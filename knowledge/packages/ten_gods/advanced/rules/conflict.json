@@ -1,0 +1,3928 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_13_ten_gods_advanced",
+  "category": "conflict",
+  "count": 40,
+  "objects": [
+    {
+      "id": "TGA-000171",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "peer",
+        "direct_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_peer_direct_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_peer_direct_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_peer_direct_wealth_00",
+      "name": "Xung thần peer/direct_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_peer_direct_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_peer_direct_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000172",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "rob_wealth",
+        "seven_killings",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_rob_wealth_seven_killings",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_rob_wealth_seven_killings",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_rob_wealth_seven_killings_01",
+      "name": "Xung thần rob_wealth/seven_killings",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_rob_wealth_seven_killings",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_rob_wealth_seven_killings",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000173",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "eating_god",
+        "direct_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 49
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_eating_god_direct_officer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_eating_god_direct_officer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_eating_god_direct_officer_02",
+      "name": "Xung thần eating_god/direct_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 49
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_eating_god_direct_officer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_eating_god_direct_officer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000174",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "hurling_officer",
+        "indirect_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 46
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_hurling_officer_indirect_resource",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_hurling_officer_indirect_resource",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_hurling_officer_indirect_resource_03",
+      "name": "Xung thần hurling_officer/indirect_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 46
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_hurling_officer_indirect_resource",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_hurling_officer_indirect_resource",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000175",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "indirect_wealth",
+        "direct_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 43
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_indirect_wealth_direct_resource",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_indirect_wealth_direct_resource",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_indirect_wealth_direct_resource_04",
+      "name": "Xung thần indirect_wealth/direct_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 43
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_indirect_wealth_direct_resource",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_indirect_wealth_direct_resource",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000176",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "direct_wealth",
+        "peer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_direct_wealth_peer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_direct_wealth_peer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_direct_wealth_peer_05",
+      "name": "Xung thần direct_wealth/peer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_direct_wealth_peer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_direct_wealth_peer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000177",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "seven_killings",
+        "rob_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_seven_killings_rob_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_seven_killings_rob_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_seven_killings_rob_wealth_06",
+      "name": "Xung thần seven_killings/rob_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_seven_killings_rob_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_seven_killings_rob_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000178",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "direct_officer",
+        "eating_god",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 49
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_direct_officer_eating_god",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_direct_officer_eating_god",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_direct_officer_eating_god_07",
+      "name": "Xung thần direct_officer/eating_god",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 49
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_direct_officer_eating_god",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_direct_officer_eating_god",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000179",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "indirect_resource",
+        "hurling_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 46
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_indirect_resource_hurling_officer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_indirect_resource_hurling_officer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_indirect_resource_hurling_officer_08",
+      "name": "Xung thần indirect_resource/hurling_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 46
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_indirect_resource_hurling_officer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_indirect_resource_hurling_officer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000180",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "direct_resource",
+        "indirect_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 43
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_direct_resource_indirect_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_direct_resource_indirect_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_direct_resource_indirect_wealth_09",
+      "name": "Xung thần direct_resource/indirect_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 43
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_direct_resource_indirect_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_direct_resource_indirect_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000181",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "peer",
+        "direct_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_peer_direct_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_peer_direct_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_peer_direct_wealth_10",
+      "name": "Xung thần peer/direct_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_peer_direct_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_peer_direct_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000182",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "rob_wealth",
+        "seven_killings",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_rob_wealth_seven_killings",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_rob_wealth_seven_killings",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_rob_wealth_seven_killings_11",
+      "name": "Xung thần rob_wealth/seven_killings",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_rob_wealth_seven_killings",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_rob_wealth_seven_killings",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000183",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "eating_god",
+        "direct_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 49
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_eating_god_direct_officer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_eating_god_direct_officer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_eating_god_direct_officer_12",
+      "name": "Xung thần eating_god/direct_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 49
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_eating_god_direct_officer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_eating_god_direct_officer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000184",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "hurling_officer",
+        "indirect_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 46
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_hurling_officer_indirect_resource",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_hurling_officer_indirect_resource",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_hurling_officer_indirect_resource_13",
+      "name": "Xung thần hurling_officer/indirect_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 46
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_hurling_officer_indirect_resource",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_hurling_officer_indirect_resource",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000185",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "indirect_wealth",
+        "direct_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 43
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_indirect_wealth_direct_resource",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_indirect_wealth_direct_resource",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_indirect_wealth_direct_resource_14",
+      "name": "Xung thần indirect_wealth/direct_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 43
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_indirect_wealth_direct_resource",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_indirect_wealth_direct_resource",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000186",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "direct_wealth",
+        "peer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_direct_wealth_peer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_direct_wealth_peer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_direct_wealth_peer_15",
+      "name": "Xung thần direct_wealth/peer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_direct_wealth_peer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_direct_wealth_peer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000187",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "seven_killings",
+        "rob_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_seven_killings_rob_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_seven_killings_rob_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_seven_killings_rob_wealth_16",
+      "name": "Xung thần seven_killings/rob_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_seven_killings_rob_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_seven_killings_rob_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000188",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "direct_officer",
+        "eating_god",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 49
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_direct_officer_eating_god",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_direct_officer_eating_god",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_direct_officer_eating_god_17",
+      "name": "Xung thần direct_officer/eating_god",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 49
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_direct_officer_eating_god",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_direct_officer_eating_god",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000189",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "indirect_resource",
+        "hurling_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 46
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_indirect_resource_hurling_officer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_indirect_resource_hurling_officer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_indirect_resource_hurling_officer_18",
+      "name": "Xung thần indirect_resource/hurling_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 46
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_indirect_resource_hurling_officer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_indirect_resource_hurling_officer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000190",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "direct_resource",
+        "indirect_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 43
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_direct_resource_indirect_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_direct_resource_indirect_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_direct_resource_indirect_wealth_19",
+      "name": "Xung thần direct_resource/indirect_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 43
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_direct_resource_indirect_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_direct_resource_indirect_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000191",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "peer",
+        "direct_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_peer_direct_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_peer_direct_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_peer_direct_wealth_20",
+      "name": "Xung thần peer/direct_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_peer_direct_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_peer_direct_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000192",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "rob_wealth",
+        "seven_killings",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_rob_wealth_seven_killings",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_rob_wealth_seven_killings",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_rob_wealth_seven_killings_21",
+      "name": "Xung thần rob_wealth/seven_killings",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_rob_wealth_seven_killings",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_rob_wealth_seven_killings",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000193",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "eating_god",
+        "direct_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 49
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_eating_god_direct_officer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_eating_god_direct_officer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_eating_god_direct_officer_22",
+      "name": "Xung thần eating_god/direct_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 49
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_eating_god_direct_officer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_eating_god_direct_officer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000194",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "hurling_officer",
+        "indirect_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 46
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_hurling_officer_indirect_resource",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_hurling_officer_indirect_resource",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_hurling_officer_indirect_resource_23",
+      "name": "Xung thần hurling_officer/indirect_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 46
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_hurling_officer_indirect_resource",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_hurling_officer_indirect_resource",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000195",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "indirect_wealth",
+        "direct_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 43
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_indirect_wealth_direct_resource",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_indirect_wealth_direct_resource",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_indirect_wealth_direct_resource_24",
+      "name": "Xung thần indirect_wealth/direct_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 43
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_indirect_wealth_direct_resource",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_indirect_wealth_direct_resource",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000196",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "direct_wealth",
+        "peer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_direct_wealth_peer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_direct_wealth_peer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_direct_wealth_peer_25",
+      "name": "Xung thần direct_wealth/peer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_direct_wealth_peer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_direct_wealth_peer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000197",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "seven_killings",
+        "rob_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_seven_killings_rob_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_seven_killings_rob_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_seven_killings_rob_wealth_26",
+      "name": "Xung thần seven_killings/rob_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_seven_killings_rob_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_seven_killings_rob_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000198",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "direct_officer",
+        "eating_god",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 49
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_direct_officer_eating_god",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_direct_officer_eating_god",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_direct_officer_eating_god_27",
+      "name": "Xung thần direct_officer/eating_god",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 49
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_direct_officer_eating_god",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_direct_officer_eating_god",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000199",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "indirect_resource",
+        "hurling_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 46
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_indirect_resource_hurling_officer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_indirect_resource_hurling_officer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_indirect_resource_hurling_officer_28",
+      "name": "Xung thần indirect_resource/hurling_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 46
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_indirect_resource_hurling_officer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_indirect_resource_hurling_officer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000200",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "direct_resource",
+        "indirect_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 43
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_direct_resource_indirect_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_direct_resource_indirect_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_direct_resource_indirect_wealth_29",
+      "name": "Xung thần direct_resource/indirect_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 43
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_direct_resource_indirect_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_direct_resource_indirect_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000201",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "peer",
+        "direct_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_peer_direct_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_peer_direct_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_peer_direct_wealth_30",
+      "name": "Xung thần peer/direct_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_peer_direct_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_peer_direct_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000202",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "rob_wealth",
+        "seven_killings",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_rob_wealth_seven_killings",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_rob_wealth_seven_killings",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_rob_wealth_seven_killings_31",
+      "name": "Xung thần rob_wealth/seven_killings",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_rob_wealth_seven_killings",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_rob_wealth_seven_killings",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000203",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "eating_god",
+        "direct_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 49
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_eating_god_direct_officer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_eating_god_direct_officer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_eating_god_direct_officer_32",
+      "name": "Xung thần eating_god/direct_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 49
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_eating_god_direct_officer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_eating_god_direct_officer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000204",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "hurling_officer",
+        "indirect_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 46
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_hurling_officer_indirect_resource",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_hurling_officer_indirect_resource",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_hurling_officer_indirect_resource_33",
+      "name": "Xung thần hurling_officer/indirect_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 46
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_hurling_officer_indirect_resource",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_hurling_officer_indirect_resource",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000205",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "indirect_wealth",
+        "direct_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 43
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_indirect_wealth_direct_resource",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_indirect_wealth_direct_resource",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_indirect_wealth_direct_resource_34",
+      "name": "Xung thần indirect_wealth/direct_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 43
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_indirect_wealth_direct_resource",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_indirect_wealth_direct_resource",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000206",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "direct_wealth",
+        "peer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 36
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_direct_wealth_peer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_direct_wealth_peer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_direct_wealth_peer_35",
+      "name": "Xung thần direct_wealth/peer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_direct_wealth_peer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_direct_wealth_peer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000207",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "seven_killings",
+        "rob_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 37
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 52
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_seven_killings_rob_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_seven_killings_rob_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_seven_killings_rob_wealth_36",
+      "name": "Xung thần seven_killings/rob_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 52
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_seven_killings_rob_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_seven_killings_rob_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000208",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "direct_officer",
+        "eating_god",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 38
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 49
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_direct_officer_eating_god",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_direct_officer_eating_god",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_direct_officer_eating_god_37",
+      "name": "Xung thần direct_officer/eating_god",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 49
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_direct_officer_eating_god",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_direct_officer_eating_god",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000209",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "indirect_resource",
+        "hurling_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 39
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 46
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_indirect_resource_hurling_officer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_indirect_resource_hurling_officer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_indirect_resource_hurling_officer_38",
+      "name": "Xung thần indirect_resource/hurling_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 46
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_indirect_resource_hurling_officer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_indirect_resource_hurling_officer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000210",
+      "version": "1.0.0",
+      "category": "conflict",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "conflict",
+        "direct_resource",
+        "indirect_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "lte",
+          "value": 43
+        },
+        {
+          "field": "pattern_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=conflict_direct_resource_indirect_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "conflict_direct_resource_indirect_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Xung Thập Thần từ interaction + pattern đã công bố. Không ghi đè clash_detected.",
+      "references": [
+        {
+          "target": "REF-TGA-conflict",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_direct_resource_indirect_wealth_39",
+      "name": "Xung thần direct_resource/indirect_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "lte",
+            "value": 43
+          },
+          {
+            "field": "pattern_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=conflict_direct_resource_indirect_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "conflict_direct_resource_indirect_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    }
+  ]
+}

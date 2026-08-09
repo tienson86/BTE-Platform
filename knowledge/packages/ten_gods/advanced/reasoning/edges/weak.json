@@ -1,0 +1,58 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-TGA-WEAK-001",
+      "source": "RN-TGA-WEAK-OBS-001",
+      "target": "RN-TGA-WEAK-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TGA-WEAK-002",
+      "source": "RN-TGA-WEAK-EVD-001",
+      "target": "RN-TGA-WEAK-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TGA-WEAK-003",
+      "source": "RN-TGA-WEAK-INF-001",
+      "target": "RN-TGA-WEAK-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TGA-WEAK-004",
+      "source": "RN-TGA-WEAK-MID-001",
+      "target": "RN-TGA-WEAK-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TGA-WEAK-005",
+      "source": "RN-TGA-WEAK-OBS-001",
+      "target": "RN-TGA-WEAK-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-TGA-WEAK-006",
+      "source": "RN-TGA-WEAK-CON-001",
+      "target": "RN-TGA-WEAK-FIN-001",
+      "relationship": "conflicts_with",
+      "weight": 0.3,
+      "direction": "forward",
+      "condition": null
+    }
+  ]
+}

@@ -1,0 +1,3888 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_13_ten_gods_advanced",
+  "category": "dominance",
+  "count": 40,
+  "objects": [
+    {
+      "id": "TGA-000251",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "mixed",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=mixed",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "mixed",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_mixed_00",
+      "name": "Chủ đạo: mixed",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=mixed",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "mixed",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000252",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "rob_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=rob_wealth",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "rob_wealth",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_rob_wealth_01",
+      "name": "Chủ đạo: rob_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=rob_wealth",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "rob_wealth",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000253",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "eating_god",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=eating_god",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "eating_god",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_eating_god_02",
+      "name": "Chủ đạo: eating_god",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=eating_god",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "eating_god",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000254",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "hurling_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=hurling_officer",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "hurling_officer",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_hurling_officer_03",
+      "name": "Chủ đạo: hurling_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=hurling_officer",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "hurling_officer",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000255",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "indirect_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 67
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=indirect_wealth",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_wealth",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_indirect_wealth_04",
+      "name": "Chủ đạo: indirect_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 67
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=indirect_wealth",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_wealth",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000256",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "direct_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_wealth",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_wealth",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_direct_wealth_05",
+      "name": "Chủ đạo: direct_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_wealth",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_wealth",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000257",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "seven_killings",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=seven_killings",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "seven_killings",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_seven_killings_06",
+      "name": "Chủ đạo: seven_killings",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=seven_killings",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "seven_killings",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000258",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "direct_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_officer",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_officer",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_direct_officer_07",
+      "name": "Chủ đạo: direct_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_officer",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_officer",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000259",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "indirect_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=indirect_resource",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_resource",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_indirect_resource_08",
+      "name": "Chủ đạo: indirect_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=indirect_resource",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_resource",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000260",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "direct_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 67
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_resource",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_resource",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_direct_resource_09",
+      "name": "Chủ đạo: direct_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 67
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_resource",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_resource",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000261",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "peer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=peer",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "peer",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_peer_10",
+      "name": "Chủ đạo: peer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=peer",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "peer",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000262",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "none",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=none",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "none",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_none_11",
+      "name": "Chủ đạo: none",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=none",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "none",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000263",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "eating_god",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=eating_god",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "eating_god",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_eating_god_12",
+      "name": "Chủ đạo: eating_god",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=eating_god",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "eating_god",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000264",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "hurling_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=hurling_officer",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "hurling_officer",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_hurling_officer_13",
+      "name": "Chủ đạo: hurling_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=hurling_officer",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "hurling_officer",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000265",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "indirect_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 67
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=indirect_wealth",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_wealth",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_indirect_wealth_14",
+      "name": "Chủ đạo: indirect_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 67
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=indirect_wealth",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_wealth",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000266",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "direct_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_wealth",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_wealth",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_direct_wealth_15",
+      "name": "Chủ đạo: direct_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_wealth",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_wealth",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000267",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "seven_killings",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=seven_killings",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "seven_killings",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_seven_killings_16",
+      "name": "Chủ đạo: seven_killings",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=seven_killings",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "seven_killings",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000268",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "direct_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_officer",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_officer",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_direct_officer_17",
+      "name": "Chủ đạo: direct_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_officer",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_officer",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000269",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "indirect_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=indirect_resource",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_resource",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_indirect_resource_18",
+      "name": "Chủ đạo: indirect_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=indirect_resource",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_resource",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000270",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "direct_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 67
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_resource",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_resource",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_direct_resource_19",
+      "name": "Chủ đạo: direct_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 67
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_resource",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_resource",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000271",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "peer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=peer",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "peer",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_peer_20",
+      "name": "Chủ đạo: peer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=peer",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "peer",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000272",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "rob_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=rob_wealth",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "rob_wealth",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_rob_wealth_21",
+      "name": "Chủ đạo: rob_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=rob_wealth",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "rob_wealth",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000273",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "mixed",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=mixed",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "mixed",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_mixed_22",
+      "name": "Chủ đạo: mixed",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=mixed",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "mixed",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000274",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "none",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=none",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "none",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_none_23",
+      "name": "Chủ đạo: none",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=none",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "none",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000275",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "indirect_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 67
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=indirect_wealth",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_wealth",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_indirect_wealth_24",
+      "name": "Chủ đạo: indirect_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 67
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=indirect_wealth",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_wealth",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000276",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "direct_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_wealth",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_wealth",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_direct_wealth_25",
+      "name": "Chủ đạo: direct_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_wealth",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_wealth",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000277",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "seven_killings",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=seven_killings",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "seven_killings",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_seven_killings_26",
+      "name": "Chủ đạo: seven_killings",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=seven_killings",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "seven_killings",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000278",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "direct_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_officer",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_officer",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_direct_officer_27",
+      "name": "Chủ đạo: direct_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_officer",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_officer",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000279",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "indirect_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=indirect_resource",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_resource",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_indirect_resource_28",
+      "name": "Chủ đạo: indirect_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=indirect_resource",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_resource",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000280",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "direct_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 67
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_resource",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_resource",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_direct_resource_29",
+      "name": "Chủ đạo: direct_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 67
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_resource",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_resource",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000281",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "peer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=peer",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "peer",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_peer_30",
+      "name": "Chủ đạo: peer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=peer",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "peer",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000282",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "rob_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=rob_wealth",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "rob_wealth",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_rob_wealth_31",
+      "name": "Chủ đạo: rob_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=rob_wealth",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "rob_wealth",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000283",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "eating_god",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=eating_god",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "eating_god",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_eating_god_32",
+      "name": "Chủ đạo: eating_god",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=eating_god",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "eating_god",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000284",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "mixed",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=mixed",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "mixed",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_mixed_33",
+      "name": "Chủ đạo: mixed",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=mixed",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "mixed",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000285",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "indirect_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 67
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=indirect_wealth",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_wealth",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_indirect_wealth_34",
+      "name": "Chủ đạo: indirect_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 67
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=indirect_wealth",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_wealth",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000286",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "none",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 36
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=none",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "none",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_none_35",
+      "name": "Chủ đạo: none",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=none",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "none",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000287",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "seven_killings",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 37
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 58
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=seven_killings",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "seven_killings",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_seven_killings_36",
+      "name": "Chủ đạo: seven_killings",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 58
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=seven_killings",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "seven_killings",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000288",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "direct_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 38
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 61
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "secondary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_officer",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_officer",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_direct_officer_37",
+      "name": "Chủ đạo: direct_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 61
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "secondary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_officer",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_officer",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000289",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "indirect_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 39
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 64
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "deferred"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=indirect_resource",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_resource",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_indirect_resource_38",
+      "name": "Chủ đạo: indirect_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 64
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "deferred"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=indirect_resource",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_resource",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000290",
+      "version": "1.0.0",
+      "category": "dominance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "dominance",
+        "direct_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 67
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "decision_priority",
+          "operator": "equals",
+          "value": "primary"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_resource",
+        "weight": 9,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_resource",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Thần chủ đạo từ strength/pattern/UGP đã công bố. Không chọn Dụng Thần lại.",
+      "references": [
+        {
+          "target": "REF-TGA-dominance",
+          "relation": "references"
+        }
+      ],
+      "code": "dom_direct_resource_39",
+      "name": "Chủ đạo: direct_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 67
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "decision_priority",
+            "operator": "equals",
+            "value": "primary"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_resource",
+          "weight": 9,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_resource",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    }
+  ]
+}

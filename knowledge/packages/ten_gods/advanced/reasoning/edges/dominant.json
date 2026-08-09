@@ -1,0 +1,58 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-TGA-DOMINANT-001",
+      "source": "RN-TGA-DOMINANT-OBS-001",
+      "target": "RN-TGA-DOMINANT-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TGA-DOMINANT-002",
+      "source": "RN-TGA-DOMINANT-EVD-001",
+      "target": "RN-TGA-DOMINANT-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TGA-DOMINANT-003",
+      "source": "RN-TGA-DOMINANT-INF-001",
+      "target": "RN-TGA-DOMINANT-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TGA-DOMINANT-004",
+      "source": "RN-TGA-DOMINANT-MID-001",
+      "target": "RN-TGA-DOMINANT-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TGA-DOMINANT-005",
+      "source": "RN-TGA-DOMINANT-OBS-001",
+      "target": "RN-TGA-DOMINANT-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-TGA-DOMINANT-006",
+      "source": "RN-TGA-DOMINANT-CON-001",
+      "target": "RN-TGA-DOMINANT-FIN-001",
+      "relationship": "conflicts_with",
+      "weight": 0.3,
+      "direction": "forward",
+      "condition": null
+    }
+  ]
+}

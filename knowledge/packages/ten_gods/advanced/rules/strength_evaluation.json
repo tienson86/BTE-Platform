@@ -1,0 +1,3928 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_13_ten_gods_advanced",
+  "category": "strength_evaluation",
+  "count": 40,
+  "objects": [
+    {
+      "id": "TGA-000041",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "peer",
+        "weak",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=peer_weak",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "peer_weak",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_peer_weak_00",
+      "name": "Sức thần peer: weak",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=peer_weak",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "peer_weak",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000042",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "rob_wealth",
+        "medium",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 45
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=rob_wealth",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "rob_wealth",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_rob_wealth_medium_01",
+      "name": "Sức thần rob_wealth: medium",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 45
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=rob_wealth",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "rob_wealth",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000043",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "eating_god",
+        "strong",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=eating_god_strong",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "eating_god_strong",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_eating_god_strong_02",
+      "name": "Sức thần eating_god: strong",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=eating_god_strong",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "eating_god_strong",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000044",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "hurling_officer",
+        "extreme",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=hurling_officer",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "hurling_officer",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_hurling_officer_extreme_03",
+      "name": "Sức thần hurling_officer: extreme",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=hurling_officer",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "hurling_officer",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000045",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "indirect_wealth",
+        "weak",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=indirect_wealth_weak",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_wealth_weak",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_indirect_wealth_weak_04",
+      "name": "Sức thần indirect_wealth: weak",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=indirect_wealth_weak",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_wealth_weak",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000046",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "direct_wealth",
+        "medium",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 65
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_wealth",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_wealth",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_direct_wealth_medium_05",
+      "name": "Sức thần direct_wealth: medium",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 65
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_wealth",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_wealth",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000047",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "seven_killings",
+        "strong",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=seven_killings_strong",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "seven_killings_strong",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_seven_killings_strong_06",
+      "name": "Sức thần seven_killings: strong",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=seven_killings_strong",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "seven_killings_strong",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000048",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "direct_officer",
+        "extreme",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_officer",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_officer",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_direct_officer_extreme_07",
+      "name": "Sức thần direct_officer: extreme",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_officer",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_officer",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000049",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "indirect_resource",
+        "weak",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=indirect_resource_weak",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_resource_weak",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_indirect_resource_weak_08",
+      "name": "Sức thần indirect_resource: weak",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=indirect_resource_weak",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_resource_weak",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000050",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "direct_resource",
+        "medium",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_resource",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_resource",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_direct_resource_medium_09",
+      "name": "Sức thần direct_resource: medium",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_resource",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_resource",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000051",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "peer",
+        "strong",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=peer_strong",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "peer_strong",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_peer_strong_10",
+      "name": "Sức thần peer: strong",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=peer_strong",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "peer_strong",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000052",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "rob_wealth",
+        "extreme",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=rob_wealth",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "rob_wealth",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_rob_wealth_extreme_11",
+      "name": "Sức thần rob_wealth: extreme",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=rob_wealth",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "rob_wealth",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000053",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "eating_god",
+        "weak",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 65
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=eating_god_weak",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "eating_god_weak",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_eating_god_weak_12",
+      "name": "Sức thần eating_god: weak",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 65
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=eating_god_weak",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "eating_god_weak",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000054",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "hurling_officer",
+        "medium",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=hurling_officer",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "hurling_officer",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_hurling_officer_medium_13",
+      "name": "Sức thần hurling_officer: medium",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=hurling_officer",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "hurling_officer",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000055",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "indirect_wealth",
+        "strong",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=indirect_wealth_strong",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_wealth_strong",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_indirect_wealth_strong_14",
+      "name": "Sức thần indirect_wealth: strong",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=indirect_wealth_strong",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_wealth_strong",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000056",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "direct_wealth",
+        "extreme",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 45
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_wealth",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_wealth",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_direct_wealth_extreme_15",
+      "name": "Sức thần direct_wealth: extreme",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 45
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_wealth",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_wealth",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000057",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "seven_killings",
+        "weak",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=seven_killings_weak",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "seven_killings_weak",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_seven_killings_weak_16",
+      "name": "Sức thần seven_killings: weak",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=seven_killings_weak",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "seven_killings_weak",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000058",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "direct_officer",
+        "medium",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_officer",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_officer",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_direct_officer_medium_17",
+      "name": "Sức thần direct_officer: medium",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_officer",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_officer",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000059",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "indirect_resource",
+        "strong",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=indirect_resource_strong",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_resource_strong",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_indirect_resource_strong_18",
+      "name": "Sức thần indirect_resource: strong",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=indirect_resource_strong",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_resource_strong",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000060",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "direct_resource",
+        "extreme",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 65
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_resource",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_resource",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_direct_resource_extreme_19",
+      "name": "Sức thần direct_resource: extreme",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 65
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_resource",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_resource",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000061",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "peer",
+        "weak",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=peer_weak",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "peer_weak",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_peer_weak_20",
+      "name": "Sức thần peer: weak",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=peer_weak",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "peer_weak",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000062",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "rob_wealth",
+        "medium",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=rob_wealth",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "rob_wealth",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_rob_wealth_medium_21",
+      "name": "Sức thần rob_wealth: medium",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=rob_wealth",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "rob_wealth",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000063",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "eating_god",
+        "strong",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=eating_god_strong",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "eating_god_strong",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_eating_god_strong_22",
+      "name": "Sức thần eating_god: strong",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=eating_god_strong",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "eating_god_strong",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000064",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "hurling_officer",
+        "extreme",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=hurling_officer",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "hurling_officer",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_hurling_officer_extreme_23",
+      "name": "Sức thần hurling_officer: extreme",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=hurling_officer",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "hurling_officer",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000065",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "indirect_wealth",
+        "weak",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=indirect_wealth_weak",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_wealth_weak",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_indirect_wealth_weak_24",
+      "name": "Sức thần indirect_wealth: weak",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=indirect_wealth_weak",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_wealth_weak",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000066",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "direct_wealth",
+        "medium",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_wealth",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_wealth",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_direct_wealth_medium_25",
+      "name": "Sức thần direct_wealth: medium",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_wealth",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_wealth",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000067",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "seven_killings",
+        "strong",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 65
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=seven_killings_strong",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "seven_killings_strong",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_seven_killings_strong_26",
+      "name": "Sức thần seven_killings: strong",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 65
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=seven_killings_strong",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "seven_killings_strong",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000068",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "direct_officer",
+        "extreme",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_officer",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_officer",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_direct_officer_extreme_27",
+      "name": "Sức thần direct_officer: extreme",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_officer",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_officer",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000069",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "indirect_resource",
+        "weak",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=indirect_resource_weak",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_resource_weak",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_indirect_resource_weak_28",
+      "name": "Sức thần indirect_resource: weak",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=indirect_resource_weak",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_resource_weak",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000070",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "direct_resource",
+        "medium",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 45
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_resource",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_resource",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_direct_resource_medium_29",
+      "name": "Sức thần direct_resource: medium",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 45
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_resource",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_resource",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000071",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "peer",
+        "strong",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=peer_strong",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "peer_strong",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_peer_strong_30",
+      "name": "Sức thần peer: strong",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=peer_strong",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "peer_strong",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000072",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "rob_wealth",
+        "extreme",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 55
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=rob_wealth",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "rob_wealth",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_rob_wealth_extreme_31",
+      "name": "Sức thần rob_wealth: extreme",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 55
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=rob_wealth",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "rob_wealth",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000073",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "eating_god",
+        "weak",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=eating_god_weak",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "eating_god_weak",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_eating_god_weak_32",
+      "name": "Sức thần eating_god: weak",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=eating_god_weak",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "eating_god_weak",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000074",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "hurling_officer",
+        "medium",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 65
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=hurling_officer",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "hurling_officer",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_hurling_officer_medium_33",
+      "name": "Sức thần hurling_officer: medium",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 65
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=hurling_officer",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "hurling_officer",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000075",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "indirect_wealth",
+        "strong",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 70
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=indirect_wealth_strong",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_wealth_strong",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_indirect_wealth_strong_34",
+      "name": "Sức thần indirect_wealth: strong",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 70
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=indirect_wealth_strong",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_wealth_strong",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000076",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "direct_wealth",
+        "extreme",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 36
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 40
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_wealth",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_wealth",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_direct_wealth_extreme_35",
+      "name": "Sức thần direct_wealth: extreme",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 40
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_wealth",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_wealth",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000077",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "seven_killings",
+        "weak",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 37
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=seven_killings_weak",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "seven_killings_weak",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_seven_killings_weak_36",
+      "name": "Sức thần seven_killings: weak",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=seven_killings_weak",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "seven_killings_weak",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000078",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "direct_officer",
+        "medium",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 38
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 50
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "partial"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_officer",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_officer",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_direct_officer_medium_37",
+      "name": "Sức thần direct_officer: medium",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 50
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "partial"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_officer",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_officer",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000079",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "indirect_resource",
+        "strong",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 39
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=indirect_resource_strong",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_resource_strong",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_indirect_resource_strong_38",
+      "name": "Sức thần indirect_resource: strong",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=indirect_resource_strong",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_resource_strong",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000080",
+      "version": "1.0.0",
+      "category": "strength_evaluation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "strength",
+        "direct_resource",
+        "extreme",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 60
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "transformation_detected",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_dominance=direct_resource",
+        "weight": 8,
+        "signal": "ten_gods_dominance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_resource",
+        "publishes": "ten_gods_dominance"
+      },
+      "explanation": "Đánh giá sức Thập Thần từ strength_score / season_score đã công bố. Không tính lại can.",
+      "references": [
+        {
+          "target": "REF-TGA-strength_evaluation",
+          "relation": "references"
+        }
+      ],
+      "code": "str_direct_resource_extreme_39",
+      "name": "Sức thần direct_resource: extreme",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 60
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "transformation_detected",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_dominance=direct_resource",
+          "weight": 8,
+          "signal": "ten_gods_dominance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_resource",
+          "publishes": "ten_gods_dominance"
+        }
+      }
+    }
+  ]
+}

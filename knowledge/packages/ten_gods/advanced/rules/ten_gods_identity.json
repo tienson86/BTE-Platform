@@ -1,0 +1,3888 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_13_ten_gods_advanced",
+  "category": "ten_gods_identity",
+  "count": 40,
+  "objects": [
+    {
+      "id": "TGA-000001",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "peer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=peer",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "peer",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_peer_00",
+      "name": "Hồ sơ Thập Thần: peer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=peer",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "peer",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000002",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "rob_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=rob_wealth",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "rob_wealth",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_rob_wealth_01",
+      "name": "Hồ sơ Thập Thần: rob_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=rob_wealth",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "rob_wealth",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000003",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "eating_god",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=eating_god",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "eating_god",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_eating_god_02",
+      "name": "Hồ sơ Thập Thần: eating_god",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=eating_god",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "eating_god",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000004",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "hurling_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=hurling_officer",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "hurling_officer",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_hurling_officer_03",
+      "name": "Hồ sơ Thập Thần: hurling_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=hurling_officer",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "hurling_officer",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000005",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "indirect_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 51
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=indirect_wealth",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_wealth",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_indirect_wealth_04",
+      "name": "Hồ sơ Thập Thần: indirect_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 51
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=indirect_wealth",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_wealth",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000006",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "direct_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=direct_wealth",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_wealth",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_direct_wealth_05",
+      "name": "Hồ sơ Thập Thần: direct_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=direct_wealth",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_wealth",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000007",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "seven_killings",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=seven_killings",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "seven_killings",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_seven_killings_06",
+      "name": "Hồ sơ Thập Thần: seven_killings",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=seven_killings",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "seven_killings",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000008",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "direct_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=direct_officer",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_officer",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_direct_officer_07",
+      "name": "Hồ sơ Thập Thần: direct_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=direct_officer",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_officer",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000009",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "indirect_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=indirect_resource",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_resource",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_indirect_resource_08",
+      "name": "Hồ sơ Thập Thần: indirect_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=indirect_resource",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_resource",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000010",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "direct_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=direct_resource",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_resource",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_direct_resource_09",
+      "name": "Hồ sơ Thập Thần: direct_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=direct_resource",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_resource",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000011",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "peer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 51
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=peer",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "peer",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_peer_10",
+      "name": "Hồ sơ Thập Thần: peer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 51
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=peer",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "peer",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000012",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "rob_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=rob_wealth",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "rob_wealth",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_rob_wealth_11",
+      "name": "Hồ sơ Thập Thần: rob_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=rob_wealth",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "rob_wealth",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000013",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "eating_god",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=eating_god",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "eating_god",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_eating_god_12",
+      "name": "Hồ sơ Thập Thần: eating_god",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=eating_god",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "eating_god",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000014",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "hurling_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=hurling_officer",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "hurling_officer",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_hurling_officer_13",
+      "name": "Hồ sơ Thập Thần: hurling_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=hurling_officer",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "hurling_officer",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000015",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "indirect_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=indirect_wealth",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_wealth",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_indirect_wealth_14",
+      "name": "Hồ sơ Thập Thần: indirect_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=indirect_wealth",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_wealth",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000016",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "direct_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=direct_wealth",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_wealth",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_direct_wealth_15",
+      "name": "Hồ sơ Thập Thần: direct_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=direct_wealth",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_wealth",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000017",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "seven_killings",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 51
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=seven_killings",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "seven_killings",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_seven_killings_16",
+      "name": "Hồ sơ Thập Thần: seven_killings",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 51
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=seven_killings",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "seven_killings",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000018",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "direct_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=direct_officer",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_officer",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_direct_officer_17",
+      "name": "Hồ sơ Thập Thần: direct_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=direct_officer",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_officer",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000019",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "indirect_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=indirect_resource",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_resource",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_indirect_resource_18",
+      "name": "Hồ sơ Thập Thần: indirect_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=indirect_resource",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_resource",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000020",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "direct_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=direct_resource",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_resource",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_direct_resource_19",
+      "name": "Hồ sơ Thập Thần: direct_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=direct_resource",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_resource",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000021",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "peer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=peer",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "peer",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_peer_20",
+      "name": "Hồ sơ Thập Thần: peer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=peer",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "peer",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000022",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "rob_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=rob_wealth",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "rob_wealth",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_rob_wealth_21",
+      "name": "Hồ sơ Thập Thần: rob_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=rob_wealth",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "rob_wealth",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000023",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "eating_god",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 51
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=eating_god",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "eating_god",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_eating_god_22",
+      "name": "Hồ sơ Thập Thần: eating_god",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 51
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=eating_god",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "eating_god",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000024",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "hurling_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=hurling_officer",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "hurling_officer",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_hurling_officer_23",
+      "name": "Hồ sơ Thập Thần: hurling_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=hurling_officer",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "hurling_officer",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000025",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "indirect_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=indirect_wealth",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_wealth",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_indirect_wealth_24",
+      "name": "Hồ sơ Thập Thần: indirect_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=indirect_wealth",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_wealth",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000026",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "direct_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=direct_wealth",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_wealth",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_direct_wealth_25",
+      "name": "Hồ sơ Thập Thần: direct_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=direct_wealth",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_wealth",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000027",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "seven_killings",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=seven_killings",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "seven_killings",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_seven_killings_26",
+      "name": "Hồ sơ Thập Thần: seven_killings",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=seven_killings",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "seven_killings",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000028",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "direct_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=direct_officer",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_officer",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_direct_officer_27",
+      "name": "Hồ sơ Thập Thần: direct_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=direct_officer",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_officer",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000029",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "indirect_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 51
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=indirect_resource",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_resource",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_indirect_resource_28",
+      "name": "Hồ sơ Thập Thần: indirect_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 51
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=indirect_resource",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_resource",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000030",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "direct_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=direct_resource",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_resource",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_direct_resource_29",
+      "name": "Hồ sơ Thập Thần: direct_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=direct_resource",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_resource",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000031",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "peer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=peer",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "peer",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_peer_30",
+      "name": "Hồ sơ Thập Thần: peer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=peer",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "peer",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000032",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "rob_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=rob_wealth",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "rob_wealth",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_rob_wealth_31",
+      "name": "Hồ sơ Thập Thần: rob_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=rob_wealth",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "rob_wealth",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000033",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "eating_god",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=eating_god",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "eating_god",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_eating_god_32",
+      "name": "Hồ sơ Thập Thần: eating_god",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=eating_god",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "eating_god",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000034",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "hurling_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=hurling_officer",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "hurling_officer",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_hurling_officer_33",
+      "name": "Hồ sơ Thập Thần: hurling_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=hurling_officer",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "hurling_officer",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000035",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "indirect_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 51
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=indirect_wealth",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_wealth",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_indirect_wealth_34",
+      "name": "Hồ sơ Thập Thần: indirect_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 51
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=indirect_wealth",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_wealth",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000036",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "direct_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 36
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=direct_wealth",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_wealth",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_direct_wealth_35",
+      "name": "Hồ sơ Thập Thần: direct_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=direct_wealth",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_wealth",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000037",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "seven_killings",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 37
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=seven_killings",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "seven_killings",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_seven_killings_36",
+      "name": "Hồ sơ Thập Thần: seven_killings",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "true"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=seven_killings",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "seven_killings",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000038",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "direct_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 38
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "average"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=direct_officer",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_officer",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_direct_officer_37",
+      "name": "Hồ sơ Thập Thần: direct_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "average"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=direct_officer",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_officer",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000039",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "indirect_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 39
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 39
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "strong"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=indirect_resource",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_resource",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_indirect_resource_38",
+      "name": "Hồ sơ Thập Thần: indirect_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 39
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "strong"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=indirect_resource",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_resource",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    },
+    {
+      "id": "TGA-000040",
+      "version": "1.0.0",
+      "category": "ten_gods_identity",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "identity",
+        "direct_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 47
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "pattern_quality",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "follow_pattern",
+          "operator": "equals",
+          "value": "false"
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_profile=direct_resource",
+        "weight": 8,
+        "signal": "ten_gods_profile",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_resource",
+        "publishes": "ten_gods_profile"
+      },
+      "explanation": "Nhận diện hồ sơ Thập Thần từ điểm sức/mùa/cách đã công bố. Không đọc can chi thô. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-ten_gods_identity",
+          "relation": "references"
+        }
+      ],
+      "code": "ident_direct_resource_39",
+      "name": "Hồ sơ Thập Thần: direct_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 47
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "pattern_quality",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "follow_pattern",
+            "operator": "equals",
+            "value": "false"
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_profile=direct_resource",
+          "weight": 8,
+          "signal": "ten_gods_profile",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_resource",
+          "publishes": "ten_gods_profile"
+        }
+      }
+    }
+  ]
+}

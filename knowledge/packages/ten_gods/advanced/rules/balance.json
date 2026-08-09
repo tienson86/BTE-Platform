@@ -1,0 +1,4288 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_13_ten_gods_advanced",
+  "category": "balance",
+  "count": 40,
+  "objects": [
+    {
+      "id": "TGA-000211",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "balanced",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=balanced",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "balanced",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_balanced_00",
+      "name": "Cân Thập Thần: balanced",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=balanced",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "balanced",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000212",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_output",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_output",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_output",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_output_01",
+      "name": "Cân Thập Thần: tilted_output",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_output",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_output",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000213",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 66
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_wealth",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_wealth",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_wealth_02",
+      "name": "Cân Thập Thần: tilted_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 66
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_wealth",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_wealth",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000214",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_officer",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_officer",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_officer_03",
+      "name": "Cân Thập Thần: tilted_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_officer",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_officer",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000215",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_resource",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_resource",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_resource_04",
+      "name": "Cân Thập Thần: tilted_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_resource",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_resource",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000216",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "unstable",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 66
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=unstable",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "unstable",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_unstable_05",
+      "name": "Cân Thập Thần: unstable",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 66
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=unstable",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "unstable",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000217",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "withheld",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=withheld",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "withheld",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_withheld_06",
+      "name": "Cân Thập Thần: withheld",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=withheld",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "withheld",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000218",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "balanced",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=balanced",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "balanced",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_balanced_07",
+      "name": "Cân Thập Thần: balanced",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=balanced",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "balanced",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000219",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_output",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 66
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_output",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_output",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_output_08",
+      "name": "Cân Thập Thần: tilted_output",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 66
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_output",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_output",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000220",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_wealth",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_wealth",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_wealth_09",
+      "name": "Cân Thập Thần: tilted_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_wealth",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_wealth",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000221",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_officer",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_officer",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_officer_10",
+      "name": "Cân Thập Thần: tilted_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_officer",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_officer",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000222",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 66
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_resource",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_resource",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_resource_11",
+      "name": "Cân Thập Thần: tilted_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 66
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_resource",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_resource",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000223",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "unstable",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=unstable",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "unstable",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_unstable_12",
+      "name": "Cân Thập Thần: unstable",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=unstable",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "unstable",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000224",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "withheld",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=withheld",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "withheld",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_withheld_13",
+      "name": "Cân Thập Thần: withheld",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=withheld",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "withheld",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000225",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "balanced",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 66
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=balanced",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "balanced",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_balanced_14",
+      "name": "Cân Thập Thần: balanced",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 66
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=balanced",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "balanced",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000226",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_output",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_output",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_output",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_output_15",
+      "name": "Cân Thập Thần: tilted_output",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_output",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_output",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000227",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_wealth",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_wealth",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_wealth_16",
+      "name": "Cân Thập Thần: tilted_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_wealth",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_wealth",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000228",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 66
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_officer",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_officer",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_officer_17",
+      "name": "Cân Thập Thần: tilted_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 66
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_officer",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_officer",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000229",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_resource",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_resource",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_resource_18",
+      "name": "Cân Thập Thần: tilted_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_resource",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_resource",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000230",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "unstable",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=unstable",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "unstable",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_unstable_19",
+      "name": "Cân Thập Thần: unstable",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=unstable",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "unstable",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000231",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "withheld",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 66
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=withheld",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "withheld",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_withheld_20",
+      "name": "Cân Thập Thần: withheld",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 66
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=withheld",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "withheld",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000232",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "balanced",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=balanced",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "balanced",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_balanced_21",
+      "name": "Cân Thập Thần: balanced",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=balanced",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "balanced",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000233",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_output",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_output",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_output",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_output_22",
+      "name": "Cân Thập Thần: tilted_output",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_output",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_output",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000234",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 66
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_wealth",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_wealth",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_wealth_23",
+      "name": "Cân Thập Thần: tilted_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 66
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_wealth",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_wealth",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000235",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_officer",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_officer",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_officer_24",
+      "name": "Cân Thập Thần: tilted_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_officer",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_officer",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000236",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_resource",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_resource",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_resource_25",
+      "name": "Cân Thập Thần: tilted_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_resource",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_resource",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000237",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "unstable",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 66
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=unstable",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "unstable",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_unstable_26",
+      "name": "Cân Thập Thần: unstable",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 66
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=unstable",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "unstable",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000238",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "withheld",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=withheld",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "withheld",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_withheld_27",
+      "name": "Cân Thập Thần: withheld",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=withheld",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "withheld",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000239",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "balanced",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=balanced",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "balanced",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_balanced_28",
+      "name": "Cân Thập Thần: balanced",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=balanced",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "balanced",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000240",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_output",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 66
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_output",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_output",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_output_29",
+      "name": "Cân Thập Thần: tilted_output",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 66
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_output",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_output",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000241",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_wealth",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_wealth",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_wealth_30",
+      "name": "Cân Thập Thần: tilted_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_wealth",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_wealth",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000242",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_officer",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_officer",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_officer_31",
+      "name": "Cân Thập Thần: tilted_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_officer",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_officer",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000243",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 66
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_resource",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_resource",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_resource_32",
+      "name": "Cân Thập Thần: tilted_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 66
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_resource",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_resource",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000244",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "unstable",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=unstable",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "unstable",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_unstable_33",
+      "name": "Cân Thập Thần: unstable",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=unstable",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "unstable",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000245",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "withheld",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=withheld",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "withheld",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_withheld_34",
+      "name": "Cân Thập Thần: withheld",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=withheld",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "withheld",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000246",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "balanced",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 36
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 66
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=balanced",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "balanced",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_balanced_35",
+      "name": "Cân Thập Thần: balanced",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 66
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=balanced",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "balanced",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000247",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_output",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 37
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_output",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_output",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_output_36",
+      "name": "Cân Thập Thần: tilted_output",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_output",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_output",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000248",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 38
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 43
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 68
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_wealth",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_wealth",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_wealth_37",
+      "name": "Cân Thập Thần: tilted_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 43
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 68
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_wealth",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_wealth",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000249",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 39
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 66
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_officer",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_officer",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_officer_38",
+      "name": "Cân Thập Thần: tilted_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 66
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_officer",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_officer",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    },
+    {
+      "id": "TGA-000250",
+      "version": "1.0.0",
+      "category": "balance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "balance",
+        "tilted_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "strength_score",
+          "operator": "lte",
+          "value": 70
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "temperature_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "pattern_score",
+          "operator": "gte",
+          "value": 40
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_balance=tilted_resource",
+        "weight": 9,
+        "signal": "ten_gods_balance",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "tilted_resource",
+        "publishes": "ten_gods_balance"
+      },
+      "explanation": "Cân bằng Thập Thần suy từ cụm điểm sức/mùa/khí hậu/cách. Không sinh văn luận giải.",
+      "references": [
+        {
+          "target": "REF-TGA-balance",
+          "relation": "references"
+        }
+      ],
+      "code": "balance_tilted_resource_39",
+      "name": "Cân Thập Thần: tilted_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "strength_score",
+            "operator": "lte",
+            "value": 70
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "temperature_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "pattern_score",
+            "operator": "gte",
+            "value": 40
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_balance=tilted_resource",
+          "weight": 9,
+          "signal": "ten_gods_balance",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "tilted_resource",
+          "publishes": "ten_gods_balance"
+        }
+      }
+    }
+  ]
+}

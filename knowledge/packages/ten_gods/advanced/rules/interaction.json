@@ -1,0 +1,4908 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_13_ten_gods_advanced",
+  "category": "interaction",
+  "count": 50,
+  "objects": [
+    {
+      "id": "TGA-000081",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "peer",
+        "hurling_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=peer_vs_hurling_officer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "peer_vs_hurling_officer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_peer_hurling_officer_00",
+      "name": "Tương tác peer/hurling_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=peer_vs_hurling_officer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "peer_vs_hurling_officer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000082",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "rob_wealth",
+        "indirect_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=rob_wealth_vs_indirect_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "rob_wealth_vs_indirect_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_rob_wealth_indirect_wealth_01",
+      "name": "Tương tác rob_wealth/indirect_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=rob_wealth_vs_indirect_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "rob_wealth_vs_indirect_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000083",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "eating_god",
+        "direct_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=eating_god_vs_direct_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "eating_god_vs_direct_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_eating_god_direct_wealth_02",
+      "name": "Tương tác eating_god/direct_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=eating_god_vs_direct_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "eating_god_vs_direct_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000084",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "hurling_officer",
+        "seven_killings",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=hurling_officer_vs_seven_killings",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "hurling_officer_vs_seven_killings",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_hurling_officer_seven_killings_03",
+      "name": "Tương tác hurling_officer/seven_killings",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=hurling_officer_vs_seven_killings",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "hurling_officer_vs_seven_killings",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000085",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "indirect_wealth",
+        "direct_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=indirect_wealth_vs_direct_officer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_wealth_vs_direct_officer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_indirect_wealth_direct_officer_04",
+      "name": "Tương tác indirect_wealth/direct_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=indirect_wealth_vs_direct_officer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_wealth_vs_direct_officer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000086",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "direct_wealth",
+        "indirect_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=direct_wealth_vs_indirect_resource",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_wealth_vs_indirect_resource",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_direct_wealth_indirect_resource_05",
+      "name": "Tương tác direct_wealth/indirect_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=direct_wealth_vs_indirect_resource",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_wealth_vs_indirect_resource",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000087",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "seven_killings",
+        "direct_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=seven_killings_vs_direct_resource",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "seven_killings_vs_direct_resource",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_seven_killings_direct_resource_06",
+      "name": "Tương tác seven_killings/direct_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=seven_killings_vs_direct_resource",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "seven_killings_vs_direct_resource",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000088",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "direct_officer",
+        "peer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=direct_officer_vs_peer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_officer_vs_peer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_direct_officer_peer_07",
+      "name": "Tương tác direct_officer/peer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=direct_officer_vs_peer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_officer_vs_peer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000089",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "indirect_resource",
+        "rob_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=indirect_resource_vs_rob_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_resource_vs_rob_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_indirect_resource_rob_wealth_08",
+      "name": "Tương tác indirect_resource/rob_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=indirect_resource_vs_rob_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_resource_vs_rob_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000090",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "direct_resource",
+        "eating_god",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=direct_resource_vs_eating_god",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_resource_vs_eating_god",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_direct_resource_eating_god_09",
+      "name": "Tương tác direct_resource/eating_god",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=direct_resource_vs_eating_god",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_resource_vs_eating_god",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000091",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "peer",
+        "hurling_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=peer_vs_hurling_officer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "peer_vs_hurling_officer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_peer_hurling_officer_10",
+      "name": "Tương tác peer/hurling_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=peer_vs_hurling_officer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "peer_vs_hurling_officer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000092",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "rob_wealth",
+        "indirect_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=rob_wealth_vs_indirect_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "rob_wealth_vs_indirect_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_rob_wealth_indirect_wealth_11",
+      "name": "Tương tác rob_wealth/indirect_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=rob_wealth_vs_indirect_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "rob_wealth_vs_indirect_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000093",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "eating_god",
+        "direct_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=eating_god_vs_direct_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "eating_god_vs_direct_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_eating_god_direct_wealth_12",
+      "name": "Tương tác eating_god/direct_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=eating_god_vs_direct_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "eating_god_vs_direct_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000094",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "hurling_officer",
+        "seven_killings",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=hurling_officer_vs_seven_killings",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "hurling_officer_vs_seven_killings",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_hurling_officer_seven_killings_13",
+      "name": "Tương tác hurling_officer/seven_killings",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=hurling_officer_vs_seven_killings",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "hurling_officer_vs_seven_killings",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000095",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "indirect_wealth",
+        "direct_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=indirect_wealth_vs_direct_officer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_wealth_vs_direct_officer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_indirect_wealth_direct_officer_14",
+      "name": "Tương tác indirect_wealth/direct_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=indirect_wealth_vs_direct_officer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_wealth_vs_direct_officer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000096",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "direct_wealth",
+        "indirect_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=direct_wealth_vs_indirect_resource",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_wealth_vs_indirect_resource",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_direct_wealth_indirect_resource_15",
+      "name": "Tương tác direct_wealth/indirect_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=direct_wealth_vs_indirect_resource",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_wealth_vs_indirect_resource",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000097",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "seven_killings",
+        "direct_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=seven_killings_vs_direct_resource",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "seven_killings_vs_direct_resource",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_seven_killings_direct_resource_16",
+      "name": "Tương tác seven_killings/direct_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=seven_killings_vs_direct_resource",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "seven_killings_vs_direct_resource",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000098",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "direct_officer",
+        "peer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=direct_officer_vs_peer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_officer_vs_peer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_direct_officer_peer_17",
+      "name": "Tương tác direct_officer/peer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=direct_officer_vs_peer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_officer_vs_peer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000099",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "indirect_resource",
+        "rob_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=indirect_resource_vs_rob_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_resource_vs_rob_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_indirect_resource_rob_wealth_18",
+      "name": "Tương tác indirect_resource/rob_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=indirect_resource_vs_rob_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_resource_vs_rob_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000100",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "direct_resource",
+        "eating_god",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=direct_resource_vs_eating_god",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_resource_vs_eating_god",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_direct_resource_eating_god_19",
+      "name": "Tương tác direct_resource/eating_god",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=direct_resource_vs_eating_god",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_resource_vs_eating_god",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000101",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "peer",
+        "hurling_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=peer_vs_hurling_officer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "peer_vs_hurling_officer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_peer_hurling_officer_20",
+      "name": "Tương tác peer/hurling_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=peer_vs_hurling_officer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "peer_vs_hurling_officer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000102",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "rob_wealth",
+        "indirect_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=rob_wealth_vs_indirect_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "rob_wealth_vs_indirect_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_rob_wealth_indirect_wealth_21",
+      "name": "Tương tác rob_wealth/indirect_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=rob_wealth_vs_indirect_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "rob_wealth_vs_indirect_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000103",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "eating_god",
+        "direct_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=eating_god_vs_direct_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "eating_god_vs_direct_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_eating_god_direct_wealth_22",
+      "name": "Tương tác eating_god/direct_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=eating_god_vs_direct_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "eating_god_vs_direct_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000104",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "hurling_officer",
+        "seven_killings",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=hurling_officer_vs_seven_killings",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "hurling_officer_vs_seven_killings",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_hurling_officer_seven_killings_23",
+      "name": "Tương tác hurling_officer/seven_killings",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=hurling_officer_vs_seven_killings",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "hurling_officer_vs_seven_killings",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000105",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "indirect_wealth",
+        "direct_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=indirect_wealth_vs_direct_officer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_wealth_vs_direct_officer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_indirect_wealth_direct_officer_24",
+      "name": "Tương tác indirect_wealth/direct_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=indirect_wealth_vs_direct_officer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_wealth_vs_direct_officer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000106",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "direct_wealth",
+        "indirect_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=direct_wealth_vs_indirect_resource",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_wealth_vs_indirect_resource",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_direct_wealth_indirect_resource_25",
+      "name": "Tương tác direct_wealth/indirect_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=direct_wealth_vs_indirect_resource",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_wealth_vs_indirect_resource",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000107",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "seven_killings",
+        "direct_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=seven_killings_vs_direct_resource",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "seven_killings_vs_direct_resource",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_seven_killings_direct_resource_26",
+      "name": "Tương tác seven_killings/direct_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=seven_killings_vs_direct_resource",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "seven_killings_vs_direct_resource",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000108",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "direct_officer",
+        "peer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=direct_officer_vs_peer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_officer_vs_peer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_direct_officer_peer_27",
+      "name": "Tương tác direct_officer/peer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=direct_officer_vs_peer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_officer_vs_peer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000109",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "indirect_resource",
+        "rob_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=indirect_resource_vs_rob_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_resource_vs_rob_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_indirect_resource_rob_wealth_28",
+      "name": "Tương tác indirect_resource/rob_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=indirect_resource_vs_rob_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_resource_vs_rob_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000110",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "direct_resource",
+        "eating_god",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=direct_resource_vs_eating_god",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_resource_vs_eating_god",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_direct_resource_eating_god_29",
+      "name": "Tương tác direct_resource/eating_god",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=direct_resource_vs_eating_god",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_resource_vs_eating_god",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000111",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "peer",
+        "hurling_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=peer_vs_hurling_officer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "peer_vs_hurling_officer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_peer_hurling_officer_30",
+      "name": "Tương tác peer/hurling_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=peer_vs_hurling_officer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "peer_vs_hurling_officer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000112",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "rob_wealth",
+        "indirect_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=rob_wealth_vs_indirect_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "rob_wealth_vs_indirect_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_rob_wealth_indirect_wealth_31",
+      "name": "Tương tác rob_wealth/indirect_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=rob_wealth_vs_indirect_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "rob_wealth_vs_indirect_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000113",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "eating_god",
+        "direct_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=eating_god_vs_direct_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "eating_god_vs_direct_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_eating_god_direct_wealth_32",
+      "name": "Tương tác eating_god/direct_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=eating_god_vs_direct_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "eating_god_vs_direct_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000114",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "hurling_officer",
+        "seven_killings",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=hurling_officer_vs_seven_killings",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "hurling_officer_vs_seven_killings",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_hurling_officer_seven_killings_33",
+      "name": "Tương tác hurling_officer/seven_killings",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=hurling_officer_vs_seven_killings",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "hurling_officer_vs_seven_killings",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000115",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "indirect_wealth",
+        "direct_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=indirect_wealth_vs_direct_officer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_wealth_vs_direct_officer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_indirect_wealth_direct_officer_34",
+      "name": "Tương tác indirect_wealth/direct_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=indirect_wealth_vs_direct_officer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_wealth_vs_direct_officer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000116",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "direct_wealth",
+        "indirect_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 36
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=direct_wealth_vs_indirect_resource",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_wealth_vs_indirect_resource",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_direct_wealth_indirect_resource_35",
+      "name": "Tương tác direct_wealth/indirect_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=direct_wealth_vs_indirect_resource",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_wealth_vs_indirect_resource",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000117",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "seven_killings",
+        "direct_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 37
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=seven_killings_vs_direct_resource",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "seven_killings_vs_direct_resource",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_seven_killings_direct_resource_36",
+      "name": "Tương tác seven_killings/direct_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=seven_killings_vs_direct_resource",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "seven_killings_vs_direct_resource",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000118",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "direct_officer",
+        "peer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 38
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=direct_officer_vs_peer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_officer_vs_peer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_direct_officer_peer_37",
+      "name": "Tương tác direct_officer/peer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=direct_officer_vs_peer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_officer_vs_peer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000119",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "indirect_resource",
+        "rob_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 39
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=indirect_resource_vs_rob_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_resource_vs_rob_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_indirect_resource_rob_wealth_38",
+      "name": "Tương tác indirect_resource/rob_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=indirect_resource_vs_rob_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_resource_vs_rob_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000120",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "direct_resource",
+        "eating_god",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=direct_resource_vs_eating_god",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_resource_vs_eating_god",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_direct_resource_eating_god_39",
+      "name": "Tương tác direct_resource/eating_god",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=direct_resource_vs_eating_god",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_resource_vs_eating_god",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000121",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "peer",
+        "hurling_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 41
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=peer_vs_hurling_officer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "peer_vs_hurling_officer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_peer_hurling_officer_40",
+      "name": "Tương tác peer/hurling_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=peer_vs_hurling_officer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "peer_vs_hurling_officer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000122",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "rob_wealth",
+        "indirect_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 42
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=rob_wealth_vs_indirect_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "rob_wealth_vs_indirect_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_rob_wealth_indirect_wealth_41",
+      "name": "Tương tác rob_wealth/indirect_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=rob_wealth_vs_indirect_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "rob_wealth_vs_indirect_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000123",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "eating_god",
+        "direct_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 43
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 35
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=eating_god_vs_direct_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "eating_god_vs_direct_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_eating_god_direct_wealth_42",
+      "name": "Tương tác eating_god/direct_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 35
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=eating_god_vs_direct_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "eating_god_vs_direct_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000124",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "hurling_officer",
+        "seven_killings",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 44
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=hurling_officer_vs_seven_killings",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "hurling_officer_vs_seven_killings",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_hurling_officer_seven_killings_43",
+      "name": "Tương tác hurling_officer/seven_killings",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=hurling_officer_vs_seven_killings",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "hurling_officer_vs_seven_killings",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000125",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "indirect_wealth",
+        "direct_officer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 45
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 38
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=indirect_wealth_vs_direct_officer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_wealth_vs_direct_officer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_indirect_wealth_direct_officer_44",
+      "name": "Tương tác indirect_wealth/direct_officer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 38
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=indirect_wealth_vs_direct_officer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_wealth_vs_direct_officer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000126",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "direct_wealth",
+        "indirect_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 46
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 42
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=direct_wealth_vs_indirect_resource",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_wealth_vs_indirect_resource",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_direct_wealth_indirect_resource_45",
+      "name": "Tương tác direct_wealth/indirect_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 42
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=direct_wealth_vs_indirect_resource",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_wealth_vs_indirect_resource",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000127",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "seven_killings",
+        "direct_resource",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 47
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 55
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 46
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=seven_killings_vs_direct_resource",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "seven_killings_vs_direct_resource",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_seven_killings_direct_resource_46",
+      "name": "Tương tác seven_killings/direct_resource",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 55
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 46
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=seven_killings_vs_direct_resource",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "seven_killings_vs_direct_resource",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000128",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "direct_officer",
+        "peer",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 48
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 60
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "high"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 50
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=direct_officer_vs_peer",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_officer_vs_peer",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_direct_officer_peer_47",
+      "name": "Tương tác direct_officer/peer",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 60
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "high"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 50
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=direct_officer_vs_peer",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_officer_vs_peer",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000129",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "indirect_resource",
+        "rob_wealth",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 49
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "low"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=indirect_resource_vs_rob_wealth",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "indirect_resource_vs_rob_wealth",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_indirect_resource_rob_wealth_48",
+      "name": "Tương tác indirect_resource/rob_wealth",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "low"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=indirect_resource_vs_rob_wealth",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "indirect_resource_vs_rob_wealth",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    },
+    {
+      "id": "TGA-000130",
+      "version": "1.0.0",
+      "category": "interaction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "interaction",
+        "direct_resource",
+        "eating_god",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 50
+      },
+      "conditions": [
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 30
+        },
+        {
+          "field": "interaction_confidence",
+          "operator": "equals",
+          "value": "medium"
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "transformation_score",
+          "operator": "lte",
+          "value": 85
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_diagnostics=direct_resource_vs_eating_god",
+        "weight": 8,
+        "signal": "ten_gods_diagnostics",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "direct_resource_vs_eating_god",
+        "publishes": "ten_gods_diagnostics"
+      },
+      "explanation": "Tương tác Thập Thần đọc interaction_score đã công bố. Không viết lại CBC.",
+      "references": [
+        {
+          "target": "REF-TGA-interaction",
+          "relation": "references"
+        }
+      ],
+      "code": "interact_direct_resource_eating_god_49",
+      "name": "Tương tác direct_resource/eating_god",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 30
+          },
+          {
+            "field": "interaction_confidence",
+            "operator": "equals",
+            "value": "medium"
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "transformation_score",
+            "operator": "lte",
+            "value": 85
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_diagnostics=direct_resource_vs_eating_god",
+          "weight": 8,
+          "signal": "ten_gods_diagnostics",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "direct_resource_vs_eating_god",
+          "publishes": "ten_gods_diagnostics"
+        }
+      }
+    }
+  ]
+}

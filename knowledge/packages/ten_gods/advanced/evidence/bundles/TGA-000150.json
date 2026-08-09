@@ -1,0 +1,113 @@
+{
+  "rule_id": "TGA-000150",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Hợp thần direct_resource",
+    "why": "Hợp Thập Thần dùng interaction_score. Không xác định hóa. Không tính lại lá số.",
+    "when": "Khi 17 output đã công bố khớp điều kiện Thập Thần nâng cao.",
+    "when_not": "Khi thiếu input hợp đồng hoặc hồ sơ bị withhold.",
+    "summary": "Hợp Thập Thần dùng interaction_score. Không xác định hóa. Không tính lại lá số."
+  },
+  "rationale": "Luật `combo_god_direct_resource_19` đánh giá Thập Thần từ output đã công bố. Không tính lại lá số. Không viết lại CBC/TRC/FPC/PAT/PEV/SKC/SEC/TEC/UG. Không sinh văn luận giải.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Gold KX-6A: chỉ tiêu thụ hợp đồng đã phong ấn.",
+  "references": [
+    {
+      "target": "REF-TGA-combination",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-TGA-000150-01",
+      "rule_id": "TGA-000150",
+      "polarity": "positive",
+      "published_outputs": {
+        "season_score": 42,
+        "strength_score": 55,
+        "temperature_score": 50,
+        "pattern_score": 50,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "false",
+        "follow_pattern_score": 48,
+        "transformation_detected": "false",
+        "transformation_score": 20,
+        "interaction_score": 63,
+        "interaction_confidence": "medium",
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "medium"
+      },
+      "note": "Thỏa điều kiện hồ sơ Thập Thần."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-TGA-000150-01",
+      "rule_id": "TGA-000150",
+      "polarity": "negative",
+      "published_outputs": {
+        "season_score": 42,
+        "strength_score": 55,
+        "temperature_score": 50,
+        "pattern_score": 50,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "false",
+        "follow_pattern_score": 48,
+        "transformation_detected": "false",
+        "transformation_score": 20,
+        "interaction_score": 41,
+        "interaction_confidence": "medium",
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "medium"
+      },
+      "note": "Không kích hoạt / hồ sơ khác."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-TGA-000150-01",
+      "rule_id": "TGA-000150",
+      "kind": "upstream_boundary",
+      "published_outputs": {
+        "season_score": 42,
+        "strength_score": 55,
+        "temperature_score": 50,
+        "pattern_score": 50,
+        "pattern_quality": "average",
+        "pattern_confidence": "medium",
+        "pattern_integrity": 50,
+        "pattern_stability": 50,
+        "follow_pattern": "false",
+        "follow_pattern_score": 48,
+        "transformation_detected": "false",
+        "transformation_score": 20,
+        "interaction_score": 63,
+        "interaction_confidence": "medium",
+        "resolved_useful_god": "withheld",
+        "decision_priority": "deferred",
+        "resolution_confidence": "medium"
+      },
+      "note": "Biên: đủ TGA nhưng thiếu một input hợp đồng thì không công bố hồ sơ."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_13_ten_gods_advanced",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-6A",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

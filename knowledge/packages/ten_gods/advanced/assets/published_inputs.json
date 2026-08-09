@@ -1,0 +1,97 @@
+{
+  "package_id": "bz_13_ten_gods_advanced",
+  "package_version": "1.0.0",
+  "inputs": [
+    {
+      "name": "season_score",
+      "source": "bz_02_seasonal_core",
+      "type": "number"
+    },
+    {
+      "name": "strength_score",
+      "source": "bz_01_strength_core",
+      "type": "number"
+    },
+    {
+      "name": "temperature_score",
+      "source": "bz_03_temperature_core",
+      "type": "number"
+    },
+    {
+      "name": "pattern_score",
+      "source": "bz_05_pattern_evaluation",
+      "type": "number"
+    },
+    {
+      "name": "pattern_quality",
+      "source": "bz_05_pattern_evaluation",
+      "type": "enum"
+    },
+    {
+      "name": "pattern_confidence",
+      "source": "bz_05_pattern_evaluation",
+      "type": "enum"
+    },
+    {
+      "name": "pattern_integrity",
+      "source": "bz_05_pattern_evaluation",
+      "type": "number"
+    },
+    {
+      "name": "pattern_stability",
+      "source": "bz_05_pattern_evaluation",
+      "type": "number"
+    },
+    {
+      "name": "follow_pattern",
+      "source": "bz_10_follow_pattern_core",
+      "type": "enum"
+    },
+    {
+      "name": "follow_pattern_score",
+      "source": "bz_10_follow_pattern_core",
+      "type": "number"
+    },
+    {
+      "name": "transformation_detected",
+      "source": "bz_11_transformation_core",
+      "type": "enum"
+    },
+    {
+      "name": "transformation_score",
+      "source": "bz_11_transformation_core",
+      "type": "number"
+    },
+    {
+      "name": "interaction_score",
+      "source": "bz_12_combination_clash_core",
+      "type": "number"
+    },
+    {
+      "name": "interaction_confidence",
+      "source": "bz_12_combination_clash_core",
+      "type": "enum"
+    },
+    {
+      "name": "resolved_useful_god",
+      "source": "bz_07_useful_god_priority",
+      "type": "string"
+    },
+    {
+      "name": "decision_priority",
+      "source": "bz_07_useful_god_priority",
+      "type": "enum"
+    },
+    {
+      "name": "resolution_confidence",
+      "source": "bz_07_useful_god_priority",
+      "type": "enum"
+    }
+  ],
+  "forbidden": [
+    "raw chart fields",
+    "SKC/SEC/TEC/PAT/PEV/FPC/TRC/CBC/UG internals",
+    "heavenly_stem",
+    "earthly_branch"
+  ]
+}

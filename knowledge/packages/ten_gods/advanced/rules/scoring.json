@@ -1,0 +1,3848 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_13_ten_gods_advanced",
+  "category": "scoring",
+  "count": 40,
+  "objects": [
+    {
+      "id": "TGA-000321",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 1
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 20
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=10",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "10",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_10_00",
+      "name": "Điểm Thập Thần 10",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 20
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=10",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "10",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000322",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 2
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 29
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=19",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "19",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_19_01",
+      "name": "Điểm Thập Thần 19",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 29
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=19",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "19",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000323",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 3
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 31
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=28",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "28",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_28_02",
+      "name": "Điểm Thập Thần 28",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 31
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=28",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "28",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000324",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 4
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 37
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=37",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "37",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_37_03",
+      "name": "Điểm Thập Thần 37",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 37
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=37",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "37",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000325",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 5
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 37
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=46",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "46",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_46_04",
+      "name": "Điểm Thập Thần 46",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 37
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=46",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "46",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000326",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 6
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=55",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "55",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_55_05",
+      "name": "Điểm Thập Thần 55",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=55",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "55",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000327",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 7
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=64",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "64",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_64_06",
+      "name": "Điểm Thập Thần 64",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=64",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "64",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000328",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 8
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 53
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 20
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=73",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "73",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_73_07",
+      "name": "Điểm Thập Thần 73",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 53
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 20
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=73",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "73",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000329",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 9
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 31
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=82",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "82",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_82_08",
+      "name": "Điểm Thập Thần 82",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 31
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=82",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "82",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000330",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 10
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 29
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=91",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "91",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_91_09",
+      "name": "Điểm Thập Thần 91",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 29
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=91",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "91",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000331",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 11
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 37
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=10",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "10",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_10_10",
+      "name": "Điểm Thập Thần 10",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 37
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=10",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "10",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000332",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 12
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 37
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=19",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "19",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_19_11",
+      "name": "Điểm Thập Thần 19",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 37
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=19",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "19",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000333",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 13
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=28",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "28",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_28_12",
+      "name": "Điểm Thập Thần 28",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=28",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "28",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000334",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 14
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=37",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "37",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_37_13",
+      "name": "Điểm Thập Thần 37",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=37",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "37",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000335",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 15
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 31
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 20
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=46",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "46",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_46_14",
+      "name": "Điểm Thập Thần 46",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 31
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 20
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=46",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "46",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000336",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 16
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 53
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=55",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "55",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_55_15",
+      "name": "Điểm Thập Thần 55",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 53
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=55",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "55",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000337",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 17
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 37
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=64",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "64",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_64_16",
+      "name": "Điểm Thập Thần 64",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 37
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=64",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "64",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000338",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 18
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 29
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=73",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "73",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_73_17",
+      "name": "Điểm Thập Thần 73",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 29
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=73",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "73",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000339",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 19
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=82",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "82",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_82_18",
+      "name": "Điểm Thập Thần 82",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=82",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "82",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000340",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 20
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 37
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=91",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "91",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_91_19",
+      "name": "Điểm Thập Thần 91",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 37
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=91",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "91",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000341",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 21
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 31
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=10",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "10",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_10_20",
+      "name": "Điểm Thập Thần 10",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 31
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=10",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "10",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000342",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 22
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 20
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=19",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "19",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_19_21",
+      "name": "Điểm Thập Thần 19",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 20
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=19",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "19",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000343",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 23
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 37
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=28",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "28",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_28_22",
+      "name": "Điểm Thập Thần 28",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 37
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=28",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "28",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000344",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 24
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 53
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=37",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "37",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_37_23",
+      "name": "Điểm Thập Thần 37",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 53
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=37",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "37",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000345",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 25
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=46",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "46",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_46_24",
+      "name": "Điểm Thập Thần 46",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=46",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "46",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000346",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 26
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 29
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=55",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "55",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_55_25",
+      "name": "Điểm Thập Thần 55",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 29
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=55",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "55",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000347",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 27
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 31
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=64",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "64",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_64_26",
+      "name": "Điểm Thập Thần 64",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 31
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=64",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "64",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000348",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 28
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 37
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=73",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "73",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_73_27",
+      "name": "Điểm Thập Thần 73",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 37
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=73",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "73",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000349",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 29
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 37
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 20
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=82",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "82",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_82_28",
+      "name": "Điểm Thập Thần 82",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 37
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 20
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=82",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "82",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000350",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=91",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "91",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_91_29",
+      "name": "Điểm Thập Thần 91",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=91",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "91",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000351",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 31
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=10",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "10",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_10_30",
+      "name": "Điểm Thập Thần 10",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=10",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "10",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000352",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 32
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 53
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=19",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "19",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_19_31",
+      "name": "Điểm Thập Thần 19",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 53
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=19",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "19",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000353",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 33
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 31
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=28",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "28",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_28_32",
+      "name": "Điểm Thập Thần 28",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 31
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=28",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "28",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000354",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 34
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 29
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=37",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "37",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_37_33",
+      "name": "Điểm Thập Thần 37",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 29
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=37",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "37",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000355",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 35
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 33
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 37
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 44
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=46",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "46",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_46_34",
+      "name": "Điểm Thập Thần 46",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 33
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 37
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 44
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=46",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "46",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000356",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 36
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 37
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 20
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=55",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "55",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_55_35",
+      "name": "Điểm Thập Thần 55",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 37
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 20
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=55",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "55",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000357",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 37
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 41
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 25
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 24
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=64",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "64",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_64_36",
+      "name": "Điểm Thập Thần 64",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 41
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 25
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 24
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=64",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "64",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000358",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 38
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 45
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 28
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=73",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "73",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_73_37",
+      "name": "Điểm Thập Thần 73",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 45
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 28
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=73",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "73",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000359",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 39
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 49
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 31
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 32
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=82",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "82",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_82_38",
+      "name": "Điểm Thập Thần 82",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 49
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 31
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 32
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=82",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "82",
+          "publishes": "ten_gods_score"
+        }
+      }
+    },
+    {
+      "id": "TGA-000360",
+      "version": "1.0.0",
+      "category": "scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "ten_gods",
+        "scoring",
+        "kx6a"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "strength_score",
+          "operator": "gte",
+          "value": 53
+        },
+        {
+          "field": "season_score",
+          "operator": "gte",
+          "value": 34
+        },
+        {
+          "field": "interaction_score",
+          "operator": "gte",
+          "value": 36
+        },
+        {
+          "field": "pattern_integrity",
+          "operator": "gte",
+          "value": 30
+        }
+      ],
+      "result": {
+        "effect": "ten_gods_score=91",
+        "weight": 9,
+        "signal": "ten_gods_score",
+        "score_target": "day_master.ten_gods_score",
+        "outcome": "91",
+        "publishes": "ten_gods_score"
+      },
+      "explanation": "Composite ten_gods_score. Không ghi đè strength_score / pattern_score / interaction_score.",
+      "references": [
+        {
+          "target": "REF-TGA-scoring",
+          "relation": "references"
+        }
+      ],
+      "code": "score_91_39",
+      "name": "Điểm Thập Thần 91",
+      "metadata": {
+        "package_id": "bz_13_ten_gods_advanced",
+        "domain_id": "DOM-TEN_GODS",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-6A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score",
+            "operator": "gte",
+            "value": 53
+          },
+          {
+            "field": "season_score",
+            "operator": "gte",
+            "value": 34
+          },
+          {
+            "field": "interaction_score",
+            "operator": "gte",
+            "value": 36
+          },
+          {
+            "field": "pattern_integrity",
+            "operator": "gte",
+            "value": 30
+          }
+        ],
+        "result": {
+          "effect": "ten_gods_score=91",
+          "weight": 9,
+          "signal": "ten_gods_score",
+          "score_target": "day_master.ten_gods_score",
+          "outcome": "91",
+          "publishes": "ten_gods_score"
+        }
+      }
+    }
+  ]
+}
