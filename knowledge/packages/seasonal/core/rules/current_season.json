@@ -1,0 +1,388 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_02_seasonal_core",
+  "category": "current_season",
+  "count": 5,
+  "objects": [
+    {
+      "id": "SEC-000025",
+      "version": "1.0.0",
+      "category": "current_season",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "current_season",
+        "spring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 98
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "spring"
+        }
+      ],
+      "result": {
+        "effect": "season=spring",
+        "weight": 15,
+        "signal": "current_season",
+        "score_target": "day_master.season_score",
+        "outcome": "wood"
+      },
+      "explanation": "Mùa Xuân; hành chủ lệnh Mộc. Tín hiệu khí mùa, không phải month_status sức thân.",
+      "references": [
+        {
+          "target": "REF-SEC-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "season_spring",
+      "name": "Mùa hiện tại: Xuân",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "spring"
+          }
+        ],
+        "result": {
+          "effect": "season=spring",
+          "weight": 15,
+          "signal": "current_season",
+          "score_target": "day_master.season_score",
+          "outcome": "wood"
+        },
+        "explanation": "Mùa Xuân; hành chủ lệnh Mộc. Tín hiệu khí mùa, không phải month_status sức thân.",
+        "evaluation": {
+          "weight": 15,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "current_season"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000026",
+      "version": "1.0.0",
+      "category": "current_season",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "current_season",
+        "summer"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 98
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        }
+      ],
+      "result": {
+        "effect": "season=summer",
+        "weight": 15,
+        "signal": "current_season",
+        "score_target": "day_master.season_score",
+        "outcome": "fire"
+      },
+      "explanation": "Mùa Hạ; hành chủ lệnh Hỏa. Tín hiệu khí mùa, không phải month_status sức thân.",
+      "references": [
+        {
+          "target": "REF-SEC-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "season_summer",
+      "name": "Mùa hiện tại: Hạ",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          }
+        ],
+        "result": {
+          "effect": "season=summer",
+          "weight": 15,
+          "signal": "current_season",
+          "score_target": "day_master.season_score",
+          "outcome": "fire"
+        },
+        "explanation": "Mùa Hạ; hành chủ lệnh Hỏa. Tín hiệu khí mùa, không phải month_status sức thân.",
+        "evaluation": {
+          "weight": 15,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "current_season"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000027",
+      "version": "1.0.0",
+      "category": "current_season",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "current_season",
+        "autumn"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 98
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        }
+      ],
+      "result": {
+        "effect": "season=autumn",
+        "weight": 15,
+        "signal": "current_season",
+        "score_target": "day_master.season_score",
+        "outcome": "metal"
+      },
+      "explanation": "Mùa Thu; hành chủ lệnh Kim. Tín hiệu khí mùa, không phải month_status sức thân.",
+      "references": [
+        {
+          "target": "REF-SEC-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "season_autumn",
+      "name": "Mùa hiện tại: Thu",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          }
+        ],
+        "result": {
+          "effect": "season=autumn",
+          "weight": 15,
+          "signal": "current_season",
+          "score_target": "day_master.season_score",
+          "outcome": "metal"
+        },
+        "explanation": "Mùa Thu; hành chủ lệnh Kim. Tín hiệu khí mùa, không phải month_status sức thân.",
+        "evaluation": {
+          "weight": 15,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "current_season"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000028",
+      "version": "1.0.0",
+      "category": "current_season",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "current_season",
+        "winter"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 98
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        }
+      ],
+      "result": {
+        "effect": "season=winter",
+        "weight": 15,
+        "signal": "current_season",
+        "score_target": "day_master.season_score",
+        "outcome": "water"
+      },
+      "explanation": "Mùa Đông; hành chủ lệnh Thủy. Tín hiệu khí mùa, không phải month_status sức thân.",
+      "references": [
+        {
+          "target": "REF-SEC-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "season_winter",
+      "name": "Mùa hiện tại: Đông",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          }
+        ],
+        "result": {
+          "effect": "season=winter",
+          "weight": 15,
+          "signal": "current_season",
+          "score_target": "day_master.season_score",
+          "outcome": "water"
+        },
+        "explanation": "Mùa Đông; hành chủ lệnh Thủy. Tín hiệu khí mùa, không phải month_status sức thân.",
+        "evaluation": {
+          "weight": 15,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "current_season"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000029",
+      "version": "1.0.0",
+      "category": "current_season",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "current_season",
+        "late_summer"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 98
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "late_summer"
+        }
+      ],
+      "result": {
+        "effect": "season=late_summer",
+        "weight": 15,
+        "signal": "current_season",
+        "score_target": "day_master.season_score",
+        "outcome": "earth"
+      },
+      "explanation": "Mùa Tứ quý; hành chủ lệnh Thổ. Tín hiệu khí mùa, không phải month_status sức thân.",
+      "references": [
+        {
+          "target": "REF-SEC-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "season_late_summer",
+      "name": "Mùa hiện tại: Tứ quý",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "late_summer"
+          }
+        ],
+        "result": {
+          "effect": "season=late_summer",
+          "weight": 15,
+          "signal": "current_season",
+          "score_target": "day_master.season_score",
+          "outcome": "earth"
+        },
+        "explanation": "Mùa Tứ quý; hành chủ lệnh Thổ. Tín hiệu khí mùa, không phải month_status sức thân.",
+        "evaluation": {
+          "weight": 15,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "current_season"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    }
+  ]
+}

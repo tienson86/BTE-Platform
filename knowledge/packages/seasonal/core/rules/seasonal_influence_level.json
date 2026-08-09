@@ -1,0 +1,236 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_02_seasonal_core",
+  "category": "seasonal_influence_level",
+  "count": 3,
+  "objects": [
+    {
+      "id": "SEC-000103",
+      "version": "1.0.0",
+      "category": "seasonal_influence_level",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "scoring",
+        "strong_band"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 50
+      },
+      "conditions": [
+        {
+          "field": "season_score_normalized",
+          "operator": "equals",
+          "value": "gte_0.65"
+        }
+      ],
+      "result": {
+        "effect": "strong_seasonal",
+        "weight": 0,
+        "signal": "seasonal_influence_level",
+        "score_target": "day_master.season_score",
+        "outcome": "strong_seasonal"
+      },
+      "explanation": "Khí mùa mạnh (đắc lệnh / vượng). Không phải thân vượng SKC.",
+      "references": [
+        {
+          "target": "REF-SEC-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "strong_band",
+      "name": "Ngưỡng khí mùa mạnh ≥65",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score_normalized",
+            "operator": "equals",
+            "value": "gte_0.65"
+          }
+        ],
+        "result": {
+          "effect": "strong_seasonal",
+          "weight": 0,
+          "signal": "seasonal_influence_level",
+          "score_target": "day_master.season_score",
+          "outcome": "strong_seasonal"
+        },
+        "explanation": "Khí mùa mạnh (đắc lệnh / vượng). Không phải thân vượng SKC.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_influence_level"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000104",
+      "version": "1.0.0",
+      "category": "seasonal_influence_level",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "scoring",
+        "balanced_band"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 50
+      },
+      "conditions": [
+        {
+          "field": "season_score_normalized",
+          "operator": "equals",
+          "value": "between_0.35_0.65"
+        }
+      ],
+      "result": {
+        "effect": "balanced_seasonal",
+        "weight": 0,
+        "signal": "seasonal_influence_level",
+        "score_target": "day_master.season_score",
+        "outcome": "balanced_seasonal"
+      },
+      "explanation": "Khí mùa trung / hưu / tứ quý.",
+      "references": [
+        {
+          "target": "REF-SEC-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "balanced_band",
+      "name": "Ngưỡng khí mùa cân 35–65",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score_normalized",
+            "operator": "equals",
+            "value": "between_0.35_0.65"
+          }
+        ],
+        "result": {
+          "effect": "balanced_seasonal",
+          "weight": 0,
+          "signal": "seasonal_influence_level",
+          "score_target": "day_master.season_score",
+          "outcome": "balanced_seasonal"
+        },
+        "explanation": "Khí mùa trung / hưu / tứ quý.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_influence_level"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000105",
+      "version": "1.0.0",
+      "category": "seasonal_influence_level",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "scoring",
+        "weak_band"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 50
+      },
+      "conditions": [
+        {
+          "field": "season_score_normalized",
+          "operator": "equals",
+          "value": "lt_0.35"
+        }
+      ],
+      "result": {
+        "effect": "weak_seasonal",
+        "weight": 0,
+        "signal": "seasonal_influence_level",
+        "score_target": "day_master.season_score",
+        "outcome": "weak_seasonal"
+      },
+      "explanation": "Khí mùa suy / tù / tử.",
+      "references": [
+        {
+          "target": "REF-SEC-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "weak_band",
+      "name": "Ngưỡng khí mùa yếu <35",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_score_normalized",
+            "operator": "equals",
+            "value": "lt_0.35"
+          }
+        ],
+        "result": {
+          "effect": "weak_seasonal",
+          "weight": 0,
+          "signal": "seasonal_influence_level",
+          "score_target": "day_master.season_score",
+          "outcome": "weak_seasonal"
+        },
+        "explanation": "Khí mùa suy / tù / tử.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_influence_level"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    }
+  ]
+}

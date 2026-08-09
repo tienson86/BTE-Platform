@@ -1,5 +1,7 @@
-# Assumptions
+# Assumptions and limitations
 
-- Stem×month is affinity-table expansion, not Chang Sheng (DOM-TWELVE_GROWTH).
-- Late-summer cells missing from CSV completed by the same BTE generate/control pattern; spring-earth NEUTRAL and summer-metal WEAK kept as CSV exceptions.
-- Not Temperature / Useful God.
+- Chart month branch / season is supplied upstream (Calendar / BaZi).
+- Spring-earth NEUTRAL (0) and summer-metal WEAK (−10) kept as BTE CSV exceptions; other missing cells completed by generate/control.
+- Only eight cardinal solar terms in Wave 1; full 24 in Wave 2.
+- `vi` only; ids stable for language packs.
+- Not executed by Analysis Engine until an integration sprint.

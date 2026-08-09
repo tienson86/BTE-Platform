@@ -1,0 +1,50 @@
+{
+  "trace_id": "RT-SEC-BALANCED-001",
+  "chain_id": "RC-SEC-BALANCED-001",
+  "package_version": "1.0.0",
+  "activated_rules": [
+    "SEC-000029",
+    "SEC-000042",
+    "SEC-000056",
+    "SEC-000083",
+    "SEC-000104",
+    "SEC-000101"
+  ],
+  "activated_evidence": [
+    "evidence/bundles/SEC-000029.json",
+    "evidence/bundles/SEC-000042.json",
+    "evidence/bundles/SEC-000056.json",
+    "evidence/bundles/SEC-000083.json",
+    "evidence/bundles/SEC-000104.json",
+    "evidence/bundles/SEC-000101.json"
+  ],
+  "decision_path": [
+    "RN-SEC-BALANCED-OBS-001",
+    "RN-SEC-BALANCED-EVD-001",
+    "RN-SEC-BALANCED-INF-001",
+    "RN-SEC-BALANCED-MID-001",
+    "RN-SEC-BALANCED-FIN-001"
+  ],
+  "confidence_propagation": [
+    {
+      "node_id": "RN-SEC-BALANCED-OBS-001",
+      "mode": "declared"
+    },
+    {
+      "node_id": "RN-SEC-BALANCED-EVD-001",
+      "mode": "inherited"
+    },
+    {
+      "node_id": "RN-SEC-BALANCED-INF-001",
+      "mode": "inherited"
+    },
+    {
+      "node_id": "RN-SEC-BALANCED-MID-001",
+      "mode": "combined"
+    },
+    {
+      "node_id": "RN-SEC-BALANCED-FIN-001",
+      "mode": "combined"
+    }
+  ]
+}

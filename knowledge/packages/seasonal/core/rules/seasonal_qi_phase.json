@@ -1,0 +1,2208 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_02_seasonal_core",
+  "category": "seasonal_qi_phase",
+  "count": 25,
+  "objects": [
+    {
+      "id": "SEC-000046",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "prosperous",
+        "spring",
+        "wood"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "spring"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "wood"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=prosperous",
+        "weight": 20,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "prosperous"
+      },
+      "explanation": "Mộc trong mùa Xuân ở pha Vượng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +20 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_spring_wood",
+      "name": "Mộc mùa Xuân: Vượng",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "spring"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "wood"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=prosperous",
+          "weight": 20,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "prosperous"
+        },
+        "explanation": "Mộc trong mùa Xuân ở pha Vượng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +20 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": 20,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000047",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "flourishing",
+        "spring",
+        "fire"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "spring"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "fire"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=flourishing",
+        "weight": 10,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "flourishing"
+      },
+      "explanation": "Hỏa trong mùa Xuân ở pha Tướng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +10 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_spring_fire",
+      "name": "Hỏa mùa Xuân: Tướng",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "spring"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "fire"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=flourishing",
+          "weight": 10,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "flourishing"
+        },
+        "explanation": "Hỏa trong mùa Xuân ở pha Tướng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +10 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000048",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "confined",
+        "spring",
+        "earth"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "spring"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "earth"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=confined",
+        "weight": 0,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "confined"
+      },
+      "explanation": "Thổ trong mùa Xuân ở pha Tù (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +0 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_spring_earth",
+      "name": "Thổ mùa Xuân: Tù",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "spring"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "earth"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=confined",
+          "weight": 0,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "confined"
+        },
+        "explanation": "Thổ trong mùa Xuân ở pha Tù (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +0 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000049",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "confined",
+        "spring",
+        "metal"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "spring"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "metal"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=confined",
+        "weight": -10,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "confined"
+      },
+      "explanation": "Kim trong mùa Xuân ở pha Tù (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa -10 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_spring_metal",
+      "name": "Kim mùa Xuân: Tù",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "spring"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "metal"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=confined",
+          "weight": -10,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "confined"
+        },
+        "explanation": "Kim trong mùa Xuân ở pha Tù (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa -10 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000050",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "resting",
+        "spring",
+        "water"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "spring"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "water"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=resting",
+        "weight": 5,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "resting"
+      },
+      "explanation": "Thủy trong mùa Xuân ở pha Hưu (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +5 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_spring_water",
+      "name": "Thủy mùa Xuân: Hưu",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "spring"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "water"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=resting",
+          "weight": 5,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "resting"
+        },
+        "explanation": "Thủy trong mùa Xuân ở pha Hưu (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +5 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000051",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "prosperous",
+        "summer",
+        "fire"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "fire"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=prosperous",
+        "weight": 20,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "prosperous"
+      },
+      "explanation": "Hỏa trong mùa Hạ ở pha Vượng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +20 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_summer_fire",
+      "name": "Hỏa mùa Hạ: Vượng",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "fire"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=prosperous",
+          "weight": 20,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "prosperous"
+        },
+        "explanation": "Hỏa trong mùa Hạ ở pha Vượng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +20 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": 20,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000052",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "flourishing",
+        "summer",
+        "earth"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "earth"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=flourishing",
+        "weight": 10,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "flourishing"
+      },
+      "explanation": "Thổ trong mùa Hạ ở pha Tướng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +10 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_summer_earth",
+      "name": "Thổ mùa Hạ: Tướng",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "earth"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=flourishing",
+          "weight": 10,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "flourishing"
+        },
+        "explanation": "Thổ trong mùa Hạ ở pha Tướng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +10 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000053",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "confined",
+        "summer",
+        "metal"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "metal"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=confined",
+        "weight": -10,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "confined"
+      },
+      "explanation": "Kim trong mùa Hạ ở pha Tù (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa -10 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_summer_metal",
+      "name": "Kim mùa Hạ: Tù",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "metal"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=confined",
+          "weight": -10,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "confined"
+        },
+        "explanation": "Kim trong mùa Hạ ở pha Tù (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa -10 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000054",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "dead",
+        "summer",
+        "water"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "water"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=dead",
+        "weight": -20,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "dead"
+      },
+      "explanation": "Thủy trong mùa Hạ ở pha Tử (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa -20 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_summer_water",
+      "name": "Thủy mùa Hạ: Tử",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "water"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=dead",
+          "weight": -20,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "dead"
+        },
+        "explanation": "Thủy trong mùa Hạ ở pha Tử (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa -20 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": -20,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000055",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "resting",
+        "summer",
+        "wood"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "wood"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=resting",
+        "weight": 5,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "resting"
+      },
+      "explanation": "Mộc trong mùa Hạ ở pha Hưu (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +5 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_summer_wood",
+      "name": "Mộc mùa Hạ: Hưu",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "wood"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=resting",
+          "weight": 5,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "resting"
+        },
+        "explanation": "Mộc trong mùa Hạ ở pha Hưu (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +5 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000056",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "prosperous",
+        "late_summer",
+        "earth"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "late_summer"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "earth"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=prosperous",
+        "weight": 20,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "prosperous"
+      },
+      "explanation": "Thổ trong mùa Tứ quý ở pha Vượng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +20 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_late_summer_earth",
+      "name": "Thổ mùa Tứ quý: Vượng",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "late_summer"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "earth"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=prosperous",
+          "weight": 20,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "prosperous"
+        },
+        "explanation": "Thổ trong mùa Tứ quý ở pha Vượng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +20 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": 20,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000057",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "flourishing",
+        "late_summer",
+        "metal"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "late_summer"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "metal"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=flourishing",
+        "weight": 10,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "flourishing"
+      },
+      "explanation": "Kim trong mùa Tứ quý ở pha Tướng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +10 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_late_summer_metal",
+      "name": "Kim mùa Tứ quý: Tướng",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "late_summer"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "metal"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=flourishing",
+          "weight": 10,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "flourishing"
+        },
+        "explanation": "Kim trong mùa Tứ quý ở pha Tướng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +10 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000058",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "dead",
+        "late_summer",
+        "water"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "late_summer"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "water"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=dead",
+        "weight": -20,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "dead"
+      },
+      "explanation": "Thủy trong mùa Tứ quý ở pha Tử (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa -20 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_late_summer_water",
+      "name": "Thủy mùa Tứ quý: Tử",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "late_summer"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "water"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=dead",
+          "weight": -20,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "dead"
+        },
+        "explanation": "Thủy trong mùa Tứ quý ở pha Tử (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa -20 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": -20,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000059",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "confined",
+        "late_summer",
+        "wood"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "late_summer"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "wood"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=confined",
+        "weight": -10,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "confined"
+      },
+      "explanation": "Mộc trong mùa Tứ quý ở pha Tù (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa -10 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_late_summer_wood",
+      "name": "Mộc mùa Tứ quý: Tù",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "late_summer"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "wood"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=confined",
+          "weight": -10,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "confined"
+        },
+        "explanation": "Mộc trong mùa Tứ quý ở pha Tù (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa -10 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000060",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "resting",
+        "late_summer",
+        "fire"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "late_summer"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "fire"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=resting",
+        "weight": 5,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "resting"
+      },
+      "explanation": "Hỏa trong mùa Tứ quý ở pha Hưu (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +5 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_late_summer_fire",
+      "name": "Hỏa mùa Tứ quý: Hưu",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "late_summer"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "fire"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=resting",
+          "weight": 5,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "resting"
+        },
+        "explanation": "Hỏa trong mùa Tứ quý ở pha Hưu (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +5 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000061",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "prosperous",
+        "autumn",
+        "metal"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "metal"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=prosperous",
+        "weight": 20,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "prosperous"
+      },
+      "explanation": "Kim trong mùa Thu ở pha Vượng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +20 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_autumn_metal",
+      "name": "Kim mùa Thu: Vượng",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "metal"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=prosperous",
+          "weight": 20,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "prosperous"
+        },
+        "explanation": "Kim trong mùa Thu ở pha Vượng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +20 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": 20,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000062",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "flourishing",
+        "autumn",
+        "water"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "water"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=flourishing",
+        "weight": 10,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "flourishing"
+      },
+      "explanation": "Thủy trong mùa Thu ở pha Tướng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +10 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_autumn_water",
+      "name": "Thủy mùa Thu: Tướng",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "water"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=flourishing",
+          "weight": 10,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "flourishing"
+        },
+        "explanation": "Thủy trong mùa Thu ở pha Tướng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +10 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000063",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "dead",
+        "autumn",
+        "wood"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "wood"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=dead",
+        "weight": -20,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "dead"
+      },
+      "explanation": "Mộc trong mùa Thu ở pha Tử (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa -20 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_autumn_wood",
+      "name": "Mộc mùa Thu: Tử",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "wood"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=dead",
+          "weight": -20,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "dead"
+        },
+        "explanation": "Mộc trong mùa Thu ở pha Tử (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa -20 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": -20,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000064",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "confined",
+        "autumn",
+        "fire"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "fire"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=confined",
+        "weight": -10,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "confined"
+      },
+      "explanation": "Hỏa trong mùa Thu ở pha Tù (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa -10 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_autumn_fire",
+      "name": "Hỏa mùa Thu: Tù",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "fire"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=confined",
+          "weight": -10,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "confined"
+        },
+        "explanation": "Hỏa trong mùa Thu ở pha Tù (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa -10 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000065",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "resting",
+        "autumn",
+        "earth"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "earth"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=resting",
+        "weight": 5,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "resting"
+      },
+      "explanation": "Thổ trong mùa Thu ở pha Hưu (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +5 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_autumn_earth",
+      "name": "Thổ mùa Thu: Hưu",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "earth"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=resting",
+          "weight": 5,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "resting"
+        },
+        "explanation": "Thổ trong mùa Thu ở pha Hưu (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +5 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000066",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "prosperous",
+        "winter",
+        "water"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "water"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=prosperous",
+        "weight": 20,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "prosperous"
+      },
+      "explanation": "Thủy trong mùa Đông ở pha Vượng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +20 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_winter_water",
+      "name": "Thủy mùa Đông: Vượng",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "water"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=prosperous",
+          "weight": 20,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "prosperous"
+        },
+        "explanation": "Thủy trong mùa Đông ở pha Vượng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +20 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": 20,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000067",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "flourishing",
+        "winter",
+        "wood"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "wood"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=flourishing",
+        "weight": 10,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "flourishing"
+      },
+      "explanation": "Mộc trong mùa Đông ở pha Tướng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +10 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_winter_wood",
+      "name": "Mộc mùa Đông: Tướng",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "wood"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=flourishing",
+          "weight": 10,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "flourishing"
+        },
+        "explanation": "Mộc trong mùa Đông ở pha Tướng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +10 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000068",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "dead",
+        "winter",
+        "fire"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "fire"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=dead",
+        "weight": -20,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "dead"
+      },
+      "explanation": "Hỏa trong mùa Đông ở pha Tử (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa -20 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_winter_fire",
+      "name": "Hỏa mùa Đông: Tử",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "fire"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=dead",
+          "weight": -20,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "dead"
+        },
+        "explanation": "Hỏa trong mùa Đông ở pha Tử (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa -20 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": -20,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000069",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "confined",
+        "winter",
+        "earth"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "earth"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=confined",
+        "weight": -10,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "confined"
+      },
+      "explanation": "Thổ trong mùa Đông ở pha Tù (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa -10 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_winter_earth",
+      "name": "Thổ mùa Đông: Tù",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "earth"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=confined",
+          "weight": -10,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "confined"
+        },
+        "explanation": "Thổ trong mùa Đông ở pha Tù (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa -10 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000070",
+      "version": "1.0.0",
+      "category": "seasonal_qi_phase",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "qi_phase",
+        "resting",
+        "winter",
+        "metal"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        },
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "metal"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_qi_phase=resting",
+        "weight": 5,
+        "signal": "seasonal_qi_phase",
+        "score_target": "day_master.season_score",
+        "outcome": "resting"
+      },
+      "explanation": "Kim trong mùa Đông ở pha Hưu (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +5 → season_score. Không cộng vào strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_winter_metal",
+      "name": "Kim mùa Đông: Hưu",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          },
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "metal"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_qi_phase=resting",
+          "weight": 5,
+          "signal": "seasonal_qi_phase",
+          "score_target": "day_master.season_score",
+          "outcome": "resting"
+        },
+        "explanation": "Kim trong mùa Đông ở pha Hưu (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +5 → season_score. Không cộng vào strength_score.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_qi_phase"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    }
+  ]
+}

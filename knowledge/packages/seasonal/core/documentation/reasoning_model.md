@@ -1,3 +1,3 @@
-# Reasoning model
+# Reasoning
 
-KX-1C chains RC-SEC-INCMD/DEAD/TRANS-001. Observation→…→Final.
+Strong / Weak / Balanced Seasonal Influence chains (KX-1C). Observation→Final. Not Day Master strong/weak.

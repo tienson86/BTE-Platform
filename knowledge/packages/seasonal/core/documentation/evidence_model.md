@@ -1,3 +1,3 @@
-# Evidence model
+# Evidence
 
-KX-1B bundles under `evidence/bundles/SEC-*.json`. One per rule.
+One KX-1B bundle per SEC rule under `evidence/bundles/`.

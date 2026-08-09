@@ -1,0 +1,493 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_02_seasonal_core",
+  "category": "seasonal_element_support",
+  "count": 5,
+  "objects": [
+    {
+      "id": "SEC-000071",
+      "version": "1.0.0",
+      "category": "seasonal_element_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "support",
+        "spring",
+        "fire"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "spring"
+        },
+        {
+          "field": "element",
+          "operator": "equals",
+          "value": "fire"
+        },
+        {
+          "field": "relation",
+          "operator": "equals",
+          "value": "season_generates"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_support=fire",
+        "weight": 10,
+        "signal": "seasonal_element_support",
+        "score_target": "day_master.season_score",
+        "outcome": "fire"
+      },
+      "explanation": "Mùa Xuân (Mộc) sinh Hỏa — hỗ trợ hành theo sinh khắc mùa.",
+      "references": [
+        {
+          "target": "REF-SEC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "support_spring",
+      "name": "Xuân sinh Hỏa",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "spring"
+          },
+          {
+            "field": "element",
+            "operator": "equals",
+            "value": "fire"
+          },
+          {
+            "field": "relation",
+            "operator": "equals",
+            "value": "season_generates"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_support=fire",
+          "weight": 10,
+          "signal": "seasonal_element_support",
+          "score_target": "day_master.season_score",
+          "outcome": "fire"
+        },
+        "explanation": "Mùa Xuân (Mộc) sinh Hỏa — hỗ trợ hành theo sinh khắc mùa.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_element_support"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000072",
+      "version": "1.0.0",
+      "category": "seasonal_element_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "support",
+        "summer",
+        "earth"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        },
+        {
+          "field": "element",
+          "operator": "equals",
+          "value": "earth"
+        },
+        {
+          "field": "relation",
+          "operator": "equals",
+          "value": "season_generates"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_support=earth",
+        "weight": 10,
+        "signal": "seasonal_element_support",
+        "score_target": "day_master.season_score",
+        "outcome": "earth"
+      },
+      "explanation": "Mùa Hạ (Hỏa) sinh Thổ — hỗ trợ hành theo sinh khắc mùa.",
+      "references": [
+        {
+          "target": "REF-SEC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "support_summer",
+      "name": "Hạ sinh Thổ",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          },
+          {
+            "field": "element",
+            "operator": "equals",
+            "value": "earth"
+          },
+          {
+            "field": "relation",
+            "operator": "equals",
+            "value": "season_generates"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_support=earth",
+          "weight": 10,
+          "signal": "seasonal_element_support",
+          "score_target": "day_master.season_score",
+          "outcome": "earth"
+        },
+        "explanation": "Mùa Hạ (Hỏa) sinh Thổ — hỗ trợ hành theo sinh khắc mùa.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_element_support"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000073",
+      "version": "1.0.0",
+      "category": "seasonal_element_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "support",
+        "autumn",
+        "water"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        },
+        {
+          "field": "element",
+          "operator": "equals",
+          "value": "water"
+        },
+        {
+          "field": "relation",
+          "operator": "equals",
+          "value": "season_generates"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_support=water",
+        "weight": 10,
+        "signal": "seasonal_element_support",
+        "score_target": "day_master.season_score",
+        "outcome": "water"
+      },
+      "explanation": "Mùa Thu (Kim) sinh Thủy — hỗ trợ hành theo sinh khắc mùa.",
+      "references": [
+        {
+          "target": "REF-SEC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "support_autumn",
+      "name": "Thu sinh Thủy",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          },
+          {
+            "field": "element",
+            "operator": "equals",
+            "value": "water"
+          },
+          {
+            "field": "relation",
+            "operator": "equals",
+            "value": "season_generates"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_support=water",
+          "weight": 10,
+          "signal": "seasonal_element_support",
+          "score_target": "day_master.season_score",
+          "outcome": "water"
+        },
+        "explanation": "Mùa Thu (Kim) sinh Thủy — hỗ trợ hành theo sinh khắc mùa.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_element_support"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000074",
+      "version": "1.0.0",
+      "category": "seasonal_element_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "support",
+        "winter",
+        "wood"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        },
+        {
+          "field": "element",
+          "operator": "equals",
+          "value": "wood"
+        },
+        {
+          "field": "relation",
+          "operator": "equals",
+          "value": "season_generates"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_support=wood",
+        "weight": 10,
+        "signal": "seasonal_element_support",
+        "score_target": "day_master.season_score",
+        "outcome": "wood"
+      },
+      "explanation": "Mùa Đông (Thủy) sinh Mộc — hỗ trợ hành theo sinh khắc mùa.",
+      "references": [
+        {
+          "target": "REF-SEC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "support_winter",
+      "name": "Đông sinh Mộc",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          },
+          {
+            "field": "element",
+            "operator": "equals",
+            "value": "wood"
+          },
+          {
+            "field": "relation",
+            "operator": "equals",
+            "value": "season_generates"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_support=wood",
+          "weight": 10,
+          "signal": "seasonal_element_support",
+          "score_target": "day_master.season_score",
+          "outcome": "wood"
+        },
+        "explanation": "Mùa Đông (Thủy) sinh Mộc — hỗ trợ hành theo sinh khắc mùa.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_element_support"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000075",
+      "version": "1.0.0",
+      "category": "seasonal_element_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "support",
+        "late_summer",
+        "metal"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "late_summer"
+        },
+        {
+          "field": "element",
+          "operator": "equals",
+          "value": "metal"
+        },
+        {
+          "field": "relation",
+          "operator": "equals",
+          "value": "season_generates"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_support=metal",
+        "weight": 10,
+        "signal": "seasonal_element_support",
+        "score_target": "day_master.season_score",
+        "outcome": "metal"
+      },
+      "explanation": "Mùa Tứ quý (Thổ) sinh Kim — hỗ trợ hành theo sinh khắc mùa.",
+      "references": [
+        {
+          "target": "REF-SEC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "support_late_summer",
+      "name": "Tứ quý sinh Kim",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "late_summer"
+          },
+          {
+            "field": "element",
+            "operator": "equals",
+            "value": "metal"
+          },
+          {
+            "field": "relation",
+            "operator": "equals",
+            "value": "season_generates"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_support=metal",
+          "weight": 10,
+          "signal": "seasonal_element_support",
+          "score_target": "day_master.season_score",
+          "outcome": "metal"
+        },
+        "explanation": "Mùa Tứ quý (Thổ) sinh Kim — hỗ trợ hành theo sinh khắc mùa.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_element_support"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    }
+  ]
+}

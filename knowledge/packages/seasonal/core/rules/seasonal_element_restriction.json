@@ -1,0 +1,493 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_02_seasonal_core",
+  "category": "seasonal_element_restriction",
+  "count": 5,
+  "objects": [
+    {
+      "id": "SEC-000076",
+      "version": "1.0.0",
+      "category": "seasonal_element_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "restriction",
+        "spring",
+        "earth"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "spring"
+        },
+        {
+          "field": "element",
+          "operator": "equals",
+          "value": "earth"
+        },
+        {
+          "field": "relation",
+          "operator": "equals",
+          "value": "season_controls"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_restriction=earth",
+        "weight": -10,
+        "signal": "seasonal_element_restriction",
+        "score_target": "day_master.season_score",
+        "outcome": "earth"
+      },
+      "explanation": "Mùa Xuân (Mộc) khắc Thổ — hạn chế hành theo sinh khắc mùa.",
+      "references": [
+        {
+          "target": "REF-SEC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "restrict_spring",
+      "name": "Xuân khắc Thổ",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "spring"
+          },
+          {
+            "field": "element",
+            "operator": "equals",
+            "value": "earth"
+          },
+          {
+            "field": "relation",
+            "operator": "equals",
+            "value": "season_controls"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_restriction=earth",
+          "weight": -10,
+          "signal": "seasonal_element_restriction",
+          "score_target": "day_master.season_score",
+          "outcome": "earth"
+        },
+        "explanation": "Mùa Xuân (Mộc) khắc Thổ — hạn chế hành theo sinh khắc mùa.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_element_restriction"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000077",
+      "version": "1.0.0",
+      "category": "seasonal_element_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "restriction",
+        "summer",
+        "metal"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        },
+        {
+          "field": "element",
+          "operator": "equals",
+          "value": "metal"
+        },
+        {
+          "field": "relation",
+          "operator": "equals",
+          "value": "season_controls"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_restriction=metal",
+        "weight": -10,
+        "signal": "seasonal_element_restriction",
+        "score_target": "day_master.season_score",
+        "outcome": "metal"
+      },
+      "explanation": "Mùa Hạ (Hỏa) khắc Kim — hạn chế hành theo sinh khắc mùa.",
+      "references": [
+        {
+          "target": "REF-SEC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "restrict_summer",
+      "name": "Hạ khắc Kim",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          },
+          {
+            "field": "element",
+            "operator": "equals",
+            "value": "metal"
+          },
+          {
+            "field": "relation",
+            "operator": "equals",
+            "value": "season_controls"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_restriction=metal",
+          "weight": -10,
+          "signal": "seasonal_element_restriction",
+          "score_target": "day_master.season_score",
+          "outcome": "metal"
+        },
+        "explanation": "Mùa Hạ (Hỏa) khắc Kim — hạn chế hành theo sinh khắc mùa.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_element_restriction"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000078",
+      "version": "1.0.0",
+      "category": "seasonal_element_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "restriction",
+        "autumn",
+        "wood"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        },
+        {
+          "field": "element",
+          "operator": "equals",
+          "value": "wood"
+        },
+        {
+          "field": "relation",
+          "operator": "equals",
+          "value": "season_controls"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_restriction=wood",
+        "weight": -10,
+        "signal": "seasonal_element_restriction",
+        "score_target": "day_master.season_score",
+        "outcome": "wood"
+      },
+      "explanation": "Mùa Thu (Kim) khắc Mộc — hạn chế hành theo sinh khắc mùa.",
+      "references": [
+        {
+          "target": "REF-SEC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "restrict_autumn",
+      "name": "Thu khắc Mộc",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          },
+          {
+            "field": "element",
+            "operator": "equals",
+            "value": "wood"
+          },
+          {
+            "field": "relation",
+            "operator": "equals",
+            "value": "season_controls"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_restriction=wood",
+          "weight": -10,
+          "signal": "seasonal_element_restriction",
+          "score_target": "day_master.season_score",
+          "outcome": "wood"
+        },
+        "explanation": "Mùa Thu (Kim) khắc Mộc — hạn chế hành theo sinh khắc mùa.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_element_restriction"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000079",
+      "version": "1.0.0",
+      "category": "seasonal_element_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "restriction",
+        "winter",
+        "fire"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        },
+        {
+          "field": "element",
+          "operator": "equals",
+          "value": "fire"
+        },
+        {
+          "field": "relation",
+          "operator": "equals",
+          "value": "season_controls"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_restriction=fire",
+        "weight": -10,
+        "signal": "seasonal_element_restriction",
+        "score_target": "day_master.season_score",
+        "outcome": "fire"
+      },
+      "explanation": "Mùa Đông (Thủy) khắc Hỏa — hạn chế hành theo sinh khắc mùa.",
+      "references": [
+        {
+          "target": "REF-SEC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "restrict_winter",
+      "name": "Đông khắc Hỏa",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          },
+          {
+            "field": "element",
+            "operator": "equals",
+            "value": "fire"
+          },
+          {
+            "field": "relation",
+            "operator": "equals",
+            "value": "season_controls"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_restriction=fire",
+          "weight": -10,
+          "signal": "seasonal_element_restriction",
+          "score_target": "day_master.season_score",
+          "outcome": "fire"
+        },
+        "explanation": "Mùa Đông (Thủy) khắc Hỏa — hạn chế hành theo sinh khắc mùa.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_element_restriction"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000080",
+      "version": "1.0.0",
+      "category": "seasonal_element_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "restriction",
+        "late_summer",
+        "water"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "late_summer"
+        },
+        {
+          "field": "element",
+          "operator": "equals",
+          "value": "water"
+        },
+        {
+          "field": "relation",
+          "operator": "equals",
+          "value": "season_controls"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_restriction=water",
+        "weight": -10,
+        "signal": "seasonal_element_restriction",
+        "score_target": "day_master.season_score",
+        "outcome": "water"
+      },
+      "explanation": "Mùa Tứ quý (Thổ) khắc Thủy — hạn chế hành theo sinh khắc mùa.",
+      "references": [
+        {
+          "target": "REF-SEC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "restrict_late_summer",
+      "name": "Tứ quý khắc Thủy",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "late_summer"
+          },
+          {
+            "field": "element",
+            "operator": "equals",
+            "value": "water"
+          },
+          {
+            "field": "relation",
+            "operator": "equals",
+            "value": "season_controls"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_restriction=water",
+          "weight": -10,
+          "signal": "seasonal_element_restriction",
+          "score_target": "day_master.season_score",
+          "outcome": "water"
+        },
+        "explanation": "Mùa Tứ quý (Thổ) khắc Thủy — hạn chế hành theo sinh khắc mùa.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_element_restriction"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    }
+  ]
+}

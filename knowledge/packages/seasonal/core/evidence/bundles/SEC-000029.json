@@ -3,14 +3,14 @@
   "evidence_version": "1.0.0",
   "explanation": {
     "language": "vi",
-    "title": "Tháng âm 12 (Sửu)",
-    "why": "Tháng âm lịch 12 (Sửu) ánh xạ sang mùa winter.",
-    "when": "Khi lunar_month=12.",
-    "when_not": "Khi điều kiện không khớp, hoặc luật exclusive khác trong cùng nhóm được chọn.",
-    "summary": "Tháng âm lịch 12 (Sửu) ánh xạ sang mùa winter."
+    "title": "Mùa hiện tại: Tứ quý",
+    "why": "Mùa Tứ quý; hành chủ lệnh Thổ. Tín hiệu khí mùa, không phải month_status sức thân.",
+    "when": "Khi season=late_summer.",
+    "when_not": "Khi điều kiện không khớp hoặc luật exclusive khác thắng.",
+    "summary": "Mùa Tứ quý; hành chủ lệnh Thổ. Tín hiệu khí mùa, không phải month_status sức thân."
   },
-  "rationale": "Luật `lunar_month_12` thuộc nhóm `lunar_month_mapping`. Không thay Temperature / Useful God / Pattern; chỉ luận khí mùa.",
-  "confidence_level": "high",
+  "rationale": "Luật `season_late_summer` / `current_season`. Chỉ luận khí tháng lệnh và Seasonal Qi. Không trùng Strength / Temperature / Useful God / Pattern.",
+  "confidence_level": "canonical",
   "confidence_reason": "Khớp MODULE_SPEC 02_season_rules, 02_season_score.csv, SDR, KR-000015.",
   "references": [
     {
@@ -24,9 +24,9 @@
       "rule_id": "SEC-000029",
       "polarity": "positive",
       "chart_facts": {
-        "lunar_month": 12
+        "season": "late_summer"
       },
-      "note": "Thỏa điều kiện — luật được phép kích hoạt."
+      "note": "Thỏa điều kiện."
     }
   ],
   "negative_examples": [
@@ -35,9 +35,9 @@
       "rule_id": "SEC-000029",
       "polarity": "negative",
       "chart_facts": {
-        "lunar_month": "not_12"
+        "season": "not_late_summer"
       },
-      "note": "Phá điều kiện chính — luật không kích hoạt."
+      "note": "Phá điều kiện chính."
     }
   ],
   "boundary_cases": [
@@ -46,21 +46,17 @@
       "rule_id": "SEC-000029",
       "kind": "exclusive_peer",
       "chart_facts": {
-        "lunar_month": 12
+        "season": "late_summer"
       },
-      "note": "Cạnh tranh exclusive cùng nhóm."
+      "note": "Cạnh tranh exclusive."
     }
   ],
   "related_rules": [],
   "conflicting_rules": [
-    "SEC-000018",
-    "SEC-000019",
-    "SEC-000020",
-    "SEC-000021",
-    "SEC-000022",
-    "SEC-000023",
-    "SEC-000024",
-    "SEC-000025"
+    "SEC-000025",
+    "SEC-000026",
+    "SEC-000027",
+    "SEC-000028"
   ],
   "traceability": {
     "originating_package": "bz_02_seasonal_core",
@@ -68,8 +64,7 @@
     "author": "BTE Knowledge Board",
     "review_status": "reviewed",
     "evidence_version": "1.0.0",
-    "generator_version": "1.0.0",
-    "profile_id": "GEN-INST-SEASONAL",
+    "sprint": "KX-2A",
     "last_reviewed": "2026-08-09"
   },
   "reviewer_notes": null

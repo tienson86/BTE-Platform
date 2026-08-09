@@ -1,0 +1,156 @@
+{
+  "nodes": [
+    {
+      "node_id": "RN-SEC-STRONG-OBS-001",
+      "node_type": "observation",
+      "title": "Tháng Dần, Nhật Chủ Mộc, mùa Xuân",
+      "description": "Tháng Dần, Nhật Chủ Mộc, mùa Xuân",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [],
+      "outputs": [
+        "chart_facts"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-SEC-STRONG-EVD-001",
+      "node_type": "evidence",
+      "title": "Mộc mùa Xuân: Vượng",
+      "description": "Mộc trong mùa Xuân ở pha Vượng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +20 → season_score. Không cộng vào strength_score.",
+      "source_rule": "SEC-000046",
+      "source_evidence": "evidence/bundles/SEC-000046.json",
+      "inputs": [
+        "chart_facts"
+      ],
+      "outputs": [
+        "evidence_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-SEC-STRONG-INF-001",
+      "node_type": "inference",
+      "title": "Mộc mùa Xuân: Vượng",
+      "description": "Mộc trong mùa Xuân ở pha Vượng (Vượng/Tướng/Hưu/Tù/Tử). Điểm khí mùa +20 → season_score. Không cộng vào strength_score.",
+      "source_rule": "SEC-000046",
+      "source_evidence": "evidence/bundles/SEC-000046.json",
+      "inputs": [
+        "evidence_signal"
+      ],
+      "outputs": [
+        "inference_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-SEC-STRONG-MID-001",
+      "node_type": "intermediate_conclusion",
+      "title": "Trọng số tháng Dần",
+      "description": "Trọng số khí tháng lệnh Dần = 12 (early). Khác bảng Strength 35/25/10/−10/−25.",
+      "source_rule": "SEC-000081",
+      "source_evidence": "evidence/bundles/SEC-000081.json",
+      "inputs": [
+        "inference_signal"
+      ],
+      "outputs": [
+        "mid_signal"
+      ],
+      "confidence": {
+        "level": "medium",
+        "mode": "combined"
+      },
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-SEC-STRONG-FIN-001",
+      "node_type": "final_conclusion",
+      "title": "Ngưỡng khí mùa mạnh ≥65",
+      "description": "Khí mùa mạnh (đắc lệnh / vượng). Không phải thân vượng SKC.",
+      "source_rule": "SEC-000103",
+      "source_evidence": "evidence/bundles/SEC-000103.json",
+      "inputs": [
+        "mid_signal"
+      ],
+      "outputs": [
+        "seasonal_influence"
+      ],
+      "confidence": {
+        "level": "medium",
+        "mode": "combined"
+      },
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-SEC-STRONG-ALT-001",
+      "node_type": "alternative",
+      "title": "Ngưỡng khí mùa cân 35–65",
+      "description": "Nhánh thay thế không chọn.",
+      "source_rule": "SEC-000104",
+      "source_evidence": "evidence/bundles/SEC-000104.json",
+      "inputs": [
+        "mid_signal"
+      ],
+      "outputs": [
+        "alt_signal"
+      ],
+      "confidence": {
+        "level": "low",
+        "mode": "reduced"
+      },
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-SEC-STRONG-CON-001",
+      "node_type": "contradiction",
+      "title": "Ngưỡng khí mùa yếu <35",
+      "description": "Nhánh mâu thuẫn.",
+      "source_rule": "SEC-000105",
+      "source_evidence": "evidence/bundles/SEC-000105.json",
+      "inputs": [
+        "mid_signal"
+      ],
+      "outputs": [
+        "con_signal"
+      ],
+      "confidence": {
+        "level": "low",
+        "mode": "conflicting"
+      },
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "language": "vi"
+      }
+    }
+  ]
+}

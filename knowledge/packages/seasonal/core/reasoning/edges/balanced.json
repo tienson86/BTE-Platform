@@ -1,0 +1,76 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-SEC-BALANCED-001",
+      "source": "RN-SEC-BALANCED-OBS-001",
+      "target": "RN-SEC-BALANCED-EVD-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-SEC-BALANCED-002",
+      "source": "RN-SEC-BALANCED-EVD-001",
+      "target": "RN-SEC-BALANCED-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-SEC-BALANCED-003",
+      "source": "RN-SEC-BALANCED-INF-001",
+      "target": "RN-SEC-BALANCED-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-SEC-BALANCED-004",
+      "source": "RN-SEC-BALANCED-MID-001",
+      "target": "RN-SEC-BALANCED-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-SEC-BALANCED-005",
+      "source": "RN-SEC-BALANCED-OBS-001",
+      "target": "RN-SEC-BALANCED-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "unused_branch"
+    },
+    {
+      "edge_id": "RE-SEC-BALANCED-006",
+      "source": "RN-SEC-BALANCED-CON-001",
+      "target": "RN-SEC-BALANCED-FIN-001",
+      "relationship": "contradicts",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-SEC-BALANCED-007",
+      "source": "RN-SEC-BALANCED-FIN-001",
+      "target": "RN-SEC-BALANCED-CON-001",
+      "relationship": "invalidates",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-SEC-BALANCED-008",
+      "source": "RN-SEC-BALANCED-MID-001",
+      "target": "RN-SEC-BALANCED-FIN-001",
+      "relationship": "confirms",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    }
+  ]
+}

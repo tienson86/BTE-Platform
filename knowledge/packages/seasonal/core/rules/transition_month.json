@@ -1,0 +1,344 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_02_seasonal_core",
+  "category": "transition_month",
+  "count": 4,
+  "objects": [
+    {
+      "id": "SEC-000042",
+      "version": "1.0.0",
+      "category": "transition_month",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "transition",
+        "thin"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 90
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "thin"
+        },
+        {
+          "field": "transition_month",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "transition=thin",
+        "weight": 8,
+        "signal": "transition_month",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Thìn là tháng tứ quý: Thổ vượng, khí mùa hỗn hợp (SDR_0005). Không luận Pattern/UG.",
+      "references": [
+        {
+          "target": "REF-SEC-000004",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_thin",
+      "name": "Tháng chuyển mùa Thìn",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "thin"
+          },
+          {
+            "field": "transition_month",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "transition=thin",
+          "weight": 8,
+          "signal": "transition_month",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Thìn là tháng tứ quý: Thổ vượng, khí mùa hỗn hợp (SDR_0005). Không luận Pattern/UG.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transition_month"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000043",
+      "version": "1.0.0",
+      "category": "transition_month",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "transition",
+        "mui"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 90
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "mui"
+        },
+        {
+          "field": "transition_month",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "transition=mui",
+        "weight": 8,
+        "signal": "transition_month",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Mùi là tháng tứ quý: Thổ vượng, khí mùa hỗn hợp (SDR_0005). Không luận Pattern/UG.",
+      "references": [
+        {
+          "target": "REF-SEC-000004",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_mui",
+      "name": "Tháng chuyển mùa Mùi",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "mui"
+          },
+          {
+            "field": "transition_month",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "transition=mui",
+          "weight": 8,
+          "signal": "transition_month",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Mùi là tháng tứ quý: Thổ vượng, khí mùa hỗn hợp (SDR_0005). Không luận Pattern/UG.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transition_month"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000044",
+      "version": "1.0.0",
+      "category": "transition_month",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "transition",
+        "tuat"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 90
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "tuat"
+        },
+        {
+          "field": "transition_month",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "transition=tuat",
+        "weight": 8,
+        "signal": "transition_month",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Tuất là tháng tứ quý: Thổ vượng, khí mùa hỗn hợp (SDR_0005). Không luận Pattern/UG.",
+      "references": [
+        {
+          "target": "REF-SEC-000004",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_tuat",
+      "name": "Tháng chuyển mùa Tuất",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "tuat"
+          },
+          {
+            "field": "transition_month",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "transition=tuat",
+          "weight": 8,
+          "signal": "transition_month",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Tuất là tháng tứ quý: Thổ vượng, khí mùa hỗn hợp (SDR_0005). Không luận Pattern/UG.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transition_month"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000045",
+      "version": "1.0.0",
+      "category": "transition_month",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "transition",
+        "suu"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 90
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "suu"
+        },
+        {
+          "field": "transition_month",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "transition=suu",
+        "weight": 8,
+        "signal": "transition_month",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Sửu là tháng tứ quý: Thổ vượng, khí mùa hỗn hợp (SDR_0005). Không luận Pattern/UG.",
+      "references": [
+        {
+          "target": "REF-SEC-000004",
+          "relation": "references"
+        }
+      ],
+      "code": "trans_suu",
+      "name": "Tháng chuyển mùa Sửu",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "suu"
+          },
+          {
+            "field": "transition_month",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "transition=suu",
+          "weight": 8,
+          "signal": "transition_month",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Sửu là tháng tứ quý: Thổ vượng, khí mùa hỗn hợp (SDR_0005). Không luận Pattern/UG.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "transition_month"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "trace_id": "RT-SEC-WEAK-001",
+  "chain_id": "RC-SEC-WEAK-001",
+  "package_version": "1.0.0",
+  "activated_rules": [
+    "SEC-000026",
+    "SEC-000005",
+    "SEC-000054",
+    "SEC-000085",
+    "SEC-000105",
+    "SEC-000101"
+  ],
+  "activated_evidence": [
+    "evidence/bundles/SEC-000026.json",
+    "evidence/bundles/SEC-000005.json",
+    "evidence/bundles/SEC-000054.json",
+    "evidence/bundles/SEC-000085.json",
+    "evidence/bundles/SEC-000105.json",
+    "evidence/bundles/SEC-000101.json"
+  ],
+  "decision_path": [
+    "RN-SEC-WEAK-OBS-001",
+    "RN-SEC-WEAK-EVD-001",
+    "RN-SEC-WEAK-INF-001",
+    "RN-SEC-WEAK-MID-001",
+    "RN-SEC-WEAK-FIN-001"
+  ],
+  "confidence_propagation": [
+    {
+      "node_id": "RN-SEC-WEAK-OBS-001",
+      "mode": "declared"
+    },
+    {
+      "node_id": "RN-SEC-WEAK-EVD-001",
+      "mode": "inherited"
+    },
+    {
+      "node_id": "RN-SEC-WEAK-INF-001",
+      "mode": "inherited"
+    },
+    {
+      "node_id": "RN-SEC-WEAK-MID-001",
+      "mode": "combined"
+    },
+    {
+      "node_id": "RN-SEC-WEAK-FIN-001",
+      "mode": "combined"
+    }
+  ]
+}

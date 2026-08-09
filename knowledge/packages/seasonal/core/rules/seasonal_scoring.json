@@ -1,0 +1,526 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_02_seasonal_core",
+  "category": "seasonal_scoring",
+  "count": 7,
+  "objects": [
+    {
+      "id": "SEC-000101",
+      "version": "1.0.0",
+      "category": "seasonal_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "scoring",
+        "baseline"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "chart_valid",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "baseline",
+        "weight": 50,
+        "signal": "seasonal_scoring",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Mọi cục hợp lệ khởi điểm season_score 50/100.",
+      "references": [
+        {
+          "target": "REF-SEC-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "baseline",
+      "name": "Điểm nền khí mùa 50",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "chart_valid",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "baseline",
+          "weight": 50,
+          "signal": "seasonal_scoring",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Mọi cục hợp lệ khởi điểm season_score 50/100.",
+        "evaluation": {
+          "weight": 50,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000102",
+      "version": "1.0.0",
+      "category": "seasonal_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "scoring",
+        "scale"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "score_scale",
+          "operator": "equals",
+          "value": 100
+        }
+      ],
+      "result": {
+        "effect": "scale",
+        "weight": 0,
+        "signal": "seasonal_scoring",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Thang khí mùa 0–100 (MODULE_SPEC).",
+      "references": [
+        {
+          "target": "REF-SEC-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "scale",
+      "name": "Thang 100",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "score_scale",
+            "operator": "equals",
+            "value": 100
+          }
+        ],
+        "result": {
+          "effect": "scale",
+          "weight": 0,
+          "signal": "seasonal_scoring",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Thang khí mùa 0–100 (MODULE_SPEC).",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000106",
+      "version": "1.0.0",
+      "category": "seasonal_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "scoring",
+        "not_strength"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "module",
+          "operator": "equals",
+          "value": "seasonal"
+        }
+      ],
+      "result": {
+        "effect": "scope",
+        "weight": 0,
+        "signal": "seasonal_scoring",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Không ghi đè SKC month_status / strength_score.",
+      "references": [
+        {
+          "target": "REF-SEC-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "not_strength",
+      "name": "Không trùng Strength",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "module",
+            "operator": "equals",
+            "value": "seasonal"
+          }
+        ],
+        "result": {
+          "effect": "scope",
+          "weight": 0,
+          "signal": "seasonal_scoring",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Không ghi đè SKC month_status / strength_score.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000107",
+      "version": "1.0.0",
+      "category": "seasonal_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "scoring",
+        "not_temperature"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "module",
+          "operator": "equals",
+          "value": "seasonal"
+        }
+      ],
+      "result": {
+        "effect": "scope",
+        "weight": 0,
+        "signal": "seasonal_scoring",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Temperature Engine / 11_temperature nằm ngoài gói.",
+      "references": [
+        {
+          "target": "REF-SEC-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "not_temperature",
+      "name": "Không luận nhiệt độ",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "module",
+            "operator": "equals",
+            "value": "seasonal"
+          }
+        ],
+        "result": {
+          "effect": "scope",
+          "weight": 0,
+          "signal": "seasonal_scoring",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Temperature Engine / 11_temperature nằm ngoài gói.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000108",
+      "version": "1.0.0",
+      "category": "seasonal_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "scoring",
+        "not_useful_god"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "module",
+          "operator": "equals",
+          "value": "seasonal"
+        }
+      ],
+      "result": {
+        "effect": "scope",
+        "weight": 0,
+        "signal": "seasonal_scoring",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Useful God nằm ngoài gói.",
+      "references": [
+        {
+          "target": "REF-SEC-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "not_useful_god",
+      "name": "Không chọn Dụng thần",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "module",
+            "operator": "equals",
+            "value": "seasonal"
+          }
+        ],
+        "result": {
+          "effect": "scope",
+          "weight": 0,
+          "signal": "seasonal_scoring",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Useful God nằm ngoài gói.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000109",
+      "version": "1.0.0",
+      "category": "seasonal_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "scoring",
+        "exclusive_one"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "exclusive_policy",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "exclusive",
+        "weight": 1,
+        "signal": "seasonal_scoring",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Priority.order quyết định luật thắng trong nhóm.",
+      "references": [
+        {
+          "target": "REF-SEC-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "exclusive_one",
+      "name": "Một luật mỗi nhóm exclusive",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "exclusive_policy",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "exclusive",
+          "weight": 1,
+          "signal": "seasonal_scoring",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Priority.order quyết định luật thắng trong nhóm.",
+        "evaluation": {
+          "weight": 1,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000110",
+      "version": "1.0.0",
+      "category": "seasonal_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "scoring",
+        "dual_read"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "compatible_with_v1",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "compatibility",
+        "weight": 0,
+        "signal": "seasonal_scoring",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "V1 SEA-* vẫn hợp lệ; SEC-* là gói V2 độc lập.",
+      "references": [
+        {
+          "target": "REF-SEC-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "dual_read",
+      "name": "Dual-read V1 SEA",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "compatible_with_v1",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "compatibility",
+          "weight": 0,
+          "signal": "seasonal_scoring",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "V1 SEA-* vẫn hợp lệ; SEC-* là gói V2 độc lập.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    }
+  ]
+}

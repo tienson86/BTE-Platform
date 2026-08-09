@@ -1,0 +1,932 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_02_seasonal_core",
+  "category": "month_branch",
+  "count": 12,
+  "objects": [
+    {
+      "id": "SEC-000001",
+      "version": "1.0.0",
+      "category": "month_branch",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_branch",
+        "dan",
+        "spring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "dan"
+        }
+      ],
+      "result": {
+        "effect": "month_branch=dan",
+        "weight": 0,
+        "signal": "month_branch",
+        "score_target": "day_master.season_score",
+        "outcome": "spring"
+      },
+      "explanation": "Địa chi tháng Dần xác định tháng lệnh và mùa spring. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+      "references": [
+        {
+          "target": "REF-SEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "mb_dan",
+      "name": "Tháng lệnh Dần",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "dan"
+          }
+        ],
+        "result": {
+          "effect": "month_branch=dan",
+          "weight": 0,
+          "signal": "month_branch",
+          "score_target": "day_master.season_score",
+          "outcome": "spring"
+        },
+        "explanation": "Địa chi tháng Dần xác định tháng lệnh và mùa spring. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000002",
+      "version": "1.0.0",
+      "category": "month_branch",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_branch",
+        "mao",
+        "spring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "mao"
+        }
+      ],
+      "result": {
+        "effect": "month_branch=mao",
+        "weight": 0,
+        "signal": "month_branch",
+        "score_target": "day_master.season_score",
+        "outcome": "spring"
+      },
+      "explanation": "Địa chi tháng Mão xác định tháng lệnh và mùa spring. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+      "references": [
+        {
+          "target": "REF-SEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "mb_mao",
+      "name": "Tháng lệnh Mão",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "mao"
+          }
+        ],
+        "result": {
+          "effect": "month_branch=mao",
+          "weight": 0,
+          "signal": "month_branch",
+          "score_target": "day_master.season_score",
+          "outcome": "spring"
+        },
+        "explanation": "Địa chi tháng Mão xác định tháng lệnh và mùa spring. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000003",
+      "version": "1.0.0",
+      "category": "month_branch",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_branch",
+        "thin",
+        "spring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "thin"
+        }
+      ],
+      "result": {
+        "effect": "month_branch=thin",
+        "weight": 0,
+        "signal": "month_branch",
+        "score_target": "day_master.season_score",
+        "outcome": "late_summer"
+      },
+      "explanation": "Địa chi tháng Thìn xác định tháng lệnh và mùa tứ quý / chuyển mùa. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+      "references": [
+        {
+          "target": "REF-SEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "mb_thin",
+      "name": "Tháng lệnh Thìn",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "thin"
+          }
+        ],
+        "result": {
+          "effect": "month_branch=thin",
+          "weight": 0,
+          "signal": "month_branch",
+          "score_target": "day_master.season_score",
+          "outcome": "late_summer"
+        },
+        "explanation": "Địa chi tháng Thìn xác định tháng lệnh và mùa tứ quý / chuyển mùa. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000004",
+      "version": "1.0.0",
+      "category": "month_branch",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_branch",
+        "ti",
+        "summer"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "ti"
+        }
+      ],
+      "result": {
+        "effect": "month_branch=ti",
+        "weight": 0,
+        "signal": "month_branch",
+        "score_target": "day_master.season_score",
+        "outcome": "summer"
+      },
+      "explanation": "Địa chi tháng Tỵ xác định tháng lệnh và mùa summer. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+      "references": [
+        {
+          "target": "REF-SEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "mb_ti",
+      "name": "Tháng lệnh Tỵ",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "ti"
+          }
+        ],
+        "result": {
+          "effect": "month_branch=ti",
+          "weight": 0,
+          "signal": "month_branch",
+          "score_target": "day_master.season_score",
+          "outcome": "summer"
+        },
+        "explanation": "Địa chi tháng Tỵ xác định tháng lệnh và mùa summer. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000005",
+      "version": "1.0.0",
+      "category": "month_branch",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_branch",
+        "ngo",
+        "summer"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "ngo"
+        }
+      ],
+      "result": {
+        "effect": "month_branch=ngo",
+        "weight": 0,
+        "signal": "month_branch",
+        "score_target": "day_master.season_score",
+        "outcome": "summer"
+      },
+      "explanation": "Địa chi tháng Ngọ xác định tháng lệnh và mùa summer. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+      "references": [
+        {
+          "target": "REF-SEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "mb_ngo",
+      "name": "Tháng lệnh Ngọ",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "ngo"
+          }
+        ],
+        "result": {
+          "effect": "month_branch=ngo",
+          "weight": 0,
+          "signal": "month_branch",
+          "score_target": "day_master.season_score",
+          "outcome": "summer"
+        },
+        "explanation": "Địa chi tháng Ngọ xác định tháng lệnh và mùa summer. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000006",
+      "version": "1.0.0",
+      "category": "month_branch",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_branch",
+        "mui",
+        "summer"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "mui"
+        }
+      ],
+      "result": {
+        "effect": "month_branch=mui",
+        "weight": 0,
+        "signal": "month_branch",
+        "score_target": "day_master.season_score",
+        "outcome": "late_summer"
+      },
+      "explanation": "Địa chi tháng Mùi xác định tháng lệnh và mùa tứ quý / chuyển mùa. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+      "references": [
+        {
+          "target": "REF-SEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "mb_mui",
+      "name": "Tháng lệnh Mùi",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "mui"
+          }
+        ],
+        "result": {
+          "effect": "month_branch=mui",
+          "weight": 0,
+          "signal": "month_branch",
+          "score_target": "day_master.season_score",
+          "outcome": "late_summer"
+        },
+        "explanation": "Địa chi tháng Mùi xác định tháng lệnh và mùa tứ quý / chuyển mùa. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000007",
+      "version": "1.0.0",
+      "category": "month_branch",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_branch",
+        "than",
+        "autumn"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "than"
+        }
+      ],
+      "result": {
+        "effect": "month_branch=than",
+        "weight": 0,
+        "signal": "month_branch",
+        "score_target": "day_master.season_score",
+        "outcome": "autumn"
+      },
+      "explanation": "Địa chi tháng Thân xác định tháng lệnh và mùa autumn. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+      "references": [
+        {
+          "target": "REF-SEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "mb_than",
+      "name": "Tháng lệnh Thân",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "than"
+          }
+        ],
+        "result": {
+          "effect": "month_branch=than",
+          "weight": 0,
+          "signal": "month_branch",
+          "score_target": "day_master.season_score",
+          "outcome": "autumn"
+        },
+        "explanation": "Địa chi tháng Thân xác định tháng lệnh và mùa autumn. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000008",
+      "version": "1.0.0",
+      "category": "month_branch",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_branch",
+        "dau",
+        "autumn"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "dau"
+        }
+      ],
+      "result": {
+        "effect": "month_branch=dau",
+        "weight": 0,
+        "signal": "month_branch",
+        "score_target": "day_master.season_score",
+        "outcome": "autumn"
+      },
+      "explanation": "Địa chi tháng Dậu xác định tháng lệnh và mùa autumn. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+      "references": [
+        {
+          "target": "REF-SEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "mb_dau",
+      "name": "Tháng lệnh Dậu",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "dau"
+          }
+        ],
+        "result": {
+          "effect": "month_branch=dau",
+          "weight": 0,
+          "signal": "month_branch",
+          "score_target": "day_master.season_score",
+          "outcome": "autumn"
+        },
+        "explanation": "Địa chi tháng Dậu xác định tháng lệnh và mùa autumn. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000009",
+      "version": "1.0.0",
+      "category": "month_branch",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_branch",
+        "tuat",
+        "autumn"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "tuat"
+        }
+      ],
+      "result": {
+        "effect": "month_branch=tuat",
+        "weight": 0,
+        "signal": "month_branch",
+        "score_target": "day_master.season_score",
+        "outcome": "late_summer"
+      },
+      "explanation": "Địa chi tháng Tuất xác định tháng lệnh và mùa tứ quý / chuyển mùa. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+      "references": [
+        {
+          "target": "REF-SEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "mb_tuat",
+      "name": "Tháng lệnh Tuất",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "tuat"
+          }
+        ],
+        "result": {
+          "effect": "month_branch=tuat",
+          "weight": 0,
+          "signal": "month_branch",
+          "score_target": "day_master.season_score",
+          "outcome": "late_summer"
+        },
+        "explanation": "Địa chi tháng Tuất xác định tháng lệnh và mùa tứ quý / chuyển mùa. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000010",
+      "version": "1.0.0",
+      "category": "month_branch",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_branch",
+        "hoi",
+        "winter"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "hoi"
+        }
+      ],
+      "result": {
+        "effect": "month_branch=hoi",
+        "weight": 0,
+        "signal": "month_branch",
+        "score_target": "day_master.season_score",
+        "outcome": "winter"
+      },
+      "explanation": "Địa chi tháng Hợi xác định tháng lệnh và mùa winter. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+      "references": [
+        {
+          "target": "REF-SEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "mb_hoi",
+      "name": "Tháng lệnh Hợi",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "hoi"
+          }
+        ],
+        "result": {
+          "effect": "month_branch=hoi",
+          "weight": 0,
+          "signal": "month_branch",
+          "score_target": "day_master.season_score",
+          "outcome": "winter"
+        },
+        "explanation": "Địa chi tháng Hợi xác định tháng lệnh và mùa winter. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000011",
+      "version": "1.0.0",
+      "category": "month_branch",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_branch",
+        "ty",
+        "winter"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "ty"
+        }
+      ],
+      "result": {
+        "effect": "month_branch=ty",
+        "weight": 0,
+        "signal": "month_branch",
+        "score_target": "day_master.season_score",
+        "outcome": "winter"
+      },
+      "explanation": "Địa chi tháng Tý xác định tháng lệnh và mùa winter. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+      "references": [
+        {
+          "target": "REF-SEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "mb_ty",
+      "name": "Tháng lệnh Tý",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "ty"
+          }
+        ],
+        "result": {
+          "effect": "month_branch=ty",
+          "weight": 0,
+          "signal": "month_branch",
+          "score_target": "day_master.season_score",
+          "outcome": "winter"
+        },
+        "explanation": "Địa chi tháng Tý xác định tháng lệnh và mùa winter. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000012",
+      "version": "1.0.0",
+      "category": "month_branch",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_branch",
+        "suu",
+        "winter"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "suu"
+        }
+      ],
+      "result": {
+        "effect": "month_branch=suu",
+        "weight": 0,
+        "signal": "month_branch",
+        "score_target": "day_master.season_score",
+        "outcome": "late_summer"
+      },
+      "explanation": "Địa chi tháng Sửu xác định tháng lệnh và mùa tứ quý / chuyển mùa. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+      "references": [
+        {
+          "target": "REF-SEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "mb_suu",
+      "name": "Tháng lệnh Sửu",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "suu"
+          }
+        ],
+        "result": {
+          "effect": "month_branch=suu",
+          "weight": 0,
+          "signal": "month_branch",
+          "score_target": "day_master.season_score",
+          "outcome": "late_summer"
+        },
+        "explanation": "Địa chi tháng Sửu xác định tháng lệnh và mùa tứ quý / chuyển mùa. Không ghi điểm sức Nhật Chủ (Strength SKC-*).",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    }
+  ]
+}

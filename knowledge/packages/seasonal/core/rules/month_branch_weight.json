@@ -1,0 +1,896 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_02_seasonal_core",
+  "category": "month_branch_weight",
+  "count": 12,
+  "objects": [
+    {
+      "id": "SEC-000081",
+      "version": "1.0.0",
+      "category": "month_branch_weight",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_weight",
+        "dan"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "dan"
+        }
+      ],
+      "result": {
+        "effect": "month_branch_weight=12",
+        "weight": 12,
+        "signal": "month_branch_weight",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Trọng số khí tháng lệnh Dần = 12 (early). Khác bảng Strength 35/25/10/−10/−25.",
+      "references": [
+        {
+          "target": "REF-SEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "mbw_dan",
+      "name": "Trọng số tháng Dần",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "dan"
+          }
+        ],
+        "result": {
+          "effect": "month_branch_weight=12",
+          "weight": 12,
+          "signal": "month_branch_weight",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Trọng số khí tháng lệnh Dần = 12 (early). Khác bảng Strength 35/25/10/−10/−25.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch_weight"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000082",
+      "version": "1.0.0",
+      "category": "month_branch_weight",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_weight",
+        "mao"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "mao"
+        }
+      ],
+      "result": {
+        "effect": "month_branch_weight=15",
+        "weight": 15,
+        "signal": "month_branch_weight",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Trọng số khí tháng lệnh Mão = 15 (mid). Khác bảng Strength 35/25/10/−10/−25.",
+      "references": [
+        {
+          "target": "REF-SEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "mbw_mao",
+      "name": "Trọng số tháng Mão",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "mao"
+          }
+        ],
+        "result": {
+          "effect": "month_branch_weight=15",
+          "weight": 15,
+          "signal": "month_branch_weight",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Trọng số khí tháng lệnh Mão = 15 (mid). Khác bảng Strength 35/25/10/−10/−25.",
+        "evaluation": {
+          "weight": 15,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch_weight"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000083",
+      "version": "1.0.0",
+      "category": "month_branch_weight",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_weight",
+        "thin"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "thin"
+        }
+      ],
+      "result": {
+        "effect": "month_branch_weight=8",
+        "weight": 8,
+        "signal": "month_branch_weight",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Trọng số khí tháng lệnh Thìn = 8 (tứ quý). Khác bảng Strength 35/25/10/−10/−25.",
+      "references": [
+        {
+          "target": "REF-SEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "mbw_thin",
+      "name": "Trọng số tháng Thìn",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "thin"
+          }
+        ],
+        "result": {
+          "effect": "month_branch_weight=8",
+          "weight": 8,
+          "signal": "month_branch_weight",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Trọng số khí tháng lệnh Thìn = 8 (tứ quý). Khác bảng Strength 35/25/10/−10/−25.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch_weight"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000084",
+      "version": "1.0.0",
+      "category": "month_branch_weight",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_weight",
+        "ti"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "ti"
+        }
+      ],
+      "result": {
+        "effect": "month_branch_weight=12",
+        "weight": 12,
+        "signal": "month_branch_weight",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Trọng số khí tháng lệnh Tỵ = 12 (early). Khác bảng Strength 35/25/10/−10/−25.",
+      "references": [
+        {
+          "target": "REF-SEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "mbw_ti",
+      "name": "Trọng số tháng Tỵ",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "ti"
+          }
+        ],
+        "result": {
+          "effect": "month_branch_weight=12",
+          "weight": 12,
+          "signal": "month_branch_weight",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Trọng số khí tháng lệnh Tỵ = 12 (early). Khác bảng Strength 35/25/10/−10/−25.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch_weight"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000085",
+      "version": "1.0.0",
+      "category": "month_branch_weight",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_weight",
+        "ngo"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "ngo"
+        }
+      ],
+      "result": {
+        "effect": "month_branch_weight=15",
+        "weight": 15,
+        "signal": "month_branch_weight",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Trọng số khí tháng lệnh Ngọ = 15 (mid). Khác bảng Strength 35/25/10/−10/−25.",
+      "references": [
+        {
+          "target": "REF-SEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "mbw_ngo",
+      "name": "Trọng số tháng Ngọ",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "ngo"
+          }
+        ],
+        "result": {
+          "effect": "month_branch_weight=15",
+          "weight": 15,
+          "signal": "month_branch_weight",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Trọng số khí tháng lệnh Ngọ = 15 (mid). Khác bảng Strength 35/25/10/−10/−25.",
+        "evaluation": {
+          "weight": 15,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch_weight"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000086",
+      "version": "1.0.0",
+      "category": "month_branch_weight",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_weight",
+        "mui"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "mui"
+        }
+      ],
+      "result": {
+        "effect": "month_branch_weight=8",
+        "weight": 8,
+        "signal": "month_branch_weight",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Trọng số khí tháng lệnh Mùi = 8 (tứ quý). Khác bảng Strength 35/25/10/−10/−25.",
+      "references": [
+        {
+          "target": "REF-SEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "mbw_mui",
+      "name": "Trọng số tháng Mùi",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "mui"
+          }
+        ],
+        "result": {
+          "effect": "month_branch_weight=8",
+          "weight": 8,
+          "signal": "month_branch_weight",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Trọng số khí tháng lệnh Mùi = 8 (tứ quý). Khác bảng Strength 35/25/10/−10/−25.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch_weight"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000087",
+      "version": "1.0.0",
+      "category": "month_branch_weight",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_weight",
+        "than"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "than"
+        }
+      ],
+      "result": {
+        "effect": "month_branch_weight=12",
+        "weight": 12,
+        "signal": "month_branch_weight",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Trọng số khí tháng lệnh Thân = 12 (early). Khác bảng Strength 35/25/10/−10/−25.",
+      "references": [
+        {
+          "target": "REF-SEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "mbw_than",
+      "name": "Trọng số tháng Thân",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "than"
+          }
+        ],
+        "result": {
+          "effect": "month_branch_weight=12",
+          "weight": 12,
+          "signal": "month_branch_weight",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Trọng số khí tháng lệnh Thân = 12 (early). Khác bảng Strength 35/25/10/−10/−25.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch_weight"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000088",
+      "version": "1.0.0",
+      "category": "month_branch_weight",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_weight",
+        "dau"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "dau"
+        }
+      ],
+      "result": {
+        "effect": "month_branch_weight=15",
+        "weight": 15,
+        "signal": "month_branch_weight",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Trọng số khí tháng lệnh Dậu = 15 (mid). Khác bảng Strength 35/25/10/−10/−25.",
+      "references": [
+        {
+          "target": "REF-SEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "mbw_dau",
+      "name": "Trọng số tháng Dậu",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "dau"
+          }
+        ],
+        "result": {
+          "effect": "month_branch_weight=15",
+          "weight": 15,
+          "signal": "month_branch_weight",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Trọng số khí tháng lệnh Dậu = 15 (mid). Khác bảng Strength 35/25/10/−10/−25.",
+        "evaluation": {
+          "weight": 15,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch_weight"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000089",
+      "version": "1.0.0",
+      "category": "month_branch_weight",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_weight",
+        "tuat"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "tuat"
+        }
+      ],
+      "result": {
+        "effect": "month_branch_weight=8",
+        "weight": 8,
+        "signal": "month_branch_weight",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Trọng số khí tháng lệnh Tuất = 8 (tứ quý). Khác bảng Strength 35/25/10/−10/−25.",
+      "references": [
+        {
+          "target": "REF-SEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "mbw_tuat",
+      "name": "Trọng số tháng Tuất",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "tuat"
+          }
+        ],
+        "result": {
+          "effect": "month_branch_weight=8",
+          "weight": 8,
+          "signal": "month_branch_weight",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Trọng số khí tháng lệnh Tuất = 8 (tứ quý). Khác bảng Strength 35/25/10/−10/−25.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch_weight"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000090",
+      "version": "1.0.0",
+      "category": "month_branch_weight",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_weight",
+        "hoi"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "hoi"
+        }
+      ],
+      "result": {
+        "effect": "month_branch_weight=12",
+        "weight": 12,
+        "signal": "month_branch_weight",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Trọng số khí tháng lệnh Hợi = 12 (early). Khác bảng Strength 35/25/10/−10/−25.",
+      "references": [
+        {
+          "target": "REF-SEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "mbw_hoi",
+      "name": "Trọng số tháng Hợi",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "hoi"
+          }
+        ],
+        "result": {
+          "effect": "month_branch_weight=12",
+          "weight": 12,
+          "signal": "month_branch_weight",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Trọng số khí tháng lệnh Hợi = 12 (early). Khác bảng Strength 35/25/10/−10/−25.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch_weight"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000091",
+      "version": "1.0.0",
+      "category": "month_branch_weight",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_weight",
+        "ty"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "ty"
+        }
+      ],
+      "result": {
+        "effect": "month_branch_weight=15",
+        "weight": 15,
+        "signal": "month_branch_weight",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Trọng số khí tháng lệnh Tý = 15 (mid). Khác bảng Strength 35/25/10/−10/−25.",
+      "references": [
+        {
+          "target": "REF-SEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "mbw_ty",
+      "name": "Trọng số tháng Tý",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "ty"
+          }
+        ],
+        "result": {
+          "effect": "month_branch_weight=15",
+          "weight": 15,
+          "signal": "month_branch_weight",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Trọng số khí tháng lệnh Tý = 15 (mid). Khác bảng Strength 35/25/10/−10/−25.",
+        "evaluation": {
+          "weight": 15,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch_weight"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    },
+    {
+      "id": "SEC-000092",
+      "version": "1.0.0",
+      "category": "month_branch_weight",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "seasonal",
+        "month_weight",
+        "suu"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "suu"
+        }
+      ],
+      "result": {
+        "effect": "month_branch_weight=8",
+        "weight": 8,
+        "signal": "month_branch_weight",
+        "score_target": "day_master.season_score"
+      },
+      "explanation": "Trọng số khí tháng lệnh Sửu = 8 (tứ quý). Khác bảng Strength 35/25/10/−10/−25.",
+      "references": [
+        {
+          "target": "REF-SEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "mbw_suu",
+      "name": "Trọng số tháng Sửu",
+      "metadata": {
+        "package_id": "bz_02_seasonal_core",
+        "domain_id": "DOM-SEASONAL",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "suu"
+          }
+        ],
+        "result": {
+          "effect": "month_branch_weight=8",
+          "weight": 8,
+          "signal": "month_branch_weight",
+          "score_target": "day_master.season_score"
+        },
+        "explanation": "Trọng số khí tháng lệnh Sửu = 8 (tứ quý). Khác bảng Strength 35/25/10/−10/−25.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_branch_weight"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "season_score"
+        }
+      }
+    }
+  ]
+}
