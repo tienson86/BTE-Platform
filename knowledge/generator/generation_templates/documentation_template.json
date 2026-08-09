@@ -1,0 +1,21 @@
+{
+  "$comment": "Documentation set emitted at pipeline stage documentation. Markdown bodies are skeletons; replace placeholders. Standards: KD-3 README/CHANGELOG, KD-4 authoring guides.",
+  "package_id": "{{PACKAGE_ID}}",
+  "files": [
+    {
+      "path": "README.md",
+      "required": true,
+      "body": "# {{PACKAGE_NAME}}\n\n| Field | Value |\n|-------|-------|\n| **package_id** | {{PACKAGE_ID}} |\n| **package_type** | {{PACKAGE_TYPE}} |\n| **package_version** | {{PACKAGE_VERSION}} |\n| **domain_id** | {{DOMAIN_ID}} |\n| **generator** | bte_knowledge_package_generator 1.0.0 |\n| **profile_id** | {{PROFILE_ID}} |\n| **status** | draft |\n\n## Purpose\n\n{{PURPOSE}}\n\n## Scope\n\n{{SCOPE}}\n\n## Limitations\n\n{{LIMITATIONS}}\n\n## Standards\n\nKD-1 → KD-4, KX-1B evidence (if present), KX-1C reasoning (if present).\n\nThis package does not modify engines, API, or contracts.\n"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "required": true,
+      "body": "# Changelog\n\n## [Unreleased]\n\n- Generated skeleton from Knowledge Package Generator v1.0.0 (profile {{PROFILE_ID}}).\n"
+    },
+    {
+      "path": "documentation/overview.md",
+      "required": false,
+      "body": "# Overview — {{PACKAGE_NAME}}\n\nDomain: {{DOMAIN_ID}}\n\n## Knowledge model\n\n{{KNOWLEDGE_MODEL}}\n\n## Evidence\n\n{{EVIDENCE_SUMMARY_OR_NA}}\n\n## Reasoning\n\n{{REASONING_SUMMARY_OR_NA}}\n\n## Assumptions and limitations\n\n{{ASSUMPTIONS}}\n"
+    }
+  ]
+}

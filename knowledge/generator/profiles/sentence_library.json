@@ -1,0 +1,64 @@
+{
+  "profile_id": "GEN-TYPE-SENTENCE",
+  "profile_kind": "type",
+  "inherits": "GEN-PROFILE-COMMON",
+  "inherit_arrays": "replace",
+  "generator_version": "1.0.0",
+  "package_id": "{{PACKAGE_ID}}",
+  "package_name": "{{PACKAGE_NAME}}",
+  "package_type": "sentence",
+  "package_version": "0.1.0",
+  "domain": {
+    "domain_id": "DOM-INTERPRETATION",
+    "parent_domain": null
+  },
+  "taxonomy": {
+    "taxonomy_version": "1.0.0",
+    "source": "knowledge/taxonomy/",
+    "classifications": []
+  },
+  "ontology": {
+    "ontology_version": "1.0.0",
+    "source": "knowledge/ontology/",
+    "concepts": ["ONT-PRESENTATION_KNOWLEDGE", "ONT-INTERPRETATION_UNIT", "ONT-LANGUAGE_VARIANT"]
+  },
+  "target_rule_count": {
+    "minimum": 1,
+    "recommended": 50,
+    "maximum": null,
+    "target": null
+  },
+  "evidence_required": false,
+  "reasoning_required": false,
+  "example_required": true,
+  "validation_profile": "PVP-STANDARD",
+  "quality_target": "silver",
+  "rule_id_prefix": "{{RULE_PREFIX}}",
+  "language": "vi",
+  "languages": ["vi"],
+  "school": "bazi_default",
+  "category_id": "sentence_library",
+  "components": {
+    "rules": {
+      "required": true,
+      "folder": "rules/",
+      "standard": "sentence units (package_type=sentence), not analytical scoring rules"
+    },
+    "examples": {
+      "required": true,
+      "folder": "examples/",
+      "standard": "rendered sentence samples"
+    },
+    "documentation": {
+      "required": true,
+      "folder": "documentation/",
+      "standard": "KD-3 + multilingual notes"
+    }
+  },
+  "dependencies": {
+    "required": [],
+    "optional": ["{{INTERPRETATION_PACKAGE_ID}}"],
+    "conflicts": []
+  },
+  "notes": "Sentence Library is reusable prose inventory. Multilingual variants keep the same id and vary language fields. Must not encode new analytical conclusions."
+}

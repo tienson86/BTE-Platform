@@ -1,0 +1,69 @@
+{
+  "profile_id": "GEN-TYPE-METADATA",
+  "profile_kind": "type",
+  "inherits": "GEN-PROFILE-COMMON",
+  "inherit_arrays": "replace",
+  "generator_version": "1.0.0",
+  "package_id": "{{PACKAGE_ID}}",
+  "package_name": "{{PACKAGE_NAME}}",
+  "package_type": "metadata",
+  "package_version": "0.1.0",
+  "domain": {
+    "domain_id": "{{DOMAIN_ID}}",
+    "parent_domain": null
+  },
+  "taxonomy": {
+    "taxonomy_version": "1.0.0",
+    "source": "knowledge/taxonomy/",
+    "classifications": []
+  },
+  "ontology": {
+    "ontology_version": "1.0.0",
+    "source": "knowledge/ontology/",
+    "concepts": ["ONT-GOVERNANCE_KNOWLEDGE"]
+  },
+  "target_rule_count": {
+    "minimum": 0,
+    "recommended": 0,
+    "maximum": null,
+    "target": 0
+  },
+  "evidence_required": false,
+  "reasoning_required": false,
+  "example_required": false,
+  "validation_profile": "PVP-STANDARD",
+  "quality_target": "silver",
+  "rule_id_prefix": "{{RULE_PREFIX_OR_NA}}",
+  "language": "vi",
+  "languages": ["vi"],
+  "school": "bazi_default",
+  "category_id": "metadata",
+  "components": {
+    "rules": {
+      "required": false,
+      "folder": "rules/",
+      "standard": "N/A — catalogs live in metadata/"
+    },
+    "metadata": {
+      "required": true,
+      "folder": "metadata/",
+      "standard": "KD-3 / METADATA_STANDARD"
+    },
+    "references": {
+      "required": true,
+      "folder": "references/",
+      "standard": "KD-3"
+    },
+    "documentation": {
+      "required": true,
+      "folder": "documentation/",
+      "standard": "KD-3"
+    }
+  },
+  "dependencies": {
+    "required": [],
+    "optional": [],
+    "conflicts": []
+  },
+  "notes": "Labels, enumerations, and lookup catalogs. Rules stage records not_applicable for analytical-rule count. Stage still runs."
+}

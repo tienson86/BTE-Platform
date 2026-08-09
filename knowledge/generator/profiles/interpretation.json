@@ -1,0 +1,79 @@
+{
+  "profile_id": "GEN-TYPE-INTERPRETATION",
+  "profile_kind": "type",
+  "inherits": "GEN-PROFILE-COMMON",
+  "inherit_arrays": "replace",
+  "generator_version": "1.0.0",
+  "package_id": "{{PACKAGE_ID}}",
+  "package_name": "{{PACKAGE_NAME}}",
+  "package_type": "interpretation",
+  "package_version": "0.1.0",
+  "domain": {
+    "domain_id": "DOM-INTERPRETATION",
+    "parent_domain": null
+  },
+  "taxonomy": {
+    "taxonomy_version": "1.0.0",
+    "source": "knowledge/taxonomy/",
+    "classifications": []
+  },
+  "ontology": {
+    "ontology_version": "1.0.0",
+    "source": "knowledge/ontology/",
+    "concepts": ["ONT-PRESENTATION_KNOWLEDGE", "ONT-INTERPRETATION_UNIT", "ONT-LANGUAGE_VARIANT"]
+  },
+  "target_rule_count": {
+    "minimum": 1,
+    "recommended": 40,
+    "maximum": null,
+    "target": null
+  },
+  "evidence_required": false,
+  "reasoning_required": false,
+  "example_required": true,
+  "validation_profile": "PVP-STANDARD",
+  "quality_target": "gold",
+  "rule_id_prefix": "{{RULE_PREFIX}}",
+  "language": "vi",
+  "languages": ["vi"],
+  "school": "bazi_default",
+  "category_id": "interpretation",
+  "components": {
+    "rules": {
+      "required": true,
+      "folder": "rules/",
+      "standard": "KD-3 interpretation / sentence templates"
+    },
+    "evidence": {
+      "required": false,
+      "folder": "evidence/",
+      "standard": "optional citations only"
+    },
+    "reasoning": {
+      "required": false,
+      "folder": "reasoning/",
+      "standard": "consumes analytical KX-1C traces; does not own analytical graphs"
+    },
+    "examples": {
+      "required": true,
+      "folder": "examples/",
+      "standard": "narrative walkthroughs"
+    },
+    "tests": {
+      "required": true,
+      "folder": "tests/",
+      "standard": "KD-4 package-local fixtures"
+    },
+    "documentation": {
+      "required": true,
+      "folder": "documentation/",
+      "standard": "KD-3"
+    }
+  },
+  "dependencies": {
+    "required": [],
+    "optional": ["{{ANALYTICAL_PACKAGE_ID}}"],
+    "conflicts": []
+  },
+  "notes": "Interpretation packages narrate analytical conclusions. They MUST NOT invent new analytical scoring. Prefer depending on released analytical packages."
+}

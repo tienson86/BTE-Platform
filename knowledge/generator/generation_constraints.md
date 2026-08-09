@@ -18,7 +18,7 @@ Every generation run MUST satisfy these constraints. Violation blocks the active
 | GC-UNIQUE-IDS | Unique identifiers | `package_id`, rule ids, evidence ids, reasoning ids unique within the Knowledge Database generation. Prefixes reserved before emit. |
 | GC-IMMUTABLE-RELEASE | Immutable released package | `status=released` bytes never change. Corrections ⇒ new `package_version`. |
 | GC-TAXONOMY | Taxonomy compliance | `domain.domain_id` exists in `knowledge/taxonomy/domains.json`. Classifications from taxonomy only. |
-| GC-ONTOLOGY | Ontology compliance | Declared `ONT-*` concepts exist in KD-2 ontology sources. |
+| GC-ONTOLOGY | Ontology compliance | Declared `ONT-*` concepts exist in `knowledge/ontology/ontology.json`. |
 | GC-PACKAGE-COMPLETE | Package completeness | KD-3 required files present for type + lifecycle state. |
 | GC-EVIDENCE-COMPLETE | Evidence completeness | If `evidence_required`, every production rule has a bundle with explanation, ± examples, confidence, traceability. |
 | GC-REASONING-COMPLETE | Reasoning completeness | If `reasoning_required`, every primary conclusion class has a chain Observation→…→Final citing existing rule ids. |

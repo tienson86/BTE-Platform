@@ -171,11 +171,12 @@
       "properties": {
         "domain_id": {
           "type": "string",
-          "pattern": "^DOM-[A-Z0-9_]+$",
-          "description": "Must exist in knowledge/taxonomy/domains.json after substitution."
+          "pattern": "^(\\{\\{[A-Z0-9_]+\\}\\}|DOM-[A-Z0-9_]+)$",
+          "description": "Must exist in knowledge/taxonomy/domains.json after placeholder substitution."
         },
         "parent_domain": {
-          "type": ["string", "null"]
+          "type": ["string", "null"],
+          "description": "DOM-* id, placeholder, or null."
         }
       }
     },
@@ -211,7 +212,7 @@
         },
         "source": {
           "type": "string",
-          "const": "knowledge/taxonomy/"
+          "const": "knowledge/ontology/"
         },
         "concepts": {
           "type": "array",

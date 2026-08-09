@@ -1,0 +1,55 @@
+{
+  "profile_id": "GEN-INST-SHENSHA",
+  "profile_kind": "instance",
+  "inherits": "GEN-TYPE-ANALYTICAL",
+  "inherit_arrays": "replace",
+  "generator_version": "1.0.0",
+  "package_id": "bz_09_shensha_core",
+  "package_name": "Shen Sha Knowledge Package — Core",
+  "package_type": "analytical",
+  "package_version": "0.1.0",
+  "domain": {
+    "domain_id": "DOM-SHENSHA",
+    "parent_domain": "DOM-BAZI"
+  },
+  "taxonomy": {
+    "taxonomy_version": "1.0.0",
+    "source": "knowledge/taxonomy/",
+    "classifications": ["domain", "category", "type", "school", "language"]
+  },
+  "ontology": {
+    "ontology_version": "1.0.0",
+    "source": "knowledge/ontology/",
+    "concepts": ["ONT-ANALYTICAL_KNOWLEDGE", "ONT-RULE", "ONT-SCHOOL_VARIANT"]
+  },
+  "target_rule_count": {
+    "minimum": 40,
+    "recommended": 80,
+    "maximum": null,
+    "target": 80
+  },
+  "evidence_required": true,
+  "reasoning_required": true,
+  "example_required": true,
+  "validation_profile": "PVP-MINIMAL",
+  "quality_target": "gold",
+  "rule_id_prefix": "SHA",
+  "language": "vi",
+  "languages": ["vi"],
+  "school": "bazi_default",
+  "category_id": "core",
+  "components": {
+    "rules": {"required": true, "folder": "rules/", "standard": "KX-1A pattern"},
+    "evidence": {"required": true, "folder": "evidence/", "standard": "KX-1B"},
+    "reasoning": {"required": true, "folder": "reasoning/", "standard": "KX-1C present / absent / void chains"},
+    "examples": {"required": true, "folder": "examples/", "standard": "star present / absent / void"},
+    "tests": {"required": true, "folder": "tests/", "standard": "package-local"},
+    "documentation": {"required": true, "folder": "documentation/", "standard": "KD-3"}
+  },
+  "dependencies": {
+    "required": [],
+    "optional": [],
+    "conflicts": []
+  },
+  "notes": "Future package profile only. Does not create bz_09_shensha_core. School-specific Shen Sha lists require a distinct package_id. Prefix SHA must be reserved before emit."
+}
