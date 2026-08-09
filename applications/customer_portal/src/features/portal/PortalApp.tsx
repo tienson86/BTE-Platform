@@ -1,6 +1,7 @@
 import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import { PortalShell } from "./chrome/PortalShell";
 import { parsePortalHash, portalHref, type PortalRoute } from "./chrome/routes";
+import type { ReportMode } from "./components/CommercialRail";
 import {
   AboutPage,
   EmptyPage,
@@ -20,6 +21,13 @@ import {
   type WizardDraft,
 } from "./pages/AnalysisWizard";
 import { DashboardPage, HomePage } from "./pages/HomeDashboard";
+import {
+  CompletionPage,
+  KnowledgeArticlePage,
+  OnboardingPage,
+  PremiumPage,
+  ShareSheet,
+} from "./pages/JourneyPages";
 import { KnowledgeCenterPage, ResultListPage } from "./pages/ResultsKnowledge";
 import { PvLoading } from "./components/states";
 import "./styles/portal.css";
@@ -48,6 +56,10 @@ export function PortalApp({ initialRoute }: PortalAppProps) {
   const [toast, setToast] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [draft, setDraft] = useState<WizardDraft>(INITIAL_DRAFT);
+  const [saved, setSaved] = useState(false);
+  const [reportMode, setReportMode] = useState<ReportMode>("reading");
+  const [shareOpen, setShareOpen] = useState(false);
+  const [knowledgeReturn, setKnowledgeReturn] = useState<PortalRoute>("result");
 
   useEffect(() => {
     if (initialRoute) return;
@@ -67,17 +79,21 @@ export function PortalApp({ initialRoute }: PortalAppProps) {
 
   const onSearch = useCallback((value: string) => {
     setSearch(value);
-    if (value.trim()) {
-      setToast("Đang lọc theo từ khóa trên trang hiện tại");
-    } else {
-      setToast(null);
-    }
+    setToast(value.trim() ? "Đang lọc theo từ khóa trên trang hiện tại" : null);
   }, []);
+
+  const openKnowledgeFromResult = useCallback(() => {
+    setKnowledgeReturn("result");
+    onNavigate("knowledge-article");
+  }, [onNavigate]);
 
   let body;
   switch (route) {
     case "home":
       body = <HomePage onNavigate={onNavigate} />;
+      break;
+    case "onboarding":
+      body = <OnboardingPage onNavigate={onNavigate} />;
       break;
     case "dashboard":
       body = <DashboardPage onNavigate={onNavigate} />;
@@ -100,12 +116,49 @@ export function PortalApp({ initialRoute }: PortalAppProps) {
     case "result":
       body = (
         <Suspense fallback={<PvLoading label="Đang mở kết quả tư vấn" />}>
-          <ResultViewerPage />
+          <ResultViewerPage
+            mode={reportMode}
+            saved={saved}
+            onSave={() => {
+              setSaved(true);
+              setToast("Báo cáo đã được lưu trên thiết bị này");
+              onNavigate("complete");
+            }}
+            onPdf={() => {
+              setReportMode("print");
+              setToast("Bạn có thể lưu thành PDF từ hộp thoại in");
+            }}
+            onPrint={() => {
+              setReportMode("print");
+              if (typeof window !== "undefined") window.print();
+            }}
+            onShare={() => {
+              setReportMode("sharing");
+              setShareOpen(true);
+              setToast("Liên kết tư vấn đã sẵn sàng để sao chép");
+            }}
+            onKnowledge={openKnowledgeFromResult}
+            onPremium={() => onNavigate("premium")}
+          />
         </Suspense>
       );
       break;
     case "knowledge":
       body = <KnowledgeCenterPage onNavigate={onNavigate} />;
+      break;
+    case "knowledge-article":
+      body = (
+        <KnowledgeArticlePage
+          onNavigate={onNavigate}
+          onBackToResult={() => onNavigate(knowledgeReturn)}
+        />
+      );
+      break;
+    case "complete":
+      body = <CompletionPage onNavigate={onNavigate} />;
+      break;
+    case "premium":
+      body = <PremiumPage onNavigate={onNavigate} />;
       break;
     case "profile":
       body = <ProfilePage />;
@@ -145,7 +198,8 @@ export function PortalApp({ initialRoute }: PortalAppProps) {
       onNavigate={onNavigate}
       onToggleSidebar={() => setSidebarOpen((open) => !open)}
     >
-      {body}
+      <div data-report-mode={reportMode}>{body}</div>
+      <ShareSheet open={shareOpen} onClose={() => setShareOpen(false)} />
     </PortalShell>
   );
 }

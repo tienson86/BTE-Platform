@@ -53,9 +53,9 @@ export function ResultListPage({ onNavigate }: { onNavigate: (route: PortalRoute
       </div>
       {filtered.length === 0 ? (
         <PvEmpty
-          title="Chưa có kết quả phù hợp"
-          body="Thử đổi bộ lọc hoặc bắt đầu một phân tích mới."
-          actionLabel="Phân tích mới"
+          title="Tạo báo cáo đầu tiên"
+          body="Chưa có tư vấn nào khớp bộ lọc. Hãy lập phân tích mới hoặc xem lại toàn bộ danh sách."
+          actionLabel="Tạo báo cáo đầu tiên"
           onAction={() => onNavigate("analyze")}
         />
       ) : (
@@ -112,7 +112,7 @@ export function KnowledgeCenterPage({ onNavigate }: { onNavigate: (route: Portal
             <PvTag>{item.category}</PvTag>
             <h3 className="pv-card-title">{item.title}</h3>
             <p className="pv-prose">{item.teaser}</p>
-            <PvButton variant="text" onClick={() => onNavigate("knowledge")}>
+            <PvButton variant="text" onClick={() => onNavigate("knowledge-article")}>
               Đọc tiếp
             </PvButton>
           </article>

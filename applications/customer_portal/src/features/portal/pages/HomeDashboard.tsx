@@ -13,7 +13,10 @@ export function HomePage({ onNavigate }: { onNavigate: (route: PortalRoute) => v
         </p>
         <div className="pv-cta-row">
           <PvButton onClick={() => onNavigate("analyze")}>Bắt đầu phân tích mới</PvButton>
-          <PvButton variant="secondary" onClick={() => onNavigate("dashboard")}>
+          <PvButton variant="secondary" onClick={() => onNavigate("onboarding")}>
+            Tìm hiểu BTE trước
+          </PvButton>
+          <PvButton variant="text" onClick={() => onNavigate("dashboard")}>
             Xem việc nên làm hôm nay
           </PvButton>
         </div>
@@ -41,14 +44,14 @@ export function DashboardPage({ onNavigate }: { onNavigate: (route: PortalRoute)
           <PvBadge tone="success">Sẵn sàng tư vấn</PvBadge>
         </PvCard>
         <PvCard
-          title={<h3 className="pv-card-title">Bắt đầu nhanh</h3>}
+          title={<h3 className="pv-card-title">Tiếp tục nơi đang dở</h3>}
           footer={
-            <PvButton variant="secondary" onClick={() => onNavigate("analyze")}>
-              Phân tích mới
+            <PvButton variant="secondary" onClick={() => onNavigate("analyze-progress")}>
+              Tiếp tục phân tích
             </PvButton>
           }
         >
-          <p className="pv-prose">Lập lá số với các bước rõ ràng: ngày sinh → lá số → tiến trình.</p>
+          <p className="pv-prose">Nháp Trần Thị Bình còn đang hoàn thiện. Quay lại tiến trình hoặc lập lá số mới.</p>
         </PvCard>
       </div>
       <PvCard title={<h3 className="pv-card-title">Phân tích gần đây</h3>}>
@@ -74,7 +77,7 @@ export function DashboardPage({ onNavigate }: { onNavigate: (route: PortalRoute)
         </PvButton>
       </PvCard>
       <PvCard title={<h3 className="pv-card-title">Gợi ý kiến thức</h3>}>
-        <button type="button" className="pv-list__row" onClick={() => onNavigate("knowledge")}>
+        <button type="button" className="pv-list__row" onClick={() => onNavigate("knowledge-article")}>
           <span className="pv-inline">
             <PortalIcon name="knowledge" />
             Nhật chủ — trục nhận diện trong buổi tư vấn

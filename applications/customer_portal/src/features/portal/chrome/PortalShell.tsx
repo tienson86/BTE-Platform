@@ -32,7 +32,13 @@ export function PortalShell({
 }: PortalShellProps) {
   const crumbs = breadcrumbsFor(route);
   const activeNav =
-    route.startsWith("analyze") ? "analyze" : route === "result" ? "results" : route;
+    route.startsWith("analyze")
+      ? "analyze"
+      : route === "result" || route === "complete"
+        ? "results"
+        : route === "knowledge-article"
+          ? "knowledge"
+          : route;
 
   return (
     <div className="pv-shell" data-portal="px5" data-route={route}>

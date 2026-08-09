@@ -20,6 +20,7 @@ export function ProfilePage() {
       </PvCard>
       <PvCard title={<h3 className="pv-card-title">Riêng tư</h3>}>
         <PvCheckbox label="Cho phép lưu lịch sử tư vấn trên thiết bị này" defaultChecked />
+        <p className="pv-note">Chia sẻ tóm tắt chỉ khi bạn chọn Chia sẻ trên trang kết quả.</p>
       </PvCard>
     </section>
   );
@@ -29,17 +30,18 @@ export function HistoryPage({ onNavigate }: { onNavigate: (route: PortalRoute) =
   return (
     <section className="pv-page">
       <PvCard title={<h2 className="pv-heading">Lịch sử tư vấn</h2>}>
+        <p className="pv-prose">Mở lại báo cáo đã lưu hoặc tiếp tục bản nháp.</p>
         <ul className="pv-list">
           <li>
             <button type="button" className="pv-list__row" onClick={() => onNavigate("result")}>
-              <span>10/08/2026 · Nguyễn Văn An</span>
-              <span>Đã đọc</span>
+              <span>10/08/2026 · Nguyễn Văn An · Đã lưu</span>
+              <span>Mở tư vấn</span>
             </button>
           </li>
           <li>
-            <button type="button" className="pv-list__row" onClick={() => onNavigate("results")}>
-              <span>03/08/2026 · Trần Thị Bình</span>
-              <span>Nháp</span>
+            <button type="button" className="pv-list__row" onClick={() => onNavigate("analyze-progress")}>
+              <span>03/08/2026 · Trần Thị Bình · Nháp</span>
+              <span>Tiếp tục phân tích</span>
             </button>
           </li>
         </ul>
@@ -80,11 +82,14 @@ export function HelpPage({ onNavigate }: { onNavigate: (route: PortalRoute) => v
   return (
     <section className="pv-page">
       <PvCard title={<h2 className="pv-heading">Trợ giúp</h2>}>
-        <p className="pv-prose">Nếu buổi tư vấn chưa hiện, hãy thử tải lại hoặc quay về tổng quan.</p>
+        <p className="pv-prose">Nếu buổi tư vấn chưa hiện, hãy thử lại, quay về tổng quan, hoặc để lại nhu cầu hỗ trợ.</p>
         <div className="pv-cta-row">
           <PvButton onClick={() => onNavigate("dashboard")}>Về tổng quan</PvButton>
           <PvButton variant="secondary" onClick={() => onNavigate("analyze")}>
             Lập phân tích mới
+          </PvButton>
+          <PvButton variant="text" onClick={() => onNavigate("premium")}>
+            Nhờ tư vấn chuyên sâu
           </PvButton>
         </div>
       </PvCard>
@@ -119,7 +124,7 @@ export function ErrorPage({ onNavigate }: { onNavigate: (route: PortalRoute) => 
   return (
     <PvError
       title="Không thể hiển thị buổi tư vấn"
-      body="Đã có sự cố khi mở trang. Bạn có thể thử lại hoặc quay về tổng quan."
+      body="Đã có sự cố khi mở trang. Hãy thử lại, quay về tổng quan, hoặc mở trợ giúp. Không cần mã kỹ thuật."
       actionLabel="Về tổng quan"
       onAction={() => onNavigate("dashboard")}
     />
@@ -133,9 +138,9 @@ export function LoadingPage() {
 export function EmptyPage({ onNavigate }: { onNavigate: (route: PortalRoute) => void }) {
   return (
     <PvEmpty
-      title="Chưa có dữ liệu tư vấn"
-      body="Hãy bắt đầu bằng một phân tích mới khi bạn sẵn sàng."
-      actionLabel="Phân tích mới"
+      title="Tạo báo cáo đầu tiên"
+      body="Chưa có buổi tư vấn nào trên thiết bị này. Bắt đầu khi bạn sẵn sàng."
+      actionLabel="Tạo báo cáo đầu tiên"
       onAction={() => onNavigate("analyze")}
     />
   );

@@ -13,6 +13,10 @@ export type PortalRoute =
   | "settings"
   | "help"
   | "about"
+  | "onboarding"
+  | "complete"
+  | "premium"
+  | "knowledge-article"
   | "notfound"
   | "error"
   | "loading"
@@ -63,6 +67,10 @@ export const ROUTE_TITLES: Record<PortalRoute, string> = {
   settings: "Cài đặt",
   help: "Trợ giúp",
   about: "Giới thiệu",
+  onboarding: "Làm quen với BTE",
+  complete: "Đã lưu báo cáo",
+  premium: "Tư vấn chuyên sâu",
+  "knowledge-article": "Bài kiến thức",
   notfound: "Không tìm thấy trang",
   error: "Không thể hiển thị",
   loading: "Đang tải",
@@ -86,6 +94,11 @@ const ALIASES: Record<string, PortalRoute> = {
   settings: "settings",
   help: "help",
   about: "about",
+  onboarding: "onboarding",
+  welcome: "onboarding",
+  complete: "complete",
+  premium: "premium",
+  "knowledge/article": "knowledge-article",
   "404": "notfound",
   notfound: "notfound",
   error: "error",
@@ -114,6 +127,10 @@ export function portalHref(route: PortalRoute): string {
     settings: "#/settings",
     help: "#/help",
     about: "#/about",
+    onboarding: "#/onboarding",
+    complete: "#/complete",
+    premium: "#/premium",
+    "knowledge-article": "#/knowledge/article",
     notfound: "#/404",
     error: "#/error",
     loading: "#/loading",
@@ -143,6 +160,16 @@ export function breadcrumbsFor(route: PortalRoute): PortalCrumb[] {
   }
   if (route === "result") {
     return [home, { id: "results", label: "Kết quả", href: portalHref("results"), route: "results" }, { id: "result", label: "Xem kết quả" }];
+  }
+  if (route === "knowledge-article") {
+    return [
+      home,
+      { id: "knowledge", label: "Kiến thức", href: portalHref("knowledge"), route: "knowledge" },
+      { id: "knowledge-article", label: "Bài kiến thức" },
+    ];
+  }
+  if (route === "complete") {
+    return [home, { id: "result", label: "Kết quả", href: portalHref("result"), route: "result" }, { id: "complete", label: "Đã lưu" }];
   }
   return [home, { id: route, label: ROUTE_TITLES[route] }];
 }
