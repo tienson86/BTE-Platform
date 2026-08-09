@@ -1,0 +1,37 @@
+{
+  "schema_version": "2.0.0",
+  "package_spec_version": "1.0.0",
+  "package_id": "bz_22_widget_library_core",
+  "package_version": "1.0.0",
+  "required": [],
+  "optional": [
+    {
+      "package_id": "bz_21_layout_library_core",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "layout_ids referenced by widgets",
+      "signals": [
+        "layout_catalog",
+        "layout_index"
+      ]
+    },
+    {
+      "package_id": "bz_20_theme_library_core",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "theme_ids referenced by widgets",
+      "signals": [
+        "theme_catalog",
+        "theme_index"
+      ]
+    }
+  ],
+  "conflicts": [],
+  "resolution": {
+    "circular_dependencies": "prohibited",
+    "optional_inclusion": "explicit_only",
+    "version_selection": "highest_satisfying_released",
+    "tie_breaker": "package_id_asc"
+  },
+  "notes": "Independently deployable. Fulfills bz_21 widget_id contracts. Does not modify bz_01–bz_21."
+}
