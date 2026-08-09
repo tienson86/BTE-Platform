@@ -42,6 +42,16 @@ from .engine import (
     InterpretationEngine,
     analyze_bazi
 )
+from .contracts.interpretation_contracts import (
+    CanonicalInterpretationResult,
+    interpretation_foundation_contract,
+)
+from .context.canonical_interpretation_context import (
+    CanonicalInterpretationContext,
+    build_interpretation_context,
+)
+from .foundation_constants import INTERPRETATION_VERSION
+from .registry.module_registry import InterpretationModuleRegistry
 
 
 
@@ -167,5 +177,13 @@ __all__ = [
     "NarrativeInterpretationResult",
 
     "Pack04Pipeline",
+
+    # IE-1 Interpretation Foundation
+    "CanonicalInterpretationContext",
+    "CanonicalInterpretationResult",
+    "InterpretationModuleRegistry",
+    "INTERPRETATION_VERSION",
+    "build_interpretation_context",
+    "interpretation_foundation_contract",
 
 ]

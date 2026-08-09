@@ -7,6 +7,10 @@ Pack 03 runtime context is ``PackInterpretationContext`` (canonical).
 from __future__ import annotations
 
 from engines.interpretation_engine.context.builder import ContextBuilder, utc_now
+from engines.interpretation_engine.context.canonical_interpretation_context import (
+    CanonicalInterpretationContext,
+    build_interpretation_context,
+)
 from engines.interpretation_engine.context.context_builder_interface import (
     InterpretationContextBuilderInterface,
 )
@@ -28,6 +32,7 @@ from engines.interpretation_engine.context.snapshot import ContextSnapshot
 from engines.interpretation_engine.legacy_runtime.context import InterpretationContext
 
 __all__ = [
+    "CanonicalInterpretationContext",
     "ContextBuilder",
     "ContextFactory",
     "ContextHistory",
@@ -40,5 +45,6 @@ __all__ = [
     "InterpretationContextBuilderInterface",
     "InterpretationContextProviderInterface",
     "PackInterpretationContext",
+    "build_interpretation_context",
     "utc_now",
 ]

@@ -3,6 +3,14 @@
 from __future__ import annotations
 
 from engines.interpretation_engine.exceptions.context_error import InterpretationContextError
+from engines.interpretation_engine.exceptions.foundation_error import (
+    InterpretationContextIntegrityError,
+    InterpretationContractError,
+    InterpretationDuplicateIdError,
+    InterpretationFoundationError,
+    InterpretationPackageNotReleasedError,
+    InterpretationVersionError,
+)
 from engines.interpretation_engine.exceptions.interpretation_error import (
     InterpretationArchitectureError,
 )
@@ -24,6 +32,12 @@ from engines.interpretation_engine.legacy_runtime.exceptions import (
 __all__ = [
     "InterpretationArchitectureError",
     "InterpretationContextError",
+    "InterpretationContextIntegrityError",
+    "InterpretationContractError",
+    "InterpretationDuplicateIdError",
+    "InterpretationFoundationError",
+    "InterpretationPackageNotReleasedError",
+    "InterpretationVersionError",
     "InterpretationError",
     "InterpretationPipelineError",
     "InterpretationRegistryError",

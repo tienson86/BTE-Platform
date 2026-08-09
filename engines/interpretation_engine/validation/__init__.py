@@ -7,6 +7,10 @@ metadata, dependencies, and versions.
 from __future__ import annotations
 
 from engines.interpretation_engine.validation.context_validator import ContextValidator
+from engines.interpretation_engine.validation.foundation_validation import (
+    FoundationValidationReport,
+    validate_foundation,
+)
 from engines.interpretation_engine.validation.contract_validator import ContractValidator
 from engines.interpretation_engine.validation.dependency_validator import (
     DependencyValidator,
@@ -26,6 +30,7 @@ from engines.interpretation_engine.validation.version_validator import VersionVa
 __all__ = [
     "ContextValidator",
     "ContractValidator",
+    "FoundationValidationReport",
     "DependencyValidator",
     "MetadataValidator",
     "RegistryValidator",
@@ -36,4 +41,5 @@ __all__ = [
     "ValidationReport",
     "ValidationSeverity",
     "VersionValidator",
+    "validate_foundation",
 ]

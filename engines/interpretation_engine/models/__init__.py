@@ -3,6 +3,15 @@
 from __future__ import annotations
 
 from engines.interpretation_engine.models.context import InterpretationContext
+from engines.interpretation_engine.models.foundation_models import (
+    ChapterModel,
+    MetadataModel,
+    ParagraphModel,
+    PlaceholderModel,
+    ReferenceModel,
+    ResultModel,
+    SectionModel,
+)
 from engines.interpretation_engine.models.final_analysis_input import FinalAnalysisInput
 from engines.interpretation_engine.models.interpretation_context_model import (
     InterpretationContextModel,
@@ -37,6 +46,7 @@ __all__ = [
     "Rule",
     "RuleResult",
     # Pack 03 architecture shells
+    "ChapterModel",
     "FinalAnalysisInput",
     "InterpretationContextModel",
     "InterpretationResultModel",
@@ -44,7 +54,13 @@ __all__ = [
     # Pack 03 interpretation output models
     "InterpretationResult",
     "Metadata",
+    "MetadataModel",
+    "ParagraphModel",
     "ParagraphResult",
+    "PlaceholderModel",
+    "ReferenceModel",
+    "ResultModel",
+    "SectionModel",
     "SectionResult",
     "SentenceResult",
     "TraceInformation",
