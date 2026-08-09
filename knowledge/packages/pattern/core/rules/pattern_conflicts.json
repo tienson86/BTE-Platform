@@ -1,0 +1,1008 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_04_pattern_core",
+  "category": "pattern_conflicts",
+  "count": 10,
+  "objects": [
+    {
+      "id": "PAT-000045",
+      "version": "1.0.0",
+      "category": "pattern_conflicts",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "conflict"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 78
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Chính Quan"
+        },
+        {
+          "field": "chart_has_that_sat",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_conflict=true",
+        "weight": -8,
+        "signal": "pattern_conflict",
+        "score_target": "day_master.pattern_score",
+        "outcome": "conflict"
+      },
+      "explanation": "Xung đột Quan–Sát khi lệnh Quan mà cục có Sát. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_officer_sha",
+      "name": "Xung đột: conflict_officer_sha",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Chính Quan"
+          },
+          {
+            "field": "chart_has_that_sat",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_conflict=true",
+          "weight": -8,
+          "signal": "pattern_conflict",
+          "score_target": "day_master.pattern_score",
+          "outcome": "conflict"
+        },
+        "explanation": "Xung đột Quan–Sát khi lệnh Quan mà cục có Sát. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000046",
+      "version": "1.0.0",
+      "category": "pattern_conflicts",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "conflict"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 78
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Thất Sát"
+        },
+        {
+          "field": "chart_has_chinh_quan",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_conflict=true",
+        "weight": -8,
+        "signal": "pattern_conflict",
+        "score_target": "day_master.pattern_score",
+        "outcome": "conflict"
+      },
+      "explanation": "Xung đột Sát–Quan khi lệnh Sát mà cục có Quan. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_sha_officer",
+      "name": "Xung đột: conflict_sha_officer",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Thất Sát"
+          },
+          {
+            "field": "chart_has_chinh_quan",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_conflict=true",
+          "weight": -8,
+          "signal": "pattern_conflict",
+          "score_target": "day_master.pattern_score",
+          "outcome": "conflict"
+        },
+        "explanation": "Xung đột Sát–Quan khi lệnh Sát mà cục có Quan. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000047",
+      "version": "1.0.0",
+      "category": "pattern_conflicts",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "conflict"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 78
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Chính Tài"
+        },
+        {
+          "field": "chart_has_thien_tai",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_conflict=true",
+        "weight": -8,
+        "signal": "pattern_conflict",
+        "score_target": "day_master.pattern_score",
+        "outcome": "conflict"
+      },
+      "explanation": "Xung đột Chính Tài–Thiên Tài. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_zheng_pian_cai",
+      "name": "Xung đột: conflict_zheng_pian_cai",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Chính Tài"
+          },
+          {
+            "field": "chart_has_thien_tai",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_conflict=true",
+          "weight": -8,
+          "signal": "pattern_conflict",
+          "score_target": "day_master.pattern_score",
+          "outcome": "conflict"
+        },
+        "explanation": "Xung đột Chính Tài–Thiên Tài. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000048",
+      "version": "1.0.0",
+      "category": "pattern_conflicts",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "conflict"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 78
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Thực Thần"
+        },
+        {
+          "field": "chart_has_thuong_quan",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_conflict=true",
+        "weight": -8,
+        "signal": "pattern_conflict",
+        "score_target": "day_master.pattern_score",
+        "outcome": "conflict"
+      },
+      "explanation": "Xung đột Thực Thần–Thương Quan. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_shi_shang",
+      "name": "Xung đột: conflict_shi_shang",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Thực Thần"
+          },
+          {
+            "field": "chart_has_thuong_quan",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_conflict=true",
+          "weight": -8,
+          "signal": "pattern_conflict",
+          "score_target": "day_master.pattern_score",
+          "outcome": "conflict"
+        },
+        "explanation": "Xung đột Thực Thần–Thương Quan. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000049",
+      "version": "1.0.0",
+      "category": "pattern_conflicts",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "conflict"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 78
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Chính Ấn"
+        },
+        {
+          "field": "chart_has_thien_an",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_conflict=true",
+        "weight": -8,
+        "signal": "pattern_conflict",
+        "score_target": "day_master.pattern_score",
+        "outcome": "conflict"
+      },
+      "explanation": "Xung đột Chính Ấn–Thiên Ấn. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_zheng_pian_yin",
+      "name": "Xung đột: conflict_zheng_pian_yin",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Chính Ấn"
+          },
+          {
+            "field": "chart_has_thien_an",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_conflict=true",
+          "weight": -8,
+          "signal": "pattern_conflict",
+          "score_target": "day_master.pattern_score",
+          "outcome": "conflict"
+        },
+        "explanation": "Xung đột Chính Ấn–Thiên Ấn. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000050",
+      "version": "1.0.0",
+      "category": "pattern_conflicts",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "conflict"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 78
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Tỷ Kiên"
+        },
+        {
+          "field": "chart_has_kiep_tai",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_conflict=true",
+        "weight": -8,
+        "signal": "pattern_conflict",
+        "score_target": "day_master.pattern_score",
+        "outcome": "conflict"
+      },
+      "explanation": "Xung đột Tỷ Kiên–Kiếp Tài. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_bi_jie",
+      "name": "Xung đột: conflict_bi_jie",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Tỷ Kiên"
+          },
+          {
+            "field": "chart_has_kiep_tai",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_conflict=true",
+          "weight": -8,
+          "signal": "pattern_conflict",
+          "score_target": "day_master.pattern_score",
+          "outcome": "conflict"
+        },
+        "explanation": "Xung đột Tỷ Kiên–Kiếp Tài. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000051",
+      "version": "1.0.0",
+      "category": "pattern_conflicts",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "conflict"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 78
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Chính Quan"
+        },
+        {
+          "field": "chart_has_thuong_quan",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_conflict=true",
+        "weight": -8,
+        "signal": "pattern_conflict",
+        "score_target": "day_master.pattern_score",
+        "outcome": "conflict"
+      },
+      "explanation": "Thương Quan khắc Quan — xung đột thành cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_officer_shang",
+      "name": "Xung đột: conflict_officer_shang",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Chính Quan"
+          },
+          {
+            "field": "chart_has_thuong_quan",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_conflict=true",
+          "weight": -8,
+          "signal": "pattern_conflict",
+          "score_target": "day_master.pattern_score",
+          "outcome": "conflict"
+        },
+        "explanation": "Thương Quan khắc Quan — xung đột thành cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000052",
+      "version": "1.0.0",
+      "category": "pattern_conflicts",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "conflict"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 78
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Chính Ấn"
+        },
+        {
+          "field": "chart_has_chinh_tai",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_conflict=true",
+        "weight": -8,
+        "signal": "pattern_conflict",
+        "score_target": "day_master.pattern_score",
+        "outcome": "conflict"
+      },
+      "explanation": "Tài phá Ấn — xung đột thành cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_wealth_seal",
+      "name": "Xung đột: conflict_wealth_seal",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Chính Ấn"
+          },
+          {
+            "field": "chart_has_chinh_tai",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_conflict=true",
+          "weight": -8,
+          "signal": "pattern_conflict",
+          "score_target": "day_master.pattern_score",
+          "outcome": "conflict"
+        },
+        "explanation": "Tài phá Ấn — xung đột thành cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000053",
+      "version": "1.0.0",
+      "category": "pattern_conflicts",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "conflict"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 78
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Thực Thần"
+        },
+        {
+          "field": "chart_has_chinh_an",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_conflict=true",
+        "weight": -8,
+        "signal": "pattern_conflict",
+        "score_target": "day_master.pattern_score",
+        "outcome": "conflict"
+      },
+      "explanation": "Ấn chế Thực — xung đột thành cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_output_seal",
+      "name": "Xung đột: conflict_output_seal",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Thực Thần"
+          },
+          {
+            "field": "chart_has_chinh_an",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_conflict=true",
+          "weight": -8,
+          "signal": "pattern_conflict",
+          "score_target": "day_master.pattern_score",
+          "outcome": "conflict"
+        },
+        "explanation": "Ấn chế Thực — xung đột thành cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000054",
+      "version": "1.0.0",
+      "category": "pattern_conflicts",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "conflict"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 78
+      },
+      "conditions": [
+        {
+          "field": "eligible_principal_count",
+          "operator": "equals",
+          "value": 2
+        }
+      ],
+      "result": {
+        "effect": "pattern_conflict=true",
+        "weight": -8,
+        "signal": "pattern_conflict",
+        "score_target": "day_master.pattern_score",
+        "outcome": "conflict"
+      },
+      "explanation": "Hai chính cách cùng eligible — đánh dấu conflict, không tự chọn Tòng. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "conflict_dual_eligible",
+      "name": "Xung đột: conflict_dual_eligible",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "eligible_principal_count",
+            "operator": "equals",
+            "value": 2
+          }
+        ],
+        "result": {
+          "effect": "pattern_conflict=true",
+          "weight": -8,
+          "signal": "pattern_conflict",
+          "score_target": "day_master.pattern_score",
+          "outcome": "conflict"
+        },
+        "explanation": "Hai chính cách cùng eligible — đánh dấu conflict, không tự chọn Tòng. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    }
+  ]
+}

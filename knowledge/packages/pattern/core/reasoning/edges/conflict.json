@@ -1,0 +1,76 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-PAT-CONFLICT-001",
+      "source": "RN-PAT-CONFLICT-OBS-001",
+      "target": "RN-PAT-CONFLICT-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PAT-CONFLICT-002",
+      "source": "RN-PAT-CONFLICT-EVD-001",
+      "target": "RN-PAT-CONFLICT-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PAT-CONFLICT-003",
+      "source": "RN-PAT-CONFLICT-INF-001",
+      "target": "RN-PAT-CONFLICT-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PAT-CONFLICT-004",
+      "source": "RN-PAT-CONFLICT-MID-001",
+      "target": "RN-PAT-CONFLICT-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PAT-CONFLICT-005",
+      "source": "RN-PAT-CONFLICT-OBS-001",
+      "target": "RN-PAT-CONFLICT-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-PAT-CONFLICT-006",
+      "source": "RN-PAT-CONFLICT-CON-001",
+      "target": "RN-PAT-CONFLICT-FIN-001",
+      "relationship": "constrains",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-PAT-CONFLICT-007",
+      "source": "RN-PAT-CONFLICT-MID-001",
+      "target": "RN-PAT-CONFLICT-CON-001",
+      "relationship": "supports",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-PAT-CONFLICT-008",
+      "source": "RN-PAT-CONFLICT-ALT-001",
+      "target": "RN-PAT-CONFLICT-CON-001",
+      "relationship": "derives",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    }
+  ]
+}

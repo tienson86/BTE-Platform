@@ -1,0 +1,1146 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_04_pattern_core",
+  "category": "pattern_scoring",
+  "count": 12,
+  "objects": [
+    {
+      "id": "PAT-000077",
+      "version": "1.0.0",
+      "category": "pattern_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "pattern_scope",
+          "operator": "equals",
+          "value": "canonical"
+        }
+      ],
+      "result": {
+        "effect": "pattern_score_delta",
+        "weight": 35,
+        "signal": "pattern_scoring",
+        "score_target": "day_master.pattern_score",
+        "outcome": "scored"
+      },
+      "explanation": "Baseline pattern_score = 35. Không đụng strength_score. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "score_baseline",
+      "name": "Điểm: score_baseline",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_scope",
+            "operator": "equals",
+            "value": "canonical"
+          }
+        ],
+        "result": {
+          "effect": "pattern_score_delta",
+          "weight": 35,
+          "signal": "pattern_scoring",
+          "score_target": "day_master.pattern_score",
+          "outcome": "scored"
+        },
+        "explanation": "Baseline pattern_score = 35. Không đụng strength_score. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 35,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000078",
+      "version": "1.0.0",
+      "category": "pattern_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "principal_pattern",
+          "operator": "in",
+          "value": [
+            "chinh_quan",
+            "that_sat"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "pattern_score_delta",
+        "weight": 20,
+        "signal": "pattern_scoring",
+        "score_target": "day_master.pattern_score",
+        "outcome": "scored"
+      },
+      "explanation": "Dải Quan/Sát cộng điểm thành cách (PS002/PS006). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "score_officer",
+      "name": "Điểm: score_officer",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "principal_pattern",
+            "operator": "in",
+            "value": [
+              "chinh_quan",
+              "that_sat"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "pattern_score_delta",
+          "weight": 20,
+          "signal": "pattern_scoring",
+          "score_target": "day_master.pattern_score",
+          "outcome": "scored"
+        },
+        "explanation": "Dải Quan/Sát cộng điểm thành cách (PS002/PS006). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 20,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000079",
+      "version": "1.0.0",
+      "category": "pattern_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "principal_pattern",
+          "operator": "in",
+          "value": [
+            "chinh_tai",
+            "thien_tai"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "pattern_score_delta",
+        "weight": 18,
+        "signal": "pattern_scoring",
+        "score_target": "day_master.pattern_score",
+        "outcome": "scored"
+      },
+      "explanation": "Dải Tài cộng điểm thành cách (PS003). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "score_wealth",
+      "name": "Điểm: score_wealth",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "principal_pattern",
+            "operator": "in",
+            "value": [
+              "chinh_tai",
+              "thien_tai"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "pattern_score_delta",
+          "weight": 18,
+          "signal": "pattern_scoring",
+          "score_target": "day_master.pattern_score",
+          "outcome": "scored"
+        },
+        "explanation": "Dải Tài cộng điểm thành cách (PS003). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 18,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000080",
+      "version": "1.0.0",
+      "category": "pattern_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "principal_pattern",
+          "operator": "in",
+          "value": [
+            "thuc_than",
+            "thuong_quan"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "pattern_score_delta",
+        "weight": 16,
+        "signal": "pattern_scoring",
+        "score_target": "day_master.pattern_score",
+        "outcome": "scored"
+      },
+      "explanation": "Dải Thực/Thương cộng điểm (PS005/PS007). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "score_output",
+      "name": "Điểm: score_output",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "principal_pattern",
+            "operator": "in",
+            "value": [
+              "thuc_than",
+              "thuong_quan"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "pattern_score_delta",
+          "weight": 16,
+          "signal": "pattern_scoring",
+          "score_target": "day_master.pattern_score",
+          "outcome": "scored"
+        },
+        "explanation": "Dải Thực/Thương cộng điểm (PS005/PS007). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 16,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000081",
+      "version": "1.0.0",
+      "category": "pattern_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "principal_pattern",
+          "operator": "in",
+          "value": [
+            "chinh_an",
+            "thien_an"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "pattern_score_delta",
+        "weight": 18,
+        "signal": "pattern_scoring",
+        "score_target": "day_master.pattern_score",
+        "outcome": "scored"
+      },
+      "explanation": "Dải Ấn cộng điểm (PS004). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "score_seal",
+      "name": "Điểm: score_seal",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "principal_pattern",
+            "operator": "in",
+            "value": [
+              "chinh_an",
+              "thien_an"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "pattern_score_delta",
+          "weight": 18,
+          "signal": "pattern_scoring",
+          "score_target": "day_master.pattern_score",
+          "outcome": "scored"
+        },
+        "explanation": "Dải Ấn cộng điểm (PS004). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 18,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000082",
+      "version": "1.0.0",
+      "category": "pattern_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "principal_pattern",
+          "operator": "in",
+          "value": [
+            "ty_kien",
+            "kiep_tai"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "pattern_score_delta",
+        "weight": 10,
+        "signal": "pattern_scoring",
+        "score_target": "day_master.pattern_score",
+        "outcome": "scored"
+      },
+      "explanation": "Dải Tỷ/Kiếp cộng điểm thấp hơn chính cách tài quan. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "score_peer",
+      "name": "Điểm: score_peer",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "principal_pattern",
+            "operator": "in",
+            "value": [
+              "ty_kien",
+              "kiep_tai"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "pattern_score_delta",
+          "weight": 10,
+          "signal": "pattern_scoring",
+          "score_target": "day_master.pattern_score",
+          "outcome": "scored"
+        },
+        "explanation": "Dải Tỷ/Kiếp cộng điểm thấp hơn chính cách tài quan. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000083",
+      "version": "1.0.0",
+      "category": "pattern_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "pattern_confirmed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_score_delta",
+        "weight": 12,
+        "signal": "pattern_scoring",
+        "score_target": "day_master.pattern_score",
+        "outcome": "scored"
+      },
+      "explanation": "Thưởng xác nhận. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "score_confirm_bonus",
+      "name": "Điểm: score_confirm_bonus",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_confirmed",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_score_delta",
+          "weight": 12,
+          "signal": "pattern_scoring",
+          "score_target": "day_master.pattern_score",
+          "outcome": "scored"
+        },
+        "explanation": "Thưởng xác nhận. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000084",
+      "version": "1.0.0",
+      "category": "pattern_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "pattern_conflict",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_score_delta",
+        "weight": -12,
+        "signal": "pattern_scoring",
+        "score_target": "day_master.pattern_score",
+        "outcome": "scored"
+      },
+      "explanation": "Phạt xung đột. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "score_conflict_penalty",
+      "name": "Điểm: score_conflict_penalty",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_conflict",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_score_delta",
+          "weight": -12,
+          "signal": "pattern_scoring",
+          "score_target": "day_master.pattern_score",
+          "outcome": "scored"
+        },
+        "explanation": "Phạt xung đột. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -12,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000085",
+      "version": "1.0.0",
+      "category": "pattern_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "pattern_suppressed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_score_delta",
+        "weight": -14,
+        "signal": "pattern_scoring",
+        "score_target": "day_master.pattern_score",
+        "outcome": "scored"
+      },
+      "explanation": "Phạt ức chế. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "score_suppress_penalty",
+      "name": "Điểm: score_suppress_penalty",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_suppressed",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_score_delta",
+          "weight": -14,
+          "signal": "pattern_scoring",
+          "score_target": "day_master.pattern_score",
+          "outcome": "scored"
+        },
+        "explanation": "Phạt ức chế. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -14,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000086",
+      "version": "1.0.0",
+      "category": "pattern_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "strength_level",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "pattern_score_delta",
+        "weight": -8,
+        "signal": "pattern_scoring",
+        "score_target": "day_master.pattern_score",
+        "outcome": "scored"
+      },
+      "explanation": "Phạt thân nhược — đọc strength_level, không tính lại. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "score_weak_strength_penalty",
+      "name": "Điểm: score_weak_strength_penalty",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_level",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "pattern_score_delta",
+          "weight": -8,
+          "signal": "pattern_scoring",
+          "score_target": "day_master.pattern_score",
+          "outcome": "scored"
+        },
+        "explanation": "Phạt thân nhược — đọc strength_level, không tính lại. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -8,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000087",
+      "version": "1.0.0",
+      "category": "pattern_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "temperature_level",
+          "operator": "in",
+          "value": [
+            "hot",
+            "cold"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "pattern_score_delta",
+        "weight": -6,
+        "signal": "pattern_scoring",
+        "score_target": "day_master.pattern_score",
+        "outcome": "scored"
+      },
+      "explanation": "Phạt khí hậu cực — đọc temperature_level. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "score_extreme_temp_penalty",
+      "name": "Điểm: score_extreme_temp_penalty",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_level",
+            "operator": "in",
+            "value": [
+              "hot",
+              "cold"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "pattern_score_delta",
+          "weight": -6,
+          "signal": "pattern_scoring",
+          "score_target": "day_master.pattern_score",
+          "outcome": "scored"
+        },
+        "explanation": "Phạt khí hậu cực — đọc temperature_level. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -6,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000088",
+      "version": "1.0.0",
+      "category": "pattern_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "scoring"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "pattern_score_raw",
+          "operator": "gte",
+          "value": 0
+        },
+        {
+          "field": "pattern_score_raw",
+          "operator": "lte",
+          "value": 100
+        }
+      ],
+      "result": {
+        "effect": "pattern_score_delta",
+        "weight": 0,
+        "signal": "pattern_scoring",
+        "score_target": "day_master.pattern_score",
+        "outcome": "scored"
+      },
+      "explanation": "Kẹp pattern_score trong 0–100. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "score_clamp",
+      "name": "Điểm: score_clamp",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_score_raw",
+            "operator": "gte",
+            "value": 0
+          },
+          {
+            "field": "pattern_score_raw",
+            "operator": "lte",
+            "value": 100
+          }
+        ],
+        "result": {
+          "effect": "pattern_score_delta",
+          "weight": 0,
+          "signal": "pattern_scoring",
+          "score_target": "day_master.pattern_score",
+          "outcome": "scored"
+        },
+        "explanation": "Kẹp pattern_score trong 0–100. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    }
+  ]
+}

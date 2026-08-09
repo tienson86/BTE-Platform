@@ -1,0 +1,49 @@
+{
+  "schema_version": "2.0.0",
+  "package_spec_version": "1.0.0",
+  "package_id": "bz_04_pattern_core",
+  "package_version": "1.0.0",
+  "required": [],
+  "optional": [
+    {
+      "package_id": "bz_02_seasonal_core",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "Provides season / season_phase / season_score.",
+      "signals": [
+        "season",
+        "season_phase",
+        "season_score"
+      ]
+    },
+    {
+      "package_id": "bz_01_strength_core",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "Provides strength_level / strength_score context.",
+      "signals": [
+        "strength_level",
+        "strength_score"
+      ]
+    },
+    {
+      "package_id": "bz_03_temperature_core",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "Provides temperature_level / climate_type.",
+      "signals": [
+        "temperature_level",
+        "temperature_score",
+        "climate_type"
+      ]
+    }
+  ],
+  "conflicts": [],
+  "resolution": {
+    "circular_dependencies": "prohibited",
+    "optional_inclusion": "explicit_only",
+    "version_selection": "highest_satisfying_released",
+    "tie_breaker": "package_id_asc"
+  },
+  "notes": "Independently deployable. Analytical order is Seasonal → Strength → Temperature → Pattern."
+}

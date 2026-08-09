@@ -1,0 +1,56 @@
+{
+  "trace_id": "RT-PAT-PRINCIPAL-001",
+  "chain_id": "RC-PAT-PRINCIPAL-001",
+  "package_version": "1.0.0",
+  "activated_rules": [
+    "PAT-000001",
+    "PAT-000003",
+    "PAT-000004",
+    "PAT-000023",
+    "PAT-000065",
+    "PAT-000078"
+  ],
+  "activated_evidence": [
+    "evidence/bundles/PAT-000001.json",
+    "evidence/bundles/PAT-000003.json",
+    "evidence/bundles/PAT-000004.json",
+    "evidence/bundles/PAT-000023.json",
+    "evidence/bundles/PAT-000065.json",
+    "evidence/bundles/PAT-000078.json"
+  ],
+  "activated_upstream_seasonal": [
+    "SEC-000026",
+    "SEC-000046",
+    "SEC-000103"
+  ],
+  "activated_upstream_strength": [
+    "SKC-000001",
+    "SKC-000098"
+  ],
+  "activated_upstream_temperature": [
+    "TEC-000033",
+    "TEC-000095",
+    "TEC-000001"
+  ],
+  "decision_path": [
+    "RN-PAT-PRINCIPAL-OBS-001",
+    "RN-PAT-PRINCIPAL-EVD-001",
+    "RN-PAT-PRINCIPAL-INF-001",
+    "RN-PAT-PRINCIPAL-MID-001",
+    "RN-PAT-PRINCIPAL-FIN-001"
+  ],
+  "confidence_propagation": [
+    {
+      "node_id": "RN-PAT-PRINCIPAL-OBS-001",
+      "mode": "declared"
+    },
+    {
+      "node_id": "RN-PAT-PRINCIPAL-EVD-001",
+      "mode": "inherited"
+    },
+    {
+      "node_id": "RN-PAT-PRINCIPAL-FIN-001",
+      "mode": "combined"
+    }
+  ]
+}

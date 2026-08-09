@@ -1,0 +1,938 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_04_pattern_core",
+  "category": "pattern_prerequisites",
+  "count": 10,
+  "objects": [
+    {
+      "id": "PAT-000001",
+      "version": "1.0.0",
+      "category": "pattern_prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "prerequisite",
+        "canonical"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 95
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "exists",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "prerequisite=ready",
+        "weight": 4,
+        "signal": "pattern_prerequisite",
+        "score_target": "day_master.pattern_score",
+        "outcome": "eligible_gate"
+      },
+      "explanation": "Yêu cầu tín hiệu `season` từ Seasonal Core. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_season_published",
+      "name": "Tiền đề: prereq_season_published",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "prerequisite=ready",
+          "weight": 4,
+          "signal": "pattern_prerequisite",
+          "score_target": "day_master.pattern_score",
+          "outcome": "eligible_gate"
+        },
+        "explanation": "Yêu cầu tín hiệu `season` từ Seasonal Core. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000002",
+      "version": "1.0.0",
+      "category": "pattern_prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "prerequisite",
+        "canonical"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 95
+      },
+      "conditions": [
+        {
+          "field": "season_phase",
+          "operator": "exists",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "prerequisite=ready",
+        "weight": 4,
+        "signal": "pattern_prerequisite",
+        "score_target": "day_master.pattern_score",
+        "outcome": "eligible_gate"
+      },
+      "explanation": "Yêu cầu `season_phase` (Vượng/Tướng/Hưu/Tù/Tử) đã công bố. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_season_phase",
+      "name": "Tiền đề: prereq_season_phase",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_phase",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "prerequisite=ready",
+          "weight": 4,
+          "signal": "pattern_prerequisite",
+          "score_target": "day_master.pattern_score",
+          "outcome": "eligible_gate"
+        },
+        "explanation": "Yêu cầu `season_phase` (Vượng/Tướng/Hưu/Tù/Tử) đã công bố. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000003",
+      "version": "1.0.0",
+      "category": "pattern_prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "prerequisite",
+        "canonical"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 95
+      },
+      "conditions": [
+        {
+          "field": "strength_level",
+          "operator": "exists",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "prerequisite=ready",
+        "weight": 4,
+        "signal": "pattern_prerequisite",
+        "score_target": "day_master.pattern_score",
+        "outcome": "eligible_gate"
+      },
+      "explanation": "Yêu cầu `strength_level` từ Strength Core. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_strength_level",
+      "name": "Tiền đề: prereq_strength_level",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_level",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "prerequisite=ready",
+          "weight": 4,
+          "signal": "pattern_prerequisite",
+          "score_target": "day_master.pattern_score",
+          "outcome": "eligible_gate"
+        },
+        "explanation": "Yêu cầu `strength_level` từ Strength Core. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000004",
+      "version": "1.0.0",
+      "category": "pattern_prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "prerequisite",
+        "canonical"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 95
+      },
+      "conditions": [
+        {
+          "field": "temperature_level",
+          "operator": "exists",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "prerequisite=ready",
+        "weight": 4,
+        "signal": "pattern_prerequisite",
+        "score_target": "day_master.pattern_score",
+        "outcome": "eligible_gate"
+      },
+      "explanation": "Yêu cầu `temperature_level` từ Temperature Core. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_temperature_level",
+      "name": "Tiền đề: prereq_temperature_level",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_level",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "prerequisite=ready",
+          "weight": 4,
+          "signal": "pattern_prerequisite",
+          "score_target": "day_master.pattern_score",
+          "outcome": "eligible_gate"
+        },
+        "explanation": "Yêu cầu `temperature_level` từ Temperature Core. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000005",
+      "version": "1.0.0",
+      "category": "pattern_prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "prerequisite",
+        "canonical"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 95
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "exists",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "prerequisite=ready",
+        "weight": 4,
+        "signal": "pattern_prerequisite",
+        "score_target": "day_master.pattern_score",
+        "outcome": "eligible_gate"
+      },
+      "explanation": "Yêu cầu thập thần lệnh tháng (can chính địa chi tháng). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_month_command",
+      "name": "Tiền đề: prereq_month_command",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "prerequisite=ready",
+          "weight": 4,
+          "signal": "pattern_prerequisite",
+          "score_target": "day_master.pattern_score",
+          "outcome": "eligible_gate"
+        },
+        "explanation": "Yêu cầu thập thần lệnh tháng (can chính địa chi tháng). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000006",
+      "version": "1.0.0",
+      "category": "pattern_prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "prerequisite",
+        "canonical"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 95
+      },
+      "conditions": [
+        {
+          "field": "day_master",
+          "operator": "exists",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "prerequisite=ready",
+        "weight": 4,
+        "signal": "pattern_prerequisite",
+        "score_target": "day_master.pattern_score",
+        "outcome": "eligible_gate"
+      },
+      "explanation": "Yêu cầu Nhật chủ từ Tứ Trụ. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_day_master",
+      "name": "Tiền đề: prereq_day_master",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "prerequisite=ready",
+          "weight": 4,
+          "signal": "pattern_prerequisite",
+          "score_target": "day_master.pattern_score",
+          "outcome": "eligible_gate"
+        },
+        "explanation": "Yêu cầu Nhật chủ từ Tứ Trụ. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000007",
+      "version": "1.0.0",
+      "category": "pattern_prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "prerequisite",
+        "canonical"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 95
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern_detected",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "prerequisite=ready",
+        "weight": 4,
+        "signal": "pattern_prerequisite",
+        "score_target": "day_master.pattern_score",
+        "outcome": "eligible_gate"
+      },
+      "explanation": "Gói nền tảng loại Tòng Cách (Wave 2). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_not_follow",
+      "name": "Tiền đề: prereq_not_follow",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern_detected",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "prerequisite=ready",
+          "weight": 4,
+          "signal": "pattern_prerequisite",
+          "score_target": "day_master.pattern_score",
+          "outcome": "eligible_gate"
+        },
+        "explanation": "Gói nền tảng loại Tòng Cách (Wave 2). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000008",
+      "version": "1.0.0",
+      "category": "pattern_prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "prerequisite",
+        "canonical"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 95
+      },
+      "conditions": [
+        {
+          "field": "special_pattern_detected",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "prerequisite=ready",
+        "weight": 4,
+        "signal": "pattern_prerequisite",
+        "score_target": "day_master.pattern_score",
+        "outcome": "eligible_gate"
+      },
+      "explanation": "Gói nền tảng loại Chuyên Cách (Wave 2). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_not_special",
+      "name": "Tiền đề: prereq_not_special",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "special_pattern_detected",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "prerequisite=ready",
+          "weight": 4,
+          "signal": "pattern_prerequisite",
+          "score_target": "day_master.pattern_score",
+          "outcome": "eligible_gate"
+        },
+        "explanation": "Gói nền tảng loại Chuyên Cách (Wave 2). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000009",
+      "version": "1.0.0",
+      "category": "pattern_prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "prerequisite",
+        "canonical"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 95
+      },
+      "conditions": [
+        {
+          "field": "pipeline_stage_ready",
+          "operator": "equals",
+          "value": "temperature"
+        }
+      ],
+      "result": {
+        "effect": "prerequisite=ready",
+        "weight": 4,
+        "signal": "pattern_prerequisite",
+        "score_target": "day_master.pattern_score",
+        "outcome": "eligible_gate"
+      },
+      "explanation": "Pattern chỉ chạy sau Temperature trên AX-1. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_pipeline_order",
+      "name": "Tiền đề: prereq_pipeline_order",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pipeline_stage_ready",
+            "operator": "equals",
+            "value": "temperature"
+          }
+        ],
+        "result": {
+          "effect": "prerequisite=ready",
+          "weight": 4,
+          "signal": "pattern_prerequisite",
+          "score_target": "day_master.pattern_score",
+          "outcome": "eligible_gate"
+        },
+        "explanation": "Pattern chỉ chạy sau Temperature trên AX-1. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000010",
+      "version": "1.0.0",
+      "category": "pattern_prerequisites",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "prerequisite",
+        "canonical"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 95
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "exists",
+          "value": true
+        },
+        {
+          "field": "strength_level",
+          "operator": "exists",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "prerequisite=ready",
+        "weight": 4,
+        "signal": "pattern_prerequisite",
+        "score_target": "day_master.pattern_score",
+        "outcome": "eligible_gate"
+      },
+      "explanation": "Lệnh tháng và sức thân phải cùng có mặt. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "prereq_ten_gods",
+      "name": "Tiền đề: prereq_ten_gods",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "exists",
+            "value": true
+          },
+          {
+            "field": "strength_level",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "prerequisite=ready",
+          "weight": 4,
+          "signal": "pattern_prerequisite",
+          "score_target": "day_master.pattern_score",
+          "outcome": "eligible_gate"
+        },
+        "explanation": "Lệnh tháng và sức thân phải cùng có mặt. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    }
+  ]
+}

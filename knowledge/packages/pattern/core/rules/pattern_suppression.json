@@ -1,0 +1,1048 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_04_pattern_core",
+  "category": "pattern_suppression",
+  "count": 10,
+  "objects": [
+    {
+      "id": "PAT-000055",
+      "version": "1.0.0",
+      "category": "pattern_suppression",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "suppression"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Chính Quan"
+        },
+        {
+          "field": "chart_has_thuong_quan",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "field": "strength_level",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "pattern_suppressed=true",
+        "weight": -10,
+        "signal": "pattern_suppression",
+        "score_target": "day_master.pattern_score",
+        "outcome": "suppressed"
+      },
+      "explanation": "Thân nhược + Thương Quan ức chế Quan cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "suppress_shang_hurts_officer",
+      "name": "Ức chế: suppress_shang_hurts_officer",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Chính Quan"
+          },
+          {
+            "field": "chart_has_thuong_quan",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "field": "strength_level",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "pattern_suppressed=true",
+          "weight": -10,
+          "signal": "pattern_suppression",
+          "score_target": "day_master.pattern_score",
+          "outcome": "suppressed"
+        },
+        "explanation": "Thân nhược + Thương Quan ức chế Quan cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000056",
+      "version": "1.0.0",
+      "category": "pattern_suppression",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "suppression"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Thực Thần"
+        },
+        {
+          "field": "chart_has_chinh_an",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_suppressed=true",
+        "weight": -10,
+        "signal": "pattern_suppression",
+        "score_target": "day_master.pattern_score",
+        "outcome": "suppressed"
+      },
+      "explanation": "Ấn nặng ức chế Thực Thần cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "suppress_seal_hurts_output",
+      "name": "Ức chế: suppress_seal_hurts_output",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Thực Thần"
+          },
+          {
+            "field": "chart_has_chinh_an",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_suppressed=true",
+          "weight": -10,
+          "signal": "pattern_suppression",
+          "score_target": "day_master.pattern_score",
+          "outcome": "suppressed"
+        },
+        "explanation": "Ấn nặng ức chế Thực Thần cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000057",
+      "version": "1.0.0",
+      "category": "pattern_suppression",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "suppression"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Chính Ấn"
+        },
+        {
+          "field": "chart_has_chinh_tai",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "field": "strength_level",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "pattern_suppressed=true",
+        "weight": -10,
+        "signal": "pattern_suppression",
+        "score_target": "day_master.pattern_score",
+        "outcome": "suppressed"
+      },
+      "explanation": "Thân nhược + Tài ức chế Ấn cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "suppress_wealth_hurts_seal",
+      "name": "Ức chế: suppress_wealth_hurts_seal",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Chính Ấn"
+          },
+          {
+            "field": "chart_has_chinh_tai",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "field": "strength_level",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "pattern_suppressed=true",
+          "weight": -10,
+          "signal": "pattern_suppression",
+          "score_target": "day_master.pattern_score",
+          "outcome": "suppressed"
+        },
+        "explanation": "Thân nhược + Tài ức chế Ấn cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000058",
+      "version": "1.0.0",
+      "category": "pattern_suppression",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "suppression"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Chính Tài"
+        },
+        {
+          "field": "chart_has_ty_kien",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_suppressed=true",
+        "weight": -10,
+        "signal": "pattern_suppression",
+        "score_target": "day_master.pattern_score",
+        "outcome": "suppressed"
+      },
+      "explanation": "Tỷ kiếp đoạt Tài — ức chế Tài cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "suppress_peer_hurts_wealth",
+      "name": "Ức chế: suppress_peer_hurts_wealth",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Chính Tài"
+          },
+          {
+            "field": "chart_has_ty_kien",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_suppressed=true",
+          "weight": -10,
+          "signal": "pattern_suppression",
+          "score_target": "day_master.pattern_score",
+          "outcome": "suppressed"
+        },
+        "explanation": "Tỷ kiếp đoạt Tài — ức chế Tài cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000059",
+      "version": "1.0.0",
+      "category": "pattern_suppression",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "suppression"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Thất Sát"
+        },
+        {
+          "field": "chart_has_thuc_than",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "field": "strength_level",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "pattern_suppressed=true",
+        "weight": -10,
+        "signal": "pattern_suppression",
+        "score_target": "day_master.pattern_score",
+        "outcome": "suppressed"
+      },
+      "explanation": "Sát vô chế khi thân nhược — ức chế Sát cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "suppress_sha_uncontrolled",
+      "name": "Ức chế: suppress_sha_uncontrolled",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Thất Sát"
+          },
+          {
+            "field": "chart_has_thuc_than",
+            "operator": "equals",
+            "value": false
+          },
+          {
+            "field": "strength_level",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "pattern_suppressed=true",
+          "weight": -10,
+          "signal": "pattern_suppression",
+          "score_target": "day_master.pattern_score",
+          "outcome": "suppressed"
+        },
+        "explanation": "Sát vô chế khi thân nhược — ức chế Sát cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000060",
+      "version": "1.0.0",
+      "category": "pattern_suppression",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "suppression"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "temperature_level",
+          "operator": "equals",
+          "value": "hot"
+        },
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Thất Sát"
+        }
+      ],
+      "result": {
+        "effect": "pattern_suppressed=true",
+        "weight": -10,
+        "signal": "pattern_suppression",
+        "score_target": "day_master.pattern_score",
+        "outcome": "suppressed"
+      },
+      "explanation": "Thái nhiệt ức chế ổn định Sát cách (đọc temperature_level). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "suppress_extreme_hot",
+      "name": "Ức chế: suppress_extreme_hot",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_level",
+            "operator": "equals",
+            "value": "hot"
+          },
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Thất Sát"
+          }
+        ],
+        "result": {
+          "effect": "pattern_suppressed=true",
+          "weight": -10,
+          "signal": "pattern_suppression",
+          "score_target": "day_master.pattern_score",
+          "outcome": "suppressed"
+        },
+        "explanation": "Thái nhiệt ức chế ổn định Sát cách (đọc temperature_level). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000061",
+      "version": "1.0.0",
+      "category": "pattern_suppression",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "suppression"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "temperature_level",
+          "operator": "equals",
+          "value": "cold"
+        },
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Chính Ấn"
+        }
+      ],
+      "result": {
+        "effect": "pattern_suppressed=true",
+        "weight": -10,
+        "signal": "pattern_suppression",
+        "score_target": "day_master.pattern_score",
+        "outcome": "suppressed"
+      },
+      "explanation": "Thái hàn ức chế Ấn cách ẩn nhu. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "suppress_extreme_cold",
+      "name": "Ức chế: suppress_extreme_cold",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_level",
+            "operator": "equals",
+            "value": "cold"
+          },
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Chính Ấn"
+          }
+        ],
+        "result": {
+          "effect": "pattern_suppressed=true",
+          "weight": -10,
+          "signal": "pattern_suppression",
+          "score_target": "day_master.pattern_score",
+          "outcome": "suppressed"
+        },
+        "explanation": "Thái hàn ức chế Ấn cách ẩn nhu. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000062",
+      "version": "1.0.0",
+      "category": "pattern_suppression",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "suppression"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "si"
+        },
+        {
+          "field": "strength_level",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "pattern_suppressed=true",
+        "weight": -10,
+        "signal": "pattern_suppression",
+        "score_target": "day_master.pattern_score",
+        "outcome": "suppressed"
+      },
+      "explanation": "Mùa Tử (tín hiệu Seasonal) + thân nhược ức chế thành cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "suppress_dead_season",
+      "name": "Ức chế: suppress_dead_season",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "si"
+          },
+          {
+            "field": "strength_level",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "pattern_suppressed=true",
+          "weight": -10,
+          "signal": "pattern_suppression",
+          "score_target": "day_master.pattern_score",
+          "outcome": "suppressed"
+        },
+        "explanation": "Mùa Tử (tín hiệu Seasonal) + thân nhược ức chế thành cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000063",
+      "version": "1.0.0",
+      "category": "pattern_suppression",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "suppression"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Chính Quan"
+        },
+        {
+          "field": "strength_level",
+          "operator": "equals",
+          "value": "weak"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "si"
+        }
+      ],
+      "result": {
+        "effect": "pattern_suppressed=true",
+        "weight": -10,
+        "signal": "pattern_suppression",
+        "score_target": "day_master.pattern_score",
+        "outcome": "suppressed"
+      },
+      "explanation": "Quan cách yếu khi thân nhược và lệnh tử. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "suppress_weak_officer",
+      "name": "Ức chế: suppress_weak_officer",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Chính Quan"
+          },
+          {
+            "field": "strength_level",
+            "operator": "equals",
+            "value": "weak"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "si"
+          }
+        ],
+        "result": {
+          "effect": "pattern_suppressed=true",
+          "weight": -10,
+          "signal": "pattern_suppression",
+          "score_target": "day_master.pattern_score",
+          "outcome": "suppressed"
+        },
+        "explanation": "Quan cách yếu khi thân nhược và lệnh tử. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000064",
+      "version": "1.0.0",
+      "category": "pattern_suppression",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "suppression"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "pattern_suppressed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_suppressed=true",
+        "weight": -10,
+        "signal": "pattern_suppression",
+        "score_target": "day_master.pattern_score",
+        "outcome": "suppressed"
+      },
+      "explanation": "Cờ ức chế đã bật — giảm pattern_score, không đổi strength_score. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "suppress_flag",
+      "name": "Ức chế: suppress_flag",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_suppressed",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_suppressed=true",
+          "weight": -10,
+          "signal": "pattern_suppression",
+          "score_target": "day_master.pattern_score",
+          "outcome": "suppressed"
+        },
+        "explanation": "Cờ ức chế đã bật — giảm pattern_score, không đổi strength_score. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    }
+  ]
+}

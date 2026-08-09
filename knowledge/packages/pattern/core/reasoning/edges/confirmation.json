@@ -1,0 +1,76 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-PAT-CONFIRMATION-001",
+      "source": "RN-PAT-CONFIRMATION-OBS-001",
+      "target": "RN-PAT-CONFIRMATION-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PAT-CONFIRMATION-002",
+      "source": "RN-PAT-CONFIRMATION-EVD-001",
+      "target": "RN-PAT-CONFIRMATION-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PAT-CONFIRMATION-003",
+      "source": "RN-PAT-CONFIRMATION-INF-001",
+      "target": "RN-PAT-CONFIRMATION-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PAT-CONFIRMATION-004",
+      "source": "RN-PAT-CONFIRMATION-MID-001",
+      "target": "RN-PAT-CONFIRMATION-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PAT-CONFIRMATION-005",
+      "source": "RN-PAT-CONFIRMATION-OBS-001",
+      "target": "RN-PAT-CONFIRMATION-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-PAT-CONFIRMATION-006",
+      "source": "RN-PAT-CONFIRMATION-CON-001",
+      "target": "RN-PAT-CONFIRMATION-FIN-001",
+      "relationship": "constrains",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-PAT-CONFIRMATION-007",
+      "source": "RN-PAT-CONFIRMATION-MID-001",
+      "target": "RN-PAT-CONFIRMATION-CON-001",
+      "relationship": "supports",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-PAT-CONFIRMATION-008",
+      "source": "RN-PAT-CONFIRMATION-ALT-001",
+      "target": "RN-PAT-CONFIRMATION-CON-001",
+      "relationship": "derives",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    }
+  ]
+}

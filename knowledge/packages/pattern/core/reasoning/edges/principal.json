@@ -1,0 +1,76 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-PAT-PRINCIPAL-001",
+      "source": "RN-PAT-PRINCIPAL-OBS-001",
+      "target": "RN-PAT-PRINCIPAL-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PAT-PRINCIPAL-002",
+      "source": "RN-PAT-PRINCIPAL-EVD-001",
+      "target": "RN-PAT-PRINCIPAL-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PAT-PRINCIPAL-003",
+      "source": "RN-PAT-PRINCIPAL-INF-001",
+      "target": "RN-PAT-PRINCIPAL-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PAT-PRINCIPAL-004",
+      "source": "RN-PAT-PRINCIPAL-MID-001",
+      "target": "RN-PAT-PRINCIPAL-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-PAT-PRINCIPAL-005",
+      "source": "RN-PAT-PRINCIPAL-OBS-001",
+      "target": "RN-PAT-PRINCIPAL-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-PAT-PRINCIPAL-006",
+      "source": "RN-PAT-PRINCIPAL-CON-001",
+      "target": "RN-PAT-PRINCIPAL-FIN-001",
+      "relationship": "constrains",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-PAT-PRINCIPAL-007",
+      "source": "RN-PAT-PRINCIPAL-MID-001",
+      "target": "RN-PAT-PRINCIPAL-CON-001",
+      "relationship": "supports",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    },
+    {
+      "edge_id": "RE-PAT-PRINCIPAL-008",
+      "source": "RN-PAT-PRINCIPAL-ALT-001",
+      "target": "RN-PAT-PRINCIPAL-CON-001",
+      "relationship": "derives",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "optional_branch"
+    }
+  ]
+}

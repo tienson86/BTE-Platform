@@ -1,0 +1,170 @@
+{
+  "nodes": [
+    {
+      "node_id": "RN-PAT-CONFIRMATION-OBS-001",
+      "node_type": "observation",
+      "title": "Thân trung hòa, khí hậu cân, không xung đột — xác nhận Quan cách.",
+      "description": "Thân trung hòa, khí hậu cân, không xung đột — xác nhận Quan cách.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [],
+      "outputs": [
+        "chart_facts"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-PAT-CONFIRMATION-EVD-001",
+      "node_type": "evidence",
+      "title": "Xác nhận chính cách khi thượng nguồn ôn hòa",
+      "description": "Đọc luật Pattern + tín hiệu SEC/SKC/TEC đã công bố.",
+      "source_rule": "PAT-000022",
+      "source_evidence": "evidence/bundles/PAT-000022.json",
+      "inputs": [
+        "chart_facts",
+        "seasonal_signals",
+        "strength_signals",
+        "temperature_signals"
+      ],
+      "outputs": [
+        "evidence_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "language": "vi",
+        "upstream_seasonal": [
+          "SEC-000025",
+          "SEC-000103"
+        ],
+        "upstream_strength": [
+          "SKC-000100"
+        ],
+        "upstream_temperature": [
+          "TEC-000057",
+          "TEC-000001"
+        ]
+      }
+    },
+    {
+      "node_id": "RN-PAT-CONFIRMATION-INF-001",
+      "node_type": "inference",
+      "title": "Xác nhận chính cách khi thượng nguồn ôn hòa",
+      "description": "Suy ra trạng thái cách từ tín hiệu, không tính lại stage trước.",
+      "source_rule": "PAT-000022",
+      "source_evidence": "evidence/bundles/PAT-000022.json",
+      "inputs": [
+        "evidence_signal"
+      ],
+      "outputs": [
+        "inference_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-PAT-CONFIRMATION-MID-001",
+      "node_type": "intermediate_conclusion",
+      "title": "Kết luận trung gian cách cục",
+      "description": "Ghép principal / conflict / confirmation.",
+      "source_rule": "PAT-000023",
+      "source_evidence": "evidence/bundles/PAT-000023.json",
+      "inputs": [
+        "inference_signal"
+      ],
+      "outputs": [
+        "mid_conclusion"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "combined"
+      },
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-PAT-CONFIRMATION-FIN-001",
+      "node_type": "final_conclusion",
+      "title": "Kết luận cách cục nền tảng",
+      "description": "Xác nhận chính cách khi thượng nguồn ôn hòa",
+      "source_rule": "PAT-000089",
+      "source_evidence": "evidence/bundles/PAT-000089.json",
+      "inputs": [
+        "mid_conclusion"
+      ],
+      "outputs": [
+        "pattern_result"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "combined"
+      },
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-PAT-CONFIRMATION-ALT-001",
+      "node_type": "alternative",
+      "title": "Nhánh Tòng/Chuyên không kích hoạt",
+      "description": "Wave 2. Gói này không suy Tòng hay Chuyên Cách.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [
+        "chart_facts"
+      ],
+      "outputs": [
+        "unused_follow_special"
+      ],
+      "confidence": {
+        "level": "low",
+        "mode": "reduced"
+      },
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-PAT-CONFIRMATION-CON-001",
+      "node_type": "constraint",
+      "title": "Ràng buộc không ghi đè stage trước",
+      "description": "Cấm ghi strength_score / season_score / temperature_score.",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [
+        "pattern_result"
+      ],
+      "outputs": [
+        "constraint_ok"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "language": "vi"
+      }
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "chain_id": "RC-PAT-CONFIRMATION-001",
+  "title": "Xác nhận chính cách khi thượng nguồn ôn hòa",
+  "package_id": "bz_04_pattern_core",
+  "package_version": "1.0.0",
+  "example_id": "EX-PAT-STABLE-001",
+  "pattern_theme": "confirmation",
+  "stages": [
+    {
+      "stage": "observation",
+      "node_id": "RN-PAT-CONFIRMATION-OBS-001"
+    },
+    {
+      "stage": "evidence",
+      "node_id": "RN-PAT-CONFIRMATION-EVD-001"
+    },
+    {
+      "stage": "inference",
+      "node_id": "RN-PAT-CONFIRMATION-INF-001"
+    },
+    {
+      "stage": "intermediate_conclusion",
+      "node_id": "RN-PAT-CONFIRMATION-MID-001"
+    },
+    {
+      "stage": "final_conclusion",
+      "node_id": "RN-PAT-CONFIRMATION-FIN-001"
+    }
+  ],
+  "rule_ids": [
+    "PAT-000022",
+    "PAT-000023",
+    "PAT-000066",
+    "PAT-000072",
+    "PAT-000075",
+    "PAT-000089"
+  ],
+  "upstream_seasonal_rules": [
+    "SEC-000025",
+    "SEC-000103"
+  ],
+  "upstream_strength_rules": [
+    "SKC-000100"
+  ],
+  "upstream_temperature_rules": [
+    "TEC-000057",
+    "TEC-000001"
+  ],
+  "dependency_chain": [
+    "calendar",
+    "four_pillars",
+    "seasonal",
+    "strength",
+    "temperature",
+    "pattern"
+  ],
+  "evidence_refs": [
+    "evidence/bundles/PAT-000022.json",
+    "evidence/bundles/PAT-000023.json",
+    "evidence/bundles/PAT-000066.json",
+    "evidence/bundles/PAT-000072.json",
+    "evidence/bundles/PAT-000075.json",
+    "evidence/bundles/PAT-000089.json"
+  ],
+  "node_ids": [
+    "RN-PAT-CONFIRMATION-OBS-001",
+    "RN-PAT-CONFIRMATION-EVD-001",
+    "RN-PAT-CONFIRMATION-INF-001",
+    "RN-PAT-CONFIRMATION-MID-001",
+    "RN-PAT-CONFIRMATION-FIN-001",
+    "RN-PAT-CONFIRMATION-ALT-001",
+    "RN-PAT-CONFIRMATION-CON-001"
+  ],
+  "edge_ids": [
+    "RE-PAT-CONFIRMATION-001",
+    "RE-PAT-CONFIRMATION-002",
+    "RE-PAT-CONFIRMATION-003",
+    "RE-PAT-CONFIRMATION-004",
+    "RE-PAT-CONFIRMATION-005",
+    "RE-PAT-CONFIRMATION-006",
+    "RE-PAT-CONFIRMATION-007",
+    "RE-PAT-CONFIRMATION-008"
+  ]
+}

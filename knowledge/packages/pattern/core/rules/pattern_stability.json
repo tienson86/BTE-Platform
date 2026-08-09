@@ -1,0 +1,1158 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_04_pattern_core",
+  "category": "pattern_stability",
+  "count": 12,
+  "objects": [
+    {
+      "id": "PAT-000089",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "stability",
+        "stable"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 68
+      },
+      "conditions": [
+        {
+          "field": "pattern_confirmed",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "field": "pattern_conflict",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "stability=stable",
+        "weight": 12,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_score",
+        "outcome": "stable"
+      },
+      "explanation": "Ổn định khi đã xác nhận và không xung đột. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "stable_confirmed_clean",
+      "name": "Ổn định: stable_confirmed_clean",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_confirmed",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "field": "pattern_conflict",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "stability=stable",
+          "weight": 12,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_score",
+          "outcome": "stable"
+        },
+        "explanation": "Ổn định khi đã xác nhận và không xung đột. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000090",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "stability",
+        "unstable"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 68
+      },
+      "conditions": [
+        {
+          "field": "pattern_conflict",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "stability=unstable",
+        "weight": -10,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_score",
+        "outcome": "unstable"
+      },
+      "explanation": "Xung đột làm cách mất ổn định. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "unstable_conflict",
+      "name": "Ổn định: unstable_conflict",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_conflict",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "stability=unstable",
+          "weight": -10,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_score",
+          "outcome": "unstable"
+        },
+        "explanation": "Xung đột làm cách mất ổn định. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000091",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "stability",
+        "unstable"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 68
+      },
+      "conditions": [
+        {
+          "field": "pattern_suppressed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "stability=unstable",
+        "weight": -12,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_score",
+        "outcome": "unstable"
+      },
+      "explanation": "Ức chế làm cách mất ổn định. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "unstable_suppressed",
+      "name": "Ổn định: unstable_suppressed",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_suppressed",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "stability=unstable",
+          "weight": -12,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_score",
+          "outcome": "unstable"
+        },
+        "explanation": "Ức chế làm cách mất ổn định. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000092",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "stability",
+        "unstable"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 68
+      },
+      "conditions": [
+        {
+          "field": "strength_level",
+          "operator": "equals",
+          "value": "weak"
+        }
+      ],
+      "result": {
+        "effect": "stability=unstable",
+        "weight": -8,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_score",
+        "outcome": "unstable"
+      },
+      "explanation": "Thân nhược (Strength) giảm ổn định cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "unstable_weak_strength",
+      "name": "Ổn định: unstable_weak_strength",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_level",
+            "operator": "equals",
+            "value": "weak"
+          }
+        ],
+        "result": {
+          "effect": "stability=unstable",
+          "weight": -8,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_score",
+          "outcome": "unstable"
+        },
+        "explanation": "Thân nhược (Strength) giảm ổn định cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000093",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "stability",
+        "unstable"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 68
+      },
+      "conditions": [
+        {
+          "field": "temperature_level",
+          "operator": "in",
+          "value": [
+            "hot",
+            "cold"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "stability=unstable",
+        "weight": -6,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_score",
+        "outcome": "unstable"
+      },
+      "explanation": "Khí hậu cực (Temperature) giảm ổn định. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "unstable_extreme_temp",
+      "name": "Ổn định: unstable_extreme_temp",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_level",
+            "operator": "in",
+            "value": [
+              "hot",
+              "cold"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "stability=unstable",
+          "weight": -6,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_score",
+          "outcome": "unstable"
+        },
+        "explanation": "Khí hậu cực (Temperature) giảm ổn định. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000094",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "stability",
+        "stable"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 68
+      },
+      "conditions": [
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "wang"
+        }
+      ],
+      "result": {
+        "effect": "stability=stable",
+        "weight": 8,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_score",
+        "outcome": "stable"
+      },
+      "explanation": "Lệnh Vượng (Seasonal) tăng ổn định. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "stable_seasonal_wang",
+      "name": "Ổn định: stable_seasonal_wang",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "wang"
+          }
+        ],
+        "result": {
+          "effect": "stability=stable",
+          "weight": 8,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_score",
+          "outcome": "stable"
+        },
+        "explanation": "Lệnh Vượng (Seasonal) tăng ổn định. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000095",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "stability",
+        "unstable"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 68
+      },
+      "conditions": [
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "si"
+        }
+      ],
+      "result": {
+        "effect": "stability=unstable",
+        "weight": -8,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_score",
+        "outcome": "unstable"
+      },
+      "explanation": "Lệnh Tử (Seasonal) giảm ổn định. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "unstable_seasonal_si",
+      "name": "Ổn định: unstable_seasonal_si",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "si"
+          }
+        ],
+        "result": {
+          "effect": "stability=unstable",
+          "weight": -8,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_score",
+          "outcome": "unstable"
+        },
+        "explanation": "Lệnh Tử (Seasonal) giảm ổn định. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": -8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000096",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "stability",
+        "stable"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 68
+      },
+      "conditions": [
+        {
+          "field": "climate_type",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "stability=stable",
+        "weight": 8,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_score",
+        "outcome": "stable"
+      },
+      "explanation": "Khí hậu cân (Temperature) tăng ổn định. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "stable_balanced_climate",
+      "name": "Ổn định: stable_balanced_climate",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "climate_type",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "stability=stable",
+          "weight": 8,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_score",
+          "outcome": "stable"
+        },
+        "explanation": "Khí hậu cân (Temperature) tăng ổn định. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000097",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "stability",
+        "stable"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 68
+      },
+      "conditions": [
+        {
+          "field": "strength_level",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "stability=stable",
+        "weight": 8,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_score",
+        "outcome": "stable"
+      },
+      "explanation": "Thân trung hòa tăng ổn định. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "stable_balanced_strength",
+      "name": "Ổn định: stable_balanced_strength",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_level",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "stability=stable",
+          "weight": 8,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_score",
+          "outcome": "stable"
+        },
+        "explanation": "Thân trung hòa tăng ổn định. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000098",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "stability",
+        "stable"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 68
+      },
+      "conditions": [
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 70
+        }
+      ],
+      "result": {
+        "effect": "stability=stable",
+        "weight": 6,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_score",
+        "outcome": "stable"
+      },
+      "explanation": "Dải ổn định cao. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "stability_high_band",
+      "name": "Ổn định: stability_high_band",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 70
+          }
+        ],
+        "result": {
+          "effect": "stability=stable",
+          "weight": 6,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_score",
+          "outcome": "stable"
+        },
+        "explanation": "Dải ổn định cao. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000099",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "stability",
+        "mixed"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 68
+      },
+      "conditions": [
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 40
+        },
+        {
+          "field": "pattern_stability",
+          "operator": "lte",
+          "value": 69
+        }
+      ],
+      "result": {
+        "effect": "stability=mixed",
+        "weight": 0,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_score",
+        "outcome": "mixed"
+      },
+      "explanation": "Dải ổn định trung. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "stability_mid_band",
+      "name": "Ổn định: stability_mid_band",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 40
+          },
+          {
+            "field": "pattern_stability",
+            "operator": "lte",
+            "value": 69
+          }
+        ],
+        "result": {
+          "effect": "stability=mixed",
+          "weight": 0,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_score",
+          "outcome": "mixed"
+        },
+        "explanation": "Dải ổn định trung. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000100",
+      "version": "1.0.0",
+      "category": "pattern_stability",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "stability",
+        "stable"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 68
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "exists",
+          "value": true
+        },
+        {
+          "field": "strength_level",
+          "operator": "exists",
+          "value": true
+        },
+        {
+          "field": "temperature_level",
+          "operator": "exists",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "stability=stable",
+        "weight": 4,
+        "signal": "pattern_stability",
+        "score_target": "day_master.pattern_score",
+        "outcome": "stable"
+      },
+      "explanation": "Ổn định chỉ đánh giá khi đủ ba tín hiệu thượng nguồn. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "stability_requires_upstream",
+      "name": "Ổn định: stability_requires_upstream",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "exists",
+            "value": true
+          },
+          {
+            "field": "strength_level",
+            "operator": "exists",
+            "value": true
+          },
+          {
+            "field": "temperature_level",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "stability=stable",
+          "weight": 4,
+          "signal": "pattern_stability",
+          "score_target": "day_master.pattern_score",
+          "outcome": "stable"
+        },
+        "explanation": "Ổn định chỉ đánh giá khi đủ ba tín hiệu thượng nguồn. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "rule_id": "TEC-000085",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Nhuận táo",
+    "why": "Tăng Thủy nhuận táo (dry_001 / flw_001). Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+    "when": "Khi dryness_level=dry.",
+    "when_not": "Khi điều kiện không khớp hoặc exclusive khác thắng.",
+    "summary": "Tăng Thủy nhuận táo (dry_001 / flw_001). Nguyên tắc điều hậu — không phải bảng Dụng thần."
+  },
+  "rationale": "Luật `corr_dry` điều hậu / khí hậu. Không trùng Strength hay Seasonal.",
+  "confidence_level": "high",
+  "confidence_reason": "Khớp database/11_temperature và MODULE_SPEC 03_temperature_rules.",
+  "references": [
+    {
+      "target": "REF-TEC-000010",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-TEC-000085-01",
+      "rule_id": "TEC-000085",
+      "polarity": "positive",
+      "chart_facts": {
+        "dryness_level": "dry"
+      },
+      "note": "Thỏa điều kiện."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-TEC-000085-01",
+      "rule_id": "TEC-000085",
+      "polarity": "negative",
+      "chart_facts": {
+        "dryness_level": "not_dry"
+      },
+      "note": "Phá điều kiện."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-TEC-000085-01",
+      "rule_id": "TEC-000085",
+      "kind": "scope",
+      "chart_facts": {
+        "dryness_level": "dry"
+      },
+      "note": "Biên exclusive hoặc phạm vi nhiệt, không phải sức thân."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_03_temperature_core",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-2B",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

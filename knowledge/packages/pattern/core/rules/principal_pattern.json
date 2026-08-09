@@ -1,0 +1,1322 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_04_pattern_core",
+  "category": "principal_pattern",
+  "count": 12,
+  "objects": [
+    {
+      "id": "PAT-000023",
+      "version": "1.0.0",
+      "category": "principal_pattern",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "principal",
+        "chinh_quan"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Chính Quan"
+        },
+        {
+          "field": "follow_pattern_detected",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "field": "special_pattern_detected",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "principal=chinh_quan",
+        "weight": 80.0,
+        "signal": "principal_pattern",
+        "score_target": "day_master.pattern_score",
+        "outcome": "chinh_quan"
+      },
+      "explanation": "Chính Quan cách — lệnh tháng Chính Quan (pat_cq_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "principal_chinh_quan",
+      "name": "Chính cách: Chính Quan",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Chính Quan"
+          },
+          {
+            "field": "follow_pattern_detected",
+            "operator": "equals",
+            "value": false
+          },
+          {
+            "field": "special_pattern_detected",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "principal=chinh_quan",
+          "weight": 80.0,
+          "signal": "principal_pattern",
+          "score_target": "day_master.pattern_score",
+          "outcome": "chinh_quan"
+        },
+        "explanation": "Chính Quan cách — lệnh tháng Chính Quan (pat_cq_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 80.0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "principal_pattern"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000024",
+      "version": "1.0.0",
+      "category": "principal_pattern",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "principal",
+        "that_sat"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Thất Sát"
+        },
+        {
+          "field": "follow_pattern_detected",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "field": "special_pattern_detected",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "principal=that_sat",
+        "weight": 80.0,
+        "signal": "principal_pattern",
+        "score_target": "day_master.pattern_score",
+        "outcome": "that_sat"
+      },
+      "explanation": "Thất Sát cách — lệnh tháng Thất Sát (pat_ts_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "principal_that_sat",
+      "name": "Chính cách: Thất Sát",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Thất Sát"
+          },
+          {
+            "field": "follow_pattern_detected",
+            "operator": "equals",
+            "value": false
+          },
+          {
+            "field": "special_pattern_detected",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "principal=that_sat",
+          "weight": 80.0,
+          "signal": "principal_pattern",
+          "score_target": "day_master.pattern_score",
+          "outcome": "that_sat"
+        },
+        "explanation": "Thất Sát cách — lệnh tháng Thất Sát (pat_ts_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 80.0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "principal_pattern"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000025",
+      "version": "1.0.0",
+      "category": "principal_pattern",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "principal",
+        "chinh_tai"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 75
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Chính Tài"
+        },
+        {
+          "field": "follow_pattern_detected",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "field": "special_pattern_detected",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "principal=chinh_tai",
+        "weight": 75.0,
+        "signal": "principal_pattern",
+        "score_target": "day_master.pattern_score",
+        "outcome": "chinh_tai"
+      },
+      "explanation": "Chính Tài cách — lệnh tháng Chính Tài (pat_ct_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "principal_chinh_tai",
+      "name": "Chính cách: Chính Tài",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Chính Tài"
+          },
+          {
+            "field": "follow_pattern_detected",
+            "operator": "equals",
+            "value": false
+          },
+          {
+            "field": "special_pattern_detected",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "principal=chinh_tai",
+          "weight": 75.0,
+          "signal": "principal_pattern",
+          "score_target": "day_master.pattern_score",
+          "outcome": "chinh_tai"
+        },
+        "explanation": "Chính Tài cách — lệnh tháng Chính Tài (pat_ct_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 75.0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "principal_pattern"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000026",
+      "version": "1.0.0",
+      "category": "principal_pattern",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "principal",
+        "thien_tai"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 75
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Thiên Tài"
+        },
+        {
+          "field": "follow_pattern_detected",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "field": "special_pattern_detected",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "principal=thien_tai",
+        "weight": 75.0,
+        "signal": "principal_pattern",
+        "score_target": "day_master.pattern_score",
+        "outcome": "thien_tai"
+      },
+      "explanation": "Thiên Tài cách — lệnh tháng Thiên Tài (pat_tt_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "principal_thien_tai",
+      "name": "Chính cách: Thiên Tài",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Thiên Tài"
+          },
+          {
+            "field": "follow_pattern_detected",
+            "operator": "equals",
+            "value": false
+          },
+          {
+            "field": "special_pattern_detected",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "principal=thien_tai",
+          "weight": 75.0,
+          "signal": "principal_pattern",
+          "score_target": "day_master.pattern_score",
+          "outcome": "thien_tai"
+        },
+        "explanation": "Thiên Tài cách — lệnh tháng Thiên Tài (pat_tt_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 75.0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "principal_pattern"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000027",
+      "version": "1.0.0",
+      "category": "principal_pattern",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "principal",
+        "thuc_than"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Thực Thần"
+        },
+        {
+          "field": "follow_pattern_detected",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "field": "special_pattern_detected",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "principal=thuc_than",
+        "weight": 70.0,
+        "signal": "principal_pattern",
+        "score_target": "day_master.pattern_score",
+        "outcome": "thuc_than"
+      },
+      "explanation": "Thực Thần cách — lệnh tháng Thực Thần (pat_tht_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "principal_thuc_than",
+      "name": "Chính cách: Thực Thần",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Thực Thần"
+          },
+          {
+            "field": "follow_pattern_detected",
+            "operator": "equals",
+            "value": false
+          },
+          {
+            "field": "special_pattern_detected",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "principal=thuc_than",
+          "weight": 70.0,
+          "signal": "principal_pattern",
+          "score_target": "day_master.pattern_score",
+          "outcome": "thuc_than"
+        },
+        "explanation": "Thực Thần cách — lệnh tháng Thực Thần (pat_tht_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 70.0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "principal_pattern"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000028",
+      "version": "1.0.0",
+      "category": "principal_pattern",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "principal",
+        "thuong_quan"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Thương Quan"
+        },
+        {
+          "field": "follow_pattern_detected",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "field": "special_pattern_detected",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "principal=thuong_quan",
+        "weight": 70.0,
+        "signal": "principal_pattern",
+        "score_target": "day_master.pattern_score",
+        "outcome": "thuong_quan"
+      },
+      "explanation": "Thương Quan cách — lệnh tháng Thương Quan (pat_thuq_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "principal_thuong_quan",
+      "name": "Chính cách: Thương Quan",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Thương Quan"
+          },
+          {
+            "field": "follow_pattern_detected",
+            "operator": "equals",
+            "value": false
+          },
+          {
+            "field": "special_pattern_detected",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "principal=thuong_quan",
+          "weight": 70.0,
+          "signal": "principal_pattern",
+          "score_target": "day_master.pattern_score",
+          "outcome": "thuong_quan"
+        },
+        "explanation": "Thương Quan cách — lệnh tháng Thương Quan (pat_thuq_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 70.0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "principal_pattern"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000029",
+      "version": "1.0.0",
+      "category": "principal_pattern",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "principal",
+        "chinh_an"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 72
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Chính Ấn"
+        },
+        {
+          "field": "follow_pattern_detected",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "field": "special_pattern_detected",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "principal=chinh_an",
+        "weight": 72.0,
+        "signal": "principal_pattern",
+        "score_target": "day_master.pattern_score",
+        "outcome": "chinh_an"
+      },
+      "explanation": "Chính Ấn cách — lệnh tháng Chính Ấn (pat_ca_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "principal_chinh_an",
+      "name": "Chính cách: Chính Ấn",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Chính Ấn"
+          },
+          {
+            "field": "follow_pattern_detected",
+            "operator": "equals",
+            "value": false
+          },
+          {
+            "field": "special_pattern_detected",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "principal=chinh_an",
+          "weight": 72.0,
+          "signal": "principal_pattern",
+          "score_target": "day_master.pattern_score",
+          "outcome": "chinh_an"
+        },
+        "explanation": "Chính Ấn cách — lệnh tháng Chính Ấn (pat_ca_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 72.0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "principal_pattern"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000030",
+      "version": "1.0.0",
+      "category": "principal_pattern",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "principal",
+        "thien_an"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 72
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Thiên Ấn"
+        },
+        {
+          "field": "follow_pattern_detected",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "field": "special_pattern_detected",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "principal=thien_an",
+        "weight": 72.0,
+        "signal": "principal_pattern",
+        "score_target": "day_master.pattern_score",
+        "outcome": "thien_an"
+      },
+      "explanation": "Thiên Ấn cách — lệnh tháng Thiên Ấn (pat_ta_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "principal_thien_an",
+      "name": "Chính cách: Thiên Ấn",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Thiên Ấn"
+          },
+          {
+            "field": "follow_pattern_detected",
+            "operator": "equals",
+            "value": false
+          },
+          {
+            "field": "special_pattern_detected",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "principal=thien_an",
+          "weight": 72.0,
+          "signal": "principal_pattern",
+          "score_target": "day_master.pattern_score",
+          "outcome": "thien_an"
+        },
+        "explanation": "Thiên Ấn cách — lệnh tháng Thiên Ấn (pat_ta_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 72.0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "principal_pattern"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000031",
+      "version": "1.0.0",
+      "category": "principal_pattern",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "principal",
+        "ty_kien"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Tỷ Kiên"
+        },
+        {
+          "field": "follow_pattern_detected",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "field": "special_pattern_detected",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "principal=ty_kien",
+        "weight": 60.0,
+        "signal": "principal_pattern",
+        "score_target": "day_master.pattern_score",
+        "outcome": "ty_kien"
+      },
+      "explanation": "Kiến Lộc cách — lệnh tháng Tỷ Kiên (pat_tyk_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "principal_ty_kien",
+      "name": "Chính cách: Tỷ Kiên",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Tỷ Kiên"
+          },
+          {
+            "field": "follow_pattern_detected",
+            "operator": "equals",
+            "value": false
+          },
+          {
+            "field": "special_pattern_detected",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "principal=ty_kien",
+          "weight": 60.0,
+          "signal": "principal_pattern",
+          "score_target": "day_master.pattern_score",
+          "outcome": "ty_kien"
+        },
+        "explanation": "Kiến Lộc cách — lệnh tháng Tỷ Kiên (pat_tyk_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 60.0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "principal_pattern"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000032",
+      "version": "1.0.0",
+      "category": "principal_pattern",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "principal",
+        "kiep_tai"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Kiếp Tài"
+        },
+        {
+          "field": "follow_pattern_detected",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "field": "special_pattern_detected",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "principal=kiep_tai",
+        "weight": 60.0,
+        "signal": "principal_pattern",
+        "score_target": "day_master.pattern_score",
+        "outcome": "kiep_tai"
+      },
+      "explanation": "Dương Nhẫn cách — lệnh tháng Kiếp Tài (pat_ktai_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "principal_kiep_tai",
+      "name": "Chính cách: Kiếp Tài",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Kiếp Tài"
+          },
+          {
+            "field": "follow_pattern_detected",
+            "operator": "equals",
+            "value": false
+          },
+          {
+            "field": "special_pattern_detected",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "principal=kiep_tai",
+          "weight": 60.0,
+          "signal": "principal_pattern",
+          "score_target": "day_master.pattern_score",
+          "outcome": "kiep_tai"
+        },
+        "explanation": "Dương Nhẫn cách — lệnh tháng Kiếp Tài (pat_ktai_01). Nhận diện theo lệnh tháng đã cho; không suy mùa từ địa chi. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 60.0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "principal_pattern"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000033",
+      "version": "1.0.0",
+      "category": "principal_pattern",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "principal",
+        "unique"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "exists",
+          "value": true
+        },
+        {
+          "field": "command_ambiguous",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "principal=unique_command",
+        "weight": 8,
+        "signal": "principal_pattern",
+        "score_target": "day_master.pattern_score",
+        "outcome": "unique_command"
+      },
+      "explanation": "Chính cách nền tảng giả định một can chính lệnh tháng. Không giải Tòng/Chuyên. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "principal_requires_unique_command",
+      "name": "Chính cách đòi lệnh tháng duy nhất",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "exists",
+            "value": true
+          },
+          {
+            "field": "command_ambiguous",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "principal=unique_command",
+          "weight": 8,
+          "signal": "principal_pattern",
+          "score_target": "day_master.pattern_score",
+          "outcome": "unique_command"
+        },
+        "explanation": "Chính cách nền tảng giả định một can chính lệnh tháng. Không giải Tòng/Chuyên. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000034",
+      "version": "1.0.0",
+      "category": "principal_pattern",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "principal",
+        "unset"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 50
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god_present",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "principal=unset",
+        "weight": 0,
+        "signal": "principal_pattern",
+        "score_target": "day_master.pattern_score",
+        "outcome": "unset"
+      },
+      "explanation": "Thiếu thập thần lệnh tháng thì không gán chính cách (không fallback pat_fallback trong gói này). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "principal_unset_if_command_missing",
+      "name": "Chưa xác định chính cách khi thiếu lệnh",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god_present",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "principal=unset",
+          "weight": 0,
+          "signal": "principal_pattern",
+          "score_target": "day_master.pattern_score",
+          "outcome": "unset"
+        },
+        "explanation": "Thiếu thập thần lệnh tháng thì không gán chính cách (không fallback pat_fallback trong gói này). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "principal_pattern"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    }
+  ]
+}

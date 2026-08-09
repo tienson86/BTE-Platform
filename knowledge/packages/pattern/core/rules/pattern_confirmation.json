@@ -1,0 +1,1172 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_04_pattern_core",
+  "category": "pattern_confirmation",
+  "count": 12,
+  "objects": [
+    {
+      "id": "PAT-000065",
+      "version": "1.0.0",
+      "category": "pattern_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 74
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Chính Quan"
+        },
+        {
+          "field": "strength_level",
+          "operator": "equals",
+          "value": "strong"
+        }
+      ],
+      "result": {
+        "effect": "pattern_confirmed=true",
+        "weight": 10,
+        "signal": "pattern_confirmation",
+        "score_target": "day_master.pattern_score",
+        "outcome": "confirmed"
+      },
+      "explanation": "Quan cách xác nhận khi thân vượng (đọc strength_level). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_officer_strong",
+      "name": "Xác nhận: confirm_officer_strong",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Chính Quan"
+          },
+          {
+            "field": "strength_level",
+            "operator": "equals",
+            "value": "strong"
+          }
+        ],
+        "result": {
+          "effect": "pattern_confirmed=true",
+          "weight": 10,
+          "signal": "pattern_confirmation",
+          "score_target": "day_master.pattern_score",
+          "outcome": "confirmed"
+        },
+        "explanation": "Quan cách xác nhận khi thân vượng (đọc strength_level). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000066",
+      "version": "1.0.0",
+      "category": "pattern_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 74
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Chính Quan"
+        },
+        {
+          "field": "strength_level",
+          "operator": "equals",
+          "value": "balanced"
+        }
+      ],
+      "result": {
+        "effect": "pattern_confirmed=true",
+        "weight": 10,
+        "signal": "pattern_confirmation",
+        "score_target": "day_master.pattern_score",
+        "outcome": "confirmed"
+      },
+      "explanation": "Quan cách xác nhận khi thân trung hòa. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_officer_balanced",
+      "name": "Xác nhận: confirm_officer_balanced",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Chính Quan"
+          },
+          {
+            "field": "strength_level",
+            "operator": "equals",
+            "value": "balanced"
+          }
+        ],
+        "result": {
+          "effect": "pattern_confirmed=true",
+          "weight": 10,
+          "signal": "pattern_confirmation",
+          "score_target": "day_master.pattern_score",
+          "outcome": "confirmed"
+        },
+        "explanation": "Quan cách xác nhận khi thân trung hòa. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000067",
+      "version": "1.0.0",
+      "category": "pattern_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 74
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Thất Sát"
+        },
+        {
+          "field": "chart_has_thuc_than",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_confirmed=true",
+        "weight": 10,
+        "signal": "pattern_confirmation",
+        "score_target": "day_master.pattern_score",
+        "outcome": "confirmed"
+      },
+      "explanation": "Sát cách xác nhận khi có Thực chế Sát. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_sha_with_food",
+      "name": "Xác nhận: confirm_sha_with_food",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Thất Sát"
+          },
+          {
+            "field": "chart_has_thuc_than",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_confirmed=true",
+          "weight": 10,
+          "signal": "pattern_confirmation",
+          "score_target": "day_master.pattern_score",
+          "outcome": "confirmed"
+        },
+        "explanation": "Sát cách xác nhận khi có Thực chế Sát. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000068",
+      "version": "1.0.0",
+      "category": "pattern_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 74
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Chính Tài"
+        },
+        {
+          "field": "chart_has_thuc_than",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_confirmed=true",
+        "weight": 10,
+        "signal": "pattern_confirmation",
+        "score_target": "day_master.pattern_score",
+        "outcome": "confirmed"
+      },
+      "explanation": "Tài cách xác nhận khi có Thực sinh Tài. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_wealth_with_output",
+      "name": "Xác nhận: confirm_wealth_with_output",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Chính Tài"
+          },
+          {
+            "field": "chart_has_thuc_than",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_confirmed=true",
+          "weight": 10,
+          "signal": "pattern_confirmation",
+          "score_target": "day_master.pattern_score",
+          "outcome": "confirmed"
+        },
+        "explanation": "Tài cách xác nhận khi có Thực sinh Tài. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000069",
+      "version": "1.0.0",
+      "category": "pattern_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 74
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Chính Ấn"
+        },
+        {
+          "field": "chart_has_chinh_quan",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_confirmed=true",
+        "weight": 10,
+        "signal": "pattern_confirmation",
+        "score_target": "day_master.pattern_score",
+        "outcome": "confirmed"
+      },
+      "explanation": "Ấn cách xác nhận khi có Quan sinh Ấn. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_seal_with_officer",
+      "name": "Xác nhận: confirm_seal_with_officer",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Chính Ấn"
+          },
+          {
+            "field": "chart_has_chinh_quan",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_confirmed=true",
+          "weight": 10,
+          "signal": "pattern_confirmation",
+          "score_target": "day_master.pattern_score",
+          "outcome": "confirmed"
+        },
+        "explanation": "Ấn cách xác nhận khi có Quan sinh Ấn. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000070",
+      "version": "1.0.0",
+      "category": "pattern_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 74
+      },
+      "conditions": [
+        {
+          "field": "month_branch_ten_god",
+          "operator": "equals",
+          "value": "Thực Thần"
+        },
+        {
+          "field": "chart_has_chinh_tai",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_confirmed=true",
+        "weight": 10,
+        "signal": "pattern_confirmation",
+        "score_target": "day_master.pattern_score",
+        "outcome": "confirmed"
+      },
+      "explanation": "Thực cách xác nhận khi có Tài tiết Thực. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_output_with_wealth",
+      "name": "Xác nhận: confirm_output_with_wealth",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_ten_god",
+            "operator": "equals",
+            "value": "Thực Thần"
+          },
+          {
+            "field": "chart_has_chinh_tai",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_confirmed=true",
+          "weight": 10,
+          "signal": "pattern_confirmation",
+          "score_target": "day_master.pattern_score",
+          "outcome": "confirmed"
+        },
+        "explanation": "Thực cách xác nhận khi có Tài tiết Thực. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000071",
+      "version": "1.0.0",
+      "category": "pattern_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 74
+      },
+      "conditions": [
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "wang"
+        }
+      ],
+      "result": {
+        "effect": "pattern_confirmed=true",
+        "weight": 10,
+        "signal": "pattern_confirmation",
+        "score_target": "day_master.pattern_score",
+        "outcome": "confirmed"
+      },
+      "explanation": "Lệnh Vượng (Seasonal) hỗ trợ xác nhận cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_seasonal_wang",
+      "name": "Xác nhận: confirm_seasonal_wang",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "wang"
+          }
+        ],
+        "result": {
+          "effect": "pattern_confirmed=true",
+          "weight": 10,
+          "signal": "pattern_confirmation",
+          "score_target": "day_master.pattern_score",
+          "outcome": "confirmed"
+        },
+        "explanation": "Lệnh Vượng (Seasonal) hỗ trợ xác nhận cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000072",
+      "version": "1.0.0",
+      "category": "pattern_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 74
+      },
+      "conditions": [
+        {
+          "field": "temperature_level",
+          "operator": "in",
+          "value": [
+            "cool",
+            "warm"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "pattern_confirmed=true",
+        "weight": 10,
+        "signal": "pattern_confirmation",
+        "score_target": "day_master.pattern_score",
+        "outcome": "confirmed"
+      },
+      "explanation": "Khí hậu ôn hòa hỗ trợ xác nhận cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_temp_not_extreme",
+      "name": "Xác nhận: confirm_temp_not_extreme",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_level",
+            "operator": "in",
+            "value": [
+              "cool",
+              "warm"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "pattern_confirmed=true",
+          "weight": 10,
+          "signal": "pattern_confirmation",
+          "score_target": "day_master.pattern_score",
+          "outcome": "confirmed"
+        },
+        "explanation": "Khí hậu ôn hòa hỗ trợ xác nhận cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000073",
+      "version": "1.0.0",
+      "category": "pattern_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 74
+      },
+      "conditions": [
+        {
+          "field": "strength_level",
+          "operator": "in",
+          "value": [
+            "strong",
+            "balanced"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "pattern_confirmed=true",
+        "weight": 10,
+        "signal": "pattern_confirmation",
+        "score_target": "day_master.pattern_score",
+        "outcome": "confirmed"
+      },
+      "explanation": "Thân không quá nhược hỗ trợ xác nhận. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_strength_not_dead",
+      "name": "Xác nhận: confirm_strength_not_dead",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_level",
+            "operator": "in",
+            "value": [
+              "strong",
+              "balanced"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "pattern_confirmed=true",
+          "weight": 10,
+          "signal": "pattern_confirmation",
+          "score_target": "day_master.pattern_score",
+          "outcome": "confirmed"
+        },
+        "explanation": "Thân không quá nhược hỗ trợ xác nhận. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000074",
+      "version": "1.0.0",
+      "category": "pattern_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 74
+      },
+      "conditions": [
+        {
+          "field": "month_stem_agrees_branch",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "pattern_confirmed=true",
+        "weight": 10,
+        "signal": "pattern_confirmation",
+        "score_target": "day_master.pattern_score",
+        "outcome": "confirmed"
+      },
+      "explanation": "Can tháng cùng họ thập thần với lệnh chi — xác nhận. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_month_stem_agrees",
+      "name": "Xác nhận: confirm_month_stem_agrees",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_stem_agrees_branch",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "pattern_confirmed=true",
+          "weight": 10,
+          "signal": "pattern_confirmation",
+          "score_target": "day_master.pattern_score",
+          "outcome": "confirmed"
+        },
+        "explanation": "Can tháng cùng họ thập thần với lệnh chi — xác nhận. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000075",
+      "version": "1.0.0",
+      "category": "pattern_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 74
+      },
+      "conditions": [
+        {
+          "field": "pattern_conflict",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "pattern_confirmed=true",
+        "weight": 10,
+        "signal": "pattern_confirmation",
+        "score_target": "day_master.pattern_score",
+        "outcome": "confirmed"
+      },
+      "explanation": "Không cờ xung đột — xác nhận sạch. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_no_conflict",
+      "name": "Xác nhận: confirm_no_conflict",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_conflict",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "pattern_confirmed=true",
+          "weight": 10,
+          "signal": "pattern_confirmation",
+          "score_target": "day_master.pattern_score",
+          "outcome": "confirmed"
+        },
+        "explanation": "Không cờ xung đột — xác nhận sạch. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000076",
+      "version": "1.0.0",
+      "category": "pattern_confirmation",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "confirmation"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 74
+      },
+      "conditions": [
+        {
+          "field": "pattern_stability",
+          "operator": "gte",
+          "value": 70
+        }
+      ],
+      "result": {
+        "effect": "pattern_confirmed=true",
+        "weight": 10,
+        "signal": "pattern_confirmation",
+        "score_target": "day_master.pattern_score",
+        "outcome": "confirmed"
+      },
+      "explanation": "Độ ổn định cao xác nhận chính cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "confirm_stability_high",
+      "name": "Xác nhận: confirm_stability_high",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_stability",
+            "operator": "gte",
+            "value": 70
+          }
+        ],
+        "result": {
+          "effect": "pattern_confirmed=true",
+          "weight": 10,
+          "signal": "pattern_confirmation",
+          "score_target": "day_master.pattern_score",
+          "outcome": "confirmed"
+        },
+        "explanation": "Độ ổn định cao xác nhận chính cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    }
+  ]
+}

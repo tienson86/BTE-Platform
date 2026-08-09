@@ -1,0 +1,71 @@
+{
+  "rule_id": "PAT-000100",
+  "evidence_version": "1.0.0",
+  "explanation": {
+    "language": "vi",
+    "title": "Ổn định: stability_requires_upstream",
+    "why": "Ổn định chỉ đánh giá khi đủ ba tín hiệu thượng nguồn. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+    "when": "Khi điều kiện tín hiệu thượng nguồn khớp.",
+    "when_not": "Khi thiếu Seasonal/Strength/Temperature hoặc điều kiện không khớp.",
+    "summary": "Ổn định chỉ đánh giá khi đủ ba tín hiệu thượng nguồn. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu."
+  },
+  "rationale": "Luật `stability_requires_upstream` thuộc pattern_stability. Chỉ đọc output AX-1, không tính lại sức thân/mùa/điều hậu.",
+  "confidence_level": "canonical",
+  "confidence_reason": "Khớp database/14_pattern chính cách Ziping; loại Tòng/Chuyên.",
+  "references": [
+    {
+      "target": "REF-PAT-000009",
+      "relation": "references"
+    }
+  ],
+  "positive_examples": [
+    {
+      "example_id": "POS-PAT-000100-01",
+      "rule_id": "PAT-000100",
+      "polarity": "positive",
+      "chart_facts": {
+        "season": true,
+        "strength_level": true,
+        "temperature_level": true
+      },
+      "note": "Thỏa điều kiện; tín hiệu thượng nguồn giả định đã công bố."
+    }
+  ],
+  "negative_examples": [
+    {
+      "example_id": "NEG-PAT-000100-01",
+      "rule_id": "PAT-000100",
+      "polarity": "negative",
+      "chart_facts": {
+        "season": null,
+        "strength_level": true,
+        "temperature_level": true
+      },
+      "note": "Phá điều kiện hoặc thiếu output stage trước."
+    }
+  ],
+  "boundary_cases": [
+    {
+      "example_id": "BND-PAT-000100-01",
+      "rule_id": "PAT-000100",
+      "kind": "upstream_boundary",
+      "chart_facts": {
+        "season": true,
+        "strength_level": true,
+        "temperature_level": true
+      },
+      "note": "Biên: đủ điều kiện pattern nhưng thiếu một tín hiệu Strength/Seasonal/Temperature thì không thành cách."
+    }
+  ],
+  "related_rules": [],
+  "conflicting_rules": [],
+  "traceability": {
+    "originating_package": "bz_04_pattern_core",
+    "package_version": "1.0.0",
+    "author": "BTE Knowledge Board",
+    "review_status": "reviewed",
+    "sprint": "KX-3A",
+    "last_reviewed": "2026-08-09"
+  },
+  "reviewer_notes": null
+}

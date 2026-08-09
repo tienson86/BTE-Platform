@@ -1,0 +1,51 @@
+{
+  "trace_id": "RT-PAT-CONFLICT-001",
+  "chain_id": "RC-PAT-CONFLICT-001",
+  "package_version": "1.0.0",
+  "activated_rules": [
+    "PAT-000023",
+    "PAT-000045",
+    "PAT-000051",
+    "PAT-000084",
+    "PAT-000090"
+  ],
+  "activated_evidence": [
+    "evidence/bundles/PAT-000023.json",
+    "evidence/bundles/PAT-000045.json",
+    "evidence/bundles/PAT-000051.json",
+    "evidence/bundles/PAT-000084.json",
+    "evidence/bundles/PAT-000090.json"
+  ],
+  "activated_upstream_seasonal": [
+    "SEC-000025",
+    "SEC-000104"
+  ],
+  "activated_upstream_strength": [
+    "SKC-000100"
+  ],
+  "activated_upstream_temperature": [
+    "TEC-000057",
+    "TEC-000097"
+  ],
+  "decision_path": [
+    "RN-PAT-CONFLICT-OBS-001",
+    "RN-PAT-CONFLICT-EVD-001",
+    "RN-PAT-CONFLICT-INF-001",
+    "RN-PAT-CONFLICT-MID-001",
+    "RN-PAT-CONFLICT-FIN-001"
+  ],
+  "confidence_propagation": [
+    {
+      "node_id": "RN-PAT-CONFLICT-OBS-001",
+      "mode": "declared"
+    },
+    {
+      "node_id": "RN-PAT-CONFLICT-EVD-001",
+      "mode": "inherited"
+    },
+    {
+      "node_id": "RN-PAT-CONFLICT-FIN-001",
+      "mode": "combined"
+    }
+  ]
+}

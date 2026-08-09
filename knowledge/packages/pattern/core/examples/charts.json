@@ -1,0 +1,219 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_04_pattern_core",
+  "examples": [
+    {
+      "example_id": "EX-PAT-PRINCIPAL-001",
+      "title": "Chính cách Quan hợp lệ",
+      "tendency": "valid_principal",
+      "chart_facts": {
+        "season": "summer",
+        "strength_level": "strong",
+        "temperature_level": "hot",
+        "month_branch_ten_god": "Chính Quan",
+        "follow_pattern_detected": false,
+        "special_pattern_detected": false
+      },
+      "activated_packages": [
+        "bz_02_seasonal_core",
+        "bz_01_strength_core",
+        "bz_03_temperature_core",
+        "bz_04_pattern_core"
+      ],
+      "activates_rules": [
+        "PAT-000023",
+        "PAT-000065",
+        "PAT-000078",
+        "PAT-000101"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/PAT-000023.json",
+        "evidence/bundles/PAT-000065.json",
+        "evidence/bundles/PAT-000078.json",
+        "evidence/bundles/PAT-000101.json"
+      ],
+      "reasoning_path": "RC-PAT-PRINCIPAL-001",
+      "upstream_seasonal_rules": [
+        "SEC-000026",
+        "SEC-000103"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000001",
+        "SKC-000098"
+      ],
+      "upstream_temperature_rules": [
+        "TEC-000033",
+        "TEC-000095"
+      ]
+    },
+    {
+      "example_id": "EX-PAT-CONFLICT-001",
+      "title": "Xung đột Quan–Sát",
+      "tendency": "conflicting",
+      "chart_facts": {
+        "month_branch_ten_god": "Chính Quan",
+        "chart_has_that_sat": true,
+        "strength_level": "balanced",
+        "season": "spring",
+        "climate_type": "balanced"
+      },
+      "activated_packages": [
+        "bz_02_seasonal_core",
+        "bz_01_strength_core",
+        "bz_03_temperature_core",
+        "bz_04_pattern_core"
+      ],
+      "activates_rules": [
+        "PAT-000023",
+        "PAT-000045",
+        "PAT-000084",
+        "PAT-000090"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/PAT-000023.json",
+        "evidence/bundles/PAT-000045.json",
+        "evidence/bundles/PAT-000084.json",
+        "evidence/bundles/PAT-000090.json"
+      ],
+      "reasoning_path": "RC-PAT-CONFLICT-001",
+      "upstream_seasonal_rules": [
+        "SEC-000025",
+        "SEC-000104"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000100"
+      ],
+      "upstream_temperature_rules": [
+        "TEC-000057"
+      ]
+    },
+    {
+      "example_id": "EX-PAT-SUPPRESS-001",
+      "title": "Quan cách bị ức chế",
+      "tendency": "suppressed",
+      "chart_facts": {
+        "month_branch_ten_god": "Chính Quan",
+        "chart_has_thuong_quan": true,
+        "strength_level": "weak",
+        "season_phase": "si",
+        "temperature_level": "cold"
+      },
+      "activated_packages": [
+        "bz_02_seasonal_core",
+        "bz_01_strength_core",
+        "bz_03_temperature_core",
+        "bz_04_pattern_core"
+      ],
+      "activates_rules": [
+        "PAT-000023",
+        "PAT-000055",
+        "PAT-000063",
+        "PAT-000085"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/PAT-000023.json",
+        "evidence/bundles/PAT-000055.json",
+        "evidence/bundles/PAT-000063.json",
+        "evidence/bundles/PAT-000085.json"
+      ],
+      "reasoning_path": "RC-PAT-CONFLICT-001",
+      "upstream_seasonal_rules": [
+        "SEC-000028",
+        "SEC-000105"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000005",
+        "SKC-000099"
+      ],
+      "upstream_temperature_rules": [
+        "TEC-000025",
+        "TEC-000096"
+      ]
+    },
+    {
+      "example_id": "EX-PAT-STABLE-001",
+      "title": "Chính cách ổn định",
+      "tendency": "stable",
+      "chart_facts": {
+        "month_branch_ten_god": "Chính Quan",
+        "strength_level": "balanced",
+        "temperature_level": "warm",
+        "climate_type": "balanced",
+        "pattern_confirmed": true,
+        "pattern_conflict": false,
+        "season_phase": "wang"
+      },
+      "activated_packages": [
+        "bz_02_seasonal_core",
+        "bz_01_strength_core",
+        "bz_03_temperature_core",
+        "bz_04_pattern_core"
+      ],
+      "activates_rules": [
+        "PAT-000023",
+        "PAT-000066",
+        "PAT-000089",
+        "PAT-000096"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/PAT-000023.json",
+        "evidence/bundles/PAT-000066.json",
+        "evidence/bundles/PAT-000089.json",
+        "evidence/bundles/PAT-000096.json"
+      ],
+      "reasoning_path": "RC-PAT-CONFIRMATION-001",
+      "upstream_seasonal_rules": [
+        "SEC-000025",
+        "SEC-000103"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000100"
+      ],
+      "upstream_temperature_rules": [
+        "TEC-000057",
+        "TEC-000001"
+      ]
+    },
+    {
+      "example_id": "EX-PAT-WEAK-001",
+      "title": "Cách yếu (thân nhược + Tỷ Kiên)",
+      "tendency": "weak",
+      "chart_facts": {
+        "month_branch_ten_god": "Tỷ Kiên",
+        "strength_level": "weak",
+        "season_phase": "si",
+        "temperature_level": "cold"
+      },
+      "activated_packages": [
+        "bz_02_seasonal_core",
+        "bz_01_strength_core",
+        "bz_03_temperature_core",
+        "bz_04_pattern_core"
+      ],
+      "activates_rules": [
+        "PAT-000031",
+        "PAT-000086",
+        "PAT-000092",
+        "PAT-000095"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/PAT-000031.json",
+        "evidence/bundles/PAT-000086.json",
+        "evidence/bundles/PAT-000092.json",
+        "evidence/bundles/PAT-000095.json"
+      ],
+      "reasoning_path": "RC-PAT-CONFIRMATION-001",
+      "upstream_seasonal_rules": [
+        "SEC-000028",
+        "SEC-000105"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000099"
+      ],
+      "upstream_temperature_rules": [
+        "TEC-000025",
+        "TEC-000096"
+      ]
+    }
+  ]
+}

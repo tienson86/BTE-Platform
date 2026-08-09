@@ -1,0 +1,982 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_04_pattern_core",
+  "category": "pattern_categories",
+  "count": 10,
+  "objects": [
+    {
+      "id": "PAT-000101",
+      "version": "1.0.0",
+      "category": "pattern_categories",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "category",
+        "officer"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "principal_pattern",
+          "operator": "in",
+          "value": [
+            "chinh_quan",
+            "that_sat"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "category=officer",
+        "weight": 4,
+        "signal": "pattern_category",
+        "score_target": "day_master.pattern_score",
+        "outcome": "officer"
+      },
+      "explanation": "Nhóm Quan Sát (chính cách). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "cat_officer",
+      "name": "Nhóm: cat_officer",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "principal_pattern",
+            "operator": "in",
+            "value": [
+              "chinh_quan",
+              "that_sat"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "category=officer",
+          "weight": 4,
+          "signal": "pattern_category",
+          "score_target": "day_master.pattern_score",
+          "outcome": "officer"
+        },
+        "explanation": "Nhóm Quan Sát (chính cách). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000102",
+      "version": "1.0.0",
+      "category": "pattern_categories",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "category",
+        "wealth"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "principal_pattern",
+          "operator": "in",
+          "value": [
+            "chinh_tai",
+            "thien_tai"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "category=wealth",
+        "weight": 4,
+        "signal": "pattern_category",
+        "score_target": "day_master.pattern_score",
+        "outcome": "wealth"
+      },
+      "explanation": "Nhóm Tài (chính cách). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "cat_wealth",
+      "name": "Nhóm: cat_wealth",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "principal_pattern",
+            "operator": "in",
+            "value": [
+              "chinh_tai",
+              "thien_tai"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "category=wealth",
+          "weight": 4,
+          "signal": "pattern_category",
+          "score_target": "day_master.pattern_score",
+          "outcome": "wealth"
+        },
+        "explanation": "Nhóm Tài (chính cách). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000103",
+      "version": "1.0.0",
+      "category": "pattern_categories",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "category",
+        "output"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "principal_pattern",
+          "operator": "in",
+          "value": [
+            "thuc_than",
+            "thuong_quan"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "category=output",
+        "weight": 4,
+        "signal": "pattern_category",
+        "score_target": "day_master.pattern_score",
+        "outcome": "output"
+      },
+      "explanation": "Nhóm Thực Thương (chính cách). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "cat_output",
+      "name": "Nhóm: cat_output",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "principal_pattern",
+            "operator": "in",
+            "value": [
+              "thuc_than",
+              "thuong_quan"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "category=output",
+          "weight": 4,
+          "signal": "pattern_category",
+          "score_target": "day_master.pattern_score",
+          "outcome": "output"
+        },
+        "explanation": "Nhóm Thực Thương (chính cách). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000104",
+      "version": "1.0.0",
+      "category": "pattern_categories",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "category",
+        "seal"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "principal_pattern",
+          "operator": "in",
+          "value": [
+            "chinh_an",
+            "thien_an"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "category=seal",
+        "weight": 4,
+        "signal": "pattern_category",
+        "score_target": "day_master.pattern_score",
+        "outcome": "seal"
+      },
+      "explanation": "Nhóm Ấn (chính cách). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "cat_seal",
+      "name": "Nhóm: cat_seal",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "principal_pattern",
+            "operator": "in",
+            "value": [
+              "chinh_an",
+              "thien_an"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "category=seal",
+          "weight": 4,
+          "signal": "pattern_category",
+          "score_target": "day_master.pattern_score",
+          "outcome": "seal"
+        },
+        "explanation": "Nhóm Ấn (chính cách). Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000105",
+      "version": "1.0.0",
+      "category": "pattern_categories",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "category",
+        "peer"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "principal_pattern",
+          "operator": "in",
+          "value": [
+            "ty_kien",
+            "kiep_tai"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "category=peer",
+        "weight": 4,
+        "signal": "pattern_category",
+        "score_target": "day_master.pattern_score",
+        "outcome": "peer"
+      },
+      "explanation": "Nhóm Tỷ Kiếp / Kiến Lộc–Dương Nhẫn. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "cat_peer",
+      "name": "Nhóm: cat_peer",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "principal_pattern",
+            "operator": "in",
+            "value": [
+              "ty_kien",
+              "kiep_tai"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "category=peer",
+          "weight": 4,
+          "signal": "pattern_category",
+          "score_target": "day_master.pattern_score",
+          "outcome": "peer"
+        },
+        "explanation": "Nhóm Tỷ Kiếp / Kiến Lộc–Dương Nhẫn. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000106",
+      "version": "1.0.0",
+      "category": "pattern_categories",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "category",
+        "orthodox"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "principal_pattern",
+          "operator": "in",
+          "value": [
+            "chinh_quan",
+            "chinh_tai",
+            "chinh_an",
+            "thuc_than",
+            "ty_kien"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "category=orthodox",
+        "weight": 4,
+        "signal": "pattern_category",
+        "score_target": "day_master.pattern_score",
+        "outcome": "orthodox"
+      },
+      "explanation": "Phân nhánh chính (正) trong chính cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "cat_zheng",
+      "name": "Nhóm: cat_zheng",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "principal_pattern",
+            "operator": "in",
+            "value": [
+              "chinh_quan",
+              "chinh_tai",
+              "chinh_an",
+              "thuc_than",
+              "ty_kien"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "category=orthodox",
+          "weight": 4,
+          "signal": "pattern_category",
+          "score_target": "day_master.pattern_score",
+          "outcome": "orthodox"
+        },
+        "explanation": "Phân nhánh chính (正) trong chính cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000107",
+      "version": "1.0.0",
+      "category": "pattern_categories",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "category",
+        "unorthodox"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "principal_pattern",
+          "operator": "in",
+          "value": [
+            "that_sat",
+            "thien_tai",
+            "thien_an",
+            "thuong_quan",
+            "kiep_tai"
+          ]
+        }
+      ],
+      "result": {
+        "effect": "category=unorthodox",
+        "weight": 4,
+        "signal": "pattern_category",
+        "score_target": "day_master.pattern_score",
+        "outcome": "unorthodox"
+      },
+      "explanation": "Phân nhánh thiên (偏) trong chính cách — không phải Chuyên Cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "cat_pian",
+      "name": "Nhóm: cat_pian",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "principal_pattern",
+            "operator": "in",
+            "value": [
+              "that_sat",
+              "thien_tai",
+              "thien_an",
+              "thuong_quan",
+              "kiep_tai"
+            ]
+          }
+        ],
+        "result": {
+          "effect": "category=unorthodox",
+          "weight": 4,
+          "signal": "pattern_category",
+          "score_target": "day_master.pattern_score",
+          "outcome": "unorthodox"
+        },
+        "explanation": "Phân nhánh thiên (偏) trong chính cách — không phải Chuyên Cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000108",
+      "version": "1.0.0",
+      "category": "pattern_categories",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "category",
+        "month_command"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "pattern_source",
+          "operator": "equals",
+          "value": "month_command"
+        }
+      ],
+      "result": {
+        "effect": "category=month_command",
+        "weight": 4,
+        "signal": "pattern_category",
+        "score_target": "day_master.pattern_score",
+        "outcome": "month_command"
+      },
+      "explanation": "Họ cách lấy lệnh tháng làm gốc Ziping. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "cat_month_command_family",
+      "name": "Nhóm: cat_month_command_family",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "pattern_source",
+            "operator": "equals",
+            "value": "month_command"
+          }
+        ],
+        "result": {
+          "effect": "category=month_command",
+          "weight": 4,
+          "signal": "pattern_category",
+          "score_target": "day_master.pattern_score",
+          "outcome": "month_command"
+        },
+        "explanation": "Họ cách lấy lệnh tháng làm gốc Ziping. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000109",
+      "version": "1.0.0",
+      "category": "pattern_categories",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "category",
+        "not_follow"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "follow_pattern_detected",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "category=not_follow",
+        "weight": 4,
+        "signal": "pattern_category",
+        "score_target": "day_master.pattern_score",
+        "outcome": "not_follow"
+      },
+      "explanation": "Danh mục loại trừ Tòng Cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "cat_not_follow",
+      "name": "Nhóm: cat_not_follow",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "follow_pattern_detected",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "category=not_follow",
+          "weight": 4,
+          "signal": "pattern_category",
+          "score_target": "day_master.pattern_score",
+          "outcome": "not_follow"
+        },
+        "explanation": "Danh mục loại trừ Tòng Cách. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    },
+    {
+      "id": "PAT-000110",
+      "version": "1.0.0",
+      "category": "pattern_categories",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "pattern",
+        "category",
+        "not_special"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "special_pattern_detected",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "result": {
+        "effect": "category=not_special",
+        "weight": 4,
+        "signal": "pattern_category",
+        "score_target": "day_master.pattern_score",
+        "outcome": "not_special"
+      },
+      "explanation": "Danh mục loại trừ Chuyên Cách / Khúc Trực / Viêm Thượng. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+      "references": [
+        {
+          "target": "REF-PAT-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "cat_not_special",
+      "name": "Nhóm: cat_not_special",
+      "metadata": {
+        "package_id": "bz_04_pattern_core",
+        "domain_id": "DOM-PATTERN",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-3A"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "special_pattern_detected",
+            "operator": "equals",
+            "value": false
+          }
+        ],
+        "result": {
+          "effect": "category=not_special",
+          "weight": 4,
+          "signal": "pattern_category",
+          "score_target": "day_master.pattern_score",
+          "outcome": "not_special"
+        },
+        "explanation": "Danh mục loại trừ Chuyên Cách / Khúc Trực / Viêm Thượng. Tiêu thụ tín hiệu Seasonal/Strength/Temperature đã công bố. Không tính lại sức thân, mùa lệnh hay điều hậu.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "pattern_score"
+        },
+        "consumes": {
+          "seasonal": [
+            "season",
+            "season_phase",
+            "season_score"
+          ],
+          "strength": [
+            "strength_level",
+            "strength_score"
+          ],
+          "temperature": [
+            "temperature_level",
+            "temperature_score",
+            "climate_type"
+          ]
+        }
+      }
+    }
+  ]
+}

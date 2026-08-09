@@ -1,0 +1,53 @@
+{
+  "trace_id": "RT-PAT-CONFIRMATION-001",
+  "chain_id": "RC-PAT-CONFIRMATION-001",
+  "package_version": "1.0.0",
+  "activated_rules": [
+    "PAT-000022",
+    "PAT-000023",
+    "PAT-000066",
+    "PAT-000072",
+    "PAT-000075",
+    "PAT-000089"
+  ],
+  "activated_evidence": [
+    "evidence/bundles/PAT-000022.json",
+    "evidence/bundles/PAT-000023.json",
+    "evidence/bundles/PAT-000066.json",
+    "evidence/bundles/PAT-000072.json",
+    "evidence/bundles/PAT-000075.json",
+    "evidence/bundles/PAT-000089.json"
+  ],
+  "activated_upstream_seasonal": [
+    "SEC-000025",
+    "SEC-000103"
+  ],
+  "activated_upstream_strength": [
+    "SKC-000100"
+  ],
+  "activated_upstream_temperature": [
+    "TEC-000057",
+    "TEC-000001"
+  ],
+  "decision_path": [
+    "RN-PAT-CONFIRMATION-OBS-001",
+    "RN-PAT-CONFIRMATION-EVD-001",
+    "RN-PAT-CONFIRMATION-INF-001",
+    "RN-PAT-CONFIRMATION-MID-001",
+    "RN-PAT-CONFIRMATION-FIN-001"
+  ],
+  "confidence_propagation": [
+    {
+      "node_id": "RN-PAT-CONFIRMATION-OBS-001",
+      "mode": "declared"
+    },
+    {
+      "node_id": "RN-PAT-CONFIRMATION-EVD-001",
+      "mode": "inherited"
+    },
+    {
+      "node_id": "RN-PAT-CONFIRMATION-FIN-001",
+      "mode": "combined"
+    }
+  ]
+}
