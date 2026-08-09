@@ -1,0 +1,1637 @@
+{
+  "manifest_version": "1.0.0",
+  "schema_version": "2.0.0",
+  "package_id": "bz_23_report_presets_core",
+  "package_version": "1.0.0",
+  "metadata": {
+    "package_type": "report",
+    "status": "released",
+    "language": "vi",
+    "languages": [
+      "vi"
+    ],
+    "author": "BTE Knowledge Board",
+    "owner": "BTE Knowledge Board",
+    "domain_id": "DOM-REPORT",
+    "category_id": "report_presets",
+    "school": "bazi_default",
+    "tags": [
+      "report",
+      "presentation",
+      "report_presets",
+      "gold",
+      "pk4"
+    ],
+    "description": "Canonical Report Narrative Presets. Orchestration identifiers only."
+  },
+  "components": {
+    "rules": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "presets/index.json",
+        "presets/executive.json",
+        "presets/professional.json",
+        "presets/technical.json",
+        "presets/academic.json",
+        "presets/business.json",
+        "presets/minimal.json",
+        "presets/luxury.json",
+        "presets/dashboard.json",
+        "presets/compact.json",
+        "presets/general.json"
+      ]
+    },
+    "metadata": {
+      "present": true,
+      "required": false,
+      "paths": [
+        "metadata/package_metadata.json"
+      ]
+    },
+    "references": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "references/references.json"
+      ]
+    },
+    "examples": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "examples/no_render.json",
+        "examples/selection_samples.json"
+      ]
+    },
+    "tests": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "tests/package_assertions.json",
+        "tests/test_package.py"
+      ]
+    },
+    "documentation": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "README.md",
+        "CHANGELOG.md",
+        "RELEASE_NOTES.md",
+        "documentation/overview.md",
+        "documentation/preset_philosophy.md",
+        "documentation/presentation_orchestration.md",
+        "documentation/selection_model.md",
+        "documentation/contract_model.md",
+        "documentation/limitations.md",
+        "documentation/wave2_roadmap.md",
+        "documentation/release_strategy.md"
+      ]
+    },
+    "assets": {
+      "present": true,
+      "required": false,
+      "paths": [
+        "assets/component_catalog.json",
+        "assets/published_inputs.json",
+        "assets/published_outputs.json",
+        "assets/reference_map.json"
+      ]
+    },
+    "changelog": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "CHANGELOG.md"
+      ]
+    }
+  },
+  "dependencies": {
+    "required": [],
+    "optional": [
+      {
+        "package_id": "bz_18_narrative_library_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "narrative_template_ids referenced by presets",
+        "signals": [
+          "narrative_templates"
+        ]
+      },
+      {
+        "package_id": "bz_19_composition_library_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "composition ids referenced via themes",
+        "signals": [
+          "composition_rules"
+        ]
+      },
+      {
+        "package_id": "bz_20_theme_library_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "theme_ids referenced by presets",
+        "signals": [
+          "theme_catalog"
+        ]
+      },
+      {
+        "package_id": "bz_21_layout_library_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "layout_ids and section_sequence referenced by presets",
+        "signals": [
+          "layout_catalog",
+          "layout_index"
+        ]
+      },
+      {
+        "package_id": "bz_22_widget_library_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional",
+        "reason": "widget_ids referenced by presets",
+        "signals": [
+          "widget_catalog"
+        ]
+      }
+    ],
+    "conflicts": []
+  },
+  "exported_objects": [
+    {
+      "id": "RPT-000001",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000002",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000003",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000004",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000005",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000006",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000007",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000008",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000009",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000010",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000011",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000012",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000013",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000014",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000015",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000016",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000017",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000018",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000019",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000020",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000021",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000022",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000023",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000024",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000025",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/executive.json"
+    },
+    {
+      "id": "RPT-000026",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000027",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000028",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000029",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000030",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000031",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000032",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000033",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000034",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000035",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000036",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000037",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000038",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000039",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000040",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000041",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000042",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000043",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000044",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000045",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000046",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000047",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000048",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000049",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000050",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/professional.json"
+    },
+    {
+      "id": "RPT-000051",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000052",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000053",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000054",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000055",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000056",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000057",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000058",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000059",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000060",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000061",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000062",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000063",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000064",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000065",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000066",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000067",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000068",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000069",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000070",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000071",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000072",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000073",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000074",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000075",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/technical.json"
+    },
+    {
+      "id": "RPT-000076",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000077",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000078",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000079",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000080",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000081",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000082",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000083",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000084",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000085",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000086",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000087",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000088",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000089",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000090",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000091",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000092",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000093",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000094",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000095",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000096",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000097",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000098",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000099",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000100",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/academic.json"
+    },
+    {
+      "id": "RPT-000101",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000102",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000103",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000104",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000105",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000106",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000107",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000108",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000109",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000110",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000111",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000112",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000113",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000114",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000115",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000116",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000117",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000118",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000119",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000120",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000121",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000122",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000123",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000124",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000125",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/business.json"
+    },
+    {
+      "id": "RPT-000126",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000127",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000128",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000129",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000130",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000131",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000132",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000133",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000134",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000135",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000136",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000137",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000138",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000139",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000140",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000141",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000142",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000143",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000144",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000145",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000146",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000147",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000148",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000149",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000150",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/minimal.json"
+    },
+    {
+      "id": "RPT-000151",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000152",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000153",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000154",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000155",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000156",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000157",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000158",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000159",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000160",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000161",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000162",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000163",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000164",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000165",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000166",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000167",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000168",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000169",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000170",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000171",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000172",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000173",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000174",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000175",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/luxury.json"
+    },
+    {
+      "id": "RPT-000176",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000177",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000178",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000179",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000180",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000181",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000182",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000183",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000184",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000185",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000186",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000187",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000188",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000189",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000190",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000191",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000192",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000193",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000194",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000195",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000196",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000197",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000198",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000199",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000200",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/dashboard.json"
+    },
+    {
+      "id": "RPT-000201",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000202",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000203",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000204",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000205",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000206",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000207",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000208",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000209",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000210",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000211",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000212",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000213",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000214",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000215",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000216",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000217",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000218",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000219",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000220",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000221",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000222",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000223",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000224",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000225",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/compact.json"
+    },
+    {
+      "id": "RPT-000226",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000227",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000228",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000229",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000230",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000231",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000232",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000233",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000234",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000235",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000236",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000237",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000238",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000239",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000240",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000241",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000242",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000243",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000244",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000245",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000246",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000247",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000248",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000249",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    },
+    {
+      "id": "RPT-000250",
+      "entity_type": "ENT-PRESET",
+      "path": "presets/general.json"
+    }
+  ],
+  "required_packages": [],
+  "optional_packages": [
+    "bz_18_narrative_library_core",
+    "bz_19_composition_library_core",
+    "bz_20_theme_library_core",
+    "bz_21_layout_library_core",
+    "bz_22_widget_library_core"
+  ],
+  "validation_profile": "PVP-RELEASE",
+  "release_information": {
+    "release_id": "REL-BZ_23_REPORT_PRESETS_CORE-1.0.0",
+    "release_date": "2026-08-10",
+    "release_author": "BTE Knowledge Board",
+    "release_notes_path": "RELEASE_NOTES.md",
+    "migration_notes_path": "CHANGELOG.md"
+  },
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "DEPENDENCIES.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "MANIFEST.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "PACKAGE.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "README.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "RELEASE.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "RELEASE_NOTES.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/component_catalog.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/published_inputs.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/published_outputs.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/reference_map.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/contract_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/limitations.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/overview.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/presentation_orchestration.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/preset_philosophy.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/release_strategy.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/selection_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/wave2_roadmap.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "examples/no_render.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "examples/selection_samples.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "metadata/package_metadata.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "presets/academic.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "presets/business.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "presets/compact.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "presets/dashboard.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "presets/executive.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "presets/general.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "presets/index.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "presets/luxury.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "presets/minimal.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "presets/professional.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "presets/technical.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/category_map.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/evidence_catalog.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/index.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "references/references.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "tests/package_assertions.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "tests/test_package.py",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "validation/VALIDATION.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "validation/profile.json",
+      "type": "artifact",
+      "required": false
+    }
+  ]
+}

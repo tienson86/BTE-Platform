@@ -1,0 +1,63 @@
+{
+  "schema_version": "2.0.0",
+  "package_spec_version": "1.0.0",
+  "package_id": "bz_23_report_presets_core",
+  "package_version": "1.0.0",
+  "required": [],
+  "optional": [
+    {
+      "package_id": "bz_18_narrative_library_core",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "narrative_template_ids referenced by presets",
+      "signals": [
+        "narrative_templates"
+      ]
+    },
+    {
+      "package_id": "bz_19_composition_library_core",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "composition ids referenced via themes",
+      "signals": [
+        "composition_rules"
+      ]
+    },
+    {
+      "package_id": "bz_20_theme_library_core",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "theme_ids referenced by presets",
+      "signals": [
+        "theme_catalog"
+      ]
+    },
+    {
+      "package_id": "bz_21_layout_library_core",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "layout_ids and section_sequence referenced by presets",
+      "signals": [
+        "layout_catalog",
+        "layout_index"
+      ]
+    },
+    {
+      "package_id": "bz_22_widget_library_core",
+      "version_constraint": "^1.0.0",
+      "kind": "optional",
+      "reason": "widget_ids referenced by presets",
+      "signals": [
+        "widget_catalog"
+      ]
+    }
+  ],
+  "conflicts": [],
+  "resolution": {
+    "circular_dependencies": "prohibited",
+    "optional_inclusion": "explicit_only",
+    "version_selection": "highest_satisfying_released",
+    "tie_breaker": "package_id_asc"
+  },
+  "notes": "Independently deployable. Orchestrates upstream presentation and narrative ids. Does not modify bz_01–bz_22."
+}
