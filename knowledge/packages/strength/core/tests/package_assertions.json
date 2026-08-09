@@ -1,0 +1,13 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_01_strength_core",
+  "assertions": [
+    {"id": "A-001", "check": "package_loads", "path": "PACKAGE.json"},
+    {"id": "A-002", "check": "manifest_valid", "path": "MANIFEST.json"},
+    {"id": "A-003", "check": "rule_ids_unique"},
+    {"id": "A-004", "check": "rule_count_between", "min": 80, "max": 120},
+    {"id": "A-005", "check": "metadata_valid", "path": "metadata/package_metadata.json"},
+    {"id": "A-006", "check": "example_rule_refs_resolve", "path": "examples/charts.json"},
+    {"id": "A-007", "check": "reference_ids_unique", "path": "references/references.json"}
+  ]
+}

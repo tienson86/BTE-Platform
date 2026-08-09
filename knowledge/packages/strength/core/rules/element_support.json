@@ -1,0 +1,632 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_01_strength_core",
+  "category": "element_support",
+  "count": 8,
+  "objects": [
+    {
+      "id": "SKC-000073",
+      "version": "1.0.0",
+      "category": "element_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "element",
+        "companion"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "same_element_pillar_count",
+          "operator": "equals",
+          "value": 1
+        }
+      ],
+      "result": {
+        "effect": "same_element_count_1",
+        "weight": 4,
+        "score_target": "day_master.strength_score",
+        "signal": "element_support"
+      },
+      "explanation": "Một trụ đồng hành ngũ hành với Nhật Chủ, trợ vừa phải.",
+      "references": [
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "same_element_count_1",
+      "name": "Một vị trí đồng hành ngũ hành",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "same_element_pillar_count",
+            "operator": "equals",
+            "value": 1
+          }
+        ],
+        "result": {
+          "effect": "same_element_count_1",
+          "weight": 4,
+          "score_target": "day_master.strength_score",
+          "signal": "element_support"
+        },
+        "explanation": "Một trụ đồng hành ngũ hành với Nhật Chủ, trợ vừa phải.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "same_element_count"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000074",
+      "version": "1.0.0",
+      "category": "element_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "element",
+        "companion"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "same_element_pillar_count",
+          "operator": "equals",
+          "value": 2
+        }
+      ],
+      "result": {
+        "effect": "same_element_count_2",
+        "weight": 8,
+        "score_target": "day_master.strength_score",
+        "signal": "element_support"
+      },
+      "explanation": "Hai trụ đồng hành, lực tỷ kiếp rõ.",
+      "references": [
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "same_element_count_2",
+      "name": "Hai vị trí đồng hành ngũ hành",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "same_element_pillar_count",
+            "operator": "equals",
+            "value": 2
+          }
+        ],
+        "result": {
+          "effect": "same_element_count_2",
+          "weight": 8,
+          "score_target": "day_master.strength_score",
+          "signal": "element_support"
+        },
+        "explanation": "Hai trụ đồng hành, lực tỷ kiếp rõ.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "same_element_count"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000075",
+      "version": "1.0.0",
+      "category": "element_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "element",
+        "companion"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "same_element_pillar_count",
+          "operator": "greater_or_equal",
+          "value": 3
+        }
+      ],
+      "result": {
+        "effect": "same_element_count_3plus",
+        "weight": 12,
+        "score_target": "day_master.strength_score",
+        "signal": "element_support"
+      },
+      "explanation": "Đồng hành ngũ hành áp đảo, thân dễ cực vượng nếu không bị tiết khắc.",
+      "references": [
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "same_element_count_3plus",
+      "name": "Ba vị trí đồng hành ngũ hành trở lên",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "same_element_pillar_count",
+            "operator": "greater_or_equal",
+            "value": 3
+          }
+        ],
+        "result": {
+          "effect": "same_element_count_3plus",
+          "weight": 12,
+          "score_target": "day_master.strength_score",
+          "signal": "element_support"
+        },
+        "explanation": "Đồng hành ngũ hành áp đảo, thân dễ cực vượng nếu không bị tiết khắc.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "same_element_count"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000076",
+      "version": "1.0.0",
+      "category": "element_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "element",
+        "resource"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "resource_element_present",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "resource_element_present",
+        "weight": 6,
+        "score_target": "day_master.strength_score",
+        "signal": "element_support"
+      },
+      "explanation": "Hành sinh Nhật Chủ hiện diện thì thân có nguồn sinh.",
+      "references": [
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "resource_element_present",
+      "name": "Có hành Ấn trong cục",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resource_element_present",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "resource_element_present",
+          "weight": 6,
+          "score_target": "day_master.strength_score",
+          "signal": "element_support"
+        },
+        "explanation": "Hành sinh Nhật Chủ hiện diện thì thân có nguồn sinh.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000077",
+      "version": "1.0.0",
+      "category": "element_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "element",
+        "combination"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 90
+      },
+      "conditions": [
+        {
+          "field": "companion_count",
+          "operator": "greater_or_equal",
+          "value": 2
+        },
+        {
+          "field": "resource_count",
+          "operator": "greater_or_equal",
+          "value": 1
+        }
+      ],
+      "result": {
+        "effect": "resource_and_companion",
+        "weight": 12,
+        "score_target": "day_master.strength_score",
+        "signal": "element_support"
+      },
+      "explanation": "Ấn Kiếp hội tụ: sinh và đồng hành cùng trợ, thân dễ vượng.",
+      "references": [
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "resource_and_companion",
+      "name": "Ấn và tỷ kiếp cùng hiện",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "companion_count",
+            "operator": "greater_or_equal",
+            "value": 2
+          },
+          {
+            "field": "resource_count",
+            "operator": "greater_or_equal",
+            "value": 1
+          }
+        ],
+        "result": {
+          "effect": "resource_and_companion",
+          "weight": 12,
+          "score_target": "day_master.strength_score",
+          "signal": "element_support"
+        },
+        "explanation": "Ấn Kiếp hội tụ: sinh và đồng hành cùng trợ, thân dễ vượng.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000078",
+      "version": "1.0.0",
+      "category": "element_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "element",
+        "season"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 91
+      },
+      "conditions": [
+        {
+          "field": "season_element",
+          "operator": "equals_field",
+          "value": "day_master_element"
+        }
+      ],
+      "result": {
+        "effect": "season_element_is_dm",
+        "weight": 6,
+        "score_target": "day_master.strength_score",
+        "signal": "element_support"
+      },
+      "explanation": "Hành lệnh trùng Nhật Chủ củng cố đắc lệnh; không cộng trùng weight month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "season_element_is_dm",
+      "name": "Hành tháng trùng Nhật Chủ",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_element",
+            "operator": "equals_field",
+            "value": "day_master_element"
+          }
+        ],
+        "result": {
+          "effect": "season_element_is_dm",
+          "weight": 6,
+          "score_target": "day_master.strength_score",
+          "signal": "element_support"
+        },
+        "explanation": "Hành lệnh trùng Nhật Chủ củng cố đắc lệnh; không cộng trùng weight month_status.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000079",
+      "version": "1.0.0",
+      "category": "element_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "element",
+        "combination"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 93
+      },
+      "conditions": [
+        {
+          "field": "branch_combination_produces_dm_element",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "combination_produces_dm",
+        "weight": 10,
+        "score_target": "day_master.strength_score",
+        "signal": "element_support"
+      },
+      "explanation": "Tam hợp/tam hội hóa thành hành Nhật Chủ gia tăng thế cục trợ thân.",
+      "references": [
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "combination_produces_dm",
+      "name": "Tam hội/tam hợp thành hành Nhật Chủ",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "branch_combination_produces_dm_element",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "combination_produces_dm",
+          "weight": 10,
+          "score_target": "day_master.strength_score",
+          "signal": "element_support"
+        },
+        "explanation": "Tam hợp/tam hội hóa thành hành Nhật Chủ gia tăng thế cục trợ thân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000080",
+      "version": "1.0.0",
+      "category": "element_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "element",
+        "absence"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 72
+      },
+      "conditions": [
+        {
+          "field": "resource_count",
+          "operator": "equals",
+          "value": 0
+        },
+        {
+          "field": "companion_count",
+          "operator": "equals",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "no_resource_no_companion",
+        "weight": -6,
+        "score_target": "day_master.strength_score",
+        "signal": "element_support"
+      },
+      "explanation": "Không sinh không đồng hành: thân dễ nhược trừ khi đắc lệnh và thông căn sâu.",
+      "references": [
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "no_resource_no_companion",
+      "name": "Không Ấn không tỷ",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resource_count",
+            "operator": "equals",
+            "value": 0
+          },
+          {
+            "field": "companion_count",
+            "operator": "equals",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "no_resource_no_companion",
+          "weight": -6,
+          "score_target": "day_master.strength_score",
+          "signal": "element_support"
+        },
+        "explanation": "Không sinh không đồng hành: thân dễ nhược trừ khi đắc lệnh và thông căn sâu.",
+        "evaluation": {
+          "weight": -6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    }
+  ]
+}

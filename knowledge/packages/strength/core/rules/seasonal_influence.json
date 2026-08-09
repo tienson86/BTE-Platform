@@ -1,0 +1,2233 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_01_strength_core",
+  "category": "seasonal_influence",
+  "count": 25,
+  "objects": [
+    {
+      "id": "SKC-000001",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "prosperous"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "month_status",
+          "operator": "equals",
+          "value": "prosperous"
+        }
+      ],
+      "result": {
+        "effect": "month_status=prosperous",
+        "weight": 35,
+        "score_target": "day_master.strength_score",
+        "signal": "month_command_score"
+      },
+      "explanation": "Tháng lệnh vượng (đắc lệnh) cộng sức Nhật Chủ.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "season_prosperous",
+      "name": "Tháng lệnh Đắc lệnh",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_status",
+            "operator": "equals",
+            "value": "prosperous"
+          }
+        ],
+        "result": {
+          "effect": "month_status=prosperous",
+          "weight": 35,
+          "score_target": "day_master.strength_score",
+          "signal": "month_command_score"
+        },
+        "explanation": "Tháng lệnh vượng (đắc lệnh) cộng sức Nhật Chủ.",
+        "evaluation": {
+          "weight": 35,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_status"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000002",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "growing"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 95
+      },
+      "conditions": [
+        {
+          "field": "month_status",
+          "operator": "equals",
+          "value": "growing"
+        }
+      ],
+      "result": {
+        "effect": "month_status=growing",
+        "weight": 25,
+        "score_target": "day_master.strength_score",
+        "signal": "month_command_score"
+      },
+      "explanation": "Tháng lệnh tướng: hành Nhật Chủ được sinh hoặc đang vượng phụ.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "season_growing",
+      "name": "Tháng lệnh Tướng",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_status",
+            "operator": "equals",
+            "value": "growing"
+          }
+        ],
+        "result": {
+          "effect": "month_status=growing",
+          "weight": 25,
+          "score_target": "day_master.strength_score",
+          "signal": "month_command_score"
+        },
+        "explanation": "Tháng lệnh tướng: hành Nhật Chủ được sinh hoặc đang vượng phụ.",
+        "evaluation": {
+          "weight": 25,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_status"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000003",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "rest"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 90
+      },
+      "conditions": [
+        {
+          "field": "month_status",
+          "operator": "equals",
+          "value": "rest"
+        }
+      ],
+      "result": {
+        "effect": "month_status=rest",
+        "weight": 10,
+        "score_target": "day_master.strength_score",
+        "signal": "month_command_score"
+      },
+      "explanation": "Tháng lệnh hưu: mẹ khí nghỉ, sức Nhật Chủ trung bình thấp.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "season_rest",
+      "name": "Tháng lệnh Hưu",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_status",
+            "operator": "equals",
+            "value": "rest"
+          }
+        ],
+        "result": {
+          "effect": "month_status=rest",
+          "weight": 10,
+          "score_target": "day_master.strength_score",
+          "signal": "month_command_score"
+        },
+        "explanation": "Tháng lệnh hưu: mẹ khí nghỉ, sức Nhật Chủ trung bình thấp.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_status"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000004",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "imprison"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 95
+      },
+      "conditions": [
+        {
+          "field": "month_status",
+          "operator": "equals",
+          "value": "imprison"
+        }
+      ],
+      "result": {
+        "effect": "month_status=imprison",
+        "weight": -10,
+        "score_target": "day_master.strength_score",
+        "signal": "month_command_score"
+      },
+      "explanation": "Tháng lệnh tù: Nhật Chủ bị hành tháng chế ước.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "season_imprison",
+      "name": "Tháng lệnh Tù",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_status",
+            "operator": "equals",
+            "value": "imprison"
+          }
+        ],
+        "result": {
+          "effect": "month_status=imprison",
+          "weight": -10,
+          "score_target": "day_master.strength_score",
+          "signal": "month_command_score"
+        },
+        "explanation": "Tháng lệnh tù: Nhật Chủ bị hành tháng chế ước.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_status"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000005",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "dead"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "month_status",
+          "operator": "equals",
+          "value": "dead"
+        }
+      ],
+      "result": {
+        "effect": "month_status=dead",
+        "weight": -25,
+        "score_target": "day_master.strength_score",
+        "signal": "month_command_score"
+      },
+      "explanation": "Tháng lệnh tử: Nhật Chủ bị hành tháng khắc, sức yếu.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "season_dead",
+      "name": "Tháng lệnh Tử",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_status",
+            "operator": "equals",
+            "value": "dead"
+          }
+        ],
+        "result": {
+          "effect": "month_status=dead",
+          "weight": -25,
+          "score_target": "day_master.strength_score",
+          "signal": "month_command_score"
+        },
+        "explanation": "Tháng lệnh tử: Nhật Chủ bị hành tháng khắc, sức yếu.",
+        "evaluation": {
+          "weight": -25,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "month_status"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000006",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "wood",
+        "spring",
+        "prosperous"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "wood"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "spring"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=prosperous",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "prosperous",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Mộc vượng mùa xuân (Dần Mão). Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_wood_spring_prosperous",
+      "name": "Nhật Chủ wood mùa spring → prosperous",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "wood"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "spring"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=prosperous",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "prosperous",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Mộc vượng mùa xuân (Dần Mão). Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_wood"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000007",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "wood",
+        "summer",
+        "rest"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "wood"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=rest",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "rest",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Mộc hưu mùa hạ vì sinh Hỏa. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_wood_summer_rest",
+      "name": "Nhật Chủ wood mùa summer → rest",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "wood"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=rest",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "rest",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Mộc hưu mùa hạ vì sinh Hỏa. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_wood"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000008",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "wood",
+        "autumn",
+        "dead"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "wood"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=dead",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "dead",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Mộc tử mùa thu vì Kim khắc Mộc. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_wood_autumn_dead",
+      "name": "Nhật Chủ wood mùa autumn → dead",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "wood"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=dead",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "dead",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Mộc tử mùa thu vì Kim khắc Mộc. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_wood"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000009",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "wood",
+        "winter",
+        "growing"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "wood"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=growing",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "growing",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Mộc tướng mùa đông vì Thủy sinh Mộc. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_wood_winter_growing",
+      "name": "Nhật Chủ wood mùa winter → growing",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "wood"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=growing",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "growing",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Mộc tướng mùa đông vì Thủy sinh Mộc. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_wood"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000010",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "fire",
+        "spring",
+        "growing"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "fire"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "spring"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=growing",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "growing",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Hỏa tướng mùa xuân vì Mộc sinh Hỏa. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_fire_spring_growing",
+      "name": "Nhật Chủ fire mùa spring → growing",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "fire"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "spring"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=growing",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "growing",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Hỏa tướng mùa xuân vì Mộc sinh Hỏa. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_fire"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000011",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "fire",
+        "summer",
+        "prosperous"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "fire"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=prosperous",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "prosperous",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Hỏa vượng mùa hạ (Tỵ Ngọ). Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_fire_summer_prosperous",
+      "name": "Nhật Chủ fire mùa summer → prosperous",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "fire"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=prosperous",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "prosperous",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Hỏa vượng mùa hạ (Tỵ Ngọ). Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_fire"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000012",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "fire",
+        "autumn",
+        "dead"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "fire"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=dead",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "dead",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Hỏa tử mùa thu vì Hỏa khắc Kim (hành khắc tháng). Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_fire_autumn_dead",
+      "name": "Nhật Chủ fire mùa autumn → dead",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "fire"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=dead",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "dead",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Hỏa tử mùa thu vì Hỏa khắc Kim (hành khắc tháng). Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_fire"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000013",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "fire",
+        "winter",
+        "imprison"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "fire"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=imprison",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "imprison",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Hỏa tù mùa đông vì Thủy khắc Hỏa. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_fire_winter_imprison",
+      "name": "Nhật Chủ fire mùa winter → imprison",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "fire"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=imprison",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "imprison",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Hỏa tù mùa đông vì Thủy khắc Hỏa. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_fire"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000014",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "earth",
+        "spring",
+        "imprison"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "earth"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "spring"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=imprison",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "imprison",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Thổ tù mùa xuân vì Mộc khắc Thổ. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_earth_spring_imprison",
+      "name": "Nhật Chủ earth mùa spring → imprison",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "earth"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "spring"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=imprison",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "imprison",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Thổ tù mùa xuân vì Mộc khắc Thổ. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_earth"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000015",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "earth",
+        "summer",
+        "growing"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "earth"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=growing",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "growing",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Thổ tướng mùa hạ vì Hỏa sinh Thổ. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_earth_summer_growing",
+      "name": "Nhật Chủ earth mùa summer → growing",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "earth"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=growing",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "growing",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Thổ tướng mùa hạ vì Hỏa sinh Thổ. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_earth"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000016",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "earth",
+        "autumn",
+        "rest"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "earth"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=rest",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "rest",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Thổ hưu mùa thu vì sinh Kim. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_earth_autumn_rest",
+      "name": "Nhật Chủ earth mùa autumn → rest",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "earth"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=rest",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "rest",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Thổ hưu mùa thu vì sinh Kim. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_earth"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000017",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "earth",
+        "winter",
+        "dead"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "earth"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=dead",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "dead",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Thổ tử mùa đông vì Thổ khắc Thủy (hành khắc tháng). Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_earth_winter_dead",
+      "name": "Nhật Chủ earth mùa winter → dead",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "earth"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=dead",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "dead",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Thổ tử mùa đông vì Thổ khắc Thủy (hành khắc tháng). Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_earth"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000018",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "metal",
+        "spring",
+        "dead"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "metal"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "spring"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=dead",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "dead",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Kim tử mùa xuân vì Mộc vượng chế Kim. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_metal_spring_dead",
+      "name": "Nhật Chủ metal mùa spring → dead",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "metal"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "spring"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=dead",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "dead",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Kim tử mùa xuân vì Mộc vượng chế Kim. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_metal"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000019",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "metal",
+        "summer",
+        "imprison"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "metal"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=imprison",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "imprison",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Kim tù mùa hạ vì Hỏa khắc Kim. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_metal_summer_imprison",
+      "name": "Nhật Chủ metal mùa summer → imprison",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "metal"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=imprison",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "imprison",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Kim tù mùa hạ vì Hỏa khắc Kim. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_metal"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000020",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "metal",
+        "autumn",
+        "prosperous"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "metal"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=prosperous",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "prosperous",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Kim vượng mùa thu (Thân Dậu). Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_metal_autumn_prosperous",
+      "name": "Nhật Chủ metal mùa autumn → prosperous",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "metal"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=prosperous",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "prosperous",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Kim vượng mùa thu (Thân Dậu). Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_metal"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000021",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "metal",
+        "winter",
+        "rest"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "metal"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=rest",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "rest",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Kim hưu mùa đông vì sinh Thủy. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_metal_winter_rest",
+      "name": "Nhật Chủ metal mùa winter → rest",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "metal"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=rest",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "rest",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Kim hưu mùa đông vì sinh Thủy. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_metal"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000022",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "water",
+        "spring",
+        "rest"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "water"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "spring"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=rest",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "rest",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Thủy hưu mùa xuân vì sinh Mộc. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_water_spring_rest",
+      "name": "Nhật Chủ water mùa spring → rest",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "water"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "spring"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=rest",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "rest",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Thủy hưu mùa xuân vì sinh Mộc. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_water"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000023",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "water",
+        "summer",
+        "dead"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "water"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=dead",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "dead",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Thủy tử mùa hạ vì Hỏa vượng, Thủy khắc Hỏa. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_water_summer_dead",
+      "name": "Nhật Chủ water mùa summer → dead",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "water"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=dead",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "dead",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Thủy tử mùa hạ vì Hỏa vượng, Thủy khắc Hỏa. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_water"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000024",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "water",
+        "autumn",
+        "growing"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "water"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=growing",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "growing",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Thủy tướng mùa thu vì Kim sinh Thủy. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_water_autumn_growing",
+      "name": "Nhật Chủ water mùa autumn → growing",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "water"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=growing",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "growing",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Thủy tướng mùa thu vì Kim sinh Thủy. Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_water"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000025",
+      "version": "1.0.0",
+      "category": "seasonal_influence",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "season",
+        "water",
+        "winter",
+        "prosperous"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "water"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        }
+      ],
+      "result": {
+        "effect": "infer_month_status=prosperous",
+        "weight": 0,
+        "signal": "month_status",
+        "inferred_month_status": "prosperous",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Thủy vượng mùa đông (Hợi Tý). Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_water_winter_prosperous",
+      "name": "Nhật Chủ water mùa winter → prosperous",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "water"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          }
+        ],
+        "result": {
+          "effect": "infer_month_status=prosperous",
+          "weight": 0,
+          "signal": "month_status",
+          "inferred_month_status": "prosperous",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Thủy vượng mùa đông (Hợi Tý). Quy chiếu 旺相休囚死; trọng số điểm lấy từ nhóm month_status.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "element_season_water"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    }
+  ]
+}

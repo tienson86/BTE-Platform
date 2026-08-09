@@ -1,0 +1,620 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_01_strength_core",
+  "category": "basic_scoring",
+  "count": 8,
+  "objects": [
+    {
+      "id": "SKC-000103",
+      "version": "1.0.0",
+      "category": "basic_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "scoring",
+        "baseline"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 50
+      },
+      "conditions": [
+        {
+          "field": "chart_valid",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "baseline",
+        "weight": 50,
+        "signal": "baseline",
+        "score_target": "day_master.strength_score"
+      },
+      "explanation": "Mọi cục hợp lệ khởi điểm 50/100 trước khi cộng trừ nhân tố.",
+      "references": [
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "baseline_score",
+      "name": "Điểm nền 50",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "chart_valid",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "baseline",
+          "weight": 50,
+          "signal": "baseline",
+          "score_target": "day_master.strength_score"
+        },
+        "explanation": "Mọi cục hợp lệ khởi điểm 50/100 trước khi cộng trừ nhân tố.",
+        "evaluation": {
+          "weight": 50,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000104",
+      "version": "1.0.0",
+      "category": "basic_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "scoring",
+        "normalize"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "raw_strength_total",
+          "operator": "exists",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "normalize",
+        "weight": 0,
+        "signal": "normalize",
+        "scale_min": 0,
+        "scale_max": 100
+      },
+      "explanation": "Tổng thô được kẹp và quy về 0–100 rồi chia 100 thành điểm chuẩn hóa.",
+      "references": [
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "normalize_0_100",
+      "name": "Chuẩn hóa thang 0–100",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "raw_strength_total",
+            "operator": "exists",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "normalize",
+          "weight": 0,
+          "signal": "normalize",
+          "scale_min": 0,
+          "scale_max": 100
+        },
+        "explanation": "Tổng thô được kẹp và quy về 0–100 rồi chia 100 thành điểm chuẩn hóa.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000105",
+      "version": "1.0.0",
+      "category": "basic_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "scoring",
+        "exclusive"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 99
+      },
+      "conditions": [
+        {
+          "field": "rule_group",
+          "operator": "equals",
+          "value": "month_status"
+        }
+      ],
+      "result": {
+        "effect": "exclusive_group",
+        "weight": 0,
+        "signal": "priority",
+        "group": "month_status"
+      },
+      "explanation": "Chỉ một trạng thái tháng lệnh được áp dụng.",
+      "references": [
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "month_status_exclusive",
+      "name": "Nhóm month_status loại trừ lẫn nhau",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "rule_group",
+            "operator": "equals",
+            "value": "month_status"
+          }
+        ],
+        "result": {
+          "effect": "exclusive_group",
+          "weight": 0,
+          "signal": "priority",
+          "group": "month_status"
+        },
+        "explanation": "Chỉ một trạng thái tháng lệnh được áp dụng.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000106",
+      "version": "1.0.0",
+      "category": "basic_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "scoring",
+        "stack"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "rule_group",
+          "operator": "equals",
+          "value": "support"
+        }
+      ],
+      "result": {
+        "effect": "max_stack",
+        "weight": 0,
+        "signal": "priority",
+        "max_stack": 4
+      },
+      "explanation": "Các nhân tố trợ (can/chi/ấn/tỷ) stackable tối đa 4 lần theo CSV support.",
+      "references": [
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "support_max_stack_4",
+      "name": "Trợ lực cộng dồn tối đa 4",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "rule_group",
+            "operator": "equals",
+            "value": "support"
+          }
+        ],
+        "result": {
+          "effect": "max_stack",
+          "weight": 0,
+          "signal": "priority",
+          "max_stack": 4
+        },
+        "explanation": "Các nhân tố trợ (can/chi/ấn/tỷ) stackable tối đa 4 lần theo CSV support.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000107",
+      "version": "1.0.0",
+      "category": "basic_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "scoring",
+        "stack"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "rule_group",
+          "operator": "equals",
+          "value": "control"
+        }
+      ],
+      "result": {
+        "effect": "max_stack",
+        "weight": 0,
+        "signal": "priority",
+        "max_stack": 4
+      },
+      "explanation": "Quan/Thực/Tài stackable tối đa 4 đơn vị.",
+      "references": [
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "control_max_stack_4",
+      "name": "Khắc tiết cộng dồn tối đa 4",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "rule_group",
+            "operator": "equals",
+            "value": "control"
+          }
+        ],
+        "result": {
+          "effect": "max_stack",
+          "weight": 0,
+          "signal": "priority",
+          "max_stack": 4
+        },
+        "explanation": "Quan/Thực/Tài stackable tối đa 4 đơn vị.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000108",
+      "version": "1.0.0",
+      "category": "basic_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "scoring",
+        "priority"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "resolve_priorities",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "priority_order",
+        "weight": 0,
+        "signal": "priority",
+        "order": [
+          "special",
+          "season",
+          "root",
+          "support",
+          "control",
+          "drain",
+          "combination"
+        ]
+      },
+      "explanation": "Ưu tiên: đặc biệt > tháng lệnh > căn > trợ > khắc > tiết > hợp. Không đảo ngược pipeline.",
+      "references": [
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "priority_order",
+      "name": "Thứ tự ưu tiên nhóm luật",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "resolve_priorities",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "priority_order",
+          "weight": 0,
+          "signal": "priority",
+          "order": [
+            "special",
+            "season",
+            "root",
+            "support",
+            "control",
+            "drain",
+            "combination"
+          ]
+        },
+        "explanation": "Ưu tiên: đặc biệt > tháng lệnh > căn > trợ > khắc > tiết > hợp. Không đảo ngược pipeline.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000109",
+      "version": "1.0.0",
+      "category": "basic_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "scoring",
+        "integrity"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 95
+      },
+      "conditions": [
+        {
+          "field": "same_pillar_evidence",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "deduplicate_pillar",
+        "weight": 0,
+        "signal": "integrity"
+      },
+      "explanation": "Một trụ chỉ đóng góp một lần cho cùng nhóm (căn hoặc trợ), tránh cộng kép.",
+      "references": [
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "no_double_count_pillar",
+      "name": "Không đếm trùng cùng một trụ",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "same_pillar_evidence",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "deduplicate_pillar",
+          "weight": 0,
+          "signal": "integrity"
+        },
+        "explanation": "Một trụ chỉ đóng góp một lần cho cùng nhóm (căn hoặc trợ), tránh cộng kép.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000110",
+      "version": "1.0.0",
+      "category": "basic_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "scoring",
+        "confidence"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "season_root_polarity_disagree",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "low_confidence",
+        "weight": 0,
+        "signal": "confidence",
+        "confidence": "low"
+      },
+      "explanation": "Đắc lệnh nhưng vô căn (hoặc tử mà căn sâu) cần đánh dấu confidence thấp, không bịa kết luận tuyệt đối.",
+      "references": [
+        {
+          "target": "REF-SKC-000008",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "season_root_disagreement_confidence",
+      "name": "Lệnh và căn trái dấu → độ tin cậy thấp",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season_root_polarity_disagree",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "low_confidence",
+          "weight": 0,
+          "signal": "confidence",
+          "confidence": "low"
+        },
+        "explanation": "Đắc lệnh nhưng vô căn (hoặc tử mà căn sâu) cần đánh dấu confidence thấp, không bịa kết luận tuyệt đối.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    }
+  ]
+}

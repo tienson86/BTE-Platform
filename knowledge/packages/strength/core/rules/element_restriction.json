@@ -1,0 +1,932 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_01_strength_core",
+  "category": "element_restriction",
+  "count": 12,
+  "objects": [
+    {
+      "id": "SKC-000081",
+      "version": "1.0.0",
+      "category": "element_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "restriction",
+        "zheng_guan_control"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "officer_type_present",
+          "operator": "equals",
+          "value": "zheng_guan"
+        }
+      ],
+      "result": {
+        "effect": "zheng_guan_control",
+        "weight": -8,
+        "score_target": "day_master.strength_score",
+        "signal": "restriction_score"
+      },
+      "explanation": "Chính Quan khắc thân có chế ước.",
+      "references": [
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "zheng_guan_control",
+      "name": "zheng guan control",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "officer_type_present",
+            "operator": "equals",
+            "value": "zheng_guan"
+          }
+        ],
+        "result": {
+          "effect": "zheng_guan_control",
+          "weight": -8,
+          "score_target": "day_master.strength_score",
+          "signal": "restriction_score"
+        },
+        "explanation": "Chính Quan khắc thân có chế ước.",
+        "evaluation": {
+          "weight": -8,
+          "stackable": true,
+          "max_stack": 4,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000082",
+      "version": "1.0.0",
+      "category": "element_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "restriction",
+        "qi_sha_control"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "officer_type_present",
+          "operator": "equals",
+          "value": "qi_sha"
+        }
+      ],
+      "result": {
+        "effect": "qi_sha_control",
+        "weight": -10,
+        "score_target": "day_master.strength_score",
+        "signal": "restriction_score"
+      },
+      "explanation": "Thất Sát khắc thân mạnh hơn Chính Quan.",
+      "references": [
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "qi_sha_control",
+      "name": "qi sha control",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "officer_type_present",
+            "operator": "equals",
+            "value": "qi_sha"
+          }
+        ],
+        "result": {
+          "effect": "qi_sha_control",
+          "weight": -10,
+          "score_target": "day_master.strength_score",
+          "signal": "restriction_score"
+        },
+        "explanation": "Thất Sát khắc thân mạnh hơn Chính Quan.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": true,
+          "max_stack": 4,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000083",
+      "version": "1.0.0",
+      "category": "element_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "restriction",
+        "shi_shen_drain"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "output_type_present",
+          "operator": "equals",
+          "value": "shi_shen"
+        }
+      ],
+      "result": {
+        "effect": "shi_shen_drain",
+        "weight": -6,
+        "score_target": "day_master.strength_score",
+        "signal": "restriction_score"
+      },
+      "explanation": "Thực Thần tiết thân ôn hòa.",
+      "references": [
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "shi_shen_drain",
+      "name": "shi shen drain",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "output_type_present",
+            "operator": "equals",
+            "value": "shi_shen"
+          }
+        ],
+        "result": {
+          "effect": "shi_shen_drain",
+          "weight": -6,
+          "score_target": "day_master.strength_score",
+          "signal": "restriction_score"
+        },
+        "explanation": "Thực Thần tiết thân ôn hòa.",
+        "evaluation": {
+          "weight": -6,
+          "stackable": true,
+          "max_stack": 4,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000084",
+      "version": "1.0.0",
+      "category": "element_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "restriction",
+        "shang_guan_drain"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 86
+      },
+      "conditions": [
+        {
+          "field": "output_type_present",
+          "operator": "equals",
+          "value": "shang_guan"
+        }
+      ],
+      "result": {
+        "effect": "shang_guan_drain",
+        "weight": -8,
+        "score_target": "day_master.strength_score",
+        "signal": "restriction_score"
+      },
+      "explanation": "Thương Quan tiết thân mạnh, dễ làm thân nhược.",
+      "references": [
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "shang_guan_drain",
+      "name": "shang guan drain",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "output_type_present",
+            "operator": "equals",
+            "value": "shang_guan"
+          }
+        ],
+        "result": {
+          "effect": "shang_guan_drain",
+          "weight": -8,
+          "score_target": "day_master.strength_score",
+          "signal": "restriction_score"
+        },
+        "explanation": "Thương Quan tiết thân mạnh, dễ làm thân nhược.",
+        "evaluation": {
+          "weight": -8,
+          "stackable": true,
+          "max_stack": 4,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000085",
+      "version": "1.0.0",
+      "category": "element_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "restriction",
+        "zheng_cai_drain"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "wealth_type_present",
+          "operator": "equals",
+          "value": "zheng_cai"
+        }
+      ],
+      "result": {
+        "effect": "zheng_cai_drain",
+        "weight": -6,
+        "score_target": "day_master.strength_score",
+        "signal": "restriction_score"
+      },
+      "explanation": "Chính Tài: thân sinh tài hao lực.",
+      "references": [
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "zheng_cai_drain",
+      "name": "zheng cai drain",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "wealth_type_present",
+            "operator": "equals",
+            "value": "zheng_cai"
+          }
+        ],
+        "result": {
+          "effect": "zheng_cai_drain",
+          "weight": -6,
+          "score_target": "day_master.strength_score",
+          "signal": "restriction_score"
+        },
+        "explanation": "Chính Tài: thân sinh tài hao lực.",
+        "evaluation": {
+          "weight": -6,
+          "stackable": true,
+          "max_stack": 4,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000086",
+      "version": "1.0.0",
+      "category": "element_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "restriction",
+        "pian_cai_drain"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 78
+      },
+      "conditions": [
+        {
+          "field": "wealth_type_present",
+          "operator": "equals",
+          "value": "pian_cai"
+        }
+      ],
+      "result": {
+        "effect": "pian_cai_drain",
+        "weight": -5,
+        "score_target": "day_master.strength_score",
+        "signal": "restriction_score"
+      },
+      "explanation": "Thiên Tài hao thân nhẹ hơn Chính Tài đơn vị.",
+      "references": [
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "pian_cai_drain",
+      "name": "pian cai drain",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "wealth_type_present",
+            "operator": "equals",
+            "value": "pian_cai"
+          }
+        ],
+        "result": {
+          "effect": "pian_cai_drain",
+          "weight": -5,
+          "score_target": "day_master.strength_score",
+          "signal": "restriction_score"
+        },
+        "explanation": "Thiên Tài hao thân nhẹ hơn Chính Tài đơn vị.",
+        "evaluation": {
+          "weight": -5,
+          "stackable": true,
+          "max_stack": 4,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000087",
+      "version": "1.0.0",
+      "category": "element_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "restriction",
+        "root_clash"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "dm_root_clashed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "root_clash",
+        "weight": -15,
+        "score_target": "day_master.strength_score",
+        "signal": "restriction_score"
+      },
+      "explanation": "Căn chi bị xung phá thì mất chỗ dựa.",
+      "references": [
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "root_clash",
+      "name": "root clash",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "dm_root_clashed",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "root_clash",
+          "weight": -15,
+          "score_target": "day_master.strength_score",
+          "signal": "restriction_score"
+        },
+        "explanation": "Căn chi bị xung phá thì mất chỗ dựa.",
+        "evaluation": {
+          "weight": -15,
+          "stackable": true,
+          "max_stack": 4,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000088",
+      "version": "1.0.0",
+      "category": "element_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "restriction",
+        "combo_loses_root"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 95
+      },
+      "conditions": [
+        {
+          "field": "root_lost_to_combination",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "combo_loses_root",
+        "weight": -12,
+        "score_target": "day_master.strength_score",
+        "signal": "restriction_score"
+      },
+      "explanation": "Hợp hóa kéo căn sang hành khác.",
+      "references": [
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "combo_loses_root",
+      "name": "combo loses root",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "root_lost_to_combination",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "combo_loses_root",
+          "weight": -12,
+          "score_target": "day_master.strength_score",
+          "signal": "restriction_score"
+        },
+        "explanation": "Hợp hóa kéo căn sang hành khác.",
+        "evaluation": {
+          "weight": -12,
+          "stackable": true,
+          "max_stack": 4,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000089",
+      "version": "1.0.0",
+      "category": "element_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "restriction",
+        "two_officers"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 90
+      },
+      "conditions": [
+        {
+          "field": "officer_count",
+          "operator": "greater_or_equal",
+          "value": 2
+        }
+      ],
+      "result": {
+        "effect": "two_officers",
+        "weight": -8,
+        "score_target": "day_master.strength_score",
+        "signal": "restriction_score"
+      },
+      "explanation": "Hai Quan Sát trở lên: khắc chế chồng.",
+      "references": [
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "two_officers",
+      "name": "two officers",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "officer_count",
+            "operator": "greater_or_equal",
+            "value": 2
+          }
+        ],
+        "result": {
+          "effect": "two_officers",
+          "weight": -8,
+          "score_target": "day_master.strength_score",
+          "signal": "restriction_score"
+        },
+        "explanation": "Hai Quan Sát trở lên: khắc chế chồng.",
+        "evaluation": {
+          "weight": -8,
+          "stackable": true,
+          "max_stack": 4,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000090",
+      "version": "1.0.0",
+      "category": "element_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "restriction",
+        "officer_plus_output"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 93
+      },
+      "conditions": [
+        {
+          "field": "has_officer_and_output",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "officer_plus_output",
+        "weight": -12,
+        "score_target": "day_master.strength_score",
+        "signal": "restriction_score"
+      },
+      "explanation": "Quan khắc và Thực tiết cùng lúc hại thân.",
+      "references": [
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "officer_plus_output",
+      "name": "officer plus output",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "has_officer_and_output",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "officer_plus_output",
+          "weight": -12,
+          "score_target": "day_master.strength_score",
+          "signal": "restriction_score"
+        },
+        "explanation": "Quan khắc và Thực tiết cùng lúc hại thân.",
+        "evaluation": {
+          "weight": -12,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000091",
+      "version": "1.0.0",
+      "category": "element_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "restriction",
+        "dead_plus_control"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 96
+      },
+      "conditions": [
+        {
+          "field": "dead_season_and_controlled",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "dead_plus_control",
+        "weight": -10,
+        "score_target": "day_master.strength_score",
+        "signal": "restriction_score"
+      },
+      "explanation": "Tháng tử lại bị khắc: thân rất yếu.",
+      "references": [
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "dead_plus_control",
+      "name": "dead plus control",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "dead_season_and_controlled",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "dead_plus_control",
+          "weight": -10,
+          "score_target": "day_master.strength_score",
+          "signal": "restriction_score"
+        },
+        "explanation": "Tháng tử lại bị khắc: thân rất yếu.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000092",
+      "version": "1.0.0",
+      "category": "element_restriction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "restriction",
+        "month_command_clashed"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 94
+      },
+      "conditions": [
+        {
+          "field": "month_branch_clashed",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "month_command_clashed",
+        "weight": -10,
+        "score_target": "day_master.strength_score",
+        "signal": "restriction_score"
+      },
+      "explanation": "Tháng lệnh bị xung: mất đắc lệnh thực tế.",
+      "references": [
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "month_command_clashed",
+      "name": "month command clashed",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_clashed",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "month_command_clashed",
+          "weight": -10,
+          "score_target": "day_master.strength_score",
+          "signal": "restriction_score"
+        },
+        "explanation": "Tháng lệnh bị xung: mất đắc lệnh thực tế.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": true,
+          "max_stack": 4,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    }
+  ]
+}

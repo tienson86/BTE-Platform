@@ -1,0 +1,774 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_01_strength_core",
+  "category": "hidden_stem_support",
+  "count": 10,
+  "objects": [
+    {
+      "id": "SKC-000053",
+      "version": "1.0.0",
+      "category": "hidden_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "hidden_stem",
+        "hidden_main_qi_dm"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 90
+      },
+      "conditions": [
+        {
+          "field": "hidden_main_qi_is_dm",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "hidden_main_qi_dm",
+        "weight": 8,
+        "score_target": "day_master.strength_score",
+        "signal": "hidden_stem_score"
+      },
+      "explanation": "Chính khí tàng can trùng Nhật Chủ, căn tàng mạnh.",
+      "references": [
+        {
+          "target": "REF-SKC-000003",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "hidden_main_qi_dm",
+      "name": "hidden main qi dm",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "hidden_main_qi_is_dm",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "hidden_main_qi_dm",
+          "weight": 8,
+          "score_target": "day_master.strength_score",
+          "signal": "hidden_stem_score"
+        },
+        "explanation": "Chính khí tàng can trùng Nhật Chủ, căn tàng mạnh.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": true,
+          "max_stack": 4,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000054",
+      "version": "1.0.0",
+      "category": "hidden_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "hidden_stem",
+        "hidden_middle_qi_dm"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "hidden_middle_qi_is_dm",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "hidden_middle_qi_dm",
+        "weight": 4,
+        "score_target": "day_master.strength_score",
+        "signal": "hidden_stem_score"
+      },
+      "explanation": "Trung khí tàng can trùng Nhật Chủ, căn vừa.",
+      "references": [
+        {
+          "target": "REF-SKC-000003",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "hidden_middle_qi_dm",
+      "name": "hidden middle qi dm",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "hidden_middle_qi_is_dm",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "hidden_middle_qi_dm",
+          "weight": 4,
+          "score_target": "day_master.strength_score",
+          "signal": "hidden_stem_score"
+        },
+        "explanation": "Trung khí tàng can trùng Nhật Chủ, căn vừa.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": true,
+          "max_stack": 4,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000055",
+      "version": "1.0.0",
+      "category": "hidden_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "hidden_stem",
+        "hidden_residual_qi_dm"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 75
+      },
+      "conditions": [
+        {
+          "field": "hidden_residual_qi_is_dm",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "hidden_residual_qi_dm",
+        "weight": 2,
+        "score_target": "day_master.strength_score",
+        "signal": "hidden_stem_score"
+      },
+      "explanation": "Dư khí tàng can trùng Nhật Chủ, căn mỏng.",
+      "references": [
+        {
+          "target": "REF-SKC-000003",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "hidden_residual_qi_dm",
+      "name": "hidden residual qi dm",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "hidden_residual_qi_is_dm",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "hidden_residual_qi_dm",
+          "weight": 2,
+          "score_target": "day_master.strength_score",
+          "signal": "hidden_stem_score"
+        },
+        "explanation": "Dư khí tàng can trùng Nhật Chủ, căn mỏng.",
+        "evaluation": {
+          "weight": 2,
+          "stackable": true,
+          "max_stack": 4,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000056",
+      "version": "1.0.0",
+      "category": "hidden_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "hidden_stem",
+        "hidden_resource"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 85
+      },
+      "conditions": [
+        {
+          "field": "hidden_stem_has_resource",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "hidden_resource",
+        "weight": 5,
+        "score_target": "day_master.strength_score",
+        "signal": "hidden_stem_score"
+      },
+      "explanation": "Tàng can Ấn sinh thân.",
+      "references": [
+        {
+          "target": "REF-SKC-000003",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "hidden_resource",
+      "name": "hidden resource",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "hidden_stem_has_resource",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "hidden_resource",
+          "weight": 5,
+          "score_target": "day_master.strength_score",
+          "signal": "hidden_stem_score"
+        },
+        "explanation": "Tàng can Ấn sinh thân.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": true,
+          "max_stack": 4,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000057",
+      "version": "1.0.0",
+      "category": "hidden_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "hidden_stem",
+        "hidden_officer"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "hidden_stem_has_officer",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "hidden_officer",
+        "weight": -4,
+        "score_target": "day_master.strength_score",
+        "signal": "hidden_stem_score"
+      },
+      "explanation": "Tàng can Quan Sát khắc thân.",
+      "references": [
+        {
+          "target": "REF-SKC-000003",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "hidden_officer",
+      "name": "hidden officer",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "hidden_stem_has_officer",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "hidden_officer",
+          "weight": -4,
+          "score_target": "day_master.strength_score",
+          "signal": "hidden_stem_score"
+        },
+        "explanation": "Tàng can Quan Sát khắc thân.",
+        "evaluation": {
+          "weight": -4,
+          "stackable": true,
+          "max_stack": 4,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000058",
+      "version": "1.0.0",
+      "category": "hidden_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "hidden_stem",
+        "hidden_output"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "hidden_stem_has_output",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "hidden_output",
+        "weight": -3,
+        "score_target": "day_master.strength_score",
+        "signal": "hidden_stem_score"
+      },
+      "explanation": "Tàng can Thực Thương tiết thân.",
+      "references": [
+        {
+          "target": "REF-SKC-000003",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "hidden_output",
+      "name": "hidden output",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "hidden_stem_has_output",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "hidden_output",
+          "weight": -3,
+          "score_target": "day_master.strength_score",
+          "signal": "hidden_stem_score"
+        },
+        "explanation": "Tàng can Thực Thương tiết thân.",
+        "evaluation": {
+          "weight": -3,
+          "stackable": true,
+          "max_stack": 4,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000059",
+      "version": "1.0.0",
+      "category": "hidden_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "hidden_stem",
+        "hidden_wealth"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 78
+      },
+      "conditions": [
+        {
+          "field": "hidden_stem_has_wealth",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "hidden_wealth",
+        "weight": -2,
+        "score_target": "day_master.strength_score",
+        "signal": "hidden_stem_score"
+      },
+      "explanation": "Tàng can Tài hao thân.",
+      "references": [
+        {
+          "target": "REF-SKC-000003",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "hidden_wealth",
+      "name": "hidden wealth",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "hidden_stem_has_wealth",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "hidden_wealth",
+          "weight": -2,
+          "score_target": "day_master.strength_score",
+          "signal": "hidden_stem_score"
+        },
+        "explanation": "Tàng can Tài hao thân.",
+        "evaluation": {
+          "weight": -2,
+          "stackable": true,
+          "max_stack": 4,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000060",
+      "version": "1.0.0",
+      "category": "hidden_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "hidden_stem",
+        "exposed"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "hidden_dm_qi_exposed_as_stem",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "hidden_exposed",
+        "weight": 6,
+        "score_target": "day_master.strength_score",
+        "signal": "hidden_stem_score"
+      },
+      "explanation": "Tàng can Nhật Chủ lộ thiên can thì căn được kích hoạt rõ.",
+      "references": [
+        {
+          "target": "REF-SKC-000003",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000004",
+          "relation": "references"
+        }
+      ],
+      "code": "hidden_exposed",
+      "name": "Tàng can透出",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "hidden_dm_qi_exposed_as_stem",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "hidden_exposed",
+          "weight": 6,
+          "score_target": "day_master.strength_score",
+          "signal": "hidden_stem_score"
+        },
+        "explanation": "Tàng can Nhật Chủ lộ thiên can thì căn được kích hoạt rõ.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": true,
+          "max_stack": 2,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000061",
+      "version": "1.0.0",
+      "category": "hidden_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "hidden_stem",
+        "month"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 86
+      },
+      "conditions": [
+        {
+          "field": "month_hidden_qi_is_dm",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "month_hidden_dm",
+        "weight": 4,
+        "score_target": "day_master.strength_score",
+        "signal": "hidden_stem_score"
+      },
+      "explanation": "Tàng can tháng gần lệnh, trọng số cao hơn tàng can niên/thời.",
+      "references": [
+        {
+          "target": "REF-SKC-000003",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "month_hidden_weight",
+      "name": "Tàng can tháng nặng hơn niên thời",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_hidden_qi_is_dm",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "month_hidden_dm",
+          "weight": 4,
+          "score_target": "day_master.strength_score",
+          "signal": "hidden_stem_score"
+        },
+        "explanation": "Tàng can tháng gần lệnh, trọng số cao hơn tàng can niên/thời.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000062",
+      "version": "1.0.0",
+      "category": "hidden_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "hidden_stem",
+        "stack"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "hidden_dm_qi_count",
+          "operator": "greater_or_equal",
+          "value": 2
+        }
+      ],
+      "result": {
+        "effect": "multiple_hidden_dm",
+        "weight": 4,
+        "score_target": "day_master.strength_score",
+        "signal": "hidden_stem_score"
+      },
+      "explanation": "Hai vị trí tàng can trở lên trùng Nhật Chủ gia tăng căn khí tàng.",
+      "references": [
+        {
+          "target": "REF-SKC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "multiple_hidden_dm",
+      "name": "Nhiều tàng can Nhật Chủ",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "hidden_dm_qi_count",
+            "operator": "greater_or_equal",
+            "value": 2
+          }
+        ],
+        "result": {
+          "effect": "multiple_hidden_dm",
+          "weight": 4,
+          "score_target": "day_master.strength_score",
+          "signal": "hidden_stem_score"
+        },
+        "explanation": "Hai vị trí tàng can trở lên trùng Nhật Chủ gia tăng căn khí tàng.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    }
+  ]
+}

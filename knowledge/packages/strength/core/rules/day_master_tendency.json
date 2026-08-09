@@ -1,0 +1,906 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_01_strength_core",
+  "category": "day_master_tendency",
+  "count": 10,
+  "objects": [
+    {
+      "id": "SKC-000093",
+      "version": "1.0.0",
+      "category": "day_master_tendency",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "tendency",
+        "strong"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 98
+      },
+      "conditions": [
+        {
+          "field": "month_status",
+          "operator": "equals",
+          "value": "prosperous"
+        },
+        {
+          "field": "has_dm_root",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "strong_tendency",
+        "weight": 0,
+        "score_target": "day_master.strength_score",
+        "signal": "strength_tendency",
+        "strength_level": "strong",
+        "tendency": "strong"
+      },
+      "explanation": "Đắc lệnh kèm thông căn là tổ hợp thân vượng cốt lõi.",
+      "references": [
+        {
+          "target": "REF-SKC-000008",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "strong_prosperous_with_root",
+      "name": "Đắc lệnh có căn → thân vượng",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_status",
+            "operator": "equals",
+            "value": "prosperous"
+          },
+          {
+            "field": "has_dm_root",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "strong_tendency",
+          "weight": 0,
+          "score_target": "day_master.strength_score",
+          "signal": "strength_tendency",
+          "strength_level": "strong",
+          "tendency": "strong"
+        },
+        "explanation": "Đắc lệnh kèm thông căn là tổ hợp thân vượng cốt lõi.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000094",
+      "version": "1.0.0",
+      "category": "day_master_tendency",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "tendency",
+        "false_strong"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 97
+      },
+      "conditions": [
+        {
+          "field": "month_status",
+          "operator": "equals",
+          "value": "prosperous"
+        },
+        {
+          "field": "root_level",
+          "operator": "equals",
+          "value": "no_root"
+        },
+        {
+          "field": "output_count",
+          "operator": "greater_or_equal",
+          "value": 1
+        }
+      ],
+      "result": {
+        "effect": "false_strong",
+        "weight": -6,
+        "score_target": "day_master.strength_score",
+        "signal": "strength_tendency",
+        "strength_level": "balanced",
+        "tendency": "false_strong"
+      },
+      "explanation": "Chỉ dựa tháng lệnh mà vô căn lại bị Thực Thương thì dễ giả vượng.",
+      "references": [
+        {
+          "target": "REF-SKC-000008",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "false_strong_no_root_drained",
+      "name": "Đắc lệnh vô căn bị tiết → không tự động vượng",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_status",
+            "operator": "equals",
+            "value": "prosperous"
+          },
+          {
+            "field": "root_level",
+            "operator": "equals",
+            "value": "no_root"
+          },
+          {
+            "field": "output_count",
+            "operator": "greater_or_equal",
+            "value": 1
+          }
+        ],
+        "result": {
+          "effect": "false_strong",
+          "weight": -6,
+          "score_target": "day_master.strength_score",
+          "signal": "strength_tendency",
+          "strength_level": "balanced",
+          "tendency": "false_strong"
+        },
+        "explanation": "Chỉ dựa tháng lệnh mà vô căn lại bị Thực Thương thì dễ giả vượng.",
+        "evaluation": {
+          "weight": -6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000095",
+      "version": "1.0.0",
+      "category": "day_master_tendency",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "tendency",
+        "weak"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 98
+      },
+      "conditions": [
+        {
+          "field": "month_status",
+          "operator": "equals",
+          "value": "dead"
+        },
+        {
+          "field": "root_level",
+          "operator": "equals",
+          "value": "no_root"
+        }
+      ],
+      "result": {
+        "effect": "weak_tendency",
+        "weight": 0,
+        "score_target": "day_master.strength_score",
+        "signal": "strength_tendency",
+        "strength_level": "weak",
+        "tendency": "weak"
+      },
+      "explanation": "Mất lệnh và vô căn: khuynh hướng thân nhược rõ.",
+      "references": [
+        {
+          "target": "REF-SKC-000008",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "weak_dead_no_root",
+      "name": "Tháng tử vô căn → thân nhược",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_status",
+            "operator": "equals",
+            "value": "dead"
+          },
+          {
+            "field": "root_level",
+            "operator": "equals",
+            "value": "no_root"
+          }
+        ],
+        "result": {
+          "effect": "weak_tendency",
+          "weight": 0,
+          "score_target": "day_master.strength_score",
+          "signal": "strength_tendency",
+          "strength_level": "weak",
+          "tendency": "weak"
+        },
+        "explanation": "Mất lệnh và vô căn: khuynh hướng thân nhược rõ.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000096",
+      "version": "1.0.0",
+      "category": "day_master_tendency",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "tendency",
+        "weak"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 96
+      },
+      "conditions": [
+        {
+          "field": "month_status",
+          "operator": "equals",
+          "value": "imprison"
+        },
+        {
+          "field": "officer_count",
+          "operator": "greater_or_equal",
+          "value": 1
+        }
+      ],
+      "result": {
+        "effect": "weak_imprison",
+        "weight": 0,
+        "score_target": "day_master.strength_score",
+        "signal": "strength_tendency",
+        "strength_level": "weak",
+        "tendency": "weak"
+      },
+      "explanation": "Tù khí cộng Quan Sát: thân bị chế.",
+      "references": [
+        {
+          "target": "REF-SKC-000008",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "weak_imprison_controlled",
+      "name": "Tháng tù bị khắc → thân nhược",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_status",
+            "operator": "equals",
+            "value": "imprison"
+          },
+          {
+            "field": "officer_count",
+            "operator": "greater_or_equal",
+            "value": 1
+          }
+        ],
+        "result": {
+          "effect": "weak_imprison",
+          "weight": 0,
+          "score_target": "day_master.strength_score",
+          "signal": "strength_tendency",
+          "strength_level": "weak",
+          "tendency": "weak"
+        },
+        "explanation": "Tù khí cộng Quan Sát: thân bị chế.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000097",
+      "version": "1.0.0",
+      "category": "day_master_tendency",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "tendency",
+        "balanced"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 85
+      },
+      "conditions": [
+        {
+          "field": "month_status",
+          "operator": "equals",
+          "value": "rest"
+        },
+        {
+          "field": "root_level",
+          "operator": "equals",
+          "value": "root_one"
+        }
+      ],
+      "result": {
+        "effect": "balanced_tendency",
+        "weight": 0,
+        "score_target": "day_master.strength_score",
+        "signal": "strength_tendency",
+        "strength_level": "balanced",
+        "tendency": "balanced"
+      },
+      "explanation": "Hưu kèm một căn thường trung hòa, cần xem Ấn/Tỷ và Quan/Thực.",
+      "references": [
+        {
+          "target": "REF-SKC-000008",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "balanced_rest_one_root",
+      "name": "Hưu khí một căn → trung hòa",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_status",
+            "operator": "equals",
+            "value": "rest"
+          },
+          {
+            "field": "root_level",
+            "operator": "equals",
+            "value": "root_one"
+          }
+        ],
+        "result": {
+          "effect": "balanced_tendency",
+          "weight": 0,
+          "score_target": "day_master.strength_score",
+          "signal": "strength_tendency",
+          "strength_level": "balanced",
+          "tendency": "balanced"
+        },
+        "explanation": "Hưu kèm một căn thường trung hòa, cần xem Ấn/Tỷ và Quan/Thực.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000098",
+      "version": "1.0.0",
+      "category": "day_master_tendency",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "tendency",
+        "level"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "strength_score_normalized",
+          "operator": "greater_or_equal",
+          "value": 0.65
+        }
+      ],
+      "result": {
+        "effect": "level_strong",
+        "weight": 0,
+        "score_target": "day_master.strength_score",
+        "strength_level": "strong"
+      },
+      "explanation": "Tổng điểm chuẩn hóa >= 0.65 xếp thân vượng (BTE strength config).",
+      "references": [
+        {
+          "target": "REF-SKC-000008",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "level_strong_threshold",
+      "name": "Ngưỡng thân vượng >= 0.65",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score_normalized",
+            "operator": "greater_or_equal",
+            "value": 0.65
+          }
+        ],
+        "result": {
+          "effect": "level_strong",
+          "weight": 0,
+          "score_target": "day_master.strength_score",
+          "strength_level": "strong"
+        },
+        "explanation": "Tổng điểm chuẩn hóa >= 0.65 xếp thân vượng (BTE strength config).",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_level"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000099",
+      "version": "1.0.0",
+      "category": "day_master_tendency",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "tendency",
+        "level"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "strength_score_normalized",
+          "operator": "less_or_equal",
+          "value": 0.35
+        }
+      ],
+      "result": {
+        "effect": "level_weak",
+        "weight": 0,
+        "score_target": "day_master.strength_score",
+        "strength_level": "weak"
+      },
+      "explanation": "Tổng điểm chuẩn hóa <= 0.35 xếp thân nhược.",
+      "references": [
+        {
+          "target": "REF-SKC-000008",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "level_weak_threshold",
+      "name": "Ngưỡng thân nhược <= 0.35",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score_normalized",
+            "operator": "less_or_equal",
+            "value": 0.35
+          }
+        ],
+        "result": {
+          "effect": "level_weak",
+          "weight": 0,
+          "score_target": "day_master.strength_score",
+          "strength_level": "weak"
+        },
+        "explanation": "Tổng điểm chuẩn hóa <= 0.35 xếp thân nhược.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_level"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000100",
+      "version": "1.0.0",
+      "category": "day_master_tendency",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "tendency",
+        "level"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "strength_score_normalized",
+          "operator": "greater_than",
+          "value": 0.35
+        },
+        {
+          "field": "strength_score_normalized",
+          "operator": "less_than",
+          "value": 0.65
+        }
+      ],
+      "result": {
+        "effect": "level_balanced",
+        "weight": 0,
+        "score_target": "day_master.strength_score",
+        "strength_level": "balanced"
+      },
+      "explanation": "Điểm nằm giữa 0.35 và 0.65 xếp trung hòa.",
+      "references": [
+        {
+          "target": "REF-SKC-000008",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "level_balanced_band",
+      "name": "Ngưỡng trung hòa 0.35–0.65",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score_normalized",
+            "operator": "greater_than",
+            "value": 0.35
+          },
+          {
+            "field": "strength_score_normalized",
+            "operator": "less_than",
+            "value": 0.65
+          }
+        ],
+        "result": {
+          "effect": "level_balanced",
+          "weight": 0,
+          "score_target": "day_master.strength_score",
+          "strength_level": "balanced"
+        },
+        "explanation": "Điểm nằm giữa 0.35 và 0.65 xếp trung hòa.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "strength_level"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000101",
+      "version": "1.0.0",
+      "category": "day_master_tendency",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "tendency",
+        "very_strong"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 90
+      },
+      "conditions": [
+        {
+          "field": "strength_score_normalized",
+          "operator": "greater_or_equal",
+          "value": 0.75
+        }
+      ],
+      "result": {
+        "effect": "very_strong",
+        "weight": 0,
+        "score_target": "day_master.strength_score",
+        "strength_level": "very_strong"
+      },
+      "explanation": "Điểm rất cao: cực vượng; xét cách Tòng chỉ ở gói Pattern, không kết luận Tòng tại đây.",
+      "references": [
+        {
+          "target": "REF-SKC-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "very_strong_band",
+      "name": "Khuynh hướng cực vượng >= 0.75",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "strength_score_normalized",
+            "operator": "greater_or_equal",
+            "value": 0.75
+          }
+        ],
+        "result": {
+          "effect": "very_strong",
+          "weight": 0,
+          "score_target": "day_master.strength_score",
+          "strength_level": "very_strong"
+        },
+        "explanation": "Điểm rất cao: cực vượng; xét cách Tòng chỉ ở gói Pattern, không kết luận Tòng tại đây.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000102",
+      "version": "1.0.0",
+      "category": "day_master_tendency",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "tendency",
+        "false_weak"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 94
+      },
+      "conditions": [
+        {
+          "field": "month_status",
+          "operator": "equals",
+          "value": "dead"
+        },
+        {
+          "field": "root_level",
+          "operator": "in",
+          "value": [
+            "root_two",
+            "root_three_plus"
+          ]
+        },
+        {
+          "field": "resource_count",
+          "operator": "greater_or_equal",
+          "value": 1
+        }
+      ],
+      "result": {
+        "effect": "false_weak",
+        "weight": 8,
+        "score_target": "day_master.strength_score",
+        "signal": "strength_tendency",
+        "strength_level": "balanced",
+        "tendency": "false_weak"
+      },
+      "explanation": "Mất lệnh nhưng thông căn sâu và có Ấn: thân không yếu như điểm mùa đơn lẻ.",
+      "references": [
+        {
+          "target": "REF-SKC-000008",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000002",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "false_weak_dead_deep_root",
+      "name": "Tháng tử nhưng căn sâu + Ấn → không cực nhược",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_status",
+            "operator": "equals",
+            "value": "dead"
+          },
+          {
+            "field": "root_level",
+            "operator": "in",
+            "value": [
+              "root_two",
+              "root_three_plus"
+            ]
+          },
+          {
+            "field": "resource_count",
+            "operator": "greater_or_equal",
+            "value": 1
+          }
+        ],
+        "result": {
+          "effect": "false_weak",
+          "weight": 8,
+          "score_target": "day_master.strength_score",
+          "signal": "strength_tendency",
+          "strength_level": "balanced",
+          "tendency": "false_weak"
+        },
+        "explanation": "Mất lệnh nhưng thông căn sâu và có Ấn: thân không yếu như điểm mùa đơn lẻ.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    }
+  ]
+}

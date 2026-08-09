@@ -1,0 +1,780 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_01_strength_core",
+  "category": "visible_stem_support",
+  "count": 10,
+  "objects": [
+    {
+      "id": "SKC-000063",
+      "version": "1.0.0",
+      "category": "visible_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "visible_stem",
+        "companion"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "visible_ten_god_contains",
+          "operator": "contains",
+          "value": "bijian"
+        }
+      ],
+      "result": {
+        "effect": "bijian_stem",
+        "weight": 6,
+        "score_target": "day_master.strength_score",
+        "signal": "stem_support"
+      },
+      "explanation": "Can đồng âm dương (Tỷ Kiên) trợ thân trực tiếp.",
+      "references": [
+        {
+          "target": "REF-SKC-000004",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "bijian_stem",
+      "name": "Thiên can Tỷ Kiên",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "visible_ten_god_contains",
+            "operator": "contains",
+            "value": "bijian"
+          }
+        ],
+        "result": {
+          "effect": "bijian_stem",
+          "weight": 6,
+          "score_target": "day_master.strength_score",
+          "signal": "stem_support"
+        },
+        "explanation": "Can đồng âm dương (Tỷ Kiên) trợ thân trực tiếp.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": true,
+          "max_stack": 3,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000064",
+      "version": "1.0.0",
+      "category": "visible_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "visible_stem",
+        "rob_wealth"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 86
+      },
+      "conditions": [
+        {
+          "field": "visible_ten_god_contains",
+          "operator": "contains",
+          "value": "jiecai"
+        }
+      ],
+      "result": {
+        "effect": "jiecai_stem",
+        "weight": 5,
+        "score_target": "day_master.strength_score",
+        "signal": "stem_support"
+      },
+      "explanation": "Can đồng hành khác âm dương (Kiếp Tài) trợ thân nhưng dễ tranh tài.",
+      "references": [
+        {
+          "target": "REF-SKC-000004",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "jiecai_stem",
+      "name": "Thiên can Kiếp Tài",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "visible_ten_god_contains",
+            "operator": "contains",
+            "value": "jiecai"
+          }
+        ],
+        "result": {
+          "effect": "jiecai_stem",
+          "weight": 5,
+          "score_target": "day_master.strength_score",
+          "signal": "stem_support"
+        },
+        "explanation": "Can đồng hành khác âm dương (Kiếp Tài) trợ thân nhưng dễ tranh tài.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": true,
+          "max_stack": 3,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000065",
+      "version": "1.0.0",
+      "category": "visible_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "visible_stem",
+        "resource"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "visible_ten_god_contains",
+          "operator": "contains",
+          "value": "zheng_yin"
+        }
+      ],
+      "result": {
+        "effect": "zheng_yin_stem",
+        "weight": 10,
+        "score_target": "day_master.strength_score",
+        "signal": "stem_support"
+      },
+      "explanation": "Chính Ấn sinh thân ôn hòa, trợ lực ổn định.",
+      "references": [
+        {
+          "target": "REF-SKC-000004",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "zheng_yin_stem",
+      "name": "Thiên can Chính Ấn",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "visible_ten_god_contains",
+            "operator": "contains",
+            "value": "zheng_yin"
+          }
+        ],
+        "result": {
+          "effect": "zheng_yin_stem",
+          "weight": 10,
+          "score_target": "day_master.strength_score",
+          "signal": "stem_support"
+        },
+        "explanation": "Chính Ấn sinh thân ôn hòa, trợ lực ổn định.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": true,
+          "max_stack": 3,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000066",
+      "version": "1.0.0",
+      "category": "visible_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "visible_stem",
+        "resource"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 90
+      },
+      "conditions": [
+        {
+          "field": "visible_ten_god_contains",
+          "operator": "contains",
+          "value": "pian_yin"
+        }
+      ],
+      "result": {
+        "effect": "pian_yin_stem",
+        "weight": 8,
+        "score_target": "day_master.strength_score",
+        "signal": "stem_support"
+      },
+      "explanation": "Thiên Ấn (Thiên Tài/Thiên Ấn) sinh thân mạnh, dễ thiên lệch.",
+      "references": [
+        {
+          "target": "REF-SKC-000004",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "pian_yin_stem",
+      "name": "Thiên can Thiên Ấn",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "visible_ten_god_contains",
+            "operator": "contains",
+            "value": "pian_yin"
+          }
+        ],
+        "result": {
+          "effect": "pian_yin_stem",
+          "weight": 8,
+          "score_target": "day_master.strength_score",
+          "signal": "stem_support"
+        },
+        "explanation": "Thiên Ấn (Thiên Tài/Thiên Ấn) sinh thân mạnh, dễ thiên lệch.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": true,
+          "max_stack": 3,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000067",
+      "version": "1.0.0",
+      "category": "visible_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "visible_stem",
+        "proximity"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "adjacent_stem_supports_dm",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "adjacent_stem_support",
+        "weight": 3,
+        "score_target": "day_master.strength_score",
+        "signal": "stem_support"
+      },
+      "explanation": "Can tháng hoặc can thời kề Nhật Chủ trợ lực rõ hơn can niên.",
+      "references": [
+        {
+          "target": "REF-SKC-000004",
+          "relation": "references"
+        }
+      ],
+      "code": "adjacent_stem_support",
+      "name": "Can trợ sát Nhật Chủ",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "adjacent_stem_supports_dm",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "adjacent_stem_support",
+          "weight": 3,
+          "score_target": "day_master.strength_score",
+          "signal": "stem_support"
+        },
+        "explanation": "Can tháng hoặc can thời kề Nhật Chủ trợ lực rõ hơn can niên.",
+        "evaluation": {
+          "weight": 3,
+          "stackable": true,
+          "max_stack": 2,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000068",
+      "version": "1.0.0",
+      "category": "visible_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "visible_stem",
+        "year"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "year_stem_supports_dm",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "year_stem_support",
+        "weight": 2,
+        "score_target": "day_master.strength_score",
+        "signal": "stem_support"
+      },
+      "explanation": "Can niên trợ thân nhưng lực xa, không bằng can tháng/thời.",
+      "references": [
+        {
+          "target": "REF-SKC-000004",
+          "relation": "references"
+        }
+      ],
+      "code": "year_stem_support_weak",
+      "name": "Can niên trợ xa",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "year_stem_supports_dm",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "year_stem_support",
+          "weight": 2,
+          "score_target": "day_master.strength_score",
+          "signal": "stem_support"
+        },
+        "explanation": "Can niên trợ thân nhưng lực xa, không bằng can tháng/thời.",
+        "evaluation": {
+          "weight": 2,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000069",
+      "version": "1.0.0",
+      "category": "visible_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "visible_stem",
+        "combination"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 96
+      },
+      "conditions": [
+        {
+          "field": "stem_combination_transforms_to_dm_element",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "stem_combo_to_dm",
+        "weight": 12,
+        "score_target": "day_master.strength_score",
+        "signal": "stem_support"
+      },
+      "explanation": "Thiên can hợp hóa thành hành Nhật Chủ thì trợ thân mạnh (tối đa 2 lần).",
+      "references": [
+        {
+          "target": "REF-SKC-000004",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_combo_to_dm",
+      "name": "Hợp hóa thành hành Nhật Chủ",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "stem_combination_transforms_to_dm_element",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "stem_combo_to_dm",
+          "weight": 12,
+          "score_target": "day_master.strength_score",
+          "signal": "stem_support"
+        },
+        "explanation": "Thiên can hợp hóa thành hành Nhật Chủ thì trợ thân mạnh (tối đa 2 lần).",
+        "evaluation": {
+          "weight": 12,
+          "stackable": true,
+          "max_stack": 2,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000070",
+      "version": "1.0.0",
+      "category": "visible_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "visible_stem",
+        "combination"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 94
+      },
+      "conditions": [
+        {
+          "field": "stem_combination_transforms_dm_away",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "stem_combo_away_dm",
+        "weight": -10,
+        "score_target": "day_master.strength_score",
+        "signal": "stem_drain"
+      },
+      "explanation": "Nhật Chủ hoặc căn can bị hợp hóa sang hành khác thì mất lực.",
+      "references": [
+        {
+          "target": "REF-SKC-000004",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "stem_combo_away_dm",
+      "name": "Hợp hóa mất hành Nhật Chủ",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "stem_combination_transforms_dm_away",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "stem_combo_away_dm",
+          "weight": -10,
+          "score_target": "day_master.strength_score",
+          "signal": "stem_drain"
+        },
+        "explanation": "Nhật Chủ hoặc căn can bị hợp hóa sang hành khác thì mất lực.",
+        "evaluation": {
+          "weight": -10,
+          "stackable": true,
+          "max_stack": 2,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000071",
+      "version": "1.0.0",
+      "category": "visible_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "visible_stem",
+        "absence"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 74
+      },
+      "conditions": [
+        {
+          "field": "visible_companion_count",
+          "operator": "equals",
+          "value": 0
+        },
+        {
+          "field": "visible_resource_count",
+          "operator": "equals",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "no_visible_support",
+        "weight": -4,
+        "score_target": "day_master.strength_score",
+        "signal": "stem_support"
+      },
+      "explanation": "Không Tỷ Kiếp/Ấn trên thiên can: thân dựa chủ yếu vào lệnh và căn.",
+      "references": [
+        {
+          "target": "REF-SKC-000004",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "no_visible_support",
+      "name": "Không có can trợ",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "visible_companion_count",
+            "operator": "equals",
+            "value": 0
+          },
+          {
+            "field": "visible_resource_count",
+            "operator": "equals",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "no_visible_support",
+          "weight": -4,
+          "score_target": "day_master.strength_score",
+          "signal": "stem_support"
+        },
+        "explanation": "Không Tỷ Kiếp/Ấn trên thiên can: thân dựa chủ yếu vào lệnh và căn.",
+        "evaluation": {
+          "weight": -4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000072",
+      "version": "1.0.0",
+      "category": "visible_stem_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "visible_stem",
+        "companion"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 85
+      },
+      "conditions": [
+        {
+          "field": "visible_companion_count",
+          "operator": "greater_or_equal",
+          "value": 3
+        }
+      ],
+      "result": {
+        "effect": "three_companion_stems",
+        "weight": 6,
+        "score_target": "day_master.strength_score",
+        "signal": "stem_support"
+      },
+      "explanation": "Nhiều Tỷ Kiếp lộ can: khuynh hướng thân vượng, cần xem tiết chế.",
+      "references": [
+        {
+          "target": "REF-SKC-000004",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "three_companion_stems",
+      "name": "Ba can đồng hành trở lên",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "visible_companion_count",
+            "operator": "greater_or_equal",
+            "value": 3
+          }
+        ],
+        "result": {
+          "effect": "three_companion_stems",
+          "weight": 6,
+          "score_target": "day_master.strength_score",
+          "signal": "stem_support"
+        },
+        "explanation": "Nhiều Tỷ Kiếp lộ can: khuynh hướng thân vượng, cần xem tiết chế.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    }
+  ]
+}

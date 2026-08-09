@@ -1,0 +1,932 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_01_strength_core",
+  "category": "root_support",
+  "count": 12,
+  "objects": [
+    {
+      "id": "SKC-000041",
+      "version": "1.0.0",
+      "category": "root_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "root",
+        "root_three_plus"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "root_level",
+          "operator": "equals",
+          "value": "root_three_plus"
+        }
+      ],
+      "result": {
+        "effect": "root_three_plus",
+        "weight": 30,
+        "score_target": "day_master.strength_score",
+        "signal": "root_score"
+      },
+      "explanation": "Thông căn từ ba chi trở lên, căn khí rất mạnh.",
+      "references": [
+        {
+          "target": "REF-SKC-000002",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "root_three_plus",
+      "name": "root three plus",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "root_level",
+            "operator": "equals",
+            "value": "root_three_plus"
+          }
+        ],
+        "result": {
+          "effect": "root_three_plus",
+          "weight": 30,
+          "score_target": "day_master.strength_score",
+          "signal": "root_score"
+        },
+        "explanation": "Thông căn từ ba chi trở lên, căn khí rất mạnh.",
+        "evaluation": {
+          "weight": 30,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "root_level"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000042",
+      "version": "1.0.0",
+      "category": "root_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "root",
+        "root_two"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 95
+      },
+      "conditions": [
+        {
+          "field": "root_level",
+          "operator": "equals",
+          "value": "root_two"
+        }
+      ],
+      "result": {
+        "effect": "root_two",
+        "weight": 22,
+        "score_target": "day_master.strength_score",
+        "signal": "root_score"
+      },
+      "explanation": "Thông căn hai chi, căn khí mạnh.",
+      "references": [
+        {
+          "target": "REF-SKC-000002",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "root_two",
+      "name": "root two",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "root_level",
+            "operator": "equals",
+            "value": "root_two"
+          }
+        ],
+        "result": {
+          "effect": "root_two",
+          "weight": 22,
+          "score_target": "day_master.strength_score",
+          "signal": "root_score"
+        },
+        "explanation": "Thông căn hai chi, căn khí mạnh.",
+        "evaluation": {
+          "weight": 22,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "root_level"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000043",
+      "version": "1.0.0",
+      "category": "root_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "root",
+        "root_one"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 90
+      },
+      "conditions": [
+        {
+          "field": "root_level",
+          "operator": "equals",
+          "value": "root_one"
+        }
+      ],
+      "result": {
+        "effect": "root_one",
+        "weight": 12,
+        "score_target": "day_master.strength_score",
+        "signal": "root_score"
+      },
+      "explanation": "Thông căn một chi, có căn ổn định.",
+      "references": [
+        {
+          "target": "REF-SKC-000002",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "root_one",
+      "name": "root one",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "root_level",
+            "operator": "equals",
+            "value": "root_one"
+          }
+        ],
+        "result": {
+          "effect": "root_one",
+          "weight": 12,
+          "score_target": "day_master.strength_score",
+          "signal": "root_score"
+        },
+        "explanation": "Thông căn một chi, có căn ổn định.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "root_level"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000044",
+      "version": "1.0.0",
+      "category": "root_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "root",
+        "hidden_root"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "root_level",
+          "operator": "equals",
+          "value": "hidden_root"
+        }
+      ],
+      "result": {
+        "effect": "hidden_root",
+        "weight": 6,
+        "score_target": "day_master.strength_score",
+        "signal": "root_score"
+      },
+      "explanation": "Chỉ thông căn tàng can, căn khí mỏng.",
+      "references": [
+        {
+          "target": "REF-SKC-000002",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "hidden_root",
+      "name": "hidden root",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "root_level",
+            "operator": "equals",
+            "value": "hidden_root"
+          }
+        ],
+        "result": {
+          "effect": "hidden_root",
+          "weight": 6,
+          "score_target": "day_master.strength_score",
+          "signal": "root_score"
+        },
+        "explanation": "Chỉ thông căn tàng can, căn khí mỏng.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "root_level"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000045",
+      "version": "1.0.0",
+      "category": "root_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "root",
+        "no_root"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 100
+      },
+      "conditions": [
+        {
+          "field": "root_level",
+          "operator": "equals",
+          "value": "no_root"
+        }
+      ],
+      "result": {
+        "effect": "no_root",
+        "weight": -20,
+        "score_target": "day_master.strength_score",
+        "signal": "root_score"
+      },
+      "explanation": "Vô căn: Nhật Chủ không bám địa chi.",
+      "references": [
+        {
+          "target": "REF-SKC-000002",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "no_root",
+      "name": "no root",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "root_level",
+            "operator": "equals",
+            "value": "no_root"
+          }
+        ],
+        "result": {
+          "effect": "no_root",
+          "weight": -20,
+          "score_target": "day_master.strength_score",
+          "signal": "root_score"
+        },
+        "explanation": "Vô căn: Nhật Chủ không bám địa chi.",
+        "evaluation": {
+          "weight": -20,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "root_level"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000046",
+      "version": "1.0.0",
+      "category": "root_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "root",
+        "day_branch"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 88
+      },
+      "conditions": [
+        {
+          "field": "day_branch_is_root",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "day_branch_root",
+        "weight": 6,
+        "score_target": "day_master.strength_score",
+        "signal": "root_seat"
+      },
+      "explanation": "Nhật chi thông căn là chỗ ngồi của Nhật Chủ, trọng số cao hơn niên/thời.",
+      "references": [
+        {
+          "target": "REF-SKC-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "day_branch_root",
+      "name": "Thông căn nhật chi",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_branch_is_root",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "day_branch_root",
+          "weight": 6,
+          "score_target": "day_master.strength_score",
+          "signal": "root_seat"
+        },
+        "explanation": "Nhật chi thông căn là chỗ ngồi của Nhật Chủ, trọng số cao hơn niên/thời.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000047",
+      "version": "1.0.0",
+      "category": "root_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "root",
+        "year_branch"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "year_branch_is_root",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "year_branch_root",
+        "weight": 3,
+        "score_target": "day_master.strength_score",
+        "signal": "root_seat"
+      },
+      "explanation": "Niên chi thông căn trợ căn xa, trọng số thấp hơn nhật/tháng.",
+      "references": [
+        {
+          "target": "REF-SKC-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "year_branch_root",
+      "name": "Thông căn niên chi",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "year_branch_is_root",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "year_branch_root",
+          "weight": 3,
+          "score_target": "day_master.strength_score",
+          "signal": "root_seat"
+        },
+        "explanation": "Niên chi thông căn trợ căn xa, trọng số thấp hơn nhật/tháng.",
+        "evaluation": {
+          "weight": 3,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000048",
+      "version": "1.0.0",
+      "category": "root_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "root",
+        "hour_branch"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 82
+      },
+      "conditions": [
+        {
+          "field": "hour_branch_is_root",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "hour_branch_root",
+        "weight": 3,
+        "score_target": "day_master.strength_score",
+        "signal": "root_seat"
+      },
+      "explanation": "Thời chi thông căn trợ căn gần, không thay thế nhật chi.",
+      "references": [
+        {
+          "target": "REF-SKC-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "hour_branch_root",
+      "name": "Thông căn thời chi",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "hour_branch_is_root",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "hour_branch_root",
+          "weight": 3,
+          "score_target": "day_master.strength_score",
+          "signal": "root_seat"
+        },
+        "explanation": "Thời chi thông căn trợ căn gần, không thay thế nhật chi.",
+        "evaluation": {
+          "weight": 3,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000049",
+      "version": "1.0.0",
+      "category": "root_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "root",
+        "month_branch"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 89
+      },
+      "conditions": [
+        {
+          "field": "month_branch_is_root",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "month_branch_root",
+        "weight": 5,
+        "score_target": "day_master.strength_score",
+        "signal": "root_seat"
+      },
+      "explanation": "Tháng chi vừa lệnh vừa căn thì thân dễ vượng; không cộng trùng month_status.",
+      "references": [
+        {
+          "target": "REF-SKC-000002",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "month_branch_root",
+      "name": "Thông căn tháng chi",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch_is_root",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "month_branch_root",
+          "weight": 5,
+          "score_target": "day_master.strength_score",
+          "signal": "root_seat"
+        },
+        "explanation": "Tháng chi vừa lệnh vừa căn thì thân dễ vượng; không cộng trùng month_status.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": true,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000050",
+      "version": "1.0.0",
+      "category": "root_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "root",
+        "storage"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 78
+      },
+      "conditions": [
+        {
+          "field": "root_branch_type",
+          "operator": "equals",
+          "value": "storage"
+        },
+        {
+          "field": "has_dm_root",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "storage_branch_root",
+        "weight": -2,
+        "score_target": "day_master.strength_score",
+        "signal": "root_quality"
+      },
+      "explanation": "Căn ở Thìn Tuất Sửu Mùi là căn kho, khí yếu hơn căn vượng/trưởng sinh.",
+      "references": [
+        {
+          "target": "REF-SKC-000002",
+          "relation": "references"
+        },
+        {
+          "target": "REF-SKC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "storage_branch_root",
+      "name": "Căn tại chi kho",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "root_branch_type",
+            "operator": "equals",
+            "value": "storage"
+          },
+          {
+            "field": "has_dm_root",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "storage_branch_root",
+          "weight": -2,
+          "score_target": "day_master.strength_score",
+          "signal": "root_quality"
+        },
+        "explanation": "Căn ở Thìn Tuất Sửu Mùi là căn kho, khí yếu hơn căn vượng/trưởng sinh.",
+        "evaluation": {
+          "weight": -2,
+          "stackable": true,
+          "max_stack": 2,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000051",
+      "version": "1.0.0",
+      "category": "root_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "root",
+        "wang"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 84
+      },
+      "conditions": [
+        {
+          "field": "root_branch_type",
+          "operator": "equals",
+          "value": "wang"
+        },
+        {
+          "field": "has_dm_root",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "wang_branch_root",
+        "weight": 4,
+        "score_target": "day_master.strength_score",
+        "signal": "root_quality"
+      },
+      "explanation": "Căn tại chi đế vượng (Mão/Ngọ/Dậu/Tý tùy hành) căn khí đầy.",
+      "references": [
+        {
+          "target": "REF-SKC-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "wang_branch_root",
+      "name": "Căn tại chi vượng",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "root_branch_type",
+            "operator": "equals",
+            "value": "wang"
+          },
+          {
+            "field": "has_dm_root",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "wang_branch_root",
+          "weight": 4,
+          "score_target": "day_master.strength_score",
+          "signal": "root_quality"
+        },
+        "explanation": "Căn tại chi đế vượng (Mão/Ngọ/Dậu/Tý tùy hành) căn khí đầy.",
+        "evaluation": {
+          "weight": 4,
+          "stackable": true,
+          "max_stack": 2,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    },
+    {
+      "id": "SKC-000052",
+      "version": "1.0.0",
+      "category": "root_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "strength",
+        "root",
+        "quality"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "foreign_element_branch_count",
+          "operator": "greater_or_equal",
+          "value": 2
+        }
+      ],
+      "result": {
+        "effect": "mixed_branch_not_root",
+        "weight": 0,
+        "score_target": "day_master.strength_score",
+        "signal": "root_quality"
+      },
+      "explanation": "Nhiều địa chi khác hành không được đếm là thông căn Nhật Chủ.",
+      "references": [
+        {
+          "target": "REF-SKC-000002",
+          "relation": "references"
+        }
+      ],
+      "code": "mixed_branch_not_root",
+      "name": "Chi đồng hiện nhưng khác hành không tính căn",
+      "metadata": {
+        "package_id": "bz_01_strength_core",
+        "domain_id": "DOM-STRENGTH",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "foreign_element_branch_count",
+            "operator": "greater_or_equal",
+            "value": 2
+          }
+        ],
+        "result": {
+          "effect": "mixed_branch_not_root",
+          "weight": 0,
+          "score_target": "day_master.strength_score",
+          "signal": "root_quality"
+        },
+        "explanation": "Nhiều địa chi khác hành không được đếm là thông căn Nhật Chủ.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "strength_score"
+        }
+      }
+    }
+  ]
+}
