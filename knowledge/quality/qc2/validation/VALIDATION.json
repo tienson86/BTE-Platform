@@ -1,0 +1,62 @@
+{
+  "schema_version": "2.0.0",
+  "sprint": "QC-2",
+  "profile": "PVP-RELEASE",
+  "validated_at": "2026-08-10T01:40:00Z",
+  "status": "pass_with_warnings",
+  "counts": {
+    "errors": 0,
+    "warnings": 1,
+    "info": 2
+  },
+  "checks": [
+    {
+      "id": "schema_validation",
+      "status": "pass"
+    },
+    {
+      "id": "metadata_validation",
+      "status": "pass"
+    },
+    {
+      "id": "dependency_validation",
+      "status": "pass"
+    },
+    {
+      "id": "reference_validation",
+      "status": "pass"
+    },
+    {
+      "id": "package_integrity",
+      "status": "pass"
+    },
+    {
+      "id": "checksum_validation",
+      "status": "pass"
+    },
+    {
+      "id": "compatibility_validation",
+      "status": "pass"
+    }
+  ],
+  "diagnostics": [
+    {
+      "code": "VAL-QC2-ENGINE",
+      "severity": "warning",
+      "message": "Snapshots are knowledge-contract canonical. Engines were not executed.",
+      "path": "snapshots"
+    },
+    {
+      "code": "VAL-QC2-SCOPE",
+      "severity": "info",
+      "message": "Additive QC-2 only. tests/golden_dataset and bz_01–bz_23 unchanged.",
+      "path": "knowledge/quality/qc2"
+    },
+    {
+      "code": "VAL-QC2-RENDER",
+      "severity": "info",
+      "message": "No PDF HTML DOCX or binary artifacts stored.",
+      "path": "snapshots"
+    }
+  ]
+}
