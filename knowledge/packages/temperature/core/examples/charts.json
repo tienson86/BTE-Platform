@@ -1,0 +1,161 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_03_temperature_core",
+  "examples": [
+    {
+      "example_id": "EX-TEC-COLD-001",
+      "title": "Thái hàn",
+      "climate": "cold",
+      "tendency": "excess_cold",
+      "chart_facts": {
+        "season": "winter",
+        "day_master_element": "water",
+        "climate_type": "cold"
+      },
+      "activates_rules": [
+        "TEC-000004",
+        "TEC-000025",
+        "TEC-000029",
+        "TEC-000096"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/TEC-000004.json",
+        "evidence/bundles/TEC-000025.json",
+        "evidence/bundles/TEC-000029.json",
+        "evidence/bundles/TEC-000096.json"
+      ],
+      "reasoning_path": "RC-TEC-COLD-001",
+      "upstream_seasonal_rules": [
+        "SEC-000028",
+        "SEC-000068"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000005",
+        "SKC-000099"
+      ]
+    },
+    {
+      "example_id": "EX-TEC-HOT-001",
+      "title": "Thái nhiệt",
+      "climate": "hot",
+      "tendency": "excess_heat",
+      "chart_facts": {
+        "season": "summer",
+        "day_master_element": "fire",
+        "climate_type": "hot"
+      },
+      "activates_rules": [
+        "TEC-000002",
+        "TEC-000033",
+        "TEC-000037",
+        "TEC-000095"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/TEC-000002.json",
+        "evidence/bundles/TEC-000033.json",
+        "evidence/bundles/TEC-000037.json",
+        "evidence/bundles/TEC-000095.json"
+      ],
+      "reasoning_path": "RC-TEC-HOT-001",
+      "upstream_seasonal_rules": [
+        "SEC-000026",
+        "SEC-000054"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000001",
+        "SKC-000098"
+      ]
+    },
+    {
+      "example_id": "EX-TEC-BAL-001",
+      "title": "Khí hậu cân",
+      "climate": "balanced",
+      "tendency": "balanced",
+      "chart_facts": {
+        "season": "spring",
+        "warm_present": true,
+        "cold_present": true
+      },
+      "activates_rules": [
+        "TEC-000001",
+        "TEC-000060",
+        "TEC-000057",
+        "TEC-000097"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/TEC-000001.json",
+        "evidence/bundles/TEC-000060.json",
+        "evidence/bundles/TEC-000057.json",
+        "evidence/bundles/TEC-000097.json"
+      ],
+      "reasoning_path": "RC-TEC-BALANCED-001",
+      "upstream_seasonal_rules": [
+        "SEC-000025",
+        "SEC-000046"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000100"
+      ]
+    },
+    {
+      "example_id": "EX-TEC-DRY-001",
+      "title": "Khí táo",
+      "climate": "dry",
+      "tendency": "dry",
+      "chart_facts": {
+        "dryness_level": "dry",
+        "fire_count": 3,
+        "season": "autumn"
+      },
+      "activates_rules": [
+        "TEC-000041",
+        "TEC-000043",
+        "TEC-000085",
+        "TEC-000035"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/TEC-000041.json",
+        "evidence/bundles/TEC-000043.json",
+        "evidence/bundles/TEC-000085.json",
+        "evidence/bundles/TEC-000035.json"
+      ],
+      "reasoning_path": "RC-TEC-HOT-001",
+      "upstream_seasonal_rules": [
+        "SEC-000027"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000001"
+      ]
+    },
+    {
+      "example_id": "EX-TEC-DAMP-001",
+      "title": "Khí thấm",
+      "climate": "damp",
+      "tendency": "damp",
+      "chart_facts": {
+        "humidity_level": "humid",
+        "water_count": 3,
+        "season": "winter"
+      },
+      "activates_rules": [
+        "TEC-000049",
+        "TEC-000051",
+        "TEC-000086",
+        "TEC-000052"
+      ],
+      "activated_evidence": [
+        "evidence/bundles/TEC-000049.json",
+        "evidence/bundles/TEC-000051.json",
+        "evidence/bundles/TEC-000086.json",
+        "evidence/bundles/TEC-000052.json"
+      ],
+      "reasoning_path": "RC-TEC-COLD-001",
+      "upstream_seasonal_rules": [
+        "SEC-000028"
+      ],
+      "upstream_strength_rules": [
+        "SKC-000099"
+      ]
+    }
+  ]
+}

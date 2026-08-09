@@ -1,0 +1,758 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_03_temperature_core",
+  "category": "climate_correction",
+  "count": 10,
+  "objects": [
+    {
+      "id": "TEC-000083",
+      "version": "1.0.0",
+      "category": "climate_correction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "correction"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "temperature_level",
+          "operator": "equals",
+          "value": "hot"
+        }
+      ],
+      "result": {
+        "effect": "correction=reduce_fire_add_water",
+        "weight": 0,
+        "signal": "climate_correction",
+        "score_target": "day_master.temperature_score",
+        "outcome": "reduce_fire_add_water"
+      },
+      "explanation": "Dùng Thủy Kim giảm Hỏa (cli_001 rec). Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+      "references": [
+        {
+          "target": "REF-TEC-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "corr_hot",
+      "name": "Nhuận hạ giáng nhiệt",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_level",
+            "operator": "equals",
+            "value": "hot"
+          }
+        ],
+        "result": {
+          "effect": "correction=reduce_fire_add_water",
+          "weight": 0,
+          "signal": "climate_correction",
+          "score_target": "day_master.temperature_score",
+          "outcome": "reduce_fire_add_water"
+        },
+        "explanation": "Dùng Thủy Kim giảm Hỏa (cli_001 rec). Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "climate_correction"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000084",
+      "version": "1.0.0",
+      "category": "climate_correction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "correction"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "temperature_level",
+          "operator": "equals",
+          "value": "cold"
+        }
+      ],
+      "result": {
+        "effect": "correction=add_fire_reduce_water",
+        "weight": 0,
+        "signal": "climate_correction",
+        "score_target": "day_master.temperature_score",
+        "outcome": "add_fire_reduce_water"
+      },
+      "explanation": "Dùng Hỏa Mộc ôn (cli_002). Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+      "references": [
+        {
+          "target": "REF-TEC-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "corr_cold",
+      "name": "Ôn dưỡng tăng dương",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_level",
+            "operator": "equals",
+            "value": "cold"
+          }
+        ],
+        "result": {
+          "effect": "correction=add_fire_reduce_water",
+          "weight": 0,
+          "signal": "climate_correction",
+          "score_target": "day_master.temperature_score",
+          "outcome": "add_fire_reduce_water"
+        },
+        "explanation": "Dùng Hỏa Mộc ôn (cli_002). Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "climate_correction"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000085",
+      "version": "1.0.0",
+      "category": "climate_correction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "correction"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "dryness_level",
+          "operator": "equals",
+          "value": "dry"
+        }
+      ],
+      "result": {
+        "effect": "correction=add_water_metal",
+        "weight": 0,
+        "signal": "climate_correction",
+        "score_target": "day_master.temperature_score",
+        "outcome": "add_water_metal"
+      },
+      "explanation": "Tăng Thủy nhuận táo (dry_001 / flw_001). Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+      "references": [
+        {
+          "target": "REF-TEC-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "corr_dry",
+      "name": "Nhuận táo",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "dryness_level",
+            "operator": "equals",
+            "value": "dry"
+          }
+        ],
+        "result": {
+          "effect": "correction=add_water_metal",
+          "weight": 0,
+          "signal": "climate_correction",
+          "score_target": "day_master.temperature_score",
+          "outcome": "add_water_metal"
+        },
+        "explanation": "Tăng Thủy nhuận táo (dry_001 / flw_001). Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000086",
+      "version": "1.0.0",
+      "category": "climate_correction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "correction"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "humidity_level",
+          "operator": "equals",
+          "value": "humid"
+        }
+      ],
+      "result": {
+        "effect": "correction=add_earth_fire",
+        "weight": 0,
+        "signal": "climate_correction",
+        "score_target": "day_master.temperature_score",
+        "outcome": "add_earth_fire"
+      },
+      "explanation": "Tăng Thổ Hỏa khối thấm (hum_001 / flw_002). Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+      "references": [
+        {
+          "target": "REF-TEC-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "corr_damp",
+      "name": "Khối thấm",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "humidity_level",
+            "operator": "equals",
+            "value": "humid"
+          }
+        ],
+        "result": {
+          "effect": "correction=add_earth_fire",
+          "weight": 0,
+          "signal": "climate_correction",
+          "score_target": "day_master.temperature_score",
+          "outcome": "add_earth_fire"
+        },
+        "explanation": "Tăng Thổ Hỏa khối thấm (hum_001 / flw_002). Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000087",
+      "version": "1.0.0",
+      "category": "climate_correction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "correction"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "temperature_level",
+          "operator": "equals",
+          "value": "warm"
+        }
+      ],
+      "result": {
+        "effect": "correction=balance_fire_water",
+        "weight": 0,
+        "signal": "climate_correction",
+        "score_target": "day_master.temperature_score",
+        "outcome": "balance_fire_water"
+      },
+      "explanation": "Khí ấm — cân Hỏa Thủy. Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+      "references": [
+        {
+          "target": "REF-TEC-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "corr_warm",
+      "name": "Cân Hỏa Thủy",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_level",
+            "operator": "equals",
+            "value": "warm"
+          }
+        ],
+        "result": {
+          "effect": "correction=balance_fire_water",
+          "weight": 0,
+          "signal": "climate_correction",
+          "score_target": "day_master.temperature_score",
+          "outcome": "balance_fire_water"
+        },
+        "explanation": "Khí ấm — cân Hỏa Thủy. Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000088",
+      "version": "1.0.0",
+      "category": "climate_correction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "correction"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "temperature_level",
+          "operator": "equals",
+          "value": "cool"
+        }
+      ],
+      "result": {
+        "effect": "correction=add_fire",
+        "weight": 0,
+        "signal": "climate_correction",
+        "score_target": "day_master.temperature_score",
+        "outcome": "add_fire"
+      },
+      "explanation": "Khí mát — tăng dương. Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+      "references": [
+        {
+          "target": "REF-TEC-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "corr_cool",
+      "name": "Tăng dương khí",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_level",
+            "operator": "equals",
+            "value": "cool"
+          }
+        ],
+        "result": {
+          "effect": "correction=add_fire",
+          "weight": 0,
+          "signal": "climate_correction",
+          "score_target": "day_master.temperature_score",
+          "outcome": "add_fire"
+        },
+        "explanation": "Khí mát — tăng dương. Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000089",
+      "version": "1.0.0",
+      "category": "climate_correction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "correction"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "warm_score",
+          "operator": "gte",
+          "value": 0.12
+        }
+      ],
+      "result": {
+        "effect": "correction=reduce_yang",
+        "weight": 0,
+        "signal": "climate_correction",
+        "score_target": "day_master.temperature_score",
+        "outcome": "reduce_yang"
+      },
+      "explanation": "flw_003. Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+      "references": [
+        {
+          "target": "REF-TEC-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "corr_hot_flow",
+      "name": "Điều hậu ấm vượng",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "warm_score",
+            "operator": "gte",
+            "value": 0.12
+          }
+        ],
+        "result": {
+          "effect": "correction=reduce_yang",
+          "weight": 0,
+          "signal": "climate_correction",
+          "score_target": "day_master.temperature_score",
+          "outcome": "reduce_yang"
+        },
+        "explanation": "flw_003. Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000090",
+      "version": "1.0.0",
+      "category": "climate_correction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "correction"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "cold_score",
+          "operator": "gte",
+          "value": 0.12
+        }
+      ],
+      "result": {
+        "effect": "correction=add_yang",
+        "weight": 0,
+        "signal": "climate_correction",
+        "score_target": "day_master.temperature_score",
+        "outcome": "add_yang"
+      },
+      "explanation": "flw_004. Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+      "references": [
+        {
+          "target": "REF-TEC-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "corr_cold_flow",
+      "name": "Điều hậu hàn vượng",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "cold_score",
+            "operator": "gte",
+            "value": 0.12
+          }
+        ],
+        "result": {
+          "effect": "correction=add_yang",
+          "weight": 0,
+          "signal": "climate_correction",
+          "score_target": "day_master.temperature_score",
+          "outcome": "add_yang"
+        },
+        "explanation": "flw_004. Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000091",
+      "version": "1.0.0",
+      "category": "climate_correction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "correction"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "dry_score",
+          "operator": "gte",
+          "value": 0.1
+        }
+      ],
+      "result": {
+        "effect": "correction=circulate_water",
+        "weight": 0,
+        "signal": "climate_correction",
+        "score_target": "day_master.temperature_score",
+        "outcome": "circulate_water"
+      },
+      "explanation": "flw_001. Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+      "references": [
+        {
+          "target": "REF-TEC-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "corr_dry_flow",
+      "name": "Lưu thông Thủy khi táo",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "dry_score",
+            "operator": "gte",
+            "value": 0.1
+          }
+        ],
+        "result": {
+          "effect": "correction=circulate_water",
+          "weight": 0,
+          "signal": "climate_correction",
+          "score_target": "day_master.temperature_score",
+          "outcome": "circulate_water"
+        },
+        "explanation": "flw_001. Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000092",
+      "version": "1.0.0",
+      "category": "climate_correction",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "correction"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 60
+      },
+      "conditions": [
+        {
+          "field": "humid_score",
+          "operator": "gte",
+          "value": 0.1
+        }
+      ],
+      "result": {
+        "effect": "correction=circulate_earth",
+        "weight": 0,
+        "signal": "climate_correction",
+        "score_target": "day_master.temperature_score",
+        "outcome": "circulate_earth"
+      },
+      "explanation": "flw_002. Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+      "references": [
+        {
+          "target": "REF-TEC-000010",
+          "relation": "references"
+        }
+      ],
+      "code": "corr_damp_flow",
+      "name": "Lưu thông Thổ khi thấm",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "humid_score",
+            "operator": "gte",
+            "value": 0.1
+          }
+        ],
+        "result": {
+          "effect": "correction=circulate_earth",
+          "weight": 0,
+          "signal": "climate_correction",
+          "score_target": "day_master.temperature_score",
+          "outcome": "circulate_earth"
+        },
+        "explanation": "flw_002. Nguyên tắc điều hậu — không phải bảng Dụng thần.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    }
+  ]
+}

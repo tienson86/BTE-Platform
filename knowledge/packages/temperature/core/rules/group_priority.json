@@ -1,0 +1,592 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_03_temperature_core",
+  "category": "group_priority",
+  "count": 8,
+  "objects": [
+    {
+      "id": "TEC-000103",
+      "version": "1.0.0",
+      "category": "group_priority",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "priority"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "active_group",
+          "operator": "equals",
+          "value": "special_dm"
+        }
+      ],
+      "result": {
+        "effect": "priority=special_dm",
+        "weight": 100,
+        "signal": "group_priority",
+        "score_target": "day_master.temperature_score"
+      },
+      "explanation": "Nhóm special_dm order=100 (06_priority_rules).",
+      "references": [
+        {
+          "target": "REF-TEC-000011",
+          "relation": "references"
+        }
+      ],
+      "code": "pri_special_dm",
+      "name": "Ưu tiên nhóm special_dm",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "active_group",
+            "operator": "equals",
+            "value": "special_dm"
+          }
+        ],
+        "result": {
+          "effect": "priority=special_dm",
+          "weight": 100,
+          "signal": "group_priority",
+          "score_target": "day_master.temperature_score"
+        },
+        "explanation": "Nhóm special_dm order=100 (06_priority_rules).",
+        "evaluation": {
+          "weight": 100,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "group_priority"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000104",
+      "version": "1.0.0",
+      "category": "group_priority",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "priority"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "active_group",
+          "operator": "equals",
+          "value": "branch_climate"
+        }
+      ],
+      "result": {
+        "effect": "priority=branch_climate",
+        "weight": 95,
+        "signal": "group_priority",
+        "score_target": "day_master.temperature_score"
+      },
+      "explanation": "Nhóm branch_climate order=95 (06_priority_rules).",
+      "references": [
+        {
+          "target": "REF-TEC-000011",
+          "relation": "references"
+        }
+      ],
+      "code": "pri_branch_climate",
+      "name": "Ưu tiên nhóm branch_climate",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "active_group",
+            "operator": "equals",
+            "value": "branch_climate"
+          }
+        ],
+        "result": {
+          "effect": "priority=branch_climate",
+          "weight": 95,
+          "signal": "group_priority",
+          "score_target": "day_master.temperature_score"
+        },
+        "explanation": "Nhóm branch_climate order=95 (06_priority_rules).",
+        "evaluation": {
+          "weight": 95,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "group_priority"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000105",
+      "version": "1.0.0",
+      "category": "group_priority",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "priority"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "active_group",
+          "operator": "equals",
+          "value": "seasonal_temp_adjustment"
+        }
+      ],
+      "result": {
+        "effect": "priority=seasonal_temp_adjustment",
+        "weight": 90,
+        "signal": "group_priority",
+        "score_target": "day_master.temperature_score"
+      },
+      "explanation": "Nhóm seasonal_temp_adjustment order=90 (06_priority_rules).",
+      "references": [
+        {
+          "target": "REF-TEC-000011",
+          "relation": "references"
+        }
+      ],
+      "code": "pri_seasonal_temp_adjustment",
+      "name": "Ưu tiên nhóm seasonal_temp_adjustment",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "active_group",
+            "operator": "equals",
+            "value": "seasonal_temp_adjustment"
+          }
+        ],
+        "result": {
+          "effect": "priority=seasonal_temp_adjustment",
+          "weight": 90,
+          "signal": "group_priority",
+          "score_target": "day_master.temperature_score"
+        },
+        "explanation": "Nhóm seasonal_temp_adjustment order=90 (06_priority_rules).",
+        "evaluation": {
+          "weight": 90,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "group_priority"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000106",
+      "version": "1.0.0",
+      "category": "group_priority",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "priority"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "active_group",
+          "operator": "equals",
+          "value": "hot_climate"
+        }
+      ],
+      "result": {
+        "effect": "priority=hot_climate",
+        "weight": 88,
+        "signal": "group_priority",
+        "score_target": "day_master.temperature_score"
+      },
+      "explanation": "Nhóm hot_climate order=88 (06_priority_rules).",
+      "references": [
+        {
+          "target": "REF-TEC-000011",
+          "relation": "references"
+        }
+      ],
+      "code": "pri_hot_climate",
+      "name": "Ưu tiên nhóm hot_climate",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "active_group",
+            "operator": "equals",
+            "value": "hot_climate"
+          }
+        ],
+        "result": {
+          "effect": "priority=hot_climate",
+          "weight": 88,
+          "signal": "group_priority",
+          "score_target": "day_master.temperature_score"
+        },
+        "explanation": "Nhóm hot_climate order=88 (06_priority_rules).",
+        "evaluation": {
+          "weight": 88,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "group_priority"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000107",
+      "version": "1.0.0",
+      "category": "group_priority",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "priority"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "active_group",
+          "operator": "equals",
+          "value": "cold_climate"
+        }
+      ],
+      "result": {
+        "effect": "priority=cold_climate",
+        "weight": 88,
+        "signal": "group_priority",
+        "score_target": "day_master.temperature_score"
+      },
+      "explanation": "Nhóm cold_climate order=88 (06_priority_rules).",
+      "references": [
+        {
+          "target": "REF-TEC-000011",
+          "relation": "references"
+        }
+      ],
+      "code": "pri_cold_climate",
+      "name": "Ưu tiên nhóm cold_climate",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "active_group",
+            "operator": "equals",
+            "value": "cold_climate"
+          }
+        ],
+        "result": {
+          "effect": "priority=cold_climate",
+          "weight": 88,
+          "signal": "group_priority",
+          "score_target": "day_master.temperature_score"
+        },
+        "explanation": "Nhóm cold_climate order=88 (06_priority_rules).",
+        "evaluation": {
+          "weight": 88,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "group_priority"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000108",
+      "version": "1.0.0",
+      "category": "group_priority",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "priority"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "active_group",
+          "operator": "equals",
+          "value": "dry_climate"
+        }
+      ],
+      "result": {
+        "effect": "priority=dry_climate",
+        "weight": 85,
+        "signal": "group_priority",
+        "score_target": "day_master.temperature_score"
+      },
+      "explanation": "Nhóm dry_climate order=85 (06_priority_rules).",
+      "references": [
+        {
+          "target": "REF-TEC-000011",
+          "relation": "references"
+        }
+      ],
+      "code": "pri_dry_climate",
+      "name": "Ưu tiên nhóm dry_climate",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "active_group",
+            "operator": "equals",
+            "value": "dry_climate"
+          }
+        ],
+        "result": {
+          "effect": "priority=dry_climate",
+          "weight": 85,
+          "signal": "group_priority",
+          "score_target": "day_master.temperature_score"
+        },
+        "explanation": "Nhóm dry_climate order=85 (06_priority_rules).",
+        "evaluation": {
+          "weight": 85,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "group_priority"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000109",
+      "version": "1.0.0",
+      "category": "group_priority",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "priority"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "active_group",
+          "operator": "equals",
+          "value": "damp_climate"
+        }
+      ],
+      "result": {
+        "effect": "priority=damp_climate",
+        "weight": 85,
+        "signal": "group_priority",
+        "score_target": "day_master.temperature_score"
+      },
+      "explanation": "Nhóm damp_climate order=85 (06_priority_rules).",
+      "references": [
+        {
+          "target": "REF-TEC-000011",
+          "relation": "references"
+        }
+      ],
+      "code": "pri_damp_climate",
+      "name": "Ưu tiên nhóm damp_climate",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "active_group",
+            "operator": "equals",
+            "value": "damp_climate"
+          }
+        ],
+        "result": {
+          "effect": "priority=damp_climate",
+          "weight": 85,
+          "signal": "group_priority",
+          "score_target": "day_master.temperature_score"
+        },
+        "explanation": "Nhóm damp_climate order=85 (06_priority_rules).",
+        "evaluation": {
+          "weight": 85,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "group_priority"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000110",
+      "version": "1.0.0",
+      "category": "group_priority",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "priority"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 30
+      },
+      "conditions": [
+        {
+          "field": "active_group",
+          "operator": "equals",
+          "value": "climate_correction"
+        }
+      ],
+      "result": {
+        "effect": "priority=climate_correction",
+        "weight": 80,
+        "signal": "group_priority",
+        "score_target": "day_master.temperature_score"
+      },
+      "explanation": "Nhóm climate_correction order=80 (06_priority_rules).",
+      "references": [
+        {
+          "target": "REF-TEC-000011",
+          "relation": "references"
+        }
+      ],
+      "code": "pri_climate_correction",
+      "name": "Ưu tiên nhóm climate_correction",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "active_group",
+            "operator": "equals",
+            "value": "climate_correction"
+          }
+        ],
+        "result": {
+          "effect": "priority=climate_correction",
+          "weight": 80,
+          "signal": "group_priority",
+          "score_target": "day_master.temperature_score"
+        },
+        "explanation": "Nhóm climate_correction order=80 (06_priority_rules).",
+        "evaluation": {
+          "weight": 80,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "group_priority"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    }
+  ]
+}

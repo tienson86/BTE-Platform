@@ -1,0 +1,638 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_03_temperature_core",
+  "category": "dry_climate",
+  "count": 8,
+  "objects": [
+    {
+      "id": "TEC-000041",
+      "version": "1.0.0",
+      "category": "dry_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "dry"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "dryness_level",
+          "operator": "equals",
+          "value": "dry"
+        }
+      ],
+      "result": {
+        "effect": "climate=dry",
+        "weight": 18,
+        "signal": "dryness",
+        "score_target": "day_master.temperature_score",
+        "outcome": "dry"
+      },
+      "explanation": "Khí táo nặng (dry_001). Trục táo–thấm, không phải sức thân.",
+      "references": [
+        {
+          "target": "REF-TEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "dry_level",
+      "name": "Táo: dry_level",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "dryness_level",
+            "operator": "equals",
+            "value": "dry"
+          }
+        ],
+        "result": {
+          "effect": "climate=dry",
+          "weight": 18,
+          "signal": "dryness",
+          "score_target": "day_master.temperature_score",
+          "outcome": "dry"
+        },
+        "explanation": "Khí táo nặng (dry_001). Trục táo–thấm, không phải sức thân.",
+        "evaluation": {
+          "weight": 18,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "dry_climate"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000042",
+      "version": "1.0.0",
+      "category": "dry_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "dry"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "dryness_level",
+          "operator": "equals",
+          "value": "slightly_dry"
+        }
+      ],
+      "result": {
+        "effect": "climate=dry",
+        "weight": 12,
+        "signal": "dryness",
+        "score_target": "day_master.temperature_score",
+        "outcome": "dry"
+      },
+      "explanation": "Hơi táo (dry_002). Trục táo–thấm, không phải sức thân.",
+      "references": [
+        {
+          "target": "REF-TEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "dry_slight",
+      "name": "Táo: dry_slight",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "dryness_level",
+            "operator": "equals",
+            "value": "slightly_dry"
+          }
+        ],
+        "result": {
+          "effect": "climate=dry",
+          "weight": 12,
+          "signal": "dryness",
+          "score_target": "day_master.temperature_score",
+          "outcome": "dry"
+        },
+        "explanation": "Hơi táo (dry_002). Trục táo–thấm, không phải sức thân.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000043",
+      "version": "1.0.0",
+      "category": "dry_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "dry"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "fire_count",
+          "operator": "gte",
+          "value": 3
+        }
+      ],
+      "result": {
+        "effect": "climate=dry",
+        "weight": 8,
+        "signal": "dryness",
+        "score_target": "day_master.temperature_score",
+        "outcome": "dry"
+      },
+      "explanation": "Hỏa ≥3 gây khô (dry_003). Trục táo–thấm, không phải sức thân.",
+      "references": [
+        {
+          "target": "REF-TEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "dry_fire3",
+      "name": "Táo: dry_fire3",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "fire_count",
+            "operator": "gte",
+            "value": 3
+          }
+        ],
+        "result": {
+          "effect": "climate=dry",
+          "weight": 8,
+          "signal": "dryness",
+          "score_target": "day_master.temperature_score",
+          "outcome": "dry"
+        },
+        "explanation": "Hỏa ≥3 gây khô (dry_003). Trục táo–thấm, không phải sức thân.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000044",
+      "version": "1.0.0",
+      "category": "dry_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "dry"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "earth_count",
+          "operator": "gte",
+          "value": 4
+        }
+      ],
+      "result": {
+        "effect": "climate=dry",
+        "weight": 6,
+        "signal": "dryness",
+        "score_target": "day_master.temperature_score",
+        "outcome": "dry"
+      },
+      "explanation": "Thổ ≥4 khí táo (dry_004). Trục táo–thấm, không phải sức thân.",
+      "references": [
+        {
+          "target": "REF-TEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "dry_earth4",
+      "name": "Táo: dry_earth4",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "earth_count",
+            "operator": "gte",
+            "value": 4
+          }
+        ],
+        "result": {
+          "effect": "climate=dry",
+          "weight": 6,
+          "signal": "dryness",
+          "score_target": "day_master.temperature_score",
+          "outcome": "dry"
+        },
+        "explanation": "Thổ ≥4 khí táo (dry_004). Trục táo–thấm, không phải sức thân.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000045",
+      "version": "1.0.0",
+      "category": "dry_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "dry"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        },
+        {
+          "field": "dryness_level",
+          "operator": "equals",
+          "value": "dry"
+        }
+      ],
+      "result": {
+        "effect": "climate=dry",
+        "weight": 10,
+        "signal": "dryness",
+        "score_target": "day_master.temperature_score",
+        "outcome": "dry"
+      },
+      "explanation": "Thu kim táo. Trục táo–thấm, không phải sức thân.",
+      "references": [
+        {
+          "target": "REF-TEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "dry_autumn",
+      "name": "Táo: dry_autumn",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          },
+          {
+            "field": "dryness_level",
+            "operator": "equals",
+            "value": "dry"
+          }
+        ],
+        "result": {
+          "effect": "climate=dry",
+          "weight": 10,
+          "signal": "dryness",
+          "score_target": "day_master.temperature_score",
+          "outcome": "dry"
+        },
+        "explanation": "Thu kim táo. Trục táo–thấm, không phải sức thân.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000046",
+      "version": "1.0.0",
+      "category": "dry_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "dry"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "metal"
+        },
+        {
+          "field": "dryness_level",
+          "operator": "equals",
+          "value": "dry"
+        }
+      ],
+      "result": {
+        "effect": "climate=dry",
+        "weight": 8,
+        "signal": "dryness",
+        "score_target": "day_master.temperature_score",
+        "outcome": "dry"
+      },
+      "explanation": "Nhật Kim tăng táo. Trục táo–thấm, không phải sức thân.",
+      "references": [
+        {
+          "target": "REF-TEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "dry_metal_dm",
+      "name": "Táo: dry_metal_dm",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "metal"
+          },
+          {
+            "field": "dryness_level",
+            "operator": "equals",
+            "value": "dry"
+          }
+        ],
+        "result": {
+          "effect": "climate=dry",
+          "weight": 8,
+          "signal": "dryness",
+          "score_target": "day_master.temperature_score",
+          "outcome": "dry"
+        },
+        "explanation": "Nhật Kim tăng táo. Trục táo–thấm, không phải sức thân.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000047",
+      "version": "1.0.0",
+      "category": "dry_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "dry"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "climate_type",
+          "operator": "equals",
+          "value": "hot"
+        },
+        {
+          "field": "dryness_level",
+          "operator": "equals",
+          "value": "dry"
+        }
+      ],
+      "result": {
+        "effect": "climate=dry",
+        "weight": 12,
+        "signal": "dryness",
+        "score_target": "day_master.temperature_score",
+        "outcome": "dry"
+      },
+      "explanation": "Nóng + táo. Trục táo–thấm, không phải sức thân.",
+      "references": [
+        {
+          "target": "REF-TEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "dry_hot_combo",
+      "name": "Táo: dry_hot_combo",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "climate_type",
+            "operator": "equals",
+            "value": "hot"
+          },
+          {
+            "field": "dryness_level",
+            "operator": "equals",
+            "value": "dry"
+          }
+        ],
+        "result": {
+          "effect": "climate=dry",
+          "weight": 12,
+          "signal": "dryness",
+          "score_target": "day_master.temperature_score",
+          "outcome": "dry"
+        },
+        "explanation": "Nóng + táo. Trục táo–thấm, không phải sức thân.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000048",
+      "version": "1.0.0",
+      "category": "dry_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "dry"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "dryness_level",
+          "operator": "equals",
+          "value": "normal"
+        }
+      ],
+      "result": {
+        "effect": "climate=dry",
+        "weight": -5,
+        "signal": "dryness",
+        "score_target": "day_master.temperature_score",
+        "outcome": "dry"
+      },
+      "explanation": "Không táo (dry_005). Trục táo–thấm, không phải sức thân.",
+      "references": [
+        {
+          "target": "REF-TEC-000005",
+          "relation": "references"
+        }
+      ],
+      "code": "dry_normal",
+      "name": "Táo: dry_normal",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "dryness_level",
+            "operator": "equals",
+            "value": "normal"
+          }
+        ],
+        "result": {
+          "effect": "climate=dry",
+          "weight": -5,
+          "signal": "dryness",
+          "score_target": "day_master.temperature_score",
+          "outcome": "dry"
+        },
+        "explanation": "Không táo (dry_005). Trục táo–thấm, không phải sức thân.",
+        "evaluation": {
+          "weight": -5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "dry_climate"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    }
+  ]
+}

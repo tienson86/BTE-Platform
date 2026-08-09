@@ -1,0 +1,76 @@
+{
+  "edges": [
+    {
+      "edge_id": "RE-TEC-COLD-001",
+      "source": "RN-TEC-COLD-OBS-001",
+      "target": "RN-TEC-COLD-EVD-001",
+      "relationship": "requires",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TEC-COLD-002",
+      "source": "RN-TEC-COLD-EVD-001",
+      "target": "RN-TEC-COLD-INF-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TEC-COLD-003",
+      "source": "RN-TEC-COLD-INF-001",
+      "target": "RN-TEC-COLD-MID-001",
+      "relationship": "supports",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TEC-COLD-004",
+      "source": "RN-TEC-COLD-MID-001",
+      "target": "RN-TEC-COLD-FIN-001",
+      "relationship": "derives",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TEC-COLD-005",
+      "source": "RN-TEC-COLD-OBS-001",
+      "target": "RN-TEC-COLD-ALT-001",
+      "relationship": "extends",
+      "weight": 0.4,
+      "direction": "forward",
+      "condition": "unused_branch"
+    },
+    {
+      "edge_id": "RE-TEC-COLD-006",
+      "source": "RN-TEC-COLD-CON-001",
+      "target": "RN-TEC-COLD-FIN-001",
+      "relationship": "contradicts",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TEC-COLD-007",
+      "source": "RN-TEC-COLD-FIN-001",
+      "target": "RN-TEC-COLD-CON-001",
+      "relationship": "invalidates",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    },
+    {
+      "edge_id": "RE-TEC-COLD-008",
+      "source": "RN-TEC-COLD-MID-001",
+      "target": "RN-TEC-COLD-FIN-001",
+      "relationship": "confirms",
+      "weight": 1.0,
+      "direction": "forward",
+      "condition": null
+    }
+  ]
+}

@@ -1,0 +1,638 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_03_temperature_core",
+  "category": "damp_climate",
+  "count": 8,
+  "objects": [
+    {
+      "id": "TEC-000049",
+      "version": "1.0.0",
+      "category": "damp_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "damp"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "humidity_level",
+          "operator": "equals",
+          "value": "humid"
+        }
+      ],
+      "result": {
+        "effect": "climate=damp",
+        "weight": 18,
+        "signal": "humidity",
+        "score_target": "day_master.temperature_score",
+        "outcome": "damp"
+      },
+      "explanation": "Khí thấm nặng (hum_001). Trục táo–thấm.",
+      "references": [
+        {
+          "target": "REF-TEC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "damp_level",
+      "name": "Thấm: damp_level",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "humidity_level",
+            "operator": "equals",
+            "value": "humid"
+          }
+        ],
+        "result": {
+          "effect": "climate=damp",
+          "weight": 18,
+          "signal": "humidity",
+          "score_target": "day_master.temperature_score",
+          "outcome": "damp"
+        },
+        "explanation": "Khí thấm nặng (hum_001). Trục táo–thấm.",
+        "evaluation": {
+          "weight": 18,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "damp_climate"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000050",
+      "version": "1.0.0",
+      "category": "damp_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "damp"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "humidity_level",
+          "operator": "equals",
+          "value": "slightly_humid"
+        }
+      ],
+      "result": {
+        "effect": "climate=damp",
+        "weight": 12,
+        "signal": "humidity",
+        "score_target": "day_master.temperature_score",
+        "outcome": "damp"
+      },
+      "explanation": "Hơi thấm (hum_002). Trục táo–thấm.",
+      "references": [
+        {
+          "target": "REF-TEC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "damp_slight",
+      "name": "Thấm: damp_slight",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "humidity_level",
+            "operator": "equals",
+            "value": "slightly_humid"
+          }
+        ],
+        "result": {
+          "effect": "climate=damp",
+          "weight": 12,
+          "signal": "humidity",
+          "score_target": "day_master.temperature_score",
+          "outcome": "damp"
+        },
+        "explanation": "Hơi thấm (hum_002). Trục táo–thấm.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000051",
+      "version": "1.0.0",
+      "category": "damp_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "damp"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "water_count",
+          "operator": "gte",
+          "value": 3
+        }
+      ],
+      "result": {
+        "effect": "climate=damp",
+        "weight": 8,
+        "signal": "humidity",
+        "score_target": "day_master.temperature_score",
+        "outcome": "damp"
+      },
+      "explanation": "Thủy ≥3 gây ẩm (hum_003). Trục táo–thấm.",
+      "references": [
+        {
+          "target": "REF-TEC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "damp_water3",
+      "name": "Thấm: damp_water3",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "water_count",
+            "operator": "gte",
+            "value": 3
+          }
+        ],
+        "result": {
+          "effect": "climate=damp",
+          "weight": 8,
+          "signal": "humidity",
+          "score_target": "day_master.temperature_score",
+          "outcome": "damp"
+        },
+        "explanation": "Thủy ≥3 gây ẩm (hum_003). Trục táo–thấm.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000052",
+      "version": "1.0.0",
+      "category": "damp_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "damp"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        },
+        {
+          "field": "water_count",
+          "operator": "gte",
+          "value": 2
+        }
+      ],
+      "result": {
+        "effect": "climate=damp",
+        "weight": 6,
+        "signal": "humidity",
+        "score_target": "day_master.temperature_score",
+        "outcome": "damp"
+      },
+      "explanation": "Đông thấm hàn (hum_004). Trục táo–thấm.",
+      "references": [
+        {
+          "target": "REF-TEC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "damp_winter_water",
+      "name": "Thấm: damp_winter_water",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          },
+          {
+            "field": "water_count",
+            "operator": "gte",
+            "value": 2
+          }
+        ],
+        "result": {
+          "effect": "climate=damp",
+          "weight": 6,
+          "signal": "humidity",
+          "score_target": "day_master.temperature_score",
+          "outcome": "damp"
+        },
+        "explanation": "Đông thấm hàn (hum_004). Trục táo–thấm.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000053",
+      "version": "1.0.0",
+      "category": "damp_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "damp"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "water"
+        },
+        {
+          "field": "humidity_level",
+          "operator": "equals",
+          "value": "humid"
+        }
+      ],
+      "result": {
+        "effect": "climate=damp",
+        "weight": 8,
+        "signal": "humidity",
+        "score_target": "day_master.temperature_score",
+        "outcome": "damp"
+      },
+      "explanation": "Nhật Thủy tăng thấm. Trục táo–thấm.",
+      "references": [
+        {
+          "target": "REF-TEC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "damp_dm_water",
+      "name": "Thấm: damp_dm_water",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "water"
+          },
+          {
+            "field": "humidity_level",
+            "operator": "equals",
+            "value": "humid"
+          }
+        ],
+        "result": {
+          "effect": "climate=damp",
+          "weight": 8,
+          "signal": "humidity",
+          "score_target": "day_master.temperature_score",
+          "outcome": "damp"
+        },
+        "explanation": "Nhật Thủy tăng thấm. Trục táo–thấm.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000054",
+      "version": "1.0.0",
+      "category": "damp_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "damp"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "climate_type",
+          "operator": "equals",
+          "value": "cold"
+        },
+        {
+          "field": "humidity_level",
+          "operator": "equals",
+          "value": "humid"
+        }
+      ],
+      "result": {
+        "effect": "climate=damp",
+        "weight": 12,
+        "signal": "humidity",
+        "score_target": "day_master.temperature_score",
+        "outcome": "damp"
+      },
+      "explanation": "Hàn + thấm. Trục táo–thấm.",
+      "references": [
+        {
+          "target": "REF-TEC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "damp_cold_combo",
+      "name": "Thấm: damp_cold_combo",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "climate_type",
+            "operator": "equals",
+            "value": "cold"
+          },
+          {
+            "field": "humidity_level",
+            "operator": "equals",
+            "value": "humid"
+          }
+        ],
+        "result": {
+          "effect": "climate=damp",
+          "weight": 12,
+          "signal": "humidity",
+          "score_target": "day_master.temperature_score",
+          "outcome": "damp"
+        },
+        "explanation": "Hàn + thấm. Trục táo–thấm.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000055",
+      "version": "1.0.0",
+      "category": "damp_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "damp"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "month_branch",
+          "operator": "equals",
+          "value": "thin"
+        }
+      ],
+      "result": {
+        "effect": "climate=damp",
+        "weight": 5,
+        "signal": "humidity",
+        "score_target": "day_master.temperature_score",
+        "outcome": "damp"
+      },
+      "explanation": "Thìn thổ thấp ẩm. Trục táo–thấm.",
+      "references": [
+        {
+          "target": "REF-TEC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "damp_chen",
+      "name": "Thấm: damp_chen",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "month_branch",
+            "operator": "equals",
+            "value": "thin"
+          }
+        ],
+        "result": {
+          "effect": "climate=damp",
+          "weight": 5,
+          "signal": "humidity",
+          "score_target": "day_master.temperature_score",
+          "outcome": "damp"
+        },
+        "explanation": "Thìn thổ thấp ẩm. Trục táo–thấm.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000056",
+      "version": "1.0.0",
+      "category": "damp_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "damp"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 80
+      },
+      "conditions": [
+        {
+          "field": "humidity_level",
+          "operator": "equals",
+          "value": "normal"
+        }
+      ],
+      "result": {
+        "effect": "climate=damp",
+        "weight": -5,
+        "signal": "humidity",
+        "score_target": "day_master.temperature_score",
+        "outcome": "damp"
+      },
+      "explanation": "Không thấm (hum_005). Trục táo–thấm.",
+      "references": [
+        {
+          "target": "REF-TEC-000006",
+          "relation": "references"
+        }
+      ],
+      "code": "damp_normal",
+      "name": "Thấm: damp_normal",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "humidity_level",
+            "operator": "equals",
+            "value": "normal"
+          }
+        ],
+        "result": {
+          "effect": "climate=damp",
+          "weight": -5,
+          "signal": "humidity",
+          "score_target": "day_master.temperature_score",
+          "outcome": "damp"
+        },
+        "explanation": "Không thấm (hum_005). Trục táo–thấm.",
+        "evaluation": {
+          "weight": -5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "damp_climate"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    }
+  ]
+}

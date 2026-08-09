@@ -1,0 +1,59 @@
+{
+  "trace_id": "RT-TEC-COLD-001",
+  "chain_id": "RC-TEC-COLD-001",
+  "package_version": "1.0.0",
+  "activated_rules": [
+    "TEC-000004",
+    "TEC-000025",
+    "TEC-000029",
+    "TEC-000096",
+    "TEC-000084",
+    "TEC-000093"
+  ],
+  "activated_evidence": [
+    "evidence/bundles/TEC-000004.json",
+    "evidence/bundles/TEC-000025.json",
+    "evidence/bundles/TEC-000029.json",
+    "evidence/bundles/TEC-000096.json",
+    "evidence/bundles/TEC-000084.json",
+    "evidence/bundles/TEC-000093.json"
+  ],
+  "activated_upstream_seasonal": [
+    "SEC-000028",
+    "SEC-000068",
+    "SEC-000105"
+  ],
+  "activated_upstream_strength": [
+    "SKC-000005",
+    "SKC-000099"
+  ],
+  "decision_path": [
+    "RN-TEC-COLD-OBS-001",
+    "RN-TEC-COLD-EVD-001",
+    "RN-TEC-COLD-INF-001",
+    "RN-TEC-COLD-MID-001",
+    "RN-TEC-COLD-FIN-001"
+  ],
+  "confidence_propagation": [
+    {
+      "node_id": "RN-TEC-COLD-OBS-001",
+      "mode": "declared"
+    },
+    {
+      "node_id": "RN-TEC-COLD-EVD-001",
+      "mode": "inherited"
+    },
+    {
+      "node_id": "RN-TEC-COLD-INF-001",
+      "mode": "inherited"
+    },
+    {
+      "node_id": "RN-TEC-COLD-MID-001",
+      "mode": "combined"
+    },
+    {
+      "node_id": "RN-TEC-COLD-FIN-001",
+      "mode": "combined"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "chain_id": "RC-TEC-HOT-001",
+  "title": "Khí hậu nhiệt — Nhật Hỏa mùa Hạ",
+  "package_id": "bz_03_temperature_core",
+  "package_version": "1.0.0",
+  "example_id": "EX-TEC-HOT-001",
+  "climate": "hot",
+  "stages": [
+    {
+      "stage": "observation",
+      "node_id": "RN-TEC-HOT-OBS-001"
+    },
+    {
+      "stage": "evidence",
+      "node_id": "RN-TEC-HOT-EVD-001"
+    },
+    {
+      "stage": "inference",
+      "node_id": "RN-TEC-HOT-INF-001"
+    },
+    {
+      "stage": "intermediate_conclusion",
+      "node_id": "RN-TEC-HOT-MID-001"
+    },
+    {
+      "stage": "final_conclusion",
+      "node_id": "RN-TEC-HOT-FIN-001"
+    }
+  ],
+  "rule_ids": [
+    "TEC-000002",
+    "TEC-000033",
+    "TEC-000037",
+    "TEC-000095",
+    "TEC-000083",
+    "TEC-000093"
+  ],
+  "upstream_seasonal_rules": [
+    "SEC-000026",
+    "SEC-000054",
+    "SEC-000103"
+  ],
+  "upstream_strength_rules": [
+    "SKC-000001",
+    "SKC-000098"
+  ],
+  "dependency_chain": [
+    "calendar",
+    "four_pillars",
+    "seasonal",
+    "strength",
+    "temperature"
+  ],
+  "evidence_refs": [
+    "evidence/bundles/TEC-000002.json",
+    "evidence/bundles/TEC-000033.json",
+    "evidence/bundles/TEC-000037.json",
+    "evidence/bundles/TEC-000095.json",
+    "evidence/bundles/TEC-000083.json",
+    "evidence/bundles/TEC-000093.json"
+  ],
+  "node_ids": [
+    "RN-TEC-HOT-OBS-001",
+    "RN-TEC-HOT-EVD-001",
+    "RN-TEC-HOT-INF-001",
+    "RN-TEC-HOT-MID-001",
+    "RN-TEC-HOT-FIN-001",
+    "RN-TEC-HOT-ALT-001",
+    "RN-TEC-HOT-CON-001"
+  ],
+  "edge_ids": [
+    "RE-TEC-HOT-001",
+    "RE-TEC-HOT-002",
+    "RE-TEC-HOT-003",
+    "RE-TEC-HOT-004",
+    "RE-TEC-HOT-005",
+    "RE-TEC-HOT-006",
+    "RE-TEC-HOT-007",
+    "RE-TEC-HOT-008"
+  ]
+}

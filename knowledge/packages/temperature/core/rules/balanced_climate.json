@@ -1,0 +1,638 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_03_temperature_core",
+  "category": "balanced_climate",
+  "count": 8,
+  "objects": [
+    {
+      "id": "TEC-000057",
+      "version": "1.0.0",
+      "category": "balanced_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "balanced"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "warm_present",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "field": "cold_present",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "climate=balanced",
+        "weight": 10,
+        "signal": "balanced_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "balanced"
+      },
+      "explanation": "Ấm hàn đều (bal_001). Không phải thân trung hòa SKC.",
+      "references": [
+        {
+          "target": "REF-TEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "bal_warm_cold",
+      "name": "Ấm–hàn cùng có",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "warm_present",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "field": "cold_present",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "climate=balanced",
+          "weight": 10,
+          "signal": "balanced_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "balanced"
+        },
+        "explanation": "Ấm hàn đều (bal_001). Không phải thân trung hòa SKC.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000058",
+      "version": "1.0.0",
+      "category": "balanced_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "balanced"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "dry_present",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "field": "humid_present",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "climate=balanced",
+        "weight": 8,
+        "signal": "balanced_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "balanced"
+      },
+      "explanation": "Táo thấm đều (bal_002). Không phải thân trung hòa SKC.",
+      "references": [
+        {
+          "target": "REF-TEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "bal_dry_damp",
+      "name": "Táo–thấm cùng có",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "dry_present",
+            "operator": "equals",
+            "value": true
+          },
+          {
+            "field": "humid_present",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "climate=balanced",
+          "weight": 8,
+          "signal": "balanced_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "balanced"
+        },
+        "explanation": "Táo thấm đều (bal_002). Không phải thân trung hòa SKC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000059",
+      "version": "1.0.0",
+      "category": "balanced_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "balanced"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "fire_count",
+          "operator": "equals",
+          "value": 2
+        },
+        {
+          "field": "water_count",
+          "operator": "equals",
+          "value": 2
+        }
+      ],
+      "result": {
+        "effect": "climate=balanced",
+        "weight": 5,
+        "signal": "balanced_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "balanced"
+      },
+      "explanation": "Hỏa Thủy cân (bal_003). Không phải thân trung hòa SKC.",
+      "references": [
+        {
+          "target": "REF-TEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "bal_fire_water_eq",
+      "name": "Hỏa=Thủy=2",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "fire_count",
+            "operator": "equals",
+            "value": 2
+          },
+          {
+            "field": "water_count",
+            "operator": "equals",
+            "value": 2
+          }
+        ],
+        "result": {
+          "effect": "climate=balanced",
+          "weight": 5,
+          "signal": "balanced_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "balanced"
+        },
+        "explanation": "Hỏa Thủy cân (bal_003). Không phải thân trung hòa SKC.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000060",
+      "version": "1.0.0",
+      "category": "balanced_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "balanced"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "spring"
+        }
+      ],
+      "result": {
+        "effect": "climate=warm",
+        "weight": 8,
+        "signal": "balanced_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "warm"
+      },
+      "explanation": "Xuân ấm dịu (sea_003). Không phải thân trung hòa SKC.",
+      "references": [
+        {
+          "target": "REF-TEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "bal_spring",
+      "name": "Xuân khí ấm cân",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "spring"
+          }
+        ],
+        "result": {
+          "effect": "climate=warm",
+          "weight": 8,
+          "signal": "balanced_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "warm"
+        },
+        "explanation": "Xuân ấm dịu (sea_003). Không phải thân trung hòa SKC.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000061",
+      "version": "1.0.0",
+      "category": "balanced_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "balanced"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        }
+      ],
+      "result": {
+        "effect": "climate=cool",
+        "weight": 5,
+        "signal": "balanced_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cool"
+      },
+      "explanation": "Thu mát (sea_004). Không phải thân trung hòa SKC.",
+      "references": [
+        {
+          "target": "REF-TEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "bal_autumn",
+      "name": "Thu khí mát cân",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          }
+        ],
+        "result": {
+          "effect": "climate=cool",
+          "weight": 5,
+          "signal": "balanced_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cool"
+        },
+        "explanation": "Thu mát (sea_004). Không phải thân trung hòa SKC.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000062",
+      "version": "1.0.0",
+      "category": "balanced_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "balanced"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "temperature_band",
+          "operator": "equals",
+          "value": "warm"
+        }
+      ],
+      "result": {
+        "effect": "climate=warm",
+        "weight": 0,
+        "signal": "balanced_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "warm"
+      },
+      "explanation": "0.50–0.65 (pri_level_warm). Không phải thân trung hòa SKC.",
+      "references": [
+        {
+          "target": "REF-TEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "bal_warm_band",
+      "name": "Ngưỡng warm",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_band",
+            "operator": "equals",
+            "value": "warm"
+          }
+        ],
+        "result": {
+          "effect": "climate=warm",
+          "weight": 0,
+          "signal": "balanced_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "warm"
+        },
+        "explanation": "0.50–0.65 (pri_level_warm). Không phải thân trung hòa SKC.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "balanced_climate"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000063",
+      "version": "1.0.0",
+      "category": "balanced_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "balanced"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "temperature_band",
+          "operator": "equals",
+          "value": "cool"
+        }
+      ],
+      "result": {
+        "effect": "climate=cool",
+        "weight": 0,
+        "signal": "balanced_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cool"
+      },
+      "explanation": "0.35–0.50 (pri_level_cool). Không phải thân trung hòa SKC.",
+      "references": [
+        {
+          "target": "REF-TEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "bal_cool_band",
+      "name": "Ngưỡng cool",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_band",
+            "operator": "equals",
+            "value": "cool"
+          }
+        ],
+        "result": {
+          "effect": "climate=cool",
+          "weight": 0,
+          "signal": "balanced_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cool"
+        },
+        "explanation": "0.35–0.50 (pri_level_cool). Không phải thân trung hòa SKC.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "balanced_climate"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000064",
+      "version": "1.0.0",
+      "category": "balanced_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "balanced"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 70
+      },
+      "conditions": [
+        {
+          "field": "climate_type",
+          "operator": "equals",
+          "value": "warm"
+        }
+      ],
+      "result": {
+        "effect": "climate=warm",
+        "weight": 15,
+        "signal": "balanced_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "warm"
+      },
+      "explanation": "cli_003 tháng ấm. Không phải thân trung hòa SKC.",
+      "references": [
+        {
+          "target": "REF-TEC-000007",
+          "relation": "references"
+        }
+      ],
+      "code": "bal_climate",
+      "name": "climate_type warm/cool",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "climate_type",
+            "operator": "equals",
+            "value": "warm"
+          }
+        ],
+        "result": {
+          "effect": "climate=warm",
+          "weight": 15,
+          "signal": "balanced_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "warm"
+        },
+        "explanation": "cli_003 tháng ấm. Không phải thân trung hòa SKC.",
+        "evaluation": {
+          "weight": 15,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "balanced_climate"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    }
+  ]
+}

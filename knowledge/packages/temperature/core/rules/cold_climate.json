@@ -1,0 +1,643 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_03_temperature_core",
+  "category": "cold_climate",
+  "count": 8,
+  "objects": [
+    {
+      "id": "TEC-000025",
+      "version": "1.0.0",
+      "category": "cold_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "cold",
+        "winter"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        }
+      ],
+      "result": {
+        "effect": "climate=cold",
+        "weight": 15,
+        "signal": "cold_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cold"
+      },
+      "explanation": "Đông tăng hàn (sea_002). Không tính strength_score.",
+      "references": [
+        {
+          "target": "REF-TEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "cold_winter",
+      "name": "Hàn khí mùa Đông",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          }
+        ],
+        "result": {
+          "effect": "climate=cold",
+          "weight": 15,
+          "signal": "cold_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cold"
+        },
+        "explanation": "Đông tăng hàn (sea_002). Không tính strength_score.",
+        "evaluation": {
+          "weight": 15,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000026",
+      "version": "1.0.0",
+      "category": "cold_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "cold"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "climate_type",
+          "operator": "equals",
+          "value": "cold"
+        }
+      ],
+      "result": {
+        "effect": "climate=cold",
+        "weight": 25,
+        "signal": "cold_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cold"
+      },
+      "explanation": "Tháng lệnh khí lạnh (cli_002). Không tính strength_score.",
+      "references": [
+        {
+          "target": "REF-TEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "cold_climate_type",
+      "name": "climate_type=cold",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "climate_type",
+            "operator": "equals",
+            "value": "cold"
+          }
+        ],
+        "result": {
+          "effect": "climate=cold",
+          "weight": 25,
+          "signal": "cold_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cold"
+        },
+        "explanation": "Tháng lệnh khí lạnh (cli_002). Không tính strength_score.",
+        "evaluation": {
+          "weight": 25,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "cold_climate"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000027",
+      "version": "1.0.0",
+      "category": "cold_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "cold",
+        "water"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "water_count",
+          "operator": "gte",
+          "value": 3
+        }
+      ],
+      "result": {
+        "effect": "climate=cold",
+        "weight": 8,
+        "signal": "cold_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cold"
+      },
+      "explanation": "Thủy nhiều sinh hàn. Không tính strength_score.",
+      "references": [
+        {
+          "target": "REF-TEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "cold_water_count",
+      "name": "Thủy ≥3 tăng hàn",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "water_count",
+            "operator": "gte",
+            "value": 3
+          }
+        ],
+        "result": {
+          "effect": "climate=cold",
+          "weight": 8,
+          "signal": "cold_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cold"
+        },
+        "explanation": "Thủy nhiều sinh hàn. Không tính strength_score.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000028",
+      "version": "1.0.0",
+      "category": "cold_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "cold"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "fire_count",
+          "operator": "equals",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "climate=cold",
+        "weight": -3,
+        "signal": "cold_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cold"
+      },
+      "explanation": "Không Hỏa → mát/hàn (bal_004). Không tính strength_score.",
+      "references": [
+        {
+          "target": "REF-TEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "cold_no_fire",
+      "name": "Vắng Hỏa",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "fire_count",
+            "operator": "equals",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "climate=cold",
+          "weight": -3,
+          "signal": "cold_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cold"
+        },
+        "explanation": "Không Hỏa → mát/hàn (bal_004). Không tính strength_score.",
+        "evaluation": {
+          "weight": -3,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000029",
+      "version": "1.0.0",
+      "category": "cold_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "cold",
+        "dm"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "water"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        }
+      ],
+      "result": {
+        "effect": "climate=cold",
+        "weight": 20,
+        "signal": "cold_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cold"
+      },
+      "explanation": "spc_002 Nhật Thủy đông. Không tính strength_score.",
+      "references": [
+        {
+          "target": "REF-TEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "cold_dm_water_winter",
+      "name": "Nhật Thủy sinh Đông",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "water"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          }
+        ],
+        "result": {
+          "effect": "climate=cold",
+          "weight": 20,
+          "signal": "cold_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cold"
+        },
+        "explanation": "spc_002 Nhật Thủy đông. Không tính strength_score.",
+        "evaluation": {
+          "weight": 20,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000030",
+      "version": "1.0.0",
+      "category": "cold_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "cold",
+        "dm"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "wood"
+        },
+        {
+          "field": "climate_type",
+          "operator": "equals",
+          "value": "cold"
+        }
+      ],
+      "result": {
+        "effect": "climate=cold",
+        "weight": 15,
+        "signal": "cold_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cold"
+      },
+      "explanation": "spc_004 Mộc đông tàn. Không tính strength_score.",
+      "references": [
+        {
+          "target": "REF-TEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "cold_dm_wood_cold",
+      "name": "Nhật Mộc gặp hàn",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "wood"
+          },
+          {
+            "field": "climate_type",
+            "operator": "equals",
+            "value": "cold"
+          }
+        ],
+        "result": {
+          "effect": "climate=cold",
+          "weight": 15,
+          "signal": "cold_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cold"
+        },
+        "explanation": "spc_004 Mộc đông tàn. Không tính strength_score.",
+        "evaluation": {
+          "weight": 15,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000031",
+      "version": "1.0.0",
+      "category": "cold_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "cold"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "mid"
+        }
+      ],
+      "result": {
+        "effect": "climate=cold",
+        "weight": 10,
+        "signal": "cold_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cold"
+      },
+      "explanation": "sea_006. Không tính strength_score.",
+      "references": [
+        {
+          "target": "REF-TEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "cold_mid_winter",
+      "name": "Giữa/cuối đông hàn sâu",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "mid"
+          }
+        ],
+        "result": {
+          "effect": "climate=cold",
+          "weight": 10,
+          "signal": "cold_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cold"
+        },
+        "explanation": "sea_006. Không tính strength_score.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000032",
+      "version": "1.0.0",
+      "category": "cold_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "cold",
+        "level"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "temperature_level",
+          "operator": "equals",
+          "value": "cold"
+        }
+      ],
+      "result": {
+        "effect": "level=cold",
+        "weight": 0,
+        "signal": "cold_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cold"
+      },
+      "explanation": "Đầu ra cold cho Pattern/UG. Không tính strength_score.",
+      "references": [
+        {
+          "target": "REF-TEC-000003",
+          "relation": "references"
+        }
+      ],
+      "code": "cold_level",
+      "name": "Phân loại cold",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_level",
+            "operator": "equals",
+            "value": "cold"
+          }
+        ],
+        "result": {
+          "effect": "level=cold",
+          "weight": 0,
+          "signal": "cold_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cold"
+        },
+        "explanation": "Đầu ra cold cho Pattern/UG. Không tính strength_score.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "cold_climate"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    }
+  ]
+}

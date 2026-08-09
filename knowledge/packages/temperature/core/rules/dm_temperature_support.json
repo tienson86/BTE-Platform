@@ -1,0 +1,823 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_03_temperature_core",
+  "category": "dm_temperature_support",
+  "count": 10,
+  "objects": [
+    {
+      "id": "TEC-000065",
+      "version": "1.0.0",
+      "category": "dm_temperature_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "dm_support",
+        "wood"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 74
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "wood"
+        }
+      ],
+      "result": {
+        "effect": "dm_temp_bias=warm",
+        "weight": 6,
+        "signal": "dm_temperature_support",
+        "score_target": "day_master.temperature_score",
+        "outcome": "warm"
+      },
+      "explanation": "Mộc thiên ấm. Thiên khí hậu Nhật Chủ — không đổi strength_level.",
+      "references": [
+        {
+          "target": "REF-TEC-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_bias_wood",
+      "name": "Mộc thiên ấm",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "wood"
+          }
+        ],
+        "result": {
+          "effect": "dm_temp_bias=warm",
+          "weight": 6,
+          "signal": "dm_temperature_support",
+          "score_target": "day_master.temperature_score",
+          "outcome": "warm"
+        },
+        "explanation": "Mộc thiên ấm. Thiên khí hậu Nhật Chủ — không đổi strength_level.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "dm_temperature_support"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000066",
+      "version": "1.0.0",
+      "category": "dm_temperature_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "dm_support",
+        "fire"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 74
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "fire"
+        }
+      ],
+      "result": {
+        "effect": "dm_temp_bias=hot",
+        "weight": 10,
+        "signal": "dm_temperature_support",
+        "score_target": "day_master.temperature_score",
+        "outcome": "hot"
+      },
+      "explanation": "Hỏa thiên nóng. Thiên khí hậu Nhật Chủ — không đổi strength_level.",
+      "references": [
+        {
+          "target": "REF-TEC-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_bias_fire",
+      "name": "Hỏa thiên nóng",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "fire"
+          }
+        ],
+        "result": {
+          "effect": "dm_temp_bias=hot",
+          "weight": 10,
+          "signal": "dm_temperature_support",
+          "score_target": "day_master.temperature_score",
+          "outcome": "hot"
+        },
+        "explanation": "Hỏa thiên nóng. Thiên khí hậu Nhật Chủ — không đổi strength_level.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "dm_temperature_support"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000067",
+      "version": "1.0.0",
+      "category": "dm_temperature_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "dm_support",
+        "earth"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 74
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "earth"
+        }
+      ],
+      "result": {
+        "effect": "dm_temp_bias=neutral",
+        "weight": 0,
+        "signal": "dm_temperature_support",
+        "score_target": "day_master.temperature_score",
+        "outcome": "neutral"
+      },
+      "explanation": "Thổ trung tính khí hậu. Thiên khí hậu Nhật Chủ — không đổi strength_level.",
+      "references": [
+        {
+          "target": "REF-TEC-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_bias_earth",
+      "name": "Thổ trung tính khí hậu",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "earth"
+          }
+        ],
+        "result": {
+          "effect": "dm_temp_bias=neutral",
+          "weight": 0,
+          "signal": "dm_temperature_support",
+          "score_target": "day_master.temperature_score",
+          "outcome": "neutral"
+        },
+        "explanation": "Thổ trung tính khí hậu. Thiên khí hậu Nhật Chủ — không đổi strength_level.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "dm_temperature_support"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000068",
+      "version": "1.0.0",
+      "category": "dm_temperature_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "dm_support",
+        "metal"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 74
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "metal"
+        }
+      ],
+      "result": {
+        "effect": "dm_temp_bias=cool",
+        "weight": 6,
+        "signal": "dm_temperature_support",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cool"
+      },
+      "explanation": "Kim thiên mát/táo. Thiên khí hậu Nhật Chủ — không đổi strength_level.",
+      "references": [
+        {
+          "target": "REF-TEC-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_bias_metal",
+      "name": "Kim thiên mát/táo",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "metal"
+          }
+        ],
+        "result": {
+          "effect": "dm_temp_bias=cool",
+          "weight": 6,
+          "signal": "dm_temperature_support",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cool"
+        },
+        "explanation": "Kim thiên mát/táo. Thiên khí hậu Nhật Chủ — không đổi strength_level.",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "dm_temperature_support"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000069",
+      "version": "1.0.0",
+      "category": "dm_temperature_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "dm_support",
+        "water"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 74
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "water"
+        }
+      ],
+      "result": {
+        "effect": "dm_temp_bias=cold",
+        "weight": 10,
+        "signal": "dm_temperature_support",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cold"
+      },
+      "explanation": "Thủy thiên hàn/thấm. Thiên khí hậu Nhật Chủ — không đổi strength_level.",
+      "references": [
+        {
+          "target": "REF-TEC-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_bias_water",
+      "name": "Thủy thiên hàn/thấm",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "water"
+          }
+        ],
+        "result": {
+          "effect": "dm_temp_bias=cold",
+          "weight": 10,
+          "signal": "dm_temperature_support",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cold"
+        },
+        "explanation": "Thủy thiên hàn/thấm. Thiên khí hậu Nhật Chủ — không đổi strength_level.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "dm_temperature_support"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000070",
+      "version": "1.0.0",
+      "category": "dm_temperature_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "dm_need",
+        "fire",
+        "winter"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "fire"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        }
+      ],
+      "result": {
+        "effect": "climate_need=need_heat",
+        "weight": 12,
+        "signal": "dm_temperature_support",
+        "score_target": "day_master.temperature_score",
+        "outcome": "need_heat"
+      },
+      "explanation": "Hỏa đông cần ôn. Điều hậu ngữ cảnh; không chọn Dụng thần.",
+      "references": [
+        {
+          "target": "REF-TEC-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_need_fire_winter",
+      "name": "Nhật fire mùa winter: need_heat",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "fire"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          }
+        ],
+        "result": {
+          "effect": "climate_need=need_heat",
+          "weight": 12,
+          "signal": "dm_temperature_support",
+          "score_target": "day_master.temperature_score",
+          "outcome": "need_heat"
+        },
+        "explanation": "Hỏa đông cần ôn. Điều hậu ngữ cảnh; không chọn Dụng thần.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000071",
+      "version": "1.0.0",
+      "category": "dm_temperature_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "dm_need",
+        "water",
+        "summer"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "water"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        }
+      ],
+      "result": {
+        "effect": "climate_need=need_cool",
+        "weight": 12,
+        "signal": "dm_temperature_support",
+        "score_target": "day_master.temperature_score",
+        "outcome": "need_cool"
+      },
+      "explanation": "Thủy hè cần nhuận hạ. Điều hậu ngữ cảnh; không chọn Dụng thần.",
+      "references": [
+        {
+          "target": "REF-TEC-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_need_water_summer",
+      "name": "Nhật water mùa summer: need_cool",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "water"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          }
+        ],
+        "result": {
+          "effect": "climate_need=need_cool",
+          "weight": 12,
+          "signal": "dm_temperature_support",
+          "score_target": "day_master.temperature_score",
+          "outcome": "need_cool"
+        },
+        "explanation": "Thủy hè cần nhuận hạ. Điều hậu ngữ cảnh; không chọn Dụng thần.",
+        "evaluation": {
+          "weight": 12,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000072",
+      "version": "1.0.0",
+      "category": "dm_temperature_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "dm_need",
+        "wood",
+        "winter"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "wood"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        }
+      ],
+      "result": {
+        "effect": "climate_need=need_heat",
+        "weight": 10,
+        "signal": "dm_temperature_support",
+        "score_target": "day_master.temperature_score",
+        "outcome": "need_heat"
+      },
+      "explanation": "Mộc đông cần ấm. Điều hậu ngữ cảnh; không chọn Dụng thần.",
+      "references": [
+        {
+          "target": "REF-TEC-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_need_wood_winter",
+      "name": "Nhật wood mùa winter: need_heat",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "wood"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          }
+        ],
+        "result": {
+          "effect": "climate_need=need_heat",
+          "weight": 10,
+          "signal": "dm_temperature_support",
+          "score_target": "day_master.temperature_score",
+          "outcome": "need_heat"
+        },
+        "explanation": "Mộc đông cần ấm. Điều hậu ngữ cảnh; không chọn Dụng thần.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000073",
+      "version": "1.0.0",
+      "category": "dm_temperature_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "dm_need",
+        "metal",
+        "summer"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "metal"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        }
+      ],
+      "result": {
+        "effect": "climate_need=need_cool",
+        "weight": 10,
+        "signal": "dm_temperature_support",
+        "score_target": "day_master.temperature_score",
+        "outcome": "need_cool"
+      },
+      "explanation": "Kim hè cần giáng nhiệt. Điều hậu ngữ cảnh; không chọn Dụng thần.",
+      "references": [
+        {
+          "target": "REF-TEC-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_need_metal_summer",
+      "name": "Nhật metal mùa summer: need_cool",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "metal"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          }
+        ],
+        "result": {
+          "effect": "climate_need=need_cool",
+          "weight": 10,
+          "signal": "dm_temperature_support",
+          "score_target": "day_master.temperature_score",
+          "outcome": "need_cool"
+        },
+        "explanation": "Kim hè cần giáng nhiệt. Điều hậu ngữ cảnh; không chọn Dụng thần.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000074",
+      "version": "1.0.0",
+      "category": "dm_temperature_support",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "dm_need",
+        "earth",
+        "summer"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 76
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "earth"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        }
+      ],
+      "result": {
+        "effect": "climate_need=need_moisture",
+        "weight": 8,
+        "signal": "dm_temperature_support",
+        "score_target": "day_master.temperature_score",
+        "outcome": "need_moisture"
+      },
+      "explanation": "Thổ hè dễ táo. Điều hậu ngữ cảnh; không chọn Dụng thần.",
+      "references": [
+        {
+          "target": "REF-TEC-000008",
+          "relation": "references"
+        }
+      ],
+      "code": "dm_need_earth_summer",
+      "name": "Nhật earth mùa summer: need_moisture",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "earth"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          }
+        ],
+        "result": {
+          "effect": "climate_need=need_moisture",
+          "weight": 8,
+          "signal": "dm_temperature_support",
+          "score_target": "day_master.temperature_score",
+          "outcome": "need_moisture"
+        },
+        "explanation": "Thổ hè dễ táo. Điều hậu ngữ cảnh; không chọn Dụng thần.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    }
+  ]
+}

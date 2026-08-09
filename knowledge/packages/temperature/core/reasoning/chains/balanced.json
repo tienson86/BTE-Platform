@@ -1,0 +1,81 @@
+{
+  "chain_id": "RC-TEC-BALANCED-001",
+  "title": "Khí hậu cân — Xuân ấm",
+  "package_id": "bz_03_temperature_core",
+  "package_version": "1.0.0",
+  "example_id": "EX-TEC-BAL-001",
+  "climate": "balanced",
+  "stages": [
+    {
+      "stage": "observation",
+      "node_id": "RN-TEC-BALANCED-OBS-001"
+    },
+    {
+      "stage": "evidence",
+      "node_id": "RN-TEC-BALANCED-EVD-001"
+    },
+    {
+      "stage": "inference",
+      "node_id": "RN-TEC-BALANCED-INF-001"
+    },
+    {
+      "stage": "intermediate_conclusion",
+      "node_id": "RN-TEC-BALANCED-MID-001"
+    },
+    {
+      "stage": "final_conclusion",
+      "node_id": "RN-TEC-BALANCED-FIN-001"
+    }
+  ],
+  "rule_ids": [
+    "TEC-000001",
+    "TEC-000060",
+    "TEC-000057",
+    "TEC-000097",
+    "TEC-000087",
+    "TEC-000093"
+  ],
+  "upstream_seasonal_rules": [
+    "SEC-000025",
+    "SEC-000046",
+    "SEC-000104"
+  ],
+  "upstream_strength_rules": [
+    "SKC-000100",
+    "SKC-000103"
+  ],
+  "dependency_chain": [
+    "calendar",
+    "four_pillars",
+    "seasonal",
+    "strength",
+    "temperature"
+  ],
+  "evidence_refs": [
+    "evidence/bundles/TEC-000001.json",
+    "evidence/bundles/TEC-000060.json",
+    "evidence/bundles/TEC-000057.json",
+    "evidence/bundles/TEC-000097.json",
+    "evidence/bundles/TEC-000087.json",
+    "evidence/bundles/TEC-000093.json"
+  ],
+  "node_ids": [
+    "RN-TEC-BALANCED-OBS-001",
+    "RN-TEC-BALANCED-EVD-001",
+    "RN-TEC-BALANCED-INF-001",
+    "RN-TEC-BALANCED-MID-001",
+    "RN-TEC-BALANCED-FIN-001",
+    "RN-TEC-BALANCED-ALT-001",
+    "RN-TEC-BALANCED-CON-001"
+  ],
+  "edge_ids": [
+    "RE-TEC-BALANCED-001",
+    "RE-TEC-BALANCED-002",
+    "RE-TEC-BALANCED-003",
+    "RE-TEC-BALANCED-004",
+    "RE-TEC-BALANCED-005",
+    "RE-TEC-BALANCED-006",
+    "RE-TEC-BALANCED-007",
+    "RE-TEC-BALANCED-008"
+  ]
+}

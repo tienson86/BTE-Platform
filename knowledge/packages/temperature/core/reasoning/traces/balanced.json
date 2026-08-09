@@ -1,0 +1,59 @@
+{
+  "trace_id": "RT-TEC-BALANCED-001",
+  "chain_id": "RC-TEC-BALANCED-001",
+  "package_version": "1.0.0",
+  "activated_rules": [
+    "TEC-000001",
+    "TEC-000060",
+    "TEC-000057",
+    "TEC-000097",
+    "TEC-000087",
+    "TEC-000093"
+  ],
+  "activated_evidence": [
+    "evidence/bundles/TEC-000001.json",
+    "evidence/bundles/TEC-000060.json",
+    "evidence/bundles/TEC-000057.json",
+    "evidence/bundles/TEC-000097.json",
+    "evidence/bundles/TEC-000087.json",
+    "evidence/bundles/TEC-000093.json"
+  ],
+  "activated_upstream_seasonal": [
+    "SEC-000025",
+    "SEC-000046",
+    "SEC-000104"
+  ],
+  "activated_upstream_strength": [
+    "SKC-000100",
+    "SKC-000103"
+  ],
+  "decision_path": [
+    "RN-TEC-BALANCED-OBS-001",
+    "RN-TEC-BALANCED-EVD-001",
+    "RN-TEC-BALANCED-INF-001",
+    "RN-TEC-BALANCED-MID-001",
+    "RN-TEC-BALANCED-FIN-001"
+  ],
+  "confidence_propagation": [
+    {
+      "node_id": "RN-TEC-BALANCED-OBS-001",
+      "mode": "declared"
+    },
+    {
+      "node_id": "RN-TEC-BALANCED-EVD-001",
+      "mode": "inherited"
+    },
+    {
+      "node_id": "RN-TEC-BALANCED-INF-001",
+      "mode": "inherited"
+    },
+    {
+      "node_id": "RN-TEC-BALANCED-MID-001",
+      "mode": "combined"
+    },
+    {
+      "node_id": "RN-TEC-BALANCED-FIN-001",
+      "mode": "combined"
+    }
+  ]
+}

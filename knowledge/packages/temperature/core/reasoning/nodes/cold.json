@@ -1,0 +1,167 @@
+{
+  "nodes": [
+    {
+      "node_id": "RN-TEC-COLD-OBS-001",
+      "node_type": "observation",
+      "title": "Mùa Đông, climate lạnh, Nhật Thủy",
+      "description": "Mùa Đông, climate lạnh, Nhật Thủy",
+      "source_rule": null,
+      "source_evidence": null,
+      "inputs": [],
+      "outputs": [
+        "chart_facts"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "declared"
+      },
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-TEC-COLD-EVD-001",
+      "node_type": "evidence",
+      "title": "Hàn khí mùa Đông",
+      "description": "Đông tăng hàn (sea_002). Không tính strength_score.",
+      "source_rule": "TEC-000025",
+      "source_evidence": "evidence/bundles/TEC-000025.json",
+      "inputs": [
+        "chart_facts",
+        "seasonal_signals",
+        "strength_signals"
+      ],
+      "outputs": [
+        "evidence_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "language": "vi",
+        "upstream_seasonal": [
+          "SEC-000028",
+          "SEC-000068",
+          "SEC-000105"
+        ],
+        "upstream_strength": [
+          "SKC-000005",
+          "SKC-000099"
+        ]
+      }
+    },
+    {
+      "node_id": "RN-TEC-COLD-INF-001",
+      "node_type": "inference",
+      "title": "Hàn khí mùa Đông",
+      "description": "Đông tăng hàn (sea_002). Không tính strength_score.",
+      "source_rule": "TEC-000025",
+      "source_evidence": "evidence/bundles/TEC-000025.json",
+      "inputs": [
+        "evidence_signal"
+      ],
+      "outputs": [
+        "inference_signal"
+      ],
+      "confidence": {
+        "level": "high",
+        "mode": "inherited"
+      },
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-TEC-COLD-MID-001",
+      "node_type": "intermediate_conclusion",
+      "title": "Nhật Thủy sinh Đông",
+      "description": "spc_002 Nhật Thủy đông. Không tính strength_score.",
+      "source_rule": "TEC-000029",
+      "source_evidence": "evidence/bundles/TEC-000029.json",
+      "inputs": [
+        "inference_signal"
+      ],
+      "outputs": [
+        "mid_signal"
+      ],
+      "confidence": {
+        "level": "medium",
+        "mode": "combined"
+      },
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-TEC-COLD-FIN-001",
+      "node_type": "final_conclusion",
+      "title": "Ngưỡng cold ≤0.35",
+      "description": "pri_level_cold.",
+      "source_rule": "TEC-000096",
+      "source_evidence": "evidence/bundles/TEC-000096.json",
+      "inputs": [
+        "mid_signal"
+      ],
+      "outputs": [
+        "temperature_level"
+      ],
+      "confidence": {
+        "level": "medium",
+        "mode": "combined"
+      },
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-TEC-COLD-ALT-001",
+      "node_type": "alternative",
+      "title": "Ngưỡng cool",
+      "description": "Nhánh thay thế.",
+      "source_rule": "TEC-000098",
+      "source_evidence": "evidence/bundles/TEC-000098.json",
+      "inputs": [
+        "mid_signal"
+      ],
+      "outputs": [
+        "alt_signal"
+      ],
+      "confidence": {
+        "level": "low",
+        "mode": "reduced"
+      },
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "language": "vi"
+      }
+    },
+    {
+      "node_id": "RN-TEC-COLD-CON-001",
+      "node_type": "contradiction",
+      "title": "Ngưỡng hot ≥0.65",
+      "description": "Nhánh mâu thuẫn.",
+      "source_rule": "TEC-000095",
+      "source_evidence": "evidence/bundles/TEC-000095.json",
+      "inputs": [
+        "mid_signal"
+      ],
+      "outputs": [
+        "con_signal"
+      ],
+      "confidence": {
+        "level": "low",
+        "mode": "conflicting"
+      },
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "language": "vi"
+      }
+    }
+  ]
+}

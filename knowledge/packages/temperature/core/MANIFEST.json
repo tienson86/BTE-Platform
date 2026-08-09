@@ -1,0 +1,1526 @@
+{
+  "manifest_version": "1.0.0",
+  "schema_version": "2.0.0",
+  "package_id": "bz_03_temperature_core",
+  "package_version": "1.0.0",
+  "metadata": {
+    "package_type": "analytical",
+    "status": "released",
+    "language": "vi",
+    "languages": [
+      "vi"
+    ],
+    "author": "BTE Knowledge Board",
+    "owner": "BTE Knowledge Board",
+    "domain_id": "DOM-TEMPERATURE",
+    "category_id": "core",
+    "school": "bazi_default",
+    "tags": [
+      "core",
+      "kx2b",
+      "temperature"
+    ],
+    "description": "Tiao Hou / climate balance foundation package."
+  },
+  "components": {
+    "rules": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "rules/balanced_climate.json",
+        "rules/branch_climate.json",
+        "rules/climate_correction.json",
+        "rules/cold_climate.json",
+        "rules/damp_climate.json",
+        "rules/dm_temperature_support.json",
+        "rules/dry_climate.json",
+        "rules/group_priority.json",
+        "rules/hot_climate.json",
+        "rules/seasonal_temp_adjustment.json",
+        "rules/temperature_imbalance.json",
+        "rules/temperature_scoring.json"
+      ]
+    },
+    "metadata": {
+      "present": true,
+      "required": false,
+      "paths": [
+        "metadata/package_metadata.json"
+      ]
+    },
+    "references": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "references/references.json"
+      ]
+    },
+    "examples": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "examples/charts.json"
+      ]
+    },
+    "tests": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "tests/test_package.py",
+        "tests/package_assertions.json"
+      ]
+    },
+    "documentation": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "README.md",
+        "CHANGELOG.md",
+        "RELEASE_NOTES.md",
+        "documentation/overview.md",
+        "documentation/philosophy.md",
+        "documentation/interaction_seasonal.md",
+        "documentation/interaction_strength.md",
+        "documentation/WAVE2_ROADMAP.md"
+      ]
+    },
+    "assets": {
+      "present": true,
+      "required": false,
+      "paths": [
+        "assets/climate_axes.json"
+      ]
+    },
+    "changelog": {
+      "present": true,
+      "required": true,
+      "paths": [
+        "CHANGELOG.md"
+      ]
+    }
+  },
+  "dependencies": {
+    "required": [],
+    "optional": [
+      {
+        "package_id": "bz_02_seasonal_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional"
+      },
+      {
+        "package_id": "bz_01_strength_core",
+        "version_constraint": "^1.0.0",
+        "kind": "optional"
+      }
+    ],
+    "conflicts": []
+  },
+  "exported_objects": [
+    {
+      "id": "TEC-000001",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_temp_adjustment.json"
+    },
+    {
+      "id": "TEC-000002",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_temp_adjustment.json"
+    },
+    {
+      "id": "TEC-000003",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_temp_adjustment.json"
+    },
+    {
+      "id": "TEC-000004",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_temp_adjustment.json"
+    },
+    {
+      "id": "TEC-000005",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_temp_adjustment.json"
+    },
+    {
+      "id": "TEC-000006",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_temp_adjustment.json"
+    },
+    {
+      "id": "TEC-000007",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_temp_adjustment.json"
+    },
+    {
+      "id": "TEC-000008",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_temp_adjustment.json"
+    },
+    {
+      "id": "TEC-000009",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_temp_adjustment.json"
+    },
+    {
+      "id": "TEC-000010",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_temp_adjustment.json"
+    },
+    {
+      "id": "TEC-000011",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_temp_adjustment.json"
+    },
+    {
+      "id": "TEC-000012",
+      "entity_type": "ENT-RULE",
+      "path": "rules/seasonal_temp_adjustment.json"
+    },
+    {
+      "id": "TEC-000013",
+      "entity_type": "ENT-RULE",
+      "path": "rules/branch_climate.json"
+    },
+    {
+      "id": "TEC-000014",
+      "entity_type": "ENT-RULE",
+      "path": "rules/branch_climate.json"
+    },
+    {
+      "id": "TEC-000015",
+      "entity_type": "ENT-RULE",
+      "path": "rules/branch_climate.json"
+    },
+    {
+      "id": "TEC-000016",
+      "entity_type": "ENT-RULE",
+      "path": "rules/branch_climate.json"
+    },
+    {
+      "id": "TEC-000017",
+      "entity_type": "ENT-RULE",
+      "path": "rules/branch_climate.json"
+    },
+    {
+      "id": "TEC-000018",
+      "entity_type": "ENT-RULE",
+      "path": "rules/branch_climate.json"
+    },
+    {
+      "id": "TEC-000019",
+      "entity_type": "ENT-RULE",
+      "path": "rules/branch_climate.json"
+    },
+    {
+      "id": "TEC-000020",
+      "entity_type": "ENT-RULE",
+      "path": "rules/branch_climate.json"
+    },
+    {
+      "id": "TEC-000021",
+      "entity_type": "ENT-RULE",
+      "path": "rules/branch_climate.json"
+    },
+    {
+      "id": "TEC-000022",
+      "entity_type": "ENT-RULE",
+      "path": "rules/branch_climate.json"
+    },
+    {
+      "id": "TEC-000023",
+      "entity_type": "ENT-RULE",
+      "path": "rules/branch_climate.json"
+    },
+    {
+      "id": "TEC-000024",
+      "entity_type": "ENT-RULE",
+      "path": "rules/branch_climate.json"
+    },
+    {
+      "id": "TEC-000025",
+      "entity_type": "ENT-RULE",
+      "path": "rules/cold_climate.json"
+    },
+    {
+      "id": "TEC-000026",
+      "entity_type": "ENT-RULE",
+      "path": "rules/cold_climate.json"
+    },
+    {
+      "id": "TEC-000027",
+      "entity_type": "ENT-RULE",
+      "path": "rules/cold_climate.json"
+    },
+    {
+      "id": "TEC-000028",
+      "entity_type": "ENT-RULE",
+      "path": "rules/cold_climate.json"
+    },
+    {
+      "id": "TEC-000029",
+      "entity_type": "ENT-RULE",
+      "path": "rules/cold_climate.json"
+    },
+    {
+      "id": "TEC-000030",
+      "entity_type": "ENT-RULE",
+      "path": "rules/cold_climate.json"
+    },
+    {
+      "id": "TEC-000031",
+      "entity_type": "ENT-RULE",
+      "path": "rules/cold_climate.json"
+    },
+    {
+      "id": "TEC-000032",
+      "entity_type": "ENT-RULE",
+      "path": "rules/cold_climate.json"
+    },
+    {
+      "id": "TEC-000033",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hot_climate.json"
+    },
+    {
+      "id": "TEC-000034",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hot_climate.json"
+    },
+    {
+      "id": "TEC-000035",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hot_climate.json"
+    },
+    {
+      "id": "TEC-000036",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hot_climate.json"
+    },
+    {
+      "id": "TEC-000037",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hot_climate.json"
+    },
+    {
+      "id": "TEC-000038",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hot_climate.json"
+    },
+    {
+      "id": "TEC-000039",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hot_climate.json"
+    },
+    {
+      "id": "TEC-000040",
+      "entity_type": "ENT-RULE",
+      "path": "rules/hot_climate.json"
+    },
+    {
+      "id": "TEC-000041",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dry_climate.json"
+    },
+    {
+      "id": "TEC-000042",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dry_climate.json"
+    },
+    {
+      "id": "TEC-000043",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dry_climate.json"
+    },
+    {
+      "id": "TEC-000044",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dry_climate.json"
+    },
+    {
+      "id": "TEC-000045",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dry_climate.json"
+    },
+    {
+      "id": "TEC-000046",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dry_climate.json"
+    },
+    {
+      "id": "TEC-000047",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dry_climate.json"
+    },
+    {
+      "id": "TEC-000048",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dry_climate.json"
+    },
+    {
+      "id": "TEC-000049",
+      "entity_type": "ENT-RULE",
+      "path": "rules/damp_climate.json"
+    },
+    {
+      "id": "TEC-000050",
+      "entity_type": "ENT-RULE",
+      "path": "rules/damp_climate.json"
+    },
+    {
+      "id": "TEC-000051",
+      "entity_type": "ENT-RULE",
+      "path": "rules/damp_climate.json"
+    },
+    {
+      "id": "TEC-000052",
+      "entity_type": "ENT-RULE",
+      "path": "rules/damp_climate.json"
+    },
+    {
+      "id": "TEC-000053",
+      "entity_type": "ENT-RULE",
+      "path": "rules/damp_climate.json"
+    },
+    {
+      "id": "TEC-000054",
+      "entity_type": "ENT-RULE",
+      "path": "rules/damp_climate.json"
+    },
+    {
+      "id": "TEC-000055",
+      "entity_type": "ENT-RULE",
+      "path": "rules/damp_climate.json"
+    },
+    {
+      "id": "TEC-000056",
+      "entity_type": "ENT-RULE",
+      "path": "rules/damp_climate.json"
+    },
+    {
+      "id": "TEC-000057",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balanced_climate.json"
+    },
+    {
+      "id": "TEC-000058",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balanced_climate.json"
+    },
+    {
+      "id": "TEC-000059",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balanced_climate.json"
+    },
+    {
+      "id": "TEC-000060",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balanced_climate.json"
+    },
+    {
+      "id": "TEC-000061",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balanced_climate.json"
+    },
+    {
+      "id": "TEC-000062",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balanced_climate.json"
+    },
+    {
+      "id": "TEC-000063",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balanced_climate.json"
+    },
+    {
+      "id": "TEC-000064",
+      "entity_type": "ENT-RULE",
+      "path": "rules/balanced_climate.json"
+    },
+    {
+      "id": "TEC-000065",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dm_temperature_support.json"
+    },
+    {
+      "id": "TEC-000066",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dm_temperature_support.json"
+    },
+    {
+      "id": "TEC-000067",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dm_temperature_support.json"
+    },
+    {
+      "id": "TEC-000068",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dm_temperature_support.json"
+    },
+    {
+      "id": "TEC-000069",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dm_temperature_support.json"
+    },
+    {
+      "id": "TEC-000070",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dm_temperature_support.json"
+    },
+    {
+      "id": "TEC-000071",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dm_temperature_support.json"
+    },
+    {
+      "id": "TEC-000072",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dm_temperature_support.json"
+    },
+    {
+      "id": "TEC-000073",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dm_temperature_support.json"
+    },
+    {
+      "id": "TEC-000074",
+      "entity_type": "ENT-RULE",
+      "path": "rules/dm_temperature_support.json"
+    },
+    {
+      "id": "TEC-000075",
+      "entity_type": "ENT-RULE",
+      "path": "rules/temperature_imbalance.json"
+    },
+    {
+      "id": "TEC-000076",
+      "entity_type": "ENT-RULE",
+      "path": "rules/temperature_imbalance.json"
+    },
+    {
+      "id": "TEC-000077",
+      "entity_type": "ENT-RULE",
+      "path": "rules/temperature_imbalance.json"
+    },
+    {
+      "id": "TEC-000078",
+      "entity_type": "ENT-RULE",
+      "path": "rules/temperature_imbalance.json"
+    },
+    {
+      "id": "TEC-000079",
+      "entity_type": "ENT-RULE",
+      "path": "rules/temperature_imbalance.json"
+    },
+    {
+      "id": "TEC-000080",
+      "entity_type": "ENT-RULE",
+      "path": "rules/temperature_imbalance.json"
+    },
+    {
+      "id": "TEC-000081",
+      "entity_type": "ENT-RULE",
+      "path": "rules/temperature_imbalance.json"
+    },
+    {
+      "id": "TEC-000082",
+      "entity_type": "ENT-RULE",
+      "path": "rules/temperature_imbalance.json"
+    },
+    {
+      "id": "TEC-000083",
+      "entity_type": "ENT-RULE",
+      "path": "rules/climate_correction.json"
+    },
+    {
+      "id": "TEC-000084",
+      "entity_type": "ENT-RULE",
+      "path": "rules/climate_correction.json"
+    },
+    {
+      "id": "TEC-000085",
+      "entity_type": "ENT-RULE",
+      "path": "rules/climate_correction.json"
+    },
+    {
+      "id": "TEC-000086",
+      "entity_type": "ENT-RULE",
+      "path": "rules/climate_correction.json"
+    },
+    {
+      "id": "TEC-000087",
+      "entity_type": "ENT-RULE",
+      "path": "rules/climate_correction.json"
+    },
+    {
+      "id": "TEC-000088",
+      "entity_type": "ENT-RULE",
+      "path": "rules/climate_correction.json"
+    },
+    {
+      "id": "TEC-000089",
+      "entity_type": "ENT-RULE",
+      "path": "rules/climate_correction.json"
+    },
+    {
+      "id": "TEC-000090",
+      "entity_type": "ENT-RULE",
+      "path": "rules/climate_correction.json"
+    },
+    {
+      "id": "TEC-000091",
+      "entity_type": "ENT-RULE",
+      "path": "rules/climate_correction.json"
+    },
+    {
+      "id": "TEC-000092",
+      "entity_type": "ENT-RULE",
+      "path": "rules/climate_correction.json"
+    },
+    {
+      "id": "TEC-000093",
+      "entity_type": "ENT-RULE",
+      "path": "rules/temperature_scoring.json"
+    },
+    {
+      "id": "TEC-000094",
+      "entity_type": "ENT-RULE",
+      "path": "rules/temperature_scoring.json"
+    },
+    {
+      "id": "TEC-000095",
+      "entity_type": "ENT-RULE",
+      "path": "rules/temperature_scoring.json"
+    },
+    {
+      "id": "TEC-000096",
+      "entity_type": "ENT-RULE",
+      "path": "rules/temperature_scoring.json"
+    },
+    {
+      "id": "TEC-000097",
+      "entity_type": "ENT-RULE",
+      "path": "rules/temperature_scoring.json"
+    },
+    {
+      "id": "TEC-000098",
+      "entity_type": "ENT-RULE",
+      "path": "rules/temperature_scoring.json"
+    },
+    {
+      "id": "TEC-000099",
+      "entity_type": "ENT-RULE",
+      "path": "rules/temperature_scoring.json"
+    },
+    {
+      "id": "TEC-000100",
+      "entity_type": "ENT-RULE",
+      "path": "rules/temperature_scoring.json"
+    },
+    {
+      "id": "TEC-000101",
+      "entity_type": "ENT-RULE",
+      "path": "rules/temperature_scoring.json"
+    },
+    {
+      "id": "TEC-000102",
+      "entity_type": "ENT-RULE",
+      "path": "rules/temperature_scoring.json"
+    },
+    {
+      "id": "TEC-000103",
+      "entity_type": "ENT-RULE",
+      "path": "rules/group_priority.json"
+    },
+    {
+      "id": "TEC-000104",
+      "entity_type": "ENT-RULE",
+      "path": "rules/group_priority.json"
+    },
+    {
+      "id": "TEC-000105",
+      "entity_type": "ENT-RULE",
+      "path": "rules/group_priority.json"
+    },
+    {
+      "id": "TEC-000106",
+      "entity_type": "ENT-RULE",
+      "path": "rules/group_priority.json"
+    },
+    {
+      "id": "TEC-000107",
+      "entity_type": "ENT-RULE",
+      "path": "rules/group_priority.json"
+    },
+    {
+      "id": "TEC-000108",
+      "entity_type": "ENT-RULE",
+      "path": "rules/group_priority.json"
+    },
+    {
+      "id": "TEC-000109",
+      "entity_type": "ENT-RULE",
+      "path": "rules/group_priority.json"
+    },
+    {
+      "id": "TEC-000110",
+      "entity_type": "ENT-RULE",
+      "path": "rules/group_priority.json"
+    }
+  ],
+  "required_packages": [],
+  "optional_packages": [
+    "bz_01_strength_core",
+    "bz_02_seasonal_core"
+  ],
+  "validation_profile": "PVP-RELEASE",
+  "release_information": {
+    "release_record": "RELEASE.json"
+  },
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "DEPENDENCIES.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "MANIFEST.json",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "PACKAGE.json",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "README.md",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "RELEASE.json",
+      "type": "artifact",
+      "required": true
+    },
+    {
+      "path": "RELEASE_NOTES.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "assets/climate_axes.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/WAVE2_ROADMAP.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/assumptions_and_limitations.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/evidence_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/interaction_seasonal.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/interaction_strength.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/overview.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/philosophy.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "documentation/reasoning_model.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000001.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000002.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000003.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000004.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000005.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000006.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000007.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000008.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000009.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000010.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000011.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000012.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000013.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000014.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000015.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000016.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000017.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000018.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000019.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000020.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000021.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000022.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000023.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000024.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000025.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000026.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000027.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000028.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000029.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000030.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000031.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000032.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000033.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000034.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000035.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000036.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000037.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000038.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000039.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000040.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000041.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000042.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000043.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000044.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000045.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000046.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000047.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000048.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000049.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000050.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000051.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000052.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000053.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000054.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000055.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000056.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000057.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000058.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000059.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000060.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000061.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000062.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000063.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000064.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000065.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000066.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000067.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000068.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000069.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000070.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000071.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000072.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000073.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000074.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000075.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000076.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000077.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000078.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000079.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000080.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000081.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000082.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000083.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000084.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000085.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000086.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000087.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000088.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000089.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000090.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000091.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000092.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000093.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000094.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000095.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000096.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000097.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000098.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000099.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000100.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000101.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000102.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000103.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000104.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000105.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000106.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000107.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000108.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000109.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/bundles/TEC-000110.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/index.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/references/sources.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/validation/EVIDENCE_VALIDATION.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "evidence/validation/evidence_validation_rules.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "examples/charts.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "metadata/package_metadata.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/balanced.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/cold.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/chains/hot.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/confidence/propagation.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/balanced.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/cold.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/edges/hot.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/balanced.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/balanced.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/cold.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/cold.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/hot.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/examples/hot.md",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/index.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/balanced.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/cold.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/nodes/hot.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/balanced.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/cold.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "reasoning/traces/hot.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "references/references.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/balanced_climate.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/branch_climate.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/climate_correction.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/cold_climate.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/damp_climate.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/dm_temperature_support.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/dry_climate.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/group_priority.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/hot_climate.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/seasonal_temp_adjustment.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/temperature_imbalance.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "rules/temperature_scoring.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "tests/package_assertions.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "tests/test_package.py",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "validation/VALIDATION.json",
+      "type": "artifact",
+      "required": false
+    },
+    {
+      "path": "validation/profile.json",
+      "type": "artifact",
+      "required": false
+    }
+  ]
+}

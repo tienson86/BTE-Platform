@@ -1,0 +1,756 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_03_temperature_core",
+  "category": "temperature_scoring",
+  "count": 10,
+  "objects": [
+    {
+      "id": "TEC-000093",
+      "version": "1.0.0",
+      "category": "temperature_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "scoring",
+        "baseline"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "chart_valid",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "baseline",
+        "weight": 35,
+        "signal": "temperature_scoring",
+        "score_target": "day_master.temperature_score"
+      },
+      "explanation": "MODULE_SPEC baseline 35.",
+      "references": [
+        {
+          "target": "REF-TEC-000011",
+          "relation": "references"
+        }
+      ],
+      "code": "baseline",
+      "name": "Điểm nền nhiệt 35",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "chart_valid",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "baseline",
+          "weight": 35,
+          "signal": "temperature_scoring",
+          "score_target": "day_master.temperature_score"
+        },
+        "explanation": "MODULE_SPEC baseline 35.",
+        "evaluation": {
+          "weight": 35,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000094",
+      "version": "1.0.0",
+      "category": "temperature_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "scoring",
+        "scale"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "score_scale",
+          "operator": "equals",
+          "value": 100
+        }
+      ],
+      "result": {
+        "effect": "scale",
+        "weight": 0,
+        "signal": "temperature_scoring",
+        "score_target": "day_master.temperature_score"
+      },
+      "explanation": "scale 100 / divisor 3.",
+      "references": [
+        {
+          "target": "REF-TEC-000011",
+          "relation": "references"
+        }
+      ],
+      "code": "scale",
+      "name": "Thang 100",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "score_scale",
+            "operator": "equals",
+            "value": 100
+          }
+        ],
+        "result": {
+          "effect": "scale",
+          "weight": 0,
+          "signal": "temperature_scoring",
+          "score_target": "day_master.temperature_score"
+        },
+        "explanation": "scale 100 / divisor 3.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000095",
+      "version": "1.0.0",
+      "category": "temperature_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "scoring",
+        "band_hot"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 50
+      },
+      "conditions": [
+        {
+          "field": "temperature_score_normalized",
+          "operator": "equals",
+          "value": "gte_0.65"
+        }
+      ],
+      "result": {
+        "effect": "hot",
+        "weight": 0,
+        "signal": "temperature_scoring",
+        "score_target": "day_master.temperature_score",
+        "outcome": "hot"
+      },
+      "explanation": "pri_level_hot.",
+      "references": [
+        {
+          "target": "REF-TEC-000011",
+          "relation": "references"
+        }
+      ],
+      "code": "band_hot",
+      "name": "Ngưỡng hot ≥0.65",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score_normalized",
+            "operator": "equals",
+            "value": "gte_0.65"
+          }
+        ],
+        "result": {
+          "effect": "hot",
+          "weight": 0,
+          "signal": "temperature_scoring",
+          "score_target": "day_master.temperature_score",
+          "outcome": "hot"
+        },
+        "explanation": "pri_level_hot.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_level_band"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000096",
+      "version": "1.0.0",
+      "category": "temperature_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "scoring",
+        "band_cold"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 50
+      },
+      "conditions": [
+        {
+          "field": "temperature_score_normalized",
+          "operator": "equals",
+          "value": "lte_0.35"
+        }
+      ],
+      "result": {
+        "effect": "cold",
+        "weight": 0,
+        "signal": "temperature_scoring",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cold"
+      },
+      "explanation": "pri_level_cold.",
+      "references": [
+        {
+          "target": "REF-TEC-000011",
+          "relation": "references"
+        }
+      ],
+      "code": "band_cold",
+      "name": "Ngưỡng cold ≤0.35",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score_normalized",
+            "operator": "equals",
+            "value": "lte_0.35"
+          }
+        ],
+        "result": {
+          "effect": "cold",
+          "weight": 0,
+          "signal": "temperature_scoring",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cold"
+        },
+        "explanation": "pri_level_cold.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_level_band"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000097",
+      "version": "1.0.0",
+      "category": "temperature_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "scoring",
+        "band_warm"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 50
+      },
+      "conditions": [
+        {
+          "field": "temperature_score_normalized",
+          "operator": "equals",
+          "value": "between_0.50_0.65"
+        }
+      ],
+      "result": {
+        "effect": "warm",
+        "weight": 0,
+        "signal": "temperature_scoring",
+        "score_target": "day_master.temperature_score",
+        "outcome": "warm"
+      },
+      "explanation": "pri_level_warm.",
+      "references": [
+        {
+          "target": "REF-TEC-000011",
+          "relation": "references"
+        }
+      ],
+      "code": "band_warm",
+      "name": "Ngưỡng warm",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score_normalized",
+            "operator": "equals",
+            "value": "between_0.50_0.65"
+          }
+        ],
+        "result": {
+          "effect": "warm",
+          "weight": 0,
+          "signal": "temperature_scoring",
+          "score_target": "day_master.temperature_score",
+          "outcome": "warm"
+        },
+        "explanation": "pri_level_warm.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_level_band"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000098",
+      "version": "1.0.0",
+      "category": "temperature_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "scoring",
+        "band_cool"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 50
+      },
+      "conditions": [
+        {
+          "field": "temperature_score_normalized",
+          "operator": "equals",
+          "value": "between_0.35_0.50"
+        }
+      ],
+      "result": {
+        "effect": "cool",
+        "weight": 0,
+        "signal": "temperature_scoring",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cool"
+      },
+      "explanation": "pri_level_cool.",
+      "references": [
+        {
+          "target": "REF-TEC-000011",
+          "relation": "references"
+        }
+      ],
+      "code": "band_cool",
+      "name": "Ngưỡng cool",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_score_normalized",
+            "operator": "equals",
+            "value": "between_0.35_0.50"
+          }
+        ],
+        "result": {
+          "effect": "cool",
+          "weight": 0,
+          "signal": "temperature_scoring",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cool"
+        },
+        "explanation": "pri_level_cool.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_level_band"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000099",
+      "version": "1.0.0",
+      "category": "temperature_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "scoring",
+        "not_strength"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "module",
+          "operator": "equals",
+          "value": "temperature"
+        }
+      ],
+      "result": {
+        "effect": "scope",
+        "weight": 0,
+        "signal": "temperature_scoring",
+        "score_target": "day_master.temperature_score"
+      },
+      "explanation": "Không trùng SKC.",
+      "references": [
+        {
+          "target": "REF-TEC-000011",
+          "relation": "references"
+        }
+      ],
+      "code": "not_strength",
+      "name": "Không ghi strength_score",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "module",
+            "operator": "equals",
+            "value": "temperature"
+          }
+        ],
+        "result": {
+          "effect": "scope",
+          "weight": 0,
+          "signal": "temperature_scoring",
+          "score_target": "day_master.temperature_score"
+        },
+        "explanation": "Không trùng SKC.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000100",
+      "version": "1.0.0",
+      "category": "temperature_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "scoring",
+        "not_seasonal"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "module",
+          "operator": "equals",
+          "value": "temperature"
+        }
+      ],
+      "result": {
+        "effect": "scope",
+        "weight": 0,
+        "signal": "temperature_scoring",
+        "score_target": "day_master.temperature_score"
+      },
+      "explanation": "Không trùng SEC month→season.",
+      "references": [
+        {
+          "target": "REF-TEC-000011",
+          "relation": "references"
+        }
+      ],
+      "code": "not_seasonal",
+      "name": "Không phân loại mùa",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "module",
+            "operator": "equals",
+            "value": "temperature"
+          }
+        ],
+        "result": {
+          "effect": "scope",
+          "weight": 0,
+          "signal": "temperature_scoring",
+          "score_target": "day_master.temperature_score"
+        },
+        "explanation": "Không trùng SEC month→season.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000101",
+      "version": "1.0.0",
+      "category": "temperature_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "scoring",
+        "dual_read"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "compatible_with_v1",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "compatibility",
+        "weight": 0,
+        "signal": "temperature_scoring",
+        "score_target": "day_master.temperature_score"
+      },
+      "explanation": "TMP-* V1 vẫn hợp lệ.",
+      "references": [
+        {
+          "target": "REF-TEC-000011",
+          "relation": "references"
+        }
+      ],
+      "code": "dual_read",
+      "name": "Dual-read V1 TMP",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "compatible_with_v1",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "compatibility",
+          "weight": 0,
+          "signal": "temperature_scoring",
+          "score_target": "day_master.temperature_score"
+        },
+        "explanation": "TMP-* V1 vẫn hợp lệ.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000102",
+      "version": "1.0.0",
+      "category": "temperature_scoring",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "scoring",
+        "exclusive_one"
+      ],
+      "priority": {
+        "level": "low",
+        "order": 40
+      },
+      "conditions": [
+        {
+          "field": "exclusive_policy",
+          "operator": "equals",
+          "value": true
+        }
+      ],
+      "result": {
+        "effect": "exclusive",
+        "weight": 1,
+        "signal": "temperature_scoring",
+        "score_target": "day_master.temperature_score"
+      },
+      "explanation": "Priority.order thắng.",
+      "references": [
+        {
+          "target": "REF-TEC-000011",
+          "relation": "references"
+        }
+      ],
+      "code": "exclusive_one",
+      "name": "Một luật mỗi exclusive group",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "exclusive_policy",
+            "operator": "equals",
+            "value": true
+          }
+        ],
+        "result": {
+          "effect": "exclusive",
+          "weight": 1,
+          "signal": "temperature_scoring",
+          "score_target": "day_master.temperature_score"
+        },
+        "explanation": "Priority.order thắng.",
+        "evaluation": {
+          "weight": 1,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    }
+  ]
+}

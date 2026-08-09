@@ -1,0 +1,1002 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_03_temperature_core",
+  "category": "seasonal_temp_adjustment",
+  "count": 12,
+  "objects": [
+    {
+      "id": "TEC-000001",
+      "version": "1.0.0",
+      "category": "seasonal_temp_adjustment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "seasonal_adjustment",
+        "spring",
+        "warm"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 90
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "spring"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_temp=warm",
+        "weight": 8,
+        "signal": "seasonal_temp_adjustment",
+        "score_target": "day_master.temperature_score",
+        "outcome": "warm"
+      },
+      "explanation": "Mùa Xuân điều chỉnh khí hậu sang warm (+8 temperature_score). Tiêu thụ tín hiệu `season` từ Seasonal Core; không phân loại tháng lệnh. Nguồn sea_003.",
+      "references": [
+        {
+          "target": "REF-TEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "adj_spring",
+      "name": "Điều nhiệt mùa Xuân",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "spring"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_temp=warm",
+          "weight": 8,
+          "signal": "seasonal_temp_adjustment",
+          "score_target": "day_master.temperature_score",
+          "outcome": "warm"
+        },
+        "explanation": "Mùa Xuân điều chỉnh khí hậu sang warm (+8 temperature_score). Tiêu thụ tín hiệu `season` từ Seasonal Core; không phân loại tháng lệnh. Nguồn sea_003.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_temp_adjustment"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000002",
+      "version": "1.0.0",
+      "category": "seasonal_temp_adjustment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "seasonal_adjustment",
+        "summer",
+        "hot"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 90
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_temp=hot",
+        "weight": 20,
+        "signal": "seasonal_temp_adjustment",
+        "score_target": "day_master.temperature_score",
+        "outcome": "hot"
+      },
+      "explanation": "Mùa Hạ điều chỉnh khí hậu sang hot (+20 temperature_score). Tiêu thụ tín hiệu `season` từ Seasonal Core; không phân loại tháng lệnh. Nguồn sea_001.",
+      "references": [
+        {
+          "target": "REF-TEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "adj_summer",
+      "name": "Điều nhiệt mùa Hạ",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_temp=hot",
+          "weight": 20,
+          "signal": "seasonal_temp_adjustment",
+          "score_target": "day_master.temperature_score",
+          "outcome": "hot"
+        },
+        "explanation": "Mùa Hạ điều chỉnh khí hậu sang hot (+20 temperature_score). Tiêu thụ tín hiệu `season` từ Seasonal Core; không phân loại tháng lệnh. Nguồn sea_001.",
+        "evaluation": {
+          "weight": 20,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_temp_adjustment"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000003",
+      "version": "1.0.0",
+      "category": "seasonal_temp_adjustment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "seasonal_adjustment",
+        "autumn",
+        "cool"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 90
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_temp=cool",
+        "weight": 5,
+        "signal": "seasonal_temp_adjustment",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cool"
+      },
+      "explanation": "Mùa Thu điều chỉnh khí hậu sang cool (+5 temperature_score). Tiêu thụ tín hiệu `season` từ Seasonal Core; không phân loại tháng lệnh. Nguồn sea_004.",
+      "references": [
+        {
+          "target": "REF-TEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "adj_autumn",
+      "name": "Điều nhiệt mùa Thu",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_temp=cool",
+          "weight": 5,
+          "signal": "seasonal_temp_adjustment",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cool"
+        },
+        "explanation": "Mùa Thu điều chỉnh khí hậu sang cool (+5 temperature_score). Tiêu thụ tín hiệu `season` từ Seasonal Core; không phân loại tháng lệnh. Nguồn sea_004.",
+        "evaluation": {
+          "weight": 5,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_temp_adjustment"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000004",
+      "version": "1.0.0",
+      "category": "seasonal_temp_adjustment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "seasonal_adjustment",
+        "winter",
+        "cold"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 90
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_temp=cold",
+        "weight": 15,
+        "signal": "seasonal_temp_adjustment",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cold"
+      },
+      "explanation": "Mùa Đông điều chỉnh khí hậu sang cold (+15 temperature_score). Tiêu thụ tín hiệu `season` từ Seasonal Core; không phân loại tháng lệnh. Nguồn sea_002.",
+      "references": [
+        {
+          "target": "REF-TEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "adj_winter",
+      "name": "Điều nhiệt mùa Đông",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_temp=cold",
+          "weight": 15,
+          "signal": "seasonal_temp_adjustment",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cold"
+        },
+        "explanation": "Mùa Đông điều chỉnh khí hậu sang cold (+15 temperature_score). Tiêu thụ tín hiệu `season` từ Seasonal Core; không phân loại tháng lệnh. Nguồn sea_002.",
+        "evaluation": {
+          "weight": 15,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_temp_adjustment"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000005",
+      "version": "1.0.0",
+      "category": "seasonal_temp_adjustment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "seasonal_adjustment",
+        "late_summer",
+        "hot"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 90
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "late_summer"
+        }
+      ],
+      "result": {
+        "effect": "seasonal_temp=hot",
+        "weight": 10,
+        "signal": "seasonal_temp_adjustment",
+        "score_target": "day_master.temperature_score",
+        "outcome": "hot"
+      },
+      "explanation": "Mùa Tứ quý / cuối Hạ điều chỉnh khí hậu sang hot (+10 temperature_score). Tiêu thụ tín hiệu `season` từ Seasonal Core; không phân loại tháng lệnh. Nguồn sea_005.",
+      "references": [
+        {
+          "target": "REF-TEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "adj_late_summer",
+      "name": "Điều nhiệt mùa Tứ quý / cuối Hạ",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "late_summer"
+          }
+        ],
+        "result": {
+          "effect": "seasonal_temp=hot",
+          "weight": 10,
+          "signal": "seasonal_temp_adjustment",
+          "score_target": "day_master.temperature_score",
+          "outcome": "hot"
+        },
+        "explanation": "Mùa Tứ quý / cuối Hạ điều chỉnh khí hậu sang hot (+10 temperature_score). Tiêu thụ tín hiệu `season` từ Seasonal Core; không phân loại tháng lệnh. Nguồn sea_005.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "seasonal_temp_adjustment"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000006",
+      "version": "1.0.0",
+      "category": "seasonal_temp_adjustment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "season_phase",
+        "summer",
+        "mid"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 85
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "mid"
+        }
+      ],
+      "result": {
+        "effect": "phase_temp=hot",
+        "weight": 10,
+        "signal": "seasonal_temp_adjustment",
+        "score_target": "day_master.temperature_score",
+        "outcome": "hot"
+      },
+      "explanation": "Pha mid của mùa đã biết (summer) tăng thiên hot. Không định nghĩa pha mùa (SEC).",
+      "references": [
+        {
+          "target": "REF-TEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "adj_phase_summer_mid",
+      "name": "Pha mid mùa summer: hot",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "mid"
+          }
+        ],
+        "result": {
+          "effect": "phase_temp=hot",
+          "weight": 10,
+          "signal": "seasonal_temp_adjustment",
+          "score_target": "day_master.temperature_score",
+          "outcome": "hot"
+        },
+        "explanation": "Pha mid của mùa đã biết (summer) tăng thiên hot. Không định nghĩa pha mùa (SEC).",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000007",
+      "version": "1.0.0",
+      "category": "seasonal_temp_adjustment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "season_phase",
+        "summer",
+        "late"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 85
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "late"
+        }
+      ],
+      "result": {
+        "effect": "phase_temp=hot",
+        "weight": 10,
+        "signal": "seasonal_temp_adjustment",
+        "score_target": "day_master.temperature_score",
+        "outcome": "hot"
+      },
+      "explanation": "Pha late của mùa đã biết (summer) tăng thiên hot. Không định nghĩa pha mùa (SEC).",
+      "references": [
+        {
+          "target": "REF-TEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "adj_phase_summer_late",
+      "name": "Pha late mùa summer: hot",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "late"
+          }
+        ],
+        "result": {
+          "effect": "phase_temp=hot",
+          "weight": 10,
+          "signal": "seasonal_temp_adjustment",
+          "score_target": "day_master.temperature_score",
+          "outcome": "hot"
+        },
+        "explanation": "Pha late của mùa đã biết (summer) tăng thiên hot. Không định nghĩa pha mùa (SEC).",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000008",
+      "version": "1.0.0",
+      "category": "seasonal_temp_adjustment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "season_phase",
+        "winter",
+        "mid"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 85
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "mid"
+        }
+      ],
+      "result": {
+        "effect": "phase_temp=cold",
+        "weight": 10,
+        "signal": "seasonal_temp_adjustment",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cold"
+      },
+      "explanation": "Pha mid của mùa đã biết (winter) tăng thiên cold. Không định nghĩa pha mùa (SEC).",
+      "references": [
+        {
+          "target": "REF-TEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "adj_phase_winter_mid",
+      "name": "Pha mid mùa winter: cold",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "mid"
+          }
+        ],
+        "result": {
+          "effect": "phase_temp=cold",
+          "weight": 10,
+          "signal": "seasonal_temp_adjustment",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cold"
+        },
+        "explanation": "Pha mid của mùa đã biết (winter) tăng thiên cold. Không định nghĩa pha mùa (SEC).",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000009",
+      "version": "1.0.0",
+      "category": "seasonal_temp_adjustment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "season_phase",
+        "winter",
+        "late"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 85
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "winter"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "late"
+        }
+      ],
+      "result": {
+        "effect": "phase_temp=cold",
+        "weight": 10,
+        "signal": "seasonal_temp_adjustment",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cold"
+      },
+      "explanation": "Pha late của mùa đã biết (winter) tăng thiên cold. Không định nghĩa pha mùa (SEC).",
+      "references": [
+        {
+          "target": "REF-TEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "adj_phase_winter_late",
+      "name": "Pha late mùa winter: cold",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "winter"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "late"
+          }
+        ],
+        "result": {
+          "effect": "phase_temp=cold",
+          "weight": 10,
+          "signal": "seasonal_temp_adjustment",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cold"
+        },
+        "explanation": "Pha late của mùa đã biết (winter) tăng thiên cold. Không định nghĩa pha mùa (SEC).",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000010",
+      "version": "1.0.0",
+      "category": "seasonal_temp_adjustment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "season_phase",
+        "spring",
+        "early"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 85
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "spring"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "early"
+        }
+      ],
+      "result": {
+        "effect": "phase_temp=warm",
+        "weight": 4,
+        "signal": "seasonal_temp_adjustment",
+        "score_target": "day_master.temperature_score",
+        "outcome": "warm"
+      },
+      "explanation": "Pha early của mùa đã biết (spring) tăng thiên warm. Không định nghĩa pha mùa (SEC).",
+      "references": [
+        {
+          "target": "REF-TEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "adj_phase_spring_early",
+      "name": "Pha early mùa spring: warm",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "spring"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "early"
+          }
+        ],
+        "result": {
+          "effect": "phase_temp=warm",
+          "weight": 4,
+          "signal": "seasonal_temp_adjustment",
+          "score_target": "day_master.temperature_score",
+          "outcome": "warm"
+        },
+        "explanation": "Pha early của mùa đã biết (spring) tăng thiên warm. Không định nghĩa pha mùa (SEC).",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000011",
+      "version": "1.0.0",
+      "category": "seasonal_temp_adjustment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "season_phase",
+        "autumn",
+        "late"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 85
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "late"
+        }
+      ],
+      "result": {
+        "effect": "phase_temp=cool",
+        "weight": 6,
+        "signal": "seasonal_temp_adjustment",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cool"
+      },
+      "explanation": "Pha late của mùa đã biết (autumn) tăng thiên cool. Không định nghĩa pha mùa (SEC).",
+      "references": [
+        {
+          "target": "REF-TEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "adj_phase_autumn_late",
+      "name": "Pha late mùa autumn: cool",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "late"
+          }
+        ],
+        "result": {
+          "effect": "phase_temp=cool",
+          "weight": 6,
+          "signal": "seasonal_temp_adjustment",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cool"
+        },
+        "explanation": "Pha late của mùa đã biết (autumn) tăng thiên cool. Không định nghĩa pha mùa (SEC).",
+        "evaluation": {
+          "weight": 6,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000012",
+      "version": "1.0.0",
+      "category": "seasonal_temp_adjustment",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "season_phase",
+        "autumn",
+        "early"
+      ],
+      "priority": {
+        "level": "medium",
+        "order": 85
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "autumn"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "early"
+        }
+      ],
+      "result": {
+        "effect": "phase_temp=cool",
+        "weight": 4,
+        "signal": "seasonal_temp_adjustment",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cool"
+      },
+      "explanation": "Pha early của mùa đã biết (autumn) tăng thiên cool. Không định nghĩa pha mùa (SEC).",
+      "references": [
+        {
+          "target": "REF-TEC-000001",
+          "relation": "references"
+        }
+      ],
+      "code": "adj_phase_autumn_early",
+      "name": "Pha early mùa autumn: cool",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "autumn"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "early"
+          }
+        ],
+        "result": {
+          "effect": "phase_temp=cool",
+          "weight": 4,
+          "signal": "seasonal_temp_adjustment",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cool"
+        },
+        "explanation": "Pha early của mùa đã biết (autumn) tăng thiên cool. Không định nghĩa pha mùa (SEC).",
+        "evaluation": {
+          "weight": 4,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    }
+  ]
+}

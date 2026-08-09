@@ -1,0 +1,643 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_03_temperature_core",
+  "category": "hot_climate",
+  "count": 8,
+  "objects": [
+    {
+      "id": "TEC-000033",
+      "version": "1.0.0",
+      "category": "hot_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "hot",
+        "summer"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        }
+      ],
+      "result": {
+        "effect": "climate=hot",
+        "weight": 20,
+        "signal": "hot_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "hot"
+      },
+      "explanation": "Hè tăng nhiệt (sea_001). Không tính strength_score.",
+      "references": [
+        {
+          "target": "REF-TEC-000004",
+          "relation": "references"
+        }
+      ],
+      "code": "hot_summer",
+      "name": "Nhiệt khí mùa Hạ",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          }
+        ],
+        "result": {
+          "effect": "climate=hot",
+          "weight": 20,
+          "signal": "hot_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "hot"
+        },
+        "explanation": "Hè tăng nhiệt (sea_001). Không tính strength_score.",
+        "evaluation": {
+          "weight": 20,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000034",
+      "version": "1.0.0",
+      "category": "hot_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "hot"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "climate_type",
+          "operator": "equals",
+          "value": "hot"
+        }
+      ],
+      "result": {
+        "effect": "climate=hot",
+        "weight": 25,
+        "signal": "hot_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "hot"
+      },
+      "explanation": "Tháng lệnh khí nóng (cli_001). Không tính strength_score.",
+      "references": [
+        {
+          "target": "REF-TEC-000004",
+          "relation": "references"
+        }
+      ],
+      "code": "hot_climate_type",
+      "name": "climate_type=hot",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "climate_type",
+            "operator": "equals",
+            "value": "hot"
+          }
+        ],
+        "result": {
+          "effect": "climate=hot",
+          "weight": 25,
+          "signal": "hot_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "hot"
+        },
+        "explanation": "Tháng lệnh khí nóng (cli_001). Không tính strength_score.",
+        "evaluation": {
+          "weight": 25,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "hot_climate"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000035",
+      "version": "1.0.0",
+      "category": "hot_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "hot",
+        "fire"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "fire_count",
+          "operator": "gte",
+          "value": 3
+        }
+      ],
+      "result": {
+        "effect": "climate=hot",
+        "weight": 8,
+        "signal": "hot_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "hot"
+      },
+      "explanation": "Hỏa nhiều gây nóng/táo (dry_003). Không tính strength_score.",
+      "references": [
+        {
+          "target": "REF-TEC-000004",
+          "relation": "references"
+        }
+      ],
+      "code": "hot_fire_count",
+      "name": "Hỏa ≥3 tăng nhiệt",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "fire_count",
+            "operator": "gte",
+            "value": 3
+          }
+        ],
+        "result": {
+          "effect": "climate=hot",
+          "weight": 8,
+          "signal": "hot_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "hot"
+        },
+        "explanation": "Hỏa nhiều gây nóng/táo (dry_003). Không tính strength_score.",
+        "evaluation": {
+          "weight": 8,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000036",
+      "version": "1.0.0",
+      "category": "hot_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "hot"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "water_count",
+          "operator": "equals",
+          "value": 0
+        }
+      ],
+      "result": {
+        "effect": "climate=hot",
+        "weight": -3,
+        "signal": "hot_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "hot"
+      },
+      "explanation": "Không Thủy → nóng khô (bal_005). Không tính strength_score.",
+      "references": [
+        {
+          "target": "REF-TEC-000004",
+          "relation": "references"
+        }
+      ],
+      "code": "hot_no_water",
+      "name": "Vắng Thủy",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "water_count",
+            "operator": "equals",
+            "value": 0
+          }
+        ],
+        "result": {
+          "effect": "climate=hot",
+          "weight": -3,
+          "signal": "hot_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "hot"
+        },
+        "explanation": "Không Thủy → nóng khô (bal_005). Không tính strength_score.",
+        "evaluation": {
+          "weight": -3,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000037",
+      "version": "1.0.0",
+      "category": "hot_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "hot",
+        "dm"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "fire"
+        },
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        }
+      ],
+      "result": {
+        "effect": "climate=hot",
+        "weight": 20,
+        "signal": "hot_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "hot"
+      },
+      "explanation": "spc_001. Không tính strength_score.",
+      "references": [
+        {
+          "target": "REF-TEC-000004",
+          "relation": "references"
+        }
+      ],
+      "code": "hot_dm_fire_summer",
+      "name": "Nhật Hỏa sinh Hè",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "fire"
+          },
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          }
+        ],
+        "result": {
+          "effect": "climate=hot",
+          "weight": 20,
+          "signal": "hot_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "hot"
+        },
+        "explanation": "spc_001. Không tính strength_score.",
+        "evaluation": {
+          "weight": 20,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000038",
+      "version": "1.0.0",
+      "category": "hot_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "hot",
+        "dm"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "day_master_element",
+          "operator": "equals",
+          "value": "metal"
+        },
+        {
+          "field": "climate_type",
+          "operator": "equals",
+          "value": "hot"
+        }
+      ],
+      "result": {
+        "effect": "climate=hot",
+        "weight": 15,
+        "signal": "hot_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "hot"
+      },
+      "explanation": "spc_003 Kim hóa hè. Không tính strength_score.",
+      "references": [
+        {
+          "target": "REF-TEC-000004",
+          "relation": "references"
+        }
+      ],
+      "code": "hot_dm_metal_hot",
+      "name": "Nhật Kim gặp nóng",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "day_master_element",
+            "operator": "equals",
+            "value": "metal"
+          },
+          {
+            "field": "climate_type",
+            "operator": "equals",
+            "value": "hot"
+          }
+        ],
+        "result": {
+          "effect": "climate=hot",
+          "weight": 15,
+          "signal": "hot_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "hot"
+        },
+        "explanation": "spc_003 Kim hóa hè. Không tính strength_score.",
+        "evaluation": {
+          "weight": 15,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000039",
+      "version": "1.0.0",
+      "category": "hot_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "hot"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "season",
+          "operator": "equals",
+          "value": "summer"
+        },
+        {
+          "field": "season_phase",
+          "operator": "equals",
+          "value": "mid"
+        }
+      ],
+      "result": {
+        "effect": "climate=hot",
+        "weight": 10,
+        "signal": "hot_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "hot"
+      },
+      "explanation": "sea_005. Không tính strength_score.",
+      "references": [
+        {
+          "target": "REF-TEC-000004",
+          "relation": "references"
+        }
+      ],
+      "code": "hot_mid_summer",
+      "name": "Giữa/cuối hè nóng gắt",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "season",
+            "operator": "equals",
+            "value": "summer"
+          },
+          {
+            "field": "season_phase",
+            "operator": "equals",
+            "value": "mid"
+          }
+        ],
+        "result": {
+          "effect": "climate=hot",
+          "weight": 10,
+          "signal": "hot_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "hot"
+        },
+        "explanation": "sea_005. Không tính strength_score.",
+        "evaluation": {
+          "weight": 10,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000040",
+      "version": "1.0.0",
+      "category": "hot_climate",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "hot",
+        "level"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 92
+      },
+      "conditions": [
+        {
+          "field": "temperature_level",
+          "operator": "equals",
+          "value": "hot"
+        }
+      ],
+      "result": {
+        "effect": "level=hot",
+        "weight": 0,
+        "signal": "hot_climate",
+        "score_target": "day_master.temperature_score",
+        "outcome": "hot"
+      },
+      "explanation": "Đầu ra hot cho Pattern/UG. Không tính strength_score.",
+      "references": [
+        {
+          "target": "REF-TEC-000004",
+          "relation": "references"
+        }
+      ],
+      "code": "hot_level",
+      "name": "Phân loại hot",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_level",
+            "operator": "equals",
+            "value": "hot"
+          }
+        ],
+        "result": {
+          "effect": "level=hot",
+          "weight": 0,
+          "signal": "hot_climate",
+          "score_target": "day_master.temperature_score",
+          "outcome": "hot"
+        },
+        "explanation": "Đầu ra hot cho Pattern/UG. Không tính strength_score.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "hot_climate"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    }
+  ]
+}

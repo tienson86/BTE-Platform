@@ -1,0 +1,678 @@
+{
+  "schema_version": "2.0.0",
+  "package_id": "bz_03_temperature_core",
+  "category": "temperature_imbalance",
+  "count": 8,
+  "objects": [
+    {
+      "id": "TEC-000075",
+      "version": "1.0.0",
+      "category": "temperature_imbalance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "imbalance"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 66
+      },
+      "conditions": [
+        {
+          "field": "temperature_level",
+          "operator": "equals",
+          "value": "hot"
+        },
+        {
+          "field": "temperature_score_normalized",
+          "operator": "gte",
+          "value": 0.65
+        }
+      ],
+      "result": {
+        "effect": "imbalance=excess_hot",
+        "weight": 0,
+        "signal": "temperature_imbalance",
+        "score_target": "day_master.temperature_score",
+        "outcome": "excess_hot"
+      },
+      "explanation": "pri_level_hot. Cờ ngữ cảnh Pattern/UG.",
+      "references": [
+        {
+          "target": "REF-TEC-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "imb_excess_hot",
+      "name": "Thái nhiệt",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_level",
+            "operator": "equals",
+            "value": "hot"
+          },
+          {
+            "field": "temperature_score_normalized",
+            "operator": "gte",
+            "value": 0.65
+          }
+        ],
+        "result": {
+          "effect": "imbalance=excess_hot",
+          "weight": 0,
+          "signal": "temperature_imbalance",
+          "score_target": "day_master.temperature_score",
+          "outcome": "excess_hot"
+        },
+        "explanation": "pri_level_hot. Cờ ngữ cảnh Pattern/UG.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_imbalance"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000076",
+      "version": "1.0.0",
+      "category": "temperature_imbalance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "imbalance"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 66
+      },
+      "conditions": [
+        {
+          "field": "temperature_level",
+          "operator": "equals",
+          "value": "cold"
+        }
+      ],
+      "result": {
+        "effect": "imbalance=excess_cold",
+        "weight": 0,
+        "signal": "temperature_imbalance",
+        "score_target": "day_master.temperature_score",
+        "outcome": "excess_cold"
+      },
+      "explanation": "pri_level_cold. Cờ ngữ cảnh Pattern/UG.",
+      "references": [
+        {
+          "target": "REF-TEC-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "imb_excess_cold",
+      "name": "Thái hàn",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "temperature_level",
+            "operator": "equals",
+            "value": "cold"
+          }
+        ],
+        "result": {
+          "effect": "imbalance=excess_cold",
+          "weight": 0,
+          "signal": "temperature_imbalance",
+          "score_target": "day_master.temperature_score",
+          "outcome": "excess_cold"
+        },
+        "explanation": "pri_level_cold. Cờ ngữ cảnh Pattern/UG.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_imbalance"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000077",
+      "version": "1.0.0",
+      "category": "temperature_imbalance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "imbalance"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 66
+      },
+      "conditions": [
+        {
+          "field": "dryness_level",
+          "operator": "equals",
+          "value": "dry"
+        },
+        {
+          "field": "dry_score",
+          "operator": "gte",
+          "value": 0.1
+        }
+      ],
+      "result": {
+        "effect": "imbalance=excess_dry",
+        "weight": 0,
+        "signal": "temperature_imbalance",
+        "score_target": "day_master.temperature_score",
+        "outcome": "excess_dry"
+      },
+      "explanation": "Táo vượt ẩm. Cờ ngữ cảnh Pattern/UG.",
+      "references": [
+        {
+          "target": "REF-TEC-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "imb_excess_dry",
+      "name": "Thái táo",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "dryness_level",
+            "operator": "equals",
+            "value": "dry"
+          },
+          {
+            "field": "dry_score",
+            "operator": "gte",
+            "value": 0.1
+          }
+        ],
+        "result": {
+          "effect": "imbalance=excess_dry",
+          "weight": 0,
+          "signal": "temperature_imbalance",
+          "score_target": "day_master.temperature_score",
+          "outcome": "excess_dry"
+        },
+        "explanation": "Táo vượt ẩm. Cờ ngữ cảnh Pattern/UG.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_imbalance"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000078",
+      "version": "1.0.0",
+      "category": "temperature_imbalance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "imbalance"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 66
+      },
+      "conditions": [
+        {
+          "field": "humidity_level",
+          "operator": "equals",
+          "value": "humid"
+        },
+        {
+          "field": "humid_score",
+          "operator": "gte",
+          "value": 0.1
+        }
+      ],
+      "result": {
+        "effect": "imbalance=excess_damp",
+        "weight": 0,
+        "signal": "temperature_imbalance",
+        "score_target": "day_master.temperature_score",
+        "outcome": "excess_damp"
+      },
+      "explanation": "Thấm vượt táo. Cờ ngữ cảnh Pattern/UG.",
+      "references": [
+        {
+          "target": "REF-TEC-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "imb_excess_damp",
+      "name": "Thái thấm",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "humidity_level",
+            "operator": "equals",
+            "value": "humid"
+          },
+          {
+            "field": "humid_score",
+            "operator": "gte",
+            "value": 0.1
+          }
+        ],
+        "result": {
+          "effect": "imbalance=excess_damp",
+          "weight": 0,
+          "signal": "temperature_imbalance",
+          "score_target": "day_master.temperature_score",
+          "outcome": "excess_damp"
+        },
+        "explanation": "Thấm vượt táo. Cờ ngữ cảnh Pattern/UG.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": true,
+          "group": "temperature_imbalance"
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000079",
+      "version": "1.0.0",
+      "category": "temperature_imbalance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "imbalance"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 66
+      },
+      "conditions": [
+        {
+          "field": "climate_type",
+          "operator": "equals",
+          "value": "hot"
+        },
+        {
+          "field": "dryness_level",
+          "operator": "equals",
+          "value": "dry"
+        }
+      ],
+      "result": {
+        "effect": "imbalance=hot_dry",
+        "weight": 0,
+        "signal": "temperature_imbalance",
+        "score_target": "day_master.temperature_score",
+        "outcome": "hot_dry"
+      },
+      "explanation": "Nóng kết táo. Cờ ngữ cảnh Pattern/UG.",
+      "references": [
+        {
+          "target": "REF-TEC-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "imb_hot_dry",
+      "name": "Nóng táo",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "climate_type",
+            "operator": "equals",
+            "value": "hot"
+          },
+          {
+            "field": "dryness_level",
+            "operator": "equals",
+            "value": "dry"
+          }
+        ],
+        "result": {
+          "effect": "imbalance=hot_dry",
+          "weight": 0,
+          "signal": "temperature_imbalance",
+          "score_target": "day_master.temperature_score",
+          "outcome": "hot_dry"
+        },
+        "explanation": "Nóng kết táo. Cờ ngữ cảnh Pattern/UG.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000080",
+      "version": "1.0.0",
+      "category": "temperature_imbalance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "imbalance"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 66
+      },
+      "conditions": [
+        {
+          "field": "climate_type",
+          "operator": "equals",
+          "value": "cold"
+        },
+        {
+          "field": "humidity_level",
+          "operator": "equals",
+          "value": "humid"
+        }
+      ],
+      "result": {
+        "effect": "imbalance=cold_damp",
+        "weight": 0,
+        "signal": "temperature_imbalance",
+        "score_target": "day_master.temperature_score",
+        "outcome": "cold_damp"
+      },
+      "explanation": "Hàn kết thấm. Cờ ngữ cảnh Pattern/UG.",
+      "references": [
+        {
+          "target": "REF-TEC-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "imb_cold_damp",
+      "name": "Hàn thấm",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "climate_type",
+            "operator": "equals",
+            "value": "cold"
+          },
+          {
+            "field": "humidity_level",
+            "operator": "equals",
+            "value": "humid"
+          }
+        ],
+        "result": {
+          "effect": "imbalance=cold_damp",
+          "weight": 0,
+          "signal": "temperature_imbalance",
+          "score_target": "day_master.temperature_score",
+          "outcome": "cold_damp"
+        },
+        "explanation": "Hàn kết thấm. Cờ ngữ cảnh Pattern/UG.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000081",
+      "version": "1.0.0",
+      "category": "temperature_imbalance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "imbalance"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 66
+      },
+      "conditions": [
+        {
+          "field": "fire_count",
+          "operator": "equals",
+          "value": 0
+        },
+        {
+          "field": "climate_type",
+          "operator": "equals",
+          "value": "cold"
+        }
+      ],
+      "result": {
+        "effect": "imbalance=imbalance",
+        "weight": 0,
+        "signal": "temperature_imbalance",
+        "score_target": "day_master.temperature_score",
+        "outcome": "imbalance"
+      },
+      "explanation": "Hàn không có Hỏa. Cờ ngữ cảnh Pattern/UG.",
+      "references": [
+        {
+          "target": "REF-TEC-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "imb_no_opposite_fire",
+      "name": "Thiếu Hỏa đối trọng",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "fire_count",
+            "operator": "equals",
+            "value": 0
+          },
+          {
+            "field": "climate_type",
+            "operator": "equals",
+            "value": "cold"
+          }
+        ],
+        "result": {
+          "effect": "imbalance=imbalance",
+          "weight": 0,
+          "signal": "temperature_imbalance",
+          "score_target": "day_master.temperature_score",
+          "outcome": "imbalance"
+        },
+        "explanation": "Hàn không có Hỏa. Cờ ngữ cảnh Pattern/UG.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    },
+    {
+      "id": "TEC-000082",
+      "version": "1.0.0",
+      "category": "temperature_imbalance",
+      "type": "rule",
+      "status": "official",
+      "enabled": true,
+      "language": "vi",
+      "tags": [
+        "temperature",
+        "imbalance"
+      ],
+      "priority": {
+        "level": "high",
+        "order": 66
+      },
+      "conditions": [
+        {
+          "field": "water_count",
+          "operator": "equals",
+          "value": 0
+        },
+        {
+          "field": "climate_type",
+          "operator": "equals",
+          "value": "hot"
+        }
+      ],
+      "result": {
+        "effect": "imbalance=imbalance",
+        "weight": 0,
+        "signal": "temperature_imbalance",
+        "score_target": "day_master.temperature_score",
+        "outcome": "imbalance"
+      },
+      "explanation": "Nóng không có Thủy. Cờ ngữ cảnh Pattern/UG.",
+      "references": [
+        {
+          "target": "REF-TEC-000009",
+          "relation": "references"
+        }
+      ],
+      "code": "imb_no_opposite_water",
+      "name": "Thiếu Thủy đối trọng",
+      "metadata": {
+        "package_id": "bz_03_temperature_core",
+        "domain_id": "DOM-TEMPERATURE",
+        "school": "bazi_default",
+        "author": "BTE Knowledge Board",
+        "sprint": "KX-2B"
+      },
+      "payload": {
+        "conditions": [
+          {
+            "field": "water_count",
+            "operator": "equals",
+            "value": 0
+          },
+          {
+            "field": "climate_type",
+            "operator": "equals",
+            "value": "hot"
+          }
+        ],
+        "result": {
+          "effect": "imbalance=imbalance",
+          "weight": 0,
+          "signal": "temperature_imbalance",
+          "score_target": "day_master.temperature_score",
+          "outcome": "imbalance"
+        },
+        "explanation": "Nóng không có Thủy. Cờ ngữ cảnh Pattern/UG.",
+        "evaluation": {
+          "weight": 0,
+          "stackable": false,
+          "max_stack": 1,
+          "exclusive": false,
+          "group": null
+        },
+        "target": {
+          "role": "day_master",
+          "attribute": "temperature_score"
+        }
+      }
+    }
+  ]
+}
