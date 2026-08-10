@@ -1,26 +1,17 @@
 {
-  "sprint": "Beta-2",
-  "layer": "public_service_platform",
-  "api_mount": "/api/v1",
-  "v2_exposed": false,
-  "services": [
-    "AnalysisService",
-    "ReportService",
-    "KnowledgeService",
-    "HealthService"
-  ],
-  "probes": ["/health", "/live", "/ready", "/version"],
-  "reserved": ["/metrics", "/api/v2"],
-  "auth": {
-    "bearer": "placeholder",
-    "api_key": "reserved",
-    "refresh_token": "reserved",
-    "role": "reserved"
-  },
-  "rate_limit": {
-    "enforced": false,
-    "error_code": "BTE-429-RATE_LIMITED",
-    "retry_after_header": "Retry-After"
-  },
-  "pipeline_binding": "unbound_design_gateway"
+  "sprint": "Beta-3",
+  "layer": "operational_platform",
+  "architecture_freeze": "AF-1 unchanged",
+  "new_endpoints": false,
+  "instrumentation": false,
+  "distributed_tracing": false,
+  "services": ["api", "portal", "nginx", "worker", "backup"],
+  "worker_status": "reserved",
+  "health_domains": ["service", "pipeline", "dependency", "overall"],
+  "observability": ["Request-ID", "Correlation-ID", "Trace-ID", "Operation-ID", "Pipeline-ID"],
+  "trace_id_status": "reserved",
+  "metric_domains": ["api", "pipeline", "system"],
+  "log_streams": ["application", "access", "error", "audit", "security", "operational"],
+  "maintenance_modes": ["maintenance", "read_only", "drain", "startup", "shutdown"],
+  "prior_layer": "Beta-2 public service platform unchanged"
 }
