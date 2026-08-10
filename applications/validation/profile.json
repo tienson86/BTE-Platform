@@ -1,0 +1,26 @@
+{
+  "sprint": "Beta-2",
+  "layer": "public_service_platform",
+  "api_mount": "/api/v1",
+  "v2_exposed": false,
+  "services": [
+    "AnalysisService",
+    "ReportService",
+    "KnowledgeService",
+    "HealthService"
+  ],
+  "probes": ["/health", "/live", "/ready", "/version"],
+  "reserved": ["/metrics", "/api/v2"],
+  "auth": {
+    "bearer": "placeholder",
+    "api_key": "reserved",
+    "refresh_token": "reserved",
+    "role": "reserved"
+  },
+  "rate_limit": {
+    "enforced": false,
+    "error_code": "BTE-429-RATE_LIMITED",
+    "retry_after_header": "Retry-After"
+  },
+  "pipeline_binding": "unbound_design_gateway"
+}

@@ -1,0 +1,28 @@
+{
+  "sprint": "Beta-2",
+  "architecture_freeze": "AF-1 unchanged",
+  "public_api_mount": "/api/v1",
+  "v2_exposed": false,
+  "checks": [
+    { "id": "API_VERSIONING", "status": "pass", "mount": "/api/v1", "v2_mounted": false },
+    { "id": "OPENAPI_COMPLETE", "path": "applications/openapi/openapi.yaml", "status": "pass", "paths": ["/health", "/live", "/ready", "/version", "/metrics", "/api/v1/analysis", "/api/v1/analysis/{id}", "/api/v1/report/{id}", "/api/v1/knowledge/{id}"] },
+    { "id": "RESPONSE_MODEL", "status": "pass", "fields": ["status", "data", "metadata", "request_id", "timestamp", "api_version"] },
+    { "id": "ERROR_MODEL", "status": "pass", "fields": ["code", "message", "details", "request_id", "timestamp"], "leaks": false },
+    { "id": "SERVICE_REGISTRY", "status": "pass", "services": ["AnalysisService", "ReportService", "KnowledgeService", "HealthService"] },
+    { "id": "NO_ENGINE_IMPORTS", "status": "pass", "scanned_files": 32, "forbidden_imports": 0 },
+    { "id": "NO_KNOWLEDGE_IMPORTS", "status": "pass", "forbidden_imports": 0 },
+    { "id": "NO_PIPELINE_MODIFICATION", "status": "pass" },
+    { "id": "NO_KNOWLEDGE_MODIFICATION", "status": "pass" },
+    { "id": "NO_ARCHITECTURE_CHANGES", "status": "pass" },
+    { "id": "HEALTH_PROBES", "status": "pass", "routes": ["/health", "/live", "/ready", "/version"], "metrics": "reserved_501" },
+    { "id": "AUTH_PLACEHOLDER", "status": "pass", "login_implemented": false },
+    { "id": "RATE_LIMIT_PLACEHOLDER", "status": "pass", "enforced": false, "retry_after_documented": true },
+    { "id": "ENGINES", "status": "unchanged" },
+    { "id": "PIPELINES", "status": "unchanged" },
+    { "id": "KNOWLEDGE", "status": "unchanged" },
+    { "id": "FOUNDATION", "status": "unchanged" },
+    { "id": "PRODUCT_UI", "status": "unchanged" },
+    { "id": "CUSTOMER_PORTAL", "status": "unchanged" },
+    { "id": "DEPLOYMENT", "status": "unchanged" }
+  ]
+}

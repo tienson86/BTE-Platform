@@ -1,0 +1,366 @@
+openapi: 3.1.0
+info:
+  title: BTE Public API
+  version: 1.0.0
+  description: |
+    Public service API for BTE Platform v1.0.
+    All resource APIs are mounted under `/api/v1/`.
+    `/api/v2/` is not exposed.
+    Engine objects are never returned.
+  contact:
+    name: BTE Platform
+servers:
+  - url: /
+    description: Public service host
+tags:
+  - name: health
+    description: Liveness and readiness probes
+  - name: system
+    description: Version identity and reserved metrics
+  - name: analysis
+    description: Analysis submission and retrieval
+  - name: report
+    description: Report retrieval
+  - name: knowledge
+    description: Published knowledge retrieval
+paths:
+  /health:
+    get:
+      tags: [health]
+      operationId: getHealth
+      summary: Aggregate health probe
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/CorrelationId"
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+  /live:
+    get:
+      tags: [health]
+      operationId: getLive
+      summary: Process liveness probe
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/CorrelationId"
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+  /ready:
+    get:
+      tags: [health]
+      operationId: getReady
+      summary: Traffic readiness probe
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/CorrelationId"
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+  /version:
+    get:
+      tags: [system]
+      operationId: getVersion
+      summary: Public API and schema versions
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/ApiVersion"
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+  /metrics:
+    get:
+      tags: [system]
+      operationId: getMetrics
+      summary: Reserved metrics endpoint
+      description: Reserved. No monitoring implementation in Beta-2.
+      responses:
+        "501":
+          $ref: "#/components/responses/Error"
+  /api/v1/analysis:
+    post:
+      tags: [analysis]
+      operationId: createAnalysis
+      summary: Submit an analysis request
+      security:
+        - BearerAuth: []
+        - ApiKeyAuth: []
+        - {}
+      parameters:
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/CorrelationId"
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/ApiVersion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalysisCreateRequest"
+            example:
+              customer:
+                id: "cust_001"
+                name: "Nguyen Van A"
+              birth_data:
+                year: 1990
+                month: 5
+                day: 15
+                hour: 10
+                minute: 30
+                calendar_type: solar
+                timezone: Asia/Ho_Chi_Minh
+                gender: male
+              options:
+                language: vi
+                report_template: STANDARD
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+        "400":
+          $ref: "#/components/responses/Error"
+        "401":
+          $ref: "#/components/responses/Error"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Error"
+  /api/v1/analysis/{id}:
+    get:
+      tags: [analysis]
+      operationId: getAnalysis
+      summary: Get analysis by id
+      parameters:
+        - $ref: "#/components/parameters/ResourceId"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/CorrelationId"
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+        "404":
+          $ref: "#/components/responses/Error"
+  /api/v1/report/{id}:
+    get:
+      tags: [report]
+      operationId: getReport
+      summary: Get report by id
+      parameters:
+        - $ref: "#/components/parameters/ResourceId"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/CorrelationId"
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+        "404":
+          $ref: "#/components/responses/Error"
+  /api/v1/knowledge/{id}:
+    get:
+      tags: [knowledge]
+      operationId: getKnowledge
+      summary: Get published knowledge by id
+      parameters:
+        - $ref: "#/components/parameters/ResourceId"
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/CorrelationId"
+      responses:
+        "200":
+          $ref: "#/components/responses/Success"
+        "404":
+          $ref: "#/components/responses/Error"
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Placeholder. Token is recognized but not validated in Beta-2.
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Reserved. Not validated in Beta-2.
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+    RequestId:
+      name: Request-ID
+      in: header
+      required: false
+      schema:
+        type: string
+    CorrelationId:
+      name: Correlation-ID
+      in: header
+      required: false
+      schema:
+        type: string
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: false
+      schema:
+        type: string
+    ApiVersion:
+      name: API-Version
+      in: header
+      required: false
+      schema:
+        type: string
+        enum: [v1]
+        default: v1
+  schemas:
+    BirthDataRequest:
+      type: object
+      additionalProperties: false
+      required: [year, month, day]
+      properties:
+        year: { type: integer, minimum: 1, maximum: 9999 }
+        month: { type: integer, minimum: 1, maximum: 12 }
+        day: { type: integer, minimum: 1, maximum: 31 }
+        hour: { type: integer, minimum: 0, maximum: 23, default: 0 }
+        minute: { type: integer, minimum: 0, maximum: 59, default: 0 }
+        calendar_type: { type: string, default: solar }
+        timezone: { type: string, default: Asia/Ho_Chi_Minh }
+        gender: { type: string, nullable: true }
+    CustomerRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        id: { type: string, maxLength: 128, nullable: true }
+        name: { type: string, maxLength: 256, nullable: true }
+    AnalysisOptionsRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        language: { type: string, default: vi }
+        report_template: { type: string, nullable: true }
+    AnalysisCreateRequest:
+      type: object
+      additionalProperties: false
+      required: [birth_data]
+      properties:
+        customer: { $ref: "#/components/schemas/CustomerRequest" }
+        birth_data: { $ref: "#/components/schemas/BirthDataRequest" }
+        options: { $ref: "#/components/schemas/AnalysisOptionsRequest" }
+        metadata:
+          type: object
+          additionalProperties: true
+          nullable: true
+    RequestIdentifiers:
+      type: object
+      additionalProperties: false
+      required: [request_id]
+      properties:
+        request_id: { type: string }
+        correlation_id: { type: string, nullable: true }
+        idempotency_key: { type: string, nullable: true }
+    ResponseMetadata:
+      type: object
+      additionalProperties: false
+      required: [service, operation, identifiers]
+      properties:
+        service: { type: string }
+        operation: { type: string }
+        pipeline: { type: string, nullable: true }
+        identifiers: { $ref: "#/components/schemas/RequestIdentifiers" }
+    PublicSuccessResponse:
+      type: object
+      additionalProperties: false
+      required: [status, data, metadata, request_id, timestamp, api_version]
+      properties:
+        status: { type: string, enum: [success] }
+        data: { type: object, additionalProperties: true }
+        metadata: { $ref: "#/components/schemas/ResponseMetadata" }
+        request_id: { type: string }
+        timestamp: { type: string, format: date-time }
+        api_version: { type: string, enum: [v1] }
+    ErrorDetails:
+      type: object
+      additionalProperties: false
+      properties:
+        field: { type: string, nullable: true }
+        reason: { type: string, nullable: true }
+        context:
+          type: array
+          items: { type: string }
+        extra:
+          type: object
+          additionalProperties: true
+          nullable: true
+    CanonicalError:
+      type: object
+      additionalProperties: false
+      required: [code, message, request_id, timestamp]
+      properties:
+        code: { type: string }
+        message: { type: string }
+        details: { $ref: "#/components/schemas/ErrorDetails" }
+        request_id: { type: string }
+        timestamp: { type: string, format: date-time }
+    PaginationMeta:
+      type: object
+      additionalProperties: false
+      required: [page, page_size, has_next, has_previous]
+      properties:
+        page: { type: integer, minimum: 1 }
+        page_size: { type: integer, minimum: 1, maximum: 100 }
+        total_items: { type: integer, nullable: true }
+        total_pages: { type: integer, nullable: true }
+        has_next: { type: boolean }
+        has_previous: { type: boolean }
+  responses:
+    Success:
+      description: Canonical success envelope
+      headers:
+        Request-ID:
+          schema: { type: string }
+        Correlation-ID:
+          schema: { type: string }
+        API-Version:
+          schema: { type: string }
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PublicSuccessResponse"
+    Error:
+      description: Canonical error body
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CanonicalError"
+          example:
+            code: BTE-404-NOT_FOUND
+            message: The requested resource was not found.
+            details:
+              field: id
+              reason: Analysis resource was not found.
+              context: []
+            request_id: req_123
+            timestamp: 2026-08-10T00:00:00Z
+    RateLimited:
+      description: Rate limit reserved response
+      headers:
+        Retry-After:
+          schema: { type: integer }
+          description: Seconds to wait before retrying.
+        X-RateLimit-Limit:
+          schema: { type: integer }
+        X-RateLimit-Remaining:
+          schema: { type: integer }
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CanonicalError"
+          example:
+            code: BTE-429-RATE_LIMITED
+            message: Rate limit exceeded. Retry after the indicated interval.
+            details:
+              reason: Placeholder policy. Enforcement is not enabled in Beta-2.
+              context: []
+            request_id: req_123
+            timestamp: 2026-08-10T00:00:00Z
