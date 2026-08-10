@@ -1,7 +1,8 @@
 {
   "dataset": "CALIBRATION_DATASET",
-  "sprint": "PILOT-1D",
+  "sprint": "PILOT-1E-B",
   "released_golden_mutated": false,
+  "next_free_calibration_id": "CAL-000008",
   "cases": [
     {
       "calibration_case_id": "CAL-000001",
@@ -11,9 +12,13 @@
       "normalized": 0.87,
       "v1_band": "strong",
       "boundary": false,
+      "boundary_label": "NON_BOUNDARY",
       "conflict": true,
-      "inclusion_status": "VERIFIED_POOL_PROVISIONAL",
-      "dual_reviewed": false
+      "inclusion_status": "CALIBRATION_DUAL_REVIEWED",
+      "dual_reviewed": true,
+      "expert_agreement": "EXACT_MATCH",
+      "adjudication_status": "NOT_REQUIRED",
+      "model_disagreement": "MODEL_DISAGREEMENT"
     },
     {
       "calibration_case_id": "CAL-000002",
@@ -25,7 +30,8 @@
       "boundary": false,
       "conflict": false,
       "inclusion_status": "VERIFIED_POOL_PROVISIONAL",
-      "dual_reviewed": false
+      "dual_reviewed": false,
+      "expert_review_2": "PENDING_ACQUISITION"
     },
     {
       "calibration_case_id": "CAL-000003",
@@ -37,7 +43,8 @@
       "boundary": true,
       "conflict": true,
       "inclusion_status": "VERIFIED_POOL_PROVISIONAL",
-      "dual_reviewed": false
+      "dual_reviewed": false,
+      "expert_review_2": "PENDING_ACQUISITION"
     },
     {
       "calibration_case_id": "CAL-000004",
@@ -49,7 +56,8 @@
       "boundary": false,
       "conflict": false,
       "inclusion_status": "VERIFIED_POOL_PROVISIONAL",
-      "dual_reviewed": false
+      "dual_reviewed": false,
+      "expert_review_2": "PENDING_ACQUISITION"
     },
     {
       "calibration_case_id": "CAL-000005",
@@ -61,7 +69,8 @@
       "boundary": true,
       "conflict": false,
       "inclusion_status": "VERIFIED_POOL_PROVISIONAL",
-      "dual_reviewed": false
+      "dual_reviewed": false,
+      "expert_review_2": "PENDING_ACQUISITION"
     },
     {
       "calibration_case_id": "CAL-000006",
@@ -71,9 +80,14 @@
       "normalized": 0.5,
       "v1_band": "balanced",
       "boundary": true,
+      "boundary_label": "BOUNDARY_CANDIDATE",
       "conflict": false,
-      "inclusion_status": "VERIFIED_POOL_PROVISIONAL",
-      "dual_reviewed": false
+      "inclusion_status": "CALIBRATION_DUAL_REVIEWED",
+      "dual_reviewed": true,
+      "expert_agreement": "EXACT_MATCH",
+      "adjudication_status": "NOT_REQUIRED",
+      "model_disagreement": "MODEL_DISAGREEMENT",
+      "canonical_month": "Mậu Ngọ"
     },
     {
       "calibration_case_id": "CAL-000007",
@@ -85,7 +99,8 @@
       "boundary": false,
       "conflict": true,
       "inclusion_status": "VERIFIED_POOL_PROVISIONAL",
-      "dual_reviewed": false
+      "dual_reviewed": false,
+      "expert_review_2": "PENDING_ACQUISITION"
     }
   ],
   "coverage": {
@@ -97,14 +112,29 @@
     "STRONG": 2,
     "VERY_STRONG": 1
   },
+  "dual_reviewed_coverage": {
+    "VERY_WEAK": 0,
+    "WEAK": 0,
+    "SLIGHTLY_WEAK": 2,
+    "BALANCED": 0,
+    "SLIGHTLY_STRONG": 0,
+    "STRONG": 0,
+    "VERY_STRONG": 0
+  },
   "counts": {
     "total_provisional_verified": 7,
+    "new_cases_acquired": 0,
     "new_verified_cases": 0,
-    "dual_reviewed": 0,
+    "dual_reviewed": 2,
+    "adjudicated": 0,
+    "adjudication_not_required": 2,
     "boundary": 3,
     "conflict": 3,
-    "low_confidence_flagged": 7
+    "low_confidence_flagged": 5
   },
   "score_only_sufficiency": "NO",
-  "taxonomy_boundaries_frozen": false
+  "taxonomy_boundaries_frozen": false,
+  "final_decision": "CALIBRATION_PARTIAL",
+  "agreement_sample_n": 2,
+  "agreement_sample_note": "Do not generalize n=2 rates to full population."
 }

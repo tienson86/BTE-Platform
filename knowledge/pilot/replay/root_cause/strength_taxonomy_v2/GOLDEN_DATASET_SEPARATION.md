@@ -1,23 +1,24 @@
-# Golden Dataset Separation
+# Golden Dataset Separation (PILOT-1E)
 
 ## Policy
 
-| Store | Purpose | PILOT-1D action |
+| Store | Purpose | PILOT-1E action |
 |---|---|---|
-| Released Golden Dataset (`tests/golden_dataset`, released Expected) | Production regression | **Not modified** |
-| Calibration Dataset (`…/strength_taxonomy_v2/calibration/`) | Taxonomy v2 expert calibration | Created / populated with EXISTING_PILOT projections |
+| Released Golden Dataset | Production regression | **Not modified** |
+| Calibration Dataset | Taxonomy v2 expert calibration | Retained 7 provisional; acquisition system ready |
 
 ## Promotion
 
-Calibration cases may be promoted later only via controlled change process:
+| Rule | Status |
+|---|---|
+| Dual review + adjudication required before candidate | Enforced |
+| Explicit Expected proposal + human approval | Required later |
+| Promotion in PILOT-1E | **Forbidden / none** |
 
-1. Dual expert review + adjudication  
-2. Chart verification under tiết khí SSOT  
-3. Explicit Expected addition proposal  
-4. Human approval  
-
-**No promotion in PILOT-1D.**
+No cases tagged `PROMOTION_CANDIDATE` this sprint.
 
 ## Identity
 
-Calibration uses `CAL-######` IDs. Source `CASE-######` retained as provenance links only.
+- Calibration IDs: `CAL-######`  
+- Source pilot IDs: `CASE-######` (provenance only)  
+- Next acquisition ID: `CAL-000008`

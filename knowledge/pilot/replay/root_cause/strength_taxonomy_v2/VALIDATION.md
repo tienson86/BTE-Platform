@@ -1,4 +1,4 @@
-# VALIDATION — PILOT-1D
+# VALIDATION — PILOT-1E-B
 
 ## Freeze / scope
 
@@ -9,11 +9,12 @@
 | Knowledge packages unchanged | YES |
 | Golden Expected unchanged | YES |
 | AF-1 unchanged | YES |
-| API / UI / pipelines unchanged | YES |
-| No fabricated charts | YES |
-| No fabricated expert judgments | YES |
-| No silent fixture mutation | YES |
-| Calibration ≠ released Golden | YES |
+| T1–T6 not frozen | YES |
+| Expert-A preserved | YES |
+| Expert-B recorded exactly (level+confidence) | YES |
+| Rationale not invented | YES |
+| Adjudication does not overwrite reviews | YES |
+| CAL-000006 month = Mậu Ngọ | YES |
 
 ## Tests
 
@@ -23,22 +24,11 @@ python -m pytest tests/golden_dataset -q
 
 python -m pytest tests/score/test_strength.py -q
 → 1 passed
+
+python .../adjudication/validation/validate_adjudication.py
+→ ok: true
 ```
 
-## Calibration validation
+## Final decision
 
-See `calibration/validation/VALIDATION.json` → `PASS_WITH_GAPS`
-
-| Check | Result |
-|---|---|
-| Unique CAL IDs | pass |
-| Provenance valid | pass |
-| No SYNTHETIC/UNKNOWN in pool | pass |
-| Expert review 1 present | pass |
-| Expert review 2 complete | **fail/gap** (pending) |
-| Coverage ≥5/level | **fail/gap** |
-| Production mutations | none |
-
-## Final decision cross-check
-
-`PILOT_1D_SUMMARY.md` → **CALIBRATION_PARTIAL**
+**CALIBRATION_PARTIAL**

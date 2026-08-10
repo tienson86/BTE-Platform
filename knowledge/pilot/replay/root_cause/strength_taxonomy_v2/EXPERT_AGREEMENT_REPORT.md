@@ -1,33 +1,34 @@
-# Expert Agreement Report
+# Expert Agreement Report (PILOT-1E-B)
 
-## Protocol status
+## Scope
 
-| Step | Status |
-|---|---|
-| Chart verification | Done for 7 EXISTING_PILOT projections |
-| Evidence snapshot | Done |
-| Expert review 1 | Recorded from Pilot reference (not new blind) |
-| Expert review 2 | **PENDING_ACQUISITION** for all |
-| Adjudication | Provisional single-reference only |
+Dual-reviewed sample for this sprint: **n = 2** (CAL-000001, CAL-000006).  
+Do **not** generalize these rates to the full 7-case provisional population.
 
-## Agreement metrics (runtime v1 vs expert reference)
-
-Using PILOT-1C categories against current runtime bands:
+## Expert agreement metrics (n=2)
 
 | Metric | Value | Notes |
-|---|---|---|
-| Exact agreement (coarse intent) | 2/7 (0004, 0007) | Exact strong match |
-| Adjacent | 2/7 (0002, 0006) | Intensity / tilt |
-| Model disagreement | 3/7 (0001, 0003, 0005) | Strong vs soft expert |
-| Expert disagreement (dual) | **N/A** | No dual reviews yet |
-| Unresolved | 0 charts unverified | Dual review unresolved |
+|---|---:|---|
+| Dual-reviewed pairs | 2 | — |
+| Exact agreement rate | 2/2 = 100% | Both SLIGHTLY_WEAK |
+| Adjacent agreement rate | 0/2 = 0% | — |
+| Within-two-level rate | 2/2 = 100% | Includes exact |
+| Expert disagreement rate (>2 levels) | 0/2 = 0% | — |
+| Insufficient-evidence rate | 0/2 = 0% | — |
+| Adjudication rate | 0/2 = 0% | Both NOT_REQUIRED |
+| Confidence agreement (exact) | 2/2 = 100% | Both MEDIUM |
 
-**Do not optimize these rates.** Disagreement is calibration signal.
+## Model disagreement (separate from expert agreement)
 
-## Dual-review rate
+| Case | Experts | Runtime | Class |
+|---|---|---|---|
+| CAL-000001 | SLIGHTLY_WEAK | strong (0.87) | MODEL_DISAGREEMENT |
+| CAL-000006 | SLIGHTLY_WEAK | balanced (0.50) | MODEL_DISAGREEMENT (adjacent) |
 
-```text
-EXPERT_DUAL_REVIEWED = 0 / 7
-```
+## Remaining provisional (not dual)
 
-Until dual reviews exist, agreement statistics are **single-reference only** and insufficient for T1–T6 freeze.
+CAL-000002, 000003, 000004, 000005, 000007 — Expert-B still PENDING.
+
+## Score-only sufficiency
+
+**SCORE_ONLY_CLASSIFICATION = NOT_SUFFICIENT** (unchanged; not reversed by n=2).

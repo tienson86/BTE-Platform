@@ -49,20 +49,34 @@
     "review_status": "RECORDED_FROM_EXISTING_REFERENCE"
   },
   "expert_review_2": {
-    "status": "PENDING_ACQUISITION",
-    "note": "Second independent expert review not available; do not fabricate."
+    "reviewer_id": "EXPERT-B",
+    "taxonomy_level": "SLIGHTLY_WEAK",
+    "confidence": "MEDIUM",
+    "rationale": null,
+    "review_status": "VALIDATED",
+    "review_ref": "reviews/CAL-000001_review2.json",
+    "sprint_recorded": "PILOT-1E-B",
+    "note": "Rationale not supplied by Expert-B; not invented."
+  },
+  "agreement": {
+    "expert_agreement": "EXACT_MATCH",
+    "taxonomy_distance": 0,
+    "confidence_agreement": "EXACT_MATCH",
+    "model_disagreement": "MODEL_DISAGREEMENT"
   },
   "adjudication": {
-    "status": "PROVISIONAL_SINGLE_REFERENCE",
-    "result_level": "SLIGHTLY_WEAK",
-    "note": "Pending dual review / adjudication per EXPERT_CALIBRATION_PROTOCOL."
+    "adjudication_status": "NOT_REQUIRED",
+    "adjudicated_taxonomy_level": null,
+    "record_ref": "../../adjudication/CASE_000001_ADJUDICATION.json"
   },
   "confidence": "MEDIUM",
   "boundary_status": false,
+  "boundary_label": "NON_BOUNDARY",
   "conflict_status": true,
   "evidence_completeness": "PARTIAL",
-  "review_status": "SINGLE_REFERENCE_VERIFIED_CHART",
-  "inclusion_status": "VERIFIED_POOL_PROVISIONAL",
-  "notes": "model disagreement; sitting fire hypothesis",
+  "review_status": "DUAL_REVIEWED",
+  "inclusion_status": "CALIBRATION_DUAL_REVIEWED",
+  "dual_reviewed": true,
+  "notes": "PILOT-1E-B: experts EXACT_MATCH SLIGHTLY_WEAK; runtime strong = MODEL_DISAGREEMENT; sitting Ngọ PLAUSIBLE; officer dedup SUPPORTED (hygiene only)",
   "anonymized_report_id": "CAL-000001"
 }

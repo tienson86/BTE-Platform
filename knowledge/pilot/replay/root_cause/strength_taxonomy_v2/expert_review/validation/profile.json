@@ -1,0 +1,30 @@
+{
+  "schema": "bte.strength.expert_b_intake_validation_profile.v1",
+  "sprint": "PILOT-1E-A",
+  "required_cases": ["CAL-000001", "CAL-000006"],
+  "required_files_per_case": [
+    "REVIEW_PACKET.md",
+    "REVIEW_FORM.md",
+    "REVIEW_FORM.json",
+    "BLINDING_MANIFEST.json",
+    "NEUTRAL_EVIDENCE.json"
+  ],
+  "expert_b_required_null_fields": [
+    "taxonomy_level",
+    "confidence",
+    "rationale"
+  ],
+  "allowed_review_status_initial": "PENDING",
+  "forbidden_in_blinded_packet": [
+    "Expert-A classification",
+    "Expert-A rationale",
+    "Expert-A confidence",
+    "adjudicated classification",
+    "expected taxonomy level",
+    "runtime strength band",
+    "runtime strength score",
+    "historical incorrect month as answer cue"
+  ],
+  "comparison_status_required": "AWAITING_EXPERT_B",
+  "adjudication_allowed": false
+}

@@ -1,41 +1,32 @@
-# Score Distribution Analysis
+# Score Distribution Analysis (PILOT-1E)
 
-## Observed normalized scores
+**Population:** 7 provisional cases (unchanged). No new verified scores.
 
-```text
-CAL-000006  0.50  SLIGHTLY_WEAK (expert) / balanced (v1)
-CAL-000003  0.66  SLIGHTLY_WEAK
-CAL-000005  0.66  SLIGHTLY_STRONG   ← identical score, different expert level
-CAL-000007  0.76  STRONG
-CAL-000004  0.84  STRONG
-CAL-000001  0.87  SLIGHTLY_WEAK (expert) / strong (v1)  ← model disagreement
-CAL-000002  0.89  VERY_STRONG
-```
+## Case table
 
-## Clustering
+| CAL | Normalized | v1 band | Expert-A | Expert-B | Adjudicated | Confidence |
+|---|---:|---|---|---|---|---|
+| CAL-000001 | 0.87 | strong | SLIGHTLY_WEAK | PENDING | provisional SLIGHTLY_WEAK | MEDIUM |
+| CAL-000002 | 0.89 | strong | VERY_STRONG | PENDING | provisional VERY_STRONG | MEDIUM |
+| CAL-000003 | 0.66 | strong | SLIGHTLY_WEAK | PENDING | provisional SLIGHTLY_WEAK | MEDIUM |
+| CAL-000004 | 0.84 | strong | STRONG | PENDING | provisional STRONG | MEDIUM |
+| CAL-000005 | 0.66 | strong | SLIGHTLY_STRONG | PENDING | provisional SLIGHTLY_STRONG | MEDIUM |
+| CAL-000006 | 0.50 | balanced | SLIGHTLY_WEAK | PENDING | provisional SLIGHTLY_WEAK | MEDIUM |
+| CAL-000007 | 0.76 | strong | STRONG | PENDING | provisional STRONG | MEDIUM |
 
-- Mid cluster: 0.50  
-- Cliff pair: 0.66 / 0.66  
-- Strong cluster: 0.76–0.89  
-
-Gaps: no scores below 0.50; no dense BALANCED band; no VERY_WEAK/WEAK.
-
-## Score-only sufficiency test
+## Findings
 
 | Question | Answer |
 |---|---|
-| Similar scores, different expert levels? | **YES** — 0.66 → SLIGHTLY_WEAK vs SLIGHTLY_STRONG |
-| Different scores, same expert level? | **YES** — STRONG at 0.76 and 0.84; SLIGHTLY_WEAK at 0.50, 0.66, 0.87 |
-| Evidence composition explains 0.66 twin? | **YES** — opposite season signs; different drain/support |
-| Profile dimensions needed? | **YES** |
-| Confidence explains ambiguity? | Should — runtime conf=1.0 fails; design conf=MEDIUM |
+| Same score, different expert level? | **Yes** — 0.66 → CAL-000003 SLIGHTLY_WEAK vs CAL-000005 SLIGHTLY_STRONG |
+| Different scores, same expert level? | **Yes** — SLIGHTLY_WEAK at 0.87, 0.66, 0.50 |
+| Evidence/profile explain difference? | Partially (design models from PILOT-1C); not dual-confirmed |
+| Confidence explain ambiguity? | Dual missing → all provisional MEDIUM |
 
-### Verdict
+## Score-only sufficiency
 
 **SCORE_ONLY_CLASSIFICATION = NO**
 
-Taxonomy v2 must consume Strength Profile + boundary/confidence, not normalized score alone.
+## Threshold freeze
 
-## Machine artifact
-
-`calibration/distributions/score_distribution.json`
+**Do not freeze T1–T6.** Candidate regions remain symbolic / INSUFFICIENT_DATA.

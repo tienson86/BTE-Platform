@@ -1,0 +1,53 @@
+{
+  "schema": "bte.strength.adjudication.v1",
+  "calibration_case_id": "CAL-000006",
+  "source_case_id": "CASE-0006",
+  "sprint": "PILOT-1E-B",
+  "canonical_chart": {
+    "birth_datetime": "1988-06-07T20:45:00",
+    "location": "Hải Phòng, Việt Nam",
+    "month": "Mậu Ngọ",
+    "calendar_rca_reopened": false
+  },
+  "expert_a": {
+    "reviewer_id": "EXPERT-A",
+    "source": "PILOT_EXPERT_REFERENCE",
+    "taxonomy_level": "SLIGHTLY_WEAK",
+    "confidence": "MEDIUM",
+    "rationale": "Carried from Pilot expert reference classification; not a new dual-blind review.",
+    "preserved": true,
+    "review_ref": "../calibration/reviews/CAL-000006_review1.json"
+  },
+  "expert_b": {
+    "reviewer_id": "EXPERT-B",
+    "taxonomy_level": "SLIGHTLY_WEAK",
+    "confidence": "MEDIUM",
+    "rationale": null,
+    "rationale_note": "Expert-B supplied taxonomy_level and confidence only in PILOT-1E-B; no free-text rationale provided — not invented.",
+    "review_ref": "../calibration/reviews/CAL-000006_review2.json",
+    "packet_ref": "../expert_review/CASE_0006/REVIEW_FORM.json"
+  },
+  "agreement": {
+    "taxonomy_distance": 0,
+    "expert_agreement": "EXACT_MATCH",
+    "confidence_agreement": "EXACT_MATCH",
+    "model_disagreement": {
+      "present": true,
+      "runtime_v1_band": "balanced",
+      "runtime_normalized": 0.5,
+      "expert_consensus_level": "SLIGHTLY_WEAK",
+      "class": "MODEL_DISAGREEMENT",
+      "note": "Runtime balanced is adjacent to expert SLIGHTLY_WEAK; recorded as model-vs-expert signal, not expert disagreement."
+    }
+  },
+  "adjudication_status": "NOT_REQUIRED",
+  "adjudicated_taxonomy_level": null,
+  "adjudication_confidence": null,
+  "adjudication_rationale": null,
+  "disagreement_dimensions": [],
+  "boundary_status": "BOUNDARY_CANDIDATE",
+  "boundary_note": "Existing calibration evidence places case near SLIGHTLY_WEAK / BALANCED; dual experts agree SLIGHTLY_WEAK. Not a frozen threshold anchor.",
+  "dual_reviewed": true,
+  "inclusion_status": "CALIBRATION_DUAL_REVIEWED",
+  "golden_promotion": false
+}

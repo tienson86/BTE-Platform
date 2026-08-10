@@ -1,32 +1,20 @@
-# Calibration Readiness
+# Calibration Readiness (PILOT-1E-B)
 
 ## Gate evaluation
 
-| Requirement for IMPLEMENTATION_READY | Met? |
+| Requirement for CALIBRATION_COMPLETE | Met? |
 |---|---|
-| ≥5 verified cases per taxonomy level | **No** |
-| Boundary coverage adequate | **No** (BOUNDARY_DATA_INSUFFICIENT) |
-| Conflict cohort ≥5 | **No** (3) |
-| Low-confidence cohort meaningful | Partial (all MEDIUM pending dual) |
-| Expert protocol executed | Partial (single reference only) |
-| Expert agreement acceptable for freeze | **No** (no dual reviews) |
+| ≥5 dual-reviewed cases per taxonomy level | **No** |
+| Boundary coverage adequate | **No** |
+| Conflict cohort ≥5 dual | **No** |
+| Dual expert protocol executed on sample | **Partial** (n=2) |
+| Expert agreement metrics available | **Yes for n=2 only** |
 | Taxonomy boundaries stable | **No** |
 | Score/profile distinction understood | **Yes** (SCORE_ONLY = NO) |
-| Golden promotion plan exists | **Yes** (separation doc) |
+| Golden promotion plan exists | **Yes** |
 
 ## Decision
 
 **CALIBRATION_PARTIAL**
 
-| Alternative | Why not |
-|---|---|
-| CALIBRATION_INSUFFICIENT | Structure + 7 provisional cases + analysis exist |
-| CALIBRATION_COMPLETE | Gaps too large; dual review absent |
-| IMPLEMENTATION_READY | Explicitly forbidden / unsupported |
-
-## Blockers
-
-1. Acquire real charts for empty levels (VERY_WEAK, WEAK, BALANCED, …)  
-2. Dual expert reviews  
-3. Boundary pairs for all six regions  
-4. Keep T1–T6 unfrozen until SUPPORTED
+Two dual-reviewed exact matches are useful evidence, not a finished taxonomy.
