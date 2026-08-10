@@ -1,0 +1,218 @@
+{
+  "case_id": "CASE-0003",
+  "expert_reference": {
+    "en": "slightly weak",
+    "vi": "Thân hơi nhược"
+  },
+  "boundary": true,
+  "corrected_chart_note": null,
+  "input": {
+    "year": 2015,
+    "month": 8,
+    "day": 14,
+    "hour": 7,
+    "minute": 20,
+    "gender": "male"
+  },
+  "chart": {
+    "year": "Ất Mùi",
+    "month": "Giáp Thân",
+    "day": "Nhâm Tuất",
+    "hour": "Giáp Thìn",
+    "day_master": "Nhâm"
+  },
+  "calendar_solar_term": {
+    "name": "Lập Thu",
+    "index": 12
+  },
+  "pipeline": {
+    "season_context": {
+      "season": "autumn",
+      "season_phase": "early_autumn",
+      "month_status": "Tướng",
+      "month_branch": "Thân"
+    },
+    "temperature_context": {
+      "from_strength_context": "cool",
+      "from_temperature_engine": {
+        "temperature_level": "warm",
+        "temperature_score": 0.59,
+        "reasoning": "Khí ấm"
+      },
+      "note": "TemperatureEngine runs separately; StrengthContext.temperature_type may be branch-derived only"
+    },
+    "supporting_elements": [],
+    "resource_elements": [],
+    "restricting_elements": {
+      "officer": [],
+      "output": [
+        "Thương Quan",
+        "Thực Thần",
+        "Thực Thần"
+      ],
+      "wealth": []
+    },
+    "root_resource_evidence": {
+      "root_level": "Thông căn 2 chi",
+      "root_count": 2,
+      "support_type": null
+    },
+    "strength_evidence_ledger": [
+      {
+        "rule_id": "sea_002",
+        "group": "season",
+        "score": 25.0,
+        "contribution_normalized": 0.25,
+        "priority": 95,
+        "reason": "Tướng địa theo tháng",
+        "conditions": "[{\"field\": \"month_status\", \"operator\": \"==\", \"value\": \"Tướng\"}]",
+        "runtime_polarity": "strengthen",
+        "expected_polarity_by_group": "strengthen",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "root_002",
+        "group": "root",
+        "score": 22.0,
+        "contribution_normalized": 0.22,
+        "priority": 95,
+        "reason": "Căn khí mạnh",
+        "conditions": "[{\"field\": \"root_level\", \"operator\": \"==\", \"value\": \"Thông căn 2 chi\"}]",
+        "runtime_polarity": "strengthen",
+        "expected_polarity_by_group": "strengthen",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "ctl_002",
+        "group": "control",
+        "score": -8.0,
+        "contribution_normalized": -0.08,
+        "priority": 85,
+        "reason": "Bị Thực Thương tiết",
+        "conditions": "[{\"field\": \"control_type\", \"operator\": \"==\", \"value\": \"Bị Thực Thương tiết\"}]",
+        "runtime_polarity": "weaken",
+        "expected_polarity_by_group": "weaken",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "flw_001",
+        "group": "drain",
+        "score": -8.0,
+        "contribution_normalized": -0.08,
+        "priority": 90,
+        "reason": "Thực Thương tiết khí",
+        "conditions": "[{\"field\": \"drain_type\", \"operator\": \"==\", \"value\": \"Thực Thương tiết khí\"}]",
+        "runtime_polarity": "weaken",
+        "expected_polarity_by_group": "weaken",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "flw_003",
+        "group": "drain",
+        "score": -5.0,
+        "contribution_normalized": -0.05,
+        "priority": 88,
+        "reason": "Có Thương Quan",
+        "conditions": "[{\"field\": \"output_elements\", \"operator\": \"contains\", \"value\": \"Thương Quan\"}]",
+        "runtime_polarity": "weaken",
+        "expected_polarity_by_group": "weaken",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "flw_005",
+        "group": "drain",
+        "score": -10.0,
+        "contribution_normalized": -0.1,
+        "priority": 92,
+        "reason": "Tiết khí nặng",
+        "conditions": "[{\"field\": \"drain_count\", \"operator\": \">=\", \"value\": 3}]",
+        "runtime_polarity": "weaken",
+        "expected_polarity_by_group": "weaken",
+        "polarity_correct_vs_group_convention": true
+      }
+    ],
+    "weighted_buckets_raw": {
+      "season": 25.0,
+      "root": 22.0,
+      "support": 0,
+      "drain": -23.0,
+      "control": -8.0,
+      "combination": 0,
+      "special": 0
+    },
+    "raw_strength_score": 16.0,
+    "normalized_score": 0.66,
+    "baseline": 50.0,
+    "scale": 100.0,
+    "normalization_formula": "(raw_total + baseline) / scale clamped [0,1]",
+    "current_band": "strong",
+    "current_label": "Thân vượng",
+    "confidence": 1.0,
+    "confidence_formula": "min(1, len(matched)/5) + 0.2 if level_rule else 0",
+    "level_rule": {
+      "rule_id": "pri_level_strong",
+      "priority": 100,
+      "score": 0,
+      "score_target": "level",
+      "conditions": "[{\"field\": \"strength_score\", \"operator\": \">=\", \"value\": 0.65}]",
+      "strength_level": "strong",
+      "reason": "Thân vượng",
+      "description": "Điểm tổng >= 65%",
+      "reference": "BTE-STR-V2",
+      "status": "active",
+      "enabled": true
+    },
+    "published_contract": {
+      "strength_level": "strong",
+      "strength_score": 0.66,
+      "season_score": 0.25,
+      "root_score": 0.22,
+      "support_score": 0.0,
+      "drain_score": -0.23,
+      "control_score": -0.08,
+      "confidence": 1.0,
+      "reasoning": "Thân vượng",
+      "matched_rules": [
+        "sea_002",
+        "root_002",
+        "ctl_002",
+        "flw_001",
+        "flw_003",
+        "flw_005"
+      ]
+    },
+    "context_fields": {
+      "day_master": "Nhâm",
+      "day_master_element": "Thủy",
+      "day_master_yin_yang": "Dương",
+      "month_branch": "Thân",
+      "month_stem": "Giáp",
+      "month_status": "Tướng",
+      "month_branch_element": "Kim",
+      "month_branch_ten_god": "Thiên Ấn",
+      "season": "autumn",
+      "season_phase": "early_autumn",
+      "temperature_type": "cool",
+      "root_level": "Thông căn 2 chi",
+      "root_count": 2,
+      "support_type": null,
+      "control_type": "Bị Thực Thương tiết",
+      "drain_type": "Thực Thương tiết khí",
+      "officer_elements": [],
+      "wealth_elements": [],
+      "resource_elements": [],
+      "output_elements": [
+        "Thương Quan",
+        "Thực Thần",
+        "Thực Thần"
+      ],
+      "companion_elements": [],
+      "drain_count": 3,
+      "hidden_stems": "NOT_EXPOSED",
+      "supporting_elements": "NOT_EXPOSED",
+      "restricting_elements": "NOT_EXPOSED",
+      "ten_gods": "NOT_EXPOSED",
+      "branches": "NOT_EXPOSED"
+    }
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "case_id": "CASE-0002",
+  "expert_reference": {
+    "en": "very strong",
+    "vi": "Thân rất vượng"
+  },
+  "boundary": false,
+  "corrected_chart_note": null,
+  "input": {
+    "year": 1977,
+    "month": 2,
+    "day": 18,
+    "hour": 6,
+    "minute": 30,
+    "gender": "male"
+  },
+  "chart": {
+    "year": "Đinh Tỵ",
+    "month": "Nhâm Dần",
+    "day": "Bính Ngọ",
+    "hour": "Tân Mão",
+    "day_master": "Bính"
+  },
+  "calendar_solar_term": {
+    "name": "Lập Xuân",
+    "index": 0
+  },
+  "pipeline": {
+    "season_context": {
+      "season": "spring",
+      "season_phase": "early_spring",
+      "month_status": "Tướng",
+      "month_branch": "Dần"
+    },
+    "temperature_context": {
+      "from_strength_context": "warm",
+      "from_temperature_engine": {
+        "temperature_level": "cool",
+        "temperature_score": 0.49666666666666665,
+        "reasoning": "Khí mát"
+      },
+      "note": "TemperatureEngine runs separately; StrengthContext.temperature_type may be branch-derived only"
+    },
+    "supporting_elements": [
+      "Kiếp Tài"
+    ],
+    "resource_elements": [],
+    "restricting_elements": {
+      "officer": [
+        "Thất Sát"
+      ],
+      "output": [],
+      "wealth": [
+        "Chính Tài"
+      ]
+    },
+    "root_resource_evidence": {
+      "root_level": "Thông căn 3 chi trở lên",
+      "root_count": 3,
+      "support_type": "Đồng hành trợ thân"
+    },
+    "strength_evidence_ledger": [
+      {
+        "rule_id": "sea_002",
+        "group": "season",
+        "score": 25.0,
+        "contribution_normalized": 0.25,
+        "priority": 95,
+        "reason": "Tướng địa theo tháng",
+        "conditions": "[{\"field\": \"month_status\", \"operator\": \"==\", \"value\": \"Tướng\"}]",
+        "runtime_polarity": "strengthen",
+        "expected_polarity_by_group": "strengthen",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "root_001",
+        "group": "root",
+        "score": 30.0,
+        "contribution_normalized": 0.3,
+        "priority": 100,
+        "reason": "Căn khí rất mạnh",
+        "conditions": "[{\"field\": \"root_level\", \"operator\": \"==\", \"value\": \"Thông căn 3 chi trở lên\"}]",
+        "runtime_polarity": "strengthen",
+        "expected_polarity_by_group": "strengthen",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "sup_001",
+        "group": "support",
+        "score": 8.0,
+        "contribution_normalized": 0.08,
+        "priority": 90,
+        "reason": "Đồng hành trợ thân",
+        "conditions": "[{\"field\": \"support_type\", \"operator\": \"==\", \"value\": \"Đồng hành trợ thân\"}]",
+        "runtime_polarity": "strengthen",
+        "expected_polarity_by_group": "strengthen",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "ctl_001",
+        "group": "control",
+        "score": -10.0,
+        "contribution_normalized": -0.1,
+        "priority": 90,
+        "reason": "Bị Quan Sát khắc",
+        "conditions": "[{\"field\": \"control_type\", \"operator\": \"==\", \"value\": \"Bị Quan Sát khắc\"}]",
+        "runtime_polarity": "weaken",
+        "expected_polarity_by_group": "weaken",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "ctl_006",
+        "group": "control",
+        "score": -8.0,
+        "contribution_normalized": -0.08,
+        "priority": 88,
+        "reason": "Có Thất Sát",
+        "conditions": "[{\"field\": \"officer_elements\", \"operator\": \"contains\", \"value\": \"Thất Sát\"}]",
+        "runtime_polarity": "weaken",
+        "expected_polarity_by_group": "weaken",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "flw_002",
+        "group": "drain",
+        "score": -6.0,
+        "contribution_normalized": -0.06,
+        "priority": 85,
+        "reason": "Tài tinh hao thân",
+        "conditions": "[{\"field\": \"drain_type\", \"operator\": \"==\", \"value\": \"Tài tinh hao thân\"}]",
+        "runtime_polarity": "weaken",
+        "expected_polarity_by_group": "weaken",
+        "polarity_correct_vs_group_convention": true
+      }
+    ],
+    "weighted_buckets_raw": {
+      "season": 25.0,
+      "root": 30.0,
+      "support": 8.0,
+      "drain": -6.0,
+      "control": -18.0,
+      "combination": 0,
+      "special": 0
+    },
+    "raw_strength_score": 39.0,
+    "normalized_score": 0.89,
+    "baseline": 50.0,
+    "scale": 100.0,
+    "normalization_formula": "(raw_total + baseline) / scale clamped [0,1]",
+    "current_band": "strong",
+    "current_label": "Thân vượng",
+    "confidence": 1.0,
+    "confidence_formula": "min(1, len(matched)/5) + 0.2 if level_rule else 0",
+    "level_rule": {
+      "rule_id": "pri_level_strong",
+      "priority": 100,
+      "score": 0,
+      "score_target": "level",
+      "conditions": "[{\"field\": \"strength_score\", \"operator\": \">=\", \"value\": 0.65}]",
+      "strength_level": "strong",
+      "reason": "Thân vượng",
+      "description": "Điểm tổng >= 65%",
+      "reference": "BTE-STR-V2",
+      "status": "active",
+      "enabled": true
+    },
+    "published_contract": {
+      "strength_level": "strong",
+      "strength_score": 0.89,
+      "season_score": 0.25,
+      "root_score": 0.3,
+      "support_score": 0.08,
+      "drain_score": -0.06,
+      "control_score": -0.18,
+      "confidence": 1.0,
+      "reasoning": "Thân vượng",
+      "matched_rules": [
+        "sea_002",
+        "root_001",
+        "sup_001",
+        "ctl_001",
+        "ctl_006",
+        "flw_002"
+      ]
+    },
+    "context_fields": {
+      "day_master": "Bính",
+      "day_master_element": "Hỏa",
+      "day_master_yin_yang": "Dương",
+      "month_branch": "Dần",
+      "month_stem": "Nhâm",
+      "month_status": "Tướng",
+      "month_branch_element": "Mộc",
+      "month_branch_ten_god": "Thiên Ấn",
+      "season": "spring",
+      "season_phase": "early_spring",
+      "temperature_type": "warm",
+      "root_level": "Thông căn 3 chi trở lên",
+      "root_count": 3,
+      "support_type": "Đồng hành trợ thân",
+      "control_type": "Bị Quan Sát khắc",
+      "drain_type": "Tài tinh hao thân",
+      "officer_elements": [
+        "Thất Sát"
+      ],
+      "wealth_elements": [
+        "Chính Tài"
+      ],
+      "resource_elements": [],
+      "output_elements": [],
+      "companion_elements": [
+        "Kiếp Tài"
+      ],
+      "drain_count": 1,
+      "hidden_stems": "NOT_EXPOSED",
+      "supporting_elements": "NOT_EXPOSED",
+      "restricting_elements": "NOT_EXPOSED",
+      "ten_gods": "NOT_EXPOSED",
+      "branches": "NOT_EXPOSED"
+    }
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "case_id": "CASE-0007",
+  "expert_reference": {
+    "en": "strong",
+    "vi": "Thân vượng"
+  },
+  "boundary": false,
+  "corrected_chart_note": null,
+  "input": {
+    "year": 1984,
+    "month": 7,
+    "day": 13,
+    "hour": 21,
+    "minute": 1,
+    "gender": "female"
+  },
+  "chart": {
+    "year": "Giáp Tý",
+    "month": "Tân Mùi",
+    "day": "Mậu Thân",
+    "hour": "Quý Hợi",
+    "day_master": "Mậu"
+  },
+  "calendar_solar_term": {
+    "name": "Tiểu Thử",
+    "index": 10
+  },
+  "pipeline": {
+    "season_context": {
+      "season": "summer",
+      "season_phase": "late_summer",
+      "month_status": "Đắc lệnh",
+      "month_branch": "Mùi"
+    },
+    "temperature_context": {
+      "from_strength_context": "hot",
+      "from_temperature_engine": {
+        "temperature_level": "warm",
+        "temperature_score": 0.63,
+        "reasoning": "Khí ấm"
+      },
+      "note": "TemperatureEngine runs separately; StrengthContext.temperature_type may be branch-derived only"
+    },
+    "supporting_elements": [],
+    "resource_elements": [],
+    "restricting_elements": {
+      "officer": [
+        "Thất Sát"
+      ],
+      "output": [
+        "Thương Quan"
+      ],
+      "wealth": [
+        "Chính Tài"
+      ]
+    },
+    "root_resource_evidence": {
+      "root_level": "Thông căn 2 chi",
+      "root_count": 2,
+      "support_type": null
+    },
+    "strength_evidence_ledger": [
+      {
+        "rule_id": "sea_001",
+        "group": "season",
+        "score": 35.0,
+        "contribution_normalized": 0.35,
+        "priority": 100,
+        "reason": "Đắc lệnh theo tháng lệnh",
+        "conditions": "[{\"field\": \"month_status\", \"operator\": \"==\", \"value\": \"Đắc lệnh\"}]",
+        "runtime_polarity": "strengthen",
+        "expected_polarity_by_group": "strengthen",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "root_002",
+        "group": "root",
+        "score": 22.0,
+        "contribution_normalized": 0.22,
+        "priority": 95,
+        "reason": "Căn khí mạnh",
+        "conditions": "[{\"field\": \"root_level\", \"operator\": \"==\", \"value\": \"Thông căn 2 chi\"}]",
+        "runtime_polarity": "strengthen",
+        "expected_polarity_by_group": "strengthen",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "ctl_001",
+        "group": "control",
+        "score": -10.0,
+        "contribution_normalized": -0.1,
+        "priority": 90,
+        "reason": "Bị Quan Sát khắc",
+        "conditions": "[{\"field\": \"control_type\", \"operator\": \"==\", \"value\": \"Bị Quan Sát khắc\"}]",
+        "runtime_polarity": "weaken",
+        "expected_polarity_by_group": "weaken",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "ctl_006",
+        "group": "control",
+        "score": -8.0,
+        "contribution_normalized": -0.08,
+        "priority": 88,
+        "reason": "Có Thất Sát",
+        "conditions": "[{\"field\": \"officer_elements\", \"operator\": \"contains\", \"value\": \"Thất Sát\"}]",
+        "runtime_polarity": "weaken",
+        "expected_polarity_by_group": "weaken",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "flw_001",
+        "group": "drain",
+        "score": -8.0,
+        "contribution_normalized": -0.08,
+        "priority": 90,
+        "reason": "Thực Thương tiết khí",
+        "conditions": "[{\"field\": \"drain_type\", \"operator\": \"==\", \"value\": \"Thực Thương tiết khí\"}]",
+        "runtime_polarity": "weaken",
+        "expected_polarity_by_group": "weaken",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "flw_003",
+        "group": "drain",
+        "score": -5.0,
+        "contribution_normalized": -0.05,
+        "priority": 88,
+        "reason": "Có Thương Quan",
+        "conditions": "[{\"field\": \"output_elements\", \"operator\": \"contains\", \"value\": \"Thương Quan\"}]",
+        "runtime_polarity": "weaken",
+        "expected_polarity_by_group": "weaken",
+        "polarity_correct_vs_group_convention": true
+      }
+    ],
+    "weighted_buckets_raw": {
+      "season": 35.0,
+      "root": 22.0,
+      "support": 0,
+      "drain": -13.0,
+      "control": -18.0,
+      "combination": 0,
+      "special": 0
+    },
+    "raw_strength_score": 26.0,
+    "normalized_score": 0.76,
+    "baseline": 50.0,
+    "scale": 100.0,
+    "normalization_formula": "(raw_total + baseline) / scale clamped [0,1]",
+    "current_band": "strong",
+    "current_label": "Thân vượng",
+    "confidence": 1.0,
+    "confidence_formula": "min(1, len(matched)/5) + 0.2 if level_rule else 0",
+    "level_rule": {
+      "rule_id": "pri_level_strong",
+      "priority": 100,
+      "score": 0,
+      "score_target": "level",
+      "conditions": "[{\"field\": \"strength_score\", \"operator\": \">=\", \"value\": 0.65}]",
+      "strength_level": "strong",
+      "reason": "Thân vượng",
+      "description": "Điểm tổng >= 65%",
+      "reference": "BTE-STR-V2",
+      "status": "active",
+      "enabled": true
+    },
+    "published_contract": {
+      "strength_level": "strong",
+      "strength_score": 0.76,
+      "season_score": 0.35,
+      "root_score": 0.22,
+      "support_score": 0.0,
+      "drain_score": -0.13,
+      "control_score": -0.18,
+      "confidence": 1.0,
+      "reasoning": "Thân vượng",
+      "matched_rules": [
+        "sea_001",
+        "root_002",
+        "ctl_001",
+        "ctl_006",
+        "flw_001",
+        "flw_003"
+      ]
+    },
+    "context_fields": {
+      "day_master": "Mậu",
+      "day_master_element": "Thổ",
+      "day_master_yin_yang": "Dương",
+      "month_branch": "Mùi",
+      "month_stem": "Tân",
+      "month_status": "Đắc lệnh",
+      "month_branch_element": "Thổ",
+      "month_branch_ten_god": "Kiếp Tài",
+      "season": "summer",
+      "season_phase": "late_summer",
+      "temperature_type": "hot",
+      "root_level": "Thông căn 2 chi",
+      "root_count": 2,
+      "support_type": null,
+      "control_type": "Bị Quan Sát khắc",
+      "drain_type": "Thực Thương tiết khí",
+      "officer_elements": [
+        "Thất Sát"
+      ],
+      "wealth_elements": [
+        "Chính Tài"
+      ],
+      "resource_elements": [],
+      "output_elements": [
+        "Thương Quan"
+      ],
+      "companion_elements": [],
+      "drain_count": 2,
+      "hidden_stems": "NOT_EXPOSED",
+      "supporting_elements": "NOT_EXPOSED",
+      "restricting_elements": "NOT_EXPOSED",
+      "ten_gods": "NOT_EXPOSED",
+      "branches": "NOT_EXPOSED"
+    }
+  }
+}

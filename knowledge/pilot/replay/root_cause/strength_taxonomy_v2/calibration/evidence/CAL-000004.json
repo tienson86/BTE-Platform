@@ -1,0 +1,120 @@
+{
+  "calibration_case_id": "CAL-000004",
+  "source_case_id": "CASE-0004",
+  "chart": {
+    "year": "Quý Tỵ",
+    "month": "Canh Thân",
+    "day": "Mậu Ngọ",
+    "hour": "Kỷ Mùi",
+    "day_master": "Mậu"
+  },
+  "pipeline": {
+    "season_context": {
+      "season": "autumn",
+      "season_phase": "early_autumn",
+      "month_status": "Hưu",
+      "month_branch": "Thân"
+    },
+    "temperature_context": {
+      "from_strength_context": "cool",
+      "from_temperature_engine": {
+        "temperature_level": "warm",
+        "temperature_score": 0.61,
+        "reasoning": "Khí ấm"
+      },
+      "note": "TemperatureEngine runs separately; StrengthContext.temperature_type may be branch-derived only"
+    },
+    "root_resource_evidence": {
+      "root_level": "Thông căn 3 chi trở lên",
+      "root_count": 4,
+      "support_type": "Đồng hành trợ thân"
+    },
+    "supporting_elements": [
+      "Kiếp Tài"
+    ],
+    "restricting_elements": {
+      "officer": [],
+      "output": [
+        "Thực Thần"
+      ],
+      "wealth": [
+        "Chính Tài"
+      ]
+    },
+    "strength_evidence_ledger": [
+      {
+        "rule_id": "sea_003",
+        "group": "season",
+        "score": 10.0,
+        "contribution_normalized": 0.1,
+        "priority": 90,
+        "reason": "Hưu khí theo tháng",
+        "conditions": "[{\"field\": \"month_status\", \"operator\": \"==\", \"value\": \"Hưu\"}]",
+        "runtime_polarity": "strengthen",
+        "expected_polarity_by_group": "strengthen",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "root_001",
+        "group": "root",
+        "score": 30.0,
+        "contribution_normalized": 0.3,
+        "priority": 100,
+        "reason": "Căn khí rất mạnh",
+        "conditions": "[{\"field\": \"root_level\", \"operator\": \"==\", \"value\": \"Thông căn 3 chi trở lên\"}]",
+        "runtime_polarity": "strengthen",
+        "expected_polarity_by_group": "strengthen",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "sup_001",
+        "group": "support",
+        "score": 8.0,
+        "contribution_normalized": 0.08,
+        "priority": 90,
+        "reason": "Đồng hành trợ thân",
+        "conditions": "[{\"field\": \"support_type\", \"operator\": \"==\", \"value\": \"Đồng hành trợ thân\"}]",
+        "runtime_polarity": "strengthen",
+        "expected_polarity_by_group": "strengthen",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "ctl_003",
+        "group": "control",
+        "score": -6.0,
+        "contribution_normalized": -0.06,
+        "priority": 80,
+        "reason": "Bị Tài tinh hao",
+        "conditions": "[{\"field\": \"control_type\", \"operator\": \"==\", \"value\": \"Bị Tài tinh hao\"}]",
+        "runtime_polarity": "weaken",
+        "expected_polarity_by_group": "weaken",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "flw_001",
+        "group": "drain",
+        "score": -8.0,
+        "contribution_normalized": -0.08,
+        "priority": 90,
+        "reason": "Thực Thương tiết khí",
+        "conditions": "[{\"field\": \"drain_type\", \"operator\": \"==\", \"value\": \"Thực Thương tiết khí\"}]",
+        "runtime_polarity": "weaken",
+        "expected_polarity_by_group": "weaken",
+        "polarity_correct_vs_group_convention": true
+      }
+    ],
+    "weighted_buckets_raw": {
+      "season": 10.0,
+      "root": 30.0,
+      "support": 8.0,
+      "drain": -8.0,
+      "control": -6.0,
+      "combination": 0,
+      "special": 0
+    },
+    "raw_strength_score": 34.0,
+    "normalized_score": 0.84,
+    "current_band": "strong",
+    "confidence_runtime": 1.0
+  }
+}

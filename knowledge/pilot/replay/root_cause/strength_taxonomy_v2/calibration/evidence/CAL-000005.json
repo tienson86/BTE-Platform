@@ -1,0 +1,143 @@
+{
+  "calibration_case_id": "CAL-000005",
+  "source_case_id": "CASE-0005",
+  "chart": {
+    "year": "Bính Ngọ",
+    "month": "Đinh Dậu",
+    "day": "Bính Tuất",
+    "hour": "Canh Dần",
+    "day_master": "Bính"
+  },
+  "pipeline": {
+    "season_context": {
+      "season": "autumn",
+      "season_phase": "mid_autumn",
+      "month_status": "Tù",
+      "month_branch": "Dậu"
+    },
+    "temperature_context": {
+      "from_strength_context": "cool",
+      "from_temperature_engine": {
+        "temperature_level": "cool",
+        "temperature_score": 0.4766666666666666,
+        "reasoning": "Khí mát"
+      },
+      "note": "TemperatureEngine runs separately; StrengthContext.temperature_type may be branch-derived only"
+    },
+    "root_resource_evidence": {
+      "root_level": "Thông căn 3 chi trở lên",
+      "root_count": 3,
+      "support_type": "Đồng hành trợ thân"
+    },
+    "supporting_elements": [
+      "Tỷ Kiên",
+      "Kiếp Tài"
+    ],
+    "restricting_elements": {
+      "officer": [],
+      "output": [],
+      "wealth": [
+        "Thiên Tài"
+      ]
+    },
+    "strength_evidence_ledger": [
+      {
+        "rule_id": "sea_004",
+        "group": "season",
+        "score": -10.0,
+        "contribution_normalized": -0.1,
+        "priority": 95,
+        "reason": "Tù khí theo tháng",
+        "conditions": "[{\"field\": \"month_status\", \"operator\": \"==\", \"value\": \"Tù\"}]",
+        "runtime_polarity": "weaken",
+        "expected_polarity_by_group": "strengthen",
+        "polarity_correct_vs_group_convention": false
+      },
+      {
+        "rule_id": "root_001",
+        "group": "root",
+        "score": 30.0,
+        "contribution_normalized": 0.3,
+        "priority": 100,
+        "reason": "Căn khí rất mạnh",
+        "conditions": "[{\"field\": \"root_level\", \"operator\": \"==\", \"value\": \"Thông căn 3 chi trở lên\"}]",
+        "runtime_polarity": "strengthen",
+        "expected_polarity_by_group": "strengthen",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "sup_001",
+        "group": "support",
+        "score": 8.0,
+        "contribution_normalized": 0.08,
+        "priority": 90,
+        "reason": "Đồng hành trợ thân",
+        "conditions": "[{\"field\": \"support_type\", \"operator\": \"==\", \"value\": \"Đồng hành trợ thân\"}]",
+        "runtime_polarity": "strengthen",
+        "expected_polarity_by_group": "strengthen",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "sup_007",
+        "group": "support",
+        "score": 5.0,
+        "contribution_normalized": 0.05,
+        "priority": 86,
+        "reason": "Có Tỷ Kiên",
+        "conditions": "[{\"field\": \"companion_elements\", \"operator\": \"contains\", \"value\": \"Tỷ Kiên\"}]",
+        "runtime_polarity": "strengthen",
+        "expected_polarity_by_group": "strengthen",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "ctl_003",
+        "group": "control",
+        "score": -6.0,
+        "contribution_normalized": -0.06,
+        "priority": 80,
+        "reason": "Bị Tài tinh hao",
+        "conditions": "[{\"field\": \"control_type\", \"operator\": \"==\", \"value\": \"Bị Tài tinh hao\"}]",
+        "runtime_polarity": "weaken",
+        "expected_polarity_by_group": "weaken",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "flw_002",
+        "group": "drain",
+        "score": -6.0,
+        "contribution_normalized": -0.06,
+        "priority": 85,
+        "reason": "Tài tinh hao thân",
+        "conditions": "[{\"field\": \"drain_type\", \"operator\": \"==\", \"value\": \"Tài tinh hao thân\"}]",
+        "runtime_polarity": "weaken",
+        "expected_polarity_by_group": "weaken",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "flw_004",
+        "group": "drain",
+        "score": -5.0,
+        "contribution_normalized": -0.05,
+        "priority": 86,
+        "reason": "Có Thiên Tài",
+        "conditions": "[{\"field\": \"wealth_elements\", \"operator\": \"contains\", \"value\": \"Thiên Tài\"}]",
+        "runtime_polarity": "weaken",
+        "expected_polarity_by_group": "weaken",
+        "polarity_correct_vs_group_convention": true
+      }
+    ],
+    "weighted_buckets_raw": {
+      "season": -10.0,
+      "root": 30.0,
+      "support": 13.0,
+      "drain": -11.0,
+      "control": -6.0,
+      "combination": 0,
+      "special": 0
+    },
+    "raw_strength_score": 16.0,
+    "normalized_score": 0.66,
+    "current_band": "strong",
+    "confidence_runtime": 1.0
+  }
+}

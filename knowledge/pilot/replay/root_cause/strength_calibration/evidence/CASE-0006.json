@@ -1,0 +1,194 @@
+{
+  "case_id": "CASE-0006",
+  "expert_reference": {
+    "en": "balanced / slightly weak",
+    "vi": "Thân trung bình thiên nhược"
+  },
+  "boundary": false,
+  "corrected_chart_note": "PILOT-1A: use live Mậu Ngọ month (not invalid expert Đinh Tỵ)",
+  "input": {
+    "year": 1988,
+    "month": 6,
+    "day": 7,
+    "hour": 20,
+    "minute": 45,
+    "gender": "female"
+  },
+  "chart": {
+    "year": "Mậu Thìn",
+    "month": "Mậu Ngọ",
+    "day": "Quý Tỵ",
+    "hour": "Nhâm Tuất",
+    "day_master": "Quý"
+  },
+  "calendar_solar_term": {
+    "name": "Mang Chủng",
+    "index": 8
+  },
+  "pipeline": {
+    "season_context": {
+      "season": "summer",
+      "season_phase": "mid_summer",
+      "month_status": "Tù",
+      "month_branch": "Ngọ"
+    },
+    "temperature_context": {
+      "from_strength_context": "hot",
+      "from_temperature_engine": {
+        "temperature_level": "hot",
+        "temperature_score": 0.78,
+        "reasoning": "Nhiệt khí nặng"
+      },
+      "note": "TemperatureEngine runs separately; StrengthContext.temperature_type may be branch-derived only"
+    },
+    "supporting_elements": [
+      "Kiếp Tài"
+    ],
+    "resource_elements": [],
+    "restricting_elements": {
+      "officer": [
+        "Chính Quan",
+        "Chính Quan"
+      ],
+      "output": [],
+      "wealth": []
+    },
+    "root_resource_evidence": {
+      "root_level": "Thông căn 1 chi",
+      "root_count": 1,
+      "support_type": "Đồng hành trợ thân"
+    },
+    "strength_evidence_ledger": [
+      {
+        "rule_id": "sea_004",
+        "group": "season",
+        "score": -10.0,
+        "contribution_normalized": -0.1,
+        "priority": 95,
+        "reason": "Tù khí theo tháng",
+        "conditions": "[{\"field\": \"month_status\", \"operator\": \"==\", \"value\": \"Tù\"}]",
+        "runtime_polarity": "weaken",
+        "expected_polarity_by_group": "strengthen",
+        "polarity_correct_vs_group_convention": false
+      },
+      {
+        "rule_id": "root_003",
+        "group": "root",
+        "score": 12.0,
+        "contribution_normalized": 0.12,
+        "priority": 90,
+        "reason": "Có căn khí",
+        "conditions": "[{\"field\": \"root_level\", \"operator\": \"==\", \"value\": \"Thông căn 1 chi\"}]",
+        "runtime_polarity": "strengthen",
+        "expected_polarity_by_group": "strengthen",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "sup_001",
+        "group": "support",
+        "score": 8.0,
+        "contribution_normalized": 0.08,
+        "priority": 90,
+        "reason": "Đồng hành trợ thân",
+        "conditions": "[{\"field\": \"support_type\", \"operator\": \"==\", \"value\": \"Đồng hành trợ thân\"}]",
+        "runtime_polarity": "strengthen",
+        "expected_polarity_by_group": "strengthen",
+        "polarity_correct_vs_group_convention": true
+      },
+      {
+        "rule_id": "ctl_001",
+        "group": "control",
+        "score": -10.0,
+        "contribution_normalized": -0.1,
+        "priority": 90,
+        "reason": "Bị Quan Sát khắc",
+        "conditions": "[{\"field\": \"control_type\", \"operator\": \"==\", \"value\": \"Bị Quan Sát khắc\"}]",
+        "runtime_polarity": "weaken",
+        "expected_polarity_by_group": "weaken",
+        "polarity_correct_vs_group_convention": true
+      }
+    ],
+    "weighted_buckets_raw": {
+      "season": -10.0,
+      "root": 12.0,
+      "support": 8.0,
+      "drain": 0,
+      "control": -10.0,
+      "combination": 0,
+      "special": 0
+    },
+    "raw_strength_score": 0.0,
+    "normalized_score": 0.5,
+    "baseline": 50.0,
+    "scale": 100.0,
+    "normalization_formula": "(raw_total + baseline) / scale clamped [0,1]",
+    "current_band": "balanced",
+    "current_label": "Trung hòa",
+    "confidence": 1.0,
+    "confidence_formula": "min(1, len(matched)/5) + 0.2 if level_rule else 0",
+    "level_rule": {
+      "rule_id": "pri_level_balanced",
+      "priority": 80,
+      "score": 0,
+      "score_target": "level",
+      "conditions": "[{\"field\": \"strength_score\", \"operator\": \">\", \"value\": 0.35}, {\"field\": \"strength_score\", \"operator\": \"<\", \"value\": 0.65}]",
+      "strength_level": "balanced",
+      "reason": "Trung hòa",
+      "description": "Điểm tổng cân bằng",
+      "reference": "BTE-STR-V2",
+      "status": "active",
+      "enabled": true
+    },
+    "published_contract": {
+      "strength_level": "balanced",
+      "strength_score": 0.5,
+      "season_score": -0.1,
+      "root_score": 0.12,
+      "support_score": 0.08,
+      "drain_score": 0.0,
+      "control_score": -0.1,
+      "confidence": 1.0,
+      "reasoning": "Trung hòa",
+      "matched_rules": [
+        "sea_004",
+        "root_003",
+        "sup_001",
+        "ctl_001"
+      ]
+    },
+    "context_fields": {
+      "day_master": "Quý",
+      "day_master_element": "Thủy",
+      "day_master_yin_yang": "Âm",
+      "month_branch": "Ngọ",
+      "month_stem": "Mậu",
+      "month_status": "Tù",
+      "month_branch_element": "Hỏa",
+      "month_branch_ten_god": "Thiên Tài",
+      "season": "summer",
+      "season_phase": "mid_summer",
+      "temperature_type": "hot",
+      "root_level": "Thông căn 1 chi",
+      "root_count": 1,
+      "support_type": "Đồng hành trợ thân",
+      "control_type": "Bị Quan Sát khắc",
+      "drain_type": null,
+      "officer_elements": [
+        "Chính Quan",
+        "Chính Quan"
+      ],
+      "wealth_elements": [],
+      "resource_elements": [],
+      "output_elements": [],
+      "companion_elements": [
+        "Kiếp Tài"
+      ],
+      "drain_count": 0,
+      "hidden_stems": "NOT_EXPOSED",
+      "supporting_elements": "NOT_EXPOSED",
+      "restricting_elements": "NOT_EXPOSED",
+      "ten_gods": "NOT_EXPOSED",
+      "branches": "NOT_EXPOSED"
+    }
+  }
+}
