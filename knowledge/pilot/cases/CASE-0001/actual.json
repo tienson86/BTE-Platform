@@ -1,0 +1,190 @@
+{
+  "case_id": "CASE-0001",
+  "run": {
+    "date": "2026-08-10",
+    "entrypoint": "applications.api.services.orchestrator.OrchestratorService.analyze",
+    "command_shape": "analyze(year=1987, month=1, day=21, hour=4, minute=30, gender='male', timezone='Asia/Ho_Chi_Minh')",
+    "engine_or_knowledge_modified": false
+  },
+  "status": "WARNING",
+  "pipeline": [
+    "calendar",
+    "bazi",
+    "pattern",
+    "score",
+    "interpretation",
+    "report",
+    "narrative"
+  ],
+  "calendar": {
+    "solar_date": "21/01/1987",
+    "lunar_date": "22/12/Bính Dần",
+    "lunar_year": 1986,
+    "lunar_month": 12,
+    "lunar_day": 22,
+    "leap_month": false,
+    "solar_term": "Đại Hàn",
+    "julian_day": 2446816.5,
+    "year_can_chi": "Bính Dần",
+    "month_can_chi": "Tân Sửu",
+    "day_can_chi": "Canh Ngọ",
+    "hour_can_chi": "Mậu Dần"
+  },
+  "bazi": {
+    "year_pillar": {
+      "text": "Bính Dần",
+      "hidden_stems": [
+        "Giáp",
+        "Bính",
+        "Mậu"
+      ],
+      "ten_god": "Thất Sát",
+      "nap_am": "Lư Trung Hỏa",
+      "truong_sinh": "Tuyệt"
+    },
+    "month_pillar": {
+      "text": "Tân Sửu",
+      "hidden_stems": [
+        "Kỷ",
+        "Quý",
+        "Tân"
+      ],
+      "ten_god": "Kiếp Tài",
+      "nap_am": "Bích Thượng Thổ",
+      "truong_sinh": "Mộ"
+    },
+    "day_pillar": {
+      "text": "Canh Ngọ",
+      "hidden_stems": [
+        "Đinh",
+        "Kỷ"
+      ],
+      "ten_god": "Nhật Chủ",
+      "nap_am": "Lộ Bàng Thổ",
+      "truong_sinh": "Mộc Dục"
+    },
+    "hour_pillar": {
+      "text": "Mậu Dần",
+      "hidden_stems": [
+        "Giáp",
+        "Bính",
+        "Mậu"
+      ],
+      "ten_god": "Thiên Ấn",
+      "nap_am": "Thành Đầu Thổ",
+      "truong_sinh": "Tuyệt"
+    },
+    "day_master": "Canh",
+    "day_master_element": "Kim",
+    "day_master_yin_yang": "Dương",
+    "shensha_sample": [
+      "Thiên Ất Quý Nhân",
+      "Thiên Ất",
+      "Hồng Loan",
+      "Thiên Hỷ",
+      "Thiên Đức"
+    ]
+  },
+  "strength": {
+    "strength_level": "strong",
+    "strength_score": 0.87,
+    "reasoning": "Thân vượng",
+    "matched_rules": [
+      "sea_002",
+      "root_003",
+      "sup_001",
+      "ctl_001",
+      "ctl_006",
+      "spc_004"
+    ]
+  },
+  "temperature": {
+    "temperature_level": "hot",
+    "temperature_score": 0.7166666666666666,
+    "warm_score": 0.0,
+    "cold_score": 0.58,
+    "dry_score": 0.32,
+    "humid_score": 0.12,
+    "reasoning": "Nhiệt khí nặng",
+    "recommendations": [
+      "Nhuận hạ giáng nhiệt",
+      "Dùng Hỏa Mộc ôn dưỡng",
+      "Tăng Thủy nhuận tao",
+      "Tăng Hỏa giảm Thủy",
+      "Thông Thổ hóa Thủy"
+    ]
+  },
+  "pattern": {
+    "success": true,
+    "pattern": "chinh_an",
+    "cach_cuc": "Chính Ấn",
+    "score": 72.0,
+    "priority": 72,
+    "than": "Kim",
+    "than_vuong_nhuoc": "Trung hòa",
+    "tong_cach": "Chính Ấn",
+    "dung_than": "Thực Thần",
+    "hy_than": "Kim",
+    "ky_than": "Thổ",
+    "dieu_hau": "Đắc lệnh"
+  },
+  "useful_god": {
+    "useful_god": "Thực Thần",
+    "favorable_gods": [
+      "Thực Thần",
+      "Thương Quan"
+    ],
+    "unfavorable_gods": [
+      "Tỷ Kiên",
+      "Kiếp Tài"
+    ],
+    "reasoning": "Than vượng cần tiết khí",
+    "confidence": 0.77
+  },
+  "score": {
+    "success": true,
+    "total_score": 51.25,
+    "grade": "D+",
+    "confidence": "medium",
+    "recommendation": "Nhiều điểm cần cải thiện",
+    "strength_score": 45.0,
+    "pattern_score": 100.0,
+    "ten_god_score": 100.0,
+    "wuxing_score": 0.0,
+    "useful_god_score": 0.0,
+    "shensha_score": 100.0,
+    "luck_score": 0.0
+  },
+  "interpretation": {
+    "section_count": 10,
+    "sentence_count": 24,
+    "confidence": 1.0,
+    "section_ids": [
+      "summary",
+      "personality",
+      "career",
+      "relationship",
+      "health",
+      "useful_god",
+      "conclusion",
+      "warning",
+      "strength",
+      "weakness"
+    ],
+    "notable_text_findings": [
+      "Summary says pattern Chinh An.",
+      "Useful-god section says 'Dụng thần: Thực Thần (Không có Dụng thần)', which is internally contradictory.",
+      "Strength section says balanced while live Strength stage says strong."
+    ]
+  },
+  "report": {
+    "title": "Bản luận Bát tự",
+    "section_count": 10,
+    "markdown_present": true,
+    "html_present": true
+  },
+  "portal": {
+    "status": "BLOCKED",
+    "reason": "Repository contains validation/live_e2e_trace.py for live portal replay, but this run did not start the portal/API server. No browser/DOM replay was claimed."
+  }
+}

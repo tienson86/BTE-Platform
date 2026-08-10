@@ -1,0 +1,79 @@
+{
+  "case_id": "CASE-0008",
+  "verdict": "REFERENCE_ONLY",
+  "canonical_outputs": null,
+  "contracts": {
+    "entrypoint": "applications.api.services.orchestrator.OrchestratorService.analyze",
+    "public_pipeline": [
+      "calendar",
+      "bazi",
+      "pattern",
+      "score",
+      "interpretation",
+      "report",
+      "narrative"
+    ],
+    "sources": null
+  },
+  "trace": {
+    "input": {
+      "status": "BLOCKED",
+      "reason": "MISSING_BIRTH_DATETIME",
+      "note": "No birth datetime provided. OrchestratorService.analyze requires solar birth datetime. Cannot invent datetime for replay."
+    },
+    "validation": {
+      "status": "BLOCKED",
+      "reason": "MISSING_BIRTH_DATETIME",
+      "note": null
+    },
+    "calendar_bazi": {
+      "status": "BLOCKED",
+      "reason": "MISSING_BIRTH_DATETIME",
+      "note": null
+    },
+    "strength": {
+      "status": "BLOCKED",
+      "reason": "MISSING_BIRTH_DATETIME",
+      "note": null
+    },
+    "follow": {
+      "status": "BLOCKED",
+      "reason": "MISSING_BIRTH_DATETIME",
+      "note": null
+    },
+    "transform": {
+      "status": "BLOCKED",
+      "reason": "MISSING_BIRTH_DATETIME",
+      "note": null
+    },
+    "decision": {
+      "status": "BLOCKED",
+      "reason": "DECISION_ENGINE_NOT_IN_ORCHESTRATOR",
+      "note": "DecisionEngine is not imported/called by OrchestratorService."
+    },
+    "luck": {
+      "status": "BLOCKED",
+      "reason": "MISSING_BIRTH_DATETIME",
+      "note": "Luck runs internally on full analyze but is stripped from public payload."
+    },
+    "interpretation": {
+      "status": "BLOCKED",
+      "reason": "MISSING_BIRTH_DATETIME",
+      "note": null
+    },
+    "report": {
+      "status": "BLOCKED",
+      "reason": "MISSING_BIRTH_DATETIME",
+      "note": null
+    }
+  },
+  "audit": {
+    "notes": [
+      "No birth datetime provided. OrchestratorService.analyze requires solar birth datetime. Cannot invent datetime for replay."
+    ],
+    "freeze_compliance": true
+  },
+  "diagnostics": {
+    "block_reason": "MISSING_BIRTH_DATETIME"
+  }
+}

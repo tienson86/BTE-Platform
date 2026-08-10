@@ -1,0 +1,98 @@
+{
+  "case_id": "CASE-0008",
+  "case_type": "reference",
+  "run": {
+    "date": "2026-08-10T16:10:12.666733+00:00",
+    "entrypoint": "applications.api.services.orchestrator.OrchestratorService.analyze",
+    "engine_or_knowledge_modified": false,
+    "architecture_freeze": "AF-1 unchanged"
+  },
+  "input": {
+    "subject": {
+      "full_name": null,
+      "gender": null
+    },
+    "birth": null,
+    "pillars_only": {
+      "year": "Quý Dậu",
+      "month": "Giáp Tý",
+      "day": "Mậu Tý",
+      "hour": "Nhâm Tý",
+      "day_master": "Mậu Thổ"
+    }
+  },
+  "expected": {
+    "expert_expected": null,
+    "external_expected": {
+      "classification": "Follow Wealth / Tòng Tài",
+      "classification_type": "REFERENCE_ONLY",
+      "note": "External reference is not absolute ground truth."
+    }
+  },
+  "actual": null,
+  "comparison": {
+    "first_divergence": "input"
+  },
+  "verdict": "REFERENCE_ONLY",
+  "trace": {
+    "input": {
+      "status": "BLOCKED",
+      "reason": "MISSING_BIRTH_DATETIME",
+      "note": "No birth datetime provided. OrchestratorService.analyze requires solar birth datetime. Cannot invent datetime for replay."
+    },
+    "validation": {
+      "status": "BLOCKED",
+      "reason": "MISSING_BIRTH_DATETIME",
+      "note": null
+    },
+    "calendar_bazi": {
+      "status": "BLOCKED",
+      "reason": "MISSING_BIRTH_DATETIME",
+      "note": null
+    },
+    "strength": {
+      "status": "BLOCKED",
+      "reason": "MISSING_BIRTH_DATETIME",
+      "note": null
+    },
+    "follow": {
+      "status": "BLOCKED",
+      "reason": "MISSING_BIRTH_DATETIME",
+      "note": null
+    },
+    "transform": {
+      "status": "BLOCKED",
+      "reason": "MISSING_BIRTH_DATETIME",
+      "note": null
+    },
+    "decision": {
+      "status": "BLOCKED",
+      "reason": "DECISION_ENGINE_NOT_IN_ORCHESTRATOR",
+      "note": "DecisionEngine is not imported/called by OrchestratorService."
+    },
+    "luck": {
+      "status": "BLOCKED",
+      "reason": "MISSING_BIRTH_DATETIME",
+      "note": "Luck runs internally on full analyze but is stripped from public payload."
+    },
+    "interpretation": {
+      "status": "BLOCKED",
+      "reason": "MISSING_BIRTH_DATETIME",
+      "note": null
+    },
+    "report": {
+      "status": "BLOCKED",
+      "reason": "MISSING_BIRTH_DATETIME",
+      "note": null
+    }
+  },
+  "audit": {
+    "notes": [
+      "No birth datetime provided. OrchestratorService.analyze requires solar birth datetime. Cannot invent datetime for replay."
+    ],
+    "freeze_compliance": true
+  },
+  "diagnostics": {
+    "block_reason": "MISSING_BIRTH_DATETIME"
+  }
+}

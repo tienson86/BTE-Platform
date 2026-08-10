@@ -1,0 +1,522 @@
+{
+  "case_id": "CASE-0006",
+  "case_type": "expert",
+  "run": {
+    "date": "2026-08-10T16:10:12.205055+00:00",
+    "entrypoint": "applications.api.services.orchestrator.OrchestratorService.analyze",
+    "engine_or_knowledge_modified": false,
+    "architecture_freeze": "AF-1 unchanged"
+  },
+  "input": {
+    "subject": {
+      "full_name": "Nguyễn Thị Hương Mai",
+      "gender": "female"
+    },
+    "birth": {
+      "year": 1988,
+      "month": 6,
+      "day": 7,
+      "hour": 20,
+      "minute": 45,
+      "timezone": "Asia/Ho_Chi_Minh",
+      "location": "Hải Phòng, Việt Nam"
+    },
+    "pillars_only": null
+  },
+  "expected": {
+    "expert_expected": {
+      "strength": "Thân trung bình thiên nhược",
+      "four_pillars": {
+        "year": "Mậu Thìn",
+        "month": "Đinh Tỵ",
+        "day": "Quý Tỵ",
+        "hour": "Nhâm Tuất"
+      }
+    },
+    "external_expected": null
+  },
+  "actual": {
+    "pipeline": [
+      "calendar",
+      "bazi",
+      "pattern",
+      "score",
+      "interpretation",
+      "report",
+      "narrative"
+    ],
+    "calendar": {
+      "solar": {
+        "year": 1988,
+        "month": 6,
+        "day": 7
+      },
+      "lunar": {
+        "year": 1988,
+        "month": 4,
+        "day": 23,
+        "leap": false,
+        "year_can_chi": "Mậu Thìn"
+      },
+      "julian_day": 2447319.5,
+      "solar_term": {
+        "name": "Mang Chủng",
+        "index": 8
+      },
+      "solar_year": 1988,
+      "solar_month": 6,
+      "solar_day": 7,
+      "solar_hour": 20,
+      "solar_minute": 45,
+      "lunar_year": 1988,
+      "lunar_month": 4,
+      "lunar_day": 23,
+      "leap_month": false,
+      "solar_date": "07/06/1988",
+      "lunar_date": "23/04/Mậu Thìn",
+      "year_can_chi": "Mậu Thìn",
+      "month_can_chi": "Mậu Ngọ",
+      "day_can_chi": "Quý Tỵ",
+      "hour_can_chi": "Nhâm Tuất",
+      "cung_phi": "Chấn",
+      "menh_quai": "Chấn",
+      "nhom_trach": "Đông Tứ Trạch",
+      "gua_name": "Chấn"
+    },
+    "bazi": {
+      "pillars": {
+        "year": "Mậu Thìn",
+        "month": "Mậu Ngọ",
+        "day": "Quý Tỵ",
+        "hour": "Nhâm Tuất"
+      },
+      "day_master": "Quý",
+      "day_master_element": "Thủy",
+      "day_master_yin_yang": "Âm",
+      "gender": "female",
+      "ten_gods": [
+        "Chính Quan",
+        "Chính Quan",
+        "Nhật Chủ",
+        "Kiếp Tài"
+      ],
+      "shensha_count": 2
+    },
+    "strength": {
+      "strength_level": "balanced",
+      "strength_score": 0.5,
+      "season_score": -0.1,
+      "root_score": 0.12,
+      "support_score": 0.08,
+      "drain_score": 0.0,
+      "control_score": -0.1,
+      "reasoning": "Trung hòa",
+      "confidence": 1.0,
+      "matched_rules": [
+        "sea_004",
+        "root_003",
+        "sup_001",
+        "ctl_001"
+      ]
+    },
+    "temperature": {
+      "temperature_level": "hot",
+      "temperature_score": 0.78,
+      "warm_score": 0.63,
+      "cold_score": 0.0,
+      "dry_score": 0.32,
+      "humid_score": 0.26,
+      "reasoning": "Nhiệt khí nặng",
+      "matched_rules": [
+        "sea_001",
+        "sea_005",
+        "cli_001",
+        "cli_005",
+        "dry_001",
+        "dry_003",
+        "dry_004",
+        "hum_001",
+        "hum_003",
+        "bal_002"
+      ]
+    },
+    "pattern": {
+      "success": true,
+      "pattern": "thien_tai",
+      "cach_cuc": "Thiên Tài",
+      "score": 73.0,
+      "priority": 75,
+      "than": "Thủy",
+      "than_vuong_nhuoc": "Nhược",
+      "tong_cach": "Thiên Tài",
+      "dung_than": "Nhâm",
+      "hy_than": "",
+      "ky_than": "",
+      "dieu_hau": "Tướng"
+    },
+    "follow": {
+      "follow_detected": false,
+      "follow_pattern_type": null,
+      "tong_cach_raw": "Thiên Tài",
+      "follow_type_raw": null,
+      "note": "tong_cach equals main pattern label — not a follow detection"
+    },
+    "transform": {
+      "transformation_detected": null,
+      "transformation_score": null,
+      "producer_present": false,
+      "probed_slots": [],
+      "status": "NOT_PRODUCED",
+      "note": "No transformation_* fields on OrchestratorService public payload; combination≠transformation per package contracts."
+    },
+    "useful_god": {
+      "useful_god": "Nhâm",
+      "favorable_gods": [
+        "Nhâm",
+        "Quý",
+        "Canh"
+      ],
+      "unfavorable_gods": [
+        "Bính",
+        "Đinh"
+      ],
+      "reasoning": "Mùa hạ nhiệt thịnh cần thủy",
+      "confidence": 0.88,
+      "matched_rules": [
+        "str_005",
+        "sea_002",
+        "tmp_002",
+        "flo_001",
+        "flo_002",
+        "flo_003",
+        "flo_004"
+      ]
+    },
+    "score": {
+      "success": true,
+      "total_score": 44.95,
+      "strength_score": 35.0,
+      "pattern_score": 100.0,
+      "ten_god_score": 100.0,
+      "wuxing_score": 0.0,
+      "grade": "D",
+      "confidence": "low",
+      "recommendation": "Lá số yếu",
+      "useful_god_score": 0.0,
+      "shensha_score": 24.0,
+      "luck_score": 0.0,
+      "wuxing_series": [
+        {
+          "label": "Mộc",
+          "value": 1.0
+        },
+        {
+          "label": "Hỏa",
+          "value": 5.0
+        },
+        {
+          "label": "Thổ",
+          "value": 8.0
+        },
+        {
+          "label": "Kim",
+          "value": 2.0
+        },
+        {
+          "label": "Thủy",
+          "value": 3.0
+        }
+      ],
+      "ten_god_series": [
+        {
+          "label": "Chính Quan",
+          "value": 2.0
+        },
+        {
+          "label": "Kiếp Tài",
+          "value": 1.0
+        }
+      ]
+    },
+    "interpretation": {
+      "section_count": 10,
+      "confidence": 1.0,
+      "section_ids": [
+        "summary",
+        "personality",
+        "career",
+        "wealth",
+        "relationship",
+        "health",
+        "useful_god",
+        "conclusion",
+        "warning",
+        "weakness"
+      ],
+      "sections_summary": [
+        {
+          "id": "summary",
+          "title": "Tổng quan",
+          "body_chars": 502
+        },
+        {
+          "id": "personality",
+          "title": "Tính cách",
+          "body_chars": 65
+        },
+        {
+          "id": "career",
+          "title": "Sự nghiệp",
+          "body_chars": 61
+        },
+        {
+          "id": "wealth",
+          "title": "Tài vận",
+          "body_chars": 61
+        },
+        {
+          "id": "relationship",
+          "title": "Quan hệ",
+          "body_chars": 64
+        },
+        {
+          "id": "health",
+          "title": "Sức khỏe",
+          "body_chars": 48
+        },
+        {
+          "id": "useful_god",
+          "title": "Dụng thần",
+          "body_chars": 37
+        },
+        {
+          "id": "conclusion",
+          "title": "Kết luận",
+          "body_chars": 30
+        },
+        {
+          "id": "warning",
+          "title": "Lưu ý",
+          "body_chars": 191
+        },
+        {
+          "id": "weakness",
+          "title": "Điểm cần lưu ý",
+          "body_chars": 95
+        }
+      ]
+    },
+    "report": {
+      "title": "Bản luận Bát tự",
+      "section_count": 10,
+      "markdown_present": true,
+      "html_present": true,
+      "markdown_chars": 1326,
+      "html_chars": 1543
+    },
+    "sources": {
+      "bazi_source": {
+        "engine": "engines.bazi_engine.engine.BaziEngine",
+        "method": "build",
+        "contract": "li_chun_jdn_v1",
+        "view": "applications.api.services.bazi_truth.build_bazi_view"
+      },
+      "strength_source": {
+        "layer": "applications.api.services.strength_truth",
+        "contract": "analysis_result.StrengthView@1.0",
+        "owner": "api_ssot"
+      },
+      "temperature_source": {
+        "layer": "applications.api.services.temperature_truth",
+        "contract": "analysis_result.TemperatureView@1.0",
+        "owner": "api_ssot"
+      },
+      "useful_god_source": {
+        "layer": "applications.api.services.useful_god_truth",
+        "contract": "analysis_result.UsefulGodView@1.0",
+        "owner": "api_ssot"
+      },
+      "pattern_source": {
+        "engine": "engines.pattern_engine.engine.PatternEngine",
+        "method": "calculate",
+        "contract": "pattern_rule_context_v1",
+        "view": "applications.api.services.pattern_truth.build_pattern_view"
+      },
+      "score_source": {
+        "engine": "engines.score_engine.engine.ScoreEngine",
+        "method": "calculate",
+        "contract": "score_rule_context_v1",
+        "view": "applications.api.services.score_truth.build_score_view"
+      },
+      "interpretation_source": {
+        "engine": "engines.interpretation_engine.engine.InterpretationEngine",
+        "method": "run",
+        "contract": "interpretation_rule_context_v1",
+        "view": "applications.api.services.interpretation_truth.build_interpretation_view"
+      },
+      "narrative_result_source": {
+        "engine": "engines.narrative_engine.engine.NarrativeEngine",
+        "method": "compose_narrative_result",
+        "contract": "pack05_narrative_result_v1",
+        "commercial_knowledge": "engines.commercial_knowledge.CommercialKnowledgeAdapter",
+        "capabilities": "CAP-D1-CA-SEL;CAP-D1-CA-PRO",
+        "polish": "commercial_v1_p0",
+        "view": "applications.api.services.narrative_result_truth.build_narrative_result_dict"
+      },
+      "report_source": {
+        "engine": "engines.report_engine.engine.ReportEngine",
+        "method": "render_from_analysis",
+        "contract": "report_analysis_result_v1",
+        "view": "applications.api.services.report_truth.build_report_view"
+      }
+    }
+  },
+  "comparison": {
+    "pillars": {
+      "status": "DISCREPANCY",
+      "matches": {
+        "year": true,
+        "month": false,
+        "day": true,
+        "hour": true
+      },
+      "all_match": false,
+      "expected": {
+        "year": "Mậu Thìn",
+        "month": "Đinh Tỵ",
+        "day": "Quý Tỵ",
+        "hour": "Nhâm Tuất"
+      },
+      "actual": {
+        "year": "Mậu Thìn",
+        "month": "Mậu Ngọ",
+        "day": "Quý Tỵ",
+        "hour": "Nhâm Tuất"
+      }
+    },
+    "strength": {
+      "status": "DISCREPANCY",
+      "expert_expected": "Thân trung bình thiên nhược",
+      "actual_level": "balanced",
+      "actual_reasoning": "Trung hòa",
+      "actual_score": 0.5,
+      "preferred_levels": [
+        "balanced"
+      ],
+      "detail": "Engine only emits balanced/strong/weak; expert asks for directional bias 'Thân trung bình thiên nhược' which engine cannot express.",
+      "granularity_gap": null
+    },
+    "follow": {
+      "follow_detected": false,
+      "follow_pattern_type": null,
+      "tong_cach_raw": "Thiên Tài",
+      "follow_type_raw": null,
+      "note": "tong_cach equals main pattern label — not a follow detection"
+    },
+    "transform": {
+      "transformation_detected": null,
+      "transformation_score": null,
+      "producer_present": false,
+      "probed_slots": [],
+      "status": "NOT_PRODUCED",
+      "note": "No transformation_* fields on OrchestratorService public payload; combination≠transformation per package contracts."
+    },
+    "first_divergence": "calendar_bazi"
+  },
+  "verdict": "DISCREPANCY",
+  "trace": {
+    "input": {
+      "status": "PASS",
+      "note": null
+    },
+    "validation": {
+      "status": "PASS",
+      "note": null
+    },
+    "calendar_bazi": {
+      "status": "DISCREPANCY",
+      "note": "Pillars checked against expert/user-confirmed four pillars."
+    },
+    "strength": {
+      "status": "DISCREPANCY",
+      "detail": "Engine only emits balanced/strong/weak; expert asks for directional bias 'Thân trung bình thiên nhược' which engine cannot express.",
+      "actual_level": "balanced",
+      "actual_reasoning": "Trung hòa",
+      "actual_score": 0.5,
+      "expert_expected": "Thân trung bình thiên nhược"
+    },
+    "follow": {
+      "status": "EXECUTED_NEGATIVE",
+      "follow_detected": false,
+      "follow_pattern_type": null,
+      "tong_cach_raw": "Thiên Tài",
+      "follow_type_raw": null,
+      "note": "tong_cach equals main pattern label — not a follow detection"
+    },
+    "transform": {
+      "transformation_detected": null,
+      "transformation_score": null,
+      "producer_present": false,
+      "probed_slots": [],
+      "status": "NOT_PRODUCED",
+      "note": "No transformation_* fields on OrchestratorService public payload; combination≠transformation per package contracts."
+    },
+    "decision": {
+      "status": "BLOCKED",
+      "reason": "DECISION_ENGINE_NOT_IN_ORCHESTRATOR",
+      "note": "No DecisionEngine call in applications.api.services.orchestrator."
+    },
+    "luck": {
+      "status": "INTERNAL_ONLY",
+      "note": "LuckEngine.build runs inside OrchestratorService.analyze (Stage 7) but key 'luck' is removed by _finalize_public_payload / _INTERNAL_PAYLOAD_KEYS. Public coverage = NOT_EXPOSED."
+    },
+    "interpretation": {
+      "status": "EXECUTED",
+      "note": "sections=10; no expert_expected for interpretation prose — not scored PASS."
+    },
+    "report": {
+      "status": "EXECUTED",
+      "note": "section_count=10 markdown=True html=True; no expert_expected for report content — not scored PASS."
+    },
+    "score_surface": {
+      "status": "EXECUTED",
+      "total_score": 44.95,
+      "grade": "D",
+      "note": null
+    },
+    "temperature": {
+      "status": "EXECUTED",
+      "temperature_level": "hot",
+      "temperature_score": 0.78,
+      "reasoning": "Nhiệt khí nặng"
+    },
+    "useful_god": {
+      "status": "EXECUTED",
+      "useful_god": "Nhâm",
+      "confidence": 0.88
+    },
+    "pipeline": [
+      "calendar",
+      "bazi",
+      "pattern",
+      "score",
+      "interpretation",
+      "report",
+      "narrative"
+    ]
+  },
+  "audit": {
+    "notes": [],
+    "freeze_compliance": true
+  },
+  "diagnostics": {
+    "score_anomaly": false,
+    "public_luck_exposed": false,
+    "decision_wired": false,
+    "transformation_produced": false,
+    "portal": {
+      "status": "BLOCKED",
+      "reason": "Portal/DOM live replay not started in this Pilot Replay run."
+    }
+  }
+}

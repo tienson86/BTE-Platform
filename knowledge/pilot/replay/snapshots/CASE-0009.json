@@ -1,0 +1,79 @@
+{
+  "case_id": "CASE-0009",
+  "verdict": "BLOCKED",
+  "canonical_outputs": null,
+  "contracts": {
+    "entrypoint": "applications.api.services.orchestrator.OrchestratorService.analyze",
+    "public_pipeline": [
+      "calendar",
+      "bazi",
+      "pattern",
+      "score",
+      "interpretation",
+      "report",
+      "narrative"
+    ],
+    "sources": null
+  },
+  "trace": {
+    "input": {
+      "status": "BLOCKED",
+      "reason": "BLOCKED_REFERENCE_DATA",
+      "note": "No reliable birth/pillar source for a transformation reference case was found in Pilot fixtures, QC2 scenarios (slug-only), or repo search. Do not fabricate CASE-0009 input."
+    },
+    "validation": {
+      "status": "BLOCKED",
+      "reason": "BLOCKED_REFERENCE_DATA",
+      "note": null
+    },
+    "calendar_bazi": {
+      "status": "BLOCKED",
+      "reason": "BLOCKED_REFERENCE_DATA",
+      "note": null
+    },
+    "strength": {
+      "status": "BLOCKED",
+      "reason": "BLOCKED_REFERENCE_DATA",
+      "note": null
+    },
+    "follow": {
+      "status": "BLOCKED",
+      "reason": "BLOCKED_REFERENCE_DATA",
+      "note": null
+    },
+    "transform": {
+      "status": "BLOCKED",
+      "reason": "BLOCKED_REFERENCE_DATA",
+      "note": null
+    },
+    "decision": {
+      "status": "BLOCKED",
+      "reason": "DECISION_ENGINE_NOT_IN_ORCHESTRATOR",
+      "note": "DecisionEngine is not imported/called by OrchestratorService."
+    },
+    "luck": {
+      "status": "BLOCKED",
+      "reason": "BLOCKED_REFERENCE_DATA",
+      "note": "Luck runs internally on full analyze but is stripped from public payload."
+    },
+    "interpretation": {
+      "status": "BLOCKED",
+      "reason": "BLOCKED_REFERENCE_DATA",
+      "note": null
+    },
+    "report": {
+      "status": "BLOCKED",
+      "reason": "BLOCKED_REFERENCE_DATA",
+      "note": null
+    }
+  },
+  "audit": {
+    "notes": [
+      "No reliable birth/pillar source for a transformation reference case was found in Pilot fixtures, QC2 scenarios (slug-only), or repo search. Do not fabricate CASE-0009 input."
+    ],
+    "freeze_compliance": true
+  },
+  "diagnostics": {
+    "block_reason": "BLOCKED_REFERENCE_DATA"
+  }
+}

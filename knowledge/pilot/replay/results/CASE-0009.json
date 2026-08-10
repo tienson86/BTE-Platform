@@ -1,0 +1,91 @@
+{
+  "case_id": "CASE-0009",
+  "case_type": "reference_transformation",
+  "run": {
+    "date": "2026-08-10T16:10:12.671368+00:00",
+    "entrypoint": "applications.api.services.orchestrator.OrchestratorService.analyze",
+    "engine_or_knowledge_modified": false,
+    "architecture_freeze": "AF-1 unchanged"
+  },
+  "input": {
+    "subject": {
+      "full_name": null,
+      "gender": null
+    },
+    "birth": null,
+    "pillars_only": null
+  },
+  "expected": {
+    "expert_expected": null,
+    "external_expected": {
+      "intent": "Combination detected vs Transformation detected",
+      "classification_type": "REFERENCE_ONLY"
+    }
+  },
+  "actual": null,
+  "comparison": {
+    "first_divergence": "input"
+  },
+  "verdict": "BLOCKED",
+  "trace": {
+    "input": {
+      "status": "BLOCKED",
+      "reason": "BLOCKED_REFERENCE_DATA",
+      "note": "No reliable birth/pillar source for a transformation reference case was found in Pilot fixtures, QC2 scenarios (slug-only), or repo search. Do not fabricate CASE-0009 input."
+    },
+    "validation": {
+      "status": "BLOCKED",
+      "reason": "BLOCKED_REFERENCE_DATA",
+      "note": null
+    },
+    "calendar_bazi": {
+      "status": "BLOCKED",
+      "reason": "BLOCKED_REFERENCE_DATA",
+      "note": null
+    },
+    "strength": {
+      "status": "BLOCKED",
+      "reason": "BLOCKED_REFERENCE_DATA",
+      "note": null
+    },
+    "follow": {
+      "status": "BLOCKED",
+      "reason": "BLOCKED_REFERENCE_DATA",
+      "note": null
+    },
+    "transform": {
+      "status": "BLOCKED",
+      "reason": "BLOCKED_REFERENCE_DATA",
+      "note": null
+    },
+    "decision": {
+      "status": "BLOCKED",
+      "reason": "DECISION_ENGINE_NOT_IN_ORCHESTRATOR",
+      "note": "DecisionEngine is not imported/called by OrchestratorService."
+    },
+    "luck": {
+      "status": "BLOCKED",
+      "reason": "BLOCKED_REFERENCE_DATA",
+      "note": "Luck runs internally on full analyze but is stripped from public payload."
+    },
+    "interpretation": {
+      "status": "BLOCKED",
+      "reason": "BLOCKED_REFERENCE_DATA",
+      "note": null
+    },
+    "report": {
+      "status": "BLOCKED",
+      "reason": "BLOCKED_REFERENCE_DATA",
+      "note": null
+    }
+  },
+  "audit": {
+    "notes": [
+      "No reliable birth/pillar source for a transformation reference case was found in Pilot fixtures, QC2 scenarios (slug-only), or repo search. Do not fabricate CASE-0009 input."
+    ],
+    "freeze_compliance": true
+  },
+  "diagnostics": {
+    "block_reason": "BLOCKED_REFERENCE_DATA"
+  }
+}
