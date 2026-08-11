@@ -1,0 +1,95 @@
+{
+  "case_id": "SYN-STR-000002",
+  "dataset_type": "SYNTHETIC_STRENGTH_STRESS",
+  "calibration_eligible": false,
+  "golden_eligible": false,
+  "synthetic_pillars": true,
+  "calendar_verified": false,
+  "day_master": "giap",
+  "pillars": {
+    "year": "mau_thin",
+    "month": "ky_mui",
+    "day": "giap_tuat",
+    "hour": "mau_thin"
+  },
+  "synthetic_expected_taxonomy": "very_weak",
+  "evidence_profile": "extreme tho dominance against moc",
+  "stress_purpose": "VERY_WEAK extreme: wood day master under heavy earth pressure",
+  "runtime": {
+    "success": true,
+    "score": 0.35,
+    "raw_total": -15.0,
+    "v1_band": "weak",
+    "v1_label": "Th\u00e2n nh\u01b0\u1ee3c",
+    "confidence": 1.0,
+    "matched_rules": [
+      "sea_004",
+      "root_002",
+      "ctl_003",
+      "flw_002",
+      "flw_004",
+      "flw_005"
+    ],
+    "profile": {
+      "season": -10.0,
+      "root": 22.0,
+      "support": 0.0,
+      "drain": -21.0,
+      "control": -6.0,
+      "combination": 0.0,
+      "special": 0.0
+    },
+    "component_scores": {
+      "season_score": -0.1,
+      "root_score": 0.22,
+      "support_score": 0.0,
+      "drain_score": -0.21,
+      "control_score": -0.06
+    },
+    "context": {
+      "day_master": "Gi\u00e1p",
+      "day_master_element": "M\u1ed9c",
+      "month_branch": "M\u00f9i",
+      "month_status": "T\u00f9",
+      "root_level": "Th\u00f4ng c\u0103n 2 chi",
+      "support_type": null,
+      "control_type": "B\u1ecb T\u00e0i tinh hao",
+      "drain_type": "T\u00e0i tinh hao th\u00e2n",
+      "season": "summer",
+      "season_phase": "late_summer",
+      "temperature_type": "hot",
+      "root_count": 2,
+      "resource_count": 0,
+      "companion_count": 0,
+      "wealth_count": 3,
+      "officer_count": 0,
+      "output_count": 0
+    },
+    "error": null,
+    "level_rule": {
+      "rule_id": "pri_level_weak",
+      "priority": 100,
+      "score": 0,
+      "score_target": "level",
+      "conditions": "[{\"field\": \"strength_score\", \"operator\": \"<=\", \"value\": 0.35}]",
+      "strength_level": "weak",
+      "reason": "Th\u00e2n nh\u01b0\u1ee3c",
+      "description": "\u0110i\u1ec3m t\u1ed5ng <= 35%",
+      "reference": "BTE-STR-V2",
+      "status": "active",
+      "enabled": true
+    }
+  },
+  "comparison": {
+    "match": true,
+    "exact_synthetic_match": true,
+    "mismatch_category": "EXACT_SYNTHETIC_MATCH",
+    "expected_v1_band": "weak",
+    "note": "Coarse v1 band matches projected synthetic expectation; seven-level intensity/tilt is not expressible in v1.",
+    "taxonomy_resolution_note": "TAXONOMY_RESOLUTION_GAP_LATENT"
+  },
+  "notes": [
+    "SYNTHETIC stress case only; not calibration evidence.",
+    "Mismatch is diagnostic; not automatically a production bug."
+  ]
+}

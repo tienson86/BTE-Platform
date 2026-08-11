@@ -1,0 +1,95 @@
+{
+  "case_id": "SYN-STR-000013",
+  "dataset_type": "SYNTHETIC_STRENGTH_STRESS",
+  "calibration_eligible": false,
+  "golden_eligible": false,
+  "synthetic_pillars": true,
+  "calendar_verified": false,
+  "day_master": "giap",
+  "pillars": {
+    "year": "nham_ty",
+    "month": "tan_hoi",
+    "day": "giap_thin",
+    "hour": "mau_than"
+  },
+  "synthetic_expected_taxonomy": "slightly_strong",
+  "evidence_profile": "strong water support with remaining metal/earth pressure",
+  "stress_purpose": "SLIGHTLY_STRONG: wood fed by water with residual pressure",
+  "runtime": {
+    "success": true,
+    "score": 0.86,
+    "raw_total": 36.0,
+    "v1_band": "strong",
+    "v1_label": "Th\u00e2n v\u01b0\u1ee3ng",
+    "confidence": 1.0,
+    "matched_rules": [
+      "sea_002",
+      "root_002",
+      "sup_002",
+      "ctl_001",
+      "flw_002",
+      "flw_004"
+    ],
+    "profile": {
+      "season": 25.0,
+      "root": 22.0,
+      "support": 10.0,
+      "drain": -11.0,
+      "control": -10.0,
+      "combination": 0.0,
+      "special": 0.0
+    },
+    "component_scores": {
+      "season_score": 0.25,
+      "root_score": 0.22,
+      "support_score": 0.1,
+      "drain_score": -0.11,
+      "control_score": -0.1
+    },
+    "context": {
+      "day_master": "Gi\u00e1p",
+      "day_master_element": "M\u1ed9c",
+      "month_branch": "H\u1ee3i",
+      "month_status": "T\u01b0\u1edbng",
+      "root_level": "Th\u00f4ng c\u0103n 2 chi",
+      "support_type": "\u1ea4n tinh sinh th\u00e2n",
+      "control_type": "B\u1ecb Quan S\u00e1t kh\u1eafc",
+      "drain_type": "T\u00e0i tinh hao th\u00e2n",
+      "season": "winter",
+      "season_phase": "early_winter",
+      "temperature_type": "cold",
+      "root_count": 2,
+      "resource_count": 1,
+      "companion_count": 0,
+      "wealth_count": 1,
+      "officer_count": 1,
+      "output_count": 0
+    },
+    "error": null,
+    "level_rule": {
+      "rule_id": "pri_level_strong",
+      "priority": 100,
+      "score": 0,
+      "score_target": "level",
+      "conditions": "[{\"field\": \"strength_score\", \"operator\": \">=\", \"value\": 0.65}]",
+      "strength_level": "strong",
+      "reason": "Th\u00e2n v\u01b0\u1ee3ng",
+      "description": "\u0110i\u1ec3m t\u1ed5ng >= 65%",
+      "reference": "BTE-STR-V2",
+      "status": "active",
+      "enabled": true
+    }
+  },
+  "comparison": {
+    "match": true,
+    "exact_synthetic_match": true,
+    "mismatch_category": "EXACT_SYNTHETIC_MATCH",
+    "expected_v1_band": "strong",
+    "note": "Coarse v1 band matches projected synthetic expectation; seven-level intensity/tilt is not expressible in v1.",
+    "taxonomy_resolution_note": "TAXONOMY_RESOLUTION_GAP_LATENT"
+  },
+  "notes": [
+    "SYNTHETIC stress case only; not calibration evidence.",
+    "Mismatch is diagnostic; not automatically a production bug."
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "case_id": "SYN-STR-000012",
+  "dataset_type": "SYNTHETIC_STRENGTH_STRESS",
+  "calibration_eligible": false,
+  "golden_eligible": false,
+  "synthetic_pillars": true,
+  "calendar_verified": false,
+  "day_master": "nham",
+  "pillars": {
+    "year": "dinh_mao",
+    "month": "mau_ngo",
+    "day": "nham_than",
+    "hour": "canh_ty"
+  },
+  "synthetic_expected_taxonomy": "balanced",
+  "evidence_profile": "thuy has strong support but faces seasonal hoa",
+  "stress_purpose": "BALANCED: water support offset by seasonal fire",
+  "runtime": {
+    "success": true,
+    "score": 0.52,
+    "raw_total": 2.0,
+    "v1_band": "balanced",
+    "v1_label": "Trung h\u00f2a",
+    "confidence": 1.0,
+    "matched_rules": [
+      "sea_004",
+      "root_002",
+      "sup_002",
+      "ctl_003",
+      "ctl_006",
+      "flw_002"
+    ],
+    "profile": {
+      "season": -10.0,
+      "root": 22.0,
+      "support": 10.0,
+      "drain": -6.0,
+      "control": -14.000000000000002,
+      "combination": 0.0,
+      "special": 1.7763568394002505e-15
+    },
+    "component_scores": {
+      "season_score": -0.1,
+      "root_score": 0.22,
+      "support_score": 0.1,
+      "drain_score": -0.06,
+      "control_score": -0.14
+    },
+    "context": {
+      "day_master": "Nh\u00e2m",
+      "day_master_element": "Th\u1ee7y",
+      "month_branch": "Ng\u1ecd",
+      "month_status": "T\u00f9",
+      "root_level": "Th\u00f4ng c\u0103n 2 chi",
+      "support_type": "\u1ea4n tinh sinh th\u00e2n",
+      "control_type": "B\u1ecb T\u00e0i tinh hao",
+      "drain_type": "T\u00e0i tinh hao th\u00e2n",
+      "season": "summer",
+      "season_phase": "mid_summer",
+      "temperature_type": "hot",
+      "root_count": 2,
+      "resource_count": 1,
+      "companion_count": 0,
+      "wealth_count": 1,
+      "officer_count": 1,
+      "output_count": 0
+    },
+    "error": null,
+    "level_rule": {
+      "rule_id": "pri_level_balanced",
+      "priority": 80,
+      "score": 0,
+      "score_target": "level",
+      "conditions": "[{\"field\": \"strength_score\", \"operator\": \">\", \"value\": 0.35}, {\"field\": \"strength_score\", \"operator\": \"<\", \"value\": 0.65}]",
+      "strength_level": "balanced",
+      "reason": "Trung h\u00f2a",
+      "description": "\u0110i\u1ec3m t\u1ed5ng c\u00e2n b\u1eb1ng",
+      "reference": "BTE-STR-V2",
+      "status": "active",
+      "enabled": true
+    }
+  },
+  "comparison": {
+    "match": true,
+    "exact_synthetic_match": true,
+    "mismatch_category": "EXACT_SYNTHETIC_MATCH",
+    "expected_v1_band": "balanced",
+    "note": "Runtime v1 band matches projected synthetic expectation.",
+    "taxonomy_resolution_note": null
+  },
+  "notes": [
+    "SYNTHETIC stress case only; not calibration evidence.",
+    "Mismatch is diagnostic; not automatically a production bug."
+  ]
+}

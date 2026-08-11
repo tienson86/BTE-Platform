@@ -1,0 +1,95 @@
+{
+  "case_id": "SYN-STR-000004",
+  "dataset_type": "SYNTHETIC_STRENGTH_STRESS",
+  "calibration_eligible": false,
+  "golden_eligible": false,
+  "synthetic_pillars": true,
+  "calendar_verified": false,
+  "day_master": "at",
+  "pillars": {
+    "year": "canh_than",
+    "month": "mau_ty",
+    "day": "at_dau",
+    "hour": "ky_suu"
+  },
+  "synthetic_expected_taxonomy": "weak",
+  "evidence_profile": "weak moc with limited rooting",
+  "stress_purpose": "WEAK: wood with scarce roots under metal/earth pressure",
+  "runtime": {
+    "success": true,
+    "score": 0.42,
+    "raw_total": -8.0,
+    "v1_band": "balanced",
+    "v1_label": "Trung h\u00f2a",
+    "confidence": 1.0,
+    "matched_rules": [
+      "sea_002",
+      "root_005",
+      "ctl_001",
+      "flw_002",
+      "flw_004",
+      "cmb_003"
+    ],
+    "profile": {
+      "season": 25.0,
+      "root": -20.0,
+      "support": 0.0,
+      "drain": -11.0,
+      "control": -10.0,
+      "combination": 0.0,
+      "special": 8.0
+    },
+    "component_scores": {
+      "season_score": 0.25,
+      "root_score": -0.2,
+      "support_score": 0.0,
+      "drain_score": -0.11,
+      "control_score": -0.1
+    },
+    "context": {
+      "day_master": "\u1ea4t",
+      "day_master_element": "M\u1ed9c",
+      "month_branch": "T\u00fd",
+      "month_status": "T\u01b0\u1edbng",
+      "root_level": "V\u00f4 c\u0103n",
+      "support_type": null,
+      "control_type": "B\u1ecb Quan S\u00e1t kh\u1eafc",
+      "drain_type": "T\u00e0i tinh hao th\u00e2n",
+      "season": "winter",
+      "season_phase": "mid_winter",
+      "temperature_type": "cold",
+      "root_count": 0,
+      "resource_count": 0,
+      "companion_count": 0,
+      "wealth_count": 2,
+      "officer_count": 1,
+      "output_count": 0
+    },
+    "error": null,
+    "level_rule": {
+      "rule_id": "pri_level_balanced",
+      "priority": 80,
+      "score": 0,
+      "score_target": "level",
+      "conditions": "[{\"field\": \"strength_score\", \"operator\": \">\", \"value\": 0.35}, {\"field\": \"strength_score\", \"operator\": \"<\", \"value\": 0.65}]",
+      "strength_level": "balanced",
+      "reason": "Trung h\u00f2a",
+      "description": "\u0110i\u1ec3m t\u1ed5ng c\u00e2n b\u1eb1ng",
+      "reference": "BTE-STR-V2",
+      "status": "active",
+      "enabled": true
+    }
+  },
+  "comparison": {
+    "match": false,
+    "exact_synthetic_match": false,
+    "mismatch_category": "SEASONAL_WEIGHTING_GAP",
+    "expected_v1_band": "weak",
+    "note": "Projected expected v1=weak vs runtime v1=balanced for synthetic_expected_taxonomy=weak.",
+    "taxonomy_resolution_note": null
+  },
+  "notes": [
+    "SYNTHETIC stress case only; not calibration evidence.",
+    "Mismatch is diagnostic; not automatically a production bug."
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "case_id": "SYN-STR-000006",
+  "dataset_type": "SYNTHETIC_STRENGTH_STRESS",
+  "calibration_eligible": false,
+  "golden_eligible": false,
+  "synthetic_pillars": true,
+  "calendar_verified": false,
+  "day_master": "nham",
+  "pillars": {
+    "year": "mau_tuat",
+    "month": "ky_mui",
+    "day": "nham_thin",
+    "hour": "mau_tuat"
+  },
+  "synthetic_expected_taxonomy": "weak",
+  "evidence_profile": "weak thuy under strong tho pressure",
+  "stress_purpose": "WEAK: water under strong earth control",
+  "runtime": {
+    "success": true,
+    "score": 0.19,
+    "raw_total": -31.0,
+    "v1_band": "weak",
+    "v1_label": "Th\u00e2n nh\u01b0\u1ee3c",
+    "confidence": 1.0,
+    "matched_rules": [
+      "sea_005",
+      "root_003",
+      "ctl_001",
+      "ctl_006"
+    ],
+    "profile": {
+      "season": -25.0,
+      "root": 12.0,
+      "support": 0.0,
+      "drain": 0.0,
+      "control": -18.0,
+      "combination": 0.0,
+      "special": 0.0
+    },
+    "component_scores": {
+      "season_score": -0.25,
+      "root_score": 0.12,
+      "support_score": 0.0,
+      "drain_score": 0.0,
+      "control_score": -0.18
+    },
+    "context": {
+      "day_master": "Nh\u00e2m",
+      "day_master_element": "Th\u1ee7y",
+      "month_branch": "M\u00f9i",
+      "month_status": "T\u1eed",
+      "root_level": "Th\u00f4ng c\u0103n 1 chi",
+      "support_type": null,
+      "control_type": "B\u1ecb Quan S\u00e1t kh\u1eafc",
+      "drain_type": null,
+      "season": "summer",
+      "season_phase": "late_summer",
+      "temperature_type": "hot",
+      "root_count": 1,
+      "resource_count": 0,
+      "companion_count": 0,
+      "wealth_count": 0,
+      "officer_count": 3,
+      "output_count": 0
+    },
+    "error": null,
+    "level_rule": {
+      "rule_id": "pri_level_weak",
+      "priority": 100,
+      "score": 0,
+      "score_target": "level",
+      "conditions": "[{\"field\": \"strength_score\", \"operator\": \"<=\", \"value\": 0.35}]",
+      "strength_level": "weak",
+      "reason": "Th\u00e2n nh\u01b0\u1ee3c",
+      "description": "\u0110i\u1ec3m t\u1ed5ng <= 35%",
+      "reference": "BTE-STR-V2",
+      "status": "active",
+      "enabled": true
+    }
+  },
+  "comparison": {
+    "match": true,
+    "exact_synthetic_match": true,
+    "mismatch_category": "EXACT_SYNTHETIC_MATCH",
+    "expected_v1_band": "weak",
+    "note": "Runtime v1 band matches projected synthetic expectation.",
+    "taxonomy_resolution_note": null
+  },
+  "notes": [
+    "SYNTHETIC stress case only; not calibration evidence.",
+    "Mismatch is diagnostic; not automatically a production bug."
+  ]
+}

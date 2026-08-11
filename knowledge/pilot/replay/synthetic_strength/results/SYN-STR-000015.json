@@ -1,0 +1,96 @@
+{
+  "case_id": "SYN-STR-000015",
+  "dataset_type": "SYNTHETIC_STRENGTH_STRESS",
+  "calibration_eligible": false,
+  "golden_eligible": false,
+  "synthetic_pillars": true,
+  "calendar_verified": false,
+  "day_master": "mau",
+  "pillars": {
+    "year": "at_mao",
+    "month": "dinh_mao",
+    "day": "mau_thin",
+    "hour": "nham_ty"
+  },
+  "synthetic_expected_taxonomy": "slightly_strong",
+  "evidence_profile": "moc pressure exists but tho retains rooting and fire support",
+  "stress_purpose": "SLIGHTLY_STRONG: earth rooted with fire support under wood",
+  "runtime": {
+    "success": true,
+    "score": 0.31,
+    "raw_total": -19.0,
+    "v1_band": "weak",
+    "v1_label": "Th\u00e2n nh\u01b0\u1ee3c",
+    "confidence": 1.0,
+    "matched_rules": [
+      "sea_005",
+      "root_003",
+      "sup_002",
+      "sup_006",
+      "ctl_001",
+      "flw_002",
+      "flw_004"
+    ],
+    "profile": {
+      "season": -25.0,
+      "root": 12.0,
+      "support": 15.0,
+      "drain": -11.0,
+      "control": -10.0,
+      "combination": 0.0,
+      "special": 0.0
+    },
+    "component_scores": {
+      "season_score": -0.25,
+      "root_score": 0.12,
+      "support_score": 0.15,
+      "drain_score": -0.11,
+      "control_score": -0.1
+    },
+    "context": {
+      "day_master": "M\u1eadu",
+      "day_master_element": "Th\u1ed5",
+      "month_branch": "M\u00e3o",
+      "month_status": "T\u1eed",
+      "root_level": "Th\u00f4ng c\u0103n 1 chi",
+      "support_type": "\u1ea4n tinh sinh th\u00e2n",
+      "control_type": "B\u1ecb Quan S\u00e1t kh\u1eafc",
+      "drain_type": "T\u00e0i tinh hao th\u00e2n",
+      "season": "spring",
+      "season_phase": "mid_spring",
+      "temperature_type": "warm",
+      "root_count": 1,
+      "resource_count": 1,
+      "companion_count": 0,
+      "wealth_count": 1,
+      "officer_count": 1,
+      "output_count": 0
+    },
+    "error": null,
+    "level_rule": {
+      "rule_id": "pri_level_weak",
+      "priority": 100,
+      "score": 0,
+      "score_target": "level",
+      "conditions": "[{\"field\": \"strength_score\", \"operator\": \"<=\", \"value\": 0.35}]",
+      "strength_level": "weak",
+      "reason": "Th\u00e2n nh\u01b0\u1ee3c",
+      "description": "\u0110i\u1ec3m t\u1ed5ng <= 35%",
+      "reference": "BTE-STR-V2",
+      "status": "active",
+      "enabled": true
+    }
+  },
+  "comparison": {
+    "match": false,
+    "exact_synthetic_match": false,
+    "mismatch_category": "TAXONOMY_RESOLUTION_GAP",
+    "expected_v1_band": "strong",
+    "note": "Projected expected v1=strong vs runtime v1=weak for synthetic_expected_taxonomy=slightly_strong.",
+    "taxonomy_resolution_note": null
+  },
+  "notes": [
+    "SYNTHETIC stress case only; not calibration evidence.",
+    "Mismatch is diagnostic; not automatically a production bug."
+  ]
+}
