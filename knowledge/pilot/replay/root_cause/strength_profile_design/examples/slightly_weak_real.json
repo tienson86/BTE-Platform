@@ -1,0 +1,223 @@
+{
+  "schema_version": "strength_profile_design_v0.1.0-candidate",
+  "identity": {
+    "profile_id": "PRF-DESIGN-SW-REAL-001",
+    "source_case_ref": "CAL-000001",
+    "population": "design_example",
+    "notes": "DESIGN_EXAMPLE only; not calibration truth"
+  },
+  "population": "design_example",
+  "design_marker": "design_example",
+  "day_master": "canh",
+  "score_reference": {
+    "raw_score": 37.0,
+    "normalized_score": 0.87,
+    "published_score": 0.87,
+    "current_v1_band": "strong",
+    "score_source": "strength_engine_v1_runtime_observation",
+    "score_status": "observed",
+    "saturation_detected": false,
+    "saturation_type": "none"
+  },
+  "seasonal_state": {
+    "season_branch": "suu",
+    "season_element": "tho",
+    "day_master_relation": "tuong",
+    "seasonal_support_direction": "support",
+    "seasonal_strength_state": "supportive",
+    "seasonal_confidence": "medium",
+    "source": "runtime_month_status_tuong",
+    "raw_contribution": 25.0
+  },
+  "rooting_state": {
+    "day_branch_root": "candidate",
+    "month_branch_root": "unknown",
+    "other_branch_root": "unknown",
+    "hidden_root": "present",
+    "multiple_roots": false,
+    "root_strength": "thong_can_1_chi",
+    "root_distribution": [
+      "unknown_loci"
+    ],
+    "root_confidence": "medium",
+    "raw_contribution": 12.0
+  },
+  "support_state": {
+    "items": [
+      {
+        "category": "same_element",
+        "direction": "support",
+        "raw_contribution": 8.0,
+        "provenance": "engine_rule"
+      },
+      {
+        "category": "resource",
+        "direction": "support",
+        "raw_contribution": 10.0,
+        "provenance": "engine_rule",
+        "note": "special_an_cold"
+      }
+    ],
+    "summary": "companion_plus_special_resource",
+    "confidence": "medium"
+  },
+  "pressure_state": {
+    "items": [
+      {
+        "category": "officer",
+        "direction": "pressure",
+        "raw_contribution": -18.0,
+        "provenance": "engine_rule"
+      }
+    ],
+    "summary": "officer_pressure",
+    "confidence": "medium"
+  },
+  "drain_state": {
+    "items": [],
+    "summary": "none_observed",
+    "confidence": "medium"
+  },
+  "structural_state": {
+    "items": [],
+    "summary": "none_confirmed",
+    "confidence": "low"
+  },
+  "temperature_state": {
+    "temperature_state": "cold",
+    "heat_evidence": null,
+    "cold_evidence": "winter_context",
+    "dryness_evidence": null,
+    "moisture_evidence": null,
+    "temperature_conflict": true,
+    "confidence": "low",
+    "provenance": "context_vs_temperature_engine_may_differ"
+  },
+  "conflicts": [
+    {
+      "schema_version": "strength_profile_design_v0.1.0-candidate",
+      "conflict_id": "CF-SUP-PRESS-001",
+      "conflict_type": "support_vs_pressure",
+      "dimensions": [
+        "same_element_support",
+        "officer_pressure",
+        "seasonal_strength"
+      ],
+      "evidence_ids": [
+        "EV-SEA-002",
+        "EV-SUP-001",
+        "EV-CTL-001"
+      ],
+      "severity": "high",
+      "resolution_status": "unresolved",
+      "confidence": "medium",
+      "notes": "runtime net strong vs expert slightly_weak; no resolution invented"
+    }
+  ],
+  "evidence_completeness": {
+    "schema_version": "strength_profile_design_v0.1.0-candidate",
+    "overall": "partial",
+    "by_dimension": {
+      "calendar": "partial",
+      "season": "partial",
+      "roots": "partial",
+      "support": "partial",
+      "pressure": "partial",
+      "drain": "partial",
+      "structure": "limited",
+      "temperature": "limited",
+      "expert_review": "partial"
+    },
+    "notes": null
+  },
+  "evidence_records": [
+    {
+      "schema_version": "strength_profile_design_v0.1.0-candidate",
+      "evidence_id": "EV-SEA-002",
+      "evidence_type": "seasonal",
+      "dimension": "seasonal_strength",
+      "source": "01_season_rules.csv",
+      "source_path": "database/12_strength/01_season_rules.csv",
+      "direction": "support",
+      "magnitude": {
+        "representation": "raw_contribution",
+        "raw_contribution": 25.0,
+        "ordinal": null,
+        "categorical": null,
+        "normalized": null,
+        "bounded_contribution": null,
+        "unit_note": "engine_bucket_contribution_if_observed"
+      },
+      "polarity": "positive",
+      "confidence": "medium",
+      "provenance": {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "provenance_class": "engine_rule",
+        "availability": "observed",
+        "source_system": "strength_engine_v1",
+        "source_path": "database/12_strength/01_season_rules.csv",
+        "rule_id": "sea_002",
+        "observed_at": null,
+        "notes": null
+      },
+      "explanation": "tuong season",
+      "affected_element": "kim",
+      "affected_day_master": "canh",
+      "pillar_scope": "month",
+      "branch_scope": "suu",
+      "stem_scope": null,
+      "seasonal_context": {
+        "month_status": "tuong"
+      },
+      "interaction_context": null,
+      "availability": "observed",
+      "completeness": "partial",
+      "information_loss": "compressed"
+    }
+  ],
+  "dominant_factors": [
+    "season_tuong",
+    "officer_pressure",
+    "special_an"
+  ],
+  "supporting_factors": [
+    "season_tuong",
+    "root_1_chi",
+    "companion"
+  ],
+  "opposing_factors": [
+    "officer_pressure"
+  ],
+  "uncertainty": "expert_dual_reviewed_slightly_weak_disagrees_with_runtime_strong",
+  "confidence": {
+    "schema_version": "strength_profile_design_v0.1.0-candidate",
+    "overall": "low",
+    "factors": {
+      "evidence_completeness": "medium",
+      "evidence_conflict": "low",
+      "calendar_certainty": "high",
+      "structural_certainty": "unknown",
+      "expert_agreement": "high",
+      "boundary_proximity": "medium",
+      "runtime_stability": "medium"
+    },
+    "numeric_runtime_confidence": null,
+    "notes": "design confidence is not the same as v1 runtime confidence"
+  },
+  "provenance": {
+    "schema_version": "strength_profile_design_v0.1.0-candidate",
+    "provenance_class": "design_only",
+    "availability": "derived",
+    "source_system": "strength_engine_v1",
+    "source_path": "pilot_1i_design_example",
+    "rule_id": null,
+    "observed_at": null,
+    "notes": null
+  },
+  "synthetic_flags": null,
+  "external_labels": {
+    "synthetic_expected_taxonomy": null,
+    "expert_taxonomy_candidate": "slightly_weak",
+    "note": "expert labels remain external; not profile taxonomy"
+  }
+}

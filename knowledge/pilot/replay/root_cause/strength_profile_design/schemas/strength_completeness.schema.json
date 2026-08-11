@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "strength_completeness.schema.json",
+  "title": "StrengthEvidenceCompleteness",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "overall",
+    "by_dimension"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "strength_profile_design_v0.1.0-candidate"
+    },
+    "overall": {
+      "type": "string",
+      "enum": [
+        "complete",
+        "partial",
+        "limited",
+        "unknown"
+      ]
+    },
+    "by_dimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "calendar": {
+          "type": "string",
+          "enum": [
+            "complete",
+            "partial",
+            "limited",
+            "unknown"
+          ]
+        },
+        "season": {
+          "type": "string",
+          "enum": [
+            "complete",
+            "partial",
+            "limited",
+            "unknown"
+          ]
+        },
+        "roots": {
+          "type": "string",
+          "enum": [
+            "complete",
+            "partial",
+            "limited",
+            "unknown"
+          ]
+        },
+        "support": {
+          "type": "string",
+          "enum": [
+            "complete",
+            "partial",
+            "limited",
+            "unknown"
+          ]
+        },
+        "pressure": {
+          "type": "string",
+          "enum": [
+            "complete",
+            "partial",
+            "limited",
+            "unknown"
+          ]
+        },
+        "drain": {
+          "type": "string",
+          "enum": [
+            "complete",
+            "partial",
+            "limited",
+            "unknown"
+          ]
+        },
+        "structure": {
+          "type": "string",
+          "enum": [
+            "complete",
+            "partial",
+            "limited",
+            "unknown"
+          ]
+        },
+        "temperature": {
+          "type": "string",
+          "enum": [
+            "complete",
+            "partial",
+            "limited",
+            "unknown"
+          ]
+        },
+        "expert_review": {
+          "type": "string",
+          "enum": [
+            "complete",
+            "partial",
+            "limited",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "notes": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

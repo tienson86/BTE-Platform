@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "strength_provenance.schema.json",
+  "title": "StrengthProvenance",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "provenance_class",
+    "availability"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "strength_profile_design_v0.1.0-candidate"
+    },
+    "provenance_class": {
+      "type": "string",
+      "enum": [
+        "engine_rule",
+        "knowledge_rule",
+        "derived",
+        "structural",
+        "calendar",
+        "expert",
+        "synthetic",
+        "design_only"
+      ]
+    },
+    "availability": {
+      "type": "string",
+      "enum": [
+        "observed",
+        "derived",
+        "inferred",
+        "externally_reviewed",
+        "synthetic",
+        "unknown"
+      ]
+    },
+    "source_system": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "source_path": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rule_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "observed_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "notes": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

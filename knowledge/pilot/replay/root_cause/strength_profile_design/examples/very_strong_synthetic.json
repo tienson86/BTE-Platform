@@ -1,0 +1,139 @@
+{
+  "schema_version": "strength_profile_design_v0.1.0-candidate",
+  "identity": {
+    "profile_id": "PRF-DESIGN-VS-001",
+    "source_case_ref": "SYN-STR-000019",
+    "population": "design_example",
+    "notes": "DESIGN_EXAMPLE only; not calibration truth"
+  },
+  "population": "design_example",
+  "design_marker": "design_example",
+  "day_master": "nham",
+  "score_reference": {
+    "raw_score": 107.0,
+    "normalized_score": 1.0,
+    "published_score": 1.0,
+    "current_v1_band": "strong",
+    "score_source": "strength_engine_v1_runtime_observation",
+    "score_status": "observed",
+    "saturation_detected": true,
+    "saturation_type": "upper_clamp"
+  },
+  "seasonal_state": {
+    "seasonal_strength_state": "very_supportive",
+    "raw_contribution": 35.0,
+    "seasonal_confidence": "medium",
+    "source": "runtime"
+  },
+  "rooting_state": {
+    "root_strength": "thong_can_2_chi",
+    "multiple_roots": true,
+    "raw_contribution": 22.0,
+    "root_confidence": "medium",
+    "root_distribution": [
+      "multi"
+    ]
+  },
+  "support_state": {
+    "items": [
+      {
+        "category": "same_element",
+        "raw_contribution": 18.0
+      }
+    ],
+    "summary": "strong_support",
+    "confidence": "medium"
+  },
+  "pressure_state": {
+    "items": [],
+    "summary": "none_observed",
+    "confidence": "medium"
+  },
+  "drain_state": {
+    "items": [],
+    "summary": "none_observed",
+    "confidence": "medium"
+  },
+  "structural_state": {
+    "items": [
+      {
+        "type": "special_structure",
+        "resolution_status": "probable"
+      }
+    ],
+    "summary": "special_boost",
+    "confidence": "medium"
+  },
+  "temperature_state": {
+    "temperature_state": "cold",
+    "confidence": "low",
+    "provenance": "context_only"
+  },
+  "conflicts": [],
+  "evidence_completeness": {
+    "schema_version": "strength_profile_design_v0.1.0-candidate",
+    "overall": "partial",
+    "by_dimension": {
+      "calendar": "unknown",
+      "season": "partial",
+      "roots": "partial",
+      "support": "partial",
+      "pressure": "partial",
+      "drain": "partial",
+      "structure": "partial",
+      "temperature": "limited",
+      "expert_review": "unknown"
+    },
+    "notes": null
+  },
+  "evidence_records": [],
+  "dominant_factors": [
+    "dac_lenh",
+    "support_mass",
+    "special"
+  ],
+  "supporting_factors": [
+    "dac_lenh",
+    "root",
+    "support",
+    "special"
+  ],
+  "opposing_factors": [],
+  "uncertainty": "raw_above_clamp_same_published_score_as_strong_peers",
+  "confidence": {
+    "schema_version": "strength_profile_design_v0.1.0-candidate",
+    "overall": "medium",
+    "factors": {
+      "evidence_completeness": "unknown",
+      "evidence_conflict": "unknown",
+      "calendar_certainty": "unknown",
+      "structural_certainty": "unknown",
+      "expert_agreement": "unknown",
+      "boundary_proximity": "unknown",
+      "runtime_stability": "unknown"
+    },
+    "numeric_runtime_confidence": null,
+    "notes": "design confidence is not the same as v1 runtime confidence"
+  },
+  "provenance": {
+    "schema_version": "strength_profile_design_v0.1.0-candidate",
+    "provenance_class": "design_only",
+    "availability": "derived",
+    "source_system": "strength_engine_v1",
+    "source_path": "pilot_1i_design_example",
+    "rule_id": null,
+    "observed_at": null,
+    "notes": null
+  },
+  "synthetic_flags": {
+    "synthetic": true,
+    "calibration_eligible": false,
+    "golden_eligible": false,
+    "expert_calibration_eligible": false
+  },
+  "external_labels": {
+    "synthetic_expected_taxonomy": "very_strong",
+    "expert_taxonomy_candidate": null,
+    "note": "intensity visible in raw_score only"
+  }
+}

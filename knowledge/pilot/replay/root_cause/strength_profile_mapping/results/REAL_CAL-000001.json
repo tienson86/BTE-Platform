@@ -1,0 +1,534 @@
+{
+  "reference_only": true,
+  "production_ready": false,
+  "taxonomy_implemented": false,
+  "calibration_implementation": false,
+  "mapper_status": "REFERENCE_ONLY",
+  "case_id": "CAL-000001",
+  "population": "real_calibration",
+  "source_paths": {
+    "case": "knowledge/pilot/replay/root_cause/strength_taxonomy_v2/calibration/cases/CAL-000001.json",
+    "evidence": "knowledge/pilot/replay/root_cause/strength_taxonomy_v2/calibration/evidence/CAL-000001.json"
+  },
+  "saturation_source": "none",
+  "profile": {
+    "schema_version": "strength_profile_design_v0.1.0-candidate",
+    "identity": {
+      "profile_id": "PRF-MAP-CAL_000001",
+      "source_case_ref": "CAL-000001",
+      "population": "real_calibration",
+      "notes": "REFERENCE_ONLY runtime projection; PRODUCTION_READY=false"
+    },
+    "population": "real_calibration",
+    "design_marker": "runtime_projection",
+    "day_master": "canh",
+    "score_reference": {
+      "raw_score": 37.0,
+      "normalized_score": 0.87,
+      "published_score": 0.87,
+      "current_v1_band": "strong",
+      "score_source": "strength_engine_v1_runtime_observation",
+      "score_status": "observed",
+      "saturation_detected": false,
+      "saturation_type": "none"
+    },
+    "seasonal_state": {
+      "season_branch": "suu",
+      "season_element": null,
+      "day_master_relation": "T\u01b0\u1edbng",
+      "seasonal_support_direction": "unknown",
+      "seasonal_strength_state": "unknown",
+      "seasonal_confidence": "unknown",
+      "source": "runtime.context",
+      "season": "winter",
+      "season_phase": "late_winter",
+      "raw_contribution": 25.0,
+      "notes": "seasonal_strength_state not inferred from month_status"
+    },
+    "rooting_state": {
+      "day_branch_root": "unknown",
+      "month_branch_root": "unknown",
+      "other_branch_root": "unknown",
+      "hidden_root": "unknown",
+      "multiple_roots": false,
+      "root_strength": "Th\u00f4ng c\u0103n 1 chi",
+      "root_distribution": [],
+      "root_confidence": "unknown",
+      "root_count": 1,
+      "raw_contribution": 12.0,
+      "notes": "per-branch loci not available from current runtime boundary"
+    },
+    "support_state": {
+      "items": [
+        {
+          "category": "same_element",
+          "label": "\u0110\u1ed3ng h\u00e0nh tr\u1ee3 th\u00e2n",
+          "raw_contribution": 8.0,
+          "provenance": "engine_context"
+        }
+      ],
+      "summary": "\u0110\u1ed3ng h\u00e0nh tr\u1ee3 th\u00e2n",
+      "bucket_total": 8.0,
+      "confidence": "unknown"
+    },
+    "pressure_state": {
+      "items": [
+        {
+          "category": "control",
+          "label": "B\u1ecb Quan S\u00e1t kh\u1eafc",
+          "raw_contribution": -18.0,
+          "provenance": "engine_context"
+        }
+      ],
+      "summary": "B\u1ecb Quan S\u00e1t kh\u1eafc",
+      "bucket_total": -18.0,
+      "officer_count": null,
+      "wealth_count": null,
+      "confidence": "unknown"
+    },
+    "drain_state": {
+      "items": [],
+      "summary": "unknown",
+      "bucket_total": 0.0,
+      "output_count": null,
+      "confidence": "unknown"
+    },
+    "structural_state": {
+      "items": [
+        {
+          "type": "special_structure",
+          "rule_id": "spc_004",
+          "resolution_status": "probable",
+          "participating_pillars": "unknown",
+          "participating_elements": "unknown",
+          "direction": "unknown",
+          "effect_on_strength": "unknown",
+          "confidence": "unknown",
+          "provenance": "matched_rules"
+        }
+      ],
+      "combination_bucket": 0.0,
+      "special_bucket": 10.0,
+      "clash": {
+        "status": "not_available",
+        "resolution_status": "not_applicable"
+      },
+      "punishment": {
+        "status": "not_available",
+        "resolution_status": "not_applicable"
+      },
+      "harm": {
+        "status": "not_available",
+        "resolution_status": "not_applicable"
+      },
+      "destruction": {
+        "status": "not_available",
+        "resolution_status": "not_applicable"
+      },
+      "follow_pattern": {
+        "status": "not_available",
+        "resolution_status": "not_applicable"
+      },
+      "summary": "partial_from_matched_rules",
+      "confidence": "unknown"
+    },
+    "temperature_state": {
+      "temperature_state": "cold",
+      "heat_evidence": {
+        "temperature_level": "hot",
+        "temperature_score": 0.7166666666666666,
+        "reasoning": "Nhi\u1ec7t kh\u00ed n\u1eb7ng"
+      },
+      "cold_evidence": "cold",
+      "dryness_evidence": null,
+      "moisture_evidence": null,
+      "temperature_conflict": true,
+      "confidence": "unknown",
+      "provenance": "strength_context_and_optional_temperature_engine",
+      "notes": "TemperatureEngine runs separately; StrengthContext.temperature_type may be branch-derived only"
+    },
+    "conflicts": [
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "conflict_id": "CF-SUP-PRESS",
+        "conflict_type": "support_vs_pressure",
+        "dimensions": [
+          "same_element_support",
+          "officer_pressure",
+          "seasonal_strength"
+        ],
+        "evidence_ids": [
+          "EV-SEA-002",
+          "EV-SUP-001",
+          "EV-CTL-001",
+          "EV-CTL-006"
+        ],
+        "severity": "unknown",
+        "resolution_status": "unresolved",
+        "confidence": "unknown",
+        "notes": "observable opposing signed contributions; not resolved"
+      },
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "conflict_id": "CF-ROOT-CTL",
+        "conflict_type": "root_vs_control",
+        "dimensions": [
+          "rooting",
+          "officer_pressure"
+        ],
+        "evidence_ids": [
+          "EV-ROOT-003",
+          "EV-CTL-001",
+          "EV-CTL-006"
+        ],
+        "severity": "unknown",
+        "resolution_status": "unresolved",
+        "confidence": "unknown",
+        "notes": "observable opposing signed contributions; not resolved"
+      }
+    ],
+    "evidence_completeness": {
+      "schema_version": "strength_profile_design_v0.1.0-candidate",
+      "overall": "partial",
+      "by_dimension": {
+        "calendar": "partial",
+        "season": "partial",
+        "roots": "partial",
+        "support": "partial",
+        "pressure": "partial",
+        "drain": "partial",
+        "structure": "partial",
+        "temperature": "partial",
+        "expert_review": "partial"
+      },
+      "notes": "completeness reflects source field presence only"
+    },
+    "evidence_records": [
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "evidence_id": "EV-SEA-002",
+        "evidence_type": "seasonal",
+        "dimension": "seasonal_strength",
+        "source": "strength_evidence_ledger",
+        "source_path": "knowledge/pilot/replay/root_cause/strength_taxonomy_v2/calibration/evidence/CAL-000001.json",
+        "direction": "support",
+        "magnitude": {
+          "representation": "raw_contribution",
+          "ordinal": null,
+          "categorical": null,
+          "raw_contribution": 25.0,
+          "normalized": null,
+          "bounded_contribution": null,
+          "unit_note": "engine_bucket_or_ledger_score"
+        },
+        "polarity": "positive",
+        "confidence": "unknown",
+        "provenance": {
+          "schema_version": "strength_profile_design_v0.1.0-candidate",
+          "provenance_class": "engine_rule",
+          "availability": "observed",
+          "source_system": "strength_engine_v1_runtime_observation",
+          "source_path": "knowledge/pilot/replay/root_cause/strength_taxonomy_v2/calibration/evidence/CAL-000001.json",
+          "rule_id": "sea_002",
+          "observed_at": null,
+          "notes": "REFERENCE_ONLY mapping; no new evidence invented"
+        },
+        "explanation": "T\u01b0\u1edbng \u0111\u1ecba theo th\u00e1ng",
+        "affected_element": null,
+        "affected_day_master": "canh",
+        "pillar_scope": "unknown",
+        "branch_scope": "suu",
+        "stem_scope": null,
+        "seasonal_context": {
+          "month_status": "T\u01b0\u1edbng"
+        },
+        "interaction_context": null,
+        "availability": "observed",
+        "completeness": "partial",
+        "information_loss": "compressed"
+      },
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "evidence_id": "EV-ROOT-003",
+        "evidence_type": "rooting",
+        "dimension": "rooting",
+        "source": "strength_evidence_ledger",
+        "source_path": "knowledge/pilot/replay/root_cause/strength_taxonomy_v2/calibration/evidence/CAL-000001.json",
+        "direction": "support",
+        "magnitude": {
+          "representation": "raw_contribution",
+          "ordinal": null,
+          "categorical": null,
+          "raw_contribution": 12.0,
+          "normalized": null,
+          "bounded_contribution": null,
+          "unit_note": "engine_bucket_or_ledger_score"
+        },
+        "polarity": "positive",
+        "confidence": "unknown",
+        "provenance": {
+          "schema_version": "strength_profile_design_v0.1.0-candidate",
+          "provenance_class": "engine_rule",
+          "availability": "observed",
+          "source_system": "strength_engine_v1_runtime_observation",
+          "source_path": "knowledge/pilot/replay/root_cause/strength_taxonomy_v2/calibration/evidence/CAL-000001.json",
+          "rule_id": "root_003",
+          "observed_at": null,
+          "notes": "REFERENCE_ONLY mapping; no new evidence invented"
+        },
+        "explanation": "C\u00f3 c\u0103n kh\u00ed",
+        "affected_element": null,
+        "affected_day_master": "canh",
+        "pillar_scope": "unknown",
+        "branch_scope": "suu",
+        "stem_scope": null,
+        "seasonal_context": null,
+        "interaction_context": null,
+        "availability": "observed",
+        "completeness": "partial",
+        "information_loss": "compressed"
+      },
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "evidence_id": "EV-SUP-001",
+        "evidence_type": "support",
+        "dimension": "same_element_support",
+        "source": "strength_evidence_ledger",
+        "source_path": "knowledge/pilot/replay/root_cause/strength_taxonomy_v2/calibration/evidence/CAL-000001.json",
+        "direction": "support",
+        "magnitude": {
+          "representation": "raw_contribution",
+          "ordinal": null,
+          "categorical": null,
+          "raw_contribution": 8.0,
+          "normalized": null,
+          "bounded_contribution": null,
+          "unit_note": "engine_bucket_or_ledger_score"
+        },
+        "polarity": "positive",
+        "confidence": "unknown",
+        "provenance": {
+          "schema_version": "strength_profile_design_v0.1.0-candidate",
+          "provenance_class": "engine_rule",
+          "availability": "observed",
+          "source_system": "strength_engine_v1_runtime_observation",
+          "source_path": "knowledge/pilot/replay/root_cause/strength_taxonomy_v2/calibration/evidence/CAL-000001.json",
+          "rule_id": "sup_001",
+          "observed_at": null,
+          "notes": "REFERENCE_ONLY mapping; no new evidence invented"
+        },
+        "explanation": "\u0110\u1ed3ng h\u00e0nh tr\u1ee3 th\u00e2n",
+        "affected_element": null,
+        "affected_day_master": "canh",
+        "pillar_scope": "unknown",
+        "branch_scope": "suu",
+        "stem_scope": null,
+        "seasonal_context": null,
+        "interaction_context": null,
+        "availability": "observed",
+        "completeness": "partial",
+        "information_loss": "compressed"
+      },
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "evidence_id": "EV-CTL-001",
+        "evidence_type": "pressure",
+        "dimension": "officer_pressure",
+        "source": "strength_evidence_ledger",
+        "source_path": "knowledge/pilot/replay/root_cause/strength_taxonomy_v2/calibration/evidence/CAL-000001.json",
+        "direction": "pressure",
+        "magnitude": {
+          "representation": "raw_contribution",
+          "ordinal": null,
+          "categorical": null,
+          "raw_contribution": -10.0,
+          "normalized": null,
+          "bounded_contribution": null,
+          "unit_note": "engine_bucket_or_ledger_score"
+        },
+        "polarity": "negative",
+        "confidence": "unknown",
+        "provenance": {
+          "schema_version": "strength_profile_design_v0.1.0-candidate",
+          "provenance_class": "engine_rule",
+          "availability": "observed",
+          "source_system": "strength_engine_v1_runtime_observation",
+          "source_path": "knowledge/pilot/replay/root_cause/strength_taxonomy_v2/calibration/evidence/CAL-000001.json",
+          "rule_id": "ctl_001",
+          "observed_at": null,
+          "notes": "REFERENCE_ONLY mapping; no new evidence invented"
+        },
+        "explanation": "B\u1ecb Quan S\u00e1t kh\u1eafc",
+        "affected_element": null,
+        "affected_day_master": "canh",
+        "pillar_scope": "unknown",
+        "branch_scope": "suu",
+        "stem_scope": null,
+        "seasonal_context": null,
+        "interaction_context": null,
+        "availability": "observed",
+        "completeness": "partial",
+        "information_loss": "compressed"
+      },
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "evidence_id": "EV-CTL-006",
+        "evidence_type": "pressure",
+        "dimension": "officer_pressure",
+        "source": "strength_evidence_ledger",
+        "source_path": "knowledge/pilot/replay/root_cause/strength_taxonomy_v2/calibration/evidence/CAL-000001.json",
+        "direction": "pressure",
+        "magnitude": {
+          "representation": "raw_contribution",
+          "ordinal": null,
+          "categorical": null,
+          "raw_contribution": -8.0,
+          "normalized": null,
+          "bounded_contribution": null,
+          "unit_note": "engine_bucket_or_ledger_score"
+        },
+        "polarity": "negative",
+        "confidence": "unknown",
+        "provenance": {
+          "schema_version": "strength_profile_design_v0.1.0-candidate",
+          "provenance_class": "engine_rule",
+          "availability": "observed",
+          "source_system": "strength_engine_v1_runtime_observation",
+          "source_path": "knowledge/pilot/replay/root_cause/strength_taxonomy_v2/calibration/evidence/CAL-000001.json",
+          "rule_id": "ctl_006",
+          "observed_at": null,
+          "notes": "REFERENCE_ONLY mapping; no new evidence invented"
+        },
+        "explanation": "C\u00f3 Th\u1ea5t S\u00e1t",
+        "affected_element": null,
+        "affected_day_master": "canh",
+        "pillar_scope": "unknown",
+        "branch_scope": "suu",
+        "stem_scope": null,
+        "seasonal_context": null,
+        "interaction_context": null,
+        "availability": "observed",
+        "completeness": "partial",
+        "information_loss": "compressed"
+      },
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "evidence_id": "EV-SPC-004",
+        "evidence_type": "structural",
+        "dimension": "special_structure",
+        "source": "strength_evidence_ledger",
+        "source_path": "knowledge/pilot/replay/root_cause/strength_taxonomy_v2/calibration/evidence/CAL-000001.json",
+        "direction": "support",
+        "magnitude": {
+          "representation": "raw_contribution",
+          "ordinal": null,
+          "categorical": null,
+          "raw_contribution": 10.0,
+          "normalized": null,
+          "bounded_contribution": null,
+          "unit_note": "engine_bucket_or_ledger_score"
+        },
+        "polarity": "positive",
+        "confidence": "unknown",
+        "provenance": {
+          "schema_version": "strength_profile_design_v0.1.0-candidate",
+          "provenance_class": "engine_rule",
+          "availability": "observed",
+          "source_system": "strength_engine_v1_runtime_observation",
+          "source_path": "knowledge/pilot/replay/root_cause/strength_taxonomy_v2/calibration/evidence/CAL-000001.json",
+          "rule_id": "spc_004",
+          "observed_at": null,
+          "notes": "REFERENCE_ONLY mapping; no new evidence invented"
+        },
+        "explanation": "\u1ea4n m\u00f9a l\u1ea1nh",
+        "affected_element": null,
+        "affected_day_master": "canh",
+        "pillar_scope": "unknown",
+        "branch_scope": "suu",
+        "stem_scope": null,
+        "seasonal_context": null,
+        "interaction_context": null,
+        "availability": "observed",
+        "completeness": "partial",
+        "information_loss": "compressed"
+      }
+    ],
+    "dominant_factors": [
+      "season:25.0",
+      "root:12.0",
+      "support:8.0",
+      "special:10.0",
+      "control:-18.0"
+    ],
+    "supporting_factors": [
+      "season:25.0",
+      "root:12.0",
+      "support:8.0",
+      "special:10.0"
+    ],
+    "opposing_factors": [
+      "control:-18.0"
+    ],
+    "uncertainty": "per_branch_root_loci_not_available",
+    "confidence": {
+      "schema_version": "strength_profile_design_v0.1.0-candidate",
+      "overall": "low",
+      "factors": {
+        "evidence_completeness": "medium",
+        "evidence_conflict": "low",
+        "calendar_certainty": "high",
+        "structural_certainty": "unknown",
+        "expert_agreement": "high",
+        "boundary_proximity": "unknown",
+        "runtime_stability": "unknown"
+      },
+      "numeric_runtime_confidence": 1.0,
+      "notes": "numeric_runtime_confidence is observed V1 value if present; overall confidence is qualitative and not a new score"
+    },
+    "provenance": {
+      "schema_version": "strength_profile_design_v0.1.0-candidate",
+      "provenance_class": "derived",
+      "availability": "derived",
+      "source_system": "strength_engine_v1_runtime_observation",
+      "source_path": "knowledge/pilot/replay/root_cause/strength_taxonomy_v2/calibration/cases/CAL-000001.json;knowledge/pilot/replay/root_cause/strength_taxonomy_v2/calibration/evidence/CAL-000001.json",
+      "rule_id": null,
+      "observed_at": null,
+      "notes": "REFERENCE_ONLY mapping; no new evidence invented"
+    },
+    "synthetic_flags": null,
+    "external_labels": {
+      "synthetic_expected_taxonomy": null,
+      "expert_taxonomy_candidate": "slightly_weak",
+      "note": "external only; not StrengthProfile taxonomy"
+    }
+  },
+  "expert_review_reference": {
+    "expert_review_1": {
+      "source": "PILOT_EXPERT_REFERENCE",
+      "taxonomy_level_v2_candidate": "SLIGHTLY_WEAK",
+      "label_en": "balanced / slightly weak",
+      "label_vi": "Th\u00e2n trung b\u00ecnh / thi\u00ean nh\u01b0\u1ee3c",
+      "confidence": "MEDIUM",
+      "rationale": "Carried from Pilot expert reference classification; not a new dual-blind review.",
+      "blinded": false,
+      "review_status": "RECORDED_FROM_EXISTING_REFERENCE"
+    },
+    "expert_review_2": {
+      "reviewer_id": "EXPERT-B",
+      "taxonomy_level": "SLIGHTLY_WEAK",
+      "confidence": "MEDIUM",
+      "rationale": null,
+      "review_status": "VALIDATED",
+      "review_ref": "reviews/CAL-000001_review2.json",
+      "sprint_recorded": "PILOT-1E-B",
+      "note": "Rationale not supplied by Expert-B; not invented."
+    },
+    "agreement": {
+      "expert_agreement": "EXACT_MATCH",
+      "taxonomy_distance": 0,
+      "confidence_agreement": "EXACT_MATCH",
+      "model_disagreement": "MODEL_DISAGREEMENT"
+    },
+    "note": "external calibration metadata only; does not overwrite runtime profile"
+  }
+}

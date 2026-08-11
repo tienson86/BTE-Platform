@@ -1,0 +1,163 @@
+{
+  "schema_version": "strength_profile_design_v0.1.0-candidate",
+  "identity": {
+    "profile_id": "PRF-DESIGN-BAL-001",
+    "source_case_ref": "SYN-STR-000010",
+    "population": "design_example",
+    "notes": "DESIGN_EXAMPLE only; not calibration truth"
+  },
+  "population": "design_example",
+  "design_marker": "design_example",
+  "day_master": "mau",
+  "score_reference": {
+    "raw_score": -11.0,
+    "normalized_score": 0.39,
+    "published_score": 0.39,
+    "current_v1_band": "balanced",
+    "score_source": "strength_engine_v1_runtime_observation",
+    "score_status": "observed",
+    "saturation_detected": false,
+    "saturation_type": "none"
+  },
+  "seasonal_state": {
+    "seasonal_strength_state": "strongly_weakening",
+    "raw_contribution": -25.0,
+    "seasonal_confidence": "medium",
+    "source": "runtime"
+  },
+  "rooting_state": {
+    "root_strength": "thong_can_3_chi",
+    "multiple_roots": true,
+    "raw_contribution": 30.0,
+    "root_confidence": "medium",
+    "root_distribution": [
+      "multi"
+    ]
+  },
+  "support_state": {
+    "items": [
+      {
+        "category": "resource",
+        "raw_contribution": 10.0
+      }
+    ],
+    "summary": "resource_support",
+    "confidence": "medium"
+  },
+  "pressure_state": {
+    "items": [
+      {
+        "category": "officer",
+        "raw_contribution": -18.0
+      }
+    ],
+    "summary": "officer_pressure",
+    "confidence": "medium"
+  },
+  "drain_state": {
+    "items": [
+      {
+        "category": "output",
+        "raw_contribution": -8.0
+      }
+    ],
+    "summary": "output_drain",
+    "confidence": "medium"
+  },
+  "structural_state": {
+    "items": [],
+    "summary": "none_confirmed",
+    "confidence": "low"
+  },
+  "temperature_state": {
+    "temperature_state": "unknown",
+    "confidence": "unknown",
+    "provenance": "unknown"
+  },
+  "conflicts": [
+    {
+      "schema_version": "strength_profile_design_v0.1.0-candidate",
+      "conflict_id": "CF-SEA-ROOT-001",
+      "conflict_type": "season_vs_root",
+      "dimensions": [
+        "seasonal_strength",
+        "rooting"
+      ],
+      "evidence_ids": [
+        "EV-SEA-005",
+        "EV-ROOT-001"
+      ],
+      "severity": "high",
+      "resolution_status": "unresolved",
+      "confidence": "medium",
+      "notes": "cancellation equilibrium; not quiet mid"
+    }
+  ],
+  "evidence_completeness": {
+    "schema_version": "strength_profile_design_v0.1.0-candidate",
+    "overall": "partial",
+    "by_dimension": {
+      "calendar": "unknown",
+      "season": "partial",
+      "roots": "partial",
+      "support": "partial",
+      "pressure": "partial",
+      "drain": "partial",
+      "structure": "limited",
+      "temperature": "unknown",
+      "expert_review": "unknown"
+    },
+    "notes": null
+  },
+  "evidence_records": [],
+  "dominant_factors": [
+    "death_season",
+    "triple_root"
+  ],
+  "supporting_factors": [
+    "triple_root",
+    "resource"
+  ],
+  "opposing_factors": [
+    "death_season",
+    "officer",
+    "output"
+  ],
+  "uncertainty": "balanced_via_cancellation",
+  "confidence": {
+    "schema_version": "strength_profile_design_v0.1.0-candidate",
+    "overall": "medium",
+    "factors": {
+      "evidence_completeness": "unknown",
+      "evidence_conflict": "low",
+      "calendar_certainty": "unknown",
+      "structural_certainty": "unknown",
+      "expert_agreement": "unknown",
+      "boundary_proximity": "unknown",
+      "runtime_stability": "unknown"
+    },
+    "numeric_runtime_confidence": null,
+    "notes": "design confidence is not the same as v1 runtime confidence"
+  },
+  "provenance": {
+    "schema_version": "strength_profile_design_v0.1.0-candidate",
+    "provenance_class": "design_only",
+    "availability": "derived",
+    "source_system": "strength_engine_v1",
+    "source_path": "pilot_1i_design_example",
+    "rule_id": null,
+    "observed_at": null,
+    "notes": null
+  },
+  "synthetic_flags": {
+    "synthetic": true,
+    "calibration_eligible": false,
+    "golden_eligible": false,
+    "expert_calibration_eligible": false
+  },
+  "external_labels": {
+    "synthetic_expected_taxonomy": "balanced",
+    "expert_taxonomy_candidate": null,
+    "note": null
+  }
+}

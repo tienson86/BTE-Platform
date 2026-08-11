@@ -1,0 +1,343 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "strength_profile.schema.json",
+  "title": "StrengthProfile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "identity",
+    "day_master",
+    "score_reference",
+    "seasonal_state",
+    "rooting_state",
+    "support_state",
+    "pressure_state",
+    "drain_state",
+    "structural_state",
+    "temperature_state",
+    "conflicts",
+    "evidence_completeness",
+    "provenance",
+    "population",
+    "design_marker"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "strength_profile_design_v0.1.0-candidate"
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile_id",
+        "source_case_ref"
+      ],
+      "properties": {
+        "profile_id": {
+          "type": "string",
+          "pattern": "^PRF-[A-Z0-9_-]+$"
+        },
+        "source_case_ref": {
+          "type": "string"
+        },
+        "population": {
+          "type": "string",
+          "enum": [
+            "real_calibration",
+            "synthetic_stress",
+            "runtime_reference",
+            "design_example"
+          ]
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "population": {
+      "type": "string",
+      "enum": [
+        "real_calibration",
+        "synthetic_stress",
+        "runtime_reference",
+        "design_example"
+      ]
+    },
+    "design_marker": {
+      "type": "string",
+      "enum": [
+        "design_example",
+        "runtime_projection",
+        "not_applicable"
+      ]
+    },
+    "day_master": {
+      "type": "string",
+      "enum": [
+        "canh",
+        "tan",
+        "nham",
+        "quy",
+        "giap",
+        "at",
+        "binh",
+        "dinh",
+        "mau",
+        "ky"
+      ]
+    },
+    "score_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "score_source",
+        "score_status",
+        "current_v1_band",
+        "saturation_detected"
+      ],
+      "properties": {
+        "raw_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "normalized_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "published_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "current_v1_band": {
+          "type": "string",
+          "enum": [
+            "weak",
+            "balanced",
+            "strong",
+            "unknown"
+          ]
+        },
+        "score_source": {
+          "type": "string"
+        },
+        "score_status": {
+          "type": "string",
+          "enum": [
+            "observed",
+            "partial",
+            "unknown",
+            "design_example"
+          ]
+        },
+        "saturation_detected": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "const": "unknown"
+            }
+          ]
+        },
+        "saturation_type": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "none",
+                "upper_clamp",
+                "lower_clamp",
+                "normalization",
+                "unknown"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "seasonal_state": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "rooting_state": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "support_state": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "pressure_state": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "drain_state": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "structural_state": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "temperature_state": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "$ref": "strength_conflict.schema.json"
+      }
+    },
+    "evidence_completeness": {
+      "$ref": "strength_completeness.schema.json"
+    },
+    "evidence_records": {
+      "type": "array",
+      "items": {
+        "$ref": "strength_evidence.schema.json"
+      }
+    },
+    "dominant_factors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supporting_factors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "opposing_factors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "uncertainty": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "confidence": {
+      "anyOf": [
+        {
+          "$ref": "strength_confidence.schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "provenance": {
+      "$ref": "strength_provenance.schema.json"
+    },
+    "synthetic_flags": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "synthetic": {
+              "type": "boolean"
+            },
+            "calibration_eligible": {
+              "type": "boolean"
+            },
+            "golden_eligible": {
+              "type": "boolean"
+            },
+            "expert_calibration_eligible": {
+              "type": "boolean"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "external_labels": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Labels stored outside StrengthProfile taxonomy fields",
+          "properties": {
+            "synthetic_expected_taxonomy": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "expert_taxonomy_candidate": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "note": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

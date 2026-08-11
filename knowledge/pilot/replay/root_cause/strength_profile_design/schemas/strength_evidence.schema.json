@@ -1,0 +1,385 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "strength_evidence.schema.json",
+  "title": "StrengthEvidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_id",
+    "evidence_type",
+    "dimension",
+    "direction",
+    "polarity",
+    "availability",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "strength_profile_design_v0.1.0-candidate"
+    },
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^EV-[A-Z0-9_-]+$"
+    },
+    "evidence_type": {
+      "type": "string",
+      "enum": [
+        "seasonal",
+        "rooting",
+        "support",
+        "pressure",
+        "drain",
+        "structural",
+        "temperature",
+        "conflict",
+        "completeness",
+        "score_reference",
+        "other"
+      ]
+    },
+    "dimension": {
+      "type": "string",
+      "enum": [
+        "seasonal_strength",
+        "rooting",
+        "same_element_support",
+        "resource_support",
+        "output_drain",
+        "wealth_pressure",
+        "officer_pressure",
+        "hidden_stem_evidence",
+        "temperature",
+        "combination",
+        "clash",
+        "punishment",
+        "harm",
+        "destruction",
+        "transformation",
+        "special_structure",
+        "follow_pattern",
+        "evidence_conflict",
+        "evidence_completeness",
+        "other"
+      ]
+    },
+    "source": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "source_path": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "support",
+        "pressure",
+        "drain",
+        "neutral",
+        "conflict",
+        "unknown"
+      ]
+    },
+    "magnitude": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "representation"
+      ],
+      "properties": {
+        "representation": {
+          "type": "string",
+          "enum": [
+            "ordinal",
+            "normalized",
+            "categorical",
+            "raw_contribution",
+            "bounded_contribution",
+            "unknown"
+          ]
+        },
+        "ordinal": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "categorical": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "raw_contribution": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "normalized": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "bounded_contribution": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "unit_note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "polarity": {
+      "type": "string",
+      "enum": [
+        "positive",
+        "negative",
+        "mixed",
+        "neutral",
+        "unknown"
+      ]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low",
+        "unknown"
+      ]
+    },
+    "provenance": {
+      "$ref": "strength_provenance.schema.json"
+    },
+    "explanation": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "affected_element": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "kim",
+            "moc",
+            "thuy",
+            "hoa",
+            "tho",
+            "unknown"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "affected_day_master": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "canh",
+            "tan",
+            "nham",
+            "quy",
+            "giap",
+            "at",
+            "binh",
+            "dinh",
+            "mau",
+            "ky"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "pillar_scope": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "year",
+            "month",
+            "day",
+            "hour",
+            "multi",
+            "unknown"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "branch_scope": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "ty",
+            "suu",
+            "dan",
+            "mao",
+            "thin",
+            "ti",
+            "ngo",
+            "mui",
+            "than",
+            "dau",
+            "tuat",
+            "hoi",
+            "multi",
+            "unknown"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "stem_scope": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "canh",
+            "tan",
+            "nham",
+            "quy",
+            "giap",
+            "at",
+            "binh",
+            "dinh",
+            "mau",
+            "ky",
+            "multi",
+            "unknown"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "seasonal_context": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": true
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "interaction_context": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": true
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "availability": {
+      "type": "string",
+      "enum": [
+        "observed",
+        "derived",
+        "inferred",
+        "externally_reviewed",
+        "synthetic",
+        "unknown"
+      ]
+    },
+    "completeness": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "complete",
+            "partial",
+            "limited",
+            "unknown"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "information_loss": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "preserved",
+            "partially_preserved",
+            "compressed",
+            "lost",
+            "not_available"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

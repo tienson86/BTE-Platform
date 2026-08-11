@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "strength_conflict.schema.json",
+  "title": "StrengthConflict",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "conflict_id",
+    "conflict_type",
+    "dimensions",
+    "evidence_ids",
+    "severity",
+    "resolution_status",
+    "confidence"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "strength_profile_design_v0.1.0-candidate"
+    },
+    "conflict_id": {
+      "type": "string",
+      "pattern": "^CF-[A-Z0-9_-]+$"
+    },
+    "conflict_type": {
+      "type": "string",
+      "enum": [
+        "seasonal_support_vs_structural_pressure",
+        "root_vs_control",
+        "resource_support_vs_drain",
+        "support_vs_pressure",
+        "multiple_structure_conflict",
+        "season_vs_root",
+        "other"
+      ]
+    },
+    "dimensions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "seasonal_strength",
+          "rooting",
+          "same_element_support",
+          "resource_support",
+          "output_drain",
+          "wealth_pressure",
+          "officer_pressure",
+          "hidden_stem_evidence",
+          "temperature",
+          "combination",
+          "clash",
+          "punishment",
+          "harm",
+          "destruction",
+          "transformation",
+          "special_structure",
+          "follow_pattern",
+          "evidence_conflict",
+          "evidence_completeness",
+          "other"
+        ]
+      },
+      "minItems": 1
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical",
+        "unknown"
+      ]
+    },
+    "resolution_status": {
+      "type": "string",
+      "enum": [
+        "confirmed",
+        "probable",
+        "candidate",
+        "unresolved",
+        "not_applicable"
+      ]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low",
+        "unknown"
+      ]
+    },
+    "notes": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  }
+}

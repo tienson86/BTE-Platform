@@ -1,0 +1,746 @@
+{
+  "reference_only": true,
+  "production_ready": false,
+  "taxonomy_implemented": false,
+  "calibration_implementation": false,
+  "mapper_status": "REFERENCE_ONLY",
+  "case_id": "SYN-STR-000010",
+  "population": "synthetic_stress",
+  "source_paths": {
+    "result": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json"
+  },
+  "saturation_source": "none",
+  "profile": {
+    "schema_version": "strength_profile_design_v0.1.0-candidate",
+    "identity": {
+      "profile_id": "PRF-MAP-SYN_STR_000010",
+      "source_case_ref": "SYN-STR-000010",
+      "population": "synthetic_stress",
+      "notes": "REFERENCE_ONLY runtime projection; PRODUCTION_READY=false"
+    },
+    "population": "synthetic_stress",
+    "design_marker": "runtime_projection",
+    "day_master": "mau",
+    "score_reference": {
+      "raw_score": -11.0,
+      "normalized_score": 0.39,
+      "published_score": 0.39,
+      "current_v1_band": "balanced",
+      "score_source": "strength_engine_v1_runtime_observation",
+      "score_status": "observed",
+      "saturation_detected": false,
+      "saturation_type": "none"
+    },
+    "seasonal_state": {
+      "season_branch": "dan",
+      "season_element": null,
+      "day_master_relation": "T\u1eed",
+      "seasonal_support_direction": "unknown",
+      "seasonal_strength_state": "unknown",
+      "seasonal_confidence": "unknown",
+      "source": "runtime.context",
+      "season": "spring",
+      "season_phase": "early_spring",
+      "raw_contribution": -25.0,
+      "notes": "seasonal_strength_state not inferred from month_status"
+    },
+    "rooting_state": {
+      "day_branch_root": "unknown",
+      "month_branch_root": "unknown",
+      "other_branch_root": "unknown",
+      "hidden_root": "unknown",
+      "multiple_roots": true,
+      "root_strength": "Th\u00f4ng c\u0103n 3 chi tr\u1edf l\u00ean",
+      "root_distribution": [],
+      "root_confidence": "unknown",
+      "root_count": 3,
+      "raw_contribution": 30.0,
+      "notes": "per-branch loci not available from current runtime boundary"
+    },
+    "support_state": {
+      "items": [
+        {
+          "category": "same_element",
+          "label": "\u1ea4n tinh sinh th\u00e2n",
+          "raw_contribution": 10.0,
+          "provenance": "engine_context"
+        }
+      ],
+      "summary": "\u1ea4n tinh sinh th\u00e2n",
+      "bucket_total": 10.0,
+      "confidence": "unknown"
+    },
+    "pressure_state": {
+      "items": [
+        {
+          "category": "control",
+          "label": "B\u1ecb Quan S\u00e1t kh\u1eafc",
+          "raw_contribution": -18.0,
+          "provenance": "engine_context"
+        }
+      ],
+      "summary": "B\u1ecb Quan S\u00e1t kh\u1eafc",
+      "bucket_total": -18.0,
+      "officer_count": 1,
+      "wealth_count": 0,
+      "confidence": "unknown"
+    },
+    "drain_state": {
+      "items": [
+        {
+          "category": "output",
+          "label": "Th\u1ef1c Th\u01b0\u01a1ng ti\u1ebft kh\u00ed",
+          "raw_contribution": -8.0,
+          "provenance": "engine_context"
+        }
+      ],
+      "summary": "Th\u1ef1c Th\u01b0\u01a1ng ti\u1ebft kh\u00ed",
+      "bucket_total": -8.0,
+      "output_count": 1,
+      "confidence": "unknown"
+    },
+    "structural_state": {
+      "items": [],
+      "combination_bucket": 0.0,
+      "special_bucket": 0.0,
+      "clash": {
+        "status": "not_available",
+        "resolution_status": "not_applicable"
+      },
+      "punishment": {
+        "status": "not_available",
+        "resolution_status": "not_applicable"
+      },
+      "harm": {
+        "status": "not_available",
+        "resolution_status": "not_applicable"
+      },
+      "destruction": {
+        "status": "not_available",
+        "resolution_status": "not_applicable"
+      },
+      "follow_pattern": {
+        "status": "not_available",
+        "resolution_status": "not_applicable"
+      },
+      "summary": "not_available",
+      "confidence": "unknown"
+    },
+    "temperature_state": {
+      "temperature_state": "warm",
+      "heat_evidence": null,
+      "cold_evidence": null,
+      "dryness_evidence": null,
+      "moisture_evidence": null,
+      "temperature_conflict": false,
+      "confidence": "unknown",
+      "provenance": "strength_context_and_optional_temperature_engine",
+      "notes": null
+    },
+    "conflicts": [
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "conflict_id": "CF-SEA-ROOT",
+        "conflict_type": "season_vs_root",
+        "dimensions": [
+          "seasonal_strength",
+          "rooting"
+        ],
+        "evidence_ids": [
+          "EV-BUCKET-SEASON",
+          "EV-BUCKET-ROOT",
+          "EV-CTX-ROOT-LEVEL"
+        ],
+        "severity": "unknown",
+        "resolution_status": "unresolved",
+        "confidence": "unknown",
+        "notes": "observable opposing signed contributions; not resolved"
+      },
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "conflict_id": "CF-SUP-PRESS",
+        "conflict_type": "support_vs_pressure",
+        "dimensions": [
+          "same_element_support",
+          "officer_pressure",
+          "seasonal_strength"
+        ],
+        "evidence_ids": [
+          "EV-BUCKET-SEASON",
+          "EV-BUCKET-SUPPORT",
+          "EV-BUCKET-CONTROL",
+          "EV-CTX-SUPPORT-TYPE"
+        ],
+        "severity": "unknown",
+        "resolution_status": "unresolved",
+        "confidence": "unknown",
+        "notes": "observable opposing signed contributions; not resolved"
+      },
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "conflict_id": "CF-RES-DRAIN",
+        "conflict_type": "resource_support_vs_drain",
+        "dimensions": [
+          "resource_support",
+          "output_drain",
+          "rooting"
+        ],
+        "evidence_ids": [
+          "EV-BUCKET-ROOT",
+          "EV-BUCKET-SUPPORT",
+          "EV-BUCKET-DRAIN",
+          "EV-CTX-ROOT-LEVEL",
+          "EV-CTX-SUPPORT-TYPE"
+        ],
+        "severity": "unknown",
+        "resolution_status": "unresolved",
+        "confidence": "unknown",
+        "notes": "observable opposing signed contributions; not resolved"
+      },
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "conflict_id": "CF-ROOT-CTL",
+        "conflict_type": "root_vs_control",
+        "dimensions": [
+          "rooting",
+          "officer_pressure"
+        ],
+        "evidence_ids": [
+          "EV-BUCKET-ROOT",
+          "EV-BUCKET-CONTROL",
+          "EV-CTX-ROOT-LEVEL"
+        ],
+        "severity": "unknown",
+        "resolution_status": "unresolved",
+        "confidence": "unknown",
+        "notes": "observable opposing signed contributions; not resolved"
+      }
+    ],
+    "evidence_completeness": {
+      "schema_version": "strength_profile_design_v0.1.0-candidate",
+      "overall": "partial",
+      "by_dimension": {
+        "calendar": "unknown",
+        "season": "partial",
+        "roots": "partial",
+        "support": "partial",
+        "pressure": "partial",
+        "drain": "partial",
+        "structure": "unknown",
+        "temperature": "limited",
+        "expert_review": "unknown"
+      },
+      "notes": "completeness reflects source field presence only"
+    },
+    "evidence_records": [
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "evidence_id": "EV-BUCKET-SEASON",
+        "evidence_type": "seasonal",
+        "dimension": "seasonal_strength",
+        "source": "runtime.profile",
+        "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+        "direction": "pressure",
+        "magnitude": {
+          "representation": "raw_contribution",
+          "ordinal": null,
+          "categorical": null,
+          "raw_contribution": -25.0,
+          "normalized": null,
+          "bounded_contribution": null,
+          "unit_note": "engine_bucket_or_ledger_score"
+        },
+        "polarity": "negative",
+        "confidence": "unknown",
+        "provenance": {
+          "schema_version": "strength_profile_design_v0.1.0-candidate",
+          "provenance_class": "derived",
+          "availability": "observed",
+          "source_system": "strength_engine_v1_runtime_observation",
+          "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+          "rule_id": null,
+          "observed_at": null,
+          "notes": "REFERENCE_ONLY mapping; no new evidence invented"
+        },
+        "explanation": "observed_season_bucket",
+        "affected_element": "tho",
+        "affected_day_master": "mau",
+        "pillar_scope": "unknown",
+        "branch_scope": "dan",
+        "stem_scope": null,
+        "seasonal_context": {
+          "month_status": "T\u1eed",
+          "season": "spring"
+        },
+        "interaction_context": null,
+        "availability": "observed",
+        "completeness": "partial",
+        "information_loss": "compressed"
+      },
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "evidence_id": "EV-BUCKET-ROOT",
+        "evidence_type": "rooting",
+        "dimension": "rooting",
+        "source": "runtime.profile",
+        "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+        "direction": "support",
+        "magnitude": {
+          "representation": "raw_contribution",
+          "ordinal": null,
+          "categorical": null,
+          "raw_contribution": 30.0,
+          "normalized": null,
+          "bounded_contribution": null,
+          "unit_note": "engine_bucket_or_ledger_score"
+        },
+        "polarity": "positive",
+        "confidence": "unknown",
+        "provenance": {
+          "schema_version": "strength_profile_design_v0.1.0-candidate",
+          "provenance_class": "derived",
+          "availability": "observed",
+          "source_system": "strength_engine_v1_runtime_observation",
+          "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+          "rule_id": null,
+          "observed_at": null,
+          "notes": "REFERENCE_ONLY mapping; no new evidence invented"
+        },
+        "explanation": "observed_root_bucket",
+        "affected_element": "tho",
+        "affected_day_master": "mau",
+        "pillar_scope": "unknown",
+        "branch_scope": "dan",
+        "stem_scope": null,
+        "seasonal_context": null,
+        "interaction_context": null,
+        "availability": "observed",
+        "completeness": "partial",
+        "information_loss": "compressed"
+      },
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "evidence_id": "EV-BUCKET-SUPPORT",
+        "evidence_type": "support",
+        "dimension": "same_element_support",
+        "source": "runtime.profile",
+        "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+        "direction": "support",
+        "magnitude": {
+          "representation": "raw_contribution",
+          "ordinal": null,
+          "categorical": null,
+          "raw_contribution": 10.0,
+          "normalized": null,
+          "bounded_contribution": null,
+          "unit_note": "engine_bucket_or_ledger_score"
+        },
+        "polarity": "positive",
+        "confidence": "unknown",
+        "provenance": {
+          "schema_version": "strength_profile_design_v0.1.0-candidate",
+          "provenance_class": "derived",
+          "availability": "observed",
+          "source_system": "strength_engine_v1_runtime_observation",
+          "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+          "rule_id": null,
+          "observed_at": null,
+          "notes": "REFERENCE_ONLY mapping; no new evidence invented"
+        },
+        "explanation": "observed_support_bucket",
+        "affected_element": "tho",
+        "affected_day_master": "mau",
+        "pillar_scope": "unknown",
+        "branch_scope": "dan",
+        "stem_scope": null,
+        "seasonal_context": null,
+        "interaction_context": null,
+        "availability": "observed",
+        "completeness": "partial",
+        "information_loss": "compressed"
+      },
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "evidence_id": "EV-BUCKET-DRAIN",
+        "evidence_type": "drain",
+        "dimension": "output_drain",
+        "source": "runtime.profile",
+        "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+        "direction": "drain",
+        "magnitude": {
+          "representation": "raw_contribution",
+          "ordinal": null,
+          "categorical": null,
+          "raw_contribution": -8.0,
+          "normalized": null,
+          "bounded_contribution": null,
+          "unit_note": "engine_bucket_or_ledger_score"
+        },
+        "polarity": "negative",
+        "confidence": "unknown",
+        "provenance": {
+          "schema_version": "strength_profile_design_v0.1.0-candidate",
+          "provenance_class": "derived",
+          "availability": "observed",
+          "source_system": "strength_engine_v1_runtime_observation",
+          "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+          "rule_id": null,
+          "observed_at": null,
+          "notes": "REFERENCE_ONLY mapping; no new evidence invented"
+        },
+        "explanation": "observed_drain_bucket",
+        "affected_element": "tho",
+        "affected_day_master": "mau",
+        "pillar_scope": "unknown",
+        "branch_scope": "dan",
+        "stem_scope": null,
+        "seasonal_context": null,
+        "interaction_context": null,
+        "availability": "observed",
+        "completeness": "partial",
+        "information_loss": "compressed"
+      },
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "evidence_id": "EV-BUCKET-CONTROL",
+        "evidence_type": "pressure",
+        "dimension": "officer_pressure",
+        "source": "runtime.profile",
+        "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+        "direction": "pressure",
+        "magnitude": {
+          "representation": "raw_contribution",
+          "ordinal": null,
+          "categorical": null,
+          "raw_contribution": -18.0,
+          "normalized": null,
+          "bounded_contribution": null,
+          "unit_note": "engine_bucket_or_ledger_score"
+        },
+        "polarity": "negative",
+        "confidence": "unknown",
+        "provenance": {
+          "schema_version": "strength_profile_design_v0.1.0-candidate",
+          "provenance_class": "derived",
+          "availability": "observed",
+          "source_system": "strength_engine_v1_runtime_observation",
+          "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+          "rule_id": null,
+          "observed_at": null,
+          "notes": "REFERENCE_ONLY mapping; no new evidence invented"
+        },
+        "explanation": "observed_control_bucket",
+        "affected_element": "tho",
+        "affected_day_master": "mau",
+        "pillar_scope": "unknown",
+        "branch_scope": "dan",
+        "stem_scope": null,
+        "seasonal_context": null,
+        "interaction_context": null,
+        "availability": "observed",
+        "completeness": "partial",
+        "information_loss": "compressed"
+      },
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "evidence_id": "EV-BUCKET-COMBINATION",
+        "evidence_type": "structural",
+        "dimension": "combination",
+        "source": "runtime.profile",
+        "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+        "direction": "neutral",
+        "magnitude": {
+          "representation": "raw_contribution",
+          "ordinal": null,
+          "categorical": null,
+          "raw_contribution": 0.0,
+          "normalized": null,
+          "bounded_contribution": null,
+          "unit_note": "engine_bucket_or_ledger_score"
+        },
+        "polarity": "neutral",
+        "confidence": "unknown",
+        "provenance": {
+          "schema_version": "strength_profile_design_v0.1.0-candidate",
+          "provenance_class": "derived",
+          "availability": "observed",
+          "source_system": "strength_engine_v1_runtime_observation",
+          "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+          "rule_id": null,
+          "observed_at": null,
+          "notes": "REFERENCE_ONLY mapping; no new evidence invented"
+        },
+        "explanation": "observed_combination_bucket",
+        "affected_element": "tho",
+        "affected_day_master": "mau",
+        "pillar_scope": "unknown",
+        "branch_scope": "dan",
+        "stem_scope": null,
+        "seasonal_context": null,
+        "interaction_context": null,
+        "availability": "observed",
+        "completeness": "partial",
+        "information_loss": "compressed"
+      },
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "evidence_id": "EV-BUCKET-SPECIAL",
+        "evidence_type": "structural",
+        "dimension": "special_structure",
+        "source": "runtime.profile",
+        "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+        "direction": "neutral",
+        "magnitude": {
+          "representation": "raw_contribution",
+          "ordinal": null,
+          "categorical": null,
+          "raw_contribution": 0.0,
+          "normalized": null,
+          "bounded_contribution": null,
+          "unit_note": "engine_bucket_or_ledger_score"
+        },
+        "polarity": "neutral",
+        "confidence": "unknown",
+        "provenance": {
+          "schema_version": "strength_profile_design_v0.1.0-candidate",
+          "provenance_class": "derived",
+          "availability": "observed",
+          "source_system": "strength_engine_v1_runtime_observation",
+          "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+          "rule_id": null,
+          "observed_at": null,
+          "notes": "REFERENCE_ONLY mapping; no new evidence invented"
+        },
+        "explanation": "observed_special_bucket",
+        "affected_element": "tho",
+        "affected_day_master": "mau",
+        "pillar_scope": "unknown",
+        "branch_scope": "dan",
+        "stem_scope": null,
+        "seasonal_context": null,
+        "interaction_context": null,
+        "availability": "observed",
+        "completeness": "partial",
+        "information_loss": "compressed"
+      },
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "evidence_id": "EV-CTX-ROOT-LEVEL",
+        "evidence_type": "rooting",
+        "dimension": "rooting",
+        "source": "runtime.context.root_level",
+        "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+        "direction": "unknown",
+        "magnitude": {
+          "representation": "categorical",
+          "ordinal": null,
+          "categorical": "Th\u00f4ng c\u0103n 3 chi tr\u1edf l\u00ean",
+          "raw_contribution": null,
+          "normalized": null,
+          "bounded_contribution": null,
+          "unit_note": "context_label_only"
+        },
+        "polarity": "unknown",
+        "confidence": "unknown",
+        "provenance": {
+          "schema_version": "strength_profile_design_v0.1.0-candidate",
+          "provenance_class": "derived",
+          "availability": "observed",
+          "source_system": "strength_engine_v1_runtime_observation",
+          "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+          "rule_id": null,
+          "observed_at": null,
+          "notes": "REFERENCE_ONLY mapping; no new evidence invented"
+        },
+        "explanation": "context_root_level",
+        "affected_element": "tho",
+        "affected_day_master": "mau",
+        "pillar_scope": "unknown",
+        "branch_scope": "dan",
+        "stem_scope": null,
+        "seasonal_context": null,
+        "interaction_context": null,
+        "availability": "observed",
+        "completeness": "partial",
+        "information_loss": "partially_preserved"
+      },
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "evidence_id": "EV-CTX-SUPPORT-TYPE",
+        "evidence_type": "support",
+        "dimension": "same_element_support",
+        "source": "runtime.context.support_type",
+        "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+        "direction": "unknown",
+        "magnitude": {
+          "representation": "categorical",
+          "ordinal": null,
+          "categorical": "\u1ea4n tinh sinh th\u00e2n",
+          "raw_contribution": null,
+          "normalized": null,
+          "bounded_contribution": null,
+          "unit_note": "context_label_only"
+        },
+        "polarity": "unknown",
+        "confidence": "unknown",
+        "provenance": {
+          "schema_version": "strength_profile_design_v0.1.0-candidate",
+          "provenance_class": "derived",
+          "availability": "observed",
+          "source_system": "strength_engine_v1_runtime_observation",
+          "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+          "rule_id": null,
+          "observed_at": null,
+          "notes": "REFERENCE_ONLY mapping; no new evidence invented"
+        },
+        "explanation": "context_support_type",
+        "affected_element": "tho",
+        "affected_day_master": "mau",
+        "pillar_scope": "unknown",
+        "branch_scope": "dan",
+        "stem_scope": null,
+        "seasonal_context": null,
+        "interaction_context": null,
+        "availability": "observed",
+        "completeness": "partial",
+        "information_loss": "partially_preserved"
+      },
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "evidence_id": "EV-CTX-CONTROL-TYPE",
+        "evidence_type": "pressure",
+        "dimension": "officer_pressure",
+        "source": "runtime.context.control_type",
+        "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+        "direction": "unknown",
+        "magnitude": {
+          "representation": "categorical",
+          "ordinal": null,
+          "categorical": "B\u1ecb Quan S\u00e1t kh\u1eafc",
+          "raw_contribution": null,
+          "normalized": null,
+          "bounded_contribution": null,
+          "unit_note": "context_label_only"
+        },
+        "polarity": "unknown",
+        "confidence": "unknown",
+        "provenance": {
+          "schema_version": "strength_profile_design_v0.1.0-candidate",
+          "provenance_class": "derived",
+          "availability": "observed",
+          "source_system": "strength_engine_v1_runtime_observation",
+          "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+          "rule_id": null,
+          "observed_at": null,
+          "notes": "REFERENCE_ONLY mapping; no new evidence invented"
+        },
+        "explanation": "context_control_type",
+        "affected_element": "tho",
+        "affected_day_master": "mau",
+        "pillar_scope": "unknown",
+        "branch_scope": "dan",
+        "stem_scope": null,
+        "seasonal_context": null,
+        "interaction_context": null,
+        "availability": "observed",
+        "completeness": "partial",
+        "information_loss": "partially_preserved"
+      },
+      {
+        "schema_version": "strength_profile_design_v0.1.0-candidate",
+        "evidence_id": "EV-CTX-DRAIN-TYPE",
+        "evidence_type": "drain",
+        "dimension": "output_drain",
+        "source": "runtime.context.drain_type",
+        "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+        "direction": "unknown",
+        "magnitude": {
+          "representation": "categorical",
+          "ordinal": null,
+          "categorical": "Th\u1ef1c Th\u01b0\u01a1ng ti\u1ebft kh\u00ed",
+          "raw_contribution": null,
+          "normalized": null,
+          "bounded_contribution": null,
+          "unit_note": "context_label_only"
+        },
+        "polarity": "unknown",
+        "confidence": "unknown",
+        "provenance": {
+          "schema_version": "strength_profile_design_v0.1.0-candidate",
+          "provenance_class": "derived",
+          "availability": "observed",
+          "source_system": "strength_engine_v1_runtime_observation",
+          "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+          "rule_id": null,
+          "observed_at": null,
+          "notes": "REFERENCE_ONLY mapping; no new evidence invented"
+        },
+        "explanation": "context_drain_type",
+        "affected_element": "tho",
+        "affected_day_master": "mau",
+        "pillar_scope": "unknown",
+        "branch_scope": "dan",
+        "stem_scope": null,
+        "seasonal_context": null,
+        "interaction_context": null,
+        "availability": "observed",
+        "completeness": "partial",
+        "information_loss": "partially_preserved"
+      }
+    ],
+    "dominant_factors": [
+      "root:30.0",
+      "support:10.0",
+      "season:-25.0",
+      "drain:-8.0",
+      "control:-18.0"
+    ],
+    "supporting_factors": [
+      "root:30.0",
+      "support:10.0"
+    ],
+    "opposing_factors": [
+      "season:-25.0",
+      "drain:-8.0",
+      "control:-18.0"
+    ],
+    "uncertainty": "synthetic_population;ledger_not_in_synthetic_result;per_branch_root_loci_not_available",
+    "confidence": {
+      "schema_version": "strength_profile_design_v0.1.0-candidate",
+      "overall": "low",
+      "factors": {
+        "evidence_completeness": "medium",
+        "evidence_conflict": "low",
+        "calendar_certainty": "low",
+        "structural_certainty": "unknown",
+        "expert_agreement": "unknown",
+        "boundary_proximity": "unknown",
+        "runtime_stability": "unknown"
+      },
+      "numeric_runtime_confidence": 1.0,
+      "notes": "numeric_runtime_confidence is observed V1 value if present; overall confidence is qualitative and not a new score"
+    },
+    "provenance": {
+      "schema_version": "strength_profile_design_v0.1.0-candidate",
+      "provenance_class": "synthetic",
+      "availability": "derived",
+      "source_system": "strength_engine_v1_runtime_observation",
+      "source_path": "knowledge/pilot/replay/synthetic_strength/results/SYN-STR-000010.json",
+      "rule_id": null,
+      "observed_at": null,
+      "notes": "REFERENCE_ONLY mapping; no new evidence invented"
+    },
+    "synthetic_flags": {
+      "synthetic": true,
+      "calibration_eligible": false,
+      "golden_eligible": false,
+      "expert_calibration_eligible": false
+    },
+    "external_labels": {
+      "synthetic_expected_taxonomy": "balanced",
+      "expert_taxonomy_candidate": null,
+      "note": "external only; not StrengthProfile taxonomy"
+    }
+  },
+  "expert_review_reference": null
+}

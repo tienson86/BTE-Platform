@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mapped_profile.schema.json",
+  "title": "MappedStrengthProfileEnvelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "reference_only",
+    "production_ready",
+    "taxonomy_implemented",
+    "calibration_implementation",
+    "case_id",
+    "population",
+    "profile"
+  ],
+  "properties": {
+    "reference_only": {
+      "type": "boolean",
+      "const": true
+    },
+    "production_ready": {
+      "type": "boolean",
+      "const": false
+    },
+    "taxonomy_implemented": {
+      "type": "boolean",
+      "const": false
+    },
+    "calibration_implementation": {
+      "type": "boolean",
+      "const": false
+    },
+    "mapper_status": {
+      "type": "string"
+    },
+    "case_id": {
+      "type": "string"
+    },
+    "population": {
+      "type": "string",
+      "enum": [
+        "real_calibration",
+        "synthetic_stress",
+        "runtime_reference",
+        "design_example"
+      ]
+    },
+    "source_paths": {
+      "type": "object"
+    },
+    "saturation_source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "expert_review_reference": {},
+    "profile": {
+      "type": "object"
+    }
+  }
+}
