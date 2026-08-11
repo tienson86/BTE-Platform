@@ -15,16 +15,19 @@
 
 | File | Role |
 |---|---|
-| `ACQUISITION_QUEUE.md` | Operational targets (from PILOT-1D queue) |
-| `ACQUISITION_STATUS.md` | Sprint status + DATA_GAP ledger |
+| `ACQUISITION_QUEUE.md` | Baseline operational targets |
+| `ACQUISITION_STATUS.md` | Live status |
 | `SOURCE_REGISTER.md` | Allowed / registered sources |
 | `DATA_REQUIREMENTS.md` | Required fields + verification gates |
+| `ROUND_2_QUEUE.md` | PILOT-1F Round-2 targets |
+| `ROUND_2_STATUS.md` | PILOT-1F Round-2 outcomes |
+| `ROUND_2_SOURCE_LOG.md` | PILOT-1F intake / source log |
 | `templates/` | Expert review + intake templates |
 | `workflow/DUAL_REVIEW_WORKFLOW.md` | Step-by-step dual-review process |
 
-## Current outcome (PILOT-1E)
+## Current outcome
 
-- New real cases acquired: **0**  
-- Dual reviews completed: **0**  
-- Decision remains: **CALIBRATION_PARTIAL**  
-- System readiness: **OPERATIONAL** (queue + workflow ready; waiting on human experts / real charts)
+- Dual-reviewed: **2** (CAL-000001, CAL-000006)  
+- Round-2 new acquisitions: **0** → DATA_GAP  
+- Decision: **CALIBRATION_PARTIAL**  
+- Next free ID: **CAL-000008**

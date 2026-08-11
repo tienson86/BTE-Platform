@@ -1,4 +1,4 @@
-# VALIDATION — PILOT-1E-B
+# VALIDATION — PILOT-1F
 
 ## Freeze / scope
 
@@ -9,12 +9,11 @@
 | Knowledge packages unchanged | YES |
 | Golden Expected unchanged | YES |
 | AF-1 unchanged | YES |
+| No fabricated charts | YES |
+| No fabricated expert judgments | YES |
+| CAL-000001…007 identities preserved | YES |
+| No new CAL IDs assigned (none acquired) | YES |
 | T1–T6 not frozen | YES |
-| Expert-A preserved | YES |
-| Expert-B recorded exactly (level+confidence) | YES |
-| Rationale not invented | YES |
-| Adjudication does not overwrite reviews | YES |
-| CAL-000006 month = Mậu Ngọ | YES |
 
 ## Tests
 
@@ -24,11 +23,8 @@ python -m pytest tests/golden_dataset -q
 
 python -m pytest tests/score/test_strength.py -q
 → 1 passed
-
-python .../adjudication/validation/validate_adjudication.py
-→ ok: true
 ```
 
 ## Final decision
 
-**CALIBRATION_PARTIAL**
+**CALIBRATION_PARTIAL** (Round-2 DATA_GAP; dual-reviewed = 2)

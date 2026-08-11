@@ -14,21 +14,21 @@
 | SYNTHETIC | **No** | Engineering only |
 | UNKNOWN | **No** | Reject from verified pool |
 
-## Registered sources (PILOT-1E)
+## Registered sources
 
 | source_id | class | description | license/access | cases | status |
 |---|---|---|---|---|---|
 | SRC-PILOT-001 | EXISTING_PILOT | Pilot replay CASE-0001…0007 | Internal pilot | CAL-000001…007 | ACTIVE |
-| SRC-EXPERT-PENDING | EXPERT_SUPPLIED | Authorized expert chart intake | Pending human supply | — | WAITING |
-| SRC-USER-PENDING | EXPERT_SUPPLIED / user | Authorized user charts (anonymized) | Pending consent + intake | — | WAITING |
+| SRC-EXPERT-PENDING | EXPERT_SUPPLIED | Authorized expert chart intake | Pending human supply | — | WAITING (PILOT-1F) |
+| SRC-USER-PENDING | EXPERT_SUPPLIED / user | Authorized user charts (anonymized) | Pending consent + intake | — | WAITING (PILOT-1F) |
 
 ## Reviewer IDs (anonymized)
 
-| reviewer_id | role | availability PILOT-1E |
+| reviewer_id | role | availability |
 |---|---|---|
-| EXPERT-A | Primary Strength reviewer | Reference labels exist for CAL-000001…007 only (historical) |
-| EXPERT-B | Independent second reviewer | **NOT AVAILABLE** — dual reviews blocked |
-| ADJUDICATOR-1 | Disagreement adjudicator | Standby when dual disagreement >1 level |
+| EXPERT-A | Primary Strength reviewer | Available for new intake; historical refs for CAL-000001…007 |
+| EXPERT-B | Independent second reviewer | Completed CAL-000001 / CAL-000006; available for new intake |
+| ADJUDICATOR-1 | Disagreement adjudicator | Standby |
 
 ## Rejected / not registered
 

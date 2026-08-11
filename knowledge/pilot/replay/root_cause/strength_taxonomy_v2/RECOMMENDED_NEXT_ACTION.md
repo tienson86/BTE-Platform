@@ -1,23 +1,17 @@
 # Recommended Next Action
 
-**Sprint context:** PILOT-1E ended **CALIBRATION_PARTIAL**. Acquisition + dual-review workflow are operational; data and EXPERT-B are waiting.
+**Sprint context:** PILOT-1F ended **CALIBRATION_PARTIAL** with Round-2 **DATA_GAP** (0 new charts).
 
 ## Single NEXT_ACTION
 
-Obtain EXPERT-B dual reviews for CAL-000001 and CAL-000006, then acquire ≥5 real charts targeting VERY_WEAK, WEAK, and BALANCED per `acquisition/ACQUISITION_QUEUE.md`.
+Deliver ≥3 authorized real charts targeting VERY_WEAK, WEAK, and BALANCED per `acquisition/ROUND_2_QUEUE.md`, then calendar-verify and run independent Expert-A / blinded Expert-B reviews.
 
 ## Still deferred
 
 | Item | Status |
 |---|---|
-| T1–T6 freeze | Not allowed yet |
-| Taxonomy v2 implementation | Not allowed yet |
-| Golden Expected mutation / promotion | Not allowed yet |
-| Production Strength patches | Not allowed yet |
+| T1–T6 freeze | Not allowed |
+| Taxonomy v2 implementation | Not allowed |
+| Golden Expected mutation / promotion | Not allowed |
 | Fabricated charts / expert labels | Forbidden |
-
-## Backlog (unchanged intent)
-
-- P2: Complete dual reviews for all CAL-000001…007  
-- P3: Fill Priority-1 taxonomy gaps with real charts  
-- P4: Implementation only after CALIBRATION_COMPLETE → IMPLEMENTATION_READY gate
+| Dual reviews for CAL-000002…005, 007 | Optional backlog after Priority 1–3 acquisitions |

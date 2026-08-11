@@ -1,34 +1,33 @@
-# Expert Agreement Report (PILOT-1E-B)
+# Expert Agreement Report (PILOT-1F)
 
 ## Scope
 
-Dual-reviewed sample for this sprint: **n = 2** (CAL-000001, CAL-000006).  
-Do **not** generalize these rates to the full 7-case provisional population.
+Dual-reviewed sample remains **n = 2** (CAL-000001, CAL-000006).  
+Round-2 added **0** dual pairs. Do not generalize to the full population.
 
-## Expert agreement metrics (n=2)
+## Metrics (n=2)
 
-| Metric | Value | Notes |
-|---|---:|---|
-| Dual-reviewed pairs | 2 | — |
-| Exact agreement rate | 2/2 = 100% | Both SLIGHTLY_WEAK |
-| Adjacent agreement rate | 0/2 = 0% | — |
-| Within-two-level rate | 2/2 = 100% | Includes exact |
-| Expert disagreement rate (>2 levels) | 0/2 = 0% | — |
-| Insufficient-evidence rate | 0/2 = 0% | — |
-| Adjudication rate | 0/2 = 0% | Both NOT_REQUIRED |
-| Confidence agreement (exact) | 2/2 = 100% | Both MEDIUM |
+| Metric | Value |
+|---|---:|
+| Dual-reviewed pairs | 2 |
+| Exact agreement | 2/2 = 100% |
+| Adjacent agreement | 0/2 = 0% |
+| Within-two-level | 2/2 = 100% |
+| Expert disagreement (>2) | 0/2 = 0% |
+| Adjudication rate | 0/2 = 0% |
+| Confidence exact agreement | 2/2 = 100% |
 
-## Model disagreement (separate from expert agreement)
+## Model disagreement (separate)
 
 | Case | Experts | Runtime | Class |
 |---|---|---|---|
-| CAL-000001 | SLIGHTLY_WEAK | strong (0.87) | MODEL_DISAGREEMENT |
-| CAL-000006 | SLIGHTLY_WEAK | balanced (0.50) | MODEL_DISAGREEMENT (adjacent) |
+| CAL-000001 | SLIGHTLY_WEAK | strong | MODEL_DISAGREEMENT |
+| CAL-000006 | SLIGHTLY_WEAK | balanced | MODEL_DISAGREEMENT |
 
-## Remaining provisional (not dual)
+## Pending Expert-B
 
-CAL-000002, 000003, 000004, 000005, 000007 — Expert-B still PENDING.
+CAL-000002, 000003, 000004, 000005, 000007.
 
 ## Score-only sufficiency
 
-**SCORE_ONLY_CLASSIFICATION = NOT_SUFFICIENT** (unchanged; not reversed by n=2).
+**SCORE_ONLY_CLASSIFICATION = NOT_SUFFICIENT** (unchanged).
