@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "strength_conflict_output.schema.json",
+  "title": "StrengthConflictEvidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "design_marker",
+    "conflicts"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "design_marker": {
+      "type": "string",
+      "const": "design_only"
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "conflict_id",
+          "conflict_type",
+          "evidence_ids",
+          "dimensions",
+          "severity",
+          "resolution_status",
+          "confidence",
+          "provenance"
+        ],
+        "properties": {
+          "conflict_id": {
+            "type": "string",
+            "pattern": "^CF-[A-Z0-9_-]+$"
+          },
+          "conflict_type": {
+            "type": "string",
+            "enum": [
+              "season_vs_root",
+              "support_vs_pressure",
+              "resource_vs_drain",
+              "root_vs_control",
+              "structure_conflict",
+              "temperature_conflict",
+              "other"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "dimensions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "critical",
+              "unknown"
+            ]
+          },
+          "resolution_status": {
+            "type": "string",
+            "enum": [
+              "confirmed",
+              "probable",
+              "candidate",
+              "unresolved",
+              "not_applicable"
+            ]
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low",
+              "unknown"
+            ]
+          },
+          "provenance": {
+            "$ref": "strength_provenance_output.schema.json"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

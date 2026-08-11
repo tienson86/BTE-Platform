@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "strength_output_envelope.schema.json",
+  "title": "StrengthOutputEnvelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "design_marker",
+    "engine_version",
+    "calculation_id",
+    "day_master_reference",
+    "score_reference",
+    "evidence",
+    "completeness",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "design_marker": {
+      "type": "string",
+      "const": "design_only"
+    },
+    "engine_version": {
+      "type": "string"
+    },
+    "calculation_id": {
+      "type": "string"
+    },
+    "chart_reference": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "day_master_reference": {
+      "type": "string",
+      "enum": [
+        "canh",
+        "tan",
+        "nham",
+        "quy",
+        "giap",
+        "at",
+        "binh",
+        "dinh",
+        "mau",
+        "ky"
+      ]
+    },
+    "score_reference": {
+      "$ref": "strength_score_output.schema.json"
+    },
+    "evidence": {
+      "$ref": "strength_evidence_output.schema.json"
+    },
+    "completeness": {
+      "$ref": "strength_completeness_output.schema.json"
+    },
+    "provenance": {
+      "$ref": "strength_provenance_output.schema.json"
+    },
+    "diagnostics": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": true
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "contract_class": {
+      "type": "string",
+      "enum": [
+        "minimum",
+        "extended",
+        "partial",
+        "unknown"
+      ]
+    }
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "schema_version": "0.1.0",
+  "fields": [
+    {
+      "field": "score.raw_score",
+      "class": "required",
+      "priority": "P0",
+      "v1": "AVAILABLE",
+      "note": "preserve when exposed"
+    },
+    {
+      "field": "score.normalized_score",
+      "class": "required",
+      "priority": "P0",
+      "v1": "AVAILABLE",
+      "note": "current published path"
+    },
+    {
+      "field": "score.published_score",
+      "class": "required",
+      "priority": "P0",
+      "v1": "AVAILABLE",
+      "note": "may equal normalized"
+    },
+    {
+      "field": "score.current_v1_band",
+      "class": "required",
+      "priority": "P0",
+      "v1": "AVAILABLE",
+      "note": "runtime observation only"
+    },
+    {
+      "field": "score.saturation_*",
+      "class": "required",
+      "priority": "P0",
+      "v1": "PARTIAL",
+      "note": "observational metadata"
+    },
+    {
+      "field": "contributions.*_bucket",
+      "class": "required",
+      "priority": "P0",
+      "v1": "AVAILABLE",
+      "note": "existing profile buckets"
+    },
+    {
+      "field": "season.season_branch",
+      "class": "required",
+      "priority": "P0",
+      "v1": "AVAILABLE",
+      "note": "month branch"
+    },
+    {
+      "field": "season.relation_month_status",
+      "class": "required",
+      "priority": "P0",
+      "v1": "AVAILABLE",
+      "note": "dac/tuong/..."
+    },
+    {
+      "field": "season.seasonal_state",
+      "class": "optional",
+      "priority": "P2",
+      "v1": "NOT_AVAILABLE",
+      "note": "do not infer"
+    },
+    {
+      "field": "root.root_id_loci",
+      "class": "required",
+      "priority": "P0",
+      "v1": "LOST",
+      "note": "PILOT-1J major loss"
+    },
+    {
+      "field": "root.source_pillar/branch",
+      "class": "required",
+      "priority": "P0",
+      "v1": "LOST",
+      "note": "must expose loci"
+    },
+    {
+      "field": "root.visibility_hidden",
+      "class": "required",
+      "priority": "P0",
+      "v1": "PARTIAL",
+      "note": "hidden stems exist internally"
+    },
+    {
+      "field": "root.summary_count_label",
+      "class": "required",
+      "priority": "P0",
+      "v1": "AVAILABLE",
+      "note": "root_level/count"
+    },
+    {
+      "field": "support.items",
+      "class": "required",
+      "priority": "P0",
+      "v1": "PARTIAL",
+      "note": "support_type + bucket"
+    },
+    {
+      "field": "pressure.items_visible",
+      "class": "required",
+      "priority": "P0",
+      "v1": "PARTIAL",
+      "note": "control_type + bucket"
+    },
+    {
+      "field": "pressure.sitting_hidden",
+      "class": "required",
+      "priority": "P0",
+      "v1": "LOST",
+      "note": "PILOT-1J major loss"
+    },
+    {
+      "field": "drain.items",
+      "class": "required",
+      "priority": "P1",
+      "v1": "PARTIAL",
+      "note": "drain_type + bucket"
+    },
+    {
+      "field": "structural.clash",
+      "class": "required",
+      "priority": "P0",
+      "v1": "NOT_AVAILABLE",
+      "note": "PILOT-1J loss"
+    },
+    {
+      "field": "structural.punishment",
+      "class": "required",
+      "priority": "P0",
+      "v1": "NOT_AVAILABLE",
+      "note": "PILOT-1J loss"
+    },
+    {
+      "field": "structural.harm",
+      "class": "required",
+      "priority": "P0",
+      "v1": "NOT_AVAILABLE",
+      "note": "PILOT-1J loss"
+    },
+    {
+      "field": "structural.destruction",
+      "class": "required",
+      "priority": "P0",
+      "v1": "NOT_AVAILABLE",
+      "note": "PILOT-1J loss"
+    },
+    {
+      "field": "structural.combination",
+      "class": "optional",
+      "priority": "P1",
+      "v1": "PARTIAL",
+      "note": "cmb rules sometimes"
+    },
+    {
+      "field": "structural.special_structure",
+      "class": "optional",
+      "priority": "P1",
+      "v1": "PARTIAL",
+      "note": "spc rules"
+    },
+    {
+      "field": "structural.transformation",
+      "class": "reserved",
+      "priority": "P3",
+      "v1": "NOT_AVAILABLE",
+      "note": "future"
+    },
+    {
+      "field": "follow_pattern",
+      "class": "required",
+      "priority": "P1",
+      "v1": "NOT_AVAILABLE",
+      "note": "considered/resolution only"
+    },
+    {
+      "field": "temperature",
+      "class": "optional",
+      "priority": "P2",
+      "v1": "PARTIAL",
+      "note": "independent of taxonomy"
+    },
+    {
+      "field": "conflicts",
+      "class": "required",
+      "priority": "P1",
+      "v1": "LOST",
+      "note": "native objects not published"
+    },
+    {
+      "field": "provenance",
+      "class": "required",
+      "priority": "P0",
+      "v1": "PARTIAL",
+      "note": "must be first-class"
+    },
+    {
+      "field": "completeness",
+      "class": "required",
+      "priority": "P1",
+      "v1": "LOST",
+      "note": "derived today"
+    },
+    {
+      "field": "taxonomy_v2_*",
+      "class": "not_supported",
+      "priority": "P3",
+      "v1": "N/A",
+      "note": "firewall"
+    },
+    {
+      "field": "t1_t6",
+      "class": "not_supported",
+      "priority": "P3",
+      "v1": "N/A",
+      "note": "firewall"
+    }
+  ],
+  "counts": {
+    "required": 24,
+    "optional": 4,
+    "reserved": 1,
+    "not_supported": 2
+  }
+}

@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "strength_structural_output.schema.json",
+  "title": "StrengthStructuralEvidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "design_marker",
+    "structures"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "design_marker": {
+      "type": "string",
+      "const": "design_only"
+    },
+    "structures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "structure_id",
+          "structure_type",
+          "resolution_status",
+          "direction",
+          "provenance"
+        ],
+        "properties": {
+          "structure_id": {
+            "type": "string",
+            "pattern": "^STR-[A-Z0-9_-]+$"
+          },
+          "structure_type": {
+            "type": "string",
+            "enum": [
+              "combination",
+              "clash",
+              "punishment",
+              "harm",
+              "destruction",
+              "transformation",
+              "special_structure",
+              "follow_pattern"
+            ]
+          },
+          "participating_pillars": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "year",
+                "month",
+                "day",
+                "hour",
+                "multi",
+                "unknown"
+              ]
+            }
+          },
+          "participating_stems": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "canh",
+                "tan",
+                "nham",
+                "quy",
+                "giap",
+                "at",
+                "binh",
+                "dinh",
+                "mau",
+                "ky"
+              ]
+            }
+          },
+          "participating_branches": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ty",
+                "suu",
+                "dan",
+                "mao",
+                "thin",
+                "ti",
+                "ngo",
+                "mui",
+                "than",
+                "dau",
+                "tuat",
+                "hoi"
+              ]
+            }
+          },
+          "participating_elements": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "kim",
+                "moc",
+                "thuy",
+                "hoa",
+                "tho",
+                "unknown"
+              ]
+            }
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "support",
+              "pressure",
+              "drain",
+              "neutral",
+              "conflict",
+              "unknown"
+            ]
+          },
+          "effect_on_strength": {
+            "type": "string",
+            "enum": [
+              "support",
+              "pressure",
+              "drain",
+              "neutral",
+              "unknown"
+            ]
+          },
+          "resolution_status": {
+            "type": "string",
+            "enum": [
+              "confirmed",
+              "probable",
+              "candidate",
+              "unresolved",
+              "not_applicable"
+            ]
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low",
+              "unknown"
+            ]
+          },
+          "supporting_evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "opposing_evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "provenance": {
+            "$ref": "strength_provenance_output.schema.json"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

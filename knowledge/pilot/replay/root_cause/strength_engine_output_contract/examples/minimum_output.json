@@ -1,0 +1,291 @@
+{
+  "schema_version": "0.1.0",
+  "design_marker": "design_only",
+  "engine_version": "future_design_only",
+  "calculation_id": "DESIGN-MIN-001",
+  "chart_reference": null,
+  "day_master_reference": "canh",
+  "score_reference": {
+    "schema_version": "0.1.0",
+    "design_marker": "design_only",
+    "raw_score": 37.0,
+    "normalized_score": 0.87,
+    "published_score": 0.87,
+    "current_v1_band": "strong",
+    "score_source": "design_only",
+    "score_status": "observed",
+    "saturation_detected": false,
+    "saturation_type": "none",
+    "saturation_boundary": null,
+    "saturation_source": null,
+    "contributions": {
+      "seasonal_contribution": 25.0,
+      "root_contribution": 12.0,
+      "support_contribution": 8.0,
+      "pressure_contribution": -18.0,
+      "drain_contribution": 0.0,
+      "structural_contribution": 0.0,
+      "special_rule_contribution": 10.0
+    },
+    "provenance": {
+      "schema_version": "0.1.0",
+      "provenance_type": "design_only",
+      "source_module": "pilot_1k_design",
+      "source_rule": null,
+      "source_path": "knowledge/pilot/replay/root_cause/strength_engine_output_contract/",
+      "source_record": null,
+      "generated_at": null,
+      "calculation_id": "DESIGN-ONLY",
+      "notes": "DESIGN_ONLY example; not runtime output"
+    }
+  },
+  "evidence": {
+    "schema_version": "0.1.0",
+    "design_marker": "design_only",
+    "seasonal": {
+      "season_branch": "suu",
+      "season_element": "tho",
+      "day_master_element": "kim",
+      "relation": "tuong",
+      "seasonal_direction": "support",
+      "seasonal_state": "unknown",
+      "source": "month_status",
+      "confidence": "medium",
+      "provenance": {
+        "schema_version": "0.1.0",
+        "provenance_type": "engine_rule",
+        "source_module": "pilot_1k_design",
+        "source_rule": null,
+        "source_path": "knowledge/pilot/replay/root_cause/strength_engine_output_contract/",
+        "source_record": null,
+        "generated_at": null,
+        "calculation_id": "DESIGN-ONLY",
+        "notes": "DESIGN_ONLY example; not runtime output"
+      }
+    },
+    "roots": {
+      "schema_version": "0.1.0",
+      "design_marker": "design_only",
+      "summary": {
+        "multiple_roots": false,
+        "root_count": 1,
+        "root_strength_label": "thong_can_1_chi",
+        "root_confidence": "medium"
+      },
+      "roots": [
+        {
+          "root_id": "ROOT-DAY-NGO",
+          "source_pillar": "day",
+          "source_branch": "ngo",
+          "source_stem": "dinh",
+          "element": "hoa",
+          "visibility": "hidden",
+          "relation": "not_same_element_as_day_master",
+          "direction": "unknown",
+          "magnitude": {
+            "representation": "unknown"
+          },
+          "confidence": "unknown",
+          "provenance": {
+            "schema_version": "0.1.0",
+            "provenance_type": "design_only",
+            "source_module": "pilot_1k_design",
+            "source_rule": null,
+            "source_path": "knowledge/pilot/replay/root_cause/strength_engine_output_contract/",
+            "source_record": null,
+            "generated_at": null,
+            "calculation_id": "DESIGN-ONLY",
+            "notes": "DESIGN_ONLY example; not runtime output"
+          }
+        }
+      ]
+    },
+    "support": {
+      "items": [
+        {
+          "evidence_id": "EV-SUP-001",
+          "support_type": "same_element",
+          "direction": "support",
+          "magnitude": {
+            "representation": "raw_contribution",
+            "raw_contribution": 8.0
+          },
+          "confidence": "unknown",
+          "provenance": {
+            "schema_version": "0.1.0",
+            "provenance_type": "engine_rule",
+            "source_module": "pilot_1k_design",
+            "source_rule": null,
+            "source_path": "knowledge/pilot/replay/root_cause/strength_engine_output_contract/",
+            "source_record": null,
+            "generated_at": null,
+            "calculation_id": "DESIGN-ONLY",
+            "notes": "DESIGN_ONLY example; not runtime output"
+          }
+        }
+      ]
+    },
+    "pressure": {
+      "items": [
+        {
+          "evidence_id": "EV-PRESS-OFF-001",
+          "pressure_type": "officer",
+          "direction": "pressure",
+          "visibility": "visible",
+          "magnitude": {
+            "representation": "raw_contribution",
+            "raw_contribution": -18.0
+          },
+          "confidence": "unknown",
+          "provenance": {
+            "schema_version": "0.1.0",
+            "provenance_type": "engine_rule",
+            "source_module": "pilot_1k_design",
+            "source_rule": null,
+            "source_path": "knowledge/pilot/replay/root_cause/strength_engine_output_contract/",
+            "source_record": null,
+            "generated_at": null,
+            "calculation_id": "DESIGN-ONLY",
+            "notes": "DESIGN_ONLY example; not runtime output"
+          }
+        },
+        {
+          "evidence_id": "EV-PRESS-SIT-001",
+          "pressure_type": "structural_pressure",
+          "direction": "pressure",
+          "visibility": "hidden",
+          "affected_branch": "ngo",
+          "affected_pillar": "day",
+          "notes": "sitting_hidden_pressure_example",
+          "magnitude": {
+            "representation": "unknown"
+          },
+          "confidence": "unknown",
+          "provenance": {
+            "schema_version": "0.1.0",
+            "provenance_type": "design_only",
+            "source_module": "pilot_1k_design",
+            "source_rule": null,
+            "source_path": "knowledge/pilot/replay/root_cause/strength_engine_output_contract/",
+            "source_record": null,
+            "generated_at": null,
+            "calculation_id": "DESIGN-ONLY",
+            "notes": "DESIGN_ONLY example; not runtime output"
+          }
+        }
+      ]
+    },
+    "drain": {
+      "items": []
+    },
+    "structural": {
+      "schema_version": "0.1.0",
+      "design_marker": "design_only",
+      "structures": []
+    },
+    "follow_pattern": {
+      "considered": "unknown",
+      "supporting_evidence_ids": [],
+      "opposing_evidence_ids": [],
+      "resolution_status": "not_applicable",
+      "confidence": "unknown",
+      "provenance": {
+        "schema_version": "0.1.0",
+        "provenance_type": "design_only",
+        "source_module": "pilot_1k_design",
+        "source_rule": null,
+        "source_path": "knowledge/pilot/replay/root_cause/strength_engine_output_contract/",
+        "source_record": null,
+        "generated_at": null,
+        "calculation_id": "DESIGN-ONLY",
+        "notes": "DESIGN_ONLY example; not runtime output"
+      }
+    },
+    "temperature": {
+      "temperature_state": "cold",
+      "heat_evidence": null,
+      "cold_evidence": "winter_context",
+      "dryness_evidence": null,
+      "moisture_evidence": null,
+      "conflict": false,
+      "confidence": "unknown",
+      "provenance": {
+        "schema_version": "0.1.0",
+        "provenance_type": "derived",
+        "source_module": "pilot_1k_design",
+        "source_rule": null,
+        "source_path": "knowledge/pilot/replay/root_cause/strength_engine_output_contract/",
+        "source_record": null,
+        "generated_at": null,
+        "calculation_id": "DESIGN-ONLY",
+        "notes": "DESIGN_ONLY example; not runtime output"
+      }
+    },
+    "conflicts": {
+      "schema_version": "0.1.0",
+      "design_marker": "design_only",
+      "conflicts": [
+        {
+          "conflict_id": "CF-SUP-PRESS-001",
+          "conflict_type": "support_vs_pressure",
+          "evidence_ids": [
+            "EV-SUP-001",
+            "EV-PRESS-OFF-001"
+          ],
+          "dimensions": [
+            "support",
+            "pressure"
+          ],
+          "severity": "unknown",
+          "resolution_status": "unresolved",
+          "confidence": "unknown",
+          "provenance": {
+            "schema_version": "0.1.0",
+            "provenance_type": "derived",
+            "source_module": "pilot_1k_design",
+            "source_rule": null,
+            "source_path": "knowledge/pilot/replay/root_cause/strength_engine_output_contract/",
+            "source_record": null,
+            "generated_at": null,
+            "calculation_id": "DESIGN-ONLY",
+            "notes": "DESIGN_ONLY example; not runtime output"
+          },
+          "notes": null
+        }
+      ]
+    },
+    "items": []
+  },
+  "completeness": {
+    "schema_version": "0.1.0",
+    "design_marker": "design_only",
+    "overall": "partial",
+    "by_dimension": {
+      "calendar": "unknown",
+      "season": "partial",
+      "roots": "partial",
+      "support": "partial",
+      "pressure": "partial",
+      "drain": "limited",
+      "structure": "limited",
+      "temperature": "limited",
+      "expert_review": "unknown"
+    },
+    "notes": null
+  },
+  "provenance": {
+    "schema_version": "0.1.0",
+    "provenance_type": "design_only",
+    "source_module": "pilot_1k_design",
+    "source_rule": null,
+    "source_path": "knowledge/pilot/replay/root_cause/strength_engine_output_contract/",
+    "source_record": null,
+    "generated_at": null,
+    "calculation_id": "DESIGN-ONLY",
+    "notes": "DESIGN_ONLY example; not runtime output"
+  },
+  "diagnostics": {
+    "note": "DESIGN_ONLY"
+  },
+  "contract_class": "minimum"
+}

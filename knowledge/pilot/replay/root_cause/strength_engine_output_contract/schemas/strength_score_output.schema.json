@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "strength_score_output.schema.json",
+  "title": "StrengthScoreEvidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "raw_score",
+    "normalized_score",
+    "published_score",
+    "current_v1_band",
+    "score_source",
+    "score_status",
+    "saturation_detected",
+    "saturation_type",
+    "design_marker"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "design_marker": {
+      "type": "string",
+      "const": "design_only"
+    },
+    "raw_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "normalized_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "published_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "current_v1_band": {
+      "type": "string",
+      "enum": [
+        "weak",
+        "balanced",
+        "strong",
+        "unknown"
+      ]
+    },
+    "score_source": {
+      "type": "string"
+    },
+    "score_status": {
+      "type": "string",
+      "enum": [
+        "observed",
+        "partial",
+        "unknown",
+        "design_only"
+      ]
+    },
+    "saturation_detected": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string",
+          "const": "unknown"
+        }
+      ]
+    },
+    "saturation_type": {
+      "type": "string",
+      "enum": [
+        "none",
+        "upper_clamp",
+        "lower_clamp",
+        "normalization",
+        "unknown"
+      ]
+    },
+    "saturation_boundary": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "saturation_source": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "contributions": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "seasonal_contribution": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "root_contribution": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "support_contribution": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "pressure_contribution": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "drain_contribution": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "structural_contribution": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "special_rule_contribution": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "provenance": {
+      "$ref": "strength_provenance_output.schema.json"
+    }
+  }
+}

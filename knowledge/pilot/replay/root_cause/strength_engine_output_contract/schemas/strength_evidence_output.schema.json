@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "strength_evidence_output.schema.json",
+  "title": "StrengthEvidenceBundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "design_marker"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "design_marker": {
+      "type": "string",
+      "const": "design_only"
+    },
+    "seasonal": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": true
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "roots": {
+      "anyOf": [
+        {
+          "$ref": "strength_root_output.schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "support": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": true
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "pressure": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": true
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "drain": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": true
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "structural": {
+      "anyOf": [
+        {
+          "$ref": "strength_structural_output.schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "follow_pattern": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": true
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "temperature": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": true
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "conflicts": {
+      "anyOf": [
+        {
+          "$ref": "strength_conflict_output.schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidence_id",
+          "dimension",
+          "direction",
+          "provenance"
+        ],
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "pattern": "^EV-[A-Z0-9_-]+$"
+          },
+          "dimension": {
+            "type": "string"
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "support",
+              "pressure",
+              "drain",
+              "neutral",
+              "conflict",
+              "unknown"
+            ]
+          },
+          "availability": {
+            "type": "string",
+            "enum": [
+              "observed",
+              "derived",
+              "inferred",
+              "unknown",
+              "not_available"
+            ]
+          },
+          "magnitude": {
+            "anyOf": [
+              {
+                "type": "object",
+                "additionalProperties": true
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low",
+              "unknown"
+            ]
+          },
+          "provenance": {
+            "$ref": "strength_provenance_output.schema.json"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

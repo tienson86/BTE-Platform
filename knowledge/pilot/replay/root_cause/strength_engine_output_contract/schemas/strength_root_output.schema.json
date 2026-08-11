@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "strength_root_output.schema.json",
+  "title": "StrengthRootEvidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "design_marker",
+    "roots"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1.0"
+    },
+    "design_marker": {
+      "type": "string",
+      "const": "design_only"
+    },
+    "summary": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "multiple_roots": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string",
+                  "const": "unknown"
+                }
+              ]
+            },
+            "root_count": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "root_strength_label": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "root_confidence": {
+              "type": "string",
+              "enum": [
+                "high",
+                "medium",
+                "low",
+                "unknown"
+              ]
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "roots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "root_id",
+          "source_pillar",
+          "visibility",
+          "direction",
+          "provenance"
+        ],
+        "properties": {
+          "root_id": {
+            "type": "string",
+            "pattern": "^ROOT-[A-Z0-9_-]+$"
+          },
+          "source_pillar": {
+            "type": "string",
+            "enum": [
+              "year",
+              "month",
+              "day",
+              "hour",
+              "multi",
+              "unknown"
+            ]
+          },
+          "source_branch": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "ty",
+                  "suu",
+                  "dan",
+                  "mao",
+                  "thin",
+                  "ti",
+                  "ngo",
+                  "mui",
+                  "than",
+                  "dau",
+                  "tuat",
+                  "hoi",
+                  "unknown"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_stem": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "canh",
+                  "tan",
+                  "nham",
+                  "quy",
+                  "giap",
+                  "at",
+                  "binh",
+                  "dinh",
+                  "mau",
+                  "ky",
+                  "unknown"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "element": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "kim",
+                  "moc",
+                  "thuy",
+                  "hoa",
+                  "tho",
+                  "unknown"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "visibility": {
+            "type": "string",
+            "enum": [
+              "visible",
+              "hidden",
+              "unknown"
+            ]
+          },
+          "relation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "support",
+              "pressure",
+              "drain",
+              "neutral",
+              "conflict",
+              "unknown"
+            ]
+          },
+          "magnitude": {
+            "anyOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "representation": {
+                    "type": "string",
+                    "enum": [
+                      "raw_contribution",
+                      "categorical",
+                      "ordinal",
+                      "unknown"
+                    ]
+                  },
+                  "raw_contribution": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "categorical": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ordinal": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low",
+              "unknown"
+            ]
+          },
+          "provenance": {
+            "$ref": "strength_provenance_output.schema.json"
+          }
+        }
+      }
+    }
+  }
+}
