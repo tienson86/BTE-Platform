@@ -16,9 +16,10 @@ describe("ResultPageV2", () => {
     expect(screen.getAllByText("Lưu ý quan trọng").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Sự nghiệp").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Tài chính").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Quan hệ").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Sức khỏe").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Vận trình").length).toBeGreaterThan(0);
+    // Unavailable domains are hidden (no empty shells).
+    expect(screen.queryByText("Quan hệ")).toBeNull();
+    expect(screen.queryByText("Sức khỏe")).toBeNull();
+    expect(screen.queryByText("Vận trình")).toBeNull();
     expect(screen.getAllByText("Biểu đồ minh họa").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Chi tiết kỹ thuật").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Kiến thức bổ sung").length).toBeGreaterThan(0);
@@ -30,8 +31,10 @@ describe("ResultPageV2", () => {
     expect(screen.queryByText("Hero")).toBeNull();
     expect(screen.queryByText("Summary")).toBeNull();
     expect(screen.queryByText("<html>must-not-render</html>")).toBeNull();
-    expect(await screen.findByRole("button", { name: "Xem chi tiết kỹ thuật" })).toBeTruthy();
-    expect(screen.queryByText("Dương lịch")).toBeNull();
+    // Chart fundamentals open by default (Technical is eager + expanded).
+    expect(screen.getByText("Dương lịch")).toBeTruthy();
+    expect(screen.getByText("Giáp Tý · Ất Sửu · Bính Dần · Đinh Mão")).toBeTruthy();
+    expect(document.querySelector('[data-chart-fundamentals="true"]')).toBeTruthy();
   });
 
   it("shows loading chrome in Vietnamese", () => {

@@ -4,6 +4,7 @@ import { DOMAIN_ORDER } from "../../adapter/PortalResultModel";
 import {
   showAppendix,
   showCharts,
+  showDomain,
   showKnowledge,
   showTechnical,
   showWarnings,
@@ -18,8 +19,9 @@ import { Hero } from "../Hero";
 import { ImportantWarnings } from "../ImportantWarnings";
 import { LoadingState } from "../LoadingState";
 import { Recommendation } from "../Recommendation";
+import { TechnicalInfo } from "../TechnicalInfo";
 
-const TechnicalInfoLazy = lazy(() => import("../TechnicalInfo"));
+// Knowledge/Charts stay lazy; Technical is eager so chart fundamentals paint on first read.
 const KnowledgeLazy = lazy(() => import("../Knowledge"));
 const ChartsLazy = lazy(async () => {
   const mod = await import("../Charts");
@@ -100,6 +102,7 @@ export const ResultPage = memo(function ResultPage({
     );
   }
 
+  // Chart fundamentals expand by default for first-read.
   const technicalCollapsed = !isExpanded("section:technical");
   const knowledgeCollapsed = !isExpanded("section:knowledge");
 
@@ -124,6 +127,15 @@ export const ResultPage = memo(function ResultPage({
       </nav>
       <main className="rv2-main" id="rv2-main">
         {model.hero ? <Hero model={model.hero} /> : null}
+        {showTechnical(model.technical) ? (
+          <TechnicalInfo
+            title={chrome.section_technical}
+            model={model.technical}
+            chrome={chrome}
+            collapsed={technicalCollapsed}
+            onToggle={() => onToggle("section:technical")}
+          />
+        ) : null}
         {model.summary ? (
           <ExecutiveSummary
             model={model.summary}
@@ -154,6 +166,7 @@ export const ResultPage = memo(function ResultPage({
         ) : null}
         {DOMAIN_ORDER.map((key: DomainKey) => {
           const domain = model.domains[key];
+          if (!showDomain(domain)) return null;
           const recs = domain.recommendation_ids
             .map((id) => recById.get(id))
             .filter((item): item is NonNullable<typeof item> => Boolean(item));
@@ -178,17 +191,6 @@ export const ResultPage = memo(function ResultPage({
               chrome={chrome}
               isExpanded={(id) => isExpanded(id)}
               onToggleTable={(index) => onToggle(`chart:${index}`)}
-            />
-          </Suspense>
-        ) : null}
-        {showTechnical(model.technical) ? (
-          <Suspense fallback={null}>
-            <TechnicalInfoLazy
-              title={chrome.section_technical}
-              model={model.technical}
-              chrome={chrome}
-              collapsed={technicalCollapsed}
-              onToggle={() => onToggle("section:technical")}
             />
           </Suspense>
         ) : null}

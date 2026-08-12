@@ -105,13 +105,14 @@ describe("LAUNCH-03 liveAnalysisResultAdapter", () => {
 
     const presentation = mapped.report.presentation;
     expect(presentation?.identity?.full_name).toBe("Trần Thị Bình");
-    expect(presentation?.identity?.headline).toContain("ổn định");
+    expect(presentation?.identity?.headline).toContain("Ất");
     expect(presentation?.identity?.one_line_summary).toContain("nền tảng");
     expect(presentation?.summary?.bullets?.length).toBeGreaterThan(0);
-    expect(presentation?.summary?.bullets?.[0]).toContain("vai trò rõ ràng");
+    expect(presentation?.summary?.bullets?.[0]).toMatch(/Năm|Nhật chủ|Ất/);
     expect(presentation?.technical?.ids).toBe("anl_live_03");
     expect(presentation?.technical?.pillars).toContain("Ất Dậu");
     expect(presentation?.technical?.timezone).toBe("Asia/Ho_Chi_Minh");
+    expect(presentation?.technical?.metadata?.day_master).toBe("Ất");
     expect(presentation?.recommendations?.[0]?.title).toBe("Chọn môi trường có cấu trúc");
     expect(presentation?.recommendations?.[0]?.domain).toBe("career");
     expect(presentation?.warnings?.[0]?.body).toContain("quá nhiều việc");
@@ -119,8 +120,9 @@ describe("LAUNCH-03 liveAnalysisResultAdapter", () => {
     expect(
       presentation?.recommendations?.some((item) => item.id === "rec-1"),
     ).toBe(false);
-    // No fabricated knowledge/charts.
-    expect(presentation?.knowledge).toEqual([]);
+    // Narrative sections mapped; charts remain empty.
+    expect((presentation?.knowledge ?? []).length).toBeGreaterThan(0);
+    expect(presentation?.knowledge?.[0]?.title).toBe("Quan sát");
     expect(presentation?.charts).toEqual([]);
   });
 

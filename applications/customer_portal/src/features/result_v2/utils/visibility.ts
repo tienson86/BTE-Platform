@@ -46,6 +46,17 @@ export function showTechnical(technical: TechnicalModel): boolean {
   return technical.available;
 }
 
+/** Domain is mountable only when it has real availability/content. */
+export function showDomain(domain: DomainMapModel[keyof DomainMapModel]): boolean {
+  if (!domain.available) return false;
+  return Boolean(
+    domain.intro ||
+      domain.analysis_preview ||
+      domain.analysis_detail ||
+      domain.recommendation_ids.length > 0,
+  );
+}
+
 export function buildNavModel(
   chrome: ChromeModel,
   pageState: PageState,
@@ -58,6 +69,11 @@ export function buildNavModel(
 ): NavModel {
   const reading = isReadingState(pageState);
   const items = [
+    {
+      target_ui_id: "Technical",
+      label: chrome.section_technical,
+      visible: reading && showTechnical(technical),
+    },
     { target_ui_id: "Summary", label: chrome.section_summary, visible: reading },
     {
       target_ui_id: "Recommendation",
@@ -72,17 +88,12 @@ export function buildNavModel(
     ...DOMAIN_ORDER.map((key) => ({
       target_ui_id: `Domain${key.charAt(0).toUpperCase()}${key.slice(1)}`,
       label: domains[key].title,
-      visible: reading,
-    })),
+      visible: reading && showDomain(domains[key]),
+    })).filter((item) => item.visible),
     {
       target_ui_id: "Charts",
       label: chrome.section_charts,
       visible: reading && showCharts(charts),
-    },
-    {
-      target_ui_id: "Technical",
-      label: chrome.section_technical,
-      visible: reading && showTechnical(technical),
     },
     {
       target_ui_id: "Knowledge",

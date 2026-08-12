@@ -12,11 +12,13 @@ import {
   primaryRecommendationFromNarrative,
   type NarrativeRecommendationDto,
   type NarrativeResultDto,
+  type NarrativeSectionDto,
 } from "../../adapters/narrativeResultAdapter";
-import type { AnalysisDataDto, BaziDto, CustomerEchoDto } from "../../models";
+import type { AnalysisDataDto, BaziDto, CustomerEchoDto, PillarDto } from "../../models";
 import type {
   CanonicalReportInput,
   PresentationIdentity,
+  PresentationKnowledge,
   PresentationRecommendation,
   PresentationTechnical,
   PresentationWarning,
@@ -64,26 +66,120 @@ function mapConsultationStatus(status: string | null | undefined): string {
   }
 }
 
-function pillarLine(bazi: BaziDto | undefined): string | null {
-  if (!bazi) return null;
-  const parts = [
-    bazi.year_pillar,
-    bazi.month_pillar,
-    bazi.day_pillar,
-    bazi.hour_pillar,
-  ]
-    .map((pillar) => {
-      if (!pillar) return null;
-      const stem = asText(pillar.stem);
-      const branch = asText(pillar.branch);
-      if (!stem && !branch) return null;
-      return [stem, branch].filter(Boolean).join(" ");
-    })
-    .filter((item): item is string => Boolean(item));
-  return parts.length > 0 ? parts.join(" · ") : null;
+function formatPillar(pillar: PillarDto | undefined): string | null {
+  if (!pillar) return null;
+  const stem = asText(pillar.stem);
+  const branch = asText(pillar.branch);
+  if (!stem && !branch) return null;
+  return [stem, branch].filter(Boolean).join(" ");
 }
 
-function collectSummaryBullets(narrative: NarrativeResultDto): string[] {
+/** Labeled four pillars for first-read technical display. */
+export function formatLabeledPillars(bazi: BaziDto | undefined): string | null {
+  if (!bazi) return null;
+  const rows: string[] = [];
+  const year = formatPillar(bazi.year_pillar);
+  const month = formatPillar(bazi.month_pillar);
+  const day = formatPillar(bazi.day_pillar);
+  const hour = formatPillar(bazi.hour_pillar);
+  if (year) rows.push(`Năm ${year}`);
+  if (month) rows.push(`Tháng ${month}`);
+  if (day) rows.push(`Ngày ${day}`);
+  if (hour) rows.push(`Giờ ${hour}`);
+  return rows.length > 0 ? rows.join(" · ") : null;
+}
+
+function pickPatternLabel(data: AnalysisDataDto): string | null {
+  const pattern = data.pattern;
+  if (!pattern || typeof pattern !== "object") return null;
+  return (
+    asText(pattern.cach_cuc) ??
+    asText(pattern.tong_cach) ??
+    asText(pattern.pattern)
+  );
+}
+
+function pickDayMaster(data: AnalysisDataDto): string | null {
+  return asText(data.bazi?.day_master);
+}
+
+function pickStrengthLabel(data: AnalysisDataDto): string | null {
+  const strength = data.strength;
+  if (!strength || typeof strength !== "object") return null;
+  return (
+    asText(strength.reasoning) ??
+    asText(strength.strength_level) ??
+    asText((strength as { level?: unknown }).level)
+  );
+}
+
+function pickStrengthScore(data: AnalysisDataDto): string | null {
+  const raw = data.strength?.strength_score;
+  if (raw === null || raw === undefined) return null;
+  const num = Number(raw);
+  if (!Number.isFinite(num)) return null;
+  if (num > 0 && num <= 1) return String(Math.round(num * 100) / 100);
+  return String(num);
+}
+
+function pickScoreGrade(data: AnalysisDataDto): string | null {
+  return asText(data.score?.grade);
+}
+
+function pickScoreRecommendation(data: AnalysisDataDto): string | null {
+  return asText(data.score?.recommendation);
+}
+
+/**
+ * Hero uses concise chart facts from structured API fields — not long career prose.
+ */
+function buildIdentity(
+  customer: CustomerEchoDto | undefined,
+  data: AnalysisDataDto,
+  narrative: NarrativeResultDto,
+): PresentationIdentity | null {
+  const fullName = asText(customer?.full_name);
+  if (!fullName) return null;
+
+  const dayMaster = pickDayMaster(data);
+  const pattern = pickPatternLabel(data);
+  const chartHeadline = [dayMaster, pattern].filter(Boolean).join(" · ");
+
+  const strength = pickStrengthLabel(data);
+  const grade = pickScoreGrade(data);
+  const scoreLine = pickScoreRecommendation(data);
+  const chartOneLine =
+    [strength, grade ? `Hạng ${grade}` : null].filter(Boolean).join(" · ") ||
+    scoreLine;
+
+  const executive = executiveFromNarrative(narrative);
+  const headline =
+    asText(chartHeadline) ??
+    asText(executive?.central_message) ??
+    asText(narrative.summary?.identity);
+  const oneLine =
+    asText(chartOneLine) ??
+    asText(executive?.conclusion) ??
+    asText(narrative.summary?.priority_recommendation) ??
+    asText(narrative.summary?.next_action);
+
+  if (!headline || !oneLine) return null;
+
+  return {
+    full_name: fullName,
+    headline,
+    one_line_summary: oneLine,
+    consultation_status: mapConsultationStatus(narrative.status),
+  };
+}
+
+/**
+ * Summary leads with chart fundamentals, then optional short executive points.
+ */
+function collectSummaryBullets(
+  data: AnalysisDataDto,
+  narrative: NarrativeResultDto,
+): string[] {
   const bullets: string[] = [];
   const push = (value: unknown): void => {
     const text = asText(value);
@@ -92,26 +188,31 @@ function collectSummaryBullets(narrative: NarrativeResultDto): string[] {
     bullets.push(text);
   };
 
+  const pillars = formatLabeledPillars(data.bazi);
+  if (pillars) push(pillars);
+  const dayMaster = pickDayMaster(data);
+  if (dayMaster) push(`Nhật chủ: ${dayMaster}`);
+  const pattern = pickPatternLabel(data);
+  if (pattern) push(`Cách cục: ${pattern}`);
+  const strength = pickStrengthLabel(data);
+  const strengthScore = pickStrengthScore(data);
+  if (strength && strengthScore) push(`${strength} (${strengthScore})`);
+  else if (strength) push(strength);
+  const grade = pickScoreGrade(data);
+  const scoreRec = pickScoreRecommendation(data);
+  if (grade && scoreRec) push(`Điểm ${grade}: ${scoreRec}`);
+  else if (grade) push(`Điểm: ${grade}`);
+  else if (scoreRec) push(scoreRec);
+
   const executive = executiveFromNarrative(narrative);
   for (const point of executive?.supporting_points ?? []) {
+    if (bullets.length >= 5) break;
     push(point);
   }
-  for (const strength of narrative.summary?.strengths ?? []) {
-    push(strength);
-  }
-  for (const weakness of narrative.summary?.weaknesses ?? []) {
-    push(weakness);
-  }
-  push(narrative.summary?.priority_recommendation);
-  push(narrative.summary?.next_action);
 
   if (bullets.length === 0) {
-    for (const section of narrative.sections ?? []) {
-      for (const paragraph of section.paragraphs ?? []) {
-        if (paragraph.insufficient_data) continue;
-        push(paragraph.text);
-        if (bullets.length >= 5) break;
-      }
+    for (const strengthItem of narrative.summary?.strengths ?? []) {
+      push(strengthItem);
       if (bullets.length >= 5) break;
     }
   }
@@ -134,10 +235,6 @@ function mapPriorityNumber(priority: string | null | undefined): number | null {
   }
 }
 
-/**
- * Map Pack 05 primary commercial recommendation only when all Result V2 fields exist.
- * Domain is career because this structured object is the career commercial enrichment.
- */
 function mapPrimaryCareerRecommendation(
   narrative: NarrativeResultDto,
 ): PresentationRecommendation | null {
@@ -160,11 +257,6 @@ function mapPrimaryCareerRecommendation(
   };
 }
 
-/**
- * Root narrative recommendations lack a domain field — omit rather than invent domain.
- * Only include items that somehow carry an explicit domain (none today) → empty list.
- * Kept for forward-compatibility if runtime adds domain later.
- */
 function mapRootRecommendationsWithDomain(
   items: readonly NarrativeRecommendationDto[] | undefined,
 ): PresentationRecommendation[] {
@@ -218,32 +310,51 @@ function mapCareerWarnings(narrative: NarrativeResultDto): PresentationWarning[]
   ];
 }
 
-function buildIdentity(
-  customer: CustomerEchoDto | undefined,
+function sectionParagraphBody(section: NarrativeSectionDto): string | null {
+  const parts: string[] = [];
+  for (const paragraph of section.paragraphs ?? []) {
+    if (paragraph.insufficient_data) continue;
+    const text = asText(paragraph.text);
+    if (text) parts.push(text);
+  }
+  return parts.length > 0 ? parts.join("\n\n") : null;
+}
+
+/**
+ * Map Pack 05 narrative sections → presentation.knowledge (titled expandable blocks).
+ * Preserves source order and section titles; no invented titles.
+ */
+function mapNarrativeSectionsToKnowledge(
   narrative: NarrativeResultDto,
-): PresentationIdentity | null {
-  const fullName = asText(customer?.full_name);
-  if (!fullName) return null;
+): PresentationKnowledge[] {
+  const items: PresentationKnowledge[] = [];
+  for (const section of narrative.sections ?? []) {
+    const title = asText(section.title);
+    const body = sectionParagraphBody(section);
+    if (!title || !body) continue;
+    const teaser = asText(section.paragraphs?.[0]?.text) ?? body;
+    items.push({
+      title,
+      teaser,
+      body,
+    });
+  }
+  return items;
+}
 
-  const executive = executiveFromNarrative(narrative);
-  const headline =
-    asText(executive?.central_message) ??
-    asText(executive?.composed_text) ??
-    asText(narrative.summary?.identity);
-  const oneLine =
-    asText(executive?.conclusion) ??
-    asText(narrative.summary?.priority_recommendation) ??
-    asText(narrative.summary?.next_action) ??
-    asText(narrative.summary?.identity);
-
-  if (!headline || !oneLine) return null;
-
-  return {
-    full_name: fullName,
-    headline,
-    one_line_summary: oneLine,
-    consultation_status: mapConsultationStatus(narrative.status),
-  };
+function careerAnalysisFromSections(
+  narrative: NarrativeResultDto,
+): { preview: string | null; detail: string | null } {
+  const knowledge = mapNarrativeSectionsToKnowledge(narrative);
+  if (knowledge.length === 0) return { preview: null, detail: null };
+  const preview = asText(knowledge[0]?.teaser);
+  const detail =
+    knowledge.length > 1
+      ? knowledge
+          .map((item) => `${item.title}\n${item.body ?? item.teaser}`)
+          .join("\n\n")
+      : asText(knowledge[0]?.body);
+  return { preview, detail };
 }
 
 function buildTechnical(
@@ -253,6 +364,31 @@ function buildTechnical(
 ): PresentationTechnical {
   const customer = data.customer;
   const metadata: Record<string, unknown> = {};
+
+  const year = formatPillar(data.bazi?.year_pillar);
+  const month = formatPillar(data.bazi?.month_pillar);
+  const day = formatPillar(data.bazi?.day_pillar);
+  const hour = formatPillar(data.bazi?.hour_pillar);
+  if (year) metadata.year_pillar = year;
+  if (month) metadata.month_pillar = month;
+  if (day) metadata.day_pillar = day;
+  if (hour) metadata.hour_pillar = hour;
+
+  const dayMaster = pickDayMaster(data);
+  if (dayMaster) metadata.day_master = dayMaster;
+  const pattern = pickPatternLabel(data);
+  if (pattern) metadata.pattern = pattern;
+  const strength = pickStrengthLabel(data);
+  if (strength) metadata.strength = strength;
+  const strengthScore = pickStrengthScore(data);
+  if (strengthScore) metadata.strength_score = strengthScore;
+  const grade = pickScoreGrade(data);
+  if (grade) metadata.score_grade = grade;
+  const total = data.score?.total_score;
+  if (total !== null && total !== undefined && Number.isFinite(Number(total))) {
+    metadata.score_total = Number(total);
+  }
+
   if (asText(customer?.birth_place)) metadata.birth_place = customer?.birth_place;
   if (asText(customer?.gender)) metadata.gender = customer?.gender;
   if (asText(data.stage)) metadata.stage = data.stage;
@@ -264,7 +400,7 @@ function buildTechnical(
 
   return {
     calendar: asText(data.calendar?.solar_term?.name) ?? null,
-    pillars: pillarLine(data.bazi),
+    pillars: formatLabeledPillars(data.bazi),
     timezone: asText(customer?.timezone) ?? null,
     schema: asText(narrative.contract),
     ids: analysisId,
@@ -277,10 +413,10 @@ function buildPresentation(
   narrative: NarrativeResultDto,
   analysisId: string | null,
 ): ReportPresentationEnvelope | null {
-  const identity = buildIdentity(data.customer, narrative);
+  const identity = buildIdentity(data.customer, data, narrative);
   if (!identity) return null;
 
-  const bullets = collectSummaryBullets(narrative);
+  const bullets = collectSummaryBullets(data, narrative);
   if (bullets.length === 0) return null;
 
   const primary = mapPrimaryCareerRecommendation(narrative);
@@ -289,15 +425,18 @@ function buildPresentation(
     ...mapRootRecommendationsWithDomain(narrative.recommendations),
   ];
 
+  const careerText = careerAnalysisFromSections(narrative);
   const domains =
-    primary != null
+    primary != null || careerText.preview
       ? {
           career: {
             available: true,
-            recommendation_ids: [primary.id ?? "rec_career_primary"],
+            recommendation_ids: primary
+              ? [primary.id ?? "rec_career_primary"]
+              : [],
             intro: null,
-            analysis_preview: null,
-            analysis_detail: null,
+            analysis_preview: careerText.preview,
+            analysis_detail: careerText.detail,
           },
         }
       : undefined;
@@ -310,7 +449,7 @@ function buildPresentation(
     domains,
     charts: [],
     technical: buildTechnical(data, analysisId, narrative),
-    knowledge: [],
+    knowledge: mapNarrativeSectionsToKnowledge(narrative),
     appendix: null,
     cta: {
       primary: { enabled: true },

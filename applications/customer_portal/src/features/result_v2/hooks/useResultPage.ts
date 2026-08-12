@@ -35,7 +35,11 @@ export function useResultPage(args: UseResultPageArgs) {
     exporting: args.exporting,
   });
 
-  const expand = useExpand();
+  // Expand chart fundamentals (and narrative sections) on first paint.
+  const expand = useExpand({
+    "section:technical": true,
+    "section:knowledge": true,
+  });
 
   const onNavigate = useCallback((targetUiId: string) => {
     const node = document.getElementById(`rv2-${targetUiId}`);
