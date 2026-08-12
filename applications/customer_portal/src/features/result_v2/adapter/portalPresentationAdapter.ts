@@ -257,10 +257,16 @@ function mapDomains(
     const intro = trimText(src?.intro);
     const preview = trimText(src?.analysis_preview);
     const detail = trimText(src?.analysis_detail);
-    const declaredIds = Array.isArray(src?.recommendation_ids)
-      ? src.recommendation_ids.map((id) => trimText(id)).filter((id): id is string => Boolean(id))
+    const hasDeclaredIds = Array.isArray(src?.recommendation_ids);
+    const declaredIds = hasDeclaredIds
+      ? src!.recommendation_ids!
+          .map((id) => trimText(id))
+          .filter((id): id is string => Boolean(id))
       : [];
-    const recIds = declaredIds.length > 0 ? declaredIds : collectIdsByDomain(recommendations, key);
+    // Explicit [] means "no domain cards" (avoid duplicate Recommendation zone cards).
+    const recIds = hasDeclaredIds
+      ? declaredIds
+      : collectIdsByDomain(recommendations, key);
     const available =
       src?.available === true ||
       Boolean(intro || preview || detail || recIds.length > 0);

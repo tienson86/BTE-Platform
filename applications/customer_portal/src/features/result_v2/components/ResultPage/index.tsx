@@ -17,12 +17,12 @@ import { ExecutiveSummary } from "../ExecutiveSummary";
 import { Footer } from "../Footer";
 import { Hero } from "../Hero";
 import { ImportantWarnings } from "../ImportantWarnings";
+import { Knowledge } from "../Knowledge";
 import { LoadingState } from "../LoadingState";
 import { Recommendation } from "../Recommendation";
 import { TechnicalInfo } from "../TechnicalInfo";
 
-// Knowledge/Charts stay lazy; Technical is eager so chart fundamentals paint on first read.
-const KnowledgeLazy = lazy(() => import("../Knowledge"));
+// Charts stay lazy; Knowledge + Technical are eager for readable narrative / fundamentals.
 const ChartsLazy = lazy(async () => {
   const mod = await import("../Charts");
   return { default: mod.Charts };
@@ -102,7 +102,7 @@ export const ResultPage = memo(function ResultPage({
     );
   }
 
-  // Chart fundamentals expand by default for first-read.
+  // Narrative open by default; Technical remains available but secondary (collapsed).
   const technicalCollapsed = !isExpanded("section:technical");
   const knowledgeCollapsed = !isExpanded("section:knowledge");
 
@@ -127,15 +127,6 @@ export const ResultPage = memo(function ResultPage({
       </nav>
       <main className="rv2-main" id="rv2-main">
         {model.hero ? <Hero model={model.hero} /> : null}
-        {showTechnical(model.technical) ? (
-          <TechnicalInfo
-            title={chrome.section_technical}
-            model={model.technical}
-            chrome={chrome}
-            collapsed={technicalCollapsed}
-            onToggle={() => onToggle("section:technical")}
-          />
-        ) : null}
         {model.summary ? (
           <ExecutiveSummary
             model={model.summary}
@@ -162,6 +153,17 @@ export const ResultPage = memo(function ResultPage({
             chrome={chrome}
             isExpanded={isExpanded}
             onToggleItem={onToggle}
+          />
+        ) : null}
+        {showKnowledge(model.knowledge) ? (
+          <Knowledge
+            title={chrome.section_knowledge}
+            items={model.knowledge}
+            chrome={chrome}
+            sectionCollapsed={knowledgeCollapsed}
+            isItemExpanded={(index) => isExpanded(`know:${index}`)}
+            onToggleSection={() => onToggle("section:knowledge")}
+            onToggleItem={(index) => onToggle(`know:${index}`)}
           />
         ) : null}
         {DOMAIN_ORDER.map((key: DomainKey) => {
@@ -194,18 +196,14 @@ export const ResultPage = memo(function ResultPage({
             />
           </Suspense>
         ) : null}
-        {showKnowledge(model.knowledge) ? (
-          <Suspense fallback={null}>
-            <KnowledgeLazy
-              title={chrome.section_knowledge}
-              items={model.knowledge}
-              chrome={chrome}
-              sectionCollapsed={knowledgeCollapsed}
-              isItemExpanded={(index) => isExpanded(`know:${index}`)}
-              onToggleSection={() => onToggle("section:knowledge")}
-              onToggleItem={(index) => onToggle(`know:${index}`)}
-            />
-          </Suspense>
+        {showTechnical(model.technical) ? (
+          <TechnicalInfo
+            title={chrome.section_technical}
+            model={model.technical}
+            chrome={chrome}
+            collapsed={technicalCollapsed}
+            onToggle={() => onToggle("section:technical")}
+          />
         ) : null}
         {showAppendix(model.appendix) ? (
           <Appendix title={chrome.section_appendix} model={model.appendix} />

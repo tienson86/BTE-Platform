@@ -69,11 +69,6 @@ export function buildNavModel(
 ): NavModel {
   const reading = isReadingState(pageState);
   const items = [
-    {
-      target_ui_id: "Technical",
-      label: chrome.section_technical,
-      visible: reading && showTechnical(technical),
-    },
     { target_ui_id: "Summary", label: chrome.section_summary, visible: reading },
     {
       target_ui_id: "Recommendation",
@@ -84,6 +79,11 @@ export function buildNavModel(
       target_ui_id: "Warnings",
       label: chrome.section_warnings,
       visible: reading && showWarnings(warnings),
+    },
+    {
+      target_ui_id: "Knowledge",
+      label: chrome.section_knowledge,
+      visible: reading && showKnowledge(knowledge),
     },
     ...DOMAIN_ORDER.map((key) => ({
       target_ui_id: `Domain${key.charAt(0).toUpperCase()}${key.slice(1)}`,
@@ -96,9 +96,9 @@ export function buildNavModel(
       visible: reading && showCharts(charts),
     },
     {
-      target_ui_id: "Knowledge",
-      label: chrome.section_knowledge,
-      visible: reading && showKnowledge(knowledge),
+      target_ui_id: "Technical",
+      label: chrome.section_technical,
+      visible: reading && showTechnical(technical),
     },
     {
       target_ui_id: "Appendix",

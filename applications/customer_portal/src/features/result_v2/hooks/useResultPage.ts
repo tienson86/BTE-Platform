@@ -35,9 +35,8 @@ export function useResultPage(args: UseResultPageArgs) {
     exporting: args.exporting,
   });
 
-  // Expand chart fundamentals (and narrative sections) on first paint.
+  // Narrative open by default. Technical stays collapsed (secondary reference).
   const expand = useExpand({
-    "section:technical": true,
     "section:knowledge": true,
   });
 

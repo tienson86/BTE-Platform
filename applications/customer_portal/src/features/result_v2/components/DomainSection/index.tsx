@@ -7,6 +7,7 @@ import type {
 } from "../../adapter/PortalResultModel";
 import { interpolateDomain } from "../../formatters/labels";
 import { EmptyState } from "../EmptyState";
+import { splitProseParagraphs } from "../Knowledge";
 import { RecommendationCard } from "../RecommendationCard";
 import { Expand } from "../Shared/Expand";
 import { SectionHeader } from "../Shared/SectionHeader";
@@ -77,7 +78,11 @@ export const DomainSection = memo(function DomainSection({
           ))}
           {domain.analysis_preview ? (
             <div className="rv2-card rv2-analysis-card">
-              <p className="rv2-prose">{domain.analysis_preview}</p>
+              <div className="rv2-article rv2-prose">
+                {splitProseParagraphs(domain.analysis_preview).map((paragraph, index) => (
+                  <p key={`${analysisId}-preview-${index}`}>{paragraph}</p>
+                ))}
+              </div>
               {domain.analysis_detail ? (
                 <>
                   <Expand
@@ -88,9 +93,11 @@ export const DomainSection = memo(function DomainSection({
                     onToggle={() => onToggleAnalysis(domain.key)}
                   />
                   {analysisExpanded ? (
-                    <p id={analysisId} className="rv2-prose rv2-expand-panel">
-                      {domain.analysis_detail}
-                    </p>
+                    <div id={analysisId} className="rv2-article rv2-prose rv2-expand-panel">
+                      {splitProseParagraphs(domain.analysis_detail).map((paragraph, index) => (
+                        <p key={`${analysisId}-detail-${index}`}>{paragraph}</p>
+                      ))}
+                    </div>
                   ) : (
                     <div id={analysisId} hidden />
                   )}

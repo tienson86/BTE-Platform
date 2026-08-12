@@ -348,6 +348,8 @@
 
 .rv2-field__value {
   margin: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .rv2-field__value--result {
@@ -619,6 +621,17 @@
   color: var(--text-secondary);
 }
 
+.rv2-knowledge-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bte-space-16);
+  max-width: var(--rv2-measure);
+}
+
+.rv2-knowledge-body {
+  max-width: var(--rv2-measure);
+}
+
 .rv2-article {
   max-width: 65ch;
   font-size: var(--rv2-body);
@@ -627,6 +640,12 @@
 
 .rv2-article p {
   margin: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.rv2-article p + p {
+  margin-top: var(--bte-space-16);
 }
 
 .rv2-dl {

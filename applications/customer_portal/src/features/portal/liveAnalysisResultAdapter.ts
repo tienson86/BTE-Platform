@@ -342,19 +342,44 @@ function mapNarrativeSectionsToKnowledge(
   return items;
 }
 
-function careerAnalysisFromSections(
+/**
+ * Career domain uses Career Selection Assessment fields only.
+ * Does not re-mount the seven narrative sections (avoids Portal duplication).
+ */
+function careerAnalysisFromAssessment(
   narrative: NarrativeResultDto,
 ): { preview: string | null; detail: string | null } {
-  const knowledge = mapNarrativeSectionsToKnowledge(narrative);
-  if (knowledge.length === 0) return { preview: null, detail: null };
-  const preview = asText(knowledge[0]?.teaser);
-  const detail =
-    knowledge.length > 1
-      ? knowledge
-          .map((item) => `${item.title}\n${item.body ?? item.teaser}`)
-          .join("\n\n")
-      : asText(knowledge[0]?.body);
-  return { preview, detail };
+  const career = careerSelectionFromNarrative(narrative);
+  if (!career) return { preview: null, detail: null };
+
+  // Risks/mitigation already surface in Warnings — omit here.
+  const detailKeys = [
+    "working_environment",
+    "preferred_role",
+    "leadership_posture",
+    "employment_posture",
+    "career_strengths",
+    "development_focus",
+    "timing_guidance",
+    "action_plan_90d",
+  ] as const;
+
+  const preview =
+    asText(careerFieldText(career, "career_direction")) ??
+    asText(careerFieldText(career, "working_environment"));
+
+  const detailParts: string[] = [];
+  for (const key of detailKeys) {
+    const text = asText(careerFieldText(career, key));
+    if (!text) continue;
+    if (preview && text === preview) continue;
+    detailParts.push(text);
+  }
+
+  return {
+    preview,
+    detail: detailParts.length > 0 ? detailParts.join("\n\n") : null,
+  };
 }
 
 function buildTechnical(
@@ -425,15 +450,14 @@ function buildPresentation(
     ...mapRootRecommendationsWithDomain(narrative.recommendations),
   ];
 
-  const careerText = careerAnalysisFromSections(narrative);
+  const careerText = careerAnalysisFromAssessment(narrative);
+  // Keep primary recommendation only in the Recommendation zone (no duplicate card).
   const domains =
-    primary != null || careerText.preview
+    primary != null || careerText.preview || careerText.detail
       ? {
           career: {
             available: true,
-            recommendation_ids: primary
-              ? [primary.id ?? "rec_career_primary"]
-              : [],
+            recommendation_ids: [] as string[],
             intro: null,
             analysis_preview: careerText.preview,
             analysis_detail: careerText.detail,

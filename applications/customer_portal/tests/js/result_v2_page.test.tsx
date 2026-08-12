@@ -1,4 +1,4 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { ResultPageV2 } from "../../src/features/result_v2/pages/ResultPageV2";
 import { resultV2ReadyReport } from "./result_v2_fixture";
@@ -8,7 +8,7 @@ afterEach(() => {
 });
 
 describe("ResultPageV2", () => {
-  it("renders PX-1 reading order in Vietnamese", async () => {
+  it("renders PX-1 reading order in Vietnamese", () => {
     render(<ResultPageV2 report={resultV2ReadyReport} />);
     expect(screen.getByRole("heading", { level: 1 }).textContent).toContain("ổn định");
     expect(screen.getAllByText("Tóm tắt tư vấn").length).toBeGreaterThan(0);
@@ -31,10 +31,12 @@ describe("ResultPageV2", () => {
     expect(screen.queryByText("Hero")).toBeNull();
     expect(screen.queryByText("Summary")).toBeNull();
     expect(screen.queryByText("<html>must-not-render</html>")).toBeNull();
-    // Chart fundamentals open by default (Technical is eager + expanded).
+    // Technical is secondary (collapsed) but fully accessible via expand.
+    expect(document.querySelector('[data-chart-fundamentals="true"]')).toBeTruthy();
+    expect(screen.queryByText("Dương lịch")).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Xem chi tiết kỹ thuật" }));
     expect(screen.getByText("Dương lịch")).toBeTruthy();
     expect(screen.getByText("Giáp Tý · Ất Sửu · Bính Dần · Đinh Mão")).toBeTruthy();
-    expect(document.querySelector('[data-chart-fundamentals="true"]')).toBeTruthy();
   });
 
   it("shows loading chrome in Vietnamese", () => {

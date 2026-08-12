@@ -14,14 +14,32 @@ export type KnowledgeProps = {
   onToggleItem: (index: number) => void;
 };
 
+/** Split stored prose into readable paragraphs without inventing content. */
+export function splitProseParagraphs(text: string): string[] {
+  return text
+    .split(/\n\s*\n/)
+    .map((part) => part.trim())
+    .filter((part) => part.length > 0);
+}
+
+function knowledgeParagraphs(item: KnowledgeModel): string[] {
+  const body = (item.body ?? "").trim();
+  const teaser = (item.teaser ?? "").trim();
+  if (body) return splitProseParagraphs(body);
+  if (teaser) return [teaser];
+  return [];
+}
+
+/**
+ * Narrative sections: full prose is visible when the section is open.
+ * Section-level expand preserves hierarchy; no teaser/body duplication.
+ */
 export function Knowledge({
   title,
   items,
   chrome,
   sectionCollapsed,
-  isItemExpanded,
   onToggleSection,
-  onToggleItem,
 }: KnowledgeProps) {
   if (items.length === 0) return null;
   const panelId = "rv2-knowledge-panel";
@@ -31,6 +49,7 @@ export function Knowledge({
       id="rv2-Knowledge"
       tabIndex={-1}
       aria-labelledby="rv2-know-title"
+      data-narrative-sections="true"
     >
       <SectionHeader id="rv2-know-title" icon="knowledge">
         {title}
@@ -43,31 +62,23 @@ export function Knowledge({
         onToggle={onToggleSection}
       />
       {!sectionCollapsed ? (
-        <div id={panelId} className="rv2-expand-panel">
+        <div id={panelId} className="rv2-expand-panel rv2-knowledge-list">
           {items.map((item, index) => {
-            const itemId = `rv2-know-item-${index}`;
-            const expanded = isItemExpanded(index);
+            const paragraphs = knowledgeParagraphs(item);
             return (
-              <Card key={`${item.title}-${index}`} className="rv2-knowledge-card" title={item.title}>
-                <p className="rv2-prose rv2-knowledge-teaser">{item.teaser}</p>
-                {item.body ? (
-                  <>
-                    <Expand
-                      expanded={expanded}
-                      expandLabel={chrome.expand_knowledge_item}
-                      collapseLabel={chrome.expand_less}
-                      controlsId={itemId}
-                      onToggle={() => onToggleItem(index)}
-                    />
-                    {expanded ? (
-                      <div id={itemId} className="rv2-article rv2-expand-panel">
-                        <p>{item.body}</p>
-                      </div>
-                    ) : (
-                      <div id={itemId} hidden />
-                    )}
-                  </>
-                ) : null}
+              <Card
+                key={`${item.title}-${index}`}
+                className="rv2-knowledge-card"
+                title={item.title}
+              >
+                <div
+                  className="rv2-article rv2-knowledge-body"
+                  data-knowledge-index={index}
+                >
+                  {paragraphs.map((paragraph, paragraphIndex) => (
+                    <p key={`know-${index}-p-${paragraphIndex}`}>{paragraph}</p>
+                  ))}
+                </div>
               </Card>
             );
           })}
