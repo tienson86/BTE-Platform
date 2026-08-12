@@ -29,6 +29,11 @@ from applications.production.models import (
     SectionAvailability,
     SectionStatus,
 )
+from applications.production.product_context.delivery import ContextDeliveryAdapter
+from applications.production.product_context.engine import ProductContextEngine
+from applications.production.product_context.input_builder import (
+    build_product_context_input,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -42,7 +47,7 @@ def _map_domain_status(status: DomainStatus) -> SectionStatus:
 
 
 class ProductionEndToEndOrchestrator:
-    """One orchestrator: engines → multi-domain composition → report → PDF."""
+    """One orchestrator: engines → composition → product context → report → PDF."""
 
     def __init__(
         self,
@@ -51,6 +56,8 @@ class ProductionEndToEndOrchestrator:
         strength_service: StrengthInterpretationService | None = None,
         composition_service: MultiDomainInterpretationService | None = None,
         export_service: ReportExportServiceV1 | None = None,
+        product_context_engine: ProductContextEngine | None = None,
+        context_delivery: ContextDeliveryAdapter | None = None,
     ) -> None:
         self._engines = engine_runner or ProductionEngineRunner()
         self._strength = strength_service or StrengthInterpretationService()
@@ -58,6 +65,8 @@ class ProductionEndToEndOrchestrator:
             strength_service=self._strength,
         )
         self._export = export_service or ReportExportServiceV1()
+        self._product_context = product_context_engine or ProductContextEngine()
+        self._context_delivery = context_delivery or ContextDeliveryAdapter()
 
     def run(self, request: ProductionRequest) -> ProductionPipelineResult:
         """Execute full customer pipeline for one birth request."""
@@ -83,10 +92,17 @@ class ProductionEndToEndOrchestrator:
             stages.append("career_report")
             stages.append("executive_consulting")
 
+            context_input = build_product_context_input(request)
+            product_context = self._product_context.resolve(context_input)
+            delivery = self._context_delivery.apply(composition, product_context)
+            stages.append("product_context")
+            stages.append("context_delivery")
+
             report_input = build_report_input_v1(engine_output.report_source)
             report_input = self._enrich_report_with_composition(
                 report_input,
                 composition=composition,
+                delivery=delivery,
             )
             stages.append("report_input_v1")
 
@@ -104,22 +120,24 @@ class ProductionEndToEndOrchestrator:
                 stages.append("pdf_export")
 
             domains = composition.customer_domain_payloads()
-            executive = composition.executive
+            executive = delivery.executive
             executive_body = (
                 executive.body
                 if executive.status != DomainStatus.NOT_AVAILABLE
                 else EXECUTIVE_CONSULTING_NOT_AVAILABLE
             )
             identity_body = (
-                composition.identity.body
-                if composition.identity.status != DomainStatus.NOT_AVAILABLE
+                delivery.identity.body
+                if delivery.identity.status != DomainStatus.NOT_AVAILABLE
                 else ""
             )
-            career_body = (
-                composition.career.body
-                if composition.career.status != DomainStatus.NOT_AVAILABLE
-                else ""
-            )
+            # Keep explicit hide marker when context blocks Career (customer-visible policy signal).
+            career_body = delivery.career.body or ""
+            if (
+                delivery.career.status == DomainStatus.NOT_AVAILABLE
+                and not career_body
+            ):
+                career_body = "CAREER_REPORT_HIDDEN_BY_PRODUCT_CONTEXT"
             section_status = SectionAvailability(
                 strength_interpretation=_map_domain_status(
                     composition.domains["strength"].status
@@ -134,8 +152,18 @@ class ProductionEndToEndOrchestrator:
                     composition.domains["useful_god"].status
                 ),
                 executive_consulting=_map_domain_status(executive.status),
-                identity_report=_map_domain_status(composition.identity.status),
-                career_report=_map_domain_status(composition.career.status),
+                identity_report=_map_domain_status(delivery.identity.status),
+                career_report=_map_domain_status(delivery.career.status),
+                development_guidance=(
+                    SectionStatus.AVAILABLE
+                    if delivery.development_guidance
+                    else SectionStatus.NOT_AVAILABLE
+                ),
+                parent_guidance=(
+                    SectionStatus.AVAILABLE
+                    if delivery.parent_guidance
+                    else SectionStatus.NOT_AVAILABLE
+                ),
                 master_interpretation=SectionStatus.NOT_AVAILABLE,
                 report=report_status,
             )
@@ -151,8 +179,10 @@ class ProductionEndToEndOrchestrator:
                 useful_god_interpretation=domains.get("useful_god", {}),
                 identity_report=identity_body,
                 career_report=career_body,
-                report_summary=executive.sections[5].paragraphs[0]
-                if len(executive.sections) > 5
+                development_guidance=delivery.development_guidance,
+                parent_guidance=delivery.parent_guidance,
+                report_summary=executive.sections[0].paragraphs[0]
+                if executive.sections and executive.sections[0].paragraphs
                 else (executive_body[:500] if executive_body else ""),
                 recommendations=list(executive.recommendations),
                 pipeline_stages=stages,
@@ -165,6 +195,8 @@ class ProductionEndToEndOrchestrator:
                 engine_output,
                 composition.diagnostics,
             )
+            diagnostics["product_context"] = product_context.to_dict()
+            diagnostics["context_delivery"] = dict(delivery.diagnostics or {})
 
             return ProductionPipelineResult(
                 success=True,
@@ -211,8 +243,14 @@ class ProductionEndToEndOrchestrator:
         )
         return self.run(request)
 
-    def _enrich_report_with_composition(self, report_input, *, composition) -> Any:
-        """Attach generic domain + executive sections to ReportInputV1."""
+    def _enrich_report_with_composition(
+        self,
+        report_input,
+        *,
+        composition,
+        delivery=None,
+    ) -> Any:
+        """Attach generic domain + context-delivered feature sections to ReportInputV1."""
         sections = list(report_input.interpretation.sections)
         for domain_name, result in composition.domains.items():
             if result.status in {DomainStatus.NOT_AVAILABLE, DomainStatus.INSUFFICIENT}:
@@ -228,7 +266,10 @@ class ProductionEndToEndOrchestrator:
                     priority=10,
                 )
             )
-        executive = composition.executive
+        identity = delivery.identity if delivery is not None else composition.identity
+        career = delivery.career if delivery is not None else composition.career
+        executive = delivery.executive if delivery is not None else composition.executive
+
         if executive.status != DomainStatus.NOT_AVAILABLE:
             sections.append(
                 ReportInterpretationSectionV1(
@@ -238,28 +279,46 @@ class ProductionEndToEndOrchestrator:
                     priority=0,
                 )
             )
-        if composition.identity.status != DomainStatus.NOT_AVAILABLE:
+        if identity.status != DomainStatus.NOT_AVAILABLE:
             sections.append(
                 ReportInterpretationSectionV1(
                     id="identity_report",
                     title="Báo cáo danh tính",
-                    content=composition.identity.body[:6000],
+                    content=identity.body[:6000],
                     priority=1,
                 )
             )
-        if composition.career.status != DomainStatus.NOT_AVAILABLE:
+        if career.status != DomainStatus.NOT_AVAILABLE:
             sections.append(
                 ReportInterpretationSectionV1(
                     id="career_report",
                     title="Báo cáo sự nghiệp",
-                    content=composition.career.body[:6000],
+                    content=career.body[:6000],
                     priority=2,
+                )
+            )
+        if delivery is not None and delivery.parent_guidance:
+            sections.append(
+                ReportInterpretationSectionV1(
+                    id="parent_guidance",
+                    title="Hướng dẫn phụ huynh",
+                    content=delivery.parent_guidance[:4000],
+                    priority=3,
+                )
+            )
+        if delivery is not None and delivery.development_guidance:
+            sections.append(
+                ReportInterpretationSectionV1(
+                    id="development_guidance",
+                    title="Định hướng phát triển",
+                    content=delivery.development_guidance[:4000],
+                    priority=4,
                 )
             )
         insight = ""
         if executive.sections:
             for section in executive.sections:
-                if section.section_id == "INSIGHT" and section.paragraphs:
+                if section.section_id in {"INSIGHT", "CONCLUSION", "WHO"} and section.paragraphs:
                     insight = section.paragraphs[0]
                     break
         report_input.interpretation = ReportInterpretationV1(

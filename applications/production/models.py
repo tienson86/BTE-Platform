@@ -68,6 +68,8 @@ class SectionAvailability:
     executive_consulting: SectionStatus = SectionStatus.NOT_AVAILABLE
     identity_report: SectionStatus = SectionStatus.NOT_AVAILABLE
     career_report: SectionStatus = SectionStatus.NOT_AVAILABLE
+    development_guidance: SectionStatus = SectionStatus.NOT_AVAILABLE
+    parent_guidance: SectionStatus = SectionStatus.NOT_AVAILABLE
     master_interpretation: SectionStatus = SectionStatus.NOT_AVAILABLE
     report: SectionStatus = SectionStatus.NOT_AVAILABLE
 
@@ -81,6 +83,8 @@ class SectionAvailability:
             "executive_consulting": self.executive_consulting.value,
             "identity_report": self.identity_report.value,
             "career_report": self.career_report.value,
+            "development_guidance": self.development_guidance.value,
+            "parent_guidance": self.parent_guidance.value,
             "master_interpretation": self.master_interpretation.value,
             "report": self.report.value,
         }
@@ -101,6 +105,8 @@ class CustomerDeliverable:
     useful_god_interpretation: dict[str, Any] = field(default_factory=dict)
     identity_report: str = ""
     career_report: str = ""
+    development_guidance: str = ""
+    parent_guidance: str = ""
     report_summary: str = ""
     recommendations: list[str] = field(default_factory=list)
     pipeline_stages: list[str] = field(default_factory=list)
@@ -119,6 +125,8 @@ class CustomerDeliverable:
             "useful_god_interpretation": dict(self.useful_god_interpretation),
             "identity_report": self.identity_report,
             "career_report": self.career_report,
+            "development_guidance": self.development_guidance,
+            "parent_guidance": self.parent_guidance,
             "report_summary": self.report_summary,
             "recommendations": list(self.recommendations),
             "pipeline_stages": list(self.pipeline_stages),

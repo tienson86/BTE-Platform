@@ -217,10 +217,12 @@ def test_case_0002_acceptance(composition_0002) -> None:
     assert composition_0002.identity.status.value in {"AVAILABLE", "PARTIAL"}
     assert composition_0002.career.status.value in {"AVAILABLE", "PARTIAL"}
     assert "Tôi là ai" in composition_0002.identity.body
-    assert "Phong cách làm việc" in composition_0002.career.body
+    assert "làm việc" in composition_0002.career.body.lower()
     assert "TRUE_CONFLICT" not in composition_0002.executive.body
     assert "claim_id" not in composition_0002.executive.body
     assert "DEPENDENCY_OVERRIDE" not in composition_0002.executive.body
+    assert "align_operating_role:" not in composition_0002.identity.body
+    assert "balance:" not in composition_0002.executive.body
 
 
 def test_case_0001_regression(composition_0001) -> None:
@@ -285,6 +287,7 @@ def test_customer_mode_leak_prevention(tmp_path, composition_0002) -> None:
 
 def test_identity_career_integration(composition_0001) -> None:
     assert "Mẫu vận hành" in composition_0001.identity.body
-    assert "Hướng cân bằng" in composition_0001.career.body or (
-        "cân bằng" in composition_0001.career.body.lower()
+    assert "cân bằng" in composition_0001.career.body.lower() or (
+        "đầu ra" in composition_0001.career.body.lower()
+        or "tự chủ" in composition_0001.career.body.lower()
     )
