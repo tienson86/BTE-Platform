@@ -1,4 +1,5 @@
 import { PvButton, PvCard, PvInput, PvRadio, PvSelect } from "../components/primitives";
+import { PvError, PvLoading } from "../components/states";
 import type { PortalRoute } from "../chrome/routes";
 
 export type WizardDraft = {
@@ -12,6 +13,8 @@ export type WizardDraft = {
   gender: string;
   calendar: string;
 };
+
+export type WizardAnalyzeStatus = "idle" | "loading" | "error" | "ready";
 
 const STEPS = [
   { id: "analyze", label: "Tổng quan" },
@@ -107,26 +110,38 @@ export function ChartInputPage({
   draft,
   onChange,
   onNavigate,
+  onStartAnalysis,
+  analyzeStatus,
 }: {
   draft: WizardDraft;
   onChange: (patch: Partial<WizardDraft>) => void;
   onNavigate: (route: PortalRoute) => void;
+  onStartAnalysis: () => void;
+  analyzeStatus: WizardAnalyzeStatus;
 }) {
+  const submitting = analyzeStatus === "loading";
   return (
-    <section className="pv-page">
+    <section className="pv-page" data-analyze-status={analyzeStatus}>
       <Stepper current="analyze-chart" />
       <PvCard title={<h2 className="pv-heading">Thông tin lá số</h2>}>
         <p className="pv-hint">Chỉ cần lịch và múi giờ. Phần còn lại hệ thống sẽ sắp xếp.</p>
         <div className="pv-form-grid">
-          <PvSelect label="Lịch" value={draft.calendar} onChange={(event) => onChange({ calendar: event.target.value })}>
+          <PvSelect
+            label="Lịch"
+            value={draft.calendar}
+            onChange={(event) => onChange({ calendar: event.target.value })}
+            disabled={submitting}
+          >
             <option value="solar">Dương lịch</option>
             <option value="lunar">Âm lịch</option>
           </PvSelect>
           <PvInput label="Múi giờ" value="Việt Nam (UTC+7)" readOnly />
         </div>
         <div className="pv-cta-row">
-          <PvButton onClick={() => onNavigate("analyze-progress")}>Bắt đầu phân tích</PvButton>
-          <PvButton variant="text" onClick={() => onNavigate("analyze-birth")}>
+          <PvButton disabled={submitting} onClick={onStartAnalysis}>
+            Bắt đầu phân tích
+          </PvButton>
+          <PvButton variant="text" disabled={submitting} onClick={() => onNavigate("analyze-birth")}>
             Quay lại
           </PvButton>
         </div>
@@ -138,23 +153,57 @@ export function ChartInputPage({
 export function AnalysisProgressPage({
   draft,
   onNavigate,
+  analyzeStatus,
+  analyzeError,
+  onRetry,
 }: {
   draft: WizardDraft;
   onNavigate: (route: PortalRoute) => void;
+  analyzeStatus: WizardAnalyzeStatus;
+  analyzeError: string | null;
+  onRetry: () => void;
 }) {
+  const loading = analyzeStatus === "loading";
+  const failed = analyzeStatus === "error";
+
   return (
-    <section className="pv-page">
+    <section className="pv-page" data-analyze-status={analyzeStatus}>
       <Stepper current="analyze-progress" />
       <PvCard title={<h2 className="pv-heading">Đang chuẩn bị tư vấn</h2>}>
-        <p className="pv-prose">Đang sắp xếp hồ sơ cho {draft.name || "bạn"}. Bạn có thể mở kết quả khi sẵn sàng.</p>
-        <div className="pv-progress" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={72} aria-label="Tiến trình phân tích">
-          <span style={{ width: "72%" }} />
-        </div>
+        <p className="pv-prose">
+          {loading
+            ? `Đang tạo phân tích cho ${draft.name || "bạn"}…`
+            : failed
+              ? `Chưa tạo được phân tích cho ${draft.name || "bạn"}. Bạn có thể thử lại.`
+              : `Đang sắp xếp hồ sơ cho ${draft.name || "bạn"}.`}
+        </p>
+
+        {loading ? <PvLoading label="Đang tạo phân tích..." /> : null}
+
+        {failed && analyzeError ? (
+          <PvError
+            title="Không tạo được phân tích"
+            body={analyzeError}
+            actionLabel="Thử lại"
+            onAction={onRetry}
+          />
+        ) : null}
+
+        {!loading && !failed ? (
+          <div className="pv-progress" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={72} aria-label="Tiến trình phân tích">
+            <span style={{ width: "72%" }} />
+          </div>
+        ) : null}
+
         <div className="pv-cta-row">
-          <PvButton onClick={() => onNavigate("result")}>Xem kết quả</PvButton>
-          <PvButton variant="secondary" onClick={() => onNavigate("dashboard")}>
+          <PvButton variant="secondary" disabled={loading} onClick={() => onNavigate("dashboard")}>
             Về tổng quan
           </PvButton>
+          {failed ? (
+            <PvButton variant="text" onClick={() => onNavigate("analyze-chart")}>
+              Quay lại lá số
+            </PvButton>
+          ) : null}
         </div>
       </PvCard>
     </section>

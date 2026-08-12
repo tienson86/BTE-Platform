@@ -1,4 +1,4 @@
-import { lazy, Suspense, useCallback, useEffect, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { PortalShell } from "./chrome/PortalShell";
 import { parsePortalHash, portalHref, type PortalRoute } from "./chrome/routes";
 import type { ReportMode } from "./components/CommercialRail";
@@ -18,6 +18,7 @@ import {
   BirthInformationPage,
   ChartInputPage,
   NewAnalysisPage,
+  type WizardAnalyzeStatus,
   type WizardDraft,
 } from "./pages/AnalysisWizard";
 import { DashboardPage, HomePage } from "./pages/HomeDashboard";
@@ -30,6 +31,14 @@ import {
 } from "./pages/JourneyPages";
 import { KnowledgeCenterPage, ResultListPage } from "./pages/ResultsKnowledge";
 import { PvLoading } from "./components/states";
+import { apiErrorUserMessage, isApiError } from "../../api";
+import type { AnalyzeService } from "../../services";
+import { getAnalyzeService } from "../../services";
+import {
+  resolveAnalysisId,
+  type PortalAnalysisSession,
+} from "./analysisSession";
+import { draftToAnalyzeRequest } from "./wizardAnalyzeRequest";
 import "./styles/portal.css";
 
 const ResultViewerPage = lazy(() => import("./pages/ResultViewerPage"));
@@ -46,11 +55,17 @@ const INITIAL_DRAFT: WizardDraft = {
   calendar: "solar",
 };
 
+const VALIDATION_ERROR_VI =
+  "Thông tin ngày sinh chưa đủ hoặc không hợp lệ. Vui lòng kiểm tra lại.";
+const UNKNOWN_ERROR_VI = "Không tạo được phân tích. Vui lòng thử lại.";
+
 export type PortalAppProps = {
   initialRoute?: PortalRoute;
+  /** Optional AnalyzeService injection for tests. */
+  analyzeService?: AnalyzeService;
 };
 
-export function PortalApp({ initialRoute }: PortalAppProps) {
+export function PortalApp({ initialRoute, analyzeService }: PortalAppProps) {
   const [route, setRoute] = useState<PortalRoute>(initialRoute ?? "home");
   const [search, setSearch] = useState("");
   const [toast, setToast] = useState<string | null>(null);
@@ -60,6 +75,12 @@ export function PortalApp({ initialRoute }: PortalAppProps) {
   const [reportMode, setReportMode] = useState<ReportMode>("reading");
   const [shareOpen, setShareOpen] = useState(false);
   const [knowledgeReturn, setKnowledgeReturn] = useState<PortalRoute>("result");
+  const [analyzeStatus, setAnalyzeStatus] = useState<WizardAnalyzeStatus>("idle");
+  const [analyzeError, setAnalyzeError] = useState<string | null>(null);
+  const [analysisSession, setAnalysisSession] = useState<PortalAnalysisSession | null>(
+    null,
+  );
+  const submittingRef = useRef(false);
 
   useEffect(() => {
     if (initialRoute) return;
@@ -69,13 +90,16 @@ export function PortalApp({ initialRoute }: PortalAppProps) {
     return () => window.removeEventListener("hashchange", sync);
   }, [initialRoute]);
 
-  const onNavigate = useCallback((next: PortalRoute) => {
-    setRoute(next);
-    setSidebarOpen(false);
-    if (!initialRoute && typeof window !== "undefined") {
-      window.location.hash = portalHref(next).slice(1);
-    }
-  }, [initialRoute]);
+  const onNavigate = useCallback(
+    (next: PortalRoute) => {
+      setRoute(next);
+      setSidebarOpen(false);
+      if (!initialRoute && typeof window !== "undefined") {
+        window.location.hash = portalHref(next).slice(1);
+      }
+    },
+    [initialRoute],
+  );
 
   const onSearch = useCallback((value: string) => {
     setSearch(value);
@@ -86,6 +110,47 @@ export function PortalApp({ initialRoute }: PortalAppProps) {
     setKnowledgeReturn("result");
     onNavigate("knowledge-article");
   }, [onNavigate]);
+
+  const startAnalysis = useCallback(async () => {
+    if (submittingRef.current || analyzeStatus === "loading") {
+      return;
+    }
+
+    const request = draftToAnalyzeRequest(draft);
+    if (!request) {
+      setAnalyzeStatus("error");
+      setAnalyzeError(VALIDATION_ERROR_VI);
+      onNavigate("analyze-progress");
+      return;
+    }
+
+    submittingRef.current = true;
+    setAnalyzeStatus("loading");
+    setAnalyzeError(null);
+    onNavigate("analyze-progress");
+
+    const service = analyzeService ?? getAnalyzeService();
+    try {
+      const response = await service.analyze(request);
+      const analysisId = resolveAnalysisId(response.request_id);
+      setAnalysisSession({
+        analysis_id: analysisId,
+        request_id: response.request_id ?? null,
+        data: response.data,
+      });
+      setAnalyzeStatus("ready");
+      onNavigate("result");
+    } catch (error) {
+      const message = isApiError(error)
+        ? apiErrorUserMessage(error)
+        : UNKNOWN_ERROR_VI;
+      setAnalyzeStatus("error");
+      setAnalyzeError(message);
+      setAnalysisSession(null);
+    } finally {
+      submittingRef.current = false;
+    }
+  }, [analyzeService, analyzeStatus, draft, onNavigate]);
 
   let body;
   switch (route) {
@@ -102,13 +167,39 @@ export function PortalApp({ initialRoute }: PortalAppProps) {
       body = <NewAnalysisPage onNavigate={onNavigate} />;
       break;
     case "analyze-birth":
-      body = <BirthInformationPage draft={draft} onChange={(patch) => setDraft((prev) => ({ ...prev, ...patch }))} onNavigate={onNavigate} />;
+      body = (
+        <BirthInformationPage
+          draft={draft}
+          onChange={(patch) => setDraft((prev) => ({ ...prev, ...patch }))}
+          onNavigate={onNavigate}
+        />
+      );
       break;
     case "analyze-chart":
-      body = <ChartInputPage draft={draft} onChange={(patch) => setDraft((prev) => ({ ...prev, ...patch }))} onNavigate={onNavigate} />;
+      body = (
+        <ChartInputPage
+          draft={draft}
+          onChange={(patch) => setDraft((prev) => ({ ...prev, ...patch }))}
+          onNavigate={onNavigate}
+          onStartAnalysis={() => {
+            void startAnalysis();
+          }}
+          analyzeStatus={analyzeStatus}
+        />
+      );
       break;
     case "analyze-progress":
-      body = <AnalysisProgressPage draft={draft} onNavigate={onNavigate} />;
+      body = (
+        <AnalysisProgressPage
+          draft={draft}
+          onNavigate={onNavigate}
+          analyzeStatus={analyzeStatus}
+          analyzeError={analyzeError}
+          onRetry={() => {
+            void startAnalysis();
+          }}
+        />
+      );
       break;
     case "results":
       body = <ResultListPage onNavigate={onNavigate} />;
@@ -119,6 +210,8 @@ export function PortalApp({ initialRoute }: PortalAppProps) {
           <ResultViewerPage
             mode={reportMode}
             saved={saved}
+            analysisId={analysisSession?.analysis_id ?? null}
+            analysisResult={analysisSession?.data ?? null}
             onSave={() => {
               setSaved(true);
               setToast("Báo cáo đã được lưu trên thiết bị này");
