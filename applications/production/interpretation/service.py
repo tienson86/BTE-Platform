@@ -1,4 +1,4 @@
-"""Multi-domain interpretation service — Sprint 4 composition entry."""
+"""Multi-domain interpretation service — CDR V1.1 composition entry."""
 
 from __future__ import annotations
 
@@ -10,14 +10,28 @@ from engines.interpretation_engine_v2.strength.runtime.service import (
 )
 
 from applications.production.engine_runner import EnginePipelineOutput
+from applications.production.interpretation.career_composer import CareerFeatureComposer
 from applications.production.interpretation.contracts import (
     DomainInterpretationResult,
     DomainStatus,
     ExecutiveConsultingResult,
     IntegratedInterpretationContext,
 )
+from applications.production.interpretation.cross_domain.input_builder import (
+    build_reasoning_input,
+)
+from applications.production.interpretation.cross_domain.models import (
+    CrossDomainReasoningResult,
+    QuestionContext,
+)
+from applications.production.interpretation.cross_domain.reasoner import (
+    CrossDomainReasoner,
+)
 from applications.production.interpretation.executive_composer import (
     ExecutiveConsultingComposer,
+)
+from applications.production.interpretation.identity_composer import (
+    IdentityFeatureComposer,
 )
 from applications.production.interpretation.integrator import CrossDomainIntegrator
 from applications.production.interpretation.pattern_composer import (
@@ -37,11 +51,14 @@ from applications.production.interpretation.useful_god_composer import (
 
 @dataclass(slots=True)
 class MultiDomainCompositionResult:
-    """Full multi-domain composition outcome."""
+    """Full multi-domain composition outcome including CDR features."""
 
     domains: dict[str, DomainInterpretationResult]
     integrated: IntegratedInterpretationContext
     executive: ExecutiveConsultingResult
+    cross_domain: CrossDomainReasoningResult
+    identity: ExecutiveConsultingResult
+    career: ExecutiveConsultingResult
     diagnostics: dict[str, Any] = field(default_factory=dict)
 
     def customer_domain_payloads(self) -> dict[str, dict[str, Any]]:
@@ -53,7 +70,7 @@ class MultiDomainCompositionResult:
 
 
 class MultiDomainInterpretationService:
-    """Orchestrate domain composers → integration → executive consulting."""
+    """Orchestrate domains → CDR → Identity/Career/Executive."""
 
     def __init__(
         self,
@@ -65,7 +82,10 @@ class MultiDomainInterpretationService:
         self._pattern = PatternDomainComposer()
         self._useful_god = UsefulGodDomainComposer()
         self._integrator = CrossDomainIntegrator()
+        self._reasoner = CrossDomainReasoner()
         self._executive = ExecutiveConsultingComposer()
+        self._identity = IdentityFeatureComposer()
+        self._career = CareerFeatureComposer()
 
     def compose(
         self,
@@ -73,7 +93,7 @@ class MultiDomainInterpretationService:
         case_id: str,
         engine_output: EnginePipelineOutput,
     ) -> MultiDomainCompositionResult:
-        """Compose all in-scope domains from engine pipeline output."""
+        """Compose domains, cross-domain reasoning, and feature reports."""
         strength = self._strength.compose(
             case_id=case_id,
             strength_result=engine_output.strength_result,
@@ -96,7 +116,31 @@ class MultiDomainInterpretationService:
             "useful_god": useful_god,
         }
         integrated = self._integrator.integrate(domains)
-        executive = self._executive.compose(integrated)
+
+        general_input = build_reasoning_input(
+            engine_output,
+            domains,
+            question_context=QuestionContext.GENERAL,
+        )
+        cross_domain = self._reasoner.reason(general_input)
+
+        identity_input = build_reasoning_input(
+            engine_output,
+            domains,
+            question_context=QuestionContext.IDENTITY,
+        )
+        identity_reasoning = self._reasoner.reason(identity_input)
+        identity = self._identity.compose(identity_reasoning)
+
+        career_input = build_reasoning_input(
+            engine_output,
+            domains,
+            question_context=QuestionContext.CAREER,
+        )
+        career_reasoning = self._reasoner.reason(career_input)
+        career = self._career.compose(career_reasoning)
+
+        executive = self._executive.compose(integrated, reasoning=cross_domain)
 
         diagnostics = {
             "domain_statuses": {
@@ -106,12 +150,18 @@ class MultiDomainInterpretationService:
                 name: result.knowledge_status.value for name, result in domains.items()
             },
             "integrated": integrated.to_diagnostics_dict(),
+            "cross_domain": cross_domain.to_validation_dict(),
+            "identity": dict(identity.diagnostics),
+            "career": dict(career.diagnostics),
             "executive": dict(executive.diagnostics),
         }
         return MultiDomainCompositionResult(
             domains=domains,
             integrated=integrated,
             executive=executive,
+            cross_domain=cross_domain,
+            identity=identity,
+            career=career,
             diagnostics=diagnostics,
         )
 

@@ -78,6 +78,9 @@ class ProductionEndToEndOrchestrator:
             stages.append("interpretation_pattern")
             stages.append("interpretation_useful_god")
             stages.append("cross_domain_integration")
+            stages.append("cross_domain_reasoning")
+            stages.append("identity_report")
+            stages.append("career_report")
             stages.append("executive_consulting")
 
             report_input = build_report_input_v1(engine_output.report_source)
@@ -107,6 +110,16 @@ class ProductionEndToEndOrchestrator:
                 if executive.status != DomainStatus.NOT_AVAILABLE
                 else EXECUTIVE_CONSULTING_NOT_AVAILABLE
             )
+            identity_body = (
+                composition.identity.body
+                if composition.identity.status != DomainStatus.NOT_AVAILABLE
+                else ""
+            )
+            career_body = (
+                composition.career.body
+                if composition.career.status != DomainStatus.NOT_AVAILABLE
+                else ""
+            )
             section_status = SectionAvailability(
                 strength_interpretation=_map_domain_status(
                     composition.domains["strength"].status
@@ -121,6 +134,8 @@ class ProductionEndToEndOrchestrator:
                     composition.domains["useful_god"].status
                 ),
                 executive_consulting=_map_domain_status(executive.status),
+                identity_report=_map_domain_status(composition.identity.status),
+                career_report=_map_domain_status(composition.career.status),
                 master_interpretation=SectionStatus.NOT_AVAILABLE,
                 report=report_status,
             )
@@ -134,6 +149,8 @@ class ProductionEndToEndOrchestrator:
                 ten_gods_interpretation=domains.get("ten_gods", {}),
                 pattern_interpretation=domains.get("pattern", {}),
                 useful_god_interpretation=domains.get("useful_god", {}),
+                identity_report=identity_body,
+                career_report=career_body,
                 report_summary=executive.sections[5].paragraphs[0]
                 if len(executive.sections) > 5
                 else (executive_body[:500] if executive_body else ""),
@@ -219,6 +236,24 @@ class ProductionEndToEndOrchestrator:
                     title="Báo cáo tư vấn tổng hợp",
                     content=executive.body[:8000],
                     priority=0,
+                )
+            )
+        if composition.identity.status != DomainStatus.NOT_AVAILABLE:
+            sections.append(
+                ReportInterpretationSectionV1(
+                    id="identity_report",
+                    title="Báo cáo danh tính",
+                    content=composition.identity.body[:6000],
+                    priority=1,
+                )
+            )
+        if composition.career.status != DomainStatus.NOT_AVAILABLE:
+            sections.append(
+                ReportInterpretationSectionV1(
+                    id="career_report",
+                    title="Báo cáo sự nghiệp",
+                    content=composition.career.body[:6000],
+                    priority=2,
                 )
             )
         insight = ""

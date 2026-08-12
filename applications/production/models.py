@@ -66,6 +66,8 @@ class SectionAvailability:
     pattern_interpretation: SectionStatus = SectionStatus.NOT_AVAILABLE
     useful_god_interpretation: SectionStatus = SectionStatus.NOT_AVAILABLE
     executive_consulting: SectionStatus = SectionStatus.NOT_AVAILABLE
+    identity_report: SectionStatus = SectionStatus.NOT_AVAILABLE
+    career_report: SectionStatus = SectionStatus.NOT_AVAILABLE
     master_interpretation: SectionStatus = SectionStatus.NOT_AVAILABLE
     report: SectionStatus = SectionStatus.NOT_AVAILABLE
 
@@ -77,6 +79,8 @@ class SectionAvailability:
             "pattern_interpretation": self.pattern_interpretation.value,
             "useful_god_interpretation": self.useful_god_interpretation.value,
             "executive_consulting": self.executive_consulting.value,
+            "identity_report": self.identity_report.value,
+            "career_report": self.career_report.value,
             "master_interpretation": self.master_interpretation.value,
             "report": self.report.value,
         }
@@ -95,6 +99,8 @@ class CustomerDeliverable:
     ten_gods_interpretation: dict[str, Any] = field(default_factory=dict)
     pattern_interpretation: dict[str, Any] = field(default_factory=dict)
     useful_god_interpretation: dict[str, Any] = field(default_factory=dict)
+    identity_report: str = ""
+    career_report: str = ""
     report_summary: str = ""
     recommendations: list[str] = field(default_factory=list)
     pipeline_stages: list[str] = field(default_factory=list)
@@ -111,6 +117,8 @@ class CustomerDeliverable:
             "ten_gods_interpretation": dict(self.ten_gods_interpretation),
             "pattern_interpretation": dict(self.pattern_interpretation),
             "useful_god_interpretation": dict(self.useful_god_interpretation),
+            "identity_report": self.identity_report,
+            "career_report": self.career_report,
             "report_summary": self.report_summary,
             "recommendations": list(self.recommendations),
             "pipeline_stages": list(self.pipeline_stages),
