@@ -11,8 +11,11 @@ FORBIDDEN_HAN = re.compile(r"[\u4e00-\u9fff]")
 
 def test_no_cal_case_files_created() -> None:
     assert list(ROOT.rglob("CAL-*.json")) == []
-    assert list(PACKETS.rglob("*.json")) == []
-    assert list(EXECUTION.rglob("*.json")) == []
+    assert sorted(p.name for p in (PACKETS / "CAL-000008").glob("*.json")) == [
+        "expert_a_packet.json",
+    ]
+    assert not (PACKETS / "CAL-000008" / "expert_b_packet.json").exists()
+    assert not (EXECUTION / "CAL-000008" / "expert_a_review.json").exists()
 
 
 def test_templates_are_empty_shells_not_filled_judgments() -> None:
@@ -26,10 +29,10 @@ def test_templates_are_empty_shells_not_filled_judgments() -> None:
 
 def test_summary_status_block() -> None:
     text = (ROOT / "PILOT_1M_SUMMARY.md").read_text(encoding="utf-8")
-    assert "NEW_REAL_CASES_ACQUIRED: 0" in text
+    assert "NEW_REAL_CASES_ACQUIRED: 1" in text
     assert "NEW_DUAL_REVIEWED_CASES: 0" in text
     assert "EXISTING_DUAL_REVIEWED_CASES: 2" in text
-    assert "NO_DATA_CONTINGENCY_VALIDATED: YES" in text
+    assert "Expert-A result | pending; no judgment invented" in text
     assert "BLINDING_VALIDATED: YES" in text
     assert "Final Decision:\nCALIBRATION_PARTIAL" in text
     assert "CALIBRATION_COMPLETE" not in text.split("Final Decision:")[-1]
@@ -46,7 +49,7 @@ def test_validation_no_fabrication() -> None:
     assert data["no_fabricated_expert_judgments"] is True
 
 
-def test_intake_status_zero() -> None:
+def test_intake_status_ready_for_expert_a() -> None:
     data = load_json(REPORTS / "intake_status.json")
-    assert data["intake_records_received"] == 0
-    assert data["status"] == "no_data"
+    assert data["intake_records_received"] == 1
+    assert data["status"] == "ready_for_expert_a"

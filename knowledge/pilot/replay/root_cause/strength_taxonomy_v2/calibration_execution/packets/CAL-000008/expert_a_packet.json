@@ -1,0 +1,64 @@
+{
+  "schema": "expert_a_packet_v0.1",
+  "review_id": "REV-A-CAL-000008",
+  "cal_id": "CAL-000008",
+  "acquisition_id": "AQ-REAL-20260812-0001",
+  "case_status": "ready_for_expert_a",
+  "reviewer_id": "expert_a",
+  "population": "real_calibration",
+  "packet_contents": {
+    "verified_birth_data": {
+      "gender": "male",
+      "birth_date": "1998-01-08",
+      "birth_time": "16:45",
+      "birth_place": "Quang Binh, Vietnam",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "calendar_type": "solar_gregorian_with_user_verified_four_pillars"
+    },
+    "verified_chart": {
+      "year_pillar": "dinh_suu",
+      "month_pillar": "quy_suu",
+      "day_pillar": "at_mao",
+      "hour_pillar": "giap_than",
+      "day_master": "at",
+      "pillar_source": "user_verified"
+    },
+    "verification_context": {
+      "source_status": "verified",
+      "data_status": "verified",
+      "calendar_status": "verified",
+      "critical_ambiguity": false,
+      "not_synthetic": true
+    }
+  },
+  "review_instructions": {
+    "candidate_strength_levels": [
+      "very_weak",
+      "weak",
+      "slightly_weak",
+      "balanced",
+      "slightly_strong",
+      "strong",
+      "very_strong"
+    ],
+    "required_output_fields": [
+      "strength_level",
+      "confidence",
+      "supporting_evidence",
+      "opposing_evidence",
+      "boundary_assessment",
+      "conflict_assessment",
+      "uncertainty",
+      "rationale"
+    ],
+    "must_not_use": [
+      "runtime_strength_score",
+      "runtime_v1_band",
+      "expert_b_judgment",
+      "adjudication",
+      "future_taxonomy_thresholds",
+      "expected_classification"
+    ]
+  },
+  "review_status": "pending_independent_expert_a"
+}

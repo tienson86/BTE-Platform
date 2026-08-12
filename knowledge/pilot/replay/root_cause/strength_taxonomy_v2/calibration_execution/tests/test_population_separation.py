@@ -22,8 +22,9 @@ def test_coverage_references_existing_dual_only() -> None:
         "CAL-000006": "slightly_weak",
     }
     assert data["dual_reviewed_by_level"]["slightly_weak"] == 2
-    assert data["cal_ids_allocated_this_sprint"] == []
-    assert data["next_free_calibration_id"] == "CAL-000008"
+    assert data["cal_ids_allocated_this_sprint"] == ["CAL-000008"]
+    assert data["pending_expert_a"] == ["CAL-000008"]
+    assert data["next_free_calibration_id"] == "CAL-000009"
 
 
 def test_validation_protection_flags() -> None:
