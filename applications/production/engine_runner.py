@@ -23,6 +23,8 @@ from engines.pattern_engine.rule_context_bridge import (
 from engines.pattern_engine.utils.context_builder import build_pattern_context
 from engines.report_engine.adapters.report_input_v1_adapter import ReportInputV1Source
 from engines.report_engine.contracts.report_input_v1 import ReportProfileV1
+from engines.strength_engine.context import StrengthContext
+from engines.strength_engine.models import StrengthResult
 from engines.strength_engine.utils.context_builder import build_strength_context
 from engines.temperature_engine.utils.context_builder import build_temperature_context
 from engines.ten_gods_engine.engine import TenGodsEngine
@@ -41,6 +43,8 @@ class EnginePipelineOutput:
     calendar: dict[str, Any]
     luck: dict[str, Any]
     ten_gods: TenGodsResult
+    strength_result: StrengthResult
+    strength_context: StrengthContext
     report_source: ReportInputV1Source
     stages: list[str]
 
@@ -127,15 +131,27 @@ class ProductionEngineRunner:
         stages.append("score")
 
         pillars = {
-            "year": {"stem": bazi_view.year.stem, "branch": bazi_view.year.branch},
-            "month": {"stem": bazi_view.month.stem, "branch": bazi_view.month.branch},
-            "day": {"stem": bazi_view.day.stem, "branch": bazi_view.day.branch},
-            "hour": {"stem": bazi_view.hour.stem, "branch": bazi_view.hour.branch},
+            "year": {
+                "stem": bazi_view.year_pillar.stem,
+                "branch": bazi_view.year_pillar.branch,
+            },
+            "month": {
+                "stem": bazi_view.month_pillar.stem,
+                "branch": bazi_view.month_pillar.branch,
+            },
+            "day": {
+                "stem": bazi_view.day_pillar.stem,
+                "branch": bazi_view.day_pillar.branch,
+            },
+            "hour": {
+                "stem": bazi_view.hour_pillar.stem,
+                "branch": bazi_view.hour_pillar.branch,
+            },
         }
         ten_gods = self._ten_gods.calculate(
             day_master=bazi_view.day_master,
             pillars=pillars,
-            case_id=request.case_id,
+            case_id=request.case_id or request.request_key,
         )
         stages.append("ten_gods")
 
@@ -186,7 +202,7 @@ class ProductionEngineRunner:
             calendar=calendar_payload,
             luck=luck_context.to_dict(),
             profile=profile,
-            case_id=request.case_id,
+            case_id=request.case_id or request.request_key,
             timezone=request.timezone,
             knowledge_version="v1.0",
         )
@@ -197,6 +213,8 @@ class ProductionEngineRunner:
             calendar=calendar_payload,
             luck=luck_context.to_dict(),
             ten_gods=ten_gods,
+            strength_result=strength_result,
+            strength_context=strength_context,
             report_source=report_source,
             stages=stages,
         )
