@@ -1295,6 +1295,20 @@
     "diagnostics": {
       "$ref": "#/$defs/DiagnosticsPayload",
       "description": "Diagnostics payload section."
+    },
+    "narrative_result": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Pack 05 canonical NarrativeResult. Optional for backward compatibility.",
+      "title": "Narrative Result"
     }
   },
   "required": [

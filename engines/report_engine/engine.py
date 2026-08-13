@@ -16,7 +16,13 @@ from engines.base.base_engine import BaseEngine
 from engines.base.context import EngineContext
 from engines.base.result import EngineResult
 
-from .portal_view import build_narrative_portal_dict, build_report_portal_dict
+from .narrative_binding import (
+    MISSING_NARRATIVE_DIAGNOSTIC,
+    NARRATIVE_SOURCE,
+    build_report_dict_from_narrative,
+    is_usable_narrative_result,
+    missing_narrative_report,
+)
 from .report import ReportFormat, ReportModel
 from .result import ReportResult
 from .service import ReportService
@@ -60,21 +66,46 @@ class ReportEngine(BaseEngine):
         analysis: Any,
         *,
         include_narrative: bool = False,
+        narrative_result: Any = None,
     ) -> ReportResult:
         """
-        Terminal pipeline entry: AnalysisResult → portal report (+ optional narrative).
+        Terminal pipeline entry: NarrativeResult → portal report (+ optional narrative).
 
-        Reads only ``analysis.interpretation`` — no RuleContext or engine rebuild.
+        Interpretation remains on AnalysisResult as an upstream artifact.
+        Customer narrative is Pack 05 NarrativeResult only.
         """
         interpretation = getattr(analysis, "interpretation", None)
         if interpretation is None:
             raise ValueError("AnalysisResult.interpretation is required for report.")
 
-        report = build_report_portal_dict(interpretation)
-        narrative = (
-            build_narrative_portal_dict(interpretation) if include_narrative else None
+        payload = narrative_result
+        if payload is None:
+            payload = getattr(analysis, "narrative_result", None)
+
+        if is_usable_narrative_result(payload):
+            report = build_report_dict_from_narrative(payload)
+            narrative = dict(report) if include_narrative else None
+            return ReportResult(
+                report=report,
+                narrative=narrative,
+                canonical_narrative=dict(payload),
+                source=NARRATIVE_SOURCE,
+                diagnostics={"narrative_source": NARRATIVE_SOURCE},
+            )
+
+        # Fallback path is diagnostic only — never dump InterpretationView as narrative.
+        report = missing_narrative_report()
+        narrative = dict(report) if include_narrative else None
+        return ReportResult(
+            report=report,
+            narrative=narrative,
+            canonical_narrative=None,
+            source=MISSING_NARRATIVE_DIAGNOSTIC,
+            diagnostics={
+                "narrative_source": MISSING_NARRATIVE_DIAGNOSTIC,
+                "interpretation_available": True,
+            },
         )
-        return ReportResult(report=report, narrative=narrative)
 
     def render(
         self,

@@ -333,3 +333,7 @@ class ReportResponse(BaseModel):
     )
     report: ReportPayload = Field(..., description="Report payload section.")
     diagnostics: DiagnosticsPayload = Field(..., description="Diagnostics payload section.")
+    narrative_result: dict | None = Field(
+        default=None,
+        description="Pack 05 canonical NarrativeResult. Optional for backward compatibility.",
+    )

@@ -565,6 +565,7 @@ class OrchestratorService:
             interpretation=payload.get("interpretation") or {},
             run_id=str(payload.get("request_id") or ""),
         )
+        analysis.narrative_result = narrative_result_payload
         payload["narrative_result"] = narrative_result_payload
         payload["narrative_result_source"] = narrative_result_source_fingerprint()
         logger.info(
@@ -575,11 +576,12 @@ class OrchestratorService:
         if stop_index == 11:
             return self._finalize_public_payload(payload, completed)
 
-        # ----- Stage 12: Report -----
+        # ----- Stage 12: Report (consumes already-built NarrativeResult) -----
         include_narrative = stop_index >= 13
         report_result = self.report_engine.render_from_analysis(
             analysis,
             include_narrative=include_narrative,
+            narrative_result=narrative_result_payload,
         )
         report_view = build_report_view(report_result)
         analysis.report = report_view

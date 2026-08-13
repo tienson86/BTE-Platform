@@ -20,6 +20,7 @@ from engines.report_engine.contracts.report_input_v1 import (
 )
 from engines.report_engine.services.report_export_service_v1 import ReportExportServiceV1
 
+from applications.api.services.narrative_result_truth import build_narrative_result_dict
 from applications.production.customer_projection import assert_no_internal_keys
 from applications.production.engine_runner import EnginePipelineOutput, ProductionEngineRunner
 from applications.production.fixtures.case_0001 import CASE_0001_REQUEST
@@ -121,12 +122,16 @@ class ProductionEndToEndOrchestrator:
             report_input = build_report_input_v1(engine_output.report_source)
             stages.append("report_input_v1")
 
+            narrative_result = self._compose_narrative_result(request, engine_output)
+            stages.append("narrative_result")
+
             commercial_request = self._build_commercial_request(
                 request,
                 engine_output=engine_output,
                 composition=composition,
                 delivery=delivery,
                 product_context=product_context,
+                narrative_result=narrative_result,
             )
             commercial_report = self._commercial_builder.build(commercial_request)
             stages.append("commercial_theme_library")
@@ -225,6 +230,8 @@ class ProductionEndToEndOrchestrator:
             diagnostics["product_context"] = product_context.to_dict()
             diagnostics["context_delivery"] = dict(delivery.diagnostics or {})
             diagnostics["commercial_report"] = dict(commercial_report.diagnostics)
+            diagnostics["narrative_result_status"] = narrative_result.get("status")
+            diagnostics["narrative_result_contract"] = narrative_result.get("contract")
 
             return ProductionPipelineResult(
                 success=True,
@@ -271,6 +278,25 @@ class ProductionEndToEndOrchestrator:
         )
         return self.run(request)
 
+    def _compose_narrative_result(
+        self,
+        request: ProductionRequest,
+        engine_output: EnginePipelineOutput,
+    ) -> dict[str, Any]:
+        """Compose Pack 05 NarrativeResult once for the production PDF path."""
+        analysis = engine_output.analysis
+        return build_narrative_result_dict(
+            analysis={
+                "bazi": analysis.bazi_dict(),
+                "pattern": analysis.pattern_dict(),
+                "strength": analysis.strength_dict(),
+                "useful_god": analysis.useful_god_dict(),
+                "score": analysis.score_dict(),
+            },
+            interpretation=analysis.interpretation_dict(),
+            run_id=request.case_id or request.request_key,
+        )
+
     def _build_commercial_request(
         self,
         request: ProductionRequest,
@@ -279,8 +305,9 @@ class ProductionEndToEndOrchestrator:
         composition,
         delivery,
         product_context,
+        narrative_result: dict[str, Any] | None = None,
     ) -> CommercialBuildRequest:
-        """Map product features + theme resolution into the commercial builder."""
+        """Map canonical narrative + product features into the commercial builder."""
         advisor_mode = self._is_advisor_mode(request, product_context)
         parent_context = product_context.language_profile == LanguageProfile.PARENT_SUPPORT or (
             product_context.life_stage in {LifeStage.CHILD, LifeStage.TEEN}
@@ -329,6 +356,7 @@ class ProductionEndToEndOrchestrator:
             writing_variant=str(request.options.get("writing_variant") or ""),
             appendix_rows=appendix_rows,
             appendix_paragraphs=appendix_paragraphs,
+            narrative_result=narrative_result,
         )
 
     @staticmethod

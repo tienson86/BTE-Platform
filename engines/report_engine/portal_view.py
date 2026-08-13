@@ -81,7 +81,7 @@ def build_report_portal_dict(
     *,
     title: str = DEFAULT_REPORT_TITLE,
 ) -> dict[str, Any]:
-    """Build portal-compatible report payload from authoritative interpretation."""
+    """LEGACY FALLBACK — InterpretationView dump. Not the production narrative spine."""
     sections = _sections_from_interpretation(interpretation)
     markdown = render_markdown_from_sections(sections, title)
     html_text = render_html_from_sections(sections, title)
@@ -98,6 +98,5 @@ def build_narrative_portal_dict(
     *,
     title: str = DEFAULT_REPORT_TITLE,
 ) -> dict[str, Any]:
-    """Build portal-compatible narrative payload from authoritative interpretation."""
-    payload = build_report_portal_dict(interpretation, title=title)
-    return payload
+    """LEGACY FALLBACK — same InterpretationView dump as report portal dict."""
+    return build_report_portal_dict(interpretation, title=title)

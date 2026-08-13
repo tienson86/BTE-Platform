@@ -86,4 +86,5 @@ class DefaultReportService(ReportService):
                 runtime_messages=[],
                 debug_info=None,
             ),
+            narrative_result=result.narrative_result,
         )

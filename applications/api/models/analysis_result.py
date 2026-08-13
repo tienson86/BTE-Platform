@@ -380,6 +380,7 @@ class AnalysisResult:
     interpretation: InterpretationView | None = None
     report: ReportView | None = None
     narrative: NarrativeView | None = None
+    narrative_result: dict[str, Any] | None = None
     meta: AnalysisMeta = field(default_factory=AnalysisMeta)
     rule_context: dict[str, Any] = field(default_factory=dict)
     unified_context: dict[str, Any] = field(default_factory=dict)

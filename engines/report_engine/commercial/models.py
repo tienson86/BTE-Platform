@@ -80,13 +80,15 @@ class ThemeResolution:
 
 @dataclass(slots=True)
 class CommercialReport:
-    """Customer consulting report composed from product features."""
+    """Customer consulting report composed from canonical narrative + features."""
 
     cover: CommercialCover
     chapters: list[CommercialChapter]
     audience: ReportAudience = ReportAudience.CUSTOMER
     theme: ThemeResolution = field(default_factory=ThemeResolution)
     appendix: list[CommercialSection] = field(default_factory=list)
+    supporting_chapters: list[CommercialChapter] = field(default_factory=list)
+    canonical_narrative: dict[str, Any] | None = None
     footer: str = "BTE · Báo cáo tư vấn"
     version: str = COMMERCIAL_REPORT_VERSION
     diagnostics: dict[str, Any] = field(default_factory=dict)
@@ -126,3 +128,4 @@ class CommercialBuildRequest:
     writing_variant: str = ""
     appendix_rows: list[tuple[str, str]] = field(default_factory=list)
     appendix_paragraphs: list[str] = field(default_factory=list)
+    narrative_result: dict[str, Any] | None = None

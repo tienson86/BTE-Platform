@@ -6,9 +6,17 @@ from abc import ABC, abstractmethod
 from datetime import datetime, timezone
 from time import perf_counter
 
-from applications.api.adapters.analysis_adapter import AnalysisAdapter
-from applications.api.adapters.interpretation_adapter import InterpretationAdapter
-from applications.api.adapters.report_adapter import ReportAdapter
+from applications.api.adapters.analysis_adapter import (
+    AnalysisAdapter,
+    extract_birth_kwargs,
+    map_analysis_payload,
+    map_chart_payload,
+)
+from applications.api.adapters.interpretation_adapter import (
+    InterpretationAdapter,
+    map_interpretation_payload,
+)
+from applications.api.adapters.report_adapter import ReportAdapter, map_report_payload
 from applications.api.contracts.analyze_request import AnalyzeRequest
 from applications.api.contracts.report_response import (
     DiagnosticsPayload,
@@ -38,6 +46,7 @@ class DefaultAnalysisService(AnalysisService):
         orchestrator: OrchestratorService | None = None,
     ) -> None:
         shared = orchestrator or OrchestratorService()
+        self._orchestrator = shared
         self._adapter = adapter or AnalysisAdapter(orchestrator=shared)
         self._interpretation_adapter = interpretation_adapter or InterpretationAdapter(
             orchestrator=shared
@@ -46,20 +55,18 @@ class DefaultAnalysisService(AnalysisService):
 
     def execute(self, request: AnalyzeRequest) -> ReportResponse:
         """
-        Orchestrate the integration pipeline.
+        Orchestrate the integration pipeline from one analyze() run.
 
         AnalyzeRequest
-            → AnalysisAdapter
-            → InterpretationAdapter
-            → ReportAdapter
+            → OrchestratorService.analyze
+            → adapters map chart / interpretation / report / narrative_result
             → ReportResponse
         """
         started = perf_counter()
         timestamp = datetime.now(timezone.utc)
-
-        analysis_result = self._adapter.execute(request)
-        interpretation_result = self._interpretation_adapter.execute(request)
-        report_result = self._report_adapter.execute(request)
+        engine_payload = self._orchestrator.analyze(**extract_birth_kwargs(request))
+        raw_narrative = engine_payload.get("narrative_result")
+        narrative_result = raw_narrative if isinstance(raw_narrative, dict) else None
 
         elapsed_ms = int((perf_counter() - started) * 1000)
         return ReportResponse(
@@ -73,14 +80,15 @@ class DefaultAnalysisService(AnalysisService):
                 knowledge_version=SCHEMA_VERSION,
                 processing_time_ms=elapsed_ms,
             ),
-            chart=analysis_result.chart,
-            analysis=analysis_result.analysis,
-            interpretation=interpretation_result.interpretation,
-            report=report_result.report,
+            chart=map_chart_payload(engine_payload, request),
+            analysis=map_analysis_payload(engine_payload),
+            interpretation=map_interpretation_payload(engine_payload),
+            report=map_report_payload(engine_payload, request),
             diagnostics=DiagnosticsPayload(
                 warnings=[],
                 validation_errors=[],
                 runtime_messages=[],
                 debug_info=None,
             ),
+            narrative_result=narrative_result,
         )

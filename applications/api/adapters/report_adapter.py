@@ -22,6 +22,7 @@ class ReportAdaptation:
     """Adapted report section from engine output."""
 
     report: ReportPayload
+    narrative_result: dict[str, Any] | None
     engine_payload: dict[str, Any]
 
 
@@ -84,7 +85,10 @@ class ReportAdapter:
         """Run Report Engine through full analyze and adapt to contract section."""
         birth = extract_birth_kwargs(request)
         engine_payload = self._orchestrator.analyze(**birth)
+        raw_narrative = engine_payload.get("narrative_result")
+        narrative_result = raw_narrative if isinstance(raw_narrative, dict) else None
         return ReportAdaptation(
             report=map_report_payload(engine_payload, request),
+            narrative_result=narrative_result,
             engine_payload=engine_payload,
         )

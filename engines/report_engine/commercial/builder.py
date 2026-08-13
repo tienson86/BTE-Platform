@@ -1,6 +1,8 @@
-"""Commercial Report Builder — compose PDF from product features only."""
+"""Commercial Report Builder — compose PDF from canonical narrative + features."""
 
 from __future__ import annotations
+
+from typing import Any
 
 from engines.report_engine.commercial.leak_filter import (
     is_feature_available,
@@ -17,6 +19,13 @@ from engines.report_engine.commercial.models import (
     ReportAudience,
 )
 from engines.report_engine.commercial.theme_hook import resolve_theme
+from engines.report_engine.narrative_binding import (
+    CANONICAL_SECTION_IDS,
+    MISSING_NARRATIVE_DIAGNOSTIC,
+    NARRATIVE_SOURCE,
+    extract_canonical_sections,
+    is_usable_narrative_result,
+)
 
 _CHAPTER_TITLES = {
     "identity": "Danh tính",
@@ -34,12 +43,12 @@ _GENDER_LABEL = {
 
 
 class CommercialReportBuilder:
-    """Assemble Cover → Identity → Career → Executive → optional Appendix."""
+    """Assemble Cover → Pack 05 narrative → optional Advisor appendix."""
 
     version = COMMERCIAL_REPORT_VERSION
 
     def build(self, request: CommercialBuildRequest) -> CommercialReport:
-        """Compose a commercial consulting report from feature payloads."""
+        """Compose a commercial consulting report from canonical NarrativeResult."""
         audience = (
             ReportAudience.ADVISOR if request.advisor_mode else ReportAudience.CUSTOMER
         )
@@ -52,16 +61,19 @@ class CommercialReportBuilder:
             writing_variant=request.writing_variant,
         )
         cover = self._build_cover(request, theme.customer_name)
-        chapters: list[CommercialChapter] = []
+        narrative_payload = request.narrative_result
+        narrative_ok = is_usable_narrative_result(narrative_payload)
+        chapters = [self._canonical_narrative_chapter(narrative_payload)]
+        supporting: list[CommercialChapter] = []
         identity = self._chapter("identity", request.identity)
         if identity is not None:
-            chapters.append(identity)
+            supporting.append(identity)
         career = self._chapter("career", request.career)
         if career is not None:
-            chapters.append(career)
+            supporting.append(career)
         executive = self._chapter("executive", request.executive)
         if executive is not None:
-            chapters.append(executive)
+            supporting.append(executive)
 
         appendix: list[CommercialSection] = []
         if audience == ReportAudience.ADVISOR:
@@ -73,15 +85,68 @@ class CommercialReportBuilder:
             audience=audience,
             theme=theme,
             appendix=appendix,
+            supporting_chapters=supporting,
+            canonical_narrative=dict(narrative_payload) if narrative_ok else None,
             footer=self._footer(audience),
             version=self.version,
             diagnostics={
                 "theme_library": theme.to_dict(),
                 "commercial_language": "wired",
                 "chapter_ids": [chapter.chapter_id for chapter in chapters],
+                "supporting_feature_ids": [item.chapter_id for item in supporting],
+                "narrative_source": (
+                    NARRATIVE_SOURCE if narrative_ok else MISSING_NARRATIVE_DIAGNOSTIC
+                ),
+                "canonical_section_ids": [
+                    section.section_id for section in chapters[0].sections
+                ],
                 "parent_context": request.parent_context,
                 "audience": audience.value,
             },
+        )
+
+    def _canonical_narrative_chapter(
+        self,
+        payload: dict[str, Any] | None,
+    ) -> CommercialChapter:
+        """Customer PDF spine from Pack 05 NarrativeResult — no prose rewrite."""
+        if not is_usable_narrative_result(payload):
+            return CommercialChapter(
+                chapter_id="canonical_narrative",
+                title="Bản luận Bát tự",
+                sections=[
+                    CommercialSection(
+                        section_id=MISSING_NARRATIVE_DIAGNOSTIC,
+                        title="Chẩn đoán",
+                        paragraphs=[
+                            "Canonical NarrativeResult is required but was not provided.",
+                        ],
+                    )
+                ],
+            )
+        assert payload is not None
+        sections: list[CommercialSection] = []
+        extracted = extract_canonical_sections(payload)
+        by_id = {item["id"]: item for item in extracted}
+        for section_id in CANONICAL_SECTION_IDS:
+            item = by_id.get(section_id)
+            if item is None:
+                continue
+            paragraphs = [part for part in item["body"].split("\n\n") if part.strip()]
+            if not paragraphs:
+                continue
+            sections.append(
+                CommercialSection(
+                    section_id=item["id"],
+                    title=item["title"],
+                    paragraphs=paragraphs,
+                )
+            )
+        return CommercialChapter(
+            chapter_id="canonical_narrative",
+            title="Bản luận Bát tự",
+            sections=sections,
+            available=True,
         )
 
     def _build_cover(

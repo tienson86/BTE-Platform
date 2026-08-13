@@ -16,7 +16,7 @@ _TEMPLATE_DIR = Path(__file__).resolve().parents[1] / "templates" / "v1"
 
 
 class CommercialHtmlRenderer:
-    """Render Cover → Identity → Career → Executive → optional Appendix."""
+    """Render Cover → Pack 05 canonical narrative → optional Appendix."""
 
     def __init__(self, *, template_dir: Path | None = None) -> None:
         self._template_dir = template_dir or _TEMPLATE_DIR
