@@ -14,7 +14,7 @@
 | CASE_0001 | P01 Over-carrier | **Bound** — Nguyễn Tiến Sơn · 1987 · strong self-carry | SELF | Identity + Career + Executive |
 | CASE_0002 | P02 Output Maker | **Bound** — Hoàng Thị Thu Phương · 1997 · balanced Tòng / output | SELF | Identity + Career + Executive |
 | CASE_0003 | P03 Caregiver Parent | **Bound** — child 2015 · weak · PARENT delivery | PARENT | Development + Parent guidance + soft Executive · Career hidden |
-| CASE_0004 | P04 Conserving Adult | **Unbound** — recruit adult weak / enemy-caution chart | SELF | Identity + Career (conservation) + Executive |
+| CASE_0004 | P04 Conserving Adult | **Discovery chart** — existing Pilot CASE-0006 (Nguyễn Thị Hương Mai · 1988 · Hải Phòng). Golden CASE_0004 still placeholder. Pilot CASE-0004 (2013 strong child) rejected. | SELF | Identity + Career (conservation) + Executive |
 | CASE_0005 | P05 Special-structure | **Unbound** — special or strong-follow structure | SELF | Identity + Executive (Career if adult) |
 | CASE_0006 | P06 Tension Holder | **Unbound** — mixed favorable + caution | SELF | Full C · must surface both layers |
 | CASE_0007 | P07 Founder | **Unbound** — business-intent adult | SELF | B · no invented expansion/income |

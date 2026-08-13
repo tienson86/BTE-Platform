@@ -42,7 +42,14 @@ S0/S1 on a bound Golden (CASE_0001) → stop-the-line for any later engineering 
 
 | Beta ID | Case | Persona | Severity | Category | Disposition | Note |
 |---------|------|---------|----------|----------|-------------|------|
-| — | — | — | — | — | — | No sessions yet |
+| BETA-0001 | RC3-P04 | P04 | S1 | Context | LATER | Adult pass_through; conservation is child-only |
+| BETA-0002 | RC3-P04 | P04 | S1 | Language | LATER | “Bạn mạnh hơn” + trách nhiệm close |
+| BETA-0003 | RC3-P04 | P04 | S1 | Language | LATER | Output/speed residue on BALANCE_DIRECTION |
+| BETA-0004 | RC3-P04 | P04 | S2 | Language | LATER | Empty “khung lá số” / kênh đã công bố |
+| BETA-0005 | RC3-P04 | P04 | S2 | Product | LATER | No stop-list |
+| BETA-0006 | RC3-P04 | P04 | S2 | Reasoning | HOLD | body:balanced vs Nhược / 0.50 — no engine change |
+| BETA-0007 | RC3-P04 | P04 | S3 | Knowledge | WONTFIX | Split band vs pattern — not this program |
+| BETA-0008 | RC3-P04 | P04 | S3 | Language | LATER | Duplicate avoid |
 
 ---
 

@@ -18,6 +18,10 @@ README · PROGRAM · CUSTOMER_PERSONAS · CASE_SELECTION · BETA_PROTOCOL · FEE
 - Soft launch ready (P01–P03)  
 - Full cohort blocked on binding CASE_0004–0010  
 
+## 2026-08-13 — P04 Conserving Adult discovery
+
+Existing Pilot CASE-0006 run through frozen production. Commercial **5.7**. See `PERSONA_P04/`. Golden CASE_0004 unchanged.  
+
 ---
 
 END
