@@ -8,6 +8,12 @@ from typing import Any
 
 from engines.interpretation_engine_v2 import StrengthInterpretationService
 from engines.report_engine.adapters.report_input_v1_adapter import build_report_input_v1
+from engines.report_engine.commercial.builder import CommercialReportBuilder
+from engines.report_engine.commercial.models import (
+    CommercialBuildRequest,
+    CommercialFeatureInput,
+)
+from engines.report_engine.commercial.pdf_exporter import CommercialPdfExporter
 from engines.report_engine.contracts.report_input_v1 import (
     ReportInterpretationSectionV1,
     ReportInterpretationV1,
@@ -17,7 +23,11 @@ from engines.report_engine.services.report_export_service_v1 import ReportExport
 from applications.production.customer_projection import assert_no_internal_keys
 from applications.production.engine_runner import EnginePipelineOutput, ProductionEngineRunner
 from applications.production.fixtures.case_0001 import CASE_0001_REQUEST
-from applications.production.interpretation.contracts import DomainStatus
+from applications.production.interpretation.contracts import (
+    DomainStatus,
+    ExecutiveConsultingResult,
+)
+from applications.production.interpretation.cross_domain.models import ThemeStatus
 from applications.production.interpretation.service import MultiDomainInterpretationService
 from applications.production.knowledge_diagnostics import build_knowledge_diagnostics
 from applications.production.luck_internal import extract_internal_dayun_sequence
@@ -33,6 +43,12 @@ from applications.production.product_context.delivery import ContextDeliveryAdap
 from applications.production.product_context.engine import ProductContextEngine
 from applications.production.product_context.input_builder import (
     build_product_context_input,
+)
+from applications.production.product_context.models import (
+    LanguageProfile,
+    LifeStage,
+    PurchasePackage,
+    ReaderRole,
 )
 
 logger = logging.getLogger(__name__)
@@ -58,6 +74,8 @@ class ProductionEndToEndOrchestrator:
         export_service: ReportExportServiceV1 | None = None,
         product_context_engine: ProductContextEngine | None = None,
         context_delivery: ContextDeliveryAdapter | None = None,
+        commercial_builder: CommercialReportBuilder | None = None,
+        commercial_exporter: CommercialPdfExporter | None = None,
     ) -> None:
         self._engines = engine_runner or ProductionEngineRunner()
         self._strength = strength_service or StrengthInterpretationService()
@@ -67,6 +85,8 @@ class ProductionEndToEndOrchestrator:
         self._export = export_service or ReportExportServiceV1()
         self._product_context = product_context_engine or ProductContextEngine()
         self._context_delivery = context_delivery or ContextDeliveryAdapter()
+        self._commercial_builder = commercial_builder or CommercialReportBuilder()
+        self._commercial_export = commercial_exporter or CommercialPdfExporter()
 
     def run(self, request: ProductionRequest) -> ProductionPipelineResult:
         """Execute full customer pipeline for one birth request."""
@@ -99,12 +119,19 @@ class ProductionEndToEndOrchestrator:
             stages.append("context_delivery")
 
             report_input = build_report_input_v1(engine_output.report_source)
-            report_input = self._enrich_report_with_composition(
-                report_input,
+            stages.append("report_input_v1")
+
+            commercial_request = self._build_commercial_request(
+                request,
+                engine_output=engine_output,
                 composition=composition,
                 delivery=delivery,
+                product_context=product_context,
             )
-            stages.append("report_input_v1")
+            commercial_report = self._commercial_builder.build(commercial_request)
+            stages.append("commercial_theme_library")
+            stages.append("commercial_language")
+            stages.append("commercial_report_builder")
 
             pdf_path: Path | None = None
             report_status = SectionStatus.AVAILABLE
@@ -112,8 +139,8 @@ class ProductionEndToEndOrchestrator:
                 export_root = request.export_dir or Path(
                     "knowledge/report_v1_validation/exports"
                 )
-                export_result = self._export.export_pdf(
-                    report_input,
+                export_result = self._commercial_export.export(
+                    commercial_report,
                     export_root / f"BTE_{request_key}_Production_E2E.pdf",
                 )
                 pdf_path = Path(export_result.file_path)
@@ -197,6 +224,7 @@ class ProductionEndToEndOrchestrator:
             )
             diagnostics["product_context"] = product_context.to_dict()
             diagnostics["context_delivery"] = dict(delivery.diagnostics or {})
+            diagnostics["commercial_report"] = dict(commercial_report.diagnostics)
 
             return ProductionPipelineResult(
                 success=True,
@@ -242,6 +270,119 @@ class ProductionEndToEndOrchestrator:
             export_dir=export_dir,
         )
         return self.run(request)
+
+    def _build_commercial_request(
+        self,
+        request: ProductionRequest,
+        *,
+        engine_output: EnginePipelineOutput,
+        composition,
+        delivery,
+        product_context,
+    ) -> CommercialBuildRequest:
+        """Map product features + theme resolution into the commercial builder."""
+        advisor_mode = self._is_advisor_mode(request, product_context)
+        parent_context = product_context.language_profile == LanguageProfile.PARENT_SUPPORT or (
+            product_context.life_stage in {LifeStage.CHILD, LifeStage.TEEN}
+        )
+        active_themes = [
+            theme.theme_id
+            for theme in composition.cross_domain.themes
+            if theme.status != ThemeStatus.SUPPRESSED
+        ]
+        appendix_rows: list[tuple[str, str]] = []
+        appendix_paragraphs: list[str] = []
+        if advisor_mode:
+            appendix_rows, appendix_paragraphs = self._advisor_appendix(
+                engine_output,
+                composition,
+            )
+        return CommercialBuildRequest(
+            client_name=request.full_name,
+            case_id=request.case_id or request.request_key,
+            birth_date=request.birth_date,
+            birth_place=request.birth_place,
+            gender=request.gender,
+            identity=self._feature_input(
+                "identity",
+                "Danh tính",
+                delivery.identity,
+            ),
+            career=self._feature_input(
+                "career",
+                "Sự nghiệp",
+                delivery.career,
+            ),
+            executive=self._feature_input(
+                "executive",
+                "Tư vấn tổng hợp",
+                delivery.executive,
+            ),
+            primary_theme=composition.cross_domain.primary_theme,
+            active_theme_ids=active_themes,
+            capacity_level=engine_output.strength_result.strength_level,
+            has_conflicts=bool(composition.cross_domain.conflicts),
+            parent_context=parent_context,
+            purchase_package=product_context.purchase_package.value,
+            reader_role=product_context.reader_role.value,
+            advisor_mode=advisor_mode,
+            writing_variant=str(request.options.get("writing_variant") or ""),
+            appendix_rows=appendix_rows,
+            appendix_paragraphs=appendix_paragraphs,
+        )
+
+    @staticmethod
+    def _feature_input(
+        feature_id: str,
+        title: str,
+        result: ExecutiveConsultingResult,
+    ) -> CommercialFeatureInput:
+        """Adapt a composed feature into commercial builder input."""
+        sections = [
+            (section.section_id, section.title, list(section.paragraphs))
+            for section in result.sections
+        ]
+        return CommercialFeatureInput(
+            feature_id=feature_id,
+            title=title,
+            status=result.status.value,
+            sections=sections,
+            body=result.body,
+        )
+
+    @staticmethod
+    def _is_advisor_mode(request: ProductionRequest, product_context) -> bool:
+        """Appendix is Advisor Mode only — never default customer PDF."""
+        options = dict(request.options or {})
+        if options.get("advisor_mode") in {True, "true", "1", 1}:
+            return True
+        if product_context.purchase_package == PurchasePackage.PACKAGE_D:
+            return True
+        return product_context.reader_role == ReaderRole.CONSULTANT
+
+    @staticmethod
+    def _advisor_appendix(
+        engine_output: EnginePipelineOutput,
+        composition,
+    ) -> tuple[list[tuple[str, str]], list[str]]:
+        """Technical rows for Advisor Mode appendix."""
+        strength = engine_output.strength_result
+        plan = composition.cross_domain.executive_claim_plan
+        rows = [
+            ("Mức thân", str(strength.strength_level or "")),
+            ("Điểm thân", str(strength.strength_score or "")),
+            ("Chủ đề chính", composition.cross_domain.primary_theme),
+            ("Xung đột", ", ".join(composition.cross_domain.conflicts)),
+        ]
+        paragraphs = [
+            f"identity_core: {plan.identity_core}",
+            f"operating_style: {plan.operating_style}",
+            f"primary_insight: {plan.primary_insight}",
+        ]
+        why = composition.cross_domain.diagnostics.get("why_primary") or {}
+        if why:
+            paragraphs.append(f"why_primary: {why}")
+        return rows, paragraphs
 
     def _enrich_report_with_composition(
         self,

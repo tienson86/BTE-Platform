@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Báo cáo tư vấn — Nguyễn Tiến Sơn</title>
+  <style>/* Report V1 — print-friendly foundation (UTF-8, Vietnamese-safe stack) */
+
+:root {
+  --report-text: #1a1a1a;
+  --report-muted: #555;
+  --report-border: #d8d8d8;
+  --report-accent: #2c4a6e;
+  --report-bg: #ffffff;
+  --report-font: "Segoe UI", Arial, "Noto Sans", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--report-bg);
+  color: var(--report-text);
+  font-family: var(--report-font);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.report-v1 {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 32px 40px 48px;
+}
+
+.report-v1__header {
+  border-bottom: 2px solid var(--report-accent);
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+}
+
+.report-v1__title {
+  color: var(--report-accent);
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.report-v1__subtitle {
+  color: var(--report-muted);
+  font-size: 13px;
+  margin: 0;
+}
+
+.report-v1__section {
+  margin-bottom: 24px;
+  page-break-inside: avoid;
+}
+
+.report-v1__section-title {
+  border-left: 4px solid var(--report-accent);
+  color: var(--report-accent);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 10px;
+  padding-left: 10px;
+  page-break-after: avoid;
+}
+
+.report-v1__section-body {
+  margin: 0;
+}
+
+.report-v1__section-body p {
+  margin: 0 0 10px;
+}
+
+.report-v1__meta-grid {
+  display: grid;
+  gap: 8px 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+
+.report-v1__meta-grid dt {
+  color: var(--report-muted);
+  font-weight: 600;
+  margin: 0;
+}
+
+.report-v1__meta-grid dd {
+  margin: 0 0 8px;
+}
+
+.report-v1__table {
+  border-collapse: collapse;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.report-v1__table th,
+.report-v1__table td {
+  border: 1px solid var(--report-border);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.report-v1__table th {
+  background: #f4f6f8;
+  font-weight: 600;
+}
+
+.report-v1__pillars {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.report-v1__pillar-card {
+  border: 1px solid var(--report-border);
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.report-v1__pillar-card h3 {
+  font-size: 14px;
+  margin: 0 0 6px;
+}
+
+.report-v1__pillar-card p {
+  margin: 0 0 4px;
+}
+
+.report-v1__list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.report-v1__fallback {
+  color: var(--report-muted);
+  font-style: italic;
+}
+
+.report-v1__footer {
+  border-top: 1px solid var(--report-border);
+  color: var(--report-muted);
+  font-size: 12px;
+  margin-top: 32px;
+  padding-top: 12px;
+}
+
+@media print {
+  @page {
+    margin: 18mm 16mm;
+    size: A4;
+  }
+
+  body {
+    background: #fff;
+    font-size: 12px;
+  }
+
+  .report-v1 {
+    max-width: none;
+    padding: 0;
+  }
+
+  .report-v1__section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .report-v1__section-title {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .report-v1__table {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .report-v1__pillars {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.report-commercial__kicker {
+  color: var(--report-accent);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+.report-commercial__class {
+  color: var(--report-accent);
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+.report-commercial__cover .report-v1__meta-grid {
+  margin-top: 16px;
+}
+.report-commercial__section {
+  margin: 0 0 16px;
+}
+.report-commercial__section h3 {
+  color: var(--report-text);
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+.report-commercial__appendix {
+  border-top: 1px dashed var(--report-border);
+  margin-top: 32px;
+  padding-top: 16px;
+}
+</style>
+</head>
+<body>
+  <main class="report-v1">
+    <header class="report-v1__header report-commercial__cover"><p class="report-commercial__kicker">BTE Consulting</p><h1 class="report-v1__title">Báo cáo tư vấn</h1><p class="report-commercial__class">Người tự gánh</p><p class="report-v1__subtitle">Một bản tư vấn — đọc như một cuộc trao đổi, không như bảng tính.</p><dl class="report-v1__meta-grid"><dt>Khách hàng</dt><dd>Nguyễn Tiến Sơn</dd><dt>Hồ sơ</dt><dd>CASE-0001</dd><dt>Ngày sinh</dt><dd>1987-01-21</dd><dt>Nơi sinh</dt><dd>Hà Tây, Việt Nam</dd><dt>Giới tính</dt><dd>Nam</dd><dt>Hướng tư vấn</dt><dd>Người tự gánh</dd></dl></header><section class="report-v1__section report-commercial__chapter" id="identity"><h2 class="report-v1__section-title">Danh tính</h2><article class="report-commercial__section" id="WHO"><h3>Tôi là ai?</h3><p>Điểm nhận diện chính: bạn dễ tự gánh và tự đẩy tiến độ. Điều này gắn với nhịp quyết nhanh dưới áp lực và tiêu chuẩn cao. Người khác thường nhận ra bạn khi việc khó: bạn vẫn còn mặt để xử lý. Bên trong, bạn hay tự định nghĩa mình qua việc đã nhận — làm được thì ôm, ôm rồi thì làm tròn. Về nền năng lượng, nền chịu tải vững — mạnh khi chuyển tải thành đầu ra có định nghĩa. Về khung dài hạn, khung dài hạn nghiêng về chuẩn bị, hỗ trợ và ổn định nền. Điều quan trọng: sức mạnh ở đây là chịu tải có chủ đích — không phải ôm vô hạn.</p></article><article class="report-commercial__section" id="OPERATING"><h3>Mẫu vận hành tự nhiên</h3><p>Cách bạn làm việc hiệu quả nhất nghiêng về nhịp quyết nhanh dưới áp lực và tiêu chuẩn cao: có việc → đặt mình vào chỗ phải xử lý → tự nâng chuẩn → làm đến khi xong. Quyết định thường đi theo câu hỏi &#x27;ai chịu trách nhiệm?&#x27; hơn &#x27;ai thích nhất?&#x27;. Khi đúng kênh này, bạn bền; khi bị ép sang khung trái, dễ mệt vì ôm hộ.</p></article><article class="report-commercial__section" id="STRENGTHS"><h3>Điểm làm tôi mạnh hơn</h3><p>Điểm mạnh lớn nhất là chịu tải có uy tín: khi đã nhận, bạn ít biến mất giữa áp lực. Điểm tựa đi kèm: biết chuyển việc đang mang thành đầu ra có định nghĩa — đó là van xả, không phải &#x27;gánh thêm cho đủ&#x27;. Hướng điều tiết: hướng điều tiết nghiêng về cắt giảm phần thừa, làm rõ biên.</p></article><article class="report-commercial__section" id="BLIND_SPOTS"><h3>Điểm mù / biên giới</h3><p>Giới hạn không phải ‘yếu hơn người khác’, mà là ôm thêm khi vẫn còn làm được — sức mạnh dễ thành gánh quá. Rủi ro chính là ôm thêm tải khi vẫn còn làm được — sức mạnh dễ thành gánh quá.</p></article><article class="report-commercial__section" id="PRESSURE"><h3>Phản ứng khi bị áp lực</h3><p>Khi áp lực tăng, phản xạ thường gặp là tự gánh thêm trước khi kịp phân vai. Trước khi nhận thêm một đầu việc, xác định rõ việc nào tự quyết và việc nào giao lại.</p></article><article class="report-commercial__section" id="ENVIRONMENT"><h3>Môi trường hợp tôi</h3><p>Môi trường hợp bạn hơn khi vai trò tự chủ được định nghĩa rõ biên tải — không phải chỗ việc tràn về một người theo mặc định. Nếu môi trường trái kênh này kéo dài, dễ hiểu nhầm bản thân là &#x27;thiếu năng lực&#x27; trong khi thực ra đang ôm quá biên.</p></article><article class="report-commercial__section" id="LESSON"><h3>Bài học nhận diện</h3><p>Điểm then chốt: sức bền nằm ở chịu tải có biên — và khung dài hạn nghiêng về chuẩn bị, hỗ trợ và ổn định nền cùng đúng; không gánh thêm cho đủ tư cách, cũng không xóa lớp cần ổn định. Nếu bỏ qua điều này, dễ lấy &#x27;còn làm được&#x27; làm giấy phép ôm thêm, rồi mệt mà vẫn trông ổn.</p></article><article class="report-commercial__section" id="CONDITION"><h3>Đọc có điều kiện</h3><p>Hai lớp đã công bố đều đúng trong phạm vi của chúng — đừng chọn một nhãn để xóa nhãn kia. Đọc có điều kiện: Rủi ro chính là ôm thêm tải khi vẫn còn làm được — sức mạnh dễ thành gánh quá.</p></article><article class="report-commercial__section" id="ACTIONS"><h3>Việc nên điều chỉnh</h3><p>Điều phối tuần làm việc quanh nhịp quyết nhanh dưới áp lực và tiêu chuẩn cao — đừng nhận việc trái nhịp chỉ vì đang trống lịch.</p><p>Giữ hướng điều tiết nghiêng về cắt giảm phần thừa, làm rõ biên như thói quen tuần, không chờ đến lúc kiệt mới điều chỉnh.</p><p>Chuyển việc đang mang thành đầu ra có định nghĩa rõ trong tuần — không chỉ giữ việc trên vai.</p></article><article class="report-commercial__section" id="SUMMARY"><h3>Tóm tắt danh tính</h3><p>Bạn mạnh ở chỗ tự gánh — và khung dài hạn nghiêng về chuẩn bị, hỗ trợ và ổn định nền; bền hơn khi biết dừng nhận thêm, không chọn một nhãn xóa nhãn kia.</p></article></section><section class="report-v1__section report-commercial__chapter" id="career"><h2 class="report-v1__section-title">Sự nghiệp</h2><article class="report-commercial__section" id="WORK_STYLE"><h3>Bạn làm việc tốt nhất như thế nào</h3><p>Cách bạn làm việc hiệu quả nhất nghiêng về nhịp quyết nhanh dưới áp lực và tiêu chuẩn cao: có việc → đặt mình vào chỗ phải xử lý → tự nâng chuẩn → làm đến khi xong. Quyết định thường đi theo câu hỏi &#x27;ai chịu trách nhiệm?&#x27; hơn &#x27;ai thích nhất?&#x27;. Khi đúng kênh này, bạn bền; khi bị ép sang khung trái, dễ mệt vì ôm hộ.</p></article><article class="report-commercial__section" id="ENVIRONMENT"><h3>Môi trường nghề nghiệp hợp bạn</h3><p>Môi trường hợp bạn hơn khi vai trò tự chủ được định nghĩa rõ biên tải — không phải chỗ việc tràn về một người theo mặc định. Nếu môi trường trái kênh này kéo dài, dễ hiểu nhầm bản thân là &#x27;thiếu năng lực&#x27; trong khi thực ra đang ôm quá biên.</p></article><article class="report-commercial__section" id="POSTURE"><h3>Tư thế vai trò phù hợp</h3><p>Tư thế vai trò hợp bạn hơn khi được tự chủ triển khai trong biên tải rõ — có quyền từ chối việc tràn về theo phản xạ.</p></article><article class="report-commercial__section" id="PRESSURE"><h3>Phản ứng với áp lực công việc</h3><p>Khi áp lực tăng, phản xạ thường gặp là tự gánh thêm trước khi kịp phân vai. Trước khi nhận thêm một đầu việc, xác định rõ việc nào tự quyết và việc nào giao lại.</p></article><article class="report-commercial__section" id="BALANCE"><h3>Hướng cân bằng trong công việc</h3><p>Hướng cân bằng trong công việc: hướng điều tiết nghiêng về cắt giảm phần thừa, làm rõ biên. Trong tuần, nghĩa là làm dịu cường độ và giữ biên tải — không thêm một vòng sản xuất để cho đủ. Đây là thói quen tuần, không phải mẹo một lần khi đã kiệt.</p></article><article class="report-commercial__section" id="CONDITION"><h3>Đọc có điều kiện</h3><p>Hai lớp đã công bố đều đúng trong phạm vi của chúng — đừng chọn một nhãn để xóa nhãn kia. Đọc có điều kiện: Rủi ro chính là ôm thêm tải khi vẫn còn làm được — sức mạnh dễ thành gánh quá.</p></article><article class="report-commercial__section" id="RISK"><h3>Rủi ro nghề nghiệp chính</h3><p>Rủi ro nghề nghiệp chính là trở thành người giải quyết được việc rồi bị đổ thêm việc — thành công biến thành biên tải vô hạn. Giới hạn này không phải yếu hơn người khác — là biên tải cần nhìn thẳng, kể cả khi vẫn còn làm được. Rủi ro chính là ôm thêm tải khi vẫn còn làm được — sức mạnh dễ thành gánh quá.</p></article><article class="report-commercial__section" id="FOCUS"><h3>Trọng tâm nên giữ</h3><p>Điều phối tuần làm việc quanh nhịp quyết nhanh dưới áp lực và tiêu chuẩn cao — đừng nhận việc trái nhịp chỉ vì đang trống lịch. Trong công việc: xếp lịch quanh việc đã nhận, không quanh việc &#x27;có mặt&#x27;.</p><p>Giữ hướng điều tiết nghiêng về cắt giảm phần thừa, làm rõ biên như thói quen tuần, không chờ đến lúc kiệt mới điều chỉnh. Trong công việc: giữ biên tải; đừng thêm vòng việc vì vẫn còn làm được.</p><p>Chuyển việc đang mang thành đầu ra có định nghĩa rõ trong tuần — không chỉ giữ việc trên vai.</p></article><article class="report-commercial__section" id="AVOIDS"><h3>Điều nên tránh</h3><p>Đừng nhận thêm đầu việc theo phản xạ khi hệ đã căng.</p><p>Đừng kết luận ngoài phạm vi dữ liệu đã có.</p></article><article class="report-commercial__section" id="SUMMARY"><h3>Tóm tắt hướng sự nghiệp</h3><p>Công việc hợp bạn khi tự chủ có biên tải — và khung dài hạn nghiêng về chuẩn bị, hỗ trợ và ổn định nền; không ôm hết theo phản xạ.</p></article></section><section class="report-v1__section report-commercial__chapter" id="executive"><h2 class="report-v1__section-title">Tư vấn tổng hợp</h2><article class="report-commercial__section" id="WHO"><h3>Bạn là ai</h3><p>Trong môi trường nhiều việc dồn về một người, bạn thường là người tự nhận và tự đẩy trước khi kịp phân vai. Nền của bạn: nền chịu tải vững — mạnh khi chuyển tải thành đầu ra có định nghĩa.</p></article><article class="report-commercial__section" id="SYSTEM"><h3>Hệ thống nội tại vận hành ra sao</h3><p>Cách bạn làm việc hiệu quả nhất nghiêng về nhịp quyết nhanh dưới áp lực và tiêu chuẩn cao: có việc → đặt mình vào chỗ phải xử lý → tự nâng chuẩn → làm đến khi xong. Quyết định thường đi theo câu hỏi &#x27;ai chịu trách nhiệm?&#x27; hơn &#x27;ai thích nhất?&#x27;. Khi đúng kênh này, bạn bền; khi bị ép sang khung trái, dễ mệt vì ôm hộ.</p></article><article class="report-commercial__section" id="SUPPORTS"><h3>Điều gì hỗ trợ bạn</h3><p>Điểm tựa điều tiết: hướng điều tiết nghiêng về cắt giảm phần thừa, làm rõ biên. Giữ điểm tựa này như đòn bẩy tuần — không phải lời khuyên chung chung.</p></article><article class="report-commercial__section" id="LIMITS"><h3>Điều gì giới hạn bạn</h3><p>Giới hạn không phải ‘yếu hơn người khác’, mà là ôm thêm khi vẫn còn làm được — sức mạnh dễ thành gánh quá. Rủi ro chính là ôm thêm tải khi vẫn còn làm được — sức mạnh dễ thành gánh quá.</p></article><article class="report-commercial__section" id="DIRECTION"><h3>Trọng tâm chiến lược hiện tại</h3><p>Hướng điều tiết hiện tại: hướng điều tiết nghiêng về cắt giảm phần thừa, làm rõ biên. Trong đời sống, nghĩa là ưu tiên làm dịu cường độ và giữ dòng chảy ổn định thay vì tăng ga khi vẫn còn làm được. Đây là thói quen tuần, không phải mẹo một lần khi đã kiệt.</p></article><article class="report-commercial__section" id="INSIGHT"><h3>Một insight quan trọng nhất</h3><p>Điểm then chốt: sức bền nằm ở chịu tải có biên — và khung dài hạn nghiêng về chuẩn bị, hỗ trợ và ổn định nền cùng đúng; không gánh thêm cho đủ tư cách, cũng không xóa lớp cần ổn định. Nếu bỏ qua điều này, dễ lấy &#x27;còn làm được&#x27; làm giấy phép ôm thêm, rồi mệt mà vẫn trông ổn.</p></article><article class="report-commercial__section" id="PRIORITIES"><h3>Ba ưu tiên</h3><p>1. Điều phối tuần làm việc quanh nhịp quyết nhanh dưới áp lực và tiêu chuẩn cao — đừng nhận việc trái nhịp chỉ vì đang trống lịch.</p><p>2. Giữ hướng điều tiết nghiêng về cắt giảm phần thừa, làm rõ biên như thói quen tuần, không chờ đến lúc kiệt mới điều chỉnh.</p><p>3. Chuyển việc đang mang thành đầu ra có định nghĩa rõ trong tuần — không chỉ giữ việc trên vai.</p></article><article class="report-commercial__section" id="AVOIDS"><h3>Ba điều cần tránh</h3><p>1. Đừng nhận thêm đầu việc theo phản xạ khi hệ đã căng.</p><p>2. Đừng kết luận ngoài phạm vi dữ liệu đã có.</p></article><article class="report-commercial__section" id="CONCLUSION"><h3>Kết luận tư vấn</h3><p>Bạn mạnh ở chỗ tự gánh — và khung dài hạn nghiêng về chuẩn bị, hỗ trợ và ổn định nền; bền hơn khi biết dừng nhận thêm, không chọn một nhãn xóa nhãn kia. Báo cáo này tổng hợp các miền đã có dữ liệu; không tạo timeline cuộc đời khi luận vận trình đầy đủ chưa sẵn sàng.</p></article></section><footer class="report-v1__footer">BTE · Báo cáo tư vấn</footer>
+  </main>
+</body>
+</html>
