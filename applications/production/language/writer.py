@@ -82,6 +82,53 @@ def _is_output(data: CommercialLanguageInput) -> bool:
     return data.primary_theme == "OPERATING_OUTPUT" or "Thương Quan" in style or "Thực Thần" in style
 
 
+def _capacity_band(cue: str) -> str:
+    key = (cue or "").strip().lower()
+    if key.startswith("body:"):
+        key = key.split(":", 1)[1]
+    return key
+
+
+def _is_conserving(data: CommercialLanguageInput) -> bool:
+    """Thin / cooling week — not a motivation close. Shared rule, not a case."""
+    band = _capacity_band(data.capacity_cue)
+    if band in {"weak", "very_weak"}:
+        return True
+    return data.primary_theme == "BALANCE_DIRECTION" and band in {"balanced", ""}
+
+
+def _has_dual_layer(data: CommercialLanguageInput) -> bool:
+    """Both capacity and structure are published — keep both stories."""
+    return bool((data.capacity_cue or "").strip() and (data.structure_cue or "").strip())
+
+
+def _lived_balance(data: CommercialLanguageInput) -> str:
+    """Theme-gate UG cooling: product-dump language is OUTPUT-only."""
+    balance = pl.plain_balance(data.balance_cue)
+    if not balance:
+        return ""
+    if _is_output(data):
+        return balance
+    if "sản phẩm" in balance or "kết quả cụ thể" in balance or "biểu đạt" in balance:
+        return "hướng điều tiết nghiêng về cắt giảm phần thừa, làm rõ biên"
+    return balance
+
+
+def _strip_output_leak(text: str, data: CommercialLanguageInput) -> str:
+    """Keep published action text, drop OUTPUT-room wording off-theme."""
+    if not text or _is_output(data):
+        return text
+    return (
+        text.replace(
+            "nhả tải bằng cách tạo ra sản phẩm / kết quả cụ thể",
+            "cắt giảm phần thừa, làm rõ biên",
+        ).replace(
+            "tạo ra sản phẩm / kết quả cụ thể",
+            "cắt giảm phần thừa, làm rõ biên",
+        )
+    )
+
+
 def _observation(data: CommercialLanguageInput) -> ConsultingParagraph:
     theme = pl.plain_theme(data.primary_theme)
     style = pl.plain_style(data.operating_style)
@@ -184,11 +231,22 @@ def _recognition(data: CommercialLanguageInput) -> ConsultingParagraph:
                 " Khung dài hạn của bạn là kiểu riêng: hợp khi được tôn trọng nhịp đó, "
                 "không hợp khi bị ép giống checklist chung."
             )
-    elif style:
+    elif data.primary_theme == "BALANCE_DIRECTION" or _is_conserving(data):
         recognition = (
-            f"Trong môi trường cần ra quyết định nhanh và có sản phẩm nhìn thấy được, "
-            f"bạn thường ổn hơn khi đi đúng {style}."
+            "Trong tuần đang cần điều tiết — không phải sân ra quyết nhanh hay sản phẩm nhìn thấy — "
+            f"bạn ổn hơn khi đi đúng {style}."
+            if style
+            else (
+                "Trong tuần đang cần điều tiết — không phải sân ra quyết nhanh hay sản phẩm nhìn thấy — "
+                "bạn ổn hơn khi giữ nhịp tải và phục hồi."
+            )
         )
+    elif data.primary_theme == "OPERATING_STANDARDS" and style:
+        recognition = (
+            f"Trong môi trường cần phạm vi và kỳ vọng rõ, bạn thường ổn hơn khi đi đúng {style}."
+        )
+    elif style:
+        recognition = f"Trong môi trường khớp với nhịp đã công bố, bạn thường ổn hơn khi đi đúng {style}."
     meaning = f"Nền của bạn: {capacity}." if capacity else ""
     return ConsultingParagraph(
         intent=data.intent,
@@ -257,7 +315,7 @@ def _work_style(data: CommercialLanguageInput) -> ConsultingParagraph:
 
 def _support(data: CommercialLanguageInput) -> ConsultingParagraph:
     section = (data.section or "").upper()
-    balance = pl.plain_balance(data.balance_cue)
+    balance = _lived_balance(data)
     capacity = pl.plain_capacity(data.capacity_cue)
     style = pl.plain_style(data.operating_style)
     career = data.feature == FeatureKind.CAREER
@@ -302,11 +360,23 @@ def _support(data: CommercialLanguageInput) -> ConsultingParagraph:
     if section in {"BALANCE", "DIRECTION"} or (career and balance):
         if balance:
             if career:
-                meaning = (
-                    f"Hướng cân bằng trong công việc: {balance}. "
-                    "Trong tuần, nghĩa là chèn nhịp làm dịu giữa các vòng ra kết quả — "
-                    "họp ngắn hơn, đóng một đầu ra rồi mới mở đầu ra mới."
-                )
+                if _is_output(data):
+                    meaning = (
+                        f"Hướng cân bằng trong công việc: {balance}. "
+                        "Trong tuần, nghĩa là chèn nhịp làm dịu giữa các vòng ra kết quả — "
+                        "họp ngắn hơn, đóng một đầu ra rồi mới mở đầu ra mới."
+                    )
+                elif _is_conserving(data):
+                    meaning = (
+                        f"Hướng cân bằng trong công việc: {balance}. "
+                        "Trong tuần, nghĩa là giảm bề mặt việc — trả một đầu, không mở vòng mới."
+                    )
+                else:
+                    meaning = (
+                        f"Hướng cân bằng trong công việc: {balance}. "
+                        "Trong tuần, nghĩa là làm dịu cường độ và giữ biên tải — "
+                        "không thêm một vòng sản xuất để cho đủ."
+                    )
             else:
                 meaning = (
                     f"Hướng điều tiết hiện tại: {balance}. "
@@ -362,10 +432,17 @@ def _limitation(data: CommercialLanguageInput) -> ConsultingParagraph:
             )
         else:
             meaning = "Rủi ro nghề nghiệp chính là làm việc trái kênh vận hành đã rõ quá lâu."
-        limitation = (
-            "Nền trung hòa càng dễ kiệt nếu lấy 'chứng minh bằng khối lượng' làm thước. "
-            "Giới hạn này không phải yếu hơn người khác — là biên cần nhìn thẳng."
-        )
+        band = _capacity_band(data.capacity_cue)
+        if band in {"weak", "very_weak", "balanced"} or _is_conserving(data):
+            limitation = (
+                "Nền càng dễ kiệt nếu lấy 'chứng minh bằng khối lượng' làm thước. "
+                "Giới hạn này không phải yếu hơn người khác — là biên cần nhìn thẳng."
+            )
+        else:
+            limitation = (
+                "Giới hạn này không phải yếu hơn người khác — là biên tải cần nhìn thẳng, "
+                "kể cả khi vẫn còn làm được."
+            )
         if texts:
             limitation += f" {texts[0]}"
         return ConsultingParagraph(
@@ -407,7 +484,12 @@ def _condition(data: CommercialLanguageInput) -> ConsultingParagraph:
     meaning = (
         "Trước khi chốt một nhãn duy nhất về bản thân, giữ đọc có điều kiện:"
     )
-    if _is_output(data) and _is_follow(data.structure_cue):
+    if _has_dual_layer(data):
+        meaning = (
+            "Hai lớp đã công bố đều đúng trong phạm vi của chúng — "
+            "đừng chọn một nhãn để xóa nhãn kia. Đọc có điều kiện:"
+        )
+    elif _is_output(data) and _is_follow(data.structure_cue):
         meaning = (
             "Trước khi chốt một nhãn duy nhất — 'mạnh' hay 'yếu', 'giống mọi người' hay không — "
             "giữ đọc có điều kiện:"
@@ -441,6 +523,13 @@ def _pressure(data: CommercialLanguageInput) -> ConsultingParagraph:
         )
         action = (
             "Trước khi nhận thêm một đầu việc, xác định rõ việc nào tự quyết và việc nào giao lại."
+        )
+    elif _is_conserving(data) or theme == "BALANCE_DIRECTION":
+        recognition = (
+            "Khi áp lực tăng, phản xạ 'làm thêm cho xong' làm nền mỏng hơn — không phải giải pháp."
+        )
+        action = (
+            "Giảm bề mặt việc: một ưu tiên, một việc trả lại — đừng mở mặt trận mới để chứng minh."
         )
     else:
         recognition = (
@@ -498,11 +587,23 @@ def _environment(data: CommercialLanguageInput) -> ConsultingParagraph:
             "không ép theo checklist ‘chuẩn mực chung’ trái nhịp."
         )
         implication = "Nếu môi trường trái kênh này kéo dài, dễ hiểu nhầm bản thân là ‘thiếu năng lực’."
-    else:
+    elif _is_conserving(data) or theme == "BALANCE_DIRECTION":
         meaning = (
-            "Môi trường hợp bạn hơn khi khớp với kênh vận hành và nền năng lượng đã công bố."
+            "Môi trường hợp bạn hơn khi lịch thưa, việc đóng được, và không phải chứng minh bằng hiện diện."
         )
-        implication = "Nếu môi trường trái kênh này kéo dài, dễ hiểu nhầm bản thân là ‘thiếu năng lực’."
+        implication = (
+            "Chỗ luôn-bật và đo bằng khối lượng sẽ biến nhu cầu bảo toàn thành cảm giác 'thiếu năng lực'."
+        )
+    else:
+        style = pl.plain_style(data.operating_style)
+        meaning = (
+            f"Môi trường hợp bạn hơn khi khớp với {style}."
+            if style
+            else "Môi trường hợp bạn hơn khi khớp với nhịp vận hành đã công bố."
+        )
+        implication = (
+            "Nếu môi trường trái nhịp này kéo dài, dễ hiểu nhầm bản thân là ‘thiếu năng lực’."
+        )
     return ConsultingParagraph(
         intent=data.intent,
         meaning=meaning,
@@ -513,10 +614,18 @@ def _environment(data: CommercialLanguageInput) -> ConsultingParagraph:
 
 def _insight(data: CommercialLanguageInput) -> ConsultingParagraph:
     if data.primary_theme == "OPERATING_SELF_CARRY":
-        meaning = (
-            "Điểm then chốt: sức bền thật sự nằm ở khả năng chuyển tải thành đầu ra có chu kỳ — "
-            "không phải gánh thêm cho đủ tư cách."
-        )
+        structure = pl.structure_to_plain(data.structure_cue)
+        if _has_dual_layer(data) and structure:
+            meaning = (
+                "Điểm then chốt: sức bền nằm ở chịu tải có biên — và "
+                f"{structure} cùng đúng; không gánh thêm cho đủ tư cách, "
+                "cũng không xóa lớp cần ổn định."
+            )
+        else:
+            meaning = (
+                "Điểm then chốt: sức bền thật sự nằm ở khả năng chuyển tải thành đầu ra có chu kỳ — "
+                "không phải gánh thêm cho đủ tư cách."
+            )
         implication = (
             "Nếu bỏ qua điều này, dễ lấy 'còn làm được' làm giấy phép ôm thêm, rồi mệt mà vẫn trông ổn."
         )
@@ -534,6 +643,35 @@ def _insight(data: CommercialLanguageInput) -> ConsultingParagraph:
         implication = (
             "Nếu lấy 'làm việc như mọi người' hoặc 'ôm thêm cho đủ' để tự đo, "
             "dễ đánh giá thấp đúng chỗ mạnh dù từng miền riêng lẻ vẫn 'đúng'."
+        )
+        return ConsultingParagraph(
+            intent=data.intent,
+            meaning=meaning,
+            implication=implication,
+            status=ParagraphStatus.READY,
+        )
+    if _is_conserving(data):
+        meaning = (
+            "Điểm then chốt: bảo toàn nền là quyết định đúng — không phải bước lùi trước khi 'mạnh hơn'."
+        )
+        implication = (
+            "Nếu bỏ qua điều này, dễ lấy thêm việc làm thước tư cách, rồi kiệt mà vẫn trông ổn."
+        )
+        return ConsultingParagraph(
+            intent=data.intent,
+            meaning=meaning,
+            implication=implication,
+            status=ParagraphStatus.READY,
+        )
+    if _has_dual_layer(data):
+        structure = pl.structure_to_plain(data.structure_cue)
+        capacity = pl.plain_capacity(data.capacity_cue)
+        meaning = (
+            f"Điểm then chốt: {capacity} và {structure} cùng đúng trong phạm vi của chúng — "
+            "không chọn một nhãn để xóa nhãn kia."
+        )
+        implication = (
+            "Nếu gộp thành một câu cho gọn, dễ hiểu sai bản thân dù từng lớp riêng vẫn đúng."
         )
         return ConsultingParagraph(
             intent=data.intent,
@@ -568,12 +706,21 @@ def _action(data: CommercialLanguageInput) -> ConsultingParagraph:
     action = pl.plain_priority(data.actionability) or pl.plain_avoid(data.actionability)
     if not action and data.claims:
         action = data.claims[0] if " " in data.claims[0] else ""
+    action = _strip_output_leak(action, data)
     if action and data.feature == FeatureKind.CAREER:
         key = (data.actionability or "").split(":", 1)[0]
-        if key == "align_operating_role":
-            action += " Trong công việc: xếp lịch quanh vòng ra kết quả, không quanh việc 'có mặt'."
+        if _is_output(data):
+            if key == "align_operating_role":
+                action += " Trong công việc: xếp lịch quanh vòng ra kết quả, không quanh việc 'có mặt'."
+            elif key == "apply_balance":
+                action += " Trong công việc: đóng một đầu ra rồi mới mở vòng sau."
+        elif _is_conserving(data):
+            if key in {"align_operating_role", "apply_balance", "keep_load_recovery_rhythm"}:
+                action += " Trong công việc: trả hoặc đóng một việc — đừng mở vòng mới để chứng minh."
+        elif key == "align_operating_role":
+            action += " Trong công việc: xếp lịch quanh việc đã nhận, không quanh việc 'có mặt'."
         elif key == "apply_balance":
-            action += " Trong công việc: đóng một đầu ra rồi mới mở vòng sau."
+            action += " Trong công việc: giữ biên tải; đừng thêm vòng việc vì vẫn còn làm được."
     meaning = "Việc nên làm gần đây:" if action else ""
     return ConsultingParagraph(
         intent=data.intent,
@@ -588,8 +735,15 @@ def _closing(data: CommercialLanguageInput) -> ConsultingParagraph:
     if not memory:
         theme = pl.plain_theme(data.primary_theme)
         style = pl.plain_style(data.operating_style)
-        if theme and style:
-            memory = f"Bạn mạnh hơn khi được {style} — và giữ đúng biên năng lượng của mình."
+        if _is_conserving(data):
+            memory = "Bạn không cần mạnh hơn tuần này. Bảo toàn nền là quyết định đúng."
+        elif _has_dual_layer(data) and pl.structure_to_plain(data.structure_cue):
+            memory = (
+                f"{pl.plain_capacity(data.capacity_cue)} và {pl.structure_to_plain(data.structure_cue)} "
+                "cùng đúng — đừng chọn một nhãn xóa nhãn kia."
+            )
+        elif theme and style and data.primary_theme != "BALANCE_DIRECTION":
+            memory = f"Bạn rõ hơn khi được {style} — và giữ đúng biên năng lượng của mình."
         elif theme:
             memory = f"Nhớ điều này: bạn {theme}."
         elif style:

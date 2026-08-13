@@ -250,9 +250,15 @@ def structure_to_plain(structure: str) -> str:
             "khung dài hạn kiểu riêng (không ép theo khuôn thông thường) — "
             "cần được tôn trọng khi tự đánh giá bản thân"
         )
-    if "ấn" in s or "an" in low:
+    if "ấn" in low:
         return "khung dài hạn nghiêng về chuẩn bị, hỗ trợ và ổn định nền"
-    return "khung dài hạn đã xác định trong lá số"
+    if "tài" in low:
+        return "khung dài hạn nghiêng về quản lý nguồn lực và cơ hội"
+    if "quan" in low or "sát" in low:
+        return "khung dài hạn nghiêng về trách nhiệm, ranh giới và chuẩn"
+    if "thương" in low or "thực" in low:
+        return "khung dài hạn nghiêng về làm ra và thể hiện"
+    return "khung dài hạn cần giữ nhất quán — không đổi mỗi khi áp lực ngắn hạn tăng"
 
 
 def contains_forbidden_leak(text: str) -> list[str]:

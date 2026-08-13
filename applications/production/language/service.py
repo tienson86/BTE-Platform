@@ -80,6 +80,7 @@ class CommercialLanguageService:
             primary_theme=theme,
             structure_cue=structure,
             operating_style=style,
+            capacity_cue=capacity,
         )
         pressure = self._para(
             FeatureKind.IDENTITY,
@@ -88,6 +89,8 @@ class CommercialLanguageService:
             reasoning,
             claims=["pressure"],
             primary_theme=theme,
+            capacity_cue=capacity,
+            structure_cue=structure,
         )
         environment = self._para(
             FeatureKind.IDENTITY,
@@ -109,12 +112,16 @@ class CommercialLanguageService:
             primary_theme=theme,
             operating_style=style,
             structure_cue=structure,
+            capacity_cue=capacity,
         )
         actions = self._action_block(
             FeatureKind.IDENTITY,
             plan.priorities[:3],
             section="ACTIONS",
             reasoning=reasoning,
+            primary_theme=theme,
+            capacity_cue=capacity,
+            structure_cue=structure,
         )
         memory = self._memory_line(theme, style, capacity, structure)
         summary = self._para(
@@ -147,6 +154,9 @@ class CommercialLanguageService:
                 reasoning,
                 claims=["nuance"],
                 limitations=limitations,
+                primary_theme=theme,
+                capacity_cue=capacity,
+                structure_cue=structure,
             )
             section_defs.insert(
                 7,
@@ -215,6 +225,9 @@ class CommercialLanguageService:
             plan.priorities[:3],
             section="FOCUS",
             reasoning=reasoning,
+            primary_theme=theme,
+            capacity_cue=capacity,
+            structure_cue=structure,
         )
         avoids = self._avoid_block(
             FeatureKind.CAREER,
@@ -240,6 +253,8 @@ class CommercialLanguageService:
             reasoning,
             claims=["pressure"],
             primary_theme=theme,
+            capacity_cue=capacity,
+            structure_cue=structure,
         )
         memory = self._memory_line(theme, style, capacity, structure, career=True)
         closing = self._para(
@@ -272,6 +287,9 @@ class CommercialLanguageService:
                 reasoning,
                 claims=["nuance"],
                 limitations=limitations,
+                primary_theme=theme,
+                capacity_cue=capacity,
+                structure_cue=structure,
             )
             section_defs.insert(
                 5,
@@ -343,6 +361,7 @@ class CommercialLanguageService:
             primary_theme=theme,
             structure_cue=structure,
             operating_style=style,
+            capacity_cue=capacity,
         )
         direction = self._para(
             FeatureKind.EXECUTIVE,
@@ -354,6 +373,7 @@ class CommercialLanguageService:
             structure_cue=structure,
             primary_theme=theme,
             operating_style=style,
+            capacity_cue=capacity,
         )
         insight = self._para(
             FeatureKind.EXECUTIVE,
@@ -364,6 +384,7 @@ class CommercialLanguageService:
             primary_theme=theme,
             operating_style=style,
             structure_cue=structure,
+            capacity_cue=capacity,
         )
         priorities = self._action_block(
             FeatureKind.EXECUTIVE,
@@ -371,6 +392,9 @@ class CommercialLanguageService:
             section="PRIORITIES",
             reasoning=reasoning,
             numbered=True,
+            primary_theme=theme,
+            capacity_cue=capacity,
+            structure_cue=structure,
         )
         avoids = self._avoid_block(
             FeatureKind.EXECUTIVE,
@@ -460,6 +484,9 @@ class CommercialLanguageService:
         section: str,
         reasoning: CrossDomainReasoningResult,
         numbered: bool = False,
+        primary_theme: str = "",
+        capacity_cue: str = "",
+        structure_cue: str = "",
     ) -> list[str]:
         lines: list[str] = []
         for index, item in enumerate(items, start=1):
@@ -470,6 +497,9 @@ class CommercialLanguageService:
                 reasoning,
                 claims=[item],
                 actionability=item,
+                primary_theme=primary_theme,
+                capacity_cue=capacity_cue,
+                structure_cue=structure_cue,
             )
             text = paragraph.action or paragraph.prose
             if numbered:
@@ -490,16 +520,17 @@ class CommercialLanguageService:
         numbered: bool = False,
     ) -> list[str]:
         lines: list[str] = []
-        for index, item in enumerate(items, start=1):
+        seen: set[str] = set()
+        for item in items:
             text = pl.plain_avoid(item)
-            if not text:
+            if not text or text in seen:
                 continue
-            if numbered:
-                lines.append(f"{index}. {text}")
-            else:
-                lines.append(text)
-        while len(lines) < 1:
+            seen.add(text)
+            lines.append(text)
+        if not lines:
             lines.append("Đừng kết luận ngoài phạm vi dữ liệu đã có.")
+        if numbered:
+            return [f"{index}. {text}" for index, text in enumerate(lines[:3], start=1)]
         return lines[:3]
 
     @staticmethod
@@ -600,6 +631,23 @@ class CommercialLanguageService:
         style_plain = pl.plain_style(style)
         theme_plain = pl.plain_theme(theme)
         follow = "tòng" in (structure or "").lower() or "tong" in (structure or "").lower()
+        band = (capacity or "").strip().lower()
+        if band.startswith("body:"):
+            band = band.split(":", 1)[1]
+        conserving = band in {"weak", "very_weak"} or (
+            theme == "BALANCE_DIRECTION" and band in {"balanced", ""}
+        )
+        struct_plain = pl.structure_to_plain(structure)
+        dual = bool((capacity or "").strip() and (structure or "").strip() and struct_plain)
+
+        if conserving:
+            if career:
+                return (
+                    "Công việc hợp bạn khi được phép dừng và trả việc — "
+                    "không khi chứng minh bằng khối lượng."
+                )
+            return "Bạn không cần mạnh hơn tuần này. Bảo toàn nền là quyết định đúng."
+
         if career:
             if theme == "OPERATING_OUTPUT" and follow:
                 return (
@@ -609,7 +657,17 @@ class CommercialLanguageService:
             if theme == "OPERATING_OUTPUT" and style_plain:
                 return f"Công việc hợp bạn khi {style_plain} được đặt đúng chỗ."
             if theme == "OPERATING_SELF_CARRY":
+                if dual:
+                    return (
+                        "Công việc hợp bạn khi tự chủ có biên tải — "
+                        f"và {struct_plain}; không ôm hết theo phản xạ."
+                    )
                 return "Công việc hợp bạn khi tự chủ có biên tải — không phải ôm hết theo phản xạ."
+            if theme == "BALANCE_DIRECTION":
+                return (
+                    "Công việc hợp bạn khi tuần có hướng làm dịu — "
+                    "không khi thêm một vòng sản xuất."
+                )
             if theme_plain:
                 return f"Công việc hợp bạn khi bạn được {theme_plain}."
         if theme == "OPERATING_OUTPUT" and follow:
@@ -618,13 +676,24 @@ class CommercialLanguageService:
                 "không khi ép mình vào khuôn chung hay ôm thêm cho đủ."
             )
         if theme == "OPERATING_SELF_CARRY":
+            if dual:
+                return (
+                    "Bạn mạnh ở chỗ tự gánh — và "
+                    f"{struct_plain}; bền hơn khi biết dừng nhận thêm, "
+                    "không chọn một nhãn xóa nhãn kia."
+                )
             return "Bạn mạnh ở chỗ tự gánh — và bền hơn khi biết dừng nhận thêm."
-        if style_plain and theme_plain:
-            return f"Bạn mạnh hơn khi đi đúng {style_plain}."
-        if theme_plain:
-            return f"Nhớ điều này: bạn {theme_plain}."
+        if theme == "BALANCE_DIRECTION":
+            return "Bạn bền khi tuần có hướng điều tiết — không khi đợi kiệt mới nghỉ."
+        if dual:
+            return (
+                f"{pl.plain_capacity(capacity)} và {struct_plain} cùng đúng — "
+                "đừng chọn một nhãn xóa nhãn kia."
+            )
         if style_plain:
             return f"Bạn rõ hơn khi đi đúng {style_plain}."
+        if theme_plain:
+            return f"Nhớ điều này: bạn {theme_plain}."
         return "Giữ quyết định bám những gì đã được công bố về bạn."
 
     @staticmethod

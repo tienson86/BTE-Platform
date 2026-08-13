@@ -3,7 +3,7 @@
 | Field | Value |
 |-------|-------|
 | As of | 2026-08-13 |
-| Source | ITERATION_001 baseline |
+| Source | ITERATION_002 lab review |
 | Live-beta | Empty |
 
 ---
@@ -12,18 +12,18 @@
 
 | KPI | 0001 | 0002 | 0003 parent | Floor |
 |-----|-----:|-----:|------------:|------:|
-| Identity | 8.7 | 8.0 | 7.5† | 7.0 |
-| Career | 8.6 | 8.1 | n/a | 7.0 |
-| Executive | 9.4* | 8.0 | 7.5† | 7.0 |
-| Commercial Score | **8.0** | **8.0** | **7.5** | 7.0 |
-| Trust | 8.0 | 8.0 | 8.0 | 7.0 |
-| Clarity | 8.0 | 8.0 | 8.0 | 7.0 |
-| Actionability | 8.0 | 7.8 | 8.0 | 7.0 |
+| Identity | **9.5** | 8.1 | 7.5† | 7.0 |
+| Career | **9.2** | 8.1 | n/a | 7.0 |
+| Executive | **9.6*** | 8.1 | 7.5† | 7.0 |
+| Commercial Score | **8.5** | **8.0** | **7.5** | 7.0 |
+| Trust | 8.5 | 8.0 | 8.0 | 7.0 |
+| Clarity | 8.7 | 8.1 | 8.0 | 7.0 |
+| Actionability | 8.4 | 7.8 | 8.0 | 7.0 |
 | Recommendation | — | — | — | RC3 |
 | Purchase Intent | ready* | — | — | RC3 |
 | Regression % | **100** | 100 vs 0001 | 100 vs 0001 | 100 |
 
-\* 0001 Rec/Buy = lab commercial-ready, not RC3 form. Executive 9.4 = Part 08 chapter.
+\* 0001 Rec/Buy = lab commercial-ready, not RC3 form. Executive 9.6 = Part 08 consulting chapter. Overall 8.5 still packaging-capped (PB-010).
 
 ---
 
@@ -41,7 +41,9 @@
 | Recommendation | 5.0 | 8.0 | 5.0 | 7.0 |
 | Purchase Intent | 5.0 | 8.0 | 5.0 | 7.0 |
 
-P04/P06 are why PB-001–003 exist. P05 is why OUTPUT is not a backlog emergency.
+P04/P06 discovery scores are **001 baseline** (not restated in 002). 002 confirmed conserving close on a P04 spot-check; formal discovery rescore is not this ledger row.
+
+P05 is why OUTPUT is not a backlog emergency.
 
 ---
 
@@ -49,10 +51,11 @@ P04/P06 are why PB-001–003 exist. P05 is why OUTPUT is not a backlog emergency
 
 | KPI | Status |
 |-----|--------|
-| Discovery mean P04–P06 | 6.4 — below RC3 |
-| Lab ship set 0001+0002 | MET 8.0 |
+| Discovery mean P04–P06 | 6.4 — below RC3 (formal rescore still open) |
+| Lab ship set 0001+0002 | MET 8.5 / 8.0 |
+| CASE_0001 I/C/E KPI | **Met** 9.5 / 9.2 / 9.6 |
 | Live-beta n | 0 |
-| Regression | 100% on last EPICs |
+| Regression | 100% Golden + 0002/0003 holds |
 
 ---
 

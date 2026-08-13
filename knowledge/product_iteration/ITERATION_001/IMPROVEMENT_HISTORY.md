@@ -31,12 +31,24 @@
 
 ---
 
-## Queue (do not start inside 001)
+## 002
 
-1. CAND-001 Adult CONSERVING  
-2. CAND-002 Theme-gated memory  
-3. CAND-003 TENSION_HOLDER close  
-4. CAND-004 Lived structure phrase  
+| Field | Value |
+|-------|-------|
+| Improvement | Narrative Quality Program (PB-001+002+003) |
+| Layer | CLL runtime realization |
+| Expected ROI | 0001 I/C/E 8.7/8.6/9.4 → 9.5/9.2/9.6 |
+| Observed ROI | **9.5 / 9.2 / 9.6** · Overall 8.0→8.5 |
+| Regression | Golden **PASS** · 0002 8.0 hold · 0003 7.5 hold |
+
+---
+
+## Queue (after 002)
+
+1. PB-005 Consume Theme Library  
+2. PB-008 RC3 live forms  
+3. PB-010 CASE_0001 pack appendices  
+4. PB-006 Child stated vs engine pillars  
 
 Order = expected ROI on weakest discovery scores (P04, P06) without touching Golden.
 

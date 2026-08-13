@@ -13,6 +13,9 @@
 | 2026-08-13 | **One product backlog** (this package) | No parallel roadmap. Iterations pull from here only. |
 | 2026-08-13 | **ITERATION_001** = analytics only | Measure before the next composer/context change. |
 | 2026-08-13 | **PB-001 first** (CONSERVING) | Highest expected Overall + Purchase on weakest discovery buyer; child conservation already proved in EPIC-B. |
+| 2026-08-13 | **ITERATION_002** = PB-001+002+003 as **one** Narrative Quality program | Product named the three as one iteration, not three In Progress slots. Shared gates, not case lines. |
+| 2026-08-13 | Lived structure map ships with 002 (PB-004) | Dual close cannot land on an empty khung. |
+| 2026-08-13 | Avoid dedupe ships with 002 (PB-013) | Same pass; trivial; no extra iteration. |
 | 2026-08-13 | Theme Library as **catalog**, not engine | CLL may consume later (PB-005); no new Truth. |
 | 2026-08-13 | Personas = **review lenses** | P02≡P05 commercially; runtime would fight CDR theme. |
 | 2026-08-12/13 | CLL V1.2 · EPIC-A · EPIC-B | Observed ROI hit; Golden hold. |
@@ -38,7 +41,7 @@
 | 2026-08-13 | **ISS-009 DRAFT_KNOWLEDGE** (PB-012) | High cost · ~0 live CX while features already speak. V1.1. |
 | 2026-08-13 | **Master as primary SKU** (PB-011) | Executive substitute exists; Advisor not V1. |
 | 2026-08-13 | P07–P10 **intent products** (business/marriage/health/wealth as new SKUs) | RC3 only asked to *bind charts*, not to build new domains. PB-009 = bind only. |
-| 2026-08-13 | PB-002/003 in the same iteration as PB-001 | Process: one In Progress. May share a later CLL memory pass if Product names it. |
+| 2026-08-13 | PB-002/003 in the same iteration as PB-001 | **Superseded** — Product named ITERATION_002 as one Narrative Quality program. |
 
 ---
 

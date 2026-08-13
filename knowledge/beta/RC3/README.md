@@ -4,6 +4,7 @@
 |-------|-------|
 | Program | RC3 Internal Beta |
 | Status | **READY TO RECRUIT** (protocol frozen; 7 charts still unbound) |
+| Execution | `../RC3_EXECUTION/` — 10 slots · soft launch Wave 1 |
 | Date | 2026-08-13 |
 | Prerequisite | RC2 **PASS** |
 | Goal | Customer discovery — not engineering |

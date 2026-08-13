@@ -41,7 +41,7 @@ RC0 → RC1 → RC2 → RC3 (discovery) → Commercial V1 → Commercial V1.1
 
 | Case | Product view | Backlog |
 |------|----------------|---------|
-| 0001 | Golden 8.0 · regress always | PB-010 |
+| 0001 | Golden PASS · I/C/E **9.5 / 9.2 / 9.6** · Overall 8.5 | PB-010 |
 | 0002 | Lab 8.0 OUTPUT | Protect in PB-002 |
 | 0003 | Parent 7.5 · Career hidden | PB-006 · PB-007 |
 | 0004–0010 Golden | Placeholders | PB-009 (bind, don’t invent) |

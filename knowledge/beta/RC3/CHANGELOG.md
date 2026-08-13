@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-08-13 — RC3 EXECUTION pack
+
+Delivery ops in `knowledge/beta/RC3_EXECUTION/`. 10 slots. Soft launch Wave 1 (P01–P03). No new charts. Program files unchanged.
+
+---
+
 ## 2026-08-13 — RC3 Internal Beta program created
 
 | Field | Value |

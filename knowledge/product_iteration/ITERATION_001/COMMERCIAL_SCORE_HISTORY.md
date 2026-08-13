@@ -3,14 +3,14 @@
 | Field | Value |
 |-------|-------|
 | Ledger | Product |
-| Snapshot | **2026-08-13 · ITERATION_001 baseline** |
-| Behavior | Unchanged this iteration |
+| Snapshot | **2026-08-13 · ITERATION_002 current** |
+| Behavior | 002 changed CLL realization only |
 
 Scores are **as published**. This file does not recalculate them.
 
 ---
 
-## Current baseline (001)
+## 001 baseline (before 002)
 
 ### Lab (Quality / Golden path)
 
@@ -34,6 +34,18 @@ CASE_0001 Rec/Buy: lab **commercial ready** (not an RC3 form).
 | P06 Tension (Pilot 0002) | discovery | 5.5 | 5.5 | 5.5 | **5.5** | 6.0 | 6.0 | 6.0 | 5.0 | 5.0 | 2026-08-13 |
 
 P01–P03 live RC3 forms: **not yet**. P07–P10: **not bound**.
+
+---
+
+## 002 snapshot (lab)
+
+| Chart | Src | Identity | Career | Executive | Overall | Trust | Clarity | Action | Rec | Buy | As of |
+|-------|-----|---------:|-------:|----------:|--------:|------:|--------:|-------:|----:|----:|-------|
+| CASE_0001 Frozen Golden | lab | **9.5** | **9.2** | **9.6*** | **8.5** | 8.5 | 8.7 | 8.4 | — | — | 2026-08-13 |
+| CASE_0002 (hold) | lab | 8.1 | 8.1 | 8.1 | **8.0** | 8.0 | 8.1 | 7.8 | — | — | 2026-08-13 |
+| CASE_0003 parent (hold) | lab | 7.5† | n/a (hidden) | 7.5† | **7.5** | 8.0 | 8.0 | 8.0 | — | — | 2026-08-13 |
+
+Evidence: `knowledge/product_iteration/ITERATION_002/COMMERCIAL_REVIEW.md`. Discovery P04–P06 rows **unchanged** (no official rescore).
 
 ---
 

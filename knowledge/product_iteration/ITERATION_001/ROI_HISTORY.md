@@ -26,14 +26,25 @@ Skipped (low ROI, still skipped):
 
 ---
 
-## Forecast (not run — candidates for 002+)
+## Closed — ITERATION_002
+
+| ID | Change | Layer | Expected ROI | Observed ROI | Regression | Verdict |
+|----|--------|-------|--------------|--------------|------------|---------|
+| PB-001 | Conserving close + stop-list | CLL realization | P04 5.7→~7.2 | System confirmed on conserving path · 0001 KPI via dual/theme gates | 0001 PASS · 0002/0003 hold | Hit (system) · P04 formal score open |
+| PB-002 | Theme-gated memory / rooms | CLL realization | No OUTPUT leak off-theme | 0001 Career no output week · 0002 output week kept · Clarity +0.7 | 0002 **8.0** | **Hit** |
+| PB-003 | Keep two published stories | CLL realization | Dual close usable | 0001 I **9.5** · C **9.2** · E **9.6** | 0001 not flattened | **Hit** |
+| PB-004 | Lived structure phrase | Composer map | Clarity +0.3–0.5 | Empty khung gone · Ấn lived | PASS | **Hit** |
+| PB-013 | Avoid dedupe | CLL | S3 polish | Duplicate avoid collapsed | PASS | **Hit** |
+
+---
+
+## Forecast (not run — candidates for 003+)
 
 | ID | Change | Layer | Expected ROI | Observed | Regression plan |
 |----|--------|-------|--------------|----------|-----------------|
-| CAND-001 | Adult CONSERVING close + stop-list | Context + CLL memory | P04 5.7 → ~7.2 · Buy 5→7 | — | 0001 + 0002 + P05 |
-| CAND-002 | Theme-gated memory (no output leak on BALANCE / SELF_CARRY) | CLL / composer | P04/P06 Clarity/Trust +0.3–0.5 | — | 0001 + 0002 |
-| CAND-003 | TENSION_HOLDER keep two stories in close | CLL dual-scope content | P06 5.5 → ~7.0 if both lines live | — | 0001 (must not flatten P01) |
-| CAND-004 | Replace empty “khung lá số” | Composer mapping | Clarity +0.3–0.5 on P04/P06 | — | 0001 + 0002 |
+| PB-005 | Consume Theme Library catalog in CLL | CLL consume | Same class, same close without new code branches | — | 0001 + 0002 + 0003 |
+| PB-008 | RC3 live forms P01–P03 | Discovery | Confirm or challenge lab 8.0/9.x | — | No code |
+| PB-010 | Hide 0001 engineering appendices | Packaging | Overall toward I/C/E | — | 0001 Golden PASS |
 
 Expected numbers are **forecasts from discovery**, not promises.
 
