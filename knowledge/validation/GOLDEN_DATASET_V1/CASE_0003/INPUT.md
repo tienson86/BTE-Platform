@@ -8,7 +8,7 @@
 | Status | STRESS / NOT GOLDEN |
 | Rule | Index only — do not rewrite existing reports |
 
-Input as published in `knowledge/validation/CASE_0003/`BASELINE.md` — not re-authored.
+Input as published in `knowledge/validation/CASE_0003/BASELINE.md` — not re-authored.
 
 | Field | Value |
 |-------|-------|

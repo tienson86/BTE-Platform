@@ -8,7 +8,7 @@
 | Status | STRESS / NOT GOLDEN |
 | Rule | Index only — do not rewrite existing reports |
 
-Scored inside `knowledge/validation/CASE_0003/`CUSTOMER_REVIEW.md` — do not rewrite.
+Scored inside `knowledge/validation/CASE_0003/CUSTOMER_REVIEW.md` — do not rewrite.
 
 | Score | Value |
 |------:|-------|

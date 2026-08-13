@@ -10,6 +10,6 @@
 
 Canonical:
 
-`knowledge/validation/CASE_0003/`ROOT_CAUSE.md`
+`knowledge/validation/CASE_0003/ROOT_CAUSE.md`
 
 Published summary: extreme chart stresses **packaging and language bias**, not calculation collapse.

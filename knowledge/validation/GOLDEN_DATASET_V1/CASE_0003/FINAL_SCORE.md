@@ -8,7 +8,7 @@
 | Status | STRESS / NOT GOLDEN |
 | Rule | Index only — do not rewrite existing reports |
 
-Snapshot from `knowledge/validation/CASE_0003/`CUSTOMER_REVIEW.md`. Not a freeze.
+Snapshot from `knowledge/validation/CASE_0003/CUSTOMER_REVIEW.md`. Not a freeze.
 
 | KPI | Score |
 |-----|------:|

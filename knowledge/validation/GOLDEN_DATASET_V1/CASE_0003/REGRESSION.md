@@ -10,7 +10,7 @@
 
 Canonical:
 
-`knowledge/validation/CASE_0003/`REGRESSION.md`
+`knowledge/validation/CASE_0003/REGRESSION.md`
 
 Published verdict: **CASE_0001 regression PASS.** CASE_0003 findings do not imply Golden breakage.
 

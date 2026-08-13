@@ -10,7 +10,7 @@
 
 Canonical review:
 
-`knowledge/validation/CASE_0003/`CUSTOMER_REVIEW.md`
+`knowledge/validation/CASE_0003/CUSTOMER_REVIEW.md`
 
 | Published result | Value |
 |------------------|-------|
@@ -21,4 +21,4 @@ Canonical review:
 | Parent trust of Career | FAIL |
 | Overconfidence control | FAIL |
 
-Also: `knowledge/validation/CASE_0003/`BIAS_CHECK.md`
+Also: `knowledge/validation/CASE_0003/BIAS_CHECK.md`

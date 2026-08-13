@@ -8,7 +8,7 @@
 | Status | STRESS / NOT GOLDEN |
 | Rule | Index only — do not rewrite existing reports |
 
-No IMPROVEMENT.md was authored in `knowledge/validation/CASE_0003/ (explicit no-fix cycle).
+No IMPROVEMENT.md was authored in `knowledge/validation/CASE_0003/` (explicit no-fix cycle).
 
 Expected product direction (not executed here): `knowledge/product_context/CASES.md`
 

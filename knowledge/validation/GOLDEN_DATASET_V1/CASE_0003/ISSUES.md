@@ -10,7 +10,7 @@
 
 Canonical register:
 
-`knowledge/validation/CASE_0003/`ISSUES.md`
+`knowledge/validation/CASE_0003/ISSUES.md`
 
 ISS-C3-001 … ISS-C3-008. All OPEN at that cycle (no fixes).
 

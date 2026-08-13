@@ -19,7 +19,7 @@ Third validation case. Stresses weak capacity, follow structure, and minor packa
 | Birth (input) | 2015-02-15 · 05:30 · Asia/Ho_Chi_Minh |
 | Age (2026) | ~11 |
 | Chart (engine) | Weak 0.19 · Tòng Nhi / Thực Thần · Thương Quan · UG Canh |
-| Artifact tree | `knowledge/validation/CASE_0003/ |
+| Artifact tree | knowledge/validation/CASE_0003/ |
 
 ## Purpose
 

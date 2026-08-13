@@ -10,8 +10,8 @@
 
 No separate DOMAIN_REVIEW.md filename in the CASE_0003 tree. Domain facts and bias are in:
 
-- `knowledge/validation/CASE_0003/`BASELINE.md`
-- `knowledge/validation/CASE_0003/`BIAS_CHECK.md`
-- `knowledge/validation/CASE_0003/`ROOT_CAUSE.md`
+- `knowledge/validation/CASE_0003/BASELINE.md`
+- `knowledge/validation/CASE_0003/BIAS_CHECK.md`
+- `knowledge/validation/CASE_0003/ROOT_CAUSE.md`
 
 Engine published weak 0.19 correctly. CDR detected follow qualification and UG↔weak TRUE_CONFLICT. Customer language still over-weights OPERATING_OUTPUT.
