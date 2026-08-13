@@ -179,6 +179,10 @@ class ScoreEngine:
 
         Does not mutate ``rule_context`` (Stage 5 published RuleContext stays
         immutable). Callers must use the returned dict for Interpretation.
+
+        StrengthEngine owns canonical ``strength.level`` / ``strength.score``.
+        This method may attach ``score.strength_score`` as a contribution.
+        It must not remap or overwrite canonical strength classification.
         """
         composed: dict[str, Any] = dict(rule_context)
         section = dict(composed.get("score") or {})
@@ -205,40 +209,8 @@ class ScoreEngine:
         composed["score"] = section
         composed["strength_score"] = section["strength_score"]
 
-        # Score-owned strength.level on the composed (non-published) dict only.
-        strength = dict(composed.get("strength") or {})
-        score_value = float(result.strength_score or 0.0)
-        strength["score"] = score_value
-        if score_value >= 70:
-            level = "strong"
-        elif score_value >= 40:
-            level = "balanced"
-        elif score_value > 0:
-            level = "weak"
-        else:
-            level = strength.get("level") or "unknown"
-        strength["level"] = level
-        composed["strength"] = strength
-
-        facts = dict(composed.get("facts") or {})
-        facts["day_master_strength_calculated"] = level not in {None, "unknown"}
-        facts["than_vuong_nhuoc_da_xac_dinh"] = level not in {None, "unknown"}
-        facts["than_score_da_tinh"] = level not in {None, "unknown"} or score_value > 0
-        facts["strong_day_master"] = level == "strong"
-        facts["strength_vuong"] = level == "strong"
-        facts["weak_day_master"] = level == "weak"
-        facts["strength_nhuoc"] = level == "weak"
-        facts["balanced_day_master"] = level == "balanced"
-        facts["strength_balanced"] = level == "balanced"
-        facts["day_master_extremely_strong"] = score_value >= 80
-        facts["day_master_extremely_weak"] = 0 < score_value <= 20
-        facts["extremely_strong_day_master"] = facts["day_master_extremely_strong"]
-        facts["extremely_weak_day_master"] = facts["day_master_extremely_weak"]
-        composed["facts"] = facts
-        for key, value in facts.items():
-            if value is True:
-                composed[key] = True
-
+        # StrengthEngine owns canonical strength.level / strength.score.
+        # Score may publish a separate contribution on the score section only.
         return composed
 
     def _resolve_rule_context(self, context: Any) -> dict[str, Any]:
@@ -290,7 +262,7 @@ class ScoreEngine:
                 value = entry.get("count")
             if value is None:
                 continue
-            series.append({"label": label, "value": float(value)})
+            series.append({"element": key, "label": label, "value": float(value)})
         return series
 
     @staticmethod

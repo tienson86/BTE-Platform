@@ -58,10 +58,12 @@ def test_calendar_and_bazi_are_portal_friendly() -> None:
 
     calendar = data["calendar"]
     assert calendar["solar_term"]["name"] == "Đại Hàn"
+    assert calendar["lunar_date"] == "22/12/1986"
     assert calendar["year_can_chi"] == "Bính Dần"
-    assert calendar["month_can_chi"] == "Tân Sửu"
-    assert calendar["day_can_chi"] == "Canh Ngọ"
-    assert calendar["hour_can_chi"] == "Mậu Dần"
+    assert calendar["bazi_can_chi"]["year"] == "Bính Dần"
+    assert calendar["bazi_can_chi"]["month"] == "Tân Sửu"
+    assert calendar["bazi_can_chi"]["day"] == "Canh Ngọ"
+    assert calendar["bazi_can_chi"]["hour"] == "Mậu Dần"
     assert calendar["cung_phi"] == "Khôn"
     assert calendar["menh_quai"] == "Khôn"
 

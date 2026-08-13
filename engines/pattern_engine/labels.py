@@ -21,8 +21,8 @@ PATTERN_LABELS: dict[str, str] = {
 }
 
 STRENGTH_LEVEL_LABELS: dict[str, str] = {
-    "strong": "Vượng",
-    "weak": "Nhược",
+    "strong": "Thân vượng",
+    "weak": "Thân nhược",
     "balanced": "Trung hòa",
     "unknown": "",
 }

@@ -77,6 +77,8 @@ from applications.api.services.score_truth import (
     build_score_view,
     score_source_fingerprint,
 )
+from applications.api.services.five_elements_truth import build_five_elements_payload
+from applications.api.services.luck_truth import shape_luck_payload
 from applications.api.utils.pillars import pillar_text
 from applications.api.utils.serializers import to_jsonable
 
@@ -152,7 +154,6 @@ _INTERNAL_PAYLOAD_KEYS: frozenset[str] = frozenset(
         "knowledge",
         "matching",
         "priority",
-        "luck",
         "delivery",
     }
 )
@@ -190,16 +191,27 @@ class OrchestratorService:
         bazi_data: dict[str, Any] | None = None,
         feng_data: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
-        """Build a portal-friendly Calendar view model."""
+        """Build a portal-friendly Calendar view from canonical CalendarResult."""
         data = to_jsonable(calendar)
         if not isinstance(data, dict):
             return {}
+        lunar = data.get("lunar") if isinstance(data.get("lunar"), dict) else {}
+        lunar_can_chi = data.get("lunar_can_chi") if isinstance(data.get("lunar_can_chi"), dict) else {}
+        if lunar.get("year_can_chi") and not data.get("lunar_year_can_chi"):
+            data["lunar_year_can_chi"] = lunar.get("year_can_chi")
+        if lunar_can_chi.get("year"):
+            data["year_can_chi"] = lunar_can_chi["year"]
+        elif lunar.get("year_can_chi"):
+            data["year_can_chi"] = lunar["year_can_chi"]
         if bazi_data:
+            bazi_can_chi: dict[str, str] = {}
             for part in ("year", "month", "day", "hour"):
                 pillar = bazi_data.get(f"{part}_pillar") or {}
                 text = f"{pillar.get('stem', '')} {pillar.get('branch', '')}".strip()
                 if text:
-                    data[f"{part}_can_chi"] = text
+                    bazi_can_chi[part] = text
+            if bazi_can_chi:
+                data["bazi_can_chi"] = bazi_can_chi
         if feng_data:
             for key in ("cung_phi", "menh_quai", "nhom_trach", "gua_name"):
                 if feng_data.get(key):
@@ -219,7 +231,6 @@ class OrchestratorService:
         timezone: str = "Asia/Ho_Chi_Minh",
     ) -> dict[str, Any]:
         """Run the pipeline through ``stage`` (inclusive) and return JSON data."""
-        del timezone  # reserved for future calendar localization
         try:
             return self._run(
                 stage=stage,
@@ -229,6 +240,7 @@ class OrchestratorService:
                 hour=hour,
                 minute=minute,
                 gender=gender,
+                timezone=timezone,
             )
         except PipelineAPIError:
             raise
@@ -308,6 +320,7 @@ class OrchestratorService:
         hour: int,
         minute: int,
         gender: str | None,
+        timezone: str = "Asia/Ho_Chi_Minh",
     ) -> dict[str, Any]:
         stop_at = self._resolve_stop(stage)
         stop_index = PIPELINE_ORDER.index(stop_at)
@@ -346,7 +359,14 @@ class OrchestratorService:
             return self._finalize_public_payload(payload, completed)
 
         # ----- Stage 1: Calendar -----
-        calendar = self.calendar_engine.build(year, month, day, hour, minute)
+        calendar = self.calendar_engine.build(
+            year,
+            month,
+            day,
+            hour,
+            minute,
+            timezone_name=timezone,
+        )
         completed.append("calendar")
         payload["calendar"] = self._shape_calendar(calendar)
         if stop_index == 1:
@@ -470,7 +490,7 @@ class OrchestratorService:
             published_rule_context,
             score_result,
         )
-        # Refresh Cách Cục labels from Score-owned strength without mutating Stage 5 RC.
+        # Refresh Cách Cục labels from canonical Strength (Score must not remap).
         enrich_rule_context_summaries(interpretation_ctx, pattern=pattern_result)
         enrich_result_from_rule_context(pattern_result, interpretation_ctx)
         analysis.pattern = build_pattern_view(pattern_result)
@@ -483,6 +503,14 @@ class OrchestratorService:
         completed.append("score")
         payload["score"] = analysis.score_dict()
         payload["score_source"] = analysis.meta.score_source
+        payload["five_elements"] = build_five_elements_payload(
+            published_rule_context.get("wuxing") or {}
+        )
+        payload["ten_gods"] = {
+            "visible": list(analysis.bazi.ten_gods or []),
+            "hidden": list(analysis.bazi.hidden_stems or []),
+            "summary": ", ".join(str(item) for item in (analysis.bazi.ten_gods or []) if item),
+        }
         logger.info(
             "pipeline.score total=%.2f grade=%s",
             payload["score"].get("total_score", 0.0),
@@ -500,7 +528,7 @@ class OrchestratorService:
             score=score_result,
         )
         completed.append("luck")
-        payload["luck"] = luck_context.to_dict()
+        payload["luck"] = shape_luck_payload(luck_context)
         if stop_index == 7:
             return self._finalize_public_payload(payload, completed)
 

@@ -14,6 +14,9 @@ from applications.api.services.score_truth import build_score_view
 from applications.api.services.strength_truth import build_strength_view
 from applications.api.services.temperature_truth import build_temperature_view
 from applications.api.services.useful_god_truth import build_useful_god_view
+from applications.api.services.five_elements_truth import build_five_elements_payload
+from applications.api.services.luck_truth import shape_luck_payload
+from engines.feng_shui_engine import FengShuiEngineError
 from engines.interpretation_engine.legacy_builder import InterpretationResult
 from engines.pattern_engine.rule_context_bridge import (
     enrich_result_from_rule_context,
@@ -67,6 +70,7 @@ class ProductionEngineRunner:
             request.day,
             request.hour,
             request.minute,
+            timezone_name=request.timezone,
         )
         stages.append("calendar")
 
@@ -74,6 +78,19 @@ class ProductionEngineRunner:
         bazi_view = build_bazi_view(bazi_chart)
         sync_chart_from_view(bazi_chart, bazi_view)
         stages.append("bazi")
+
+        lunar = getattr(calendar, "lunar", None)
+        feng_year = getattr(lunar, "year", None) or request.year
+        feng_view: dict[str, Any] | None
+        try:
+            feng = orch.feng_shui_engine.calculate(
+                year=int(feng_year),
+                gender=request.gender,
+            )
+            feng_view = feng.to_dict()
+        except FengShuiEngineError:
+            feng_view = None
+        stages.append("feng_shui")
 
         analysis = AnalysisResult(
             bazi=bazi_view,
@@ -187,7 +204,11 @@ class ProductionEngineRunner:
         analysis.interpretation = build_interpretation_view(interpretation_result)
         stages.append("interpretation_v1")
 
-        calendar_payload = orch._shape_calendar(calendar, analysis.bazi_dict())
+        calendar_payload = orch._shape_calendar(
+            calendar,
+            analysis.bazi_dict(),
+            feng_view,
+        )
         profile = ReportProfileV1(
             full_name=request.full_name,
             gender=request.gender,
@@ -200,7 +221,10 @@ class ProductionEngineRunner:
             analysis=analysis,
             interpretation=interpretation_result,
             calendar=calendar_payload,
-            luck=luck_context.to_dict(),
+            luck=shape_luck_payload(luck_context),
+            five_elements=build_five_elements_payload(
+                published_rule_context.get("wuxing") or {}
+            ),
             profile=profile,
             case_id=request.case_id or request.request_key,
             timezone=request.timezone,
@@ -211,7 +235,7 @@ class ProductionEngineRunner:
             analysis=analysis,
             interpretation=interpretation_result,
             calendar=calendar_payload,
-            luck=luck_context.to_dict(),
+            luck=shape_luck_payload(luck_context),
             ten_gods=ten_gods,
             strength_result=strength_result,
             strength_context=strength_context,

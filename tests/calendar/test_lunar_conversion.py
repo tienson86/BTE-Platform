@@ -65,7 +65,7 @@ class TestCalendarEngineLunar(unittest.TestCase):
         self.assertEqual(result.lunar_month, 12)
         self.assertEqual(result.lunar_day, 22)
         self.assertEqual(result.solar_date, "21/01/1987")
-        self.assertEqual(result.lunar_date, "22/12/Bính Dần")
+        self.assertEqual(result.lunar_date, "22/12/1986")
         self.assertEqual(result.lunar.year_can_chi, "Bính Dần")
 
     def test_api_flat_fields_year_edges(self) -> None:

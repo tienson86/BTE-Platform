@@ -60,10 +60,61 @@ export type CalendarDto = {
   readonly month_can_chi?: string;
   readonly day_can_chi?: string;
   readonly hour_can_chi?: string;
+  readonly solar_date?: string;
+  readonly lunar_date?: string;
+  readonly lunar_year?: number;
+  readonly lunar_month?: number;
+  readonly lunar_day?: number;
+  readonly leap_month?: boolean;
+  readonly is_leap_month?: boolean;
+  readonly lunar?: {
+    readonly year?: number;
+    readonly month?: number;
+    readonly day?: number;
+    readonly leap?: boolean;
+    readonly is_leap_month?: boolean;
+    readonly year_can_chi?: string;
+  };
+  readonly lunar_can_chi?: {
+    readonly year?: string;
+    readonly day?: string;
+  };
   readonly solar_term?: { readonly name?: string } | null;
   readonly cung_phi?: string;
   readonly menh_quai?: string;
+  readonly nhom_trach?: string;
   readonly [key: string]: unknown;
+};
+
+export type FiveElementsDto = {
+  readonly wood?: { readonly count?: number; readonly status?: string } | number;
+  readonly fire?: { readonly count?: number; readonly status?: string } | number;
+  readonly earth?: { readonly count?: number; readonly status?: string } | number;
+  readonly metal?: { readonly count?: number; readonly status?: string } | number;
+  readonly water?: { readonly count?: number; readonly status?: string } | number;
+  readonly counts?: Readonly<Record<string, number | null | undefined>>;
+  readonly status?: string;
+  readonly dominant?: string;
+  readonly missing?: readonly string[];
+};
+
+export type LuckCycleDto = {
+  readonly index?: number;
+  readonly age_start?: number;
+  readonly age_end?: number;
+  readonly year_start?: number;
+  readonly year_end?: number;
+  readonly gan_zhi?: string;
+  readonly stem?: string;
+  readonly branch?: string;
+};
+
+export type LuckDto = {
+  readonly available?: boolean;
+  readonly direction?: string;
+  readonly start_age?: number;
+  readonly current_cycle?: LuckCycleDto | null;
+  readonly cycles?: readonly LuckCycleDto[];
 };
 
 export type SeriesItemDto = {
@@ -117,6 +168,13 @@ export type AnalysisDataDto = {
   readonly temperature?: Record<string, unknown>;
   readonly useful_god?: Record<string, unknown>;
   readonly score?: ScoreDto;
+  readonly five_elements?: FiveElementsDto;
+  readonly ten_gods?: {
+    readonly visible?: readonly string[];
+    readonly hidden?: readonly string[];
+    readonly summary?: string;
+  };
+  readonly luck?: LuckDto;
   readonly interpretation?: Record<string, unknown>;
   readonly report?: Record<string, unknown>;
   /** ReportEngine delivery markdown/html (legacy delivery alias). */

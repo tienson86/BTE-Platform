@@ -1,33 +1,46 @@
 {
   "calendar": {
-    "calendar_mode": "",
+    "calendar_mode": "solar_utc7",
+    "cung_phi": "Khôn",
+    "leap_month": false,
     "lunar_date": "22/12/1986",
+    "lunar_day": 22,
+    "lunar_month": 12,
+    "lunar_year": 1986,
+    "lunar_year_can_chi": "Bính Dần",
+    "menh_quai": "Khôn",
+    "nhom_trach": "Tây Tứ Trạch",
     "solar_date": "21/01/1987",
-    "solar_term": "{'name': 'Đại Hàn', 'index': 23}",
-    "solar_term_datetime": ""
+    "solar_term": "Đại Hàn",
+    "solar_term_datetime": "",
+    "timezone": "Asia/Bangkok"
   },
   "diagnostics": {
     "fallbacks_used": [],
-    "missing_fields": [
-      "calendar.calendar_mode"
-    ],
+    "missing_fields": [],
     "source_contracts": [
       "applications.api.models.analysis_result.AnalysisResult",
       "engines.interpretation_engine.legacy_builder.InterpretationResult",
-      "AnalysisResult.score.wuxing_series",
+      "five_elements.analytical_counts",
       "AnalysisResult.score.ten_god_series",
       "AnalysisResult.interpretation.InterpretationView"
     ]
   },
   "five_elements": {
-    "earth": null,
-    "fire": null,
-    "metal": null,
+    "earth": 6.0,
+    "fire": 5.0,
+    "metal": 3.0,
     "normalized": {},
     "percentages": {},
-    "raw": {},
-    "water": null,
-    "wood": null
+    "raw": {
+      "earth": 6,
+      "fire": 5,
+      "metal": 3,
+      "water": 1,
+      "wood": 4
+    },
+    "water": 1.0,
+    "wood": 4.0
   },
   "interpretation": {
     "conclusion": "",
@@ -37,45 +50,10 @@
     "sections": [
       {
         "confidence": null,
-        "content": "Áp dụng bảng trạng thái ngũ hành của mùa đã được xác định.\n\nƯu tiên xác định mùa theo Tiết khí nếu dữ liệu Tiết khí có sẵn.\n\nNếu chưa có Tiết khí thì xác định mùa theo Địa Chi tháng.\n\nNếu có dữ liệu Tiết khí thì sử dụng Tiết khí để xác nhận trạng thái mùa.\n\nTháng âm lịch chỉ dùng để tham khảo khi không có dữ liệu khác.\n\nKiểm tra tính hợp lệ của mùa trước khi áp dụng điều chỉnh.\n\nKích hoạt khi xác định Chính Cách.\n\nKích hoạt khi tháng sinh thuộc mùa Đông.\n\nTổng quan: Nhật Chủ Canh, cách cục Chinh An.",
-        "id": "summary",
-        "priority": 0,
-        "title": "Tổng quan"
-      },
-      {
-        "confidence": null,
-        "content": "Tính cách phản ánh thập thần nổi: Thất Sát, Kiếp Tài, Nhật Chủ, Thiên Ấn.",
-        "id": "personality",
-        "priority": 0,
-        "title": "Tính cách"
-      },
-      {
-        "confidence": null,
         "content": "Quan/Sát hoặc cách Quan — liên quan sự nghiệp và trách nhiệm.",
         "id": "career",
         "priority": 0,
         "title": "Sự nghiệp"
-      },
-      {
-        "confidence": null,
-        "content": "Quan hệ xã hội chịu ảnh hưởng bởi cấu trúc Thập thần / cách cục.",
-        "id": "relationship",
-        "priority": 0,
-        "title": "Quan hệ"
-      },
-      {
-        "confidence": null,
-        "content": "Thần sát hiện diện: Thiên Ất Quý Nhân, Thiên Ất, Hồng Loan, Thiên Hỷ, Thiên Đức.",
-        "id": "health",
-        "priority": 0,
-        "title": "Sức khỏe"
-      },
-      {
-        "confidence": null,
-        "content": "Dụng thần: Thực Thần (Không có Dụng thần).",
-        "id": "useful_god",
-        "priority": 0,
-        "title": "Dụng thần"
       },
       {
         "confidence": null,
@@ -86,17 +64,52 @@
       },
       {
         "confidence": null,
-        "content": "Khi mua hien tai sinh tro cho Cach Cuc, gia tri Cach duoc nang cao.\n\nMua va Cach Cuc ket hop tot.\n\nNgu hanh cua Cach Cuc dang nam trong lenh mua.\n\nDung Than duoc kich hoat trong dieu kien ly tuong.\n\nThan can bang ket hop Cach Cuc on dinh.\n\nDung Than nhan duoc su sinh tro tu ngu hanh.",
-        "id": "warning",
+        "content": "Thần sát hiện diện: Thiên Ất Quý Nhân, Thiên Ất, Hồng Loan, Thiên Hỷ, Thiên Đức.",
+        "id": "health",
         "priority": 0,
-        "title": "Lưu ý"
+        "title": "Sức khỏe"
       },
       {
         "confidence": null,
-        "content": "Kích hoạt khi Nhật Chủ ở trạng thái cân bằng.\n\nThân vượng/nhược: balanced (month=Đắc lệnh, root=Thông căn 1 chi).",
+        "content": "Tính cách phản ánh thập thần nổi: Kiếp Tài, Nhật Chủ, Thiên Ấn, Thất Sát.",
+        "id": "personality",
+        "priority": 0,
+        "title": "Tính cách"
+      },
+      {
+        "confidence": null,
+        "content": "Quan hệ xã hội chịu ảnh hưởng bởi cấu trúc Thập thần / cách cục.",
+        "id": "relationship",
+        "priority": 0,
+        "title": "Quan hệ"
+      },
+      {
+        "confidence": null,
+        "content": "Thân vượng/nhược: strong (month=Đắc lệnh, root=Thông căn 1 chi).",
         "id": "strength",
         "priority": 0,
         "title": "Điểm mạnh"
+      },
+      {
+        "confidence": null,
+        "content": "Áp dụng bảng trạng thái ngũ hành của mùa đã được xác định.\n\nƯu tiên xác định mùa theo Tiết khí nếu dữ liệu Tiết khí có sẵn.\n\nNếu chưa có Tiết khí thì xác định mùa theo Địa Chi tháng.\n\nNếu có dữ liệu Tiết khí thì sử dụng Tiết khí để xác nhận trạng thái mùa.\n\nTháng âm lịch chỉ dùng để tham khảo khi không có dữ liệu khác.\n\nKiểm tra tính hợp lệ của mùa trước khi áp dụng điều chỉnh.\n\nKích hoạt khi xác định Chính Cách.\n\nKích hoạt khi tháng sinh thuộc mùa Đông.\n\nTổng quan: Nhật Chủ Canh, cách cục Chinh An.",
+        "id": "summary",
+        "priority": 0,
+        "title": "Tổng quan"
+      },
+      {
+        "confidence": null,
+        "content": "Dụng thần: Thực Thần.",
+        "id": "useful_god",
+        "priority": 0,
+        "title": "Dụng thần"
+      },
+      {
+        "confidence": null,
+        "content": "Khi mua hien tai sinh tro cho Cach Cuc, gia tri Cach duoc nang cao.\n\nMua va Cach Cuc ket hop tot.\n\nNgu hanh cua Cach Cuc dang nam trong lenh mua.",
+        "id": "warning",
+        "priority": 0,
+        "title": "Lưu ý"
       },
       {
         "confidence": null,
@@ -111,6 +124,36 @@
   "luck_cycles": {
     "cycles": [
       {
+        "age_end": 14,
+        "age_start": 5,
+        "branch": "Dần",
+        "end_year": 2001,
+        "index": 0,
+        "start_year": 1992,
+        "stem": "Nhâm",
+        "summary": "Nhâm Dần"
+      },
+      {
+        "age_end": 24,
+        "age_start": 15,
+        "branch": "Mão",
+        "end_year": 2011,
+        "index": 1,
+        "start_year": 2002,
+        "stem": "Quý",
+        "summary": "Quý Mão"
+      },
+      {
+        "age_end": 34,
+        "age_start": 25,
+        "branch": "Thìn",
+        "end_year": 2021,
+        "index": 2,
+        "start_year": 2012,
+        "stem": "Giáp",
+        "summary": "Giáp Thìn"
+      },
+      {
         "age_end": 44,
         "age_start": 35,
         "branch": "Tỵ",
@@ -119,16 +162,75 @@
         "start_year": 2022,
         "stem": "Ất",
         "summary": "Ất Tỵ"
+      },
+      {
+        "age_end": 54,
+        "age_start": 45,
+        "branch": "Ngọ",
+        "end_year": 2041,
+        "index": 4,
+        "start_year": 2032,
+        "stem": "Bính",
+        "summary": "Bính Ngọ"
+      },
+      {
+        "age_end": 64,
+        "age_start": 55,
+        "branch": "Mùi",
+        "end_year": 2051,
+        "index": 5,
+        "start_year": 2042,
+        "stem": "Đinh",
+        "summary": "Đinh Mùi"
+      },
+      {
+        "age_end": 74,
+        "age_start": 65,
+        "branch": "Thân",
+        "end_year": 2061,
+        "index": 6,
+        "start_year": 2052,
+        "stem": "Mậu",
+        "summary": "Mậu Thân"
+      },
+      {
+        "age_end": 84,
+        "age_start": 75,
+        "branch": "Dậu",
+        "end_year": 2071,
+        "index": 7,
+        "start_year": 2062,
+        "stem": "Kỷ",
+        "summary": "Kỷ Dậu"
+      },
+      {
+        "age_end": 94,
+        "age_start": 85,
+        "branch": "Tuất",
+        "end_year": 2081,
+        "index": 8,
+        "start_year": 2072,
+        "stem": "Canh",
+        "summary": "Canh Tuất"
+      },
+      {
+        "age_end": 104,
+        "age_start": 95,
+        "branch": "Hợi",
+        "end_year": 2091,
+        "index": 9,
+        "start_year": 2082,
+        "stem": "Tân",
+        "summary": "Tân Hợi"
       }
     ],
-    "direction": "",
-    "start_age": null,
+    "direction": "forward",
+    "start_age": 5,
     "start_date": ""
   },
   "metadata": {
     "case_id": "CASE-0001",
     "engine_version": "1.0.0",
-    "generated_at": "2026-08-12T10:13:04Z",
     "knowledge_version": "v1.0",
     "locale": "vi-VN",
     "report_version": "1.0",
@@ -136,7 +238,7 @@
   },
   "pattern": {
     "confidence": 72.0,
-    "explanation": "Trung hòa",
+    "explanation": "Thân vượng",
     "follow_pattern": "Đắc lệnh",
     "primary_pattern": "Chính Ấn",
     "secondary_patterns": [

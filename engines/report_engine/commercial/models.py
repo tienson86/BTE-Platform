@@ -112,8 +112,18 @@ class CommercialBuildRequest:
     client_name: str
     case_id: str = ""
     birth_date: str = ""
+    birth_time: str = ""
+    birth_lunar: str = ""
     birth_place: str = ""
     gender: str = ""
+    cung_phi: str = ""
+    menh_quai: str = ""
+    nhom_trach: str = ""
+    current_dayun: str = ""
+    dayun_start_age: str = ""
+    dayun_cycles: list[tuple[str, str]] = field(default_factory=list)
+    five_elements_summary: str = ""
+    ten_gods_summary: str = ""
     identity: CommercialFeatureInput | None = None
     career: CommercialFeatureInput | None = None
     executive: CommercialFeatureInput | None = None

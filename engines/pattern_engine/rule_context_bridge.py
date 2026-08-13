@@ -163,8 +163,38 @@ def merge_upstream_into_rule_context(
             context.get("hidden_stems") or {},
             context.get("ten_gods") or {},
         )
+        _refresh_useful_god_facts(context)
 
     return context
+
+
+def _refresh_useful_god_facts(context: dict[str, Any]) -> None:
+    """Keep RuleContext facts aligned with UsefulGodEngine-owned fields."""
+    useful = context.get("useful_god") or {}
+    facts = dict(context.get("facts") or {})
+    status = useful.get("status")
+    missing = {None, "", "MISSING", "Không có Dụng thần"}
+    has_name = bool(useful.get("name") or useful.get("useful_god"))
+    facts["useful_god_found"] = has_name
+    facts["dung_than_da_xac_dinh"] = has_name
+    facts["useful_god_active"] = has_name and status not in missing
+    facts["hy_than_da_xac_dinh"] = bool(
+        useful.get("favorable_gods") or useful.get("favorable")
+    )
+    facts["ky_than_da_xac_dinh"] = bool(
+        useful.get("unfavorable_gods") or useful.get("unfavorable")
+    )
+    facts["harmful_god_present"] = bool(
+        useful.get("unfavorable_gods") or useful.get("unfavorable")
+    )
+    facts["useful_god_blocked"] = status in {"MISSING", "Không có Dụng thần"}
+    facts["useful_god_supported"] = bool(
+        useful.get("in_stem") or useful.get("in_branch") or useful.get("in_hidden")
+    )
+    context["facts"] = facts
+    for key, value in facts.items():
+        if value is True:
+            context[key] = True
 
 
 def enrich_rule_context_summaries(
@@ -210,9 +240,11 @@ def enrich_rule_context_summaries(
     # Tổng cách: follow pattern when present; otherwise standard cách cục label.
     tong_cach = str(follow or "").strip() or cach_cuc
 
-    dung_than = str(useful.get("name") or "").strip()
-    hy_than = ", ".join(str(x) for x in (useful.get("favorable") or []) if x)
-    ky_than = ", ".join(str(x) for x in (useful.get("unfavorable") or []) if x)
+    dung_than = str(useful.get("name") or useful.get("useful_god") or "").strip()
+    hy_src = useful.get("favorable_gods") or useful.get("favorable") or []
+    ky_src = useful.get("unfavorable_gods") or useful.get("unfavorable") or []
+    hy_than = ", ".join(str(x) for x in hy_src if x)
+    ky_than = ", ".join(str(x) for x in ky_src if x)
     # Điều hậu: month/season producer (not temperature — separate temperature_state).
     dieu_hau = str(month.get("status") or "").strip()
     if not dieu_hau:
@@ -231,10 +263,16 @@ def enrich_rule_context_summaries(
     # Useful-god aliases already produced in Builder — surface at top level once.
     context["than_status"] = useful.get("than_status") or useful.get("status")
     context["support_elements"] = list(
-        useful.get("support_elements") or useful.get("favorable") or []
+        useful.get("support_elements")
+        or useful.get("favorable_gods")
+        or useful.get("favorable")
+        or []
     )
     context["avoid_elements"] = list(
-        useful.get("avoid_elements") or useful.get("unfavorable") or []
+        useful.get("avoid_elements")
+        or useful.get("unfavorable_gods")
+        or useful.get("unfavorable")
+        or []
     )
 
     context["season"] = {

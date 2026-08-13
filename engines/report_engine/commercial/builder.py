@@ -165,9 +165,32 @@ class CommercialReportBuilder:
         if request.case_id:
             meta_rows.append(("Hồ sơ", request.case_id))
         if request.birth_date:
-            meta_rows.append(("Ngày sinh", request.birth_date))
+            label = "Ngày sinh dương lịch"
+            value = request.birth_date
+            if request.birth_time:
+                value = f"{value} — {request.birth_time}"
+            meta_rows.append((label, value))
+        if request.birth_lunar:
+            meta_rows.append(("Ngày sinh âm lịch", request.birth_lunar))
         if request.birth_place:
             meta_rows.append(("Nơi sinh", request.birth_place))
+        if request.cung_phi:
+            meta_rows.append(("Cung Phi", request.cung_phi))
+        if request.menh_quai:
+            meta_rows.append(("Mệnh Quái", request.menh_quai))
+        if request.nhom_trach:
+            meta_rows.append(("Nhóm Trạch", request.nhom_trach))
+        if request.dayun_start_age:
+            meta_rows.append(("Tuổi khởi Đại vận", request.dayun_start_age))
+        if request.current_dayun:
+            meta_rows.append(("Đại vận hiện tại", request.current_dayun))
+        for label, value in request.dayun_cycles:
+            if label and value:
+                meta_rows.append((label, value))
+        if request.five_elements_summary:
+            meta_rows.append(("Ngũ hành", request.five_elements_summary))
+        if request.ten_gods_summary:
+            meta_rows.append(("Thập thần", request.ten_gods_summary))
         gender = _GENDER_LABEL.get((request.gender or "").strip().lower(), "")
         if gender:
             meta_rows.append(("Giới tính", gender))

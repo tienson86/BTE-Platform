@@ -169,6 +169,47 @@ describe("adaptAnalysisToCanonicalDesktop", () => {
     expect(vm.s11.recommendations.items[0]).toContain("Thủy");
   });
 
+  it("maps CalendarResult lunar date instead of BaZi can chi", () => {
+    const vm = adaptAnalysisToCanonicalDesktop(
+      {
+        ...SAMPLE,
+        calendar: {
+          ...SAMPLE.calendar,
+          lunar_date: "22/08/1966",
+          lunar: { year: 1966, month: 8, day: 22, is_leap_month: false, year_can_chi: "Bính Ngọ" },
+          year_can_chi: "Bính Ngọ",
+        },
+        luck: {
+          available: true,
+          start_age: 5,
+          current_cycle: { gan_zhi: "Quý Mão", year_start: 2021, year_end: 2030 },
+          cycles: [{ gan_zhi: "Mậu Tuất", year_start: 1971, year_end: 1980 }],
+        },
+        five_elements: {
+          wood: { count: 2 },
+          fire: { count: 7 },
+          earth: { count: 4 },
+          metal: { count: 4 },
+          water: { count: 0 },
+          counts: { wood: 2, fire: 7, earth: 4, metal: 4, water: 0 },
+        },
+        ten_gods: { visible: ["Tỷ Kiên", "Kiếp Tài", "Nhật Chủ", "Thiên Tài"] },
+      },
+      {
+        request: { year: 1966, month: 9, day: 24, hour: 4, minute: 15, gender: "male" },
+        source: "api",
+      },
+    );
+    expect(vm.s00.birth.lunar).toContain("22/08/1966");
+    expect(vm.s00.birth.lunar).not.toContain("Bính Dần");
+    expect(vm.s01.conditions.rows.find((row) => row.label === "Đại vận")?.value).toContain("Quý Mão");
+    expect(vm.s01.conditions.rows.find((row) => row.label === "Lộ trình Đại vận")?.value).toContain("Mậu Tuất");
+    expect(vm.s04.rows.find((row) => row.name === "Hỏa")?.pct).toBeGreaterThan(30);
+    expect(vm.s06.gods.map((god) => god.name)).toEqual(
+      expect.arrayContaining(["Tỷ Kiên", "Kiếp Tài", "Thiên Tài"]),
+    );
+  });
+
   it("keeps fixture ViewModel for preview/tests", () => {
     const vm = createCanonicalDesktopMockViewModel();
     expect(vm.source).toBe("mock");

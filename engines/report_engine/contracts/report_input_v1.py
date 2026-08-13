@@ -78,9 +78,18 @@ class ReportCalendarV1:
 
     solar_date: str = ""
     lunar_date: str = ""
+    lunar_year: int | None = None
+    lunar_month: int | None = None
+    lunar_day: int | None = None
+    leap_month: bool = False
+    lunar_year_can_chi: str = ""
     solar_term: str = ""
     solar_term_datetime: str = ""
     calendar_mode: str = ""
+    timezone: str = ""
+    cung_phi: str = ""
+    menh_quai: str = ""
+    nhom_trach: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return _normalize_mapping(asdict(self))

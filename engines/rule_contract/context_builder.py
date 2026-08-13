@@ -48,6 +48,26 @@ BRANCH_ELEMENT: dict[str, str] = {
 
 ELEMENTS: tuple[str, ...] = ("wood", "fire", "earth", "metal", "water")
 
+STEM_HAN_TO_VI: dict[str, str] = {
+    "甲": "Giáp",
+    "乙": "Ất",
+    "丙": "Bính",
+    "丁": "Đinh",
+    "戊": "Mậu",
+    "己": "Kỷ",
+    "庚": "Canh",
+    "辛": "Tân",
+    "壬": "Nhâm",
+    "癸": "Quý",
+}
+
+TEN_GOD_NAMES: frozenset[str] = frozenset(
+    name
+    for roles in maps.TEN_GOD_MATRIX.values()
+    for pair in roles.values()
+    for name in pair
+)
+
 # Solar month → rough season / month command label (V1 heuristic)
 MONTH_STATUS: dict[int, str] = {
     1: "Đắc lệnh",
@@ -718,6 +738,9 @@ class RuleContextBuilder:
             "name": None,
             "element": None,
             "role": None,
+            "candidate_type": None,
+            "favorable_gods": [],
+            "unfavorable_gods": [],
             "favorable": [],
             "unfavorable": [],
             "score": score_value,
@@ -730,16 +753,43 @@ class RuleContextBuilder:
         if useful_god is not None:
             if isinstance(useful_god, dict):
                 result.update({k: v for k, v in useful_god.items() if v is not None})
+                result["name"] = (
+                    result.get("name")
+                    or result.get("useful_god")
+                    or result.get("dung_than")
+                )
             else:
                 result["name"] = getattr(useful_god, "useful_god", None) or getattr(
                     useful_god, "name", None
                 )
                 result["status"] = getattr(useful_god, "status", result["status"])
                 result["element"] = getattr(useful_god, "element", None)
-                result["favorable"] = list(getattr(useful_god, "favorable", []) or [])
-                result["unfavorable"] = list(
-                    getattr(useful_god, "unfavorable", []) or []
+                result["candidate_type"] = (
+                    getattr(useful_god, "candidate_type", None)
+                    or getattr(useful_god, "value_type", None)
                 )
+                metadata = getattr(useful_god, "metadata", None) or {}
+                if not result["candidate_type"] and isinstance(metadata, Mapping):
+                    result["candidate_type"] = metadata.get("candidate_type") or (
+                        metadata.get("value_type")
+                    )
+
+        favorable = self._god_list(
+            result.get("favorable_gods"),
+            result.get("favorable"),
+            getattr(useful_god, "favorable_gods", None) if useful_god is not None else None,
+            getattr(useful_god, "favorable", None) if useful_god is not None else None,
+        )
+        unfavorable = self._god_list(
+            result.get("unfavorable_gods"),
+            result.get("unfavorable"),
+            getattr(useful_god, "unfavorable_gods", None) if useful_god is not None else None,
+            getattr(useful_god, "unfavorable", None) if useful_god is not None else None,
+        )
+        result["favorable_gods"] = favorable
+        result["unfavorable_gods"] = unfavorable
+        result["favorable"] = list(favorable)
+        result["unfavorable"] = list(unfavorable)
 
         # Map from pattern + chart pillars when upstream useful-god absent
         if result["name"] is None:
@@ -752,25 +802,33 @@ class RuleContextBuilder:
 
         god_name = result.get("name")
         if god_name:
-            locations = self._locate_ten_god(
-                god_name, bazi_section, hidden_stems, ten_gods
+            value_type = self._useful_god_value_type(str(god_name), result, useful_god)
+            result["candidate_type"] = value_type
+            locations = self._locate_useful_god(
+                str(god_name),
+                value_type,
+                bazi_section,
+                hidden_stems,
+                ten_gods,
             )
             result["in_stem"] = locations["in_stem"]
             result["in_branch"] = locations["in_branch"]
             result["in_hidden"] = locations["in_hidden"]
             result["status"] = self._useful_status_phrase(locations)
             # Producer: favorable / unfavorable (→ Pattern.hy_than / ky_than)
-            if not result.get("favorable") or not result.get("unfavorable"):
+            if not result.get("favorable_gods") or not result.get("unfavorable_gods"):
                 element = result.get("element") or self._useful_god_element(
                     god_name, bazi_section
                 )
                 if element:
                     result["element"] = element
                     hy, ky = self._mac_dinh_hy_ky(element)
-                    if not result.get("favorable"):
-                        result["favorable"] = hy
-                    if not result.get("unfavorable"):
-                        result["unfavorable"] = ky
+                    if not result.get("favorable_gods"):
+                        result["favorable_gods"] = hy
+                        result["favorable"] = list(hy)
+                    if not result.get("unfavorable_gods"):
+                        result["unfavorable_gods"] = ky
+                        result["unfavorable"] = list(ky)
         elif score_value > 0:
             result["status"] = "PRESENT"
         elif result["status"] is None:
@@ -778,8 +836,12 @@ class RuleContextBuilder:
 
         # Publish aliases from the same useful-god producer (no second calculation).
         result["than_status"] = result.get("status")
-        result["support_elements"] = list(result.get("favorable") or [])
-        result["avoid_elements"] = list(result.get("unfavorable") or [])
+        result["support_elements"] = list(
+            result.get("favorable_gods") or result.get("favorable") or []
+        )
+        result["avoid_elements"] = list(
+            result.get("unfavorable_gods") or result.get("unfavorable") or []
+        )
 
         return result
 
@@ -1092,9 +1154,15 @@ class RuleContextBuilder:
         facts["useful_god_found"] = bool(useful.get("name"))
         facts["dung_than_da_xac_dinh"] = bool(useful.get("name"))
         facts["useful_god_active"] = has_useful
-        facts["hy_than_da_xac_dinh"] = bool(useful.get("favorable"))
-        facts["ky_than_da_xac_dinh"] = bool(useful.get("unfavorable"))
-        facts["harmful_god_present"] = bool(useful.get("unfavorable"))
+        facts["hy_than_da_xac_dinh"] = bool(
+            useful.get("favorable_gods") or useful.get("favorable")
+        )
+        facts["ky_than_da_xac_dinh"] = bool(
+            useful.get("unfavorable_gods") or useful.get("unfavorable")
+        )
+        facts["harmful_god_present"] = bool(
+            useful.get("unfavorable_gods") or useful.get("unfavorable")
+        )
         facts["useful_god_blocked"] = useful.get("status") in {
             "MISSING",
             "Không có Dụng thần",
@@ -1435,6 +1503,118 @@ class RuleContextBuilder:
 
         # Deduplicate preserving order
         return list(dict.fromkeys(stars))
+
+    @staticmethod
+    def _god_list(*sources: Any) -> list[str]:
+        """Return the first non-empty list of god/stem names from sources."""
+        for source in sources:
+            if source is None:
+                continue
+            if isinstance(source, str):
+                items = [source]
+            elif isinstance(source, (list, tuple, set)):
+                items = list(source)
+            else:
+                continue
+            cleaned = [str(item).strip() for item in items if str(item).strip()]
+            if cleaned:
+                return cleaned
+        return []
+
+    @staticmethod
+    def _normalize_stem(token: str | None) -> str | None:
+        """Map a heavenly-stem token to the canonical Vietnamese stem."""
+        key = str(token or "").strip()
+        if not key:
+            return None
+        if key in maps.STEM_META:
+            return key
+        return STEM_HAN_TO_VI.get(key)
+
+    def _useful_god_value_type(
+        self,
+        god_name: str,
+        result: Mapping[str, Any],
+        useful_god: Any,
+    ) -> str:
+        """Return ``stem`` or ``ten_god`` for a Useful God candidate value."""
+        explicit = result.get("candidate_type") or result.get("value_type")
+        if not explicit and useful_god is not None and not isinstance(useful_god, dict):
+            explicit = getattr(useful_god, "candidate_type", None) or getattr(
+                useful_god, "value_type", None
+            )
+            metadata = getattr(useful_god, "metadata", None) or {}
+            if not explicit and isinstance(metadata, Mapping):
+                explicit = metadata.get("candidate_type") or metadata.get("value_type")
+        if isinstance(explicit, str):
+            key = explicit.strip().lower().replace("-", "_")
+            if key == "stem":
+                return "stem"
+            if key in {"ten_god", "tengod"}:
+                return "ten_god"
+        if self._normalize_stem(god_name):
+            return "stem"
+        if god_name in TEN_GOD_NAMES:
+            return "ten_god"
+        return "ten_god"
+
+    def _locate_useful_god(
+        self,
+        god_name: str,
+        value_type: str,
+        bazi_section: Mapping[str, Any],
+        hidden_stems: Mapping[str, Any],
+        ten_gods: Mapping[str, Any],
+    ) -> dict[str, bool]:
+        """Locate a Useful God by candidate type (stem vs ten-god role)."""
+        if value_type == "stem":
+            return self._locate_stem(god_name, bazi_section, hidden_stems)
+        return self._locate_ten_god(god_name, bazi_section, hidden_stems, ten_gods)
+
+    def _locate_stem(
+        self,
+        god_name: str,
+        bazi_section: Mapping[str, Any],
+        hidden_stems: Mapping[str, Any],
+    ) -> dict[str, bool]:
+        """Locate a heavenly-stem Useful God on stems and hidden stems."""
+        target = self._normalize_stem(god_name)
+        in_stem = False
+        in_branch = False
+        in_hidden = False
+        if not target:
+            return {"in_stem": False, "in_branch": False, "in_hidden": False}
+
+        for key in ("year_pillar", "month_pillar", "day_pillar", "hour_pillar"):
+            stem = (bazi_section.get(key) or {}).get("stem")
+            if self._normalize_stem(stem) == target:
+                in_stem = True
+
+        if self._normalize_stem(str(bazi_section.get("day_master") or "")) == target:
+            in_stem = True
+
+        for key in ("year_pillar", "month_pillar", "day_pillar", "hour_pillar"):
+            branch = (bazi_section.get(key) or {}).get("branch")
+            hidden = maps.BRANCH_HIDDEN.get(branch or "", [])
+            normalized = [self._normalize_stem(item) for item in hidden]
+            if target in normalized:
+                in_hidden = True
+                if normalized and normalized[0] == target:
+                    in_branch = True
+
+        extra_hidden = hidden_stems.get("items") or hidden_stems.get("list") or []
+        for item in extra_hidden:
+            token = item
+            if isinstance(item, Mapping):
+                token = item.get("stem") or item.get("name")
+            if self._normalize_stem(str(token or "")) == target:
+                in_hidden = True
+
+        return {
+            "in_stem": in_stem,
+            "in_branch": in_branch,
+            "in_hidden": in_hidden,
+        }
 
     def _locate_ten_god(
         self,

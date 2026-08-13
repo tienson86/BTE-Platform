@@ -177,6 +177,81 @@ function asString(value: unknown, fallback = ""): string {
   return String(value);
 }
 
+function formatLunarBirth(calendar: AnalysisDataDto["calendar"]): string {
+  if (!calendar) return "";
+  const lunar = calendar.lunar;
+  const canChi = lunar?.year_can_chi ?? calendar.lunar_can_chi?.year ?? calendar.year_can_chi;
+  if (calendar.lunar_date) {
+    const date = asString(calendar.lunar_date);
+    return canChi ? `${date} (${canChi})` : date;
+  }
+  const day = lunar?.day ?? calendar.lunar_day;
+  const month = lunar?.month ?? calendar.lunar_month;
+  const year = lunar?.year ?? calendar.lunar_year;
+  if (day == null || month == null || year == null) return "";
+  const leap = Boolean(lunar?.is_leap_month ?? lunar?.leap ?? calendar.is_leap_month ?? calendar.leap_month);
+  const date = `${pad2(Number(day))}/${pad2(Number(month))}/${Number(year)}`;
+  const leapMark = leap ? " nhuận" : "";
+  return canChi ? `${date}${leapMark} (${canChi})` : `${date}${leapMark}`;
+}
+
+function formatLuckCurrent(luck: AnalysisDataDto["luck"]): string {
+  const current = luck?.current_cycle;
+  if (!current) return UNAVAILABLE_CONCLUSION;
+  const gan = asString(current.gan_zhi);
+  const years =
+    current.year_start != null && current.year_end != null
+      ? `${current.year_start}–${current.year_end}`
+      : "";
+  const text = [gan, years].filter(Boolean).join(" ");
+  return text || UNAVAILABLE_CONCLUSION;
+}
+
+function formatLuckSequence(luck: AnalysisDataDto["luck"]): string {
+  const cycles = luck?.cycles ?? [];
+  if (!cycles.length) return UNAVAILABLE_CONCLUSION;
+  return cycles
+    .map((cycle) => {
+      const gan = asString(cycle.gan_zhi);
+      const years =
+        cycle.year_start != null && cycle.year_end != null
+          ? `${cycle.year_start}–${cycle.year_end}`
+          : "";
+      return [gan, years].filter(Boolean).join(" ");
+    })
+    .filter(Boolean)
+    .join(" · ");
+}
+
+function fiveElementCounts(
+  facts: AnalysisDataDto["five_elements"],
+): Record<string, number> | null {
+  if (!facts) return null;
+  const labels: Record<string, string> = {
+    wood: "Mộc",
+    fire: "Hỏa",
+    earth: "Thổ",
+    metal: "Kim",
+    water: "Thủy",
+  };
+  const out: Record<string, number> = { Mộc: 0, Hỏa: 0, Thổ: 0, Kim: 0, Thủy: 0 };
+  let found = false;
+  for (const [key, label] of Object.entries(labels)) {
+    const raw = facts[key as keyof NonNullable<AnalysisDataDto["five_elements"]>];
+    const count =
+      typeof raw === "number"
+        ? raw
+        : raw && typeof raw === "object" && "count" in raw
+          ? Number((raw as { count?: number }).count)
+          : Number(facts.counts?.[key]);
+    if (Number.isFinite(count)) {
+      out[label] = count;
+      found = true;
+    }
+  }
+  return found ? out : null;
+}
+
 function pad2(n: number): string {
   return String(n).padStart(2, "0");
 }
@@ -312,10 +387,7 @@ function mapS00(
   const day = request?.day;
   const hour = request?.hour ?? 0;
   const minute = request?.minute ?? 0;
-  const lunarDay = asString(data.calendar?.day_can_chi);
-  const lunarMonth = asString(data.calendar?.month_can_chi);
-  const lunarYear = asString(data.calendar?.year_can_chi);
-  const lunarBits = [lunarDay, lunarMonth, lunarYear].filter(Boolean).join(" · ");
+  const lunarText = formatLunarBirth(data.calendar);
   const now = new Date();
 
   return {
@@ -332,7 +404,7 @@ function mapS00(
         year && month && day
           ? `${pad2(day)}/${pad2(month)}/${year}`
           : base.birth.date,
-      lunar: lunarBits ? `(${lunarBits})` : base.birth.lunar,
+      lunar: lunarText ? `(${lunarText})` : base.birth.lunar,
       time:
         year !== undefined
           ? `${pad2(hour)}:${pad2(minute)} (${asString(data.customer?.timezone ?? request?.timezone, "GMT+7")})`
@@ -464,6 +536,18 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
           value: pickStr(pattern, ["tong_cach", "than"]) || than || UNAVAILABLE_CONCLUSION,
           tag: score >= 55 ? "Tốt" : "Theo dõi",
           tone: score >= 55 ? ("success" as const) : ("warning" as const),
+        },
+        {
+          label: "Đại vận",
+          value: formatLuckCurrent(data.luck),
+          tag: data.luck?.start_age != null ? `Tuổi ${data.luck.start_age}` : "—",
+          tone: "neutral" as const,
+        },
+        {
+          label: "Lộ trình Đại vận",
+          value: formatLuckSequence(data.luck),
+          tag: data.luck?.cycles?.length ? `${data.luck.cycles.length} vận` : "—",
+          tone: "neutral" as const,
         },
       ],
     },
@@ -601,9 +685,14 @@ function mapS03(
 function mapS04(data: AnalysisDataDto): CanonicalDesktopViewModel["s04"] {
   const base = cloneFixture().s04;
   const scores: Record<string, number> = { Mộc: 0, Hỏa: 0, Thổ: 0, Kim: 0, Thủy: 0 };
-  for (const item of data.score?.wuxing_series ?? []) {
-    const name = normalizeElement(asString(item.label ?? item.element ?? item.name));
-    if (name in scores) scores[name] = seriesValue(item);
+  const fromFacts = fiveElementCounts(data.five_elements);
+  if (fromFacts) {
+    Object.assign(scores, fromFacts);
+  } else {
+    for (const item of data.score?.wuxing_series ?? []) {
+      const name = normalizeElement(asString(item.label ?? item.element ?? item.name));
+      if (name in scores) scores[name] = seriesValue(item);
+    }
   }
   const total = Object.values(scores).reduce((a, b) => a + b, 0) || 1;
   const rows = ELEMENT_ROW.map((row) => {
@@ -656,6 +745,31 @@ function mapS05(data: AnalysisDataDto): CanonicalDesktopViewModel["s05"] {
 
 function mapS06(data: AnalysisDataDto): CanonicalDesktopViewModel["s06"] {
   const base = cloneFixture().s06;
+  const analytical = data.ten_gods?.visible ?? data.bazi?.ten_gods ?? [];
+  if (analytical.length > 0) {
+    const counts = new Map<string, number>();
+    for (const god of analytical) {
+      const name = asString(god).trim();
+      if (!name || name === "Nhật Chủ") continue;
+      counts.set(name, (counts.get(name) ?? 0) + 1);
+    }
+    if (counts.size > 0) {
+      return {
+        ...base,
+        gods: Array.from(counts.entries()).map(([name, count]) => {
+          const key = name.toLowerCase();
+          const color =
+            Object.entries(TEN_GOD_COLORS).find(([k]) => key.includes(k))?.[1] ?? "#5c6570";
+          return {
+            name,
+            short: name.length > 8 ? `${name.slice(0, 6)}.` : name,
+            score: String(count),
+            color,
+          };
+        }),
+      };
+    }
+  }
   const series = data.score?.ten_god_series;
   if (Array.isArray(series) && series.length > 0) {
     return {

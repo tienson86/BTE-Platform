@@ -831,10 +831,16 @@ class InterpretationBuilder:
 
         useful_name = useful.get("name")
         if useful_name:
+            status = str(useful.get("status") or "").strip()
+            missing = {None, "", "MISSING", "Không có Dụng thần"}
+            if status and status not in missing:
+                useful_text = f"Dụng thần: {useful_name} ({status})."
+            else:
+                useful_text = f"Dụng thần: {useful_name}."
             _ensure(
                 "useful_god",
                 "CTX_USEFUL_GOD",
-                f"Dụng thần: {useful_name} ({useful.get('status')}).",
+                useful_text,
                 "positive",
             )
 

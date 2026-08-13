@@ -324,12 +324,57 @@ class ProductionEndToEndOrchestrator:
                 engine_output,
                 composition,
             )
+        calendar = engine_output.calendar or {}
+        luck = engine_output.luck or {}
+        current = luck.get("current_cycle") or {}
+        current_dayun = ""
+        if current:
+            gan = current.get("gan_zhi") or ""
+            years = ""
+            if current.get("year_start") and current.get("year_end"):
+                years = f"{current['year_start']}–{current['year_end']}"
+            current_dayun = " ".join(part for part in (gan, years) if part)
+        dayun_cycles: list[tuple[str, str]] = []
+        for item in luck.get("cycles") or []:
+            if not isinstance(item, dict):
+                continue
+            gan_zhi = str(item.get("gan_zhi") or "").strip()
+            year_start = item.get("year_start")
+            year_end = item.get("year_end")
+            years = ""
+            if year_start and year_end:
+                years = f"{year_start}–{year_end}"
+            label = f"Đại vận {item.get('index', len(dayun_cycles)) + 1}"
+            value = " ".join(part for part in (gan_zhi, years) if part)
+            if value:
+                dayun_cycles.append((label, value))
+        five_summary = ""
+        series = []
+        if engine_output.analysis.score and engine_output.analysis.score.wuxing_series:
+            series = list(engine_output.analysis.score.wuxing_series)
+        if series:
+            five_summary = ", ".join(
+                f"{item.get('label')}:{item.get('value')}"
+                for item in series
+                if isinstance(item, dict)
+            )
+        ten_gods = list(engine_output.analysis.bazi.ten_gods or [])
         return CommercialBuildRequest(
             client_name=request.full_name,
             case_id=request.case_id or request.request_key,
             birth_date=request.birth_date,
+            birth_time=request.birth_time,
+            birth_lunar=str(calendar.get("lunar_date") or ""),
             birth_place=request.birth_place,
             gender=request.gender,
+            cung_phi=str(calendar.get("cung_phi") or ""),
+            menh_quai=str(calendar.get("menh_quai") or ""),
+            nhom_trach=str(calendar.get("nhom_trach") or ""),
+            current_dayun=current_dayun,
+            dayun_start_age=str(luck.get("start_age") or ""),
+            dayun_cycles=dayun_cycles,
+            five_elements_summary=five_summary,
+            ten_gods_summary=", ".join(str(item) for item in ten_gods if item),
             identity=self._feature_input(
                 "identity",
                 "Danh tính",

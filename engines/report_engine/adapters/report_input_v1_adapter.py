@@ -36,6 +36,11 @@ from engines.report_engine.contracts.report_input_v1 import (
 )
 from engines.report_engine.foundation_constants import REPORT_VERSION
 from engines.report_engine.interpretation_adapter import interpretation_to_dict
+from applications.api.services.five_elements_truth import (
+    ELEMENT_KEYS,
+    normalize_element_key,
+)
+from applications.api.services.luck_truth import shape_luck_payload
 
 
 @dataclass(slots=True)
@@ -46,6 +51,7 @@ class ReportInputV1Source:
     interpretation: InterpretationResult | None = None
     calendar: dict[str, Any] | None = None
     luck: dict[str, Any] | None = None
+    five_elements: dict[str, Any] | None = None
     profile: ReportProfileV1 | None = None
     case_id: str = ""
     locale: str = "vi-VN"
@@ -74,7 +80,7 @@ class ReportInputV1Adapter:
         profile = self._build_profile(source, diagnostics)
         calendar = self._build_calendar(source, diagnostics)
         pillars = self._build_pillars(source.analysis, diagnostics)
-        five_elements = self._build_five_elements(source.analysis, diagnostics)
+        five_elements = self._build_five_elements(source, diagnostics)
         strength = self._build_strength(source.analysis, diagnostics)
         ten_gods = self._build_ten_gods(source.analysis, diagnostics)
         pattern = self._build_pattern(source.analysis, diagnostics)
@@ -136,39 +142,74 @@ class ReportInputV1Adapter:
             diagnostics.missing_fields.append("calendar")
             return ReportCalendarV1()
         lunar = payload.get("lunar") or {}
-        lunar_date = ""
-        if isinstance(lunar, Mapping):
-            lunar_date = "/".join(
-                str(part)
-                for part in (
-                    lunar.get("day"),
-                    lunar.get("month"),
-                    lunar.get("year"),
-                )
-                if part is not None
-            )
+        if not isinstance(lunar, Mapping):
+            lunar = {}
+        lunar_year = lunar.get("year", payload.get("lunar_year"))
+        lunar_month = lunar.get("month", payload.get("lunar_month"))
+        lunar_day = lunar.get("day", payload.get("lunar_day"))
+        leap = bool(
+            lunar.get("is_leap_month")
+            or lunar.get("leap")
+            or payload.get("is_leap_month")
+            or payload.get("leap_month")
+        )
+        lunar_date = str(payload.get("lunar_date") or "")
+        if not lunar_date and lunar_day is not None and lunar_month is not None and lunar_year is not None:
+            lunar_date = f"{int(lunar_day):02d}/{int(lunar_month):02d}/{int(lunar_year):04d}"
+            if leap:
+                lunar_date = f"{lunar_date} nhuận"
         solar_date = str(
             payload.get("solar_date")
             or payload.get("date")
-            or payload.get("solar")
             or ""
         )
+        if not solar_date and isinstance(payload.get("solar"), Mapping):
+            solar = payload["solar"]
+            solar_date = (
+                f"{int(solar.get('day') or 0):02d}/"
+                f"{int(solar.get('month') or 0):02d}/"
+                f"{int(solar.get('year') or 0):04d}"
+            )
         if not solar_date and source.profile and source.profile.birth_date:
             solar_date = source.profile.birth_date
             diagnostics.fallbacks_used.append("calendar.solar_date.from_profile")
+        solar_term_raw = payload.get("solar_term") or payload.get("jieqi") or ""
+        if isinstance(solar_term_raw, Mapping):
+            solar_term = str(solar_term_raw.get("name") or "")
+        else:
+            solar_term = str(solar_term_raw)
+        timezone = ""
+        tz_payload = payload.get("timezone")
+        if isinstance(tz_payload, Mapping):
+            timezone = str(tz_payload.get("name") or "")
+        timezone = timezone or str(payload.get("timezone_name") or source.timezone or "")
+        lunar_can_chi = payload.get("lunar_can_chi") if isinstance(payload.get("lunar_can_chi"), Mapping) else {}
         calendar = ReportCalendarV1(
             solar_date=solar_date,
             lunar_date=lunar_date,
-            solar_term=str(payload.get("solar_term") or payload.get("jieqi") or ""),
+            lunar_year=_as_int(lunar_year),
+            lunar_month=_as_int(lunar_month),
+            lunar_day=_as_int(lunar_day),
+            leap_month=leap,
+            lunar_year_can_chi=str(
+                lunar_can_chi.get("year")
+                or lunar.get("year_can_chi")
+                or payload.get("lunar_year_can_chi")
+                or ""
+            ),
+            solar_term=solar_term,
             solar_term_datetime=str(
                 payload.get("solar_term_datetime") or payload.get("jieqi_datetime") or ""
             ),
-            calendar_mode=str(payload.get("calendar_mode") or payload.get("mode") or ""),
+            calendar_mode=str(payload.get("calendar_mode") or payload.get("mode") or "solar_utc7"),
+            timezone=timezone,
+            cung_phi=str(payload.get("cung_phi") or ""),
+            menh_quai=str(payload.get("menh_quai") or ""),
+            nhom_trach=str(payload.get("nhom_trach") or ""),
         )
         for field_name, value in (
             ("lunar_date", calendar.lunar_date),
             ("solar_term", calendar.solar_term),
-            ("calendar_mode", calendar.calendar_mode),
         ):
             if not value:
                 diagnostics.missing_fields.append(f"calendar.{field_name}")
@@ -199,32 +240,39 @@ class ReportInputV1Adapter:
 
     def _build_five_elements(
         self,
-        analysis: AnalysisResult,
+        source: ReportInputV1Source,
         diagnostics: ReportDiagnosticsV1,
     ) -> ReportFiveElementsV1:
-        score = analysis.score
         raw: dict[str, Any] = {}
-        normalized: dict[str, Any] = {}
-        percentages: dict[str, Any] = {}
-        if score is not None and score.wuxing_series:
+        published = source.five_elements or {}
+        if published:
+            counts = published.get("counts") if isinstance(published.get("counts"), Mapping) else {}
+            for key in ELEMENT_KEYS:
+                value = counts.get(key) if counts else None
+                if value is None:
+                    entry = published.get(key)
+                    if isinstance(entry, Mapping):
+                        value = entry.get("count")
+                    elif isinstance(entry, (int, float)):
+                        value = entry
+                if value is not None:
+                    raw[key] = value
+            if raw:
+                diagnostics.source_contracts.append("five_elements.analytical_counts")
+        score = source.analysis.score
+        if not raw and score is not None and score.wuxing_series:
             for item in score.wuxing_series:
                 if not isinstance(item, Mapping):
                     continue
-                element = str(item.get("element") or item.get("name") or "").lower()
-                value = item.get("value", item.get("score"))
-                if element:
+                element = normalize_element_key(
+                    str(item.get("element") or item.get("name") or item.get("label") or "")
+                )
+                value = item.get("value", item.get("count"))
+                if element and value is not None:
                     raw[element] = value
-            diagnostics.source_contracts.append("AnalysisResult.score.wuxing_series")
-        elif score is not None:
-            raw = {
-                "wood": score.wuxing_score,
-                "fire": None,
-                "earth": None,
-                "metal": None,
-                "water": None,
-            }
-            diagnostics.fallbacks_used.append("five_elements.score_aggregate_only")
-        else:
+            if raw:
+                diagnostics.source_contracts.append("AnalysisResult.score.wuxing_series")
+        if not raw:
             diagnostics.missing_fields.append("five_elements")
         return ReportFiveElementsV1(
             wood=_as_float(raw.get("wood")),
@@ -232,9 +280,9 @@ class ReportInputV1Adapter:
             earth=_as_float(raw.get("earth")),
             metal=_as_float(raw.get("metal")),
             water=_as_float(raw.get("water")),
-            raw=raw,
-            normalized=normalized,
-            percentages=percentages,
+            raw={key: raw.get(key) for key in ELEMENT_KEYS},
+            normalized={},
+            percentages={},
         )
 
     def _build_strength(
@@ -362,13 +410,8 @@ class ReportInputV1Adapter:
         if not payload:
             diagnostics.missing_fields.append("luck_cycles")
             return ReportLuckCyclesV1()
-        metadata = payload.get("metadata") or {}
-        cycles_raw = (
-            metadata.get("dayun_periods")
-            or metadata.get("cycles")
-            or payload.get("dayun_periods")
-            or []
-        )
+        shaped = payload if "cycles" in payload else shape_luck_payload(payload)
+        cycles_raw = shaped.get("cycles") or []
         cycles: list[ReportLuckCycleV1] = []
         if isinstance(cycles_raw, list):
             for item in cycles_raw:
@@ -377,44 +420,26 @@ class ReportInputV1Adapter:
                 cycles.append(
                     ReportLuckCycleV1(
                         index=int(item.get("index") or 0),
-                        start_year=_as_int(item.get("start_year")),
-                        end_year=_as_int(item.get("end_year")),
-                        stem=str(
-                            item.get("stem")
-                            or item.get("heavenly_stem")
-                            or ""
-                        ),
-                        branch=str(
-                            item.get("branch")
-                            or item.get("earthly_branch")
-                            or ""
-                        ),
+                        start_year=_as_int(item.get("year_start") or item.get("start_year")),
+                        end_year=_as_int(item.get("year_end") or item.get("end_year")),
+                        stem=str(item.get("stem") or item.get("heavenly_stem") or ""),
+                        branch=str(item.get("branch") or item.get("earthly_branch") or ""),
                         age_start=_as_int(item.get("age_start") or item.get("start_age")),
                         age_end=_as_int(item.get("age_end") or item.get("end_age")),
-                        summary=str(item.get("summary") or item.get("ganzhi") or ""),
+                        summary=str(
+                            item.get("gan_zhi")
+                            or item.get("ganzhi")
+                            or item.get("summary")
+                            or ""
+                        ),
                     )
                 )
         if not cycles:
-            current = payload.get("current_dayun")
-            if isinstance(current, Mapping):
-                cycles.append(
-                    ReportLuckCycleV1(
-                        index=int(current.get("index") or 1),
-                        start_year=_as_int(current.get("start_year")),
-                        end_year=_as_int(current.get("end_year")),
-                        stem=str(current.get("heavenly_stem") or ""),
-                        branch=str(current.get("earthly_branch") or ""),
-                        age_start=_as_int(current.get("start_age")),
-                        age_end=_as_int(current.get("end_age")),
-                        summary=str(current.get("ganzhi") or payload.get("luck_summary") or ""),
-                    )
-                )
-            else:
-                diagnostics.missing_fields.append("luck_cycles.cycles")
+            diagnostics.missing_fields.append("luck_cycles.cycles")
         return ReportLuckCyclesV1(
-            direction=str(metadata.get("direction") or ""),
-            start_age=_as_int(metadata.get("start_age")),
-            start_date=str(metadata.get("start_date") or ""),
+            direction=str(shaped.get("direction") or ""),
+            start_age=_as_int(shaped.get("start_age")),
+            start_date=str(shaped.get("start_date") or ""),
             cycles=cycles,
         )
 

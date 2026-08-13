@@ -49,7 +49,7 @@ class TestLunarRegressionCases(unittest.TestCase):
         self.assertEqual(result.lunar_month, 12)
         self.assertEqual(result.lunar_day, 22)
         self.assertFalse(result.leap_month)
-        self.assertEqual(result.lunar_date, "22/12/Bính Dần")
+        self.assertEqual(result.lunar_date, "22/12/1986")
         self.assertEqual(result.solar_date, "21/01/1987")
 
 

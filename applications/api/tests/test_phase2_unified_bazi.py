@@ -138,8 +138,14 @@ def test_api_analyze_matches_engine_for_critical_case() -> None:
         assert _pillar_pair(bazi, key) == expected
 
     calendar = data["calendar"]
+    assert calendar["lunar"]["year"] == 1986
+    assert calendar["lunar"]["month"] == 12
+    assert calendar["lunar"]["day"] == 22
+    assert calendar["lunar"]["is_leap_month"] is False
+    assert calendar["lunar_date"] == "22/12/1986"
     assert calendar["year_can_chi"] == "Bính Dần"
-    assert calendar["month_can_chi"] == "Tân Sửu"
-    assert calendar["day_can_chi"] == "Canh Ngọ"
-    assert calendar["hour_can_chi"] == "Mậu Dần"
+    assert calendar["bazi_can_chi"]["year"] == "Bính Dần"
+    assert calendar["bazi_can_chi"]["month"] == "Tân Sửu"
+    assert calendar["bazi_can_chi"]["day"] == "Canh Ngọ"
+    assert calendar["bazi_can_chi"]["hour"] == "Mậu Dần"
     assert bazi["hour_pillar"]["ten_god"] == "Thiên Ấn"

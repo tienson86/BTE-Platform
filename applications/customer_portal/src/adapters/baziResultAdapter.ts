@@ -438,14 +438,17 @@ function mapProfile(data: AnalysisDataDto, request?: AnalyzeChartRequest): BaZiP
   const hour = request?.hour ?? 0;
   const minute = request?.minute ?? 0;
 
-  const lunar =
-    [
-      data.calendar?.day_can_chi,
-      data.calendar?.month_can_chi,
-      data.calendar?.year_can_chi,
-    ]
-      .filter(Boolean)
-      .join(" · ") || "—";
+  const lunarObj = data.calendar?.lunar;
+  const lunarDate = asString(data.calendar?.lunar_date);
+  const lunarParts = [
+    lunarObj?.day ?? data.calendar?.lunar_day,
+    lunarObj?.month ?? data.calendar?.lunar_month,
+    lunarObj?.year ?? data.calendar?.lunar_year,
+  ];
+  const lunarNumeric = lunarParts.every((part) => part != null)
+    ? `${String(lunarParts[0]).padStart(2, "0")}/${String(lunarParts[1]).padStart(2, "0")}/${lunarParts[2]}`
+    : "";
+  const lunar = lunarDate || lunarNumeric || "—";
 
   return {
     fullName: asString(customer?.full_name ?? request?.full_name, "—"),
