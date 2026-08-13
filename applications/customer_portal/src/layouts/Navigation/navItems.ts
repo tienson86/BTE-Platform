@@ -12,7 +12,7 @@ export type AppNavItem = {
 /** Top-bar primary destinations (Canonical Portal UI). */
 export const APP_NAV_ITEMS: readonly AppNavItem[] = [
   { id: "dashboard", label: "Trang chủ", href: "/dashboard" },
-  { id: "interpretation", label: "Luận giải", href: "/interpretation" },
+  { id: "interpretation", label: "Luận giải", href: "/result#interpretation" },
   { id: "result", label: "Kết quả", href: "/result" },
   { id: "reports", label: "Báo cáo", href: "/reports" },
   { id: "history", label: "Lịch sử", href: "/history" },

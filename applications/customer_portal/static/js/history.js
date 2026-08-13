@@ -46,8 +46,9 @@
         BtePortal.ResultStore.selectForView({
           input: item.input || {},
           data: item.data,
+          analysis_id: item.analysis_id || item.id,
         });
-        window.location.href = "/result";
+        window.location.href = "/result?from=history";
       });
     });
   }

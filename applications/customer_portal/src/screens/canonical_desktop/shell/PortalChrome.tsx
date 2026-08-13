@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 import { useCanonicalDesktop } from "../CanonicalDesktopContext";
 import {
   IconBell,
@@ -8,6 +8,38 @@ import {
   IconStarLogo,
 } from "../icons";
 
+const HEADER_NAV_HREF: Record<string, string> = {
+  home: "/dashboard",
+  analysis: "/result#interpretation",
+  result: "/result",
+  report: "/reports",
+  history: "/history",
+  account: "/profile",
+  guide: "/dashboard",
+};
+
+const SIDEBAR_NAV_HREF: Record<string, string> = {
+  "tom-tat": "#summary",
+  "bat-tu": "#analysis",
+  "bieu-do": "#visualization",
+  "phan-tich": "#analysis",
+  "luan-giai": "#interpretation",
+  "kien-thuc": "#knowledge",
+  "so-sanh": "/history",
+  "luu-tru": "/history",
+  xuat: "#xuat",
+};
+
+function hrefForNav(id: string, table: Record<string, string>): string {
+  return table[id] ?? `#${id}`;
+}
+
+function handleCanonicalNav(event: MouseEvent<HTMLAnchorElement>, href: string): void {
+  if (href !== "#xuat") return;
+  event.preventDefault();
+  window.print();
+}
+
 export function PortalHeader(): ReactNode {
   const data = useCanonicalDesktop();
   return (
@@ -16,17 +48,21 @@ export function PortalHeader(): ReactNode {
         <IconMenu size={20} />
       </button>
       <nav className="cd-header__nav" aria-label="Điều hướng chính">
-        {data.header.nav.map((item) => (
+        {data.header.nav.map((item) => {
+          const href = hrefForNav(item.id, HEADER_NAV_HREF);
+          return (
           <a
             key={item.id}
-            href={`#${item.id}`}
+            href={href}
+            onClick={(event) => handleCanonicalNav(event, href)}
             className={
               item.active ? "cd-header__link cd-header__link--active" : "cd-header__link"
             }
           >
             {item.label}
           </a>
-        ))}
+          );
+        })}
       </nav>
       <div className="cd-header__utils">
         <button type="button" className="cd-header__icon-btn" aria-label="Chế độ sáng">
@@ -69,7 +105,10 @@ export function PortalSidebar(): ReactNode {
             {group.items.map((item) => (
               <li key={item.id}>
                 <a
-                  href={`#${item.id}`}
+                  href={hrefForNav(item.id, SIDEBAR_NAV_HREF)}
+                  onClick={(event) =>
+                    handleCanonicalNav(event, hrefForNav(item.id, SIDEBAR_NAV_HREF))
+                  }
                   className={
                     item.active
                       ? "cd-sidebar__item cd-sidebar__item--active"

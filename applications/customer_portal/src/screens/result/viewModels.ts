@@ -17,6 +17,9 @@ export type ContextZoneViewModel = {
   readonly chartId: string;
   readonly status: string;
   readonly analyzedAt: string;
+  readonly cungPhi: string;
+  readonly menhQuai: string;
+  readonly nhomTrach: string;
 };
 
 export type ExecutiveSummaryViewModel = {
@@ -62,6 +65,7 @@ export type FiveElementsViewModel = {
     readonly name: string;
     readonly element: string;
     readonly pct: number;
+    readonly count: number | null;
     readonly status: string;
   }>;
   readonly summary: PreviewText;
@@ -184,7 +188,32 @@ export type KnowledgeZoneViewModel = {
   readonly visible: boolean;
 };
 
+export type ChartPillarViewModel = {
+  readonly label: string;
+  readonly stem: string;
+  readonly branch: string;
+  readonly napAm: string;
+  readonly hiddenStems: string;
+  readonly tenGod: string;
+  readonly growthStage: string;
+};
+
+export type ChartDetailViewModel = {
+  readonly title: string;
+  readonly pillars: readonly ChartPillarViewModel[];
+  readonly visible: boolean;
+};
+
+export type ShenShaViewModel = {
+  readonly title: string;
+  readonly items: readonly string[];
+  readonly visible: boolean;
+};
+
 export type ResultPageViewModel = {
+  readonly analysisId: string;
+  readonly chart: ChartDetailViewModel;
+  readonly shenSha: ShenShaViewModel;
   readonly context: ContextZoneViewModel;
   readonly executive: ExecutiveSummaryViewModel;
   readonly indicators: CoreIndicatorsViewModel;

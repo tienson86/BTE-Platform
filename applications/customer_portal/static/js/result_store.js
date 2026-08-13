@@ -13,6 +13,8 @@
   const LAST_KEY = "bte_last_result";
   const HISTORY_KEY = "bte_history";
   const VIEW_KEY = "bte_view_result";
+  const CURRENT_ID_KEY = "bte_current_analysis_id";
+  const VIEW_ID_KEY = "bte_view_analysis_id";
   // Pre-refactor keys — read-only, so existing browser sessions keep their data.
   const LEGACY_LAST_KEY = "bte_portal_last_result";
   const LEGACY_HISTORY_KEY = "bte_portal_history";
@@ -113,6 +115,85 @@
     return { input: result.input || {}, data: result.data };
   }
 
+  function makeAnalysisId(entry) {
+    const fromEntry = entry && (entry.analysis_id || entry.id);
+    if (fromEntry) return String(fromEntry);
+    const data = entry && entry.data;
+    if (data && (data.analysis_id || data.request_id || data.case_id)) {
+      return String(data.analysis_id || data.request_id || data.case_id);
+    }
+    const input = (entry && entry.input) || {};
+    return ["bte", input.year || 0, input.month || 0, input.day || 0, input.hour || 0, input.minute || 0, Date.now()].join("-");
+  }
+
+  function displayAnalysisId(entry) {
+    const fromEntry = entry && (entry.analysis_id || entry.id);
+    if (fromEntry) return String(fromEntry);
+    const data = entry && entry.data;
+    if (data && (data.analysis_id || data.request_id || data.case_id)) {
+      return String(data.analysis_id || data.request_id || data.case_id);
+    }
+    const input = (entry && entry.input) || {};
+    return ["bte", input.year || 0, input.month || 0, input.day || 0, input.hour || 0, input.minute || 0].join("-");
+  }
+
+  function writeCurrentAnalysisId(id) {
+    if (!id) return;
+    writeRaw(CURRENT_ID_KEY, encode(String(id)), false);
+  }
+
+  function readCurrentAnalysisId() {
+    const value = readValue([CURRENT_ID_KEY]);
+    return typeof value === "string" && value.trim() ? value : null;
+  }
+
+  /**
+   * Last Analyze result plus the current-session analysis id.
+   * Does not change load() JSON shape used by existing store tests.
+   */
+  function loadCurrent() {
+    const entry = load();
+    if (!entry) return null;
+    return {
+      input: entry.input || {},
+      data: entry.data,
+      analysis_id: readCurrentAnalysisId() || displayAnalysisId(entry),
+      source: "current",
+    };
+  }
+
+  /**
+   * Customer display payload.
+   *
+   * Default: fresh current analysis.
+   * fromHistory: explicit History / older report selection only.
+   */
+  function resolveForDisplay(fromHistory) {
+    if (fromHistory) {
+      const view = peekView();
+      if (view && view.data) {
+        return {
+          input: view.input || {},
+          data: view.data,
+          analysis_id: readValue([VIEW_ID_KEY]) || view.analysis_id || view.id || displayAnalysisId(view),
+          source: "history",
+        };
+      }
+    }
+    const current = loadCurrent();
+    if (current) return current;
+    const legacy = load();
+    if (legacy && legacy.data) {
+      return {
+        input: legacy.input || {},
+        data: legacy.data,
+        analysis_id: readCurrentAnalysisId() || displayAnalysisId(legacy),
+        source: "legacy",
+      };
+    }
+    return null;
+  }
+
   function defaultSummary(entry) {
     const interp = entry.data && entry.data.interpretation;
     const summary = interp && (interp.summary || interp.interpretation_summary);
@@ -121,8 +202,10 @@
   }
 
   function historyRow(entry) {
+    const analysisId = readCurrentAnalysisId() || makeAnalysisId(entry);
     return {
-      id: "local-" + Date.now(),
+      id: analysisId,
+      analysis_id: analysisId,
       saved_at: new Date().toISOString(),
       input: entry.input || {},
       summary: defaultSummary(entry),
@@ -143,6 +226,7 @@
     if (raw === null) return false;
     const wrote = writeRaw(LAST_KEY, raw, false);
     if (!wrote) return false;
+    writeCurrentAnalysisId(makeAnalysisId(result) || makeAnalysisId(entry));
     // Drop pre-refactor keys so stale pillars cannot shadow the new result.
     removeRaw([LEGACY_LAST_KEY]);
     // A fresh analyze always wins over whatever entry was being viewed.
@@ -226,7 +310,12 @@
     if (!entry) return false;
     const raw = encode(entry);
     if (raw === null) return false;
-    return writeRaw(VIEW_KEY, raw, true);
+    const wrote = writeRaw(VIEW_KEY, raw, true);
+    if (wrote) {
+      const viewId = (result && (result.analysis_id || result.id)) || displayAnalysisId(entry);
+      writeRaw(VIEW_ID_KEY, encode(String(viewId)), true);
+    }
+    return wrote;
   }
 
   /**
@@ -241,7 +330,7 @@
 
   /** Drop the current view selection. */
   function clearView() {
-    removeRaw([VIEW_KEY]);
+    removeRaw([VIEW_KEY, VIEW_ID_KEY]);
   }
 
   global.BtePortal = global.BtePortal || {};
@@ -249,8 +338,12 @@
     LAST_KEY: LAST_KEY,
     HISTORY_KEY: HISTORY_KEY,
     VIEW_KEY: VIEW_KEY,
+    CURRENT_ID_KEY: CURRENT_ID_KEY,
     save: save,
     load: load,
+    loadCurrent: loadCurrent,
+    getCurrentAnalysisId: readCurrentAnalysisId,
+    resolveForDisplay: resolveForDisplay,
     clear: clear,
     saveHistory: saveHistory,
     loadHistory: loadHistory,

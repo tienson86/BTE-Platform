@@ -20,3 +20,4 @@ export {
   InterpretationCard,
   KnowledgeCard,
 } from "./ContentCards";
+export { ChartDetailCard, ShenShaCard } from "./ChartDetailCards";

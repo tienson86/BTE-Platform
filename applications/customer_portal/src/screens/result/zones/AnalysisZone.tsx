@@ -4,7 +4,10 @@
 
 import type { ReactNode } from "react";
 import {
+  ChartDetailCard,
+  CoreIndicatorsCard,
   FiveElementsCard,
+  ShenShaCard,
   StrengthAnalysisCard,
   TenGodsAnalysisCard,
 } from "../cards";
@@ -36,6 +39,27 @@ export function AnalysisZone(): ReactNode {
     cards.push(
       <ResultGridCell key="ten-gods" span={4}>
         <TenGodsAnalysisCard model={model.tenGods} />
+      </ResultGridCell>,
+    );
+  }
+  if (model.indicators.visible) {
+    cards.push(
+      <ResultGridCell key="indicators" span={12}>
+        <CoreIndicatorsCard model={model.indicators} />
+      </ResultGridCell>,
+    );
+  }
+  if (model.chart.visible) {
+    cards.push(
+      <ResultGridCell key="chart" span={12}>
+        <ChartDetailCard model={model.chart} />
+      </ResultGridCell>,
+    );
+  }
+  if (model.shenSha.visible) {
+    cards.push(
+      <ResultGridCell key="shensha" span={12}>
+        <ShenShaCard model={model.shenSha} />
       </ResultGridCell>,
     );
   }

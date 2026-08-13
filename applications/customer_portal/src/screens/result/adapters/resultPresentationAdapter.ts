@@ -30,6 +30,7 @@ import {
   sortByRecommendationPriority,
   truncatePrimaryList,
 } from "../presentation/previewBuilder";
+import type { FullReportViewModel } from "../../../report/fullReportViewModel";
 import type {
   InterpretationBlockViewModel,
   KnowledgeSectionViewModel,
@@ -38,7 +39,15 @@ import type {
   ResultPageViewModel,
 } from "../viewModels";
 
-const TIMELINE_LABELS = ["Tiền vận", "Trung vận", "Hậu vận", "Định hướng"] as const;
+const CANONICAL_NARRATIVE_TITLES: ReadonlyArray<{ match: RegExp; title: string }> = [
+  { match: /executive|summary|tóm tắt/i, title: "Tóm tắt điều hành" },
+  { match: /observation|quan sát/i, title: "Quan sát" },
+  { match: /reasoning|explanation|lý giải/i, title: "Lý giải" },
+  { match: /impact|ảnh hưởng|tác động/i, title: "Tác động" },
+  { match: /recommendation|suggestion|khuyến/i, title: "Khuyến nghị" },
+  { match: /warning|caution|cảnh báo|lưu ý/i, title: "Lưu ý" },
+  { match: /conclusion|kết luận/i, title: "Kết luận" },
+];
 
 function isUsablePreviewText(text: string): boolean {
   const trimmed = text.trim();
@@ -242,55 +251,79 @@ function _mapPriority(
   return priorityFromIndex(index);
 }
 
+function canonicalNarrativeTitle(section: { id?: string; intent?: string; title?: string }): string {
+  const blob = `${section.id ?? ""} ${section.intent ?? ""} ${section.title ?? ""}`;
+  return CANONICAL_NARRATIVE_TITLES.find((item) => item.match.test(blob))?.title || section.title || "Luận giải";
+}
+
 function buildInterpretation(
   source: CanonicalDesktopViewModel,
+  fullReport?: FullReportViewModel | null,
 ): ResultPageViewModel["interpretation"] {
+  if (fullReport && fullReport.narrative.length === 7) {
+    const blocks = fullReport.narrative.map((section) => ({
+      id: section.id,
+      title: section.title,
+      observation: formatPreviewField(section.body || UNAVAILABLE_CONCLUSION, "summary"),
+      explanation: formatPreviewField(section.body || UNAVAILABLE_CONCLUSION, "description"),
+      impact: formatPreviewField(section.body || UNAVAILABLE_CONCLUSION, "summary"),
+      suggestion: formatPreviewField(section.body || UNAVAILABLE_CONCLUSION, "summary"),
+      hasMore: Boolean(section.body),
+    }));
+    return {
+      title: "LUẬN GIẢI",
+      blocks,
+      expandLabel: "Mở rộng luận giải",
+      collapseLabel: "Thu gọn",
+      visible: blocks.length > 0,
+    };
+  }
   const narrative = source.narrativeResult;
   if (hasUsableNarrativeResult(narrative) && narrative) {
-    const overviewObs = paragraphByRole(narrative, "observation");
-    const overviewExplanation = paragraphByRole(narrative, "explanation");
-    const overviewImpact = paragraphByRole(narrative, "impact");
-    const overviewSuggestion = paragraphByRole(narrative, "suggestion");
-    const cautionObs = commercialOrUnavailable(
-      (narrative.summary?.weaknesses ?? []).join("; "),
-    );
-    const directionObs = commercialOrUnavailable(narrative.summary?.identity);
-    const directionSuggestion = commercialOrUnavailable(
-      narrative.summary?.next_action || narrative.summary?.priority_recommendation,
-    );
+    const sectionBlocks: InterpretationBlockViewModel[] = (narrative.sections ?? [])
+      .map((section, index) => {
+        const texts = (section.paragraphs ?? [])
+          .map((paragraph) => commercialOrUnavailable(paragraph.text ?? ""))
+          .filter(isUsablePreviewText);
+        const observation = texts[0] ?? "";
+        const explanation = texts[1] ?? texts[0] ?? "";
+        const impact = texts.find((_, i) => i === 2) ?? texts[0] ?? "";
+        const suggestion = texts[texts.length - 1] ?? "";
+        return {
+          id: section.id || `interp-${index + 1}`,
+          title: canonicalNarrativeTitle(section),
+          observation: formatPreviewField(observation, "summary"),
+          explanation: formatPreviewField(explanation, "description"),
+          impact: formatPreviewField(impact, "summary"),
+          suggestion: formatPreviewField(suggestion, "summary"),
+          hasMore: true,
+        };
+      })
+      .filter((block) => isUsablePreviewText(block.observation.text));
 
-    const blocks: InterpretationBlockViewModel[] = [
-      {
-        id: "interp-overview",
-        title: "Tổng quan mệnh cục",
-        observation: formatPreviewField(overviewObs, "summary"),
-        explanation: formatPreviewField(overviewExplanation, "description"),
-        impact: formatPreviewField(overviewImpact, "summary"),
-        suggestion: formatPreviewField(overviewSuggestion, "summary"),
-        hasMore: true,
-      },
-      {
-        id: "interp-caution",
-        title: "Điểm cần lưu ý",
-        observation: formatPreviewField(cautionObs, "summary"),
-        explanation: formatPreviewField(overviewExplanation, "description"),
-        impact: formatPreviewField(cautionObs, "summary"),
-        suggestion: formatPreviewField(directionSuggestion, "summary"),
-        hasMore: true,
-      },
-      {
-        id: "interp-direction",
-        title: "Định hướng hành động",
-        observation: formatPreviewField(directionObs, "summary"),
-        explanation: formatPreviewField(
-          commercialOrUnavailable(narrative.summary?.priority_recommendation),
-          "description",
-        ),
-        impact: formatPreviewField(overviewImpact, "summary"),
-        suggestion: formatPreviewField(directionSuggestion, "summary"),
-        hasMore: true,
-      },
-    ].map((block) => ({
+    const blocks = (
+      sectionBlocks.length > 0
+        ? sectionBlocks
+        : [
+            {
+              id: "interp-overview",
+              title: "Executive Summary",
+              observation: formatPreviewField(
+                paragraphByRole(narrative, "observation") ||
+                  commercialOrUnavailable(narrative.summary?.identity),
+                "summary",
+              ),
+              explanation: formatPreviewField(paragraphByRole(narrative, "explanation"), "description"),
+              impact: formatPreviewField(paragraphByRole(narrative, "impact"), "summary"),
+              suggestion: formatPreviewField(
+                paragraphByRole(narrative, "suggestion") ||
+                  commercialOrUnavailable(narrative.summary?.priority_recommendation),
+                "summary",
+              ),
+              hasMore: true,
+            },
+          ]
+    ).map((block) => ({
       ...block,
       hasMore:
         block.observation.hasMore ||
@@ -485,6 +518,7 @@ function buildKnowledge(
  */
 export function adaptResultPageViewModel(
   source: CanonicalDesktopViewModel,
+  fullReport?: FullReportViewModel | null,
 ): ResultPageViewModel {
   const narrative = source.narrativeResult;
   const commercialExec = executiveFromNarrative(narrative);
@@ -524,9 +558,6 @@ export function adaptResultPageViewModel(
     6,
   );
 
-  const careerLabel =
-    narrative?.career_selection_label?.trim() ||
-    "ĐỊNH HƯỚNG NGHỀ NGHIỆP";
   const destinyItems = adaptPreviewList(
     source.s01.decisions.map((d) => ({
       question: d.question,
@@ -543,6 +574,7 @@ export function adaptResultPageViewModel(
       name: row.name,
       element: row.element,
       pct: row.pct,
+      count: "count" in row && typeof row.count === "number" ? row.count : null,
       status: row.status,
     })),
     5,
@@ -581,44 +613,85 @@ export function adaptResultPageViewModel(
     "summary",
   );
 
-  const timelineSource = [
-    {
-      label: TIMELINE_LABELS[0],
-      detail: adaptPreviewText(UNAVAILABLE_CONCLUSION, "summary"),
-    },
-    {
-      label: TIMELINE_LABELS[1],
+  const luckCurrent = source.s01.conditions.rows.find((row) => row.label === "Đại vận");
+  const luckSequence = source.s01.conditions.rows.find((row) => row.label === "Lộ trình Đại vận");
+  const luckParts = (luckSequence?.value ?? "")
+    .split(" · ")
+    .map((part) => part.trim())
+    .filter((part) => part && part !== UNAVAILABLE_CONCLUSION);
+  const currentGan = (luckCurrent?.value ?? "").split(" ")[0] ?? "";
+  const timelineSource = luckParts.map((part, index) => {
+    const isCurrent = Boolean(currentGan) && part.startsWith(currentGan);
+    return {
+      label: isCurrent ? `Hiện tại · ${part}` : part,
       detail: adaptPreviewText(
-        commercialOrUnavailable(source.s08.strengths.items[0] ?? ""),
+        index === 0 && luckCurrent?.tag
+          ? `Tuổi khởi Đại vận: ${luckCurrent.tag.replace(/^Tuổi\s+/i, "")}`
+          : part,
         "summary",
       ),
-    },
-    {
-      label: TIMELINE_LABELS[2],
-      detail: adaptPreviewText(
-        commercialOrUnavailable(source.s08.warnings.items[0] ?? ""),
-        "summary",
-      ),
-    },
-    {
-      label: TIMELINE_LABELS[3],
-      detail: adaptPreviewText(
-        commercialOrUnavailable(source.s08.actions.items[0] ?? source.s01.cta),
-        "summary",
-      ),
-    },
-  ];
-  const stages = adaptPreviewList(timelineSource, 4);
-  const timelineSummary = adaptPreviewText(UNAVAILABLE_CONCLUSION, "summary");
+    };
+  });
+  const stages = adaptPreviewList(timelineSource, 10);
+  const timelineSummaryText =
+    luckParts.length > 0
+      ? [
+          luckCurrent?.tag ? `Tuổi khởi Đại vận: ${luckCurrent.tag.replace(/^Tuổi\s+/i, "")}` : "",
+          luckCurrent && isUsablePreviewText(luckCurrent.value)
+            ? `Hiện tại: ${luckCurrent.value}`
+            : "",
+          `${luckParts.length} chu kỳ`,
+        ]
+          .filter(Boolean)
+          .join(" · ")
+      : UNAVAILABLE_CONCLUSION;
+  const timelineSummary = adaptPreviewText(timelineSummaryText, "summary");
   const timelineVisible = stages.items.some((stage) =>
     isUsablePreviewText(stage.detail.text),
   );
 
   const recommendations = buildRecommendations(source);
-  const interpretation = buildInterpretation(source);
+  const interpretation = buildInterpretation(source, fullReport);
   const knowledge = buildKnowledge(source);
 
+  const cungPhi =
+    source.s09.quai.bullets
+      .find((item) => item.toLowerCase().includes("cung"))
+      ?.split(":")
+      .slice(1)
+      .join(":")
+      .trim() || source.s09.quai.center;
+  const nhomTrach =
+    source.s09.quai.bullets
+      .find((item) => item.toLowerCase().includes("nhóm") || item.toLowerCase().includes("trạch"))
+      ?.split(":")
+      .slice(1)
+      .join(":")
+      .trim() || "";
+
   return {
+    analysisId: fullReport?.analysisId || source.s00.chartId.value,
+    chart: {
+      title: "TỨ TRỤ / BÁT TỰ",
+      pillars: (fullReport?.pillars ?? []).map((pillar) => ({
+        label: pillar.label,
+        stem: pillar.stem,
+        branch: pillar.branch,
+        napAm: pillar.napAm,
+        hiddenStems: pillar.hiddenStems,
+        tenGod: pillar.tenGod,
+        growthStage: pillar.growthStage,
+      })),
+      visible: Boolean(fullReport?.pillars.length),
+    },
+    shenSha: {
+      title: "THẦN SÁT",
+      items: fullReport?.shenSha ?? source.s07.good.items.concat(source.s07.bad.items).filter((item) => item && item !== UNAVAILABLE_CONCLUSION),
+      visible: Boolean(
+        (fullReport?.shenSha.length ?? 0) > 0 ||
+          source.s07.good.items.some((item) => item && item !== UNAVAILABLE_CONCLUSION),
+      ),
+    },
     context: {
       title: "BẠN LÀ AI",
       identityLabel: "Hồ sơ tư vấn",
@@ -630,6 +703,9 @@ export function adaptResultPageViewModel(
       chartId: source.s00.chartId.value,
       status: source.s00.status.value,
       analyzedAt: source.s00.analyzedAt.value,
+      cungPhi,
+      menhQuai: source.s09.quai.center,
+      nhomTrach,
     },
     executive: {
       title: "TÓM TẮT TƯ VẤN",
@@ -647,10 +723,10 @@ export function adaptResultPageViewModel(
       title: "CHỈ SỐ CỐT LÕI",
       items: indicators,
       hasMore: indicators.hasMore,
-      visible: false,
+      visible: indicators.items.length > 0,
     },
     destiny: {
-      title: careerLabel,
+      title: "ĐỊNH HƯỚNG NGHỀ NGHIỆP",
       questionLabel: "Hướng nghề phù hợp?",
       items: destinyItems,
       cta: source.s01.cta,

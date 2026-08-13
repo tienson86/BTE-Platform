@@ -192,11 +192,11 @@ export const CANONICAL_DESKTOP_MOCK = {
   s04: {
     title: "CÂN BẰNG NGŨ HÀNH",
     rows: [
-      { name: "Mộc", element: "wood" as const, pct: 22, status: "Trung bình" },
-      { name: "Hỏa", element: "fire" as const, pct: 42, status: "Rất mạnh" },
-      { name: "Thổ", element: "earth" as const, pct: 15, status: "Trung bình" },
-      { name: "Kim", element: "metal" as const, pct: 12, status: "Yếu" },
-      { name: "Thủy", element: "water" as const, pct: 9, status: "Rất yếu" },
+      { name: "Mộc", element: "wood" as const, pct: 22, count: 2, status: "Trung bình" },
+      { name: "Hỏa", element: "fire" as const, pct: 42, count: 7, status: "Rất mạnh" },
+      { name: "Thổ", element: "earth" as const, pct: 15, count: 4, status: "Trung bình" },
+      { name: "Kim", element: "metal" as const, pct: 12, count: 4, status: "Yếu" },
+      { name: "Thủy", element: "water" as const, pct: 9, count: 0, status: "Rất yếu" },
     ],
     summary: "Hỏa vượng • Thủy thiếu • Cân bằng trung bình",
   },

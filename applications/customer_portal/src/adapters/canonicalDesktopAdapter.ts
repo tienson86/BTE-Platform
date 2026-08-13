@@ -180,10 +180,8 @@ function asString(value: unknown, fallback = ""): string {
 function formatLunarBirth(calendar: AnalysisDataDto["calendar"]): string {
   if (!calendar) return "";
   const lunar = calendar.lunar;
-  const canChi = lunar?.year_can_chi ?? calendar.lunar_can_chi?.year ?? calendar.year_can_chi;
   if (calendar.lunar_date) {
-    const date = asString(calendar.lunar_date);
-    return canChi ? `${date} (${canChi})` : date;
+    return asString(calendar.lunar_date);
   }
   const day = lunar?.day ?? calendar.lunar_day;
   const month = lunar?.month ?? calendar.lunar_month;
@@ -191,8 +189,7 @@ function formatLunarBirth(calendar: AnalysisDataDto["calendar"]): string {
   if (day == null || month == null || year == null) return "";
   const leap = Boolean(lunar?.is_leap_month ?? lunar?.leap ?? calendar.is_leap_month ?? calendar.leap_month);
   const date = `${pad2(Number(day))}/${pad2(Number(month))}/${Number(year)}`;
-  const leapMark = leap ? " nhuận" : "";
-  return canChi ? `${date}${leapMark} (${canChi})` : `${date}${leapMark}`;
+  return leap ? `${date} nhuận` : date;
 }
 
 function formatLuckCurrent(luck: AnalysisDataDto["luck"]): string {
@@ -455,11 +452,9 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
   const careerDirection = careerFieldText(career, "career_direction");
   const careerStrengths = careerFieldText(career, "career_strengths");
   const whoBody = useNarrative
-    ? (executive?.central_message
-        ? `Career Selection Assessment — ${executive.central_message}`
-        : careerDirection
-          ? `Career Selection Assessment — ${careerDirection}`
-          : summaryText(narrative?.summary, "identity"))
+    ? (executive?.central_message ||
+        summaryText(narrative?.summary, "identity") ||
+        careerDirection)
     : findSectionBody(sections, [/^tính cách$/i, /tổng quan/i]);
   const strengthBody = useNarrative
     ? (executive?.supporting_points?.length
@@ -577,15 +572,15 @@ function mapS02(data: AnalysisDataDto): CanonicalDesktopViewModel["s02"] {
   const base = cloneFixture().s02;
   const pattern = data.pattern as Record<string, unknown> | undefined;
   const useful = data.useful_god as Record<string, unknown> | undefined;
-  const series = data.score?.wuxing_series ?? [];
+  const analyticalCounts = fiveElementCounts(data.five_elements);
   let topElement = "—";
   let topPct = -1;
-  for (const item of series) {
-    const name = normalizeElement(asString(item.label ?? item.element ?? item.name));
-    const v = seriesValue(item);
-    if (v > topPct) {
-      topPct = v;
-      topElement = name;
+  if (analyticalCounts) {
+    for (const [name, count] of Object.entries(analyticalCounts)) {
+      if (count > topPct) {
+        topPct = count;
+        topElement = name;
+      }
     }
   }
   const yy = asString(data.bazi?.day_master_yin_yang, "—");
@@ -696,8 +691,15 @@ function mapS04(data: AnalysisDataDto): CanonicalDesktopViewModel["s04"] {
   }
   const total = Object.values(scores).reduce((a, b) => a + b, 0) || 1;
   const rows = ELEMENT_ROW.map((row) => {
-    const pct = Math.round((scores[row.name] / total) * 100);
-    return { name: row.name, element: row.element, pct, status: ELEMENT_STATUS(pct) };
+    const count = scores[row.name];
+    const pct = Math.round((count / total) * 100);
+    return {
+      name: row.name,
+      element: row.element,
+      pct,
+      count,
+      status: ELEMENT_STATUS(pct),
+    };
   });
   const strongest = [...rows].sort((a, b) => b.pct - a.pct)[0];
   const weakest = [...rows].sort((a, b) => a.pct - b.pct)[0];
@@ -713,8 +715,17 @@ function mapS05(data: AnalysisDataDto): CanonicalDesktopViewModel["s05"] {
   const score = normalizeScore100(
     data.score?.strength_score ?? data.strength?.strength_score ?? 0,
   );
-  const levelRaw = asString(data.strength?.strength_level, "");
-  const level = score >= 70 ? "MẠNH" : score >= 45 ? "TRUNG BÌNH" : "YẾU";
+  const than = pickStr(data.pattern as Record<string, unknown> | undefined, [
+    "than_vuong_nhuoc",
+    "than",
+  ]);
+  const totalScore = data.score?.total_score;
+  const grade = asString(data.score?.grade);
+  const scoreLabel =
+    totalScore != null && Number.isFinite(Number(totalScore)) && grade
+      ? `${Number(totalScore)} / ${grade}`
+      : `${score} / 100`;
+  const level = than || (score >= 70 ? "MẠNH" : score >= 45 ? "TRUNG BÌNH" : "YẾU");
   const reasoning = commercialOrUnavailable(asString(data.strength?.reasoning));
   const factors = asString(data.strength?.reasoning)
     .split(/[.;\n]+/)
@@ -732,8 +743,8 @@ function mapS05(data: AnalysisDataDto): CanonicalDesktopViewModel["s05"] {
 
   return {
     ...base,
-    level: level || levelRaw.toUpperCase() || "—",
-    score: `${score} / 100`,
+    level: level || "—",
+    score: scoreLabel,
     percent: Math.min(100, Math.max(0, score)),
     insight: reasoning,
     factors:
@@ -750,7 +761,7 @@ function mapS06(data: AnalysisDataDto): CanonicalDesktopViewModel["s06"] {
     const counts = new Map<string, number>();
     for (const god of analytical) {
       const name = asString(god).trim();
-      if (!name || name === "Nhật Chủ") continue;
+      if (!name) continue;
       counts.set(name, (counts.get(name) ?? 0) + 1);
     }
     if (counts.size > 0) {
@@ -789,7 +800,7 @@ function mapS06(data: AnalysisDataDto): CanonicalDesktopViewModel["s06"] {
   const counts = new Map<string, number>();
   for (const god of data.bazi?.ten_gods ?? []) {
     const name = asString(god).trim();
-    if (!name || name === "Nhật Chủ") continue;
+    if (!name) continue;
     counts.set(name, (counts.get(name) ?? 0) + 1);
   }
   if (counts.size === 0) {
@@ -919,15 +930,12 @@ function mapS08(data: AnalysisDataDto): CanonicalDesktopViewModel["s08"] {
       .filter((item) => item && item !== UNAVAILABLE_CONCLUSION)
       .slice(0, 4);
     const overview =
-      (executive?.composed_text
-        ? `Career Selection Assessment — ${executive.central_message || executive.composed_text}`
-        : "") ||
-      (careerFieldText(career, "career_direction")
-        ? `Career Selection Assessment — ${careerFieldText(career, "career_direction")}`
-        : "") ||
+      executive?.central_message ||
+      executive?.composed_text ||
       summaryText(narrative.summary, "identity") ||
       paragraphByRole(narrative, "observation") ||
       sectionParagraphTexts(narrative, /observation|overview|executive/i)[0] ||
+      careerFieldText(career, "career_direction") ||
       "";
     return {
       ...base,
@@ -1034,10 +1042,17 @@ function mapS10(): CanonicalDesktopViewModel["s10"] {
 function mapS09(data: AnalysisDataDto): CanonicalDesktopViewModel["s09"] {
   const base = cloneFixture().s09;
   const cal = data.calendar ?? {};
-  const cung = asString(cal.cung_phi ?? cal.menh_quai, base.quai.center);
-  const menh = asString(cal.menh_quai ?? cal.cung_phi, cung);
-  const nhom = asString(cal.nhom_trach, "");
-  const guaName = asString(cal.gua_name, menh);
+  const feng =
+    data.feng_shui && typeof data.feng_shui === "object"
+      ? (data.feng_shui as Record<string, unknown>)
+      : {};
+  const cung = asString(
+    feng.cung_phi ?? cal.cung_phi ?? feng.menh_quai ?? cal.menh_quai,
+    base.quai.center,
+  );
+  const menh = asString(feng.menh_quai ?? cal.menh_quai ?? feng.cung_phi ?? cal.cung_phi, cung);
+  const nhom = asString(feng.nhom_trach ?? cal.nhom_trach, "");
+  const guaName = asString(feng.gua_name ?? cal.gua_name, menh);
   const numberMatch = guaName.match(/\d+/) ?? menh.match(/\d+/);
   const bullets = [
     `Cung mệnh: ${cung || menh}`,

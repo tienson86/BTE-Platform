@@ -8,11 +8,12 @@
  * Prints one "PASS <name>" / "FAIL <name>: <detail>" line per check and exits
  * with 1 when any check fails. Driven by test_result_store.py.
  */
-"use strict";
+import fs from "fs";
+import path from "path";
+import vm from "vm";
+import { fileURLToPath } from "url";
 
-const fs = require("fs");
-const path = require("path");
-const vm = require("vm");
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const MODULE_PATH = path.resolve(
   __dirname,
@@ -186,12 +187,50 @@ function testRejectsInvalidPayload() {
   check("guard.nothing_persisted", ctx.session.keys().length === 0, ctx.session.keys().join(","));
 }
 
+function testCurrentResultPrecedence() {
+  const ctx = newStore();
+  const store = ctx.store;
+  const stale = result("OLD");
+  const fresh = result("FRESH");
+  store.save(stale);
+  store.save(fresh);
+  store.selectForView(stale);
+
+  check("current.load_is_fresh", sameJson(store.load(), fresh), JSON.stringify(store.load()));
+  check(
+    "current.loadCurrent_is_fresh",
+    store.loadCurrent().data.calendar.lunar_date.indexOf("FRESH") !== -1,
+    JSON.stringify(store.loadCurrent())
+  );
+  check(
+    "current.default_display_is_fresh",
+    store.resolveForDisplay(false).data.calendar.lunar_date.indexOf("FRESH") !== -1,
+    JSON.stringify(store.resolveForDisplay(false))
+  );
+  check(
+    "current.history_display_is_stale",
+    store.resolveForDisplay(true).data.calendar.lunar_date.indexOf("OLD") !== -1,
+    JSON.stringify(store.resolveForDisplay(true))
+  );
+  check(
+    "current.analysis_id_present",
+    typeof store.getCurrentAnalysisId() === "string" && store.getCurrentAnalysisId().length > 0,
+    String(store.getCurrentAnalysisId())
+  );
+  check(
+    "current.loadForView_still_supports_history",
+    sameJson(store.loadForView(), stale),
+    JSON.stringify(store.loadForView())
+  );
+}
+
 testKeysAreSeparate();
 testFullFlowKeepsLastResult();
 testSelectForViewNeverWritesLastKey();
 testClearAndHistoryIsolation();
 testLegacyKeysStillReadable();
 testRejectsInvalidPayload();
+testCurrentResultPrecedence();
 
 let failed = 0;
 results.forEach(function (row) {
@@ -204,3 +243,4 @@ results.forEach(function (row) {
 });
 process.stdout.write("TOTAL " + results.length + " FAILED " + failed + "\n");
 process.exit(failed ? 1 : 0);
+

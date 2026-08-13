@@ -29,9 +29,12 @@ export default defineConfig(({ mode }) => {
       emptyOutDir: true,
       sourcemap: true,
       rollupOptions: {
-        input: path.resolve(rootDir, "src/entries/resultApp.tsx"),
+        input: {
+          result: path.resolve(rootDir, "src/entries/resultApp.tsx"),
+          report: path.resolve(rootDir, "src/entries/reportComposer.ts"),
+        },
         output: {
-          entryFileNames: "result.js",
+          entryFileNames: "[name].js",
           chunkFileNames: "chunks/[name]-[hash].js",
           assetFileNames: (assetInfo) => {
             if (assetInfo.name?.endsWith(".css")) {

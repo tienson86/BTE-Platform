@@ -79,6 +79,11 @@ def create_app() -> FastAPI:
             return page("result", "result_legacy.html")
         return HTMLResponse(render_desktop_page("result_desktop.html"))
 
+    @app.get("/interpretation", response_class=HTMLResponse)
+    def interpretation_page() -> HTMLResponse:
+        """Luận giải — same current result as /result, interpretation zone."""
+        return HTMLResponse(render_desktop_page("result_desktop.html"))
+
     @app.get("/reports", response_class=HTMLResponse)
     def reports_page() -> HTMLResponse:
         """Reports page."""

@@ -46,8 +46,56 @@
     return t("reports.status_unknown");
   }
 
+  function hasStructuredAnalysis(data) {
+    return Boolean(
+      data &&
+        (data.calendar ||
+          data.five_elements ||
+          data.ten_gods ||
+          data.luck ||
+          data.feng_shui ||
+          data.useful_god ||
+          data.narrative_result ||
+          data.pattern)
+    );
+  }
+
+  function currentAnalysisId(report) {
+    var fromStore =
+      window.BtePortal &&
+      BtePortal.ResultStore &&
+      typeof BtePortal.ResultStore.getCurrentAnalysisId === "function"
+        ? BtePortal.ResultStore.getCurrentAnalysisId()
+        : null;
+    var raw = (report && (report.analysis_id || report.id)) || fromStore || "";
+    if (!raw || /last-result|last_result|bte_last_result|bte_history|bte_view_result/i.test(String(raw))) {
+      return fromStore && !/last-result/i.test(String(fromStore)) ? fromStore : "";
+    }
+    return String(raw);
+  }
+
+  function composeFullCustomerReport(report) {
+    var data = (report && report.data) || {};
+    if (!window.BteFullReport || typeof window.BteFullReport.build !== "function") {
+      return "";
+    }
+    var model = window.BteFullReport.build(data, {
+      input: (report && report.input) || {},
+      analysisId: currentAnalysisId(report),
+    });
+    return window.BteFullReport.render(model);
+  }
+
   function composeHtmlDocument(report) {
-    var body = report && report.html ? String(report.html) : "";
+    if (hasStructuredAnalysis(report && report.data)) {
+      var full = composeFullCustomerReport(report);
+      if (full) return full;
+    }
+    var body = hasStructuredAnalysis(report && report.data)
+      ? ""
+      : report && report.html
+        ? String(report.html)
+        : "";
     var execHtml = "";
     if (
       report &&
@@ -79,18 +127,38 @@
     return "# " + execTitle + "\n\n---\n\n" + md;
   }
 
+  function whenComposerReady(done) {
+    if (window.BteFullReport && typeof window.BteFullReport.build === "function") {
+      done();
+      return;
+    }
+    var tries = 0;
+    var timer = setInterval(function () {
+      tries += 1;
+      if (
+        (window.BteFullReport && typeof window.BteFullReport.build === "function") ||
+        tries > 40
+      ) {
+        clearInterval(timer);
+        done();
+      }
+    }, 50);
+  }
+
   function boot() {
     if (!window.BtePortal) {
       setEmpty(t("common.api_client_failed"));
       return;
     }
     showSkeleton();
-    // Local history only — avoid probing missing list APIs (404 console noise).
-    buildLocalReports();
-    bindControls();
-    refreshList();
-    if (allReports.length) selectReport(allReports[0].id);
-    else setEmpty(t("reports.empty"));
+    whenComposerReady(function () {
+      // Local history only — avoid probing missing list APIs (404 console noise).
+      buildLocalReports();
+      bindControls();
+      refreshList();
+      if (allReports.length) selectReport(allReports[0].id);
+      else setEmpty(t("reports.empty"));
+    });
   }
 
   function showSkeleton() {
@@ -138,7 +206,9 @@
             : markdown
               ? "markdown"
               : "unknown");
-    const status = raw.status || (html || markdown || pdf ? "ready" : "empty");
+    const status =
+      raw.status ||
+      (html || markdown || pdf || hasStructuredAnalysis(raw.data) ? "ready" : "empty");
     const id = String(raw.id || fallbackId || "report-" + Date.now());
 
     return {
@@ -181,7 +251,14 @@
         "hist-" + idx
       );
       if (!entry) return;
-      if (!entry.has_html && !entry.has_markdown && !entry.has_pdf) return;
+      if (
+        !entry.has_html &&
+        !entry.has_markdown &&
+        !entry.has_pdf &&
+        !hasStructuredAnalysis(entry.data)
+      ) {
+        return;
+      }
       if (seen[entry.id]) return;
       seen[entry.id] = true;
       items.push(entry);
@@ -189,9 +266,19 @@
 
     const last = BtePortal.getLastResult();
     if (last && last.data) {
+      const currentId = currentAnalysisId({
+        analysis_id:
+          (BtePortal.ResultStore &&
+            BtePortal.ResultStore.getCurrentAnalysisId &&
+            BtePortal.ResultStore.getCurrentAnalysisId()) ||
+          last.analysis_id,
+        data: last.data,
+        input: last.input,
+      });
       const entry = normalizeReport(
         {
-          id: "last-result",
+          id: currentId,
+          analysis_id: currentId,
           saved_at: new Date().toISOString(),
           input: last.input,
           report: last.data.report,
@@ -200,9 +287,15 @@
           source: "last",
           summary: t("reports.latest_summary"),
         },
-        "last-result"
+        currentId || "current-analysis"
       );
-      if (entry && (entry.has_html || entry.has_markdown || entry.has_pdf)) {
+      if (
+        entry &&
+        (entry.has_html ||
+          entry.has_markdown ||
+          entry.has_pdf ||
+          hasStructuredAnalysis(entry.data))
+      ) {
         if (!seen[entry.id]) {
           items.unshift(entry);
           seen[entry.id] = true;
@@ -436,13 +529,18 @@
     if (tabs) tabs.hidden = false;
     if (tabPdf) tabPdf.disabled = !selected.has_pdf;
 
-    if (!selected.has_html && !selected.has_markdown && !selected.has_pdf) {
+    if (
+      !selected.has_html &&
+      !selected.has_markdown &&
+      !selected.has_pdf &&
+      !hasStructuredAnalysis(selected.data)
+    ) {
       setEmpty(t("reports.empty"));
       return;
     }
 
     let format = viewFormat;
-    if (format === "html" && !selected.has_html) {
+    if (format === "html" && !selected.has_html && !hasStructuredAnalysis(selected.data)) {
       format = selected.has_markdown ? "markdown" : selected.has_pdf ? "pdf" : "html";
     }
     if (format === "markdown" && !selected.has_markdown) {
@@ -460,9 +558,10 @@
     if (htmlView) {
       htmlView.hidden = format !== "html";
       if (format === "html") {
-        htmlView.srcdoc = selected.has_html || (selected.data && window.BtePresenters)
-          ? composeHtmlDocument(selected)
-          : "<p>" + esc(t("reports.empty")) + "</p>";
+        htmlView.srcdoc =
+          selected.has_html || hasStructuredAnalysis(selected.data) || (selected.data && window.BtePresenters)
+            ? composeHtmlDocument(selected)
+            : "<p>" + esc(t("reports.empty")) + "</p>";
       }
     }
     if (mdView) {
@@ -494,12 +593,18 @@
 
   function openReport(report) {
     if (report.data) {
-      // Opening a report is read-only for last_result.
+      if (report.source === "last") {
+        BtePortal.ResultStore.clearView();
+        window.location.href = "/result";
+        return;
+      }
+      // Opening an older report is read-only for last_result.
       BtePortal.ResultStore.selectForView({
         input: report.input || {},
         data: report.data,
+        analysis_id: report.id,
       });
-      window.location.href = "/result";
+      window.location.href = "/result?from=history";
       return;
     }
     if (report.has_html || report.data) {
@@ -579,6 +684,15 @@
         return;
       }
       BtePortal.showFlash(flash, t("reports.pdf_download_unavailable"), "error");
+      return;
+    }
+
+    if (hasStructuredAnalysis(report.data)) {
+      triggerDownload(
+        safeFilename(report.name) + ".html",
+        composeHtmlDocument(report),
+        "text/html;charset=utf-8"
+      );
       return;
     }
 

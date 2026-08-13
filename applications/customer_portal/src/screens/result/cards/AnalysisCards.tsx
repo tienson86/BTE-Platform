@@ -44,7 +44,9 @@ export function FiveElementsCard({
             >
               <span className="rp-elements__fill" style={{ width: `${row.pct}%` }} />
             </div>
-            <span className="rp-elements__pct">{row.pct}%</span>
+            <span className="rp-elements__pct">
+              {row.count != null ? row.count : `${row.pct}%`}
+            </span>
           </li>
         ))}
       </ul>

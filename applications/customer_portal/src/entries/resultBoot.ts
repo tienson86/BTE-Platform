@@ -7,16 +7,22 @@ import {
   type CanonicalDesktopViewModel,
 } from "../adapters";
 import type { AnalysisDataDto, AnalyzeChartRequest } from "../models";
+import { buildFullReportViewModel, type FullReportViewModel } from "../report/fullReportViewModel";
+import {
+  isHistoryViewSearch,
+  resolveCurrentStoredResult,
+  type StoredResultRecord,
+} from "../resultState/currentResult";
 
-export type StoredResult = {
-  readonly input?: Record<string, unknown> | null;
-  readonly data?: AnalysisDataDto | null;
-};
+export type StoredResult = StoredResultRecord;
 
 export type ResultBootProps = {
   readonly request: AnalyzeChartRequest | null;
   readonly initialData?: CanonicalDesktopViewModel;
   readonly previewFallback: boolean;
+  readonly analysisId?: string;
+  readonly resultSource?: "current" | "history" | "legacy" | "preview";
+  readonly fullReport?: FullReportViewModel;
 };
 
 /**
@@ -54,30 +60,46 @@ export function toAnalyzeRequest(
 export function resolveResultBoot(
   stored: StoredResult | null,
   search: string = "",
+  historyView: StoredResult | null = null,
 ): ResultBootProps {
   const params = new URLSearchParams(search);
   const forcePreview = params.get("preview") === "1";
   if (forcePreview) {
-    return { request: null, previewFallback: true };
+    return { request: null, previewFallback: true, resultSource: "preview" };
   }
 
-  const request = toAnalyzeRequest(stored?.input ?? null);
+  const resolved = resolveCurrentStoredResult({
+    current: stored,
+    historyView,
+    fromHistory: isHistoryViewSearch(search),
+  });
+  const payload = resolved ?? stored;
+  const request = toAnalyzeRequest(payload?.input ?? null);
 
-  if (stored?.data && request) {
+  if (payload?.data && request) {
+    const analysisId = resolved?.analysisId;
+    const fullReport = buildFullReportViewModel(payload.data, {
+      input: payload.input,
+      analysisId,
+    });
     return {
       request: null,
-      initialData: adaptAnalysisToCanonicalDesktop(stored.data, {
+      initialData: adaptAnalysisToCanonicalDesktop(payload.data, {
         request,
+        requestId: fullReport.analysisId,
         source: "api",
         status: "ready",
       }),
       previewFallback: false,
+      analysisId: fullReport.analysisId,
+      resultSource: resolved?.source ?? "current",
+      fullReport,
     };
   }
 
   if (request) {
-    return { request, previewFallback: false };
+    return { request, previewFallback: false, resultSource: "current" };
   }
 
-  return { request: null, previewFallback: true };
+  return { request: null, previewFallback: true, resultSource: "preview" };
 }

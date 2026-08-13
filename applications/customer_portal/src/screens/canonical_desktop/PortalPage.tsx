@@ -10,6 +10,7 @@
 
 import { useMemo, type ReactNode } from "react";
 import type { CanonicalDesktopViewModel } from "../../adapters";
+import type { FullReportViewModel } from "../../report/fullReportViewModel";
 import { useCanonicalDesktopResult } from "../../hooks";
 import type { AnalyzeChartRequest } from "../../models";
 import { CanonicalDesktopProvider } from "./CanonicalDesktopContext";
@@ -36,6 +37,7 @@ export type PortalPageProps = {
    * Production host passes false when expecting engine data.
    */
   readonly previewFallback?: boolean;
+  readonly fullReport?: FullReportViewModel | null;
 };
 
 /**
@@ -46,6 +48,7 @@ export function PortalPage({
   initialData,
   enabled = true,
   previewFallback = true,
+  fullReport = null,
 }: PortalPageProps = {}): ReactNode {
   const { viewModel } = useCanonicalDesktopResult({
     request,
@@ -55,8 +58,8 @@ export function PortalPage({
   });
 
   const resultModel = useMemo(
-    () => adaptResultPageViewModel(viewModel),
-    [viewModel],
+    () => adaptResultPageViewModel(viewModel, fullReport),
+    [viewModel, fullReport],
   );
 
   const mode = viewModel.source === "api" ? "engine-live" : "dashboard-preview";
