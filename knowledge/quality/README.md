@@ -1,85 +1,85 @@
-# BTE Knowledge Quality — Specification
+# BTE Quality Gate System V1.0
 
-**Sprint:** 3C  
-**Location:** `knowledge/quality/`  
-**Status:** Specification only (no scoring engine runtime)
+| Field | Value |
+|-------|-------|
+| Document | README |
+| System | Quality Gate System V1.0 |
+| Status | **OFFICIAL — Release governance** |
+| Date | 2026-08-13 |
+| Authority | **Only authority** for advancing a BTE release stage |
+
+This package upgrades quality from scattered documentation into the **official release governance system**.
+
+It does **not** modify Engines, Knowledge packs, Reasoning, Commercial Language, Production Pipeline, or Golden Dataset.
 
 ---
 
 ## Purpose
 
-Defines canonical quality metrics, review checklist, academic/technical/governance scorecards, and the golden-record promotion checklist for Knowledge Records.
+Decide, with a frozen rule, whether BTE may advance to the next release stage.
 
-Does not score live records, modify golden datasets, or change authored Knowledge Records.
-
----
-
-## Folder tree
-
-```text
-knowledge/quality/
-├── README.md
-├── quality_metrics.json
-├── review_checklist.json
-├── academic_scorecard.json
-├── technical_scorecard.json
-├── governance_scorecard.json
-├── golden_record_checklist.json
-└── examples/
-    └── quality_evaluation_example.json
-```
+No sprint, UI wave, Knowledge QC cycle, or engineering green build may override this system.
 
 ---
 
-## Scoring dimensions
+## Reading order
 
-| Metric ID | Name |
-|-----------|------|
-| QM-COMPLETENESS | Completeness |
-| QM-CONSISTENCY | Consistency |
-| QM-TRACEABILITY | Traceability |
-| QM-COMPILER_COMPATIBILITY | Compiler Compatibility |
-| QM-RELATIONSHIP_INTEGRITY | Relationship Integrity |
-| QM-BIBLIOGRAPHY_INTEGRITY | Bibliography Integrity |
-| QM-GRAPH_INTEGRITY | Graph Integrity |
-| QM-GOVERNANCE_COMPLIANCE | Governance Compliance |
-
-Defaults: 0–100 scale, pass threshold **80**, overall rollup = weighted average (`quality_metrics.json`).
-
----
-
-## Scorecards
-
-| File | Scope |
-|------|--------|
-| `academic_scorecard.json` | Completeness, Consistency, Traceability, Bibliography Integrity |
-| `technical_scorecard.json` | Compiler Compatibility, Relationship Integrity, Graph Integrity |
-| `governance_scorecard.json` | Governance Compliance (+ supporting completeness/traceability) |
-
-`review_checklist.json` maps RC-* checklist items to metric IDs.  
-`golden_record_checklist.json` requires all eight metrics pass with overall ≥ **90** for golden promotion.
+| Order | File | Section |
+|------:|------|---------|
+| 1 | This README | Index |
+| 2 | [QUALITY_LEVELS.md](QUALITY_LEVELS.md) | Q0–Q4 |
+| 3 | [QUALITY_GATES.md](QUALITY_GATES.md) | RC0 → Commercial V1.1 + metrics + roadmap |
+| 4 | [QUALITY_SCORECARD.md](QUALITY_SCORECARD.md) | Official scorecard |
+| 5 | [QUALITY_BACKLOG.md](QUALITY_BACKLOG.md) | Categorized issues |
+| 6 | [RELEASE_BOARD.md](RELEASE_BOARD.md) | Current readiness |
+| 7 | [RELEASE_POLICY.md](RELEASE_POLICY.md) | Pass policy |
+| 8 | [RC_CHECKLIST.md](RC_CHECKLIST.md) | Gate-by-gate checklist |
+| 9 | [VERSION_POLICY.md](VERSION_POLICY.md) | Version / freeze rules |
+| 10 | [CHANGELOG.md](CHANGELOG.md) | History |
 
 ---
 
-## Examples
+## Current official state (2026-08-13)
 
-`examples/quality_evaluation_example.json` — synthetic evaluation of fixture `KR-000000`. Not a review of production records.
+| Axis | Level | Status |
+|------|-------|--------|
+| Quality | **Q1 — Measured** | MET |
+| Release | **RC1** | MET |
+| Next | RC2 | NOT MET |
 
----
-
-## Validation
-
-Structural validation for this folder:
-
-1. All JSON files parse.
-2. Exactly the eight metric codes above exist in `quality_metrics.json`.
-3. Default metric weights sum to `1.0`.
-4. Scorecards and checklists reference only registered `QM-*` IDs.
-5. Example evaluation covers all eight metrics.
+See [RELEASE_BOARD.md](RELEASE_BOARD.md).
 
 ---
 
-## Out of scope
+## What this system governs
 
-- Automated scorer / CI gate implementation
-- Changes to `knowledge/bazi/**`, bibliography, compiler, graph runtime, or KR content
+| Governs | Does not govern |
+|---------|-----------------|
+| Advance / hold of RC0, RC1, RC2, Commercial V1, Commercial V1.1 | Engine implementation |
+| Mandatory commercial metrics | Knowledge pack authoring |
+| Whether a case is shippable | Golden Dataset file contents |
+| Categorization of quality issues | UI Foundation / Design System |
+| Freeze of quality levels | QC1–QC4 Knowledge-infrastructure scans |
+
+Evidence sources (read-only):
+
+- `knowledge/validation/GOLDEN_DATASET_V1/`
+- `knowledge/consulting_quality/`
+- Existing case reviews (not rewritten here)
+
+---
+
+## Related systems (not release authority)
+
+| System | Role |
+|--------|------|
+| Sprint 3C JSON in this folder (`quality_metrics.json`, scorecards, checklists) | Knowledge Record quality specification |
+| `qc1/` `qc2/` `qc3/` `qc4/` | Knowledge-infrastructure QC cycles |
+| `knowledge/roadmap/` | Delivery / UI sprint tracking |
+| `knowledge/validation/GOLDEN_DATASET_V1/` | Ground-truth laboratory |
+
+Those systems **feed evidence**. They do not declare a release.
+
+---
+
+END

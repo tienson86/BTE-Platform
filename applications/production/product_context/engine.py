@@ -18,7 +18,7 @@ from applications.production.product_context.models import (
     ReaderRole,
 )
 
-ENGINE_VERSION = "1.0.0"
+ENGINE_VERSION = "1.1.0"
 
 
 class ProductContextEngine:

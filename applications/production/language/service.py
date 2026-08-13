@@ -55,6 +55,8 @@ class CommercialLanguageService:
             claims=["operating_style"],
             primary_theme=theme,
             operating_style=style,
+            structure_cue=structure,
+            capacity_cue=capacity,
         )
         strengths = self._para(
             FeatureKind.IDENTITY,
@@ -63,6 +65,8 @@ class CommercialLanguageService:
             reasoning,
             claims=["main_support"],
             capacity_cue=capacity,
+            operating_style=style,
+            structure_cue=structure,
             balance_cue=plan.main_support or plan.balance_direction,
             primary_theme=theme,
         )
@@ -73,6 +77,9 @@ class CommercialLanguageService:
             reasoning,
             claims=["main_constraint"],
             limitations=limitations,
+            primary_theme=theme,
+            structure_cue=structure,
+            operating_style=style,
         )
         pressure = self._para(
             FeatureKind.IDENTITY,
@@ -81,7 +88,6 @@ class CommercialLanguageService:
             reasoning,
             claims=["pressure"],
             primary_theme=theme,
-            limitations=limitations[:1],
         )
         environment = self._para(
             FeatureKind.IDENTITY,
@@ -91,6 +97,8 @@ class CommercialLanguageService:
             claims=["environment"],
             primary_theme=theme,
             operating_style=style,
+            structure_cue=structure,
+            capacity_cue=capacity,
         )
         lesson = self._para(
             FeatureKind.IDENTITY,
@@ -174,6 +182,8 @@ class CommercialLanguageService:
             claims=["operating_style"],
             primary_theme=theme,
             operating_style=style,
+            structure_cue=structure,
+            capacity_cue=capacity,
         )
         # Authority / role posture — prefer primary output/self-carry over secondary standards.
         posture = self._role_posture(theme, style)
@@ -185,6 +195,8 @@ class CommercialLanguageService:
             claims=["environment"],
             primary_theme=theme,
             operating_style=style,
+            structure_cue=structure,
+            capacity_cue=capacity,
         )
         risk = self._para(
             FeatureKind.CAREER,
@@ -192,6 +204,10 @@ class CommercialLanguageService:
             ParagraphIntent.LIMITATION,
             reasoning,
             claims=["main_constraint"],
+            primary_theme=theme,
+            operating_style=style,
+            capacity_cue=capacity,
+            structure_cue=structure,
             limitations=limitations or (["OVERLOAD_RISK"] if theme == "OPERATING_SELF_CARRY" else []),
         )
         focus = self._action_block(
@@ -214,6 +230,8 @@ class CommercialLanguageService:
             claims=["balance_direction"],
             balance_cue=plan.balance_direction or plan.main_support,
             capacity_cue=capacity,
+            operating_style=style,
+            primary_theme=theme,
         )
         pressure = self._para(
             FeatureKind.CAREER,
@@ -222,7 +240,6 @@ class CommercialLanguageService:
             reasoning,
             claims=["pressure"],
             primary_theme=theme,
-            limitations=limitations[:1],
         )
         memory = self._memory_line(theme, style, capacity, structure, career=True)
         closing = self._para(
@@ -301,6 +318,8 @@ class CommercialLanguageService:
             claims=["operating_style"],
             primary_theme=theme,
             operating_style=style,
+            structure_cue=structure,
+            capacity_cue=capacity,
         )
         supports = self._para(
             FeatureKind.EXECUTIVE,
@@ -310,6 +329,9 @@ class CommercialLanguageService:
             claims=["main_support"],
             balance_cue=plan.main_support or plan.balance_direction,
             capacity_cue=capacity,
+            operating_style=style,
+            primary_theme=theme,
+            structure_cue=structure,
         )
         limits = self._para(
             FeatureKind.EXECUTIVE,
@@ -318,6 +340,9 @@ class CommercialLanguageService:
             reasoning,
             claims=["main_constraint"],
             limitations=limitations,
+            primary_theme=theme,
+            structure_cue=structure,
+            operating_style=style,
         )
         direction = self._para(
             FeatureKind.EXECUTIVE,
@@ -327,6 +352,8 @@ class CommercialLanguageService:
             claims=["balance_direction"],
             balance_cue=plan.balance_direction,
             structure_cue=structure,
+            primary_theme=theme,
+            operating_style=style,
         )
         insight = self._para(
             FeatureKind.EXECUTIVE,
@@ -572,15 +599,24 @@ class CommercialLanguageService:
     ) -> str:
         style_plain = pl.plain_style(style)
         theme_plain = pl.plain_theme(theme)
+        follow = "tòng" in (structure or "").lower() or "tong" in (structure or "").lower()
         if career:
+            if theme == "OPERATING_OUTPUT" and follow:
+                return (
+                    "Công việc hợp bạn khi được trả bằng kết quả nhìn thấy được, "
+                    "trong nhịp tải–nghỉ rõ — không khi cố giống khuôn làm việc chung."
+                )
             if theme == "OPERATING_OUTPUT" and style_plain:
                 return f"Công việc hợp bạn khi {style_plain} được đặt đúng chỗ."
             if theme == "OPERATING_SELF_CARRY":
                 return "Công việc hợp bạn khi tự chủ có biên tải — không phải ôm hết theo phản xạ."
             if theme_plain:
                 return f"Công việc hợp bạn khi bạn được {theme_plain}."
-        if theme == "OPERATING_OUTPUT" and "tòng" in (structure or "").lower():
-            return "Bạn rõ hơn khi tạo ra đầu ra trong đúng khung riêng của mình."
+        if theme == "OPERATING_OUTPUT" and follow:
+            return (
+                "Bạn rõ và bền hơn khi tạo ra đầu ra trong đúng khung riêng — "
+                "không khi ép mình vào khuôn chung hay ôm thêm cho đủ."
+            )
         if theme == "OPERATING_SELF_CARRY":
             return "Bạn mạnh ở chỗ tự gánh — và bền hơn khi biết dừng nhận thêm."
         if style_plain and theme_plain:

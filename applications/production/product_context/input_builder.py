@@ -47,7 +47,7 @@ def build_product_context_input(
         customer_goal=str(options.get("customer_goal") or ""),
         report_type=report_type,
         language=str(options.get("language") or "vi"),
-        versions={"product_context": "1.0.0"},
+        versions={"product_context": "1.1.0"},
     )
 
 

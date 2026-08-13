@@ -12,6 +12,7 @@ from applications.production.interpretation.contracts import (
     KnowledgeStatus,
 )
 from applications.production.interpretation.service import MultiDomainCompositionResult
+from applications.production.product_context import adaptive as adp
 from applications.production.product_context.feature_filter import (
     FEATURE_CAREER,
     FEATURE_DEVELOPMENT,
@@ -20,7 +21,6 @@ from applications.production.product_context.feature_filter import (
     FEATURE_PARENT,
 )
 from applications.production.product_context.models import (
-    ActionProfile,
     LanguageProfile,
     LifeStage,
     ProductContextResult,
@@ -124,9 +124,10 @@ class ContextDeliveryAdapter:
             parent_guidance=parent,
             context=context,
             diagnostics={
-                "delivery": "context_adapted",
+                "delivery": "adaptive",
                 "language_profile": context.language_profile.value,
                 "action_profile": context.action_profile.value,
+                "replacements": [src for src, _dst, _why in adp.REPLACEMENTS],
             },
         )
 
@@ -135,78 +136,48 @@ class ContextDeliveryAdapter:
         composition: MultiDomainCompositionResult,
         context: ProductContextResult,
     ) -> ExecutiveConsultingResult:
-        plan = composition.cross_domain.executive_claim_plan
-        theme = composition.cross_domain.primary_theme
-        age_note = (
-            f"Độ tuổi hiện tại khoảng {context.subject_age} — "
-            if context.subject_age is not None
-            else ""
+        reasoning = composition.cross_domain
+        theme = reasoning.primary_theme
+        weak = adp.is_weak_capacity(reasoning)
+        actions = adp.parent_actions(
+            theme=theme,
+            weak=weak,
+            action_profile=context.action_profile,
         )
-        who = (
-            f"{age_note}Báo cáo này hướng tới nhận diện tiềm năng phát triển của trẻ, "
-            "không phải tư vấn nghề nghiệp người lớn."
-        )
-        style = (
-            "Xu hướng vận hành nổi bật nghiêng về việc được tạo ra / biểu đạt / có phản hồi rõ — "
-            "nên được hiểu như nhu cầu phát triển, không phải áp lực thành tích."
-            if theme == "OPERATING_OUTPUT"
-            else "Xu hướng vận hành cần được nuôi dưỡng theo đúng kênh đã công bố, với biên bảo toàn."
-        )
-        capacity = ""
-        if "weak" in (plan.identity_core or "") or "body:weak" in (plan.identity_core or ""):
-            capacity = (
-                "Nền năng lượng đang thiên về cần bảo toàn: ưu tiên nghỉ ngơi, nhịp nhẹ, "
-                "tránh ép cường độ học / hoạt động quá tải."
-            )
-        elif "balanced" in (plan.identity_core or ""):
-            capacity = "Nền năng lượng trung hòa: giữ nhịp đều, tránh dồn ép thành tích ngắn hạn."
-        else:
-            capacity = "Nền năng lượng cần được đọc cùng khung phát triển dài hạn — không ép khuôn người lớn."
-
-        nuance = ""
-        if composition.cross_domain.tensions or composition.cross_domain.conflicts:
-            nuance = (
-                "Có điểm cần đọc có điều kiện giữa các lớp phân tích — "
-                "người lớn nên giữ cả hai tín hiệu thay vì gắn một nhãn duy nhất cho trẻ."
-            )
-
-        actions = [
-            "Tạo môi trường có sản phẩm nhỏ / phản hồi rõ, không biến thành áp lực thành tích.",
-            "Ưu tiên bảo toàn năng lượng trước khi mở rộng lịch hoạt động.",
-            "Không dùng báo cáo này để chọn nghề, kinh doanh, hoặc timing hôn nhân.",
-        ]
-        if context.action_profile == ActionProfile.PARENT_ACTIONS:
-            actions = [f"Phụ huynh: {a}" for a in actions]
-
+        nuance = adp.conflict_nuance(reasoning)
         sections = [
-            DomainSection("WHO", "Nhận diện phát triển", [who]),
-            DomainSection("OPERATING", "Xu hướng vận hành cần nuôi dưỡng", [style]),
-            DomainSection("CAPACITY", "Nền năng lượng & biên bảo toàn", [capacity]),
+            DomainSection("WHO", "Nhận diện phát triển", [adp.parent_who(context)]),
             DomainSection(
-                "ENVIRONMENT",
-                "Môi trường hỗ trợ",
-                [
-                    "Môi trường hợp hơn khi có không gian tạo ra / thể hiện nhẹ nhàng và được công nhận đúng mức — "
-                    "không phải sân chơi cạnh tranh người lớn."
-                ],
+                "OPERATING",
+                "Nhu cầu phát triển cần nuôi dưỡng",
+                [adp.development_operating_frame(theme)],
+            ),
+            DomainSection(
+                "CAPACITY",
+                "Nền năng lượng & biên bảo toàn",
+                [adp.conservation_line(weak)],
+            ),
+            DomainSection(
+                "LEARNING",
+                "Môi trường học tập",
+                [adp.learning_environment(theme)],
+            ),
+            DomainSection(
+                "CONFIDENCE",
+                "Xây tự tin",
+                [adp.confidence_building(theme)],
             ),
         ]
         if nuance:
             sections.append(DomainSection("CONDITION", "Đọc có điều kiện", [nuance]))
-        sections.append(
-            DomainSection(
-                "ACTIONS",
-                "Việc người lớn nên làm",
-                actions,
-            )
-        )
+        sections.append(DomainSection("ACTIONS", "Việc phụ huynh nên làm", actions))
         sections.append(
             DomainSection(
                 "SUMMARY",
                 "Tóm tắt định hướng phát triển",
                 [
-                    "Nuôi dưỡng đúng kênh vận hành với biên bảo toàn — "
-                    "không biến lá số trẻ em thành tư vấn nghề nghiệp."
+                    "Đồng hành học tập và xây tự tin trong biên bảo toàn — "
+                    "không biến lá số trẻ em thành tư vấn nghề hay kinh doanh người lớn."
                 ],
             )
         )
@@ -218,10 +189,10 @@ class ContextDeliveryAdapter:
             body=body,
             sections=sections,
             recommendations=actions[:3],
-            version="1.0.0",
+            version="1.1.0",
             knowledge_status=KnowledgeStatus.PILOT,
             diagnostics={
-                "product_context": "development_identity",
+                "product_context": "adaptive_development_identity",
                 "source_theme": theme,
                 "claims_unchanged": True,
             },
@@ -232,43 +203,52 @@ class ContextDeliveryAdapter:
         composition: MultiDomainCompositionResult,
         context: ProductContextResult,
     ) -> ExecutiveConsultingResult:
-        theme = composition.cross_domain.primary_theme
-        conflicts = composition.cross_domain.conflicts
-        who = (
-            "Đây là bản tư vấn cho người lớn đang đồng hành với trẻ — "
-            "không phải báo cáo tự quyết nghề nghiệp của người lớn."
+        reasoning = composition.cross_domain
+        theme = reasoning.primary_theme
+        weak = adp.is_weak_capacity(reasoning)
+        conflicts = reasoning.conflicts
+        limits = adp.conservation_line(weak)
+        nuance = adp.conflict_nuance(reasoning)
+        if nuance:
+            limits = f"{limits} {nuance}"
+        raw_actions = adp.parent_actions(
+            theme=theme,
+            weak=weak,
+            action_profile=context.action_profile,
         )
-        system = (
-            "Trẻ có xu hướng vận hành theo kênh đầu ra / biểu đạt."
-            if theme == "OPERATING_OUTPUT"
-            else "Trẻ có xu hướng vận hành theo kênh đã công bố trong claim plan."
-        )
-        limits = (
-            "Ưu tiên bảo toàn năng lượng; tránh ép lịch và thành tích."
-            if "weak" in (composition.cross_domain.executive_claim_plan.identity_core or "")
-            else "Giữ biên tải phù hợp độ tuổi."
-        )
-        if conflicts:
-            limits += (
-                " Có xung đột điều tiết đã được đánh dấu ở tầng lý giải — "
-                "không kết luận một hướng duy nhất khi dữ liệu còn treo."
-            )
-        actions = [
-            "1. Giữ môi trường phản hồi rõ, cường độ nhẹ.",
-            "2. Bảo toàn nghỉ ngơi trước khi thêm hoạt động.",
-            "3. Không dùng báo cáo trẻ em cho Career / business / marriage timing.",
-        ]
+        numbered = [f"{index}. {item}" for index, item in enumerate(raw_actions[:3], start=1)]
         sections = [
-            DomainSection("WHO", "Đối tượng đọc", [who]),
-            DomainSection("SYSTEM", "Xu hướng cần hiểu", [system]),
+            DomainSection(
+                "WHO",
+                "Đối tượng đọc",
+                [
+                    "Đây là bản đồng hành cho phụ huynh — "
+                    "không phải báo cáo tự quyết nghề nghiệp của người lớn."
+                ],
+            ),
+            DomainSection(
+                "SYSTEM",
+                "Nhu cầu phát triển cần hiểu",
+                [adp.development_operating_frame(theme)],
+            ),
             DomainSection("LIMITS", "Biên cần giữ", [limits]),
-            DomainSection("PRIORITIES", "Ưu tiên của phụ huynh", actions),
+            DomainSection(
+                "LEARNING",
+                "Học tập thay cho kinh doanh",
+                [adp.learning_environment(theme)],
+            ),
+            DomainSection(
+                "CONFIDENCE",
+                "Tự tin thay cho lãnh đạo",
+                [adp.confidence_building(theme)],
+            ),
+            DomainSection("PRIORITIES", "Ưu tiên của phụ huynh", numbered),
             DomainSection(
                 "CONCLUSION",
                 "Kết luận đồng hành",
                 [
-                    "Đồng hành phát triển theo đúng kênh và biên bảo toàn — "
-                    "Career Decision bị ẩn bởi Product Context."
+                    "Đồng hành học tập và xây tự tin trong biên bảo toàn. "
+                    "Career Decision bị ẩn — thay bằng định hướng phát triển."
                 ],
             ),
         ]
@@ -279,11 +259,11 @@ class ContextDeliveryAdapter:
             status=DomainStatus.AVAILABLE,
             body=body,
             sections=sections,
-            recommendations=[a[3:] if a[0].isdigit() else a for a in actions],
-            version="1.0.0",
+            recommendations=raw_actions[:3],
+            version="1.1.0",
             knowledge_status=KnowledgeStatus.PILOT,
             diagnostics={
-                "product_context": "parent_executive",
+                "product_context": "adaptive_parent_executive",
                 "hidden_career": True,
                 "cdr_conflicts": list(conflicts),
             },
@@ -295,35 +275,49 @@ class ContextDeliveryAdapter:
         context: ProductContextResult,
     ) -> str:
         theme = composition.cross_domain.primary_theme
-        lines = [
-            "# Định hướng phát triển",
-            "",
-            "Báo cáo phát triển (không phải Career Decision).",
-            "",
-            f"- Life stage: {context.life_stage.value}",
-            f"- Language profile: {context.language_profile.value}",
-            f"- Theme định hướng (từ claim plan): {theme}",
-            "",
-            "Tập trung nuôi dưỡng kênh vận hành phù hợp và bảo toàn năng lượng theo độ tuổi.",
-        ]
-        return "\n".join(lines)
+        weak = adp.is_weak_capacity(composition.cross_domain)
+        return "\n".join(
+            [
+                "# Định hướng phát triển",
+                "",
+                "Thay cho Career Decision: nuôi dưỡng học tập và xây tự tin theo độ tuổi.",
+                "",
+                adp.development_operating_frame(theme),
+                "",
+                adp.learning_environment(theme),
+                "",
+                adp.confidence_building(theme),
+                "",
+                adp.conservation_line(weak),
+            ]
+        )
 
     def _parent_guidance(
         self,
         composition: MultiDomainCompositionResult,
         context: ProductContextResult,
     ) -> str:
-        return "\n".join(
+        theme = composition.cross_domain.primary_theme
+        weak = adp.is_weak_capacity(composition.cross_domain)
+        actions = adp.parent_actions(
+            theme=theme,
+            weak=weak,
+            action_profile=context.action_profile,
+        )
+        lines = [
+            "# Hướng dẫn cho phụ huynh",
+            "",
+            "Bạn đang đọc với vai trò phụ huynh đồng hành — không phải chủ thể tự quyết nghề.",
+            "",
+        ]
+        for index, item in enumerate(actions, start=1):
+            lines.append(f"{index}. {item}")
+        lines.extend(
             [
-                "# Hướng dẫn cho phụ huynh",
                 "",
-                "Bạn đang đọc với vai trò người lớn đồng hành.",
-                "",
-                "1. Không biến nhận diện vận hành thành áp lực thành tích.",
-                "2. Ưu tiên bảo toàn năng lượng nếu tín hiệu nền yếu / cần nghỉ.",
-                "3. Career Decision, business advice, và marriage timing bị chặn ở độ tuổi này.",
-                "4. Khi có căng giữa các lớp phân tích, giữ đọc có điều kiện — không gắn một nhãn.",
-                "",
-                f"Action profile: {context.action_profile.value}",
+                "Career Decision và tư vấn kinh doanh không thuộc gói này. "
+                "Thay bằng học tập và xây tự tin.",
             ]
         )
+        return "\n".join(lines)
+
