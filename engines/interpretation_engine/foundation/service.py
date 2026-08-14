@@ -14,6 +14,11 @@ from engines.interpretation_engine.foundation.builders.interpretation_facts_buil
     build_interpretation_facts,
 )
 from engines.interpretation_engine.foundation.canonical_context import CanonicalAnalysisContext
+from engines.interpretation_engine.foundation.interpreters.useful_god import (
+    UsefulGodInterpreter,
+    UsefulGodInterpretationResult,
+)
+from engines.interpretation_engine.foundation.explanation.models import DecisionExplanationResult
 from engines.interpretation_engine.foundation.results.domain_result import (
     FoundationDomainInterpretationResult,
     stub_domain_result,
@@ -38,6 +43,8 @@ class InterpretationFoundationBundle:
     readiness: InterpretationReadiness
     score_guard: ScoreTruthGuardResult
     domain_results: dict[str, FoundationDomainInterpretationResult]
+    useful_god_interpretation: UsefulGodInterpretationResult | None
+    useful_god_explanation: DecisionExplanationResult | None
     diagnostics: tuple[str, ...]
 
     def to_dict(self) -> dict[str, Any]:
@@ -50,6 +57,16 @@ class InterpretationFoundationBundle:
             "domain_results": {
                 key: value.to_dict() for key, value in self.domain_results.items()
             },
+            "useful_god_interpretation": (
+                self.useful_god_interpretation.to_dict()
+                if self.useful_god_interpretation is not None
+                else None
+            ),
+            "useful_god_explanation": (
+                self.useful_god_explanation.to_dict()
+                if self.useful_god_explanation is not None
+                else None
+            ),
             "diagnostics": list(self.diagnostics),
         }
 
@@ -88,7 +105,14 @@ def build_interpretation_foundation(
     score_guard = validate_score_not_used_as_truth(context, facts, score_payload=score_payload)
 
     all_diagnostics = _collect_diagnostics(facts, score_guard)
-    domain_results = _stub_domain_results(facts)
+    interpreter = UsefulGodInterpreter()
+    useful_god_explanation = interpreter.explain(facts.useful_god)
+    from engines.interpretation_engine.foundation.interpreters.useful_god.adapter import (
+        to_useful_god_interpretation_result,
+    )
+
+    useful_god_interpretation = to_useful_god_interpretation_result(useful_god_explanation)
+    domain_results = _build_domain_results(facts, useful_god_interpretation)
 
     return InterpretationFoundationBundle(
         context=context,
@@ -96,6 +120,8 @@ def build_interpretation_foundation(
         readiness=readiness,
         score_guard=score_guard,
         domain_results=domain_results,
+        useful_god_interpretation=useful_god_interpretation,
+        useful_god_explanation=useful_god_explanation,
         diagnostics=all_diagnostics,
     )
 
@@ -133,6 +159,42 @@ def _collect_diagnostics(
         collected.extend(domain.diagnostics)
     collected.extend(score_guard.violations)
     return tuple(dict.fromkeys(item for item in collected if item))
+
+
+def _build_domain_results(
+    facts: InterpretationFactsBundle,
+    useful_god: UsefulGodInterpretationResult,
+) -> dict[str, FoundationDomainInterpretationResult]:
+    """Build domain results — real Useful God interpretation, stubs for others."""
+    mapping = {
+        "strength": facts.strength.status,
+        "pattern": facts.pattern.status,
+        "ten_gods": facts.ten_gods.status,
+        "shensha": facts.shensha.status,
+        "luck": facts.luck.status,
+        "temperature": facts.temperature.status,
+    }
+    results = {
+        domain: stub_domain_result(domain, status=status)
+        for domain, status in mapping.items()
+    }
+    results["useful_god"] = FoundationDomainInterpretationResult(
+        domain="useful_god",
+        status=useful_god.status,
+        observations=useful_god.observations,
+        reasoning=useful_god.reasoning,
+        conclusions=useful_god.conclusions,
+        impacts=tuple(item.text for item in useful_god.impacts),
+        recommendations=tuple(
+            f"{group.category}: {'; '.join(group.items)}"
+            for group in useful_god.recommendations
+        ),
+        warnings=useful_god.warnings,
+        evidence=tuple(useful_god.evidence.rule_ids),
+        confidence=useful_god.confidence,
+        diagnostics=useful_god.diagnostics,
+    )
+    return results
 
 
 def _stub_domain_results(
