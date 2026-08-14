@@ -34,6 +34,11 @@ from engines.ten_gods_engine.engine import TenGodsEngine
 from engines.ten_gods_engine.models import TenGodsResult
 from engines.useful_god_engine.utils.context_builder import build_useful_god_context
 
+from engines.interpretation_engine.foundation import (
+    EngineSources,
+    InterpretationFoundationBundle,
+    build_interpretation_foundation,
+)
 from applications.production.models import ProductionRequest
 
 
@@ -50,6 +55,7 @@ class EnginePipelineOutput:
     strength_context: StrengthContext
     report_source: ReportInputV1Source
     stages: list[str]
+    interpretation_foundation: InterpretationFoundationBundle | None = None
 
 
 class ProductionEngineRunner:
@@ -217,28 +223,58 @@ class ProductionEngineRunner:
             birth_place=request.birth_place,
             timezone=request.timezone,
         )
+        luck_payload = shape_luck_payload(luck_context)
+        five_elements_payload = build_five_elements_payload(
+            published_rule_context.get("wuxing") or {}
+        )
         report_source = ReportInputV1Source(
             analysis=analysis,
             interpretation=interpretation_result,
             calendar=calendar_payload,
-            luck=shape_luck_payload(luck_context),
-            five_elements=build_five_elements_payload(
-                published_rule_context.get("wuxing") or {}
-            ),
+            luck=luck_payload,
+            five_elements=five_elements_payload,
             profile=profile,
             case_id=request.case_id or request.request_key,
             timezone=request.timezone,
             knowledge_version="v1.0",
         )
 
+        foundation = build_interpretation_foundation(
+            analysis=analysis,
+            calendar=calendar_payload,
+            luck=luck_payload,
+            five_elements=five_elements_payload,
+            feng_shui=feng_view or {},
+            identity={
+                "full_name": request.full_name,
+                "gender": request.gender,
+                "birth_datetime": (
+                    f"{request.year:04d}-{request.month:02d}-{request.day:02d} "
+                    f"{request.hour:02d}:{request.minute:02d}"
+                ),
+                "timezone": request.timezone,
+            },
+            engine_sources=EngineSources(
+                useful_god_result=useful_god_result,
+                strength_result=strength_result,
+                temperature_result=temperature_result,
+                ten_gods_result=ten_gods,
+                pattern_context=pattern_context,
+                rule_context=published_rule_context,
+            ),
+            pattern_dieu_hau=analysis.pattern.dieu_hau if analysis.pattern else "",
+        )
+        stages.append("interpretation_foundation")
+
         return EnginePipelineOutput(
             analysis=analysis,
             interpretation=interpretation_result,
             calendar=calendar_payload,
-            luck=shape_luck_payload(luck_context),
+            luck=luck_payload,
             ten_gods=ten_gods,
             strength_result=strength_result,
             strength_context=strength_context,
             report_source=report_source,
             stages=stages,
+            interpretation_foundation=foundation,
         )
