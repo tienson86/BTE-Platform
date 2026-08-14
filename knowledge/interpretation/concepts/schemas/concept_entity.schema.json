@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/interpretation/concept_entity.schema.json",
+  "title": "BaZi Interpretation ConceptEntity",
+  "type": "object",
+  "required": ["id", "category", "title", "metadata"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "category": {
+      "type": "string",
+      "enum": ["core", "symbolic", "application"]
+    },
+    "title": { "type": "string", "minLength": 1 },
+    "summary": { "type": "string" },
+    "meaning": { "type": "string" },
+    "conditions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "applications": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "related_concepts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["target_id", "relationship"],
+        "properties": {
+          "target_id": { "type": "string" },
+          "relationship": {
+            "type": "string",
+            "enum": [
+              "supports",
+              "requires",
+              "opposes",
+              "extends",
+              "specializes",
+              "related_to"
+            ]
+          }
+        }
+      }
+    },
+    "related_entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["domain", "key"],
+        "properties": {
+          "domain": { "type": "string" },
+          "key": { "type": "string" }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["author", "version", "status", "source"],
+      "properties": {
+        "author": { "type": "string" },
+        "version": { "type": "string" },
+        "created": { "type": "string" },
+        "updated": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "review", "approved", "deprecated"]
+        },
+        "source": { "type": "string" },
+        "quality": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/interpretation/knowledge_entity.schema.json",
+  "title": "BaZi Interpretation KnowledgeEntity",
+  "type": "object",
+  "required": ["id", "domain", "key", "title", "metadata"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "domain": { "type": "string", "minLength": 1 },
+    "key": { "type": "string", "minLength": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "meaning": { "type": "string" },
+    "positive_meaning": { "type": "string" },
+    "negative_meaning": { "type": "string" },
+    "applications": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "recommendations": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "related_entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["domain", "key"],
+        "properties": {
+          "domain": { "type": "string" },
+          "key": { "type": "string" }
+        }
+      }
+    },
+    "concept_ids": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "evidence_notes": { "type": "string" },
+    "metadata": {
+      "type": "object",
+      "required": ["author", "version", "status", "source"],
+      "properties": {
+        "author": { "type": "string" },
+        "version": { "type": "string" },
+        "created": { "type": "string" },
+        "updated": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "review", "approved", "deprecated"]
+        },
+        "source": { "type": "string" },
+        "quality": { "type": "string" }
+      }
+    }
+  }
+}
