@@ -57,15 +57,15 @@ def test_graph_links_model(concept_registry: ConceptRegistry) -> None:
     """Graph relationships are modeled on ConceptEntity."""
     concept = concept_registry.get("refining_metal")
     assert concept is not None
-    assert concept.related_concepts == ()
-    assert concept_registry.related("refining_metal") == ()
+    related = concept_registry.related("refining_metal")
+    assert all(item.id != "refining_metal" for item in related)
 
 
 def test_entity_mapping(knowledge_registry: KnowledgeRegistry) -> None:
     """Knowledge entity references concept_ids without duplicating concept content."""
     entity = knowledge_registry.get("UsefulGod", "Đinh")
     assert entity is not None
-    assert entity.concept_ids == ("refining_metal",)
+    assert "refining_metal" in entity.concept_ids
     assert "Đinh" in entity.meaning
     concept = retrieve_concept("refining_metal")
     assert concept is not None
@@ -169,10 +169,13 @@ def test_generic_registry_api(concept_registry: ConceptRegistry) -> None:
     """Registry exposes get, exists, list, validate, related."""
     assert concept_registry.exists("refining_metal")
     items = concept_registry.list("core")
-    assert len(items) == 1
-    assert items[0].id == "refining_metal"
+    assert len(items) >= 1
+    assert any(item.id == "refining_metal" for item in items)
     assert concept_registry.validate().passed
-    assert concept_registry.related("refining_metal") == ()
+    assert all(
+        item.id != "refining_metal"
+        for item in concept_registry.related("refining_metal")
+    )
 
 
 def test_golden_example_mapping() -> None:
@@ -180,10 +183,9 @@ def test_golden_example_mapping() -> None:
     entity = retrieve_knowledge("UsefulGod", "Đinh")
     assert entity is not None
     concepts = retrieve_concepts_for_knowledge("UsefulGod", "Đinh")
-    assert len(concepts) == 1
-    assert concepts[0].id == "refining_metal"
+    refining = next(item for item in concepts if item.id == "refining_metal")
     assert ("UsefulGod", "Đinh") in {
-        (ref.domain, ref.key) for ref in concepts[0].related_entities
+        (ref.domain, ref.key) for ref in refining.related_entities
     }
 
 
@@ -198,8 +200,7 @@ def test_interpreter_retrieves_concepts_through_entity() -> None:
 
     selected = explanation.decision.selected
     concepts = retrieve_concepts_for_knowledge("UsefulGod", selected)
-    assert len(concepts) == 1
-    assert concepts[0].id == "refining_metal"
+    assert any(item.id == "refining_metal" for item in concepts)
 
 
 def test_loader_works() -> None:

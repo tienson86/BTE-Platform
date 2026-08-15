@@ -9,11 +9,11 @@
 | approved | Production-ready expert meaning |
 | deprecated | Retained for traceability — do not use in new narrative |
 
-## Sprint K1 inventory
+## Sprint K2 inventory — Useful God V1
 
 | Domain | Entities | Status |
 |---|---|---|
-| UsefulGod | 1 (Đinh) | approved (example) |
+| UsefulGod | 10 (Giáp–Quý) | approved |
 | Strength | 0 | — |
 | Pattern | 0 | — |
 | Temperature | 0 | — |
@@ -26,4 +26,4 @@
 | ExecutiveSummary | 0 | — |
 | Recommendations | 0 | — |
 
-Full population: Sprint K2+
+Coverage index: `knowledge/interpretation/domains/useful_god/COVERAGE.md`

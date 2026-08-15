@@ -110,8 +110,8 @@ def test_generic_api(registry: KnowledgeRegistry) -> None:
     """Registry exposes get, exists, list, validate."""
     assert registry.exists("UsefulGod", "Đinh")
     items = registry.list("UsefulGod")
-    assert len(items) == 1
-    assert items[0].key == "Đinh"
+    assert len(items) >= 1
+    assert any(item.key == "Đinh" for item in items)
     validation = registry.validate()
     assert validation.passed
 

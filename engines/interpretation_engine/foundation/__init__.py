@@ -26,6 +26,12 @@ from engines.interpretation_engine.foundation.knowledge import (
     KnowledgeRegistry,
     retrieve_knowledge,
 )
+from engines.interpretation_engine.foundation.knowledge.bundle import (
+    UsefulGodKnowledgeBundle,
+)
+from engines.interpretation_engine.foundation.knowledge.retrieval import (
+    build_useful_god_knowledge_bundle,
+)
 from engines.interpretation_engine.foundation.interpreters.useful_god import (
     UsefulGodInterpreter,
     UsefulGodInterpretationResult,
@@ -43,7 +49,9 @@ __all__ = [
     "KnowledgeRegistry",
     "UsefulGodInterpreter",
     "UsefulGodInterpretationResult",
+    "UsefulGodKnowledgeBundle",
     "build_interpretation_foundation",
+    "build_useful_god_knowledge_bundle",
     "retrieve_concept",
     "retrieve_concepts_for_knowledge",
     "retrieve_knowledge",
