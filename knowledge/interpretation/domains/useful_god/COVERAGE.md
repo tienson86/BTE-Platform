@@ -31,7 +31,7 @@ Thiên Ấn     APPROVED
 - entity count: 20
 - approved: 20
 - draft: 0
-- concept count: 33
+- concept count: 37
 - entities with recommendations: 20
 - entities with warnings: 20
 - broken references: 0

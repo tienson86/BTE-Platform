@@ -1,0 +1,90 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.shensha.van_xuong",
+  "domain": "ShenSha",
+  "key": "Văn Xương",
+  "entity_type": "shen_sha",
+  "title": "Văn Xương — chi học theo nhật chủ (WEN_CHANG_BRANCH)",
+  "meaning": "Sao học/khung chữ: nhật chủ map một địa chi Văn Xương và chi đó có mặt trên tứ trụ. Không suy ra học vị.",
+  "positive_meaning": "Có kênh chữ, giấy, kỹ thuật có khung. Hữu ích khi việc đòi chuẩn văn bản.",
+  "negative_meaning": "Kẹt giấy, lý thuyết thay việc. Biến khung chữ thành trì.",
+  "mechanism": "Nếu day_master in WEN_CHANG_BRANCH và WEN_CHANG_BRANCH[day_master] in branch_list thì append Văn Xương. Một chi đích, không cặp alias.",
+  "manifestation": "Thiên giấy tờ, thi cử, kỹ thuật có mẫu. Không hứa đỗ đạt.",
+  "applications": {
+    "career": "Hợp việc có hồ sơ, quy trình chữ. Không suy ra học giả.",
+    "wealth": "Thiên thù lao từ kỹ năng có chứng. Rủi ro: chờ bằng.",
+    "relationships": "Giao tiếp theo chuẩn chữ. Khó khi cửa phi chính thức.",
+    "health": "Dễ căng vì chuẩn. Không chẩn đoán.",
+    "learning": "Học có giáo trình. Đúng sở trường sao.",
+    "decision_making": "Thiên cần văn bản. Bất lợi khi cửa miệng."
+  },
+  "recommendations": [
+    {
+      "category": "practice",
+      "action": "Chốt một sản phẩm chữ có hạn, không sưu tầm bằng.",
+      "rationale": "Văn hữu dụng khi chữ ra việc."
+    },
+    {
+      "category": "boundary",
+      "action": "Ghép một cửa làm tay để khỏi kẹt giấy.",
+      "rationale": "Khung chữ không thay đầu ra thực thần."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "paper_lock",
+      "risk": "Chờ đủ giấy mới làm.",
+      "mitigation": "Đặt hạn hồ sơ; ra một việc không giấy."
+    }
+  ],
+  "contraindications": [
+    {
+      "condition": "pure_craft_window",
+      "avoid": "Không lấy Văn Xương làm lý do hoãn bung tay nghề."
+    }
+  ],
+  "activation_conditions": [
+    "day_master có trong WEN_CHANG_BRANCH",
+    "chi đích của nhật chủ xuất hiện trên tứ trụ"
+  ],
+  "typical_triggers": [
+    "chi văn lộ",
+    "ngữ cảnh ấn/thực cần khung chữ"
+  ],
+  "luck_relationship": "Vận mang đúng chi WEN_CHANG của nhật chủ làm sao nổi. Không tính Luck Engine.",
+  "pattern_relationship": "Hòa cách ấn/thực có khung; không thay selected pattern.",
+  "ten_gods_relationship": "Gần ấn (khung) và thực (chữ ra việc); căng thương quan phá giấy.",
+  "suppression": "Suy khi mất chi văn trên trụ hoặc khi thương/sát phá khung chữ.",
+  "base_influence": "Kênh chữ/khung — ảnh hưởng học và quy trình, không phải IQ.",
+  "conditional_influence": "Mạnh khi ấn có phép; yếu khi sát hạn ép quyết không giấy.",
+  "activation_dependency": "Phụ thuộc một chi WEN_CHANG theo nhật chủ.",
+  "suppression_conditions": [
+    "mất chi văn",
+    "thương quan/sát chiếm quyết"
+  ],
+  "interaction_conditions": [
+    "cùng chart Lộc Thần: chữ vs lộc — hai map khác"
+  ],
+  "relationship_notes": "Không alias. Graph: day_master generates Văn Xương.",
+  "related_entities": [
+    {
+      "domain": "ShenSha",
+      "key": "Lộc Thần"
+    }
+  ],
+  "concept_ids": [
+    "shensha_presence",
+    "shensha_activation",
+    "pillar_position"
+  ],
+  "evidence_notes": "WEN_CHANG_BRANCH in signal_maps.py. Not Văn Khúc (not emitted).",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "quality": "k6_expert_ready",
+    "source": "knowledge/interpretation/domains/shensha/van_xuong.json"
+  }
+}

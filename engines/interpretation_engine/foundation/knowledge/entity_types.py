@@ -7,6 +7,7 @@ from typing import Final
 KNOWLEDGE_ENTITY_TYPE_STATE: Final[str] = "state"
 KNOWLEDGE_ENTITY_TYPE_PATTERN: Final[str] = "pattern"
 KNOWLEDGE_ENTITY_TYPE_TEN_GOD: Final[str] = "ten_god"
+KNOWLEDGE_ENTITY_TYPE_SHEN_SHA: Final[str] = "shen_sha"
 
 CANONICAL_KNOWLEDGE_ENTITY_TYPES: Final[tuple[str, ...]] = (
     "stem",
@@ -15,6 +16,7 @@ CANONICAL_KNOWLEDGE_ENTITY_TYPES: Final[tuple[str, ...]] = (
     "state",
     "pattern",
     "ten_god",
+    "shen_sha",
 )
 
 # Strength Engine V2 level rules (database/12_strength/06_priority_rules.csv).
@@ -125,3 +127,20 @@ TEN_GOD_KEYS: Final[tuple[str, ...]] = (
     TEN_GOD_DAY_MASTER_KEY,
 )
 TEN_GOD_PILLAR_KEYS: Final[tuple[str, ...]] = ("year", "month", "day", "hour")
+
+# Production ShenShaService catalog (engines/bazi_engine/shensha/service.py).
+# Closed list of names the production engine can emit. Do not add analysis-CSV extras.
+SHEN_SHA_KEYS: Final[tuple[str, ...]] = (
+    "Thiên Ất Quý Nhân",
+    "Thiên Ất",
+    "Văn Xương",
+    "Lộc Thần",
+    "Hồng Loan",
+    "Thiên Hỷ",
+    "Hoa Cái",
+    "Dương Nhẫn",
+    "Thiên Đức",
+    "Thiên Đức Quý Nhân",
+    "Nguyệt Đức",
+    "Nguyệt Đức Quý Nhân",
+)

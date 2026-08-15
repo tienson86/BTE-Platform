@@ -76,6 +76,27 @@ from engines.interpretation_engine.foundation.knowledge.ten_god_bundle import (
 from engines.interpretation_engine.foundation.knowledge.ten_god_retrieval import (
     build_ten_god_knowledge_bundle,
 )
+from engines.interpretation_engine.foundation.interpreters.shensha import (
+    ShenShaFacts,
+    ShenShaInterpretationBundle,
+    build_shensha_facts,
+    build_shensha_interpretation_bundle,
+)
+from engines.interpretation_engine.foundation.knowledge.shensha_bundle import (
+    ShenShaKnowledgeBundle,
+)
+from engines.interpretation_engine.foundation.knowledge.shensha_retrieval import (
+    build_shensha_knowledge_bundle,
+)
+from engines.interpretation_engine.foundation.narrative import (
+    NarrativeComposerInput,
+    NarrativeComposerResult,
+    NarrativeComposerV2,
+    NARRATIVE_SECTIONS,
+    build_composer_input_from_production,
+    compose_narrative_v2,
+    compose_narrative_v2_from_production,
+)
 
 __all__ = [
     "CanonicalAnalysisContext",
@@ -88,6 +109,10 @@ __all__ = [
     "InterpretationFoundationBundle",
     "KnowledgeEntity",
     "KnowledgeRegistry",
+    "NarrativeComposerInput",
+    "NarrativeComposerResult",
+    "NarrativeComposerV2",
+    "NARRATIVE_SECTIONS",
     "PatternFacts",
     "PatternInterpretationBundle",
     "PatternKnowledgeBundle",
@@ -95,6 +120,9 @@ __all__ = [
     "RelationshipExplainer",
     "StrengthAssessment",
     "StrengthKnowledgeBundle",
+    "ShenShaFacts",
+    "ShenShaInterpretationBundle",
+    "ShenShaKnowledgeBundle",
     "TenGodFacts",
     "TenGodInterpretationBundle",
     "TenGodKnowledgeBundle",
@@ -107,10 +135,16 @@ __all__ = [
     "build_pattern_knowledge_bundle",
     "build_strength_assessment",
     "build_strength_knowledge_bundle",
+    "build_shensha_facts",
+    "build_shensha_interpretation_bundle",
+    "build_shensha_knowledge_bundle",
     "build_ten_god_facts",
     "build_ten_god_interpretation_bundle",
     "build_ten_god_knowledge_bundle",
     "build_useful_god_knowledge_bundle",
+    "build_composer_input_from_production",
+    "compose_narrative_v2",
+    "compose_narrative_v2_from_production",
     "retrieve_concept",
     "retrieve_concepts_for_knowledge",
     "retrieve_knowledge",

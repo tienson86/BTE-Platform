@@ -18,7 +18,7 @@
 | Pattern | 26 (10 main + 5 special + 6 follow + 5 combination) | approved |
 | Temperature | 0 | — |
 | TenGods | 11 (10 roles + Nhật Chủ) | approved |
-| ShenSha | 0 | — |
+| ShenSha | 12 (production ShenShaService catalog) | expert ready |
 | Luck | 0 | — |
 | FiveElements | 0 | — |
 | FengShui | 0 | — |
@@ -55,4 +55,20 @@ Complete domain: facts + relationship assessment + knowledge + interpretation + 
 Engine inventory: 10 classic labels from `TEN_GOD_LABELS` plus `Nhật Chủ` (`god_id=day_master`).
 
 Coverage index: `knowledge/interpretation/domains/ten_gods/COVERAGE.md`
+
+## Sprint K6 — Shen Sha Expert Domain V1
+
+Complete domain: facts + relationship assessment + knowledge + interpretation + narrative mapping + Expert Ready knowledge.
+
+Engine inventory: 12 names from production `ShenShaService` (`engines/bazi_engine/shensha/service.py`). Not the analysis CSV catalog.
+
+Coverage index: `knowledge/interpretation/domains/shensha/COVERAGE.md`
+
+## Sprint N1 — Narrative Composer V2
+
+Composition layer only. Receives Decision, State, Relationship, and Knowledge bundles. Produces the seven canonical narrative sections.
+
+Does not calculate astrology, select winners, or own knowledge. Pack 05 `NarrativeEngine` remains the current report renderer during migration.
+
+Coverage: `engines/interpretation_engine/foundation/narrative/`
 

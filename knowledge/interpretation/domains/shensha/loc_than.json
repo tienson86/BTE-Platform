@@ -1,0 +1,90 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.shensha.loc_than",
+  "domain": "ShenSha",
+  "key": "Lộc Thần",
+  "entity_type": "shen_sha",
+  "title": "Lộc Thần — chi lộc theo nhật chủ (LU_SHEN_BRANCH)",
+  "meaning": "Sao lộc: nhật chủ map một địa chi lộc và chi đó có trên tứ trụ. Là kênh nguồn/đất đứng, không hứa giàu.",
+  "positive_meaning": "Có đất đứng, nguồn gần thân. Hữu ích khi cần chỗ dựa vật chất vừa.",
+  "negative_meaning": "Bám lộc, không chịu đổi cửa. Biến đất đứng thành trì.",
+  "mechanism": "Nếu day_master in LU_SHEN_BRANCH và LU_SHEN_BRANCH[day_master] in branch_list thì append Lộc Thần.",
+  "manifestation": "Thiên chỗ đứng, bổng lộc cấu trúc. Không hứa tài khoản.",
+  "applications": {
+    "career": "Hợp việc có chỗ đứng ổn. Không suy ra biên chế.",
+    "wealth": "Thiên nguồn gần thân. Rủi ro: không bung. Không hứa lãi.",
+    "relationships": "Bám chỗ quen. Khó khi phải rời đất.",
+    "health": "Cần nhịp ổn. Không chẩn đoán.",
+    "learning": "Học thứ dùng ngay trên đất đang đứng.",
+    "decision_making": "Thiên giữ đất. Bất lợi khi cửa đòi đổi ngành."
+  },
+  "recommendations": [
+    {
+      "category": "practice",
+      "action": "Khai thác một đất lộc có hạn mức, không ôm mọi bổng.",
+      "rationale": "Lộc hữu dụng khi đất có sổ."
+    },
+    {
+      "category": "boundary",
+      "action": "Chừa một cửa đổi khi đất đang kiệt.",
+      "rationale": "Lộc không thay tài có phép."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "loc_stick",
+      "risk": "Bám đất lộc khi nguồn đã kiệt.",
+      "mitigation": "Đặt hạn khai thác; mở cửa phụ."
+    }
+  ],
+  "contraindications": [
+    {
+      "condition": "forced_relocation_window",
+      "avoid": "Không lấy Lộc Thần cấm đổi chỗ khi trục việc đã chuyển."
+    }
+  ],
+  "activation_conditions": [
+    "day_master có trong LU_SHEN_BRANCH",
+    "chi lộc của nhật chủ có trên tứ trụ"
+  ],
+  "typical_triggers": [
+    "chi lộc lộ",
+    "ngữ cảnh tài/thân cần đất đứng"
+  ],
+  "luck_relationship": "Vận mang chi LU_SHEN của nhật chủ làm lộc nổi. Không tính Luck.",
+  "pattern_relationship": "Hòa cách tài/thân có đất; không lập cách lộc riêng.",
+  "ten_gods_relationship": "Gần tài (nguồn) và tỷ (đất thân); căng khi kiếp tranh lộc.",
+  "suppression": "Suy khi mất chi lộc hoặc kiếp/sát cướp đất không khung.",
+  "base_influence": "Đất đứng/nguồn gần — không phải số dư.",
+  "conditional_influence": "Mạnh khi tài có phép; yếu khi kiếp tranh hoặc thân quá bám.",
+  "activation_dependency": "Phụ thuộc một chi LU_SHEN theo nhật chủ.",
+  "suppression_conditions": [
+    "mất chi lộc",
+    "kiếp tranh đất"
+  ],
+  "interaction_conditions": [
+    "cùng Văn Xương: đất vs chữ, hai detector"
+  ],
+  "relationship_notes": "Không cặp alias. day_master generates Lộc Thần.",
+  "related_entities": [
+    {
+      "domain": "ShenSha",
+      "key": "Văn Xương"
+    }
+  ],
+  "concept_ids": [
+    "shensha_presence",
+    "shensha_activation",
+    "day_master_axis"
+  ],
+  "evidence_notes": "LU_SHEN_BRANCH in signal_maps.py. Production name Lộc Thần only.",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "quality": "k6_expert_ready",
+    "source": "knowledge/interpretation/domains/shensha/loc_than.json"
+  }
+}

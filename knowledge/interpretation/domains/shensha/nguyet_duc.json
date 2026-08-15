@@ -1,0 +1,91 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.shensha.nguyet_duc",
+  "domain": "ShenSha",
+  "key": "Nguyệt Đức",
+  "entity_type": "shen_sha",
+  "title": "Nguyệt Đức — can đức theo tháng (YUE_DE_STEM)",
+  "meaning": "Sao đức tháng: month_branch map một thiên can trong YUE_DE_STEM, và can đó có trong stem_list. Chỉ can, không chi. Kênh nhu theo tháng.",
+  "positive_meaning": "Có lớp nhu can, giảm nóng. Hữu ích khi can trùng đức tháng.",
+  "negative_meaning": "Ỷ can đức, chậm bứt. Không phải phúc nguyệt.",
+  "mechanism": "Nếu month_branch in YUE_DE_STEM, token = YUE_DE_STEM[month_branch]; nếu token in stem_list thì append Nguyệt Đức + Nguyệt Đức Quý Nhân. Cần stems.",
+  "manifestation": "Thiên can hòa theo tháng. Không hứa tháng lành.",
+  "applications": {
+    "career": "Hợp việc cần can hòa, ít đụng. Không suy HR.",
+    "wealth": "Thiên giữ nhịp tháng. Rủi ro: chậm.",
+    "relationships": "Nhu theo tháng. Không dự báo tình.",
+    "health": "Giảm nóng can. Không chẩn đoán.",
+    "learning": "Học nhịp tháng, không dồn.",
+    "decision_making": "Thiên theo can đức. Bất lợi khi cửa sắc can khác."
+  },
+  "recommendations": [
+    {
+      "category": "practice",
+      "action": "Dùng can đức để hòa một xung can, không hòa hết lịch.",
+      "rationale": "Nguyệt Đức hữu dụng khi stems được truyền vào calculate."
+    },
+    {
+      "category": "boundary",
+      "action": "Không nhầm với Thiên Đức (token có thể là chi).",
+      "rationale": "Đức tháng không thay Dụng."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "missing_stems",
+      "risk": "Nếu stems rỗng, detector can không hit.",
+      "mitigation": "Production phải truyền stems; Knowledge không sửa engine."
+    }
+  ],
+  "contraindications": [
+    {
+      "condition": "stemless_context",
+      "avoid": "Không luận Nguyệt Đức nếu chart không có stem list — đó là giới hạn engine, không bịa."
+    }
+  ],
+  "activation_conditions": [
+    "month_branch có trong YUE_DE_STEM",
+    "can đức xuất hiện trong stems tứ trụ"
+  ],
+  "typical_triggers": [
+    "can tháng-đức lộ trên trụ",
+    "stems được service nhận"
+  ],
+  "luck_relationship": "Vận không thay month_branch natal; nổi khi luận đúng can YUE_DE. Không tính Luck để tạo Nguyệt Đức.",
+  "pattern_relationship": "Nhu cách; không lập cách nguyệt đức.",
+  "ten_gods_relationship": "Hòa can; giảm xung thương/sát trên can. Không xóa thập thần.",
+  "suppression": "Suy khi mất can đức trên trụ hoặc stems không được truyền.",
+  "base_influence": "Nhu can theo tháng — không phải phúc lịch.",
+  "conditional_influence": "Mạnh khi can đức lộ; zero nếu stems trống.",
+  "activation_dependency": "Phụ thuộc tháng + stem_list chứa token.",
+  "suppression_conditions": [
+    "mất can đức",
+    "stem_list trống"
+  ],
+  "interaction_conditions": [
+    "cặp Nguyệt Đức Quý Nhân",
+    "khác Thiên Đức (chi/can token)"
+  ],
+  "relationship_notes": "combines Nguyệt Đức Quý Nhân. Stem-only detector.",
+  "related_entities": [
+    {
+      "domain": "ShenSha",
+      "key": "Nguyệt Đức Quý Nhân"
+    }
+  ],
+  "concept_ids": [
+    "shensha_presence",
+    "shensha_activation",
+    "noble_star"
+  ],
+  "evidence_notes": "YUE_DE_STEM month branch → heavenly stem. Requires stems in calculate().",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "quality": "k6_expert_ready",
+    "source": "knowledge/interpretation/domains/shensha/nguyet_duc.json"
+  }
+}

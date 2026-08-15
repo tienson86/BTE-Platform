@@ -1,0 +1,30 @@
+{
+  "$schema": "../schemas/concept_entity.schema.json",
+  "id": "shensha_presence",
+  "category": "core",
+  "title": "Hiện diện thần sát",
+  "summary": "Thần sát production là nhãn hiện diện từ ShenShaService, không phải điểm số hay vận mệnh.",
+  "meaning": "Engine chỉ append tên khi map ngày/chi khớp. Knowledge giải thích cơ chế và điều kiện; không phát hiện lại sao, không đổi matching.",
+  "conditions": [
+    "Tên nằm trong catalog 12 nhãn của ShenShaService",
+    "Không dùng CSV phân tích 20 sao làm inventory production",
+    "Không bịa trụ kích hoạt nếu engine không phát vị trí"
+  ],
+  "applications": {
+    "shensha": "Bundle lấy mọi sao đã match trên chart.",
+    "relationship": "Day master generates shensha là copy hiện diện, không phải cát hung."
+  },
+  "related_concepts": [
+    { "target_id": "shensha_activation", "relationship": "requires" }
+  ],
+  "related_entities": [],
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/concepts/core/shensha_presence.json",
+    "quality": "k6_expert_ready"
+  }
+}

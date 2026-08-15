@@ -1,0 +1,88 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.shensha.thien_at",
+  "domain": "ShenSha",
+  "key": "Thiên Ất",
+  "entity_type": "shen_sha",
+  "title": "Thiên Ất — alias ngắn của cùng detector quý nhân",
+  "meaning": "Cùng detector tian_yi với Thiên Ất Quý Nhân. Engine append cả hai khi chi quý khớp. Không phải sao thứ hai độc lập.",
+  "positive_meaning": "Cùng kênh đỡ, bản nhãn ngắn để tra cứu. Hữu ích khi hệ thống cần alias.",
+  "negative_meaning": "Đếm hai sao thành hai quý nhân. Nhân đôi lời hứa đỡ.",
+  "mechanism": "Cùng nhánh if TIAN_YI_BRANCHES: append Thiên Ất ngay sau Thiên Ất Quý Nhân. Không có map riêng.",
+  "manifestation": "Xuất hiện luôn cặp với bản đủ tên trên production list. Luận một cơ chế.",
+  "applications": {
+    "career": "Không tách nghề riêng khỏi bản đủ tên.",
+    "wealth": "Không nhân đôi nguồn đỡ.",
+    "relationships": "Một kênh nhờ, hai nhãn.",
+    "health": "Không chẩn hai bệnh từ hai nhãn.",
+    "learning": "Học một cơ chế quý.",
+    "decision_making": "Không hỏi hai lần vì hai tên."
+  },
+  "recommendations": [
+    {
+      "category": "practice",
+      "action": "Luận một cơ chế quý, không tách hai hồ sơ.",
+      "rationale": "Alias không tạo sao mới."
+    },
+    {
+      "category": "boundary",
+      "action": "Ưu tiên nhãn đủ tên khi trình bày cấu trúc.",
+      "rationale": "Tránh đếm trùng trên narrative sau này."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "double_count",
+      "risk": "Đếm cặp alias thành hai quý.",
+      "mitigation": "Gộp cơ chế; giữ cả hai key vì engine emit cả hai."
+    }
+  ],
+  "contraindications": [
+    {
+      "condition": "independent_star_reading",
+      "avoid": "Không đọc Thiên Ất như detector khác Văn Xương/Lộc."
+    }
+  ],
+  "activation_conditions": [
+    "cùng điều kiện TIAN_YI_BRANCHES với bản đủ tên"
+  ],
+  "typical_triggers": [
+    "luôn đi cùng Thiên Ất Quý Nhân trên production list"
+  ],
+  "luck_relationship": "Cùng semantic với bản đủ tên: vận mang chi quý. Không tính Luck.",
+  "pattern_relationship": "Không lập cách riêng; theo cùng khung với bản đủ tên.",
+  "ten_gods_relationship": "Cùng quan hệ ấn/quan như bản đủ tên.",
+  "suppression": "Suy cùng lúc bản đủ tên suy — cùng detector.",
+  "base_influence": "Alias; ảnh hưởng trùng bản đủ tên, không cộng dồn.",
+  "conditional_influence": "Chỉ khác ở lớp nhãn/tra cứu, không khác cơ chế.",
+  "activation_dependency": "Phụ thuộc cùng hit TIAN_YI với Thiên Ất Quý Nhân.",
+  "suppression_conditions": [
+    "mất hit TIAN_YI",
+    "tách alias thành sao độc lập trong luận"
+  ],
+  "interaction_conditions": [
+    "combines với Thiên Ất Quý Nhân trên graph"
+  ],
+  "relationship_notes": "Service append cặp; graph combines hai nhãn.",
+  "related_entities": [
+    {
+      "domain": "ShenSha",
+      "key": "Thiên Ất Quý Nhân"
+    }
+  ],
+  "concept_ids": [
+    "shensha_presence",
+    "shensha_activation",
+    "noble_star"
+  ],
+  "evidence_notes": "service.py append Thiên Ất immediately after Thiên Ất Quý Nhân. Same map.",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "quality": "k6_expert_ready",
+    "source": "knowledge/interpretation/domains/shensha/thien_at.json"
+  }
+}

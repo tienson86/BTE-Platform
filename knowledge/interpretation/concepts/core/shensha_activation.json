@@ -1,0 +1,30 @@
+{
+  "$schema": "../schemas/concept_entity.schema.json",
+  "id": "shensha_activation",
+  "category": "core",
+  "title": "Kích hoạt thần sát",
+  "summary": "Sao hiện diện khi map engine khớp; kích hoạt luận giải khi ngữ cảnh trụ/vận/cách gặp đúng loại tín hiệu — không tính Đại vận.",
+  "meaning": "Activation knowledge mô tả điều kiện ngữ nghĩa: chi/can nào trong bảng map, tương tác cách và thập thần. Luck relationship là semantic: vận mang đúng chi/can mới làm sao 'nổi' — Knowledge không chạy Luck Engine.",
+  "conditions": [
+    "Không tính đại vận/lưu niên",
+    "Không gán trụ kích hoạt nếu production list không có position",
+    "Suppression là điều kiện kiến thức, không phải cạnh graph mới"
+  ],
+  "applications": {
+    "shensha": "Mỗi entity có activation_conditions, typical_triggers, suppression.",
+    "luck": "Chỉ mô tả 'khi vận mang tín hiệu khớp map', không output luck."
+  },
+  "related_concepts": [
+    { "target_id": "shensha_presence", "relationship": "supports" }
+  ],
+  "related_entities": [],
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/concepts/core/shensha_activation.json",
+    "quality": "k6_expert_ready"
+  }
+}

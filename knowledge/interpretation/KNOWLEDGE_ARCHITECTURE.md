@@ -71,6 +71,8 @@ Relationship Reasoning
 Pattern (K4)
 
 Ten Gods (K5)
+
+Shen Sha (K6)
 ```
 
 ### Decision pipeline

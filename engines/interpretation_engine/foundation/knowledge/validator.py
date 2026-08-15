@@ -10,9 +10,11 @@ from engines.interpretation_engine.foundation.knowledge.entity import KnowledgeE
 from engines.interpretation_engine.foundation.knowledge.entity_types import (
     CANONICAL_KNOWLEDGE_ENTITY_TYPES,
     KNOWLEDGE_ENTITY_TYPE_PATTERN,
+    KNOWLEDGE_ENTITY_TYPE_SHEN_SHA,
     KNOWLEDGE_ENTITY_TYPE_STATE,
     KNOWLEDGE_ENTITY_TYPE_TEN_GOD,
     PATTERN_KEYS,
+    SHEN_SHA_KEYS,
     STRENGTH_STATE_KEYS,
     TEN_GOD_KEYS,
     USEFUL_GOD_ROLE_KEYS,
@@ -69,11 +71,13 @@ class KnowledgeValidator:
         state_keys_seen: dict[str, str] = {}
         pattern_keys_seen: dict[str, str] = {}
         ten_god_keys_seen: dict[str, str] = {}
+        shensha_keys_seen: dict[str, str] = {}
         stem_keys = set(USEFUL_GOD_STEM_KEYS)
         role_keys = set(USEFUL_GOD_ROLE_KEYS)
         state_keys = set(STRENGTH_STATE_KEYS)
         pattern_keys = set(PATTERN_KEYS)
         ten_god_keys = set(TEN_GOD_KEYS)
+        shensha_keys = set(SHEN_SHA_KEYS)
 
         for entity in entities:
             if not entity.id:
@@ -162,6 +166,14 @@ class KnowledgeValidator:
                         entity,
                         ten_god_keys=ten_god_keys,
                         ten_god_keys_seen=ten_god_keys_seen,
+                    )
+                )
+            if entity.domain == "ShenSha":
+                issues.extend(
+                    _shensha_entity_issues(
+                        entity,
+                        shensha_keys=shensha_keys,
+                        shensha_keys_seen=shensha_keys_seen,
                     )
                 )
 
@@ -488,3 +500,103 @@ def _ten_god_entity_issues(
         ten_god_keys_seen[entity.key] = entity.id
 
     return issues
+
+
+def _shensha_entity_issues(
+    entity: KnowledgeEntity,
+    *,
+    shensha_keys: set[str],
+    shensha_keys_seen: dict[str, str],
+) -> list[KnowledgeValidationIssue]:
+    """Validate Shen Sha entities against the production catalog."""
+    issues: list[KnowledgeValidationIssue] = []
+    entity_type = entity.entity_type.strip()
+    if not entity_type:
+        issues.append(
+            KnowledgeValidationIssue(
+                code="unknown_entity_type",
+                message="Shen Sha entity missing entity_type",
+                entity_id=entity.id,
+            )
+        )
+    elif entity_type != KNOWLEDGE_ENTITY_TYPE_SHEN_SHA:
+        code = (
+            "unknown_entity_type"
+            if entity_type not in CANONICAL_KNOWLEDGE_ENTITY_TYPES
+            else "entity_type_mismatch"
+        )
+        issues.append(
+            KnowledgeValidationIssue(
+                code=code,
+                message=f"Shen Sha entity_type must be shen_sha, got {entity_type}",
+                entity_id=entity.id,
+            )
+        )
+
+    if entity.key and entity.key not in shensha_keys:
+        issues.append(
+            KnowledgeValidationIssue(
+                code="invalid_shensha",
+                message=f"invalid Shen Sha key: {entity.key}",
+                entity_id=entity.id,
+            )
+        )
+
+    if not entity.concept_ids:
+        issues.append(
+            KnowledgeValidationIssue(
+                code="broken_concepts",
+                message="Shen Sha entity missing concept_ids",
+                entity_id=entity.id,
+            )
+        )
+
+    if not entity.mechanism.strip():
+        issues.append(
+            KnowledgeValidationIssue(
+                code="missing_mechanism",
+                message="Shen Sha entity missing mechanism",
+                entity_id=entity.id,
+            )
+        )
+    if not entity.activation_conditions:
+        issues.append(
+            KnowledgeValidationIssue(
+                code="missing_activation",
+                message="Shen Sha entity missing activation_conditions",
+                entity_id=entity.id,
+            )
+        )
+    if not _meaningful_applications(entity.applications):
+        issues.append(
+            KnowledgeValidationIssue(
+                code="missing_applications",
+                message="Shen Sha entity missing applications",
+                entity_id=entity.id,
+            )
+        )
+
+    previous = shensha_keys_seen.get(entity.key)
+    if previous:
+        issues.append(
+            KnowledgeValidationIssue(
+                code="duplicate_entity",
+                message=f"duplicate Shen Sha entity for key {entity.key}",
+                entity_id=entity.id,
+            )
+        )
+    elif entity.key:
+        shensha_keys_seen[entity.key] = entity.id
+
+    return issues
+
+
+def _meaningful_applications(applications: dict[str, str] | Any) -> dict[str, str]:
+    """Return non-empty application values."""
+    if not applications:
+        return {}
+    return {
+        str(key): str(value)
+        for key, value in dict(applications).items()
+        if str(key).strip() and str(value).strip()
+    }

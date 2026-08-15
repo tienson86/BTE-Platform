@@ -1,0 +1,88 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.shensha.thien_duc_quy_nhan",
+  "domain": "ShenSha",
+  "key": "Thiên Đức Quý Nhân",
+  "entity_type": "shen_sha",
+  "title": "Thiên Đức Quý Nhân — alias đủ tên cùng detector đức tháng",
+  "meaning": "Cùng hit TIAN_DE_BRANCH với Thiên Đức. Engine append cả hai. Không phải quý nhân Thiên Ất.",
+  "positive_meaning": "Cùng kênh giảm xung, nhãn đủ. Tra cứu quý-đức tháng.",
+  "negative_meaning": "Nhầm với Thiên Ất Quý Nhân. Nhân đôi đức.",
+  "mechanism": "Cùng khối month_branch token: append Thiên Đức rồi Thiên Đức Quý Nhân.",
+  "manifestation": "Luôn cặp Thiên Đức trên production list.",
+  "applications": {
+    "career": "Không tách khỏi Thiên Đức.",
+    "wealth": "Không nhân đôi phúc.",
+    "relationships": "Một kênh hòa, hai nhãn.",
+    "health": "Không chẩn hai phúc.",
+    "learning": "Học một detector tháng.",
+    "decision_making": "Không hòa hai lần."
+  },
+  "recommendations": [
+    {
+      "category": "practice",
+      "action": "Luận một đức tháng; giữ hai key vì engine emit.",
+      "rationale": "Không trộn với Thiên Ất (map nhật chủ)."
+    },
+    {
+      "category": "boundary",
+      "action": "Ưu tiên Thiên Đức khi nói token tháng.",
+      "rationale": "Bản đủ tên là alias quý-đức."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "mix_tian_yi",
+      "risk": "Nhầm đức tháng với quý nhật chủ.",
+      "mitigation": "Tách TIAN_DE vs TIAN_YI."
+    }
+  ],
+  "contraindications": [
+    {
+      "condition": "tian_yi_substitution",
+      "avoid": "Không thay Thiên Ất bằng Thiên Đức Quý Nhân."
+    }
+  ],
+  "activation_conditions": [
+    "cùng điều kiện TIAN_DE_BRANCH với Thiên Đức"
+  ],
+  "typical_triggers": [
+    "luôn đi cùng Thiên Đức"
+  ],
+  "luck_relationship": "Cùng semantic token tháng. Không tính Luck.",
+  "pattern_relationship": "Cùng Thiên Đức.",
+  "ten_gods_relationship": "Cùng giảm sát như Thiên Đức.",
+  "suppression": "Suy cùng Thiên Đức.",
+  "base_influence": "Alias; không cộng dồn Thiên Đức.",
+  "conditional_influence": "Khác nhãn, cùng token tháng.",
+  "activation_dependency": "Cùng hit TIAN_DE.",
+  "suppression_conditions": [
+    "mất hit đức tháng",
+    "nhầm TIAN_YI"
+  ],
+  "interaction_conditions": [
+    "combines Thiên Đức"
+  ],
+  "relationship_notes": "Alias pair, not Thiên Ất pair.",
+  "related_entities": [
+    {
+      "domain": "ShenSha",
+      "key": "Thiên Đức"
+    }
+  ],
+  "concept_ids": [
+    "shensha_presence",
+    "shensha_activation",
+    "noble_star"
+  ],
+  "evidence_notes": "service.py append Thiên Đức Quý Nhân after Thiên Đức. TIAN_DE_BRANCH.",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "quality": "k6_expert_ready",
+    "source": "knowledge/interpretation/domains/shensha/thien_duc_quy_nhan.json"
+  }
+}

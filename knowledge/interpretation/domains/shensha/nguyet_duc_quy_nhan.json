@@ -1,0 +1,88 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.shensha.nguyet_duc_quy_nhan",
+  "domain": "ShenSha",
+  "key": "Nguyệt Đức Quý Nhân",
+  "entity_type": "shen_sha",
+  "title": "Nguyệt Đức Quý Nhân — alias đủ tên cùng detector can tháng",
+  "meaning": "Cùng hit YUE_DE_STEM với Nguyệt Đức. Engine append cả hai. Không phải Thiên Ất hay Thiên Đức.",
+  "positive_meaning": "Cùng kênh nhu can, nhãn đủ. Tra cứu quý-đức tháng (can).",
+  "negative_meaning": "Nhầm ba loại quý. Nhân đôi nguyệt đức.",
+  "mechanism": "Cùng khối YUE_DE_STEM: append Nguyệt Đức rồi Nguyệt Đức Quý Nhân.",
+  "manifestation": "Luôn cặp Nguyệt Đức trên production list khi stems hit.",
+  "applications": {
+    "career": "Không tách khỏi Nguyệt Đức.",
+    "wealth": "Không nhân đôi đức tháng.",
+    "relationships": "Một kênh nhu can, hai nhãn.",
+    "health": "Không chẩn hai phúc tháng.",
+    "learning": "Học một detector YUE_DE.",
+    "decision_making": "Không nhu hai lần."
+  },
+  "recommendations": [
+    {
+      "category": "practice",
+      "action": "Luận một can đức tháng; giữ hai key.",
+      "rationale": "Tách khỏi Thiên Ất (chi nhật chủ) và Thiên Đức (token tháng hỗn can/chi)."
+    },
+    {
+      "category": "boundary",
+      "action": "Ưu tiên Nguyệt Đức khi nói YUE_DE_STEM.",
+      "rationale": "Bản đủ tên là alias."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "three_nobles_mix",
+      "risk": "Trộn Ất/Đức/Nguyệt thành một quý.",
+      "mitigation": "Giữ ba detector tách."
+    }
+  ],
+  "contraindications": [
+    {
+      "condition": "tian_yi_or_tian_de_swap",
+      "avoid": "Không thay thế Thiên Ất hoặc Thiên Đức bằng nhãn này."
+    }
+  ],
+  "activation_conditions": [
+    "cùng điều kiện YUE_DE_STEM với Nguyệt Đức"
+  ],
+  "typical_triggers": [
+    "luôn đi cùng Nguyệt Đức khi hit"
+  ],
+  "luck_relationship": "Cùng semantic can tháng. Không tính Luck.",
+  "pattern_relationship": "Cùng Nguyệt Đức.",
+  "ten_gods_relationship": "Cùng hòa can như Nguyệt Đức.",
+  "suppression": "Suy cùng Nguyệt Đức.",
+  "base_influence": "Alias; không cộng dồn Nguyệt Đức.",
+  "conditional_influence": "Khác nhãn, cùng can tháng.",
+  "activation_dependency": "Cùng hit YUE_DE_STEM.",
+  "suppression_conditions": [
+    "mất hit can đức",
+    "nhầm detector quý khác"
+  ],
+  "interaction_conditions": [
+    "combines Nguyệt Đức"
+  ],
+  "relationship_notes": "Alias pair from service append after Nguyệt Đức.",
+  "related_entities": [
+    {
+      "domain": "ShenSha",
+      "key": "Nguyệt Đức"
+    }
+  ],
+  "concept_ids": [
+    "shensha_presence",
+    "shensha_activation",
+    "noble_star"
+  ],
+  "evidence_notes": "service.py append Nguyệt Đức Quý Nhân after Nguyệt Đức. YUE_DE_STEM.",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "quality": "k6_expert_ready",
+    "source": "knowledge/interpretation/domains/shensha/nguyet_duc_quy_nhan.json"
+  }
+}

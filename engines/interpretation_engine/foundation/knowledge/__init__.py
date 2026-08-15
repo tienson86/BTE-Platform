@@ -9,8 +9,11 @@ from engines.interpretation_engine.foundation.knowledge.diagnostics import (
     BROKEN_RELATIONSHIP,
     INVALID_PATTERN,
     INVALID_POSITION,
+    INVALID_SHENSHA,
     INVALID_STRENGTH_STATE,
     INVALID_TEN_GOD,
+    MISSING_ACTIVATION,
+    MISSING_MECHANISM,
     MISSING_NARRATIVE_MAPPING,
     PATTERN_CONCEPTS_MISSING,
     PATTERN_KNOWLEDGE_MISSING,
@@ -18,6 +21,8 @@ from engines.interpretation_engine.foundation.knowledge.diagnostics import (
     STRENGTH_KNOWLEDGE_MISSING,
     TEN_GOD_CONCEPTS_MISSING,
     TEN_GOD_KNOWLEDGE_MISSING,
+    SHENSHA_CONCEPTS_MISSING,
+    SHENSHA_KNOWLEDGE_MISSING,
     DUPLICATE_ROLE,
     USEFUL_GOD_KNOWLEDGE_MISSING,
     USEFUL_GOD_ROLE_CONFLICT,
@@ -63,6 +68,11 @@ __all__ = [
     "INVALID_POSITION",
     "TEN_GOD_CONCEPTS_MISSING",
     "TEN_GOD_KNOWLEDGE_MISSING",
+    "SHENSHA_CONCEPTS_MISSING",
+    "SHENSHA_KNOWLEDGE_MISSING",
+    "INVALID_SHENSHA",
+    "MISSING_MECHANISM",
+    "MISSING_ACTIVATION",
     "DUPLICATE_ROLE",
     "BROKEN_RELATIONSHIP",
     "MISSING_NARRATIVE_MAPPING",
@@ -83,6 +93,9 @@ __all__ = [
     "TenGodKnowledgeBundle",
     "TenGodKnowledgeCoverage",
     "TenGodQualityReport",
+    "ShenShaKnowledgeBundle",
+    "ShenShaKnowledgeCoverage",
+    "ShenShaQualityReport",
     "build_useful_god_knowledge_bundle",
     "build_useful_god_quality_report",
     "build_strength_assessment",
@@ -92,12 +105,15 @@ __all__ = [
     "build_pattern_quality_report",
     "build_ten_god_knowledge_bundle",
     "build_ten_god_quality_report",
+    "build_shensha_knowledge_bundle",
+    "build_shensha_quality_report",
     "get_knowledge_registry",
     "retrieve_knowledge",
     "write_useful_god_reports",
     "write_strength_reports",
     "write_pattern_reports",
     "write_ten_god_reports",
+    "write_shensha_reports",
 ]
 
 
@@ -248,6 +264,40 @@ def __getattr__(name: str) -> object:
             "TenGodQualityReport": TenGodQualityReport,
             "build_ten_god_quality_report": build_ten_god_quality_report,
             "write_ten_god_reports": write_ten_god_reports,
+        }
+        return mapping[name]
+    if name in {"ShenShaKnowledgeBundle", "ShenShaKnowledgeCoverage"}:
+        from engines.interpretation_engine.foundation.knowledge.shensha_bundle import (
+            ShenShaKnowledgeBundle,
+            ShenShaKnowledgeCoverage,
+        )
+
+        mapping = {
+            "ShenShaKnowledgeBundle": ShenShaKnowledgeBundle,
+            "ShenShaKnowledgeCoverage": ShenShaKnowledgeCoverage,
+        }
+        return mapping[name]
+    if name == "build_shensha_knowledge_bundle":
+        from engines.interpretation_engine.foundation.knowledge.shensha_retrieval import (
+            build_shensha_knowledge_bundle,
+        )
+
+        return build_shensha_knowledge_bundle
+    if name in {
+        "ShenShaQualityReport",
+        "build_shensha_quality_report",
+        "write_shensha_reports",
+    }:
+        from engines.interpretation_engine.foundation.knowledge.shensha_coverage import (
+            ShenShaQualityReport,
+            build_shensha_quality_report,
+            write_shensha_reports,
+        )
+
+        mapping = {
+            "ShenShaQualityReport": ShenShaQualityReport,
+            "build_shensha_quality_report": build_shensha_quality_report,
+            "write_shensha_reports": write_shensha_reports,
         }
         return mapping[name]
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

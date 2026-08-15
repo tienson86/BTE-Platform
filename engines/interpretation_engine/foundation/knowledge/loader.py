@@ -107,6 +107,15 @@ class JsonKnowledgeLoader:
             for item in (payload.get("concept_ids") or [])
             if str(item)
         )
+        contraindications = tuple(
+            dict(item)
+            for item in (payload.get("contraindications") or [])
+            if isinstance(item, Mapping)
+        )
+        activation_conditions = _string_tuple(payload.get("activation_conditions"))
+        typical_triggers = _string_tuple(payload.get("typical_triggers"))
+        suppression_conditions = _string_tuple(payload.get("suppression_conditions"))
+        interaction_conditions = _string_tuple(payload.get("interaction_conditions"))
 
         return KnowledgeEntity(
             id=str(payload.get("id") or ""),
@@ -123,6 +132,21 @@ class JsonKnowledgeLoader:
             concept_ids=concept_ids,
             evidence_notes=str(payload.get("evidence_notes") or ""),
             entity_type=str(payload.get("entity_type") or ""),
+            mechanism=str(payload.get("mechanism") or ""),
+            manifestation=str(payload.get("manifestation") or ""),
+            contraindications=contraindications,
+            activation_conditions=activation_conditions,
+            typical_triggers=typical_triggers,
+            luck_relationship=str(payload.get("luck_relationship") or ""),
+            pattern_relationship=str(payload.get("pattern_relationship") or ""),
+            ten_gods_relationship=str(payload.get("ten_gods_relationship") or ""),
+            suppression=str(payload.get("suppression") or ""),
+            base_influence=str(payload.get("base_influence") or ""),
+            conditional_influence=str(payload.get("conditional_influence") or ""),
+            activation_dependency=str(payload.get("activation_dependency") or ""),
+            suppression_conditions=suppression_conditions,
+            interaction_conditions=interaction_conditions,
+            relationship_notes=str(payload.get("relationship_notes") or ""),
             metadata=KnowledgeMetadata(
                 author=str(meta_raw.get("author") or ""),
                 version=str(meta_raw.get("version") or ""),
@@ -144,3 +168,10 @@ class JsonKnowledgeLoader:
         if not isinstance(raw, dict):
             raise KnowledgeLoadError(f"invalid json object: {path}")
         return raw
+
+
+def _string_tuple(value: Any) -> tuple[str, ...]:
+    """Copy a JSON string list into a tuple."""
+    if not value:
+        return ()
+    return tuple(str(item) for item in value if str(item).strip())

@@ -55,6 +55,21 @@ class KnowledgeEntity:
     concept_ids: tuple[str, ...] = ()
     evidence_notes: str = ""
     entity_type: str = ""
+    mechanism: str = ""
+    manifestation: str = ""
+    contraindications: tuple[Mapping[str, Any], ...] = ()
+    activation_conditions: tuple[str, ...] = ()
+    typical_triggers: tuple[str, ...] = ()
+    luck_relationship: str = ""
+    pattern_relationship: str = ""
+    ten_gods_relationship: str = ""
+    suppression: str = ""
+    base_influence: str = ""
+    conditional_influence: str = ""
+    activation_dependency: str = ""
+    suppression_conditions: tuple[str, ...] = ()
+    interaction_conditions: tuple[str, ...] = ()
+    relationship_notes: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize knowledge entity."""
@@ -73,5 +88,20 @@ class KnowledgeEntity:
             "related_entities": [item.to_dict() for item in self.related_entities],
             "concept_ids": list(self.concept_ids),
             "evidence_notes": self.evidence_notes,
+            "mechanism": self.mechanism,
+            "manifestation": self.manifestation,
+            "contraindications": [dict(item) for item in self.contraindications],
+            "activation_conditions": list(self.activation_conditions),
+            "typical_triggers": list(self.typical_triggers),
+            "luck_relationship": self.luck_relationship,
+            "pattern_relationship": self.pattern_relationship,
+            "ten_gods_relationship": self.ten_gods_relationship,
+            "suppression": self.suppression,
+            "base_influence": self.base_influence,
+            "conditional_influence": self.conditional_influence,
+            "activation_dependency": self.activation_dependency,
+            "suppression_conditions": list(self.suppression_conditions),
+            "interaction_conditions": list(self.interaction_conditions),
+            "relationship_notes": self.relationship_notes,
             "metadata": self.metadata.to_dict(),
         }

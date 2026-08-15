@@ -10,7 +10,7 @@
     "key": { "type": "string", "minLength": 1 },
     "entity_type": {
       "type": "string",
-      "enum": ["stem", "role", "element", "state", "pattern", "ten_god"]
+      "enum": ["stem", "role", "element", "state", "pattern", "ten_god", "shen_sha"]
     },
     "title": { "type": "string", "minLength": 1 },
     "meaning": { "type": "string" },
@@ -44,6 +44,36 @@
       "items": { "type": "string", "minLength": 1 }
     },
     "evidence_notes": { "type": "string" },
+    "mechanism": { "type": "string" },
+    "manifestation": { "type": "string" },
+    "contraindications": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "activation_conditions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "typical_triggers": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "luck_relationship": { "type": "string" },
+    "pattern_relationship": { "type": "string" },
+    "ten_gods_relationship": { "type": "string" },
+    "suppression": { "type": "string" },
+    "base_influence": { "type": "string" },
+    "conditional_influence": { "type": "string" },
+    "activation_dependency": { "type": "string" },
+    "suppression_conditions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "interaction_conditions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "relationship_notes": { "type": "string" },
     "metadata": {
       "type": "object",
       "required": ["author", "version", "status", "source"],

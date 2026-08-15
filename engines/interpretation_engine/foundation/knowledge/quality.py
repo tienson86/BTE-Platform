@@ -19,6 +19,8 @@ _TOKEN_RE = re.compile(
     r"tòng vượng|tòng tài|tòng sát|tòng quan|tòng nhi|tòng ấn|"
     r"quan ấn|sát ấn|thực thần sinh tài|thương quan phối ấn|tài quan song mỹ|"
     r"kiến lộc|dương nhẫn|nhật chủ|"
+    r"thiên ất quý nhân|thiên ất|văn xương|lộc thần|hồng loan|thiên hỷ|"
+    r"hoa cái|thiên đức quý nhân|thiên đức|nguyệt đức quý nhân|nguyệt đức|"
     r"\bvery_strong\b|\bvery_weak\b|\bstrong\b|\bbalanced\b|\bweak\b",
     re.IGNORECASE,
 )
@@ -136,6 +138,8 @@ class KnowledgeQualityGate:
             )
         if not entity.metadata.author or not entity.metadata.version:
             issues.append(_issue("invalid_metadata", "metadata incomplete", entity.id))
+        if entity.domain == "ShenSha":
+            issues.extend(_expert_ready_issues(entity))
         return KnowledgeQualityResult(passed=not issues, issues=tuple(issues))
 
     def evaluate_approved(self, entities: list[KnowledgeEntity]) -> KnowledgeQualityResult:
@@ -143,6 +147,25 @@ class KnowledgeQualityGate:
         issues: list[QualityIssue] = []
         for entity in entities:
             if entity.metadata.status != KnowledgeStatus.APPROVED:
+                continue
+            result = self.evaluate(entity)
+            issues.extend(result.issues)
+        return KnowledgeQualityResult(passed=not issues, issues=tuple(issues))
+
+    def evaluate_expert_ready(self, entities: list[KnowledgeEntity]) -> KnowledgeQualityResult:
+        """Shen Sha Expert Ready gate — approved entities only."""
+        issues: list[QualityIssue] = []
+        for entity in entities:
+            if entity.domain != "ShenSha":
+                continue
+            if entity.metadata.status != KnowledgeStatus.APPROVED:
+                issues.append(
+                    _issue(
+                        "not_expert_ready",
+                        "Shen Sha entity is not approved",
+                        entity.id,
+                    )
+                )
                 continue
             result = self.evaluate(entity)
             issues.extend(result.issues)
@@ -286,6 +309,76 @@ def _fingerprint(text: str) -> str:
         return ""
     replaced = _TOKEN_RE.sub("{token}", lowered)
     return _WS_RE.sub(" ", replaced)
+
+
+def _expert_ready_issues(entity: KnowledgeEntity) -> list[QualityIssue]:
+    """Extra Expert Ready fields required for approved Shen Sha entities."""
+    issues: list[QualityIssue] = []
+    if not entity.mechanism.strip():
+        issues.append(_issue("missing_mechanism", "missing mechanism", entity.id))
+    if not entity.manifestation.strip():
+        issues.append(_issue("missing_manifestation", "missing manifestation", entity.id))
+    if not entity.activation_conditions:
+        issues.append(_issue("missing_activation", "missing activation_conditions", entity.id))
+    if not entity.typical_triggers:
+        issues.append(_issue("missing_activation", "missing typical_triggers", entity.id))
+    if not entity.contraindications:
+        issues.append(
+            _issue("missing_contraindication", "missing contraindications", entity.id)
+        )
+    if not entity.luck_relationship.strip():
+        issues.append(
+            _issue("missing_luck_relationship", "missing luck_relationship", entity.id)
+        )
+    if not entity.pattern_relationship.strip():
+        issues.append(
+            _issue(
+                "missing_pattern_relationship",
+                "missing pattern_relationship",
+                entity.id,
+            )
+        )
+    if not entity.ten_gods_relationship.strip():
+        issues.append(
+            _issue(
+                "missing_ten_gods_relationship",
+                "missing ten_gods_relationship",
+                entity.id,
+            )
+        )
+    if not entity.suppression.strip() and not entity.suppression_conditions:
+        issues.append(_issue("missing_suppression", "missing suppression", entity.id))
+    if not entity.base_influence.strip():
+        issues.append(_issue("missing_base_influence", "missing base_influence", entity.id))
+    if not entity.conditional_influence.strip():
+        issues.append(
+            _issue(
+                "missing_conditional_influence",
+                "missing conditional_influence",
+                entity.id,
+            )
+        )
+    if not entity.activation_dependency.strip():
+        issues.append(
+            _issue(
+                "missing_activation_dependency",
+                "missing activation_dependency",
+                entity.id,
+            )
+        )
+    if not entity.interaction_conditions:
+        issues.append(
+            _issue(
+                "missing_interaction_conditions",
+                "missing interaction_conditions",
+                entity.id,
+            )
+        )
+    if not entity.relationship_notes.strip():
+        issues.append(
+            _issue("missing_relationship_notes", "missing relationship_notes", entity.id)
+        )
+    return issues
 
 
 def _issue(code: str, message: str, entity_id: str) -> QualityIssue:

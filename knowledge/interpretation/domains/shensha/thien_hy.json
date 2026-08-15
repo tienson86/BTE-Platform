@@ -1,0 +1,87 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.shensha.thien_hy",
+  "domain": "ShenSha",
+  "key": "Thiên Hỷ",
+  "entity_type": "shen_sha",
+  "title": "Thiên Hỷ — alias cùng detector hồng loan/năm",
+  "meaning": "Cùng hit HONG_LUAN_OPPOSITE với Hồng Loan. Engine append cả hai. Không phải sao hỷ độc lập khác map.",
+  "positive_meaning": "Cùng kênh gặp/hỷ, nhãn ngắn. Hữu ích cho tra cứu alias.",
+  "negative_meaning": "Đếm hai hỷ thành hai duyên. Nhân đôi dự báo lễ.",
+  "mechanism": "Cùng khối if year_branch: append Hồng Loan rồi Thiên Hỷ. Không map riêng.",
+  "manifestation": "Luôn cặp Hồng Loan trên production list.",
+  "applications": {
+    "career": "Không tách nghề khỏi Hồng Loan.",
+    "wealth": "Không nhân đôi nguồn hỷ.",
+    "relationships": "Một kênh gặp, hai nhãn.",
+    "health": "Không chẩn hai trạng thái hỷ.",
+    "learning": "Học một cơ chế đối-năm.",
+    "decision_making": "Không quyết hai lần vì hai tên."
+  },
+  "recommendations": [
+    {
+      "category": "practice",
+      "action": "Luận một detector năm-đối, giữ cả hai key vì engine emit.",
+      "rationale": "Alias không tạo duyên thứ hai."
+    },
+    {
+      "category": "boundary",
+      "action": "Ưu tiên Hồng Loan khi nói cơ chế năm.",
+      "rationale": "Thiên Hỷ là nhãn cặp."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "joy_double_count",
+      "risk": "Hai nhãn thành hai hỷ sự.",
+      "mitigation": "Gộp cơ chế."
+    }
+  ],
+  "contraindications": [
+    {
+      "condition": "separate_peach_blossom",
+      "avoid": "Không đọc thành Đào Hoa/Dịch Mã (không production)."
+    }
+  ],
+  "activation_conditions": [
+    "cùng điều kiện HONG_LUAN_OPPOSITE với Hồng Loan"
+  ],
+  "typical_triggers": [
+    "luôn đi cùng Hồng Loan"
+  ],
+  "luck_relationship": "Cùng semantic vận mang chi đối năm. Không tính Luck.",
+  "pattern_relationship": "Cùng Hồng Loan; không lập cách riêng.",
+  "ten_gods_relationship": "Cùng tài/tỷ gặp gỡ như Hồng Loan.",
+  "suppression": "Suy cùng Hồng Loan — cùng detector.",
+  "base_influence": "Alias; không cộng dồn Hồng Loan.",
+  "conditional_influence": "Khác nhãn, cùng cơ chế năm.",
+  "activation_dependency": "Phụ thuộc cùng hit năm-đối.",
+  "suppression_conditions": [
+    "mất hit hồng loan",
+    "tách thành đào hoa"
+  ],
+  "interaction_conditions": [
+    "combines Hồng Loan trên graph"
+  ],
+  "relationship_notes": "Alias pair from service append.",
+  "related_entities": [
+    {
+      "domain": "ShenSha",
+      "key": "Hồng Loan"
+    }
+  ],
+  "concept_ids": [
+    "shensha_presence",
+    "shensha_activation"
+  ],
+  "evidence_notes": "service.py append Thiên Hỷ after Hồng Loan. Same HONG_LUAN_OPPOSITE.",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "quality": "k6_expert_ready",
+    "source": "knowledge/interpretation/domains/shensha/thien_hy.json"
+  }
+}

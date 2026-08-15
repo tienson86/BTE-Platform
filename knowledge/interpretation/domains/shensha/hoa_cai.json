@@ -1,0 +1,89 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.shensha.hoa_cai",
+  "domain": "ShenSha",
+  "key": "Hoa Cái",
+  "entity_type": "shen_sha",
+  "title": "Hoa Cái — chi ngày thuộc nhóm thổ (HUA_GAI_BRANCHES)",
+  "meaning": "Sao cái/phủ: day_branch thuộc {Thìn, Tuất, Sửu, Mùi}. Không cần nhật chủ map. Lớp phủ, tàng, không phải ẩn tu định mệnh.",
+  "positive_meaning": "Có lớp trong, chỗ ủ, thẩm mỹ/kỹ thuật riêng. Hữu ích khi cần sâu.",
+  "negative_meaning": "Phủ kín, khó cộng tác. Biến cái thành cô lập.",
+  "mechanism": "Nếu day_branch in HUA_GAI_BRANCHES thì append Hoa Cái. Chỉ neo chi ngày, không bảng nhật chủ.",
+  "manifestation": "Thiên vào trong, lớp phủ. Không hứa nghệ sĩ ẩn.",
+  "applications": {
+    "career": "Hợp việc chuyên sâu, ít sân khấu. Không suy artist.",
+    "wealth": "Thiên nguồn kín. Rủi ro: khó chứng minh.",
+    "relationships": "Cần lớp riêng. Xung đột khi phủ hết cửa.",
+    "health": "Dễ ủ trong. Không chẩn đoán.",
+    "learning": "Học lệch chương, sâu một môn.",
+    "decision_making": "Thiên ủ. Bất lợi khi cửa công khai ngắn."
+  },
+  "recommendations": [
+    {
+      "category": "practice",
+      "action": "Giữ một lớp trong có sản phẩm ra, không phủ kín lịch.",
+      "rationale": "Cái hữu dụng khi có điểm lộ."
+    },
+    {
+      "category": "boundary",
+      "action": "Mở một cửa cộng tác định kỳ.",
+      "rationale": "Phủ không thay ấn có phép."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "over_cover",
+      "risk": "Phủ kín làm mất cửa việc.",
+      "mitigation": "Hẹn một lần lộ việc/tháng."
+    }
+  ],
+  "contraindications": [
+    {
+      "condition": "public_deadline",
+      "avoid": "Không lấy Hoa Cái hoãn việc phải công bố."
+    }
+  ],
+  "activation_conditions": [
+    "day_branch thuộc Thìn/Tuất/Sửu/Mùi"
+  ],
+  "typical_triggers": [
+    "chi ngày nhóm thổ",
+    "ngữ cảnh ấn/tỷ muốn vào trong"
+  ],
+  "luck_relationship": "Vận không đổi day_branch natal; chỉ nổi khi luận đúng chi ngày thổ. Không tính Luck để 'tạo Hoa Cái'.",
+  "pattern_relationship": "Kéo cách ấn/tỷ vào trong; không lập cách hoa cái.",
+  "ten_gods_relationship": "Gần ấn (ủ) và tỷ (chỗ riêng); căng thực/thương cần bung.",
+  "suppression": "Suy khi việc bắt buộc lộ sân và khi thực thương phải ra hàng.",
+  "base_influence": "Lớp phủ/tàng — không phải số phận ẩn.",
+  "conditional_influence": "Mạnh khi cần chuyên sâu; yếu khi cửa PR/bung.",
+  "activation_dependency": "Phụ thuộc day_branch nhóm thổ, không phụ thuộc nhật chủ map.",
+  "suppression_conditions": [
+    "cửa bắt buộc công khai",
+    "thực thương phải ra"
+  ],
+  "interaction_conditions": [
+    "cùng Dương Nhẫn: phủ vs cạnh — hai cơ chế"
+  ],
+  "relationship_notes": "day_master still generates on graph as chart identity; mechanism is day branch set.",
+  "related_entities": [
+    {
+      "domain": "ShenSha",
+      "key": "Dương Nhẫn"
+    }
+  ],
+  "concept_ids": [
+    "shensha_presence",
+    "shensha_activation",
+    "blade_cover_star"
+  ],
+  "evidence_notes": "HUA_GAI_BRANCHES frozenset Thìn Tuất Sửu Mùi. day_branch only.",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "quality": "k6_expert_ready",
+    "source": "knowledge/interpretation/domains/shensha/hoa_cai.json"
+  }
+}

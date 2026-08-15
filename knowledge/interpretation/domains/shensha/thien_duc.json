@@ -1,0 +1,91 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.shensha.thien_duc",
+  "domain": "ShenSha",
+  "key": "Thiên Đức",
+  "entity_type": "shen_sha",
+  "title": "Thiên Đức — token đức theo tháng (TIAN_DE_BRANCH)",
+  "meaning": "Sao đức trời: month_branch map một token (can hoặc chi) trong TIAN_DE_BRANCH, và token đó có trong stems hoặc branches tứ trụ. Kênh giảm sát, không phải đạo đức cá nhân.",
+  "positive_meaning": "Có lớp giảm xung, cửa lành cấu trúc. Hữu ích khi sát đang căng.",
+  "negative_meaning": "Ỷ đức, chậm quyết. Biến giảm sát thành trì.",
+  "mechanism": "Nếu month_branch in TIAN_DE_BRANCH, token = TIAN_DE_BRANCH[month_branch]; nếu token in stem_list or branch_list thì append Thiên Đức + Thiên Đức Quý Nhân.",
+  "manifestation": "Thiên giảm ma sát, cửa hòa. Không hứa phúc báo.",
+  "applications": {
+    "career": "Hợp việc cần hòa, giảm xung. Không suy từ thiện.",
+    "wealth": "Thiên giữ, ít bung rủi. Rủi ro: chậm cơ.",
+    "relationships": "Dễ hòa. Cần không biến hòa thành tránh việc.",
+    "health": "Ưu tiên giảm áp. Không chẩn đoán.",
+    "learning": "Học nhu, theo đức tháng.",
+    "decision_making": "Thiên hòa. Bất lợi khi cửa sắc bắt buộc."
+  },
+  "recommendations": [
+    {
+      "category": "practice",
+      "action": "Dùng đức để giảm một xung, không xóa mọi quyết.",
+      "rationale": "Đức hữu dụng khi sát đang căng."
+    },
+    {
+      "category": "boundary",
+      "action": "Giữ một quyết lõi không hòa hết.",
+      "rationale": "Thiên Đức không thay Dụng."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "virtue_delay",
+      "risk": "Hòa hết làm lỡ cửa.",
+      "mitigation": "Chọn một việc không hòa."
+    }
+  ],
+  "contraindications": [
+    {
+      "condition": "hard_cut_required",
+      "avoid": "Không lấy Thiên Đức hoãn cắt việc phải cắt."
+    }
+  ],
+  "activation_conditions": [
+    "month_branch có trong TIAN_DE_BRANCH",
+    "token đức xuất hiện trên can hoặc chi tứ trụ"
+  ],
+  "typical_triggers": [
+    "tháng map token",
+    "token lộ can/chi"
+  ],
+  "luck_relationship": "Vận mang đúng token TIAN_DE của tháng natal làm đức nổi. Không tính Luck, không đổi tháng natal.",
+  "pattern_relationship": "Hòa cách, giảm phá cách; không lập cách đức.",
+  "ten_gods_relationship": "Giảm sát/thương; hòa quan/ấn. Không xóa thập thần.",
+  "suppression": "Suy khi mất token trên trụ hoặc khi cửa bắt buộc sắc.",
+  "base_influence": "Giảm xung — không phải phúc số.",
+  "conditional_influence": "Mạnh khi sát căng; yếu khi cần bứt nhẫn.",
+  "activation_dependency": "Phụ thuộc tháng + token trên trụ (cần stems trong calculate).",
+  "suppression_conditions": [
+    "mất token",
+    "cửa sắc bắt buộc"
+  ],
+  "interaction_conditions": [
+    "cặp Thiên Đức Quý Nhân",
+    "cần stem_list khác rỗng để token can khớp"
+  ],
+  "relationship_notes": "combines Thiên Đức Quý Nhân. Month-based detector.",
+  "related_entities": [
+    {
+      "domain": "ShenSha",
+      "key": "Thiên Đức Quý Nhân"
+    }
+  ],
+  "concept_ids": [
+    "shensha_presence",
+    "shensha_activation",
+    "noble_star"
+  ],
+  "evidence_notes": "TIAN_DE_BRANCH maps month branch to stem or branch token. Pair append.",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "quality": "k6_expert_ready",
+    "source": "knowledge/interpretation/domains/shensha/thien_duc.json"
+  }
+}

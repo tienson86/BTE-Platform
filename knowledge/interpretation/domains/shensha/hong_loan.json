@@ -1,0 +1,90 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.shensha.hong_loan",
+  "domain": "ShenSha",
+  "key": "Hồng Loan",
+  "entity_type": "shen_sha",
+  "title": "Hồng Loan — chi đối của năm (HONG_LUAN_OPPOSITE)",
+  "meaning": "Sao hỷ/đối: năm có chi, bảng HONG_LUAN_OPPOSITE cho chi đích, và chi đích xuất hiện trên tứ trụ. Engine append cả Thiên Hỷ. Không suy hôn nhân.",
+  "positive_meaning": "Kênh gặp gỡ, hỷ sự cấu trúc. Hữu ích khi cần mở quan hệ.",
+  "negative_meaning": "Hỷ tán, cửa tình cảm lấn việc. Không phải số đào hoa.",
+  "mechanism": "Nếu year_branch in HONG_LUAN_OPPOSITE và target in branch_list thì append Hồng Loan + Thiên Hỷ. Neo năm, không neo nhật chủ.",
+  "manifestation": "Thiên gặp gỡ, lễ, cặp cửa. Không hứa kết hôn.",
+  "applications": {
+    "career": "Hợp việc mạng lưới, sự kiện. Không suy PR.",
+    "wealth": "Thiên nguồn từ quan hệ. Rủi ro: chi hỷ phí. Không hứa.",
+    "relationships": "Dễ mở cửa gặp. Cần ranh; không dự báo cưới.",
+    "health": "Dễ hao vì giao tế. Không chẩn đoán.",
+    "learning": "Học qua người. Chậm khi phải ủ một mình.",
+    "decision_making": "Thiên theo khí hỷ. Bất lợi khi cần lạnh."
+  },
+  "recommendations": [
+    {
+      "category": "practice",
+      "action": "Mở một cửa gặp có mục, không săn mọi hỷ.",
+      "rationale": "Hỷ hữu dụng khi có ranh."
+    },
+    {
+      "category": "boundary",
+      "action": "Tách lễ/gặp khỏi quyết nguồn lõi.",
+      "rationale": "Hồng Loan không thay Dụng thần quan hệ."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "scatter_joy",
+      "risk": "Hỷ tán làm mất trục việc.",
+      "mitigation": "Khóa lịch gặp; giữ một việc không sự kiện."
+    }
+  ],
+  "contraindications": [
+    {
+      "condition": "marriage_prediction",
+      "avoid": "Không dùng Hồng Loan để đoán cưới/ly."
+    }
+  ],
+  "activation_conditions": [
+    "có year_branch",
+    "chi đối HONG_LUAN_OPPOSITE xuất hiện trên tứ trụ"
+  ],
+  "typical_triggers": [
+    "chi đối năm lộ",
+    "tháng/ngày/giờ mang chi đích"
+  ],
+  "luck_relationship": "Vận mang chi đối của năm natal làm hỷ nổi. Không tính Luck, không đổi năm natal.",
+  "pattern_relationship": "Không lập cách tình duyên; có thể kéo cách tài/tỷ ra ngoài gặp.",
+  "ten_gods_relationship": "Gần tài/tỷ (gặp gỡ); căng ấn muốn ủ trong.",
+  "suppression": "Suy khi mất chi đối trên trụ hoặc ấn/quan khóa cửa gặp.",
+  "base_influence": "Kênh gặp/hỷ — không phải duyên số.",
+  "conditional_influence": "Mạnh khi cần mạng lưới; yếu khi cách đòi ủ ấn.",
+  "activation_dependency": "Phụ thuộc year_branch + chi đối trên trụ.",
+  "suppression_conditions": [
+    "mất chi đối",
+    "ấn khóa gặp"
+  ],
+  "interaction_conditions": [
+    "cặp Thiên Hỷ cùng detector",
+    "không phải Đào Hoa (không emit)"
+  ],
+  "relationship_notes": "combines Thiên Hỷ. year-based, not day-master-based.",
+  "related_entities": [
+    {
+      "domain": "ShenSha",
+      "key": "Thiên Hỷ"
+    }
+  ],
+  "concept_ids": [
+    "shensha_presence",
+    "shensha_activation"
+  ],
+  "evidence_notes": "HONG_LUAN_OPPOSITE. Service also appends Thiên Hỷ. Not Đào Hoa.",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "quality": "k6_expert_ready",
+    "source": "knowledge/interpretation/domains/shensha/hong_loan.json"
+  }
+}

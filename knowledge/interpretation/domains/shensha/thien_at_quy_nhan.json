@@ -1,0 +1,92 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.shensha.thien_at_quy_nhan",
+  "domain": "ShenSha",
+  "key": "Thiên Ất Quý Nhân",
+  "entity_type": "shen_sha",
+  "title": "Thiên Ất Quý Nhân — chi quý theo nhật chủ, kênh đỡ",
+  "meaning": "Sao quý nhân đầy đủ tên: nhật chủ rơi vào bảng TIAN_YI_BRANCHES và một địa chi tứ trụ thuộc tập chi quý. Là nhãn hiện diện, không phải người cứu mạng.",
+  "positive_meaning": "Có chỗ đỡ, giảm ma sát khi thân cần nhờ. Hữu ích khi việc đòi người nâng đúng phép.",
+  "negative_meaning": "Dựa quý bỏ khung. Chờ người đỡ thay vì giữ cách/thập thần đang là trục.",
+  "mechanism": "ShenShaService: nếu day_master có trong TIAN_YI_BRANCHES và bất kỳ branch tứ trụ thuộc targets thì append cặp Thiên Ất Quý Nhân + Thiên Ất. Không xét đại vận.",
+  "manifestation": "Biểu hiện cấu trúc: cửa nhờ, người đỡ, giảm xung. Không hứa gặp quý nhân đời thực.",
+  "applications": {
+    "career": "Hợp môi trường có mentor/đỡ đúng phép. Không suy ra thăng chức.",
+    "wealth": "Thiên nguồn được nâng, không tự sinh lãi. Rủi ro: ỷ lại.",
+    "relationships": "Dễ có chỗ dựa. Xung đột khi biến đỡ thành lệ thuộc.",
+    "health": "Ưu tiên kênh phục hồi có người kèm. Không chẩn đoán.",
+    "learning": "Học có thầy khung. Chậm khi phải tự bứt không đỡ.",
+    "decision_making": "Thiên hỏi người đỡ trước. Bất lợi khi cửa đòi tự quyết sát."
+  },
+  "recommendations": [
+    {
+      "category": "practice",
+      "action": "Dùng một kênh đỡ có phép, không mở mọi cửa nhờ.",
+      "rationale": "Quý hữu dụng khi đỡ đúng trục."
+    },
+    {
+      "category": "boundary",
+      "action": "Giữ cách/thập thần lõi; quý không thay Dụng.",
+      "rationale": "Hiện diện quý không chọn lại Dụng thần."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "over_reliance",
+      "risk": "Chờ đỡ làm mất phản xạ tự lực.",
+      "mitigation": "Giới hạn kênh nhờ; giữ một việc tự quyết."
+    }
+  ],
+  "contraindications": [
+    {
+      "condition": "when_self_authority_required",
+      "avoid": "Không lấy quý nhân làm lý do tránh trách nhiệm sát hạn."
+    }
+  ],
+  "activation_conditions": [
+    "day_master thuộc TIAN_YI_BRANCHES",
+    "một địa chi tứ trụ nằm trong chi quý của nhật chủ đó"
+  ],
+  "typical_triggers": [
+    "chi quý lộ trên năm/tháng/ngày/giờ",
+    "ngữ cảnh cần đỡ (ấn/quan có phép)"
+  ],
+  "luck_relationship": "Semantic only: đại vận/lưu niên mang chi trong TIAN_YI_BRANCHES của nhật chủ làm sao 'nổi'. Knowledge không tính Luck.",
+  "pattern_relationship": "Hòa với cách ấn/quan có phép; không tự lập cách. Không thay selected pattern.",
+  "ten_gods_relationship": "Thường đỡ kênh ấn/quan; căng khi sát không khung đang là trục thập thần.",
+  "suppression": "Suy khi không còn chi quý trên trụ và khi sát/nhẫn chiếm trục quyết mà không có phép.",
+  "base_influence": "Kênh đỡ, giảm ma sát — ảnh hưởng nền, không phải điểm số.",
+  "conditional_influence": "Mạnh hơn khi ấn/quan có phép; yếu khi tự lực tỷ kiếp đang là trục bắt buộc.",
+  "activation_dependency": "Phụ thuộc nhật chủ + chi quý hiện diện trên tứ trụ production.",
+  "suppression_conditions": [
+    "mất chi quý trên trụ",
+    "trục sát/nhẫn không khung"
+  ],
+  "interaction_conditions": [
+    "đồng hiện với Thiên Ất (cặp engine)",
+    "cùng chart với Dương Nhẫn thì quý đỡ, nhẫn vẫn là cạnh"
+  ],
+  "relationship_notes": "Cạnh graph: day_master generates sao; combines với Thiên Ất vì service append cặp.",
+  "related_entities": [
+    {
+      "domain": "ShenSha",
+      "key": "Thiên Ất"
+    }
+  ],
+  "concept_ids": [
+    "shensha_presence",
+    "shensha_activation",
+    "noble_star",
+    "day_master_axis"
+  ],
+  "evidence_notes": "Catalog ShenShaService.calculate TIAN_YI_BRANCHES. Production list names only, no pillar field.",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "quality": "k6_expert_ready",
+    "source": "knowledge/interpretation/domains/shensha/thien_at_quy_nhan.json"
+  }
+}
