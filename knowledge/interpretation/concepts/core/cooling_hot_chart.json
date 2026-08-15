@@ -1,0 +1,35 @@
+{
+  "$schema": "../schemas/concept_entity.schema.json",
+  "id": "cooling_hot_chart",
+  "category": "core",
+  "title": "Giảm nhiệt đồ nóng",
+  "summary": "Dùng thủy khí để hạ nhiệt khi cục diện thiên nóng, tránh kiệt và sấy.",
+  "meaning": "Khi cục diện nóng, cần lực làm mát để khí không thiêu. Giảm nhiệt là cân bằng, không phải dập tắt mọi hỏa dụng.",
+  "conditions": [
+    "Cục diện nóng hoặc ấm thái quá theo Temperature facts",
+    "Thủy được chọn vào hướng hữu dụng",
+    "Không áp dụng khi đồ đã lạnh"
+  ],
+  "applications": {
+    "useful_god": "Dụng thần thủy nhằm hạ nhiệt và khơi thông, không nhằm nhấn chìm.",
+    "hy": "Hỷ thần thủy hỗ trợ giữ độ mát vừa.",
+    "ky": "Gia tăng hỏa sấy đi ngược chức năng này."
+  },
+  "related_concepts": [
+    { "target_id": "warming_cold_chart", "relationship": "opposes" },
+    { "target_id": "moistening_dry_chart", "relationship": "related_to" }
+  ],
+  "related_entities": [
+    { "domain": "UsefulGod", "key": "Nhâm" },
+    { "domain": "UsefulGod", "key": "Quý" }
+  ],
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/concepts/core/cooling_hot_chart.json",
+    "quality": "k2_production"
+  }
+}

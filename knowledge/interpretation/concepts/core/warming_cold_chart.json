@@ -1,0 +1,35 @@
+{
+  "$schema": "../schemas/concept_entity.schema.json",
+  "id": "warming_cold_chart",
+  "category": "core",
+  "title": "Sưởi ấm đồ lạnh",
+  "summary": "Bổ sung hỏa khí để giảm thiên lệch mát/lạnh, khôi phục khả năng vận hành.",
+  "meaning": "Khi cục diện thiên lạnh hoặc mát, cần nguồn nhiệt để khí vận. Sưởi ấm là chức năng cân bằng, không phải khuyến khích hỏa vô hạn.",
+  "conditions": [
+    "Cục diện mát hoặc lạnh theo Temperature facts",
+    "Hỏa được Decision Explanation chọn vào hướng hữu dụng",
+    "Không áp dụng máy móc khi hỏa đã thái quá"
+  ],
+  "applications": {
+    "useful_god": "Dụng thần hỏa nhằm sưởi, không nhằm thiêu.",
+    "hy": "Hỷ thần hỏa hỗ trợ giữ ấm theo hướng đã chọn.",
+    "ky": "Gia tăng hàn khí hoặc dập nhiệt đi ngược chức năng này."
+  },
+  "related_concepts": [
+    { "target_id": "focused_warming", "relationship": "related_to" },
+    { "target_id": "cooling_hot_chart", "relationship": "opposes" }
+  ],
+  "related_entities": [
+    { "domain": "UsefulGod", "key": "Bính" },
+    { "domain": "UsefulGod", "key": "Đinh" }
+  ],
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/concepts/core/warming_cold_chart.json",
+    "quality": "k2_production"
+  }
+}
