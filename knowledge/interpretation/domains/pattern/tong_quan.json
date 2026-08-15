@@ -1,0 +1,62 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.pattern.tong_quan",
+  "domain": "Pattern",
+  "key": "tong_quan",
+  "entity_type": "pattern",
+  "title": "Tòng Quan — theo khí quan khi nhật không giữ thế",
+  "meaning": "Tòng Quan là follow override khi engine xếp theo Chính Quan (fol_tquan_01). Nhật đi theo khung đang lấn, không phải 'có quan thì quý'.",
+  "positive_meaning": "Bớt chống khung, việc đi trong chuẩn. Hữu ích khi giữ cách chính sẽ lệch.",
+  "negative_meaning": "Theo khung mất chủ. Tự phong tòng quan khi chưa xếp là bịa danh.",
+  "applications": {
+    "career": "Hợp đi trong hệ có chuẩn đang mạnh. Không suy ra thăng chức.",
+    "wealth": "Thiên theo quy nguồn. Rủi ro: mất phần riêng.",
+    "relationships": "Theo chuẩn nhóm. Cần một ranh nhật.",
+    "health": "Cần pha tự nhịp. Không chẩn đoán.",
+    "learning": "Học theo chương đang lấn. Chậm khi cần phá lệ.",
+    "decision_making": "Thiên theo quy. Bất lợi khi cần giữ nhật."
+  },
+  "recommendations": [
+    {
+      "category": "follow_frame",
+      "state": "tong_quan",
+      "action": "Theo một khung đã xếp, giữ một việc nhật không nộp hết.",
+      "rationale": "Tòng quan hữu dụng khi theo có ranh."
+    },
+    {
+      "category": "no_title",
+      "state": "tong_quan",
+      "action": "Không biến tòng quan thành hứa danh vị.",
+      "rationale": "Override không phải chức."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "frame_absorption",
+      "state": "tong_quan",
+      "risk": "Theo khung hết làm mất chủ.",
+      "mitigation": "Một khung; một việc nhật."
+    }
+  ],
+  "related_entities": [
+    {
+      "domain": "Pattern",
+      "key": "chinh_quan"
+    }
+  ],
+  "concept_ids": [
+    "follow_pattern",
+    "pattern_structure",
+    "officer_role"
+  ],
+  "evidence_notes": "Mã tong_quan từ 03_follow_pattern.csv (fol_tquan_01).",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/domains/pattern/tong_quan.json",
+    "quality": "k4_production"
+  }
+}

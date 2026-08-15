@@ -1,0 +1,62 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.pattern.tong_vuong",
+  "domain": "Pattern",
+  "key": "tong_vuong",
+  "entity_type": "pattern",
+  "title": "Tòng Vượng — theo khí đồng/ấn khi nhật không giữ thế",
+  "meaning": "Tòng Vượng là follow override khi engine xếp nhật theo Tỷ/Ấn (fol_tv_01). Đây là theo khí đang lấn, không phải 'mạnh là tốt'. Knowledge không tự suy tòng từ thân vượng.",
+  "positive_meaning": "Đi cùng khí đồng/ấn đang lấn, giảm chống. Hữu ích khi chống sẽ gãy.",
+  "negative_meaning": "Theo quá mất điểm nhật. Dùng tòng để bỏ khung cách chính khi engine chưa xếp là lệch.",
+  "applications": {
+    "career": "Hợp đi cùng thế đang mạnh của nhóm/đồng khí. Không suy ra lãnh đạo.",
+    "wealth": "Thiên theo nguồn nhóm. Rủi ro: mất phần riêng.",
+    "relationships": "Theo nhóm. Cần giữ một ranh nhật.",
+    "health": "Cần pha tự đứng. Không chẩn đoán.",
+    "learning": "Học theo dòng đang mạnh. Chậm khi cần độc lập.",
+    "decision_making": "Thiên theo thế. Bất lợi khi cần giữ cách chính."
+  },
+  "recommendations": [
+    {
+      "category": "follow_peer",
+      "state": "tong_vuong",
+      "action": "Theo một dòng đồng/ấn đang lấn, giữ một phần nhật không hòa tan.",
+      "rationale": "Tòng vượng hữu dụng khi theo có ranh."
+    },
+    {
+      "category": "no_self_follow",
+      "state": "tong_vuong",
+      "action": "Không tự phong tòng khi engine chưa chọn tong_vuong.",
+      "rationale": "Override thuộc engine."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "dissolved_self",
+      "state": "tong_vuong",
+      "risk": "Theo hết làm mất điểm nhật.",
+      "mitigation": "Theo dòng; giữ một ranh."
+    }
+  ],
+  "related_entities": [
+    {
+      "domain": "Pattern",
+      "key": "ty_kien"
+    }
+  ],
+  "concept_ids": [
+    "follow_pattern",
+    "pattern_structure",
+    "companion_role"
+  ],
+  "evidence_notes": "Mã tong_vuong từ 03_follow_pattern.csv (fol_tv_01).",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/domains/pattern/tong_vuong.json",
+    "quality": "k4_production"
+  }
+}

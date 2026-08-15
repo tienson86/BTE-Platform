@@ -1,0 +1,62 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.pattern.tong_nhi",
+  "domain": "Pattern",
+  "key": "tong_nhi",
+  "entity_type": "pattern",
+  "title": "Tòng Nhi — theo khí thực/thương khi nhật không giữ thế",
+  "meaning": "Tòng Nhi là follow override khi engine xếp theo Thực Thần (fol_tnhi_01). Nhật đi theo kênh thoát đang lấn, không phải 'có tài hoa'.",
+  "positive_meaning": "Bớt giữ, cho sức ra theo việc đang lấn. Hữu ích khi chống thoát sẽ kẹt.",
+  "negative_meaning": "Theo thoát mất đáy. Phong tòng nhi khi chưa xếp là bịa tài năng.",
+  "applications": {
+    "career": "Hợp đi theo việc đang ra sản phẩm. Không suy ra nghề nghệ.",
+    "wealth": "Thiên đổi công theo vụ đang thoát. Rủi ro: rò đáy.",
+    "relationships": "Theo nhịp bày. Cần pha ủ.",
+    "health": "Cần nghỉ sau thoát. Không chẩn đoán.",
+    "learning": "Học bằng làm theo dòng. Chậm khi cần ủ.",
+    "decision_making": "Thiên theo việc ra. Bất lợi khi cần giữ nhật."
+  },
+  "recommendations": [
+    {
+      "category": "follow_output",
+      "state": "tong_nhi",
+      "action": "Theo một kênh thoát đã xếp, giữ một nhịp ủ.",
+      "rationale": "Tòng nhi hữu dụng khi thoát còn đáy."
+    },
+    {
+      "category": "no_talent_myth",
+      "state": "tong_nhi",
+      "action": "Không biến tòng nhi thành hứa tài hoa.",
+      "rationale": "Override là hướng thoát, không phải năng khiếu."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "drain_absorption",
+      "state": "tong_nhi",
+      "risk": "Theo thoát hết làm mất đáy nhật.",
+      "mitigation": "Một kênh; một nhịp ủ."
+    }
+  ],
+  "related_entities": [
+    {
+      "domain": "Pattern",
+      "key": "thuc_than"
+    }
+  ],
+  "concept_ids": [
+    "follow_pattern",
+    "pattern_structure",
+    "output_role"
+  ],
+  "evidence_notes": "Mã tong_nhi từ 03_follow_pattern.csv (fol_tnhi_01).",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/domains/pattern/tong_nhi.json",
+    "quality": "k4_production"
+  }
+}

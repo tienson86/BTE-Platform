@@ -1,0 +1,66 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.pattern.sat_an",
+  "domain": "Pattern",
+  "key": "sat_an",
+  "entity_type": "pattern",
+  "title": "Sát Ấn tương sinh — phối Sát và Ấn",
+  "meaning": "Sát Ấn là combination khi có Thất Sát và Chính Ấn (com_san_01). Ấn chế/dẫn sát, không phải 'sát ấn thì hung hóa cát' theo khẩu quyết.",
+  "positive_meaning": "Áp có nền, sát được dẫn. Hữu ích khi cần sức bứt không gãy.",
+  "negative_meaning": "Ấn không đủ thì sát đè; ấn quá thì trì. Bịa thêm cặp khi engine không chọn là lệch.",
+  "applications": {
+    "career": "Hợp việc áp lực có chỗ nâng. Không suy ra nghề nguy.",
+    "wealth": "Thiên vụ có nền. Rủi ro: cháy hoặc trì.",
+    "relationships": "Cường độ có chỗ dựa. Cần cửa xả.",
+    "health": "Cần hạ áp + dưỡng. Không chẩn đoán.",
+    "learning": "Học trong hạn có mentor. Chậm khi cần tự phá.",
+    "decision_making": "Thiên bứt có nền. Bất lợi khi thiếu một trong hai kênh."
+  },
+  "recommendations": [
+    {
+      "category": "guided_pressure",
+      "state": "sat_an",
+      "action": "Giữ ấn dẫn sát, không bỏ nền để bứt.",
+      "rationale": "Phối sát ấn hữu dụng khi áp được dẫn."
+    },
+    {
+      "category": "no_slogan",
+      "state": "sat_an",
+      "action": "Không biến sát ấn thành khẩu quyết hung-cát.",
+      "rationale": "Combination là hai kênh hiện diện."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "unguided_kill",
+      "state": "sat_an",
+      "risk": "Sát không ấn dẫn làm đè đáy.",
+      "mitigation": "Giữ kênh ấn; hạn sát."
+    }
+  ],
+  "related_entities": [
+    {
+      "domain": "Pattern",
+      "key": "that_sat"
+    },
+    {
+      "domain": "Pattern",
+      "key": "chinh_an"
+    }
+  ],
+  "concept_ids": [
+    "combination_pattern",
+    "pattern_structure",
+    "officer_role"
+  ],
+  "evidence_notes": "Mã sat_an từ 04_combination_pattern.csv (com_san_01).",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/domains/pattern/sat_an.json",
+    "quality": "k4_production"
+  }
+}

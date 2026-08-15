@@ -15,4 +15,5 @@ class EngineSources:
     temperature_result: Any | None = None
     ten_gods_result: Any | None = None
     pattern_context: Any | None = None
+    pattern_result: Any | None = None
     rule_context: Mapping[str, Any] | None = None

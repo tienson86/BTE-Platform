@@ -117,7 +117,8 @@ def _pillars(pattern_context: Any | None) -> tuple[str, ...]:
     for name in ("year_pillar", "month_pillar", "day_pillar", "hour_pillar"):
         value = str(getattr(pattern_context, name, None) or "").strip()
         if value:
-            items.append(f"{name.removesuffix('_pillar')}:{value}")
+            slot = name[:-7] if name.endswith("_pillar") else name
+            items.append(f"{slot}:{value}")
     return tuple(items)
 
 

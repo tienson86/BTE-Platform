@@ -1,0 +1,66 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.pattern.thuong_quan_phoi_an",
+  "domain": "Pattern",
+  "key": "thuong_quan_phoi_an",
+  "entity_type": "pattern",
+  "title": "Thương Quan phối Ấn — lệch khuôn được dưỡng",
+  "meaning": "Cách này lập khi lệnh tháng là Thương Quan và có Chính Ấn (com_thuq_an_01). Phá lệ được ấn chế/dưỡng, không phải 'nghịch mà có thầy thì đỗ'.",
+  "positive_meaning": "Tỏ khác có nền, phá lệ không đổ. Hữu ích khi cần đổi cách vẫn được nuôi.",
+  "negative_meaning": "Ấn dập thương, hoặc thương phá hết nền. Bịa thêm sát vào cặp là lệch.",
+  "applications": {
+    "career": "Hợp đổi cách trong hệ có chỗ nâng. Không suy ra nghề phản biện.",
+    "wealth": "Thiên vụ tỏ có nền. Rủi ro: phá quy mất nguồn dưỡng.",
+    "relationships": "Khác biệt có chỗ chứa. Xung đột khi dập hoặc phá.",
+    "health": "Cần pha ủ sau tỏ. Không chẩn đoán.",
+    "learning": "Học phản biện có khung. Chậm khi cần thuộc lòng hoặc phá sạch.",
+    "decision_making": "Thiên đổi có nền. Bất lợi khi thiếu ấn hoặc thiếu thương."
+  },
+  "recommendations": [
+    {
+      "category": "held_break",
+      "state": "thuong_quan_phoi_an",
+      "action": "Phá một lệ trong nền ấn, không phá nền.",
+      "rationale": "Phối hữu dụng khi lệch còn dưỡng."
+    },
+    {
+      "category": "protect_print",
+      "state": "thuong_quan_phoi_an",
+      "action": "Giữ ấn khi tỏ khác, không dập thương bằng bọc kín.",
+      "rationale": "Hai kênh cùng mức."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "smothered_break",
+      "state": "thuong_quan_phoi_an",
+      "risk": "Ấn dập thương hoặc thương phá ấn làm mất phối.",
+      "mitigation": "Một lệ phá; nền ấn giữ."
+    }
+  ],
+  "related_entities": [
+    {
+      "domain": "Pattern",
+      "key": "thuong_quan"
+    },
+    {
+      "domain": "Pattern",
+      "key": "chinh_an"
+    }
+  ],
+  "concept_ids": [
+    "combination_pattern",
+    "pattern_structure",
+    "output_role"
+  ],
+  "evidence_notes": "Mã thuong_quan_phoi_an từ 04_combination_pattern.csv (com_thuq_an_01).",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/domains/pattern/thuong_quan_phoi_an.json",
+    "quality": "k4_production"
+  }
+}

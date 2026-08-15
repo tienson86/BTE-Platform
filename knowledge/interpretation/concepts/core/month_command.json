@@ -1,0 +1,30 @@
+{
+  "$schema": "../schemas/concept_entity.schema.json",
+  "id": "month_command",
+  "category": "core",
+  "title": "Lệnh tháng",
+  "summary": "Thập thần của địa chi tháng đối với nhật chủ — mốc lập cách, không phải quyết định Dụng thần.",
+  "meaning": "Lệnh tháng là quan hệ tháng–nhật đã có trong engine truth. Cách cục chính thường đứng trên lệnh này. Knowledge giải thích hệ quả cấu trúc, không chọn lại lệnh.",
+  "conditions": [
+    "PatternContext đã có month_branch_ten_god",
+    "Không suy lệnh tháng từ điểm số",
+    "Không đồng nhất lệnh tháng với Dụng thần"
+  ],
+  "applications": {
+    "pattern": "Lệnh tháng là lý do cách được lập, không phải nhãn trang trí.",
+    "relationship": "Cạnh generates từ lệnh tháng tới pattern là copy truth, không phải quy tắc mới."
+  },
+  "related_concepts": [
+    { "target_id": "pattern_structure", "relationship": "supports" }
+  ],
+  "related_entities": [],
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/concepts/core/month_command.json",
+    "quality": "k4_production"
+  }
+}

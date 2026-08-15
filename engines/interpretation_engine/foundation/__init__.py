@@ -52,6 +52,18 @@ from engines.interpretation_engine.foundation.interpreters.useful_god import (
     UsefulGodInterpreter,
     UsefulGodInterpretationResult,
 )
+from engines.interpretation_engine.foundation.interpreters.pattern import (
+    PatternFacts,
+    PatternInterpretationBundle,
+    build_pattern_facts,
+    build_pattern_interpretation_bundle,
+)
+from engines.interpretation_engine.foundation.knowledge.pattern_bundle import (
+    PatternKnowledgeBundle,
+)
+from engines.interpretation_engine.foundation.knowledge.pattern_retrieval import (
+    build_pattern_knowledge_bundle,
+)
 
 __all__ = [
     "CanonicalAnalysisContext",
@@ -64,6 +76,9 @@ __all__ = [
     "InterpretationFoundationBundle",
     "KnowledgeEntity",
     "KnowledgeRegistry",
+    "PatternFacts",
+    "PatternInterpretationBundle",
+    "PatternKnowledgeBundle",
     "RelationshipAssessment",
     "RelationshipExplainer",
     "StrengthAssessment",
@@ -72,6 +87,9 @@ __all__ = [
     "UsefulGodInterpretationResult",
     "UsefulGodKnowledgeBundle",
     "build_interpretation_foundation",
+    "build_pattern_facts",
+    "build_pattern_interpretation_bundle",
+    "build_pattern_knowledge_bundle",
     "build_strength_assessment",
     "build_strength_knowledge_bundle",
     "build_useful_god_knowledge_bundle",

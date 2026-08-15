@@ -1,0 +1,66 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.pattern.quan_an",
+  "domain": "Pattern",
+  "key": "quan_an",
+  "entity_type": "pattern",
+  "title": "Quan Ấn tương sinh — phối Quan và Ấn",
+  "meaning": "Quan Ấn là combination khi ten_gods_list có cả Chính Quan và Chính Ấn (com_qan_01). Cục đứng trên hai kênh: chế và dưỡng, không phải 'quan ấn thì hiển'.",
+  "positive_meaning": "Khung có nền, chuẩn được nuôi. Hữu ích khi cần trách nhiệm không kiệt.",
+  "negative_meaning": "Hai kênh lệch: quan đè hoặc ấn bọc. Ghép thêm tài vào cặp này khi engine không chọn là bịa.",
+  "applications": {
+    "career": "Hợp việc chuẩn có chỗ học/nâng. Không suy ra công chức.",
+    "wealth": "Thiên giữ trong quy. Rủi ro: trì + đè.",
+    "relationships": "Cam kết có chỗ dựa. Xung đột khi chuẩn nuốt dưỡng hoặc ngược.",
+    "health": "Cần pha xả và pha tự vận. Không chẩn đoán.",
+    "learning": "Học trong khung. Chậm khi cần phá lệ.",
+    "decision_making": "Thiên quy có nền. Bất lợi khi cần bung nguồn."
+  },
+  "recommendations": [
+    {
+      "category": "pair_balance",
+      "state": "quan_an",
+      "action": "Giữ quan và ấn cùng mức, không để một kênh nuốt kênh kia.",
+      "rationale": "Phối hữu dụng khi chế được nuôi."
+    },
+    {
+      "category": "no_extra_pair",
+      "state": "quan_an",
+      "action": "Không ghép thêm kênh ngoài mã quan_an.",
+      "rationale": "Combination thuộc engine."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "pair_skew",
+      "state": "quan_an",
+      "risk": "Quan đè hoặc ấn bọc làm mất phối.",
+      "mitigation": "Kênh yếu được nâng vừa, không đảo trục."
+    }
+  ],
+  "related_entities": [
+    {
+      "domain": "Pattern",
+      "key": "chinh_quan"
+    },
+    {
+      "domain": "Pattern",
+      "key": "chinh_an"
+    }
+  ],
+  "concept_ids": [
+    "combination_pattern",
+    "pattern_structure",
+    "officer_role"
+  ],
+  "evidence_notes": "Mã quan_an từ 04_combination_pattern.csv (com_qan_01).",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/domains/pattern/quan_an.json",
+    "quality": "k4_production"
+  }
+}

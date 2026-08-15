@@ -6,7 +6,12 @@ from engines.interpretation_engine.foundation.knowledge.entity import (
     KnowledgeMetadata,
 )
 from engines.interpretation_engine.foundation.knowledge.diagnostics import (
+    BROKEN_RELATIONSHIP,
+    INVALID_PATTERN,
     INVALID_STRENGTH_STATE,
+    MISSING_NARRATIVE_MAPPING,
+    PATTERN_CONCEPTS_MISSING,
+    PATTERN_KNOWLEDGE_MISSING,
     STRENGTH_CONCEPTS_MISSING,
     STRENGTH_KNOWLEDGE_MISSING,
     USEFUL_GOD_KNOWLEDGE_MISSING,
@@ -46,6 +51,11 @@ __all__ = [
     "KnowledgeValidationResult",
     "KnowledgeValidator",
     "INVALID_STRENGTH_STATE",
+    "PATTERN_CONCEPTS_MISSING",
+    "PATTERN_KNOWLEDGE_MISSING",
+    "INVALID_PATTERN",
+    "BROKEN_RELATIONSHIP",
+    "MISSING_NARRATIVE_MAPPING",
     "STRENGTH_CONCEPTS_MISSING",
     "STRENGTH_KNOWLEDGE_MISSING",
     "USEFUL_GOD_KNOWLEDGE_MISSING",
@@ -57,15 +67,21 @@ __all__ = [
     "StrengthKnowledgeBundle",
     "StrengthKnowledgeCoverage",
     "StrengthQualityReport",
+    "PatternKnowledgeBundle",
+    "PatternKnowledgeCoverage",
+    "PatternQualityReport",
     "build_useful_god_knowledge_bundle",
     "build_useful_god_quality_report",
     "build_strength_assessment",
     "build_strength_knowledge_bundle",
     "build_strength_quality_report",
+    "build_pattern_knowledge_bundle",
+    "build_pattern_quality_report",
     "get_knowledge_registry",
     "retrieve_knowledge",
     "write_useful_god_reports",
     "write_strength_reports",
+    "write_pattern_reports",
 ]
 
 
@@ -148,6 +164,40 @@ def __getattr__(name: str) -> object:
         mapping = {
             "StrengthAssessment": StrengthAssessment,
             "build_strength_assessment": build_strength_assessment,
+        }
+        return mapping[name]
+    if name in {"PatternKnowledgeBundle", "PatternKnowledgeCoverage"}:
+        from engines.interpretation_engine.foundation.knowledge.pattern_bundle import (
+            PatternKnowledgeBundle,
+            PatternKnowledgeCoverage,
+        )
+
+        mapping = {
+            "PatternKnowledgeBundle": PatternKnowledgeBundle,
+            "PatternKnowledgeCoverage": PatternKnowledgeCoverage,
+        }
+        return mapping[name]
+    if name == "build_pattern_knowledge_bundle":
+        from engines.interpretation_engine.foundation.knowledge.pattern_retrieval import (
+            build_pattern_knowledge_bundle,
+        )
+
+        return build_pattern_knowledge_bundle
+    if name in {
+        "PatternQualityReport",
+        "build_pattern_quality_report",
+        "write_pattern_reports",
+    }:
+        from engines.interpretation_engine.foundation.knowledge.pattern_coverage import (
+            PatternQualityReport,
+            build_pattern_quality_report,
+            write_pattern_reports,
+        )
+
+        mapping = {
+            "PatternQualityReport": PatternQualityReport,
+            "build_pattern_quality_report": build_pattern_quality_report,
+            "write_pattern_reports": write_pattern_reports,
         }
         return mapping[name]
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

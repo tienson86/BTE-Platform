@@ -1,0 +1,62 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.pattern.tong_tai",
+  "domain": "Pattern",
+  "key": "tong_tai",
+  "entity_type": "pattern",
+  "title": "Tòng Tài — theo khí nguồn khi nhật không giữ thế",
+  "meaning": "Tòng Tài là follow override khi engine xếp theo Tài (fol_ttai_01). Nhật đi theo nguồn đang lấn, không phải công thức làm giàu.",
+  "positive_meaning": "Bớt chống nguồn, cho việc chảy theo tài. Hữu ích khi giữ cách chính sẽ kiệt.",
+  "negative_meaning": "Theo nguồn mất nền nhật. Tự xưng tòng tài khi chưa được xếp là bịa.",
+  "applications": {
+    "career": "Hợp đi theo dòng nguồn đang mạnh. Không hứa giàu.",
+    "wealth": "Thiên theo vụ nguồn. Rủi ro: mất đáy nhật.",
+    "relationships": "Theo người giữ nguồn. Cần ranh không bị hút.",
+    "health": "Cần pha giữ đáy. Không chẩn đoán.",
+    "learning": "Học thứ đổi được nguồn. Chậm khi cần ủ ấn.",
+    "decision_making": "Thiên theo nguồn. Bất lợi khi cần giữ nhật."
+  },
+  "recommendations": [
+    {
+      "category": "follow_source",
+      "state": "tong_tai",
+      "action": "Theo một dòng nguồn engine đã xếp, giữ một đáy không nộp.",
+      "rationale": "Tòng tài hữu dụng khi theo có đáy."
+    },
+    {
+      "category": "engine_only",
+      "state": "tong_tai",
+      "action": "Chỉ luận tòng khi mã tong_tai được chọn.",
+      "rationale": "Không suy từ thân nhược."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "source_absorption",
+      "state": "tong_tai",
+      "risk": "Theo nguồn hết làm mất đáy nhật.",
+      "mitigation": "Một dòng; một đáy giữ."
+    }
+  ],
+  "related_entities": [
+    {
+      "domain": "Pattern",
+      "key": "chinh_tai"
+    }
+  ],
+  "concept_ids": [
+    "follow_pattern",
+    "pattern_structure",
+    "wealth_role"
+  ],
+  "evidence_notes": "Mã tong_tai từ 03_follow_pattern.csv (fol_ttai_01).",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/domains/pattern/tong_tai.json",
+    "quality": "k4_production"
+  }
+}

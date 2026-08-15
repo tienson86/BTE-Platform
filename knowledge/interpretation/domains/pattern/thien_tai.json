@@ -1,0 +1,62 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.pattern.thien_tai",
+  "domain": "Pattern",
+  "key": "thien_tai",
+  "entity_type": "pattern",
+  "title": "Thiên Tài cách — lệnh tháng là kênh nguồn lệch nhịp",
+  "meaning": "Thiên Tài cách lập khi lệnh tháng là Thiên Tài. Trục vẫn là nguồn, nhưng nhịp lệch hơn Chính Tài: cơ hội, biến động, không phải sổ đều. Không hứa vận may.",
+  "positive_meaning": "Nhạy nguồn không đều, bắt nhịp biến. Hữu ích khi cần xoay vốn/cơ hội có hạn.",
+  "negative_meaning": "Theo biến mất nền. Biến cách thành 'cờ bạc số' là gán nghĩa, không phải truth engine.",
+  "applications": {
+    "career": "Hợp việc theo vụ, hoa hồng, biến động có trần. Không suy ra nghề đầu cơ.",
+    "wealth": "Thiên vòng không đều. Rủi ro: đuổi biến. Không hứa lãi.",
+    "relationships": "Nhịp tới-đi. Cần nói rõ vụ; xung đột khi biến thành nợ tình.",
+    "health": "Dễ mất nhịp ăn/ngủ theo vụ. Không chẩn đoán.",
+    "learning": "Học theo đợt. Chậm khi cần chương trình dài.",
+    "decision_making": "Thiên bắt nhịp ngắn. Hữu ích khi cửa mở; bất lợi khi cần sổ dài."
+  },
+  "recommendations": [
+    {
+      "category": "cycle",
+      "state": "thien_tai",
+      "action": "Chốt một vụ có trần, không mở thêm cửa khi vụ trước chưa đóng.",
+      "rationale": "Thiên tài hữu dụng khi biến có hạn."
+    },
+    {
+      "category": "reserve",
+      "state": "thien_tai",
+      "action": "Giữ một phần nguồn không đưa vào vụ.",
+      "rationale": "Lệnh thiên tài không đòi all-in."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "chase_volatility",
+      "state": "thien_tai",
+      "risk": "Đuổi biến làm mất đáy.",
+      "mitigation": "Trần vụ; giữ phần không đụng."
+    }
+  ],
+  "related_entities": [
+    {
+      "domain": "Pattern",
+      "key": "chinh_tai"
+    }
+  ],
+  "concept_ids": [
+    "month_command",
+    "pattern_structure",
+    "wealth_role"
+  ],
+  "evidence_notes": "Mã thien_tai từ 01_main_pattern.csv (pat_tt_01).",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/domains/pattern/thien_tai.json",
+    "quality": "k4_production"
+  }
+}

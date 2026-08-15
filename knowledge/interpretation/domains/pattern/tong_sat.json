@@ -1,0 +1,62 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.pattern.tong_sat",
+  "domain": "Pattern",
+  "key": "tong_sat",
+  "entity_type": "pattern",
+  "title": "Tòng Sát — theo khí sát khi nhật không giữ thế",
+  "meaning": "Tòng Sát là follow override khi engine xếp theo Thất Sát (fol_tsat_01). Nhật đi theo áp đang lấn, không phải định mệnh hung.",
+  "positive_meaning": "Bớt chống sát, dùng áp thành hướng. Hữu ích khi chống sẽ gãy.",
+  "negative_meaning": "Theo sát mất chủ. Phong tòng sát khi chưa được xếp là gán hung.",
+  "applications": {
+    "career": "Hợp đi trong áp có hạn. Không suy ra nghề nguy.",
+    "wealth": "Thiên theo vụ áp. Rủi ro: cháy đáy.",
+    "relationships": "Theo người giữ áp. Cần cửa xả.",
+    "health": "Cần pha hạ áp. Không chẩn đoán.",
+    "learning": "Học trong hạn. Chậm khi cần ủ.",
+    "decision_making": "Thiên theo áp. Bất lợi khi cần giữ nhật."
+  },
+  "recommendations": [
+    {
+      "category": "follow_pressure",
+      "state": "tong_sat",
+      "action": "Theo một hạn sát đã xếp, giữ một cửa xả.",
+      "rationale": "Tòng sát hữu dụng khi theo có xả."
+    },
+    {
+      "category": "no_omen",
+      "state": "tong_sat",
+      "action": "Không biến tòng sát thành hung tin.",
+      "rationale": "Override là cấu trúc, không phải lời nguyền."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "absorbed_by_pressure",
+      "state": "tong_sat",
+      "risk": "Theo sát hết làm mất chủ.",
+      "mitigation": "Một hạn; một cửa xả."
+    }
+  ],
+  "related_entities": [
+    {
+      "domain": "Pattern",
+      "key": "that_sat"
+    }
+  ],
+  "concept_ids": [
+    "follow_pattern",
+    "pattern_structure",
+    "officer_role"
+  ],
+  "evidence_notes": "Mã tong_sat từ 03_follow_pattern.csv (fol_tsat_01).",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/domains/pattern/tong_sat.json",
+    "quality": "k4_production"
+  }
+}

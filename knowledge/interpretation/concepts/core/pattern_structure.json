@@ -1,0 +1,30 @@
+{
+  "$schema": "../schemas/concept_entity.schema.json",
+  "id": "pattern_structure",
+  "category": "core",
+  "title": "Cấu trúc cách cục",
+  "summary": "Cách cục là khung quan hệ nhật–tháng–thập thần, không phải nghề nghiệp hay vận mệnh cố định.",
+  "meaning": "Cấu trúc cách mô tả vì sao cục được lập và kênh nào đang đứng trung tâm. Ý nghĩa thuộc Knowledge; việc chọn cách thuộc Pattern Engine.",
+  "conditions": [
+    "Engine đã chọn selected pattern",
+    "Không dùng cách để thay Decision Explanation",
+    "Không biến tên cách thành dự báo chắc"
+  ],
+  "applications": {
+    "pattern": "Giải thích khung vận hành của cách đã chọn.",
+    "narrative": "Narrative Composer chỉ được map từ cấu trúc này, không bịa thêm cách."
+  },
+  "related_concepts": [
+    { "target_id": "month_command", "relationship": "requires" }
+  ],
+  "related_entities": [],
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/concepts/core/pattern_structure.json",
+    "quality": "k4_production"
+  }
+}

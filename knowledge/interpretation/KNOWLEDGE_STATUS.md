@@ -15,7 +15,7 @@
 |---|---|---|
 | UsefulGod | 20 (10 stem + 10 role) | approved |
 | Strength | 3 (`strong`, `balanced`, `weak`) | approved |
-| Pattern | 0 | — |
+| Pattern | 26 (10 main + 5 special + 6 follow + 5 combination) | approved |
 | Temperature | 0 | — |
 | TenGods | 0 | — |
 | ShenSha | 0 | — |
@@ -38,6 +38,13 @@ Coverage index: `knowledge/interpretation/domains/strength/COVERAGE.md`
 
 ## Sprint R1 — Relationship Reasoning Framework
 
-Framework only. No domain knowledge populated.
+Generic graph contracts only. Pattern is the first domain to consume the framework (K4).
 
-Relationship knowledge domains remain empty until a later sprint.
+## Sprint K4 — Pattern Domain V1
+
+Complete domain: facts + relationship assessment + knowledge + interpretation + narrative mapping.
+
+Engine inventory: 26 codes from `database/14_pattern/`.
+
+Coverage index: `knowledge/interpretation/domains/pattern/COVERAGE.md`
+

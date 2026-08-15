@@ -23,6 +23,8 @@ from engines.pattern_engine.rule_context_bridge import (
     enrich_rule_context_summaries,
     merge_upstream_into_rule_context,
 )
+from engines.pattern_engine.context import PatternContext
+from engines.pattern_engine.engine import PatternResult
 from engines.pattern_engine.utils.context_builder import build_pattern_context
 from engines.report_engine.adapters.report_input_v1_adapter import ReportInputV1Source
 from engines.report_engine.contracts.report_input_v1 import ReportProfileV1
@@ -53,6 +55,8 @@ class EnginePipelineOutput:
     ten_gods: TenGodsResult
     strength_result: StrengthResult
     strength_context: StrengthContext
+    pattern_result: PatternResult
+    pattern_context: PatternContext
     report_source: ReportInputV1Source
     stages: list[str]
     interpretation_foundation: InterpretationFoundationBundle | None = None
@@ -260,6 +264,7 @@ class ProductionEngineRunner:
                 temperature_result=temperature_result,
                 ten_gods_result=ten_gods,
                 pattern_context=pattern_context,
+                pattern_result=pattern_result,
                 rule_context=published_rule_context,
             ),
             pattern_dieu_hau=analysis.pattern.dieu_hau if analysis.pattern else "",
@@ -274,6 +279,8 @@ class ProductionEngineRunner:
             ten_gods=ten_gods,
             strength_result=strength_result,
             strength_context=strength_context,
+            pattern_result=pattern_result,
+            pattern_context=pattern_context,
             report_source=report_source,
             stages=stages,
             interpretation_foundation=foundation,

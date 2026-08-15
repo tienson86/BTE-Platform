@@ -68,7 +68,7 @@ Strength
 ```text
 Relationship Reasoning
 
-Framework only (R1)
+Pattern (K4)
 ```
 
 ### Decision pipeline
