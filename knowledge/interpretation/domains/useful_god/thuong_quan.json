@@ -1,0 +1,67 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.useful_god.thuong_quan",
+  "domain": "UsefulGod",
+  "key": "Thương Quan",
+  "entity_type": "role",
+  "title": "Thương Quan — kênh biểu đạt phá khuôn",
+  "meaning": "Thương Quan là vai trò thực tiết nghịch khuôn: đưa sức ra bằng cách phá form, phản biện, làm khác. Không phải nghĩa một can. Khi làm Dụng thần, đây là hướng đổi cách làm để thoát khí. Khi thuộc Hỷ, hỗ trợ đổi mới theo Dụng. Khi thuộc Kỵ, cùng phá khuôn thành chống đối không sản phẩm, chạm khung đang cần giữ.",
+  "positive_meaning": "Là Dụng thần: mở lối làm việc không rập khuôn, giải kẹt form cũ. Là Hỷ thần: tiếp sức đổi cách — không thay Dụng.",
+  "negative_meaning": "Là Kỵ thần hoặc dùng quá mức: cãi để cãi, phá quy trình đang chạy. Gia cố Thương Quan khi khung đang là Dụng làm lệch.",
+  "applications": {
+    "career": "Hợp môi trường chịu thử cách mới, phản biện có sản phẩm. Phong cách: làm khác có chủ đích. Không suy ra nghề nghệ sĩ hay luật.",
+    "wealth": "Thiên thử kênh giá trị lạ, chấp nhận biến động. Rủi ro: phá nguồn đang đều. Không hứa hiệu quả tài chính.",
+    "relationships": "Giao tiếp sắc, hay đặt lại luật chơi. Cần thỏa thuận 'phá việc, không phá người'. Xung đột khi phản biện thành xúc phạm khung chung.",
+    "health": "Cân bằng căng/giãn: dễ thiên kích và mất ngủ vì không dừng tranh. Cần nhịp hạ. Không chẩn đoán.",
+    "decision_making": "Thiên quyết ngược mặc định. Hữu ích khi form cũ kẹt; bất lợi khi cần tuân thủ ngắn hạn.",
+    "environment": "Môi trường cho phép thử-sai. Khuôn cứng tuyệt đối đi ngược khi Thương Quan là Dụng; nếu là Kỵ thì chính môi trường kích phản biện là rủi ro."
+  },
+  "recommendations": [
+    {
+      "category": "decision_style",
+      "role": "useful_god",
+      "action": "Phá một khuôn mỗi nhịp và ra được sản phẩm thay thế, không phá hết hệ.",
+      "rationale": "Thương Quan hữu dụng khi đổi cách, có hại khi chỉ chống."
+    },
+    {
+      "category": "behavior",
+      "role": "hy",
+      "action": "Khi là Hỷ, dùng phản biện để phục vụ Dụng, không mở mặt trận riêng.",
+      "rationale": "Hỷ thần hỗ trợ hướng đã chọn."
+    },
+    {
+      "category": "balance_strategy",
+      "role": "ky",
+      "action": "Khi là Kỵ, giảm phản xạ 'làm ngược cho đã' trước khung đang cần.",
+      "rationale": "Cùng kênh phá khuôn làm tăng lệch nếu bị khuếch đại."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "formless_rebellion",
+      "role": "useful_god",
+      "risk": "Phá khuôn không thay thế thành hỗn, mất chỗ đứng.",
+      "mitigation": "Đổi cách kèm sản phẩm thay thế."
+    },
+    {
+      "condition": "reinforcement_when_ky",
+      "role": "ky",
+      "risk": "Gia cố Thương Quan khi là Kỵ làm va khung và rò lực.",
+      "mitigation": "Thu hẹp phạm vi phản biện, không cấm tuyệt ý mới."
+    }
+  ],
+  "related_entities": [
+    { "domain": "UsefulGod", "key": "Thực Thần" }
+  ],
+  "concept_ids": ["output_role", "drain_strong_day_master"],
+  "evidence_notes": "Vai trò thực tiết nghịch khuôn. Engine dùng tên này trong Hỷ/Kỵ của strength rules. Không copy nghĩa can. Vai trò do Decision Explanation gán.",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/domains/useful_god/thuong_quan.json",
+    "quality": "k2_1_production"
+  }
+}

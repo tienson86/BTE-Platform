@@ -10,8 +10,12 @@ from typing import Any, Callable, Mapping
 from engines.interpretation_engine.foundation.knowledge.entity import KnowledgeEntity
 from engines.interpretation_engine.foundation.knowledge.status import KnowledgeStatus
 
-_STEM_TOKEN_RE = re.compile(
-    r"giáp|ất|bính|đinh|mậu|kỷ|canh|tân|nhâm|quý",
+_TOKEN_RE = re.compile(
+    r"thực thần|thương quan|tỷ kiên|kiếp tài|chính tài|thiên tài|"
+    r"chính quan|thất sát|chính ấn|thiên ấn|"
+    r"giáp|ất|bính|đinh|mậu|kỷ|canh|tân|nhâm|quý|"
+    r"thân vượng|thân nhược|trung hòa|rất vượng|rất nhược|"
+    r"\bvery_strong\b|\bvery_weak\b|\bstrong\b|\bbalanced\b|\bweak\b",
     re.IGNORECASE,
 )
 _WS_RE = re.compile(r"\s+")
@@ -276,7 +280,7 @@ def _fingerprint(text: str) -> str:
     lowered = text.strip().lower()
     if not lowered:
         return ""
-    replaced = _STEM_TOKEN_RE.sub("{stem}", lowered)
+    replaced = _TOKEN_RE.sub("{token}", lowered)
     return _WS_RE.sub(" ", replaced)
 
 

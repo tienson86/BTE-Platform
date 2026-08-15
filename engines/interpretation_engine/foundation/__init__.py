@@ -32,6 +32,16 @@ from engines.interpretation_engine.foundation.knowledge.bundle import (
 from engines.interpretation_engine.foundation.knowledge.retrieval import (
     build_useful_god_knowledge_bundle,
 )
+from engines.interpretation_engine.foundation.assessment import (
+    StrengthAssessment,
+    build_strength_assessment,
+)
+from engines.interpretation_engine.foundation.knowledge.strength_bundle import (
+    StrengthKnowledgeBundle,
+)
+from engines.interpretation_engine.foundation.knowledge.strength_retrieval import (
+    build_strength_knowledge_bundle,
+)
 from engines.interpretation_engine.foundation.interpreters.useful_god import (
     UsefulGodInterpreter,
     UsefulGodInterpretationResult,
@@ -47,10 +57,14 @@ __all__ = [
     "InterpretationFoundationBundle",
     "KnowledgeEntity",
     "KnowledgeRegistry",
+    "StrengthAssessment",
+    "StrengthKnowledgeBundle",
     "UsefulGodInterpreter",
     "UsefulGodInterpretationResult",
     "UsefulGodKnowledgeBundle",
     "build_interpretation_foundation",
+    "build_strength_assessment",
+    "build_strength_knowledge_bundle",
     "build_useful_god_knowledge_bundle",
     "retrieve_concept",
     "retrieve_concepts_for_knowledge",

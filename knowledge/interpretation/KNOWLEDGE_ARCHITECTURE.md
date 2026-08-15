@@ -48,8 +48,38 @@ get(domain, key) → KnowledgeEntity | None
 
 The interpreter does not know file paths, JSON vs YAML, or future database backends.
 
-## Sprint K1
+## Semantic interpretation classes (K3)
 
-Framework only. One example entity proves the architecture.
+Do not merge these classes. They use different reasoning structures.
 
-Population of full stem/pattern/shensha catalogs is Sprint K2+.
+```text
+Decision Domain
+
+Useful God
+```
+
+```text
+State Domain
+
+Strength
+```
+
+### Decision pipeline (Useful God)
+
+```text
+Engine Truth → Canonical Facts → Decision Explanation → Knowledge → Narrative
+```
+
+### State pipeline (Strength)
+
+```text
+Engine Truth → Canonical Facts → Assessment → Knowledge → Narrative
+```
+
+Strength uses Assessment, not Decision. No winner. No alternatives.
+
+Assessment path:
+
+```text
+Season → Roots → Support → Drain → Control → Balance → Strength
+```

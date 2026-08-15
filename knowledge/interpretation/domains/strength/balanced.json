@@ -1,0 +1,68 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.strength.balanced",
+  "domain": "Strength",
+  "key": "balanced",
+  "entity_type": "state",
+  "title": "Trung hòa — vận hành trong biên",
+  "meaning": "Trung hòa là trạng thái lực nhật chủ nằm giữa ngưỡng vượng và nhược do Strength Engine đặt (điểm tổng giữa 0.35 và 0.65). Đây là assessment: đo mức đứng trong biên, không phải 'không có gì để luận' và không phải winner. Cục trung hòa vẫn có mùa, căn, trợ, tiết, khắc — đường đánh giá vẫn chạy đủ bước. Hướng vận hành là giữ biên: không bồi khi chưa thiếu, không thoát khi chưa thừa.",
+  "positive_meaning": "Lực đủ để xoay việc vừa, điều chỉnh nhẹ theo cục. Hữu ích khi giữ nhịp sinh–tiết đều, không đảo hướng.",
+  "negative_meaning": "Đứng trong biên dễ bị chỉnh quá: bồi hoặc thoát mạnh sẽ đẩy ra khỏi trung hòa. Không mặc định trung hòa là 'an toàn tuyệt đối' hay 'không cần giữ'.",
+  "applications": {
+    "career": "Hợp nhịp việc vừa sức, xoay vai trò, giữ đều hơn bứt. Phong cách: vận hành trong biên. Không suy ra một nghề cố định hay sự ổn định suốt đời.",
+    "wealth": "Thiên thu–chi đều, ít cược lớn. Rủi ro: đảo hướng tài vì muốn 'thêm lực' hoặc 'bung sức'. Không hứa hiệu quả tài chính.",
+    "relationships": "Dễ giữ nhịp qua lại. Xung đột khi một phía đòi gánh hết hoặc rút hết. Điều kiện hỗ trợ: chia việc vừa, không biến quan hệ thành chỗ bồi hoặc chỗ thoát.",
+    "health": "Giữ nhịp hoạt/nghỉ đều. Lệch khi ép pha chịu tải dài hoặc pha ủ quá. Không chẩn đoán.",
+    "learning": "Học theo vòng nhỏ, củng cố đều. Hữu ích cho nền tảng; chậm khi bài đòi bứt sức hoặc ủ sâu.",
+    "decision_making": "Thiên quyết theo việc nào giữ được biên. Hữu ích khi cần ổn nhịp; bất lợi khi cần dồn sức hoặc thu hết để dưỡng."
+  },
+  "recommendations": [
+    {
+      "category": "balance_strategy",
+      "state": "balanced",
+      "action": "Giữ biên hiện có: chỉnh nhẹ theo mùa/căn, không đảo thành bồi mạnh hoặc thoát mạnh.",
+      "rationale": "Trung hòa là đứng trong biên, không phải không điều chỉnh."
+    },
+    {
+      "category": "energy_management",
+      "state": "balanced",
+      "action": "Xoay việc vừa sức theo nhịp, xen pha làm và ủ, không dồn một phía.",
+      "rationale": "Lực trong biên hữu dụng khi được phân nhịp."
+    },
+    {
+      "category": "workload",
+      "state": "balanced",
+      "action": "Nhận khối vừa với sức đang có; từ chối việc đòi chịu tải dài hoặc ủ tuyệt.",
+      "rationale": "Ra khỏi biên làm mất trạng thái trung hòa."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "over_correction",
+      "state": "balanced",
+      "risk": "Chỉnh quá — bồi mạnh hoặc thoát mạnh — đẩy lực ra khỏi biên trung hòa.",
+      "mitigation": "Chỉnh theo từng bước assessment; giữ một hướng nhỏ."
+    },
+    {
+      "condition": "ignored_balance",
+      "state": "balanced",
+      "risk": "Bỏ qua việc giữ biên vì tưởng trung hòa là 'không cần làm gì'.",
+      "mitigation": "Theo dõi mùa–căn–trợ–tiết–khắc; giữ nhịp đều."
+    }
+  ],
+  "related_entities": [
+    { "domain": "Strength", "key": "strong" },
+    { "domain": "Strength", "key": "weak" }
+  ],
+  "concept_ids": ["strength_balance", "support_day_master", "drain_strong_day_master"],
+  "evidence_notes": "State key `balanced` khớp level rule pri_level_balanced (0.35 < điểm tổng < 0.65, nhãn Trung hòa) và default engine khi không khớp strong/weak. Assessment path không có winner. Không populate very_strong/very_weak vì engine không phát hai mức đó.",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/domains/strength/balanced.json",
+    "quality": "k3_production"
+  }
+}

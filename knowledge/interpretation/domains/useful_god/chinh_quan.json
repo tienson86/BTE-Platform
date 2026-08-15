@@ -1,0 +1,67 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.useful_god.chinh_quan",
+  "domain": "UsefulGod",
+  "key": "Chính Quan",
+  "entity_type": "role",
+  "title": "Chính Quan — kênh chế ước có phép",
+  "meaning": "Chính Quan là vai trò quan thuận: khung, kỷ luật, trách nhiệm chế nhật chủ không tràn. Không phải chức danh. Khi làm Dụng thần, hướng chính là lập phép để thân vượng không lấn. Khi thuộc Hỷ, giữ chuẩn theo Dụng. Khi thuộc Kỵ, cùng khung thành đè, mất lực khởi, hoặc dập kênh biểu đạt đang cần.",
+  "positive_meaning": "Là Dụng thần: đặt luật, chịu trách nhiệm, chế vừa. Là Hỷ thần: gia cố khung — không thay Dụng.",
+  "negative_meaning": "Là Kỵ thần hoặc dùng quá mức: kiểm soát, sợ sai, đè biểu đạt. Gia cố Chính Quan khi thực tiết đang là Dụng làm nghẽn thoát.",
+  "applications": {
+    "career": "Hợp môi trường có chuẩn, trách nhiệm, quy trình. Phong cách: làm đúng phép. Không suy ra nghề công chức.",
+    "wealth": "Thiên kỷ luật chi, ít phá lệ. Rủi ro: không dám xoay khi cần. Không hứa hiệu quả tài chính.",
+    "relationships": "Giao tiếp theo vai và phép. Cần khung chung; xung đột khi biến phép thành áp. Điều kiện hỗ trợ: luật rõ, có chỗ góp.",
+    "health": "Cân bằng căng/giãn: dễ thiên căng vì đúng. Cần nhịp không bị soi. Không chẩn đoán.",
+    "decision_making": "Thiên quyết theo chuẩn. Hữu ích khi cần chế; bất lợi khi cần phá form.",
+    "environment": "Môi trường có luật minh bạch. Hỗn không phép đi ngược khi Chính Quan là Dụng."
+  },
+  "recommendations": [
+    {
+      "category": "environment",
+      "role": "useful_god",
+      "action": "Dựng khung vừa đủ để việc chạy, không chồng lớp kiểm soát.",
+      "rationale": "Chính Quan hữu dụng khi chế, có hại khi đè."
+    },
+    {
+      "category": "decision_style",
+      "role": "hy",
+      "action": "Khi là Hỷ, dùng phép để hỗ trợ Dụng, không mở bộ luật riêng.",
+      "rationale": "Hỷ thần không ngang Dụng thần."
+    },
+    {
+      "category": "balance_strategy",
+      "role": "ky",
+      "action": "Khi là Kỵ, giảm soi và thêm thủ tục vào lúc cần thoát khí.",
+      "rationale": "Cùng kênh quan đè lực nếu bị khuếch đại."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "over_control",
+      "role": "useful_god",
+      "risk": "Khung quá dày làm mất kênh biểu đạt và khởi sự.",
+      "mitigation": "Giữ phép; chừa cửa thoát có kiểm soát."
+    },
+    {
+      "condition": "reinforcement_when_ky",
+      "role": "ky",
+      "risk": "Gia cố Chính Quan khi là Kỵ làm đè và nghẽn thực tiết.",
+      "mitigation": "Thu hẹp kiểm soát, không phá hết chuẩn."
+    }
+  ],
+  "related_entities": [
+    { "domain": "UsefulGod", "key": "Thất Sát" }
+  ],
+  "concept_ids": ["officer_role", "control_excess"],
+  "evidence_notes": "Vai trò quan thuận. Engine chọn ở str_003 (thân vượng có quan) và spc_002 (tòng quan). Knowledge không đổi engine. Không hardcode case.",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/domains/useful_god/chinh_quan.json",
+    "quality": "k2_1_production"
+  }
+}

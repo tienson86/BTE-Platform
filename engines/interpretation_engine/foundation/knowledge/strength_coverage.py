@@ -1,4 +1,4 @@
-"""Coverage index and quality report for Useful God knowledge V1."""
+"""Coverage index and quality report for Strength knowledge V1."""
 
 from __future__ import annotations
 
@@ -11,8 +11,7 @@ from typing import Any
 from engines.interpretation_engine.foundation.concepts.registry import ConceptRegistry
 from engines.interpretation_engine.foundation.knowledge.entity import KnowledgeEntity
 from engines.interpretation_engine.foundation.knowledge.entity_types import (
-    USEFUL_GOD_ROLE_KEYS,
-    USEFUL_GOD_STEM_KEYS,
+    STRENGTH_STATE_KEYS,
 )
 from engines.interpretation_engine.foundation.knowledge.quality import (
     DuplicateContentDetector,
@@ -25,13 +24,12 @@ from engines.interpretation_engine.foundation.knowledge.registry import (
 from engines.interpretation_engine.foundation.knowledge.status import KnowledgeStatus
 from engines.interpretation_engine.foundation.knowledge.validator import KnowledgeValidator
 
-USEFUL_GOD_STEM_ORDER: tuple[str, ...] = USEFUL_GOD_STEM_KEYS
-USEFUL_GOD_ROLE_ORDER: tuple[str, ...] = USEFUL_GOD_ROLE_KEYS
+STRENGTH_STATE_ORDER: tuple[str, ...] = STRENGTH_STATE_KEYS
 
 
 @dataclass(frozen=True, slots=True)
-class UsefulGodQualityReport:
-    """Machine-readable Useful God knowledge quality report."""
+class StrengthQualityReport:
+    """Machine-readable Strength knowledge quality report."""
 
     entity_count: int
     approved_count: int
@@ -43,8 +41,7 @@ class UsefulGodQualityReport:
     application_coverage: dict[str, int]
     recommendation_coverage: int
     warning_coverage: int
-    stem_status: dict[str, str]
-    role_status: dict[str, str]
+    state_status: dict[str, str]
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize report."""
@@ -59,27 +56,27 @@ class UsefulGodQualityReport:
             "application_coverage": dict(self.application_coverage),
             "recommendation_coverage": self.recommendation_coverage,
             "warning_coverage": self.warning_coverage,
-            "stem_status": dict(self.stem_status),
-            "role_status": dict(self.role_status),
+            "state_status": dict(self.state_status),
         }
 
     def to_markdown(self) -> str:
         """Render coverage index and quality summary."""
         lines = [
-            "# UsefulGod Knowledge V1",
+            "# Strength Knowledge V1",
             "",
-            "## Stems",
+            "## States",
             "",
         ]
-        for stem in USEFUL_GOD_STEM_ORDER:
-            status = self.stem_status.get(stem, "MISSING")
-            lines.append(f"{stem:<8} {status}")
-        lines.extend(["", "## Roles", ""])
-        for role in USEFUL_GOD_ROLE_ORDER:
-            status = self.role_status.get(role, "MISSING")
-            lines.append(f"{role:<12} {status}")
+        for state in STRENGTH_STATE_ORDER:
+            status = self.state_status.get(state, "MISSING")
+            lines.append(f"{state:<12} {status}")
         lines.extend(
             [
+                "",
+                "## Out of inventory",
+                "",
+                "- very_strong: not emitted by Strength Engine V2",
+                "- very_weak: not emitted by Strength Engine V2",
                 "",
                 "## Coverage",
                 "",
@@ -103,15 +100,15 @@ class UsefulGodQualityReport:
         return "\n".join(lines)
 
 
-def build_useful_god_quality_report(
+def build_strength_quality_report(
     *,
     knowledge_registry: KnowledgeRegistry | None = None,
     concept_registry: ConceptRegistry | None = None,
-) -> UsefulGodQualityReport:
-    """Build Useful God coverage/quality report from loaded registries."""
+) -> StrengthQualityReport:
+    """Build Strength coverage/quality report from loaded registries."""
     knowledge = knowledge_registry or KnowledgeRegistry.default()
     concepts = concept_registry or ConceptRegistry.default()
-    entities = list(knowledge.list("UsefulGod"))
+    entities = list(knowledge.list("Strength"))
     validation = KnowledgeValidator().validate(
         entities,
         known_concept_ids=concepts.known_ids(),
@@ -142,11 +139,8 @@ def build_useful_god_quality_report(
             warning_entities += 1
 
     by_key = {entity.key: entity for entity in entities}
-    stem_status = {
-        stem: _stem_status(by_key.get(stem)) for stem in USEFUL_GOD_STEM_ORDER
-    }
-    role_status = {
-        role: _stem_status(by_key.get(role)) for role in USEFUL_GOD_ROLE_ORDER
+    state_status = {
+        state: _state_status(by_key.get(state)) for state in STRENGTH_STATE_ORDER
     }
     approved_count = sum(
         1 for entity in entities if entity.metadata.status == KnowledgeStatus.APPROVED
@@ -154,33 +148,39 @@ def build_useful_god_quality_report(
     draft_count = sum(
         1 for entity in entities if entity.metadata.status == KnowledgeStatus.DRAFT
     )
-    return UsefulGodQualityReport(
+    return StrengthQualityReport(
         entity_count=len(entities),
         approved_count=approved_count,
         draft_count=draft_count,
-        concept_count=len(concepts.known_ids()),
+        concept_count=len(
+            {
+                concept_id
+                for entity in entities
+                for concept_id in entity.concept_ids
+            }
+        ),
         broken_references=broken,
         missing_required_content=missing_required,
         duplicate_content_warnings=tuple(item.to_dict() for item in duplicates),
         application_coverage=dict(application_counts),
         recommendation_coverage=recommendation_entities,
         warning_coverage=warning_entities,
-        stem_status=stem_status,
-        role_status=role_status,
+        state_status=state_status,
     )
 
 
-def write_useful_god_reports(
+def write_strength_reports(
     *,
     knowledge_root: Path | None = None,
-    report: UsefulGodQualityReport | None = None,
+    report: StrengthQualityReport | None = None,
 ) -> tuple[Path, Path]:
     """Write coverage markdown and machine-readable quality JSON."""
-    payload = report or build_useful_god_quality_report()
+    payload = report or build_strength_quality_report()
     root = knowledge_root or DEFAULT_KNOWLEDGE_ROOT
-    coverage_path = root / "domains" / "useful_god" / "COVERAGE.md"
-    quality_path = root / "reports" / "useful_god_k2_quality.json"
+    coverage_path = root / "domains" / "strength" / "COVERAGE.md"
+    quality_path = root / "reports" / "strength_k3_quality.json"
     quality_path.parent.mkdir(parents=True, exist_ok=True)
+    coverage_path.parent.mkdir(parents=True, exist_ok=True)
     coverage_path.write_text(payload.to_markdown(), encoding="utf-8")
     quality_path.write_text(
         json.dumps(payload.to_dict(), ensure_ascii=False, indent=2) + "\n",
@@ -189,8 +189,8 @@ def write_useful_god_reports(
     return coverage_path, quality_path
 
 
-def _stem_status(entity: KnowledgeEntity | None) -> str:
-    """Return coverage status label for one stem."""
+def _state_status(entity: KnowledgeEntity | None) -> str:
+    """Return coverage status label for one state."""
     if entity is None:
         return "MISSING"
     return entity.metadata.status.value.upper()

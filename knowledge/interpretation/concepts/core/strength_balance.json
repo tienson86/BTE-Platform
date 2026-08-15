@@ -1,0 +1,33 @@
+{
+  "$schema": "../schemas/concept_entity.schema.json",
+  "id": "strength_balance",
+  "category": "core",
+  "title": "Cân bằng lực nhật chủ",
+  "summary": "Giữ lực nhật chủ trong biên vận hành: không bồi khi đã thừa, không thoát khi đang mỏng.",
+  "meaning": "Cân bằng lực là mục tiêu vận hành của trạng thái thân, không phải một quyết định Dụng thần. Biên cân được engine đo bằng điểm tổng; kiến thức chỉ giải thích hệ quả của việc đứng trong, trên, hoặc dưới biên đó.",
+  "conditions": [
+    "Strength facts đã có level và score từ engine",
+    "Không dùng cân bằng để chọn Dụng thần",
+    "Điều chỉnh hướng theo trạng thái: thừa thì dẫn, thiếu thì dựng nền"
+  ],
+  "applications": {
+    "strength": "Trạng thái trung hòa là đứng trong biên; vượng/nhược là lệch biên cần dẫn hoặc dựng.",
+    "useful_god": "Cân bằng thân là ngữ cảnh cho Decision, không thay Decision Explanation.",
+    "timing": "Giữ biên theo nhịp cục, không đảo hướng mỗi khi điểm dao động nhẹ."
+  },
+  "related_concepts": [
+    { "target_id": "support_day_master", "relationship": "related_to" },
+    { "target_id": "drain_strong_day_master", "relationship": "related_to" },
+    { "target_id": "control_excess", "relationship": "related_to" }
+  ],
+  "related_entities": [],
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/concepts/core/strength_balance.json",
+    "quality": "k3_production"
+  }
+}

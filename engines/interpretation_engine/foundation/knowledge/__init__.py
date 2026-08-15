@@ -6,6 +6,9 @@ from engines.interpretation_engine.foundation.knowledge.entity import (
     KnowledgeMetadata,
 )
 from engines.interpretation_engine.foundation.knowledge.diagnostics import (
+    INVALID_STRENGTH_STATE,
+    STRENGTH_CONCEPTS_MISSING,
+    STRENGTH_KNOWLEDGE_MISSING,
     USEFUL_GOD_KNOWLEDGE_MISSING,
     USEFUL_GOD_ROLE_CONFLICT,
 )
@@ -42,16 +45,27 @@ __all__ = [
     "KnowledgeStatus",
     "KnowledgeValidationResult",
     "KnowledgeValidator",
+    "INVALID_STRENGTH_STATE",
+    "STRENGTH_CONCEPTS_MISSING",
+    "STRENGTH_KNOWLEDGE_MISSING",
     "USEFUL_GOD_KNOWLEDGE_MISSING",
     "USEFUL_GOD_ROLE_CONFLICT",
     "UsefulGodKnowledgeBundle",
     "UsefulGodKnowledgeCoverage",
     "UsefulGodQualityReport",
+    "StrengthAssessment",
+    "StrengthKnowledgeBundle",
+    "StrengthKnowledgeCoverage",
+    "StrengthQualityReport",
     "build_useful_god_knowledge_bundle",
     "build_useful_god_quality_report",
+    "build_strength_assessment",
+    "build_strength_knowledge_bundle",
+    "build_strength_quality_report",
     "get_knowledge_registry",
     "retrieve_knowledge",
     "write_useful_god_reports",
+    "write_strength_reports",
 ]
 
 
@@ -91,4 +105,49 @@ def __getattr__(name: str) -> object:
         )
 
         return build_useful_god_knowledge_bundle
+    if name in {"StrengthKnowledgeBundle", "StrengthKnowledgeCoverage"}:
+        from engines.interpretation_engine.foundation.knowledge.strength_bundle import (
+            StrengthKnowledgeBundle,
+            StrengthKnowledgeCoverage,
+        )
+
+        mapping = {
+            "StrengthKnowledgeBundle": StrengthKnowledgeBundle,
+            "StrengthKnowledgeCoverage": StrengthKnowledgeCoverage,
+        }
+        return mapping[name]
+    if name == "build_strength_knowledge_bundle":
+        from engines.interpretation_engine.foundation.knowledge.strength_retrieval import (
+            build_strength_knowledge_bundle,
+        )
+
+        return build_strength_knowledge_bundle
+    if name in {
+        "StrengthQualityReport",
+        "build_strength_quality_report",
+        "write_strength_reports",
+    }:
+        from engines.interpretation_engine.foundation.knowledge.strength_coverage import (
+            StrengthQualityReport,
+            build_strength_quality_report,
+            write_strength_reports,
+        )
+
+        mapping = {
+            "StrengthQualityReport": StrengthQualityReport,
+            "build_strength_quality_report": build_strength_quality_report,
+            "write_strength_reports": write_strength_reports,
+        }
+        return mapping[name]
+    if name in {"StrengthAssessment", "build_strength_assessment"}:
+        from engines.interpretation_engine.foundation.assessment.strength import (
+            StrengthAssessment,
+            build_strength_assessment,
+        )
+
+        mapping = {
+            "StrengthAssessment": StrengthAssessment,
+            "build_strength_assessment": build_strength_assessment,
+        }
+        return mapping[name]
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

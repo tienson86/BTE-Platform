@@ -1,0 +1,67 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.strength.strong",
+  "domain": "Strength",
+  "key": "strong",
+  "entity_type": "state",
+  "title": "Thân vượng — sức dư cần được dẫn",
+  "meaning": "Thân vượng là trạng thái nhật chủ có lực đủ hoặc thừa so với cục, do Strength Engine xếp từ điểm tổng và đường đánh giá mùa–căn–trợ–tiết–khắc–cân. Đây là assessment, không phải quyết định Dụng thần: không có winner, không có phương án thay. Khi thân vượng, hướng vận hành hữu ích thường là dẫn/tiết/chế để sức dư thành việc dùng được, chứ không phải bồi thêm. Không suy ra 'vượng thì tốt' hay 'vượng thì xấu'.",
+  "positive_meaning": "Có nền lực để chịu tải, hoàn thành việc dài, giữ nhịp khi môi trường đòi hỏi sức bền. Hữu ích khi kênh thoát và chế được giữ phép.",
+  "negative_meaning": "Sức dư không dẫn sẽ dồn: làm quá, ôm việc, khó dừng. Bồi thêm khi đã vượng làm lệch biên cân, không phải 'thêm lực thì mạnh hơn'.",
+  "applications": {
+    "career": "Hợp nhịp chịu tải, giữ việc dài, hoàn thành khối lượng. Phong cách: sức có sẵn, cần kênh ra có phép. Không suy ra một nghề cố định hay thăng tiến chắc.",
+    "wealth": "Thiên đổi sức thành giá trị qua việc đều, ít phụ thuộc 'được nâng'. Rủi ro: chi sức cho vòng quay không thu. Không hứa hiệu quả tài chính.",
+    "relationships": "Dễ trở thành chỗ dựa. Xung đột khi biến sức thành áp lực phải gánh. Điều kiện hỗ trợ: có chỗ để đặt gánh, không biến quan hệ thành kho chứa việc.",
+    "health": "Cân bằng hoạt/nghỉ: dễ thiên làm dày. Cần nhịp xả sau pha chịu tải. Không chẩn đoán, không báo bệnh.",
+    "learning": "Học bằng làm khối lớn, luyện đến thành thạo. Chậm khi cần im để dưỡng; hữu ích khi bài học đòi sức bền.",
+    "decision_making": "Thiên quyết theo việc nào chịu được tải. Hữu ích khi cần giữ nhịp; bất lợi khi cần thu hẹp và ủ."
+  },
+  "recommendations": [
+    {
+      "category": "energy_management",
+      "state": "strong",
+      "action": "Mở một kênh thoát có phép và giữ nhịp, không bồi thêm lực vào thân đã vượng.",
+      "rationale": "Thân vượng cần dẫn, không cần thêm nền."
+    },
+    {
+      "category": "workload",
+      "state": "strong",
+      "action": "Chọn việc chịu tải có hạn, rồi dừng khi khối đã ra, không ôm thêm cửa.",
+      "rationale": "Sức dư hữu dụng khi được giới hạn thành việc."
+    },
+    {
+      "category": "balance_strategy",
+      "state": "strong",
+      "action": "Giữ chế vừa với phần đang lấn; không dùng sức dư để đè mọi phía.",
+      "rationale": "Chế nhằm giảm lấn, không nhằm hủy."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "over_accumulation",
+      "state": "strong",
+      "risk": "Sức dư không dẫn sẽ dồn áp và làm lệch biên cân.",
+      "mitigation": "Giữ một kênh thoát; chèn nhịp nghỉ sau pha chịu tải."
+    },
+    {
+      "condition": "reinforcement_when_strong",
+      "state": "strong",
+      "risk": "Bồi thêm khi đã vượng làm thân nặng hơn, không bền hơn.",
+      "mitigation": "Ưu tiên dẫn/chế trước khi thêm nguồn."
+    }
+  ],
+  "related_entities": [
+    { "domain": "Strength", "key": "balanced" }
+  ],
+  "concept_ids": ["drain_strong_day_master", "control_excess", "strength_balance"],
+  "evidence_notes": "State key `strong` khớp level rule pri_level_strong (điểm tổng >= 0.65, nhãn Thân vượng) và hint special khi engine xếp strong. Assessment path: Season → Roots → Support → Drain → Control → Balance → Strength. Không chứa quyết định Dụng thần. Tra cứu generic theo level engine, không gắn một lá số.",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/domains/strength/strong.json",
+    "quality": "k3_production"
+  }
+}

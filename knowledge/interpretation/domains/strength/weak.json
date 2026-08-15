@@ -1,0 +1,67 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.strength.weak",
+  "domain": "Strength",
+  "key": "weak",
+  "entity_type": "state",
+  "title": "Thân nhược — lực mỏng cần dựng nền",
+  "meaning": "Thân nhược là trạng thái nhật chủ thiếu lực so với cục, do Strength Engine xếp từ điểm tổng và đường đánh giá mùa–căn–trợ–tiết–khắc–cân. Đây là assessment, không phải quyết định Dụng thần và không phải đánh giá phẩm chất người. Khi thân nhược, hướng vận hành hữu ích thường là phù trợ/dưỡng nền trước, chứ không phải mở thêm kênh thoát. Không suy ra 'nhược thì kém' hay 'nhược thì phải tránh việc'.",
+  "positive_meaning": "Biết biên lực giúp chọn việc vừa, dựng nền trước khi bung. Hữu ích khi nguồn trợ và rễ được giữ, không bị rút sớm.",
+  "negative_meaning": "Nền mỏng mà thoát hoặc gánh sẽ làm lệch biên thêm. Ép chịu tải dài khi đang nhược không biến thành vượng; chỉ làm mất đáy.",
+  "applications": {
+    "career": "Hợp nhịp việc có chỗ dựa, khối vừa, thời gian ủ. Phong cách: dựng nền rồi mới ra việc. Không suy ra một nghề cố định hay 'không gánh được trách nhiệm'.",
+    "wealth": "Thiên giữ nguồn, thu nhỏ vòng quay trước khi mở. Rủi ro: chi sức cho việc đòi thoát sớm. Không hứa hiệu quả tài chính.",
+    "relationships": "Cần chỗ nâng, không phải chỗ gửi gánh. Xung đột khi bị biến thành người phải ra sức trước. Điều kiện hỗ trợ: có nền quan hệ ổn trước khi thêm việc chung.",
+    "health": "Ưu tiên phục hồi và nhịp ủ. Tránh pha chịu tải dày khi nền đang mỏng. Không chẩn đoán, không báo bệnh.",
+    "learning": "Học bằng củng cố nền, lặp vòng nhỏ. Hữu ích cho gốc; chậm khi bài đòi bung sức ngay.",
+    "decision_making": "Thiên quyết theo việc nào dựng được nền. Hữu ích khi cần ủ; bất lợi khi cần bung hết lực để ra thành quả ngay."
+  },
+  "recommendations": [
+    {
+      "category": "foundation",
+      "state": "weak",
+      "action": "Dựng nền trước: giữ nguồn trợ và rễ, hoãn mở kênh thoát cho đến khi đáy đủ.",
+      "rationale": "Thân nhược cần phù trợ, không cần thêm cửa thoát."
+    },
+    {
+      "category": "workload",
+      "state": "weak",
+      "action": "Chọn khối vừa với lực đang có; chia việc, không ôm chịu tải dài.",
+      "rationale": "Ra việc quá sớm làm mỏng thêm đáy."
+    },
+    {
+      "category": "energy_management",
+      "state": "weak",
+      "action": "Giữ nhịp ủ–làm ngắn; phục hồi trước khi nhận vòng mới.",
+      "rationale": "Nền mỏng hữu dụng khi được dưỡng theo nhịp."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "over_drain",
+      "state": "weak",
+      "risk": "Mở kênh thoát khi nền đang mỏng làm lệch biên thêm.",
+      "mitigation": "Ưu tiên dựng nền; chỉ thoát nhẹ sau khi đáy đã giữ."
+    },
+    {
+      "condition": "overload_when_weak",
+      "state": "weak",
+      "risk": "Gánh việc chịu tải dài khi đang nhược không tạo vượng, chỉ mất đáy.",
+      "mitigation": "Thu hẹp khối; tìm nguồn trợ trước khi tăng việc."
+    }
+  ],
+  "related_entities": [
+    { "domain": "Strength", "key": "balanced" }
+  ],
+  "concept_ids": ["support_day_master", "generate_support", "strength_balance"],
+  "evidence_notes": "State key `weak` khớp level rule pri_level_weak (điểm tổng <= 0.35, nhãn Thân nhược) và hint special khi engine xếp weak. Assessment path không có winner. Không populate very_weak vì Strength Engine V2 không phát mức đó.",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/domains/strength/weak.json",
+    "quality": "k3_production"
+  }
+}

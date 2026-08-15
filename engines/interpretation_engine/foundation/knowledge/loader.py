@@ -122,6 +122,7 @@ class JsonKnowledgeLoader:
             related_entities=tuple(related),
             concept_ids=concept_ids,
             evidence_notes=str(payload.get("evidence_notes") or ""),
+            entity_type=str(payload.get("entity_type") or ""),
             metadata=KnowledgeMetadata(
                 author=str(meta_raw.get("author") or ""),
                 version=str(meta_raw.get("version") or ""),

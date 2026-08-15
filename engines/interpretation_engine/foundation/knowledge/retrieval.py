@@ -16,6 +16,10 @@ from engines.interpretation_engine.foundation.knowledge.diagnostics import (
     USEFUL_GOD_KNOWLEDGE_MISSING,
     USEFUL_GOD_ROLE_CONFLICT,
 )
+from engines.interpretation_engine.foundation.knowledge.entity_types import (
+    KNOWLEDGE_READINESS_PARTIAL,
+    KNOWLEDGE_READINESS_READY,
+)
 from engines.interpretation_engine.foundation.knowledge.entity import KnowledgeEntity
 from engines.interpretation_engine.foundation.knowledge.registry import KnowledgeRegistry
 from engines.interpretation_engine.foundation.knowledge.service import get_knowledge_registry
@@ -146,6 +150,9 @@ def _assemble_bundle(
     rejected_concepts = _concepts_for_many(rejected_entities, concepts)
 
     status = DataAvailability.PARTIAL if missing_requested else DataAvailability.AVAILABLE
+    readiness = (
+        KNOWLEDGE_READINESS_PARTIAL if missing_requested else KNOWLEDGE_READINESS_READY
+    )
     concept_count = len(
         {
             item.id
@@ -166,6 +173,10 @@ def _assemble_bundle(
         rejected_found=rejected_found,
         rejected_missing=rejected_missing,
         concept_count=concept_count,
+        readiness=readiness,
+        selected_entity_type=(
+            selected_entity.entity_type if selected_entity is not None else ""
+        ),
     )
     return UsefulGodKnowledgeBundle(
         selected_entity=selected_entity,

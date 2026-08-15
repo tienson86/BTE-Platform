@@ -1,0 +1,33 @@
+{
+  "$schema": "../schemas/concept_entity.schema.json",
+  "id": "resource_role",
+  "category": "core",
+  "title": "Vai trò ấn",
+  "summary": "Kênh sinh trợ: học, nuôi nền, cho nhật chủ chỗ dựa.",
+  "meaning": "Vai trò ấn mô tả chức năng sinh/trợ, không mô tả bằng cấp. Hữu dụng khi thân nhược cần nâng; lệch khi ấn thái quá bọc kín, hoặc tranh với tài đang là Dụng.",
+  "conditions": [
+    "Decision Explanation chọn chính/thiên ấn làm Dụng hoặc Hỷ/Kỵ",
+    "Không suy ra học vị hay nghề giáo"
+  ],
+  "applications": {
+    "useful_god": "Dụng thần ấn nhằm dựng nền và nuôi lực.",
+    "hy": "Hỷ thần ấn hỗ trợ dưỡng theo hướng Dụng.",
+    "ky": "Gia cố ấn khi đang bọc kín làm trì và tranh tài."
+  },
+  "related_concepts": [
+    { "target_id": "support_day_master", "relationship": "specializes" }
+  ],
+  "related_entities": [
+    { "domain": "UsefulGod", "key": "Chính Ấn" },
+    { "domain": "UsefulGod", "key": "Thiên Ấn" }
+  ],
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/concepts/core/resource_role.json",
+    "quality": "k2_1_production"
+  }
+}

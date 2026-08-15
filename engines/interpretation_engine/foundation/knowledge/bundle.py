@@ -22,6 +22,8 @@ class UsefulGodKnowledgeCoverage:
     rejected_found: tuple[str, ...]
     rejected_missing: tuple[str, ...]
     concept_count: int
+    readiness: str = "PARTIAL"
+    selected_entity_type: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize coverage."""
@@ -34,6 +36,8 @@ class UsefulGodKnowledgeCoverage:
             "rejected_found": list(self.rejected_found),
             "rejected_missing": list(self.rejected_missing),
             "concept_count": self.concept_count,
+            "readiness": self.readiness,
+            "selected_entity_type": self.selected_entity_type,
         }
 
 

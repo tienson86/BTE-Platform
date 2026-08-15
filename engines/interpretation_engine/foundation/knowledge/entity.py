@@ -54,6 +54,7 @@ class KnowledgeEntity:
     related_entities: tuple[KnowledgeEntityReference, ...] = ()
     concept_ids: tuple[str, ...] = ()
     evidence_notes: str = ""
+    entity_type: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize knowledge entity."""
@@ -61,6 +62,7 @@ class KnowledgeEntity:
             "id": self.id,
             "domain": self.domain,
             "key": self.key,
+            "entity_type": self.entity_type,
             "title": self.title,
             "meaning": self.meaning,
             "positive_meaning": self.positive_meaning,

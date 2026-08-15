@@ -95,7 +95,8 @@ def test_b_approved_entities_meet_quality(
         for entity in entities
         if entity.metadata.status == KnowledgeStatus.APPROVED
     ]
-    assert len(approved) == 10
+    stems = [entity for entity in approved if entity.entity_type == "stem"]
+    assert len(stems) == 10
     result = KnowledgeQualityGate().evaluate_approved(entities)
     assert result.passed, [issue.to_dict() for issue in result.issues]
 
@@ -316,8 +317,8 @@ def test_quality_report_and_coverage_index(
 ) -> None:
     """Coverage index and quality report are generated from live knowledge."""
     report = build_useful_god_quality_report(knowledge_registry=knowledge_registry)
-    assert report.entity_count == 10
-    assert report.approved_count == 10
+    assert report.entity_count >= 10
+    assert report.approved_count >= 10
     assert report.draft_count == 0
     assert report.broken_references == ()
     assert report.missing_required_content == ()
