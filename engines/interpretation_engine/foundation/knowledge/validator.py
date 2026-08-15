@@ -11,8 +11,10 @@ from engines.interpretation_engine.foundation.knowledge.entity_types import (
     CANONICAL_KNOWLEDGE_ENTITY_TYPES,
     KNOWLEDGE_ENTITY_TYPE_PATTERN,
     KNOWLEDGE_ENTITY_TYPE_STATE,
+    KNOWLEDGE_ENTITY_TYPE_TEN_GOD,
     PATTERN_KEYS,
     STRENGTH_STATE_KEYS,
+    TEN_GOD_KEYS,
     USEFUL_GOD_ROLE_KEYS,
     USEFUL_GOD_STEM_KEYS,
 )
@@ -66,10 +68,12 @@ class KnowledgeValidator:
         role_keys_seen: dict[str, str] = {}
         state_keys_seen: dict[str, str] = {}
         pattern_keys_seen: dict[str, str] = {}
+        ten_god_keys_seen: dict[str, str] = {}
         stem_keys = set(USEFUL_GOD_STEM_KEYS)
         role_keys = set(USEFUL_GOD_ROLE_KEYS)
         state_keys = set(STRENGTH_STATE_KEYS)
         pattern_keys = set(PATTERN_KEYS)
+        ten_god_keys = set(TEN_GOD_KEYS)
 
         for entity in entities:
             if not entity.id:
@@ -150,6 +154,14 @@ class KnowledgeValidator:
                         entity,
                         pattern_keys=pattern_keys,
                         pattern_keys_seen=pattern_keys_seen,
+                    )
+                )
+            if entity.domain == "TenGods":
+                issues.extend(
+                    _ten_god_entity_issues(
+                        entity,
+                        ten_god_keys=ten_god_keys,
+                        ten_god_keys_seen=ten_god_keys_seen,
                     )
                 )
 
@@ -410,5 +422,69 @@ def _pattern_entity_issues(
         )
     elif entity.key:
         pattern_keys_seen[entity.key] = entity.id
+
+    return issues
+
+
+def _ten_god_entity_issues(
+    entity: KnowledgeEntity,
+    *,
+    ten_god_keys: set[str],
+    ten_god_keys_seen: dict[str, str],
+) -> list[KnowledgeValidationIssue]:
+    """Validate Ten Gods entities against engine inventory."""
+    issues: list[KnowledgeValidationIssue] = []
+    entity_type = entity.entity_type.strip()
+    if not entity_type:
+        issues.append(
+            KnowledgeValidationIssue(
+                code="unknown_entity_type",
+                message="Ten Gods entity missing entity_type",
+                entity_id=entity.id,
+            )
+        )
+    elif entity_type != KNOWLEDGE_ENTITY_TYPE_TEN_GOD:
+        code = (
+            "unknown_entity_type"
+            if entity_type not in CANONICAL_KNOWLEDGE_ENTITY_TYPES
+            else "entity_type_mismatch"
+        )
+        issues.append(
+            KnowledgeValidationIssue(
+                code=code,
+                message=f"Ten Gods entity_type must be ten_god, got {entity_type}",
+                entity_id=entity.id,
+            )
+        )
+
+    if entity.key and entity.key not in ten_god_keys:
+        issues.append(
+            KnowledgeValidationIssue(
+                code="invalid_ten_god",
+                message=f"invalid Ten Gods key: {entity.key}",
+                entity_id=entity.id,
+            )
+        )
+
+    if not entity.concept_ids:
+        issues.append(
+            KnowledgeValidationIssue(
+                code="ten_god_missing_concept",
+                message="Ten Gods entity missing concept_ids",
+                entity_id=entity.id,
+            )
+        )
+
+    previous = ten_god_keys_seen.get(entity.key)
+    if previous:
+        issues.append(
+            KnowledgeValidationIssue(
+                code="duplicate_role",
+                message=f"duplicate Ten Gods entity for key {entity.key}",
+                entity_id=entity.id,
+            )
+        )
+    elif entity.key:
+        ten_god_keys_seen[entity.key] = entity.id
 
     return issues

@@ -20,7 +20,7 @@ CANONICAL_REASONING_CLASSES: Final[tuple[str, ...]] = (
 
 DECISION_KNOWLEDGE_DOMAINS: Final[tuple[str, ...]] = ("UsefulGod",)
 STATE_KNOWLEDGE_DOMAINS: Final[tuple[str, ...]] = ("Strength",)
-RELATIONSHIP_KNOWLEDGE_DOMAINS: Final[tuple[str, ...]] = ("Pattern",)
+RELATIONSHIP_KNOWLEDGE_DOMAINS: Final[tuple[str, ...]] = ("Pattern", "TenGods")
 
 
 def interpretation_class_for(domain: str) -> str:

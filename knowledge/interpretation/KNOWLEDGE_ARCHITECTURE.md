@@ -69,6 +69,8 @@ Strength
 Relationship Reasoning
 
 Pattern (K4)
+
+Ten Gods (K5)
 ```
 
 ### Decision pipeline

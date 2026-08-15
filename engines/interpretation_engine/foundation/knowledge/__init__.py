@@ -8,12 +8,17 @@ from engines.interpretation_engine.foundation.knowledge.entity import (
 from engines.interpretation_engine.foundation.knowledge.diagnostics import (
     BROKEN_RELATIONSHIP,
     INVALID_PATTERN,
+    INVALID_POSITION,
     INVALID_STRENGTH_STATE,
+    INVALID_TEN_GOD,
     MISSING_NARRATIVE_MAPPING,
     PATTERN_CONCEPTS_MISSING,
     PATTERN_KNOWLEDGE_MISSING,
     STRENGTH_CONCEPTS_MISSING,
     STRENGTH_KNOWLEDGE_MISSING,
+    TEN_GOD_CONCEPTS_MISSING,
+    TEN_GOD_KNOWLEDGE_MISSING,
+    DUPLICATE_ROLE,
     USEFUL_GOD_KNOWLEDGE_MISSING,
     USEFUL_GOD_ROLE_CONFLICT,
 )
@@ -54,6 +59,11 @@ __all__ = [
     "PATTERN_CONCEPTS_MISSING",
     "PATTERN_KNOWLEDGE_MISSING",
     "INVALID_PATTERN",
+    "INVALID_TEN_GOD",
+    "INVALID_POSITION",
+    "TEN_GOD_CONCEPTS_MISSING",
+    "TEN_GOD_KNOWLEDGE_MISSING",
+    "DUPLICATE_ROLE",
     "BROKEN_RELATIONSHIP",
     "MISSING_NARRATIVE_MAPPING",
     "STRENGTH_CONCEPTS_MISSING",
@@ -70,6 +80,9 @@ __all__ = [
     "PatternKnowledgeBundle",
     "PatternKnowledgeCoverage",
     "PatternQualityReport",
+    "TenGodKnowledgeBundle",
+    "TenGodKnowledgeCoverage",
+    "TenGodQualityReport",
     "build_useful_god_knowledge_bundle",
     "build_useful_god_quality_report",
     "build_strength_assessment",
@@ -77,11 +90,14 @@ __all__ = [
     "build_strength_quality_report",
     "build_pattern_knowledge_bundle",
     "build_pattern_quality_report",
+    "build_ten_god_knowledge_bundle",
+    "build_ten_god_quality_report",
     "get_knowledge_registry",
     "retrieve_knowledge",
     "write_useful_god_reports",
     "write_strength_reports",
     "write_pattern_reports",
+    "write_ten_god_reports",
 ]
 
 
@@ -198,6 +214,40 @@ def __getattr__(name: str) -> object:
             "PatternQualityReport": PatternQualityReport,
             "build_pattern_quality_report": build_pattern_quality_report,
             "write_pattern_reports": write_pattern_reports,
+        }
+        return mapping[name]
+    if name in {"TenGodKnowledgeBundle", "TenGodKnowledgeCoverage"}:
+        from engines.interpretation_engine.foundation.knowledge.ten_god_bundle import (
+            TenGodKnowledgeBundle,
+            TenGodKnowledgeCoverage,
+        )
+
+        mapping = {
+            "TenGodKnowledgeBundle": TenGodKnowledgeBundle,
+            "TenGodKnowledgeCoverage": TenGodKnowledgeCoverage,
+        }
+        return mapping[name]
+    if name == "build_ten_god_knowledge_bundle":
+        from engines.interpretation_engine.foundation.knowledge.ten_god_retrieval import (
+            build_ten_god_knowledge_bundle,
+        )
+
+        return build_ten_god_knowledge_bundle
+    if name in {
+        "TenGodQualityReport",
+        "build_ten_god_quality_report",
+        "write_ten_god_reports",
+    }:
+        from engines.interpretation_engine.foundation.knowledge.ten_god_coverage import (
+            TenGodQualityReport,
+            build_ten_god_quality_report,
+            write_ten_god_reports,
+        )
+
+        mapping = {
+            "TenGodQualityReport": TenGodQualityReport,
+            "build_ten_god_quality_report": build_ten_god_quality_report,
+            "write_ten_god_reports": write_ten_god_reports,
         }
         return mapping[name]
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

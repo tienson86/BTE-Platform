@@ -17,7 +17,7 @@
 | Strength | 3 (`strong`, `balanced`, `weak`) | approved |
 | Pattern | 26 (10 main + 5 special + 6 follow + 5 combination) | approved |
 | Temperature | 0 | — |
-| TenGods | 0 | — |
+| TenGods | 11 (10 roles + Nhật Chủ) | approved |
 | ShenSha | 0 | — |
 | Luck | 0 | — |
 | FiveElements | 0 | — |
@@ -47,4 +47,12 @@ Complete domain: facts + relationship assessment + knowledge + interpretation + 
 Engine inventory: 26 codes from `database/14_pattern/`.
 
 Coverage index: `knowledge/interpretation/domains/pattern/COVERAGE.md`
+
+## Sprint K5 — Ten Gods Domain V1
+
+Complete domain: facts + relationship assessment + knowledge + interpretation + narrative mapping.
+
+Engine inventory: 10 classic labels from `TEN_GOD_LABELS` plus `Nhật Chủ` (`god_id=day_master`).
+
+Coverage index: `knowledge/interpretation/domains/ten_gods/COVERAGE.md`
 

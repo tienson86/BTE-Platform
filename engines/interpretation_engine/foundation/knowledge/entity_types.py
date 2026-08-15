@@ -6,6 +6,7 @@ from typing import Final
 
 KNOWLEDGE_ENTITY_TYPE_STATE: Final[str] = "state"
 KNOWLEDGE_ENTITY_TYPE_PATTERN: Final[str] = "pattern"
+KNOWLEDGE_ENTITY_TYPE_TEN_GOD: Final[str] = "ten_god"
 
 CANONICAL_KNOWLEDGE_ENTITY_TYPES: Final[tuple[str, ...]] = (
     "stem",
@@ -13,6 +14,7 @@ CANONICAL_KNOWLEDGE_ENTITY_TYPES: Final[tuple[str, ...]] = (
     "element",
     "state",
     "pattern",
+    "ten_god",
 )
 
 # Strength Engine V2 level rules (database/12_strength/06_priority_rules.csv).
@@ -101,3 +103,25 @@ PATTERN_KEYS: Final[tuple[str, ...]] = (
     *PATTERN_FOLLOW_KEYS,
     *PATTERN_COMBINATION_KEYS,
 )
+
+# Ten Gods Engine labels from engines/ten_gods_engine/constants.py.
+# The 10 classic gods plus Nhật Chủ (god_id=day_master) which the engine emits
+# when a stem equals the day master. Do not guess extra aliases.
+TEN_GOD_ROLE_KEYS: Final[tuple[str, ...]] = (
+    "Tỷ Kiên",
+    "Kiếp Tài",
+    "Thực Thần",
+    "Thương Quan",
+    "Thiên Tài",
+    "Chính Tài",
+    "Thất Sát",
+    "Chính Quan",
+    "Thiên Ấn",
+    "Chính Ấn",
+)
+TEN_GOD_DAY_MASTER_KEY: Final[str] = "Nhật Chủ"
+TEN_GOD_KEYS: Final[tuple[str, ...]] = (
+    *TEN_GOD_ROLE_KEYS,
+    TEN_GOD_DAY_MASTER_KEY,
+)
+TEN_GOD_PILLAR_KEYS: Final[tuple[str, ...]] = ("year", "month", "day", "hour")

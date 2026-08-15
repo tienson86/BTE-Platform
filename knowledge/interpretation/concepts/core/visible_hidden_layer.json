@@ -1,0 +1,30 @@
+{
+  "$schema": "../schemas/concept_entity.schema.json",
+  "id": "visible_hidden_layer",
+  "category": "core",
+  "title": "Lớp hiện và tàng",
+  "summary": "Can lộ là lớp visible; can tàng trong chi là lớp hidden. Cùng nhãn thập thần, khác lớp kích hoạt.",
+  "meaning": "Visible copy từ can trụ. Hidden copy từ hidden_stems.csv theo chi. Knowledge không đổi trọng số; facts giữ visibility và weight đã có.",
+  "conditions": [
+    "visibility là visible hoặc hidden",
+    "Không cộng dồn hidden thành visible",
+    "Không bỏ hidden khi luận quan hệ"
+  ],
+  "applications": {
+    "ten_gods": "Bundle lấy cả visible và hidden roles.",
+    "relationship": "Stem lộ và branch tàng đều có cạnh supports tới ten_god."
+  },
+  "related_concepts": [
+    { "target_id": "pillar_position", "relationship": "related_to" }
+  ],
+  "related_entities": [],
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/concepts/core/visible_hidden_layer.json",
+    "quality": "k5_production"
+  }
+}

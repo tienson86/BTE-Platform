@@ -1,0 +1,30 @@
+{
+  "$schema": "../schemas/concept_entity.schema.json",
+  "id": "pillar_position",
+  "category": "core",
+  "title": "Vị trí trụ",
+  "summary": "Year/month/day/hour là vị trí xuất hiện, không tạo entity thập thần riêng.",
+  "meaning": "Cùng một thập thần có thể đứng năm, tháng, ngày hoặc giờ. Knowledge một entity; facts giữ pillar. Năm thiên gốc sớm, tháng thiên lệnh, ngày thiên thân/cung phối cấu trúc, giờ thiên đầu ra — đều là khung vị trí, không phải dự báo sự kiện.",
+  "conditions": [
+    "pillar thuộc year|month|day|hour",
+    "Không tách 4 file knowledge cho mỗi trụ",
+    "Không suy tiểu sử từ vị trí"
+  ],
+  "applications": {
+    "ten_gods": "Interpretation gắn activation theo visibility:pillar đã copy.",
+    "narrative": "Composer sau này map vị trí, không bịa trụ mới."
+  },
+  "related_concepts": [
+    { "target_id": "visible_hidden_layer", "relationship": "related_to" }
+  ],
+  "related_entities": [],
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "source": "knowledge/interpretation/concepts/core/pillar_position.json",
+    "quality": "k5_production"
+  }
+}

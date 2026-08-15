@@ -64,6 +64,18 @@ from engines.interpretation_engine.foundation.knowledge.pattern_bundle import (
 from engines.interpretation_engine.foundation.knowledge.pattern_retrieval import (
     build_pattern_knowledge_bundle,
 )
+from engines.interpretation_engine.foundation.interpreters.ten_gods import (
+    TenGodFacts,
+    TenGodInterpretationBundle,
+    build_ten_god_facts,
+    build_ten_god_interpretation_bundle,
+)
+from engines.interpretation_engine.foundation.knowledge.ten_god_bundle import (
+    TenGodKnowledgeBundle,
+)
+from engines.interpretation_engine.foundation.knowledge.ten_god_retrieval import (
+    build_ten_god_knowledge_bundle,
+)
 
 __all__ = [
     "CanonicalAnalysisContext",
@@ -83,6 +95,9 @@ __all__ = [
     "RelationshipExplainer",
     "StrengthAssessment",
     "StrengthKnowledgeBundle",
+    "TenGodFacts",
+    "TenGodInterpretationBundle",
+    "TenGodKnowledgeBundle",
     "UsefulGodInterpreter",
     "UsefulGodInterpretationResult",
     "UsefulGodKnowledgeBundle",
@@ -92,6 +107,9 @@ __all__ = [
     "build_pattern_knowledge_bundle",
     "build_strength_assessment",
     "build_strength_knowledge_bundle",
+    "build_ten_god_facts",
+    "build_ten_god_interpretation_bundle",
+    "build_ten_god_knowledge_bundle",
     "build_useful_god_knowledge_bundle",
     "retrieve_concept",
     "retrieve_concepts_for_knowledge",

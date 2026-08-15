@@ -1,0 +1,60 @@
+{
+  "$schema": "../../schemas/knowledge_entity.schema.json",
+  "id": "knowledge.ten_gods.nhat_chu",
+  "domain": "TenGods",
+  "key": "Nhật Chủ",
+  "entity_type": "ten_god",
+  "title": "Nhật Chủ — trục can ngày, không phải thập thần chức năng",
+  "meaning": "Nhật Chủ là chính can ngày. Engine phát nhãn này khi stem == day_master, kể cả trụ năm/tháng/giờ trùng can. Đây là trục so sánh, không phải Tỷ Kiên. Không suy ra 'có mình' hay tính cách từ việc xuất hiện nhiều lần.",
+  "positive_meaning": "Trục rõ: mọi vai khác được đọc so với can này. Hữu ích để không nhầm đồng khí.",
+  "negative_meaning": "Lặp can ngày trên nhiều trụ dễ bị đọc nhầm thành Tỷ Kiên. Không tự thành mạnh hay yếu — sức thuộc Strength Engine.",
+  "applications": {
+    "career": "Là gốc nhận vai, không phải mô tả nghề. Không suy ra lãnh đạo.",
+    "wealth": "Không phải kênh nguồn. Tài/quan/ấn mới là kênh.",
+    "relationships": "Ngày trụ thiên thân/cung phối cấu trúc; không dự báo hôn nhân.",
+    "health": "Không chẩn đoán từ nhãn trục.",
+    "learning": "Là điểm đọc, không phải chương học.",
+    "decision_making": "Mọi quyết trong hệ được neo vào trục này; không tự chọn Dụng."
+  },
+  "recommendations": [
+    {
+      "category": "identity",
+      "action": "Giữ nhãn Nhật Chủ khi can trùng ngày; không đổi thành Tỷ Kiên.",
+      "rationale": "Engine truth thắng nhãn đủ bộ 10."
+    },
+    {
+      "category": "scope",
+      "action": "Đọc sức từ Strength, vai từ thập thần khác, không từ số lần Nhật Chủ.",
+      "rationale": "Trục không phải đếm điểm."
+    }
+  ],
+  "warnings": [
+    {
+      "condition": "relabel_peer",
+      "risk": "Gán Tỷ Kiên cho can trùng nhật chủ làm sai quan hệ.",
+      "mitigation": "Giữ Nhật Chủ; Tỷ Kiên chỉ khi can khác cùng loại."
+    }
+  ],
+  "related_entities": [
+    {
+      "domain": "TenGods",
+      "key": "Tỷ Kiên"
+    }
+  ],
+  "concept_ids": [
+    "ten_god_relation",
+    "pillar_position",
+    "visible_hidden_layer",
+    "day_master_axis"
+  ],
+  "evidence_notes": "DAY_MASTER_LABEL Nhật Chủ, god_id day_master. mapper.map_stem_to_ten_god khi stem == day_master.",
+  "metadata": {
+    "author": "BTE Knowledge Team",
+    "version": "1.0.0",
+    "created": "2026-08-15",
+    "updated": "2026-08-15",
+    "status": "approved",
+    "quality": "k5_production",
+    "source": "knowledge/interpretation/domains/ten_gods/nhat_chu.json"
+  }
+}
