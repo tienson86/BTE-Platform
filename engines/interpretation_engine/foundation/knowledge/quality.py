@@ -15,6 +15,10 @@ _TOKEN_RE = re.compile(
     r"chính quan|thất sát|chính ấn|thiên ấn|"
     r"giáp|ất|bính|đinh|mậu|kỷ|canh|tân|nhâm|quý|"
     r"thân vượng|thân nhược|trung hòa|rất vượng|rất nhược|"
+    r"khúc trực|viêm thượng|nhuận hạ|giá sắc|giá vượng|"
+    r"tòng vượng|tòng tài|tòng sát|tòng quan|tòng nhi|tòng ấn|"
+    r"quan ấn|sát ấn|thực thần sinh tài|thương quan phối ấn|tài quan song mỹ|"
+    r"kiến lộc|dương nhẫn|"
     r"\bvery_strong\b|\bvery_weak\b|\bstrong\b|\bbalanced\b|\bweak\b",
     re.IGNORECASE,
 )

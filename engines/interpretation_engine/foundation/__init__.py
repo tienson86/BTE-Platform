@@ -42,6 +42,12 @@ from engines.interpretation_engine.foundation.knowledge.strength_bundle import (
 from engines.interpretation_engine.foundation.knowledge.strength_retrieval import (
     build_strength_knowledge_bundle,
 )
+from engines.interpretation_engine.foundation.relationship import (
+    GenericRelationshipExplainer,
+    RelationshipAssessment,
+    RelationshipExplainer,
+    validate_relationship_assessment,
+)
 from engines.interpretation_engine.foundation.interpreters.useful_god import (
     UsefulGodInterpreter,
     UsefulGodInterpretationResult,
@@ -54,9 +60,12 @@ __all__ = [
     "DecisionExplanationResult",
     "DecisionExplainer",
     "EngineSources",
+    "GenericRelationshipExplainer",
     "InterpretationFoundationBundle",
     "KnowledgeEntity",
     "KnowledgeRegistry",
+    "RelationshipAssessment",
+    "RelationshipExplainer",
     "StrengthAssessment",
     "StrengthKnowledgeBundle",
     "UsefulGodInterpreter",
@@ -70,4 +79,5 @@ __all__ = [
     "retrieve_concepts_for_knowledge",
     "retrieve_knowledge",
     "validate_decision_explanation",
+    "validate_relationship_assessment",
 ]

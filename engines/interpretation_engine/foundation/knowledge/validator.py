@@ -9,7 +9,9 @@ from engines.interpretation_engine.foundation.knowledge.domains import CANONICAL
 from engines.interpretation_engine.foundation.knowledge.entity import KnowledgeEntity
 from engines.interpretation_engine.foundation.knowledge.entity_types import (
     CANONICAL_KNOWLEDGE_ENTITY_TYPES,
+    KNOWLEDGE_ENTITY_TYPE_PATTERN,
     KNOWLEDGE_ENTITY_TYPE_STATE,
+    PATTERN_KEYS,
     STRENGTH_STATE_KEYS,
     USEFUL_GOD_ROLE_KEYS,
     USEFUL_GOD_STEM_KEYS,
@@ -63,9 +65,11 @@ class KnowledgeValidator:
         index: dict[tuple[str, str], KnowledgeEntity] = {}
         role_keys_seen: dict[str, str] = {}
         state_keys_seen: dict[str, str] = {}
+        pattern_keys_seen: dict[str, str] = {}
         stem_keys = set(USEFUL_GOD_STEM_KEYS)
         role_keys = set(USEFUL_GOD_ROLE_KEYS)
         state_keys = set(STRENGTH_STATE_KEYS)
+        pattern_keys = set(PATTERN_KEYS)
 
         for entity in entities:
             if not entity.id:
@@ -138,6 +142,14 @@ class KnowledgeValidator:
                         entity,
                         state_keys=state_keys,
                         state_keys_seen=state_keys_seen,
+                    )
+                )
+            if entity.domain == "Pattern":
+                issues.extend(
+                    _pattern_entity_issues(
+                        entity,
+                        pattern_keys=pattern_keys,
+                        pattern_keys_seen=pattern_keys_seen,
                     )
                 )
 
@@ -334,5 +346,69 @@ def _strength_state_issues(
         )
     elif entity.key:
         state_keys_seen[entity.key] = entity.id
+
+    return issues
+
+
+def _pattern_entity_issues(
+    entity: KnowledgeEntity,
+    *,
+    pattern_keys: set[str],
+    pattern_keys_seen: dict[str, str],
+) -> list[KnowledgeValidationIssue]:
+    """Validate Pattern entities against engine inventory."""
+    issues: list[KnowledgeValidationIssue] = []
+    entity_type = entity.entity_type.strip()
+    if not entity_type:
+        issues.append(
+            KnowledgeValidationIssue(
+                code="unknown_entity_type",
+                message="Pattern entity missing entity_type",
+                entity_id=entity.id,
+            )
+        )
+    elif entity_type != KNOWLEDGE_ENTITY_TYPE_PATTERN:
+        code = (
+            "unknown_entity_type"
+            if entity_type not in CANONICAL_KNOWLEDGE_ENTITY_TYPES
+            else "entity_type_mismatch"
+        )
+        issues.append(
+            KnowledgeValidationIssue(
+                code=code,
+                message=f"Pattern entity_type must be pattern, got {entity_type}",
+                entity_id=entity.id,
+            )
+        )
+
+    if entity.key and entity.key not in pattern_keys:
+        issues.append(
+            KnowledgeValidationIssue(
+                code="invalid_pattern",
+                message=f"invalid Pattern key: {entity.key}",
+                entity_id=entity.id,
+            )
+        )
+
+    if not entity.concept_ids:
+        issues.append(
+            KnowledgeValidationIssue(
+                code="pattern_missing_concept",
+                message="Pattern entity missing concept_ids",
+                entity_id=entity.id,
+            )
+        )
+
+    previous = pattern_keys_seen.get(entity.key)
+    if previous:
+        issues.append(
+            KnowledgeValidationIssue(
+                code="duplicate_entity",
+                message=f"duplicate Pattern entity for key {entity.key}",
+                entity_id=entity.id,
+            )
+        )
+    elif entity.key:
+        pattern_keys_seen[entity.key] = entity.id
 
     return issues

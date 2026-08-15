@@ -35,3 +35,9 @@ Engine inventory (Strength Engine V2 level rules): `strong` | `balanced` | `weak
 `very_strong` and `very_weak` are not emitted by the engine and are not populated.
 
 Coverage index: `knowledge/interpretation/domains/strength/COVERAGE.md`
+
+## Sprint R1 — Relationship Reasoning Framework
+
+Framework only. No domain knowledge populated.
+
+Relationship knowledge domains remain empty until a later sprint.

@@ -48,38 +48,71 @@ get(domain, key) → KnowledgeEntity | None
 
 The interpreter does not know file paths, JSON vs YAML, or future database backends.
 
-## Semantic interpretation classes (K3)
+## Semantic interpretation classes (K3 / R1)
 
-Do not merge these classes. They use different reasoning structures.
+The reasoning layer contains exactly three classes. Do not merge them.
+No additional reasoning class without explicit architectural review.
 
 ```text
-Decision Domain
+Decision Reasoning
 
 Useful God
 ```
 
 ```text
-State Domain
+State Reasoning
 
 Strength
 ```
 
-### Decision pipeline (Useful God)
+```text
+Relationship Reasoning
+
+Framework only (R1)
+```
+
+### Decision pipeline
 
 ```text
 Engine Truth → Canonical Facts → Decision Explanation → Knowledge → Narrative
 ```
 
-### State pipeline (Strength)
+Winner and alternatives. Not used for state or relationship.
+
+### State pipeline
 
 ```text
 Engine Truth → Canonical Facts → Assessment → Knowledge → Narrative
 ```
 
-Strength uses Assessment, not Decision. No winner. No alternatives.
+Condition/state. No winner. No alternatives.
 
-Assessment path:
+### Relationship pipeline
 
 ```text
-Season → Roots → Support → Drain → Control → Balance → Strength
+Engine Truth → Canonical Facts → Relationship Assessment → Relationship Knowledge → Narrative
+```
+
+Interaction only. No decisions. No state evaluation.
+
+Relationship types (semantic, not encoded rules):
+
+```text
+supports | generates | drains | controls | balances | conflicts | transforms | combines
+```
+
+Meaning belongs to Knowledge. Relationship belongs to Reasoning.
+
+Conceptual future uses (not implemented in R1; names are documentation only):
+
+```text
+Month Command → Day Master → Pattern relationship
+```
+
+```text
+Ten God → Day Master → Role interaction
+```
+
+```text
+Luck cycle → Natal chart → Relationship
 ```
