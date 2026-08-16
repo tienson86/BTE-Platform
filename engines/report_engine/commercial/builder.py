@@ -60,7 +60,10 @@ class CommercialReportBuilder:
             purchase_package=request.purchase_package,
             writing_variant=request.writing_variant,
         )
-        cover = self._build_cover(request, theme.customer_name)
+        cover = self._build_cover(
+            request,
+            self._consulting_class(request, theme.customer_name),
+        )
         narrative_payload = request.narrative_result
         narrative_ok = is_usable_narrative_result(narrative_payload)
         chapters = [self._canonical_narrative_chapter(narrative_payload)]
@@ -188,21 +191,21 @@ class CommercialReportBuilder:
             text = block.strip()
             if text.startswith("Sự nghiệp"):
                 paragraphs.append(text)
-        rec = str(by_id.get("sec-recommendation", {}).get("body") or "")
-        rec_added = 0
-        for block in rec.split("\n\n"):
-            text = block.strip()
-            if not text:
-                continue
-            paragraphs.append(text)
-            rec_added += 1
-            if rec_added >= 3:
-                break
-        if current_dayun and not any("Đại vận" in item for item in paragraphs):
-            paragraphs.append(
-                f"Khung thời gian của bản luận là Đại vận {current_dayun}."
-            )
         return paragraphs
+
+    @staticmethod
+    def _consulting_class(
+        request: CommercialBuildRequest,
+        fallback: str,
+    ) -> str:
+        """Prefer the case thesis title already composed for this PDF."""
+        payload = request.narrative_result or {}
+        metadata = payload.get("metadata") if isinstance(payload, dict) else None
+        thesis = metadata.get("case_thesis") if isinstance(metadata, dict) else None
+        title = ""
+        if isinstance(thesis, dict):
+            title = str(thesis.get("title") or "").strip()
+        return title or fallback
 
     def _build_cover(
         self,

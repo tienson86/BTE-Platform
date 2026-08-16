@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Báo cáo tư vấn — Lương Ngọc Huỳnh</title>
+  <style>/* Report V1 — print-friendly foundation (UTF-8, Vietnamese-safe stack) */
+
+:root {
+  --report-text: #1a1a1a;
+  --report-muted: #555;
+  --report-border: #d8d8d8;
+  --report-accent: #2c4a6e;
+  --report-bg: #ffffff;
+  --report-font: "Segoe UI", Arial, "Noto Sans", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--report-bg);
+  color: var(--report-text);
+  font-family: var(--report-font);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.report-v1 {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 32px 40px 48px;
+}
+
+.report-v1__header {
+  border-bottom: 2px solid var(--report-accent);
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+}
+
+.report-v1__title {
+  color: var(--report-accent);
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.report-v1__subtitle {
+  color: var(--report-muted);
+  font-size: 13px;
+  margin: 0;
+}
+
+.report-v1__section {
+  margin-bottom: 24px;
+  page-break-inside: avoid;
+}
+
+.report-v1__section-title {
+  border-left: 4px solid var(--report-accent);
+  color: var(--report-accent);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 10px;
+  padding-left: 10px;
+  page-break-after: avoid;
+}
+
+.report-v1__section-body {
+  margin: 0;
+}
+
+.report-v1__section-body p {
+  margin: 0 0 10px;
+}
+
+.report-v1__meta-grid {
+  display: grid;
+  gap: 8px 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+
+.report-v1__meta-grid dt {
+  color: var(--report-muted);
+  font-weight: 600;
+  margin: 0;
+}
+
+.report-v1__meta-grid dd {
+  margin: 0 0 8px;
+}
+
+.report-v1__table {
+  border-collapse: collapse;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.report-v1__table th,
+.report-v1__table td {
+  border: 1px solid var(--report-border);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.report-v1__table th {
+  background: #f4f6f8;
+  font-weight: 600;
+}
+
+.report-v1__pillars {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.report-v1__pillar-card {
+  border: 1px solid var(--report-border);
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.report-v1__pillar-card h3 {
+  font-size: 14px;
+  margin: 0 0 6px;
+}
+
+.report-v1__pillar-card p {
+  margin: 0 0 4px;
+}
+
+.report-v1__list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.report-v1__fallback {
+  color: var(--report-muted);
+  font-style: italic;
+}
+
+.report-v1__footer {
+  border-top: 1px solid var(--report-border);
+  color: var(--report-muted);
+  font-size: 12px;
+  margin-top: 32px;
+  padding-top: 12px;
+}
+
+@media print {
+  @page {
+    margin: 18mm 16mm;
+    size: A4;
+  }
+
+  body {
+    background: #fff;
+    font-size: 12px;
+  }
+
+  .report-v1 {
+    max-width: none;
+    padding: 0;
+  }
+
+  .report-v1__section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .report-v1__section-title {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .report-v1__table {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .report-v1__pillars {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.report-commercial__kicker {
+  color: var(--report-accent);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+.report-commercial__class {
+  color: var(--report-accent);
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+.report-commercial__cover .report-v1__meta-grid {
+  margin-top: 16px;
+}
+.report-commercial__section {
+  margin: 0 0 16px;
+}
+.report-commercial__section h3 {
+  color: var(--report-text);
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+.report-commercial__appendix {
+  border-top: 1px dashed var(--report-border);
+  margin-top: 32px;
+  padding-top: 16px;
+}
+</style>
+</head>
+<body>
+  <main class="report-v1">
+    <header class="report-v1__header report-commercial__cover"><p class="report-commercial__kicker">BTE Consulting</p><h1 class="report-v1__title">Báo cáo tư vấn</h1><p class="report-commercial__class">Người kiến tạo</p><p class="report-v1__subtitle">Một bản tư vấn — đọc như một cuộc trao đổi, không như bảng tính.</p><dl class="report-v1__meta-grid"><dt>Khách hàng</dt><dd>Lương Ngọc Huỳnh</dd><dt>Hồ sơ</dt><dd>HUYNH</dd><dt>Ngày sinh dương lịch</dt><dd>1966-09-24 — 04:15</dd><dt>Ngày sinh âm lịch</dt><dd>10/08/1966</dd><dt>Nơi sinh</dt><dd>Hà Nội, Việt Nam</dd><dt>Cung Phi</dt><dd>Đoài</dd><dt>Mệnh Quái</dt><dd>Đoài</dd><dt>Nhóm Trạch</dt><dd>Tây Tứ Trạch</dd><dt>Tuổi khởi Đại vận</dt><dd>5</dd><dt>Đại vận hiện tại</dt><dd>Quý Mão 2021–2030</dd><dt>Đại vận 1</dt><dd>Mậu Tuất 1971–1980</dd><dt>Đại vận 2</dt><dd>Kỷ Hợi 1981–1990</dd><dt>Đại vận 3</dt><dd>Canh Tý 1991–2000</dd><dt>Đại vận 4</dt><dd>Tân Sửu 2001–2010</dd><dt>Đại vận 5</dt><dd>Nhâm Dần 2011–2020</dd><dt>Đại vận 6</dt><dd>Quý Mão 2021–2030</dd><dt>Đại vận 7</dt><dd>Giáp Thìn 2031–2040</dd><dt>Đại vận 8</dt><dd>Ất Tỵ 2041–2050</dd><dt>Đại vận 9</dt><dd>Bính Ngọ 2051–2060</dd><dt>Đại vận 10</dt><dd>Đinh Mùi 2061–2070</dd><dt>Ngũ hành</dt><dd>Mộc:2.0, Hỏa:7.0, Thổ:4.0, Kim:4.0, Thủy:0.0</dd><dt>Thập thần</dt><dd>Tỷ Kiên, Kiếp Tài, Nhật Chủ, Thiên Tài</dd><dt>Giới tính</dt><dd>Nam</dd><dt>Hướng tư vấn</dt><dd>Người kiến tạo</dd></dl></header><section class="report-v1__section report-commercial__chapter" id="canonical_narrative"><h2 class="report-v1__section-title">Bản luận Bát tự</h2><article class="report-commercial__section" id="sec-executive_summary"><h3>Tóm tắt điều hành</h3><p>Người kiến tạo. Lá số cho thấy xu hướng sức gánh cao trên nền Chính Tài.</p><p>Cấu trúc này phù hợp hơn khi giữ nhiệt điểm, tinh luyện đúng chỗ.</p><p>Rủi ro tăng khi nguồn vận hành được nhưng dễ bị cắt lạnh thay vì được luyện thành giá trị.</p><p>Việc nên làm trước: Vun kỹ năng tinh luyện, mentoring và kiểm soát chất lượng.</p><p>Khung thời gian của bản luận là Đại vận Quý Mão 2021–2030.</p></article><article class="report-commercial__section" id="sec-observation"><h3>Quan sát</h3><p>Nhật chủ: Bính (Hỏa).</p><p>Lệnh tháng: Dậu; mùa: Thu.</p><p>Dụng thần được chọn: Đinh.</p><p>Hỷ thần: Đinh, Bính, Ất.</p><p>Kỵ thần: Canh, Tân.</p><p>Đại vận hiện tại: Quý Mão 2021–2030.</p><p>Thân vượng</p><p>Thiên Tài — nguồn lệch cửa, cơ hội không cố định</p></article><article class="report-commercial__section" id="sec-reasoning"><h3>Lý giải</h3><p>Nền Chính Tài và trạng thái Thân vượng giải thích vì sao hướng chỉnh là giữ nhiệt điểm, tinh luyện đúng chỗ.</p><p>Nhật chủ: Bính (Hỏa). Thu kim vượng cần hỏa tôi luyện Vì vậy, Đinh: Thu kim vượng cần hỏa tôi luyện</p></article><article class="report-commercial__section" id="sec-impact"><h3>Tác động</h3><p>Sự nghiệp: Sự nghiệp phù hợp hơn khi giữ nhiệt điểm, tinh luyện đúng chỗ; rủi ro tăng khi biến chỗ làm thành chỗ cắt lạnh quá sớm phần đang cần luyện.</p><p>Tài chính: Tài chính nên chọn lọc chất, không cắt lạnh vòng vốn đang luyện.</p><p>Quan hệ: Quan hệ dễ thành chỗ tính-cắt; cần giữ nhiệt luyện, bớt nhát cắt lạnh.</p><p>Sức khỏe: Sức khỏe: giữ nhịp nghỉ sau pha gánh; không hiểu còn sức là không cần phục hồi.</p></article><article class="report-commercial__section" id="sec-recommendation"><h3>Khuyến nghị</h3><p>1. Củng cố: Vun kỹ năng tinh luyện, mentoring và kiểm soát chất lượng.</p><p>2. Củng cố: Giữ lửa vừa: đủ để tôi luyện và sưởi, không đốt rộng.</p><p>3. Dùng: Khi Bính là Hỷ chứ không phải Dụng, dùng nó để hỗ trợ ánh sáng — không lấy phủ rộng thay nhiệt điểm.</p><p>4. Củng cố: Nuôi Đinh (Hỏa)</p><p>5. Làm: Vận hành một dòng nguồn có hạn mức, không ôm mọi nghĩa vụ.</p></article><article class="report-commercial__section" id="sec-warning"><h3>Lưu ý</h3><p>1. Lấy Ất Hỷ thần làm kim chỉ nam thay Dụng thần — hỗ trợ bị hiểu thành hướng chính. Giữ Ất ở vai trò tiếp sức; ưu tiên vẫn là Dụng đã chọn.</p><p>2. Nhiệt điểm quá mức thành căng, khô cục bộ, mất nhu. Giữ lửa; chèn nhịp nguội và độ ẩm hành vi (nghỉ, không hun).</p><p>3. Gia cố Tân khi là Kỵ làm tăng chê bai và khí lạnh — đi ngược hướng cần nhiệt luyện nếu Dụng là hỏa. Giảm kích hoạt sắc lạnh, không cấm tuyệt độ chính xác.</p></article><article class="report-commercial__section" id="sec-conclusion"><h3>Kết luận</h3><p>Người kiến tạo: cấu trúc này phù hợp hơn khi giữ nhiệt điểm, tinh luyện đúng chỗ. Rủi ro tăng khi nguồn vận hành được nhưng dễ bị cắt lạnh thay vì được luyện thành giá trị. Giữ hướng này trên nền Chính Tài.</p></article></section><section class="report-v1__section report-commercial__chapter" id="career"><h2 class="report-v1__section-title">Sự nghiệp</h2><article class="report-commercial__section" id="career-core"><h3>Sự nghiệp</h3><p>Sự nghiệp: Sự nghiệp phù hợp hơn khi giữ nhiệt điểm, tinh luyện đúng chỗ; rủi ro tăng khi biến chỗ làm thành chỗ cắt lạnh quá sớm phần đang cần luyện.</p></article></section><footer class="report-v1__footer">BTE · Báo cáo tư vấn</footer>
+  </main>
+</body>
+</html>

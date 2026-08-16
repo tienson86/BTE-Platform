@@ -11,9 +11,13 @@ from engines.interpretation_engine.foundation.narrative.constants import (
     COMMERCIAL_SHENSHA_LIMIT,
     GOVERNING_APPLICATION_DOMAINS,
     KIND_APPLICATION,
+    KIND_RECOMMENDATION,
+    KIND_WARNING,
     SHENSHA_CANONICAL_OVER_ALIAS,
     SLOT_IMPACT,
     SLOT_OBSERVATION,
+    SLOT_RECOMMENDATION,
+    SLOT_WARNING,
 )
 from engines.interpretation_engine.foundation.narrative.input import (
     ChartFocus,
@@ -62,6 +66,37 @@ _SKIP_OBSERVATION_LABELS = (
     "phân bố ngũ hành:",
     "thân: strong",
     "thân: weak",
+    "thân: balanced",
+)
+_GLOSSARY_MARKERS = (
+    "là quan hệ ",
+    "không suy ra",
+    "sao quý nhân đầy đủ tên",
+    "hệ thống xác định nhãn",
+    "tên gọi khác",
+    "không phải thập thần",
+    "khắc nghịch",
+    "đồng khí đối cực",
+    "tiết thuận, đổi sức",
+)
+_GENERIC_RECOMMENDATION = (
+    "làm trọng tâm khi cần điều tiết",
+    "ưu tiên hành động gắn hỷ",
+    "môi trường thuận: không khí có yếu tố",
+    "hạn chế khuếch đại",
+    "trước quyết định lớn: kiểm tra",
+    "giữ nhãn nhật chủ",
+    "đọc sức từ strength",
+    "không từ số lần nhật chủ",
+    "khi là kỵ",
+)
+_GENERIC_WARNING = (
+    "hệ vượng bị kìm",
+    "mất ổn định khi hệ mất cân",
+    "cam kết dài hạn trong môi trường xung khắc",
+    "giữ ba bước nhận diện",
+    "thành một quý",
+    "giữ nhật chủ",
 )
 
 
@@ -116,6 +151,12 @@ def statement_is_relevant(
         return False
     if statement.slot == SLOT_OBSERVATION and _is_skip_observation(text):
         return False
+    if statement.kind == KIND_RECOMMENDATION or statement.slot == SLOT_RECOMMENDATION:
+        if _is_generic_recommendation(text):
+            return False
+    if statement.kind == KIND_WARNING or statement.slot == SLOT_WARNING:
+        if _is_generic_warning(text):
+            return False
     if focus is None:
         return not is_hypothetical_role_leak(text, ChartFocus())
     if is_hypothetical_role_leak(text, focus):
@@ -149,11 +190,27 @@ def _name_fits_role(name: str, role: str, focus: ChartFocus) -> bool:
 
 
 def _is_skip_observation(text: str) -> bool:
-    """Drop score dumps and climate internals from Observation."""
+    """Drop score dumps, climate internals, and glossary from Observation."""
     lowered = text.casefold()
     if _SCORE_DUMP.search(text):
         return True
-    return any(label in lowered for label in _SKIP_OBSERVATION_LABELS)
+    if any(label in lowered for label in _SKIP_OBSERVATION_LABELS):
+        return True
+    if any(marker in lowered for marker in _GLOSSARY_MARKERS):
+        return True
+    return False
+
+
+def _is_generic_recommendation(text: str) -> bool:
+    """Drop ritual recommendations that could apply to almost any chart."""
+    lowered = text.casefold()
+    return any(marker in lowered for marker in _GENERIC_RECOMMENDATION)
+
+
+def _is_generic_warning(text: str) -> bool:
+    """Drop template warnings that are not this chart's risk."""
+    lowered = text.casefold()
+    return any(marker in lowered for marker in _GENERIC_WARNING)
 
 
 def _application_domain_allowed(statement: CopiedStatement, focus: ChartFocus) -> bool:

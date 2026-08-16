@@ -140,17 +140,16 @@ IMPACT_CUSTOMER_DOMAINS: Final[tuple[str, ...]] = (
     CUSTOMER_DOMAIN_FINANCE,
     CUSTOMER_DOMAIN_RELATIONSHIP,
     CUSTOMER_DOMAIN_HEALTH,
-    CUSTOMER_DOMAIN_LEARNING,
-    CUSTOMER_DOMAIN_DECISION,
 )
 
 COMMERCIAL_OBSERVATION_LIMIT: Final[int] = 8
+COMMERCIAL_OBSERVATION_MIN: Final[int] = 5
 COMMERCIAL_SUMMARY_LIMIT: Final[int] = 6
-COMMERCIAL_REASONING_LIMIT: Final[int] = 6
-COMMERCIAL_IMPACT_PER_DOMAIN: Final[int] = 2
+COMMERCIAL_REASONING_LIMIT: Final[int] = 4
+COMMERCIAL_IMPACT_PER_DOMAIN: Final[int] = 1
 COMMERCIAL_RECOMMENDATION_LIMIT: Final[int] = 5
 COMMERCIAL_WARNING_LIMIT: Final[int] = 3
-COMMERCIAL_CONCLUSION_LIMIT: Final[int] = 6
+COMMERCIAL_CONCLUSION_LIMIT: Final[int] = 2
 COMMERCIAL_SHENSHA_LIMIT: Final[int] = 2
 REASONING_DOMAIN_ORDER: Final[tuple[str, ...]] = (
     "Pattern",
@@ -158,6 +157,19 @@ REASONING_DOMAIN_ORDER: Final[tuple[str, ...]] = (
     "UsefulGod",
     "TenGods",
     "ShenSha",
+)
+GOVERNING_REASONING_DOMAINS: Final[tuple[str, ...]] = (
+    "Pattern",
+    "Strength",
+    "UsefulGod",
+)
+RECOMMENDATION_DIRECTIVE_VERBS: Final[tuple[str, ...]] = (
+    "Làm",
+    "Tránh",
+    "Xây",
+    "Củng cố",
+    "Giảm",
+    "Dùng",
 )
 GOVERNING_APPLICATION_DOMAINS: Final[frozenset[str]] = frozenset(
     {"UsefulGod", "Strength", "Pattern"}

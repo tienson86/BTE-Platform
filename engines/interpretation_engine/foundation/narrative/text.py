@@ -13,11 +13,16 @@ _ENGINE_PAIR = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*\s*[=:]")
 _GRAPH_EDGE = re.compile(r".+->.+->.+")
 _NUMERIC_ASSIGNMENT = re.compile(r"[A-Za-z_][A-Za-z0-9_]*=-?\d")
 _BARE_ENGINE_TOKENS = frozenset(
-    {"year", "month", "day", "hour", "strong", "weak", "normal"}
+    {"year", "month", "day", "hour", "strong", "weak", "normal", "balanced"}
 )
 _BROKEN_FRAGMENT = re.compile(
     r"\(\s*\)|Tách vs\s*\.|trong\s*,|khi nói\s+\.|:\s*$"
 )
+_ENGINE_LEVEL = re.compile(
+    r"^(balanced|strong|weak|normal)\b",
+    re.IGNORECASE,
+)
+_DIRECTIVE_VERBS = ("Làm", "Tránh", "Xây", "Củng cố", "Giảm", "Dùng")
 _DISCLAIMER_PHRASES = (
     "Không hứa hiệu quả tài chính.",
     "Không chẩn đoán, không báo bệnh.",
@@ -75,7 +80,41 @@ def is_broken_fragment(value: str) -> bool:
         return False
     if "()" in text or "( )" in text:
         return True
-    return bool(_BROKEN_FRAGMENT.search(text))
+    if _BROKEN_FRAGMENT.search(text):
+        return True
+    # Concatenated labels without a sentence, e.g. "Hệ vượng bị kìm / căng …"
+    if " / " in text and "." not in text.split(" / ", 1)[0]:
+        return True
+    return False
+
+
+def strip_engine_level_prefix(value: str) -> str:
+    """Drop English strength tokens leaked beside a Vietnamese label."""
+    text = normalize_text(value)
+    cleaned = _ENGINE_LEVEL.sub("", text).strip(" /-")
+    return cleaned or text
+
+
+def directive_recommendation(action: str) -> str:
+    """Start a customer recommendation with an allowed directive verb."""
+    text = normalize_text(action)
+    if not text:
+        return text
+    for verb in _DIRECTIVE_VERBS:
+        if text.startswith(f"{verb} ") or text.startswith(f"{verb}:"):
+            return text
+    lowered = text.casefold()
+    if lowered.startswith(("không ", "tránh ", "hạn chế ", "đừng ")):
+        return f"Tránh: {text}"
+    if lowered.startswith(("giảm ", "cắt ", "thu hẹp ")):
+        return f"Giảm: {text}"
+    if lowered.startswith(("giữ ", "vun ", "nuôi ", "bồi ")):
+        return f"Củng cố: {text}"
+    if lowered.startswith(("dùng ", "khi ")):
+        return f"Dùng: {text}"
+    if lowered.startswith(("xây ", "dựng ")):
+        return f"Xây: {text}"
+    return f"Làm: {text}"
 
 
 def collapse_repeated_disclaimer(value: str) -> str:
@@ -88,6 +127,13 @@ def collapse_repeated_disclaimer(value: str) -> str:
                 phrase, ""
             )
             text = normalize_text(text)
+    if text.count("Không chẩn đoán") > 1:
+        first = text.find("Không chẩn đoán")
+        rest = text[first + len("Không chẩn đoán") :]
+        rest = rest.replace("Không chẩn đoán, không báo bệnh.", "")
+        rest = rest.replace("Không chẩn đoán.", "")
+        rest = rest.replace("Không chẩn đoán", "")
+        text = normalize_text(text[: first + len("Không chẩn đoán")] + rest)
     return text
 
 

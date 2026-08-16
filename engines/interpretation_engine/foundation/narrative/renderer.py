@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from dataclasses import replace
+
 from engines.interpretation_engine.foundation.narrative.case_thesis.models import (
     CaseThesisResult,
 )
@@ -21,9 +23,9 @@ from engines.interpretation_engine.foundation.narrative.constants import (
     COMMERCIAL_RECOMMENDATION_LIMIT,
     COMMERCIAL_SUMMARY_LIMIT,
     COMMERCIAL_WARNING_LIMIT,
+    GOVERNING_REASONING_DOMAINS,
     IMPACT_CUSTOMER_DOMAINS,
     NARRATIVE_SECTIONS,
-    REASONING_DOMAIN_ORDER,
     SECTION_CONCLUSION,
     SECTION_EXECUTIVE_SUMMARY,
     SECTION_IMPACT,
@@ -55,8 +57,10 @@ from engines.interpretation_engine.foundation.narrative.quality import (
 )
 from engines.interpretation_engine.foundation.narrative.text import (
     collapse_repeated_disclaimer,
+    directive_recommendation,
     fingerprint,
     is_customer_prose,
+    strip_engine_level_prefix,
 )
 
 
@@ -71,12 +75,13 @@ def render_sections(
 ) -> tuple[tuple[NarrativeSection, ...], tuple[TraceabilityRecord, ...]]:
     """Render seven sections. Repeated evidence is dropped, not rewritten."""
     by_name: dict[str, list[NarrativeSentence]] = {name: [] for name in NARRATIVE_SECTIONS}
-    _render_summary(graph, by_name, thesis)
+    chosen_recs = _choose_recommendations(recommendations, thesis)
     _render_observations(graph, by_name)
     _render_reasoning(chains, graph, by_name, thesis)
     _render_impacts(applications, graph, by_name, thesis)
-    _render_recommendations(recommendations, graph, by_name, thesis)
+    _render_recommendations(chosen_recs, graph, by_name)
     _render_warnings(warnings, graph, by_name, thesis)
+    _render_summary(graph, by_name, thesis, chosen_recs)
     _render_conclusions(graph, by_name, thesis)
     sections = tuple(
         NarrativeSection(
@@ -99,33 +104,43 @@ def _render_summary(
     graph: EvidenceGraph,
     by_name: dict[str, list[NarrativeSentence]],
     thesis: CaseThesisResult | None = None,
+    recommendations: tuple[RecommendationItem, ...] = (),
 ) -> None:
-    """Executive Summary begins from the case thesis."""
+    """Executive Summary is the whole consultation in at most six sentences."""
     if thesis is not None and thesis.status == "complete":
+        parts = _split_sentences(thesis.short_thesis)
+        identity = thesis.title.strip()
+        governing = parts[0] if parts else ""
+        first = f"{identity}. {governing}".strip() if governing else f"{identity}."
+        briefing: list[str] = [first]
+        for extra in parts[1:3]:
+            briefing.append(extra)
+        if recommendations:
+            action = recommendations[0].action
+            if ": " in action:
+                action = action.split(": ", 1)[1]
+            briefing.append(f"Việc nên làm trước: {action}")
+        luck = _luck_frame(graph)
+        if luck:
+            briefing.append(luck)
         _append_thesis_texts(
             SECTION_EXECUTIVE_SUMMARY,
-            (thesis.title, *_split_sentences(thesis.short_thesis)),
+            tuple(briefing),
             thesis.evidence_ids,
             graph,
             by_name,
             limit=COMMERCIAL_SUMMARY_LIMIT,
         )
-    remaining = COMMERCIAL_SUMMARY_LIMIT - len(by_name[SECTION_EXECUTIVE_SUMMARY])
-    if remaining <= 0:
         return
-    used = {
-        fingerprint(sentence.text) for sentence in by_name[SECTION_EXECUTIVE_SUMMARY]
-    }
     candidates = [
         node
         for node in _ranked_nodes(graph)
         if SLOT_TO_SECTION.get(node.slot) == SECTION_EXECUTIVE_SUMMARY
         and is_customer_prose(node.statement)
-        and fingerprint(node.statement) not in used
     ]
     _append_plain(
         SECTION_EXECUTIVE_SUMMARY,
-        candidates[:remaining],
+        candidates[:COMMERCIAL_SUMMARY_LIMIT],
         graph,
         by_name,
     )
@@ -135,19 +150,30 @@ def _render_observations(
     graph: EvidenceGraph,
     by_name: dict[str, list[NarrativeSentence]],
 ) -> None:
-    """Observation lists current-chart facts the consultant can see."""
-    candidates = [
-        node
-        for node in _ranked_nodes(graph)
-        if SLOT_TO_SECTION.get(node.slot) == SECTION_OBSERVATION
-        and is_customer_prose(node.statement)
-    ]
-    _append_plain(
-        SECTION_OBSERVATION,
-        candidates[:COMMERCIAL_OBSERVATION_LIMIT],
-        graph,
-        by_name,
-    )
+    """Observation lists 5–8 current-chart facts. No glossary, no repeated labels."""
+    seen: set[str] = set()
+    chosen: list[EvidenceNode] = []
+    for node in _ranked_nodes(graph):
+        if SLOT_TO_SECTION.get(node.slot) != SECTION_OBSERVATION:
+            continue
+        text = strip_engine_level_prefix(node.statement)
+        if not is_customer_prose(text):
+            continue
+        mark = fingerprint(text)
+        if mark in seen:
+            continue
+        if any(
+            mark != prior and (mark.startswith(prior) or prior.startswith(mark))
+            for prior in seen
+        ):
+            continue
+        seen.add(mark)
+        if text != node.statement:
+            node = replace(node, statement=text)
+        chosen.append(node)
+        if len(chosen) >= COMMERCIAL_OBSERVATION_LIMIT:
+            break
+    _append_plain(SECTION_OBSERVATION, chosen, graph, by_name)
 
 
 def _render_reasoning(
@@ -156,9 +182,7 @@ def _render_reasoning(
     by_name: dict[str, list[NarrativeSentence]],
     thesis: CaseThesisResult | None = None,
 ) -> None:
-    """Reasoning follows Pattern → Strength → Useful God, then supporting roles."""
-    grouped: dict[str, list[ReasoningChain]] = {name: [] for name in REASONING_DOMAIN_ORDER}
-    seen_reasons: set[str] = set()
+    """One synthesis: Pattern + Strength + Useful God as Fact → Reason → Therefore."""
     if thesis is not None and thesis.status == "complete" and thesis.evidence_ids:
         why = (
             f"Nền {thesis.core_pattern} và trạng thái {thesis.core_strength} "
@@ -172,28 +196,35 @@ def _render_reasoning(
             by_name,
             limit=1,
         )
-    for chain in _ranked_chains(chains, graph):
-        if chain.reason_id in seen_reasons:
-            continue
-        domain = chain.domain if chain.domain in grouped else ""
-        if not domain:
-            continue
-        grouped[domain].append(chain)
-        seen_reasons.add(chain.reason_id)
-    used_marks: set[str] = set()
-    for domain in REASONING_DOMAIN_ORDER:
-        topic_chains = grouped[domain][:2]
-        if not topic_chains:
-            continue
-        text = _topic_reasoning_text(topic_chains, used_marks)
-        if not is_customer_prose(text):
-            continue
+    synthesis = _governing_therefore_text(chains, graph)
+    if synthesis:
         evidence_ids = tuple(
             dict.fromkeys(
                 evidence_id
-                for chain in topic_chains
+                for chain in _governing_chains(chains, graph)
                 for evidence_id in (*chain.fact_ids, *chain.evidence_ids, chain.reason_id)
             )
+        )
+        if thesis is not None and thesis.evidence_ids:
+            evidence_ids = tuple(dict.fromkeys((*thesis.evidence_ids, *evidence_ids)))
+        sentence = _sentence(
+            SECTION_REASONING,
+            len(by_name[SECTION_REASONING]),
+            synthesis,
+            evidence_ids,
+            graph,
+        )
+        if sentence is not None:
+            by_name[SECTION_REASONING].append(sentence)
+    if by_name[SECTION_REASONING]:
+        return
+    used_marks: set[str] = set()
+    for chain in _governing_chains(chains, graph):
+        text = _therefore_text(chain, used_marks)
+        if not is_customer_prose(text):
+            continue
+        evidence_ids = tuple(
+            dict.fromkeys((*chain.fact_ids, *chain.evidence_ids, chain.reason_id))
         )
         sentence = _sentence(
             SECTION_REASONING,
@@ -214,9 +245,8 @@ def _render_impacts(
     by_name: dict[str, list[NarrativeSentence]],
     thesis: CaseThesisResult | None = None,
 ) -> None:
-    """Impact is one concise paragraph per customer life area."""
+    """Impact is one thesis paragraph per life area. Not leftover knowledge."""
     grouped: dict[str, list[ApplicationItem]] = {topic: [] for topic in IMPACT_CUSTOMER_DOMAINS}
-    used_local: set[str] = set()
     ranked = sorted(
         applications,
         key=lambda item: rank_key(
@@ -232,15 +262,12 @@ def _render_impacts(
             continue
         if not is_customer_prose(item.statement):
             continue
-        if used_local.intersection(item.evidence_ids) and grouped[item.customer_domain]:
-            continue
         grouped[item.customer_domain].append(item)
-        used_local.update(item.evidence_ids)
     for topic in IMPACT_CUSTOMER_DOMAINS:
-        items = grouped[topic][:COMMERCIAL_IMPACT_PER_DOMAIN]
-        heading = domain_heading(topic)
         implication = _thesis_implication(thesis, topic)
-        if not items and not implication:
+        items = () if implication else tuple(grouped[topic][:COMMERCIAL_IMPACT_PER_DOMAIN])
+        heading = domain_heading(topic)
+        if not implication and not items:
             continue
         statements = tuple(dict.fromkeys(item.statement for item in items if item.statement))
         body_parts = [part for part in (implication, *statements) if part]
@@ -265,13 +292,11 @@ def _render_impacts(
             by_name[SECTION_IMPACT].append(sentence)
 
 
-def _render_recommendations(
+def _choose_recommendations(
     recommendations: tuple[RecommendationItem, ...],
-    graph: EvidenceGraph,
-    by_name: dict[str, list[NarrativeSentence]],
-    thesis: CaseThesisResult | None = None,
-) -> None:
-    """Recommendation section exposes a ranked commercial shortlist."""
+    thesis: CaseThesisResult | None,
+) -> tuple[RecommendationItem, ...]:
+    """Rank a shortlist of case-specific directives. No ritual Hỷ lists."""
     ranked = sorted(
         recommendations,
         key=lambda item: (
@@ -285,23 +310,42 @@ def _render_recommendations(
         ),
         reverse=True,
     )
-    seen_ids: set[str] = set()
     seen_actions: set[str] = set()
     chosen: list[RecommendationItem] = []
     for item in ranked:
-        if not is_customer_prose(item.action):
+        action = directive_recommendation(item.action)
+        if not is_customer_prose(action):
             continue
-        if seen_ids.intersection(item.evidence_ids):
-            continue
-        mark = fingerprint(item.action)
+        mark = fingerprint(action)
         if mark in seen_actions:
             continue
-        chosen.append(item)
-        seen_ids.update(item.evidence_ids)
+        chosen.append(
+            RecommendationItem(
+                recommendation_id=item.recommendation_id,
+                action=action,
+                rationale=item.rationale,
+                category=item.category,
+                evidence_ids=item.evidence_ids,
+                bundle_id=item.bundle_id,
+                domain=item.domain,
+                customer_domain=item.customer_domain,
+                confidence=item.confidence,
+                importance=item.importance,
+            )
+        )
         seen_actions.add(mark)
         if len(chosen) >= COMMERCIAL_RECOMMENDATION_LIMIT:
             break
-    for index, item in enumerate(chosen, start=1):
+    return tuple(chosen)
+
+
+def _render_recommendations(
+    recommendations: tuple[RecommendationItem, ...],
+    graph: EvidenceGraph,
+    by_name: dict[str, list[NarrativeSentence]],
+) -> None:
+    """Recommendation section exposes a ranked commercial shortlist."""
+    for index, item in enumerate(recommendations, start=1):
         sentence = _sentence(
             SECTION_RECOMMENDATION,
             len(by_name[SECTION_RECOMMENDATION]),
@@ -319,7 +363,7 @@ def _render_warnings(
     by_name: dict[str, list[NarrativeSentence]],
     thesis: CaseThesisResult | None = None,
 ) -> None:
-    """Warning section exposes the principal current-chart risks."""
+    """Warning section exposes at most three current-chart risks."""
     ranked = sorted(
         warnings,
         key=lambda item: (
@@ -364,11 +408,12 @@ def _render_conclusions(
     by_name: dict[str, list[NarrativeSentence]],
     thesis: CaseThesisResult | None = None,
 ) -> None:
-    """Conclusion synthesizes the governing reading; it does not restart a catalogue."""
+    """Conclusion is one memorable ending. It does not restart a catalogue."""
     if thesis is not None and thesis.status == "complete":
         closing = (
             f"{thesis.title}: cấu trúc này phù hợp hơn khi {thesis.corrective_direction}. "
-            f"Rủi ro tăng khi {thesis.core_tension}."
+            f"Rủi ro tăng khi {thesis.core_tension}. "
+            f"Giữ hướng này trên nền {thesis.core_pattern}."
         )
         _append_thesis_texts(
             SECTION_CONCLUSION,
@@ -378,6 +423,7 @@ def _render_conclusions(
             by_name,
             limit=1,
         )
+        return
     used = {
         fingerprint(sentence.text)
         for name in (
@@ -511,6 +557,83 @@ def _ranked_chains(
 ) -> list[ReasoningChain]:
     """Order reasoning chains with the same ranking rules."""
     return sorted(chains, key=lambda chain: _chain_score(chain, graph), reverse=True)
+
+
+def _governing_chains(
+    chains: tuple[ReasoningChain, ...],
+    graph: EvidenceGraph,
+) -> list[ReasoningChain]:
+    """Keep Pattern / Strength / Useful God chains only — not a Ten God catalogue."""
+    chosen: list[ReasoningChain] = []
+    seen: set[str] = set()
+    ordered = sorted(
+        (chain for chain in chains if chain.domain in GOVERNING_REASONING_DOMAINS),
+        key=lambda chain: (
+            {"UsefulGod": 0, "Strength": 1, "Pattern": 2}.get(chain.domain, 9),
+            -_chain_score(chain, graph),
+        ),
+    )
+    for chain in ordered:
+        if chain.domain not in GOVERNING_REASONING_DOMAINS:
+            continue
+        if chain.reason_id in seen:
+            continue
+        seen.add(chain.reason_id)
+        chosen.append(chain)
+    return chosen
+
+
+def _governing_therefore_text(
+    chains: tuple[ReasoningChain, ...],
+    graph: EvidenceGraph,
+) -> str:
+    """Join governing chains into one Fact → Reason → Therefore meaning."""
+    used: set[str] = set()
+    parts: list[str] = []
+    for chain in _governing_chains(chains, graph):
+        piece = _therefore_text(chain, used)
+        if is_customer_prose(piece):
+            parts.append(piece)
+        if parts:
+            break
+    return " ".join(parts)
+
+
+def _therefore_text(chain: ReasoningChain, seen: set[str]) -> str:
+    """Copy fact, reason, and conclusion as one therefore-chain."""
+    parts: list[str] = []
+    for piece in (chain.fact, chain.reason):
+        if not is_customer_prose(piece):
+            continue
+        mark = fingerprint(piece)
+        if not mark or mark in seen:
+            continue
+        seen.add(mark)
+        parts.append(piece)
+    conclusion = chain.conclusion
+    if is_customer_prose(conclusion):
+        mark = fingerprint(conclusion)
+        if mark and mark not in seen:
+            seen.add(mark)
+            if not conclusion.casefold().startswith("vì vậy"):
+                conclusion = f"Vì vậy, {conclusion}"
+            parts.append(conclusion)
+    return " ".join(parts)
+
+
+def _luck_frame(graph: EvidenceGraph) -> str:
+    """Copy the confirmed current Da Yun as a time frame, not a reading."""
+    for node in graph.nodes:
+        ref = node.engine_truth_ref.casefold()
+        if "current_dayun" in ref and is_customer_prose(node.statement):
+            if node.statement.startswith("Khung thời gian"):
+                return node.statement
+    for node in graph.nodes:
+        if "current_dayun" in node.engine_truth_ref.casefold() and is_customer_prose(
+            node.statement
+        ):
+            return node.statement
+    return ""
 
 
 def _topic_reasoning_text(chains: list[ReasoningChain], seen: set[str]) -> str:
