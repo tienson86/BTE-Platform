@@ -13,6 +13,7 @@ from engines.interpretation_engine.foundation.narrative.collect import (
     extend_copied,
 )
 from engines.interpretation_engine.foundation.narrative.constants import (
+    CUSTOMER_DOMAIN_DECISION,
     KIND_APPLICATION,
     KIND_CONCLUSION,
     KIND_EVIDENCE,
@@ -46,13 +47,17 @@ def copy_decision_explanation(
         reason = explanation.decision.reason
         confidence = explanation.decision.confidence
         refs.extend(explanation.decision.supporting_evidence_ids)
+        summary = (
+            f"{selected}: {reason}" if selected and reason else (reason or selected)
+        )
         extend_copied(
             statements,
             copy_statement(
-                selected,
+                summary,
                 kind=KIND_CONCLUSION,
                 slot=SLOT_SUMMARY,
                 engine_truth_ref=f"{prefix}:selected",
+                customer_domain=CUSTOMER_DOMAIN_DECISION,
                 confidence=confidence,
             ),
         )
@@ -61,8 +66,9 @@ def copy_decision_explanation(
             copy_statement(
                 reason,
                 kind=KIND_REASON,
-                slot=SLOT_SUMMARY,
+                slot=SLOT_REASONING,
                 engine_truth_ref=f"{prefix}:reason",
+                customer_domain=CUSTOMER_DOMAIN_DECISION,
                 confidence=confidence,
             ),
         )
@@ -103,6 +109,20 @@ def copy_decision_explanation(
             ),
         )
         refs.extend(step.rule_refs)
+    for alt in explanation.alternatives:
+        if alt.status != "rejected":
+            continue
+        extend_copied(
+            statements,
+            copy_statement(
+                alt.rejection_reason or f"{alt.candidate} rejected",
+                kind=KIND_REASON,
+                slot=SLOT_REASONING,
+                engine_truth_ref=f"{prefix}:rejected:{alt.candidate}",
+                customer_domain=CUSTOMER_DOMAIN_DECISION,
+                confidence=confidence,
+            ),
+        )
     for item in explanation.domain_meaning:
         extend_copied(
             statements,

@@ -81,7 +81,7 @@ def compose_narrative_v2(source: NarrativeComposerInput) -> NarrativeComposerRes
 
 
 def compose_narrative_v2_from_production(output: Any) -> NarrativeComposerResult:
-    """Compose from production output without replacing Pack 05 rendering."""
+    """Compose from production engine output. Does not calculate astrology."""
     from engines.interpretation_engine.foundation.narrative.production import (
         build_composer_input_from_production,
     )

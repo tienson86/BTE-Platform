@@ -46,15 +46,24 @@ ANALYZE_BODY = {
 
 
 def test_a_narrative_created_before_report_single_compose(monkeypatch) -> None:
-    """A + single-generation: NarrativeEngine runs once before report consume."""
-    calls = {"count": 0}
-    original = NarrativeEngine.compose_narrative_result
+    """A + single-generation: Narrative Composer V2 runs once before report consume."""
+    v2_calls = {"count": 0}
+    pack05_calls = {"count": 0}
+    from applications.api.services import narrative_result_truth as truth
 
-    def _counted(self, *args, **kwargs):
-        calls["count"] += 1
-        return original(self, *args, **kwargs)
+    original_v2 = truth.compose_narrative_v2_from_production
+    original_pack05 = NarrativeEngine.compose_narrative_result
 
-    monkeypatch.setattr(NarrativeEngine, "compose_narrative_result", _counted)
+    def _counted_v2(output):
+        v2_calls["count"] += 1
+        return original_v2(output)
+
+    def _counted_pack05(self, *args, **kwargs):
+        pack05_calls["count"] += 1
+        return original_pack05(self, *args, **kwargs)
+
+    monkeypatch.setattr(truth, "compose_narrative_v2_from_production", _counted_v2)
+    monkeypatch.setattr(NarrativeEngine, "compose_narrative_result", _counted_pack05)
     payload = OrchestratorService().analyze(
         year=1990,
         month=5,
@@ -63,8 +72,10 @@ def test_a_narrative_created_before_report_single_compose(monkeypatch) -> None:
         minute=30,
         gender="male",
     )
-    assert calls["count"] == 1
+    assert v2_calls["count"] == 1
+    assert pack05_calls["count"] == 0
     assert payload["narrative_result"]["contract"] == "pack05_narrative_result_v1"
+    assert payload["narrative_result"].get("generator") == "narrative_composer_v2"
     report = ReportEngine().render_from_analysis(
         type("Analysis", (), {"interpretation": object(), "narrative_result": None})(),
         narrative_result=payload["narrative_result"],

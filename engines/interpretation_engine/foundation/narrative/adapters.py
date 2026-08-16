@@ -50,6 +50,7 @@ from engines.interpretation_engine.foundation.narrative.constants import (
     BUNDLE_KIND_KNOWLEDGE,
     BUNDLE_KIND_RELATIONSHIP,
     BUNDLE_KIND_STATE,
+    CUSTOMER_DOMAIN_HEALTH,
     KIND_APPLICATION,
     KIND_CONCLUSION,
     KIND_EVIDENCE,
@@ -141,20 +142,11 @@ def build_state_bundle(*, domain: str, assessment: StrengthAssessment) -> StateB
     extend_copied(
         statements,
         copy_statement(
-            assessment.state,
-            kind=KIND_CONCLUSION,
-            slot=SLOT_SUMMARY,
-            engine_truth_ref=f"{prefix}:state",
-            confidence=assessment.confidence,
-        ),
-    )
-    extend_copied(
-        statements,
-        copy_statement(
             assessment.label,
             kind=KIND_FACT,
             slot=SLOT_SUMMARY,
             engine_truth_ref=f"{prefix}:label",
+            customer_domain=CUSTOMER_DOMAIN_HEALTH,
             confidence=assessment.confidence,
         ),
     )

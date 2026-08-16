@@ -14,6 +14,7 @@ from __future__ import annotations
 
 from datetime import datetime
 import logging
+from types import SimpleNamespace
 from typing import Any, Literal
 
 from engines.bazi_engine.engine import BaziEngine
@@ -21,6 +22,10 @@ from engines.pattern_engine.utils.context_builder import build_pattern_context
 from engines.calendar_engine.engine import CalendarEngine
 from engines.feng_shui_engine import FengShuiEngine, FengShuiEngineError
 from engines.interpretation_engine.engine import InterpretationEngine
+from engines.interpretation_engine.foundation import (
+    EngineSources,
+    build_interpretation_foundation,
+)
 from engines.luck_engine import LuckEngine
 from engines.pattern_engine.engine import PatternEngine
 from engines.pattern_engine.rule_context_bridge import (
@@ -36,6 +41,7 @@ from engines.useful_god_engine.engine import UsefulGodEngine
 from engines.useful_god_engine.utils.context_builder import build_useful_god_context
 from engines.report_engine.engine import ReportEngine
 from engines.score_engine.engine import ScoreEngine
+from engines.ten_gods_engine.engine import TenGodsEngine
 
 from applications.api.exceptions import PipelineAPIError
 from applications.api.models.analysis_result import AnalysisMeta, AnalysisResult
@@ -184,6 +190,7 @@ class OrchestratorService:
         self.luck_engine = LuckEngine()
         self.interpretation_engine = InterpretationEngine()
         self.report_engine = ReportEngine()
+        self.ten_gods_engine = TenGodsEngine()
 
     def _shape_calendar(
         self,
@@ -309,6 +316,100 @@ class OrchestratorService:
             payload.pop(key, None)
         payload["pipeline"] = self._public_pipeline(completed)
         return payload
+
+    def _narrative_pipeline_source(
+        self,
+        *,
+        analysis: AnalysisResult,
+        calendar: Any,
+        feng_view: dict[str, Any] | None,
+        pattern_context: Any,
+        pattern_result: Any,
+        useful_god_result: Any,
+        strength_result: Any,
+        temperature_result: Any,
+        published_rule_context: dict[str, Any],
+        luck_context: Any,
+        year: int,
+        month: int,
+        day: int,
+        hour: int,
+        minute: int,
+        gender: str,
+        timezone: str,
+        run_id: str,
+    ) -> SimpleNamespace:
+        """Assemble already-run engine outputs for Narrative Composer V2.
+
+        Does not recalculate Pattern, Strength, or Useful God.
+        """
+        bazi_view = analysis.bazi
+        pillars = {
+            "year": {
+                "stem": bazi_view.year_pillar.stem,
+                "branch": bazi_view.year_pillar.branch,
+            },
+            "month": {
+                "stem": bazi_view.month_pillar.stem,
+                "branch": bazi_view.month_pillar.branch,
+            },
+            "day": {
+                "stem": bazi_view.day_pillar.stem,
+                "branch": bazi_view.day_pillar.branch,
+            },
+            "hour": {
+                "stem": bazi_view.hour_pillar.stem,
+                "branch": bazi_view.hour_pillar.branch,
+            },
+        }
+        ten_gods = self.ten_gods_engine.calculate(
+            day_master=bazi_view.day_master,
+            pillars=pillars,
+            case_id=run_id or None,
+        )
+        calendar_payload = self._shape_calendar(
+            calendar,
+            analysis.bazi_dict(),
+            feng_view,
+        )
+        luck_payload = shape_luck_payload(luck_context)
+        five_elements_payload = build_five_elements_payload(
+            published_rule_context.get("wuxing") or {}
+        )
+        foundation = build_interpretation_foundation(
+            analysis=analysis,
+            calendar=calendar_payload,
+            luck=luck_payload,
+            five_elements=five_elements_payload,
+            feng_shui=feng_view or {},
+            identity={
+                "full_name": "",
+                "gender": gender,
+                "birth_datetime": (
+                    f"{year:04d}-{month:02d}-{day:02d} {hour:02d}:{minute:02d}"
+                ),
+                "timezone": timezone,
+            },
+            engine_sources=EngineSources(
+                useful_god_result=useful_god_result,
+                strength_result=strength_result,
+                temperature_result=temperature_result,
+                ten_gods_result=ten_gods,
+                pattern_context=pattern_context,
+                pattern_result=pattern_result,
+                rule_context=published_rule_context,
+            ),
+            pattern_dieu_hau=analysis.pattern.dieu_hau if analysis.pattern else "",
+        )
+        return SimpleNamespace(
+            analysis=analysis,
+            interpretation_foundation=foundation,
+            strength_result=strength_result,
+            pattern_context=pattern_context,
+            pattern_result=pattern_result,
+            ten_gods=ten_gods,
+        )
+
 
     def _run(
         self,
@@ -580,7 +681,7 @@ class OrchestratorService:
         completed.append("interpretation")
         payload["interpretation"] = analysis.interpretation_dict()
         payload["interpretation_source"] = analysis.meta.interpretation_source
-        # Pack 05 NarrativeResult — official commercial narrative for Portal.
+        # Canonical NarrativeResult V2 — Pack 05 is legacy fallback only.
         analysis_bag = {
             "bazi": payload.get("bazi") or {},
             "pattern": payload.get("pattern") or {},
@@ -588,10 +689,31 @@ class OrchestratorService:
             "useful_god": payload.get("useful_god") or {},
             "score": payload.get("score") or {},
         }
+        narrative_engine_output = self._narrative_pipeline_source(
+            analysis=analysis,
+            calendar=calendar,
+            feng_view=feng_view,
+            pattern_context=pattern_context,
+            pattern_result=pattern_result,
+            useful_god_result=useful_god_result,
+            strength_result=strength_result,
+            temperature_result=temperature_result,
+            published_rule_context=published_rule_context,
+            luck_context=luck_context,
+            year=year,
+            month=month,
+            day=day,
+            hour=hour,
+            minute=minute,
+            gender=gender or "",
+            timezone=timezone,
+            run_id=str(payload.get("request_id") or ""),
+        )
         narrative_result_payload = build_narrative_result_dict(
             analysis=analysis_bag,
             interpretation=payload.get("interpretation") or {},
             run_id=str(payload.get("request_id") or ""),
+            engine_output=narrative_engine_output,
         )
         analysis.narrative_result = narrative_result_payload
         payload["narrative_result"] = narrative_result_payload

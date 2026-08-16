@@ -23,6 +23,9 @@ from engines.interpretation_engine.foundation.narrative.models import (
     NarrativeComposerResult,
     NarrativeSection,
 )
+from engines.interpretation_engine.foundation.narrative.result_v2 import (
+    narrative_result_v2_to_dict,
+)
 from engines.interpretation_engine.foundation.narrative.production import (
     build_composer_input_from_production,
 )
@@ -44,4 +47,5 @@ __all__ = [
     "build_composer_input_from_production",
     "compose_narrative_v2",
     "compose_narrative_v2_from_production",
+    "narrative_result_v2_to_dict",
 ]

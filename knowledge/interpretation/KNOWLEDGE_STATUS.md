@@ -64,11 +64,9 @@ Engine inventory: 12 names from production `ShenShaService` (`engines/bazi_engin
 
 Coverage index: `knowledge/interpretation/domains/shensha/COVERAGE.md`
 
-## Sprint N1 — Narrative Composer V2
+## Sprint N1.1 — Narrative Composer V2 production cutover
 
-Composition layer only. Receives Decision, State, Relationship, and Knowledge bundles. Produces the seven canonical narrative sections.
+Narrative Composer V2 is the canonical production generator. Pack 05 NarrativeEngine remains legacy fallback only. Live Portal/PDF/report keep `pack05_narrative_result_v1` section ids.
 
-Does not calculate astrology, select winners, or own knowledge. Pack 05 `NarrativeEngine` remains the current report renderer during migration.
-
-Coverage: `engines/interpretation_engine/foundation/narrative/`
+Cutover choke point: `applications/api/services/narrative_result_truth.py`. Coverage is ranked by importance / confidence / customer relevance / bundle priority, then grouped by customer topic. Evidence graph is required on every sentence. Dedup is by evidence identity, not identical wording.
 

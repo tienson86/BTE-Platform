@@ -87,6 +87,7 @@ class ReasoningChain:
     fact: str
     reason: str
     conclusion: str
+    topic: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize a reasoning chain."""
@@ -94,6 +95,7 @@ class ReasoningChain:
             "chain_id": self.chain_id,
             "bundle_id": self.bundle_id,
             "domain": self.domain,
+            "topic": self.topic,
             "fact_ids": list(self.fact_ids),
             "evidence_ids": list(self.evidence_ids),
             "reason_id": self.reason_id,

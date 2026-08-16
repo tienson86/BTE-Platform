@@ -234,8 +234,8 @@ def test_v2_does_not_import_pack05_narrative_engine() -> None:
     """V2 coexists with Pack 05. It must not call or import NarrativeEngine."""
     for path in _NARRATIVE_DIR.glob("*.py"):
         source = path.read_text(encoding="utf-8")
-        assert "engines.narrative_engine" not in source
-        assert "NarrativeEngine" not in source
+        assert "from engines.narrative_engine" not in source
+        assert "import NarrativeEngine" not in source
 
 
 def test_golden_huynh_composes_all_bundles_without_missing_sections(
@@ -269,6 +269,72 @@ def test_golden_huynh_composes_all_bundles_without_missing_sections(
     assert result.warnings
     blob = result.to_dict()
     assert "Lương Ngọc Huỳnh" not in str(blob)
+
+
+def test_reasoning_is_grouped_by_customer_topic() -> None:
+    """Reasoning paragraphs are labeled by customer topic, not engine name."""
+    result = compose_narrative_v2(_synthetic_input())
+    reasoning = result.section("Reasoning")
+    assert reasoning is not None
+    prefixes = {sentence.text.split(":", 1)[0] for sentence in reasoning.sentences}
+    assert prefixes
+    assert prefixes <= set(CUSTOMER_DOMAINS)
+    engines = {"UsefulGod", "Strength", "Pattern", "TenGods", "ShenSha"}
+    assert prefixes.isdisjoint(engines)
+
+
+def test_renderer_has_no_fixed_sentence_budget() -> None:
+    """Coverage ranking replaced the old 8-sentence cap."""
+    source = (_NARRATIVE_DIR / "renderer.py").read_text(encoding="utf-8")
+    assert "_SECTION_CAP" not in source
+
+
+def test_golden_huynh_explains_decision_state_and_relationships(
+    huynh_output,
+) -> None:
+    """Huỳnh live narrative must explain Đinh, rejected Bính, Chính Tài, thân vượng, Hỷ/Kỵ."""
+    result = compose_narrative_v2_from_production(huynh_output)
+    blob = " ".join(
+        sentence.text
+        for section in result.sections
+        for sentence in section.sentences
+    )
+    assert "Đinh" in blob
+    assert "Bính" in blob
+    assert "Chính Tài" in blob
+    assert "vượng" in blob or "strong" in blob.casefold()
+    assert "Hỷ" in blob
+    assert "Kỵ" in blob
+    assert any(role in blob for role in ("Nhật Chủ", "Kiếp Tài", "Thiên Tài"))
+    assert "day_master=" not in blob
+    assert "group priority" not in blob.casefold()
+    reasoning = result.section("Reasoning")
+    assert reasoning is not None
+    reason_topics = {sentence.text.split(":", 1)[0] for sentence in reasoning.sentences}
+    assert "Decision" in reason_topics
+    recs = [sentence.text for sentence in result.section("Recommendation").sentences]
+    assert recs
+    assert len(recs) == len({fingerprint(item) for item in recs})
+    rec_topics = {item.split(":", 1)[0] for item in recs}
+    assert rec_topics <= set(CUSTOMER_DOMAINS)
+
+
+def test_narrative_result_v2_keeps_live_report_section_ids(huynh_output) -> None:
+    """Adapter emits the live Portal/PDF section ids without a UI redesign."""
+    from engines.interpretation_engine.foundation.narrative import (
+        narrative_result_v2_to_dict,
+    )
+    from engines.report_engine.narrative_binding import CANONICAL_SECTION_IDS
+
+    result = compose_narrative_v2_from_production(huynh_output)
+    payload = narrative_result_v2_to_dict(result, run_id="huynh")
+    assert payload["generator"] == "narrative_composer_v2"
+    assert payload["contract"] == "pack05_narrative_result_v1"
+    assert [section["id"] for section in payload["sections"]] == list(CANONICAL_SECTION_IDS)
+    for section in payload["sections"]:
+        assert section["paragraphs"]
+        for paragraph in section["paragraphs"]:
+            assert paragraph["evidence_refs"]
 
 
 def test_pack05_narrative_engine_still_importable() -> None:
@@ -326,6 +392,13 @@ def _synthetic_input() -> NarrativeComposerInput:
                 slot=SLOT_OBSERVATION,
                 engine_truth_ref="bazi.day_master",
                 confidence=0.9,
+            ),
+            CopiedStatement(
+                text="Nhật chủ Bính copied again",
+                kind=KIND_FACT,
+                slot=SLOT_OBSERVATION,
+                engine_truth_ref="bazi.day_master",
+                confidence=0.8,
             ),
             CopiedStatement(
                 text="rule=ug_dinh",

@@ -21,7 +21,8 @@ CUSTOMER_DOMAIN_FINANCE: Final[str] = "Finance"
 CUSTOMER_DOMAIN_RELATIONSHIP: Final[str] = "Relationship"
 CUSTOMER_DOMAIN_HEALTH: Final[str] = "Health"
 CUSTOMER_DOMAIN_LEARNING: Final[str] = "Learning"
-CUSTOMER_DOMAIN_DECISION_MAKING: Final[str] = "Decision Making"
+CUSTOMER_DOMAIN_DECISION: Final[str] = "Decision"
+CUSTOMER_DOMAIN_DECISION_MAKING: Final[str] = "Decision"
 CUSTOMER_DOMAIN_ENVIRONMENT: Final[str] = "Environment"
 
 CUSTOMER_DOMAINS: Final[tuple[str, ...]] = (
@@ -30,7 +31,7 @@ CUSTOMER_DOMAINS: Final[tuple[str, ...]] = (
     CUSTOMER_DOMAIN_RELATIONSHIP,
     CUSTOMER_DOMAIN_HEALTH,
     CUSTOMER_DOMAIN_LEARNING,
-    CUSTOMER_DOMAIN_DECISION_MAKING,
+    CUSTOMER_DOMAIN_DECISION,
     CUSTOMER_DOMAIN_ENVIRONMENT,
 )
 
@@ -43,8 +44,9 @@ CUSTOMER_DOMAIN_ALIASES: Final[Mapping[str, str]] = {
     "health": CUSTOMER_DOMAIN_HEALTH,
     "learning": CUSTOMER_DOMAIN_LEARNING,
     "learning_growth": CUSTOMER_DOMAIN_LEARNING,
-    "decision_making": CUSTOMER_DOMAIN_DECISION_MAKING,
-    "decision making": CUSTOMER_DOMAIN_DECISION_MAKING,
+    "decision_making": CUSTOMER_DOMAIN_DECISION,
+    "decision making": CUSTOMER_DOMAIN_DECISION,
+    "decision": CUSTOMER_DOMAIN_DECISION,
     "environment": CUSTOMER_DOMAIN_ENVIRONMENT,
     "supportive_environments": CUSTOMER_DOMAIN_ENVIRONMENT,
     "decision_guidance": CUSTOMER_DOMAIN_DECISION_MAKING,
@@ -111,4 +113,54 @@ KIND_IMPORTANCE: Final[Mapping[str, float]] = {
 
 SCORE_FIELD_NAMES: Final[frozenset[str]] = frozenset(
     {"score", "total_score", "component_score"}
+)
+
+MIN_CUSTOMER_PROSE_CHARS: Final[int] = 8
+RANK_KEEP_RATIO: Final[float] = 0.65
+
+DOMAIN_DEFAULT_TOPIC: Final[Mapping[str, str]] = {
+    "UsefulGod": CUSTOMER_DOMAIN_DECISION,
+    "Strength": CUSTOMER_DOMAIN_HEALTH,
+    "Pattern": CUSTOMER_DOMAIN_CAREER,
+    "TenGods": CUSTOMER_DOMAIN_DECISION,
+    "ShenSha": CUSTOMER_DOMAIN_ENVIRONMENT,
+}
+
+PACK05_SECTION_MAP: Final[Mapping[str, tuple[str, str, str]]] = {
+    SECTION_EXECUTIVE_SUMMARY: (
+        "sec-executive_summary",
+        "overview",
+        "Tóm tắt điều hành",
+    ),
+    SECTION_OBSERVATION: ("sec-observation", "observation", "Quan sát"),
+    SECTION_REASONING: ("sec-reasoning", "reasoning", "Lý giải"),
+    SECTION_IMPACT: ("sec-impact", "impact", "Tác động"),
+    SECTION_RECOMMENDATION: ("sec-recommendation", "priority", "Khuyến nghị"),
+    SECTION_WARNING: ("sec-warning", "warning", "Lưu ý"),
+    SECTION_CONCLUSION: ("sec-conclusion", "closing", "Kết luận"),
+}
+
+PACK05_SECTION_TONES: Final[Mapping[str, str]] = {
+    SECTION_EXECUTIVE_SUMMARY: "briefing",
+    SECTION_OBSERVATION: "neutral_factual",
+    SECTION_REASONING: "explanatory",
+    SECTION_IMPACT: "empathic_concrete",
+    SECTION_RECOMMENDATION: "directive_supportive",
+    SECTION_WARNING: "cautionary_calm",
+    SECTION_CONCLUSION: "settling",
+}
+
+NARRATIVE_RESULT_V2_GENERATOR: Final[str] = "narrative_composer_v2"
+PACK05_CONTRACT: Final[str] = "pack05_narrative_result_v1"
+
+QUALITY_TRUTH_MARKERS: Final[tuple[str, ...]] = (
+    ":selected",
+    ":reason",
+    "explain_rejected",
+    ":rejected:",
+    "favorable",
+    "unfavorable",
+    ":state",
+    "pattern:selected",
+    "preserve_hy",
 )

@@ -283,7 +283,7 @@ class ProductionEndToEndOrchestrator:
         request: ProductionRequest,
         engine_output: EnginePipelineOutput,
     ) -> dict[str, Any]:
-        """Compose Pack 05 NarrativeResult once for the production PDF path."""
+        """Compose NarrativeResult V2 for the production PDF path."""
         analysis = engine_output.analysis
         return build_narrative_result_dict(
             analysis={
@@ -295,6 +295,7 @@ class ProductionEndToEndOrchestrator:
             },
             interpretation=analysis.interpretation_dict(),
             run_id=request.case_id or request.request_key,
+            engine_output=engine_output,
         )
 
     def _build_commercial_request(
