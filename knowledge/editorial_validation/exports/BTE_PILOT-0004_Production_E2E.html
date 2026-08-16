@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Báo cáo đồng hành phụ huynh — Nguyễn Tiến Minh</title>
+  <style>/* Report V1 — print-friendly foundation (UTF-8, Vietnamese-safe stack) */
+
+:root {
+  --report-text: #1a1a1a;
+  --report-muted: #555;
+  --report-border: #d8d8d8;
+  --report-accent: #2c4a6e;
+  --report-bg: #ffffff;
+  --report-font: "Segoe UI", Arial, "Noto Sans", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--report-bg);
+  color: var(--report-text);
+  font-family: var(--report-font);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.report-v1 {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 32px 40px 48px;
+}
+
+.report-v1__header {
+  border-bottom: 2px solid var(--report-accent);
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+}
+
+.report-v1__title {
+  color: var(--report-accent);
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.report-v1__subtitle {
+  color: var(--report-muted);
+  font-size: 13px;
+  margin: 0;
+}
+
+.report-v1__section {
+  margin-bottom: 24px;
+  page-break-inside: avoid;
+}
+
+.report-v1__section-title {
+  border-left: 4px solid var(--report-accent);
+  color: var(--report-accent);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 10px;
+  padding-left: 10px;
+  page-break-after: avoid;
+}
+
+.report-v1__section-body {
+  margin: 0;
+}
+
+.report-v1__section-body p {
+  margin: 0 0 10px;
+}
+
+.report-v1__meta-grid {
+  display: grid;
+  gap: 8px 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+
+.report-v1__meta-grid dt {
+  color: var(--report-muted);
+  font-weight: 600;
+  margin: 0;
+}
+
+.report-v1__meta-grid dd {
+  margin: 0 0 8px;
+}
+
+.report-v1__table {
+  border-collapse: collapse;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.report-v1__table th,
+.report-v1__table td {
+  border: 1px solid var(--report-border);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.report-v1__table th {
+  background: #f4f6f8;
+  font-weight: 600;
+}
+
+.report-v1__pillars {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.report-v1__pillar-card {
+  border: 1px solid var(--report-border);
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.report-v1__pillar-card h3 {
+  font-size: 14px;
+  margin: 0 0 6px;
+}
+
+.report-v1__pillar-card p {
+  margin: 0 0 4px;
+}
+
+.report-v1__list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.report-v1__fallback {
+  color: var(--report-muted);
+  font-style: italic;
+}
+
+.report-v1__footer {
+  border-top: 1px solid var(--report-border);
+  color: var(--report-muted);
+  font-size: 12px;
+  margin-top: 32px;
+  padding-top: 12px;
+}
+
+@media print {
+  @page {
+    margin: 18mm 16mm;
+    size: A4;
+  }
+
+  body {
+    background: #fff;
+    font-size: 12px;
+  }
+
+  .report-v1 {
+    max-width: none;
+    padding: 0;
+  }
+
+  .report-v1__section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .report-v1__section-title {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .report-v1__table {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .report-v1__pillars {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.report-commercial__kicker {
+  color: var(--report-accent);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+.report-commercial__class {
+  color: var(--report-accent);
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+.report-commercial__cover .report-v1__meta-grid {
+  margin-top: 16px;
+}
+.report-commercial__section {
+  margin: 0 0 16px;
+}
+.report-commercial__section h3 {
+  color: var(--report-text);
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+.report-commercial__appendix {
+  border-top: 1px dashed var(--report-border);
+  margin-top: 32px;
+  padding-top: 16px;
+}
+</style>
+</head>
+<body>
+  <main class="report-v1">
+    <header class="report-v1__header report-commercial__cover"><p class="report-commercial__kicker">BTE Consulting</p><h1 class="report-v1__title">Báo cáo đồng hành phụ huynh</h1><p class="report-v1__subtitle">Đọc với vai trò phụ huynh — không phải tư vấn nghề người lớn.</p><dl class="report-v1__meta-grid"><dt>Khách hàng</dt><dd>Nguyễn Tiến Minh</dd><dt>Hồ sơ</dt><dd>PILOT-0004</dd><dt>Ngày sinh dương lịch</dt><dd>2013-08-20 — 13:40</dd><dt>Ngày sinh âm lịch</dt><dd>14/07/2013</dd><dt>Nơi sinh</dt><dd>Hà Nội, Việt Nam</dd><dt>Cung Phi</dt><dd>Khôn</dd><dt>Mệnh Quái</dt><dd>Khôn</dd><dt>Nhóm Trạch</dt><dd>Tây Tứ Trạch</dd><dt>Tuổi khởi Đại vận</dt><dd>4</dd><dt>Đại vận hiện tại</dt><dd>Kỷ Mùi 2017–2026</dd><dt>Đại vận 1</dt><dd>Kỷ Mùi 2017–2026</dd><dt>Đại vận 2</dt><dd>Mậu Ngọ 2027–2036</dd><dt>Đại vận 3</dt><dd>Đinh Tỵ 2037–2046</dd><dt>Đại vận 4</dt><dd>Bính Thìn 2047–2056</dd><dt>Đại vận 5</dt><dd>Ất Mão 2057–2066</dd><dt>Đại vận 6</dt><dd>Giáp Dần 2067–2076</dd><dt>Đại vận 7</dt><dd>Quý Sửu 2077–2086</dd><dt>Đại vận 8</dt><dd>Nhâm Tý 2087–2096</dd><dt>Đại vận 9</dt><dd>Tân Hợi 2097–2106</dd><dt>Đại vận 10</dt><dd>Canh Tuất 2107–2116</dd><dt>Ngũ hành</dt><dd>Mộc:1.0, Hỏa:5.0, Thổ:7.0, Kim:4.0, Thủy:2.0</dd><dt>Thập thần</dt><dd>Chính Tài, Thực Thần, Nhật Chủ, Kiếp Tài</dd><dt>Giới tính</dt><dd>Nam</dd></dl></header><section class="report-v1__section report-commercial__chapter" id="canonical_narrative"><h2 class="report-v1__section-title">Bản luận Bát tự</h2><article class="report-commercial__section" id="sec-executive_summary"><h3>Tóm tắt điều hành</h3><p>Đinh: Thu kim vượng cần hỏa tôi luyện</p><p>Khung thời gian của bản luận là Đại vận Kỷ Mùi 2017–2026.</p><p>Thân vượng</p><p>Chính Tài</p><p>Thực Thần</p><p>Nhật Chủ</p></article><article class="report-commercial__section" id="sec-observation"><h3>Quan sát</h3><p>Nhật chủ: Mậu (Thổ).</p><p>Lệnh tháng: Thân; mùa: Thu.</p><p>Dụng thần được chọn: Đinh.</p><p>Hỷ thần: Đinh, Bính, Ất.</p><p>Kỵ thần: Canh, Tân.</p><p>Đại vận hiện tại: Kỷ Mùi 2017–2026.</p><p>Thân vượng</p><p>Thân vượng — sức dư cần được dẫn</p></article><article class="report-commercial__section" id="sec-reasoning"><h3>Lý giải</h3><p>Có nền lực để chịu tải, hoàn thành việc dài, giữ nhịp khi môi trường đòi hỏi sức bền. Hữu ích khi kênh thoát và chế được giữ phép.</p><p>Thu kim vượng cần hỏa tôi luyện Đinh: Thu kim vượng cần hỏa tôi luyện Đinh (Hỏa âm) là lửa đèn/lò — nhiệt tập trung, tinh luyện, văn hóa kỹ nghệ, độ chính xác. Không mặc định cát hung. Khi luận Dụng thần chọn Đinh làm Dụng thần, chức năng ấy trở thành hướng cân bằng chính: sưởi đúng điểm, tôi luyện kim cứng thành lực dùng được. Khi Đinh thuộc Hỷ thần, nó hỗ trợ hơi ấm và độ tinh theo Dụng, không ngang quyền Dụng. Khi Đinh thuộc Kỵ thần, cùng nhiệt điểm trở thành nóng âm ỉ, quá tinh chỉnh hoặc căng nội nhiệt. Khác Bính: Đinh không phủ nắng toàn cục mà giữ lửa vừa để chuyển hóa.</p><p>Chính Tài là quan hệ nhật chủ khắc theo chiều thuận. Kênh nguồn có hạn: trách nhiệm, hợp đồng, sổ. Khác Thiên Tài vì không phải nguồn lệch cửa; khác cách Chính Tài vì đây là vai trên trụ, không phải lệnh tháng. Không hứa giàu. Thực Thần là quan hệ nhật chủ sinh ra theo chiều thuận. Kênh đầu ra: tài năng, sản phẩm, lời có phép. Khác Thương Quan vì không chống quan; khác tài vì đây là tiết sức chứ không phải nguồn. Không suy ra nghề nghệ thuật hay &#x27;có tài&#x27;.</p><p>Kênh đỡ, giảm ma sát — ảnh hưởng nền, không phải điểm số. Kênh chữ/khung — ảnh hưởng học và quy trình, không phải IQ.</p></article><article class="report-commercial__section" id="sec-impact"><h3>Tác động</h3><p>Sự nghiệp: Sự nghiệp ổn định hơn khi vận hành theo Đinh (Hỏa) — thân vượng cần tiết xuất và trách nhiệm có cấu trúc. Hạn chế áp lực từ Canh, Tân khi nhận thêm cam kết. Hợp làm ra sản phẩm đổi được nguồn. Không suy ra nghề bán.</p><p>Tài chính: Tài lộc liên quan khả năng điều tiết qua Hỏa; ưu tiên dòng tiền gắn Hỷ thần (Đinh, Bính, Ất). Thiên đổi công. Rủi ro: làm nhiều không đọng.</p><p>Quan hệ: Quan hệ cân bằng hơn khi duy trì không khí thuận (Đinh, Bính); tránh kích hoạt Kỵ thần (Canh, Tân) trong tranh chấp. Cho việc thành giá trị chung. Cần ranh không bị hút công.</p><p>Sức khỏe: Sức khỏe cần giữ ấm / cân khí; Đinh (Hỏa) là hướng điều tiết chính. Cần nghỉ sau đổi công. Không chẩn đoán.</p><p>Học hỏi: Học hỏi / phát triển: nuôi dưỡng Đinh, Bính thay vì thiên về Canh, Tân. Học nghề đổi được việc. Chậm khi cần lý thuyết thuần.</p><p>Ra quyết định: Thiên việc nào ra nguồn. Bất lợi khi cần ủ. Thiên quyết theo việc nào chịu được tải. Hữu ích khi cần giữ nhịp; bất lợi khi cần thu hẹp và ủ.</p></article><article class="report-commercial__section" id="sec-recommendation"><h3>Khuyến nghị</h3><p>1. Đặt Đinh làm trọng tâm khi cần điều tiết hệ.</p><p>2. Ưu tiên hành động gắn Hỷ thần: Đinh, Bính, Ất.</p><p>3. Môi trường thuận: không khí có yếu tố Đinh, Bính, Ất.</p><p>4. Hạn chế khuếch đại Canh (Kim)</p><p>5. Trước quyết định lớn: kiểm tra có đang thiên về Kỵ thần (Canh, Tân) không.</p></article><article class="report-commercial__section" id="sec-warning"><h3>Lưu ý</h3><p>1. Hệ vượng bị kìm / căng Hạn chế khuếch đại yếu tố bất lợi</p><p>2. Mất ổn định khi hệ mất cân Duy trì trọng tâm Đinh</p><p>3. Cam kết dài hạn trong môi trường xung khắc Nhận diện môi trường trước cam kết</p></article><article class="report-commercial__section" id="sec-conclusion"><h3>Kết luận</h3><p>Dụng thần chính: Đinh (Hỏa) — trụ cột điều tiết hệ.</p><p>Hỷ thần (Đinh, Bính, Ất) hỗ trợ duy trì cân bằng; Kỵ thần (Canh, Tân) cần hạn chế khuếch đại.</p><p>Chính Tài là quan hệ nhật chủ khắc theo chiều thuận. Kênh nguồn có hạn: trách nhiệm, hợp đồng, sổ. Khác Thiên Tài vì không phải nguồn lệch cửa; khác cách Chính Tài vì đây là vai trên trụ, không phải lệnh tháng. Không hứa giàu.</p><p>Thực Thần là quan hệ nhật chủ sinh ra theo chiều thuận. Kênh đầu ra: tài năng, sản phẩm, lời có phép. Khác Thương Quan vì không chống quan; khác tài vì đây là tiết sức chứ không phải nguồn. Không suy ra nghề nghệ thuật hay &#x27;có tài&#x27;.</p><p>Nhật Chủ là chính can ngày. Hệ thống xác định nhãn này khi can trùng nhật chủ, kể cả trụ năm/tháng/giờ trùng can. Đây là trục so sánh, không phải Tỷ Kiên. Không suy ra &#x27;có mình&#x27; hay tính cách từ việc xuất hiện nhiều lần.</p></article></section><section class="report-v1__section report-commercial__chapter" id="career"><h2 class="report-v1__section-title">Sự nghiệp</h2><article class="report-commercial__section" id="career-core"><h3>Sự nghiệp</h3><p>Sự nghiệp: Sự nghiệp ổn định hơn khi vận hành theo Đinh (Hỏa) — thân vượng cần tiết xuất và trách nhiệm có cấu trúc. Hạn chế áp lực từ Canh, Tân khi nhận thêm cam kết. Hợp làm ra sản phẩm đổi được nguồn. Không suy ra nghề bán.</p><p>1. Đặt Đinh làm trọng tâm khi cần điều tiết hệ.</p><p>2. Ưu tiên hành động gắn Hỷ thần: Đinh, Bính, Ất.</p><p>3. Môi trường thuận: không khí có yếu tố Đinh, Bính, Ất.</p><p>Khung thời gian của bản luận là Đại vận Kỷ Mùi 2017–2026.</p></article></section><footer class="report-v1__footer">BTE · Báo cáo tư vấn</footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,205 @@
+{
+  "phase": "GOLDEN_DATASET_EDITORIAL_VALIDATION_V1",
+  "date": "2026-08-16",
+  "editorial_standard": "BTE Editorial Standard v1.0",
+  "code_changed": false,
+  "dataset_rule": {
+    "named_bound_cases_reviewed": 10,
+    "target": "20-30",
+    "conclusion_band": "10-19 provisional",
+    "invented_cases": 0
+  },
+  "id_policy": "Editorial IDs EV-0001..EV-0010 avoid CASE-0002/CASE-0003 collisions across pilot, production, and validation folders.",
+  "pdf_generation": {
+    "orchestrator": "applications.production.ProductionEndToEndOrchestrator",
+    "export_dir": "knowledge/editorial_validation/exports",
+    "note": "Fresh production PDFs generated 2026-08-16 without code changes."
+  },
+  "excluded": [
+    {
+      "id": "validation/real_cases/case_01-case_20",
+      "reason": "Anonymous pipeline fixtures (year/month/day/hour/gender only). No customer name, place, or consulting identity. Not used as editorial PDF cases."
+    },
+    {
+      "id": "pilot CASE-0008",
+      "reason": "No birth datetime. REFERENCE_ONLY / blocked."
+    },
+    {
+      "id": "pilot CASE-0009",
+      "reason": "No verified birth/pillar source. Do not fabricate."
+    },
+    {
+      "id": "SYNTHETIC_REQUEST_B",
+      "reason": "Explicitly labelled Synthetic Readiness Subject. Not a real chart."
+    },
+    {
+      "id": "golden placeholders CASE_0004-CASE_0010",
+      "reason": "Not bound to a real person."
+    }
+  ],
+  "cases": [
+    {
+      "ev_id": "EV-0001",
+      "anchor": "A",
+      "person": "Nguyễn Tiến Sơn",
+      "repo_case_id": "CASE-0001",
+      "source": "canonical production fixture applications/production/fixtures/case_0001.py",
+      "input": {
+        "year": 1987, "month": 1, "day": 21, "hour": 4, "minute": 30,
+        "gender": "male", "timezone": "Asia/Bangkok",
+        "birth_place": "Hà Tây, Việt Nam"
+      },
+      "pdf": "knowledge/editorial_validation/exports/BTE_CASE-0001_Production_E2E.pdf",
+      "html": "knowledge/editorial_validation/exports/BTE_CASE-0001_Production_E2E.html",
+      "life_stage": "middle_age",
+      "ready_for_customers": "NO"
+    },
+    {
+      "ev_id": "EV-0002",
+      "anchor": "B",
+      "person": "Lương Ngọc Huỳnh",
+      "repo_case_id": "HUYNH",
+      "source": "live production tests / prior commercial PDF",
+      "input": {
+        "year": 1966, "month": 9, "day": 24, "hour": 4, "minute": 15,
+        "gender": "male", "timezone": "Asia/Bangkok",
+        "birth_place": "Hà Nội, Việt Nam"
+      },
+      "gender_note": "Production path used in this phase is male, matching existing production tests. Not reinterpreted.",
+      "pdf": "knowledge/editorial_validation/exports/BTE_HUYNH_Production_E2E.pdf",
+      "html": "knowledge/editorial_validation/exports/BTE_HUYNH_Production_E2E.html",
+      "life_stage": "older_adult",
+      "ready_for_customers": "NO"
+    },
+    {
+      "ev_id": "EV-0003",
+      "anchor": "C",
+      "person": "Ngô Đặng Minh Tân",
+      "repo_case_id": "TAN",
+      "source": "Product Owner supplied 2026-08-16",
+      "input": {
+        "year": 2008, "month": 3, "day": 17, "hour": 6, "minute": 20,
+        "gender": "male", "timezone": "Asia/Bangkok",
+        "birth_place": "Hà Nội, Việt Nam"
+      },
+      "timezone_note": "Asia/Bangkok used to match CASE-0001 production path. Live analytical truth matched PO stated report truth, so timezone did not disturb the stated picture.",
+      "pdf": "knowledge/editorial_validation/exports/BTE_TAN_Production_E2E.pdf",
+      "html": "knowledge/editorial_validation/exports/BTE_TAN_Production_E2E.html",
+      "life_stage": "teen_young_adult",
+      "ready_for_customers": "NO"
+    },
+    {
+      "ev_id": "EV-0004",
+      "anchor": null,
+      "person": "Đinh Thành Trung",
+      "repo_case_id": "PILOT-0002",
+      "source": "knowledge/pilot/replay CASE-0002 (different person from production CASE-0002)",
+      "input": {
+        "year": 1977, "month": 2, "day": 18, "hour": 6, "minute": 30,
+        "gender": "male", "timezone": "Asia/Ho_Chi_Minh",
+        "birth_place": "Hải Phòng, Việt Nam"
+      },
+      "pdf": "knowledge/editorial_validation/exports/BTE_PILOT-0002_Production_E2E.pdf",
+      "html": "knowledge/editorial_validation/exports/BTE_PILOT-0002_Production_E2E.html",
+      "life_stage": "middle_age",
+      "ready_for_customers": "NO"
+    },
+    {
+      "ev_id": "EV-0005",
+      "anchor": null,
+      "person": "Nguyễn Tiến Khang",
+      "repo_case_id": "PILOT-0003",
+      "source": "knowledge/pilot/replay CASE-0003",
+      "input": {
+        "year": 2015, "month": 8, "day": 14, "hour": 7, "minute": 20,
+        "gender": "male", "timezone": "Asia/Ho_Chi_Minh",
+        "birth_place": "Hà Nội, Việt Nam"
+      },
+      "pdf": "knowledge/editorial_validation/exports/BTE_PILOT-0003_Production_E2E.pdf",
+      "html": "knowledge/editorial_validation/exports/BTE_PILOT-0003_Production_E2E.html",
+      "life_stage": "child",
+      "ready_for_customers": "NO"
+    },
+    {
+      "ev_id": "EV-0006",
+      "anchor": null,
+      "person": "Nguyễn Tiến Minh",
+      "repo_case_id": "PILOT-0004",
+      "source": "knowledge/pilot/replay CASE-0004",
+      "input": {
+        "year": 2013, "month": 8, "day": 20, "hour": 13, "minute": 40,
+        "gender": "male", "timezone": "Asia/Ho_Chi_Minh",
+        "birth_place": "Hà Nội, Việt Nam"
+      },
+      "pdf": "knowledge/editorial_validation/exports/BTE_PILOT-0004_Production_E2E.pdf",
+      "html": "knowledge/editorial_validation/exports/BTE_PILOT-0004_Production_E2E.html",
+      "life_stage": "child",
+      "ready_for_customers": "NO"
+    },
+    {
+      "ev_id": "EV-0007",
+      "anchor": null,
+      "person": "Nguyễn Thị Hương Mai",
+      "repo_case_id": "PILOT-0006",
+      "source": "knowledge/pilot/replay CASE-0006",
+      "input": {
+        "year": 1988, "month": 6, "day": 7, "hour": 20, "minute": 45,
+        "gender": "female", "timezone": "Asia/Ho_Chi_Minh",
+        "birth_place": "Hải Phòng, Việt Nam"
+      },
+      "pdf": "knowledge/editorial_validation/exports/BTE_PILOT-0006_Production_E2E.pdf",
+      "html": "knowledge/editorial_validation/exports/BTE_PILOT-0006_Production_E2E.html",
+      "life_stage": "middle_age",
+      "ready_for_customers": "NO"
+    },
+    {
+      "ev_id": "EV-0008",
+      "anchor": null,
+      "person": "Vũ Thị Thanh Tuyền",
+      "repo_case_id": "PILOT-0007",
+      "source": "knowledge/pilot/replay CASE-0007",
+      "input": {
+        "year": 1984, "month": 7, "day": 13, "hour": 21, "minute": 1,
+        "gender": "female", "timezone": "Asia/Ho_Chi_Minh",
+        "birth_place": "Quảng Ninh, Việt Nam"
+      },
+      "pdf": "knowledge/editorial_validation/exports/BTE_PILOT-0007_Production_E2E.pdf",
+      "html": "knowledge/editorial_validation/exports/BTE_PILOT-0007_Production_E2E.html",
+      "life_stage": "middle_age",
+      "ready_for_customers": "NO"
+    },
+    {
+      "ev_id": "EV-0009",
+      "anchor": null,
+      "person": "Hoàng Thị Thu Phương",
+      "repo_case_id": "CASE-0002",
+      "source": "applications/production/fixtures/case_0002_readiness.py",
+      "input": {
+        "year": 1997, "month": 7, "day": 1, "hour": 14, "minute": 24,
+        "gender": "female", "timezone": "Asia/Ho_Chi_Minh",
+        "birth_place": "Quảng Ninh, Việt Nam"
+      },
+      "pdf": "knowledge/editorial_validation/exports/BTE_CASE-0002_Production_E2E.pdf",
+      "html": "knowledge/editorial_validation/exports/BTE_CASE-0002_Production_E2E.html",
+      "life_stage": "young_adult",
+      "ready_for_customers": "NO"
+    },
+    {
+      "ev_id": "EV-0010",
+      "anchor": null,
+      "person": "CASE-0003 Extreme Subject",
+      "repo_case_id": "CASE-0003",
+      "source": "knowledge/validation/GOLDEN_DATASET_V1/CASE_0003 — unnamed female child; production name left as in repo",
+      "input": {
+        "year": 2015, "month": 2, "day": 15, "hour": 5, "minute": 30,
+        "gender": "female", "timezone": "Asia/Ho_Chi_Minh",
+        "birth_place": "Hà Nội, Việt Nam"
+      },
+      "pdf": "knowledge/editorial_validation/exports/BTE_CASE-0003_Production_E2E.pdf",
+      "html": "knowledge/editorial_validation/exports/BTE_CASE-0003_Production_E2E.html",
+      "life_stage": "child",
+      "ready_for_customers": "NO",
+      "identity_note": "No customer name in source. Do not invent one."
+    }
+  ]
+}

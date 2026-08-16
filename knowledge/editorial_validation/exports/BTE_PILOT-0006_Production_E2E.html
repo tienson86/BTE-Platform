@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Báo cáo tư vấn — Nguyễn Thị Hương Mai</title>
+  <style>/* Report V1 — print-friendly foundation (UTF-8, Vietnamese-safe stack) */
+
+:root {
+  --report-text: #1a1a1a;
+  --report-muted: #555;
+  --report-border: #d8d8d8;
+  --report-accent: #2c4a6e;
+  --report-bg: #ffffff;
+  --report-font: "Segoe UI", Arial, "Noto Sans", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--report-bg);
+  color: var(--report-text);
+  font-family: var(--report-font);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.report-v1 {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 32px 40px 48px;
+}
+
+.report-v1__header {
+  border-bottom: 2px solid var(--report-accent);
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+}
+
+.report-v1__title {
+  color: var(--report-accent);
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.report-v1__subtitle {
+  color: var(--report-muted);
+  font-size: 13px;
+  margin: 0;
+}
+
+.report-v1__section {
+  margin-bottom: 24px;
+  page-break-inside: avoid;
+}
+
+.report-v1__section-title {
+  border-left: 4px solid var(--report-accent);
+  color: var(--report-accent);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 10px;
+  padding-left: 10px;
+  page-break-after: avoid;
+}
+
+.report-v1__section-body {
+  margin: 0;
+}
+
+.report-v1__section-body p {
+  margin: 0 0 10px;
+}
+
+.report-v1__meta-grid {
+  display: grid;
+  gap: 8px 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+
+.report-v1__meta-grid dt {
+  color: var(--report-muted);
+  font-weight: 600;
+  margin: 0;
+}
+
+.report-v1__meta-grid dd {
+  margin: 0 0 8px;
+}
+
+.report-v1__table {
+  border-collapse: collapse;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.report-v1__table th,
+.report-v1__table td {
+  border: 1px solid var(--report-border);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.report-v1__table th {
+  background: #f4f6f8;
+  font-weight: 600;
+}
+
+.report-v1__pillars {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.report-v1__pillar-card {
+  border: 1px solid var(--report-border);
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.report-v1__pillar-card h3 {
+  font-size: 14px;
+  margin: 0 0 6px;
+}
+
+.report-v1__pillar-card p {
+  margin: 0 0 4px;
+}
+
+.report-v1__list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.report-v1__fallback {
+  color: var(--report-muted);
+  font-style: italic;
+}
+
+.report-v1__footer {
+  border-top: 1px solid var(--report-border);
+  color: var(--report-muted);
+  font-size: 12px;
+  margin-top: 32px;
+  padding-top: 12px;
+}
+
+@media print {
+  @page {
+    margin: 18mm 16mm;
+    size: A4;
+  }
+
+  body {
+    background: #fff;
+    font-size: 12px;
+  }
+
+  .report-v1 {
+    max-width: none;
+    padding: 0;
+  }
+
+  .report-v1__section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .report-v1__section-title {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .report-v1__table {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .report-v1__pillars {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.report-commercial__kicker {
+  color: var(--report-accent);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+.report-commercial__class {
+  color: var(--report-accent);
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+.report-commercial__cover .report-v1__meta-grid {
+  margin-top: 16px;
+}
+.report-commercial__section {
+  margin: 0 0 16px;
+}
+.report-commercial__section h3 {
+  color: var(--report-text);
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+.report-commercial__appendix {
+  border-top: 1px dashed var(--report-border);
+  margin-top: 32px;
+  padding-top: 16px;
+}
+</style>
+</head>
+<body>
+  <main class="report-v1">
+    <header class="report-v1__header report-commercial__cover"><p class="report-commercial__kicker">BTE Consulting</p><h1 class="report-v1__title">Báo cáo tư vấn</h1><p class="report-commercial__class">Người điều tiết</p><p class="report-v1__subtitle">Một bản tư vấn — đọc như một cuộc trao đổi, không như bảng tính.</p><dl class="report-v1__meta-grid"><dt>Khách hàng</dt><dd>Nguyễn Thị Hương Mai</dd><dt>Hồ sơ</dt><dd>PILOT-0006</dd><dt>Ngày sinh dương lịch</dt><dd>1988-06-07 — 20:45</dd><dt>Ngày sinh âm lịch</dt><dd>23/04/1988</dd><dt>Nơi sinh</dt><dd>Hải Phòng, Việt Nam</dd><dt>Cung Phi</dt><dd>Chấn</dd><dt>Mệnh Quái</dt><dd>Chấn</dd><dt>Nhóm Trạch</dt><dd>Đông Tứ Trạch</dd><dt>Tuổi khởi Đại vận</dt><dd>1</dd><dt>Đại vận hiện tại</dt><dd>Giáp Dần 2019–2028</dd><dt>Đại vận 1</dt><dd>Đinh Tỵ 1989–1998</dd><dt>Đại vận 2</dt><dd>Bính Thìn 1999–2008</dd><dt>Đại vận 3</dt><dd>Ất Mão 2009–2018</dd><dt>Đại vận 4</dt><dd>Giáp Dần 2019–2028</dd><dt>Đại vận 5</dt><dd>Quý Sửu 2029–2038</dd><dt>Đại vận 6</dt><dd>Nhâm Tý 2039–2048</dd><dt>Đại vận 7</dt><dd>Tân Hợi 2049–2058</dd><dt>Đại vận 8</dt><dd>Canh Tuất 2059–2068</dd><dt>Đại vận 9</dt><dd>Kỷ Dậu 2069–2078</dd><dt>Đại vận 10</dt><dd>Mậu Thân 2079–2088</dd><dt>Ngũ hành</dt><dd>Mộc:1.0, Hỏa:5.0, Thổ:8.0, Kim:2.0, Thủy:3.0</dd><dt>Thập thần</dt><dd>Chính Quan, Chính Quan, Nhật Chủ, Kiếp Tài</dd><dt>Giới tính</dt><dd>Nữ</dd><dt>Hướng tư vấn</dt><dd>Người điều tiết</dd></dl></header><section class="report-v1__section report-commercial__chapter" id="canonical_narrative"><h2 class="report-v1__section-title">Bản luận Bát tự</h2><article class="report-commercial__section" id="sec-executive_summary"><h3>Tóm tắt điều hành</h3><p>Người điều phối</p><p>Lá số cho thấy xu hướng trung hòa, cần chỉnh cho vừa trên nền Thiên Tài.</p><p>Cấu trúc này phù hợp hơn khi khơi dòng lưu thông, bớt ứ đọng.</p><p>Rủi ro tăng khi cân bằng được nhịp nhưng dễ mất trục khi mở quá nhiều hướng.</p><p>Áp lực chính đi cùng hướng Nhâm cần được giữ, không đảo ngược.</p><p>Nhâm: Mùa hạ nhiệt thịnh cần thủy</p></article><article class="report-commercial__section" id="sec-observation"><h3>Quan sát</h3><p>Nhật chủ: Quý (Thủy).</p><p>Lệnh tháng: Ngọ; mùa: Hạ.</p><p>Dụng thần được chọn: Nhâm.</p><p>Hỷ thần: Nhâm, Quý, Canh.</p><p>Kỵ thần: Bính, Đinh.</p><p>Đại vận hiện tại: Giáp Dần 2019–2028.</p><p>balanced</p><p>Trung hòa</p></article><article class="report-commercial__section" id="sec-reasoning"><h3>Lý giải</h3><p>Nền Thiên Tài và trạng thái Trung hòa giải thích vì sao hướng chỉnh là khơi dòng lưu thông, bớt ứ đọng.</p><p>Thiên Tài cách lập khi lệnh tháng là Thiên Tài. Trục vẫn là nguồn, nhưng nhịp lệch hơn Chính Tài: cơ hội, biến động, không phải sổ đều. Không hứa vận may.</p><p>Lực đủ để xoay việc vừa, điều chỉnh nhẹ theo cục. Hữu ích khi giữ nhịp sinh–tiết đều, không đảo hướng.</p><p>Mùa hạ nhiệt thịnh cần thủy Nhâm: Mùa hạ nhiệt thịnh cần thủy Nhâm là thủy dương: sông/biển — chảy, vận động, mở quy mô. Không mặc định cát hung. Khi được chọn làm Dụng thần, Nhâm khơi thông tuần hoàn và hạ nhiệt bằng dòng lớn. Khi thuộc Hỷ thần, Nhâm hỗ trợ lưu chuyển theo hướng Dụng. Khi thuộc Kỵ thần, cùng dòng trở thành tràn, phân tán hướng, hàn khí thái quá.</p><p>Chính Quan là quan hệ khắc nhật chủ theo chiều thuận. Kênh khung: phép, chức, trách nhiệm trước chuẩn. Khác Thất Sát vì không phải áp lực lệch; khác ấn vì đây là bị khắc chứ không phải được sinh. Không suy ra làm quan hay có chức. Nhật Chủ là chính can ngày. Hệ thống xác định nhãn này khi can trùng nhật chủ, kể cả trụ năm/tháng/giờ trùng can. Đây là trục so sánh, không phải Tỷ Kiên. Không suy ra &#x27;có mình&#x27; hay tính cách từ việc xuất hiện nhiều lần.</p><p>Sao quý nhân đầy đủ tên: nhật chủ rơi vào bảng và một địa chi tứ trụ thuộc tập chi quý. Là nhãn hiện diện, không phải người cứu mạng.</p></article><article class="report-commercial__section" id="sec-impact"><h3>Tác động</h3><p>Sự nghiệp: Sự nghiệp phù hợp hơn khi khơi dòng lưu thông, bớt ứ đọng; rủi ro tăng khi biến chỗ làm thành chỗ hun đốt nội nhiệt, tinh chỉnh không điểm dừng. Sự nghiệp ổn định hơn khi vận hành theo Nhâm (Thủy). Hạn chế áp lực từ Bính, Đinh khi nhận thêm cam kết. Hợp việc theo vụ, hoa hồng, biến động có trần. Không suy ra nghề đầu cơ.</p><p>Tài chính: Tài chính nên theo hướng chỉnh đã chọn, không hứa hiệu quả. Tài lộc liên quan khả năng điều tiết qua Thủy; ưu tiên dòng tiền gắn Hỷ thần (Nhâm, Quý, Canh). Thiên vòng không đều. Rủi ro: đuổi biến. Không hứa lãi.</p><p>Quan hệ: Quan hệ nên theo cùng hướng chỉnh, không biến thành kho chứa. Quan hệ cân bằng hơn khi duy trì không khí thuận (Nhâm, Quý); tránh kích hoạt Kỵ thần (Bính, Đinh) trong tranh chấp. Nhịp tới-đi. Cần nói rõ vụ; xung đột khi biến thành nợ tình.</p><p>Sức khỏe: Sức khỏe: chỉnh nóng-lạnh và căng-giãn cho vừa, không kích một phía. Sức khỏe cần giữ ấm / cân khí; Nhâm (Thủy) là hướng điều tiết chính. Dễ mất nhịp ăn/ngủ theo vụ. Không chẩn đoán.</p><p>Học hỏi: Học hỏi / phát triển: nuôi dưỡng Nhâm, Quý thay vì thiên về Bính, Đinh. Học theo đợt. Chậm khi cần chương trình dài.</p><p>Ra quyết định: Thiên bắt nhịp ngắn. Hữu ích khi cửa mở; bất lợi khi cần sổ dài. Thiên quyết theo việc nào giữ được biên. Hữu ích khi cần ổn nhịp; bất lợi khi cần dồn sức hoặc thu hết để dưỡng.</p></article><article class="report-commercial__section" id="sec-recommendation"><h3>Khuyến nghị</h3><p>1. Đặt Nhâm làm trọng tâm khi cần điều tiết hệ.</p><p>2. Ưu tiên hành động gắn Hỷ thần: Nhâm, Quý, Canh.</p><p>3. Môi trường thuận: không khí có yếu tố Nhâm, Quý, Canh.</p><p>4. Hạn chế khuếch đại Bính (Hỏa)</p><p>5. Trước quyết định lớn: kiểm tra có đang thiên về Kỵ thần (Bính, Đinh) không.</p></article><article class="report-commercial__section" id="sec-warning"><h3>Lưu ý</h3><p>1. Hệ vượng bị kìm / căng Hạn chế khuếch đại yếu tố bất lợi</p><p>2. Mất ổn định khi hệ mất cân Duy trì trọng tâm Nhâm</p><p>3. Cam kết dài hạn trong môi trường xung khắc Nhận diện môi trường trước cam kết</p></article><article class="report-commercial__section" id="sec-conclusion"><h3>Kết luận</h3><p>Người điều phối: cấu trúc này phù hợp hơn khi khơi dòng lưu thông, bớt ứ đọng. Rủi ro tăng khi cân bằng được nhịp nhưng dễ mất trục khi mở quá nhiều hướng.</p><p>Dụng thần chính: Nhâm (Thủy) — trụ cột điều tiết hệ.</p><p>Hỷ thần (Nhâm, Quý, Canh) hỗ trợ duy trì cân bằng; Kỵ thần (Bính, Đinh) cần hạn chế khuếch đại.</p><p>Chính Quan là quan hệ khắc nhật chủ theo chiều thuận. Kênh khung: phép, chức, trách nhiệm trước chuẩn. Khác Thất Sát vì không phải áp lực lệch; khác ấn vì đây là bị khắc chứ không phải được sinh. Không suy ra làm quan hay có chức.</p><p>Nhật Chủ là chính can ngày. Hệ thống xác định nhãn này khi can trùng nhật chủ, kể cả trụ năm/tháng/giờ trùng can. Đây là trục so sánh, không phải Tỷ Kiên. Không suy ra &#x27;có mình&#x27; hay tính cách từ việc xuất hiện nhiều lần.</p><p>Kiếp Tài là quan hệ cùng loại khác âm dương với nhật chủ. Kênh nhanh: tranh, chia, đoạt nhịp tài/quan đang đứng. Không đồng nhất với Tỷ Kiên (cùng cực) và không phải sát. Không suy ra bị cướp hay nghề đầu cơ.</p></article></section><section class="report-v1__section report-commercial__chapter" id="career"><h2 class="report-v1__section-title">Sự nghiệp</h2><article class="report-commercial__section" id="career-core"><h3>Sự nghiệp</h3><p>Sự nghiệp: Sự nghiệp phù hợp hơn khi khơi dòng lưu thông, bớt ứ đọng; rủi ro tăng khi biến chỗ làm thành chỗ hun đốt nội nhiệt, tinh chỉnh không điểm dừng. Sự nghiệp ổn định hơn khi vận hành theo Nhâm (Thủy). Hạn chế áp lực từ Bính, Đinh khi nhận thêm cam kết. Hợp việc theo vụ, hoa hồng, biến động có trần. Không suy ra nghề đầu cơ.</p><p>1. Đặt Nhâm làm trọng tâm khi cần điều tiết hệ.</p><p>2. Ưu tiên hành động gắn Hỷ thần: Nhâm, Quý, Canh.</p><p>3. Môi trường thuận: không khí có yếu tố Nhâm, Quý, Canh.</p><p>Khung thời gian của bản luận là Đại vận Giáp Dần 2019–2028.</p></article></section><footer class="report-v1__footer">BTE · Báo cáo tư vấn</footer>
+  </main>
+</body>
+</html>
