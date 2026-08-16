@@ -45,6 +45,9 @@ def _render_content(report: CommercialReport) -> str:
     parts = [_render_cover(report.cover)]
     for chapter in report.chapters:
         parts.append(_render_chapter(chapter))
+    for chapter in report.supporting_chapters:
+        if chapter.chapter_id == "career":
+            parts.append(_render_chapter(chapter))
     if report.audience.value == "ADVISOR" and report.appendix:
         parts.append(_render_appendix(report.appendix))
     parts.append(f'<footer class="report-v1__footer">{escape(report.footer)}</footer>')

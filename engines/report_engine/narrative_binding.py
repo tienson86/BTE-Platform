@@ -116,6 +116,8 @@ def _paragraphs_from_section(section: dict[str, Any]) -> list[str]:
             text = str(paragraph or "").strip()
         if text:
             lines.append(text)
+    if lines:
+        return lines
     for recommendation in section.get("recommendations") or []:
         if not isinstance(recommendation, dict):
             continue

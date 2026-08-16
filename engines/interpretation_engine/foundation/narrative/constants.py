@@ -126,6 +126,49 @@ DOMAIN_DEFAULT_TOPIC: Final[Mapping[str, str]] = {
     "ShenSha": CUSTOMER_DOMAIN_ENVIRONMENT,
 }
 
+CUSTOMER_DOMAIN_LABELS: Final[Mapping[str, str]] = {
+    CUSTOMER_DOMAIN_CAREER: "Sự nghiệp",
+    CUSTOMER_DOMAIN_FINANCE: "Tài chính",
+    CUSTOMER_DOMAIN_RELATIONSHIP: "Quan hệ",
+    CUSTOMER_DOMAIN_HEALTH: "Sức khỏe",
+    CUSTOMER_DOMAIN_LEARNING: "Học hỏi",
+    CUSTOMER_DOMAIN_DECISION: "Ra quyết định",
+}
+
+IMPACT_CUSTOMER_DOMAINS: Final[tuple[str, ...]] = (
+    CUSTOMER_DOMAIN_CAREER,
+    CUSTOMER_DOMAIN_FINANCE,
+    CUSTOMER_DOMAIN_RELATIONSHIP,
+    CUSTOMER_DOMAIN_HEALTH,
+    CUSTOMER_DOMAIN_LEARNING,
+    CUSTOMER_DOMAIN_DECISION,
+)
+
+COMMERCIAL_OBSERVATION_LIMIT: Final[int] = 8
+COMMERCIAL_SUMMARY_LIMIT: Final[int] = 6
+COMMERCIAL_REASONING_LIMIT: Final[int] = 6
+COMMERCIAL_IMPACT_PER_DOMAIN: Final[int] = 2
+COMMERCIAL_RECOMMENDATION_LIMIT: Final[int] = 5
+COMMERCIAL_WARNING_LIMIT: Final[int] = 3
+COMMERCIAL_CONCLUSION_LIMIT: Final[int] = 6
+COMMERCIAL_SHENSHA_LIMIT: Final[int] = 2
+REASONING_DOMAIN_ORDER: Final[tuple[str, ...]] = (
+    "Pattern",
+    "Strength",
+    "UsefulGod",
+    "TenGods",
+    "ShenSha",
+)
+GOVERNING_APPLICATION_DOMAINS: Final[frozenset[str]] = frozenset(
+    {"UsefulGod", "Strength", "Pattern"}
+)
+SHENSHA_CANONICAL_OVER_ALIAS: Final[Mapping[str, str]] = {
+    "Thiên Ất": "Thiên Ất Quý Nhân",
+    "Thiên Hỷ": "Hồng Loan",
+    "Thiên Đức Quý Nhân": "Thiên Đức",
+    "Nguyệt Đức Quý Nhân": "Nguyệt Đức",
+}
+
 PACK05_SECTION_MAP: Final[Mapping[str, tuple[str, str, str]]] = {
     SECTION_EXECUTIVE_SUMMARY: (
         "sec-executive_summary",

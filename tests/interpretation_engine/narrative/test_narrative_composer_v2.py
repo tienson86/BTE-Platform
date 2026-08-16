@@ -272,15 +272,17 @@ def test_golden_huynh_composes_all_bundles_without_missing_sections(
 
 
 def test_reasoning_is_grouped_by_customer_topic() -> None:
-    """Reasoning paragraphs are labeled by customer topic, not engine name."""
+    """Reasoning is a consultation chain, not an engine or English-tagged dump."""
     result = compose_narrative_v2(_synthetic_input())
     reasoning = result.section("Reasoning")
     assert reasoning is not None
-    prefixes = {sentence.text.split(":", 1)[0] for sentence in reasoning.sentences}
-    assert prefixes
-    assert prefixes <= set(CUSTOMER_DOMAINS)
     engines = {"UsefulGod", "Strength", "Pattern", "TenGods", "ShenSha"}
-    assert prefixes.isdisjoint(engines)
+    english_tags = {"Career", "Health", "Decision", "Finance", "Environment", "Learning"}
+    for sentence in reasoning.sentences:
+        prefix = sentence.text.split(":", 1)[0].strip()
+        assert prefix not in engines
+        assert prefix not in english_tags
+    assert reasoning.sentences
 
 
 def test_renderer_has_no_fixed_sentence_budget() -> None:
@@ -310,13 +312,12 @@ def test_golden_huynh_explains_decision_state_and_relationships(
     assert "group priority" not in blob.casefold()
     reasoning = result.section("Reasoning")
     assert reasoning is not None
-    reason_topics = {sentence.text.split(":", 1)[0] for sentence in reasoning.sentences}
-    assert "Decision" in reason_topics
     recs = [sentence.text for sentence in result.section("Recommendation").sentences]
     assert recs
     assert len(recs) == len({fingerprint(item) for item in recs})
-    rec_topics = {item.split(":", 1)[0] for item in recs}
-    assert rec_topics <= set(CUSTOMER_DOMAINS)
+    assert recs[0].startswith("1.")
+    assert "Career:" not in " ".join(recs)
+    assert "Decision:" not in " ".join(recs)
 
 
 def test_narrative_result_v2_keeps_live_report_section_ids(huynh_output) -> None:

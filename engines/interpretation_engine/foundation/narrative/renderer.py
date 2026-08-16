@@ -1,10 +1,18 @@
-"""Narrative Renderer — rank and group copied language. No fixed sentence budget."""
+"""Narrative Renderer — rank and group copied language. No English topic tags."""
 
 from __future__ import annotations
 
 from engines.interpretation_engine.foundation.narrative.constants import (
-    CUSTOMER_DOMAINS,
+    COMMERCIAL_CONCLUSION_LIMIT,
+    COMMERCIAL_IMPACT_PER_DOMAIN,
+    COMMERCIAL_OBSERVATION_LIMIT,
+    COMMERCIAL_REASONING_LIMIT,
+    COMMERCIAL_RECOMMENDATION_LIMIT,
+    COMMERCIAL_SUMMARY_LIMIT,
+    COMMERCIAL_WARNING_LIMIT,
+    IMPACT_CUSTOMER_DOMAINS,
     NARRATIVE_SECTIONS,
+    REASONING_DOMAIN_ORDER,
     SECTION_CONCLUSION,
     SECTION_EXECUTIVE_SUMMARY,
     SECTION_IMPACT,
@@ -16,8 +24,6 @@ from engines.interpretation_engine.foundation.narrative.constants import (
 )
 from engines.interpretation_engine.foundation.narrative.mapping import (
     customer_relevance,
-    keep_ranked,
-    narrative_topic,
     rank_key,
     rank_score,
 )
@@ -32,7 +38,12 @@ from engines.interpretation_engine.foundation.narrative.models import (
     TraceabilityRecord,
     WarningItem,
 )
+from engines.interpretation_engine.foundation.narrative.quality import (
+    domain_heading,
+    ranked_recommendation_text,
+)
 from engines.interpretation_engine.foundation.narrative.text import (
+    collapse_repeated_disclaimer,
     fingerprint,
     is_customer_prose,
 )
@@ -76,26 +87,38 @@ def _render_summary(
     graph: EvidenceGraph,
     by_name: dict[str, list[NarrativeSentence]],
 ) -> None:
-    """Executive Summary uses ranked summary-slot evidence."""
+    """Executive Summary is a short briefing, not a tagged dump."""
     candidates = [
         node
         for node in _ranked_nodes(graph)
         if SLOT_TO_SECTION.get(node.slot) == SECTION_EXECUTIVE_SUMMARY
+        and is_customer_prose(node.statement)
     ]
-    _append_nodes(SECTION_EXECUTIVE_SUMMARY, candidates, graph, by_name)
+    _append_plain(
+        SECTION_EXECUTIVE_SUMMARY,
+        candidates[:COMMERCIAL_SUMMARY_LIMIT],
+        graph,
+        by_name,
+    )
 
 
 def _render_observations(
     graph: EvidenceGraph,
     by_name: dict[str, list[NarrativeSentence]],
 ) -> None:
-    """Observation uses copied facts and evidence, unique by evidence id."""
+    """Observation lists current-chart facts the consultant can see."""
     candidates = [
         node
         for node in _ranked_nodes(graph)
         if SLOT_TO_SECTION.get(node.slot) == SECTION_OBSERVATION
+        and is_customer_prose(node.statement)
     ]
-    _append_nodes(SECTION_OBSERVATION, candidates, graph, by_name)
+    _append_plain(
+        SECTION_OBSERVATION,
+        candidates[:COMMERCIAL_OBSERVATION_LIMIT],
+        graph,
+        by_name,
+    )
 
 
 def _render_reasoning(
@@ -103,26 +126,24 @@ def _render_reasoning(
     graph: EvidenceGraph,
     by_name: dict[str, list[NarrativeSentence]],
 ) -> None:
-    """Reasoning is grouped by customer topic, not by engine."""
-    grouped: dict[str, list[ReasoningChain]] = {topic: [] for topic in CUSTOMER_DOMAINS}
+    """Reasoning follows Pattern → Strength → Useful God, then supporting roles."""
+    grouped: dict[str, list[ReasoningChain]] = {name: [] for name in REASONING_DOMAIN_ORDER}
     seen_reasons: set[str] = set()
     for chain in _ranked_chains(chains, graph):
         if chain.reason_id in seen_reasons:
             continue
-        topic = chain.topic if chain.topic in CUSTOMER_DOMAINS else ""
-        if not topic:
+        domain = chain.domain if chain.domain in grouped else ""
+        if not domain:
             continue
-        grouped[topic].append(chain)
+        grouped[domain].append(chain)
         seen_reasons.add(chain.reason_id)
-    for topic in CUSTOMER_DOMAINS:
-        topic_chains = keep_ranked(
-            grouped[topic],
-            lambda item, current_graph=graph: _chain_score(item, current_graph),
-        )
+    used_marks: set[str] = set()
+    for domain in REASONING_DOMAIN_ORDER:
+        topic_chains = grouped[domain][:2]
         if not topic_chains:
             continue
-        text = _topic_reasoning_text(topic, topic_chains)
-        if not is_customer_prose(text.split(":", 1)[-1]):
+        text = _topic_reasoning_text(topic_chains, used_marks)
+        if not is_customer_prose(text):
             continue
         evidence_ids = tuple(
             dict.fromkeys(
@@ -140,6 +161,8 @@ def _render_reasoning(
         )
         if sentence is not None:
             by_name[SECTION_REASONING].append(sentence)
+        if len(by_name[SECTION_REASONING]) >= COMMERCIAL_REASONING_LIMIT:
+            break
 
 
 def _render_impacts(
@@ -147,8 +170,8 @@ def _render_impacts(
     graph: EvidenceGraph,
     by_name: dict[str, list[NarrativeSentence]],
 ) -> None:
-    """Impact groups implications by customer topic. It does not predict outcomes."""
-    grouped: dict[str, list[ApplicationItem]] = {topic: [] for topic in CUSTOMER_DOMAINS}
+    """Impact is one concise paragraph per customer life area."""
+    grouped: dict[str, list[ApplicationItem]] = {topic: [] for topic in IMPACT_CUSTOMER_DOMAINS}
     used_local: set[str] = set()
     ranked = sorted(
         applications,
@@ -161,7 +184,7 @@ def _render_impacts(
         reverse=True,
     )
     for item in ranked:
-        if item.customer_domain not in CUSTOMER_DOMAINS:
+        if item.customer_domain not in IMPACT_CUSTOMER_DOMAINS:
             continue
         if not is_customer_prose(item.statement):
             continue
@@ -169,22 +192,14 @@ def _render_impacts(
             continue
         grouped[item.customer_domain].append(item)
         used_local.update(item.evidence_ids)
-    for topic in CUSTOMER_DOMAINS:
-        items = keep_ranked(
-            grouped[topic],
-            lambda item: rank_score(
-                item.domain,
-                item.importance,
-                item.confidence,
-                customer_relevance(item.customer_domain),
-            ),
-        )
+    for topic in IMPACT_CUSTOMER_DOMAINS:
+        items = grouped[topic][:COMMERCIAL_IMPACT_PER_DOMAIN]
         if not items:
             continue
-        statements = tuple(
-            dict.fromkeys(item.statement for item in items if item.statement)
-        )
-        text = f"{topic}: " + " ".join(statements)
+        heading = domain_heading(topic)
+        statements = tuple(dict.fromkeys(item.statement for item in items if item.statement))
+        body = collapse_repeated_disclaimer(" ".join(statements))
+        text = f"{heading}: {body}" if heading else body
         evidence_ids = tuple(
             dict.fromkeys(evidence_id for item in items for evidence_id in item.evidence_ids)
         )
@@ -204,8 +219,7 @@ def _render_recommendations(
     graph: EvidenceGraph,
     by_name: dict[str, list[NarrativeSentence]],
 ) -> None:
-    """Recommendation section groups unique-by-evidence actions by topic."""
-    grouped: dict[str, list[RecommendationItem]] = {topic: [] for topic in CUSTOMER_DOMAINS}
+    """Recommendation section exposes a ranked commercial shortlist."""
     ranked = sorted(
         recommendations,
         key=lambda item: rank_key(
@@ -218,39 +232,26 @@ def _render_recommendations(
     )
     seen_ids: set[str] = set()
     seen_actions: set[str] = set()
+    chosen: list[RecommendationItem] = []
     for item in ranked:
-        topic = narrative_topic(item.customer_domain, item.domain)
-        if topic not in CUSTOMER_DOMAINS or not is_customer_prose(item.action):
+        if not is_customer_prose(item.action):
             continue
         if seen_ids.intersection(item.evidence_ids):
             continue
         mark = fingerprint(item.action)
         if mark in seen_actions:
             continue
-        grouped[topic].append(item)
+        chosen.append(item)
         seen_ids.update(item.evidence_ids)
         seen_actions.add(mark)
-    for topic in CUSTOMER_DOMAINS:
-        items = keep_ranked(
-            grouped[topic],
-            lambda item: rank_score(
-                item.domain,
-                item.importance,
-                item.confidence,
-                customer_relevance(item.customer_domain),
-            ),
-        )
-        if not items:
-            continue
-        text = f"{topic}: " + " ".join(dict.fromkeys(item.action for item in items))
-        evidence_ids = tuple(
-            dict.fromkeys(evidence_id for item in items for evidence_id in item.evidence_ids)
-        )
+        if len(chosen) >= COMMERCIAL_RECOMMENDATION_LIMIT:
+            break
+    for index, item in enumerate(chosen, start=1):
         sentence = _sentence(
             SECTION_RECOMMENDATION,
             len(by_name[SECTION_RECOMMENDATION]),
-            text,
-            evidence_ids,
+            ranked_recommendation_text(index, item.action),
+            tuple(dict.fromkeys(item.evidence_ids)),
             graph,
         )
         if sentence is not None:
@@ -262,8 +263,7 @@ def _render_warnings(
     graph: EvidenceGraph,
     by_name: dict[str, list[NarrativeSentence]],
 ) -> None:
-    """Warning section groups unique-by-evidence risks by topic."""
-    grouped: dict[str, list[WarningItem]] = {topic: [] for topic in CUSTOMER_DOMAINS}
+    """Warning section exposes the principal current-chart risks."""
     ranked = sorted(
         warnings,
         key=lambda item: rank_key(item.domain, item.importance, item.confidence, 0.5),
@@ -271,36 +271,29 @@ def _render_warnings(
     )
     seen_ids: set[str] = set()
     seen_risks: set[str] = set()
+    chosen: list[WarningItem] = []
     for item in ranked:
-        topic = narrative_topic("", item.domain)
-        if topic not in CUSTOMER_DOMAINS or not is_customer_prose(item.risk):
+        if not is_customer_prose(item.risk):
             continue
         if seen_ids.intersection(item.evidence_ids):
             continue
         mark = fingerprint(item.risk)
         if mark in seen_risks:
             continue
-        grouped[topic].append(item)
+        chosen.append(item)
         seen_ids.update(item.evidence_ids)
         seen_risks.add(mark)
-    for topic in CUSTOMER_DOMAINS:
-        items = keep_ranked(
-            grouped[topic],
-            lambda item: rank_score(item.domain, item.importance, item.confidence, 0.5),
-        )
-        if not items:
-            continue
-        parts = []
-        for item in items:
-            text = item.risk
-            if item.mitigation:
-                text = f"{item.risk} {item.mitigation}"
-            parts.append(text)
+        if len(chosen) >= COMMERCIAL_WARNING_LIMIT:
+            break
+    for index, item in enumerate(chosen, start=1):
+        text = item.risk
+        if item.mitigation:
+            text = f"{item.risk} {item.mitigation}"
         sentence = _sentence(
             SECTION_WARNING,
             len(by_name[SECTION_WARNING]),
-            f"{topic}: " + " ".join(dict.fromkeys(parts)),
-            tuple(dict.fromkeys(eid for item in items for eid in item.evidence_ids)),
+            ranked_recommendation_text(index, text),
+            tuple(dict.fromkeys(item.evidence_ids)),
             graph,
         )
         if sentence is not None:
@@ -311,53 +304,54 @@ def _render_conclusions(
     graph: EvidenceGraph,
     by_name: dict[str, list[NarrativeSentence]],
 ) -> None:
-    """Conclusion uses remaining conclusion-slot statements unique by evidence."""
+    """Conclusion synthesizes the governing reading; it does not restart a catalogue."""
+    used = {
+        fingerprint(sentence.text)
+        for name in (SECTION_REASONING, SECTION_IMPACT, SECTION_RECOMMENDATION)
+        for sentence in by_name[name]
+    }
     candidates = [
         node
         for node in _ranked_nodes(graph)
         if SLOT_TO_SECTION.get(node.slot) == SECTION_CONCLUSION
+        and is_customer_prose(node.statement)
+        and fingerprint(node.statement) not in used
     ]
-    _append_nodes(SECTION_CONCLUSION, candidates, graph, by_name)
+    _append_plain(
+        SECTION_CONCLUSION,
+        candidates[:COMMERCIAL_CONCLUSION_LIMIT],
+        graph,
+        by_name,
+    )
 
 
-def _append_nodes(
+def _append_plain(
     section: str,
     candidates: list[EvidenceNode],
     graph: EvidenceGraph,
     by_name: dict[str, list[NarrativeSentence]],
 ) -> None:
-    """Append topic paragraphs from ranked prose. Length follows coverage, not a cap."""
-    grouped: dict[str, list[EvidenceNode]] = {topic: [] for topic in CUSTOMER_DOMAINS}
+    """Append one sentence per unique fact. No English domain prefix."""
     seen: set[str] = set()
     for node in candidates:
-        if not is_customer_prose(node.statement):
+        mark = fingerprint(node.statement)
+        if mark in seen:
             continue
         evidence_ids = (node.evidence_id, *node.alias_ids)
-        if seen.intersection(evidence_ids) and grouped.get(
-            narrative_topic(node.customer_domain, node.domain, node.engine_truth_ref),
-            [],
-        ):
+        if seen.intersection(evidence_ids):
             continue
-        topic = narrative_topic(node.customer_domain, node.domain, node.engine_truth_ref)
-        if topic not in CUSTOMER_DOMAINS:
-            continue
-        grouped[topic].append(node)
-        seen.update(evidence_ids)
-    for topic in CUSTOMER_DOMAINS:
-        nodes = keep_ranked(grouped[topic], _node_score)
-        if not nodes:
-            continue
-        text = f"{topic}: " + " ".join(dict.fromkeys(node.statement for node in nodes))
-        evidence_ids = tuple(
-            dict.fromkeys(
-                evidence_id
-                for node in nodes
-                for evidence_id in (node.evidence_id, *node.alias_ids)
-            )
+        sentence = _sentence(
+            section,
+            len(by_name[section]),
+            node.statement,
+            evidence_ids,
+            graph,
         )
-        sentence = _sentence(section, len(by_name[section]), text, evidence_ids, graph)
-        if sentence is not None:
-            by_name[section].append(sentence)
+        if sentence is None:
+            continue
+        by_name[section].append(sentence)
+        seen.add(mark)
+        seen.update(evidence_ids)
 
 
 def _ranked_nodes(graph: EvidenceGraph) -> list[EvidenceNode]:
@@ -382,30 +376,19 @@ def _ranked_chains(
     return sorted(chains, key=lambda chain: _chain_score(chain, graph), reverse=True)
 
 
-def _topic_reasoning_text(topic: str, chains: list[ReasoningChain]) -> str:
-    """Organize copied reason/conclusion text under one customer topic."""
+def _topic_reasoning_text(chains: list[ReasoningChain], seen: set[str]) -> str:
+    """Organize copied reason/conclusion text without English tags."""
     parts: list[str] = []
-    seen: set[str] = set()
     for chain in chains:
         for piece in (chain.reason, chain.conclusion):
             if not is_customer_prose(piece):
                 continue
-            mark = piece.casefold().strip()
+            mark = fingerprint(piece)
             if not mark or mark in seen:
                 continue
             seen.add(mark)
             parts.append(piece)
-    return f"{topic}: " + " ".join(parts)
-
-
-def _node_score(node: EvidenceNode) -> float:
-    """Coverage score for one evidence node."""
-    return rank_score(
-        node.domain,
-        node.importance,
-        node.confidence,
-        customer_relevance(node.customer_domain, node.engine_truth_ref),
-    )
+    return " ".join(parts)
 
 
 def _chain_score(chain: ReasoningChain, graph: EvidenceGraph) -> float:

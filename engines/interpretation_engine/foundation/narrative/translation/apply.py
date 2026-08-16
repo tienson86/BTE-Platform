@@ -40,6 +40,7 @@ def apply_expert_translation(
             _translate_knowledge(item, debug_mode=debug_mode)
             for item in source.knowledge_bundles
         ),
+        chart_focus=source.chart_focus,
     )
 
 

@@ -18,10 +18,17 @@ from engines.interpretation_engine.foundation.narrative.models import (
     EvidenceGraph,
     NarrativeComposerResult,
 )
+from engines.interpretation_engine.foundation.narrative.quality import (
+    assert_customer_narrative_quality,
+    customer_quality_metrics,
+)
 from engines.interpretation_engine.foundation.narrative.reason import compose_reasons
 from engines.interpretation_engine.foundation.narrative.recommendation import (
     compose_recommendations,
     compose_warnings,
+)
+from engines.interpretation_engine.foundation.narrative.relevance import (
+    apply_customer_relevance,
 )
 from engines.interpretation_engine.foundation.narrative.renderer import render_sections
 from engines.interpretation_engine.foundation.narrative.translation import (
@@ -45,7 +52,8 @@ class NarrativeComposerV2:
         Application Composer → Recommendation Composer → Narrative Renderer.
         """
         translated = apply_expert_translation(source, debug_mode=debug_mode)
-        collected = compose_evidence(translated)
+        selected = apply_customer_relevance(translated)
+        collected = compose_evidence(selected)
         merged = merge_evidence_nodes(collected.nodes)
         evidence = EvidenceGraph(
             nodes=merged.nodes,
@@ -64,7 +72,7 @@ class NarrativeComposerV2:
             warnings=warnings,
         )
         diagnostics = _section_diagnostics(sections)
-        metrics = build_metrics(
+        base_metrics = build_metrics(
             graph=evidence,
             chains=chains,
             recommendations=recommendations,
@@ -80,11 +88,27 @@ class NarrativeComposerV2:
             recommendations=recommendations,
             warnings=warnings,
             traceability=traces,
-            metrics=metrics,
+            metrics=base_metrics,
             diagnostics=diagnostics,
+        )
+        result = NarrativeComposerResult(
+            sections=result.sections,
+            evidence=result.evidence,
+            reasoning_chains=result.reasoning_chains,
+            applications=result.applications,
+            recommendations=result.recommendations,
+            warnings=result.warnings,
+            traceability=result.traceability,
+            metrics=customer_quality_metrics(
+                result=result,
+                focus=selected.chart_focus,
+                base=base_metrics,
+            ),
+            diagnostics=result.diagnostics,
         )
         if not debug_mode:
             assert_customer_narrative_clean(result)
+            assert_customer_narrative_quality(result, focus=selected.chart_focus)
         return result
 
 

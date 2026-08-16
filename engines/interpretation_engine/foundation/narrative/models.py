@@ -269,6 +269,16 @@ class ComposerMetrics:
     evidence_count: int
     sentence_count: int
     orphan_sentence_count: int
+    customer_relevance_ratio: float = 1.0
+    active_chart_fact_ratio: float = 1.0
+    hypothetical_knowledge_leak_count: int = 0
+    duplicate_section_ratio: float = 0.0
+    broken_fragment_count: int = 0
+    implementation_language_count: int = 0
+    recommendation_count: int = 0
+    priority_recommendation_count: int = 0
+    domain_paragraph_count: int = 0
+    customer_narrative_word_count: int = 0
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize composer metrics."""
@@ -282,6 +292,16 @@ class ComposerMetrics:
             "evidence_count": self.evidence_count,
             "sentence_count": self.sentence_count,
             "orphan_sentence_count": self.orphan_sentence_count,
+            "customer_relevance_ratio": self.customer_relevance_ratio,
+            "active_chart_fact_ratio": self.active_chart_fact_ratio,
+            "hypothetical_knowledge_leak_count": self.hypothetical_knowledge_leak_count,
+            "duplicate_section_ratio": self.duplicate_section_ratio,
+            "broken_fragment_count": self.broken_fragment_count,
+            "implementation_language_count": self.implementation_language_count,
+            "recommendation_count": self.recommendation_count,
+            "priority_recommendation_count": self.priority_recommendation_count,
+            "domain_paragraph_count": self.domain_paragraph_count,
+            "customer_narrative_word_count": self.customer_narrative_word_count,
         }
 
 

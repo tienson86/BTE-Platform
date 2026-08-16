@@ -11,6 +11,55 @@ from engines.interpretation_engine.foundation.narrative.constants import (
 
 
 @dataclass(frozen=True, slots=True)
+class ChartFocus:
+    """Current-chart facts used to drop unused knowledge from customer text."""
+
+    selected: str = ""
+    favorable: tuple[str, ...] = ()
+    unfavorable: tuple[str, ...] = ()
+    pattern_label: str = ""
+    strength_label: str = ""
+    strength_state: str = ""
+    day_master: str = ""
+    present_ten_gods: tuple[str, ...] = ()
+    canonical_shensha: tuple[str, ...] = ()
+    current_dayun: str = ""
+
+    def active_names(self) -> frozenset[str]:
+        """Names that belong to this chart's governing reading."""
+        names = [
+            self.selected,
+            self.pattern_label,
+            self.strength_label,
+            self.strength_state,
+            self.day_master,
+            *self.favorable,
+            *self.unfavorable,
+            *self.present_ten_gods,
+            *self.canonical_shensha,
+        ]
+        return frozenset(item for item in names if item)
+
+    def role_for(self, key: str) -> str:
+        """Map an entity key to its current-chart role."""
+        if key and key == self.selected:
+            return "useful_god"
+        if key in self.favorable:
+            return "hy"
+        if key in self.unfavorable:
+            return "ky"
+        if key and key == self.pattern_label:
+            return "pattern"
+        if key in {self.strength_label, self.strength_state, "strong", "weak", "balanced"}:
+            return "strength"
+        if key in self.present_ten_gods:
+            return "ten_god"
+        if key in self.canonical_shensha:
+            return "shensha"
+        return ""
+
+
+@dataclass(frozen=True, slots=True)
 class CopiedStatement:
     """One already-validated statement copied from an upstream bundle."""
 
@@ -155,6 +204,7 @@ class NarrativeComposerInput:
     state_bundles: tuple[StateBundle, ...] = ()
     relationship_bundles: tuple[RelationshipBundle, ...] = ()
     knowledge_bundles: tuple[KnowledgeBundle, ...] = ()
+    chart_focus: ChartFocus | None = None
 
     def all_bundles(
         self,

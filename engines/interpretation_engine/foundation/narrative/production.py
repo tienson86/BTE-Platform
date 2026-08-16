@@ -76,6 +76,7 @@ def build_composer_input_from_production(output: Any) -> NarrativeComposerInput:
         pattern_bundle=pattern_bundle,
         ten_god_bundle=ten_god_bundle,
         shensha_bundle=shensha_bundle,
+        current_dayun=_current_dayun(output),
     )
 
 
@@ -125,3 +126,20 @@ def _shensha_facts(output: Any):
         ten_god_roles=ten_god_roles,
         strength_level=foundation.facts.strength.level,
     )
+
+
+def _current_dayun(output: Any) -> str:
+    """Copy the confirmed current luck cycle label. Do not interpret luck."""
+    luck = getattr(output, "luck", None) or {}
+    if not isinstance(luck, dict):
+        return ""
+    current = luck.get("current_cycle") or luck.get("current_dayun") or {}
+    if not isinstance(current, dict):
+        return str(current or "")
+    gan = str(current.get("gan_zhi") or current.get("ganzhi") or "").strip()
+    years = ""
+    start = current.get("year_start")
+    end = current.get("year_end")
+    if start and end:
+        years = f"{start}–{end}"
+    return " ".join(part for part in (gan, years) if part)

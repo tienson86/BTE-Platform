@@ -74,10 +74,15 @@ from engines.interpretation_engine.foundation.narrative.input import (
     RelationshipBundle,
     StateBundle,
     CopiedStatement,
+    ChartFocus,
 )
 from engines.interpretation_engine.foundation.narrative.adapters_decision import (
     copy_decision_explanation,
     copy_useful_god_interpretation,
+)
+from engines.interpretation_engine.foundation.narrative.relevance import (
+    canonical_shensha_names,
+    entity_is_relevant,
 )
 from engines.interpretation_engine.foundation.relationship.models import (
     RelationshipAssessment,
@@ -201,42 +206,6 @@ def build_relationship_bundle(
     refs: list[str] = list(assessment.rule_ids)
     prefix = f"relationship:{domain}"
     confidence = assessment.confidence
-    for node in assessment.graph.nodes:
-        extend_copied(
-            statements,
-            copy_statement(
-                node.label or node.node_id,
-                kind=KIND_FACT,
-                slot=SLOT_OBSERVATION,
-                engine_truth_ref=f"{prefix}:node:{node.node_id}",
-                confidence=confidence,
-            ),
-        )
-    for edge in assessment.graph.edges:
-        extend_copied(
-            statements,
-            copy_statement(
-                f"{edge.source}->{edge.relationship_type}->{edge.target}",
-                kind=KIND_REASON,
-                slot=SLOT_REASONING,
-                engine_truth_ref=f"{prefix}:edge:{edge.edge_id}",
-                confidence=edge.confidence or confidence,
-            ),
-        )
-        refs.extend(edge.rule_ids)
-    for item in assessment.evidence:
-        extend_copied(
-            statements,
-            copy_statement(
-                f"{item.fact}={item.value}" if item.value else item.fact,
-                kind=KIND_EVIDENCE,
-                slot=SLOT_OBSERVATION,
-                engine_truth_ref=item.evidence_id or f"{prefix}:evidence:{item.rule_id}",
-                confidence=item.confidence or confidence,
-            ),
-        )
-        if item.rule_id:
-            refs.append(item.rule_id)
     for item in assessment.meaning:
         extend_copied(
             statements,
@@ -343,11 +312,21 @@ def build_knowledge_bundle(
     entities: Iterable[KnowledgeEntity],
     confidence: float,
     extra_refs: Iterable[str] = (),
+    focus: ChartFocus | None = None,
 ) -> KnowledgeBundle:
     """Copy knowledge entities. Composer does not look up or rewrite them."""
-    entity_list = tuple(entities)
+    entity_list = tuple(
+        entity
+        for entity in entities
+        if entity is not None and entity_is_relevant(domain, entity.key, focus)
+    )
     statements: list[CopiedStatement] = []
     for entity in entity_list:
+        entity_role = focus.role_for(entity.key) if focus is not None else ""
+        if domain == "Strength":
+            entity_role = "strength"
+        elif domain == "Pattern":
+            entity_role = "pattern"
         extend_copied(
             statements,
             copy_statement(
@@ -358,7 +337,13 @@ def build_knowledge_bundle(
                 confidence=confidence,
             ),
         )
-        statements.extend(copy_knowledge_entity(entity, confidence=confidence))
+        statements.extend(
+            copy_knowledge_entity(
+                entity,
+                confidence=confidence,
+                entity_role=entity_role,
+            )
+        )
     keys = tuple(entity.key for entity in entity_list)
     refs = [entity.id for entity in entity_list]
     refs.extend(item for item in extra_refs if item)
@@ -378,6 +363,7 @@ def knowledge_bundle_from_source(
     *,
     domain: str,
     confidence: float,
+    focus: ChartFocus | None = None,
 ) -> KnowledgeBundle:
     """Normalize any domain knowledge bundle into the frozen knowledge input."""
     entities = _entities_from_source(source)
@@ -389,6 +375,7 @@ def knowledge_bundle_from_source(
         entities=entities,
         confidence=confidence,
         extra_refs=extra_refs,
+        focus=focus,
     )
 
 
@@ -402,8 +389,18 @@ def composer_input_from_domains(
     pattern_bundle: PatternInterpretationBundle | None,
     ten_god_bundle: TenGodInterpretationBundle | None,
     shensha_bundle: ShenShaInterpretationBundle | None,
+    current_dayun: str = "",
 ) -> NarrativeComposerInput:
     """Assemble frozen composer input from already-built domain bundles."""
+    focus = _chart_focus(
+        useful_god_explanation=useful_god_explanation,
+        useful_god_knowledge=useful_god_knowledge,
+        strength_assessment=strength_assessment,
+        pattern_bundle=pattern_bundle,
+        ten_god_bundle=ten_god_bundle,
+        shensha_bundle=shensha_bundle,
+        current_dayun=current_dayun,
+    )
     decisions: list[DecisionBundle] = []
     states: list[StateBundle] = []
     relationships: list[RelationshipBundle] = []
@@ -422,6 +419,7 @@ def composer_input_from_domains(
                 useful_god_knowledge,
                 domain="UsefulGod",
                 confidence=_bundle_confidence(useful_god_explanation),
+                focus=focus,
             )
         )
     if strength_assessment is not None:
@@ -432,16 +430,25 @@ def composer_input_from_domains(
                 strength_knowledge,
                 domain="Strength",
                 confidence=strength_assessment.confidence if strength_assessment else 0.0,
+                focus=focus,
             )
         )
-    _append_relationship_domain(relationships, knowledge, pattern_bundle, "Pattern")
-    _append_relationship_domain(relationships, knowledge, ten_god_bundle, "TenGods")
-    _append_relationship_domain(relationships, knowledge, shensha_bundle, "ShenSha")
+    _append_relationship_domain(
+        relationships, knowledge, pattern_bundle, "Pattern", focus
+    )
+    _append_relationship_domain(
+        relationships, knowledge, ten_god_bundle, "TenGods", focus
+    )
+    _append_relationship_domain(
+        relationships, knowledge, shensha_bundle, "ShenSha", focus
+    )
+    _append_dayun_frame(decisions, current_dayun)
     return NarrativeComposerInput(
         decision_bundles=tuple(decisions),
         state_bundles=tuple(states),
         relationship_bundles=tuple(relationships),
         knowledge_bundles=tuple(knowledge),
+        chart_focus=focus,
     )
 
 
@@ -453,6 +460,7 @@ def _append_relationship_domain(
     | ShenShaInterpretationBundle
     | None,
     domain: str,
+    focus: ChartFocus | None,
 ) -> None:
     """Split one domain interpretation bundle into relationship + knowledge."""
     if bundle is None:
@@ -467,7 +475,7 @@ def _append_relationship_domain(
             impacts=narrative.impacts,
             recommendations=narrative.recommendations,
             warnings=narrative.warnings,
-            conclusions=_interpretation_conclusions(bundle),
+            conclusions=_interpretation_conclusions(bundle, focus),
         )
     )
     knowledge.append(
@@ -475,6 +483,7 @@ def _append_relationship_domain(
             bundle.knowledge,
             domain=domain,
             confidence=bundle.relationship.confidence,
+            focus=focus,
         )
     )
 
@@ -486,7 +495,6 @@ def _entities_from_source(source: _KnowledgeSource) -> tuple[KnowledgeEntity, ..
             source.selected_entity,
             *source.favorable_entities,
             *source.unfavorable_entities,
-            *source.rejected_entities,
         ]
         return tuple(item for item in items if item is not None)
     if isinstance(source, StrengthKnowledgeBundle):
@@ -522,6 +530,7 @@ def _interpretation_conclusions(
     bundle: PatternInterpretationBundle
     | TenGodInterpretationBundle
     | ShenShaInterpretationBundle,
+    focus: ChartFocus | None = None,
 ) -> tuple[str, ...]:
     """Copy already-validated interpretation meaning. Do not invent conclusions."""
     interpretation = bundle.interpretation
@@ -533,11 +542,119 @@ def _interpretation_conclusions(
     if strengths:
         items.append(str(strengths))
     for role in getattr(interpretation, "roles", ()):
+        key = str(getattr(role, "key", "") or getattr(role, "name", "") or "")
+        if focus is not None and key and key not in focus.present_ten_gods:
+            continue
         if getattr(role, "role_meaning", ""):
             items.append(str(role.role_meaning))
     for star in getattr(interpretation, "stars", ()):
+        key = str(getattr(star, "key", "") or getattr(star, "name", "") or "")
+        if focus is not None and key and key not in focus.canonical_shensha:
+            continue
         if getattr(star, "base_influence", ""):
             items.append(str(star.base_influence))
         elif getattr(star, "why_exists", ""):
             items.append(str(star.why_exists))
     return tuple(items)
+
+
+def _chart_focus(
+    *,
+    useful_god_explanation: DecisionExplanationResult | None,
+    useful_god_knowledge: UsefulGodKnowledgeBundle | None,
+    strength_assessment: StrengthAssessment | None,
+    pattern_bundle: PatternInterpretationBundle | None,
+    ten_god_bundle: TenGodInterpretationBundle | None,
+    shensha_bundle: ShenShaInterpretationBundle | None,
+    current_dayun: str,
+) -> ChartFocus:
+    """Collect current-chart names. Does not calculate new astrology."""
+    selected = ""
+    favorable: tuple[str, ...] = ()
+    unfavorable: tuple[str, ...] = ()
+    if useful_god_knowledge is not None:
+        selected = useful_god_knowledge.selected_key
+        favorable = useful_god_knowledge.favorable_keys
+        unfavorable = useful_god_knowledge.unfavorable_keys
+    elif useful_god_explanation is not None and useful_god_explanation.decision is not None:
+        selected = useful_god_explanation.decision.selected
+    pattern_label = ""
+    if pattern_bundle is not None:
+        facts = getattr(pattern_bundle, "facts", None)
+        pattern_label = str(getattr(facts, "label", "") or getattr(facts, "selected", "") or "")
+        if not pattern_label and pattern_bundle.narrative.summary:
+            pattern_label = str(pattern_bundle.narrative.summary[0]).split("—", 1)[0].strip()
+    day_master = ""
+    visible: list[str] = []
+    if ten_god_bundle is not None:
+        facts = ten_god_bundle.facts
+        day_master = str(facts.day_master or "")
+        visible.extend(facts.visible_roles)
+        if facts.pattern_label and not pattern_label:
+            pattern_label = facts.pattern_label
+        if facts.useful_god_selected and not selected:
+            selected = facts.useful_god_selected
+    matched: tuple[str, ...] = ()
+    if shensha_bundle is not None:
+        matched = shensha_bundle.facts.matched_shensha
+    present = tuple(
+        dict.fromkeys(
+            [
+                *visible,
+                selected,
+                *favorable,
+                *unfavorable,
+                pattern_label,
+                "Nhật Chủ",
+            ]
+        )
+    )
+    present = tuple(item for item in present if item)
+    return ChartFocus(
+        selected=selected,
+        favorable=tuple(item for item in favorable if item),
+        unfavorable=tuple(item for item in unfavorable if item),
+        pattern_label=pattern_label,
+        strength_label=strength_assessment.label if strength_assessment else "",
+        strength_state=strength_assessment.state if strength_assessment else "",
+        day_master=day_master,
+        present_ten_gods=present,
+        canonical_shensha=canonical_shensha_names(matched),
+        current_dayun=current_dayun,
+    )
+
+
+def _append_dayun_frame(decisions: list[DecisionBundle], current_dayun: str) -> None:
+    """Copy confirmed current luck cycle as a framing fact. No luck interpretation."""
+    if not current_dayun or not decisions:
+        return
+    bundle = decisions[0]
+    extra = copy_statement(
+        f"Khung thời gian của bản luận là Đại vận {current_dayun}.",
+        kind=KIND_FACT,
+        slot=SLOT_SUMMARY,
+        engine_truth_ref="luck:current_dayun",
+        confidence=bundle.confidence,
+    )
+    observe = copy_statement(
+        f"Đại vận hiện tại: {current_dayun}.",
+        kind=KIND_FACT,
+        slot=SLOT_OBSERVATION,
+        engine_truth_ref="luck:current_dayun:observation",
+        confidence=bundle.confidence,
+    )
+    statements = list(bundle.statements)
+    if extra is not None:
+        statements.append(extra)
+    if observe is not None:
+        statements.append(observe)
+    decisions[0] = DecisionBundle(
+        bundle_id=bundle.bundle_id,
+        domain=bundle.domain,
+        selected=bundle.selected,
+        reason=bundle.reason,
+        confidence=bundle.confidence,
+        importance=bundle.importance,
+        statements=tuple(statements),
+        engine_truth_refs=(*bundle.engine_truth_refs, "luck:current_dayun"),
+    )

@@ -68,7 +68,7 @@ class CommercialReportBuilder:
         identity = self._chapter("identity", request.identity)
         if identity is not None:
             supporting.append(identity)
-        career = self._chapter("career", request.career)
+        career = self._career_chapter(request, narrative_payload)
         if career is not None:
             supporting.append(career)
         executive = self._chapter("executive", request.executive)
@@ -148,6 +148,61 @@ class CommercialReportBuilder:
             sections=sections,
             available=True,
         )
+
+    def _career_chapter(
+        self,
+        request: CommercialBuildRequest,
+        payload: dict[str, Any] | None,
+    ) -> CommercialChapter | None:
+        """Dedicated Sự nghiệp chapter from narrative, using the existing career slot."""
+        paragraphs = self._career_from_narrative(payload, request.current_dayun)
+        if paragraphs:
+            return CommercialChapter(
+                chapter_id="career",
+                title="Sự nghiệp",
+                sections=[
+                    CommercialSection(
+                        section_id="career-core",
+                        title="Sự nghiệp",
+                        paragraphs=paragraphs,
+                    )
+                ],
+                available=True,
+            )
+        return self._chapter("career", request.career)
+
+    @staticmethod
+    def _career_from_narrative(
+        payload: dict[str, Any] | None,
+        current_dayun: str,
+    ) -> list[str]:
+        """Select career paragraphs already composed. Do not invent occupations."""
+        if not is_usable_narrative_result(payload):
+            return []
+        assert payload is not None
+        extracted = extract_canonical_sections(payload)
+        by_id = {item["id"]: item for item in extracted}
+        paragraphs: list[str] = []
+        impact = str(by_id.get("sec-impact", {}).get("body") or "")
+        for block in impact.split("\n\n"):
+            text = block.strip()
+            if text.startswith("Sự nghiệp"):
+                paragraphs.append(text)
+        rec = str(by_id.get("sec-recommendation", {}).get("body") or "")
+        rec_added = 0
+        for block in rec.split("\n\n"):
+            text = block.strip()
+            if not text:
+                continue
+            paragraphs.append(text)
+            rec_added += 1
+            if rec_added >= 3:
+                break
+        if current_dayun and not any("Đại vận" in item for item in paragraphs):
+            paragraphs.append(
+                f"Khung thời gian của bản luận là Đại vận {current_dayun}."
+            )
+        return paragraphs
 
     def _build_cover(
         self,
