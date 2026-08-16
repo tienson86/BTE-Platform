@@ -107,6 +107,24 @@ def customer_quality_metrics(
         priority_recommendation_count=min(rec_count, COMMERCIAL_RECOMMENDATION_LIMIT),
         domain_paragraph_count=domain_count,
         customer_narrative_word_count=words,
+        thesis_evidence_coverage=(
+            result.case_thesis.thesis_evidence_coverage if result.case_thesis else 1.0
+        ),
+        thesis_domain_coverage=(
+            result.case_thesis.thesis_domain_coverage if result.case_thesis else 1.0
+        ),
+        thesis_specificity=(
+            result.case_thesis.thesis_specificity if result.case_thesis else 0.0
+        ),
+        unsupported_thesis_claims=(
+            result.case_thesis.unsupported_thesis_claims if result.case_thesis else 0
+        ),
+        core_tension_present=(
+            result.case_thesis.core_tension_present if result.case_thesis else 0.0
+        ),
+        corrective_direction_present=(
+            result.case_thesis.corrective_direction_present if result.case_thesis else 0.0
+        ),
     )
 
 

@@ -77,6 +77,8 @@ def build_composer_input_from_production(output: Any) -> NarrativeComposerInput:
         ten_god_bundle=ten_god_bundle,
         shensha_bundle=shensha_bundle,
         current_dayun=_current_dayun(output),
+        five_elements=_five_elements(output),
+        dominant_element=_dominant_element(output),
     )
 
 
@@ -143,3 +145,39 @@ def _current_dayun(output: Any) -> str:
     if start and end:
         years = f"{start}–{end}"
     return " ".join(part for part in (gan, years) if part)
+
+
+_ELEMENT_LABELS: tuple[tuple[str, str], ...] = (
+    ("wood", "Mộc"),
+    ("fire", "Hỏa"),
+    ("earth", "Thổ"),
+    ("metal", "Kim"),
+    ("water", "Thủy"),
+)
+
+
+def _five_elements(output: Any) -> tuple[tuple[str, int], ...]:
+    """Copy five-element counts. Does not recalculate wuxing."""
+    foundation = getattr(output, "interpretation_foundation", None)
+    if foundation is None:
+        return ()
+    facts = getattr(getattr(foundation, "facts", None), "five_elements", None)
+    if facts is None:
+        facts = getattr(getattr(foundation, "context", None), "five_elements", None)
+    if facts is None:
+        return ()
+    items: list[tuple[str, int]] = []
+    for field, label in _ELEMENT_LABELS:
+        value = getattr(facts, field, None)
+        if value is None:
+            continue
+        items.append((label, int(value)))
+    return tuple(items)
+
+
+def _dominant_element(output: Any) -> str:
+    """Copy the thickest element name when counts exist."""
+    counts = _five_elements(output)
+    if not counts:
+        return ""
+    return max(counts, key=lambda item: item[1])[0]

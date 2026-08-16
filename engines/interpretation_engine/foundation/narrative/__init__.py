@@ -1,5 +1,10 @@
 """Narrative Composer V2 — composition layer over already-validated bundles."""
 
+from engines.interpretation_engine.foundation.narrative.case_thesis import (
+    CaseThesisResult,
+    compare_case_theses,
+    generate_case_thesis,
+)
 from engines.interpretation_engine.foundation.narrative.composer import (
     NarrativeComposerV2,
     compose_narrative_v2,
@@ -33,6 +38,7 @@ from engines.interpretation_engine.foundation.narrative.production import (
 __all__ = [
     "CANONICAL_BUNDLE_KINDS",
     "CUSTOMER_DOMAINS",
+    "CaseThesisResult",
     "ComposerMetrics",
     "DecisionBundle",
     "EvidenceGraph",
@@ -47,5 +53,7 @@ __all__ = [
     "build_composer_input_from_production",
     "compose_narrative_v2",
     "compose_narrative_v2_from_production",
+    "compare_case_theses",
+    "generate_case_thesis",
     "narrative_result_v2_to_dict",
 ]

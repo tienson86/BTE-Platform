@@ -61,6 +61,9 @@ def narrative_result_v2_to_dict(
             "composer": NARRATIVE_RESULT_V2_GENERATOR,
             "metrics": result.metrics.to_dict(),
             "section_names": list(NARRATIVE_SECTIONS),
+            "case_thesis": (
+                result.case_thesis.to_dict() if result.case_thesis else None
+            ),
         },
         "validation_issues": list(result.diagnostics),
         "evidence": result.evidence.to_dict(),

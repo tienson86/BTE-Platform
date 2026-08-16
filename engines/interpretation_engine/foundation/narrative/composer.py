@@ -7,6 +7,11 @@ from typing import Any
 from engines.interpretation_engine.foundation.narrative.application import (
     compose_applications,
 )
+from engines.interpretation_engine.foundation.narrative.case_thesis import (
+    apply_thesis_relevance,
+    filter_evidence_graph,
+    generate_case_thesis,
+)
 from engines.interpretation_engine.foundation.narrative.constants import (
     NARRATIVE_SECTIONS,
 )
@@ -53,13 +58,17 @@ class NarrativeComposerV2:
         """
         translated = apply_expert_translation(source, debug_mode=debug_mode)
         selected = apply_customer_relevance(translated)
-        collected = compose_evidence(selected)
+        draft_thesis = generate_case_thesis(selected)
+        focused = apply_thesis_relevance(selected, draft_thesis)
+        collected = compose_evidence(focused)
         merged = merge_evidence_nodes(collected.nodes)
-        evidence = EvidenceGraph(
+        raw_graph = EvidenceGraph(
             nodes=merged.nodes,
             raw_count=collected.raw_count,
             merged_count=merged.merged_count,
         )
+        thesis = generate_case_thesis(focused, evidence=raw_graph)
+        evidence = filter_evidence_graph(raw_graph, thesis, focused.chart_focus)
         chains = compose_reasons(evidence)
         applications = compose_applications(evidence)
         recommendations = compose_recommendations(evidence)
@@ -70,6 +79,7 @@ class NarrativeComposerV2:
             applications=applications,
             recommendations=recommendations,
             warnings=warnings,
+            thesis=thesis,
         )
         diagnostics = _section_diagnostics(sections)
         base_metrics = build_metrics(
@@ -90,6 +100,7 @@ class NarrativeComposerV2:
             traceability=traces,
             metrics=base_metrics,
             diagnostics=diagnostics,
+            case_thesis=thesis,
         )
         result = NarrativeComposerResult(
             sections=result.sections,
@@ -101,14 +112,15 @@ class NarrativeComposerV2:
             traceability=result.traceability,
             metrics=customer_quality_metrics(
                 result=result,
-                focus=selected.chart_focus,
+                focus=focused.chart_focus,
                 base=base_metrics,
             ),
             diagnostics=result.diagnostics,
+            case_thesis=result.case_thesis,
         )
         if not debug_mode:
             assert_customer_narrative_clean(result)
-            assert_customer_narrative_quality(result, focus=selected.chart_focus)
+            assert_customer_narrative_quality(result, focus=focused.chart_focus)
         return result
 
 

@@ -5,6 +5,10 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
+from engines.interpretation_engine.foundation.narrative.case_thesis.models import (
+    CaseThesisResult,
+)
+
 
 @dataclass(frozen=True, slots=True)
 class EvidenceNode:
@@ -279,6 +283,12 @@ class ComposerMetrics:
     priority_recommendation_count: int = 0
     domain_paragraph_count: int = 0
     customer_narrative_word_count: int = 0
+    thesis_evidence_coverage: float = 1.0
+    thesis_domain_coverage: float = 1.0
+    thesis_specificity: float = 0.0
+    unsupported_thesis_claims: int = 0
+    core_tension_present: float = 0.0
+    corrective_direction_present: float = 0.0
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize composer metrics."""
@@ -302,6 +312,12 @@ class ComposerMetrics:
             "priority_recommendation_count": self.priority_recommendation_count,
             "domain_paragraph_count": self.domain_paragraph_count,
             "customer_narrative_word_count": self.customer_narrative_word_count,
+            "thesis_evidence_coverage": self.thesis_evidence_coverage,
+            "thesis_domain_coverage": self.thesis_domain_coverage,
+            "thesis_specificity": self.thesis_specificity,
+            "unsupported_thesis_claims": self.unsupported_thesis_claims,
+            "core_tension_present": self.core_tension_present,
+            "corrective_direction_present": self.corrective_direction_present,
         }
 
 
@@ -318,6 +334,7 @@ class NarrativeComposerResult:
     traceability: tuple[TraceabilityRecord, ...]
     metrics: ComposerMetrics
     diagnostics: tuple[str, ...] = ()
+    case_thesis: CaseThesisResult | None = None
 
     def section(self, name: str) -> NarrativeSection | None:
         """Return one section by canonical name."""
@@ -338,4 +355,5 @@ class NarrativeComposerResult:
             "traceability": [item.to_dict() for item in self.traceability],
             "metrics": self.metrics.to_dict(),
             "diagnostics": list(self.diagnostics),
+            "case_thesis": self.case_thesis.to_dict() if self.case_thesis else None,
         }

@@ -24,6 +24,10 @@ class ChartFocus:
     present_ten_gods: tuple[str, ...] = ()
     canonical_shensha: tuple[str, ...] = ()
     current_dayun: str = ""
+    useful_god_role: str = ""
+    five_elements: tuple[tuple[str, int], ...] = ()
+    dominant_element: str = ""
+    stem_roles: tuple[tuple[str, str], ...] = ()
 
     def active_names(self) -> frozenset[str]:
         """Names that belong to this chart's governing reading."""

@@ -38,6 +38,9 @@ from engines.interpretation_engine.foundation.knowledge.strength_bundle import (
 from engines.interpretation_engine.foundation.knowledge.ten_god_bundle import (
     TenGodKnowledgeBundle,
 )
+from engines.interpretation_engine.foundation.knowledge.entity_types import (
+    TEN_GOD_ROLE_KEYS,
+)
 from engines.interpretation_engine.foundation.narrative.collect import (
     copy_knowledge_entity,
     copy_mapping_recommendations,
@@ -390,6 +393,8 @@ def composer_input_from_domains(
     ten_god_bundle: TenGodInterpretationBundle | None,
     shensha_bundle: ShenShaInterpretationBundle | None,
     current_dayun: str = "",
+    five_elements: tuple[tuple[str, int], ...] = (),
+    dominant_element: str = "",
 ) -> NarrativeComposerInput:
     """Assemble frozen composer input from already-built domain bundles."""
     focus = _chart_focus(
@@ -400,6 +405,8 @@ def composer_input_from_domains(
         ten_god_bundle=ten_god_bundle,
         shensha_bundle=shensha_bundle,
         current_dayun=current_dayun,
+        five_elements=five_elements,
+        dominant_element=dominant_element,
     )
     decisions: list[DecisionBundle] = []
     states: list[StateBundle] = []
@@ -567,6 +574,8 @@ def _chart_focus(
     ten_god_bundle: TenGodInterpretationBundle | None,
     shensha_bundle: ShenShaInterpretationBundle | None,
     current_dayun: str,
+    five_elements: tuple[tuple[str, int], ...] = (),
+    dominant_element: str = "",
 ) -> ChartFocus:
     """Collect current-chart names. Does not calculate new astrology."""
     selected = ""
@@ -586,6 +595,8 @@ def _chart_focus(
             pattern_label = str(pattern_bundle.narrative.summary[0]).split("—", 1)[0].strip()
     day_master = ""
     visible: list[str] = []
+    stem_roles: list[tuple[str, str]] = []
+    useful_god_role = ""
     if ten_god_bundle is not None:
         facts = ten_god_bundle.facts
         day_master = str(facts.day_master or "")
@@ -594,6 +605,15 @@ def _chart_focus(
             pattern_label = facts.pattern_label
         if facts.useful_god_selected and not selected:
             selected = facts.useful_god_selected
+        for position in facts.positions:
+            stem = str(getattr(position, "stem", "") or "")
+            role = str(getattr(position, "name", "") or "")
+            if stem and role:
+                stem_roles.append((stem, role))
+                if selected and stem == selected and not useful_god_role:
+                    useful_god_role = role
+    if selected in TEN_GOD_ROLE_KEYS:
+        useful_god_role = selected
     matched: tuple[str, ...] = ()
     if shensha_bundle is not None:
         matched = shensha_bundle.facts.matched_shensha
@@ -605,11 +625,16 @@ def _chart_focus(
                 *favorable,
                 *unfavorable,
                 pattern_label,
+                useful_god_role,
                 "Nhật Chủ",
             ]
         )
     )
     present = tuple(item for item in present if item)
+    copied_five = five_elements
+    copied_dominant = dominant_element
+    if copied_five and not copied_dominant:
+        copied_dominant = max(copied_five, key=lambda item: item[1])[0]
     return ChartFocus(
         selected=selected,
         favorable=tuple(item for item in favorable if item),
@@ -621,6 +646,10 @@ def _chart_focus(
         present_ten_gods=present,
         canonical_shensha=canonical_shensha_names(matched),
         current_dayun=current_dayun,
+        useful_god_role=useful_god_role,
+        five_elements=copied_five,
+        dominant_element=copied_dominant,
+        stem_roles=tuple(dict.fromkeys(stem_roles)),
     )
 
 
