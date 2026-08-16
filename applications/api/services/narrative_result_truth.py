@@ -23,6 +23,9 @@ from engines.interpretation_engine.foundation.narrative.constants import (
 from engines.interpretation_engine.foundation.narrative.composer import (
     compose_narrative_v2_from_production,
 )
+from engines.interpretation_engine.foundation.narrative.publish import (
+    apply_published_narrative,
+)
 from engines.interpretation_engine.foundation.narrative.result_v2 import (
     narrative_result_v2_to_dict,
 )
@@ -118,7 +121,7 @@ def build_narrative_result_dict(
             payload["summary"] = summary
     if isinstance(secondary_milestone_payload, dict):
         payload["secondary_career_milestone"] = secondary_milestone_payload
-    return payload
+    return apply_published_narrative(payload)
 
 
 def narrative_result_source_fingerprint() -> dict[str, str]:
