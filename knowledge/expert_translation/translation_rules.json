@@ -1,0 +1,674 @@
+{
+  "version": "1.0.0",
+  "rules": [
+    {
+      "id": "ET-ENG-001",
+      "source_pattern": "Loaded\\s+\\d+\\s+candidates(?:\\s+from\\s+engine)?",
+      "target_pattern": "Hệ thống đã đánh giá nhiều phương án cân bằng trước khi xác định lựa chọn phù hợp nhất.",
+      "scope": "engine_terms",
+      "priority": 100,
+      "examples": [
+        [
+          "Loaded 6 candidates from engine",
+          "Hệ thống đã đánh giá nhiều phương án cân bằng trước khi xác định lựa chọn phù hợp nhất."
+        ]
+      ],
+      "notes": "Hide candidate-load dumps."
+    },
+    {
+      "id": "ET-ENG-002",
+      "source_pattern": "Engine chọn\\s+(.+?)\\s+với độ tin cậy\\s+[0-9.]+",
+      "target_pattern": "Phương án phù hợp nhất là \\1",
+      "scope": "engine_terms",
+      "priority": 95,
+      "examples": [
+        [
+          "Engine chọn Đinh với độ tin cậy 0.85",
+          "Phương án phù hợp nhất là Đinh"
+        ]
+      ],
+      "notes": "Vietnamese engine-selection dump."
+    },
+    {
+      "id": "ET-ENG-003",
+      "source_pattern": "Lý do engine:",
+      "target_pattern": "Lý do lựa chọn:",
+      "scope": "engine_terms",
+      "priority": 90,
+      "examples": [
+        ["Lý do engine: tiết thân.", "Lý do lựa chọn: tiết thân."]
+      ],
+      "notes": "Remove the word engine from reason labels."
+    },
+    {
+      "id": "ET-ENG-004",
+      "source_pattern": "\\bengine emit\\b",
+      "target_pattern": "kết quả đánh giá",
+      "scope": "engine_terms",
+      "priority": 88,
+      "examples": [
+        ["engine emit", "kết quả đánh giá"]
+      ],
+      "notes": "Forbidden debug phrase."
+    },
+    {
+      "id": "ET-ENG-005",
+      "source_pattern": "\\bfrom engine\\b",
+      "target_pattern": "",
+      "scope": "engine_terms",
+      "priority": 70,
+      "examples": [
+        ["candidates from engine", "candidates"]
+      ],
+      "notes": "Strip residual engine attribution."
+    },
+    {
+      "id": "ET-ENG-007",
+      "source_pattern": "\\bEngine append\\b",
+      "target_pattern": "Hệ thống ghi nhận",
+      "scope": "engine_terms",
+      "priority": 88,
+      "examples": [
+        ["Engine append cả hai", "Hệ thống ghi nhận cả hai"]
+      ],
+      "notes": "Hide engine-append implementation notes."
+    },
+    {
+      "id": "ET-ENG-008",
+      "source_pattern": "\\bEngine phát\\b",
+      "target_pattern": "Hệ thống xác định",
+      "scope": "engine_terms",
+      "priority": 88,
+      "examples": [
+        ["Engine phát nhãn này", "Hệ thống xác định nhãn này"]
+      ],
+      "notes": "Hide engine-label implementation notes."
+    },
+    {
+      "id": "ET-ENG-009",
+      "source_pattern": "vì engine emit",
+      "target_pattern": "vì cùng một cơ chế",
+      "scope": "engine_terms",
+      "priority": 89,
+      "examples": [
+        ["vì engine emit cả hai", "vì cùng một cơ chế cả hai"]
+      ],
+      "notes": "Hide emit implementation notes."
+    },
+    {
+      "id": "ET-ENG-010",
+      "source_pattern": "Strength Engine",
+      "target_pattern": "đánh giá thân",
+      "scope": "engine_terms",
+      "priority": 85,
+      "examples": [
+        ["do Strength Engine xếp", "do đánh giá thân xếp"]
+      ],
+      "notes": "Hide engine class names."
+    },
+    {
+      "id": "ET-ENG-006",
+      "source_pattern": "\\bdetector\\b",
+      "target_pattern": "bước nhận diện",
+      "scope": "engine_terms",
+      "priority": 70,
+      "examples": [
+        ["detector", "bước nhận diện"]
+      ],
+      "notes": "Forbidden detector token."
+    },
+    {
+      "id": "ET-RNK-001",
+      "source_pattern": "group priority:\\s*season\\s*>\\s*strength\\s*>\\s*temperature\\s*>\\s*flow",
+      "target_pattern": "thứ tự xét duyệt: lệnh mùa trước, rồi thân, điều hậu, và lưu thông",
+      "scope": "ranking_terms",
+      "priority": 100,
+      "examples": [
+        [
+          "group priority: season > strength > temperature > flow",
+          "thứ tự xét duyệt: lệnh mùa trước, rồi thân, điều hậu, và lưu thông"
+        ]
+      ],
+      "notes": "Translate ranking policy without numbers."
+    },
+    {
+      "id": "ET-RNK-002",
+      "source_pattern": "Group\\s+(.+?)\\s*\\(priority\\s+\\d+\\)\\s+leads ranking",
+      "target_pattern": "Nhóm đánh giá \\1 đứng trước trong thứ tự xét duyệt.",
+      "scope": "ranking_terms",
+      "priority": 95,
+      "examples": [
+        [
+          "Group Lệnh mùa (priority 90) leads ranking",
+          "Nhóm đánh giá Lệnh mùa đứng trước trong thứ tự xét duyệt."
+        ]
+      ],
+      "notes": "Drop numeric group priority."
+    },
+    {
+      "id": "ET-RNK-003",
+      "source_pattern": "same stem, lower group priority\\s*\\([^)]*\\)",
+      "target_pattern": "cùng lựa chọn nhưng thứ tự xét duyệt thấp hơn",
+      "scope": "ranking_terms",
+      "priority": 92,
+      "examples": [
+        [
+          "same stem, lower group priority (80 < 90)",
+          "cùng lựa chọn nhưng thứ tự xét duyệt thấp hơn"
+        ]
+      ],
+      "notes": "Same-choice lower rank."
+    },
+    {
+      "id": "ET-RNK-004",
+      "source_pattern": "group priority\\s+\\d+\\s*<\\s*\\d+",
+      "target_pattern": "thứ tự xét duyệt thấp hơn trong bối cảnh hiện tại",
+      "scope": "ranking_terms",
+      "priority": 91,
+      "examples": [
+        [
+          "group priority 80 < 90",
+          "thứ tự xét duyệt thấp hơn trong bối cảnh hiện tại"
+        ]
+      ],
+      "notes": "Numeric group comparison."
+    },
+    {
+      "id": "ET-RNK-005",
+      "source_pattern": "\\(ưu tiên\\s+\\d+\\)",
+      "target_pattern": "",
+      "scope": "ranking_terms",
+      "priority": 80,
+      "examples": [
+        ["nhóm Lệnh mùa (ưu tiên 90)", "nhóm Lệnh mùa"]
+      ],
+      "notes": "Strip numeric Vietnamese priority."
+    },
+    {
+      "id": "ET-RNK-006",
+      "source_pattern": "\\(priority\\s+\\d+\\)",
+      "target_pattern": "",
+      "scope": "ranking_terms",
+      "priority": 80,
+      "examples": [
+        ["(priority 90)", ""]
+      ],
+      "notes": "Strip parenthetical priority numbers."
+    },
+    {
+      "id": "ET-RNK-007",
+      "source_pattern": "\\bpriority\\s*=\\s*\\d+\\b",
+      "target_pattern": "mức độ ưu tiên của yếu tố này trong quá trình đánh giá",
+      "scope": "ranking_terms",
+      "priority": 75,
+      "examples": [
+        [
+          "priority=80",
+          "mức độ ưu tiên của yếu tố này trong quá trình đánh giá"
+        ]
+      ],
+      "notes": "Forbidden priority assignment."
+    },
+    {
+      "id": "ET-RNK-008",
+      "source_pattern": "\\bgroup\\s*=\\s*\\d+\\b",
+      "target_pattern": "nhóm đánh giá",
+      "scope": "ranking_terms",
+      "priority": 75,
+      "examples": [
+        ["group=90", "nhóm đánh giá"]
+      ],
+      "notes": "Forbidden group assignment."
+    },
+    {
+      "id": "ET-RNK-009",
+      "source_pattern": "\\bpriority\\b",
+      "target_pattern": "mức độ ưu tiên của yếu tố này trong quá trình đánh giá",
+      "scope": "ranking_terms",
+      "priority": 20,
+      "examples": [
+        [
+          "priority",
+          "mức độ ưu tiên của yếu tố này trong quá trình đánh giá"
+        ]
+      ],
+      "notes": "Bare English priority token. Applied last among ranking rules."
+    },
+    {
+      "id": "ET-CNF-001",
+      "source_pattern": "lower score than\\s+(\\S+)\\s*\\([^)]*\\)",
+      "target_pattern": "mức độ phù hợp chưa bằng \\1",
+      "scope": "confidence_terms",
+      "priority": 90,
+      "examples": [
+        [
+          "lower score than Đinh (0.85)",
+          "mức độ phù hợp chưa bằng Đinh"
+        ]
+      ],
+      "notes": "Score comparison without raw floats."
+    },
+    {
+      "id": "ET-CNF-002",
+      "source_pattern": "\\bscore\\s*=\\s*[0-9.]+",
+      "target_pattern": "mức độ phù hợp",
+      "scope": "confidence_terms",
+      "priority": 80,
+      "examples": [
+        ["score=0.85", "mức độ phù hợp"]
+      ],
+      "notes": "Assignment-style score dump."
+    },
+    {
+      "id": "ET-CNF-003",
+      "source_pattern": "\\bscore\\s+[0-9.]+",
+      "target_pattern": "",
+      "scope": "confidence_terms",
+      "priority": 78,
+      "examples": [
+        ["score 0.85", ""]
+      ],
+      "notes": "Inline score token; band pass fills meaning."
+    },
+    {
+      "id": "ET-CNF-004",
+      "source_pattern": "độ tin cậy\\s+[0-9.]+",
+      "target_pattern": "mức độ phù hợp",
+      "scope": "confidence_terms",
+      "priority": 78,
+      "examples": [
+        ["độ tin cậy 0.85", "mức độ phù hợp"]
+      ],
+      "notes": "Vietnamese confidence dump."
+    },
+    {
+      "id": "ET-CNF-005",
+      "source_pattern": "điểm thấp hơn",
+      "target_pattern": "mức độ phù hợp thấp hơn",
+      "scope": "confidence_terms",
+      "priority": 70,
+      "examples": [
+        ["điểm thấp hơn ứng viên thắng", "mức độ phù hợp thấp hơn phương án phù hợp nhất"]
+      ],
+      "notes": "Replace calculator score language."
+    },
+    {
+      "id": "ET-RUL-001",
+      "source_pattern": "\\bvia\\s+[a-z]{2,5}_[a-z0-9]+\\b",
+      "target_pattern": "",
+      "scope": "rule_terms",
+      "priority": 90,
+      "examples": [
+        ["via sea_004", ""]
+      ],
+      "notes": "Hide via-rule pointers."
+    },
+    {
+      "id": "ET-RUL-002",
+      "source_pattern": "\\b(?:sea|tmp|flo|str|pat|ug|tg|hy|ky)_[a-z0-9]+\\b",
+      "target_pattern": "",
+      "scope": "rule_terms",
+      "priority": 85,
+      "examples": [
+        ["sea_004", ""],
+        ["tmp_003", ""],
+        ["flo_001", ""]
+      ],
+      "notes": "Never expose rule ids to customers."
+    },
+    {
+      "id": "ET-RUL-003",
+      "source_pattern": "\\brule_id\\b",
+      "target_pattern": "cơ sở đánh giá",
+      "scope": "rule_terms",
+      "priority": 70,
+      "examples": [
+        ["rule_id", "cơ sở đánh giá"]
+      ],
+      "notes": "Forbidden rule_id token."
+    },
+    {
+      "id": "ET-CND-001",
+      "source_pattern": "Winner\\s+(.+?)\\s+score\\s+[0-9.]+(?:\\s+via\\s+\\S+)?",
+      "target_pattern": "Phương án phù hợp nhất là \\1.",
+      "scope": "candidate_terms",
+      "priority": 100,
+      "examples": [
+        [
+          "Winner Đinh score 0.85 via sea_004",
+          "Phương án phù hợp nhất là Đinh."
+        ]
+      ],
+      "notes": "Winner dump with optional score and rule."
+    },
+    {
+      "id": "ET-CND-000",
+      "source_pattern": "không có winner",
+      "target_pattern": "không phải cuộc chọn phương án cạnh tranh",
+      "scope": "candidate_terms",
+      "priority": 95,
+      "examples": [
+        [
+          "không có winner, không có phương án thay",
+          "không phải cuộc chọn phương án cạnh tranh, không có phương án thay"
+        ]
+      ],
+      "notes": "Strength standing is not a candidate contest."
+    },
+    {
+      "id": "ET-CND-002",
+      "source_pattern": "\\bwinner\\b",
+      "target_pattern": "phương án phù hợp nhất",
+      "scope": "candidate_terms",
+      "priority": 40,
+      "examples": [
+        ["winner", "Phương án phù hợp nhất."]
+      ],
+      "notes": "Bare winner token after specific Winner rules."
+    },
+    {
+      "id": "ET-CND-003",
+      "source_pattern": "Rejected candidate",
+      "target_pattern": "Các phương án còn lại vẫn có giá trị tham khảo nhưng không phù hợp bằng trong bối cảnh hiện tại",
+      "scope": "candidate_terms",
+      "priority": 90,
+      "examples": [
+        [
+          "Rejected candidate",
+          "Các phương án còn lại vẫn có giá trị tham khảo nhưng không phù hợp bằng trong bối cảnh hiện tại."
+        ]
+      ],
+      "notes": "Rejected-candidate heading."
+    },
+    {
+      "id": "ET-CND-004",
+      "source_pattern": "(?<!No )(\\S+)\\s+rejected\\b",
+      "target_pattern": "\\1 vẫn có cơ sở nhất định, tuy nhiên không phù hợp bằng trong bối cảnh hiện tại",
+      "scope": "candidate_terms",
+      "priority": 85,
+      "examples": [
+        [
+          "Bính rejected",
+          "Bính vẫn có cơ sở nhất định, tuy nhiên không phù hợp bằng trong bối cảnh hiện tại"
+        ]
+      ],
+      "notes": "Named rejection."
+    },
+    {
+      "id": "ET-CND-005",
+      "source_pattern": "Candidate\\s+\\S+\\s+lost because[^.]*",
+      "target_pattern": "Các phương án khác vẫn có cơ sở nhất định, tuy nhiên không phù hợp bằng trong bối cảnh hiện tại",
+      "scope": "candidate_terms",
+      "priority": 90,
+      "examples": [
+        [
+          "Candidate A lost because score was lower",
+          "Các phương án khác vẫn có cơ sở nhất định, tuy nhiên không phù hợp bằng trong bối cảnh hiện tại"
+        ]
+      ],
+      "notes": "Lost-candidate dump."
+    },
+    {
+      "id": "ET-CND-006",
+      "source_pattern": "not selected after group and score ranking",
+      "target_pattern": "chưa phù hợp bằng phương án được chọn trong bối cảnh hiện tại",
+      "scope": "candidate_terms",
+      "priority": 88,
+      "examples": [
+        [
+          "not selected after group and score ranking",
+          "chưa phù hợp bằng phương án được chọn trong bối cảnh hiện tại"
+        ]
+      ],
+      "notes": "Generic ranking rejection."
+    },
+    {
+      "id": "ET-CND-007",
+      "source_pattern": "No rejected alternatives",
+      "target_pattern": "Không có phương án thay thế cần đối chiếu thêm.",
+      "scope": "candidate_terms",
+      "priority": 96,
+      "examples": [
+        [
+          "No rejected alternatives",
+          "Không có phương án thay thế cần đối chiếu thêm."
+        ]
+      ],
+      "notes": "Empty alternative set."
+    },
+    {
+      "id": "ET-CND-008",
+      "source_pattern": "([^:|]+):\\s*(?:cùng lựa chọn nhưng thứ tự xét duyệt thấp hơn|thứ tự xét duyệt thấp hơn[^|]*)",
+      "target_pattern": "\\1 vẫn có cơ sở nhất định, tuy nhiên không phù hợp bằng trong bối cảnh hiện tại",
+      "scope": "candidate_terms",
+      "priority": 60,
+      "examples": [
+        [
+          "Bính (Hỏa): thứ tự xét duyệt thấp hơn trong bối cảnh hiện tại",
+          "Bính vẫn có cơ sở nhất định, tuy nhiên không phù hợp bằng trong bối cảnh hiện tại"
+        ]
+      ],
+      "notes": "Rewrite remaining rejection lines after ranking rules."
+    },
+    {
+      "id": "ET-CND-009",
+      "source_pattern": "ứng viên thắng",
+      "target_pattern": "phương án phù hợp nhất",
+      "scope": "candidate_terms",
+      "priority": 70,
+      "examples": [
+        ["ứng viên thắng", "phương án phù hợp nhất"]
+      ],
+      "notes": "Vietnamese winner jargon."
+    },
+    {
+      "id": "ET-CND-010",
+      "source_pattern": "bị loại vì",
+      "target_pattern": "không được chọn vì",
+      "scope": "candidate_terms",
+      "priority": 70,
+      "examples": [
+        ["bị loại vì điểm thấp", "không được chọn vì điểm thấp"]
+      ],
+      "notes": "Soften elimination language."
+    },
+    {
+      "id": "ET-CND-011",
+      "source_pattern": "kích hoạt các ứng viên",
+      "target_pattern": "mở các phương án thuộc",
+      "scope": "candidate_terms",
+      "priority": 72,
+      "examples": [
+        ["kích hoạt các ứng viên nhóm điều hậu", "mở các phương án thuộc nhóm điều hậu"]
+      ],
+      "notes": "Forbidden kích hoạt + candidate jargon."
+    },
+    {
+      "id": "ET-CND-012",
+      "source_pattern": "các ứng viên",
+      "target_pattern": "các phương án",
+      "scope": "candidate_terms",
+      "priority": 50,
+      "examples": [
+        ["các ứng viên nhóm thân", "các phương án nhóm thân"]
+      ],
+      "notes": "Plural candidate jargon."
+    },
+    {
+      "id": "ET-CND-013",
+      "source_pattern": "ứng viên",
+      "target_pattern": "phương án",
+      "scope": "candidate_terms",
+      "priority": 40,
+      "examples": [
+        ["ứng viên", "phương án"]
+      ],
+      "notes": "Singular candidate jargon."
+    },
+    {
+      "id": "ET-DBG-001",
+      "source_pattern": "\\bdebug\\b",
+      "target_pattern": "",
+      "scope": "debug_terms",
+      "priority": 80,
+      "examples": [
+        ["debug", ""]
+      ],
+      "notes": "Forbidden debug token."
+    },
+    {
+      "id": "ET-DBG-002",
+      "source_pattern": "\\bjson\\b",
+      "target_pattern": "",
+      "scope": "debug_terms",
+      "priority": 80,
+      "examples": [
+        ["JSON", ""]
+      ],
+      "notes": "Forbidden JSON token."
+    },
+    {
+      "id": "ET-DBG-003",
+      "source_pattern": "\\bbundle_id\\b",
+      "target_pattern": "",
+      "scope": "debug_terms",
+      "priority": 80,
+      "examples": [
+        ["bundle_id", ""]
+      ],
+      "notes": "Internal bundle identifier."
+    },
+    {
+      "id": "ET-DBG-004",
+      "source_pattern": "\\bengine_output\\b",
+      "target_pattern": "",
+      "scope": "debug_terms",
+      "priority": 80,
+      "examples": [
+        ["engine_output", ""]
+      ],
+      "notes": "Internal engine output token."
+    },
+    {
+      "id": "ET-DBG-005",
+      "source_pattern": "\\balias\\b",
+      "target_pattern": "tên gọi khác",
+      "scope": "debug_terms",
+      "priority": 70,
+      "examples": [
+        ["alias", ""]
+      ],
+      "notes": "Forbidden alias token."
+    },
+    {
+      "id": "ET-DBG-006",
+      "source_pattern": "\\btoken\\b",
+      "target_pattern": "ký hiệu",
+      "scope": "debug_terms",
+      "priority": 70,
+      "examples": [
+        ["token", ""]
+      ],
+      "notes": "Forbidden token word."
+    },
+    {
+      "id": "ET-DBG-007",
+      "source_pattern": "\\bemit\\b",
+      "target_pattern": "",
+      "scope": "debug_terms",
+      "priority": 70,
+      "examples": [
+        ["emit", ""]
+      ],
+      "notes": "Forbidden emit token."
+    },
+    {
+      "id": "ET-REL-001",
+      "source_pattern": "\\b(?:graph edge|edge_id|node_id)\\b",
+      "target_pattern": "quan hệ",
+      "scope": "relationship_terms",
+      "priority": 70,
+      "examples": [
+        ["graph edge", "quan hệ"]
+      ],
+      "notes": "Graph implementation terms."
+    },
+    {
+      "id": "ET-KNO-001",
+      "source_pattern": "\\bknowledge_id\\b",
+      "target_pattern": "",
+      "scope": "knowledge_terms",
+      "priority": 80,
+      "examples": [
+        ["knowledge_id", ""]
+      ],
+      "notes": "Internal knowledge identifier."
+    },
+    {
+      "id": "ET-KNO-002",
+      "source_pattern": "\\b(?:KR|KNO|TERM|RUL)-\\d{6}\\b",
+      "target_pattern": "",
+      "scope": "knowledge_terms",
+      "priority": 70,
+      "examples": [
+        ["KR-000011", ""]
+      ],
+      "notes": "Canonical record ids stay internal."
+    },
+    {
+      "id": "ET-KNO-003",
+      "source_pattern": "\\b[A-Z]{2,}(?:_[A-Z0-9]+)+\\b",
+      "target_pattern": "",
+      "scope": "knowledge_terms",
+      "priority": 75,
+      "examples": [
+        ["TIAN_DE_BRANCH", ""]
+      ],
+      "notes": "Strip screaming-snake internal keys."
+    },
+    {
+      "id": "ET-KNO-004",
+      "source_pattern": "\\b(?:tian_yi|tian_de|yue_de|hong_luan)(?:_[a-z0-9]+)?\\b",
+      "target_pattern": "",
+      "scope": "knowledge_terms",
+      "priority": 74,
+      "examples": [
+        ["tian_yi", ""]
+      ],
+      "notes": "Strip lowercase internal star keys."
+    },
+    {
+      "id": "ET-ENG-011",
+      "source_pattern": "stem\\s*==\\s*day_master",
+      "target_pattern": "can trùng nhật chủ",
+      "scope": "engine_terms",
+      "priority": 85,
+      "examples": [
+        ["khi stem == day_master", "khi can trùng nhật chủ"]
+      ],
+      "notes": "Hide equality dumps."
+    },
+    {
+      "id": "ET-ENG-012",
+      "source_pattern": "không sửa engine",
+      "target_pattern": "không thay quyết định phân tích",
+      "scope": "engine_terms",
+      "priority": 80,
+      "examples": [
+        ["Knowledge không sửa engine", "Knowledge không thay quyết định phân tích"]
+      ],
+      "notes": "Hide engine-mutation notes."
+    },
+    {
+      "id": "ET-DBG-008",
+      "source_pattern": "không hit",
+      "target_pattern": "không khớp",
+      "scope": "debug_terms",
+      "priority": 70,
+      "examples": [
+        ["detector can không hit", "bước nhận diện can không khớp"]
+      ],
+      "notes": "Hide matcher hit jargon."
+    }
+  ]
+}

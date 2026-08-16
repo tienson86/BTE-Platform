@@ -24,18 +24,28 @@ from engines.interpretation_engine.foundation.narrative.recommendation import (
     compose_warnings,
 )
 from engines.interpretation_engine.foundation.narrative.renderer import render_sections
+from engines.interpretation_engine.foundation.narrative.translation import (
+    apply_expert_translation,
+    assert_customer_narrative_clean,
+)
 
 
 class NarrativeComposerV2:
     """Canonical composition layer. Does not calculate, decide, or own knowledge."""
 
-    def compose(self, source: NarrativeComposerInput) -> NarrativeComposerResult:
+    def compose(
+        self,
+        source: NarrativeComposerInput,
+        *,
+        debug_mode: bool = False,
+    ) -> NarrativeComposerResult:
         """Run the frozen pipeline and return narrative sections.
 
-        Evidence Composer → Reason Composer → Application Composer →
-        Recommendation Composer → Narrative Renderer.
+        Expert Translation → Evidence Composer → Reason Composer →
+        Application Composer → Recommendation Composer → Narrative Renderer.
         """
-        collected = compose_evidence(source)
+        translated = apply_expert_translation(source, debug_mode=debug_mode)
+        collected = compose_evidence(translated)
         merged = merge_evidence_nodes(collected.nodes)
         evidence = EvidenceGraph(
             nodes=merged.nodes,
@@ -62,7 +72,7 @@ class NarrativeComposerV2:
             sections=sections,
             traceability=traces,
         )
-        return NarrativeComposerResult(
+        result = NarrativeComposerResult(
             sections=sections,
             evidence=evidence,
             reasoning_chains=chains,
@@ -73,11 +83,18 @@ class NarrativeComposerV2:
             metrics=metrics,
             diagnostics=diagnostics,
         )
+        if not debug_mode:
+            assert_customer_narrative_clean(result)
+        return result
 
 
-def compose_narrative_v2(source: NarrativeComposerInput) -> NarrativeComposerResult:
+def compose_narrative_v2(
+    source: NarrativeComposerInput,
+    *,
+    debug_mode: bool = False,
+) -> NarrativeComposerResult:
     """Compose narrative sections from frozen bundle input."""
-    return NarrativeComposerV2().compose(source)
+    return NarrativeComposerV2().compose(source, debug_mode=debug_mode)
 
 
 def compose_narrative_v2_from_production(output: Any) -> NarrativeComposerResult:

@@ -42,6 +42,21 @@ _PHRASE_LEAKS = (
     "report_input",
     "ba engine",
     "three engines",
+    "loaded",
+    "candidates from engine",
+    "from engine",
+    "detector",
+    "winner",
+    "group priority",
+    "engine emit",
+    "engine_output",
+    "bundle_id",
+    "knowledge_id",
+    "rule_id",
+    "select_winner",
+    "alias",
+    "token",
+    "engine emit",
 )
 
 _ID_LEAK = re.compile(
