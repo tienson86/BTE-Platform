@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Báo cáo tư vấn — Ngô Đặng Minh Tân</title>
+  <style>/* Report V1 — print-friendly foundation (UTF-8, Vietnamese-safe stack) */
+
+:root {
+  --report-text: #1a1a1a;
+  --report-muted: #555;
+  --report-border: #d8d8d8;
+  --report-accent: #2c4a6e;
+  --report-bg: #ffffff;
+  --report-font: "Segoe UI", Arial, "Noto Sans", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--report-bg);
+  color: var(--report-text);
+  font-family: var(--report-font);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.report-v1 {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 32px 40px 48px;
+}
+
+.report-v1__header {
+  border-bottom: 2px solid var(--report-accent);
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+}
+
+.report-v1__title {
+  color: var(--report-accent);
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.report-v1__subtitle {
+  color: var(--report-muted);
+  font-size: 13px;
+  margin: 0;
+}
+
+.report-v1__section {
+  margin-bottom: 24px;
+  page-break-inside: avoid;
+}
+
+.report-v1__section-title {
+  border-left: 4px solid var(--report-accent);
+  color: var(--report-accent);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 10px;
+  padding-left: 10px;
+  page-break-after: avoid;
+}
+
+.report-v1__section-body {
+  margin: 0;
+}
+
+.report-v1__section-body p {
+  margin: 0 0 10px;
+}
+
+.report-v1__meta-grid {
+  display: grid;
+  gap: 8px 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+}
+
+.report-v1__meta-grid dt {
+  color: var(--report-muted);
+  font-weight: 600;
+  margin: 0;
+}
+
+.report-v1__meta-grid dd {
+  margin: 0 0 8px;
+}
+
+.report-v1__table {
+  border-collapse: collapse;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.report-v1__table th,
+.report-v1__table td {
+  border: 1px solid var(--report-border);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.report-v1__table th {
+  background: #f4f6f8;
+  font-weight: 600;
+}
+
+.report-v1__pillars {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.report-v1__pillar-card {
+  border: 1px solid var(--report-border);
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.report-v1__pillar-card h3 {
+  font-size: 14px;
+  margin: 0 0 6px;
+}
+
+.report-v1__pillar-card p {
+  margin: 0 0 4px;
+}
+
+.report-v1__list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.report-v1__fallback {
+  color: var(--report-muted);
+  font-style: italic;
+}
+
+.report-v1__footer {
+  border-top: 1px solid var(--report-border);
+  color: var(--report-muted);
+  font-size: 12px;
+  margin-top: 32px;
+  padding-top: 12px;
+}
+
+@media print {
+  @page {
+    margin: 18mm 16mm;
+    size: A4;
+  }
+
+  body {
+    background: #fff;
+    font-size: 12px;
+  }
+
+  .report-v1 {
+    max-width: none;
+    padding: 0;
+  }
+
+  .report-v1__section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .report-v1__section-title {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .report-v1__table {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .report-v1__pillars {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.report-commercial__kicker {
+  color: var(--report-accent);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+.report-commercial__class {
+  color: var(--report-accent);
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+.report-commercial__cover .report-v1__meta-grid {
+  margin-top: 16px;
+}
+.report-commercial__section {
+  margin: 0 0 16px;
+}
+.report-commercial__section h3 {
+  color: var(--report-text);
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+.report-commercial__appendix {
+  border-top: 1px dashed var(--report-border);
+  margin-top: 32px;
+  padding-top: 16px;
+}
+.report-commercial__chapter + .report-commercial__chapter {
+  break-before: page;
+  page-break-before: always;
+}
+</style>
+</head>
+<body>
+  <main class="report-v1">
+    <header class="report-v1__header report-commercial__cover"><p class="report-commercial__kicker">BTE Consulting</p><h1 class="report-v1__title">Báo cáo tư vấn</h1><p class="report-commercial__class">Người chỉnh trục</p><p class="report-v1__subtitle">Một bản tư vấn — đọc như một cuộc trao đổi, không như bảng tính.</p><dl class="report-v1__meta-grid"><dt>Khách hàng</dt><dd>Ngô Đặng Minh Tân</dd><dt>Hồ sơ</dt><dd>TAN</dd><dt>Ngày sinh dương lịch</dt><dd>2008-03-17 — 06:20</dd><dt>Ngày sinh âm lịch</dt><dd>10/02/2008</dd><dt>Nơi sinh</dt><dd>Hà Nội</dd><dt>Cung Phi</dt><dd>Khảm</dd><dt>Mệnh Quái</dt><dd>Khảm</dd><dt>Nhóm Trạch</dt><dd>Đông Tứ Trạch</dd><dt>Tuổi khởi Đại vận</dt><dd>6</dd><dt>Đại vận hiện tại</dt><dd>Đinh Tỵ 2024–2033</dd><dt>Đại vận 1</dt><dd>Bính Thìn 2014–2023</dd><dt>Đại vận 2</dt><dd>Đinh Tỵ 2024–2033</dd><dt>Đại vận 3</dt><dd>Mậu Ngọ 2034–2043</dd><dt>Đại vận 4</dt><dd>Kỷ Mùi 2044–2053</dd><dt>Đại vận 5</dt><dd>Canh Thân 2054–2063</dd><dt>Đại vận 6</dt><dd>Tân Dậu 2064–2073</dd><dt>Đại vận 7</dt><dd>Nhâm Tuất 2074–2083</dd><dt>Đại vận 8</dt><dd>Quý Hợi 2084–2093</dd><dt>Đại vận 9</dt><dd>Giáp Tý 2094–2103</dd><dt>Đại vận 10</dt><dd>Ất Sửu 2104–2113</dd><dt>Ngũ hành</dt><dd>Mộc:6.0, Hỏa:1.0, Thổ:3.0, Kim:1.0, Thủy:3.0</dd><dt>Thập thần</dt><dd>Thực Thần, Chính Ấn, Nhật Chủ, Chính Tài</dd><dt>Giới tính</dt><dd>Nam</dd><dt>Hướng tư vấn</dt><dd>Người chỉnh trục</dd></dl></header><section class="report-v1__section report-commercial__chapter" id="sec-executive_summary"><h2 class="report-v1__section-title">Tóm tắt</h2><article class="report-commercial__section" id="sec-executive_summary"><h3>Tóm tắt</h3><p>Người chỉnh trục. Lá số cho thấy xu hướng trung hòa, cần chỉnh cho vừa trên nền Chính Ấn trong bối cảnh Mộc dày.</p><p>Cấu trúc này phù hợp hơn khi cắt phần thừa và lập kỷ luật dùng được.</p><p>Rủi ro tăng khi nền có hệ nhưng dễ bị mọc thêm khung thay vì được chỉnh cho vừa.</p><p>Việc nên làm trước: Cắt có phạm vi: một việc thừa mỗi nhịp, không phát thanh án trên mọi thứ.</p><p>Khung thời gian của bản luận là Đại vận Đinh Tỵ 2024–2033.</p></article></section><section class="report-v1__section report-commercial__chapter" id="sec-chart"><h2 class="report-v1__section-title">Lá số</h2><article class="report-commercial__section" id="sec-chart"><h3>Lá số</h3><p>Nhật chủ: Bính (Hỏa).</p><p>Lệnh tháng: Mão; mùa: Xuân.</p><p>Dụng thần được chọn: Canh.</p><p>Hỷ thần: Canh, Tân, Nhâm.</p><p>Kỵ thần: Giáp, Ất.</p><p>Đại vận hiện tại: Đinh Tỵ 2024–2033.</p><p>Trung hòa</p><p>Chính Ấn — sinh thuận, dưỡng có khuôn</p></article></section><section class="report-v1__section report-commercial__chapter" id="sec-core_interpretation"><h2 class="report-v1__section-title">Luận giải cốt lõi</h2><article class="report-commercial__section" id="sec-core_interpretation"><h3>Luận giải cốt lõi</h3><p>Nền Chính Ấn và trạng thái Trung hòa giải thích vì sao hướng chỉnh là cắt phần thừa và lập kỷ luật dùng được.</p><p>Dụng thần chính: Canh (Kim) — trụ cột điều tiết hệ.</p><p>Hỷ thần (Canh (Kim), Tân (Kim), Nhâm (Thủy)) hỗ trợ duy trì cân bằng; Kỵ thần (Giáp (Mộc), Ất (Mộc)) cần hạn chế khuếch đại.</p><p>Chính Ấn cách lập khi lệnh tháng là Chính Ấn. Trục là sinh/trợ nhật chủ theo khuôn: học, nền, chỗ dựa. Không suy ra bằng cấp.</p><p>Có chỗ dưỡng, chịu được việc cần nền. Hữu ích khi cần ủ và học có khung.</p><p>Lực đủ để xoay việc vừa, điều chỉnh nhẹ theo cục. Hữu ích khi giữ nhịp sinh–tiết đều, không đảo hướng.</p><p>Canh là kim dương: rìu/kiếm — cắt, kỷ luật, chuyển hóa bằng quyết đoạn. Không mặc định cát hung. Khi được chọn làm Dụng thần, Canh cắt phần thừa và lập chuẩn cứng. Khi thuộc Hỷ thần, Canh hỗ trợ quyết theo hướng Dụng. Khi thuộc Kỵ thần, cùng lực cắt trở thành khắc nghiệt, phá hủy, lạnh cứng — gia cố kim lúc ấy làm tăng mất cân, không phải &#x27;thêm kỷ luật thì tốt&#x27;.</p><p>Là Dụng thần: lọc nhiễu, nâng chất, định giá đúng mức. Là Hỷ thần: giữ độ tinh — ưu tiên thấp hơn Dụng.</p></article></section><section class="report-v1__section report-commercial__chapter" id="sec-ten_gods"><h2 class="report-v1__section-title">Thập thần</h2><article class="report-commercial__section" id="sec-ten_gods"><h3>Thập thần</h3><p>Chính Tài là quan hệ nhật chủ khắc theo chiều thuận. Kênh nguồn có hạn: trách nhiệm, hợp đồng, sổ. Khác Thiên Tài vì không phải nguồn lệch cửa; khác cách Chính Tài vì đây là vai trên trụ, không phải lệnh tháng. Không hứa giàu.</p><p>Là Dụng thần: mở kênh, chuyển khối, làm mát khi đồ nóng. Là Hỷ thần: giữ dòng phục vụ Dụng — không tranh thành hướng chính.</p><p>Là Kỵ thần hoặc dùng quá mức: tăng trưởng lệch, bất khả nhượng bộ, đâm đối đầu, dựng khung chồng lên chỗ đã chật. Gia cố Giáp khi nó đang lấn sẽ làm mất cân, không phải &#x27;mạnh hơn thì tốt&#x27;.</p><p>Là Kỵ thần hoặc dùng quá mức: do dự kéo dài, bám chỗ không còn phù hợp, tăng trưởng lan mà không có khung. Gia cố Ất khi nó đang làm lệch sẽ làm mất hướng.</p><p>Là Dụng thần: cắt việc thừa, chỉnh hình, tạo kỷ luật dùng được. Là Hỷ thần: tiếp sức quyết đoạn — ưu tiên thấp hơn Dụng.</p></article></section><section class="report-v1__section report-commercial__chapter" id="sec-shen_sha"><h2 class="report-v1__section-title">Thần sát</h2><article class="report-commercial__section" id="sec-shen_sha"><h3>Thần sát</h3><p>Sao hỷ/đối: năm có chi, bảng cho chi đích, và chi đích xuất hiện trên tứ trụ. Hệ thống ghi nhận cả Thiên Hỷ. Không suy hôn nhân.</p><p>Sao cái/phủ: thuộc {Thìn, Tuất, Sửu, Mùi}. Không cần nhật chủ map. Lớp phủ, tàng, không phải ẩn tu định mệnh.</p></article></section><section class="report-v1__section report-commercial__chapter" id="sec-luck"><h2 class="report-v1__section-title">Đại vận hiện tại</h2><article class="report-commercial__section" id="sec-luck"><h3>Đại vận hiện tại</h3><p>Đại vận đang sống là Đinh Tỵ 2024–2033. Đây là thập niên đang luận, không phải toàn bộ chuỗi đại vận.</p><p>Trong Đinh Tỵ 2024–2033, production đã công bố thiên can Đinh (Âm, Hỏa), địa chi Tỵ, thập thần Đại vận Kiếp Tài. Tàng can đã công bố: Bính, Mậu, Canh.</p><p>Trong Đinh Tỵ 2024–2033, lá số vẫn do Chính Ấn, Trung hòa, Canh, Tân giữ. Đây là luận giải gốc, không phải hiệu ứng thập niên.</p><p>Trong Đinh Tỵ 2024–2033, phân tích production hiện tại chưa xác định thêm tương tác ngoài luận giải gốc.</p><p>Hướng natal được giữ trong Đinh Tỵ 2024–2033 vẫn là Canh, Tân, Nhâm. Hướng natal bị hạn chế vẫn là Giáp, Ất.</p><p>Đại vận kế tiếp đã có trên lá số là Mậu Ngọ 2034–2043; đó chưa phải thập niên đang sống. Không luận mười vòng. Giữ hướng hiện tại đến hết Đinh Tỵ 2024–2033.</p></article></section><section class="report-v1__section report-commercial__chapter" id="sec-career"><h2 class="report-v1__section-title">Sự nghiệp</h2><article class="report-commercial__section" id="sec-career"><h3>Sự nghiệp</h3><p>Trong Đinh Tỵ 2024–2033, phân tích production hiện tại chưa xác định thêm tương tác ngoài luận giải gốc. Không lặp luận giải gốc cho sự nghiệp như thể đó là Đại vận.</p><p>Sự nghiệp: Sự nghiệp phù hợp hơn khi cắt phần thừa và lập kỷ luật dùng được; rủi ro tăng khi biến chỗ làm thành chỗ mở thêm khung, khởi sự chồng lên chỗ đã chật.</p><p>Sự nghiệp ổn định hơn khi vận hành theo Canh (Kim). Hạn chế áp lực từ Giáp, Ất khi nhận thêm cam kết.</p><p>Hợp môi trường có mentor, quy trình học. Không suy ra nghề giáo.</p><p>Thiên ủ rồi quyết. Bất lợi khi cửa đang mở ngắn.</p><p>Hợp nhịp việc vừa sức, xoay vai trò, giữ đều hơn bứt. Phong cách: vận hành trong biên. Không suy ra một nghề cố định hay sự ổn định suốt đời.</p><p>Thiên quyết theo việc nào giữ được biên. Hữu ích khi cần ổn nhịp; bất lợi khi cần dồn sức hoặc thu hết để dưỡng.</p><p>Hợp môi trường cải tổ, rà soát, ra quyết dứt. Phong cách: thẳng, chịu cắt. Kỹ năng nên vun: phân biệt việc phải cắt với việc phải luyện. Không suy ra nghề cố định.</p></article></section><section class="report-v1__section report-commercial__chapter" id="sec-life_areas"><h2 class="report-v1__section-title">Tài chính · Quan hệ · Sức khỏe · Học hỏi</h2><article class="report-commercial__section" id="sec-life_areas"><h3>Tài chính · Quan hệ · Sức khỏe · Học hỏi</h3><p>Trong Đinh Tỵ 2024–2033, phân tích production hiện tại chưa xác định thêm tương tác ngoài luận giải gốc. Không lặp luận giải gốc cho tài chính như thể đó là Đại vận.</p><p>Tài chính: Tài chính nên cắt phần lỗ và giữ hạn mức, không mở vốn theo đà mọc.</p><p>Trong Đinh Tỵ 2024–2033, phân tích production hiện tại chưa xác định thêm tương tác ngoài luận giải gốc. Không lặp luận giải gốc cho quan hệ như thể đó là Đại vận.</p><p>Quan hệ: Quan hệ dễ thành chỗ mở thêm khung; cần biên để không đâm thẳng mọi hướng.</p><p>Trong Đinh Tỵ 2024–2033, phân tích production hiện tại chưa xác định thêm tương tác ngoài luận giải gốc. Không lặp luận giải gốc cho sức khỏe như thể đó là Đại vận.</p><p>Sức khỏe: Sức khỏe: chỉnh nóng-lạnh và căng-giãn cho vừa, không kích một phía.</p><p>Học theo chương trình. Chậm khi cần bung tay nghề ngay.</p><p>Học theo vòng nhỏ, củng cố đều. Hữu ích cho nền tảng; chậm khi bài đòi bứt sức hoặc ủ sâu.</p></article></section><section class="report-v1__section report-commercial__chapter" id="sec-professional_recommendation"><h2 class="report-v1__section-title">Khuyến nghị</h2><article class="report-commercial__section" id="sec-professional_recommendation"><h3>Khuyến nghị</h3><p>Trong Đinh Tỵ 2024–2033, phân tích production hiện tại chưa xác định thêm tương tác ngoài luận giải gốc. Không gắn khuyến nghị gốc vào thập niên.</p><p>Giữ một nền học/dưỡng, không bọc mọi việc. Ấn hữu dụng khi nuôi vừa.</p><p>Ra một việc nhỏ sau pha ủ để ấn không kín. Lệnh ấn không cấm thoát.</p><p>Giữ biên hiện có: chỉnh nhẹ theo mùa/căn, không đảo thành bồi mạnh hoặc thoát mạnh. Trung hòa là đứng trong biên, không phải không điều chỉnh.</p><p>Xoay việc vừa sức theo nhịp, xen pha làm và ủ, không dồn một phía. Lực trong biên hữu dụng khi được phân nhịp.</p></article></section><section class="report-v1__section report-commercial__chapter" id="sec-professional_conclusion"><h2 class="report-v1__section-title">Kết luận</h2><article class="report-commercial__section" id="sec-professional_conclusion"><h3>Kết luận</h3><p>Trong Đinh Tỵ 2024–2033, phân tích production hiện tại chưa xác định thêm tương tác ngoài luận giải gốc. Thập thần Đại vận đã công bố là Kiếp Tài. Không lặp luận giải gốc.</p></article></section><footer class="report-v1__footer">BTE · Báo cáo tư vấn</footer>
+  </main>
+</body>
+</html>
