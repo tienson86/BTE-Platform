@@ -38,6 +38,15 @@ from engines.interpretation_engine.foundation.narrative.publish.constants import
 from engines.interpretation_engine.foundation.narrative.publish.current_dayun import (
     assemble_current_dayun_consultation,
 )
+from engines.interpretation_engine.foundation.narrative.publish.interaction_copy import (
+    career_overlay_from_interaction,
+    conclusion_overlay_from_interaction,
+    finance_overlay_from_interaction,
+    health_overlay_from_interaction,
+    interaction_from_payload,
+    recommendation_overlay_from_interaction,
+    relationship_overlay_from_interaction,
+)
 from engines.interpretation_engine.foundation.narrative.publish.editions import (
     APPENDIX_LIMIT,
     APPENDIX_SECTION_ID,
@@ -123,11 +132,17 @@ def _apply_professional(payload: dict[str, Any]) -> dict[str, Any]:
         [text for text in used if not _has_marker(text, LUCK_MARKERS)],
     )
     used = used + luck
-    career = _select_career(published, evidence, used)
+    natal_used = _without_period_copy(used)
+    career = _select_career(payload, published, evidence, natal_used)
     used = used + career
-    life_areas = _select_life_areas(published, evidence, used)
+    life_areas = _select_life_areas(payload, published, evidence, natal_used)
     used = used + life_areas
-    recommendations = _select_recommendations(published, evidence, used)
+    recommendations = _select_recommendations(
+        payload,
+        published,
+        evidence,
+        natal_used + _without_period_copy(career + life_areas),
+    )
     pages = {
         "sec-executive_summary": _limit(exec_texts, "sec-executive_summary"),
         "sec-chart": chart,
@@ -138,7 +153,11 @@ def _apply_professional(payload: dict[str, Any]) -> dict[str, Any]:
         "sec-career": career,
         "sec-life_areas": life_areas,
         "sec-professional_recommendation": recommendations,
-        "sec-professional_conclusion": _select_conclusion(published, []),
+        "sec-professional_conclusion": _select_conclusion(
+            payload,
+            published,
+            natal_used,
+        ),
     }
     sections = [
         _section_payload(section_id, pages.get(section_id) or [])
@@ -273,26 +292,18 @@ def _select_luck(
     )
     if assembled:
         return assembled
-    pool: list[str] = []
-    for text in published.get("sec-executive_summary") or []:
-        if _has_marker(text, LUCK_MARKERS):
-            pool.append(text)
-    for text in published.get("sec-observation") or []:
-        if _has_marker(text, LUCK_MARKERS):
-            pool.append(text)
-    for item in evidence:
-        if _has_marker(item.text, LUCK_MARKERS):
-            pool.append(item.text)
-    return _unique(pool, exclude, PROFESSIONAL_SECTION_LIMITS["sec-luck"])
+    return []
 
 
 def _select_career(
+    payload: dict[str, Any],
     published: dict[str, list[str]],
     evidence: list["_Evidence"],
     exclude: list[str],
 ) -> list[str]:
-    """Page 7 — operating style and environments. No profession catalogue."""
-    pool: list[str] = []
+    """Page 7 — operating style plus period overlay. No profession catalogue."""
+    overlay = career_overlay_from_interaction(interaction_from_payload(payload))
+    pool: list[str] = [overlay] if overlay else []
     for text in published.get("sec-impact") or []:
         if text.startswith(CUSTOMER_DOMAIN_LABELS[CUSTOMER_DOMAIN_CAREER]):
             pool.append(text)
@@ -311,43 +322,56 @@ def _select_career(
 
 
 def _select_life_areas(
+    payload: dict[str, Any],
     published: dict[str, list[str]],
     evidence: list["_Evidence"],
     exclude: list[str],
 ) -> list[str]:
     """Page 8 — one coherent consultation per remaining life area."""
+    data = interaction_from_payload(payload)
+    overlays = {
+        CUSTOMER_DOMAIN_FINANCE: finance_overlay_from_interaction(data),
+        CUSTOMER_DOMAIN_RELATIONSHIP: relationship_overlay_from_interaction(data),
+        CUSTOMER_DOMAIN_HEALTH: health_overlay_from_interaction(data),
+    }
     chosen: list[str] = []
     blocked = list(exclude)
     for domain in _LIFE_AREA_DOMAINS:
         label = CUSTOMER_DOMAIN_LABELS[domain]
-        candidates: list[str] = []
+        overlay = overlays.get(domain) or ""
+        natal_candidates: list[str] = []
         for text in published.get("sec-impact") or []:
             if text.startswith(label):
-                candidates.append(text)
+                natal_candidates.append(text)
         for item in evidence:
             if item.customer_domain == domain and word_count(item.text) >= MIN_CONSULTING_WORDS:
-                candidates.append(item.text)
-        picked = _unique(candidates, blocked, 2)
+                natal_candidates.append(item.text)
+        natal_limit = 1 if overlay else 2
+        picked = _unique(natal_candidates, blocked, natal_limit)
+        if overlay:
+            chosen.append(overlay)
         chosen.extend(picked)
         blocked.extend(picked)
     return chosen[: PROFESSIONAL_SECTION_LIMITS["sec-life_areas"]]
 
 
 def _select_recommendations(
+    payload: dict[str, Any],
     published: dict[str, list[str]],
     evidence: list["_Evidence"],
     exclude: list[str],
 ) -> list[str]:
-    """Page 9 — ranked 3–5 with expanded already-composed reasoning."""
-    expanded: list[str] = []
+    """Page 9 — period overlay first, then ranked already-composed reasoning."""
+    overlay = recommendation_overlay_from_interaction(interaction_from_payload(payload))
+    expanded: list[str] = [overlay] if overlay else []
     for item in evidence:
         if item.kind != KIND_RECOMMENDATION:
             continue
         if word_count(item.text) < 6:
             continue
         expanded.append(_join_clauses(item.text, item.rationale))
-    if not expanded:
-        expanded = list(published.get("sec-recommendation") or [])
+    if len(expanded) == (1 if overlay else 0):
+        expanded.extend(published.get("sec-recommendation") or [])
     return _unique(
         expanded,
         exclude,
@@ -355,8 +379,19 @@ def _select_recommendations(
     )
 
 
-def _select_conclusion(published: dict[str, list[str]], exclude: list[str]) -> list[str]:
-    """Page 10 — one mature synthesis. No glossary, no restart."""
+def _select_conclusion(
+    payload: dict[str, Any],
+    published: dict[str, list[str]],
+    exclude: list[str],
+) -> list[str]:
+    """Page 10 — period-true close when Interaction Facts exist. No natal restart."""
+    overlay = conclusion_overlay_from_interaction(interaction_from_payload(payload))
+    if overlay:
+        return _unique(
+            [overlay],
+            exclude,
+            PROFESSIONAL_SECTION_LIMITS["sec-professional_conclusion"],
+        )
     texts = published.get("sec-conclusion") or []
     return _unique(texts, exclude, PROFESSIONAL_SECTION_LIMITS["sec-professional_conclusion"])
 
@@ -624,6 +659,21 @@ def _has_marker(text: str, markers: tuple[str, ...]) -> bool:
     """True when any publication marker appears in the paragraph."""
     lowered = normalize_text(text).casefold()
     return any(marker in lowered for marker in markers)
+
+
+def _without_period_copy(texts: list[str]) -> list[str]:
+    """Natal paragraphs only. Period overlays must not suppress each other."""
+    kept: list[str] = []
+    for text in texts:
+        if _has_marker(text, LUCK_MARKERS):
+            continue
+        lowered = normalize_text(text).casefold()
+        if "danh tính đại vận" in lowered:
+            continue
+        if "không lặp luận giải gốc" in lowered:
+            continue
+        kept.append(text)
+    return kept
 
 
 def _slot_section(slot: str) -> str:
