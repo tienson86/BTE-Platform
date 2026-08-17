@@ -13,6 +13,11 @@ from engines.interpretation_engine.foundation.builders.interpretation_facts_buil
     InterpretationFactsBundle,
     build_interpretation_facts,
 )
+from engines.interpretation_engine.foundation.builders.interaction_truth_builder import (
+    build_interaction_truth_facts,
+)
+from engines.interpretation_engine.foundation.canonical_context import CanonicalAnalysisContext
+from engines.interpretation_engine.foundation.facts.interaction import InteractionTruthFacts
 from engines.interpretation_engine.foundation.canonical_context import CanonicalAnalysisContext
 from engines.interpretation_engine.foundation.interpreters.useful_god import (
     UsefulGodInterpreter,
@@ -45,6 +50,7 @@ class InterpretationFoundationBundle:
     domain_results: dict[str, FoundationDomainInterpretationResult]
     useful_god_interpretation: UsefulGodInterpretationResult | None
     useful_god_explanation: DecisionExplanationResult | None
+    interaction_truth: InteractionTruthFacts
     diagnostics: tuple[str, ...]
 
     def to_dict(self) -> dict[str, Any]:
@@ -67,6 +73,7 @@ class InterpretationFoundationBundle:
                 if self.useful_god_explanation is not None
                 else None
             ),
+            "interaction_truth": self.interaction_truth.to_dict(),
             "diagnostics": list(self.diagnostics),
         }
 
@@ -104,7 +111,6 @@ def build_interpretation_foundation(
     score_payload = _score_payload(payload, analysis)
     score_guard = validate_score_not_used_as_truth(context, facts, score_payload=score_payload)
 
-    all_diagnostics = _collect_diagnostics(facts, score_guard)
     interpreter = UsefulGodInterpreter()
     useful_god_explanation = interpreter.explain(facts.useful_god)
     from engines.interpretation_engine.foundation.interpreters.useful_god.adapter import (
@@ -112,7 +118,9 @@ def build_interpretation_foundation(
     )
 
     useful_god_interpretation = to_useful_god_interpretation_result(useful_god_explanation)
+    interaction_truth = build_interaction_truth_facts(facts, luck_payload=luck)
     domain_results = _build_domain_results(facts, useful_god_interpretation)
+    all_diagnostics = _collect_diagnostics(facts, score_guard, interaction_truth)
 
     return InterpretationFoundationBundle(
         context=context,
@@ -122,6 +130,7 @@ def build_interpretation_foundation(
         domain_results=domain_results,
         useful_god_interpretation=useful_god_interpretation,
         useful_god_explanation=useful_god_explanation,
+        interaction_truth=interaction_truth,
         diagnostics=all_diagnostics,
     )
 
@@ -143,8 +152,9 @@ def _score_payload(
 def _collect_diagnostics(
     facts: InterpretationFactsBundle,
     score_guard: ScoreTruthGuardResult,
+    interaction_truth: InteractionTruthFacts,
 ) -> tuple[str, ...]:
-    """Merge domain and guard diagnostics."""
+    """Merge domain, interaction, and guard diagnostics."""
     collected: list[str] = []
     for domain in (
         facts.strength,
@@ -157,6 +167,7 @@ def _collect_diagnostics(
         facts.five_elements,
     ):
         collected.extend(domain.diagnostics)
+    collected.extend(interaction_truth.diagnostics)
     collected.extend(score_guard.violations)
     return tuple(dict.fromkeys(item for item in collected if item))
 
