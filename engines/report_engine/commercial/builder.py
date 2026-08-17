@@ -27,6 +27,8 @@ from engines.report_engine.narrative_binding import (
     is_usable_narrative_result,
 )
 
+_PROFESSIONAL_EDITION = "professional"
+
 _CHAPTER_TITLES = {
     "identity": "Danh tính",
     "career": "Sự nghiệp",
@@ -66,13 +68,17 @@ class CommercialReportBuilder:
         )
         narrative_payload = request.narrative_result
         narrative_ok = is_usable_narrative_result(narrative_payload)
-        chapters = [self._canonical_narrative_chapter(narrative_payload)]
+        professional = _is_professional_edition(narrative_payload)
+        if professional:
+            chapters = self._edition_chapters(narrative_payload)
+        else:
+            chapters = [self._canonical_narrative_chapter(narrative_payload)]
         supporting: list[CommercialChapter] = []
         identity = self._chapter("identity", request.identity)
         if identity is not None:
             supporting.append(identity)
         career = self._career_chapter(request, narrative_payload)
-        if career is not None:
+        if career is not None and not professional:
             supporting.append(career)
         executive = self._chapter("executive", request.executive)
         if executive is not None:
@@ -82,6 +88,11 @@ class CommercialReportBuilder:
         if audience == ReportAudience.ADVISOR:
             appendix = self._build_appendix(request)
 
+        section_ids = [
+            section.section_id
+            for chapter in chapters
+            for section in chapter.sections
+        ]
         return CommercialReport(
             cover=cover,
             chapters=chapters,
@@ -100,13 +111,45 @@ class CommercialReportBuilder:
                 "narrative_source": (
                     NARRATIVE_SOURCE if narrative_ok else MISSING_NARRATIVE_DIAGNOSTIC
                 ),
-                "canonical_section_ids": [
-                    section.section_id for section in chapters[0].sections
-                ],
+                "canonical_section_ids": section_ids,
+                "publication_edition": (
+                    _PROFESSIONAL_EDITION if professional else "executive"
+                ),
                 "parent_context": request.parent_context,
                 "audience": audience.value,
             },
         )
+
+    def _edition_chapters(
+        self,
+        payload: dict[str, Any] | None,
+    ) -> list[CommercialChapter]:
+        """One chapter per published edition page. No prose rewrite."""
+        if not is_usable_narrative_result(payload):
+            return [self._canonical_narrative_chapter(payload)]
+        assert payload is not None
+        chapters: list[CommercialChapter] = []
+        for item in extract_canonical_sections(payload):
+            paragraphs = [part for part in item["body"].split("\n\n") if part.strip()]
+            if not paragraphs:
+                continue
+            chapters.append(
+                CommercialChapter(
+                    chapter_id=item["id"],
+                    title=item["title"],
+                    sections=[
+                        CommercialSection(
+                            section_id=item["id"],
+                            title=item["title"],
+                            paragraphs=paragraphs,
+                        )
+                    ],
+                    available=True,
+                )
+            )
+        if not chapters:
+            return [self._canonical_narrative_chapter(payload)]
+        return chapters
 
     def _canonical_narrative_chapter(
         self,
@@ -334,3 +377,16 @@ class CommercialReportBuilder:
         if audience == ReportAudience.ADVISOR:
             return "BTE · Bản tư vấn (chế độ cố vấn) · phụ lục kỹ thuật không gửi khách"
         return "BTE · Báo cáo tư vấn"
+
+
+def _is_professional_edition(payload: dict[str, Any] | None) -> bool:
+    """True when publication policy selected the professional edition."""
+    if not isinstance(payload, dict):
+        return False
+    metadata = payload.get("metadata")
+    if not isinstance(metadata, dict):
+        return False
+    publication = metadata.get("publication")
+    if not isinstance(publication, dict):
+        return False
+    return str(publication.get("edition") or "").strip().casefold() == _PROFESSIONAL_EDITION
