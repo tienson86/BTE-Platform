@@ -29,6 +29,9 @@ class ChartFocus:
     five_elements: tuple[tuple[str, int], ...] = ()
     dominant_element: str = ""
     stem_roles: tuple[tuple[str, str], ...] = ()
+    selected_entity_type: str = ""
+    favorable_entity_types: tuple[str, ...] = ()
+    unfavorable_entity_types: tuple[str, ...] = ()
 
     def active_names(self) -> frozenset[str]:
         """Names that belong to this chart's governing reading."""
