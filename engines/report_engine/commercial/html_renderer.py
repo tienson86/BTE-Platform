@@ -140,4 +140,8 @@ _COMMERCIAL_CSS = """
   margin-top: 32px;
   padding-top: 16px;
 }
+.report-commercial__chapter + .report-commercial__chapter {
+  break-before: page;
+  page-break-before: always;
+}
 """
