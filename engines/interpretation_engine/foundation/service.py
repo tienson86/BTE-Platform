@@ -16,8 +16,12 @@ from engines.interpretation_engine.foundation.builders.interpretation_facts_buil
 from engines.interpretation_engine.foundation.builders.interaction_truth_builder import (
     build_interaction_truth_facts,
 )
+from engines.interpretation_engine.foundation.builders.luck_analysis_bridge import (
+    build_luck_analysis_facts,
+)
 from engines.interpretation_engine.foundation.canonical_context import CanonicalAnalysisContext
 from engines.interpretation_engine.foundation.facts.interaction import InteractionTruthFacts
+from engines.interpretation_engine.foundation.facts.luck_analysis import LuckAnalysisFacts
 from engines.interpretation_engine.foundation.interpreters.useful_god import (
     UsefulGodInterpreter,
     UsefulGodInterpretationResult,
@@ -50,6 +54,7 @@ class InterpretationFoundationBundle:
     useful_god_interpretation: UsefulGodInterpretationResult | None
     useful_god_explanation: DecisionExplanationResult | None
     interaction_truth: InteractionTruthFacts
+    luck_analysis: LuckAnalysisFacts
     diagnostics: tuple[str, ...]
 
     def to_dict(self) -> dict[str, Any]:
@@ -73,6 +78,7 @@ class InterpretationFoundationBundle:
                 else None
             ),
             "interaction_truth": self.interaction_truth.to_dict(),
+            "luck_analysis": self.luck_analysis.to_dict(),
             "diagnostics": list(self.diagnostics),
         }
 
@@ -118,8 +124,11 @@ def build_interpretation_foundation(
 
     useful_god_interpretation = to_useful_god_interpretation_result(useful_god_explanation)
     interaction_truth = build_interaction_truth_facts(facts, luck_payload=luck)
+    luck_analysis = build_luck_analysis_facts(facts, luck_payload=luck)
     domain_results = _build_domain_results(facts, useful_god_interpretation)
-    all_diagnostics = _collect_diagnostics(facts, score_guard, interaction_truth)
+    all_diagnostics = _collect_diagnostics(
+        facts, score_guard, interaction_truth, luck_analysis
+    )
 
     return InterpretationFoundationBundle(
         context=context,
@@ -130,6 +139,7 @@ def build_interpretation_foundation(
         useful_god_interpretation=useful_god_interpretation,
         useful_god_explanation=useful_god_explanation,
         interaction_truth=interaction_truth,
+        luck_analysis=luck_analysis,
         diagnostics=all_diagnostics,
     )
 
@@ -152,8 +162,9 @@ def _collect_diagnostics(
     facts: InterpretationFactsBundle,
     score_guard: ScoreTruthGuardResult,
     interaction_truth: InteractionTruthFacts,
+    luck_analysis: LuckAnalysisFacts,
 ) -> tuple[str, ...]:
-    """Merge domain, interaction, and guard diagnostics."""
+    """Merge domain, interaction, luck analysis, and guard diagnostics."""
     collected: list[str] = []
     for domain in (
         facts.strength,
@@ -167,6 +178,7 @@ def _collect_diagnostics(
     ):
         collected.extend(domain.diagnostics)
     collected.extend(interaction_truth.diagnostics)
+    collected.extend(luck_analysis.diagnostics)
     collected.extend(score_guard.violations)
     return tuple(dict.fromkeys(item for item in collected if item))
 
