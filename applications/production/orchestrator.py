@@ -296,6 +296,9 @@ class ProductionEndToEndOrchestrator:
             interpretation=analysis.interpretation_dict(),
             run_id=request.case_id or request.request_key,
             engine_output=engine_output,
+            publication_edition=str(
+                request.options.get("publication_edition") or "executive"
+            ),
         )
 
     def _build_commercial_request(
