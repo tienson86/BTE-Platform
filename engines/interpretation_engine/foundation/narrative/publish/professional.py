@@ -13,7 +13,6 @@ from engines.interpretation_engine.foundation.narrative.constants import (
     CUSTOMER_DOMAIN_LABELS,
     CUSTOMER_DOMAIN_LEARNING,
     CUSTOMER_DOMAIN_RELATIONSHIP,
-    KIND_APPLICATION,
     KIND_CONCLUSION,
     KIND_FACT,
     KIND_REASON,
@@ -105,21 +104,36 @@ def _apply_professional(payload: dict[str, Any]) -> dict[str, Any]:
     chart_names = _chart_names_from_payload(payload)
     published = _published_texts_by_section(payload)
     exec_texts = list(published.get("sec-executive_summary") or [])
-    exclude_exec = list(exec_texts)
-    luck_exclude = [text for text in exec_texts if not _has_marker(text, LUCK_MARKERS)]
     evidence = _evidence_candidates(payload, thesis, chart_names)
+    used: list[str] = list(exec_texts)
+    chart = _select_chart(published, evidence, [])
+    core = _select_core(published, evidence, used)
+    used = used + core
+    ten_gods = _select_ten_gods(evidence, used)
+    used = used + ten_gods
+    shen_sha = _select_shen_sha(evidence, used)
+    used = used + shen_sha
+    luck = _select_luck(
+        published,
+        evidence,
+        [text for text in used if not _has_marker(text, LUCK_MARKERS)],
+    )
+    used = used + luck
+    career = _select_career(published, evidence, used)
+    used = used + career
+    life_areas = _select_life_areas(published, evidence, used)
+    used = used + life_areas
+    recommendations = _select_recommendations(published, evidence, used)
     pages = {
         "sec-executive_summary": _limit(exec_texts, "sec-executive_summary"),
-        "sec-chart": _select_chart(published, evidence, []),
-        "sec-core_interpretation": _select_core(published, evidence, exclude_exec),
-        "sec-ten_gods": _select_ten_gods(evidence, exclude_exec),
-        "sec-shen_sha": _select_shen_sha(evidence, exclude_exec),
-        "sec-luck": _select_luck(published, evidence, luck_exclude),
-        "sec-career": _select_career(published, evidence, exclude_exec),
-        "sec-life_areas": _select_life_areas(published, evidence, exclude_exec),
-        "sec-professional_recommendation": _select_recommendations(
-            published, evidence, exclude_exec
-        ),
+        "sec-chart": chart,
+        "sec-core_interpretation": core,
+        "sec-ten_gods": ten_gods,
+        "sec-shen_sha": shen_sha,
+        "sec-luck": luck,
+        "sec-career": career,
+        "sec-life_areas": life_areas,
+        "sec-professional_recommendation": recommendations,
         "sec-professional_conclusion": _select_conclusion(published, []),
     }
     sections = [
@@ -196,7 +210,7 @@ def _select_core(
     from_spine = [
         text
         for text in published.get("sec-reasoning") or []
-        if word_count(text) >= MIN_CONSULTING_WORDS
+        if word_count(text) >= MIN_CONSULTING_WORDS and not _is_chart_fact(text)
     ]
     from_evidence = [
         item.text
@@ -219,9 +233,12 @@ def _select_ten_gods(evidence: list["_Evidence"], exclude: list[str]) -> list[st
         item.text
         for item in evidence
         if item.domain in {TEN_GOD_DOMAIN, "UsefulGod"}
+        and item.kind in {KIND_REASON, KIND_CONCLUSION}
         and word_count(item.text) >= MIN_ROLE_WHY_WORDS
         and _has_marker(item.text, ROLE_WHY_MARKERS)
         and not _is_chart_fact(item.text)
+        and item.customer_domain not in _LIFE_AREA_DOMAINS
+        and item.customer_domain != CUSTOMER_DOMAIN_CAREER
     ]
     return _unique(chosen, exclude, PROFESSIONAL_SECTION_LIMITS["sec-ten_gods"])
 
@@ -256,13 +273,12 @@ def _select_luck(
         if _has_marker(item.text, LUCK_MARKERS):
             pool.append(item.text)
             continue
-        if item.kind == KIND_WARNING and word_count(item.text) >= MIN_CONSULTING_WORDS:
-            if "vượng" in lowered or "tải" in lowered or "thoát" in lowered:
-                pool.append(_join_clauses(item.text, item.mitigation))
-        if item.kind == KIND_APPLICATION and item.domain in CORE_DOMAINS:
-            if "hữu ích khi" in lowered or "rủi ro" in lowered:
-                if word_count(item.text) >= MIN_CONSULTING_WORDS:
-                    pool.append(item.text)
+        if item.kind != KIND_WARNING:
+            continue
+        if word_count(item.text) < MIN_CONSULTING_WORDS:
+            continue
+        if "vượng" in lowered or "thoát" in lowered or "tải" in lowered:
+            pool.append(_join_clauses(item.text, item.mitigation))
     return _unique(pool, exclude, PROFESSIONAL_SECTION_LIMITS["sec-luck"])
 
 
