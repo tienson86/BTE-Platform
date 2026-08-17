@@ -18,7 +18,6 @@ from engines.interpretation_engine.foundation.builders.interaction_truth_builder
 )
 from engines.interpretation_engine.foundation.canonical_context import CanonicalAnalysisContext
 from engines.interpretation_engine.foundation.facts.interaction import InteractionTruthFacts
-from engines.interpretation_engine.foundation.canonical_context import CanonicalAnalysisContext
 from engines.interpretation_engine.foundation.interpreters.useful_god import (
     UsefulGodInterpreter,
     UsefulGodInterpretationResult,
