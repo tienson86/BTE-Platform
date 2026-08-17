@@ -513,6 +513,22 @@ def _entities_from_source(source: _KnowledgeSource) -> tuple[KnowledgeEntity, ..
     return tuple(source.entities)
 
 
+def _entity_types_by_key(source: UsefulGodKnowledgeBundle) -> dict[str, str]:
+    """Copy canonical entity_type from already-retrieved Useful God knowledge."""
+    mapping: dict[str, str] = {}
+    entities = (
+        source.selected_entity,
+        *source.favorable_entities,
+        *source.unfavorable_entities,
+    )
+    for entity in entities:
+        if entity is None or not entity.key:
+            continue
+        if entity.entity_type:
+            mapping[entity.key] = entity.entity_type
+    return mapping
+
+
 def _bundle_confidence(explanation: DecisionExplanationResult | None) -> float:
     """Copy decision confidence when present."""
     if explanation is None:
@@ -584,12 +600,20 @@ def _chart_focus(
     selected = ""
     favorable: tuple[str, ...] = ()
     unfavorable: tuple[str, ...] = ()
+    selected_entity_type = ""
+    favorable_entity_types: tuple[str, ...] = ()
+    unfavorable_entity_types: tuple[str, ...] = ()
     if useful_god_knowledge is not None:
         selected = useful_god_knowledge.selected_key
         favorable = useful_god_knowledge.favorable_keys
         unfavorable = useful_god_knowledge.unfavorable_keys
+        selected_entity_type = useful_god_knowledge.coverage.selected_entity_type
+        type_by_key = _entity_types_by_key(useful_god_knowledge)
+        favorable_entity_types = tuple(type_by_key.get(item, "") for item in favorable)
+        unfavorable_entity_types = tuple(type_by_key.get(item, "") for item in unfavorable)
     elif useful_god_explanation is not None and useful_god_explanation.decision is not None:
         selected = useful_god_explanation.decision.selected
+        selected_entity_type = useful_god_explanation.decision.selected_entity_type
     pattern_label = ""
     if pattern_bundle is not None:
         facts = getattr(pattern_bundle, "facts", None)
@@ -654,6 +678,9 @@ def _chart_focus(
         five_elements=copied_five,
         dominant_element=copied_dominant,
         stem_roles=tuple(dict.fromkeys(stem_roles)),
+        selected_entity_type=selected_entity_type,
+        favorable_entity_types=favorable_entity_types,
+        unfavorable_entity_types=unfavorable_entity_types,
     )
 
 
