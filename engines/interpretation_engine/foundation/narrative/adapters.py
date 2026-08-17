@@ -393,6 +393,7 @@ def composer_input_from_domains(
     ten_god_bundle: TenGodInterpretationBundle | None,
     shensha_bundle: ShenShaInterpretationBundle | None,
     current_dayun: str = "",
+    next_dayun: str = "",
     five_elements: tuple[tuple[str, int], ...] = (),
     dominant_element: str = "",
 ) -> NarrativeComposerInput:
@@ -405,6 +406,7 @@ def composer_input_from_domains(
         ten_god_bundle=ten_god_bundle,
         shensha_bundle=shensha_bundle,
         current_dayun=current_dayun,
+        next_dayun=next_dayun,
         five_elements=five_elements,
         dominant_element=dominant_element,
     )
@@ -574,6 +576,7 @@ def _chart_focus(
     ten_god_bundle: TenGodInterpretationBundle | None,
     shensha_bundle: ShenShaInterpretationBundle | None,
     current_dayun: str,
+    next_dayun: str = "",
     five_elements: tuple[tuple[str, int], ...] = (),
     dominant_element: str = "",
 ) -> ChartFocus:
@@ -646,6 +649,7 @@ def _chart_focus(
         present_ten_gods=present,
         canonical_shensha=canonical_shensha_names(matched),
         current_dayun=current_dayun,
+        next_dayun=next_dayun,
         useful_god_role=useful_god_role,
         five_elements=copied_five,
         dominant_element=copied_dominant,
