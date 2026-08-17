@@ -90,7 +90,9 @@ def build_interaction_truth_facts(
 
     supported = InteractionDirection(
         identities=tuple(
-            item for item in (useful, *facts.useful_god.favorable_gods) if item
+            dict.fromkeys(
+                item for item in (useful, *facts.useful_god.favorable_gods) if item
+            )
         ),
         overlap_status=supported_status,
         evidence_ids=(
