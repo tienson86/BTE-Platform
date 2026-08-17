@@ -56,6 +56,24 @@ class UsefulGodInterpretationFacts:
     five_elements: dict[str, int | None]
     owner: str = DOMAIN_OWNERS["useful_god"]
     diagnostics: tuple[str, ...] = ()
+    selected_entity_type: str = ""
+    favorable_entity_types: tuple[str, ...] = ()
+    unfavorable_entity_types: tuple[str, ...] = ()
+
+    def entity_type_of(self, value: str) -> str:
+        """Return canonical K2.1 entity type already stored for this value."""
+        text = str(value or "").strip()
+        if not text:
+            return ""
+        if text == self.selected and self.selected_entity_type:
+            return self.selected_entity_type
+        for name, kind in zip(self.favorable_gods, self.favorable_entity_types):
+            if name == text and kind:
+                return kind
+        for name, kind in zip(self.unfavorable_gods, self.unfavorable_entity_types):
+            if name == text and kind:
+                return kind
+        return ""
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize useful-god facts."""
@@ -80,4 +98,22 @@ class UsefulGodInterpretationFacts:
             "five_elements": dict(self.five_elements),
             "owner": self.owner,
             "diagnostics": list(self.diagnostics),
+            "selected_entity_type": self.selected_entity_type,
+            "favorable_entity_types": list(self.favorable_entity_types),
+            "unfavorable_entity_types": list(self.unfavorable_entity_types),
         }
+
+
+def lookup_useful_god_entity_type(key: str) -> str:
+    """Copy K2.1 entity_type from knowledge. Do not guess from the label."""
+    text = str(key or "").strip()
+    if not text:
+        return ""
+    from engines.interpretation_engine.foundation.knowledge.service import (
+        retrieve_knowledge,
+    )
+
+    entity = retrieve_knowledge("UsefulGod", text)
+    if entity is None:
+        return ""
+    return str(entity.entity_type or "")
