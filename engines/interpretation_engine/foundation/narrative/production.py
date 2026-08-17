@@ -77,6 +77,7 @@ def build_composer_input_from_production(output: Any) -> NarrativeComposerInput:
         ten_god_bundle=ten_god_bundle,
         shensha_bundle=shensha_bundle,
         current_dayun=_current_dayun(output),
+        next_dayun=_next_dayun(output),
         five_elements=_five_elements(output),
         dominant_element=_dominant_element(output),
     )
@@ -130,6 +131,14 @@ def _shensha_facts(output: Any):
     )
 
 
+def dayun_frame_from_production(output: Any) -> dict[str, str]:
+    """Copy current and next cycle labels already computed upstream."""
+    return {
+        "current_dayun": _current_dayun(output),
+        "next_dayun": _next_dayun(output),
+    }
+
+
 def _current_dayun(output: Any) -> str:
     """Copy the confirmed current luck cycle label. Do not interpret luck."""
     luck = getattr(output, "luck", None) or {}
@@ -138,10 +147,45 @@ def _current_dayun(output: Any) -> str:
     current = luck.get("current_cycle") or luck.get("current_dayun") or {}
     if not isinstance(current, dict):
         return str(current or "")
-    gan = str(current.get("gan_zhi") or current.get("ganzhi") or "").strip()
+    return _cycle_label(current)
+
+
+def _next_dayun(output: Any) -> str:
+    """Copy the already-computed next cycle label. Do not calculate the sequence."""
+    luck = getattr(output, "luck", None) or {}
+    if not isinstance(luck, dict):
+        return ""
+    current_label = _current_dayun(output)
+    cycles = luck.get("cycles") or []
+    if not isinstance(cycles, list):
+        return ""
+    labels = [_cycle_label(item) for item in cycles if isinstance(item, dict)]
+    labels = [item for item in labels if item]
+    if current_label and current_label in labels:
+        index = labels.index(current_label)
+        if index + 1 < len(labels):
+            return labels[index + 1]
+    current = luck.get("current_cycle") or luck.get("current_dayun") or {}
+    current_index = current.get("index") if isinstance(current, dict) else None
+    if current_index is None:
+        return ""
+    for item in cycles:
+        if not isinstance(item, dict):
+            continue
+        try:
+            if int(item.get("index")) == int(current_index) + 1:
+                return _cycle_label(item)
+        except (TypeError, ValueError):
+            continue
+    return ""
+
+
+def _cycle_label(cycle: dict[str, Any]) -> str:
+    """Format one already-shaped cycle as gan-zhi plus years."""
+    gan = str(cycle.get("gan_zhi") or cycle.get("ganzhi") or "").strip()
     years = ""
-    start = current.get("year_start")
-    end = current.get("year_end")
+    start = cycle.get("year_start")
+    end = cycle.get("year_end")
     if start and end:
         years = f"{start}–{end}"
     return " ".join(part for part in (gan, years) if part)
