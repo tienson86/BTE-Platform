@@ -32,7 +32,8 @@ def luck_paragraphs_from_interaction(data: Mapping[str, Any]) -> list[str]:
         return [
             (
                 f"Đại vận đang sống là {label}. "
-                "Chưa đủ Interaction Truth để luận thập niên này, không lặp luận giải gốc."
+                "Chưa đủ dữ liệu tương tác để luận thập niên này, "
+                "không lặp luận giải gốc."
             )
         ]
 
@@ -41,7 +42,7 @@ def luck_paragraphs_from_interaction(data: Mapping[str, Any]) -> list[str]:
             f"Đại vận đang sống là {label}. "
             "Đây là thập niên đang luận, không phải toàn bộ chuỗi đại vận."
         ),
-        _summary_sentence(label, summary, data),
+        _summary_sentence(label, summary),
         _helpful_sentence(label, data),
         _pressure_sentence(label, data),
         _supported_sentence(label, data),
@@ -80,12 +81,12 @@ def recommendation_overlay_from_interaction(data: Mapping[str, Any]) -> str:
     if helpful:
         names = ", ".join(helpful)
         return (
-            f"Trong {label}, ưu tiên hướng đã trùng token Đại vận: {names}. "
-            "Không đổi Dụng thần natal."
+            f"Trong {label}, ưu tiên hướng đã trùng danh tính Đại vận: {names}. "
+            "Không đổi Dụng thần đã luận trên lá số."
         )
     return (
-        f"Trong {label}, chưa có token Đại vận trùng Dụng / Hỷ; "
-        "giữ hướng natal, không gắn khuyến nghị gốc vào thập niên."
+        f"Trong {label}, chưa có danh tính Đại vận trùng Dụng thần hoặc Hỷ thần; "
+        "giữ hướng đã luận, không gắn khuyến nghị gốc vào thập niên."
     )
 
 
@@ -95,34 +96,35 @@ def conclusion_overlay_from_interaction(data: Mapping[str, Any]) -> str:
     if not label:
         return ""
     summary = data.get("interaction_summary") or {}
+    useful = str(summary.get("useful_god") or "").strip() or "đã chọn"
     if summary.get("empty_overlap"):
         return (
-            f"Trong {label}, lá số vẫn do Dụng {summary.get('useful_god') or 'đã chọn'} giữ; "
-            "chưa có token Đại vận trùng Hỷ hoặc Kỵ đã công bố."
+            f"Trong {label}, lá số vẫn do Dụng {useful} giữ; "
+            "chưa có danh tính Đại vận trùng Hỷ thần hoặc Kỵ thần đã công bố."
         )
     helpful = _factor_names(data.get("helpful_factors") or [])
     pressure = _factor_names(data.get("pressure_factors") or [])
-    parts = [f"Thập niên {label} gặp token đã công bố"]
+    parts = [f"Thập niên {label} gặp danh tính Đại vận đã công bố"]
     if helpful:
         parts.append(f"trùng hỗ trợ {', '.join(helpful)}")
     if pressure:
         parts.append(f"trùng áp lực {', '.join(pressure)}")
-    return "; ".join(parts) + ". Không đổi quyết định natal."
+    return "; ".join(parts) + ". Không đổi quyết định đã luận trên lá số."
 
 
-def _summary_sentence(label: str, summary: Mapping[str, Any], data: Mapping[str, Any]) -> str:
+def _summary_sentence(label: str, summary: Mapping[str, Any]) -> str:
     """Governors in force plus overlap flag."""
     pattern = str(summary.get("pattern") or "").strip() or "cục đã luận"
     strength = str(summary.get("strength") or "").strip() or "thân đã luận"
     useful = str(summary.get("useful_god") or "").strip() or "Dụng đã chọn"
     if summary.get("empty_overlap"):
-        overlap = "không trùng identity nào với Dụng / Hỷ / Kỵ đã công bố"
+        overlap = "không trùng danh tính nào với Dụng thần, Hỷ thần hoặc Kỵ thần đã công bố"
     else:
         count = int(summary.get("overlap_count") or 0)
-        overlap = f"trùng {count} token đã công bố với Dụng / Hỷ / Kỵ"
+        overlap = f"trùng {count} danh tính đã công bố với Dụng thần, Hỷ thần hoặc Kỵ thần"
     return (
         f"Trong {label}, lá số vẫn do {pattern}, {strength}, Dụng {useful} giữ. "
-        f"So khớp token Đại vận đã công bố: {overlap}."
+        f"So khớp danh tính Đại vận đã công bố: {overlap}."
     )
 
 
@@ -131,11 +133,11 @@ def _helpful_sentence(label: str, data: Mapping[str, Any]) -> str:
     factors = list(data.get("helpful_factors") or [])
     if not factors:
         return (
-            f"Không có token Đại vận đã công bố trùng Dụng thần hoặc Hỷ thần trong {label}."
+            f"Không có danh tính Đại vận đã công bố trùng Dụng thần hoặc Hỷ thần trong {label}."
         )
     parts = [
         f"{item.get('natal_identity')} trùng {item.get('period_identity')} "
-        f"qua {item.get('period_field')}"
+        f"qua {_field_label(str(item.get('period_field') or ''))}"
         for item in factors
         if isinstance(item, Mapping)
     ]
@@ -147,11 +149,11 @@ def _pressure_sentence(label: str, data: Mapping[str, Any]) -> str:
     factors = list(data.get("pressure_factors") or [])
     if not factors:
         return (
-            f"Không có token Đại vận đã công bố trùng Kỵ thần trong {label}."
+            f"Không có danh tính Đại vận đã công bố trùng Kỵ thần trong {label}."
         )
     parts = [
         f"{item.get('natal_identity')} trùng {item.get('period_identity')} "
-        f"qua {item.get('period_field')}"
+        f"qua {_field_label(str(item.get('period_field') or ''))}"
         for item in factors
         if isinstance(item, Mapping)
     ]
@@ -162,7 +164,7 @@ def _supported_sentence(label: str, data: Mapping[str, Any]) -> str:
     """Natal Useful God / Hỷ still in force, with overlap qualifier."""
     direction = data.get("supported_direction") or {}
     names = [str(item) for item in (direction.get("identities") or []) if item]
-    named = ", ".join(names) if names else "Dụng / Hỷ natal"
+    named = ", ".join(names) if names else "Dụng thần / Hỷ thần đã luận"
     qualifier = _qualifier(str(direction.get("overlap_status") or ""))
     return f"Hướng được giữ trong {label} vẫn là {named}; {qualifier}."
 
@@ -172,7 +174,7 @@ def _restricted_sentence(label: str, data: Mapping[str, Any]) -> str:
     direction = data.get("restricted_direction") or {}
     names = [str(item) for item in (direction.get("identities") or []) if item]
     if not names:
-        return f"Không có Kỵ thần natal đã công bố để hạn chế trong {label}."
+        return f"Không có Kỵ thần đã công bố để hạn chế trong {label}."
     qualifier = _qualifier(str(direction.get("overlap_status") or ""))
     return f"Hướng bị hạn chế trong {label} vẫn là {', '.join(names)}; {qualifier}."
 
@@ -182,7 +184,7 @@ def _next_sentence(label: str, period: Mapping[str, Any]) -> str:
     nxt = str(period.get("next_label") or period.get("next_gan_zhi") or "").strip()
     if not nxt or nxt == label:
         return (
-            f"Không luận toàn bộ mười đại vận. Giữ hướng đã chọn đến hết {label}."
+            f"Không luận toàn bộ chuỗi đại vận. Giữ hướng đã chọn đến hết {label}."
         )
     return (
         f"Đại vận kế tiếp đã có trên lá số là {nxt}; đó chưa phải thập niên đang sống. "
@@ -204,22 +206,34 @@ def _domain_overlay(data: Mapping[str, Any], *, area: str) -> str:
         if pressure:
             bits.append(f"trùng áp lực {', '.join(pressure)}")
         return (
-            f"Trong {label}, {area} chịu token Đại vận đã công bố: {'; '.join(bits)}. "
+            f"Trong {label}, {area} chịu danh tính Đại vận đã công bố: {'; '.join(bits)}. "
             "Đây không phải luận giải gốc gắn nhãn thập niên."
         )
     return (
-        f"Trong {label}, chưa có token Đại vận trùng Dụng / Hỷ / Kỵ cho {area}; "
-        "không lặp luận giải gốc như thể đó là hiệu ứng thập niên."
+        f"Trong {label}, chưa có danh tính Đại vận trùng Dụng thần, Hỷ thần hoặc Kỵ thần "
+        f"cho {area}; không lặp luận giải gốc như thể đó là hiệu ứng thập niên."
     )
 
 
 def _qualifier(status: str) -> str:
     """Overlap qualifier copied from Interaction Facts."""
     if status == "overlapped":
-        return "có trùng token Đại vận đã công bố"
+        return "có trùng danh tính Đại vận đã công bố"
     if status == "missing":
-        return "chưa đủ dữ liệu để so khớp token"
-    return "chưa có trùng token Đại vận đã công bố"
+        return "chưa đủ dữ liệu để so khớp danh tính"
+    return "chưa có trùng danh tính Đại vận đã công bố"
+
+
+def _field_label(field: str) -> str:
+    """Customer label for a copied luck field path."""
+    mapping = {
+        "LuckEngine.current_dayun.heavenly_stem": "thiên can Đại vận",
+        "LuckEngine.current_dayun.earthly_branch": "địa chi Đại vận",
+        "LuckEngine.current_dayun.element": "ngũ hành Đại vận",
+        "LuckEngine.current_dayun.ten_god": "thập thần Đại vận",
+        "LuckEngine.current_dayun.hidden_stems": "tàng can Đại vận",
+    }
+    return mapping.get(field, "danh tính Đại vận đã công bố")
 
 
 def _label(data: Mapping[str, Any]) -> str:
