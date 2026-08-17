@@ -28,6 +28,9 @@ from engines.interpretation_engine.foundation.narrative.publish import (
     apply_published_narrative,
     apply_report_edition,
 )
+from engines.interpretation_engine.foundation.narrative.publish.current_dayun import (
+    stamp_dayun_frame,
+)
 from engines.interpretation_engine.foundation.narrative.result_v2 import (
     narrative_result_v2_to_dict,
 )
@@ -125,6 +128,7 @@ def build_narrative_result_dict(
     if isinstance(secondary_milestone_payload, dict):
         payload["secondary_career_milestone"] = secondary_milestone_payload
     published = apply_published_narrative(payload)
+    published = stamp_dayun_frame(published, engine_output)
     return apply_report_edition(published, publication_edition)
 
 
