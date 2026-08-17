@@ -35,6 +35,9 @@ from engines.interpretation_engine.foundation.narrative.publish.constants import
     DECISION_DROP,
     DECISION_PUBLISH,
 )
+from engines.interpretation_engine.foundation.narrative.publish.current_dayun import (
+    assemble_current_dayun_consultation,
+)
 from engines.interpretation_engine.foundation.narrative.publish.editions import (
     APPENDIX_LIMIT,
     APPENDIX_SECTION_ID,
@@ -114,6 +117,7 @@ def _apply_professional(payload: dict[str, Any]) -> dict[str, Any]:
     shen_sha = _select_shen_sha(evidence, used)
     used = used + shen_sha
     luck = _select_luck(
+        payload,
         published,
         evidence,
         [text for text in used if not _has_marker(text, LUCK_MARKERS)],
@@ -256,11 +260,19 @@ def _select_shen_sha(evidence: list["_Evidence"], exclude: list[str]) -> list[st
 
 
 def _select_luck(
+    payload: dict[str, Any],
     published: dict[str, list[str]],
     evidence: list["_Evidence"],
     exclude: list[str],
 ) -> list[str]:
-    """Page 6 — current cycle, meaning, risk, opportunity. Not all ten cycles."""
+    """Page 6 — current decade consultation. Not all ten cycles."""
+    assembled = assemble_current_dayun_consultation(
+        payload,
+        published,
+        exclude=exclude,
+    )
+    if assembled:
+        return assembled
     pool: list[str] = []
     for text in published.get("sec-executive_summary") or []:
         if _has_marker(text, LUCK_MARKERS):
@@ -269,16 +281,8 @@ def _select_luck(
         if _has_marker(text, LUCK_MARKERS):
             pool.append(text)
     for item in evidence:
-        lowered = item.text.casefold()
         if _has_marker(item.text, LUCK_MARKERS):
             pool.append(item.text)
-            continue
-        if item.kind != KIND_WARNING:
-            continue
-        if word_count(item.text) < MIN_CONSULTING_WORDS:
-            continue
-        if "vượng" in lowered or "thoát" in lowered or "tải" in lowered:
-            pool.append(_join_clauses(item.text, item.mitigation))
     return _unique(pool, exclude, PROFESSIONAL_SECTION_LIMITS["sec-luck"])
 
 
