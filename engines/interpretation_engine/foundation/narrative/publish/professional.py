@@ -38,14 +38,14 @@ from engines.interpretation_engine.foundation.narrative.publish.constants import
 from engines.interpretation_engine.foundation.narrative.publish.current_dayun import (
     assemble_current_dayun_consultation,
 )
-from engines.interpretation_engine.foundation.narrative.publish.interaction_copy import (
-    career_overlay_from_interaction,
-    conclusion_overlay_from_interaction,
-    finance_overlay_from_interaction,
-    health_overlay_from_interaction,
-    interaction_from_payload,
-    recommendation_overlay_from_interaction,
-    relationship_overlay_from_interaction,
+from engines.interpretation_engine.foundation.narrative.publish.luck_analysis_copy import (
+    career_overlay_from_analysis,
+    conclusion_overlay_from_analysis,
+    finance_overlay_from_analysis,
+    health_overlay_from_analysis,
+    luck_analysis_from_payload,
+    recommendation_overlay_from_analysis,
+    relationship_overlay_from_analysis,
 )
 from engines.interpretation_engine.foundation.narrative.publish.editions import (
     APPENDIX_LIMIT,
@@ -302,7 +302,7 @@ def _select_career(
     exclude: list[str],
 ) -> list[str]:
     """Page 7 — operating style plus period overlay. No profession catalogue."""
-    overlay = career_overlay_from_interaction(interaction_from_payload(payload))
+    overlay = career_overlay_from_analysis(luck_analysis_from_payload(payload))
     pool: list[str] = [overlay] if overlay else []
     for text in published.get("sec-impact") or []:
         if text.startswith(CUSTOMER_DOMAIN_LABELS[CUSTOMER_DOMAIN_CAREER]):
@@ -328,11 +328,11 @@ def _select_life_areas(
     exclude: list[str],
 ) -> list[str]:
     """Page 8 — one coherent consultation per remaining life area."""
-    data = interaction_from_payload(payload)
+    data = luck_analysis_from_payload(payload)
     overlays = {
-        CUSTOMER_DOMAIN_FINANCE: finance_overlay_from_interaction(data),
-        CUSTOMER_DOMAIN_RELATIONSHIP: relationship_overlay_from_interaction(data),
-        CUSTOMER_DOMAIN_HEALTH: health_overlay_from_interaction(data),
+        CUSTOMER_DOMAIN_FINANCE: finance_overlay_from_analysis(data),
+        CUSTOMER_DOMAIN_RELATIONSHIP: relationship_overlay_from_analysis(data),
+        CUSTOMER_DOMAIN_HEALTH: health_overlay_from_analysis(data),
     }
     chosen: list[str] = []
     blocked = list(exclude)
@@ -362,7 +362,7 @@ def _select_recommendations(
     exclude: list[str],
 ) -> list[str]:
     """Page 9 — period overlay first, then ranked already-composed reasoning."""
-    overlay = recommendation_overlay_from_interaction(interaction_from_payload(payload))
+    overlay = recommendation_overlay_from_analysis(luck_analysis_from_payload(payload))
     expanded: list[str] = [overlay] if overlay else []
     for item in evidence:
         if item.kind != KIND_RECOMMENDATION:
@@ -385,7 +385,7 @@ def _select_conclusion(
     exclude: list[str],
 ) -> list[str]:
     """Page 10 — period-true close when Interaction Facts exist. No natal restart."""
-    overlay = conclusion_overlay_from_interaction(interaction_from_payload(payload))
+    overlay = conclusion_overlay_from_analysis(luck_analysis_from_payload(payload))
     if overlay:
         return _unique(
             [overlay],
@@ -671,6 +671,8 @@ def _without_period_copy(texts: list[str]) -> list[str]:
         if "danh tính đại vận" in lowered:
             continue
         if "không lặp luận giải gốc" in lowered:
+            continue
+        if "chưa xác định thêm tương tác" in lowered:
             continue
         kept.append(text)
     return kept
