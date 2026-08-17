@@ -40,3 +40,4 @@ TEMPERATURE_CONTAMINATED_BY_TRUONG_SINH = "temperature_contaminated_by_truong_si
 ANALYTICAL_DISTRIBUTION_UNAVAILABLE = "analytical_distribution_unavailable"
 USEFUL_GOD_NOT_AVAILABLE = "useful_god_not_available"
 SILENT_FALLBACK_DETECTED = "silent_fallback_detected"
+INSUFFICIENT_LUCK_ANALYSIS = "insufficient_luck_analysis"
