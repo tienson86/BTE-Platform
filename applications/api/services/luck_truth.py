@@ -43,6 +43,14 @@ def shape_luck_payload(luck: Any) -> dict[str, Any]:
         "cycles": cycles,
         "current_dayun": dict(current),
         "metadata": dict(raw.get("metadata") or {}),
+        "support_elements": list(raw.get("support_elements") or []),
+        "attack_elements": list(raw.get("attack_elements") or []),
+        "support_level": raw.get("support_level"),
+        "attack_level": raw.get("attack_level"),
+        "luck_stage": raw.get("luck_stage"),
+        "luck_strength": raw.get("luck_strength"),
+        "luck_summary": raw.get("luck_summary"),
+        "confidence": raw.get("confidence"),
     }
 
 
