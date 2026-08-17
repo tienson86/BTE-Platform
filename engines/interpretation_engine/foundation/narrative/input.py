@@ -24,6 +24,7 @@ class ChartFocus:
     present_ten_gods: tuple[str, ...] = ()
     canonical_shensha: tuple[str, ...] = ()
     current_dayun: str = ""
+    next_dayun: str = ""
     useful_god_role: str = ""
     five_elements: tuple[tuple[str, int], ...] = ()
     dominant_element: str = ""
