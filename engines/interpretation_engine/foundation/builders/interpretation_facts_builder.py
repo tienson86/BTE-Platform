@@ -18,6 +18,7 @@ from engines.interpretation_engine.foundation.facts.ten_gods import TenGodInterp
 from engines.interpretation_engine.foundation.facts.useful_god import (
     UsefulGodCandidateFact,
     UsefulGodInterpretationFacts,
+    lookup_useful_god_entity_type,
 )
 from engines.interpretation_engine.foundation.status import DataAvailability, EvidenceStatus
 
@@ -193,6 +194,13 @@ def _build_useful_god_facts(
         temperature_level=context.temperature.level,
         five_elements=five,
         diagnostics=tuple(diagnostics),
+        selected_entity_type=lookup_useful_god_entity_type(useful.selected),
+        favorable_entity_types=tuple(
+            lookup_useful_god_entity_type(item) for item in useful.favorable_gods
+        ),
+        unfavorable_entity_types=tuple(
+            lookup_useful_god_entity_type(item) for item in useful.unfavorable_gods
+        ),
     )
 
 
