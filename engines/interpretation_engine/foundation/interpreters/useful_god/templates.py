@@ -23,6 +23,31 @@ STEM_ELEMENT: dict[str, str] = {
     "Quý": "Thủy",
 }
 
+KNOWLEDGE_ENTITY_TYPE_STEM = "stem"
+KNOWLEDGE_ENTITY_TYPE_ROLE = "role"
+KNOWLEDGE_ENTITY_TYPE_ELEMENT = "element"
+
+
+def customer_display_label(value: str, entity_type: str) -> str:
+    """Format Useful God / Hỷ / Kỵ for customer display from canonical type.
+
+    stem → ``Đinh (Hỏa)`` using STEM_ELEMENT only.
+    role → ``Thực Thần`` with no appended element.
+    element → canonical element label only.
+    Missing type → the value only. Never invent an element.
+    """
+    text = str(value or "").strip()
+    if not text:
+        return ""
+    kind = str(entity_type or "").strip()
+    if kind == KNOWLEDGE_ENTITY_TYPE_STEM:
+        element = STEM_ELEMENT.get(text)
+        if element:
+            return f"{text} ({element})"
+        return text
+    return text
+
+
 STRENGTH_VI: dict[str, str] = {
     "strong": "vượng",
     "weak": "nhược",
