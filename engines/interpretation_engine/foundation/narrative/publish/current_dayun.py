@@ -1,6 +1,6 @@
 """Current Da Yun consultation for Professional edition.
 
-Consumes stamped Interaction Truth. Does not calculate luck, interpret all
+Consumes stamped Luck Analysis Facts. Does not calculate luck, interpret all
 ten cycles, or paste natal thesis onto the decade name.
 """
 
@@ -16,9 +16,9 @@ from engines.interpretation_engine.foundation.narrative.publish.editions import 
     MIN_CONSULTING_WORDS,
     PROFESSIONAL_SECTION_LIMITS,
 )
-from engines.interpretation_engine.foundation.narrative.publish.interaction_copy import (
-    interaction_from_payload,
-    luck_paragraphs_from_interaction,
+from engines.interpretation_engine.foundation.narrative.publish.luck_analysis_copy import (
+    luck_analysis_from_payload,
+    luck_paragraphs_from_analysis,
 )
 from engines.interpretation_engine.foundation.narrative.text import normalize_text
 
@@ -37,17 +37,17 @@ def assemble_current_dayun_consultation(
     *,
     exclude: list[str],
 ) -> list[str]:
-    """Build the Professional Current Da Yun page from Interaction Facts only."""
-    data = interaction_from_payload(payload)
-    paragraphs = luck_paragraphs_from_interaction(data)
+    """Build the Professional Current Da Yun page from Luck Analysis Facts only."""
+    data = luck_analysis_from_payload(payload)
+    paragraphs = luck_paragraphs_from_analysis(data)
     if not paragraphs:
         current = _current_label(payload, published)
         if current:
             paragraphs = [
                 (
                     f"Đại vận đang sống là {current}. "
-                    "Chưa đủ dữ liệu tương tác để luận thập niên này, "
-                    "không lặp luận giải gốc."
+                    "Phân tích production hiện tại chưa xác định thêm tương tác "
+                    "ngoài luận giải gốc. Không lặp luận giải gốc."
                 )
             ]
     return _unique_kept(paragraphs, exclude, PROFESSIONAL_SECTION_LIMITS["sec-luck"])
@@ -67,6 +67,21 @@ def stamp_dayun_frame(payload: dict[str, Any], engine_output: Any) -> dict[str, 
     out = dict(payload)
     metadata = dict(out.get("metadata") or {}) if isinstance(out.get("metadata"), dict) else {}
     metadata["luck_frame"] = frame
+    out["metadata"] = metadata
+    return out
+
+
+def stamp_luck_analysis(payload: dict[str, Any], engine_output: Any) -> dict[str, Any]:
+    """Copy Luck Analysis facts onto narrative metadata. Do not calculate them."""
+    if not isinstance(payload, dict) or engine_output is None:
+        return payload
+    foundation = getattr(engine_output, "interpretation_foundation", None)
+    analysis = getattr(foundation, "luck_analysis", None) if foundation is not None else None
+    if analysis is None or not hasattr(analysis, "to_dict"):
+        return payload
+    out = dict(payload)
+    metadata = dict(out.get("metadata") or {}) if isinstance(out.get("metadata"), dict) else {}
+    metadata["luck_analysis"] = analysis.to_dict()
     out["metadata"] = metadata
     return out
 
