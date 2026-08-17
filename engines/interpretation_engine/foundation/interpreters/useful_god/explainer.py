@@ -20,15 +20,18 @@ from engines.interpretation_engine.foundation.explanation.validation import vali
 from engines.interpretation_engine.foundation.facts.useful_god import (
     UsefulGodCandidateFact,
     UsefulGodInterpretationFacts,
+    lookup_useful_god_entity_type,
 )
 from engines.interpretation_engine.foundation.interpreters.useful_god.templates import (
     ELEMENT_LABELS,
     GROUP_LABEL_VI,
     GROUP_PRIORITY,
     IMPACT_DOMAINS,
+    KNOWLEDGE_ENTITY_TYPE_STEM,
     STEM_ELEMENT,
     STRENGTH_VI,
     TEMPERATURE_VI,
+    customer_display_label,
 )
 from engines.interpretation_engine.foundation.status import DataAvailability
 
@@ -253,6 +256,19 @@ def _build_analysis(facts: UsefulGodInterpretationFacts) -> list[AnalysisFact]:
 def _evidence_id(prefix: str, key: str) -> str:
     """Build stable evidence identifier."""
     return f"{prefix}_{key}"
+
+
+def _entity_type_of(facts: UsefulGodInterpretationFacts, value: str) -> str:
+    """Prefer stored facts type, else canonical knowledge type. Do not guess."""
+    stored = facts.entity_type_of(value)
+    if stored:
+        return stored
+    return lookup_useful_god_entity_type(value)
+
+
+def _customer_label(facts: UsefulGodInterpretationFacts, value: str) -> str:
+    """Customer-facing Useful God / Hỷ / Kỵ label from canonical type."""
+    return customer_display_label(value, _entity_type_of(facts, value))
 
 
 def _build_evidence_items(
@@ -643,6 +659,7 @@ def _build_decision(
         confidence=facts.confidence,
         supporting_evidence_ids=tuple(supporting),
         rejected_alternatives=rejected,
+        selected_entity_type=_entity_type_of(facts, facts.selected),
     )
 
 
@@ -651,9 +668,9 @@ def _build_domain_meaning(
     evidence_ids: set[str],
 ) -> list[DomainMeaningItem]:
     """Expert domain meaning — not customer advice."""
-    selected_el = STEM_ELEMENT.get(facts.selected, facts.day_master_element)
-    hy = ", ".join(facts.favorable_gods)
-    ky = ", ".join(facts.unfavorable_gods)
+    selected_label = _customer_label(facts, facts.selected)
+    hy = ", ".join(_customer_label(facts, item) for item in facts.favorable_gods)
+    ky = ", ".join(_customer_label(facts, item) for item in facts.unfavorable_gods)
     refs = [
         eid
         for eid in (
@@ -665,7 +682,7 @@ def _build_domain_meaning(
     return [
         DomainMeaningItem(
             statement=(
-                f"Dụng thần chính: {facts.selected} ({selected_el}) — "
+                f"Dụng thần chính: {selected_label} — "
                 f"trụ cột điều tiết hệ."
             ),
             evidence_ids=tuple(refs),
@@ -690,7 +707,12 @@ def _build_applications(
 ) -> list[DomainApplication]:
     """Map decision to life domains."""
     selected = facts.selected
-    selected_el = STEM_ELEMENT.get(selected, "")
+    selected_label = _customer_label(facts, selected)
+    selected_el = (
+        STEM_ELEMENT.get(selected, "")
+        if _entity_type_of(facts, selected) == KNOWLEDGE_ENTITY_TYPE_STEM
+        else ""
+    )
     hy = facts.favorable_gods
     ky = facts.unfavorable_gods
     strong = facts.strength_level == "strong"
@@ -706,7 +728,7 @@ def _build_applications(
 
     apps: list[DomainApplication] = []
     career = (
-        f"Sự nghiệp ổn định hơn khi vận hành theo {selected} ({selected_el})"
+        f"Sự nghiệp ổn định hơn khi vận hành theo {selected_label}"
         + (" — thân vượng cần tiết xuất và trách nhiệm có cấu trúc." if strong else ".")
     )
     if ky:
@@ -750,7 +772,7 @@ def _build_applications(
     health = (
         f"Sức khỏe cần giữ ấm / cân khí"
         + (" vì điều hậu mát" if cool else "")
-        + f"; {selected} ({selected_el}) là hướng điều tiết chính."
+        + f"; {selected_label} là hướng điều tiết chính."
     )
     apps.append(
         DomainApplication(
@@ -833,7 +855,7 @@ def _build_advice(
         [
             AdviceItem(
                 category="support",
-                action=f"Nuôi {stem} ({STEM_ELEMENT.get(stem, '')})",
+                action=f"Nuôi {_customer_label(facts, stem)}",
                 priority="medium",
                 rationale="Hỷ thần cultivation",
                 evidence_ids=tuple(
@@ -849,7 +871,7 @@ def _build_advice(
         [
             AdviceItem(
                 category="avoid",
-                action=f"Hạn chế khuếch đại {stem} ({STEM_ELEMENT.get(stem, '')})",
+                action=f"Hạn chế khuếch đại {_customer_label(facts, stem)}",
                 priority="medium",
                 rationale="Kỵ thần restriction",
                 evidence_ids=tuple(
