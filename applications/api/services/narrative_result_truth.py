@@ -24,7 +24,9 @@ from engines.interpretation_engine.foundation.narrative.composer import (
     compose_narrative_v2_from_production,
 )
 from engines.interpretation_engine.foundation.narrative.publish import (
+    EDITION_EXECUTIVE,
     apply_published_narrative,
+    apply_report_edition,
 )
 from engines.interpretation_engine.foundation.narrative.result_v2 import (
     narrative_result_v2_to_dict,
@@ -42,6 +44,7 @@ def build_narrative_result_dict(
     scenario_id: str = "default",
     include_commercial_knowledge: bool = True,
     engine_output: Any | None = None,
+    publication_edition: str = EDITION_EXECUTIVE,
 ) -> dict[str, Any]:
     """Compose the production NarrativeResult.
 
@@ -121,7 +124,8 @@ def build_narrative_result_dict(
             payload["summary"] = summary
     if isinstance(secondary_milestone_payload, dict):
         payload["secondary_career_milestone"] = secondary_milestone_payload
-    return apply_published_narrative(payload)
+    published = apply_published_narrative(payload)
+    return apply_report_edition(published, publication_edition)
 
 
 def narrative_result_source_fingerprint() -> dict[str, str]:
