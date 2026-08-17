@@ -93,6 +93,7 @@ class Decision:
     confidence: float
     supporting_evidence_ids: tuple[str, ...]
     rejected_alternatives: tuple[str, ...]
+    selected_entity_type: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize decision."""
@@ -103,6 +104,7 @@ class Decision:
             "confidence": self.confidence,
             "supporting_evidence_ids": list(self.supporting_evidence_ids),
             "rejected_alternatives": list(self.rejected_alternatives),
+            "selected_entity_type": self.selected_entity_type,
         }
 
 
