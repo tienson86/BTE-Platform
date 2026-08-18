@@ -42,7 +42,7 @@ PROFESSIONAL_SECTION_LIMITS: Final[Mapping[str, int]] = {
     "sec-executive_summary": 6,
     "sec-chart": 8,
     "sec-core_interpretation": 8,
-    "sec-ten_gods": 6,
+    "sec-ten_gods": 20,
     "sec-shen_sha": 4,
     "sec-luck": 7,
     "sec-career": 8,

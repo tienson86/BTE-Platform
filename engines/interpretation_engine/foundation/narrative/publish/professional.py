@@ -38,6 +38,9 @@ from engines.interpretation_engine.foundation.narrative.publish.constants import
 from engines.interpretation_engine.foundation.narrative.publish.current_dayun import (
     assemble_current_dayun_consultation,
 )
+from engines.interpretation_engine.foundation.narrative.publish.ten_gods_copy import (
+    assemble_ten_gods_consultation,
+)
 from engines.interpretation_engine.foundation.narrative.publish.luck_analysis_copy import (
     career_overlay_from_analysis,
     conclusion_overlay_from_analysis,
@@ -58,14 +61,11 @@ from engines.interpretation_engine.foundation.narrative.publish.editions import 
     EDITION_PROFESSIONAL,
     LUCK_MARKERS,
     MIN_CONSULTING_WORDS,
-    MIN_ROLE_WHY_WORDS,
     PROFESSIONAL_PAGE_ORDER,
     PROFESSIONAL_PAGE_TITLES,
     PROFESSIONAL_REPORT_PUBLISHER_ID,
     PROFESSIONAL_SECTION_LIMITS,
-    ROLE_WHY_MARKERS,
     SHEN_SHA_DOMAIN,
-    TEN_GOD_DOMAIN,
 )
 from engines.interpretation_engine.foundation.narrative.text import normalize_text
 
@@ -121,7 +121,7 @@ def _apply_professional(payload: dict[str, Any]) -> dict[str, Any]:
     chart = _select_chart(published, evidence, [])
     core = _select_core(published, evidence, used)
     used = used + core
-    ten_gods = _select_ten_gods(evidence, used)
+    ten_gods = _select_ten_gods(payload, evidence, used)
     used = used + ten_gods
     shen_sha = _select_shen_sha(evidence, used)
     used = used + shen_sha
@@ -250,20 +250,17 @@ def _select_core(
     )
 
 
-def _select_ten_gods(evidence: list["_Evidence"], exclude: list[str]) -> list[str]:
-    """Page 4 — chart-relevant roles. Why this role matters here."""
-    chosen = [
-        item.text
-        for item in evidence
-        if item.domain in {TEN_GOD_DOMAIN, "UsefulGod"}
-        and item.kind in {KIND_REASON, KIND_CONCLUSION}
-        and word_count(item.text) >= MIN_ROLE_WHY_WORDS
-        and _has_marker(item.text, ROLE_WHY_MARKERS)
-        and not _is_chart_fact(item.text)
-        and item.customer_domain not in _LIFE_AREA_DOMAINS
-        and item.customer_domain != CUSTOMER_DOMAIN_CAREER
-    ]
-    return _unique(chosen, exclude, PROFESSIONAL_SECTION_LIMITS["sec-ten_gods"])
+def _select_ten_gods(
+    payload: dict[str, Any],
+    evidence: list["_Evidence"],
+    exclude: list[str],
+) -> list[str]:
+    """Page 4 — chart-specific Ten Gods consultation. Not a catalogue."""
+    del evidence
+    assembled = assemble_ten_gods_consultation(payload, exclude=exclude)
+    if assembled:
+        return assembled
+    return []
 
 
 def _select_shen_sha(evidence: list["_Evidence"], exclude: list[str]) -> list[str]:

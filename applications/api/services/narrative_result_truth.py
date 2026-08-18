@@ -33,6 +33,9 @@ from engines.interpretation_engine.foundation.narrative.publish.current_dayun im
     stamp_interaction_truth,
     stamp_luck_analysis,
 )
+from engines.interpretation_engine.foundation.narrative.publish.ten_gods_copy import (
+    stamp_ten_gods_consultation,
+)
 from engines.interpretation_engine.foundation.narrative.result_v2 import (
     narrative_result_v2_to_dict,
 )
@@ -133,6 +136,7 @@ def build_narrative_result_dict(
     published = stamp_dayun_frame(published, engine_output)
     published = stamp_luck_analysis(published, engine_output)
     published = stamp_interaction_truth(published, engine_output)
+    published = stamp_ten_gods_consultation(published, engine_output)
     return apply_report_edition(published, publication_edition)
 
 
