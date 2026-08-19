@@ -97,6 +97,9 @@ export type FiveElementsDto = {
   readonly status?: string;
   readonly dominant?: string;
   readonly missing?: readonly string[];
+  readonly method_note?: string;
+  readonly unit_total?: number;
+  readonly count_model?: string;
 };
 
 export type LuckCycleDto = {

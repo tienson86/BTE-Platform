@@ -13,6 +13,10 @@ import {
 } from "../adapters/canonicalStrength";
 import { canonicalPatternEvidence } from "../adapters/canonicalPattern";
 import {
+  FIVE_ELEMENTS_SECTION_TITLE,
+  formatFiveElementsProvenance,
+} from "../adapters/canonicalFiveElements";
+import {
   canonicalBalancingNeedLabel,
   canonicalClimateStateLabel,
   canonicalTemperatureEvidence,
@@ -256,7 +260,7 @@ ${coverSection(model)}
 ${section("Thông tin sinh", identityGrid(model))}
 ${section("Tứ trụ / Bát Tự", pillarTable(model.pillars))}
 ${section("Nhật chủ · Thân · Cách cục", overviewGrid(model))}
-${section("Ngũ hành", elementsList(model))}
+${section(FIVE_ELEMENTS_SECTION_TITLE, elementsList(model))}
 ${section("Thập thần", godsList(model))}
 ${section("Dụng thần · Hỷ · Kỵ", godsSupport(model))}
 ${section("Thần sát", bulletList(model.shenSha, "Chưa có thần sát trên lá số này."))}
@@ -440,9 +444,11 @@ function pillarTable(pillars: readonly FullReportPillar[]): string {
 }
 
 function elementsList(model: FullReportViewModel): string {
-  return `<ul class="bte-full-elements">${model.fiveElements
+  const total = model.fiveElements.reduce((sum, row) => sum + row.count, 0);
+  const list = `<ul class="bte-full-elements">${model.fiveElements
     .map((row) => `<li><span>${esc(row.name)}</span><strong>${row.count}</strong></li>`)
     .join("")}</ul>`;
+  return `${list}<p class="bte-full-note">${esc(formatFiveElementsProvenance(total))}</p>`;
 }
 
 function godsList(model: FullReportViewModel): string {

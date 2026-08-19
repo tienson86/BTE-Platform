@@ -32,7 +32,7 @@ export const RESULT_TOC_ITEMS: readonly TocNavItem[] = [
   { id: "summary", label: "Tóm tắt", href: "#tom-tat" },
   { id: "overview", label: "Tổng quan", href: "#tong-quan" },
   { id: "pillars", label: "BaZi", href: "#tu-tru" },
-  { id: "elements", label: "Ngũ hành", href: "#ngu-hanh" },
+  { id: "elements", label: "Phân bố Ngũ hành", href: "#ngu-hanh" },
   { id: "strength", label: "Thân", href: "#than-vuong" },
   { id: "gods", label: "Thập thần", href: "#thap-than" },
   { id: "shensha", label: "Thần sát", href: "#than-sat" },

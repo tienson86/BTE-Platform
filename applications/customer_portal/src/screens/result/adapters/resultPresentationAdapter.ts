@@ -479,7 +479,7 @@ function buildKnowledge(
         commercialOrUnavailable(source.s04.summary),
         "summary",
       ),
-      reference: formatPreviewField("Cân bằng Ngũ hành", "summary"),
+      reference: formatPreviewField("Phân bố Ngũ hành", "summary"),
       detail: adaptPreviewText(
         commercialOrUnavailable(source.s05.insight),
         "narrative",
@@ -734,7 +734,7 @@ export function adaptResultPageViewModel(
       visible: destinyVisible,
     },
     fiveElements: {
-      title: "NGŨ HÀNH",
+      title: "PHÂN BỐ NGŨ HÀNH",
       rows: elementRows,
       summary: adaptPreviewText(source.s04.summary, "summary"),
       hasMore: elementRows.hasMore,

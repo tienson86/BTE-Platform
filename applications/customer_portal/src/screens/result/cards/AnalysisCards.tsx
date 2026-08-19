@@ -32,7 +32,7 @@ export function FiveElementsCard({
           <li key={row.name} className="rp-elements__row" data-element={row.element}>
             <div className="rp-elements__meta">
               <span className="rp-elements__name">{row.name}</span>
-              <span className="rp-elements__status">{row.status}</span>
+              {row.status ? <span className="rp-elements__status">{row.status}</span> : null}
             </div>
             <div
               className="rp-elements__track"

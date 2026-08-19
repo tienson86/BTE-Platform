@@ -1,6 +1,6 @@
 /**
- * S04 — CÂN BẰNG NGŨ HÀNH
- * Horizontal bars only. No pie / donut / gauge.
+ * S04 — PHÂN BỐ NGŨ HÀNH
+ * Structural occurrence bars. Count is the fact; no strength/balance labels.
  */
 
 import type { ReactNode } from "react";
@@ -15,18 +15,7 @@ const ELEMENT_CLASS: Record<string, string> = {
 };
 
 /**
- * Map status label to semantic color modifier.
- */
-function statusModifier(status: string): string {
-  if (status === "Rất mạnh" || status === "Mạnh") return "cd-s04__status--strong";
-  if (status === "Trung bình") return "cd-s04__status--medium";
-  if (status === "Yếu") return "cd-s04__status--weak";
-  if (status === "Rất yếu") return "cd-s04__status--very-weak";
-  return "";
-}
-
-/**
- * S04 Element Balance — five proportional rows + one summary line.
+ * S04 Five Elements distribution — five count rows + provenance.
  */
 export function S04ElementBalance(): ReactNode {
   const data = useCanonicalDesktop().s04;
@@ -44,8 +33,8 @@ export function S04ElementBalance(): ReactNode {
               <div
                 className="cd-s04__track"
                 role="meter"
-                aria-label={`${row.name} ${row.pct}% — ${row.status}`}
-                aria-valuenow={row.pct}
+                aria-label={`${row.name} ${row.count}${row.status ? ` — ${row.status}` : ""}`}
+                aria-valuenow={row.count}
                 aria-valuemin={0}
                 aria-valuemax={100}
               >
@@ -54,15 +43,13 @@ export function S04ElementBalance(): ReactNode {
                   style={{ width: `${row.pct}%` }}
                 />
               </div>
-              <span className="cd-s04__pct">{row.pct}%</span>
-              <span className={`cd-s04__status ${statusModifier(row.status)}`}>
-                {row.status}
-              </span>
+              <span className="cd-s04__pct">{row.count}</span>
+              {row.status ? <span className="cd-s04__status">{row.status}</span> : null}
             </li>
           ))}
         </ul>
 
-        <p className="cd-s04__summary">{data.summary}</p>
+        {data.summary ? <p className="cd-s04__summary">{data.summary}</p> : null}
       </div>
     </section>
   );

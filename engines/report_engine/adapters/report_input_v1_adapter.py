@@ -38,7 +38,6 @@ from engines.report_engine.foundation_constants import REPORT_VERSION
 from engines.report_engine.interpretation_adapter import interpretation_to_dict
 from applications.api.services.five_elements_truth import (
     ELEMENT_KEYS,
-    normalize_element_key,
 )
 from applications.api.services.luck_truth import shape_luck_payload
 from applications.api.services.ten_gods_truth import (
@@ -264,19 +263,6 @@ class ReportInputV1Adapter:
                     raw[key] = value
             if raw:
                 diagnostics.source_contracts.append("five_elements.analytical_counts")
-        score = source.analysis.score
-        if not raw and score is not None and score.wuxing_series:
-            for item in score.wuxing_series:
-                if not isinstance(item, Mapping):
-                    continue
-                element = normalize_element_key(
-                    str(item.get("element") or item.get("name") or item.get("label") or "")
-                )
-                value = item.get("value", item.get("count"))
-                if element and value is not None:
-                    raw[element] = value
-            if raw:
-                diagnostics.source_contracts.append("AnalysisResult.score.wuxing_series")
         if not raw:
             diagnostics.missing_fields.append("five_elements")
         return ReportFiveElementsV1(

@@ -127,7 +127,7 @@ export const CANONICAL_DESKTOP_MOCK = {
   s02: {
     title: "TỔNG QUAN LÁ SỐ",
     items: [
-      { icon: "fire" as const, label: "Ngũ hành", value: "Hỏa vượng", color: "fire" },
+      { icon: "fire" as const, label: "Phân bố Ngũ hành", value: "Mộc 4 · Hỏa 5 · Thổ 6 · Kim 3 · Thủy 1", color: "earth" },
       { icon: "yinyang" as const, label: "Âm dương", value: "Cân bằng", color: "water" },
       { icon: "scale" as const, label: "Thế cục", value: "Trung bình", color: "earth" },
       { icon: "drop" as const, label: "Dụng thần", value: "Thủy", color: "water" },
@@ -198,15 +198,15 @@ export const CANONICAL_DESKTOP_MOCK = {
     ],
   },
   s04: {
-    title: "CÂN BẰNG NGŨ HÀNH",
+    title: "PHÂN BỐ NGŨ HÀNH",
     rows: [
-      { name: "Mộc", element: "wood" as const, pct: 22, count: 2, status: "Trung bình" },
-      { name: "Hỏa", element: "fire" as const, pct: 42, count: 7, status: "Rất mạnh" },
-      { name: "Thổ", element: "earth" as const, pct: 15, count: 4, status: "Trung bình" },
-      { name: "Kim", element: "metal" as const, pct: 12, count: 4, status: "Yếu" },
-      { name: "Thủy", element: "water" as const, pct: 9, count: 0, status: "Rất yếu" },
+      { name: "Mộc", element: "wood" as const, pct: 21, count: 4, status: "" },
+      { name: "Hỏa", element: "fire" as const, pct: 26, count: 5, status: "" },
+      { name: "Thổ", element: "earth" as const, pct: 32, count: 6, status: "" },
+      { name: "Kim", element: "metal" as const, pct: 16, count: 3, status: "" },
+      { name: "Thủy", element: "water" as const, pct: 5, count: 1, status: "" },
     ],
-    summary: "Hỏa vượng • Thủy thiếu • Cân bằng trung bình",
+    summary: "Tính theo Thiên can · bản hành Địa chi · Tàng can. Tổng đơn vị cấu trúc: 19",
   },
   s05: {
     title: "MỆNH CỤC",

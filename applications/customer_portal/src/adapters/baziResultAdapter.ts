@@ -32,6 +32,10 @@ import {
   readCanonicalStrengthScore,
 } from "./canonicalStrength";
 import {
+  canonicalFiveElementCounts,
+  fiveElementAbsentLabel,
+} from "./canonicalFiveElements";
+import {
   asTenGodsPayload,
   hiddenLinesForPillar,
   hiddenLabels,
@@ -121,12 +125,6 @@ function normalizeElementName(label: string): string {
   return map[key] ?? label.trim();
 }
 
-function strengthBand(score: number): string {
-  if (score >= 70) return "Mạnh";
-  if (score >= 55) return "Khá";
-  if (score >= 40) return "Trung bình";
-  return "Yếu";
-}
 
 function mapStrengthLevel(level: string): { label: string; level: string } {
   const token = level.trim().toLowerCase();
@@ -183,7 +181,7 @@ function seriesValue(item: SeriesItemDto): number {
 }
 
 function mapFiveElements(data: AnalysisDataDto): readonly BaZiFiveElement[] {
-  const series = data.score?.wuxing_series;
+  const fromFacts = canonicalFiveElementCounts(data);
   const scores: Record<string, number> = {
     Kim: 0,
     Mộc: 0,
@@ -192,26 +190,31 @@ function mapFiveElements(data: AnalysisDataDto): readonly BaZiFiveElement[] {
     Thổ: 0,
   };
 
-  if (Array.isArray(series) && series.length > 0) {
-    for (const item of series) {
-      const name = normalizeElementName(asString(item.label ?? item.element ?? item.name));
-      if (name in scores) {
-        scores[name] = seriesValue(item);
+  if (fromFacts) {
+    Object.assign(scores, fromFacts);
+  } else {
+    const series = data.score?.wuxing_series;
+    if (Array.isArray(series) && series.length > 0) {
+      for (const item of series) {
+        const name = normalizeElementName(asString(item.label ?? item.element ?? item.name));
+        if (name in scores) {
+          scores[name] = seriesValue(item);
+        }
       }
     }
   }
 
-  const total = Object.values(scores).reduce((sum, n) => sum + n, 0) || 1;
+  const total = Object.values(scores).reduce((sum, n) => sum + n, 0);
 
   return ELEMENT_ORDER.map((el) => {
     const score = scores[el.name] ?? 0;
-    const percentage = Math.round((score / total) * 100);
+    const percentage = total > 0 ? Math.round((score / total) * 100) : 0;
     return {
       id: el.id,
       name: el.name,
       score,
       percentage,
-      strength: strengthBand(percentage),
+      strength: fiveElementAbsentLabel(score),
     };
   });
 }

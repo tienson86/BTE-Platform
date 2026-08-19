@@ -28,6 +28,16 @@ import {
   canonicalTemperatureEvidence,
 } from "./canonicalTemperature";
 import {
+  FIVE_ELEMENT_ROWS,
+  FIVE_ELEMENTS_TITLE,
+  canonicalFiveElementCounts,
+  fiveElementAbsentLabel,
+  fiveElementUnitTotal,
+  formatFiveElementsCompact,
+  formatFiveElementsProvenance,
+  publishedFiveElementsMethodNote,
+} from "./canonicalFiveElements";
+import {
   asTenGodsPayload,
   hiddenLabels,
   hiddenLinesForPillar,
@@ -164,21 +174,6 @@ const TEN_GOD_COLORS: Record<string, string> = {
   "kiếp tài": "#00838f",
 };
 
-const ELEMENT_STATUS = (pct: number): string => {
-  if (pct >= 35) return "Rất mạnh";
-  if (pct >= 25) return "Mạnh";
-  if (pct >= 15) return "Trung bình";
-  if (pct >= 8) return "Yếu";
-  return "Rất yếu";
-};
-
-const ELEMENT_ROW: { name: string; element: "wood" | "fire" | "earth" | "metal" | "water" }[] = [
-  { name: "Mộc", element: "wood" },
-  { name: "Hỏa", element: "fire" },
-  { name: "Thổ", element: "earth" },
-  { name: "Kim", element: "metal" },
-  { name: "Thủy", element: "water" },
-];
 
 /**
  * Deep-clone fixture for mutation-safe ViewModel bases.
@@ -239,34 +234,6 @@ function formatLuckSequence(luck: AnalysisDataDto["luck"]): string {
     .join(" · ");
 }
 
-function fiveElementCounts(
-  facts: AnalysisDataDto["five_elements"],
-): Record<string, number> | null {
-  if (!facts) return null;
-  const labels: Record<string, string> = {
-    wood: "Mộc",
-    fire: "Hỏa",
-    earth: "Thổ",
-    metal: "Kim",
-    water: "Thủy",
-  };
-  const out: Record<string, number> = { Mộc: 0, Hỏa: 0, Thổ: 0, Kim: 0, Thủy: 0 };
-  let found = false;
-  for (const [key, label] of Object.entries(labels)) {
-    const raw = facts[key as keyof NonNullable<AnalysisDataDto["five_elements"]>];
-    const count =
-      typeof raw === "number"
-        ? raw
-        : raw && typeof raw === "object" && "count" in raw
-          ? Number((raw as { count?: number }).count)
-          : Number(facts.counts?.[key]);
-    if (Number.isFinite(count)) {
-      out[label] = count;
-      found = true;
-    }
-  }
-  return found ? out : null;
-}
 
 function pad2(n: number): string {
   return String(n).padStart(2, "0");
@@ -344,12 +311,6 @@ function normalizeElement(label: string): string {
   return map[normKey(label)] ?? label.trim();
 }
 
-function seriesValue(item: { value?: number; count?: number; score?: number }): number {
-  if (typeof item.value === "number") return item.value;
-  if (typeof item.count === "number") return item.count;
-  if (typeof item.score === "number") return item.score;
-  return 0;
-}
 
 function pickStr(obj: Record<string, unknown> | undefined, keys: string[]): string {
   if (!obj) return "";
@@ -620,17 +581,7 @@ function mapS02(data: AnalysisDataDto): CanonicalDesktopViewModel["s02"] {
   const base = cloneFixture().s02;
   const pattern = data.pattern as Record<string, unknown> | undefined;
   const useful = data.useful_god as Record<string, unknown> | undefined;
-  const analyticalCounts = fiveElementCounts(data.five_elements);
-  let topElement = "—";
-  let topPct = -1;
-  if (analyticalCounts) {
-    for (const [name, count] of Object.entries(analyticalCounts)) {
-      if (count > topPct) {
-        topPct = count;
-        topElement = name;
-      }
-    }
-  }
+  const distribution = formatFiveElementsCompact(canonicalFiveElementCounts(data));
   const yy = asString(data.bazi?.day_master_yin_yang, "—");
   const than = canonicalStrengthLabel(data) || "—";
   const dung = pickStr(useful, ["useful_god"]) || pickStr(pattern, ["dung_than"]) || "—";
@@ -643,25 +594,14 @@ function mapS02(data: AnalysisDataDto): CanonicalDesktopViewModel["s02"] {
     pickStr(pattern, ["ky_than"]) ||
     "—";
 
-  const elementColor =
-    topElement === "Hỏa"
-      ? "fire"
-      : topElement === "Thủy"
-        ? "water"
-        : topElement === "Mộc"
-          ? "wood"
-          : topElement === "Kim"
-            ? "metal"
-            : "earth";
-
   return {
     ...base,
     items: [
       {
         icon: "fire" as const,
-        label: "Ngũ hành",
-        value: topElement !== "—" ? `${topElement} nổi` : base.items[0].value,
-        color: elementColor,
+        label: "Phân bố Ngũ hành",
+        value: distribution || "—",
+        color: "earth",
       },
       {
         icon: "yinyang" as const,
@@ -747,34 +687,26 @@ function mapS03(
 
 function mapS04(data: AnalysisDataDto): CanonicalDesktopViewModel["s04"] {
   const base = cloneFixture().s04;
-  const scores: Record<string, number> = { Mộc: 0, Hỏa: 0, Thổ: 0, Kim: 0, Thủy: 0 };
-  const fromFacts = fiveElementCounts(data.five_elements);
-  if (fromFacts) {
-    Object.assign(scores, fromFacts);
-  } else {
-    for (const item of data.score?.wuxing_series ?? []) {
-      const name = normalizeElement(asString(item.label ?? item.element ?? item.name));
-      if (name in scores) scores[name] = seriesValue(item);
-    }
-  }
-  const total = Object.values(scores).reduce((a, b) => a + b, 0) || 1;
-  const rows = ELEMENT_ROW.map((row) => {
-    const count = scores[row.name];
-    const pct = Math.round((count / total) * 100);
+  const counts = canonicalFiveElementCounts(data);
+  const total = fiveElementUnitTotal(counts);
+  const rows = FIVE_ELEMENT_ROWS.map((row) => {
+    const count = counts?.[row.name] ?? 0;
+    const pct = total > 0 ? Math.round((count / total) * 100) : 0;
     return {
       name: row.name,
       element: row.element,
       pct,
       count,
-      status: ELEMENT_STATUS(pct),
+      status: fiveElementAbsentLabel(count),
     };
   });
-  const strongest = [...rows].sort((a, b) => b.pct - a.pct)[0];
-  const weakest = [...rows].sort((a, b) => a.pct - b.pct)[0];
   return {
     ...base,
+    title: FIVE_ELEMENTS_TITLE,
     rows,
-    summary: `${strongest.name} vượng • ${weakest.name} thiếu • Điểm ${asString(data.score?.grade, "—")}`,
+    summary: counts
+      ? formatFiveElementsProvenance(total) || publishedFiveElementsMethodNote(data)
+      : "",
   };
 }
 

@@ -16,7 +16,7 @@ describe("Wave 3 BaZi Result UI", () => {
     expect(screen.getByRole("heading", { level: 1, name: /Kết Quả Bát Tự/i })).toBeTruthy();
     expect(screen.getAllByText(BAZI_RESULT_MOCK.profile.fullName).length).toBeGreaterThan(0);
     expect(screen.getByLabelText("Tứ Trụ")).toBeTruthy();
-    expect(screen.getByLabelText("Ngũ Hành")).toBeTruthy();
+    expect(screen.getByLabelText("Phân bố Ngũ hành")).toBeTruthy();
     expect(screen.getByLabelText("Thập Thần")).toBeTruthy();
     expect(screen.getAllByLabelText("Thân Vượng Nhược").length).toBeGreaterThan(0);
     expect(screen.getByText("Chính Quan")).toBeTruthy();

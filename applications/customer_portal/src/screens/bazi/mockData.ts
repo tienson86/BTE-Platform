@@ -203,7 +203,7 @@ export const BAZI_RESULT_LABELS: BaZiResultLabels = {
   metadataHeading: "Thông tin lá số",
   actionsHeading: "Thao tác",
   pillarsTitle: "Tứ Trụ",
-  fiveElementsTitle: "Ngũ Hành",
+  fiveElementsTitle: "Phân bố Ngũ hành",
   tenGodsTitle: "Thập Thần",
   strengthTitle: "Thân Vượng Nhược",
   shenShaTitle: "Thần Sát",
@@ -334,11 +334,11 @@ export const BAZI_MOCK_PILLARS: readonly BaZiPillar[] = [
 ] as const;
 
 export const BAZI_MOCK_FIVE_ELEMENTS: readonly BaZiFiveElement[] = [
-  { id: "kim", name: "Kim", score: 18, percentage: 18, strength: "Trung bình" },
-  { id: "moc", name: "Mộc", score: 22, percentage: 22, strength: "Khá" },
-  { id: "thuy", name: "Thủy", score: 15, percentage: 15, strength: "Yếu" },
-  { id: "hoa", name: "Hỏa", score: 28, percentage: 28, strength: "Mạnh" },
-  { id: "tho", name: "Thổ", score: 17, percentage: 17, strength: "Trung bình" },
+  { id: "kim", name: "Kim", score: 18, percentage: 18, strength: "" },
+  { id: "moc", name: "Mộc", score: 22, percentage: 22, strength: "" },
+  { id: "thuy", name: "Thủy", score: 15, percentage: 15, strength: "" },
+  { id: "hoa", name: "Hỏa", score: 28, percentage: 28, strength: "" },
+  { id: "tho", name: "Thổ", score: 17, percentage: 17, strength: "" },
 ] as const;
 
 export const BAZI_MOCK_TEN_GODS: readonly BaZiTenGod[] = [
@@ -443,7 +443,7 @@ export const BAZI_MOCK_EXECUTIVE: BaZiExecutiveSummary = {
   summary: BAZI_MOCK_STRENGTH.summary,
   highlights: [
     `Nhật Chủ: ${BAZI_MOCK_PILLARS[2].heavenlyStem} ${BAZI_MOCK_PILLARS[2].earthlyBranch}`,
-    `Ngũ Hành nổi bật: Hỏa ${BAZI_MOCK_FIVE_ELEMENTS[3].percentage}%`,
+    `Phân bố Ngũ hành: Mộc 22 · Hỏa 28 · Thổ 17 · Kim 18 · Thủy 15`,
     `Thập Thần mạnh: Chính Ấn, Chính Quan, Chính Tài`,
   ],
   metrics: [
@@ -652,6 +652,9 @@ export function buildExecutiveFromResult(input: {
   const recommendation = input.recommendation?.trim() || unavailable;
   const yinYang = input.yinYang?.trim() || "—";
 
+  const compact = input.fiveElements
+    .map((el) => `${el.name} ${el.score}`)
+    .join(" · ");
   return {
     title: BAZI_RESULT_LABELS.executiveTitle,
     verdict: input.strength.label,
@@ -660,9 +663,7 @@ export function buildExecutiveFromResult(input: {
     summary: input.strength.summary || unavailable,
     highlights: [
       day ? `Nhật Chủ: ${day.heavenlyStem} ${day.earthlyBranch}` : "Nhật Chủ: —",
-      topElement
-        ? `Ngũ Hành nổi bật: ${topElement.name} ${topElement.percentage}%`
-        : "Ngũ Hành: —",
+      compact ? `Phân bố Ngũ hành: ${compact}` : "Phân bố Ngũ hành: —",
       topGods ? `Thập Thần mạnh: ${topGods}` : "Thập Thần: —",
     ],
     metrics: [

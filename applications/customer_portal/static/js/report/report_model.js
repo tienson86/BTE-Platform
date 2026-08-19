@@ -114,7 +114,8 @@
       Array.isArray(summaryWuxing) &&
       summaryWuxing.length &&
       summaryWuxing[0] &&
-      summaryWuxing[0].label !== "Ngũ hành"
+      summaryWuxing[0].label !== "Ngũ hành" &&
+      summaryWuxing[0].label !== "Điểm module Ngũ hành"
     ) {
       return { series: summaryWuxing, source: "score" };
     }

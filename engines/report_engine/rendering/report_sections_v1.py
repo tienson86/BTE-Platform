@@ -248,28 +248,51 @@ def _format_pillar_hidden(
     return ", ".join(display_text(item) for item in pillar.hidden_stems) or "—"
 
 
+def _five_element_display(value: object) -> str:
+    """Format a structural count. Zero is absence in the distribution, not khuyết/Dụng."""
+    text = display_text(value)
+    if not text:
+        return "—"
+    try:
+        number = float(value)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        return text
+    if number == 0:
+        return "0 — Không xuất hiện trong phân bố cấu trúc"
+    if number.is_integer():
+        return str(int(number))
+    return text
+
+
 def _section_five_elements(report_input: ReportInputV1) -> PresentedSection:
     five = report_input.five_elements
     values = (five.wood, five.fire, five.earth, five.metal, five.water)
     if all(value is None for value in values):
         return PresentedSection(
             id="five-elements",
-            title="03. Ngũ hành",
+            title="03. Phân bố Ngũ hành",
             fallback=RUNTIME_GAP_MESSAGE,
         )
+    total = sum(float(value) for value in values if isinstance(value, (int, float)))
+    notes = [
+        "Tính theo Thiên can · bản hành Địa chi · Tàng can",
+    ]
+    if total > 0:
+        notes.append(f"Tổng đơn vị cấu trúc: {int(total)}")
     return PresentedSection(
         id="five-elements",
-        title="03. Ngũ hành",
+        title="03. Phân bố Ngũ hành",
         table=PresentedTable(
-            headers=["Hành", "Giá trị"],
+            headers=["Hành", "Số đơn vị"],
             rows=[
-                ["Mộc", display_text(five.wood) or "—"],
-                ["Hỏa", display_text(five.fire) or "—"],
-                ["Thổ", display_text(five.earth) or "—"],
-                ["Kim", display_text(five.metal) or "—"],
-                ["Thủy", display_text(five.water) or "—"],
+                ["Mộc", _five_element_display(five.wood)],
+                ["Hỏa", _five_element_display(five.fire)],
+                ["Thổ", _five_element_display(five.earth)],
+                ["Kim", _five_element_display(five.metal)],
+                ["Thủy", _five_element_display(five.water)],
             ],
         ),
+        notes=notes,
     )
 
 

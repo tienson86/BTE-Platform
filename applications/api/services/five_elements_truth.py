@@ -39,7 +39,11 @@ def normalize_element_key(token: str | None) -> str | None:
 
 
 def build_five_elements_payload(wuxing: Mapping[str, Any] | None) -> dict[str, Any]:
-    """Publish RuleContext wuxing counts as the customer Five Elements fact."""
+    """Publish RuleContext wuxing counts as the customer Five Elements fact.
+
+    Customer semantic is structural occurrence (Thiên can + bản hành Địa chi
+    + Tàng can). This adapter does not score, weight, or classify strength.
+    """
     section = dict(wuxing or {})
     counts = dict(section.get("counts") or {})
     payload: dict[str, Any] = {}
@@ -68,4 +72,7 @@ def build_five_elements_payload(wuxing: Mapping[str, Any] | None) -> dict[str, A
     payload["status"] = section.get("status")
     payload["dominant"] = dominant
     payload["missing"] = missing
+    payload["unit_total"] = int(sum(value for _, value in numeric)) if numeric else 0
+    payload["method_note"] = "Tính theo Thiên can · bản hành Địa chi · Tàng can"
+    payload["count_model"] = "stem_1_branch_base_1_hidden_occurrence_1"
     return payload

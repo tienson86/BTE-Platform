@@ -44,7 +44,7 @@ export const FiveElementsCard = memo(function FiveElementsCard({
             {elements.map((element) => (
               <BaseTooltip
                 key={element.id}
-                content={`${element.name}: ${element.percentage}% · điểm ${element.score} · ${element.strength}`}
+                content={`${element.name}: ${element.score}${element.strength ? ` · ${element.strength}` : ""}`}
               >
                 <div className="cui-bazi-elements__bar-item">
                   <ScoreBar

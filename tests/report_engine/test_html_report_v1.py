@@ -33,7 +33,7 @@ def test_render_html_required_headings_present() -> None:
     for heading in (
         "01. Thông tin lá số",
         "02. Tứ Trụ",
-        "03. Ngũ hành",
+        "03. Phân bố Ngũ hành",
         "04. Thân vượng nhược",
         "10. Luận giải tổng thể",
         "17. Tổng kết",

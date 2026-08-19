@@ -10,6 +10,7 @@
  */
 
 import type { AnalysisDataDto } from "../models";
+import { canonicalFiveElementCounts } from "../adapters/canonicalFiveElements";
 
 export const HISTORY_VIEW_QUERY = "from";
 export const HISTORY_VIEW_VALUE = "history";
@@ -104,37 +105,7 @@ export function hasStructuredAnalysis(data: AnalysisDataDto | null | undefined):
 export function analyticalFiveElementCounts(
   data: AnalysisDataDto | null | undefined,
 ): Record<"Mộc" | "Hỏa" | "Thổ" | "Kim" | "Thủy", number> | null {
-  const facts = data?.five_elements;
-  if (!facts) return null;
-  const labels = {
-    wood: "Mộc",
-    fire: "Hỏa",
-    earth: "Thổ",
-    metal: "Kim",
-    water: "Thủy",
-  } as const;
-  const out: Record<"Mộc" | "Hỏa" | "Thổ" | "Kim" | "Thủy", number> = {
-    Mộc: 0,
-    Hỏa: 0,
-    Thổ: 0,
-    Kim: 0,
-    Thủy: 0,
-  };
-  let found = false;
-  for (const [key, label] of Object.entries(labels) as Array<[keyof typeof labels, (typeof labels)[keyof typeof labels]]>) {
-    const raw = facts[key];
-    const count =
-      typeof raw === "number"
-        ? raw
-        : raw && typeof raw === "object" && "count" in raw
-          ? Number(raw.count)
-          : Number(facts.counts?.[key]);
-    if (Number.isFinite(count)) {
-      out[label] = count;
-      found = true;
-    }
-  }
-  return found ? out : null;
+  return canonicalFiveElementCounts(data);
 }
 
 /**

@@ -106,7 +106,8 @@ describe("adaptAnalysisToCanonicalDesktop", () => {
   it("maps Score / Pattern / Feng Shui / ShenSha / Report slices", () => {
     const vm = adaptAnalysisToCanonicalDesktop(SAMPLE, { source: "api" });
 
-    expect(vm.s04.rows.find((r) => r.name === "Hỏa")?.pct).toBeGreaterThan(30);
+    expect(vm.s04.rows.find((r) => r.name === "Hỏa")?.count).toBe(0);
+    expect(vm.s04.title).toBe("PHÂN BỐ NGŨ HÀNH");
     expect(vm.s02.items.find((i) => i.label === "Dụng thần")?.value).toBe("Thủy");
     expect(vm.s09.quai.center).toContain("Ly");
     expect(vm.s07.good.items).toContain("Thiên Ất Quý Nhân");

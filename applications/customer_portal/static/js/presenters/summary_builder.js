@@ -595,13 +595,13 @@
       overview: overview,
       // Prefer numeric module scores for executive bars — not element-count series.
       wuxing: Object.prototype.hasOwnProperty.call(score, "wuxing_score")
-        ? [{ label: "Ngũ hành", value: score.wuxing_score }]
+        ? [{ label: "Điểm module Ngũ hành", value: score.wuxing_score }]
         : buildSeries(
             score,
             ["ngu_hanh", "wuxing", "five_elements", "elements", "element_scores", "wuxing_scores"],
             "wuxing",
             "wuxing_score",
-            "Ngũ hành"
+            "Điểm module Ngũ hành"
           ),
       ten_gods: Object.prototype.hasOwnProperty.call(score, "ten_god_score")
         ? [{ label: "Thập thần", value: score.ten_god_score }]

@@ -25,6 +25,12 @@ import {
   canonicalTemperatureEvidence,
   canonicalTemperatureScore,
 } from "../../adapters/canonicalTemperature";
+import {
+  formatFiveElementsCompact,
+  canonicalFiveElementCounts,
+  fiveElementUnitTotal,
+  publishedFiveElementsMethodNote,
+} from "../../adapters/canonicalFiveElements";
 import type { AnalysisDataDto, BaziDto, CustomerEchoDto, PillarDto } from "../../models";
 import type {
   CanonicalReportInput,
@@ -423,6 +429,13 @@ function buildTechnical(
   if (climateEvidence) metadata.climate_evidence = climateEvidence;
   const temperatureScore = canonicalTemperatureScore(data);
   if (temperatureScore) metadata.temperature_score = temperatureScore;
+  const fiveCounts = canonicalFiveElementCounts(data);
+  const distribution = formatFiveElementsCompact(fiveCounts);
+  if (distribution) metadata.five_elements_distribution = distribution;
+  const unitTotal = fiveElementUnitTotal(fiveCounts);
+  if (unitTotal > 0) metadata.five_elements_total = unitTotal;
+  const methodNote = publishedFiveElementsMethodNote(data);
+  if (fiveCounts) metadata.five_elements_method = methodNote;
   const strength = pickStrengthLabel(data);
   if (strength) metadata.strength = strength;
   const strengthScore = pickStrengthScore(data);
