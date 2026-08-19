@@ -121,6 +121,9 @@ export function BaZiResultScreen({
                 status={resolvedStatus}
                 labels={labels}
                 gods={bundle.tenGods}
+                visibleLabels={bundle.tenGodsVisible}
+                hiddenLabels={bundle.tenGodsHidden}
+                note={bundle.tenGodsNote}
                 errorMessage={bundle.errorMessage}
               />
             </section>

@@ -37,6 +37,7 @@ export type PillarDto = {
   readonly branch?: string;
   readonly hidden_stems?: readonly string[];
   readonly ten_god?: string;
+  readonly element?: string;
   readonly nap_am?: string;
   readonly truong_sinh?: string;
 };
@@ -170,9 +171,23 @@ export type AnalysisDataDto = {
   readonly score?: ScoreDto;
   readonly five_elements?: FiveElementsDto;
   readonly ten_gods?: {
-    readonly visible?: readonly string[];
-    readonly hidden?: readonly string[];
+    readonly visible?: readonly unknown[];
+    readonly hidden?: readonly unknown[];
+    readonly visible_labels?: readonly string[];
+    readonly hidden_labels?: readonly string[];
+    readonly visible_summary?: string;
+    readonly hidden_summary?: string;
     readonly summary?: string;
+    readonly note?: string;
+  };
+  readonly ten_gods_result?: {
+    readonly visible?: readonly unknown[];
+    readonly hidden?: readonly unknown[];
+    readonly visible_labels?: readonly string[];
+    readonly hidden_labels?: readonly string[];
+    readonly visible_summary?: string;
+    readonly hidden_summary?: string;
+    readonly note?: string;
   };
   readonly luck?: LuckDto;
   readonly interpretation?: Record<string, unknown>;

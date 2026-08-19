@@ -16,6 +16,7 @@ from engines.ten_gods_engine.exceptions import TenGodsValidationError
 from engines.ten_gods_engine.hierarchy import assign_hierarchy
 from engines.ten_gods_engine.interaction_matrix import build_interaction_matrix
 from engines.ten_gods_engine.loader import HiddenStemWeightLoader
+from engines.bazi_engine.ten_god import stem_mapping_facts
 from engines.ten_gods_engine.mapper import day_master_info, map_stem_to_ten_god
 from engines.ten_gods_engine.models import (
     DayMasterInfo,
@@ -148,7 +149,13 @@ class TenGodsCalculator:
 
         for pillar in PILLAR_ORDER:
             node = pillars[pillar]
-            label, god_id = map_stem_to_ten_god(day_master, node.stem)
+            label, god_id = map_stem_to_ten_god(
+                day_master,
+                node.stem,
+                pillar=pillar,
+                visibility="visible",
+            )
+            facts = stem_mapping_facts(day_master, node.stem)
             evidence = f"visible:{pillar}:{node.stem}"
             visible.append(
                 VisibleTenGodEntry(
@@ -158,6 +165,10 @@ class TenGodsCalculator:
                     god_id=god_id,
                     visibility="visible",
                     evidence=evidence,
+                    element=facts["element"],
+                    yin_yang=facts["yin_yang"],
+                    element_relation=facts["element_relation"],
+                    polarity_relation=facts["polarity_relation"],
                 )
             )
             weights.append(
@@ -180,7 +191,13 @@ class TenGodsCalculator:
                 ) from exc
 
             for slot in slots:
-                h_label, h_god_id = map_stem_to_ten_god(day_master, slot.hidden_stem)
+                h_label, h_god_id = map_stem_to_ten_god(
+                    day_master,
+                    slot.hidden_stem,
+                    pillar=pillar,
+                    visibility="hidden",
+                )
+                h_facts = stem_mapping_facts(day_master, slot.hidden_stem)
                 h_evidence = (
                     f"hidden:{pillar}:{node.branch}:"
                     f"{slot.position_name}:{slot.hidden_stem}"
@@ -196,6 +213,10 @@ class TenGodsCalculator:
                         ten_god=h_label,
                         god_id=h_god_id,
                         evidence=h_evidence,
+                        element=h_facts["element"],
+                        yin_yang=h_facts["yin_yang"],
+                        element_relation=h_facts["element_relation"],
+                        polarity_relation=h_facts["polarity_relation"],
                     )
                 )
                 weights.append(

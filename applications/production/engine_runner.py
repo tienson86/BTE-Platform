@@ -16,6 +16,7 @@ from applications.api.services.temperature_truth import build_temperature_view
 from applications.api.services.useful_god_truth import build_useful_god_view
 from applications.api.services.five_elements_truth import build_five_elements_payload
 from applications.api.services.luck_truth import shape_luck_payload
+from applications.api.services.ten_gods_truth import shape_ten_gods_payload
 from engines.feng_shui_engine import FengShuiEngineError
 from engines.interpretation_engine.legacy_builder import InterpretationResult
 from engines.pattern_engine.rule_context_bridge import (
@@ -180,6 +181,7 @@ class ProductionEngineRunner:
             pillars=pillars,
             case_id=request.case_id or request.request_key,
         )
+        analysis.ten_gods_result = shape_ten_gods_payload(ten_gods)
         stages.append("ten_gods")
 
         luck_context = orch.luck_engine.build(
@@ -241,6 +243,7 @@ class ProductionEngineRunner:
             case_id=request.case_id or request.request_key,
             timezone=request.timezone,
             knowledge_version="v1.0",
+            ten_gods_result=ten_gods,
         )
 
         foundation = build_interpretation_foundation(

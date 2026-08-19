@@ -170,9 +170,21 @@ class ReportTenGodsV1:
     visible: list[str] = field(default_factory=list)
     hidden: list[str] = field(default_factory=list)
     summary: str = ""
+    visible_entries: list[dict[str, Any]] = field(default_factory=list)
+    hidden_entries: list[dict[str, Any]] = field(default_factory=list)
+    visible_summary: str = ""
+    hidden_summary: str = ""
+    note: str = ""
 
     def to_dict(self) -> dict[str, Any]:
-        return _normalize_mapping(asdict(self))
+        """Keep the public JSON keys stable for ReportInputV1 snapshots."""
+        return _normalize_mapping(
+            {
+                "visible": self.visible,
+                "hidden": self.hidden,
+                "summary": self.summary,
+            }
+        )
 
 
 @dataclass(slots=True)

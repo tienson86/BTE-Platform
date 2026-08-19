@@ -302,11 +302,12 @@
     });
   }
 
-  function buildPillars(bazi) {
+  function buildPillars(bazi, tenGods) {
     var pillars = PILLAR_SPECS.map(function (spec) {
       return pickPillar(bazi, spec);
     });
     var hidden = sliceHidden(bazi || {}, pillars);
+    var pillarKeys = ["year", "month", "day", "hour"];
     var stems = [];
     var branches = [];
     var napAm = [];
@@ -320,13 +321,28 @@
       napAm.push(
         present(pillarField(pillar, ["nap_am", "nayin", "na_yin", "napam"]))
       );
-      var fromPillar = pillarField(pillar, [
-        "hidden_stems",
-        "tang_can",
-        "cang_gan",
-        "hidden",
-      ]);
-      tangCan.push(fromPillar != null ? present(fromPillar) : present(hidden[index]));
+      var fromCanonical = [];
+      if (tenGods && Array.isArray(tenGods.hidden)) {
+        fromCanonical = tenGods.hidden
+          .filter(function (item) {
+            return item && item.pillar === pillarKeys[index];
+          })
+          .map(function (item) {
+            return item.display || [item.hidden_stem || item.stem, item.element, item.ten_god].filter(Boolean).join(" · ");
+          })
+          .filter(Boolean);
+      }
+      if (fromCanonical.length) {
+        tangCan.push(fromCanonical.join(" · "));
+      } else {
+        var fromPillar = pillarField(pillar, [
+          "hidden_stems",
+          "tang_can",
+          "cang_gan",
+          "hidden",
+        ]);
+        tangCan.push(fromPillar != null ? present(fromPillar) : present(hidden[index]));
+      }
       var tg = pillarField(pillar, ["ten_god", "ten_gods", "thap_than", "shi_shen"]);
       if (tg != null) thapThan.push(present(tg));
       else if (Array.isArray(bazi.ten_gods) && bazi.ten_gods[index] != null) {
@@ -574,7 +590,7 @@
 
     return {
       basic: buildBasic(payload, input),
-      pillars: buildPillars(bazi),
+      pillars: buildPillars(bazi, payload.ten_gods),
       day_master: dayMaster,
       overview: overview,
       // Prefer numeric module scores for executive bars — not element-count series.

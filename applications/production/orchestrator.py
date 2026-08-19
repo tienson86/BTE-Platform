@@ -362,7 +362,16 @@ class ProductionEndToEndOrchestrator:
                 for item in series
                 if isinstance(item, dict)
             )
-        ten_gods = list(engine_output.analysis.bazi.ten_gods or [])
+        ten_gods_payload = engine_output.analysis.ten_gods_result or {}
+        visible_summary = str(
+            ten_gods_payload.get("visible_summary")
+            or " · ".join(engine_output.analysis.bazi.ten_gods or [])
+        )
+        hidden_summary = str(ten_gods_payload.get("hidden_summary") or "")
+        if hidden_summary:
+            ten_gods_cover = f"Lộ can: {visible_summary}. Tàng can: {hidden_summary}"
+        else:
+            ten_gods_cover = visible_summary
         return CommercialBuildRequest(
             client_name=request.full_name,
             case_id=request.case_id or request.request_key,
@@ -378,7 +387,7 @@ class ProductionEndToEndOrchestrator:
             dayun_start_age=str(luck.get("start_age") or ""),
             dayun_cycles=dayun_cycles,
             five_elements_summary=five_summary,
-            ten_gods_summary=", ".join(str(item) for item in ten_gods if item),
+            ten_gods_summary=ten_gods_cover,
             identity=self._feature_input(
                 "identity",
                 "Danh tính",

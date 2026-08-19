@@ -6,6 +6,11 @@
 
 import type { AnalysisDataDto, AnalyzeChartRequest, PillarDto } from "../models";
 import {
+  asTenGodsPayload,
+  hiddenLinesForPillar,
+  stemDisplay,
+} from "../adapters/tenGodsDisplay";
+import {
   asNarrativeResult,
   careerFieldText,
   careerSelectionFromNarrative,
@@ -14,6 +19,7 @@ import {
 } from "../adapters/narrativeResultAdapter";
 import {
   analyticalFiveElementCounts,
+  analyticalHiddenTenGods,
   analyticalTenGods,
 } from "../resultState/currentResult";
 
@@ -71,6 +77,8 @@ export type FullReportViewModel = {
   readonly kyThan: string;
   readonly fiveElements: ReadonlyArray<{ readonly name: string; readonly count: number }>;
   readonly tenGods: readonly string[];
+  readonly hiddenTenGods: readonly string[];
+  readonly tenGodsNote: string;
   readonly pillars: readonly FullReportPillar[];
   readonly shenSha: readonly string[];
   readonly luckStartAge: string;
@@ -172,7 +180,13 @@ export function buildFullReportViewModel(
       { name: "Thủy", count: counts.Thủy },
     ],
     tenGods: analyticalTenGods(data),
-    pillars: PILLAR_META.map((meta) => mapPillar(bazi[meta.field] as PillarDto | undefined, meta)),
+    hiddenTenGods: analyticalHiddenTenGods(data),
+    tenGodsNote:
+      String(data.ten_gods?.note || data.ten_gods_result?.note || "").trim() ||
+      "Xác định theo quan hệ Ngũ hành và âm dương với Nhật chủ.",
+    pillars: PILLAR_META.map((meta) =>
+      mapPillar(bazi[meta.field] as PillarDto | undefined, meta, data),
+    ),
     shenSha: (bazi.shensha ?? []).map((item) => String(item).trim()).filter(Boolean),
     luckStartAge: luck?.start_age != null ? String(luck.start_age) : "",
     luckCurrent: current
@@ -220,7 +234,7 @@ ${section("Thông tin sinh", identityGrid(model))}
 ${section("Tứ trụ / Bát Tự", pillarTable(model.pillars))}
 ${section("Nhật chủ · Thân · Cách cục", overviewGrid(model))}
 ${section("Ngũ hành", elementsList(model))}
-${section("Thập thần", godsList(model.tenGods))}
+${section("Thập thần", godsList(model))}
 ${section("Dụng thần · Hỷ · Kỵ", godsSupport(model))}
 ${section("Thần sát", bulletList(model.shenSha, "Chưa có thần sát trên lá số này."))}
 ${section("Đại vận", luckBlock(model))}
@@ -235,16 +249,22 @@ ${supportingBlock(model)}
 function mapPillar(
   pillar: PillarDto | undefined,
   meta: (typeof PILLAR_META)[number],
+  data: AnalysisDataDto,
 ): FullReportPillar {
+  const payload =
+    asTenGodsPayload(data.ten_gods) ?? asTenGodsPayload(data.ten_gods_result);
+  const hidden = hiddenLinesForPillar(payload, meta.key);
   return {
     key: meta.key,
     label: meta.label,
-    stem: text(pillar?.stem),
+    stem: stemDisplay(text(pillar?.stem), text(pillar?.element)) || text(pillar?.stem),
     branch: text(pillar?.branch),
     napAm: text(pillar?.nap_am),
-    hiddenStems: Array.isArray(pillar?.hidden_stems)
-      ? pillar.hidden_stems.filter(Boolean).join(", ")
-      : text(pillar?.hidden_stems as unknown as string),
+    hiddenStems: hidden.length
+      ? hidden.join(" · ")
+      : Array.isArray(pillar?.hidden_stems)
+        ? pillar.hidden_stems.filter(Boolean).join(", ")
+        : text(pillar?.hidden_stems as unknown as string),
     tenGod: text(pillar?.ten_god),
     growthStage: text(pillar?.truong_sinh),
   };
@@ -403,9 +423,15 @@ function elementsList(model: FullReportViewModel): string {
     .join("")}</ul>`;
 }
 
-function godsList(gods: readonly string[]): string {
-  if (!gods.length) return `<p class="bte-full-empty">Chưa có thập thần hiển thị.</p>`;
-  return `<p>${esc(gods.join(" · "))}</p>`;
+function godsList(model: FullReportViewModel): string {
+  const visible = model.tenGods.join(" · ");
+  const hidden = model.hiddenTenGods.join(" · ");
+  if (!visible && !hidden) return `<p class="bte-full-empty">Chưa có thập thần hiển thị.</p>`;
+  return `<div>
+    <p><strong>Lộ can</strong> ${esc(visible || "—")}</p>
+    <p><strong>Tàng can</strong> ${esc(hidden || "—")}</p>
+    <p class="bte-full-note">${esc(model.tenGodsNote)}</p>
+  </div>`;
 }
 
 function godsSupport(model: FullReportViewModel): string {

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, fields
 from types import MappingProxyType
 from typing import Any, Mapping
 
@@ -28,6 +28,10 @@ class VisibleTenGodEntry:
     god_id: str
     visibility: str
     evidence: str
+    element: str = ""
+    yin_yang: str = ""
+    element_relation: str = ""
+    polarity_relation: str = ""
 
 
 @dataclass(frozen=True, slots=True)
@@ -43,6 +47,10 @@ class HiddenTenGodEntry:
     ten_god: str
     god_id: str
     evidence: str
+    element: str = ""
+    yin_yang: str = ""
+    element_relation: str = ""
+    polarity_relation: str = ""
 
 
 @dataclass(frozen=True, slots=True)
@@ -150,6 +158,10 @@ class TenGodsResult:
                     "god_id": item.god_id,
                     "visibility": item.visibility,
                     "evidence": item.evidence,
+                    "element": item.element,
+                    "yin_yang": item.yin_yang,
+                    "element_relation": item.element_relation,
+                    "polarity_relation": item.polarity_relation,
                 }
                 for item in self.visible
             ],
@@ -164,6 +176,10 @@ class TenGodsResult:
                     "ten_god": item.ten_god,
                     "god_id": item.god_id,
                     "evidence": item.evidence,
+                    "element": item.element,
+                    "yin_yang": item.yin_yang,
+                    "element_relation": item.element_relation,
+                    "polarity_relation": item.polarity_relation,
                 }
                 for item in self.hidden
             ],
@@ -243,10 +259,12 @@ class TenGodsResult:
                 yin_yang=str(dm["yin_yang"]),
             ),
             visible=tuple(
-                VisibleTenGodEntry(**item) for item in payload.get("visible", [])
+                VisibleTenGodEntry(**_known(VisibleTenGodEntry, item))
+                for item in payload.get("visible", [])
             ),
             hidden=tuple(
-                HiddenTenGodEntry(**item) for item in payload.get("hidden", [])
+                HiddenTenGodEntry(**_known(HiddenTenGodEntry, item))
+                for item in payload.get("hidden", [])
             ),
             distribution=tuple(
                 DistributionEntry(**item) for item in payload.get("distribution", [])
@@ -276,3 +294,9 @@ class TenGodsResult:
             ),
             version=str(payload.get("version") or ENGINE_VERSION),
         )
+
+
+def _known(model: type, item: Mapping[str, Any]) -> dict[str, Any]:
+    """Keep only dataclass fields so additive evidence keys stay compatible."""
+    allowed = {entry.name for entry in fields(model)}
+    return {key: value for key, value in dict(item).items() if key in allowed}

@@ -52,8 +52,16 @@ class TestCanonicalMapping:
             assert god_id == LABEL_TO_GOD_ID[expected_label]
         else:
             label, god_id = map_stem_to_ten_god(day_master, other_stem)
-            assert label == "Nhật Chủ"
-            assert god_id == "day_master"
+            assert label == "Tỷ Kiên"
+            assert god_id == LABEL_TO_GOD_ID["Tỷ Kiên"]
+            presented, presented_id = map_stem_to_ten_god(
+                day_master,
+                other_stem,
+                pillar="day",
+                visibility="visible",
+            )
+            assert presented == "Nhật Chủ"
+            assert presented_id == "day_master"
 
     def test_yin_yang_polarity_mapping(self) -> None:
         """Same element + same polarity → Tỷ Kiên; diff polarity → Kiếp Tài."""

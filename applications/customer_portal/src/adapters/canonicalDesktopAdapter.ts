@@ -17,6 +17,14 @@ import {
   normalizeScore100,
 } from "./contentGuards";
 import {
+  asTenGodsPayload,
+  hiddenLabels,
+  hiddenLinesForPillar,
+  tenGodLabel,
+  tenGodsNote,
+  visibleLabels,
+} from "./tenGodsDisplay";
+import {
   asNarrativeResult,
   careerFieldText,
   careerSelectionFromNarrative,
@@ -360,6 +368,8 @@ function mapPillarGlyph(
   title: string,
   stamp: string,
   highlight: boolean,
+  tenGod: string,
+  hiddenLines: readonly string[],
 ): CanonicalDesktopViewModel["s03"]["pillars"][number] {
   const stem = lookupStem(asString(dto?.stem, "—"));
   const branch = lookupBranch(asString(dto?.branch, "—"));
@@ -369,6 +379,8 @@ function mapPillarGlyph(
     branch,
     stamp,
     highlight,
+    tenGod,
+    hiddenLines: [...hiddenLines],
   };
 }
 
@@ -656,22 +668,42 @@ function mapS03(
   const base = cloneFixture().s03;
   const hour = request?.hour ?? 0;
   const minute = request?.minute ?? 0;
+  const payload =
+    asTenGodsPayload(data.ten_gods) ?? asTenGodsPayload(data.ten_gods_result);
   return {
     ...base,
     pillars: [
-      mapPillarGlyph(data.bazi?.year_pillar, "NĂM TRỤ", asString(request?.year, base.pillars[0].stamp), false),
+      mapPillarGlyph(
+        data.bazi?.year_pillar,
+        "NĂM TRỤ",
+        asString(request?.year, base.pillars[0].stamp),
+        false,
+        asString(data.bazi?.year_pillar?.ten_god),
+        hiddenLinesForPillar(payload, "year"),
+      ),
       mapPillarGlyph(
         data.bazi?.month_pillar,
         "THÁNG TRỤ",
         request?.month ? pad2(request.month) : base.pillars[1].stamp,
         false,
+        asString(data.bazi?.month_pillar?.ten_god),
+        hiddenLinesForPillar(payload, "month"),
       ),
-      mapPillarGlyph(data.bazi?.day_pillar, "NGÀY TRỤ (NHẬT CHỦ)", asString(request?.day, base.pillars[2].stamp), true),
+      mapPillarGlyph(
+        data.bazi?.day_pillar,
+        "NGÀY TRỤ (NHẬT CHỦ)",
+        asString(request?.day, base.pillars[2].stamp),
+        true,
+        asString(data.bazi?.day_pillar?.ten_god),
+        hiddenLinesForPillar(payload, "day"),
+      ),
       mapPillarGlyph(
         data.bazi?.hour_pillar,
         "GIỜ TRỤ",
         request ? `${pad2(hour)}:${pad2(minute)}` : base.pillars[3].stamp,
         false,
+        asString(data.bazi?.hour_pillar?.ten_god),
+        hiddenLinesForPillar(payload, "hour"),
       ),
     ],
   };
@@ -754,56 +786,38 @@ function mapS05(data: AnalysisDataDto): CanonicalDesktopViewModel["s05"] {
   };
 }
 
+function toGodRows(names: readonly string[]): CanonicalDesktopViewModel["s06"]["gods"] {
+  return names.filter(Boolean).map((name) => {
+    const key = name.toLowerCase();
+    const color =
+      Object.entries(TEN_GOD_COLORS).find(([k]) => key.includes(k))?.[1] ?? "#5c6570";
+    return {
+      name,
+      short: name.length > 8 ? `${name.slice(0, 6)}.` : name,
+      score: "1",
+      color,
+    };
+  });
+}
+
 function mapS06(data: AnalysisDataDto): CanonicalDesktopViewModel["s06"] {
   const base = cloneFixture().s06;
-  const analytical = data.ten_gods?.visible ?? data.bazi?.ten_gods ?? [];
-  if (analytical.length > 0) {
-    const counts = new Map<string, number>();
-    for (const god of analytical) {
-      const name = asString(god).trim();
-      if (!name) continue;
-      counts.set(name, (counts.get(name) ?? 0) + 1);
-    }
-    if (counts.size > 0) {
-      return {
-        ...base,
-        gods: Array.from(counts.entries()).map(([name, count]) => {
-          const key = name.toLowerCase();
-          const color =
-            Object.entries(TEN_GOD_COLORS).find(([k]) => key.includes(k))?.[1] ?? "#5c6570";
-          return {
-            name,
-            short: name.length > 8 ? `${name.slice(0, 6)}.` : name,
-            score: String(count),
-            color,
-          };
-        }),
-      };
-    }
-  }
-  const series = data.score?.ten_god_series;
-  if (Array.isArray(series) && series.length > 0) {
+  const payload =
+    asTenGodsPayload(data.ten_gods) ?? asTenGodsPayload(data.ten_gods_result);
+  const visible = visibleLabels(payload);
+  const hidden = hiddenLabels(payload);
+  if (visible.length || hidden.length) {
     return {
       ...base,
-      gods: series.map((item, index) => {
-        const name = asString(item.label ?? item.name, `Thần ${index + 1}`);
-        const score = seriesValue(item);
-        const key = name.toLowerCase();
-        const color =
-          Object.entries(TEN_GOD_COLORS).find(([k]) => key.includes(k))?.[1] ?? "#5c6570";
-        const short = name.length > 8 ? `${name.slice(0, 6)}.` : name;
-        return { name, short, score: score.toFixed(1), color };
-      }),
+      gods: toGodRows(visible),
+      hiddenGods: toGodRows(hidden),
+      note: tenGodsNote(payload),
     };
   }
-
-  const counts = new Map<string, number>();
-  for (const god of data.bazi?.ten_gods ?? []) {
-    const name = asString(god).trim();
-    if (!name) continue;
-    counts.set(name, (counts.get(name) ?? 0) + 1);
-  }
-  if (counts.size === 0) {
+  const fallback = (data.bazi?.ten_gods ?? [])
+    .map((item) => tenGodLabel(item) || asString(item).trim())
+    .filter(Boolean);
+  if (!fallback.length) {
     return {
       ...base,
       gods: [
@@ -814,22 +828,13 @@ function mapS06(data: AnalysisDataDto): CanonicalDesktopViewModel["s06"] {
           color: "#5c6570",
         },
       ],
+      hiddenGods: [],
     };
   }
-
   return {
     ...base,
-    gods: Array.from(counts.entries()).map(([name, count]) => {
-      const key = name.toLowerCase();
-      const color =
-        Object.entries(TEN_GOD_COLORS).find(([k]) => key.includes(k))?.[1] ?? "#5c6570";
-      return {
-        name,
-        short: name.length > 8 ? `${name.slice(0, 6)}.` : name,
-        score: (count * 0.5).toFixed(1),
-        color,
-      };
-    }),
+    gods: toGodRows(fallback),
+    hiddenGods: [],
   };
 }
 

@@ -381,6 +381,7 @@ class AnalysisResult:
     report: ReportView | None = None
     narrative: NarrativeView | None = None
     narrative_result: dict[str, Any] | None = None
+    ten_gods_result: dict[str, Any] | None = None
     meta: AnalysisMeta = field(default_factory=AnalysisMeta)
     rule_context: dict[str, Any] = field(default_factory=dict)
     unified_context: dict[str, Any] = field(default_factory=dict)
@@ -419,8 +420,12 @@ class AnalysisResult:
             return {}
         return self.temperature.to_dict()
 
+    def ten_gods_dict(self) -> dict[str, Any]:
+        """Serialize canonical Ten Gods for ``data.ten_gods``."""
+        return dict(self.ten_gods_result or {})
+
     def unified_context_dict(self) -> dict[str, Any]:
-        """Serialize UnifiedAnalysisContext V2 for ``data.unified_context``."""
+        """Serialize unified context for the public analyze payload."""
         return dict(self.unified_context or {})
 
     def interpretation_dict(self) -> dict[str, Any]:

@@ -41,6 +41,10 @@ from applications.api.services.five_elements_truth import (
     normalize_element_key,
 )
 from applications.api.services.luck_truth import shape_luck_payload
+from applications.api.services.ten_gods_truth import (
+    TEN_GODS_NOTE,
+    shape_ten_gods_payload,
+)
 
 
 @dataclass(slots=True)
@@ -58,6 +62,7 @@ class ReportInputV1Source:
     timezone: str = "Asia/Bangkok"
     knowledge_version: str = ""
     report_view: Mapping[str, Any] | None = None
+    ten_gods_result: Any = None
 
 
 def build_report_input_v1(source: ReportInputV1Source) -> ReportInputV1:
@@ -82,7 +87,7 @@ class ReportInputV1Adapter:
         pillars = self._build_pillars(source.analysis, diagnostics)
         five_elements = self._build_five_elements(source, diagnostics)
         strength = self._build_strength(source.analysis, diagnostics)
-        ten_gods = self._build_ten_gods(source.analysis, diagnostics)
+        ten_gods = self._build_ten_gods(source, diagnostics)
         pattern = self._build_pattern(source.analysis, diagnostics)
         useful_god = self._build_useful_god(source.analysis, diagnostics)
         shensha = self._build_shensha(source.analysis, diagnostics)
@@ -317,22 +322,67 @@ class ReportInputV1Adapter:
 
     def _build_ten_gods(
         self,
-        analysis: AnalysisResult,
+        source: ReportInputV1Source,
         diagnostics: ReportDiagnosticsV1,
     ) -> ReportTenGodsV1:
+        analysis = source.analysis
         bazi = analysis.bazi
         visible = list(bazi.ten_gods or bazi.pillar_ten_gods())
-        hidden = list(bazi.hidden_stems)
+        hidden_stems = list(bazi.hidden_stems)
         score = analysis.score
         if score is not None and score.ten_god_series:
             diagnostics.source_contracts.append("AnalysisResult.score.ten_god_series")
-        if not visible and not hidden:
+        payload = self._canonical_ten_gods(source)
+        visible_entries = [
+            dict(item)
+            for item in (payload.get("visible") or [])
+            if isinstance(item, Mapping)
+        ]
+        hidden_entries = [
+            dict(item)
+            for item in (payload.get("hidden") or [])
+            if isinstance(item, Mapping)
+        ]
+        if hidden_entries and not hidden_stems:
+            hidden_stems = [
+                str(item.get("hidden_stem") or item.get("stem") or "")
+                for item in hidden_entries
+                if item.get("hidden_stem") or item.get("stem")
+            ]
+        if not visible and not hidden_stems and not visible_entries:
             diagnostics.missing_fields.append("ten_gods")
         return ReportTenGodsV1(
             visible=visible,
-            hidden=hidden,
+            hidden=hidden_stems,
             summary=", ".join(visible) if visible else "",
+            visible_entries=visible_entries,
+            hidden_entries=hidden_entries,
+            visible_summary=str(payload.get("visible_summary") or ""),
+            hidden_summary=str(payload.get("hidden_summary") or ""),
+            note=str(payload.get("note") or TEN_GODS_NOTE),
         )
+
+    def _canonical_ten_gods(self, source: ReportInputV1Source) -> dict[str, Any]:
+        """Prefer already-shaped TenGodsEngine output. Never recalculate."""
+        candidate = source.ten_gods_result
+        if candidate is None:
+            candidate = getattr(source.analysis, "ten_gods_result", None)
+        if candidate is None:
+            return {}
+        if hasattr(candidate, "to_dict"):
+            return shape_ten_gods_payload(candidate)
+        if not isinstance(candidate, Mapping):
+            return {}
+        hidden = candidate.get("hidden")
+        if candidate.get("visible_labels") is not None or (
+            isinstance(hidden, list)
+            and hidden
+            and isinstance(hidden[0], Mapping)
+        ):
+            return dict(candidate)
+        if candidate.get("visible") or candidate.get("hidden"):
+            return shape_ten_gods_payload(candidate)
+        return {}
 
     def _build_pattern(
         self,

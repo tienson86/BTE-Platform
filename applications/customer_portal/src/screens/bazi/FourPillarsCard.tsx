@@ -101,6 +101,11 @@ function PillarPanel({
           </div>
         </div>
         <PillarRow
+          label={labels.tenGod}
+          value={pillar.tenGod || "—"}
+          tooltip={`${labels.tenGod}: ${pillar.tenGod || "—"}`}
+        />
+        <PillarRow
           label={labels.naYin}
           value={pillar.naYin}
           tooltip={`${labels.naYin}: ${pillar.naYin}`}

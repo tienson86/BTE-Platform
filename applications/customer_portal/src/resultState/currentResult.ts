@@ -141,8 +141,45 @@ export function analyticalFiveElementCounts(
  * Analytical Ten Gods labels — never ScoreEngine ten_god_score / ten_god_series.
  */
 export function analyticalTenGods(data: AnalysisDataDto | null | undefined): string[] {
-  const visible = data?.ten_gods?.visible ?? data?.bazi?.ten_gods ?? [];
-  return visible.map((item) => String(item).trim()).filter(Boolean);
+  const payload = data?.ten_gods ?? data?.ten_gods_result;
+  const labels = payload?.visible_labels;
+  if (Array.isArray(labels) && labels.length) {
+    return labels.map((item) => String(item).trim()).filter(Boolean);
+  }
+  const visible = payload?.visible ?? data?.bazi?.ten_gods ?? [];
+  return visible
+    .map((item) => {
+      if (typeof item === "string") return item.trim();
+      if (item && typeof item === "object" && "ten_god" in item) {
+        return String((item as { ten_god?: string }).ten_god || "").trim();
+      }
+      return String(item).trim();
+    })
+    .filter(Boolean);
+}
+
+export function analyticalHiddenTenGods(
+  data: AnalysisDataDto | null | undefined,
+): string[] {
+  const payload = data?.ten_gods ?? data?.ten_gods_result;
+  const labels = payload?.hidden_labels;
+  if (Array.isArray(labels) && labels.length) {
+    return [...new Set(labels.map((item) => String(item).trim()).filter(Boolean))];
+  }
+  const hidden = payload?.hidden ?? [];
+  return [
+    ...new Set(
+      hidden
+        .map((item) => {
+          if (typeof item === "string") return item.trim();
+          if (item && typeof item === "object" && "ten_god" in item) {
+            return String((item as { ten_god?: string }).ten_god || "").trim();
+          }
+          return "";
+        })
+        .filter(Boolean),
+    ),
+  ];
 }
 
 function toResolved(record: StoredResultRecord, source: CurrentResultSource): ResolvedCurrentResult | null {

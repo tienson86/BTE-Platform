@@ -84,6 +84,16 @@ export function S03FourPillars(): ReactNode {
 
                 <GlyphBlock glyph={pillar.stem} />
                 <GlyphBlock glyph={pillar.branch} />
+                {pillar.tenGod ? (
+                  <div className="cd-s03__ten-god">{pillar.tenGod}</div>
+                ) : null}
+                {pillar.hiddenLines && pillar.hiddenLines.length ? (
+                  <div className="cd-s03__hidden">
+                    {pillar.hiddenLines.map((line) => (
+                      <div key={line}>{line}</div>
+                    ))}
+                  </div>
+                ) : null}
 
                 <footer className="cd-s03__footer">{pillar.stamp}</footer>
               </article>

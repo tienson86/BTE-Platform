@@ -4,10 +4,12 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+from engines.bazi_engine.ten_god import stem_element
 from engines.report_engine.contracts.report_input_v1 import (
     ReportInputV1,
     ReportInterpretationSectionV1,
     ReportPillarV1,
+    ReportTenGodsV1,
     missing_data_message,
 )
 from engines.report_engine.localization.customer_text import customer_paragraphs
@@ -143,35 +145,50 @@ def _section_profile(report_input: ReportInputV1) -> PresentedSection:
     )
 
 
+_PILLAR_KEYS = {
+    "Năm": "year",
+    "Tháng": "month",
+    "Ngày": "day",
+    "Giờ": "hour",
+}
+
+
 def _section_pillars(report_input: ReportInputV1) -> PresentedSection:
     pillars = report_input.pillars
+    ten_gods = report_input.ten_gods
     return PresentedSection(
         id="four-pillars",
         title="02. Tứ Trụ",
         pillars=[
-            _pillar("Năm", pillars.year),
-            _pillar("Tháng", pillars.month),
-            _pillar("Ngày", pillars.day),
-            _pillar("Giờ", pillars.hour),
+            _pillar("Năm", pillars.year, ten_gods),
+            _pillar("Tháng", pillars.month, ten_gods),
+            _pillar("Ngày", pillars.day, ten_gods),
+            _pillar("Giờ", pillars.hour, ten_gods),
         ],
         table=PresentedTable(
             headers=["Trụ", "Can Chi", "Ẩn can", "Nạp âm", "Thập thần", "Trường sinh"],
             rows=[
-                _pillar_row("Năm", pillars.year),
-                _pillar_row("Tháng", pillars.month),
-                _pillar_row("Ngày", pillars.day),
-                _pillar_row("Giờ", pillars.hour),
+                _pillar_row("Năm", pillars.year, ten_gods),
+                _pillar_row("Tháng", pillars.month, ten_gods),
+                _pillar_row("Ngày", pillars.day, ten_gods),
+                _pillar_row("Giờ", pillars.hour, ten_gods),
             ],
         ),
     )
 
 
-def _pillar(label: str, pillar: ReportPillarV1) -> PresentedPillar:
-    hidden = ", ".join(display_text(item) for item in pillar.hidden_stems) or "—"
+def _pillar(
+    label: str,
+    pillar: ReportPillarV1,
+    ten_gods: ReportTenGodsV1,
+) -> PresentedPillar:
+    hidden = _format_pillar_hidden(label, pillar, ten_gods)
+    stem_line = _stem_with_element(label, pillar, ten_gods)
     return PresentedPillar(
         label=label,
         lines=[
             ("Can Chi", f"{display_text(pillar.stem)} {display_text(pillar.branch)}".strip()),
+            ("Thiên can", stem_line),
             ("Ẩn can", hidden),
             ("Nạp âm", display_text(pillar.na_yin) or "—"),
             ("Thập thần", display_text(pillar.ten_god) or "—"),
@@ -180,8 +197,12 @@ def _pillar(label: str, pillar: ReportPillarV1) -> PresentedPillar:
     )
 
 
-def _pillar_row(label: str, pillar: ReportPillarV1) -> list[str]:
-    hidden = ", ".join(display_text(item) for item in pillar.hidden_stems) or "—"
+def _pillar_row(
+    label: str,
+    pillar: ReportPillarV1,
+    ten_gods: ReportTenGodsV1,
+) -> list[str]:
+    hidden = _format_pillar_hidden(label, pillar, ten_gods)
     return [
         label,
         f"{display_text(pillar.stem)} {display_text(pillar.branch)}".strip(),
@@ -190,6 +211,41 @@ def _pillar_row(label: str, pillar: ReportPillarV1) -> list[str]:
         display_text(pillar.ten_god) or "—",
         display_text(pillar.truong_sinh) or "—",
     ]
+
+
+def _stem_with_element(
+    label: str,
+    pillar: ReportPillarV1,
+    ten_gods: ReportTenGodsV1,
+) -> str:
+    element = ""
+    pillar_key = _PILLAR_KEYS.get(label, "")
+    for item in ten_gods.visible_entries:
+        if str(item.get("pillar") or "") == pillar_key:
+            element = str(item.get("element") or "")
+            break
+    if not element:
+        element = stem_element(pillar.stem)
+    stem = display_text(pillar.stem)
+    if element:
+        return f"{stem} · {element}"
+    return stem
+
+
+def _format_pillar_hidden(
+    label: str,
+    pillar: ReportPillarV1,
+    ten_gods: ReportTenGodsV1,
+) -> str:
+    pillar_key = _PILLAR_KEYS.get(label, "")
+    lines = [
+        str(item.get("display") or _hidden_display(item))
+        for item in ten_gods.hidden_entries
+        if str(item.get("pillar") or "") == pillar_key
+    ]
+    if lines:
+        return " · ".join(lines)
+    return ", ".join(display_text(item) for item in pillar.hidden_stems) or "—"
 
 
 def _section_five_elements(report_input: ReportInputV1) -> PresentedSection:
@@ -244,17 +300,46 @@ def _section_strength(report_input: ReportInputV1) -> PresentedSection:
 
 def _section_ten_gods(report_input: ReportInputV1) -> PresentedSection:
     ten_gods = report_input.ten_gods
+    visible_lines = [
+        _visible_display(item)
+        for item in (ten_gods.visible_entries or [])
+    ] or list(ten_gods.visible)
+    hidden_lines = [
+        str(item.get("display") or _hidden_display(item))
+        for item in (ten_gods.hidden_entries or [])
+        if isinstance(item, dict)
+    ] or [str(item) for item in ten_gods.hidden if item]
+    note = ten_gods.note or "Xác định theo quan hệ Ngũ hành và âm dương với Nhật chủ."
     return PresentedSection(
         id="ten-gods",
         title="05. Thập thần",
         meta_rows=_filled_rows(
             [
-                ("Thập thần hiển", ", ".join(display_text(item) for item in ten_gods.visible)),
-                ("Ẩn can", ", ".join(display_text(item) for item in ten_gods.hidden)),
-                ("Tóm tắt", display_text(ten_gods.summary)),
+                ("Lộ can", " · ".join(display_text(item) for item in visible_lines)),
+                ("Tàng can", " · ".join(display_text(item) for item in hidden_lines)),
+                ("Tóm tắt lộ", display_text(ten_gods.visible_summary or ten_gods.summary)),
+                ("Tóm tắt tàng", display_text(ten_gods.hidden_summary)),
+                ("Ghi chú", note),
             ]
         ),
     )
+
+
+def _visible_display(item: dict[str, object]) -> str:
+    stem = str(item.get("stem") or "")
+    element = str(item.get("element") or "")
+    ten_god = str(item.get("ten_god") or "")
+    head = " · ".join(part for part in (stem, element) if part)
+    if head and ten_god:
+        return f"{head} / {ten_god}"
+    return ten_god or head
+
+
+def _hidden_display(item: dict[str, object]) -> str:
+    stem = str(item.get("hidden_stem") or item.get("stem") or "")
+    element = str(item.get("element") or "")
+    ten_god = str(item.get("ten_god") or "")
+    return " · ".join(part for part in (stem, element, ten_god) if part)
 
 
 def _section_pattern(report_input: ReportInputV1) -> PresentedSection:

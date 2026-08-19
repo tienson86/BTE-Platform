@@ -29,6 +29,15 @@ import {
   normalizeScore100,
 } from "./contentGuards";
 import {
+  asTenGodsPayload,
+  hiddenLinesForPillar,
+  hiddenLabels,
+  stemDisplay,
+  tenGodsNote,
+  visibleEntryForPillar,
+  visibleLabels,
+} from "./tenGodsDisplay";
+import {
   asNarrativeResult,
   hasUsableNarrativeResult,
 } from "./narrativeResultAdapter";
@@ -139,15 +148,30 @@ function mapStrengthLevel(level: string, score: number): { label: string; level:
   return { label: "CÂN BẰNG", level: "Trung bình" };
 }
 
-function mapPillar(dto: PillarDto | undefined, kind: PillarKind, label: string): BaZiPillar {
+function mapPillar(
+  dto: PillarDto | undefined,
+  kind: PillarKind,
+  label: string,
+  payload: ReturnType<typeof asTenGodsPayload>,
+): BaZiPillar {
+  const hidden = hiddenLinesForPillar(payload, kind);
+  const stem = asString(dto?.stem, "—");
+  const fromPayload = visibleEntryForPillar(payload, kind);
+  const element = asString(dto?.element) || fromPayload?.element || undefined;
   return {
     kind,
     label,
-    heavenlyStem: asString(dto?.stem, "—"),
+    heavenlyStem: stemDisplay(stem === "—" ? "" : stem, element) || stem,
     earthlyBranch: asString(dto?.branch, "—"),
-    hiddenStems: Array.isArray(dto?.hidden_stems) ? [...dto.hidden_stems] : [],
+    hiddenStems: hidden.length
+      ? hidden
+      : Array.isArray(dto?.hidden_stems)
+        ? [...dto.hidden_stems]
+        : [],
     naYin: asString(dto?.nap_am, "—"),
     twelveStage: asString(dto?.truong_sinh, "—"),
+    tenGod: asString(dto?.ten_god, "—"),
+    stemElement: element,
   };
 }
 
@@ -201,51 +225,52 @@ function slugify(text: string): string {
     .replace(/^-|-$/g, "");
 }
 
+const TEN_GOD_CATALOG = [
+  "Chính Quan",
+  "Thất Sát",
+  "Chính Tài",
+  "Thiên Tài",
+  "Chính Ấn",
+  "Thiên Ấn",
+  "Thực Thần",
+  "Thương Quan",
+  "Tỷ Kiên",
+  "Kiếp Tài",
+] as const;
+
 function mapTenGods(data: AnalysisDataDto): readonly BaZiTenGod[] {
-  const series = data.score?.ten_god_series;
-  if (Array.isArray(series) && series.length > 0) {
-    return series.map((item, index) => {
-      const name = asString(item.label ?? item.name, `Thần ${index + 1}`);
-      const score = seriesValue(item);
-      return {
-        id: slugify(name) || `god-${index}`,
-        name,
-        count: Math.max(1, Math.round(score)),
-        score,
-        strength: strengthBand(score),
-        descriptionPreview: "",
-      };
-    });
+  const payload =
+    asTenGodsPayload(data.ten_gods) ?? asTenGodsPayload(data.ten_gods_result);
+  const present = new Set(
+    [...visibleLabels(payload), ...hiddenLabels(payload)].filter(Boolean),
+  );
+  if (!present.size) {
+    const fromList = data.bazi?.ten_gods ?? [];
+    for (const god of fromList) {
+      const name = asString(god).trim();
+      if (name && name !== "Nhật Chủ") present.add(name);
+    }
+    for (const pillar of [
+      data.bazi?.year_pillar,
+      data.bazi?.month_pillar,
+      data.bazi?.day_pillar,
+      data.bazi?.hour_pillar,
+    ]) {
+      const name = asString(pillar?.ten_god).trim();
+      if (name && name !== "Nhật Chủ") present.add(name);
+    }
   }
-
-  const counts = new Map<string, number>();
-  const fromList = data.bazi?.ten_gods ?? [];
-  for (const god of fromList) {
-    const name = asString(god).trim();
-    if (!name || name === "Nhật Chủ") continue;
-    counts.set(name, (counts.get(name) ?? 0) + 1);
-  }
-
-  const pillars = [
-    data.bazi?.year_pillar,
-    data.bazi?.month_pillar,
-    data.bazi?.day_pillar,
-    data.bazi?.hour_pillar,
-  ];
-  for (const pillar of pillars) {
-    const name = asString(pillar?.ten_god).trim();
-    if (!name || name === "Nhật Chủ") continue;
-    counts.set(name, (counts.get(name) ?? 0) + 1);
-  }
-
-  return Array.from(counts.entries()).map(([name, count]) => ({
-    id: slugify(name),
-    name,
-    count,
-    score: count * 25,
-    strength: strengthBand(count * 25),
-    descriptionPreview: "",
-  }));
+  return TEN_GOD_CATALOG.map((name) => {
+    const count = present.has(name) ? 1 : 0;
+    return {
+      id: slugify(name),
+      name,
+      count,
+      score: count,
+      strength: count ? "Có" : "Không",
+      descriptionPreview: "",
+    };
+  });
 }
 
 function mapStrength(data: AnalysisDataDto): BaZiStrength {
@@ -495,8 +520,10 @@ export function adaptAnalysisToBaZiResult(
   data: AnalysisDataDto,
   options: AdaptBaZiResultOptions = {},
 ): BaZiResultViewModel {
+  const payload =
+    asTenGodsPayload(data.ten_gods) ?? asTenGodsPayload(data.ten_gods_result);
   const pillars = PILLAR_SPECS.map((spec) =>
-    mapPillar(data.bazi?.[spec.key], spec.kind, spec.label),
+    mapPillar(data.bazi?.[spec.key], spec.kind, spec.label, payload),
   );
 
   const fiveElements = mapFiveElements(data);
@@ -515,6 +542,9 @@ export function adaptAnalysisToBaZiResult(
     pillars,
     fiveElements,
     tenGods,
+    tenGodsVisible: visibleLabels(payload),
+    tenGodsHidden: hiddenLabels(payload),
+    tenGodsNote: tenGodsNote(payload),
     strength,
     executive: buildExecutiveFromResult({
       strength,

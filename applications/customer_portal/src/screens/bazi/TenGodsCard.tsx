@@ -14,6 +14,9 @@ export type TenGodsCardProps = {
   status: PresentationStatus;
   labels: BaZiResultLabels;
   gods: readonly BaZiTenGod[];
+  visibleLabels?: readonly string[];
+  hiddenLabels?: readonly string[];
+  note?: string;
   errorMessage?: string;
 };
 
@@ -25,6 +28,9 @@ export const TenGodsCard = memo(function TenGodsCard({
   status,
   labels,
   gods,
+  visibleLabels,
+  hiddenLabels,
+  note,
   errorMessage,
 }: TenGodsCardProps): ReactNode {
   return (
@@ -42,6 +48,16 @@ export const TenGodsCard = memo(function TenGodsCard({
         errorDescription={errorMessage}
       >
         <Stack gap="paragraph">
+          {visibleLabels && visibleLabels.length ? (
+            <BaseText variant="body">
+              {labels.visibleGods}: {visibleLabels.join(" · ")}
+            </BaseText>
+          ) : null}
+          {hiddenLabels && hiddenLabels.length ? (
+            <BaseText variant="body">
+              {labels.hiddenGods}: {hiddenLabels.join(" · ")}
+            </BaseText>
+          ) : null}
           <ul className="cui-bazi-presence-grid">
             {gods.map((god) => {
               const present = god.count > 0;
@@ -68,6 +84,9 @@ export const TenGodsCard = memo(function TenGodsCard({
               );
             })}
           </ul>
+          <BaseText variant="caption" tone="muted">
+            {note || labels.tenGodsNote}
+          </BaseText>
           <BaseText variant="caption" tone="muted">
             ✓ Có xuất hiện · × Không có
           </BaseText>

@@ -165,6 +165,8 @@ export const CANONICAL_DESKTOP_MOCK = {
         branch: { han: "午", viet: "Ngọ", element: "Hỏa Dương", tone: "fire" },
         stamp: "1990",
         highlight: false,
+        tenGod: "",
+        hiddenLines: [] as string[],
       },
       {
         title: "THÁNG TRỤ",
@@ -172,6 +174,8 @@ export const CANONICAL_DESKTOP_MOCK = {
         branch: { han: "午", viet: "Ngọ", element: "Hỏa Dương", tone: "fire" },
         stamp: "06",
         highlight: false,
+        tenGod: "",
+        hiddenLines: [] as string[],
       },
       {
         title: "NGÀY TRỤ (NHẬT CHỦ)",
@@ -179,6 +183,8 @@ export const CANONICAL_DESKTOP_MOCK = {
         branch: { han: "寅", viet: "Dần", element: "Mộc Dương", tone: "wood" },
         stamp: "25",
         highlight: true,
+        tenGod: "",
+        hiddenLines: [] as string[],
       },
       {
         title: "GIỜ TRỤ",
@@ -186,6 +192,8 @@ export const CANONICAL_DESKTOP_MOCK = {
         branch: { han: "巳", viet: "Tỵ", element: "Hỏa Âm", tone: "fire" },
         stamp: "10:30",
         highlight: false,
+        tenGod: "",
+        hiddenLines: [] as string[],
       },
     ],
   },
@@ -251,6 +259,15 @@ export const CANONICAL_DESKTOP_MOCK = {
       { name: "Kiếp Tài", short: "Ki.Tài", score: "0.7", color: "#00838f" },
     ],
     link: "Xem chi tiết →",
+    visibleLabel: "Lộ can",
+    hiddenLabel: "Tàng can",
+    note: "Xác định theo quan hệ Ngũ hành và âm dương với Nhật chủ.",
+    hiddenGods: [] as Array<{
+      name: string;
+      short: string;
+      score: string;
+      color: string;
+    }>,
   },
   s07: {
     title: "THẦN SÁT",

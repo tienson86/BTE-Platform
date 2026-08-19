@@ -44,6 +44,8 @@ export type BaZiPillar = {
   readonly hiddenStems: readonly string[];
   readonly naYin: string;
   readonly twelveStage: string;
+  readonly tenGod?: string;
+  readonly stemElement?: string;
 };
 
 export type FiveElementId = "kim" | "moc" | "thuy" | "hoa" | "tho";
@@ -173,6 +175,10 @@ export type BaZiResultLabels = {
   readonly stem: string;
   readonly branch: string;
   readonly hidden: string;
+  readonly tenGod: string;
+  readonly visibleGods: string;
+  readonly hiddenGods: string;
+  readonly tenGodsNote: string;
   readonly naYin: string;
   readonly twelveStage: string;
   readonly score: string;
@@ -220,6 +226,10 @@ export const BAZI_RESULT_LABELS: BaZiResultLabels = {
   stem: "Thiên Can",
   branch: "Địa Chi",
   hidden: "Tàng Can",
+  tenGod: "Thập Thần",
+  visibleGods: "Lộ can",
+  hiddenGods: "Tàng can",
+  tenGodsNote: "Xác định theo quan hệ Ngũ hành và âm dương với Nhật chủ.",
   naYin: "Nạp Âm",
   twelveStage: "Trường Sinh",
   score: "Điểm tổng",
@@ -285,6 +295,8 @@ export const BAZI_MOCK_PILLARS: readonly BaZiPillar[] = [
     hiddenStems: ["Đinh", "Kỷ"],
     naYin: "Lộ Bàng Thổ (placeholder)",
     twelveStage: "Đế Vượng (placeholder)",
+    tenGod: "—",
+    stemElement: "Kim",
   },
   {
     kind: "month",
@@ -294,6 +306,8 @@ export const BAZI_MOCK_PILLARS: readonly BaZiPillar[] = [
     hiddenStems: ["Canh", "Nhâm", "Tuất"],
     naYin: "Đại Khê Thủy (placeholder)",
     twelveStage: "Bệnh (placeholder)",
+    tenGod: "—",
+    stemElement: "Mộc",
   },
   {
     kind: "day",
@@ -303,6 +317,8 @@ export const BAZI_MOCK_PILLARS: readonly BaZiPillar[] = [
     hiddenStems: ["Giáp", "Bính", "Tuất"],
     naYin: "Furnace Fire (placeholder)",
     twelveStage: "Trường Sinh (placeholder)",
+    tenGod: "—",
+    stemElement: "Hỏa",
   },
   {
     kind: "hour",
@@ -312,6 +328,8 @@ export const BAZI_MOCK_PILLARS: readonly BaZiPillar[] = [
     hiddenStems: ["Bính", "Canh", "Tuất"],
     naYin: "Tuyền Trung Thủy (placeholder)",
     twelveStage: "Quan Đới (placeholder)",
+    tenGod: "—",
+    stemElement: "Mộc",
   },
 ] as const;
 
@@ -572,6 +590,9 @@ export type BaZiResultMockBundle = {
   readonly pillars: readonly BaZiPillar[];
   readonly fiveElements: readonly BaZiFiveElement[];
   readonly tenGods: readonly BaZiTenGod[];
+  readonly tenGodsVisible?: readonly string[];
+  readonly tenGodsHidden?: readonly string[];
+  readonly tenGodsNote?: string;
   readonly strength: BaZiStrength;
   readonly executive: BaZiExecutiveSummary;
   readonly spiritGods: readonly BaZiSpiritGod[];

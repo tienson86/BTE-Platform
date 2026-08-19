@@ -302,7 +302,7 @@
   function formatWithElement(name, element) {
     if (!name || name === MISSING) return MISSING;
     if (!element || element === MISSING) return name;
-    return name + " (" + element + ")";
+    return name + " · " + element;
   }
 
   function elBadge(text, element) {
@@ -387,6 +387,7 @@
     var branchEl = BRANCH_ELEMENT[branch] || MISSING;
     var stemDisplay = formatWithElement(stem, stemInfo.element);
     var branchDisplay = formatWithElement(branch, branchEl);
+    var hiddenText = Array.isArray(hidden) && hidden.length ? hidden.join(" · ") : hiddenAt(pillar, hidden);
 
     return (
       '<article class="bte-card bte-pillar-card bte-el-' +
@@ -412,7 +413,7 @@
         t("bazi.branch"),
         elBadge(branchDisplay, branchEl === MISSING ? null : branchEl)
       ) +
-      row(t("bazi.hidden"), esc(hiddenAt(pillar, hidden))) +
+      row(t("bazi.hidden"), esc(hiddenText === MISSING ? MISSING : hiddenText)) +
       row(t("bazi.ten_god"), esc(tenGod)) +
       row(t("bazi.chang_sheng"), esc(growthAt(pillar))) +
       row(t("bazi.nap_am"), esc(nayinAt(pillar))) +
@@ -534,7 +535,37 @@
       .trim();
   }
 
-  function collectPresentGods(bazi, pillarObjs) {
+  function canonicalTenGods(full) {
+    var payload = full && (full.ten_gods || full.ten_gods_result);
+    if (!payload || typeof payload !== "object" || Array.isArray(payload)) return null;
+    if (!payload.visible && !payload.hidden && !payload.visible_labels) return null;
+    return payload;
+  }
+
+  function tenGodLabel(item) {
+    if (item == null || item === "") return "";
+    if (typeof item === "string") return item;
+    return String(item.ten_god || item.name || item.label || "");
+  }
+
+  function hiddenDisplay(item) {
+    if (!item || typeof item !== "object") return String(item || "");
+    if (item.display) return String(item.display);
+    return [item.hidden_stem || item.stem, item.element, item.ten_god]
+      .filter(Boolean)
+      .join(" · ");
+  }
+
+  function hiddenForPillar(payload, pillarKey) {
+    if (!payload || !Array.isArray(payload.hidden)) return [];
+    return payload.hidden
+      .filter(function (item) {
+        return item && item.pillar === pillarKey;
+      })
+      .map(hiddenDisplay);
+  }
+
+  function collectPresentGods(bazi, pillarObjs, payload) {
     var present = {};
     pillarObjs.forEach(function (pillar, index) {
       var god = tenGodAt(bazi, pillar, index);
@@ -549,9 +580,19 @@
     });
     if (Array.isArray(bazi.ten_gods)) {
       bazi.ten_gods.forEach(function (g) {
-        var token = normalizeToken(g);
+        var token = normalizeToken(tenGodLabel(g));
         if (token) present[token] = true;
       });
+    }
+    if (payload) {
+      []
+        .concat(payload.visible_labels || [], payload.hidden_labels || [])
+        .concat((payload.visible || []).map(tenGodLabel))
+        .concat((payload.hidden || []).map(tenGodLabel))
+        .forEach(function (g) {
+          var token = normalizeToken(g);
+          if (token) present[token] = true;
+        });
     }
     return present;
   }
@@ -676,7 +717,13 @@
       var pillarObjs = PILLARS.map(function (spec) {
         return pickPillar(data, spec);
       });
-      var hiddenSlices = sliceHidden(data, pillarObjs);
+      var payload = canonicalTenGods(full);
+      var PILLAR_KEYS = ["year", "month", "day", "hour"];
+      var hiddenSlicesDefault = sliceHidden(data, pillarObjs);
+      var hiddenSlices = PILLARS.map(function (spec, index) {
+        var fromPayload = payload ? hiddenForPillar(payload, PILLAR_KEYS[index]) : [];
+        return fromPayload.length ? fromPayload : hiddenSlicesDefault[index];
+      });
       var dayPillar = pillarObjs[2];
       var dm = dayMaster(data, dayPillar);
       var dmEl = dayMasterElement(data, dm);
@@ -737,11 +784,41 @@
         analysisCard(t("bazi.hy_than"), hyThan) +
         "</div>";
 
-      var godsPresent = collectPresentGods(data, pillarObjs);
+      var godsPresent = collectPresentGods(data, pillarObjs, payload);
       var shenshaState = collectPresentShensha(data);
+      var visibleList = payload && payload.visible_labels && payload.visible_labels.length
+        ? payload.visible_labels
+        : payload && Array.isArray(payload.visible)
+          ? payload.visible.map(tenGodLabel).filter(Boolean)
+          : [];
+      var hiddenList = payload && payload.hidden_labels && payload.hidden_labels.length
+        ? payload.hidden_labels
+        : payload && Array.isArray(payload.hidden)
+          ? payload.hidden.map(tenGodLabel).filter(Boolean)
+          : [];
+      var uniqueHidden = [];
+      hiddenList.forEach(function (name) {
+        if (name && uniqueHidden.indexOf(name) < 0) uniqueHidden.push(name);
+      });
+      var note =
+        (payload && payload.note) ||
+        t("bazi.ten_gods_note");
 
       var tenGodsBody =
         '<div class="bte-checklist-card">' +
+        '<p class="bte-ten-gods-split"><strong>' +
+        esc(t("bazi.visible_gods")) +
+        "</strong> " +
+        esc(visibleList.join(" · ") || MISSING) +
+        "</p>" +
+        '<p class="bte-ten-gods-split"><strong>' +
+        esc(t("bazi.hidden_gods")) +
+        "</strong> " +
+        esc(uniqueHidden.join(" · ") || MISSING) +
+        "</p>" +
+        '<p class="muted">' +
+        esc(note) +
+        "</p>" +
         checklistHtml(TEN_GOD_CATALOG, godsPresent, false) +
         "</div>";
 

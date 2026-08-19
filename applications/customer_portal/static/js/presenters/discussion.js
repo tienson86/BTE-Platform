@@ -69,16 +69,30 @@
     var element = show(
       pick(bazi, ["day_master_element", "dayMasterElement", "element"])
     );
-    var tenGods = Array.isArray(bazi.ten_gods)
-      ? bazi.ten_gods.filter(Boolean).join(", ")
-      : [
-          bazi.year_pillar && bazi.year_pillar.ten_god,
-          bazi.month_pillar && bazi.month_pillar.ten_god,
-          bazi.day_pillar && bazi.day_pillar.ten_god,
-          bazi.hour_pillar && bazi.hour_pillar.ten_god,
-        ]
-          .filter(Boolean)
-          .join(", ");
+    var tgPayload = payload.ten_gods;
+    var tenGods;
+    if (tgPayload && typeof tgPayload === "object" && !Array.isArray(tgPayload)) {
+      var lo = Array.isArray(tgPayload.visible_labels)
+        ? tgPayload.visible_labels.filter(Boolean).join(" · ")
+        : "";
+      var tang = Array.isArray(tgPayload.hidden_labels)
+        ? tgPayload.hidden_labels.filter(Boolean).join(" · ")
+        : "";
+      tenGods =
+        (lo ? t("bazi.visible_gods") + ": " + lo : "") +
+        (tang ? (lo ? " / " : "") + t("bazi.hidden_gods") + ": " + tang : "");
+    } else {
+      tenGods = Array.isArray(bazi.ten_gods)
+        ? bazi.ten_gods.filter(Boolean).join(", ")
+        : [
+            bazi.year_pillar && bazi.year_pillar.ten_god,
+            bazi.month_pillar && bazi.month_pillar.ten_god,
+            bazi.day_pillar && bazi.day_pillar.ten_god,
+            bazi.hour_pillar && bazi.hour_pillar.ten_god,
+          ]
+            .filter(Boolean)
+            .join(", ");
+    }
     var shensha = Array.isArray(bazi.shensha)
       ? bazi.shensha
           .map(function (s) {

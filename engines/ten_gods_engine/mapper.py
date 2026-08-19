@@ -16,12 +16,24 @@ from engines.ten_gods_engine.constants import (
 from engines.ten_gods_engine.exceptions import TenGodsValidationError
 
 
-def map_stem_to_ten_god(day_master: str, stem: str) -> tuple[str, str]:
+def map_stem_to_ten_god(
+    day_master: str,
+    stem: str,
+    *,
+    pillar: str | None = None,
+    visibility: str = "visible",
+) -> tuple[str, str]:
     """Map a heavenly stem to Vietnamese label and canonical god_id.
 
-    Uses ``engines.bazi_engine.ten_god.ten_god_name`` as the single mapper.
+    Ten God relationship always comes from ``ten_god_name`` (same stem → Tỷ Kiên).
+    Nhật Chủ is a presentation role for the day pillar heavenly stem only.
     """
-    if stem == day_master:
+    if _is_day_heavenly_stem(
+        day_master=day_master,
+        stem=stem,
+        pillar=pillar,
+        visibility=visibility,
+    ):
         return DAY_MASTER_LABEL, "day_master"
 
     label = ten_god_name(day_master, stem)
@@ -36,6 +48,21 @@ def map_stem_to_ten_god(day_master: str, stem: str) -> tuple[str, str]:
             f"Unknown Ten God label '{label}' for stem '{stem}'",
         )
     return label, god_id
+
+
+def _is_day_heavenly_stem(
+    *,
+    day_master: str,
+    stem: str,
+    pillar: str | None,
+    visibility: str,
+) -> bool:
+    """True only for the visible Day Pillar heavenly stem."""
+    return (
+        stem == day_master
+        and pillar == "day"
+        and visibility == "visible"
+    )
 
 
 def day_master_info(stem: str) -> dict[str, str]:

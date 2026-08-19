@@ -85,6 +85,10 @@ from applications.api.services.score_truth import (
 )
 from applications.api.services.five_elements_truth import build_five_elements_payload
 from applications.api.services.luck_truth import shape_luck_payload
+from applications.api.services.ten_gods_truth import (
+    shape_ten_gods_payload,
+    ten_gods_source_fingerprint,
+)
 from applications.api.utils.pillars import pillar_text
 from applications.api.utils.serializers import to_jsonable
 
@@ -317,6 +321,40 @@ class OrchestratorService:
         payload["pipeline"] = self._public_pipeline(completed)
         return payload
 
+    def _pillars_from_bazi(self, bazi_view: Any) -> dict[str, dict[str, str]]:
+        """Copy four-pillar stems and branches for TenGodsEngine."""
+        return {
+            "year": {
+                "stem": bazi_view.year_pillar.stem,
+                "branch": bazi_view.year_pillar.branch,
+            },
+            "month": {
+                "stem": bazi_view.month_pillar.stem,
+                "branch": bazi_view.month_pillar.branch,
+            },
+            "day": {
+                "stem": bazi_view.day_pillar.stem,
+                "branch": bazi_view.day_pillar.branch,
+            },
+            "hour": {
+                "stem": bazi_view.hour_pillar.stem,
+                "branch": bazi_view.hour_pillar.branch,
+            },
+        }
+
+    def _calculate_ten_gods(
+        self,
+        bazi_view: Any,
+        *,
+        case_id: str | None = None,
+    ) -> Any:
+        """Run canonical TenGodsEngine once. Does not recalculate Day Master."""
+        return self.ten_gods_engine.calculate(
+            day_master=bazi_view.day_master,
+            pillars=self._pillars_from_bazi(bazi_view),
+            case_id=case_id or None,
+        )
+
     def _narrative_pipeline_source(
         self,
         *,
@@ -338,35 +376,14 @@ class OrchestratorService:
         gender: str,
         timezone: str,
         run_id: str,
+        ten_gods: Any | None = None,
     ) -> SimpleNamespace:
         """Assemble already-run engine outputs for Narrative Composer V2.
 
-        Does not recalculate Pattern, Strength, or Useful God.
+        Does not recalculate Pattern, Strength, Useful God, or Ten Gods.
         """
-        bazi_view = analysis.bazi
-        pillars = {
-            "year": {
-                "stem": bazi_view.year_pillar.stem,
-                "branch": bazi_view.year_pillar.branch,
-            },
-            "month": {
-                "stem": bazi_view.month_pillar.stem,
-                "branch": bazi_view.month_pillar.branch,
-            },
-            "day": {
-                "stem": bazi_view.day_pillar.stem,
-                "branch": bazi_view.day_pillar.branch,
-            },
-            "hour": {
-                "stem": bazi_view.hour_pillar.stem,
-                "branch": bazi_view.hour_pillar.branch,
-            },
-        }
-        ten_gods = self.ten_gods_engine.calculate(
-            day_master=bazi_view.day_master,
-            pillars=pillars,
-            case_id=run_id or None,
-        )
+        if ten_gods is None:
+            ten_gods = self._calculate_ten_gods(analysis.bazi, case_id=run_id)
         calendar_payload = self._shape_calendar(
             calendar,
             analysis.bazi_dict(),
@@ -427,6 +444,7 @@ class OrchestratorService:
         stop_index = PIPELINE_ORDER.index(stop_at)
         completed: list[str] = []
         payload: dict[str, Any] = {"pipeline": []}
+        ten_gods_engine_result = None
         logger.info(
             "pipeline.start stage=%s birth=%04d-%02d-%02d %02d:%02d gender=%s",
             stage,
@@ -607,11 +625,14 @@ class OrchestratorService:
         payload["five_elements"] = build_five_elements_payload(
             published_rule_context.get("wuxing") or {}
         )
-        payload["ten_gods"] = {
-            "visible": list(analysis.bazi.ten_gods or []),
-            "hidden": list(analysis.bazi.hidden_stems or []),
-            "summary": ", ".join(str(item) for item in (analysis.bazi.ten_gods or []) if item),
-        }
+        ten_gods_engine_result = self._calculate_ten_gods(
+            analysis.bazi,
+            case_id=str(payload.get("request_id") or ""),
+        )
+        ten_gods_payload = shape_ten_gods_payload(ten_gods_engine_result)
+        analysis.ten_gods_result = ten_gods_payload
+        payload["ten_gods"] = ten_gods_payload
+        payload["ten_gods_source"] = ten_gods_source_fingerprint()
         logger.info(
             "pipeline.score total=%.2f grade=%s",
             payload["score"].get("total_score", 0.0),
@@ -708,6 +729,7 @@ class OrchestratorService:
             gender=gender or "",
             timezone=timezone,
             run_id=str(payload.get("request_id") or ""),
+            ten_gods=ten_gods_engine_result,
         )
         narrative_result_payload = build_narrative_result_dict(
             analysis=analysis_bag,
