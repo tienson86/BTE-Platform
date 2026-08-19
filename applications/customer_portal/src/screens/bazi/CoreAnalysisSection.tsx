@@ -64,10 +64,14 @@ export const CoreAnalysisSection = memo(function CoreAnalysisSection({
           >
             <Stack gap="paragraph">
               <BaseTooltip
-                content={`${labels.score}: ${strength.score}/${strength.maxScore}`}
+                content={`${labels.score}: ${strength.score}${
+                  strength.maxScore === 1 ? "" : `/${strength.maxScore}`
+                }`}
               >
                 <BaseText variant="section">
-                  {strength.score} / {strength.maxScore}
+                  {strength.maxScore === 1
+                    ? String(strength.score)
+                    : `${strength.score} / ${strength.maxScore}`}
                 </BaseText>
               </BaseTooltip>
               <ProgressBar

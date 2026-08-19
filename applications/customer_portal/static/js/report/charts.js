@@ -100,7 +100,16 @@
   function gauge(value, label, emptyLabel) {
     var n = Number(value);
     if (!Number.isFinite(n)) return emptyChart(emptyLabel);
-    n = Math.max(0, Math.min(100, n));
+    var display;
+    var arc;
+    if (n >= 0 && n <= 1) {
+      display = (Math.round(n * 100) / 100).toFixed(2);
+      arc = n * 100;
+    } else {
+      display = String(Math.round(n));
+      arc = n;
+    }
+    arc = Math.max(0, Math.min(100, arc));
     var r = 54;
     var cx = 70;
     var cy = 68;
@@ -110,10 +119,10 @@
       return { x: cx + Math.cos(a) * r, y: cy + Math.sin(a) * r };
     }
     var a0 = start;
-    var a1 = start + (end - start) * (n / 100);
+    var a1 = start + (end - start) * (arc / 100);
     var p0 = polar(a0);
     var p1 = polar(a1);
-    var large = n > 50 ? 1 : 0;
+    var large = arc > 50 ? 1 : 0;
     var track =
       "M " +
       polar(start).x +
@@ -146,7 +155,7 @@
     return (
       '<div class="rpt-chart rpt-chart-gauge">' +
       '<svg viewBox="0 0 140 90" role="img" aria-label="' +
-      esc(label + " " + Math.round(n)) +
+      esc(label + " " + display) +
       '" tabindex="0">' +
       '<path class="rpt-gauge-track" d="' +
       track +
@@ -155,7 +164,7 @@
       arc +
       '" fill="none" stroke-width="10" stroke-linecap="round"/>' +
       '<text class="rpt-gauge-num" x="70" y="62" text-anchor="middle">' +
-      esc(String(Math.round(n))) +
+      esc(display) +
       "</text>" +
       '<text class="rpt-gauge-caption" x="70" y="78" text-anchor="middle">' +
       esc(label) +

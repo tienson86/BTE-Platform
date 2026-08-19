@@ -26,8 +26,11 @@ import {
   UNAVAILABLE_CONCLUSION,
   commercialOrUnavailable,
   extractInterpretationSections,
-  normalizeScore100,
 } from "./contentGuards";
+import {
+  canonicalStrengthLabel,
+  readCanonicalStrengthScore,
+} from "./canonicalStrength";
 import {
   asTenGodsPayload,
   hiddenLinesForPillar,
@@ -125,27 +128,24 @@ function strengthBand(score: number): string {
   return "Yếu";
 }
 
-function mapStrengthLevel(level: string, score: number): { label: string; level: string } {
-  const token = level
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
-  if (token.includes("vuong") || token.includes("strong") || token.includes("wang")) {
-    return { label: "THÂN VƯỢNG", level: "Mạnh" };
+function mapStrengthLevel(level: string): { label: string; level: string } {
+  const token = level.trim().toLowerCase();
+  if (token === "strong" || token.includes("vượng") || token.includes("vuong")) {
+    return { label: "Thân vượng", level: "Thân vượng" };
   }
-  if (token.includes("nhuoc") || token.includes("weak") || token.includes("ruo")) {
-    return { label: "THÂN NHƯỢC", level: "Yếu" };
+  if (token === "weak" || token.includes("nhược") || token.includes("nhuoc")) {
+    return { label: "Thân nhược", level: "Thân nhược" };
   }
-  if (token.includes("balance") || token.includes("can bang") || token.includes("balanced")) {
-    return { label: "CÂN BẰNG", level: "Trung bình" };
+  if (token === "balanced" || token.includes("cân") || token.includes("can bang")) {
+    return { label: "Thân cân bằng", level: "Thân cân bằng" };
   }
-  if (score >= 60) {
-    return { label: "THÂN VƯỢNG", level: "Mạnh" };
+  const fromCanonical = canonicalStrengthLabel({
+    strength: { strength_level: token },
+  });
+  if (fromCanonical) {
+    return { label: fromCanonical, level: fromCanonical };
   }
-  if (score <= 40) {
-    return { label: "THÂN NHƯỢC", level: "Yếu" };
-  }
-  return { label: "CÂN BẰNG", level: "Trung bình" };
+  return { label: "", level: "" };
 }
 
 function mapPillar(
@@ -275,22 +275,21 @@ function mapTenGods(data: AnalysisDataDto): readonly BaZiTenGod[] {
 
 function mapStrength(data: AnalysisDataDto): BaZiStrength {
   const strength = data.strength;
-  const score = normalizeScore100(
-    data.score?.strength_score ?? strength?.strength_score ?? 0,
-  );
-  const mapped = mapStrengthLevel(asString(strength?.strength_level), score);
+  const raw = readCanonicalStrengthScore(data) ?? 0;
+  const unitOne = raw >= 0 && raw <= 1;
+  const mapped = mapStrengthLevel(String(strength?.strength_level || ""));
   const confidenceRaw = strength?.confidence;
   const confidence =
     typeof confidenceRaw === "number"
       ? Math.round(confidenceRaw <= 1 ? confidenceRaw * 100 : confidenceRaw)
-      : Math.min(95, Math.max(40, score));
+      : 0;
   const summary = commercialOrUnavailable(asString(strength?.reasoning));
 
   return {
-    score,
-    maxScore: 100,
-    label: mapped.label,
-    level: mapped.level,
+    score: unitOne ? Math.round(raw * 100) / 100 : raw,
+    maxScore: unitOne ? 1 : 100,
+    label: mapped.label || canonicalStrengthLabel(data),
+    level: mapped.level || canonicalStrengthLabel(data),
     confidence,
     summary,
   };

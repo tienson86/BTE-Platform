@@ -23,7 +23,11 @@ def build_strength_view(result) -> StrengthView:
         support_score=float(data.get("support_score") or 0.0),
         drain_score=float(data.get("drain_score") or 0.0),
         control_score=float(data.get("control_score") or 0.0),
+        combination_score=float(data.get("combination_score") or 0.0),
+        special_score=float(data.get("special_score") or 0.0),
+        raw_total=float(data.get("raw_total") or 0.0),
         reasoning=str(data.get("reasoning") or ""),
+        evidence_compact=str(data.get("evidence_compact") or ""),
         confidence=float(data.get("confidence") or 0.0),
         matched_rules=[str(x) for x in (data.get("matched_rules") or [])],
     )

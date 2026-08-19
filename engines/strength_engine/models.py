@@ -32,8 +32,12 @@ class StrengthResult:
     support_score: float = 0.0
     drain_score: float = 0.0
     control_score: float = 0.0
+    combination_score: float = 0.0
+    special_score: float = 0.0
+    raw_total: float = 0.0
     confidence: float = 0.0
     matched_rules: list[str] = field(default_factory=list)
+    evidence_compact: str = ""
     reasoning: str = ""
     metadata: dict[str, Any] = field(default_factory=dict)
     error: str | None = None
@@ -49,7 +53,11 @@ class StrengthResult:
             "support_score": float(self.support_score),
             "drain_score": float(self.drain_score),
             "control_score": float(self.control_score),
+            "combination_score": float(self.combination_score),
+            "special_score": float(self.special_score),
+            "raw_total": float(self.raw_total),
             "confidence": float(self.confidence),
             "matched_rules": list(self.matched_rules),
+            "evidence_compact": self.evidence_compact or "",
             "reasoning": self.reasoning or "",
         }

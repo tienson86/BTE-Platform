@@ -26,6 +26,13 @@
     return unavailable(v) ? MISSING : String(v);
   }
 
+  function formatStrengthGaugeLabel(value) {
+    var n = Number(value);
+    if (!Number.isFinite(n)) return MISSING;
+    if (n >= 0 && n <= 1) return (Math.round(n * 100) / 100).toFixed(2);
+    return String(Math.round(n));
+  }
+
   function TooltipInfo(text) {
     if (!text) return "";
     return (
@@ -120,9 +127,14 @@
       });
     }
     if (charts.strength_gauge != null && Number.isFinite(Number(charts.strength_gauge))) {
+      var strengthValue = Number(charts.strength_gauge);
+      var strengthDisplay =
+        strengthValue >= 0 && strengthValue <= 1
+          ? (Math.round(strengthValue * 100) / 100).toFixed(2)
+          : String(Math.round(strengthValue));
       metrics.push({
         label: t("report.chart_metric_strength_score"),
-        value: Math.round(Number(charts.strength_gauge)),
+        value: strengthDisplay,
         hint: t("report.chart_metric_strength_hint"),
       });
     }
@@ -184,14 +196,14 @@
       description: t("report.chart_gauge_desc"),
       source: empty
         ? sourceLabel(unavailable(charts.than_label) ? "none" : "score")
-        : t("report.chart_source_score"),
+        : t("report.chart_source_strength"),
       tooltip: t("report.chart_gauge_tip"),
       insight: charts.insights && charts.insights.strength,
       empty: empty && unavailable(charts.than_label),
       body: body,
       altText: empty
         ? t("report.than") + ": " + show(charts.than_label)
-        : t("report.chart_gauge") + ": " + Math.round(Number(gauge)),
+        : t("report.chart_gauge") + ": " + formatStrengthGaugeLabel(gauge),
     });
   }
 

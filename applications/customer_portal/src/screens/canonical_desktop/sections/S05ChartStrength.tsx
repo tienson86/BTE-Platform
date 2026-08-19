@@ -17,10 +17,16 @@ const CHECK_TONE: Record<string, string> = {
 
 function levelModifier(level: string): string {
   const key = level.trim().toLowerCase();
+  if (key.includes("vượng") || key.includes("vuong") || key === "mạnh") {
+    return "cd-s05__level--strong";
+  }
+  if (key.includes("nhược") || key.includes("nhuoc") || key === "yếu") {
+    return "cd-s05__level--weak";
+  }
+  if (key.includes("cân") || key.includes("trung")) {
+    return "cd-s05__level--medium";
+  }
   if (key === "rất mạnh") return "cd-s05__level--very-strong";
-  if (key === "mạnh") return "cd-s05__level--strong";
-  if (key === "trung bình") return "cd-s05__level--medium";
-  if (key === "yếu") return "cd-s05__level--weak";
   if (key === "rất yếu") return "cd-s05__level--very-weak";
   return "cd-s05__level--strong";
 }
@@ -35,7 +41,10 @@ export function S05ChartStrength(): ReactNode {
     factors: data.factors,
     cardType: "preview",
   });
-  const [scoreMain, scoreMax = "100"] = data.score.split(/\s*\/\s*/);
+  const hasScale = data.score.includes("/");
+  const [scoreMain, scoreMax] = hasScale
+    ? data.score.split(/\s*\/\s*/)
+    : [data.score, ""];
 
   return (
     <section
@@ -55,7 +64,9 @@ export function S05ChartStrength(): ReactNode {
           </div>
           <div className="cd-s05__score">
             <span className="cd-s05__score-main">{scoreMain}</span>
-            <span className="cd-s05__score-max"> / {scoreMax}</span>
+            {scoreMax ? (
+              <span className="cd-s05__score-max"> / {scoreMax}</span>
+            ) : null}
           </div>
         </div>
 

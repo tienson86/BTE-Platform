@@ -74,6 +74,8 @@ class StrengthScorer:
             "support_score": context.support_score,
             "drain_score": context.drain_score,
             "control_score": context.control_score,
+            "combination_score": buckets["combination"] / scale if scale else 0.0,
+            "special_score": buckets["special"] / scale if scale else 0.0,
             "confidence": confidence,
             "reasoning": reasoning,
             "raw_total": raw_total,

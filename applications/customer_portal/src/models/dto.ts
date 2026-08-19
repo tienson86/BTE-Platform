@@ -146,7 +146,10 @@ export type StrengthDto = {
   readonly strength_level?: string;
   readonly strength_score?: number;
   readonly reasoning?: string;
+  readonly evidence_compact?: string;
   readonly confidence?: number;
+  readonly matched_rules?: readonly string[];
+  readonly raw_total?: number;
   readonly [key: string]: unknown;
 };
 

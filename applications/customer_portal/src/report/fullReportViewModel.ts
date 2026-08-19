@@ -6,6 +6,12 @@
 
 import type { AnalysisDataDto, AnalyzeChartRequest, PillarDto } from "../models";
 import {
+  canonicalStrengthEvidence,
+  canonicalStrengthLabel,
+  formatCanonicalStrengthScore,
+  readCanonicalStrengthScore,
+} from "../adapters/canonicalStrength";
+import {
   asTenGodsPayload,
   hiddenLinesForPillar,
   stemDisplay,
@@ -71,6 +77,7 @@ export type FullReportViewModel = {
   readonly yinYang: string;
   readonly strengthLabel: string;
   readonly strengthScore: string;
+  readonly strengthEvidence: string;
   readonly pattern: string;
   readonly usefulGod: string;
   readonly hyThan: string;
@@ -166,8 +173,12 @@ export function buildFullReportViewModel(
     dayMaster: text(bazi.day_master),
     dayMasterElement: text(bazi.day_master_element),
     yinYang: text(bazi.day_master_yin_yang),
-    strengthLabel: text(pattern.than_vuong_nhuoc || pattern.than || data.strength?.strength_level),
-    strengthScore: text(data.strength?.strength_score),
+    strengthLabel: canonicalStrengthLabel(data) || text(data.strength?.strength_level),
+    strengthScore: (() => {
+      const score = readCanonicalStrengthScore(data);
+      return score == null ? "" : formatCanonicalStrengthScore(score);
+    })(),
+    strengthEvidence: canonicalStrengthEvidence(data),
     pattern: text(pattern.cach_cuc || pattern.pattern),
     usefulGod: text(useful.useful_god || pattern.dung_than),
     hyThan: listText(useful.favorable_gods) || text(pattern.hy_than),
@@ -393,6 +404,7 @@ function overviewGrid(model: FullReportViewModel): string {
     ${kv("Nhật chủ", [model.dayMaster, model.yinYang, model.dayMasterElement].filter(Boolean).join(" · "))}
     ${kv("Thân", model.strengthLabel)}
     ${kv("Điểm thân", model.strengthScore)}
+    ${model.strengthEvidence ? kv("Căn cứ chính", model.strengthEvidence) : ""}
     ${kv("Cách cục", model.pattern)}
     ${kv("Điều hậu", model.temperature)}
   </div>`;

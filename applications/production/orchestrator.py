@@ -452,10 +452,12 @@ class ProductionEndToEndOrchestrator:
         composition,
     ) -> tuple[list[tuple[str, str]], list[str]]:
         """Technical rows for Advisor Mode appendix."""
+        from engines.strength_engine.labels import strength_level_label
+
         strength = engine_output.strength_result
         plan = composition.cross_domain.executive_claim_plan
         rows = [
-            ("Mức thân", str(strength.strength_level or "")),
+            ("Mức thân", strength_level_label(strength.strength_level) or str(strength.strength_level or "")),
             ("Điểm thân", str(strength.strength_score or "")),
             ("Chủ đề chính", composition.cross_domain.primary_theme),
             ("Xung đột", ", ".join(composition.cross_domain.conflicts)),

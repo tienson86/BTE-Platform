@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any
 
 from .analyzer import StrengthAnalyzer
+from .evidence import compact_evidence
 from .loader import StrengthLoader
 from .matcher import StrengthMatcher
 from .models import StrengthResult
@@ -66,8 +67,12 @@ class StrengthEngine:
             support_score=float(scored.get("support_score") or 0.0),
             drain_score=float(scored.get("drain_score") or 0.0),
             control_score=float(scored.get("control_score") or 0.0),
+            combination_score=float(scored.get("combination_score") or 0.0),
+            special_score=float(scored.get("special_score") or 0.0),
+            raw_total=float(scored.get("raw_total") or 0.0),
             confidence=float(scored.get("confidence") or 0.0),
             matched_rules=matched_rules,
+            evidence_compact=compact_evidence(all_matches),
             reasoning=reasoning,
             metadata={
                 "trace": {

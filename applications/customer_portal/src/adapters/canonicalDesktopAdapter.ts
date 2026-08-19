@@ -14,8 +14,14 @@ import {
   extractInterpretationSections,
   findSectionBody,
   firstCommercialSnippet,
-  normalizeScore100,
 } from "./contentGuards";
+import {
+  canonicalStrengthEvidence,
+  canonicalStrengthLabel,
+  canonicalStrengthMeterPercent,
+  formatCanonicalStrengthScore,
+  readCanonicalStrengthScore,
+} from "./canonicalStrength";
 import {
   asTenGodsPayload,
   hiddenLabels,
@@ -441,13 +447,11 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
   const element = normalizeElement(asString(data.bazi?.day_master_element));
   const yy = asString(data.bazi?.day_master_yin_yang);
   const pattern = data.pattern as Record<string, unknown> | undefined;
-  const strength = data.strength;
-  const score = normalizeScore100(
-    data.score?.strength_score ?? strength?.strength_score ?? 0,
-  );
-  const level = asString(strength?.strength_level);
+  const strengthScore = readCanonicalStrengthScore(data) ?? 0;
+  const score = canonicalStrengthMeterPercent(strengthScore);
+  const level = canonicalStrengthLabel(data);
   const cachCuc = pickStr(pattern, ["cach_cuc", "pattern"]);
-  const than = pickStr(pattern, ["than_vuong_nhuoc", "than"]);
+  const than = level;
   const season = asString(
     (data.calendar?.solar_term as { name?: string } | null | undefined)?.name,
   );
@@ -596,7 +600,7 @@ function mapS02(data: AnalysisDataDto): CanonicalDesktopViewModel["s02"] {
     }
   }
   const yy = asString(data.bazi?.day_master_yin_yang, "—");
-  const than = pickStr(pattern, ["than_vuong_nhuoc", "than"]) || "—";
+  const than = canonicalStrengthLabel(data) || "—";
   const dung = pickStr(useful, ["useful_god"]) || pickStr(pattern, ["dung_than"]) || "—";
   const hy =
     pickList(useful, ["favorable_gods"]).join(", ") ||
@@ -744,27 +748,20 @@ function mapS04(data: AnalysisDataDto): CanonicalDesktopViewModel["s04"] {
 
 function mapS05(data: AnalysisDataDto): CanonicalDesktopViewModel["s05"] {
   const base = cloneFixture().s05;
-  const score = normalizeScore100(
-    data.score?.strength_score ?? data.strength?.strength_score ?? 0,
-  );
-  const than = pickStr(data.pattern as Record<string, unknown> | undefined, [
-    "than_vuong_nhuoc",
-    "than",
-  ]);
-  const totalScore = data.score?.total_score;
-  const grade = asString(data.score?.grade);
+  const strengthScore = readCanonicalStrengthScore(data);
   const scoreLabel =
-    totalScore != null && Number.isFinite(Number(totalScore)) && grade
-      ? `${Number(totalScore)} / ${grade}`
-      : `${score} / 100`;
-  const level = than || (score >= 70 ? "MẠNH" : score >= 45 ? "TRUNG BÌNH" : "YẾU");
+    strengthScore == null ? "—" : formatCanonicalStrengthScore(strengthScore);
+  const percent =
+    strengthScore == null ? 0 : canonicalStrengthMeterPercent(strengthScore);
+  const level = canonicalStrengthLabel(data);
   const reasoning = commercialOrUnavailable(asString(data.strength?.reasoning));
-  const factors = asString(data.strength?.reasoning)
-    .split(/[.;\n]+/)
+  const evidence = canonicalStrengthEvidence(data);
+  const factors = evidence
+    .split(/\s·\s|[.;\n]+/)
     .map((s) => s.trim())
     .filter(Boolean)
     .filter((text) => commercialOrUnavailable(text) !== UNAVAILABLE_CONCLUSION)
-    .slice(0, 4)
+    .slice(0, 6)
     .map((text, i) => ({
       text,
       tone: (i < 2 ? "positive" : i === 2 ? "neutral" : "negative") as
@@ -777,7 +774,7 @@ function mapS05(data: AnalysisDataDto): CanonicalDesktopViewModel["s05"] {
     ...base,
     level: level || "—",
     score: scoreLabel,
-    percent: Math.min(100, Math.max(0, score)),
+    percent: Math.min(100, Math.max(0, percent)),
     insight: reasoning,
     factors:
       factors.length > 0

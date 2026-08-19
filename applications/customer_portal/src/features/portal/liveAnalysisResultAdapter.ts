@@ -14,6 +14,11 @@ import {
   type NarrativeResultDto,
   type NarrativeSectionDto,
 } from "../../adapters/narrativeResultAdapter";
+import {
+  canonicalStrengthLabel,
+  formatCanonicalStrengthScore,
+  readCanonicalStrengthScore,
+} from "../../adapters/canonicalStrength";
 import type { AnalysisDataDto, BaziDto, CustomerEchoDto, PillarDto } from "../../models";
 import type {
   CanonicalReportInput,
@@ -104,22 +109,17 @@ function pickDayMaster(data: AnalysisDataDto): string | null {
 }
 
 function pickStrengthLabel(data: AnalysisDataDto): string | null {
+  const mapped = canonicalStrengthLabel(data);
+  if (mapped) return mapped;
   const strength = data.strength;
   if (!strength || typeof strength !== "object") return null;
-  return (
-    asText(strength.reasoning) ??
-    asText(strength.strength_level) ??
-    asText((strength as { level?: unknown }).level)
-  );
+  return asText(strength.reasoning) ?? asText(strength.strength_level);
 }
 
 function pickStrengthScore(data: AnalysisDataDto): string | null {
-  const raw = data.strength?.strength_score;
-  if (raw === null || raw === undefined) return null;
-  const num = Number(raw);
-  if (!Number.isFinite(num)) return null;
-  if (num > 0 && num <= 1) return String(Math.round(num * 100) / 100);
-  return String(num);
+  const raw = readCanonicalStrengthScore(data);
+  if (raw === null) return null;
+  return formatCanonicalStrengthScore(raw);
 }
 
 function pickScoreGrade(data: AnalysisDataDto): string | null {

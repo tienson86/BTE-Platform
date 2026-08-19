@@ -618,12 +618,27 @@
     });
   }
 
-  function strengthGaugeValue(_overview, score) {
-    var raw = pick(score || {}, [
-      "strength_score",
-      "body_strength_score",
-      "than_score",
-    ]);
+  function strengthClassLabel(payload, overview) {
+    var labels = {
+      strong: "Thân vượng",
+      weak: "Thân nhược",
+      balanced: "Thân cân bằng",
+    };
+    var strength = payload && payload.strength && typeof payload.strength === "object"
+      ? payload.strength
+      : {};
+    var level = String(strength.strength_level || strength.level || "")
+      .trim()
+      .toLowerCase();
+    if (labels[level]) return labels[level];
+    return present(overview && (overview.than_strength || overview.than));
+  }
+
+  function strengthGaugeValue(_overview, _score, payload) {
+    var strength = payload && payload.strength && typeof payload.strength === "object"
+      ? payload.strength
+      : {};
+    var raw = pick(strength, ["strength_score"]);
     if (raw != null && Number.isFinite(Number(raw))) return Number(raw);
     return null;
   }
@@ -1365,11 +1380,11 @@
         : tenGods.length
           ? "pillars"
           : "none";
-    var gauge = strengthGaugeValue(overview, score);
+    var gauge = strengthGaugeValue(overview, score, payload);
     var relations = relationsUnavailable(payload);
     var knowledge = payload.knowledge_expert || null;
     var quality = qualityLabel(score, interpretation);
-    var thanLabel = present(overview.than_strength || overview.than);
+    var thanLabel = strengthClassLabel(payload, overview);
     var wuxingScalar = pick(score, ["wuxing_score"]);
     if (wuxingScalar == null && summary && summary.wuxing && summary.wuxing.length === 1) {
       wuxingScalar = summary.wuxing[0].value;
