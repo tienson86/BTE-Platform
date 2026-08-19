@@ -23,6 +23,11 @@ import {
   readCanonicalStrengthScore,
 } from "./canonicalStrength";
 import {
+  canonicalBalancingNeedLabel,
+  canonicalClimateStateLabel,
+  canonicalTemperatureEvidence,
+} from "./canonicalTemperature";
+import {
   asTenGodsPayload,
   hiddenLabels,
   hiddenLinesForPillar,
@@ -451,6 +456,9 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
   const score = canonicalStrengthMeterPercent(strengthScore);
   const level = canonicalStrengthLabel(data);
   const cachCuc = pickStr(pattern, ["cach_cuc", "pattern"]);
+  const patternEvidence = String(
+    (pattern as { evidence_compact?: unknown } | undefined)?.evidence_compact || "",
+  ).trim();
   const than = level;
   const season = asString(
     (data.calendar?.solar_term as { name?: string } | null | undefined)?.name,
@@ -541,6 +549,30 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
           value: cachCuc || UNAVAILABLE_CONCLUSION,
           tag: than || "—",
           tone: strengthTone === "danger" ? ("warning" as const) : strengthTone,
+        },
+        {
+          label: "Căn cứ",
+          value: patternEvidence || UNAVAILABLE_CONCLUSION,
+          tag: "Nhận diện",
+          tone: "neutral" as const,
+        },
+        {
+          label: "Trạng thái khí hậu",
+          value: canonicalClimateStateLabel(data) || UNAVAILABLE_CONCLUSION,
+          tag: "Điều hậu",
+          tone: "neutral" as const,
+        },
+        {
+          label: "Nhu cầu điều hòa",
+          value: canonicalBalancingNeedLabel(data) || UNAVAILABLE_CONCLUSION,
+          tag: "Điều hậu",
+          tone: "neutral" as const,
+        },
+        {
+          label: "Căn cứ khí hậu",
+          value: canonicalTemperatureEvidence(data) || UNAVAILABLE_CONCLUSION,
+          tag: "Điều hậu",
+          tone: "neutral" as const,
         },
         {
           label: "Thân cư",

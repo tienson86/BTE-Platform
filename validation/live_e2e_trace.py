@@ -10,8 +10,8 @@ from playwright.sync_api import sync_playwright
 from applications.api.services.orchestrator import OrchestratorService
 from engines.bazi_engine.engine import BaziEngine
 from engines.calendar_engine.engine import CalendarEngine
-from engines.pattern_engine.context import PatternContext
 from engines.pattern_engine.engine import PatternEngine
+from engines.pattern_engine.utils.context_builder import build_pattern_context
 from engines.pattern_engine.rule_context_bridge import (
     build_rule_context,
     enrich_result_from_rule_context,
@@ -54,17 +54,7 @@ def compute_engine_fields() -> dict[str, Any]:
         INPUT["minute"],
     )
     bazi_chart = BaziEngine().build(calendar, gender=INPUT["gender"])
-    pattern_context = PatternContext(
-        year_pillar=f"{bazi_chart.year_pillar.stem} {bazi_chart.year_pillar.branch}",
-        month_pillar=f"{bazi_chart.month_pillar.stem} {bazi_chart.month_pillar.branch}",
-        day_pillar=f"{bazi_chart.day_pillar.stem} {bazi_chart.day_pillar.branch}",
-        hour_pillar=f"{bazi_chart.hour_pillar.stem} {bazi_chart.hour_pillar.branch}",
-        day_master=bazi_chart.day_master,
-        ten_gods={"list": list(bazi_chart.ten_gods or [])},
-        shensha=list(bazi_chart.shensha or []),
-        calendar=calendar,
-        bazi=bazi_chart,
-    )
+    pattern_context = build_pattern_context(bazi_chart, calendar=calendar)
     pattern_result = PatternEngine().calculate(pattern_context)
     rule_context = build_rule_context(
         calendar=calendar,
@@ -192,7 +182,7 @@ def map_dom_value(dom: dict[str, Any], field: str) -> Any:
         "dung_than": "Dụng thần",
         "hy_than": "Hỷ thần",
         "ky_than": "Kỵ thần",
-        "dieu_hau": "Điều hậu",
+        "dieu_hau": "Đắc lệnh",
     }
     return (dom or {}).get(label_map[field])
 

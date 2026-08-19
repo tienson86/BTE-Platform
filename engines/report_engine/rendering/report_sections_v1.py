@@ -372,6 +372,8 @@ def _section_useful_god(report_input: ReportInputV1) -> PresentedSection:
                 ("Kỵ thần", ", ".join(display_text(item) for item in useful.unfavorable_gods)),
                 ("Trung tính", ", ".join(display_text(item) for item in useful.neutral_gods)),
                 ("Điều hậu nhiệt", display_text(useful.temperature_adjustment, "temperature")),
+                ("Nhu cầu điều hòa", display_text(useful.balancing_need, "balancing_need")),
+                ("Căn cứ khí hậu", display_text(useful.climate_evidence)),
             ]
         ),
         paragraphs=customer_paragraphs(useful.reasoning),

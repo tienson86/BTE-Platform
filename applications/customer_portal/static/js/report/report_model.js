@@ -469,13 +469,7 @@
           open: spec.open,
           conclusion: v,
           summary: chartInsightText(interpretation, spec.hints),
-          factors: v
-            ? [v].concat(
-                overview.dieu_hau && overview.dieu_hau !== MISSING
-                  ? [overview.dieu_hau]
-                  : []
-              )
-            : [],
+          factors: v ? [v] : [],
           rules: extractRules(scoped([pattern.useful_god, pattern.dung_than])),
           evidence: extractEvidence(scoped([pattern.useful_god])),
           confidence: pickConfidence(scoped([pattern.useful_god])),

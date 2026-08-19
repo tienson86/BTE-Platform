@@ -87,7 +87,7 @@
     },
     {
       id: "dieu_hau",
-      label: "Điều hậu",
+      label: "Đắc lệnh",
       keys: ["dieu_hau", "climate", "tiao_hou", "tiaohou", "season_adjust"],
       tone: "climate",
       icon: "sun",

@@ -426,8 +426,11 @@ class ReportInputV1Adapter:
             ),
             neutral_gods=[],
             temperature_adjustment=(
-                temperature.temperature_level if temperature else ""
+                (temperature.climate_state if temperature else "")
+                or (temperature.temperature_level if temperature else "")
             ),
+            balancing_need=(temperature.balancing_need if temperature else ""),
+            climate_evidence=(temperature.evidence_compact if temperature else ""),
             reasoning=(useful.reasoning if useful else "") or (pattern.dieu_hau if pattern else ""),
         )
 

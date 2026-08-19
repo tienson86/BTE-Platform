@@ -11,48 +11,18 @@ from applications.api.services.interpretation_truth import build_interpretation_
 from applications.api.services.orchestrator import OrchestratorService
 from applications.api.services.pattern_truth import build_pattern_view
 from applications.api.services.score_truth import build_score_view
-from engines.bazi_engine.engine import BaziEngine
-from engines.calendar_engine.engine import CalendarEngine
+from applications.api.tests.unified_stack import (
+    CRITICAL,
+    production_interpretation_stage,
+    production_score_stage,
+)
 from engines.interpretation_engine.engine import InterpretationEngine
-from engines.pattern_engine.context import PatternContext
-from engines.pattern_engine.engine import PatternEngine
-from engines.score_engine.engine import ScoreEngine
-
-CRITICAL = {
-    "year": 1987,
-    "month": 1,
-    "day": 21,
-    "hour": 4,
-    "minute": 30,
-    "gender": "male",
-}
 
 
 def _pipeline_ctx_for_critical() -> tuple[dict, object, object, object]:
-    calendar = CalendarEngine().build(
-        CRITICAL["year"],
-        CRITICAL["month"],
-        CRITICAL["day"],
-        CRITICAL["hour"],
-        CRITICAL["minute"],
-    )
-    chart = BaziEngine().build(calendar, gender=CRITICAL["gender"])
-    pattern_context = PatternContext(
-        year_pillar=f"{chart.year_pillar.stem} {chart.year_pillar.branch}",
-        month_pillar=f"{chart.month_pillar.stem} {chart.month_pillar.branch}",
-        day_pillar=f"{chart.day_pillar.stem} {chart.day_pillar.branch}",
-        hour_pillar=f"{chart.hour_pillar.stem} {chart.hour_pillar.branch}",
-        day_master=chart.day_master,
-        ten_gods={"list": list(chart.ten_gods or [])},
-        shensha=list(chart.shensha or []),
-        calendar=calendar,
-        bazi=chart,
-    )
-    pattern = PatternEngine().calculate(pattern_context)
-    pipeline_ctx = dict(pattern.rule_context or {})
-    score = ScoreEngine().calculate(pipeline_ctx)
-    ScoreEngine().append_score_to_rule_context(pipeline_ctx, score)
-    return pipeline_ctx, chart, pattern, score
+    """Scored RuleContext after canonical Pattern / Strength / Temperature overlay."""
+    interpretation_ctx, score, chart, pattern, _published = production_score_stage()
+    return interpretation_ctx, chart, pattern, score
 
 
 def test_interpretation_reads_rule_context_without_rebuild() -> None:
@@ -93,8 +63,7 @@ def test_orchestrator_interpretation_matches_engine() -> None:
         minute=CRITICAL["minute"],
         gender=CRITICAL["gender"],
     )
-    pipeline_ctx, _, _, _ = _pipeline_ctx_for_critical()
-    engine_result = InterpretationEngine().run(pipeline_ctx)
+    engine_result, _, _, _, _ = production_interpretation_stage()
     engine_portal = engine_result.to_portal_dict()
     api_interp = payload["interpretation"]
     assert api_interp["section_count"] == engine_portal["section_count"]
@@ -113,8 +82,7 @@ def test_api_analyze_interpretation_matches_engine() -> None:
     assert response.status_code == 200
     data = response.json()["data"]
     interp = data["interpretation"]
-    pipeline_ctx, _, _, _ = _pipeline_ctx_for_critical()
-    engine_portal = InterpretationEngine().run(pipeline_ctx).to_portal_dict()
+    engine_portal = production_interpretation_stage()[0].to_portal_dict()
     assert interp["section_count"] == engine_portal["section_count"]
     assert interp["confidence"] == engine_portal["confidence"]
     assert "summary" not in interp

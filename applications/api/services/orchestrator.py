@@ -542,7 +542,11 @@ class OrchestratorService:
             strength_score=strength_result.strength_score,
         )
         temperature_result = self.temperature_engine.calculate(temperature_context)
-        pattern_context.temperature_type = temperature_result.to_pattern_temperature_type()
+        # G1-04: climate_state is published on TemperatureView. Useful God overlay
+        # stays frozen until G1-06 so Overall Useful God is not rewritten here.
+        pattern_context.temperature_type = (
+            temperature_result.useful_god_temperature_overlay()
+        )
         analysis.temperature = build_temperature_view(temperature_result)
 
         # ----- Stage 4: Pattern (recognition only) -----

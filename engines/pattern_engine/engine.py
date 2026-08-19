@@ -61,6 +61,16 @@ class PatternResult:
     hy_than: str = ""
     ky_than: str = ""
     dieu_hau: str = ""
+    winning_rule_id: str = ""
+    evidence_compact: str = ""
+    month_branch: str = ""
+    month_main_qi: str = ""
+    month_main_qi_ten_god: str = ""
+    month_hidden_stems: List[str] = field(default_factory=list)
+    day_master: str = ""
+    penetration_exact: bool | None = None
+    penetration_related: List[dict[str, Any]] = field(default_factory=list)
+    fallback_used: bool = False
     rule_context: dict[str, Any] = field(default_factory=dict)
 
     def to_portal_dict(self) -> dict[str, Any]:
@@ -87,6 +97,27 @@ class PatternResult:
             payload["ky_than"] = self.ky_than
         if self.dieu_hau:
             payload["dieu_hau"] = self.dieu_hau
+        if self.winning_rule_id:
+            payload["winning_rule_id"] = self.winning_rule_id
+        if self.evidence_compact:
+            payload["evidence_compact"] = self.evidence_compact
+        if self.month_branch:
+            payload["month_branch"] = self.month_branch
+        if self.month_main_qi:
+            payload["month_main_qi"] = self.month_main_qi
+        if self.month_main_qi_ten_god:
+            payload["month_main_qi_ten_god"] = self.month_main_qi_ten_god
+        if self.month_hidden_stems:
+            payload["month_hidden_stems"] = list(self.month_hidden_stems)
+        if self.day_master:
+            payload["day_master"] = self.day_master
+        if self.penetration_exact is not None:
+            payload["penetration_exact"] = bool(self.penetration_exact)
+        if self.penetration_related:
+            payload["penetration_related"] = list(self.penetration_related)
+        if self.candidate_patterns:
+            payload["candidate_patterns"] = list(self.candidate_patterns)
+        payload["fallback_used"] = bool(self.fallback_used)
         # Optional metadata — omit when unset (no fabricated defaults).
         if self.follow_type:
             payload["follow_type"] = self.follow_type
@@ -175,6 +206,22 @@ class PatternEngine:
             failure_reason=(
                 data.get("failure_reason") or data.get("error")
             ),
+            winning_rule_id=str(data.get("winning_rule_id") or ""),
+            evidence_compact=str(data.get("evidence_compact") or ""),
+            month_branch=str(data.get("month_branch") or ""),
+            month_main_qi=str(data.get("month_main_qi") or ""),
+            month_main_qi_ten_god=str(data.get("month_main_qi_ten_god") or ""),
+            month_hidden_stems=[
+                str(item) for item in (data.get("month_hidden_stems") or [])
+            ],
+            day_master=str(data.get("day_master") or ""),
+            penetration_exact=(
+                bool(data["penetration_exact"])
+                if data.get("penetration_exact") is not None
+                else None
+            ),
+            penetration_related=list(data.get("penetration_related") or []),
+            fallback_used=bool(data.get("fallback_used")),
         )
 
         # Pattern Engine is the sole RuleContext producer.

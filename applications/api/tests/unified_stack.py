@@ -11,6 +11,7 @@ from typing import Any
 from engines.bazi_engine.engine import BaziEngine
 from engines.calendar_engine.engine import CalendarEngine
 from engines.interpretation_engine.engine import InterpretationEngine
+from engines.luck_engine.engine import LuckEngine
 from engines.pattern_engine.engine import PatternEngine, PatternResult
 from engines.pattern_engine.rule_context_bridge import (
     enrich_result_from_rule_context,
@@ -73,7 +74,9 @@ def production_pattern_stage() -> tuple[PatternResult, Any, Any]:
             strength_score=strength_result.strength_score,
         )
     )
-    pattern_context.temperature_type = temperature_result.to_pattern_temperature_type()
+    pattern_context.temperature_type = (
+        temperature_result.useful_god_temperature_overlay()
+    )
 
     pattern = PatternEngine().calculate(pattern_context)
     return pattern, chart, calendar
@@ -98,7 +101,9 @@ def production_rule_context() -> tuple[dict[str, Any], Any, PatternResult]:
             strength_score=strength_result.strength_score,
         )
     )
-    pattern_context.temperature_type = temperature_result.to_pattern_temperature_type()
+    pattern_context.temperature_type = (
+        temperature_result.useful_god_temperature_overlay()
+    )
 
     pattern = PatternEngine().calculate(pattern_context)
     useful_god_result = UsefulGodEngine().calculate(
@@ -117,14 +122,40 @@ def production_rule_context() -> tuple[dict[str, Any], Any, PatternResult]:
     return rule_context, chart, pattern
 
 
-def production_score_stage() -> tuple[dict[str, Any], ScoreResult, Any, PatternResult]:
-    rule_context, chart, pattern = production_rule_context()
-    score = ScoreEngine().calculate(rule_context)
-    ScoreEngine().append_score_to_rule_context(rule_context, score)
-    return rule_context, score, chart, pattern
+def production_score_stage() -> tuple[dict[str, Any], ScoreResult, Any, PatternResult, dict[str, Any]]:
+    """Score stage parity: published RuleContext stays immutable; score is composed."""
+    published_rule_context, chart, pattern = production_rule_context()
+    score = ScoreEngine().calculate(published_rule_context)
+    interpretation_ctx = ScoreEngine().append_score_to_rule_context(
+        published_rule_context,
+        score,
+    )
+    return interpretation_ctx, score, chart, pattern, published_rule_context
 
 
 def production_interpretation_stage() -> tuple[Any, dict[str, Any], Any, PatternResult, ScoreResult]:
-    rule_context, score, chart, pattern = production_score_stage()
-    interpretation = InterpretationEngine().run(rule_context)
-    return interpretation, rule_context, chart, pattern, score
+    """Interpretation parity with orchestrator (matching on scored ctx + LuckContext)."""
+    interpretation_ctx, score, chart, pattern, published_rule_context = (
+        production_score_stage()
+    )
+    calendar, _ = _birth_calendar_chart()
+    luck_context = LuckEngine().build(
+        calendar=calendar,
+        bazi=chart,
+        pattern=pattern,
+        rule_context=published_rule_context,
+        score=score,
+    )
+    engine = InterpretationEngine()
+    all_rules = engine.load_knowledge_rules()
+    matched_rules = engine.match_knowledge_rules(interpretation_ctx, all_rules)
+    scored_rules = engine.score_matched_rules(matched_rules, interpretation_ctx)
+    ordered_rules = engine.resolve_priority(scored_rules, interpretation_ctx)
+    interpretation = engine.build_from_resolved(
+        ordered_rules,
+        interpretation_ctx,
+        all_rules=all_rules,
+        matched_count=len(scored_rules),
+        luck_context=luck_context,
+    )
+    return interpretation, interpretation_ctx, chart, pattern, score

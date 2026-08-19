@@ -211,10 +211,24 @@ class ReportUsefulGodV1:
     unfavorable_gods: list[str] = field(default_factory=list)
     neutral_gods: list[str] = field(default_factory=list)
     temperature_adjustment: str = ""
+    balancing_need: str = ""
+    climate_evidence: str = ""
     reasoning: str = ""
 
     def to_dict(self) -> dict[str, Any]:
-        return _normalize_mapping(asdict(self))
+        """Keep legacy keys; G1-04 adds Điều hậu need/evidence."""
+        return _normalize_mapping(
+            {
+                "useful_god": self.useful_god,
+                "favorable_gods": self.favorable_gods,
+                "unfavorable_gods": self.unfavorable_gods,
+                "neutral_gods": self.neutral_gods,
+                "temperature_adjustment": self.temperature_adjustment,
+                "balancing_need": self.balancing_need,
+                "climate_evidence": self.climate_evidence,
+                "reasoning": self.reasoning,
+            }
+        )
 
 
 @dataclass(slots=True)

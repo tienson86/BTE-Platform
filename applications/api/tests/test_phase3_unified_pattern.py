@@ -11,8 +11,8 @@ from applications.api.services.orchestrator import OrchestratorService
 from applications.api.services.pattern_truth import build_pattern_view
 from engines.bazi_engine.engine import BaziEngine
 from engines.calendar_engine.engine import CalendarEngine
-from engines.pattern_engine.context import PatternContext
 from engines.pattern_engine.engine import PatternEngine
+from engines.pattern_engine.utils.context_builder import build_pattern_context
 
 CRITICAL = {
     "year": 1987,
@@ -33,17 +33,7 @@ def _build_pattern_stack() -> tuple[PatternEngine, PatternContext, object]:
         CRITICAL["minute"],
     )
     chart = BaziEngine().build(calendar, gender=CRITICAL["gender"])
-    context = PatternContext(
-        year_pillar=f"{chart.year_pillar.stem} {chart.year_pillar.branch}",
-        month_pillar=f"{chart.month_pillar.stem} {chart.month_pillar.branch}",
-        day_pillar=f"{chart.day_pillar.stem} {chart.day_pillar.branch}",
-        hour_pillar=f"{chart.hour_pillar.stem} {chart.hour_pillar.branch}",
-        day_master=chart.day_master,
-        ten_gods={"list": list(chart.ten_gods or [])},
-        shensha=list(chart.shensha or []),
-        calendar=calendar,
-        bazi=chart,
-    )
+    context = build_pattern_context(chart, calendar=calendar)
     return PatternEngine(), context, chart
 
 
@@ -51,11 +41,13 @@ def test_pattern_engine_produces_rule_context() -> None:
     engine, context, _ = _build_pattern_stack()
     result = engine.calculate(context)
     assert result.success
-    assert result.pattern == "chinh_quan"
-    assert result.cach_cuc == "Chính Quan"
+    assert result.pattern == "chinh_an"
+    assert result.cach_cuc == "Chính Ấn"
     assert result.rule_context
     assert "wuxing" in result.rule_context
-    assert result.rule_context["pattern"]["main_pattern"] == "chinh_quan"
+    assert result.rule_context["pattern"]["main_pattern"] == "chinh_an"
+    assert result.winning_rule_id == "pat_ca_01"
+    assert result.fallback_used is False
 
 
 def test_pattern_view_matches_engine() -> None:
@@ -67,7 +59,7 @@ def test_pattern_view_matches_engine() -> None:
     assert view.cach_cuc == portal["cach_cuc"]
     assert view.to_dict() == portal
     assert view.than == "Kim"
-    assert view.dung_than == "Chính Quan"
+    assert view.dung_than == "Chính Ấn"
 
 
 def test_orchestrator_pattern_payload_matches_engine() -> None:
@@ -101,9 +93,8 @@ def test_api_analyze_pattern_matches_engine() -> None:
     engine, context, _ = _build_pattern_stack()
     engine_result = engine.calculate(context)
     assert pattern["pattern"] == engine_result.pattern
-    assert pattern["cach_cuc"] == "Chính Quan"
+    assert pattern["cach_cuc"] == "Chính Ấn"
     assert pattern["than"] == "Kim"
-    assert pattern["dung_than"] == "Chính Quan"
 
 
 def test_analysis_result_pattern_slice() -> None:

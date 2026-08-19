@@ -24,8 +24,8 @@ def main() -> None:
     from engines.calendar_engine.engine import CalendarEngine
     from engines.interpretation_engine.engine import InterpretationEngine
     from engines.narrative_engine.engine import NarrativeEngine
-    from engines.pattern_engine.context import PatternContext
     from engines.pattern_engine.engine import PatternEngine
+    from engines.pattern_engine.utils.context_builder import build_pattern_context
     from engines.report_engine.engine import ReportEngine
     from engines.score_engine.engine import ScoreEngine
 
@@ -52,9 +52,6 @@ def main() -> None:
         {"id": "case_20", "year": 2001, "month": 3, "day": 8, "hour": 13, "minute": 45, "gender": "female", "timezone": "Asia/Ho_Chi_Minh"},
     ]
 
-    def pillar_text(pillar: object) -> str:
-        return f"{getattr(pillar, 'stem', '')} {getattr(pillar, 'branch', '')}".strip()
-
     def stage_run(inp: dict) -> tuple[dict, int, dict]:
         times: dict[str, float] = {}
         tracemalloc.start()
@@ -66,15 +63,7 @@ def main() -> None:
         bazi = BaziEngine().build(cal, gender=inp["gender"])
         times["bazi"] = (time.perf_counter() - t0) * 1000
 
-        ctx = PatternContext(
-            year_pillar=pillar_text(bazi.year_pillar),
-            month_pillar=pillar_text(bazi.month_pillar),
-            day_pillar=pillar_text(bazi.day_pillar),
-            hour_pillar=pillar_text(bazi.hour_pillar),
-            day_master=bazi.day_master,
-            ten_gods={"list": list(bazi.ten_gods or [])},
-            shensha=list(bazi.shensha or []),
-        )
+        ctx = build_pattern_context(bazi, calendar=cal)
         t0 = time.perf_counter()
         pattern = PatternEngine().calculate(ctx)
         times["pattern"] = (time.perf_counter() - t0) * 1000

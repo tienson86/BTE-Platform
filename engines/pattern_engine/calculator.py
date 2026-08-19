@@ -30,8 +30,10 @@ from .conflict import (
     pattern_code,
     resolve_exclusive_conflicts,
 )
+from .evidence import attach_identification_evidence
 from .loader import PatternLoader
 from .matcher import PatternMatcher
+from .utils.context_builder import ensure_canonical_pattern_context
 from .validator import PatternValidator
 
 logger = logging.getLogger(__name__)
@@ -60,6 +62,7 @@ class PatternCalculator:
     def calculate(self, context: Any) -> dict[str, Any]:
         """Run the full Pattern decision pipeline."""
         empty = self._empty_result()
+        context = ensure_canonical_pattern_context(context)
 
         if not self.loader.rules_exist():
             empty["success"] = False
@@ -95,6 +98,7 @@ class PatternCalculator:
 
         # ---- 5. Final Pattern Selection ----
         return self.select_final(
+            context=context,
             candidates=candidates,
             validated=validated,
             resolved=resolved,
@@ -228,6 +232,7 @@ class PatternCalculator:
     def select_final(
         self,
         *,
+        context: Any,
         candidates: list[dict[str, Any]],
         validated: list[dict[str, Any]],
         resolved: list[dict[str, Any]],
@@ -267,6 +272,7 @@ class PatternCalculator:
             result["failure_reason"] = result["error"]
             result["reason"] = result["error"]
             result["confidence"] = 0.0
+            attach_identification_evidence(result, context, None, candidates)
             return result
 
         winner = resolved[0]
@@ -275,6 +281,7 @@ class PatternCalculator:
         score = float(winner.get("score", 0) or 0)
         priority = int(winner.get("priority", 0) or 0)
         description = winner.get("description")
+        self._log_fallback_diagnostic(context, winner)
 
         result["success"] = True
         result["pattern"] = final
@@ -290,6 +297,7 @@ class PatternCalculator:
         result["resolved_rule_count"] = len(resolved)
         result["candidate_count"] = len(candidates)
         result["validated_count"] = len(validated)
+        attach_identification_evidence(result, context, winner, candidates)
         return result
 
     # ================================================================
@@ -334,6 +342,26 @@ class PatternCalculator:
             seen.add(code)
             codes.append(code)
         return codes
+
+    def _log_fallback_diagnostic(self, context: Any, winner: dict[str, Any]) -> None:
+        """Fallback stays available; incomplete context must not look canonical."""
+        if not self._is_fallback(winner):
+            return
+        has_bazi = getattr(context, "bazi", None) is not None
+        month_tg = str(getattr(context, "month_branch_ten_god", "") or "").strip()
+        if has_bazi or month_tg:
+            logger.warning(
+                "pattern.fallback_with_canonical_signals rule_id=%s "
+                "month_branch_ten_god=%s has_bazi=%s",
+                winner.get("rule_id"),
+                month_tg,
+                has_bazi,
+            )
+            return
+        logger.info(
+            "pattern.fallback_incomplete_context: pat_fallback selected because "
+            "PatternContext has no BaZi and no month_branch_ten_god"
+        )
 
     @staticmethod
     def _is_fallback(item: dict[str, Any]) -> bool:

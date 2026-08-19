@@ -10,44 +10,13 @@ from applications.api.services.bazi_truth import build_bazi_view
 from applications.api.services.orchestrator import OrchestratorService
 from applications.api.services.pattern_truth import build_pattern_view
 from applications.api.services.score_truth import build_score_view
-from engines.bazi_engine.engine import BaziEngine
-from engines.calendar_engine.engine import CalendarEngine
-from engines.pattern_engine.context import PatternContext
-from engines.pattern_engine.engine import PatternEngine
+from applications.api.tests.unified_stack import CRITICAL, production_rule_context
 from engines.score_engine.engine import ScoreEngine
-
-CRITICAL = {
-    "year": 1987,
-    "month": 1,
-    "day": 21,
-    "hour": 4,
-    "minute": 30,
-    "gender": "male",
-}
 
 
 def _rule_context_for_critical() -> tuple[dict, object, object]:
-    calendar = CalendarEngine().build(
-        CRITICAL["year"],
-        CRITICAL["month"],
-        CRITICAL["day"],
-        CRITICAL["hour"],
-        CRITICAL["minute"],
-    )
-    chart = BaziEngine().build(calendar, gender=CRITICAL["gender"])
-    context = PatternContext(
-        year_pillar=f"{chart.year_pillar.stem} {chart.year_pillar.branch}",
-        month_pillar=f"{chart.month_pillar.stem} {chart.month_pillar.branch}",
-        day_pillar=f"{chart.day_pillar.stem} {chart.day_pillar.branch}",
-        hour_pillar=f"{chart.hour_pillar.stem} {chart.hour_pillar.branch}",
-        day_master=chart.day_master,
-        ten_gods={"list": list(chart.ten_gods or [])},
-        shensha=list(chart.shensha or []),
-        calendar=calendar,
-        bazi=chart,
-    )
-    pattern = PatternEngine().calculate(context)
-    return pattern.rule_context, chart, pattern
+    """Reuse orchestrator-aligned RuleContext (canonical Pattern + Strength overlay)."""
+    return production_rule_context()
 
 
 def test_score_engine_reads_rule_context_without_rebuild() -> None:
@@ -85,12 +54,15 @@ def test_append_score_only_mutates_score_section() -> None:
     pattern_before = dict(rule_context.get("pattern") or {})
     bazi_before = dict(rule_context.get("bazi") or {})
     wuxing_before = dict(rule_context.get("wuxing") or {})
-    engine.append_score_to_rule_context(rule_context, result)
+    composed = engine.append_score_to_rule_context(rule_context, result)
     assert rule_context["pattern"] == pattern_before
     assert rule_context["bazi"] == bazi_before
     assert rule_context["wuxing"] == wuxing_before
-    assert rule_context["score"]["total_score"] == result.total_score
-    assert rule_context["score"]["strength_score"] == result.strength_score
+    assert composed["score"]["total_score"] == result.total_score
+    assert composed["score"]["strength_score"] == result.strength_score
+    assert composed["pattern"] == pattern_before
+    assert composed["bazi"] == bazi_before
+    assert composed["wuxing"] == wuxing_before
 
 
 def test_orchestrator_score_payload_matches_engine() -> None:

@@ -210,10 +210,22 @@ class PatternView:
     hy_than: str = ""
     ky_than: str = ""
     dieu_hau: str = ""
+    success_reason: str = ""
+    winning_rule_id: str = ""
+    evidence_compact: str = ""
+    month_branch: str = ""
+    month_main_qi: str = ""
+    month_main_qi_ten_god: str = ""
+    month_hidden_stems: list[str] = field(default_factory=list)
+    day_master: str = ""
+    penetration_exact: bool | None = None
+    penetration_related: list[dict[str, Any]] = field(default_factory=list)
+    candidate_patterns: list[str] = field(default_factory=list)
+    fallback_used: bool = False
 
     def to_dict(self) -> dict[str, Any]:
         """Portal-compatible ``data.pattern`` JSON."""
-        return {
+        payload: dict[str, Any] = {
             "success": self.success,
             "pattern": self.pattern,
             "cach_cuc": self.cach_cuc,
@@ -226,7 +238,31 @@ class PatternView:
             "hy_than": self.hy_than or "",
             "ky_than": self.ky_than or "",
             "dieu_hau": self.dieu_hau or "",
+            "fallback_used": bool(self.fallback_used),
         }
+        if self.success_reason:
+            payload["success_reason"] = self.success_reason
+        if self.winning_rule_id:
+            payload["winning_rule_id"] = self.winning_rule_id
+        if self.evidence_compact:
+            payload["evidence_compact"] = self.evidence_compact
+        if self.month_branch:
+            payload["month_branch"] = self.month_branch
+        if self.month_main_qi:
+            payload["month_main_qi"] = self.month_main_qi
+        if self.month_main_qi_ten_god:
+            payload["month_main_qi_ten_god"] = self.month_main_qi_ten_god
+        if self.month_hidden_stems:
+            payload["month_hidden_stems"] = list(self.month_hidden_stems)
+        if self.day_master:
+            payload["day_master"] = self.day_master
+        if self.penetration_exact is not None:
+            payload["penetration_exact"] = bool(self.penetration_exact)
+        if self.penetration_related:
+            payload["penetration_related"] = list(self.penetration_related)
+        if self.candidate_patterns:
+            payload["candidate_patterns"] = list(self.candidate_patterns)
+        return payload
 
 
 @dataclass(slots=True)
@@ -293,7 +329,7 @@ class StrengthView:
 
 @dataclass(slots=True)
 class TemperatureView:
-    """Authoritative temperature slice for production pipeline."""
+    """Authoritative temperature / Điều hậu slice. Score is intensity, not heat axis."""
 
     temperature_level: str = "warm"
     temperature_score: float = 0.0
@@ -305,11 +341,28 @@ class TemperatureView:
     confidence: float = 0.0
     matched_rules: list[str] = field(default_factory=list)
     recommendations: list[str] = field(default_factory=list)
+    climate_state: str = ""
+    balancing_need: str = ""
+    climate_state_label: str = ""
+    balancing_need_label: str = ""
+    evidence_compact: str = ""
+    month_branch: str = ""
+    season: str = ""
+    score_semantic: str = "imbalance_intensity"
 
     def to_dict(self) -> dict[str, Any]:
         """Portal-compatible ``data.temperature`` JSON."""
+        climate_state = self.climate_state or self.temperature_level or "warm"
         return {
-            "temperature_level": self.temperature_level or "warm",
+            "temperature_level": climate_state,
+            "climate_state": climate_state,
+            "balancing_need": self.balancing_need or "",
+            "climate_state_label": self.climate_state_label or "",
+            "balancing_need_label": self.balancing_need_label or "",
+            "evidence_compact": self.evidence_compact or "",
+            "month_branch": self.month_branch or "",
+            "season": self.season or "",
+            "score_semantic": self.score_semantic or "imbalance_intensity",
             "temperature_score": float(self.temperature_score),
             "warm_score": float(self.warm_score),
             "cold_score": float(self.cold_score),

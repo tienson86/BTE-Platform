@@ -74,6 +74,29 @@ _OUTPUT_GODS     = frozenset({"Thực Thần", "Thương Quan"})
 _COMPANION_GODS  = frozenset({"Tỷ Kiên", "Kiếp Tài"})
 
 
+def ensure_canonical_pattern_context(context: PatternContext) -> PatternContext:
+    """
+    Reuse production context builder when BaZi is present but lệnh-tháng is missing.
+
+    Does not duplicate mapping logic. Preserves Strength / Temperature overlays.
+    """
+    bazi = getattr(context, "bazi", None)
+    if bazi is None:
+        return context
+    if str(getattr(context, "month_branch_ten_god", "") or "").strip():
+        if str(getattr(context, "month_main_qi", "") or "").strip():
+            return context
+    rebuilt = build_pattern_context(bazi, calendar=getattr(context, "calendar", None))
+    rebuilt.strength_level = getattr(context, "strength_level", None)
+    rebuilt.strength_score = float(getattr(context, "strength_score", 0.0) or 0.0)
+    rebuilt.temperature_type = getattr(context, "temperature_type", None)
+    rebuilt.useful_god = getattr(context, "useful_god", None)
+    rebuilt.wuxing_score = dict(getattr(context, "wuxing_score", {}) or {})
+    rebuilt.luck_pillar = getattr(context, "luck_pillar", None)
+    rebuilt.extra = dict(getattr(context, "extra", {}) or {})
+    return rebuilt
+
+
 def build_pattern_context(bazi_chart: Any, *, calendar: Any = None) -> PatternContext:
     """
     Build a fully-populated PatternContext from a BaziChart.
@@ -202,6 +225,7 @@ def build_pattern_context(bazi_chart: Any, *, calendar: Any = None) -> PatternCo
         month_stem=month_stem or None,
         month_branch=month_branch or None,
         month_branch_element=month_branch_element or None,
+        month_main_qi=_BRANCH_MAIN_STEM.get(month_branch) if month_branch else None,
         month_stem_ten_god=month_stem_ten_god,
         month_branch_ten_god=month_branch_ten_god,
         # Per-pillar hidden stems

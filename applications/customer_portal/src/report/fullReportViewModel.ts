@@ -11,6 +11,12 @@ import {
   formatCanonicalStrengthScore,
   readCanonicalStrengthScore,
 } from "../adapters/canonicalStrength";
+import { canonicalPatternEvidence } from "../adapters/canonicalPattern";
+import {
+  canonicalBalancingNeedLabel,
+  canonicalClimateStateLabel,
+  canonicalTemperatureEvidence,
+} from "../adapters/canonicalTemperature";
 import {
   asTenGodsPayload,
   hiddenLinesForPillar,
@@ -79,6 +85,7 @@ export type FullReportViewModel = {
   readonly strengthScore: string;
   readonly strengthEvidence: string;
   readonly pattern: string;
+  readonly patternEvidence: string;
   readonly usefulGod: string;
   readonly hyThan: string;
   readonly kyThan: string;
@@ -99,7 +106,9 @@ export type FullReportViewModel = {
   readonly menhQuai: string;
   readonly nhomTrach: string;
   readonly scoreLabel: string;
-  readonly temperature: string;
+  readonly climateState: string;
+  readonly balancingNeed: string;
+  readonly climateEvidence: string;
   readonly narrative: readonly FullReportNarrativeSection[];
   readonly supporting: readonly FullReportSupportingSection[];
   readonly factsOnly: false;
@@ -180,6 +189,7 @@ export function buildFullReportViewModel(
     })(),
     strengthEvidence: canonicalStrengthEvidence(data),
     pattern: text(pattern.cach_cuc || pattern.pattern),
+    patternEvidence: canonicalPatternEvidence(data),
     usefulGod: text(useful.useful_god || pattern.dung_than),
     hyThan: listText(useful.favorable_gods) || text(pattern.hy_than),
     kyThan: listText(useful.unfavorable_gods) || text(pattern.ky_than),
@@ -213,7 +223,9 @@ export function buildFullReportViewModel(
       score.total_score != null && score.grade
         ? `${score.total_score} / ${score.grade}`
         : text(score.grade),
-    temperature: temperatureText(data.temperature),
+    climateState: canonicalClimateStateLabel(data),
+    balancingNeed: canonicalBalancingNeedLabel(data),
+    climateEvidence: canonicalTemperatureEvidence(data),
     narrative: buildNarrativeSections(narrative),
     supporting: buildSupportingSections(narrative),
     factsOnly: false,
@@ -359,11 +371,6 @@ function timeFromInput(input: Record<string, unknown>): string {
   return `${pad(Number(input.hour))}:${pad(Number(input.minute || 0))}`;
 }
 
-function temperatureText(value: unknown): string {
-  const record = asRecord(value);
-  return text(record.dieu_hau || record.label || record.status || record.level);
-}
-
 function pad(value: number): string {
   return String(Number.isFinite(value) ? value : 0).padStart(2, "0");
 }
@@ -406,7 +413,10 @@ function overviewGrid(model: FullReportViewModel): string {
     ${kv("Điểm thân", model.strengthScore)}
     ${model.strengthEvidence ? kv("Căn cứ chính", model.strengthEvidence) : ""}
     ${kv("Cách cục", model.pattern)}
-    ${kv("Điều hậu", model.temperature)}
+    ${model.patternEvidence ? kv("Căn cứ", model.patternEvidence) : ""}
+    ${kv("Trạng thái khí hậu", model.climateState)}
+    ${kv("Nhu cầu điều hòa", model.balancingNeed)}
+    ${model.climateEvidence ? kv("Căn cứ khí hậu", model.climateEvidence) : ""}
   </div>`;
 }
 

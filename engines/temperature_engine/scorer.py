@@ -4,6 +4,13 @@ from __future__ import annotations
 
 from typing import Any
 
+from .climate import (
+    climate_aligned_recommendations,
+    compact_evidence,
+    resolve_climate_state,
+    winning_climate_rule_id,
+)
+
 _WARM_LEVELS = frozenset({"warm", "hot"})
 _COLD_LEVELS = frozenset({"cold", "cool"})
 
@@ -75,26 +82,38 @@ class TemperatureScorer:
         normalized = max(0.0, min(1.0, normalized))
         context.temperature_score = normalized
 
-        level_rule = priority_resolver.resolve_level(context, level_rules, matcher)
-        temperature_level = "warm"
-        reasoning = ""
-        if level_rule is not None:
-            temperature_level = str(level_rule.get("temperature_level") or "warm")
-            reasoning = str(level_rule.get("reason") or level_rule.get("description") or "")
+        # Score is imbalance/intensity, not a cold→hot axis. Do not classify from it.
+        climate = resolve_climate_state(context, primary_analysis)
+        climate_state = str(climate.get("climate_state") or "")
+        climate_rule_id = winning_climate_rule_id(primary_analysis)
+        reasoning = str(climate.get("climate_state_label") or climate_state)
+        climate_matches = list(primary_analysis.get("climate_matches") or [])
+        if climate_matches:
+            climate_matches.sort(key=lambda item: int(item.get("priority") or 0), reverse=True)
+            reasoning = str(
+                climate_matches[0].get("reason")
+                or climate_matches[0].get("description")
+                or reasoning
+            )
 
-        for rule in primary_analysis.get("special_matches") or []:
-            hint = str(rule.get("temperature_level") or "").strip()
-            if hint and int(rule.get("priority") or 0) >= 105:
-                temperature_level = hint
-                reasoning = str(rule.get("reason") or rule.get("description") or reasoning)
-
-        recommendations = self._collect_recommendations(all_matches, level_rule)
+        recommendations = climate_aligned_recommendations(primary_analysis, climate_state)
         confidence = min(1.0, len(all_matches) / 4.0) if all_matches else 0.0
-        if level_rule is not None:
+        if climate_state:
             confidence = min(1.0, confidence + 0.2)
 
         return {
-            "temperature_level": temperature_level,
+            "temperature_level": climate_state or "warm",
+            "climate_state": climate_state,
+            "balancing_need": str(climate.get("balancing_need") or ""),
+            "climate_state_label": str(climate.get("climate_state_label") or ""),
+            "balancing_need_label": str(climate.get("balancing_need_label") or ""),
+            "evidence_compact": compact_evidence(
+                climate, winning_climate_rule_id=climate_rule_id
+            ),
+            "month_branch": str(climate.get("month_branch") or ""),
+            "season": str(climate.get("season") or ""),
+            "score_semantic": "imbalance_intensity",
+            "climate_source": str(climate.get("climate_source") or ""),
             "temperature_score": normalized,
             "warm_score": context.warm_score,
             "cold_score": context.cold_score,
@@ -104,7 +123,7 @@ class TemperatureScorer:
             "reasoning": reasoning,
             "recommendations": recommendations,
             "raw_total": raw_total,
-            "level_rule": level_rule,
+            "level_rule": None,
             "all_matches": all_matches,
             "balance_matches": balance_matches,
         }

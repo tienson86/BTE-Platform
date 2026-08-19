@@ -101,7 +101,7 @@ class PatternDomainComposer:
 
         detail_parts: list[str] = []
         if facts.dieu_hau:
-            detail_parts.append(f"điều hầu: {facts.dieu_hau}")
+            detail_parts.append(f"đắc lệnh: {facts.dieu_hau}")
         if facts.than:
             detail_parts.append(f"thân: {facts.than}")
         if facts.than_vuong_nhuoc:

@@ -123,7 +123,9 @@ class ProductionEngineRunner:
             strength_score=strength_result.strength_score,
         )
         temperature_result = orch.temperature_engine.calculate(temperature_context)
-        pattern_context.temperature_type = temperature_result.to_pattern_temperature_type()
+        pattern_context.temperature_type = (
+            temperature_result.useful_god_temperature_overlay()
+        )
         analysis.temperature = build_temperature_view(temperature_result)
         stages.append("temperature")
 

@@ -19,6 +19,12 @@ import {
   formatCanonicalStrengthScore,
   readCanonicalStrengthScore,
 } from "../../adapters/canonicalStrength";
+import {
+  canonicalBalancingNeedLabel,
+  canonicalClimateStateLabel,
+  canonicalTemperatureEvidence,
+  canonicalTemperatureScore,
+} from "../../adapters/canonicalTemperature";
 import type { AnalysisDataDto, BaziDto, CustomerEchoDto, PillarDto } from "../../models";
 import type {
   CanonicalReportInput,
@@ -403,6 +409,20 @@ function buildTechnical(
   if (dayMaster) metadata.day_master = dayMaster;
   const pattern = pickPatternLabel(data);
   if (pattern) metadata.pattern = pattern;
+  const patternEvidence = asText(
+    data.pattern && typeof data.pattern === "object"
+      ? (data.pattern as { evidence_compact?: unknown }).evidence_compact
+      : null,
+  );
+  if (patternEvidence) metadata.pattern_evidence = patternEvidence;
+  const climateState = canonicalClimateStateLabel(data);
+  if (climateState) metadata.climate_state = climateState;
+  const balancingNeed = canonicalBalancingNeedLabel(data);
+  if (balancingNeed) metadata.balancing_need = balancingNeed;
+  const climateEvidence = canonicalTemperatureEvidence(data);
+  if (climateEvidence) metadata.climate_evidence = climateEvidence;
+  const temperatureScore = canonicalTemperatureScore(data);
+  if (temperatureScore) metadata.temperature_score = temperatureScore;
   const strength = pickStrengthLabel(data);
   if (strength) metadata.strength = strength;
   const strengthScore = pickStrengthScore(data);

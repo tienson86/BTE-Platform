@@ -70,6 +70,12 @@ CONFIDENCE_LEVEL_LABELS: dict[str, str] = {
     "very_low": "Rất thấp",
 }
 
+BALANCING_NEED_LABELS: dict[str, str] = {
+    "warming": "Cần ôn ấm",
+    "cooling": "Cần làm mát",
+    "balance": "Cần cân Hỏa Thủy",
+}
+
 CATEGORY_LABELS: dict[str, str] = {
     "shensha": "Thần sát",
     "shen_sha": "Thần sát",
@@ -84,6 +90,7 @@ DOMAIN_TABLES: dict[str, dict[str, str]] = {
     "season": SEASON_LABELS,
     "luck_direction": LUCK_DIRECTION_LABELS,
     "confidence_level": CONFIDENCE_LEVEL_LABELS,
+    "balancing_need": BALANCING_NEED_LABELS,
     "category": CATEGORY_LABELS,
 }
 

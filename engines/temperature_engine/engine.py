@@ -59,9 +59,10 @@ class TemperatureEngine:
         reasoning = scored.get("reasoning") or self._build_reasoning(primary)
         winner = scored.get("level_rule")
 
+        climate_state = str(scored.get("climate_state") or scored.get("temperature_level") or "warm")
         return TemperatureResult(
             success=True,
-            temperature_level=str(scored.get("temperature_level") or "warm"),
+            temperature_level=climate_state,
             temperature_score=float(scored.get("temperature_score") or 0.0),
             warm_score=float(scored.get("warm_score") or 0.0),
             cold_score=float(scored.get("cold_score") or 0.0),
@@ -71,14 +72,30 @@ class TemperatureEngine:
             matched_rules=matched_rules,
             reasoning=reasoning,
             recommendations=list(scored.get("recommendations") or []),
+            climate_state=climate_state,
+            balancing_need=str(scored.get("balancing_need") or ""),
+            climate_state_label=str(scored.get("climate_state_label") or ""),
+            balancing_need_label=str(scored.get("balancing_need_label") or ""),
+            evidence_compact=str(scored.get("evidence_compact") or ""),
+            month_branch=str(scored.get("month_branch") or ""),
+            season=str(scored.get("season") or ""),
+            score_semantic=str(scored.get("score_semantic") or "imbalance_intensity"),
+            climate_source=str(scored.get("climate_source") or ""),
             metadata={
                 "trace": {
                     "context": self._context_snapshot(context),
                     "matched_rules": matched_rules,
                     "analysis": self._public_analysis(primary, scored),
                     "temperature_score": float(scored.get("temperature_score") or 0.0),
+                    "score_semantic": "imbalance_intensity",
+                    "climate_state": climate_state,
+                    "balancing_need": scored.get("balancing_need"),
                     "priority": [r for r in priority_rules if str(r.get("score_target")) != "level"],
-                    "winner": self._public_rule(winner),
+                    "winner": {
+                        "climate_state": climate_state,
+                        "climate_source": scored.get("climate_source"),
+                        "level_rule": self._public_rule(winner),
+                    },
                     "confidence": float(scored.get("confidence") or 0.0),
                     "scoring": {
                         "raw_total": scored.get("raw_total"),

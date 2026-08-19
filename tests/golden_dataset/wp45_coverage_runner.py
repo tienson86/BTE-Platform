@@ -18,8 +18,8 @@ from engines.bazi_engine.engine import BaziEngine
 from engines.calendar_engine.engine import CalendarEngine
 from engines.interpretation_engine.engine import InterpretationEngine
 from engines.interpretation_engine.knowledge_rule_loader import KnowledgeRuleLoader
-from engines.pattern_engine.context import PatternContext
 from engines.pattern_engine.engine import PatternEngine
+from engines.pattern_engine.utils.context_builder import build_pattern_context
 from engines.rule_contract import RuleContextBuilder
 from engines.score_engine.engine import ScoreEngine
 from engines.score_engine.loader import ScoreLoader
@@ -74,13 +74,7 @@ def _build_context(case: dict[str, Any]) -> tuple[dict[str, Any], Any, Any]:
     dt, gender = _parse_birth(case)
     calendar = CalendarEngine().build(dt.year, dt.month, dt.day, dt.hour, dt.minute)
     chart = BaziEngine().build(calendar, gender=gender)
-    pctx = PatternContext(
-        year_pillar=f"{chart.year_pillar.stem} {chart.year_pillar.branch}",
-        month_pillar=f"{chart.month_pillar.stem} {chart.month_pillar.branch}",
-        day_pillar=f"{chart.day_pillar.stem} {chart.day_pillar.branch}",
-        hour_pillar=f"{chart.hour_pillar.stem} {chart.hour_pillar.branch}",
-        day_master=chart.day_master,
-    )
+    pctx = build_pattern_context(chart, calendar=calendar)
     pattern = PatternEngine().calculate(pctx)
 
     upstream = case.get("upstream") or {}

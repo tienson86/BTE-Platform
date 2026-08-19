@@ -28,6 +28,7 @@ class PatternContext:
     month_stem: Optional[str] = None                # Thiên can tháng
     month_branch: Optional[str] = None              # Địa chi tháng
     month_branch_element: Optional[str] = None      # Ngũ hành địa chi tháng
+    month_main_qi: Optional[str] = None             # Khí chính địa chi tháng (Lệnh Tháng stem)
 
     # ---- Ten gods of month ----
     month_stem_ten_god: Optional[str] = None        # Thập thần thiên can tháng
