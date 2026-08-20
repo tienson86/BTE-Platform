@@ -148,17 +148,19 @@ def test_f_ten_god_facts_positions(huynh_foundation) -> None:
 
 
 def test_g_shensha_never_fabricates_evidence(huynh_foundation) -> None:
-    """G. ShenShaInterpretationFacts never fabricate evidence."""
+    """G. ShenShaInterpretationFacts copy engine evidence and never invent stars."""
     ss = huynh_foundation.facts.shensha
-    assert len(ss.items) >= 10
+    assert ss.items
     names = {item.name for item in ss.items}
     assert "Thiên Ất Quý Nhân" in names
+    assert "Thiên Ất" not in names
     assert "available" not in names
     for item in ss.items:
-        if not item.evidence:
-            assert item.evidence_status.value == "unavailable"
-            assert item.rule_id == ""
-    assert diag.SHENSHA_EVIDENCE_UNAVAILABLE in ss.diagnostics
+        assert item.evidence
+        assert item.evidence != item.name
+        assert item.evidence_status.value == "available"
+        assert item.rule_id
+    assert diag.SHENSHA_EVIDENCE_UNAVAILABLE not in ss.diagnostics
 
 
 def test_h_luck_facts_all_cycles(huynh_foundation) -> None:
