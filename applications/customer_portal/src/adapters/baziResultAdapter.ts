@@ -395,7 +395,7 @@ function mapShenSha(data: AnalysisDataDto): readonly BaZiShenShaItem[] {
     name: item.name,
     tone: "Trung" as const,
     note: item.evidence
-      ? `${item.presence} · Căn cứ: ${item.evidence}`
+      ? `${item.presence} · ${item.evidence}`
       : item.presence,
     present: true,
   }));

@@ -63,7 +63,7 @@ export function ShenShaCard({ model }: { model: ShenShaViewModel }): ReactNode {
             </PresentationText>
             <PresentationText typeRole="caption" clamp="description" as="span">
               {item.presence}
-              {item.evidence ? ` · Căn cứ: ${item.evidence}` : ""}
+              {item.evidence ? ` · ${item.evidence}` : ""}
             </PresentationText>
           </li>
         ))}

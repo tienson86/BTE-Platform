@@ -19,6 +19,11 @@ from engines.report_engine.localization.labels_vi import (
     FULL_LUCK_CYCLES_GAP_NOTE,
     RUNTIME_GAP_MESSAGE,
 )
+from engines.report_engine.rendering.customer_facing import (
+    shensha_customer_line,
+    temperature_customer_evidence,
+    ten_gods_prominence,
+)
 
 _DOMAIN_ALIASES: dict[str, tuple[str, ...]] = {
     "career": ("su_nghiep", "career", "nghiep", "nghề"),
@@ -323,6 +328,15 @@ def _section_strength(report_input: ReportInputV1) -> PresentedSection:
 
 def _section_ten_gods(report_input: ReportInputV1) -> PresentedSection:
     ten_gods = report_input.ten_gods
+    prominence = ten_gods_prominence(
+        ten_gods.visible_entries,
+        ten_gods.hidden_entries,
+        day_master_stem=report_input.strength.day_master,
+    )
+    featured_rows = [
+        (f"{item['name']} — {item['klass']}", display_text(item["evidence"]))
+        for item in prominence["featured"]
+    ]
     visible_lines = [
         _visible_display(item)
         for item in (ten_gods.visible_entries or [])
@@ -333,17 +347,23 @@ def _section_ten_gods(report_input: ReportInputV1) -> PresentedSection:
         if isinstance(item, dict)
     ] or [str(item) for item in ten_gods.hidden if item]
     note = ten_gods.note or "Xác định theo quan hệ Ngũ hành và âm dương với Nhật chủ."
+    extra_rows: list[tuple[str, str]] = []
+    others = str(prominence.get("others_line") or "")
+    if others:
+        extra_rows.append(("Các thần khác", others.replace("Các thần khác: ", "", 1)))
+    extra_rows.append(("Ghi chú", note))
     return PresentedSection(
         id="ten-gods",
         title="05. Thập thần",
         meta_rows=_filled_rows(
-            [
+            featured_rows
+            + [
                 ("Lộ can", " · ".join(display_text(item) for item in visible_lines)),
                 ("Tàng can", " · ".join(display_text(item) for item in hidden_lines)),
                 ("Tóm tắt lộ", display_text(ten_gods.visible_summary or ten_gods.summary)),
                 ("Tóm tắt tàng", display_text(ten_gods.hidden_summary)),
-                ("Ghi chú", note),
             ]
+            + extra_rows
         ),
     )
 
@@ -402,7 +422,7 @@ def _section_useful_god(report_input: ReportInputV1) -> PresentedSection:
                 ("Trung tính", ", ".join(display_text(item) for item in useful.neutral_gods)),
                 ("Điều hậu nhiệt", display_text(useful.temperature_adjustment, "temperature")),
                 ("Nhu cầu điều hòa", display_text(useful.balancing_need, "balancing_need")),
-                ("Căn cứ khí hậu", display_text(useful.climate_evidence)),
+                ("Điều hậu", temperature_customer_evidence(useful.climate_evidence)),
             ]
         ),
         paragraphs=customer_paragraphs(useful.reasoning),
@@ -416,19 +436,21 @@ def _section_shensha(report_input: ReportInputV1) -> PresentedSection:
             title="08. Thần sát",
             fallback=missing_data_message(),
         )
-    rows = [
-        [
-            display_text(item.name),
-            display_text(item.presence_label or ("Có" if item.present else "Không")),
-            display_text(item.evidence),
-        ]
-        for item in report_input.shensha
-    ]
+    rows = []
+    for item in report_input.shensha:
+        name, presence, evidence = shensha_customer_line(item)
+        rows.append(
+            [
+                display_text(name),
+                display_text(presence),
+                display_text(evidence),
+            ]
+        )
     return PresentedSection(
         id="shensha",
         title="08. Thần sát",
         table=PresentedTable(
-            headers=["Tên", "Hiện diện", "Căn cứ"],
+            headers=["Tên", "Hiện diện", "Vị trí"],
             rows=rows,
         ),
     )

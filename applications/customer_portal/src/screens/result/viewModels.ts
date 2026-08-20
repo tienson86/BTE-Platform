@@ -92,6 +92,7 @@ export type TenGodsAnalysisViewModel = {
     readonly score: string;
     readonly color: string;
   }>;
+  readonly othersLine: string;
   readonly cta: string;
   readonly hasMore: boolean;
   readonly visible: boolean;

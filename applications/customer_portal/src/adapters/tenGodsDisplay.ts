@@ -10,6 +10,7 @@ export type TenGodEntry = {
   readonly branch?: string;
   readonly element?: string;
   readonly ten_god?: string;
+  readonly god_id?: string;
   readonly display?: string;
   readonly visibility?: string;
 };

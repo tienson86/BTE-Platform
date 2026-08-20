@@ -595,9 +595,7 @@ export function adaptResultPageViewModel(
     Boolean(source.s05.level?.trim()) ||
     isUsablePreviewText(strengthInsight.text);
 
-  const rankedGods = [...source.s06.gods].sort(
-    (a, b) => Number.parseFloat(b.score) - Number.parseFloat(a.score),
-  );
+  const rankedGods = [...source.s06.gods];
   const gods = adaptPreviewList(
     rankedGods.map((g) => ({ name: g.name, score: g.score, color: g.color })),
     5,
@@ -764,8 +762,9 @@ export function adaptResultPageViewModel(
       visible: strengthVisible,
     },
     tenGods: {
-      title: "THẬP THẦN",
+      title: source.s06.title || "THẬP THẦN NỔI BẬT",
       gods,
+      othersLine: source.s06.note.startsWith("Các thần khác") ? source.s06.note : "",
       cta: source.s06.link,
       hasMore: gods.hasMore,
       visible: gods.items.length > 0,

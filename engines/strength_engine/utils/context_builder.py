@@ -1,4 +1,11 @@
-"""Strength context builder from BaziChart."""
+"""Strength context builder from BaziChart.
+
+Visible heavenly stems drive support/control presence lists.
+Drain also reads earthly-branch bản khí so output (tiết) cannot vanish
+when it sits only in địa chi / tàng can chính khí (e.g. Tỵ/Hỏa for Ất Mộc).
+Repeated branches are counted per pillar, not collapsed by branch name.
+Residual (non-main) hidden stems are not copied into drain lists.
+"""
 
 from __future__ import annotations
 
@@ -117,13 +124,14 @@ def build_strength_context(bazi_chart: Any, *, calendar: Any = None) -> Strength
 
     month_status = _compute_month_status(day_master_element, month_branch_element)
 
-    hidden_by_branch = {
-        month_branch: _BRANCH_HIDDEN.get(month_branch, []),
-        year_branch: _BRANCH_HIDDEN.get(year_branch, []),
-        day_branch: _BRANCH_HIDDEN.get(day_branch, []),
-        hour_branch: _BRANCH_HIDDEN.get(hour_branch, []),
-    }
-    root_count, root_level = _compute_root(day_master_element, hidden_by_branch, bazi_chart)
+    # One entry per pillar so repeated branches (e.g. three Tỵ) are not collapsed.
+    pillar_hidden: list[tuple[str, list[str]]] = [
+        (year_branch, list(_BRANCH_HIDDEN.get(year_branch, []))),
+        (month_branch, list(_BRANCH_HIDDEN.get(month_branch, []))),
+        (day_branch, list(_BRANCH_HIDDEN.get(day_branch, []))),
+        (hour_branch, list(_BRANCH_HIDDEN.get(hour_branch, []))),
+    ]
+    root_count, root_level = _compute_root(day_master_element, pillar_hidden, bazi_chart)
 
     raw_ten_gods = list(getattr(bazi_chart, "ten_gods", []) or [])
     ten_gods_list = [g for g in raw_ten_gods if g and g != "Nhật Chủ"]
@@ -148,18 +156,22 @@ def build_strength_context(bazi_chart: Any, *, calendar: Any = None) -> Strength
 
     support_type = _detect_support_type(day_master, year_pillar, month_pillar, hour_pillar)
     control_type = _detect_control_type(day_master, year_pillar, month_pillar, hour_pillar)
-    drain_type = _detect_drain_type(output_elements, wealth_elements)
+    output_branch_count = _count_output_branches(
+        day_master_element,
+        (year_branch, month_branch, day_branch, hour_branch),
+    )
+    drain_type = _detect_drain_type(output_elements, wealth_elements, output_branch_count)
 
     all_stems: list[str] = []
     for pillar in (year_pillar, month_pillar, day_pillar, hour_pillar):
         stem = getattr(pillar, "stem", None)
         if stem:
             all_stems.append(str(stem))
-    for stems in hidden_by_branch.values():
+    for _branch, stems in pillar_hidden:
         all_stems.extend(stems)
     element_distribution = dict(Counter(_stem_to_element(s) for s in all_stems if _stem_to_element(s)))
 
-    drain_count = len(output_elements) + len(wealth_elements)
+    drain_count = len(output_elements) + len(wealth_elements) + output_branch_count
 
     return StrengthContext(
         day_master=day_master or None,
@@ -191,6 +203,7 @@ def build_strength_context(bazi_chart: Any, *, calendar: Any = None) -> Strength
         officer_count=len(officer_elements),
         output_count=len(output_elements),
         drain_count=drain_count,
+        output_branch_count=output_branch_count,
         metadata={"builder": "strength_context_builder_v2"},
         source_bazi=bazi_chart,
     )
@@ -219,29 +232,29 @@ def _compute_month_status(day_el: str, month_el: str) -> str | None:
 
 def _compute_root(
     day_el: str,
-    hidden_by_branch: dict[str, list[str]],
+    pillar_hidden: list[tuple[str, list[str]]],
     bazi_chart: Any,
 ) -> tuple[int, str]:
     if not day_el:
         return 0, "Vô căn"
 
-    root_branches = 0
-    for branch, hidden in hidden_by_branch.items():
+    root_pillars = 0
+    for branch, hidden in pillar_hidden:
         if not branch:
             continue
         if any(STEM_META.get(stem, (None,))[0] == day_el for stem in hidden):
-            root_branches += 1
+            root_pillars += 1
 
-    if root_branches == 0:
+    if root_pillars == 0:
         flat = list(getattr(bazi_chart, "hidden_stems", []) or [])
         if any(STEM_META.get(stem, (None,))[0] == day_el for stem in flat):
             return 0, "Thông căn tàng can"
         return 0, "Vô căn"
 
     for threshold, label in _ROOT_LEVEL_LABELS:
-        if root_branches >= threshold:
-            return root_branches, label
-    return root_branches, "Vô căn"
+        if root_pillars >= threshold:
+            return root_pillars, label
+    return root_pillars, "Vô căn"
 
 
 def _ten_god_between(day_master: str, stem: str) -> str | None:
@@ -283,8 +296,29 @@ def _detect_control_type(day_master: str, *pillars: Any) -> str | None:
     return None
 
 
-def _detect_drain_type(output_elements: list[str], wealth_elements: list[str]) -> str | None:
+def _branch_element(branch: str) -> str:
+    """Bản khí of an earthly branch via its main hidden stem."""
+    main = _BRANCH_MAIN_STEM.get(branch, "")
+    meta = STEM_META.get(main, ("", ""))
+    return meta[0] if meta else ""
+
+
+def _count_output_branches(day_el: str, branches: tuple[str, ...]) -> int:
+    """Count pillars whose branch bản khí is produced by the Day Master."""
+    produced = _ELEMENT_PRODUCES.get(day_el)
+    if not day_el or not produced:
+        return 0
+    return sum(1 for branch in branches if branch and _branch_element(branch) == produced)
+
+
+def _detect_drain_type(
+    output_elements: list[str],
+    wealth_elements: list[str],
+    output_branch_count: int = 0,
+) -> str | None:
     if output_elements:
+        return _DRAIN_LABELS["output"]
+    if output_branch_count > 0:
         return _DRAIN_LABELS["output"]
     if wealth_elements:
         return _DRAIN_LABELS["wealth"]

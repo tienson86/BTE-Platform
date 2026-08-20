@@ -3,6 +3,7 @@
  */
 
 import type { AnalysisDataDto, BaziDto, ShenShaMatchDto } from "../models/dto";
+import { formatShenShaCustomer } from "./customerFacingPresentation";
 
 export type ShenShaEntryView = {
   readonly id: string;
@@ -24,12 +25,10 @@ export function shenShaEntriesFromAnalysis(data: AnalysisDataDto): readonly Shen
   const matches = readShenShaMatches(data.bazi);
   if (matches.length > 0) {
     return matches.map((item, index) => {
-      const name = asString(item.canonical_name || item.name).trim();
+      const presented = formatShenShaCustomer(item);
       return {
-        id: asString(item.id) || `ss-${index + 1}`,
-        name,
-        presence: asString(item.presence_label).trim() || "Có",
-        evidence: asString(item.evidence_text).trim(),
+        ...presented,
+        id: presented.id || `ss-${index + 1}`,
       };
     });
   }

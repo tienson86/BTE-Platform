@@ -59,12 +59,12 @@ describe("G1-04 canonical Temperature / Điều hậu binding", () => {
 
   it("Canonical Desktop shows climate rows, not pattern Đắc lệnh as Điều hậu", () => {
     const vm = adaptAnalysisToCanonicalDesktop(CASE_0001, { source: "api" });
-    const climate = vm.s01.conditions.rows.find((row) => row.label === "Trạng thái khí hậu");
-    const need = vm.s01.conditions.rows.find((row) => row.label === "Nhu cầu điều hòa");
-    const evidence = vm.s01.conditions.rows.find((row) => row.label === "Căn cứ khí hậu");
-    expect(climate?.value).toBe("Hàn");
-    expect(need?.value).toBe("Cần ôn ấm");
-    expect(evidence?.value).toContain("Nguyệt lệnh Sửu");
+    const dieuHau = vm.s01.conditions.rows.find((row) => row.label === "Điều hậu");
+    expect(dieuHau?.value).toContain("Hàn");
+    expect(dieuHau?.value).toContain("Cần ôn ấm");
+    expect(dieuHau?.value).toContain("Sửu");
+    expect(dieuHau?.value).not.toContain("cli_");
+    expect(dieuHau?.value).not.toContain("rule ");
     expect(vm.s01.conditions.rows.some((row) => row.label === "Điều hậu" && row.value === "Đắc lệnh")).toBe(
       false,
     );

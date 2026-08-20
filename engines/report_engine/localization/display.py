@@ -74,9 +74,12 @@ def localize_tokens(text: str) -> str:
     return _TOKEN_PATTERN.sub(_replace, text)
 
 
+from engines.report_engine.rendering.customer_facing import strip_internal_rule_ids
+
+
 def display_text(value: Any, domain: str = "generic") -> str:
     """Public helper used by all Report V1 renderers."""
-    return localize(value, domain)
+    return strip_internal_rule_ids(localize(value, domain))
 
 
 def _unwrap_string(value: str) -> str:

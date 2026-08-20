@@ -134,15 +134,24 @@ export function TenGodsAnalysisCard({
               style={{ background: god.color }}
               aria-hidden="true"
             />
-            <PresentationText typeRole="body" clamp="subtitle" as="span" className="rp-ten-gods__name">
-              {god.name}
-            </PresentationText>
-            <PresentationText typeRole="subtitle" as="span" className="rp-ten-gods__score">
-              {god.score}
-            </PresentationText>
+            <div>
+              <PresentationText typeRole="body" clamp="subtitle" as="span" className="rp-ten-gods__name">
+                {god.name}
+              </PresentationText>
+              {god.score ? (
+                <PresentationText typeRole="caption" clamp="description" as="span">
+                  {god.score}
+                </PresentationText>
+              ) : null}
+            </div>
           </li>
         ))}
       </ul>
+      {model.othersLine ? (
+        <PresentationText typeRole="summary" as="p" className="rp-card__summary">
+          {model.othersLine}
+        </PresentationText>
+      ) : null}
     </ResultCardShell>
   );
 }

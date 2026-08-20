@@ -100,6 +100,8 @@ class StrengthEngine:
             "support_type",
             "control_type",
             "drain_type",
+            "output_branch_count",
+            "drain_count",
             "season",
             "strength_score",
         ]

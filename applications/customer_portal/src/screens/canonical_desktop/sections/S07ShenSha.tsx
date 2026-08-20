@@ -51,7 +51,7 @@ export function S07ShenSha(): ReactNode {
               <span className="cd-s07__name ui-line-clamp-2">{item.name}</span>
               <span className="cd-s07__presence ui-line-clamp-2">{item.presence}</span>
               {item.evidence ? (
-                <span className="cd-s07__evidence ui-line-clamp-2">Căn cứ: {item.evidence}</span>
+                <span className="cd-s07__evidence ui-line-clamp-2">{item.evidence}</span>
               ) : null}
             </li>
           ))}

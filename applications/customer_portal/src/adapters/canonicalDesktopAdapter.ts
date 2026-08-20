@@ -17,7 +17,6 @@ import {
   firstCommercialSnippet,
 } from "./contentGuards";
 import {
-  canonicalStrengthEvidence,
   canonicalStrengthLabel,
   canonicalStrengthMeterPercent,
   formatCanonicalStrengthScore,
@@ -26,7 +25,6 @@ import {
 import {
   canonicalBalancingNeedLabel,
   canonicalClimateStateLabel,
-  canonicalTemperatureEvidence,
 } from "./canonicalTemperature";
 import {
   FIVE_ELEMENT_ROWS,
@@ -53,6 +51,13 @@ import {
   visibleLabels,
 } from "./tenGodsDisplay";
 import { shenShaEntriesFromAnalysis } from "./canonicalShenSha";
+import {
+  patternCustomerLine,
+  strengthCustomerSummary,
+  stripInternalRuleIds,
+  temperatureCustomerLine,
+  tenGodsProminenceFromAnalysis,
+} from "./customerFacingPresentation";
 import {
   asNarrativeResult,
   careerFieldText,
@@ -425,9 +430,6 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
   const score = canonicalStrengthMeterPercent(strengthScore);
   const level = canonicalStrengthLabel(data);
   const cachCuc = pickStr(pattern, ["cach_cuc", "pattern"]);
-  const patternEvidence = String(
-    (pattern as { evidence_compact?: unknown } | undefined)?.evidence_compact || "",
-  ).trim();
   const than = level;
   const season = asString(
     (data.calendar?.solar_term as { name?: string } | null | undefined)?.name,
@@ -514,32 +516,20 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
           tone: "neutral" as const,
         },
         {
-          label: "Cục mệnh",
-          value: cachCuc || UNAVAILABLE_CONCLUSION,
+          label: "Yếu tố chính",
+          value: strengthCustomerSummary(data) || UNAVAILABLE_CONCLUSION,
           tag: than || "—",
+          tone: strengthTone,
+        },
+        {
+          label: "Cách cục",
+          value: patternCustomerLine(data) || cachCuc || UNAVAILABLE_CONCLUSION,
+          tag: than || "Nhận diện",
           tone: strengthTone === "danger" ? ("warning" as const) : strengthTone,
         },
         {
-          label: "Căn cứ",
-          value: patternEvidence || UNAVAILABLE_CONCLUSION,
-          tag: "Nhận diện",
-          tone: "neutral" as const,
-        },
-        {
-          label: "Trạng thái khí hậu",
-          value: canonicalClimateStateLabel(data) || UNAVAILABLE_CONCLUSION,
-          tag: "Điều hậu",
-          tone: "neutral" as const,
-        },
-        {
-          label: "Nhu cầu điều hòa",
-          value: canonicalBalancingNeedLabel(data) || UNAVAILABLE_CONCLUSION,
-          tag: "Điều hậu",
-          tone: "neutral" as const,
-        },
-        {
-          label: "Căn cứ khí hậu",
-          value: canonicalTemperatureEvidence(data) || UNAVAILABLE_CONCLUSION,
+          label: "Điều hậu",
+          value: temperatureCustomerLine(data) || UNAVAILABLE_CONCLUSION,
           tag: "Điều hậu",
           tone: "neutral" as const,
         },
@@ -569,7 +559,7 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
         },
         {
           label: "Căn cứ Đại vận",
-          value: asString(data.luck?.evidence) || UNAVAILABLE_CONCLUSION,
+          value: stripInternalRuleIds(asString(data.luck?.evidence)) || UNAVAILABLE_CONCLUSION,
           tag: "Đại vận",
           tone: "neutral" as const,
         },
@@ -643,14 +633,17 @@ function mapS02(data: AnalysisDataDto): CanonicalDesktopViewModel["s02"] {
       },
       {
         icon: "spark" as const,
-        label: "Trạng thái khí hậu",
-        value: canonicalClimateStateLabel(data) || UNAVAILABLE_CONCLUSION,
+        label: "Cách cục",
+        value: pickStr(pattern, ["cach_cuc", "pattern"]) || UNAVAILABLE_CONCLUSION,
         color: "water",
       },
       {
         icon: "drop" as const,
-        label: "Nhu cầu điều hòa",
-        value: canonicalBalancingNeedLabel(data) || UNAVAILABLE_CONCLUSION,
+        label: "Điều hậu",
+        value:
+          [canonicalClimateStateLabel(data), canonicalBalancingNeedLabel(data)]
+            .filter(Boolean)
+            .join(" · ") || UNAVAILABLE_CONCLUSION,
         color: "earth",
       },
       {
@@ -756,10 +749,10 @@ function mapS05(data: AnalysisDataDto): CanonicalDesktopViewModel["s05"] {
   const percent =
     strengthScore == null ? 0 : canonicalStrengthMeterPercent(strengthScore);
   const level = canonicalStrengthLabel(data);
+  const summary = strengthCustomerSummary(data);
   const reasoning = commercialOrUnavailable(asString(data.strength?.reasoning));
-  const evidence = canonicalStrengthEvidence(data);
-  const factors = evidence
-    .split(/\s·\s|[.;\n]+/)
+  const factors = summary
+    .split(/\s·\s/)
     .map((s) => s.trim())
     .filter(Boolean)
     .filter((text) => commercialOrUnavailable(text) !== UNAVAILABLE_CONCLUSION)
@@ -777,7 +770,7 @@ function mapS05(data: AnalysisDataDto): CanonicalDesktopViewModel["s05"] {
     level: level || "—",
     score: scoreLabel,
     percent: Math.min(100, Math.max(0, percent)),
-    insight: reasoning,
+    insight: summary || reasoning,
     factors:
       factors.length > 0
         ? factors
@@ -803,8 +796,26 @@ function mapS06(data: AnalysisDataDto): CanonicalDesktopViewModel["s06"] {
   const base = cloneFixture().s06;
   const payload =
     asTenGodsPayload(data.ten_gods) ?? asTenGodsPayload(data.ten_gods_result);
+  const prominence = tenGodsProminenceFromAnalysis(data);
   const visible = visibleLabels(payload);
   const hidden = hiddenLabels(payload);
+  if (prominence.featured.length) {
+    return {
+      ...base,
+      title: "THẬP THẦN NỔI BẬT",
+      gods: prominence.featured.map((item) => ({
+        name: `${item.name} — ${item.klass}`,
+        short: item.klass,
+        score: item.evidence,
+        color:
+          Object.entries(TEN_GOD_COLORS).find(([k]) =>
+            item.name.toLowerCase().includes(k),
+          )?.[1] ?? "#5c6570",
+      })),
+      hiddenGods: toGodRows(hidden),
+      note: prominence.othersLine || tenGodsNote(payload),
+    };
+  }
   if (visible.length || hidden.length) {
     return {
       ...base,

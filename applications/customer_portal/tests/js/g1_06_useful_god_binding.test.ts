@@ -56,10 +56,9 @@ describe("G1-06 canonical Useful God binding", () => {
     expect(vm.s02.items.find((item) => item.label === "Dụng thần")?.value).toBe(DISPLAY);
     expect(vm.s02.items.find((item) => item.label === "Hỷ thần")?.value).toBe(HY);
     expect(vm.s02.items.find((item) => item.label === "Kỵ thần")?.value).toBe(KY);
-    const climate = vm.s01.conditions.rows.find((row) => row.label === "Trạng thái khí hậu");
-    const need = vm.s01.conditions.rows.find((row) => row.label === "Nhu cầu điều hòa");
-    expect(climate?.value).toBe("Hàn");
-    expect(need?.value).toBe("Cần ôn ấm");
+    const dieuHau = vm.s01.conditions.rows.find((row) => row.label === "Điều hậu");
+    expect(dieuHau?.value).toContain("Hàn");
+    expect(dieuHau?.value).toContain("Cần ôn ấm");
   });
 
   it("Full Report and BaZi adapter stay on the same published strings", () => {

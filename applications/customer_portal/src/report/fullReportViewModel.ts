@@ -11,7 +11,6 @@ import {
   formatCanonicalStrengthScore,
   readCanonicalStrengthScore,
 } from "../adapters/canonicalStrength";
-import { canonicalPatternEvidence } from "../adapters/canonicalPattern";
 import {
   FIVE_ELEMENTS_SECTION_TITLE,
   formatFiveElementsProvenance,
@@ -25,7 +24,6 @@ import {
 import {
   canonicalBalancingNeedLabel,
   canonicalClimateStateLabel,
-  canonicalTemperatureEvidence,
 } from "../adapters/canonicalTemperature";
 import { shenShaEntriesFromAnalysis, type ShenShaEntryView } from "../adapters/canonicalShenSha";
 import {
@@ -33,6 +31,14 @@ import {
   hiddenLinesForPillar,
   stemDisplay,
 } from "../adapters/tenGodsDisplay";
+import {
+  patternCustomerEvidence,
+  strengthCustomerSummary,
+  stripInternalRuleIds,
+  temperatureCustomerEvidence,
+  tenGodsProminenceFromAnalysis,
+  type TenGodProminenceItem,
+} from "../adapters/customerFacingPresentation";
 import { customerGenderDisplay } from "../adapters/genderDisplay";
 import {
   asNarrativeResult,
@@ -105,6 +111,8 @@ export type FullReportViewModel = {
   readonly tenGods: readonly string[];
   readonly hiddenTenGods: readonly string[];
   readonly tenGodsNote: string;
+  readonly tenGodsFeatured: readonly TenGodProminenceItem[];
+  readonly tenGodsOthersLine: string;
   readonly pillars: readonly FullReportPillar[];
   readonly shenSha: readonly ShenShaEntryView[];
   readonly luckStartAge: string;
@@ -160,6 +168,7 @@ export function buildFullReportViewModel(
   const bazi = data.bazi || {};
   const pattern = asRecord(data.pattern);
   const useful = canonicalUsefulGodPayload(data);
+  const prominence = tenGodsProminenceFromAnalysis(data);
   const feng = asRecord(data.feng_shui);
   const score = data.score || {};
   const luck = data.luck;
@@ -212,9 +221,9 @@ export function buildFullReportViewModel(
       const score = readCanonicalStrengthScore(data);
       return score == null ? "" : formatCanonicalStrengthScore(score);
     })(),
-    strengthEvidence: canonicalStrengthEvidence(data),
+    strengthEvidence: strengthCustomerSummary(data) || stripInternalRuleIds(canonicalStrengthEvidence(data)),
     pattern: text(pattern.cach_cuc || pattern.pattern),
-    patternEvidence: canonicalPatternEvidence(data),
+    patternEvidence: patternCustomerEvidence(data),
     usefulGod: canonicalUsefulDisplay(useful, text(pattern.dung_than)),
     hyThan: canonicalFavorableDisplay(useful, text(pattern.hy_than)),
     kyThan: canonicalUnfavorableDisplay(useful, text(pattern.ky_than)),
@@ -228,8 +237,11 @@ export function buildFullReportViewModel(
     tenGods: analyticalTenGods(data),
     hiddenTenGods: analyticalHiddenTenGods(data),
     tenGodsNote:
+      prominence.othersLine ||
       String(data.ten_gods?.note || data.ten_gods_result?.note || "").trim() ||
       "Xác định theo quan hệ Ngũ hành và âm dương với Nhật chủ.",
+    tenGodsFeatured: prominence.featured,
+    tenGodsOthersLine: prominence.othersLine,
     pillars: PILLAR_META.map((meta) =>
       mapPillar(bazi[meta.field] as PillarDto | undefined, meta, data),
     ),
@@ -241,7 +253,7 @@ export function buildFullReportViewModel(
           .join(" ")
       : "",
     luckDirection: text(luck?.direction_label),
-    luckEvidence: text(luck?.evidence),
+    luckEvidence: stripInternalRuleIds(text(luck?.evidence)),
     luckMethod: text(luck?.method_note),
     luckCycles: cycles,
     cungPhi: text(feng.cung_phi || calendar.cung_phi),
@@ -253,7 +265,7 @@ export function buildFullReportViewModel(
         : text(score.grade),
     climateState: canonicalClimateStateLabel(data),
     balancingNeed: canonicalBalancingNeedLabel(data),
-    climateEvidence: canonicalTemperatureEvidence(data),
+    climateEvidence: temperatureCustomerEvidence(data),
     narrative: buildNarrativeSections(narrative),
     supporting: buildSupportingSections(narrative),
     factsOnly: false,
@@ -435,16 +447,16 @@ function identityGrid(model: FullReportViewModel): string {
 }
 
 function overviewGrid(model: FullReportViewModel): string {
+  const dieuHau = [model.climateState, model.balancingNeed].filter(Boolean).join(" · ");
   return `<div class="bte-full-grid">
     ${kv("Nhật chủ", [model.dayMaster, model.yinYang, model.dayMasterElement].filter(Boolean).join(" · "))}
     ${kv("Thân", model.strengthLabel)}
     ${kv("Điểm thân", model.strengthScore)}
-    ${model.strengthEvidence ? kv("Căn cứ chính", model.strengthEvidence) : ""}
+    ${model.strengthEvidence ? kv("Yếu tố chính", model.strengthEvidence) : ""}
     ${kv("Cách cục", model.pattern)}
-    ${model.patternEvidence ? kv("Căn cứ", model.patternEvidence) : ""}
-    ${kv("Trạng thái khí hậu", model.climateState)}
-    ${kv("Nhu cầu điều hòa", model.balancingNeed)}
-    ${model.climateEvidence ? kv("Căn cứ khí hậu", model.climateEvidence) : ""}
+    ${model.patternEvidence ? `<p class="bte-full-note">${esc(model.patternEvidence)}</p>` : ""}
+    ${kv("Điều hậu", dieuHau)}
+    ${model.climateEvidence ? `<p class="bte-full-note">${esc(model.climateEvidence)}</p>` : ""}
   </div>`;
 }
 
@@ -476,13 +488,22 @@ function elementsList(model: FullReportViewModel): string {
 }
 
 function godsList(model: FullReportViewModel): string {
+  const featured = model.tenGodsFeatured
+    .map(
+      (item) =>
+        `<li><strong>${esc(item.name)} — ${esc(item.klass)}</strong><p class="bte-full-note">${esc(item.evidence)}</p></li>`,
+    )
+    .join("");
   const visible = model.tenGods.join(" · ");
   const hidden = model.hiddenTenGods.join(" · ");
-  if (!visible && !hidden) return `<p class="bte-full-empty">Chưa có thập thần hiển thị.</p>`;
+  if (!featured && !visible && !hidden) {
+    return `<p class="bte-full-empty">Chưa có thập thần hiển thị.</p>`;
+  }
   return `<div>
+    ${featured ? `<p><strong>Thập thần nổi bật</strong></p><ul>${featured}</ul>` : ""}
+    ${model.tenGodsOthersLine ? `<p class="bte-full-note">${esc(model.tenGodsOthersLine)}</p>` : ""}
     <p><strong>Lộ can</strong> ${esc(visible || "—")}</p>
     <p><strong>Tàng can</strong> ${esc(hidden || "—")}</p>
-    <p class="bte-full-note">${esc(model.tenGodsNote)}</p>
   </div>`;
 }
 
@@ -505,8 +526,9 @@ function shenShaBlock(items: readonly ShenShaEntryView[]): string {
   }
   return `<ul>${items
     .map((item) => {
-      const evidence = item.evidence ? ` · Căn cứ: ${item.evidence}` : "";
-      return `<li><strong>${esc(item.name)}</strong> — ${esc(item.presence)}${esc(evidence)}</li>`;
+      const evidence = item.evidence ? ` · ${item.evidence}` : "";
+      const presence = item.presence ? ` — ${item.presence}` : "";
+      return `<li><strong>${esc(item.name)}</strong>${esc(presence)}${esc(evidence)}</li>`;
     })
     .join("")}</ul>`;
 }

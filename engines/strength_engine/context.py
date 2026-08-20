@@ -46,6 +46,7 @@ class StrengthContext:
     officer_count: int = 0
     output_count: int = 0
     drain_count: int = 0
+    output_branch_count: int = 0
 
     # Populated during scoring pass
     season_score: float = 0.0

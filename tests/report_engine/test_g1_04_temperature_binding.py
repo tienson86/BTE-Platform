@@ -29,7 +29,8 @@ def test_case_0001_html_shows_dieu_hau_not_dash() -> None:
     html = render_html(ReportInputV1Adapter().build(build_case_0001_source()))
     assert "Hàn" in html
     assert "Cần ôn ấm" in html
-    assert "Nguyệt lệnh Sửu" in html
+    assert "Sinh tháng Sửu" in html
+    assert "rule cli_" not in html
     assert "Điều hậu: —" not in html
     assert ">hot<" not in html
 
