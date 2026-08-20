@@ -642,6 +642,18 @@ function mapS02(data: AnalysisDataDto): CanonicalDesktopViewModel["s02"] {
         color: "earth",
       },
       {
+        icon: "spark" as const,
+        label: "Trạng thái khí hậu",
+        value: canonicalClimateStateLabel(data) || UNAVAILABLE_CONCLUSION,
+        color: "water",
+      },
+      {
+        icon: "drop" as const,
+        label: "Nhu cầu điều hòa",
+        value: canonicalBalancingNeedLabel(data) || UNAVAILABLE_CONCLUSION,
+        color: "earth",
+      },
+      {
         icon: "drop" as const,
         label: "Dụng thần",
         value: dung,
