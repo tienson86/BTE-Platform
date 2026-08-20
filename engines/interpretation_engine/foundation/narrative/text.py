@@ -43,7 +43,14 @@ _IMPLEMENTATION_TERMS = (
 
 def normalize_text(value: str) -> str:
     """Collapse whitespace so copied statements compare stably."""
-    return _WHITESPACE.sub(" ", str(value or "").strip())
+    text = _WHITESPACE.sub(" ", str(value or "").strip())
+    # Presentation-only: CSV rule labels sometimes leak "Than" instead of "Thân".
+    text = (
+        text.replace("Than nhược", "Thân nhược")
+        .replace("Than vượng", "Thân vượng")
+        .replace("Than trung hòa", "Thân trung hòa")
+    )
+    return text
 
 
 def fingerprint(value: str) -> str:

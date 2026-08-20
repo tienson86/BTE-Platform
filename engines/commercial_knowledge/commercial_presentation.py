@@ -11,6 +11,8 @@ from typing import Any
 from .models import CareerSelectionAssessment, PromotionReadinessAssessment
 
 _TECHNICAL_REPLACEMENTS: tuple[tuple[str, str], ...] = (
+    (r"\bThan nhược\b", "Thân nhược"),
+    (r"\bThan vượng\b", "Thân vượng"),
     (r"\bDụng thần\b", "trục hỗ trợ"),
     (r"\bdụng thần\b", "trục hỗ trợ"),
     (r"\bNhật chủ\b", "nền tảng ngày"),
@@ -25,10 +27,17 @@ _TECHNICAL_REPLACEMENTS: tuple[tuple[str, str], ...] = (
     (r"\bNếu thân\b", "Nếu mức lực"),
     (r"\bnếu thân\b", "nếu mức lực"),
     (r"\bkhi thân\b", "khi mức lực"),
+    (
+        r"Chưa có Hỷ thần bổ trợ riêng",
+        "Chưa đủ căn cứ xác định Hỷ thần bổ trợ riêng",
+    ),
 )
 
 
-def commercialize_customer_text(text: str) -> str:
+def commercialize_customer_text(
+    text: str,
+    signals: dict[str, Any] | None = None,
+) -> str:
     """
     Replace technical BaZi wording with commercial customer language.
 
@@ -39,8 +48,27 @@ def commercialize_customer_text(text: str) -> str:
         return ""
     for pattern, replacement in _TECHNICAL_REPLACEMENTS:
         result = re.sub(pattern, replacement, result)
+    result = _align_strength_band_language(result, signals)
     # Collapse accidental double phrases from overlapping replacements.
     result = re.sub(r"\s{2,}", " ", result).strip()
+    return result
+
+
+def _align_strength_band_language(
+    text: str,
+    signals: dict[str, Any] | None,
+) -> str:
+    """Do not call a strong/balanced chart 'mỏng lực' from leftover KU copy."""
+    if not signals or not text:
+        return text
+    if str(signals.get("weakness_frame") or "") == "thin":
+        return text
+    band = str(signals.get("strength_band_label") or "").strip()
+    if not band or "mỏng lực" in band:
+        return text
+    result = text.replace("mức lực đang mỏng lực", f"mức lực {band}")
+    result = result.replace("nếu đang mỏng lực", "khi cần giữ mực")
+    result = result.replace("đang mỏng lực", band)
     return result
 
 

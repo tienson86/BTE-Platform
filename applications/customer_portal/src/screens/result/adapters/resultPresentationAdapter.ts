@@ -381,78 +381,23 @@ function buildInterpretation(
     };
   }
 
-  const overviewObs = commercialOrUnavailable(source.s08.executive.body);
-  const overviewImpact = commercialOrUnavailable(
-    source.s08.strengths.items.filter((i) => i !== UNAVAILABLE_CONCLUSION).slice(0, 2).join("; "),
-  );
-  const overviewSuggestion = commercialOrUnavailable(
-    source.s08.actions.items[0] ?? source.s01.cta,
-  );
-  const cautionObs = commercialOrUnavailable(
-    source.s08.warnings.items.filter((i) => i !== UNAVAILABLE_CONCLUSION).slice(0, 2).join("; "),
-  );
-  const cautionExplanation = commercialOrUnavailable(
-    source.s05.insight.replace(/\n/g, " "),
-  );
-  const cautionImpact = commercialOrUnavailable(
-    source.s11.attention.items.filter((i) => i !== UNAVAILABLE_CONCLUSION).slice(0, 2).join("; "),
-  );
-  const cautionSuggestion = commercialOrUnavailable(
-    source.s08.actions.items[1] ?? source.s11.recommendations.items[1],
-  );
-  const directionObs = commercialOrUnavailable(source.s01.decisions[0]?.answer);
-  const directionExplanation = commercialOrUnavailable(source.s01.decisions[1]?.answer);
-  const directionImpact = commercialOrUnavailable(source.s01.decisions[2]?.answer);
-  const directionSuggestion = commercialOrUnavailable(
-    source.s08.actions.items.filter((i) => i !== UNAVAILABLE_CONCLUSION).slice(0, 3).join("; "),
-  );
-
-  const blocks: InterpretationBlockViewModel[] = [
-    {
-      id: "interp-overview",
-      title: "Tổng quan mệnh cục",
-      observation: formatPreviewField(overviewObs, "summary"),
-      explanation: formatPreviewField(
-        `Nhật chủ ${bindPlaceholder(source.s01.dayMaster.value, "—")} · ${commercialOrUnavailable(source.s04.summary)}`,
-        "description",
-      ),
-      impact: formatPreviewField(overviewImpact, "summary"),
-      suggestion: formatPreviewField(overviewSuggestion, "summary"),
-      hasMore: true,
-    },
-    {
-      id: "interp-caution",
-      title: "Điểm cần lưu ý",
-      observation: formatPreviewField(cautionObs, "summary"),
-      explanation: formatPreviewField(cautionExplanation, "description"),
-      impact: formatPreviewField(cautionImpact, "summary"),
-      suggestion: formatPreviewField(cautionSuggestion, "summary"),
-      hasMore: true,
-    },
-    {
-      id: "interp-direction",
-      title: "Định hướng hành động",
-      observation: formatPreviewField(directionObs, "summary"),
-      explanation: formatPreviewField(directionExplanation, "description"),
-      impact: formatPreviewField(directionImpact, "summary"),
-      suggestion: formatPreviewField(directionSuggestion, "summary"),
-      hasMore: true,
-    },
-  ].map((block) => ({
-    ...block,
-    hasMore:
-      block.observation.hasMore ||
-      block.explanation.hasMore ||
-      block.impact.hasMore ||
-      block.suggestion.hasMore,
-  }));
-
+  const limited = formatPreviewField(UNAVAILABLE_CONCLUSION, "summary");
   return {
     title: "LUẬN GIẢI",
-    blocks,
+    blocks: [
+      {
+        id: "interp-limited",
+        title: "Luận giải",
+        observation: limited,
+        explanation: formatPreviewField(UNAVAILABLE_CONCLUSION, "description"),
+        impact: limited,
+        suggestion: limited,
+        hasMore: false,
+      },
+    ],
     expandLabel: "Mở rộng luận giải",
     collapseLabel: "Thu gọn",
-    visible: blocks.length > 0,
+    visible: true,
   };
 }
 

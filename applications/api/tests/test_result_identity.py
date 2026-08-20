@@ -24,6 +24,16 @@ def test_stamp_copies_request_id_as_analysis_id() -> None:
     assert stamped["useful_god"]["useful_display"] == "Thủy · Nhâm · Thực Thần"
 
 
+def test_stamp_copies_analysis_id_onto_narrative_run_id() -> None:
+    payload = {
+        "narrative_result": {"contract": "pack05_narrative_result_v1", "run_id": "", "sections": []},
+        "useful_god_source": {"contract": CUSTOMER_USEFUL_GOD_CONTRACT},
+    }
+    stamped = stamp_customer_result_identity(payload, "req-narrative-1")
+    assert stamped["analysis_id"] == "req-narrative-1"
+    assert stamped["narrative_result"]["run_id"] == "req-narrative-1"
+
+
 def test_stamp_does_not_invent_id_when_request_id_missing() -> None:
     stamped = stamp_customer_result_identity({"useful_god": {}}, None)
     assert "analysis_id" not in stamped or stamped.get("analysis_id") in (None, "")

@@ -37,4 +37,10 @@ def stamp_customer_result_identity(
         "month_pillar_standard": MONTH_PILLAR_STANDARD,
         "release_label": RELEASE_LABEL,
     }
+    narrative = stamped.get("narrative_result")
+    if isinstance(narrative, dict) and analysis_id:
+        narrative = dict(narrative)
+        if not str(narrative.get("run_id") or "").strip():
+            narrative["run_id"] = analysis_id
+        stamped["narrative_result"] = narrative
     return stamped

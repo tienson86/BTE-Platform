@@ -13,6 +13,7 @@ from .commercial_presentation import (
     format_secondary_promotion_milestone,
 )
 from .models import CommercialKnowledgeBundle, NarrativeKnowledgePayload
+from .signal_projection import project_analysis_signals
 
 
 def enrich_narrative_inputs(
@@ -35,6 +36,7 @@ def enrich_narrative_inputs(
     interpretation_out = (
         copy.deepcopy(interpretation) if isinstance(interpretation, dict) else {}
     )
+    signals = project_analysis_signals(analysis_out)
 
     sections = interpretation_out.get("sections")
     if not isinstance(sections, list):
@@ -48,7 +50,7 @@ def enrich_narrative_inputs(
             {
                 "id": section_id,
                 "title": title,
-                "body": commercialize_customer_text(unit.text),
+                "body": commercialize_customer_text(unit.text, signals),
                 "knowledge_unit_id": unit.knowledge_unit_id,
                 "version": unit.version,
                 "evidence_kind": unit.evidence_kind,
@@ -57,7 +59,7 @@ def enrich_narrative_inputs(
             }
         )
 
-    _enrich_analysis_from_bundle(analysis_out, bundle)
+    _enrich_analysis_from_bundle(analysis_out, bundle, signals)
     interpretation_out["commercial_knowledge_bundle_id"] = bundle.bundle_id
     interpretation_out["commercial_enrichment"] = True
 
@@ -130,6 +132,7 @@ def _section_title(evidence_kind: str, targets: tuple[str, ...]) -> str:
 def _enrich_analysis_from_bundle(
     analysis: dict[str, Any],
     bundle: CommercialKnowledgeBundle,
+    signals: dict[str, Any] | None = None,
 ) -> None:
     """Soft-enrich analysis fields Narrative source_factory already reads."""
     strength = analysis.setdefault("strength", {})
@@ -167,40 +170,40 @@ def _enrich_analysis_from_bundle(
 
     if career and career.career_strengths:
         strength["commercial_career_strengths"] = commercialize_customer_text(
-            career.career_strengths.text
+            career.career_strengths.text, signals
         )
     if career and career.career_direction:
         strength["commercial_career_direction"] = commercialize_customer_text(
-            career.career_direction.text
+            career.career_direction.text, signals
         )
 
     if career and career.career_risks:
-        risk_text = commercialize_customer_text(career.career_risks.text)
+        risk_text = commercialize_customer_text(career.career_risks.text, signals)
         useful["commercial_weakness_text"] = risk_text
         strength["commercial_weakness_text"] = risk_text
         score["commercial_weakness"] = risk_text
         if career.career_mitigation:
             score["commercial_mitigation"] = commercialize_customer_text(
-                career.career_mitigation.text
+                career.career_mitigation.text, signals
             )
 
     # Promotion metadata only — must not overwrite Exec reasoning.
     if promotion and promotion.promotion_readiness:
         strength["commercial_promotion_readiness"] = commercialize_customer_text(
-            promotion.promotion_readiness.text
+            promotion.promotion_readiness.text, signals
         )
     if promotion and promotion.promotion_risks:
         useful["commercial_promotion_risk"] = commercialize_customer_text(
-            promotion.promotion_risks.text
+            promotion.promotion_risks.text, signals
         )
         score["commercial_promotion_risk"] = useful["commercial_promotion_risk"]
         if promotion.promotion_mitigation:
             score["commercial_promotion_mitigation"] = commercialize_customer_text(
-                promotion.promotion_mitigation.text
+                promotion.promotion_mitigation.text, signals
             )
 
     if bundle.strengths and not (career and career.career_direction):
-        commercial = commercialize_customer_text(bundle.strengths[0].text)
+        commercial = commercialize_customer_text(bundle.strengths[0].text, signals)
         existing = str(strength.get("reasoning") or "").strip()
         if existing and not _is_commercial_marker(existing):
             strength["reasoning"] = f"{commercial} {existing}".strip()
@@ -209,7 +212,7 @@ def _enrich_analysis_from_bundle(
         strength["commercial_knowledge_unit_id"] = bundle.strengths[0].knowledge_unit_id
 
     if bundle.weaknesses and not (career and career.career_risks):
-        commercial = commercialize_customer_text(bundle.weaknesses[0].text)
+        commercial = commercialize_customer_text(bundle.weaknesses[0].text, signals)
         useful["unfavorable_gods"] = useful.get("unfavorable_gods") or []
         if isinstance(useful["unfavorable_gods"], list):
             useful["commercial_weakness_text"] = commercial
@@ -218,7 +221,7 @@ def _enrich_analysis_from_bundle(
 
     if bundle.useful_god:
         useful["commercial_explanation"] = commercialize_customer_text(
-            bundle.useful_god[0].text
+            bundle.useful_god[0].text, signals
         )
         useful["commercial_knowledge_unit_id"] = bundle.useful_god[0].knowledge_unit_id
 
@@ -240,7 +243,7 @@ def _enrich_analysis_from_bundle(
     elif bundle.recommendations:
         # Wave 1.1-only recommendation path.
         rec_item = bundle.recommendations[0]
-        rec = commercialize_customer_text(rec_item.text)
+        rec = commercialize_customer_text(rec_item.text, signals)
         existing_rec = str(score.get("recommendation") or "").strip()
         if existing_rec and _looks_like_code(existing_rec):
             score["recommendation"] = rec

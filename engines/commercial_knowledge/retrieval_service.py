@@ -99,7 +99,7 @@ class RetrievalService:
             if _looks_technical(bound):
                 dropped.append((unit_id, "technical_wording"))
                 continue
-            bound = commercialize_customer_text(bound)
+            bound = commercialize_customer_text(bound, signals)
             enriched = dict(row)
             enriched["commercial_text"] = bound
             enriched["bind_signals"] = signals

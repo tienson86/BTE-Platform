@@ -35,7 +35,7 @@ from engines.interpretation_engine.foundation.interpreters.useful_god.templates 
 )
 from engines.interpretation_engine.foundation.status import DataAvailability
 from engines.useful_god_engine.presentation import (
-    EMPTY_CUSTOMER_FAVORABLE_DISPLAY,
+    INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY,
     customer_favorable_tokens,
     customer_hy_overlay_text,
 )
@@ -293,7 +293,7 @@ def _customer_hy_phrase(facts: UsefulGodInterpretationFacts) -> str:
         facts.selected,
         list(facts.favorable_gods),
         winning_rule_id=str(facts.rule_ids[0] if facts.rule_ids else ""),
-    ) or EMPTY_CUSTOMER_FAVORABLE_DISPLAY
+    ) or INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
 
 
 def _build_evidence_items(
@@ -704,6 +704,16 @@ def _build_domain_meaning(
         )
         if eid in evidence_ids
     ]
+    insufficient_hy = "Chưa đủ căn cứ" in hy or hy == INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
+    if insufficient_hy:
+        hy_statement = f"Hỷ thần bổ trợ riêng: {hy}."
+        if ky:
+            hy_statement += f" Kỵ thần theo quy tắc cân bằng hiện tại: {ky}."
+    else:
+        hy_statement = (
+            f"Hỷ thần ({hy}) hỗ trợ duy trì cân bằng; "
+            f"Kỵ thần ({ky}) cần hạn chế khuếch đại."
+        )
     return [
         DomainMeaningItem(
             statement=(
@@ -713,10 +723,7 @@ def _build_domain_meaning(
             evidence_ids=tuple(refs),
         ),
         DomainMeaningItem(
-            statement=(
-                f"Hỷ thần ({hy}) hỗ trợ duy trì cân bằng; "
-                f"Kỵ thần ({ky}) cần hạn chế khuếch đại."
-            ),
+            statement=hy_statement,
             evidence_ids=tuple(
                 eid
                 for eid in list(evidence_ids)
@@ -773,14 +780,14 @@ def _build_applications(
             statement=(
                 f"Tài lộc liên quan khả năng điều tiết qua {selected_el or selected}; "
                 f"ưu tiên dòng tiền gắn Hỷ thần "
-                f"({', '.join(hy[:3]) if hy else EMPTY_CUSTOMER_FAVORABLE_DISPLAY})."
+                f"({', '.join(hy[:3]) if hy else INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY})."
             ),
             basis_evidence_ids=base_refs,
             confidence=facts.confidence,
         )
     )
 
-    hy_env = ", ".join(hy[:2]) if hy else EMPTY_CUSTOMER_FAVORABLE_DISPLAY
+    hy_env = ", ".join(hy[:2]) if hy else INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
     rel = (
         f"Quan hệ cân bằng hơn khi duy trì không khí thuận ({hy_env}); "
         f"tránh kích hoạt Kỵ thần ({', '.join(ky[:2])}) trong tranh chấp."
@@ -854,24 +861,27 @@ def _build_advice(
             action=(
                 f"Ưu tiên hành động gắn Hỷ thần: {', '.join(hy)}."
                 if hy
-                else f"Ưu tiên hành động gắn Hỷ thần: {EMPTY_CUSTOMER_FAVORABLE_DISPLAY}."
+                else f"Hỷ thần bổ trợ riêng: {INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY}."
             ),
             priority="high",
             rationale="Published favorable gods",
-            evidence_ids=tuple(_evidence_id("hy", s) for s in hy if _evidence_id("hy", s) in evidence_ids),
-        ),
-        AdviceItem(
-            category="environment",
-            action=(
-                f"Môi trường thuận: không khí có yếu tố {', '.join(hy[:3])}."
-                if hy
-                else f"Môi trường thuận: {EMPTY_CUSTOMER_FAVORABLE_DISPLAY}."
+            evidence_ids=tuple(
+                _evidence_id("hy", s)
+                for s in hy
+                if _evidence_id("hy", s) in evidence_ids
             ),
-            priority="medium",
-            rationale="Supportive element environment",
-            evidence_ids=refs,
         ),
     ]
+    if hy:
+        items.append(
+            AdviceItem(
+                category="environment",
+                action=f"Môi trường thuận: không khí có yếu tố {', '.join(hy[:3])}.",
+                priority="medium",
+                rationale="Supportive element environment",
+                evidence_ids=refs,
+            )
+        )
     if cool:
         items.append(
             AdviceItem(

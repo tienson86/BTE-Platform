@@ -28,11 +28,15 @@ def project_analysis_signals(analysis: dict[str, Any] | None) -> dict[str, Any]:
         or ""
     ).lower()
     strength_score = strength.get("strength_score", score.get("strength_score"))
-    useful_god = _text(useful.get("useful_god") or pattern.get("dung_than"))
+    useful_god = _text(
+        useful.get("useful_display")
+        or useful.get("useful_god")
+        or useful.get("overall_useful_god")
+    )
     unfavorable = useful.get("unfavorable_gods")
     if not isinstance(unfavorable, list):
         unfavorable = []
-    ky_than = _text(pattern.get("ky_than"))
+    ky_than = _text(useful.get("unfavorable_display"))
     has_enemy = bool(unfavorable) or bool(ky_than)
 
     favorable_strength = _is_favorable_strength(strength_band, strength_score)
@@ -157,24 +161,39 @@ def _eval_clause(clause: str, signals: dict[str, Any]) -> bool:
     return False
 
 
+def _canonical_strength_unit(score: Any) -> float | None:
+    """Map published Strength score onto 0–1. Never treat Score Engine 0–100 as thân."""
+    try:
+        value = float(score)
+    except (TypeError, ValueError):
+        return None
+    if value > 1.5:
+        return value / 100.0
+    return value
+
+
 def _is_favorable_strength(band: str, score: Any) -> bool:
-    tokens = ("vuong", "vượng", "can", "cân", "strong", "support", "vượng")
+    tokens = ("vuong", "vượng", "strong", "support")
     if any(token in band for token in tokens):
         return True
-    try:
-        return float(score) >= 55.0
-    except (TypeError, ValueError):
+    if any(token in band for token in ("nhuoc", "nhược", "weak", "suy", "can", "cân", "balance")):
         return False
+    unit = _canonical_strength_unit(score)
+    if unit is None:
+        return False
+    return unit >= 0.60
 
 
 def _is_weak_strength(band: str, score: Any) -> bool:
     tokens = ("nhuoc", "nhược", "weak", "overtaxed", "suy")
     if any(token in band for token in tokens):
         return True
-    try:
-        return float(score) < 45.0
-    except (TypeError, ValueError):
+    if any(token in band for token in ("vuong", "vượng", "strong", "can", "cân", "balance")):
         return False
+    unit = _canonical_strength_unit(score)
+    if unit is None:
+        return False
+    return unit < 0.40
 
 
 def _commercial_strength_band_label(
@@ -195,13 +214,12 @@ def _commercial_strength_band_label(
     if band:
         # Unknown band — never echo raw engine tokens to customers.
         return "chưa xác định rõ"
-    try:
-        numeric = float(score)
-    except (TypeError, ValueError):
+    unit = _canonical_strength_unit(score)
+    if unit is None:
         return "chưa xác định rõ"
-    if numeric < 45.0:
+    if unit < 0.40:
         return "đang mỏng lực"
-    if numeric < 55.0:
+    if unit < 0.60:
         return "đang cân bằng"
     return "được nâng đỡ"
 
