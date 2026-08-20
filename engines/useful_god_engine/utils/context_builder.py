@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from engines.pattern_engine.follow_tokens import canonicalize_follow_token
 from engines.useful_god_engine.context import UsefulGodContext
 
 
@@ -18,14 +19,18 @@ def build_useful_god_context(pattern_context: Any, pattern_result: Any = None) -
 
     if pattern_result is not None:
         main_pattern = str(getattr(pattern_result, "pattern", "") or "") or None
-        follow_pattern = str(getattr(pattern_result, "follow_type", "") or "") or None
+        follow_pattern = canonicalize_follow_token(
+            getattr(pattern_result, "follow_type", None)
+        )
         if main_pattern in _SPECIAL_CODES:
             special_pattern = main_pattern
 
     if main_pattern is None:
         main_pattern = str(getattr(pattern_context, "main_pattern", "") or "") or None
     if follow_pattern is None:
-        follow_pattern = str(getattr(pattern_context, "follow_pattern", "") or "") or None
+        follow_pattern = canonicalize_follow_token(
+            getattr(pattern_context, "follow_pattern", None)
+        )
     if special_pattern is None:
         special_pattern = str(getattr(pattern_context, "special_pattern", "") or "") or None
 

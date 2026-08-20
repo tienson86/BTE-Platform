@@ -12,6 +12,7 @@ from typing import Any
 
 from engines.bazi_engine.ten_god import day_master_element
 
+from .follow_tokens import canonicalize_follow_token, follow_display_label
 from .labels import STRENGTH_LEVEL_LABELS, pattern_display_label
 
 # Relation slots — published only when an upstream combination producer fills them.
@@ -236,9 +237,9 @@ def enrich_rule_context_summaries(
         pattern_code,
         getattr(pattern, "description", None) if pattern is not None else None,
     )
-    follow = pattern_section.get("follow_type")
-    # Tổng cách: follow pattern when present; otherwise standard cách cục label.
-    tong_cach = str(follow or "").strip() or cach_cuc
+    follow = canonicalize_follow_token(pattern_section.get("follow_type"))
+    # Tổng cách: follow display when present; otherwise standard cách cục label.
+    tong_cach = follow_display_label(follow) or cach_cuc
 
     dung_than = str(useful.get("name") or useful.get("useful_god") or "").strip()
     hy_src = useful.get("favorable_gods") or useful.get("favorable") or []

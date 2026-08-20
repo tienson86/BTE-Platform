@@ -31,24 +31,17 @@ from .conflict import (
     resolve_exclusive_conflicts,
 )
 from .evidence import attach_identification_evidence
+from .follow_tokens import (
+    canonical_strength_level,
+    canonicalize_follow_token,
+    follow_token_eligible,
+)
 from .loader import PatternLoader
 from .matcher import PatternMatcher
 from .utils.context_builder import ensure_canonical_pattern_context
 from .validator import PatternValidator
 
 logger = logging.getLogger(__name__)
-
-# Map FollowPatternCalculator labels → follow override pattern codes.
-_FOLLOW_LABEL_TO_PATTERN: dict[str, str] = {
-    "Tòng Tài": "tong_tai",
-    "Tòng Quan": "tong_quan",
-    "Tòng Sát": "tong_sat",
-    "Tòng Nhi": "tong_nhi",
-    "Tòng Ấn": "tong_an",
-    "Tòng Vượng": "tong_vuong",
-    "Tòng Cường": "tong_vuong",
-    "Tòng Thế": "tong_vuong",
-}
 class PatternCalculator:
 
     def __init__(self, loader: PatternLoader):
@@ -81,11 +74,14 @@ class PatternCalculator:
         # ---- 1. Candidate Detection (collect only; do not eliminate) ----
         candidates = self.detect_candidates(context, rules)
 
-        # ---- 2. Validation ----
-        follow_type = self.follow_calculator.detect(context)
+        # ---- 2. Validation (Strength eligibility before follow CSV rows) ----
+        follow_type = canonicalize_follow_token(
+            self.follow_calculator.detect(context)
+        )
         validated, rejected = self.validate_candidates(
             candidates,
             follow_type=follow_type,
+            strength_level=canonical_strength_level(context),
         )
 
         # ---- 3. Conflict Resolution (exclusive groups) ----
@@ -136,6 +132,7 @@ class PatternCalculator:
         candidates: list[dict[str, Any]],
         *,
         follow_type: str | None,
+        strength_level: str | None = None,
     ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
         """Verify candidates; reject invalid ones."""
         validated: list[dict[str, Any]] = []
@@ -147,11 +144,7 @@ class PatternCalculator:
             (not self._is_fallback(item) and not self._is_follow_rule(item))
             for item in candidates
         )
-        expected_follow = (
-            _FOLLOW_LABEL_TO_PATTERN.get(str(follow_type or "").strip())
-            if follow_type
-            else None
-        )
+        expected_follow = canonicalize_follow_token(follow_type)
 
         for item in candidates:
             reason = self._validation_failure(
@@ -159,6 +152,7 @@ class PatternCalculator:
                 has_substantive=has_substantive,
                 follow_type=follow_type,
                 expected_follow_pattern=expected_follow or None,
+                strength_level=strength_level,
             )
             if reason:
                 rejected.append({**item, "_reject_reason": reason})
@@ -243,7 +237,6 @@ class PatternCalculator:
     ) -> dict[str, Any]:
         """Build PatternResult payload from resolved winners."""
         result = self._empty_result()
-        result["follow_type"] = follow_type
         result["candidate_patterns"] = self._pattern_codes(candidates)
         result["validated_patterns"] = self._pattern_codes(validated)
         result["matched_rules"] = [
@@ -283,9 +276,14 @@ class PatternCalculator:
         description = winner.get("description")
         self._log_fallback_diagnostic(context, winner)
 
+        published_follow = canonicalize_follow_token(follow_type)
+        if not self._is_follow_rule(winner) or canonicalize_follow_token(final) != published_follow:
+            published_follow = None
+
         result["success"] = True
         result["pattern"] = final
         result["final_pattern"] = final
+        result["follow_type"] = published_follow
         result["secondary_patterns"] = self._pattern_codes(secondary)
         result["score"] = score
         result["priority"] = priority
@@ -386,15 +384,19 @@ class PatternCalculator:
         has_substantive: bool,
         follow_type: str | None,
         expected_follow_pattern: str | None,
+        strength_level: str | None = None,
     ) -> str | None:
         """Return rejection reason, or None when valid."""
         if not pattern_code(item):
             return "missing_pattern_code"
 
         if self._is_follow_rule(item):
+            token = pattern_code(item)
+            if not follow_token_eligible(token, strength_level):
+                return "follow_strength_incompatible"
             if not follow_type:
                 return "follow_not_detected"
-            if expected_follow_pattern and pattern_code(item) != expected_follow_pattern:
+            if expected_follow_pattern and token != expected_follow_pattern:
                 return "follow_type_mismatch"
 
         if has_substantive and self._is_fallback(item):
