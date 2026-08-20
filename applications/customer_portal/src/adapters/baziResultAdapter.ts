@@ -36,6 +36,12 @@ import {
   fiveElementAbsentLabel,
 } from "./canonicalFiveElements";
 import {
+  canonicalFavorableDisplay,
+  canonicalUsefulDisplay,
+  canonicalUsefulGodPayload,
+  canonicalUnfavorableDisplay,
+} from "./canonicalUsefulGod";
+import {
   asTenGodsPayload,
   hiddenLinesForPillar,
   hiddenLabels,
@@ -342,7 +348,7 @@ function mapInterpretation(data: AnalysisDataDto): BaZiInterpretationBlock {
 
 function mapKnowledge(data: AnalysisDataDto): readonly BaZiKnowledgeItem[] {
   const pattern = data.pattern as Record<string, unknown> | undefined;
-  const useful = data.useful_god as Record<string, unknown> | undefined;
+  const useful = canonicalUsefulGodPayload(data);
   const items: BaZiKnowledgeItem[] = [];
   const dm = asString(data.bazi?.day_master);
   if (dm) {
@@ -360,7 +366,7 @@ function mapKnowledge(data: AnalysisDataDto): readonly BaZiKnowledgeItem[] {
       reference: cach,
     });
   }
-  const dung = asString(useful?.useful_god ?? pattern?.dung_than);
+  const dung = canonicalUsefulDisplay(useful, asString(pattern?.dung_than));
   if (dung) {
     items.push({
       id: "kn-useful-god",
@@ -404,16 +410,10 @@ function mapShenSha(data: AnalysisDataDto): readonly BaZiShenShaItem[] {
 
 function mapSpiritGods(data: AnalysisDataDto): readonly BaZiSpiritGod[] {
   const pattern = data.pattern as Record<string, unknown> | undefined;
-  const useful = data.useful_god as Record<string, unknown> | undefined;
-  const dung = asString(useful?.useful_god ?? pattern?.dung_than);
-  const hy =
-    Array.isArray(useful?.favorable_gods)
-      ? asString(useful?.favorable_gods?.[0])
-      : asString(pattern?.hy_than);
-  const ky =
-    Array.isArray(useful?.unfavorable_gods)
-      ? asString(useful?.unfavorable_gods?.[0])
-      : asString(pattern?.ky_than);
+  const useful = canonicalUsefulGodPayload(data);
+  const dung = canonicalUsefulDisplay(useful, asString(pattern?.dung_than));
+  const hy = canonicalFavorableDisplay(useful, asString(pattern?.hy_than));
+  const ky = canonicalUnfavorableDisplay(useful, asString(pattern?.ky_than));
 
   const rows: BaZiSpiritGod[] = [];
   if (dung) {
@@ -532,7 +532,7 @@ export function adaptAnalysisToBaZiResult(
   const tenGods = mapTenGods(data);
   const strength = mapStrength(data);
   const pattern = data.pattern as Record<string, unknown> | undefined;
-  const useful = data.useful_god as Record<string, unknown> | undefined;
+  const useful = canonicalUsefulGodPayload(data);
 
   return {
     status: options.status ?? "ready",
@@ -555,15 +555,9 @@ export function adaptAnalysisToBaZiResult(
       tenGods,
       gender: options.request?.gender ?? data.customer?.gender ?? undefined,
       yinYang: asString(data.bazi?.day_master_yin_yang) || undefined,
-      dungThan: asString(useful?.useful_god ?? pattern?.dung_than) || undefined,
-      hyThan:
-        (Array.isArray(useful?.favorable_gods)
-          ? useful?.favorable_gods.map(String).join(", ")
-          : asString(pattern?.hy_than)) || undefined,
-      kyThan:
-        (Array.isArray(useful?.unfavorable_gods)
-          ? useful?.unfavorable_gods.map(String).join(", ")
-          : asString(pattern?.ky_than)) || undefined,
+      dungThan: canonicalUsefulDisplay(useful, asString(pattern?.dung_than)) || undefined,
+      hyThan: canonicalFavorableDisplay(useful, asString(pattern?.hy_than)) || undefined,
+      kyThan: canonicalUnfavorableDisplay(useful, asString(pattern?.ky_than)) || undefined,
       pattern: asString(pattern?.cach_cuc ?? pattern?.pattern) || undefined,
       overallGrade: asString(data.score?.grade) || undefined,
       recommendation:

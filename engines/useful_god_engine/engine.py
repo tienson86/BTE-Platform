@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from dataclasses import asdict
 from pathlib import Path
 
 from .analyzer import UsefulGodAnalyzer
@@ -10,6 +9,7 @@ from .loader import UsefulGodLoader
 from .matcher import UsefulGodMatcher
 from .models import UsefulGodResult
 from .priority import PriorityResolver
+from .roles import enrich_useful_god_result
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_DATABASE_PATH = str(_REPO_ROOT / "database" / "13_useful_god")
@@ -62,6 +62,8 @@ class UsefulGodEngine:
             strength_reason=self._first_reason(analysis["strength_candidates"]),
             balance_reason=str(analysis["balance_summary"].get("status") or ""),
             recommendations=self._build_recommendations(favorable, unfavorable),
+            winning_rule_id=str(winner.get("rule_id") or ""),
+            winning_rule_group=str(winner.get("rule_group") or ""),
             metadata={
                 "trace": {
                     "context": self._context_snapshot(context),
@@ -73,7 +75,9 @@ class UsefulGodEngine:
                 },
             },
         )
-        return result
+        return enrich_useful_god_result(
+            result, str(getattr(context, "day_master", "") or "")
+        )
 
     @staticmethod
     def _parse_json_list(value) -> list[str]:

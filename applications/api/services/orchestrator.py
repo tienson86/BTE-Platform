@@ -542,8 +542,7 @@ class OrchestratorService:
             strength_score=strength_result.strength_score,
         )
         temperature_result = self.temperature_engine.calculate(temperature_context)
-        # G1-04: climate_state is published on TemperatureView. Useful God overlay
-        # stays frozen until G1-06 so Overall Useful God is not rewritten here.
+        # G1-06: Useful God reads canonical G1-04 climate_state via overlay.
         pattern_context.temperature_type = (
             temperature_result.useful_god_temperature_overlay()
         )

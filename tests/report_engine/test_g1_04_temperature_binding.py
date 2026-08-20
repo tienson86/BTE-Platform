@@ -19,7 +19,8 @@ def test_case_0001_report_input_uses_cold_warming() -> None:
     assert report_input.useful_god.temperature_adjustment != "hot"
     assert report_input.useful_god.balancing_need == "warming"
     assert "Nguyệt lệnh Sửu" in report_input.useful_god.climate_evidence
-    assert report_input.useful_god.useful_god == "Thực Thần"
+    assert report_input.useful_god.useful_god == "Bính"
+    assert report_input.useful_god.useful_display == "Hỏa · Bính · Thất Sát"
     assert report_input.pattern.primary_pattern == "Chính Ấn"
     assert report_input.pattern.follow_pattern != "cold"
 
@@ -48,5 +49,5 @@ def test_case_0001_docx_shows_climate_not_pattern_dieu_hau(tmp_path: Path) -> No
     text = paragraphs + "\n" + tables
     assert "Hàn" in text
     assert "Cần ôn ấm" in text
-    assert "Thực Thần" in text
+    assert "Hỏa · Bính · Thất Sát" in text
     assert "Chính Ấn" in text

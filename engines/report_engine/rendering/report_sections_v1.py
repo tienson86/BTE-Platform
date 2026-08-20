@@ -390,9 +390,15 @@ def _section_useful_god(report_input: ReportInputV1) -> PresentedSection:
         title="07. Dụng thần – Hỷ thần – Kỵ thần",
         meta_rows=_filled_rows(
             [
-                ("Dụng thần", display_text(useful.useful_god)),
-                ("Hỷ thần", ", ".join(display_text(item) for item in useful.favorable_gods)),
-                ("Kỵ thần", ", ".join(display_text(item) for item in useful.unfavorable_gods)),
+                ("Dụng thần", display_text(useful.useful_display or useful.useful_god)),
+                ("Hỷ thần", display_text(
+                    useful.favorable_display
+                    or ", ".join(item for item in useful.favorable_gods if item)
+                )),
+                ("Kỵ thần", display_text(
+                    useful.unfavorable_display
+                    or ", ".join(item for item in useful.unfavorable_gods if item)
+                )),
                 ("Trung tính", ", ".join(display_text(item) for item in useful.neutral_gods)),
                 ("Điều hậu nhiệt", display_text(useful.temperature_adjustment, "temperature")),
                 ("Nhu cầu điều hòa", display_text(useful.balancing_need, "balancing_need")),

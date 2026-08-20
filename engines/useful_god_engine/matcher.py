@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import operator
+from collections.abc import Mapping
 from typing import Any
 
 
@@ -17,6 +18,31 @@ _BINARY_OPS = {
 }
 
 
+def _unique_maximum_contains(mapping: Mapping[Any, Any], needle: Any) -> bool:
+    """True when *needle* is the unique maximum numeric value in *mapping*.
+
+    Flow rules label this ``quá thịnh``. CSV has no numeric cutoff, so the
+    predicate evaluates relative dominance of the stored counts rather than
+    key presence. A lone positive count is unique-max. Ties are not unique.
+    """
+    target_value: float | None = None
+    others: list[float] = []
+    for key, raw in mapping.items():
+        try:
+            value = float(raw)
+        except (TypeError, ValueError):
+            continue
+        if key == needle or str(key) == str(needle):
+            target_value = value
+            continue
+        others.append(value)
+    if target_value is None:
+        return False
+    if not others:
+        return target_value > 0.0
+    return target_value > max(others)
+
+
 class UsefulGodMatcher:
     def evaluate(self, left: Any, op: str, right: Any) -> bool:
         if op in _BINARY_OPS:
@@ -24,13 +50,17 @@ class UsefulGodMatcher:
         if op == "contains":
             if left is None:
                 return False
-            if isinstance(left, (list, tuple, set, frozenset, dict)):
+            if isinstance(left, Mapping):
+                return _unique_maximum_contains(left, right)
+            if isinstance(left, (list, tuple, set, frozenset)):
                 return right in left
             return str(right) in str(left)
         if op == "not_contains":
             if left is None:
                 return True
-            if isinstance(left, (list, tuple, set, frozenset, dict)):
+            if isinstance(left, Mapping):
+                return not _unique_maximum_contains(left, right)
+            if isinstance(left, (list, tuple, set, frozenset)):
                 return right not in left
             return str(right) not in str(left)
         if op == "in":

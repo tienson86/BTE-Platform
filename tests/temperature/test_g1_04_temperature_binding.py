@@ -148,7 +148,8 @@ def test_case_0001_strength_pattern_ten_gods_useful_god_unchanged() -> None:
     assert strength["strength_level"] == "strong"
     assert payload["pattern"]["cach_cuc"] == "Chính Ấn"
     assert payload["pattern"]["pattern"] == "chinh_an"
-    assert payload["useful_god"]["useful_god"] == "Thực Thần"
+    assert payload["useful_god"]["useful_god"] == "Bính"
+    assert payload["useful_god"]["useful_display"] == "Hỏa · Bính · Thất Sát"
     assert payload["temperature"]["climate_state"] == "cold"
     assert payload["temperature"]["balancing_need"] == "warming"
     ten_gods = payload.get("ten_gods") or {}
@@ -158,8 +159,8 @@ def test_case_0001_strength_pattern_ten_gods_useful_god_unchanged() -> None:
     assert stems == ["Bính", "Tân", "Canh", "Mậu"]
 
 
-def test_case_0001_useful_god_overlay_frozen_until_g1_06() -> None:
-    """Climate is cold, but Overall Useful God overlay stays pre-G1-04 until G1-06."""
+def test_case_0001_useful_god_reads_canonical_climate() -> None:
+    """Climate is cold; Useful God overlay uses climate_state, not score 0.72."""
     calendar, chart = _case_0001_chart()
     strength = StrengthEngine().calculate(build_strength_context(chart, calendar=calendar))
     temperature = TemperatureEngine().calculate(
@@ -172,11 +173,14 @@ def test_case_0001_useful_god_overlay_frozen_until_g1_06() -> None:
     )
     assert temperature.climate_state == "cold"
     assert temperature.to_pattern_temperature_type() == "cold"
-    assert temperature.useful_god_temperature_overlay() == "hot"
+    assert abs(float(temperature.temperature_score) - 0.72) < 0.02
+    assert temperature.useful_god_temperature_overlay() == "cold"
     pattern_context = build_pattern_context(chart, calendar=calendar)
     pattern_context.strength_level = strength.strength_level
     pattern_context.strength_score = strength.strength_score
     pattern_context.temperature_type = temperature.useful_god_temperature_overlay()
     pattern = PatternEngine().calculate(pattern_context)
     useful = UsefulGodEngine().calculate(build_useful_god_context(pattern_context, pattern))
-    assert useful.useful_god == "Thực Thần"
+    assert useful.useful_god == "Bính"
+    assert useful.winning_rule_id == "sea_001"
+    assert useful.useful_display == "Hỏa · Bính · Thất Sát"

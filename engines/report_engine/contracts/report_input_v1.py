@@ -214,14 +214,34 @@ class ReportUsefulGodV1:
     balancing_need: str = ""
     climate_evidence: str = ""
     reasoning: str = ""
+    useful_ten_god: str = ""
+    useful_stem: str = ""
+    useful_element: str = ""
+    useful_display: str = ""
+    favorable_roles: list[dict[str, str]] = field(default_factory=list)
+    unfavorable_roles: list[dict[str, str]] = field(default_factory=list)
+    favorable_display: str = ""
+    unfavorable_display: str = ""
+    winning_rule_id: str = ""
+    winning_rule_group: str = ""
 
     def to_dict(self) -> dict[str, Any]:
-        """Keep legacy keys; G1-04 adds Điều hậu need/evidence."""
+        """Keep legacy keys; G1-06 adds rich Ten God / stem / element."""
         return _normalize_mapping(
             {
                 "useful_god": self.useful_god,
+                "useful_ten_god": self.useful_ten_god,
+                "useful_stem": self.useful_stem,
+                "useful_element": self.useful_element,
+                "useful_display": self.useful_display,
                 "favorable_gods": self.favorable_gods,
                 "unfavorable_gods": self.unfavorable_gods,
+                "favorable_roles": self.favorable_roles,
+                "unfavorable_roles": self.unfavorable_roles,
+                "favorable_display": self.favorable_display,
+                "unfavorable_display": self.unfavorable_display,
+                "winning_rule_id": self.winning_rule_id,
+                "winning_rule_group": self.winning_rule_group,
                 "neutral_gods": self.neutral_gods,
                 "temperature_adjustment": self.temperature_adjustment,
                 "balancing_need": self.balancing_need,

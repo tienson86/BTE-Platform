@@ -67,17 +67,5 @@ class TemperatureResult:
         return "warm"
 
     def useful_god_temperature_overlay(self) -> str:
-        """
-        Frozen Useful God overlay until G1-06.
-
-        Pre-G1-04 scored imbalance as if it were a heat axis. Changing that
-        overlay here would rewrite Overall Useful God (sea_001 / tmp_*).
-        Presentation must use climate_state, not this method.
-        """
-        if self.temperature_score >= 0.65:
-            return "hot"
-        if self.temperature_score <= 0.35:
-            return "cold"
-        if self.temperature_score >= 0.50:
-            return "warm"
-        return "cool"
+        """Climate state for Useful God. Does not classify score as hot/cold."""
+        return self.to_pattern_temperature_type()

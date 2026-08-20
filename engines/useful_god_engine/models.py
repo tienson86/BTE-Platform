@@ -36,14 +36,35 @@ class UsefulGodResult:
     recommendations: list[str] = field(default_factory=list)
     metadata: dict[str, Any] = field(default_factory=dict)
     error: str | None = None
+    useful_ten_god: str = ""
+    useful_stem: str = ""
+    useful_element: str = ""
+    useful_display: str = ""
+    favorable_roles: list[dict[str, str]] = field(default_factory=list)
+    unfavorable_roles: list[dict[str, str]] = field(default_factory=list)
+    favorable_display: str = ""
+    unfavorable_display: str = ""
+    winning_rule_id: str = ""
+    winning_rule_group: str = ""
 
     def to_portal_dict(self) -> dict[str, Any]:
-        """Serialize minimal API view fields."""
+        """Serialize API view fields. Rich roles are the display source."""
         return {
             "success": self.success,
             "useful_god": self.useful_god or "",
+            "useful_ten_god": self.useful_ten_god,
+            "useful_stem": self.useful_stem,
+            "useful_element": self.useful_element,
+            "useful_display": self.useful_display,
             "favorable_gods": list(self.favorable_gods),
             "unfavorable_gods": list(self.unfavorable_gods),
+            "favorable_roles": [dict(item) for item in self.favorable_roles],
+            "unfavorable_roles": [dict(item) for item in self.unfavorable_roles],
+            "favorable_display": self.favorable_display,
+            "unfavorable_display": self.unfavorable_display,
+            "winning_rule_id": self.winning_rule_id,
+            "winning_rule_group": self.winning_rule_group,
+            "candidate_list": [dict(item) for item in self.candidate_list],
             "reasoning": self.reasoning,
             "confidence": float(self.confidence),
             "matched_rules": list(self.matched_rules),

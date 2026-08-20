@@ -17,6 +17,12 @@ import {
   formatFiveElementsProvenance,
 } from "../adapters/canonicalFiveElements";
 import {
+  canonicalFavorableDisplay,
+  canonicalUsefulDisplay,
+  canonicalUsefulGodPayload,
+  canonicalUnfavorableDisplay,
+} from "../adapters/canonicalUsefulGod";
+import {
   canonicalBalancingNeedLabel,
   canonicalClimateStateLabel,
   canonicalTemperatureEvidence,
@@ -147,7 +153,7 @@ export function buildFullReportViewModel(
   const calendar = data.calendar || {};
   const bazi = data.bazi || {};
   const pattern = asRecord(data.pattern);
-  const useful = asRecord(data.useful_god);
+  const useful = canonicalUsefulGodPayload(data);
   const feng = asRecord(data.feng_shui);
   const score = data.score || {};
   const luck = data.luck;
@@ -194,9 +200,9 @@ export function buildFullReportViewModel(
     strengthEvidence: canonicalStrengthEvidence(data),
     pattern: text(pattern.cach_cuc || pattern.pattern),
     patternEvidence: canonicalPatternEvidence(data),
-    usefulGod: text(useful.useful_god || pattern.dung_than),
-    hyThan: listText(useful.favorable_gods) || text(pattern.hy_than),
-    kyThan: listText(useful.unfavorable_gods) || text(pattern.ky_than),
+    usefulGod: canonicalUsefulDisplay(useful, text(pattern.dung_than)),
+    hyThan: canonicalFavorableDisplay(useful, text(pattern.hy_than)),
+    kyThan: canonicalUnfavorableDisplay(useful, text(pattern.ky_than)),
     fiveElements: [
       { name: "Mộc", count: counts.Mộc },
       { name: "Hỏa", count: counts.Hỏa },

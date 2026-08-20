@@ -38,6 +38,12 @@ import {
   publishedFiveElementsMethodNote,
 } from "./canonicalFiveElements";
 import {
+  canonicalFavorableDisplay,
+  canonicalUsefulDisplay,
+  canonicalUsefulGodPayload,
+  canonicalUnfavorableDisplay,
+} from "./canonicalUsefulGod";
+import {
   asTenGodsPayload,
   hiddenLabels,
   hiddenLinesForPillar,
@@ -464,14 +470,14 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
         /hành động/i,
         /khuyến/i,
       ]);
-  const useful = data.useful_god as Record<string, unknown> | undefined;
+  const useful = canonicalUsefulGodPayload(data);
+  const dung = canonicalUsefulDisplay(useful);
   const whoFallback = [dm && `Nền tảng ngày ${dm}`, cachCuc && `Cấu trúc nghề ${cachCuc}`, than]
     .filter(Boolean)
     .join(" · ");
   const strengthFallback = [cachCuc && `Cấu trúc nghề ${cachCuc}`, than]
     .filter(Boolean)
     .join(". ");
-  const dung = pickStr(useful, ["useful_god"]);
   const actionFallback = dung
     ? `Ưu tiên phát huy trục hỗ trợ: ${dung}. ${asString(data.score?.recommendation)}`.trim()
     : asString(data.score?.recommendation);
@@ -580,19 +586,13 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
 function mapS02(data: AnalysisDataDto): CanonicalDesktopViewModel["s02"] {
   const base = cloneFixture().s02;
   const pattern = data.pattern as Record<string, unknown> | undefined;
-  const useful = data.useful_god as Record<string, unknown> | undefined;
+  const useful = canonicalUsefulGodPayload(data);
   const distribution = formatFiveElementsCompact(canonicalFiveElementCounts(data));
   const yy = asString(data.bazi?.day_master_yin_yang, "—");
   const than = canonicalStrengthLabel(data) || "—";
-  const dung = pickStr(useful, ["useful_god"]) || pickStr(pattern, ["dung_than"]) || "—";
-  const hy =
-    pickList(useful, ["favorable_gods"]).join(", ") ||
-    pickStr(pattern, ["hy_than"]) ||
-    "—";
-  const ky =
-    pickList(useful, ["unfavorable_gods"]).join(", ") ||
-    pickStr(pattern, ["ky_than"]) ||
-    "—";
+  const dung = canonicalUsefulDisplay(useful, pickStr(pattern, ["dung_than"]) || "—");
+  const hy = canonicalFavorableDisplay(useful, pickStr(pattern, ["hy_than"]) || "—");
+  const ky = canonicalUnfavorableDisplay(useful, pickStr(pattern, ["ky_than"]) || "—");
 
   return {
     ...base,
@@ -948,8 +948,10 @@ function mapS08(data: AnalysisDataDto): CanonicalDesktopViewModel["s08"] {
   const overviewBody =
     findSectionBody(sections, [/^tính cách$/i, /^kết luận$/i, /tổng quan/i]) ||
     asString(data.score?.recommendation);
-  const useful = data.useful_god as Record<string, unknown> | undefined;
-  const dung = pickStr(useful, ["useful_god"]) || pickStr(data.pattern as Record<string, unknown> | undefined, ["dung_than"]);
+  const dung = canonicalUsefulDisplay(
+    canonicalUsefulGodPayload(data),
+    pickStr(data.pattern as Record<string, unknown> | undefined, ["dung_than"]),
+  );
   if (actions.length === 0 && dung) {
     actions.push(`Ưu tiên phát huy Dụng thần: ${dung}`);
   }

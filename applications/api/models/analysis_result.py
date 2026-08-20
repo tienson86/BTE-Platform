@@ -275,13 +275,35 @@ class UsefulGodView:
     reasoning: str = ""
     confidence: float = 0.0
     matched_rules: list[str] = field(default_factory=list)
+    useful_ten_god: str = ""
+    useful_stem: str = ""
+    useful_element: str = ""
+    useful_display: str = ""
+    favorable_roles: list[dict[str, str]] = field(default_factory=list)
+    unfavorable_roles: list[dict[str, str]] = field(default_factory=list)
+    favorable_display: str = ""
+    unfavorable_display: str = ""
+    winning_rule_id: str = ""
+    winning_rule_group: str = ""
+    candidate_list: list[dict[str, Any]] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
         """Portal-compatible ``data.useful_god`` JSON."""
         return {
             "useful_god": self.useful_god or "",
+            "useful_ten_god": self.useful_ten_god or "",
+            "useful_stem": self.useful_stem or "",
+            "useful_element": self.useful_element or "",
+            "useful_display": self.useful_display or "",
             "favorable_gods": list(self.favorable_gods),
             "unfavorable_gods": list(self.unfavorable_gods),
+            "favorable_roles": [dict(item) for item in self.favorable_roles],
+            "unfavorable_roles": [dict(item) for item in self.unfavorable_roles],
+            "favorable_display": self.favorable_display or "",
+            "unfavorable_display": self.unfavorable_display or "",
+            "winning_rule_id": self.winning_rule_id or "",
+            "winning_rule_group": self.winning_rule_group or "",
+            "candidate_list": [dict(item) for item in self.candidate_list],
             "reasoning": self.reasoning or "",
             "confidence": float(self.confidence),
             "matched_rules": list(self.matched_rules),

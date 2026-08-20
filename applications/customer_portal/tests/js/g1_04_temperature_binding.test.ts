@@ -33,7 +33,20 @@ const CASE_0001: AnalysisDataDto = {
     temperature_score: 0.72,
     score_semantic: "imbalance_intensity",
   },
-  useful_god: { useful_god: "Thực Thần" },
+  useful_god: {
+    useful_god: "Bính",
+    useful_ten_god: "Thất Sát",
+    useful_stem: "Bính",
+    useful_element: "Hỏa",
+    useful_display: "Hỏa · Bính · Thất Sát",
+    favorable_gods: ["Bính", "Đinh", "Giáp"],
+    unfavorable_gods: ["Nhâm", "Quý"],
+    favorable_display:
+      "Hỏa · Bính · Thất Sát / Hỏa · Đinh · Chính Quan / Mộc · Giáp · Thiên Tài",
+    unfavorable_display: "Thủy · Nhâm · Thực Thần / Thủy · Quý · Thương Quan",
+    winning_rule_id: "sea_001",
+    winning_rule_group: "season",
+  },
 };
 
 describe("G1-04 canonical Temperature / Điều hậu binding", () => {

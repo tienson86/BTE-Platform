@@ -92,6 +92,18 @@ def stem_mapping_facts(day_master: str, other_stem: str) -> dict[str, str]:
     }
 
 
+def stem_for_ten_god(day_master: str, ten_god: str) -> str:
+    """Reverse G1-01 lookup: Day Master + Ten God name → heavenly stem."""
+    master = str(day_master or "").strip()
+    target = str(ten_god or "").strip()
+    if not master or not target or master not in STEM_META:
+        return ""
+    for stem in STEM_META:
+        if ten_god_name(master, stem) == target:
+            return stem
+    return ""
+
+
 def ten_god_name(day_master: str, other_stem: str) -> str:
     """Resolve Thập thần label from day master stem to another stem."""
     relation = element_relation(day_master, other_stem)
