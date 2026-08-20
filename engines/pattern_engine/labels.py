@@ -18,6 +18,12 @@ PATTERN_LABELS: dict[str, str] = {
     "duong_nhan": "Dương Nhẫn",
     "ty_kien": "Tỷ Kiên",
     "kiep_tai": "Kiếp Tài",
+    "tong_tai": "Tòng Tài",
+    "tong_quan": "Tòng Quan",
+    "tong_sat": "Tòng Sát",
+    "tong_nhi": "Tòng Nhi",
+    "tong_an": "Tòng Ấn",
+    "tong_vuong": "Tòng Vượng",
 }
 
 STRENGTH_LEVEL_LABELS: dict[str, str] = {
