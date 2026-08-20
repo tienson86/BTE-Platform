@@ -686,10 +686,15 @@ export function adaptResultPageViewModel(
     },
     shenSha: {
       title: "THẦN SÁT",
-      items: fullReport?.shenSha ?? source.s07.good.items.concat(source.s07.bad.items).filter((item) => item && item !== UNAVAILABLE_CONCLUSION),
+      items:
+        fullReport?.shenSha ??
+        source.s07.items.map((item) => ({
+          name: item.name,
+          presence: item.presence,
+          evidence: item.evidence,
+        })),
       visible: Boolean(
-        (fullReport?.shenSha.length ?? 0) > 0 ||
-          source.s07.good.items.some((item) => item && item !== UNAVAILABLE_CONCLUSION),
+        (fullReport?.shenSha.length ?? 0) > 0 || source.s07.items.length > 0,
       ),
     },
     context: {

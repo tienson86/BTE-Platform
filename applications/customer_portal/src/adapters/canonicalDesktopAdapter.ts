@@ -51,6 +51,7 @@ import {
   tenGodsNote,
   visibleLabels,
 } from "./tenGodsDisplay";
+import { shenShaEntriesFromAnalysis } from "./canonicalShenSha";
 import {
   asNarrativeResult,
   careerFieldText,
@@ -145,27 +146,6 @@ const BRANCH_ENTRIES: { keys: string[]; meta: GlyphMeta }[] = [
   { keys: ["tuất", "tuat"], meta: { han: "戌", element: "Thổ Dương", tone: "earth" } },
   { keys: ["hợi", "hoi"], meta: { han: "亥", element: "Thủy Âm", tone: "water" } },
 ];
-
-const HUNG_SHENSHA = new Set(
-  [
-    "kiếp sát",
-    "kiep sat",
-    "không vong",
-    "khong vong",
-    "cô thần",
-    "co than",
-    "quả tú",
-    "qua tu",
-    "đại hao",
-    "dai hao",
-    "tang môn",
-    "tang mon",
-    "bạch hổ",
-    "bach ho",
-    "câu trận",
-    "cau tran",
-  ].map((s) => s.toLowerCase()),
-);
 
 const TEN_GOD_COLORS: Record<string, string> = {
   "chính quan": "#1565c0",
@@ -801,51 +781,35 @@ function mapS06(data: AnalysisDataDto): CanonicalDesktopViewModel["s06"] {
 
 function mapS07(data: AnalysisDataDto): CanonicalDesktopViewModel["s07"] {
   const base = cloneFixture().s07;
-  const list = (data.bazi?.shensha ?? []).map((s) => asString(s).trim()).filter(Boolean);
-  if (list.length === 0) {
+  const entries = shenShaEntriesFromAnalysis(data);
+  if (entries.length === 0) {
     return {
       ...base,
       executive: {
         line1: UNAVAILABLE_CONCLUSION,
         line2: "",
       },
-      good: { title: "● CÁT TINH (0)", items: [UNAVAILABLE_CONCLUSION] },
-      bad: { title: "● HUNG TINH (0)", items: [UNAVAILABLE_CONCLUSION] },
+      items: [],
       footerSummary: {
         line1: UNAVAILABLE_CONCLUSION,
         line2: "",
       },
     };
   }
-
-  const good: string[] = [];
-  const bad: string[] = [];
-  for (const name of list) {
-    const key = normKey(name);
-    if (HUNG_SHENSHA.has(key) || [...HUNG_SHENSHA].some((h) => key.includes(h))) {
-      bad.push(name);
-    } else {
-      good.push(name);
-    }
-  }
-
   return {
     ...base,
     executive: {
-      line1: `Có ${list.length} Thần Sát được kích hoạt`,
-      line2: `${good.length} Cát tinh • ${bad.length} Hung tinh`,
+      line1: `Có ${entries.length} Thần Sát`,
+      line2: "",
     },
-    good: {
-      title: `● CÁT TINH (${good.length})`,
-      items: good.length > 0 ? good : [UNAVAILABLE_CONCLUSION],
-    },
-    bad: {
-      title: `● HUNG TINH (${bad.length})`,
-      items: bad.length > 0 ? bad : [UNAVAILABLE_CONCLUSION],
-    },
+    items: entries.map((item) => ({
+      name: item.name,
+      presence: item.presence,
+      evidence: item.evidence,
+    })),
     footerSummary: {
-      line1: `Có ${good.length} Cát tinh và ${bad.length} Hung tinh.`,
-      line2: "Nên xem chi tiết để đánh giá mức độ ảnh hưởng.",
+      line1: "",
+      line2: "",
     },
   };
 }

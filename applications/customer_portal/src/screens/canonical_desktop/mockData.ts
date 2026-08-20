@@ -272,26 +272,39 @@ export const CANONICAL_DESKTOP_MOCK = {
   s07: {
     title: "THẦN SÁT",
     executive: {
-      line1: "Có 10 Thần Sát được kích hoạt",
-      line2: "5 Cát tinh • 5 Hung tinh",
+      line1: "Có 5 Thần Sát",
+      line2: "",
     },
-    good: {
-      title: "● CÁT TINH (5)",
-      items: [
-        "Thiên Ất Quý Nhân",
-        "Thiên Đức Quý Nhân",
-        "Nguyệt Đức Quý Nhân",
-        "Văn Xương",
-        "Hoa Cái",
-      ],
-    },
-    bad: {
-      title: "● HUNG TINH (5)",
-      items: ["Kiếp Sát", "Không Vong", "Cô Thần", "Quả Tú", "Đại Hao"],
-    },
+    items: [
+      {
+        name: "Thiên Ất Quý Nhân",
+        presence: "Có · trụ Tháng",
+        evidence: "Nhật can Canh → gặp Sửu",
+      },
+      {
+        name: "Thiên Đức Quý Nhân",
+        presence: "Có · trụ Ngày",
+        evidence: "Nguyệt chi Sửu → gặp Canh",
+      },
+      {
+        name: "Nguyệt Đức Quý Nhân",
+        presence: "Có · trụ Ngày",
+        evidence: "Nguyệt chi Sửu → gặp Canh",
+      },
+      {
+        name: "Văn Xương",
+        presence: "Có",
+        evidence: "",
+      },
+      {
+        name: "Hoa Cái",
+        presence: "Có",
+        evidence: "",
+      },
+    ],
     footerSummary: {
-      line1: "Có 5 Cát tinh và 5 Hung tinh.",
-      line2: "Nên xem chi tiết để đánh giá mức độ ảnh hưởng.",
+      line1: "",
+      line2: "",
     },
     link: "Xem toàn bộ →",
   },

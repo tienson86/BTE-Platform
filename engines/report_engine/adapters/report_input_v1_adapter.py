@@ -445,20 +445,49 @@ class ReportInputV1Adapter:
         analysis: AnalysisResult,
         diagnostics: ReportDiagnosticsV1,
     ) -> list[ReportShenShaItemV1]:
-        names = list(analysis.bazi.shensha or [])
-        if not names:
+        names = list(analysis.bazi.published_shensha_names())
+        matches = list(analysis.bazi.shensha_matches or [])
+        if not names and not matches:
             diagnostics.missing_fields.append("shensha")
             return []
+        if matches:
+            return [self._shensha_item_from_match(item) for item in matches]
         return [
             ReportShenShaItemV1(
                 id=f"shensha_{index + 1}",
                 name=name,
                 category="shensha",
                 present=True,
-                evidence=name,
+                evidence="",
             )
             for index, name in enumerate(names)
         ]
+
+    def _shensha_item_from_match(self, match: Any) -> ReportShenShaItemV1:
+        """Copy one engine match into Report V1. Do not invent evidence."""
+        payload = match.to_dict() if hasattr(match, "to_dict") else dict(match)
+        name = str(payload.get("canonical_name") or payload.get("name") or "")
+        evidence = str(payload.get("evidence_text") or "")
+        presence = str(payload.get("presence_label") or "")
+        return ReportShenShaItemV1(
+            id=str(payload.get("id") or ""),
+            name=name,
+            category="shensha",
+            present=True,
+            evidence=evidence,
+            source_type=str(payload.get("source_type") or ""),
+            source_value=str(payload.get("source_value") or ""),
+            target_type=str(payload.get("target_type") or ""),
+            target_value=str(payload.get("target_value") or ""),
+            pillar=str(payload.get("pillar") or ""),
+            location=str(payload.get("location") or ""),
+            presence_label=presence,
+            aliases=[str(item) for item in (payload.get("aliases") or []) if item],
+            rule_source=str(payload.get("rule_source") or ""),
+            occurrences=[
+                dict(item) for item in (payload.get("occurrences") or []) if isinstance(item, dict)
+            ],
+        )
 
     def _build_luck_cycles(
         self,

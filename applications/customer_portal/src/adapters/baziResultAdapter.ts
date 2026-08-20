@@ -22,6 +22,7 @@ import {
   type PillarKind,
   type PresentationStatus,
 } from "../screens/bazi/mockData";
+import { shenShaEntriesFromAnalysis } from "./canonicalShenSha";
 import {
   UNAVAILABLE_CONCLUSION,
   commercialOrUnavailable,
@@ -387,8 +388,8 @@ function mapKnowledge(data: AnalysisDataDto): readonly BaZiKnowledgeItem[] {
 }
 
 function mapShenSha(data: AnalysisDataDto): readonly BaZiShenShaItem[] {
-  const list = (data.bazi?.shensha ?? []).map((s) => asString(s).trim()).filter(Boolean);
-  if (list.length === 0) {
+  const entries = shenShaEntriesFromAnalysis(data);
+  if (entries.length === 0) {
     return [
       {
         id: "ss-unavailable",
@@ -399,11 +400,13 @@ function mapShenSha(data: AnalysisDataDto): readonly BaZiShenShaItem[] {
       },
     ];
   }
-  return list.map((name, index) => ({
-    id: `ss-${index + 1}`,
-    name,
+  return entries.map((item) => ({
+    id: item.id,
+    name: item.name,
     tone: "Trung" as const,
-    note: name,
+    note: item.evidence
+      ? `${item.presence} · Căn cứ: ${item.evidence}`
+      : item.presence,
     present: true,
   }));
 }

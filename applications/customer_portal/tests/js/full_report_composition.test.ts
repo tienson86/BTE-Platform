@@ -173,7 +173,7 @@ describe("full canonical report composition", () => {
   });
 
   it("E. Shen Sha survive", () => {
-    expect(model().shenSha).toEqual(["Thiên Ất Quý Nhân", "Hoa Cái"]);
+    expect(model().shenSha.map((item) => item.name)).toEqual(["Thiên Ất Quý Nhân", "Hoa Cái"]);
     expect(renderFullReportHtml(model())).toContain("Thiên Ất Quý Nhân");
   });
 

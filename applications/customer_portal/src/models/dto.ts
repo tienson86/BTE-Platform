@@ -42,6 +42,29 @@ export type PillarDto = {
   readonly truong_sinh?: string;
 };
 
+export type ShenShaOccurrenceDto = {
+  readonly pillar?: string;
+  readonly location?: string;
+  readonly target_value?: string;
+};
+
+export type ShenShaMatchDto = {
+  readonly id?: string;
+  readonly canonical_name?: string;
+  readonly name?: string;
+  readonly aliases?: readonly string[];
+  readonly source_type?: string;
+  readonly source_value?: string;
+  readonly target_type?: string;
+  readonly target_value?: string;
+  readonly pillar?: string;
+  readonly location?: string;
+  readonly rule_source?: string;
+  readonly presence_label?: string;
+  readonly evidence_text?: string;
+  readonly occurrences?: readonly ShenShaOccurrenceDto[];
+};
+
 export type BaziDto = {
   readonly year_pillar?: PillarDto;
   readonly month_pillar?: PillarDto;
@@ -54,6 +77,7 @@ export type BaziDto = {
   readonly hidden_stems?: readonly string[];
   readonly ten_gods?: readonly string[];
   readonly shensha?: readonly string[];
+  readonly shensha_matches?: readonly ShenShaMatchDto[];
 };
 
 export type CalendarDto = {

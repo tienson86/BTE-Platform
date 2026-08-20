@@ -27,6 +27,7 @@ import {
   canonicalClimateStateLabel,
   canonicalTemperatureEvidence,
 } from "../adapters/canonicalTemperature";
+import { shenShaEntriesFromAnalysis, type ShenShaEntryView } from "../adapters/canonicalShenSha";
 import {
   asTenGodsPayload,
   hiddenLinesForPillar,
@@ -104,7 +105,7 @@ export type FullReportViewModel = {
   readonly hiddenTenGods: readonly string[];
   readonly tenGodsNote: string;
   readonly pillars: readonly FullReportPillar[];
-  readonly shenSha: readonly string[];
+  readonly shenSha: readonly ShenShaEntryView[];
   readonly luckStartAge: string;
   readonly luckCurrent: string;
   readonly luckCycles: ReadonlyArray<{
@@ -218,7 +219,7 @@ export function buildFullReportViewModel(
     pillars: PILLAR_META.map((meta) =>
       mapPillar(bazi[meta.field] as PillarDto | undefined, meta, data),
     ),
-    shenSha: (bazi.shensha ?? []).map((item) => String(item).trim()).filter(Boolean),
+    shenSha: shenShaEntriesFromAnalysis(data),
     luckStartAge: luck?.start_age != null ? String(luck.start_age) : "",
     luckCurrent: current
       ? [text(current.gan_zhi), current.year_start != null ? `${current.year_start}–${current.year_end}` : ""]
@@ -269,7 +270,7 @@ ${section("Nhật chủ · Thân · Cách cục", overviewGrid(model))}
 ${section(FIVE_ELEMENTS_SECTION_TITLE, elementsList(model))}
 ${section("Thập thần", godsList(model))}
 ${section("Dụng thần · Hỷ · Kỵ", godsSupport(model))}
-${section("Thần sát", bulletList(model.shenSha, "Chưa có thần sát trên lá số này."))}
+${section("Thần sát", shenShaBlock(model.shenSha))}
 ${section("Đại vận", luckBlock(model))}
 ${section("Phong thủy", fengBlock(model))}
 ${section("Điểm tổng", `<p class="bte-full-metric">${esc(model.scoreLabel || "—")}</p>`)}
@@ -479,6 +480,18 @@ function godsSupport(model: FullReportViewModel): string {
 function bulletList(items: readonly string[], empty: string): string {
   if (!items.length) return `<p class="bte-full-empty">${esc(empty)}</p>`;
   return `<ul>${items.map((item) => `<li>${esc(item)}</li>`).join("")}</ul>`;
+}
+
+function shenShaBlock(items: readonly ShenShaEntryView[]): string {
+  if (!items.length) {
+    return `<p class="bte-full-empty">Chưa có thần sát trên lá số này.</p>`;
+  }
+  return `<ul>${items
+    .map((item) => {
+      const evidence = item.evidence ? ` · Căn cứ: ${item.evidence}` : "";
+      return `<li><strong>${esc(item.name)}</strong> — ${esc(item.presence)}${esc(evidence)}</li>`;
+    })
+    .join("")}</ul>`;
 }
 
 function luckBlock(model: FullReportViewModel): string {

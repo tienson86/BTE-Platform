@@ -419,8 +419,7 @@ def _section_shensha(report_input: ReportInputV1) -> PresentedSection:
     rows = [
         [
             display_text(item.name),
-            display_text(item.category, "category"),
-            "Có" if item.present else "Không",
+            display_text(item.presence_label or ("Có" if item.present else "Không")),
             display_text(item.evidence),
         ]
         for item in report_input.shensha
@@ -429,7 +428,7 @@ def _section_shensha(report_input: ReportInputV1) -> PresentedSection:
         id="shensha",
         title="08. Thần sát",
         table=PresentedTable(
-            headers=["Tên", "Loại", "Hiện diện", "Bằng chứng"],
+            headers=["Tên", "Hiện diện", "Căn cứ"],
             rows=rows,
         ),
     )

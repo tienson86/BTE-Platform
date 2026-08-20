@@ -496,45 +496,52 @@ class RuleContextBuilder:
         bazi: Any,
         bazi_section: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
+        detection = getattr(bazi, "shensha_result", None) if bazi is not None else None
+        if detection is not None and getattr(detection, "matches", None) is not None:
+            return self._payload_from_detection(detection)
+
+        view_matches = list(getattr(bazi, "shensha_matches", None) or []) if bazi is not None else []
+        if view_matches:
+            payloads = [
+                item.to_dict() if hasattr(item, "to_dict") else dict(item)
+                for item in view_matches
+            ]
+            return self._payload_from_match_dicts(payloads)
+
         stars: list[str] = []
+        extra: dict[str, Any] = {}
         if shensha is None and bazi is not None:
             stars = list(getattr(bazi, "shensha", []) or [])
         elif isinstance(shensha, list):
             stars = [str(item) for item in shensha]
         elif isinstance(shensha, dict):
+            nested_matches = shensha.get("matches") or []
+            if nested_matches and isinstance(nested_matches, list):
+                payloads = [dict(item) for item in nested_matches if isinstance(item, dict)]
+                if payloads:
+                    return self._payload_from_match_dicts(payloads)
             nested = shensha.get("stars") or shensha.get("items") or []
             stars = [str(item) for item in nested]
-            result = {
-                "available": True,
-                "stars": stars,
-                "status": "PRESENT" if stars else "MISSING",
-                "star": stars[0] if stars else None,
+            extra = {
+                key: value
+                for key, value in shensha.items()
+                if key not in {"available", "stars", "status", "star", "items", "matches"}
             }
-            for key, value in shensha.items():
-                if key not in result:
-                    result[key] = value
-            for star in stars:
-                result[self._slug(star)] = {"status": "PRESENT", "name": star}
-            return result
         elif shensha is not None:
             stars = list(getattr(shensha, "stars", getattr(shensha, "items", [])) or [])
             names_fn = getattr(shensha, "names", None)
             if callable(names_fn):
                 stars = list(names_fn() or stars)
+            canonical_fn = getattr(shensha, "canonical_names", None)
+            if callable(canonical_fn):
+                stars = list(canonical_fn() or stars)
+            matches = getattr(shensha, "matches", None)
+            if matches:
+                return self._payload_from_detection(shensha)
 
-        # WP2D: classical presence map from day master + chart branches
         if not stars and bazi_section:
-            stars = self._detect_shensha_stars(bazi_section)
-
-        result: dict[str, Any] = {
-            "available": bool(stars),
-            "stars": stars,
-            "status": "PRESENT" if stars else "MISSING",
-            "star": stars[0] if stars else None,
-        }
-        for star in stars:
-            result[self._slug(star)] = {"status": "PRESENT", "name": star}
-        return result
+            return self._payload_from_detection(self._evaluate_from_section(bazi_section))
+        return self._payload_from_names(stars, extra)
 
     # =========================================================
     # Signal builders
@@ -1447,62 +1454,87 @@ class RuleContextBuilder:
         return root_level, support_type, control_type
 
     def _detect_shensha_stars(self, bazi_section: Mapping[str, Any]) -> list[str]:
-        day_master = bazi_section.get("day_master")
-        branches = [
-            (bazi_section.get(key) or {}).get("branch")
-            for key in ("year_pillar", "month_pillar", "day_pillar", "hour_pillar")
-        ]
-        branches = [b for b in branches if b]
-        year_branch = (bazi_section.get("year_pillar") or {}).get("branch")
-        stars: list[str] = []
+        """Legacy helper — names are projected from ShenShaService.evaluate."""
+        return self._evaluate_from_section(bazi_section).canonical_names()
 
-        if day_master in maps.TIAN_YI_BRANCHES:
-            targets = maps.TIAN_YI_BRANCHES[day_master]
-            if any(branch in targets for branch in branches):
-                stars.append("Thiên Ất Quý Nhân")
-                stars.append("Thiên Ất")
+    def _evaluate_from_section(self, bazi_section: Mapping[str, Any]) -> Any:
+        """Run the canonical ShenShaService once from a bazi section dict."""
+        from engines.bazi_engine.shensha.service import ShenShaService
 
-        if day_master in maps.WEN_CHANG_BRANCH:
-            if maps.WEN_CHANG_BRANCH[day_master] in branches:
-                stars.append("Văn Xương")
-
-        if day_master in maps.LU_SHEN_BRANCH:
-            if maps.LU_SHEN_BRANCH[day_master] in branches:
-                stars.append("Lộc Thần")
-
-        if year_branch and year_branch in maps.HONG_LUAN_OPPOSITE:
-            target = maps.HONG_LUAN_OPPOSITE[year_branch]
-            if target in branches:
-                stars.append("Hồng Loan")
-                # Thiên Hỷ is opposite of Hồng Loan in many schools
-                stars.append("Thiên Hỷ")
-
-        day_branch = (bazi_section.get("day_pillar") or {}).get("branch")
-        if day_branch in maps.HUA_GAI_BRANCHES:
-            stars.append("Hoa Cái")
-
-        if day_master in maps.YANG_REN_BRANCH:
-            if maps.YANG_REN_BRANCH[day_master] in branches:
-                stars.append("Dương Nhẫn")
-
-        month_branch = bazi_section.get("month_branch")
         stems = [
             (bazi_section.get(key) or {}).get("stem")
             for key in ("year_pillar", "month_pillar", "day_pillar", "hour_pillar")
         ]
-        if month_branch in maps.TIAN_DE_BRANCH:
-            token = maps.TIAN_DE_BRANCH[month_branch]
-            if token in stems or token in branches:
-                stars.append("Thiên Đức")
-                stars.append("Thiên Đức Quý Nhân")
-        if month_branch in maps.YUE_DE_STEM:
-            token = maps.YUE_DE_STEM[month_branch]
-            if token in stems:
-                stars.append("Nguyệt Đức")
-                stars.append("Nguyệt Đức Quý Nhân")
+        branches = [
+            (bazi_section.get(key) or {}).get("branch")
+            for key in ("year_pillar", "month_pillar", "day_pillar", "hour_pillar")
+        ]
+        return ShenShaService().evaluate(
+            day_master=bazi_section.get("day_master"),
+            year_branch=(bazi_section.get("year_pillar") or {}).get("branch"),
+            month_branch=(bazi_section.get("month_pillar") or {}).get("branch")
+            or bazi_section.get("month_branch"),
+            day_branch=(bazi_section.get("day_pillar") or {}).get("branch"),
+            hour_branch=(bazi_section.get("hour_pillar") or {}).get("branch"),
+            stems=stems,
+            branches=branches,
+        )
 
-        # Deduplicate preserving order
-        return list(dict.fromkeys(stars))
+    def _payload_from_detection(self, detection: Any) -> dict[str, Any]:
+        """Copy structured matches into RuleContext.shensha."""
+        matches = list(getattr(detection, "matches", ()) or ())
+        payloads = [item.to_dict() for item in matches]
+        return self._payload_from_match_dicts(payloads)
+
+    def _payload_from_match_dicts(self, payloads: list[dict[str, Any]]) -> dict[str, Any]:
+        """Build RuleContext shensha from serialized matches."""
+        stars = [
+            str(item.get("canonical_name") or item.get("name") or "")
+            for item in payloads
+            if item.get("canonical_name") or item.get("name")
+        ]
+        result: dict[str, Any] = {
+            "available": bool(stars),
+            "stars": stars,
+            "matches": payloads,
+            "status": "PRESENT" if stars else "MISSING",
+            "star": stars[0] if stars else None,
+        }
+        for item in payloads:
+            name = str(item.get("canonical_name") or item.get("name") or "")
+            if not name:
+                continue
+            result[self._slug(name)] = {
+                "status": "PRESENT",
+                "name": name,
+                "rule_id": str(item.get("id") or ""),
+                "source": str(item.get("source_type") or ""),
+                "evidence": str(item.get("evidence_text") or ""),
+                "position": str(item.get("presence_label") or item.get("pillar") or ""),
+                "condition": str(item.get("evidence_text") or ""),
+            }
+        return result
+
+    def _payload_from_names(
+        self,
+        stars: list[str],
+        extra: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Name-only fallback when structured matches are unavailable."""
+        result: dict[str, Any] = {
+            "available": bool(stars),
+            "stars": stars,
+            "matches": [],
+            "status": "PRESENT" if stars else "MISSING",
+            "star": stars[0] if stars else None,
+        }
+        if extra:
+            for key, value in extra.items():
+                if key not in result:
+                    result[key] = value
+        for star in stars:
+            result[self._slug(star)] = {"status": "PRESENT", "name": star}
+        return result
 
     @staticmethod
     def _god_list(*sources: Any) -> list[str]:

@@ -1,6 +1,7 @@
 /**
  * S07 — Dashboard Preview Card: THẦN SÁT
  * PACK_04: Presentation Adapter list preview + hasMore (fixed height / internal scroll).
+ * Copies engine presence + evidence. Does not classify Cát/Hung.
  */
 
 import type { ReactNode } from "react";
@@ -13,10 +14,15 @@ import { useCanonicalDesktop } from "../CanonicalDesktopContext";
  */
 export function S07ShenSha(): ReactNode {
   const data = useCanonicalDesktop().s07;
-  const good = adaptPreviewList(data.good.items, 3);
-  const bad = adaptPreviewList(data.bad.items, 2);
-  const execLine = adaptPreviewText(data.executive.line2, "summary");
-  const hasMore = good.hasMore || bad.hasMore || execLine.hasMore;
+  const preview = adaptPreviewList(
+    data.items.map((item) => item.name),
+    5,
+  );
+  const execLine = adaptPreviewText(data.executive.line1, "summary");
+  const hasMore = preview.hasMore || execLine.hasMore;
+  const rows = preview.items
+    .map((name) => data.items.find((item) => item.name === name))
+    .filter((item): item is (typeof data.items)[number] => Boolean(item));
 
   return (
     <section
@@ -39,39 +45,17 @@ export function S07ShenSha(): ReactNode {
           />
         </div>
 
-        <div className="cd-s07__group">
-          <h3 className="cd-s07__group-title cd-s07__group-title--good">
-            ● CÁT TINH
-          </h3>
-          <ul className="cd-s07__list">
-            {good.items.map((item) => (
-              <li key={item} className="cd-s07__row">
-                <span className="cd-s07__icon cd-s07__icon--good" aria-hidden="true">
-                  ✓
-                </span>
-                <span className="cd-s07__text ui-line-clamp-2">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <hr className="cd-s07__divider" />
-
-        <div className="cd-s07__group">
-          <h3 className="cd-s07__group-title cd-s07__group-title--bad">
-            ● HUNG TINH
-          </h3>
-          <ul className="cd-s07__list">
-            {bad.items.map((item) => (
-              <li key={item} className="cd-s07__row">
-                <span className="cd-s07__icon cd-s07__icon--bad" aria-hidden="true">
-                  ✕
-                </span>
-                <span className="cd-s07__text ui-line-clamp-2">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul className="cd-s07__list">
+          {rows.map((item) => (
+            <li key={item.name} className="cd-s07__entry">
+              <span className="cd-s07__name ui-line-clamp-2">{item.name}</span>
+              <span className="cd-s07__presence ui-line-clamp-2">{item.presence}</span>
+              {item.evidence ? (
+                <span className="cd-s07__evidence ui-line-clamp-2">Căn cứ: {item.evidence}</span>
+              ) : null}
+            </li>
+          ))}
+        </ul>
 
         <button
           type="button"

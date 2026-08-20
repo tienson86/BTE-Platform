@@ -18,6 +18,7 @@ from engines.calendar_engine.julian.julian import JulianDay
 from engines.calendar_engine.solar_terms.engine import SolarTermEngine
 
 from engines.bazi_engine.ten_god import ten_god_name
+from engines.bazi_engine.shensha.models import ShenShaDetectionResult
 from engines.bazi_engine.shensha.service import ShenShaService
 
 
@@ -75,6 +76,7 @@ class BaziChart:
     hidden_stems: list[str] = field(default_factory=list)
     ten_gods: list[str] = field(default_factory=list)
     shensha: list[str] = field(default_factory=list)
+    shensha_result: ShenShaDetectionResult | None = None
 
     @property
     def pillars(self) -> list[Pillar]:
@@ -129,7 +131,7 @@ class BaziEngine:
             "Nhật Chủ" if pillar is day_pillar else ten_god_name(day_master, pillar.stem)
             for pillar in pillars
         ]
-        shensha = ShenShaService().calculate(
+        shensha_result = ShenShaService().evaluate(
             day_master=day_master,
             year_branch=year_pillar.branch,
             month_branch=month_pillar.branch,
@@ -143,7 +145,8 @@ class BaziEngine:
             gender=gender,
             hidden_stems=hidden,
             ten_gods=ten_gods,
-            shensha=shensha,
+            shensha=shensha_result.canonical_names(),
+            shensha_result=shensha_result,
         )
 
     calculate = build

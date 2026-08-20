@@ -30,6 +30,72 @@ class PillarView:
 
 
 @dataclass(slots=True)
+class ShenShaMatchView:
+    """One published ShenSha copied from the engine — no recalculation."""
+
+    id: str
+    canonical_name: str
+    aliases: list[str] = field(default_factory=list)
+    source_type: str = ""
+    source_value: str = ""
+    target_type: str = ""
+    target_value: str = ""
+    pillar: str = ""
+    location: str = ""
+    rule_source: str = ""
+    presence_label: str = ""
+    evidence_text: str = ""
+    occurrences: list[dict[str, str]] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        """Serialize one match for API / Portal / Report."""
+        return {
+            "id": self.id,
+            "canonical_name": self.canonical_name,
+            "aliases": list(self.aliases),
+            "source_type": self.source_type,
+            "source_value": self.source_value,
+            "target_type": self.target_type,
+            "target_value": self.target_value,
+            "pillar": self.pillar,
+            "location": self.location,
+            "rule_source": self.rule_source,
+            "presence_label": self.presence_label,
+            "evidence_text": self.evidence_text,
+            "occurrences": [dict(item) for item in self.occurrences],
+        }
+
+    @classmethod
+    def from_mapping(cls, payload: dict[str, Any]) -> "ShenShaMatchView":
+        """Build a view from an engine match dict."""
+        occurrences_raw = payload.get("occurrences") or []
+        occurrences = [
+            {
+                "pillar": str(item.get("pillar") or ""),
+                "location": str(item.get("location") or ""),
+                "target_value": str(item.get("target_value") or ""),
+            }
+            for item in occurrences_raw
+            if isinstance(item, dict)
+        ]
+        return cls(
+            id=str(payload.get("id") or ""),
+            canonical_name=str(payload.get("canonical_name") or payload.get("name") or ""),
+            aliases=[str(item) for item in (payload.get("aliases") or []) if item],
+            source_type=str(payload.get("source_type") or ""),
+            source_value=str(payload.get("source_value") or ""),
+            target_type=str(payload.get("target_type") or ""),
+            target_value=str(payload.get("target_value") or ""),
+            pillar=str(payload.get("pillar") or ""),
+            location=str(payload.get("location") or ""),
+            rule_source=str(payload.get("rule_source") or ""),
+            presence_label=str(payload.get("presence_label") or ""),
+            evidence_text=str(payload.get("evidence_text") or ""),
+            occurrences=occurrences,
+        )
+
+
+@dataclass(slots=True)
 class BaziView:
     """Authoritative Bazi slice for the production pipeline."""
 
@@ -44,9 +110,17 @@ class BaziView:
     hidden_stems: list[str] = field(default_factory=list)
     ten_gods: list[str] = field(default_factory=list)
     shensha: list[str] = field(default_factory=list)
+    shensha_matches: list[ShenShaMatchView] = field(default_factory=list)
+
+    def published_shensha_names(self) -> list[str]:
+        """Legacy name list projected from structured matches when present."""
+        if self.shensha_matches:
+            return [item.canonical_name for item in self.shensha_matches if item.canonical_name]
+        return list(self.shensha)
 
     def to_dict(self) -> dict[str, Any]:
         """Portal-compatible `data.bazi` JSON."""
+        names = self.published_shensha_names()
         return {
             "year_pillar": self.year_pillar.to_dict(),
             "month_pillar": self.month_pillar.to_dict(),
@@ -58,7 +132,8 @@ class BaziView:
             "gender": self.gender,
             "hidden_stems": list(self.hidden_stems),
             "ten_gods": list(self.ten_gods),
-            "shensha": list(self.shensha),
+            "shensha": names,
+            "shensha_matches": [item.to_dict() for item in self.shensha_matches],
         }
 
     def pillar_ten_gods(self) -> list[str]:

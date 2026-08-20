@@ -19,7 +19,11 @@ from engines.bazi_engine.ten_god import (
     ten_god_name,
 )
 
-from applications.api.models.analysis_result import BaziView, PillarView
+from applications.api.models.analysis_result import (
+    BaziView,
+    PillarView,
+    ShenShaMatchView,
+)
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 
@@ -142,6 +146,7 @@ def build_bazi_view(chart: BaziChart) -> BaziView:
         )
         for i in range(4)
     ]
+    matches = _shensha_match_views(chart)
     return BaziView(
         year_pillar=views[0],
         month_pillar=views[1],
@@ -153,7 +158,8 @@ def build_bazi_view(chart: BaziChart) -> BaziView:
         gender=chart.gender,
         hidden_stems=list(chart.hidden_stems or []),
         ten_gods=[view.ten_god for view in views],
-        shensha=list(chart.shensha or []),
+        shensha=[item.canonical_name for item in matches] or list(chart.shensha or []),
+        shensha_matches=matches,
     )
 
 
@@ -164,9 +170,18 @@ def sync_chart_from_view(chart: BaziChart, view: BaziView) -> BaziChart:
     Does not recalculate pillars — only syncs derived lists.
     """
     chart.ten_gods = view.pillar_ten_gods()
-    chart.shensha = list(view.shensha)
+    chart.shensha = list(view.published_shensha_names())
     chart.gender = view.gender
     return chart
+
+
+def _shensha_match_views(chart: BaziChart) -> list[ShenShaMatchView]:
+    """Copy structured ShenSha matches from the engine chart."""
+    result = getattr(chart, "shensha_result", None)
+    matches = getattr(result, "matches", None) if result is not None else None
+    if not matches:
+        return []
+    return [ShenShaMatchView.from_mapping(item.to_dict()) for item in matches]
 
 
 def bazi_source_fingerprint() -> dict[str, str]:

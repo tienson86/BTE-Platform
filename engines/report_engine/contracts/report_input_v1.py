@@ -253,7 +253,7 @@ class ReportUsefulGodV1:
 
 @dataclass(slots=True)
 class ReportShenShaItemV1:
-    """Structured shen sha entry."""
+    """Structured shen sha entry copied from canonical engine evidence."""
 
     id: str = ""
     name: str = ""
@@ -261,6 +261,16 @@ class ReportShenShaItemV1:
     present: bool = False
     evidence: str = ""
     interpretation: str = ""
+    source_type: str = ""
+    source_value: str = ""
+    target_type: str = ""
+    target_value: str = ""
+    pillar: str = ""
+    location: str = ""
+    presence_label: str = ""
+    aliases: list[str] = field(default_factory=list)
+    rule_source: str = ""
+    occurrences: list[dict[str, str]] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
         return _normalize_mapping(asdict(self))

@@ -57,9 +57,13 @@ export function ShenShaCard({ model }: { model: ShenShaViewModel }): ReactNode {
     >
       <ul className="rp-shensha">
         {model.items.map((item) => (
-          <li key={item}>
+          <li key={item.name}>
             <PresentationText typeRole="body" clamp="subtitle" as="span">
-              {item}
+              {item.name}
+            </PresentationText>
+            <PresentationText typeRole="caption" clamp="description" as="span">
+              {item.presence}
+              {item.evidence ? ` · Căn cứ: ${item.evidence}` : ""}
             </PresentationText>
           </li>
         ))}

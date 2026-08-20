@@ -46,6 +46,7 @@ from engines.interpretation_engine.foundation.knowledge.entity_types import (
     KNOWLEDGE_ENTITY_TYPE_SHEN_SHA,
     KNOWLEDGE_READINESS_READY,
     SHEN_SHA_KEYS,
+    SHEN_SHA_PUBLISHED_KEYS,
     TEN_GOD_PILLAR_KEYS,
 )
 from engines.interpretation_engine.foundation.knowledge.status import KnowledgeStatus
@@ -93,10 +94,14 @@ def _runtime_catalog() -> set[str]:
 def test_engine_inventory_from_runtime() -> None:
     """Knowledge catalog is the closed production service emit list."""
     runtime = _runtime_catalog()
-    assert runtime == set(SHEN_SHA_KEYS)
+    assert runtime == set(SHEN_SHA_PUBLISHED_KEYS)
+    assert "Thiên Ất" not in runtime
+    assert "Thiên Đức" not in runtime
+    assert "Nguyệt Đức" not in runtime
     assert "Văn Khúc" not in runtime
     assert "Đào Hoa" not in runtime
     assert "Dịch Mã" not in runtime
+    assert len(SHEN_SHA_PUBLISHED_KEYS) == 9
     assert len(SHEN_SHA_KEYS) == 12
 
 
@@ -408,11 +413,12 @@ def test_no_ui_dependency() -> None:
 
 
 def test_no_engine_changes() -> None:
-    """K6 does not change Shen Sha matching."""
+    """K6 does not own Shen Sha matching; production service stays engine-owned."""
     service = (_BAZI_SHENSHA / "service.py").read_text(encoding="utf-8")
     assert "ShenShaKnowledgeBundle" not in service
     assert "knowledge.interpretation" not in service
-    assert 'stars.append("Thiên Ất Quý Nhân")' in service
+    assert "def evaluate(" in service
+    assert 'stars.append("Thiên Ất")' not in service
 
 
 def test_entities_are_not_person_specific(

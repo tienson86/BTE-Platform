@@ -4,6 +4,22 @@ from __future__ import annotations
 
 from typing import Final
 
+from engines.bazi_engine.shensha.catalog import (
+    ALIAS_TIAN_DE,
+    ALIAS_TIAN_YI,
+    ALIAS_YUE_DE,
+    NAME_HONG_LUAN,
+    NAME_HUA_GAI,
+    NAME_LU_SHEN,
+    NAME_TIAN_DE,
+    NAME_TIAN_XI,
+    NAME_TIAN_YI,
+    NAME_WEN_CHANG,
+    NAME_YANG_REN,
+    NAME_YUE_DE,
+    PUBLISHED_NAMES,
+)
+
 KNOWLEDGE_ENTITY_TYPE_STATE: Final[str] = "state"
 KNOWLEDGE_ENTITY_TYPE_PATTERN: Final[str] = "pattern"
 KNOWLEDGE_ENTITY_TYPE_TEN_GOD: Final[str] = "ten_god"
@@ -129,18 +145,19 @@ TEN_GOD_KEYS: Final[tuple[str, ...]] = (
 TEN_GOD_PILLAR_KEYS: Final[tuple[str, ...]] = ("year", "month", "day", "hour")
 
 # Production ShenShaService catalog (engines/bazi_engine/shensha/service.py).
-# Closed list of names the production engine can emit. Do not add analysis-CSV extras.
+# Published names are canonical V1.0 entities. Aliases remain lookup keys only.
+SHEN_SHA_PUBLISHED_KEYS: Final[tuple[str, ...]] = PUBLISHED_NAMES
 SHEN_SHA_KEYS: Final[tuple[str, ...]] = (
-    "Thiên Ất Quý Nhân",
-    "Thiên Ất",
-    "Văn Xương",
-    "Lộc Thần",
-    "Hồng Loan",
-    "Thiên Hỷ",
-    "Hoa Cái",
-    "Dương Nhẫn",
-    "Thiên Đức",
-    "Thiên Đức Quý Nhân",
-    "Nguyệt Đức",
-    "Nguyệt Đức Quý Nhân",
+    NAME_TIAN_YI,
+    ALIAS_TIAN_YI,
+    NAME_WEN_CHANG,
+    NAME_LU_SHEN,
+    NAME_HONG_LUAN,
+    NAME_TIAN_XI,
+    NAME_HUA_GAI,
+    NAME_YANG_REN,
+    ALIAS_TIAN_DE,
+    NAME_TIAN_DE,
+    ALIAS_YUE_DE,
+    NAME_YUE_DE,
 )

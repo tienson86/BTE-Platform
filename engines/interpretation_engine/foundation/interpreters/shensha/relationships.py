@@ -20,9 +20,8 @@ from engines.interpretation_engine.foundation.relationship.types import (
 
 _ALIAS_PAIRS: tuple[tuple[str, str], ...] = (
     ("Thiên Ất Quý Nhân", "Thiên Ất"),
-    ("Hồng Loan", "Thiên Hỷ"),
-    ("Thiên Đức", "Thiên Đức Quý Nhân"),
-    ("Nguyệt Đức", "Nguyệt Đức Quý Nhân"),
+    ("Thiên Đức Quý Nhân", "Thiên Đức"),
+    ("Nguyệt Đức Quý Nhân", "Nguyệt Đức"),
 )
 
 

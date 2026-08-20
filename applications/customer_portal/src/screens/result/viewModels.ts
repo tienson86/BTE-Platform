@@ -204,9 +204,15 @@ export type ChartDetailViewModel = {
   readonly visible: boolean;
 };
 
+export type ShenShaEntryViewModel = {
+  readonly name: string;
+  readonly presence: string;
+  readonly evidence: string;
+};
+
 export type ShenShaViewModel = {
   readonly title: string;
-  readonly items: readonly string[];
+  readonly items: readonly ShenShaEntryViewModel[];
   readonly visible: boolean;
 };
 

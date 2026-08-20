@@ -22,5 +22,5 @@ export type {
   ReportResponse,
   ScoreDto,
   SeriesItemDto,
-  StrengthDto,
+  ShenShaMatchDto,
 } from "./dto";

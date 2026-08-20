@@ -176,9 +176,8 @@ GOVERNING_APPLICATION_DOMAINS: Final[frozenset[str]] = frozenset(
 )
 SHENSHA_CANONICAL_OVER_ALIAS: Final[Mapping[str, str]] = {
     "Thiên Ất": "Thiên Ất Quý Nhân",
-    "Thiên Hỷ": "Hồng Loan",
-    "Thiên Đức Quý Nhân": "Thiên Đức",
-    "Nguyệt Đức Quý Nhân": "Nguyệt Đức",
+    "Thiên Đức": "Thiên Đức Quý Nhân",
+    "Nguyệt Đức": "Nguyệt Đức Quý Nhân",
 }
 
 PACK05_SECTION_MAP: Final[Mapping[str, tuple[str, str, str]]] = {

@@ -162,6 +162,22 @@ HONG_LUAN_OPPOSITE: dict[str, str] = {
     "Hợi": "Thìn",
 }
 
+# Thiên Hỷ — independent year-branch table (bang_thien_hy: Dần → Mùi).
+TIAN_XI_BRANCH: dict[str, str] = {
+    "Tý": "Dậu",
+    "Sửu": "Thân",
+    "Dần": "Mùi",
+    "Mão": "Ngọ",
+    "Thìn": "Tỵ",
+    "Tỵ": "Thìn",
+    "Ngọ": "Mão",
+    "Mùi": "Dần",
+    "Thân": "Sửu",
+    "Dậu": "Tý",
+    "Tuất": "Hợi",
+    "Hợi": "Tuất",
+}
+
 # Hoa Cái — day branch in earth group
 HUA_GAI_BRANCHES: frozenset[str] = frozenset({"Thìn", "Tuất", "Sửu", "Mùi"})
 
