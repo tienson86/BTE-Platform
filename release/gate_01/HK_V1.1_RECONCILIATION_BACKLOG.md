@@ -7,7 +7,7 @@
 V1.0 froze (through HK-R1G):
 
 - Internal Hỷ/Kỵ remain static copies of the Overall winner CSV row
-- Customer Hỷ = that set minus the exact Overall Dụng triple, then gated by an independently describable supporting role
+- Customer Hỷ = leftover of the winner-row favorable set after exact-Dụng omit, then gated: same-element static siblings and other CSV leftovers are not published as Hỷ thần (HK-R1H)
 - STATIC leftover is not presented as a confident Hỷ thần
 - Kỵ = winner-row unfavorable list only (algorithm unchanged)
 - Overall Dụng reasoning chain is presentation of the current V1.0 rule, not a new winner theory

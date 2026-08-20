@@ -41,6 +41,8 @@ export type CoreIndicatorsViewModel = {
     readonly value: string;
     readonly color: string;
   }>;
+  readonly reasonLabel: string;
+  readonly reason: string;
   readonly hasMore: boolean;
   /** Priority 3 — omit from hero when false. */
   readonly visible: boolean;

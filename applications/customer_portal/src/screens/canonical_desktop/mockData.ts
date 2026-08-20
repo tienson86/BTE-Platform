@@ -124,7 +124,7 @@ export const CANONICAL_DESKTOP_MOCK = {
     ],
     cta: "Xem luận giải chi tiết →",
   },
-  s02: {
+    s02: {
     title: "TỔNG QUAN LÁ SỐ",
     items: [
       { icon: "fire" as const, label: "Phân bố Ngũ hành", value: "Mộc 4 · Hỏa 5 · Thổ 6 · Kim 3 · Thủy 1", color: "earth" },
@@ -134,6 +134,7 @@ export const CANONICAL_DESKTOP_MOCK = {
       { icon: "spark" as const, label: "Hỷ thần", value: "Kim, Thủy", color: "metal" },
       { icon: "leaf" as const, label: "Kỵ thần", value: "Mộc, Hỏa", color: "wood" },
     ],
+    dungReason: "",
   },
   s09: {
     title: "CUNG PHI - MỆNH QUÁI - NHÓM TRẠCH",

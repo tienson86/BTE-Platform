@@ -14,7 +14,7 @@ from engines.useful_god_engine.presentation import (
 def useful_god_source_fingerprint() -> dict[str, str]:
     return {
         "layer": "applications.api.services.useful_god_truth",
-        "contract": "analysis_result.UsefulGodView@1.4",
+        "contract": "analysis_result.UsefulGodView@1.5",
         "owner": "api_ssot",
     }
 

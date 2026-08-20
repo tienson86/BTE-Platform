@@ -103,6 +103,12 @@ export function CoreIndicatorsCard({
           </li>
         ))}
       </ul>
+      {model.reason ? (
+        <p className="rp-indicators__reason">
+          <span className="rp-indicators__reason-label">{model.reasonLabel}</span>
+          {model.reason}
+        </p>
+      ) : null}
     </ResultCardShell>
   );
 }

@@ -516,11 +516,16 @@ function godsList(model: FullReportViewModel): string {
 }
 
 function godsSupport(model: FullReportViewModel): string {
-  return `<div class="bte-full-grid">
-    ${kv("Dụng thần", model.usefulGod)}
-    ${kv("Căn cứ chọn Dụng", model.usefulGodReason)}
-    ${kv("Hỷ thần", model.hyThan)}
-    ${kv("Kỵ thần", model.kyThan)}
+  const reason = model.usefulGodReason
+    ? `<p class="bte-full-reason"><strong>Căn cứ chọn Dụng:</strong> ${esc(model.usefulGodReason)}</p>`
+    : "";
+  return `<div class="bte-full-gods">
+    <div class="bte-full-grid">
+      ${kv("Dụng thần", model.usefulGod)}
+      ${kv("Hỷ thần", model.hyThan)}
+      ${kv("Kỵ thần", model.kyThan)}
+    </div>
+    ${reason}
   </div>`;
 }
 
@@ -599,6 +604,7 @@ function reportCss(): string {
     h3{font-size:16px;margin:0 0 8px;}
     .bte-full-section,.bte-full-narrative{background:#fff;border:1px solid #d7e0ea;border-radius:14px;padding:16px 18px;margin:0 0 14px;}
     .bte-full-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;}
+    .bte-full-reason{margin:10px 0 0;line-height:1.5;font-size:14px;}
     .bte-full-kv{background:#f4f7f7;border-radius:10px;padding:10px 12px;}
     .bte-full-kv span{display:block;font-size:12px;opacity:.7;margin-bottom:4px;}
     .bte-full-table{width:100%;border-collapse:collapse;font-size:14px;}

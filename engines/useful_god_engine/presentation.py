@@ -10,12 +10,15 @@ from .reasoning import ARCHETYPE_SINH_TRO, archetype_for_rule, build_customer_re
 from .roles import format_god_roles, resolve_god_token
 
 EMPTY_CUSTOMER_FAVORABLE_DISPLAY = "Chưa có Hỷ thần bổ trợ riêng"
-INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY = "Chưa đủ căn cứ tách Hỷ thần bổ trợ riêng"
+INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY = "Chưa đủ căn cứ xác định Hỷ thần bổ trợ riêng"
 KY_SCOPE_NOTE = "Kỵ thần theo rule cân bằng hiện tại"
 
-HY_ROLE_SUPPORTED = "SUPPORTED_ROLE"
-HY_ROLE_STATIC = "STATIC_FAVORABLE_ONLY"
+HY_ROLE_SUPPORTED_INDEPENDENT = "SUPPORTED_INDEPENDENT_ROLE"
+HY_ROLE_STATIC_SAME_ELEMENT = "STATIC_SAME_ELEMENT_SIBLING"
+HY_ROLE_STATIC_OTHER = "STATIC_OTHER"
 HY_ROLE_UNKNOWN = "UNKNOWN"
+HY_ROLE_SUPPORTED = HY_ROLE_SUPPORTED_INDEPENDENT
+HY_ROLE_STATIC = HY_ROLE_STATIC_OTHER
 
 Role = Mapping[str, str]
 
@@ -50,24 +53,29 @@ def is_exact_dung_duplicate(role: Role | None, dung_role: Role | None) -> bool:
     return left == right
 
 
+def _is_sibling_ten_god(dung_tg: str, hy_tg: str) -> bool:
+    pair = frozenset({dung_tg, hy_tg})
+    return any(pair <= group for group in _SIBLING_GROUPS)
+
+
 def classify_hy_role(
     dung_role: Role | None,
     hy_role: Role | None,
     *,
     winning_rule_id: str = "",
 ) -> str:
-    """Classify leftover Hỷ from published concept groups. Do not invent."""
-    dung_tg = role_identity(dung_role)[2]
-    hy_tg = role_identity(hy_role)[2]
+    """Classify leftover Hỷ. Sibling grouping is not independent evidence."""
+    dung_el, _, dung_tg = role_identity(dung_role)
+    hy_el, _, hy_tg = role_identity(hy_role)
     if not dung_tg or not hy_tg:
         return HY_ROLE_UNKNOWN
-    pair = frozenset({dung_tg, hy_tg})
-    if any(pair <= group for group in _SIBLING_GROUPS):
-        return HY_ROLE_SUPPORTED
     archetype = archetype_for_rule(winning_rule_id)
     if archetype == ARCHETYPE_SINH_TRO and hy_tg in _PEER_SUPPORT:
-        return HY_ROLE_SUPPORTED
-    return HY_ROLE_STATIC
+        return HY_ROLE_SUPPORTED_INDEPENDENT
+    same_element = bool(dung_el and hy_el and dung_el == hy_el)
+    if same_element and _is_sibling_ten_god(dung_tg, hy_tg):
+        return HY_ROLE_STATIC_SAME_ELEMENT
+    return HY_ROLE_STATIC_OTHER
 
 
 def customer_favorable_roles(
@@ -100,7 +108,7 @@ def build_customer_hy_presentation(
     *,
     winning_rule_id: str = "",
 ) -> CustomerHyPresentation:
-    """Apply HK-R1F omit then HK-R1G role gate. Never reinsert Dụng."""
+    """Apply HK-R1F omit then independent-role gate. Never reinsert Dụng."""
     remaining = customer_favorable_roles(dung_role, favorable_roles)
     if not remaining:
         return CustomerHyPresentation(
@@ -108,7 +116,7 @@ def build_customer_hy_presentation(
             supported_roles=[],
             classifications=[],
             display=EMPTY_CUSTOMER_FAVORABLE_DISPLAY,
-            role_status=HY_ROLE_UNKNOWN if not favorable_roles else HY_ROLE_STATIC,
+            role_status=HY_ROLE_UNKNOWN if not favorable_roles else HY_ROLE_STATIC_OTHER,
         )
     labels = [
         classify_hy_role(dung_role, role, winning_rule_id=winning_rule_id)
@@ -117,13 +125,19 @@ def build_customer_hy_presentation(
     supported = [
         role
         for role, status in zip(remaining, labels, strict=True)
-        if status == HY_ROLE_SUPPORTED
+        if status == HY_ROLE_SUPPORTED_INDEPENDENT
     ]
     if supported:
-        status = HY_ROLE_SUPPORTED
+        status = HY_ROLE_SUPPORTED_INDEPENDENT
         display = format_god_roles(supported)
+    elif HY_ROLE_STATIC_SAME_ELEMENT in labels:
+        status = HY_ROLE_STATIC_SAME_ELEMENT
+        display = INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
+    elif HY_ROLE_STATIC_OTHER in labels:
+        status = HY_ROLE_STATIC_OTHER
+        display = INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
     else:
-        status = HY_ROLE_STATIC if HY_ROLE_STATIC in labels else HY_ROLE_UNKNOWN
+        status = HY_ROLE_UNKNOWN
         display = INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
     return CustomerHyPresentation(
         remaining_roles=remaining,
@@ -167,7 +181,7 @@ def customer_favorable_tokens(
     out: list[str] = []
     for text, role in remaining:
         status = classify_hy_role(dung, role, winning_rule_id=winning_rule_id)
-        if status == HY_ROLE_SUPPORTED:
+        if status == HY_ROLE_SUPPORTED_INDEPENDENT:
             out.append(text)
     return out
 

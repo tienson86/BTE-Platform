@@ -23,10 +23,6 @@ import {
   readCanonicalStrengthScore,
 } from "./canonicalStrength";
 import {
-  canonicalBalancingNeedLabel,
-  canonicalClimateStateLabel,
-} from "./canonicalTemperature";
-import {
   FIVE_ELEMENT_ROWS,
   FIVE_ELEMENTS_TITLE,
   canonicalFiveElementCounts,
@@ -619,6 +615,7 @@ function mapS02(data: AnalysisDataDto): CanonicalDesktopViewModel["s02"] {
 
   return {
     ...base,
+    dungReason: canonicalUsefulShortReason(useful),
     items: [
       {
         icon: "fire" as const,
@@ -639,34 +636,9 @@ function mapS02(data: AnalysisDataDto): CanonicalDesktopViewModel["s02"] {
         color: "earth",
       },
       {
-        icon: "spark" as const,
-        label: "Cách cục",
-        value: pickStr(pattern, ["cach_cuc", "pattern"]) || UNAVAILABLE_CONCLUSION,
-        color: "water",
-      },
-      {
-        icon: "drop" as const,
-        label: "Điều hậu",
-        value:
-          [
-            canonicalClimateStateLabel(data),
-            canonicalBalancingNeedLabel(data),
-            canonicalClimatePreferenceLabel(useful),
-          ]
-            .filter(Boolean)
-            .join(" · ") || UNAVAILABLE_CONCLUSION,
-        color: "earth",
-      },
-      {
         icon: "drop" as const,
         label: "Dụng thần",
         value: dung,
-        color: "water",
-      },
-      {
-        icon: "spark" as const,
-        label: "Căn cứ chọn Dụng",
-        value: canonicalUsefulShortReason(useful) || "—",
         color: "water",
       },
       {

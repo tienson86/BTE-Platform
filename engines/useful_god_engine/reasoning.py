@@ -36,7 +36,7 @@ _RULE_NEED: dict[str, str] = {
     "str_001": "sinh trợ",
     "str_002": "sinh trợ",
     "str_003": "chế ước",
-    "str_004": "tiết khí",
+    "str_004": "tiết bớt khí",
     "str_005": "lưu thông",
     "spc_001": "đi theo Tài",
     "spc_002": "đi theo Quan",
@@ -164,6 +164,11 @@ def build_customer_reason(result: Any) -> UsefulGodCustomerReason:
     principle = _PRINCIPLE_VI.get(archetype, "cân bằng hiện có")
     strength_vi = STRENGTH_STATE_VI.get(strength, strength or "chưa rõ thân khí")
     dm_label = " ".join(part for part in (day_master, dm_el) if part) or "nhật chủ"
+    stem_map = (
+        f"{stem} đối với {day_master} là {ten_god}"
+        if day_master and stem and ten_god
+        else f"can {stem} ứng với {ten_god}"
+    )
     if archetype == ARCHETYPE_FOLLOW:
         follow_vi = FOLLOW_LABEL.get(follow, "cách đặc biệt đã công bố")
         short = (
@@ -177,14 +182,26 @@ def build_customer_reason(result: Any) -> UsefulGodCustomerReason:
             f"dùng nguyên tắc {principle} theo mô hình cân bằng V1.0 "
             f"(không đối chiếu sâu toàn cục) → "
             f"hành {element} có quan hệ {relation or 'Tài'} → "
-            f"can {stem} ứng với {ten_god} → chọn {display} làm Dụng."
+            f"{stem_map} → chọn {display} làm Dụng."
+        )
+    elif archetype == ARCHETYPE_TIET:
+        short = (
+            f"Nhật chủ {dm_label} {strength_vi} → cần tiết bớt khí {dm_el} → "
+            f"áp dụng nguyên tắc Tiết theo mô hình cân bằng V1.0 → "
+            f"{relation} → {stem_map} → chọn {display} làm Dụng."
+        )
+    elif archetype == ARCHETYPE_CHE:
+        short = (
+            f"Nhật chủ {dm_label} {strength_vi} → có Chính Quan đủ điều kiện Chế → "
+            f"áp dụng nguyên tắc Chế theo mô hình cân bằng V1.0 → "
+            f"{relation} → {stem_map} → chọn {display} làm Dụng."
         )
     else:
         short = (
             f"Nhật chủ {dm_label} {strength_vi} → cần {need} → "
             f"dùng nguyên tắc {principle} theo mô hình cân bằng V1.0 → "
             f"hành {element} có quan hệ {relation} → "
-            f"can {stem} ứng với {ten_god} → chọn {display} làm Dụng."
+            f"{stem_map} → chọn {display} làm Dụng."
         )
     return UsefulGodCustomerReason(
         reason_archetype=archetype,

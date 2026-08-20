@@ -54,6 +54,12 @@ export function S02OverviewActions(): ReactNode {
             );
           })}
         </div>
+        {data.dungReason ? (
+          <p className="cd-s02__reason">
+            <span className="cd-s02__reason-label">Căn cứ chọn Dụng</span>
+            {data.dungReason}
+          </p>
+        ) : null}
       </div>
     </section>
   );

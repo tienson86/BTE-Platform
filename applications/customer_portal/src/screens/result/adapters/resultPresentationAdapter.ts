@@ -549,14 +549,37 @@ export function adaptResultPageViewModel(
     ? adaptPreviewText(conclusionText, "summary")
     : null;
 
+  const indicatorSource = [
+    ...source.s02.items,
+    ...source.s01.conditions.rows
+      .filter((row) => row.label === "Điều hậu")
+      .map((row) => ({
+        label: row.label,
+        value: row.value,
+        color: "earth" as const,
+      })),
+  ];
+  const preferred = [
+    "Dụng thần",
+    "Hỷ thần",
+    "Kỵ thần",
+    "Điều hậu",
+    "Thế cục",
+    "Phân bố Ngũ hành",
+  ];
+  const byLabel = new Map(indicatorSource.map((item) => [item.label, item]));
+  const ordered = preferred
+    .map((label) => byLabel.get(label))
+    .filter((item): item is NonNullable<typeof item> => Boolean(item));
   const indicators = adaptPreviewList(
-    source.s02.items.map((item) => ({
+    ordered.map((item) => ({
       label: item.label,
       value: item.value,
       color: item.color,
     })),
     6,
   );
+  const dungReason = source.s02.dungReason?.trim() || "";
 
   const destinyItems = adaptPreviewList(
     source.s01.decisions.map((d) => ({
@@ -732,6 +755,8 @@ export function adaptResultPageViewModel(
     indicators: {
       title: "CHỈ SỐ CỐT LÕI",
       items: indicators,
+      reasonLabel: "Căn cứ chọn Dụng",
+      reason: dungReason,
       hasMore: indicators.hasMore,
       visible: indicators.items.length > 0,
     },
