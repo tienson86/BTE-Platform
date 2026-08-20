@@ -402,21 +402,26 @@ class ReportInputV1Adapter:
         if useful is None and pattern is None:
             diagnostics.missing_fields.append("useful_god")
             return ReportUsefulGodV1()
+        incomplete = bool(getattr(useful, "overall_incomplete", False)) if useful else False
+        overall_token = (useful.useful_god if useful else "") or (
+            "" if incomplete else (pattern.dung_than if pattern else "")
+        )
+        overall_display = (
+            (getattr(useful, "useful_display", "") if useful else "")
+            or (useful.useful_god if useful else "")
+            or ("" if incomplete else (pattern.dung_than if pattern else ""))
+        )
         return ReportUsefulGodV1(
-            useful_god=(useful.useful_god if useful else "") or (pattern.dung_than if pattern else ""),
+            useful_god=overall_token,
             useful_ten_god=getattr(useful, "useful_ten_god", "") if useful else "",
             useful_stem=getattr(useful, "useful_stem", "") if useful else "",
             useful_element=getattr(useful, "useful_element", "") if useful else "",
-            useful_display=(
-                (getattr(useful, "useful_display", "") if useful else "")
-                or (useful.useful_god if useful else "")
-                or (pattern.dung_than if pattern else "")
-            ),
+            useful_display=overall_display,
             favorable_gods=list(useful.favorable_gods if useful else []) or (
-                [pattern.hy_than] if pattern and pattern.hy_than else []
+                [] if incomplete else ([pattern.hy_than] if pattern and pattern.hy_than else [])
             ),
             unfavorable_gods=list(useful.unfavorable_gods if useful else []) or (
-                [pattern.ky_than] if pattern and pattern.ky_than else []
+                [] if incomplete else ([pattern.ky_than] if pattern and pattern.ky_than else [])
             ),
             favorable_roles=list(getattr(useful, "favorable_roles", []) or []) if useful else [],
             unfavorable_roles=list(getattr(useful, "unfavorable_roles", []) or []) if useful else [],
@@ -430,6 +435,14 @@ class ReportInputV1Adapter:
             ),
             winning_rule_id=getattr(useful, "winning_rule_id", "") if useful else "",
             winning_rule_group=getattr(useful, "winning_rule_group", "") if useful else "",
+            overall_incomplete=incomplete,
+            climate_preference_label=(
+                getattr(useful, "climate_preference_label", "") if useful else ""
+            ),
+            climate_candidate=getattr(useful, "climate_candidate", "") if useful else "",
+            climate_display=getattr(useful, "climate_display", "") if useful else "",
+            climate_rule_id=getattr(useful, "climate_rule_id", "") if useful else "",
+            climate_rule_group=getattr(useful, "climate_rule_group", "") if useful else "",
             neutral_gods=[],
             temperature_adjustment=(
                 (temperature.climate_state if temperature else "")

@@ -13,10 +13,10 @@ import {
 } from "../../src/adapters/canonicalUsefulGod";
 import type { AnalysisDataDto } from "../../src/models";
 
-const DISPLAY = "Hỏa · Bính · Thất Sát";
-const HY =
-  "Hỏa · Bính · Thất Sát / Hỏa · Đinh · Chính Quan / Mộc · Giáp · Thiên Tài";
-const KY = "Thủy · Nhâm · Thực Thần / Thủy · Quý · Thương Quan";
+const DISPLAY = "Thủy · Nhâm · Thực Thần";
+const HY = "Thủy · Nhâm · Thực Thần / Thủy · Quý · Thương Quan";
+const KY = "Kim · Canh · Tỷ Kiên / Kim · Tân · Kiếp Tài";
+const CLIMATE_PREFERENCE = "Điều hậu ưu tiên Hỏa";
 
 const CASE_0001: AnalysisDataDto = {
   bazi: { day_master: "Canh", day_master_element: "Kim" },
@@ -30,17 +30,21 @@ const CASE_0001: AnalysisDataDto = {
     temperature_score: 0.72,
   },
   useful_god: {
-    useful_god: "Bính",
-    useful_ten_god: "Thất Sát",
-    useful_stem: "Bính",
-    useful_element: "Hỏa",
+    useful_god: "Thực Thần",
+    useful_ten_god: "Thực Thần",
+    useful_stem: "Nhâm",
+    useful_element: "Thủy",
     useful_display: DISPLAY,
-    favorable_gods: ["Bính", "Đinh", "Giáp"],
-    unfavorable_gods: ["Nhâm", "Quý"],
+    favorable_gods: ["Thực Thần", "Thương Quan"],
+    unfavorable_gods: ["Tỷ Kiên", "Kiếp Tài"],
     favorable_display: HY,
     unfavorable_display: KY,
-    winning_rule_id: "sea_001",
-    winning_rule_group: "season",
+    winning_rule_id: "str_004",
+    winning_rule_group: "strength",
+    climate_rule_id: "sea_001",
+    climate_candidate: "Bính",
+    climate_display: "Hỏa · Bính · Thất Sát",
+    climate_preference_label: CLIMATE_PREFERENCE,
   },
 };
 
@@ -59,6 +63,10 @@ describe("G1-06 canonical Useful God binding", () => {
     const dieuHau = vm.s01.conditions.rows.find((row) => row.label === "Điều hậu");
     expect(dieuHau?.value).toContain("Hàn");
     expect(dieuHau?.value).toContain("Cần ôn ấm");
+    expect(dieuHau?.value).toContain(CLIMATE_PREFERENCE);
+    expect(vm.s02.items.find((item) => item.label === "Dụng thần")?.value).not.toBe(
+      "Hỏa · Bính · Thất Sát",
+    );
   });
 
   it("Full Report and BaZi adapter stay on the same published strings", () => {
@@ -70,6 +78,7 @@ describe("G1-06 canonical Useful God binding", () => {
     expect(html).toContain(DISPLAY);
     expect(html).toContain("Hàn");
     expect(html).toContain("Cần ôn ấm");
+    expect(html).toContain(CLIMATE_PREFERENCE);
     const bazi = adaptAnalysisToBaZiResult(CASE_0001);
     expect(bazi.spiritGods.find((row) => row.role === "dung")?.name).toBe(DISPLAY);
     expect(bazi.spiritGods.find((row) => row.role === "hy")?.name).toBe(HY);

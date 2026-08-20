@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+from applications.api.services.five_elements_truth import FIVE_ELEMENTS_DISCLAIMER
 from engines.bazi_engine.ten_god import branch_element, stem_element
 from engines.report_engine.contracts.report_input_v1 import (
     ReportInputV1,
@@ -284,6 +285,7 @@ def _section_five_elements(report_input: ReportInputV1) -> PresentedSection:
     ]
     if total > 0:
         notes.append(f"Tổng đơn vị cấu trúc: {int(total)}")
+    notes.append(FIVE_ELEMENTS_DISCLAIMER)
     return PresentedSection(
         id="five-elements",
         title="03. Phân bố Ngũ hành",
@@ -423,6 +425,7 @@ def _section_useful_god(report_input: ReportInputV1) -> PresentedSection:
                 ("Điều hậu nhiệt", display_text(useful.temperature_adjustment, "temperature")),
                 ("Nhu cầu điều hòa", display_text(useful.balancing_need, "balancing_need")),
                 ("Điều hậu", temperature_customer_evidence(useful.climate_evidence)),
+                ("Điều hậu ưu tiên", display_text(useful.climate_preference_label)),
             ]
         ),
         paragraphs=customer_paragraphs(useful.reasoning),

@@ -38,6 +38,7 @@ import {
 } from "./canonicalFiveElements";
 import {
   canonicalFavorableDisplay,
+  canonicalClimatePreferenceLabel,
   canonicalUsefulDisplay,
   canonicalUsefulGodPayload,
   canonicalUnfavorableDisplay,
@@ -529,7 +530,12 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
         },
         {
           label: "Điều hậu",
-          value: temperatureCustomerLine(data) || UNAVAILABLE_CONCLUSION,
+          value: [
+            temperatureCustomerLine(data),
+            canonicalClimatePreferenceLabel(canonicalUsefulGodPayload(data)),
+          ]
+            .filter(Boolean)
+            .join(" · ") || UNAVAILABLE_CONCLUSION,
           tag: "Điều hậu",
           tone: "neutral" as const,
         },
@@ -641,7 +647,11 @@ function mapS02(data: AnalysisDataDto): CanonicalDesktopViewModel["s02"] {
         icon: "drop" as const,
         label: "Điều hậu",
         value:
-          [canonicalClimateStateLabel(data), canonicalBalancingNeedLabel(data)]
+          [
+            canonicalClimateStateLabel(data),
+            canonicalBalancingNeedLabel(data),
+            canonicalClimatePreferenceLabel(useful),
+          ]
             .filter(Boolean)
             .join(" · ") || UNAVAILABLE_CONCLUSION,
         color: "earth",

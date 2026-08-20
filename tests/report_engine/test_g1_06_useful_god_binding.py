@@ -13,28 +13,31 @@ from engines.report_engine.rendering.html_report_v1 import render_html
 from engines.report_engine.services.report_export_service_v1 import ReportExportServiceV1
 from tests.report_engine.case_0001_runtime import build_case_0001_source
 
-CANONICAL_DISPLAY = "Hỏa · Bính · Thất Sát"
-FAVORABLE_DISPLAY = (
-    "Hỏa · Bính · Thất Sát / Hỏa · Đinh · Chính Quan / Mộc · Giáp · Thiên Tài"
-)
-UNFAVORABLE_DISPLAY = "Thủy · Nhâm · Thực Thần / Thủy · Quý · Thương Quan"
+CANONICAL_DISPLAY = "Hỏa · Đinh · Chính Quan"
+FAVORABLE_DISPLAY = "Hỏa · Đinh · Chính Quan / Thủy · Nhâm · Thực Thần"
+UNFAVORABLE_DISPLAY = "Kim · Canh · Tỷ Kiên / Kim · Tân · Kiếp Tài"
+CLIMATE_PREFERENCE = "Điều hậu ưu tiên Hỏa"
 
 
 def test_case_0001_report_uses_rich_useful_god_not_dieu_hau() -> None:
     report_input = ReportInputV1Adapter().build(build_case_0001_source())
     useful = report_input.useful_god
-    assert useful.useful_god == "Bính"
+    assert useful.useful_god == "Chính Quan"
     assert useful.useful_display == CANONICAL_DISPLAY
-    assert useful.useful_ten_god == "Thất Sát"
-    assert useful.useful_stem == "Bính"
+    assert useful.useful_ten_god == "Chính Quan"
+    assert useful.useful_stem == "Đinh"
     assert useful.useful_element == "Hỏa"
-    assert useful.winning_rule_id == "sea_001"
+    assert useful.winning_rule_id == "str_003"
+    assert useful.winning_rule_group == "strength"
+    assert useful.climate_rule_id == "sea_001"
+    assert useful.climate_preference_label == CLIMATE_PREFERENCE
     assert useful.favorable_display == FAVORABLE_DISPLAY
     assert useful.unfavorable_display == UNFAVORABLE_DISPLAY
     assert useful.temperature_adjustment == "cold"
     assert useful.balancing_need == "warming"
     assert useful.useful_god != useful.balancing_need
     assert useful.useful_display != "Cần ôn ấm"
+    assert useful.useful_display != useful.climate_display
     assert report_input.pattern.primary_pattern == "Chính Ấn"
 
 
@@ -46,7 +49,8 @@ def test_case_0001_api_and_report_same_useful_god() -> None:
     useful = payload["useful_god"]
     report = report_input.useful_god
     assert useful["useful_display"] == report.useful_display == CANONICAL_DISPLAY
-    assert useful["winning_rule_id"] == report.winning_rule_id == "sea_001"
+    assert useful["winning_rule_id"] == report.winning_rule_id == "str_003"
+    assert useful["climate_rule_id"] == report.climate_rule_id == "sea_001"
     assert useful["favorable_display"] == report.favorable_display
     assert useful["unfavorable_display"] == report.unfavorable_display
     assert payload["temperature"]["climate_state"] == report.temperature_adjustment == "cold"
@@ -59,6 +63,7 @@ def test_case_0001_html_shows_three_layer_useful_god(tmp_path: Path) -> None:
     assert CANONICAL_DISPLAY in html
     assert FAVORABLE_DISPLAY in html
     assert UNFAVORABLE_DISPLAY in html
+    assert CLIMATE_PREFERENCE in html
     assert "Hàn" in html
     assert "Cần ôn ấm" in html
     result = ReportExportServiceV1(export_root=tmp_path).export_docx(report_input)

@@ -148,8 +148,11 @@ def test_case_0001_strength_pattern_ten_gods_useful_god_unchanged() -> None:
     assert strength["strength_level"] == "strong"
     assert payload["pattern"]["cach_cuc"] == "Chính Ấn"
     assert payload["pattern"]["pattern"] == "chinh_an"
-    assert payload["useful_god"]["useful_god"] == "Bính"
-    assert payload["useful_god"]["useful_display"] == "Hỏa · Bính · Thất Sát"
+    assert payload["useful_god"]["useful_god"] == "Chính Quan"
+    assert payload["useful_god"]["useful_display"] == "Hỏa · Đinh · Chính Quan"
+    assert payload["useful_god"]["winning_rule_id"] == "str_003"
+    assert payload["useful_god"]["climate_rule_id"] == "sea_001"
+    assert payload["useful_god"]["climate_display"] == "Hỏa · Bính · Thất Sát"
     assert payload["temperature"]["climate_state"] == "cold"
     assert payload["temperature"]["balancing_need"] == "warming"
     ten_gods = payload.get("ten_gods") or {}
@@ -181,6 +184,8 @@ def test_case_0001_useful_god_reads_canonical_climate() -> None:
     pattern_context.temperature_type = temperature.useful_god_temperature_overlay()
     pattern = PatternEngine().calculate(pattern_context)
     useful = UsefulGodEngine().calculate(build_useful_god_context(pattern_context, pattern))
-    assert useful.useful_god == "Bính"
-    assert useful.winning_rule_id == "sea_001"
-    assert useful.useful_display == "Hỏa · Bính · Thất Sát"
+    assert useful.useful_god == "Chính Quan"
+    assert useful.winning_rule_id == "str_003"
+    assert useful.useful_display == "Hỏa · Đinh · Chính Quan"
+    assert useful.climate_rule_id == "sea_001"
+    assert useful.climate_display == "Hỏa · Bính · Thất Sát"

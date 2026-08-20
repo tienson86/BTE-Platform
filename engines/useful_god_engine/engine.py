@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from .analyzer import UsefulGodAnalyzer
+from .layers import OVERALL_INCOMPLETE_MESSAGE, candidate_layer
 from .loader import UsefulGodLoader
 from .matcher import UsefulGodMatcher
 from .models import UsefulGodResult
@@ -29,55 +30,106 @@ class UsefulGodEngine:
         priority_rules = self.loader.load_priority_rules()
 
         analysis = self.analyzer.analyze(context, grouped_rules)
-        candidates = analysis["candidate_list"]
+        candidates = [
+            self._with_layer(item) for item in analysis["candidate_list"]
+        ]
+        overall_candidates = [
+            item for item in candidates if item.get("layer") == "overall"
+        ]
+        climate_candidates = [
+            item for item in candidates if item.get("layer") == "climate"
+        ]
 
         resolver = PriorityResolver(priority_rules)
-        winner = resolver.resolve(candidates)
+        overall = resolver.resolve(overall_candidates)
+        climate = resolver.resolve(climate_candidates)
 
-        if winner is None:
-            return UsefulGodResult(
+        public_all = [self._public_candidate(item) for item in candidates]
+        public_overall = [self._public_candidate(item) for item in overall_candidates]
+        public_climate = [self._public_candidate(item) for item in climate_candidates]
+        matched_rules = [str(item.get("rule_id")) for item in candidates if item.get("rule_id")]
+
+        climate_fields = self._climate_fields(climate)
+        trace = {
+            "context": self._context_snapshot(context),
+            "matched_rules": matched_rules,
+            "candidate_list": public_all,
+            "overall_candidate_list": public_overall,
+            "climate_candidate_list": public_climate,
+            "priority": [row for row in priority_rules],
+            "winner": self._public_candidate(overall) if overall else None,
+            "climate_winner": self._public_candidate(climate) if climate else None,
+        }
+
+        if overall is None:
+            result = UsefulGodResult(
                 success=False,
                 useful_god=None,
-                error="no useful god rule matched",
-                metadata={"analysis": analysis},
+                error=OVERALL_INCOMPLETE_MESSAGE,
+                overall_incomplete=True,
+                useful_display=OVERALL_INCOMPLETE_MESSAGE,
+                candidate_list=public_all,
+                overall_candidate_list=public_overall,
+                climate_candidate_list=public_climate,
+                matched_rules=matched_rules,
+                temperature_reason=self._first_reason(analysis["temperature_candidates"]),
+                season_reason=self._first_reason(analysis["season_candidates"]),
+                strength_reason=self._first_reason(analysis["strength_candidates"]),
+                balance_reason=str(analysis["balance_summary"].get("status") or ""),
+                metadata={"trace": trace, "analysis": analysis},
+                **climate_fields,
+            )
+            return enrich_useful_god_result(
+                result, str(getattr(context, "day_master", "") or "")
             )
 
-        favorable = self._parse_json_list(winner.get("favorable_gods"))
-        unfavorable = self._parse_json_list(winner.get("unfavorable_gods"))
-
-        confidence = float(winner.get("score") or 0.0)
-        matched_rules = [str(c.get("rule_id")) for c in candidates if c.get("rule_id")]
-
+        favorable = self._parse_json_list(overall.get("favorable_gods"))
+        unfavorable = self._parse_json_list(overall.get("unfavorable_gods"))
+        confidence = float(overall.get("score") or 0.0)
         result = UsefulGodResult(
             success=True,
-            useful_god=str(winner.get("useful_god") or "").strip() or None,
+            useful_god=str(overall.get("useful_god") or "").strip() or None,
             favorable_gods=favorable,
             unfavorable_gods=unfavorable,
-            candidate_list=[self._public_candidate(c) for c in candidates],
+            candidate_list=public_all,
+            overall_candidate_list=public_overall,
+            climate_candidate_list=public_climate,
             confidence=confidence,
             matched_rules=matched_rules,
-            reasoning=str(winner.get("reason") or winner.get("description") or ""),
+            reasoning=str(overall.get("reason") or overall.get("description") or ""),
             temperature_reason=self._first_reason(analysis["temperature_candidates"]),
             season_reason=self._first_reason(analysis["season_candidates"]),
             strength_reason=self._first_reason(analysis["strength_candidates"]),
             balance_reason=str(analysis["balance_summary"].get("status") or ""),
             recommendations=self._build_recommendations(favorable, unfavorable),
-            winning_rule_id=str(winner.get("rule_id") or ""),
-            winning_rule_group=str(winner.get("rule_group") or ""),
-            metadata={
-                "trace": {
-                    "context": self._context_snapshot(context),
-                    "matched_rules": matched_rules,
-                    "candidate_list": [self._public_candidate(c) for c in candidates],
-                    "priority": [r for r in priority_rules],
-                    "winner": self._public_candidate(winner),
-                    "confidence": confidence,
-                },
-            },
+            winning_rule_id=str(overall.get("rule_id") or ""),
+            winning_rule_group=str(overall.get("rule_group") or ""),
+            metadata={"trace": {**trace, "confidence": confidence}},
+            **climate_fields,
         )
         return enrich_useful_god_result(
             result, str(getattr(context, "day_master", "") or "")
         )
+
+    @staticmethod
+    def _with_layer(candidate: dict) -> dict:
+        item = dict(candidate)
+        item["layer"] = candidate_layer(str(item.get("rule_group") or ""))
+        return item
+
+    @classmethod
+    def _climate_fields(cls, climate: dict | None) -> dict:
+        if not climate:
+            return {}
+        token = str(climate.get("useful_god") or "").strip()
+        return {
+            "climate_candidate": token,
+            "climate_rule_id": str(climate.get("rule_id") or ""),
+            "climate_rule_group": str(climate.get("rule_group") or ""),
+            "climate_reason": str(
+                climate.get("reason") or climate.get("description") or ""
+            ),
+        }
 
     @staticmethod
     def _parse_json_list(value) -> list[str]:
@@ -101,10 +153,15 @@ class UsefulGodEngine:
         return [str(value)]
 
     @staticmethod
-    def _public_candidate(candidate: dict) -> dict:
+    def _public_candidate(candidate: dict | None) -> dict:
+        if not candidate:
+            return {}
         return {
             "rule_id": candidate.get("rule_id"),
             "rule_group": candidate.get("rule_group"),
+            "layer": candidate.get("layer") or candidate_layer(
+                str(candidate.get("rule_group") or "")
+            ),
             "useful_god": candidate.get("useful_god"),
             "priority": int(candidate.get("priority") or 0),
             "score": float(candidate.get("score") or 0.0),
@@ -115,8 +172,8 @@ class UsefulGodEngine:
     def _first_reason(candidates: list[dict]) -> str | None:
         if not candidates:
             return None
-        c = candidates[0]
-        text = str(c.get("reason") or c.get("description") or "").strip()
+        item = candidates[0]
+        text = str(item.get("reason") or item.get("description") or "").strip()
         return text or None
 
     @staticmethod
@@ -142,6 +199,13 @@ class UsefulGodEngine:
             "follow_pattern",
             "special_pattern",
             "main_pattern",
+            "officer_elements",
         ]
-        snap = {k: getattr(context, k, None) for k in keys}
-        return snap
+        snapshot = {key: getattr(context, key, None) for key in keys}
+        snapshot["officer_provenance"] = list(
+            getattr(context, "officer_provenance", []) or []
+        )
+        metadata = getattr(context, "metadata", None)
+        if isinstance(metadata, dict):
+            snapshot["chinh_quan_visibility"] = metadata.get("chinh_quan_visibility")
+        return snapshot

@@ -40,9 +40,10 @@ def build_useful_god_published_facts(useful_god_view: Any) -> UsefulGodPublished
         if hasattr(useful_god_view, "to_dict")
         else dict(useful_god_view)
     )
-    useful = str(data.get("useful_display") or data.get("useful_god") or "")
+    incomplete = bool(data.get("overall_incomplete"))
+    useful = "" if incomplete else str(data.get("useful_display") or data.get("useful_god") or "")
     missing: list[str] = []
-    if not useful:
+    if incomplete or not useful:
         missing.append("useful_god")
     return UsefulGodPublishedFacts(
         useful_god=useful,

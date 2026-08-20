@@ -224,6 +224,12 @@ class ReportUsefulGodV1:
     unfavorable_display: str = ""
     winning_rule_id: str = ""
     winning_rule_group: str = ""
+    overall_incomplete: bool = False
+    climate_preference_label: str = ""
+    climate_candidate: str = ""
+    climate_display: str = ""
+    climate_rule_id: str = ""
+    climate_rule_group: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         """Keep legacy keys; G1-06 adds rich Ten God / stem / element."""

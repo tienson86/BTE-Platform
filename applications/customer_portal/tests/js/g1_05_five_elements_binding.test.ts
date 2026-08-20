@@ -9,6 +9,7 @@ import { buildFullReportViewModel, renderFullReportHtml } from "../../src/report
 import { adaptResultPageViewModel } from "../../src/screens/result/adapters/resultPresentationAdapter";
 import {
   FIVE_ELEMENTS_ABSENT_LABEL,
+  FIVE_ELEMENTS_DISCLAIMER,
   FIVE_ELEMENTS_METHOD_NOTE,
   FIVE_ELEMENTS_TITLE,
   formatFiveElementsCompact,
@@ -69,11 +70,12 @@ describe("G1-05 canonical Five Elements distribution binding", () => {
     ]);
     expect(vm.s04.summary).toContain(FIVE_ELEMENTS_METHOD_NOTE);
     expect(vm.s04.summary).toContain("Tổng đơn vị cấu trúc: 19");
+    expect(vm.s04.summary).toContain(FIVE_ELEMENTS_DISCLAIMER);
     expect(vm.s04.summary).not.toContain("B+");
     expect(vm.s02.items.find((item) => item.label === "Phân bố Ngũ hành")?.value).toBe(
       "Mộc 4 · Hỏa 5 · Thổ 6 · Kim 3 · Thủy 1",
     );
-    const rendered = `${vm.s04.title} ${vm.s04.summary} ${vm.s04.rows.map((row) => row.status).join(" ")}`;
+    const rendered = `${vm.s04.title} ${vm.s04.rows.map((row) => row.status).join(" ")}`;
     for (const token of FORBIDDEN) {
       expect(rendered).not.toContain(token);
     }
@@ -99,6 +101,7 @@ describe("G1-05 canonical Five Elements distribution binding", () => {
     expect(report.fiveElements.map((row) => row.count)).toEqual([4, 5, 6, 3, 1]);
     expect(html).toContain("Phân bố Ngũ hành");
     expect(html).toContain(FIVE_ELEMENTS_METHOD_NOTE);
+    expect(html).toContain(FIVE_ELEMENTS_DISCLAIMER);
     expect(html).not.toContain("Cân bằng Ngũ hành");
     const bazi = adaptAnalysisToBaZiResult(CASE_0001);
     expect(bazi.fiveElements.find((el) => el.id === "hoa")?.score).toBe(5);

@@ -361,11 +361,30 @@ class UsefulGodView:
     winning_rule_id: str = ""
     winning_rule_group: str = ""
     candidate_list: list[dict[str, Any]] = field(default_factory=list)
+    success: bool = True
+    overall_incomplete: bool = False
+    error: str = ""
+    overall_useful_god: str = ""
+    overall_candidate_list: list[dict[str, Any]] = field(default_factory=list)
+    climate_candidate_list: list[dict[str, Any]] = field(default_factory=list)
+    climate_candidate: str = ""
+    climate_display: str = ""
+    climate_stem: str = ""
+    climate_element: str = ""
+    climate_ten_god: str = ""
+    climate_rule_id: str = ""
+    climate_rule_group: str = ""
+    climate_reason: str = ""
+    climate_preference_label: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         """Portal-compatible ``data.useful_god`` JSON."""
         return {
+            "success": self.success,
+            "overall_incomplete": self.overall_incomplete,
+            "error": self.error or "",
             "useful_god": self.useful_god or "",
+            "overall_useful_god": self.overall_useful_god or self.useful_god or "",
             "useful_ten_god": self.useful_ten_god or "",
             "useful_stem": self.useful_stem or "",
             "useful_element": self.useful_element or "",
@@ -379,9 +398,20 @@ class UsefulGodView:
             "winning_rule_id": self.winning_rule_id or "",
             "winning_rule_group": self.winning_rule_group or "",
             "candidate_list": [dict(item) for item in self.candidate_list],
+            "overall_candidate_list": [dict(item) for item in self.overall_candidate_list],
+            "climate_candidate_list": [dict(item) for item in self.climate_candidate_list],
             "reasoning": self.reasoning or "",
             "confidence": float(self.confidence),
             "matched_rules": list(self.matched_rules),
+            "climate_candidate": self.climate_candidate or "",
+            "climate_display": self.climate_display or "",
+            "climate_stem": self.climate_stem or "",
+            "climate_element": self.climate_element or "",
+            "climate_ten_god": self.climate_ten_god or "",
+            "climate_rule_id": self.climate_rule_id or "",
+            "climate_rule_group": self.climate_rule_group or "",
+            "climate_reason": self.climate_reason or "",
+            "climate_preference_label": self.climate_preference_label or "",
         }
 
 

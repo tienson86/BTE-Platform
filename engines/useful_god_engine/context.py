@@ -38,6 +38,7 @@ class UsefulGodContext:
     main_pattern: str | None = None
 
     ten_gods_list: list[str] = field(default_factory=list)
+    officer_provenance: list[dict[str, Any]] = field(default_factory=list)
 
     # Trace/debug slots
     metadata: dict[str, Any] = field(default_factory=dict)

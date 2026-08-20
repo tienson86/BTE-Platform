@@ -12,6 +12,10 @@ ELEMENT_LABELS: dict[str, str] = {
     "metal": "Kim",
     "water": "Thủy",
 }
+FIVE_ELEMENTS_DISCLAIMER = (
+    "Phân bố Ngũ hành phản ánh số lần xuất hiện trong cấu trúc, "
+    "không phải mức vượng suy và không trực tiếp quyết định Dụng thần."
+)
 _LABEL_TO_ELEMENT: dict[str, str] = {
     "wood": "wood",
     "fire": "fire",
@@ -75,4 +79,5 @@ def build_five_elements_payload(wuxing: Mapping[str, Any] | None) -> dict[str, A
     payload["unit_total"] = int(sum(value for _, value in numeric)) if numeric else 0
     payload["method_note"] = "Tính theo Thiên can · bản hành Địa chi · Tàng can"
     payload["count_model"] = "stem_1_branch_base_1_hidden_occurrence_1"
+    payload["disclaimer"] = FIVE_ELEMENTS_DISCLAIMER
     return payload

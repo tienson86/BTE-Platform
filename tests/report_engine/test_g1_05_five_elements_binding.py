@@ -6,6 +6,7 @@ from pathlib import Path
 
 from docx import Document
 
+from applications.api.services.five_elements_truth import FIVE_ELEMENTS_DISCLAIMER
 from applications.api.services.orchestrator import OrchestratorService
 from engines.report_engine.adapters.report_input_v1_adapter import ReportInputV1Adapter
 from engines.report_engine.exporting.docx_exporter_v1 import validate_docx_file
@@ -65,8 +66,12 @@ def test_case_0001_html_pdf_source_shows_distribution_not_score_grade() -> None:
     assert "Thủy" in section
     assert "Tính theo Thiên can · bản hành Địa chi · Tàng can" in section
     assert "Tổng đơn vị cấu trúc: 19" in section
+    assert FIVE_ELEMENTS_DISCLAIMER in section
+    table_start = section.find("<table")
+    table_end = section.find("</table>")
+    table = section[table_start:table_end] if table_start >= 0 and table_end > table_start else ""
     for token in _FORBIDDEN_DISTRIBUTION_LABELS:
-        assert token not in section
+        assert token not in table
 
 
 def test_presented_section_does_not_use_score_series() -> None:
@@ -77,6 +82,7 @@ def test_presented_section_does_not_use_score_series() -> None:
     rows = {row[0]: row[1] for row in (section.table.rows if section.table else [])}
     assert rows == {"Mộc": "4", "Hỏa": "5", "Thổ": "6", "Kim": "3", "Thủy": "1"}
     assert section.title == "03. Phân bố Ngũ hành"
+    assert FIVE_ELEMENTS_DISCLAIMER in (section.notes or [])
 
 
 def test_case_0001_docx_shows_same_distribution(tmp_path: Path) -> None:
@@ -100,3 +106,4 @@ def test_case_0001_docx_shows_same_distribution(tmp_path: Path) -> None:
     assert "Thủy" in text and "1" in text
     assert "Tính theo Thiên can · bản hành Địa chi · Tàng can" in text
     assert "Tổng đơn vị cấu trúc: 19" in text
+    assert FIVE_ELEMENTS_DISCLAIMER in text

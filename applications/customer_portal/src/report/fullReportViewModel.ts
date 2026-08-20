@@ -16,6 +16,7 @@ import {
   formatFiveElementsProvenance,
 } from "../adapters/canonicalFiveElements";
 import {
+  canonicalClimatePreferenceLabel,
   canonicalFavorableDisplay,
   canonicalUsefulDisplay,
   canonicalUsefulGodPayload,
@@ -133,6 +134,7 @@ export type FullReportViewModel = {
   readonly climateState: string;
   readonly balancingNeed: string;
   readonly climateEvidence: string;
+  readonly climatePreference: string;
   readonly narrative: readonly FullReportNarrativeSection[];
   readonly supporting: readonly FullReportSupportingSection[];
   readonly factsOnly: false;
@@ -266,6 +268,7 @@ export function buildFullReportViewModel(
     climateState: canonicalClimateStateLabel(data),
     balancingNeed: canonicalBalancingNeedLabel(data),
     climateEvidence: temperatureCustomerEvidence(data),
+    climatePreference: canonicalClimatePreferenceLabel(useful),
     narrative: buildNarrativeSections(narrative),
     supporting: buildSupportingSections(narrative),
     factsOnly: false,
@@ -447,7 +450,9 @@ function identityGrid(model: FullReportViewModel): string {
 }
 
 function overviewGrid(model: FullReportViewModel): string {
-  const dieuHau = [model.climateState, model.balancingNeed].filter(Boolean).join(" · ");
+  const dieuHau = [model.climateState, model.balancingNeed, model.climatePreference]
+    .filter(Boolean)
+    .join(" · ");
   return `<div class="bte-full-grid">
     ${kv("Nhật chủ", [model.dayMaster, model.yinYang, model.dayMasterElement].filter(Boolean).join(" · "))}
     ${kv("Thân", model.strengthLabel)}

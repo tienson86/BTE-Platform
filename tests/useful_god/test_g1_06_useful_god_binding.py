@@ -78,31 +78,47 @@ def test_case_0001_candidate_set_and_winner() -> None:
     pattern = PatternEngine().calculate(pattern_context)
     result = _calculate(build_useful_god_context(pattern_context, pattern))
     ids = _candidate_ids(result)
-    assert ids == ["str_004", "sea_001", "tmp_001"]
+    assert ids == ["str_003", "str_004", "sea_001", "tmp_001"]
+    assert ids.count("str_003") == 1
     assert "tmp_002" not in ids
     assert not any(item.startswith("flo_") for item in ids)
     by_id = {item["rule_id"]: item for item in result.candidate_list}
+    assert by_id["str_003"]["rule_group"] == "strength"
+    assert by_id["str_003"]["layer"] == "overall"
+    assert by_id["str_003"]["useful_god"] == "Chính Quan"
+    assert by_id["str_003"]["stem"] == "Đinh"
+    assert by_id["str_003"]["element"] == "Hỏa"
+    assert by_id["str_003"]["priority"] == 82
     assert by_id["str_004"]["rule_group"] == "strength"
+    assert by_id["str_004"]["layer"] == "overall"
     assert by_id["str_004"]["useful_god"] == "Thực Thần"
     assert by_id["str_004"]["stem"] == "Nhâm"
     assert by_id["str_004"]["element"] == "Thủy"
     assert by_id["str_004"]["priority"] == 76
     assert by_id["sea_001"]["rule_group"] == "season"
+    assert by_id["sea_001"]["layer"] == "climate"
     assert by_id["sea_001"]["useful_god"] == "Bính"
     assert by_id["sea_001"]["ten_god"] == "Thất Sát"
     assert by_id["sea_001"]["element"] == "Hỏa"
     assert by_id["tmp_001"]["useful_god"] == "Đinh"
-    assert result.winning_rule_id == "sea_001"
-    assert result.winning_rule_group == "season"
-    assert result.useful_god == "Bính"
-    assert result.useful_ten_god == "Thất Sát"
-    assert result.useful_stem == "Bính"
+    assert by_id["tmp_001"]["layer"] == "climate"
+    assert result.winning_rule_id == "str_003"
+    assert result.winning_rule_group == "strength"
+    assert result.useful_god == "Chính Quan"
+    assert result.useful_ten_god == "Chính Quan"
+    assert result.useful_stem == "Đinh"
     assert result.useful_element == "Hỏa"
-    assert result.useful_display == "Hỏa · Bính · Thất Sát"
-    assert result.favorable_gods == ["Bính", "Đinh", "Giáp"]
-    assert result.unfavorable_gods == ["Nhâm", "Quý"]
-    assert "Thực Thần" in result.unfavorable_display
-    assert result.useful_ten_god != "Thực Thần"
+    assert result.useful_display == "Hỏa · Đinh · Chính Quan"
+    assert result.favorable_gods == ["Chính Quan", "Thực Thần"]
+    assert result.unfavorable_gods == ["Tỷ Kiên", "Kiếp Tài"]
+    assert result.climate_rule_id == "sea_001"
+    assert result.climate_rule_group == "season"
+    assert result.climate_candidate == "Bính"
+    assert result.climate_display == "Hỏa · Bính · Thất Sát"
+    assert result.climate_preference_label == "Điều hậu ưu tiên Hỏa"
+    assert result.winning_rule_id != "sea_001"
+    assert "Chính Quan" in result.favorable_display
+    assert "Thất Sát" not in result.useful_display
 
 
 def test_flow_predicate_evaluates_values_not_key_presence() -> None:
@@ -189,10 +205,12 @@ def test_hot_climate_does_not_use_score_axis() -> None:
             element_distribution={"Mộc": 2, "Hỏa": 2, "Thổ": 2, "Kim": 2, "Thủy": 2},
         )
     )
-    assert result.winning_rule_id == "sea_002"
-    assert result.useful_stem == "Nhâm"
-    assert result.useful_element == "Thủy"
-    assert result.useful_ten_god == "Thực Thần"
+    assert result.winning_rule_id == "str_005"
+    assert result.useful_stem == "Ất"
+    assert result.useful_element == "Mộc"
+    assert result.useful_ten_god == "Chính Tài"
+    assert result.climate_rule_id == "sea_002"
+    assert result.climate_candidate == "Nhâm"
 
 
 def test_cold_climate_seasonal_beats_temperature() -> None:
@@ -209,7 +227,8 @@ def test_cold_climate_seasonal_beats_temperature() -> None:
     assert "sea_001" in ids
     assert "str_004" in ids
     assert "tmp_001" in ids
-    assert result.winning_rule_id == "sea_001"
+    assert result.winning_rule_id == "str_004"
+    assert result.climate_rule_id == "sea_001"
 
 
 def test_equal_priority_tie_is_deterministic() -> None:
@@ -260,14 +279,17 @@ def test_api_payload_publishes_rich_fields() -> None:
     temperature = payload["temperature"]
     assert abs(float(temperature["temperature_score"]) - 0.72) < 0.02
     assert temperature["climate_state"] == "cold"
-    assert useful["useful_god"] == "Bính"
-    assert useful["useful_display"] == "Hỏa · Bính · Thất Sát"
-    assert useful["useful_ten_god"] == "Thất Sát"
-    assert useful["useful_stem"] == "Bính"
+    assert useful["useful_god"] == "Chính Quan"
+    assert useful["useful_display"] == "Hỏa · Đinh · Chính Quan"
+    assert useful["useful_ten_god"] == "Chính Quan"
+    assert useful["useful_stem"] == "Đinh"
     assert useful["useful_element"] == "Hỏa"
-    assert useful["winning_rule_id"] == "sea_001"
-    assert useful["favorable_display"].startswith("Hỏa · Bính · Thất Sát")
-    assert useful["unfavorable_display"].startswith("Thủy · Nhâm · Thực Thần")
-    assert payload["useful_god_source"]["contract"] == "analysis_result.UsefulGodView@1.1"
+    assert useful["winning_rule_id"] == "str_003"
+    assert useful["winning_rule_group"] == "strength"
+    assert useful["climate_rule_id"] == "sea_001"
+    assert useful["climate_display"] == "Hỏa · Bính · Thất Sát"
+    assert useful["favorable_display"].startswith("Hỏa · Đinh · Chính Quan")
+    assert useful["unfavorable_display"].startswith("Kim · Canh · Tỷ Kiên")
+    assert payload["useful_god_source"]["contract"] == "analysis_result.UsefulGodView@1.2"
     assert payload["strength"]["strength_level"] == "strong"
     assert payload["pattern"]["cach_cuc"] == "Chính Ấn"

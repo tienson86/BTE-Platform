@@ -29,6 +29,7 @@ import {
   formatFiveElementsCompact,
   canonicalFiveElementCounts,
   fiveElementUnitTotal,
+  publishedFiveElementsDisclaimer,
   publishedFiveElementsMethodNote,
 } from "../../adapters/canonicalFiveElements";
 import { customerGenderDisplay } from "../../adapters/genderDisplay";
@@ -436,7 +437,10 @@ function buildTechnical(
   const unitTotal = fiveElementUnitTotal(fiveCounts);
   if (unitTotal > 0) metadata.five_elements_total = unitTotal;
   const methodNote = publishedFiveElementsMethodNote(data);
-  if (fiveCounts) metadata.five_elements_method = methodNote;
+  if (fiveCounts) {
+    metadata.five_elements_method = methodNote;
+    metadata.five_elements_disclaimer = publishedFiveElementsDisclaimer(data);
+  }
   const strength = pickStrengthLabel(data);
   if (strength) metadata.strength = strength;
   const strengthScore = pickStrengthScore(data);

@@ -10,6 +10,8 @@ export const FIVE_ELEMENTS_TITLE = "PHÂN BỐ NGŨ HÀNH";
 export const FIVE_ELEMENTS_SECTION_TITLE = "Phân bố Ngũ hành";
 export const FIVE_ELEMENTS_METHOD_NOTE =
   "Tính theo Thiên can · bản hành Địa chi · Tàng can";
+export const FIVE_ELEMENTS_DISCLAIMER =
+  "Phân bố Ngũ hành phản ánh số lần xuất hiện trong cấu trúc, không phải mức vượng suy và không trực tiếp quyết định Dụng thần.";
 export const FIVE_ELEMENTS_ABSENT_LABEL =
   "Không xuất hiện trong phân bố cấu trúc";
 
@@ -90,9 +92,17 @@ export function formatFiveElementsCompact(
 
 export function formatFiveElementsProvenance(total: number): string {
   if (total > 0) {
-    return `${FIVE_ELEMENTS_METHOD_NOTE}. Tổng đơn vị cấu trúc: ${total}`;
+    return `${FIVE_ELEMENTS_METHOD_NOTE}. Tổng đơn vị cấu trúc: ${total}. ${FIVE_ELEMENTS_DISCLAIMER}`;
   }
-  return FIVE_ELEMENTS_METHOD_NOTE;
+  return `${FIVE_ELEMENTS_METHOD_NOTE}. ${FIVE_ELEMENTS_DISCLAIMER}`;
+}
+
+export function publishedFiveElementsDisclaimer(
+  data: Pick<AnalysisDataDto, "five_elements"> | null | undefined,
+): string {
+  const facts = asRecord(data?.five_elements);
+  const note = String(facts.disclaimer || "").trim();
+  return note || FIVE_ELEMENTS_DISCLAIMER;
 }
 
 export function fiveElementAbsentLabel(count: number): string {

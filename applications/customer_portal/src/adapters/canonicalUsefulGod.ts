@@ -5,6 +5,8 @@
 
 export type CanonicalUsefulGodSource = {
   readonly useful_god?: unknown;
+  readonly overall_useful_god?: unknown;
+  readonly overall_incomplete?: unknown;
   readonly useful_display?: unknown;
   readonly useful_ten_god?: unknown;
   readonly useful_stem?: unknown;
@@ -15,7 +17,13 @@ export type CanonicalUsefulGodSource = {
   readonly unfavorable_display?: unknown;
   readonly winning_rule_id?: unknown;
   readonly winning_rule_group?: unknown;
+  readonly climate_candidate?: unknown;
+  readonly climate_display?: unknown;
+  readonly climate_preference_label?: unknown;
 };
+
+export const OVERALL_INCOMPLETE_MESSAGE =
+  "Chưa đủ căn cứ xác định Dụng thần tổng thể";
 
 function asRecord(value: unknown): Record<string, unknown> {
   if (!value || typeof value !== "object" || Array.isArray(value)) return {};
@@ -43,7 +51,16 @@ export function canonicalUsefulDisplay(
   useful: CanonicalUsefulGodSource | null | undefined,
   fallback = "",
 ): string {
+  if (useful?.overall_incomplete) {
+    return text(useful?.useful_display) || OVERALL_INCOMPLETE_MESSAGE;
+  }
   return text(useful?.useful_display) || text(useful?.useful_god) || fallback;
+}
+
+export function canonicalClimatePreferenceLabel(
+  useful: CanonicalUsefulGodSource | null | undefined,
+): string {
+  return text(useful?.climate_preference_label);
 }
 
 export function canonicalFavorableDisplay(
