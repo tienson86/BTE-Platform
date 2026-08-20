@@ -36,6 +36,7 @@ from .follow_tokens import (
     canonicalize_follow_token,
     follow_token_eligible,
 )
+from .override_eligibility import classify_pattern_override
 from .loader import PatternLoader
 from .matcher import PatternMatcher
 from .utils.context_builder import ensure_canonical_pattern_context
@@ -280,10 +281,15 @@ class PatternCalculator:
         if not self._is_follow_rule(winner) or canonicalize_follow_token(final) != published_follow:
             published_follow = None
 
+        override = classify_pattern_override(final, published_follow)
+
         result["success"] = True
         result["pattern"] = final
         result["final_pattern"] = final
         result["follow_type"] = published_follow
+        result["ug_override_eligible"] = override.ug_override_eligible
+        result["qualification_level"] = override.qualification_level
+        result["detected_special_pattern"] = override.detected_special_pattern
         result["secondary_patterns"] = self._pattern_codes(secondary)
         result["score"] = score
         result["priority"] = priority
@@ -314,6 +320,9 @@ class PatternCalculator:
             "description": None,
             "cach_cuc": None,
             "follow_type": None,
+            "ug_override_eligible": False,
+            "qualification_level": None,
+            "detected_special_pattern": None,
             "candidate_patterns": [],
             "validated_patterns": [],
             "secondary_patterns": [],

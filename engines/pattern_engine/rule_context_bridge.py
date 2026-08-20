@@ -14,6 +14,7 @@ from engines.bazi_engine.ten_god import day_master_element
 
 from .follow_tokens import canonicalize_follow_token, follow_display_label
 from .labels import STRENGTH_LEVEL_LABELS, pattern_display_label
+from .override_eligibility import classify_pattern_override
 
 # Relation slots — published only when an upstream combination producer fills them.
 _RELATION_KEYS: tuple[str, ...] = (
@@ -233,9 +234,16 @@ def enrich_rule_context_summaries(
     pattern_code = pattern_section.get("main_pattern") or getattr(
         pattern, "pattern", None
     )
+    follow_hint = (
+        getattr(pattern, "follow_type", None)
+        if pattern is not None
+        else None
+    ) or pattern_section.get("follow_type")
+    override = classify_pattern_override(pattern_code, follow_hint)
     cach_cuc = pattern_display_label(
         pattern_code,
         getattr(pattern, "description", None) if pattern is not None else None,
+        ug_override_eligible=override.ug_override_eligible,
     )
     follow = canonicalize_follow_token(pattern_section.get("follow_type"))
     # Tổng cách: follow display when present; otherwise standard cách cục label.
@@ -469,6 +477,7 @@ def enrich_result_from_rule_context(result: Any, rule_context: dict[str, Any]) -
         or pattern_display_label(
             getattr(result, "pattern", None),
             getattr(result, "description", None),
+            ug_override_eligible=getattr(result, "ug_override_eligible", None),
         )
     ).strip()
     result.tong_cach = str(rule_context.get("tong_cach") or "").strip()

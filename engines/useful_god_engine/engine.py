@@ -199,6 +199,7 @@ class UsefulGodEngine:
             "follow_pattern",
             "special_pattern",
             "main_pattern",
+            "ug_override_eligible",
             "officer_elements",
         ]
         snapshot = {key: getattr(context, key, None) for key in keys}
@@ -208,4 +209,9 @@ class UsefulGodEngine:
         metadata = getattr(context, "metadata", None)
         if isinstance(metadata, dict):
             snapshot["chinh_quan_visibility"] = metadata.get("chinh_quan_visibility")
+            snapshot["detected_special_pattern"] = metadata.get("detected_special_pattern")
+            snapshot["qualification_level"] = metadata.get("qualification_level")
+            snapshot["suppressed_special_ug_override"] = metadata.get(
+                "suppressed_special_ug_override"
+            )
         return snapshot

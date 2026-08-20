@@ -36,6 +36,7 @@ class UsefulGodContext:
     follow_pattern: str | None = None
     special_pattern: str | None = None
     main_pattern: str | None = None
+    ug_override_eligible: bool | None = None
 
     ten_gods_list: list[str] = field(default_factory=list)
     officer_provenance: list[dict[str, Any]] = field(default_factory=list)

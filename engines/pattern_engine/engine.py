@@ -13,6 +13,7 @@ from typing import Any, List, Optional
 
 from .context import PatternContext
 from .labels import pattern_display_label
+from .override_eligibility import classify_pattern_override
 from .rule_context_bridge import (
     build_rule_context,
     enrich_result_from_rule_context,
@@ -71,6 +72,9 @@ class PatternResult:
     penetration_exact: bool | None = None
     penetration_related: List[dict[str, Any]] = field(default_factory=list)
     fallback_used: bool = False
+    ug_override_eligible: bool = False
+    qualification_level: int | None = None
+    detected_special_pattern: str | None = None
     rule_context: dict[str, Any] = field(default_factory=dict)
 
     def to_portal_dict(self) -> dict[str, Any]:
@@ -118,6 +122,11 @@ class PatternResult:
         if self.candidate_patterns:
             payload["candidate_patterns"] = list(self.candidate_patterns)
         payload["fallback_used"] = bool(self.fallback_used)
+        payload["ug_override_eligible"] = bool(self.ug_override_eligible)
+        if self.qualification_level is not None:
+            payload["qualification_level"] = int(self.qualification_level)
+        if self.detected_special_pattern:
+            payload["detected_special_pattern"] = self.detected_special_pattern
         # Optional metadata — omit when unset (no fabricated defaults).
         if self.follow_type:
             payload["follow_type"] = self.follow_type
@@ -182,10 +191,6 @@ class PatternEngine:
                 "error"
             ),
             description=data.get("description"),
-            cach_cuc=pattern_display_label(
-                data.get("pattern"),
-                data.get("description"),
-            ),
             follow_type=data.get("follow_type") or None,
             candidate_patterns=list(data.get("candidate_patterns") or []),
             validated_patterns=list(data.get("validated_patterns") or []),
@@ -222,6 +227,22 @@ class PatternEngine:
             ),
             penetration_related=list(data.get("penetration_related") or []),
             fallback_used=bool(data.get("fallback_used")),
+            ug_override_eligible=bool(data.get("ug_override_eligible")),
+            qualification_level=(
+                int(data["qualification_level"])
+                if data.get("qualification_level") is not None
+                else None
+            ),
+            detected_special_pattern=data.get("detected_special_pattern") or None,
+        )
+        override = classify_pattern_override(result.pattern, result.follow_type)
+        result.ug_override_eligible = override.ug_override_eligible
+        result.qualification_level = override.qualification_level
+        result.detected_special_pattern = override.detected_special_pattern
+        result.cach_cuc = pattern_display_label(
+            result.pattern,
+            result.description,
+            ug_override_eligible=override.ug_override_eligible,
         )
 
         # Pattern Engine is the sole RuleContext producer.

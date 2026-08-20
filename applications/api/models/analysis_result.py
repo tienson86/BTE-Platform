@@ -297,6 +297,9 @@ class PatternView:
     penetration_related: list[dict[str, Any]] = field(default_factory=list)
     candidate_patterns: list[str] = field(default_factory=list)
     fallback_used: bool = False
+    ug_override_eligible: bool = False
+    qualification_level: int | None = None
+    detected_special_pattern: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         """Portal-compatible ``data.pattern`` JSON."""
@@ -314,7 +317,12 @@ class PatternView:
             "ky_than": self.ky_than or "",
             "dieu_hau": self.dieu_hau or "",
             "fallback_used": bool(self.fallback_used),
+            "ug_override_eligible": bool(self.ug_override_eligible),
         }
+        if self.qualification_level is not None:
+            payload["qualification_level"] = int(self.qualification_level)
+        if self.detected_special_pattern:
+            payload["detected_special_pattern"] = self.detected_special_pattern
         if self.success_reason:
             payload["success_reason"] = self.success_reason
         if self.winning_rule_id:

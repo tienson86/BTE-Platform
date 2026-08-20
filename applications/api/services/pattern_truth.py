@@ -59,6 +59,20 @@ def build_pattern_view(result: PatternResult) -> PatternView:
             )
         ],
         fallback_used=bool(portal.get("fallback_used", result.fallback_used)),
+        ug_override_eligible=bool(
+            portal.get("ug_override_eligible", result.ug_override_eligible)
+        ),
+        qualification_level=(
+            portal.get("qualification_level")
+            if portal.get("qualification_level") is not None
+            else result.qualification_level
+        ),
+        detected_special_pattern=str(
+            portal.get("detected_special_pattern")
+            or result.detected_special_pattern
+            or ""
+        )
+        or None,
     )
 
 

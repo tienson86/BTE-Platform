@@ -6,9 +6,12 @@ from typing import Any
 
 from engines.bazi_engine.ten_god import ten_god_name
 from engines.pattern_engine.follow_tokens import canonicalize_follow_token
+from engines.pattern_engine.override_eligibility import (
+    LEVEL_1_SPECIAL_TOKENS,
+    classify_pattern_override,
+)
 from engines.useful_god_engine.context import UsefulGodContext
 
-_SPECIAL_CODES = {"khuc_truc", "viem_thuong", "nhuan_ha", "gia_sac", "jia_wang"}
 _CHINH_QUAN = "Chính Quan"
 _PILLARS = ("year", "month", "day", "hour")
 
@@ -17,15 +20,15 @@ def build_useful_god_context(pattern_context: Any, pattern_result: Any = None) -
     """Convert PatternContext V2 into UsefulGodContext for rule matching."""
     main_pattern = None
     follow_pattern = None
-    special_pattern = None
+    detected_special = None
 
     if pattern_result is not None:
         main_pattern = str(getattr(pattern_result, "pattern", "") or "") or None
         follow_pattern = canonicalize_follow_token(
             getattr(pattern_result, "follow_type", None)
         )
-        if main_pattern in _SPECIAL_CODES:
-            special_pattern = main_pattern
+        if main_pattern in LEVEL_1_SPECIAL_TOKENS:
+            detected_special = main_pattern
 
     if main_pattern is None:
         main_pattern = str(getattr(pattern_context, "main_pattern", "") or "") or None
@@ -33,8 +36,17 @@ def build_useful_god_context(pattern_context: Any, pattern_result: Any = None) -
         follow_pattern = canonicalize_follow_token(
             getattr(pattern_context, "follow_pattern", None)
         )
-    if special_pattern is None:
-        special_pattern = str(getattr(pattern_context, "special_pattern", "") or "") or None
+    if detected_special is None:
+        context_special = str(getattr(pattern_context, "special_pattern", "") or "") or None
+        if context_special in LEVEL_1_SPECIAL_TOKENS:
+            detected_special = context_special
+        elif main_pattern in LEVEL_1_SPECIAL_TOKENS:
+            detected_special = main_pattern
+
+    override = classify_pattern_override(main_pattern, follow_pattern)
+    # LEVEL-1 chuyên stay detected; they do not feed spc_* matcher fields.
+    special_pattern = None
+    matcher_follow = override.follow_pattern if override.ug_override_eligible else None
 
     officer_elements, officer_provenance = _officer_elements_with_hidden_chinh_quan(
         pattern_context
@@ -43,6 +55,11 @@ def build_useful_god_context(pattern_context: Any, pattern_result: Any = None) -
         "builder": "useful_god_context_builder_v2",
         "officer_provenance": officer_provenance,
         "chinh_quan_visibility": _chinh_quan_visibility_class(officer_provenance),
+        "detected_special_pattern": detected_special,
+        "qualification_level": override.qualification_level,
+        "ug_override_eligible": override.ug_override_eligible,
+        "suppressed_special_ug_override": bool(detected_special)
+        and not override.ug_override_eligible,
     }
     return UsefulGodContext(
         day_master=getattr(pattern_context, "day_master", None),
@@ -63,9 +80,10 @@ def build_useful_god_context(pattern_context: Any, pattern_result: Any = None) -
         output_elements=list(getattr(pattern_context, "output_elements", []) or []),
         companion_elements=list(getattr(pattern_context, "companion_elements", []) or []),
         ten_gods_list=list(getattr(pattern_context, "ten_gods_list", []) or []),
-        follow_pattern=follow_pattern,
+        follow_pattern=matcher_follow,
         special_pattern=special_pattern,
         main_pattern=main_pattern,
+        ug_override_eligible=override.ug_override_eligible,
         officer_provenance=officer_provenance,
         metadata=metadata,
         source_pattern_context=pattern_context,
