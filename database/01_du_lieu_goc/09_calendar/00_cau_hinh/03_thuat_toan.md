@@ -3,12 +3,12 @@
 
 Version:
 
-1.0
+1.1
 
 
 Status:
 
-DESIGN_LOCKED
+DESIGN_LOCKED except §6 Month Pillar, superseded 2026-08-20 by BTE-MONTH-PILLAR-LUNAR-V1.0
 
 
 
@@ -39,7 +39,6 @@ Ví dụ:
 GMT+7
 
 
-
 # 2. CHUẨN HÓA THỜI GIAN
 
 
@@ -56,7 +55,6 @@ Chuẩn hóa múi giờ.
 Bước 3:
 
 Chuyển sang Julian Day Number.
-
 
 
 # 3. TÍNH LỊCH ÂM
@@ -125,18 +123,45 @@ TietKhi
 # 6. XÁC ĐỊNH THÁNG TỬ BÌNH
 
 
-Nguyên tắc:
+Standard:
+
+BTE-MONTH-PILLAR-LUNAR-V1.0
+
+Effective:
+
+2026-08-20
 
 
-Không dùng:
+SUPERSEDED (do not use for Four Pillars month):
 
-Tháng âm lịch
+Không dùng tháng âm lịch. Dùng tiết khí / 12 Tiết / SolarTermEngine.get_bazi_month.
 
 
-Dùng:
+CANONICAL V1.0:
 
-Tiết khí
+1. Đổi ngày dương sang ngày âm lịch canonical (CalendarEngine / solar_to_lunar).
 
+2. Lấy số tháng âm (1–12; tháng nhuận giữ cùng số tháng).
+
+3. Chi tháng:
+
+tháng 1 = Dần
+tháng 2 = Mão
+tháng 3 = Thìn
+tháng 4 = Tỵ
+tháng 5 = Ngọ
+tháng 6 = Mùi
+tháng 7 = Thân
+tháng 8 = Dậu
+tháng 9 = Tuất
+tháng 10 = Hợi
+tháng 11 = Tý
+tháng 12 = Sửu
+
+4. Can tháng = Ngũ Hổ Độn (Can năm Bát Tự + chỉ số tháng âm).
+
+5. Tiết khí vẫn tính riêng (mùa, khí hậu, Điều hậu, mốc Đại vận).
+   Không dùng tiết khí để lập trụ Tháng.
 
 
 Output:
@@ -144,8 +169,6 @@ Output:
 CanThang
 
 ChiThang
-
-NguyetLenh
 
 
 
@@ -187,7 +210,6 @@ Công thức:
 CanGio =
 (CanNgay × 2 + ChiGio)
 mod 10
-
 
 
 Output:

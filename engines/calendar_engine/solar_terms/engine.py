@@ -145,9 +145,12 @@ class SolarTermEngine:
 
     def get_bazi_month(self, year: int, month: int, day: int) -> SolarTermMonth:
         """
-        Nguyệt lệnh Bát Tự tại ngày dương lịch.
+        Solar-term nguyệt lệnh (12 Tiết) at a Gregorian date.
 
-        Tháng Dần bắt đầu từ Lập Xuân; tháng Sửu bắt đầu từ Tiểu Hàn.
+        Used for season / climate / Luck jie timing.
+
+        Not the Four Pillars month pillar. Four Pillars month uses
+        BTE-MONTH-PILLAR-LUNAR-V1.0 (canonical lunar month number).
         """
         target = (year, month, day)
         best: tuple[tuple[int, int, int], int] | None = None

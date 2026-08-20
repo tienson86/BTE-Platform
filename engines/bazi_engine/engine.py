@@ -1,8 +1,9 @@
 """Public facade for building a Bazi chart from civil datetime.
 
-Pillars follow classical rules:
+Pillars follow BTE V1.0 rules:
 - Year changes at Lập Xuân (not Tết, not Jan 1)
-- Month follows 12 Tiết (nguyệt lệnh)
+- Month follows canonical lunar month (BTE-MONTH-PILLAR-LUNAR-V1.0);
+  not 12 Tiết / SolarTermEngine.get_bazi_month
 - Day uses astronomical Julian Day Number + sexagenary cycle
 - Hour follows Ngũ Thử Độn from Day Stem
 """
@@ -15,6 +16,8 @@ from typing import Any
 
 from engines.calendar_engine.algorithms.ganzhi import GanzhiAlgorithm
 from engines.calendar_engine.julian.julian import JulianDay
+from engines.calendar_engine.lunar.converter import solar_to_lunar
+from engines.calendar_engine.month_pillar import lunar_month_to_branch
 from engines.calendar_engine.solar_terms.engine import SolarTermEngine
 
 from engines.bazi_engine.ten_god import ten_god_name
@@ -105,6 +108,7 @@ class BaziEngine:
         gender: str | None = None,
     ) -> BaziChart:
         """Lập Tứ Trụ từ năm/tháng/ngày/giờ dương lịch (giờ địa phương)."""
+        source = year if not isinstance(year, int) else None
         year, month, day, hour, minute = self._normalize_input(
             year, month, day, hour, minute
         )
@@ -114,9 +118,10 @@ class BaziEngine:
         year_gz = GanzhiAlgorithm.year(bazi_year)
         year_pillar = Pillar(stem=year_gz["can"], branch=year_gz["chi"])
 
-        month_info = self._solar_terms.get_bazi_month(year, month, day)
-        month_stem = self._month_stem(year_pillar.stem, month_info.month_index)
-        month_pillar = Pillar(stem=month_stem, branch=month_info.branch)
+        lunar_month = self._resolve_lunar_month(source, year, month, day)
+        month_branch = lunar_month_to_branch(lunar_month)
+        month_stem = self._month_stem(year_pillar.stem, lunar_month)
+        month_pillar = Pillar(stem=month_stem, branch=month_branch)
 
         jdn = JulianDay.day_number(year, month, day)
         day_gz = GanzhiAlgorithm.day(jdn)
@@ -182,6 +187,23 @@ class BaziEngine:
         if month is None or day is None or year is None:
             raise ValueError("year, month and day are required")
         return int(year), int(month), int(day), int(hour), int(minute)
+
+    def _resolve_lunar_month(
+        self,
+        source: Any,
+        year: int,
+        month: int,
+        day: int,
+    ) -> int:
+        """Lunar month number from CalendarResult when present, else solar_to_lunar."""
+        if source is not None:
+            lunar_month = getattr(source, "lunar_month", None)
+            if lunar_month is None:
+                lunar = getattr(source, "lunar", None)
+                lunar_month = getattr(lunar, "month", None)
+            if lunar_month is not None:
+                return int(lunar_month)
+        return int(solar_to_lunar(day, month, year).month)
 
     def _bazi_year(self, year: int, month: int, day: int) -> int:
         """Năm Bát Tự: đổi năm tại Lập Xuân."""

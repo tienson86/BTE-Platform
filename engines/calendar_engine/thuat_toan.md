@@ -108,13 +108,13 @@ Tính Tiết Khí.
 
 Bước 06
 
-Xác định Nguyệt Lệnh.
+Xác định Nguyệt Lệnh 12 Tiết (subsystem mùa / khí hậu / mốc vận — không lập trụ Tháng).
 
 ↓
 
 Bước 07
 
-Tính Can Chi tháng.
+Tính Can Chi tháng theo tháng âm (BTE-MONTH-PILLAR-LUNAR-V1.0).
 
 ↓
 

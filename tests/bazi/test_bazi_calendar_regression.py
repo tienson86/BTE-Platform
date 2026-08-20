@@ -96,7 +96,8 @@ class TestCriticalCase19870121(unittest.TestCase):
             ("Đinh", "Mão"),
         )
 
-    def test_month_uses_solar_term_not_gregorian_month(self) -> None:
+    def test_solar_term_month_subsystem_still_suu_in_january(self) -> None:
+        """12 Tiết subsystem (not Four Pillars) still maps 21/01/1987 to Sửu."""
         month = self.terms.get_bazi_month(1987, 1, 21)
         self.assertEqual(month.branch, "Sửu")
         self.assertEqual(month.month_index, 12)
@@ -145,7 +146,7 @@ class TestBaziRegressionCases(unittest.TestCase):
         (
             (2000, 2, 4, 12, 0),
             ("Canh", "Thìn"),
-            ("Mậu", "Dần"),
+            ("Kỷ", "Sửu"),
             ("Nhâm", "Thìn"),
             ("Bính", "Ngọ"),
             (1999, 12, 29),
