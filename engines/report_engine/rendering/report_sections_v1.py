@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-from engines.bazi_engine.ten_god import stem_element
+from engines.bazi_engine.ten_god import branch_element, stem_element
 from engines.report_engine.contracts.report_input_v1 import (
     ReportInputV1,
     ReportInterpretationSectionV1,
@@ -441,9 +441,10 @@ def _section_luck(report_input: ReportInputV1) -> PresentedSection:
             id="luck-cycles",
             title="09. Đại vận",
             fallback=RUNTIME_GAP_MESSAGE,
+            notes=[FULL_LUCK_CYCLES_GAP_NOTE],
         )
     table = PresentedTable(
-        headers=["#", "Can Chi", "Từ năm", "Đến năm", "Tuổi", "Tóm tắt"],
+        headers=["#", "Can Chi", "Từ năm", "Đến năm", "Tuổi", "Ngũ hành"],
         rows=[
             [
                 display_text(cycle.index),
@@ -451,24 +452,46 @@ def _section_luck(report_input: ReportInputV1) -> PresentedSection:
                 display_text(cycle.start_year) or "—",
                 display_text(cycle.end_year) or "—",
                 f"{display_text(cycle.age_start) or '—'} – {display_text(cycle.age_end) or '—'}",
-                display_text(cycle.summary),
+                _luck_element_line(cycle.stem, cycle.branch),
             ]
             for cycle in luck.cycles
         ],
+    )
+    current_years = ""
+    if luck.current_year_start is not None and luck.current_year_end is not None:
+        current_years = f"{luck.current_year_start}–{luck.current_year_end}"
+    current_ages = ""
+    if luck.current_age_start is not None and luck.current_age_end is not None:
+        current_ages = f"{luck.current_age_start}–{luck.current_age_end}"
+    current_display = " · ".join(
+        part for part in (luck.current_gan_zhi, current_years, current_ages) if part
     )
     return PresentedSection(
         id="luck-cycles",
         title="09. Đại vận",
         meta_rows=_filled_rows(
             [
-                ("Hướng", display_text(luck.direction, "luck_direction")),
-                ("Tuổi khởi", display_text(luck.start_age)),
-                ("Ngày bắt đầu", display_text(luck.start_date)),
+                ("Đại vận hiện tại", current_display),
+                ("Chiều vận", display_text(luck.direction, "luck_direction")),
+                ("Tuổi khởi vận", display_text(luck.start_age)),
+                ("Căn cứ", display_text(luck.evidence)),
+                ("Phương pháp V1.0", display_text(luck.method_note)),
             ]
         ),
         table=table,
-        notes=[FULL_LUCK_CYCLES_GAP_NOTE],
     )
+
+
+def _luck_element_line(stem: str, branch: str) -> str:
+    """Stem/branch elements from canonical metadata, not a renderer table."""
+    stem_el = stem_element(stem)
+    branch_el = branch_element(branch)
+    parts: list[str] = []
+    if stem and stem_el:
+        parts.append(f"{stem} · {stem_el}")
+    if branch and branch_el:
+        parts.append(f"{branch} · {branch_el}")
+    return " / ".join(parts)
 
 
 def _section_executive_summary(report_input: ReportInputV1) -> PresentedSection:

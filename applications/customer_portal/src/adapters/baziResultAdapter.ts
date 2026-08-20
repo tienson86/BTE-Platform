@@ -3,6 +3,7 @@
  * Components consume ViewModels only — never raw JSON.
  */
 
+import { customerGenderDisplay, genderDisplayLabel } from "./genderDisplay";
 import type { AnalysisDataDto, AnalyzeChartRequest, PillarDto, SeriesItemDto } from "../models";
 import {
   BAZI_MOCK_ACTIONS,
@@ -98,17 +99,6 @@ function formatSolarDate(year: number, month: number, day: number): string {
 
 function formatBirthTime(hour: number, minute: number): string {
   return `${pad2(hour)}:${pad2(minute)}`;
-}
-
-function genderLabel(raw: string | null | undefined): string {
-  const value = (raw ?? "").toLowerCase();
-  if (value === "male" || value === "nam" || value === "m") {
-    return "Nam";
-  }
-  if (value === "female" || value === "nu" || value === "nữ" || value === "f") {
-    return "Nữ";
-  }
-  return raw ? String(raw) : "—";
 }
 
 function normalizeElementName(label: string): string {
@@ -482,7 +472,7 @@ function mapProfile(data: AnalysisDataDto, request?: AnalyzeChartRequest): BaZiP
 
   return {
     fullName: asString(customer?.full_name ?? request?.full_name, "—"),
-    gender: genderLabel(customer?.gender ?? request?.gender),
+    gender: customerGenderDisplay(customer, request?.gender),
     solarBirthDate:
       year && month && day ? formatSolarDate(year, month, day) : "—",
     lunarBirthDate: lunar,
@@ -556,7 +546,7 @@ export function adaptAnalysisToBaZiResult(
       pillars,
       fiveElements,
       tenGods,
-      gender: options.request?.gender ?? data.customer?.gender ?? undefined,
+      gender: genderDisplayLabel(options.request?.gender ?? data.customer?.gender),
       yinYang: asString(data.bazi?.day_master_yin_yang) || undefined,
       dungThan: canonicalUsefulDisplay(useful, asString(pattern?.dung_than)) || undefined,
       hyThan: canonicalFavorableDisplay(useful, asString(pattern?.hy_than)) || undefined,

@@ -133,12 +133,18 @@ class LuckEngine:
         if rule_context is not None and not isinstance(rule_context, dict):
             raise LuckContextError("rule_context must be a dict when provided.")
 
-        current_dayun = self._safe_provide(
-            self.dayun_provider,
-            calendar=calendar,
-            bazi=bazi,
-            rule_context=rule_context,
-        )
+        dayun_unavailable_reason: str | None = None
+        try:
+            current_dayun = self._safe_provide(
+                self.dayun_provider,
+                calendar=calendar,
+                bazi=bazi,
+                rule_context=rule_context,
+            )
+        except LuckContextError as exc:
+            logger.warning("Dayun provider rejected input: %s", exc)
+            current_dayun = None
+            dayun_unavailable_reason = str(exc)
         current_liunian = self._safe_provide(
             self.liunian_provider,
             calendar=calendar,
@@ -175,6 +181,13 @@ class LuckEngine:
             )
         )
 
+        if dayun_unavailable_reason and current_dayun is None:
+            luck_reason = dayun_unavailable_reason
+        elif not has_any:
+            luck_reason = "luck_providers_unavailable"
+        else:
+            luck_reason = None
+
         luck = LuckContext(
             current_dayun=current_dayun,
             current_liunian=current_liunian,
@@ -182,10 +195,11 @@ class LuckEngine:
             current_liuri=current_liuri,
             current_liushi=current_liushi,
             available=bool(has_any),
-            reason=None if has_any else "luck_providers_unavailable",
+            reason=luck_reason,
             metadata={
                 "engine": "engines.luck_engine.engine.LuckEngine",
                 "sprint": "4.7_liushi_rule_evaluation",
+                "dayun_unavailable_reason": dayun_unavailable_reason,
                 "providers_injected": {
                     "dayun": self.dayun_provider is not None,
                     "liunian": self.liunian_provider is not None,
@@ -367,6 +381,8 @@ class LuckEngine:
             return None
         try:
             return provider.provide(**kwargs)
+        except LuckContextError:
+            raise
         except Exception as exc:
             logger.warning(
                 "Luck provider %s failed: %s",

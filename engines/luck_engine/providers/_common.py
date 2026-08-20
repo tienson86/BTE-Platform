@@ -9,10 +9,11 @@ from __future__ import annotations
 from datetime import date, datetime
 from typing import Any
 
-from engines.bazi_engine.ten_god import STEM_META, ten_god_name
+from engines.bazi_engine.ten_god import STEM_META, branch_element, ten_god_name
 from engines.calendar_engine.algorithms.ganzhi import GanzhiAlgorithm
 from engines.calendar_engine.julian.julian import JulianDay
 from engines.calendar_engine.solar_terms.engine import SolarTermEngine
+from engines.luck_engine.exceptions import LuckContextError
 from engines.rule_contract.signal_maps import BRANCH_HIDDEN
 
 STEMS: tuple[str, ...] = tuple(GanzhiAlgorithm.STEM)
@@ -34,6 +35,15 @@ MONTH_YIN_START_STEM: dict[str, int] = {
 
 DAYUN_COUNT = 10
 DAYS_PER_START_AGE_YEAR = 3.0
+# V1.0 lock (G1-08 Option A): integer start age, calendar-day 12-Jie, year-level current.
+PRECISION_LEVEL = "year_level"
+START_AGE_METHOD = "major_jie_days_div_3"
+CURRENT_AGE_BASIS = "current_year - birth_year"
+METHOD_NOTE_VI = "Khởi vận theo ngày lịch và Tiết khí, độ chính xác theo năm"
+DIRECTION_LABELS: dict[str, str] = {"forward": "Thuận", "reverse": "Nghịch"}
+GENDER_LABELS: dict[str, str] = {"male": "Nam", "female": "Nữ"}
+_MALE_GENDER_ALIASES = frozenset({"male", "nam", "m", "1", "man", "boy"})
+_FEMALE_GENDER_ALIASES = frozenset({"female", "nu", "nữ", "f", "woman", "girl"})
 
 
 def extract_birth_parts(
@@ -47,6 +57,8 @@ def extract_birth_parts(
     ------
     ValueError
         When required birth fields are missing.
+    LuckContextError
+        When gender is missing or unsupported.
     """
     year = getattr(calendar, "solar_year", None)
     month = getattr(calendar, "solar_month", None)
@@ -58,10 +70,10 @@ def extract_birth_parts(
         year = getattr(solar, "year", year)
         month = getattr(solar, "month", month)
         day = getattr(solar, "day", day)
-    gender = getattr(bazi, "gender", None) or "male"
     if year is None or month is None or day is None:
         raise ValueError("calendar must expose solar year/month/day")
-    return int(year), int(month), int(day), hour, minute, str(gender)
+    gender = normalize_luck_gender(getattr(bazi, "gender", None))
+    return int(year), int(month), int(day), hour, minute, gender
 
 
 def day_master_of(bazi: Any) -> str:
@@ -86,6 +98,34 @@ def stem_yin_yang(stem: str) -> str:
     """Âm/Dương of a heavenly stem."""
     meta = STEM_META.get(stem)
     return meta[1] if meta else ""
+
+
+def normalize_luck_gender(gender: Any) -> str:
+    """
+    Return canonical ``male`` / ``female``.
+
+    Raises LuckContextError when gender is missing or unsupported.
+    Does not default missing gender to male.
+    """
+    if gender is None:
+        raise LuckContextError("gender_required")
+    value = str(gender).strip()
+    if not value:
+        raise LuckContextError("gender_required")
+    key = value.lower()
+    if key in _MALE_GENDER_ALIASES:
+        return "male"
+    if key in _FEMALE_GENDER_ALIASES:
+        return "female"
+    raise LuckContextError(f"unsupported_gender:{value}")
+
+
+def gender_display_label(gender: Any) -> str:
+    """Customer-facing Nam/Nữ. Empty when gender is missing or invalid."""
+    try:
+        return GENDER_LABELS[normalize_luck_gender(gender)]
+    except LuckContextError:
+        return ""
 
 
 def hidden_stems_of(branch: str) -> tuple[str, ...]:
@@ -113,16 +153,16 @@ def is_yang_stem(stem: str) -> bool:
 
 
 def is_male_gender(gender: str) -> bool:
-    """Normalize gender labels to male/female."""
-    value = gender.strip().lower()
-    return value in {"male", "nam", "m", "1"}
+    """True when gender normalizes to male. Invalid gender raises."""
+    return normalize_luck_gender(gender) == "male"
 
 
 def dayun_forward(gender: str, year_stem: str) -> bool:
     """
-    Classical DaYun direction.
+    V1.0 DaYun direction (G1-08).
 
-    Male + yang year stem / female + yin year stem → forward.
+    ``is_male(gender) == is_yang(year_stem)`` → thuận / forward.
+    Polarity is Niên can via STEM_META, never Nhật can.
     """
     return is_male_gender(gender) == is_yang_stem(year_stem)
 
@@ -174,6 +214,7 @@ def enrich_stem(
         "earthly_branch": branch,
         "ganzhi": f"{stem} {branch}",
         "element": stem_element(stem),
+        "branch_element": branch_element(branch),
         "yin_yang": stem_yin_yang(stem),
         "ten_god": ten_god_name(day_master, stem),
         "hidden_stems": hidden_stems_of(branch),
@@ -189,42 +230,58 @@ def compute_dayun_start_age(
     terms: SolarTermEngine | None = None,
 ) -> tuple[int, dict[str, Any]]:
     """
-    Start age from days to adjacent major Tiết (3 days ≈ 1 year).
+    V1.0 start age from calendar days to the adjacent 12-Jie (Tiết).
 
-    Returns
-    -------
-    tuple[int, dict]
-        (start_age, calculation metadata)
+    Formula (locked): ``start_age = max(1, round(days / 3))``.
+    Birth hour/minute is not used. Same civil day as a Jie is neither
+    before nor after that Jie (V1.0 has no Jie timestamp).
     """
     engine = terms or SolarTermEngine()
     birth = date(birth_year, birth_month, birth_day)
-    before: list[date] = []
-    after: list[date] = []
+    before: list[tuple[date, int]] = []
+    after: list[tuple[date, int]] = []
+    same_day: list[str] = []
+    names = getattr(engine, "_names", ())
     for year in (birth_year - 1, birth_year, birth_year + 1):
         for term_index in engine._MONTH_START_TERM_INDEX:
             yy, mm, dd = engine.get_term_datetime_parts(year, term_index)
             term_date = date(yy, mm, dd)
+            jie_name = names[term_index] if term_index < len(names) else str(term_index)
             if term_date < birth:
-                before.append(term_date)
+                before.append((term_date, term_index))
             elif term_date > birth:
-                after.append(term_date)
+                after.append((term_date, term_index))
+            else:
+                same_day.append(f"{jie_name} {term_date.isoformat()}")
     if forward:
         if not after:
             raise ValueError("no forward Tiết found for Dayun start age")
-        anchor = min(after)
+        anchor, anchor_index = min(after, key=lambda item: item[0])
         days = (anchor - birth).days
     else:
         if not before:
             raise ValueError("no reverse Tiết found for Dayun start age")
-        anchor = max(before)
+        anchor, anchor_index = max(before, key=lambda item: item[0])
         days = (birth - anchor).days
     start_age = max(1, int(round(days / DAYS_PER_START_AGE_YEAR)))
+    anchor_name = names[anchor_index] if anchor_index < len(names) else ""
     return start_age, {
-        "method": "major_jie_days_div_3",
+        "method": START_AGE_METHOD,
         "direction": "forward" if forward else "reverse",
         "days_to_jie": days,
         "anchor_jie_date": anchor.isoformat(),
+        "anchor_jie_name": anchor_name,
         "days_per_year": DAYS_PER_START_AGE_YEAR,
+        "precision": PRECISION_LEVEL,
+        "jie_set": "month_start_12_jie",
+        "hour_used": False,
+        "same_day_jie_skipped": same_day,
+        "same_day_jie_limitation": (
+            "V1.0 date-level Jie cannot order birth on the same civil day; "
+            "that Jie is skipped."
+            if same_day
+            else ""
+        ),
     }
 
 

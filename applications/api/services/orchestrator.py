@@ -43,7 +43,11 @@ from engines.report_engine.engine import ReportEngine
 from engines.score_engine.engine import ScoreEngine
 from engines.ten_gods_engine.engine import TenGodsEngine
 
-from applications.api.exceptions import PipelineAPIError
+from applications.api.exceptions import PipelineAPIError, ValidationAPIError
+from applications.api.services.gender_truth import (
+    gender_display_label,
+    require_canonical_gender,
+)
 from applications.api.models.analysis_result import AnalysisMeta, AnalysisResult
 from applications.api.services.bazi_truth import (
     bazi_source_fingerprint,
@@ -255,6 +259,8 @@ class OrchestratorService:
             )
         except PipelineAPIError:
             raise
+        except ValidationAPIError:
+            raise
         except Exception as exc:
             raise PipelineAPIError(
                 f"Pipeline failed at stage '{stage}': {exc}",
@@ -464,6 +470,8 @@ class OrchestratorService:
                 f"Invalid birth datetime: {exc}",
                 details={"stage": "input"},
             ) from exc
+        if stop_index >= PIPELINE_ORDER.index("luck"):
+            gender = require_canonical_gender(gender)
         completed.append("input")
         payload["input"] = {
             "year": year,
@@ -472,6 +480,7 @@ class OrchestratorService:
             "hour": hour,
             "minute": minute,
             "gender": gender,
+            "gender_label": gender_display_label(gender) if gender else "",
             "validated": True,
         }
         if stop_index == 0:

@@ -15,6 +15,8 @@ from __future__ import annotations
 
 from datetime import datetime
 
+from engines.report_engine.localization.display import display_text
+
 
 
 class MarkdownRenderer:
@@ -148,7 +150,7 @@ class MarkdownRenderer:
   {person.get('name','')}
 
 - Giới tính:
-  {person.get('gender','')}
+{display_text(person.get('gender',''), "gender")}
 
 - Ngày sinh:
   {person.get('birth_date','')}

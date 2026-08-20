@@ -3,6 +3,7 @@
  * Calendar / BaZi / Pattern / Score / Strength / Interpretation / Report / Feng Shui.
  */
 
+import { canonicalGender } from "./genderDisplay";
 import type { AnalysisDataDto, AnalyzeChartRequest, PillarDto } from "../models";
 import {
   CANONICAL_DESKTOP_MOCK,
@@ -204,6 +205,24 @@ function formatLuckCurrent(luck: AnalysisDataDto["luck"]): string {
   return text || UNAVAILABLE_CONCLUSION;
 }
 
+function formatLuckAgeBand(luck: AnalysisDataDto["luck"]): string {
+  const current = luck?.current_cycle;
+  if (current?.age_start == null || current?.age_end == null) return "";
+  return `${current.age_start}–${current.age_end}`;
+}
+
+function formatLuckElements(cycle: NonNullable<AnalysisDataDto["luck"]>["current_cycle"]): string {
+  if (!cycle) return "";
+  const stem = asString(cycle.stem);
+  const branch = asString(cycle.branch);
+  const stemEl = asString(cycle.stem_element);
+  const branchEl = asString(cycle.branch_element);
+  const parts: string[] = [];
+  if (stem && stemEl) parts.push(`${stem} · ${stemEl}`);
+  if (branch && branchEl) parts.push(`${branch} · ${branchEl}`);
+  return parts.join(" / ");
+}
+
 function formatLuckSequence(luck: AnalysisDataDto["luck"]): string {
   const cycles = luck?.cycles ?? [];
   if (!cycles.length) return UNAVAILABLE_CONCLUSION;
@@ -214,10 +233,11 @@ function formatLuckSequence(luck: AnalysisDataDto["luck"]): string {
         cycle.year_start != null && cycle.year_end != null
           ? `${cycle.year_start}–${cycle.year_end}`
           : "";
-      return [gan, years].filter(Boolean).join(" ");
+      const elements = formatLuckElements(cycle);
+      return [gan, years, elements].filter(Boolean).join(" ");
     })
     .filter(Boolean)
-    .join(" · ");
+    .join(" | ");
 }
 
 
@@ -234,14 +254,14 @@ function normKey(raw: string): string {
 }
 
 function genderMeta(raw: string | null | undefined): { symbol: string; label: string } {
-  const v = (raw ?? "").toLowerCase();
-  if (v === "male" || v === "nam" || v === "m") {
+  const canonical = canonicalGender(raw);
+  if (canonical === "male") {
     return { symbol: "♂", label: "Nam" };
   }
-  if (v === "female" || v === "nu" || v === "nữ" || v === "f") {
+  if (canonical === "female") {
     return { symbol: "♀", label: "Nữ" };
   }
-  return { symbol: "•", label: raw ? String(raw) : "—" };
+  return { symbol: "•", label: "—" };
 }
 
 function matchGlyph(
@@ -348,7 +368,9 @@ function mapS00(
   requestId: string | null | undefined,
 ): CanonicalDesktopViewModel["s00"] {
   const base = cloneFixture().s00;
-  const gender = genderMeta(data.customer?.gender ?? request?.gender);
+  const gender = genderMeta(
+    data.customer?.gender_label ?? data.customer?.gender ?? request?.gender,
+  );
   const year = request?.year;
   const month = request?.month;
   const day = request?.day;
@@ -530,7 +552,31 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
         {
           label: "Đại vận",
           value: formatLuckCurrent(data.luck),
-          tag: data.luck?.start_age != null ? `Tuổi ${data.luck.start_age}` : "—",
+          tag: formatLuckAgeBand(data.luck) || "—",
+          tone: "neutral" as const,
+        },
+        {
+          label: "Chiều vận",
+          value: asString(data.luck?.direction_label) || UNAVAILABLE_CONCLUSION,
+          tag: "Đại vận",
+          tone: "neutral" as const,
+        },
+        {
+          label: "Tuổi khởi vận",
+          value: data.luck?.start_age != null ? String(data.luck.start_age) : UNAVAILABLE_CONCLUSION,
+          tag: "Đại vận",
+          tone: "neutral" as const,
+        },
+        {
+          label: "Căn cứ Đại vận",
+          value: asString(data.luck?.evidence) || UNAVAILABLE_CONCLUSION,
+          tag: "Đại vận",
+          tone: "neutral" as const,
+        },
+        {
+          label: "Phương pháp V1.0",
+          value: asString(data.luck?.method_note) || UNAVAILABLE_CONCLUSION,
+          tag: "Đại vận",
           tone: "neutral" as const,
         },
         {

@@ -135,14 +135,22 @@ export type LuckCycleDto = {
   readonly gan_zhi?: string;
   readonly stem?: string;
   readonly branch?: string;
+  readonly stem_element?: string;
+  readonly branch_element?: string;
 };
 
 export type LuckDto = {
   readonly available?: boolean;
   readonly direction?: string;
+  readonly direction_label?: string;
   readonly start_age?: number;
   readonly current_cycle?: LuckCycleDto | null;
   readonly cycles?: readonly LuckCycleDto[];
+  readonly evidence?: string;
+  readonly method_note?: string;
+  readonly precision?: string;
+  readonly current_age_for_luck?: number;
+  readonly gender_label?: string;
 };
 
 export type SeriesItemDto = {
@@ -184,6 +192,7 @@ export type CustomerEchoDto = {
   readonly full_name?: string | null;
   readonly birth_place?: string | null;
   readonly gender?: string | null;
+  readonly gender_label?: string | null;
   readonly timezone?: string | null;
   readonly customer_id?: string | null;
 };

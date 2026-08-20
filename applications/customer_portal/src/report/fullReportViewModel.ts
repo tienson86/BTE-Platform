@@ -33,6 +33,7 @@ import {
   hiddenLinesForPillar,
   stemDisplay,
 } from "../adapters/tenGodsDisplay";
+import { customerGenderDisplay } from "../adapters/genderDisplay";
 import {
   asNarrativeResult,
   careerFieldText,
@@ -108,10 +109,14 @@ export type FullReportViewModel = {
   readonly shenSha: readonly ShenShaEntryView[];
   readonly luckStartAge: string;
   readonly luckCurrent: string;
+  readonly luckDirection: string;
+  readonly luckEvidence: string;
+  readonly luckMethod: string;
   readonly luckCycles: ReadonlyArray<{
     readonly label: string;
     readonly years: string;
     readonly current: boolean;
+    readonly elements: string;
   }>;
   readonly cungPhi: string;
   readonly menhQuai: string;
@@ -174,17 +179,26 @@ export function buildFullReportViewModel(
       cycle.year_start != null && cycle.year_end != null
         ? `${cycle.year_start}–${cycle.year_end}`
         : "";
+    const stemEl = text(cycle.stem_element);
+    const branchEl = text(cycle.branch_element);
+    const elements = [
+      cycle.stem && stemEl ? `${text(cycle.stem)} · ${stemEl}` : "",
+      cycle.branch && branchEl ? `${text(cycle.branch)} · ${branchEl}` : "",
+    ]
+      .filter(Boolean)
+      .join(" / ");
     return {
       label,
       years,
       current: Boolean(currentGan) && label === currentGan,
+      elements,
     };
   });
 
   return {
     analysisId: sanitizeAnalysisId(options.analysisId, data, input),
     customerName: text(data.customer?.full_name || input.full_name),
-    gender: text(data.customer?.gender || input.gender),
+    gender: customerGenderDisplay(data.customer, input.gender),
     birthPlace: text(data.customer?.birth_place || input.birth_place),
     timezone: text(data.customer?.timezone || input.timezone, "Asia/Ho_Chi_Minh"),
     solarDate: solarFromInput(calendar.solar_date, input),
@@ -226,6 +240,9 @@ export function buildFullReportViewModel(
           .filter(Boolean)
           .join(" ")
       : "",
+    luckDirection: text(luck?.direction_label),
+    luckEvidence: text(luck?.evidence),
+    luckMethod: text(luck?.method_note),
     luckCycles: cycles,
     cungPhi: text(feng.cung_phi || calendar.cung_phi),
     menhQuai: text(feng.menh_quai || calendar.menh_quai),
@@ -495,13 +512,14 @@ function shenShaBlock(items: readonly ShenShaEntryView[]): string {
 }
 
 function luckBlock(model: FullReportViewModel): string {
-  const head = `<p>Tuổi khởi Đại vận: <strong>${esc(model.luckStartAge || "—")}</strong>. Hiện tại: <strong>${esc(model.luckCurrent || "—")}</strong>.</p>`;
+  const head = `<p>Đại vận hiện tại: <strong>${esc(model.luckCurrent || "—")}</strong>. Chiều vận: <strong>${esc(model.luckDirection || "—")}</strong>. Tuổi khởi vận: <strong>${esc(model.luckStartAge || "—")}</strong>.</p>
+<p>Căn cứ: ${esc(model.luckEvidence || "—")}. ${esc(model.luckMethod || "")}</p>`;
   if (!model.luckCycles.length) return head;
   return `${head}<ol class="bte-full-luck">${model.luckCycles
-    .map(
-      (cycle) =>
-        `<li${cycle.current ? ' data-current="true"' : ""}>${esc(cycle.label)} ${esc(cycle.years)}${cycle.current ? " (hiện tại)" : ""}</li>`,
-    )
+    .map((cycle) => {
+      const elements = cycle.elements ? ` (${esc(cycle.elements)})` : "";
+      return `<li${cycle.current ? ' data-current="true"' : ""}>${esc(cycle.label)} ${esc(cycle.years)}${elements}${cycle.current ? " (hiện tại)" : ""}</li>`;
+    })
     .join("")}</ol>`;
 }
 

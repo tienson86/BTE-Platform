@@ -42,6 +42,7 @@ class DayunPeriod:
     yin_yang: str
     ten_god: str
     hidden_stems: tuple[str, ...] = ()
+    branch_element: str = ""
     metadata: Mapping[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
@@ -66,6 +67,7 @@ class DayunPeriod:
             "earthly_branch": self.earthly_branch,
             "ganzhi": self.ganzhi,
             "element": self.element,
+            "branch_element": self.branch_element,
             "yin_yang": self.yin_yang,
             "ten_god": self.ten_god,
             "hidden_stems": list(self.hidden_stems),

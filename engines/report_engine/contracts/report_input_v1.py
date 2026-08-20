@@ -301,14 +301,36 @@ class ReportLuckCyclesV1:
     start_age: int | None = None
     start_date: str = ""
     cycles: list[ReportLuckCycleV1] = field(default_factory=list)
+    evidence: str = ""
+    method_note: str = ""
+    precision: str = ""
+    current_gan_zhi: str = ""
+    current_year_start: int | None = None
+    current_year_end: int | None = None
+    current_age_start: int | None = None
+    current_age_end: int | None = None
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        payload = {
             "direction": self.direction,
             "start_age": self.start_age,
             "start_date": self.start_date,
             "cycles": [item.to_dict() for item in self.cycles],
+            "evidence": self.evidence,
+            "method_note": self.method_note,
+            "precision": self.precision,
         }
+        if self.current_gan_zhi:
+            payload["current_gan_zhi"] = self.current_gan_zhi
+        if self.current_year_start is not None:
+            payload["current_year_start"] = self.current_year_start
+        if self.current_year_end is not None:
+            payload["current_year_end"] = self.current_year_end
+        if self.current_age_start is not None:
+            payload["current_age_start"] = self.current_age_start
+        if self.current_age_end is not None:
+            payload["current_age_end"] = self.current_age_end
+        return payload
 
 
 @dataclass(slots=True)

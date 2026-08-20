@@ -7,15 +7,23 @@ from typing import Any
 from fastapi import Request
 
 from applications.api.schemas.common import APIResponse, BirthRequest
+from applications.api.services.gender_truth import gender_display_label, normalize_luck_gender
 from applications.api.services.orchestrator import OrchestratorService, Stage
+from engines.luck_engine.exceptions import LuckContextError
 
 
 def customer_metadata_from_request(body: BirthRequest) -> dict[str, Any]:
     """Build presentation-only customer/chart metadata (not used by engines)."""
+    canonical: str | None
+    try:
+        canonical = normalize_luck_gender(body.gender)
+    except LuckContextError:
+        canonical = None
     return {
         "full_name": body.full_name,
         "birth_place": body.birth_place,
-        "gender": body.gender,
+        "gender": canonical,
+        "gender_label": gender_display_label(canonical) if canonical else "",
         "timezone": body.timezone,
         "customer_id": body.customer_id,
     }

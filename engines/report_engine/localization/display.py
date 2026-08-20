@@ -55,6 +55,8 @@ def localize(value: Any, domain: str = "generic") -> str:
     key = text.strip().lower()
     if key in table:
         return table[key]
+    if domain == "gender":
+        return ""
     if key in GENERIC_LABELS:
         return GENERIC_LABELS[key]
     return localize_tokens(text)

@@ -15,6 +15,21 @@ STEM_META: dict[str, tuple[str, str]] = {
     "Quý": ("Thủy", "Âm"),
 }
 
+BRANCH_META: dict[str, str] = {
+    "Tý": "Thủy",
+    "Sửu": "Thổ",
+    "Dần": "Mộc",
+    "Mão": "Mộc",
+    "Thìn": "Thổ",
+    "Tỵ": "Hỏa",
+    "Ngọ": "Hỏa",
+    "Mùi": "Thổ",
+    "Thân": "Kim",
+    "Dậu": "Kim",
+    "Tuất": "Thổ",
+    "Hợi": "Thủy",
+}
+
 GENERATES: dict[str, str] = {
     "Mộc": "Hỏa",
     "Hỏa": "Thổ",
@@ -51,6 +66,11 @@ def stem_yin_yang(stem: str) -> str:
     """Âm Dương of a heavenly stem."""
     meta = STEM_META.get(stem)
     return meta[1] if meta else ""
+
+
+def branch_element(branch: str) -> str:
+    """Ngũ hành of an earthly branch (canonical BRANCH_META)."""
+    return BRANCH_META.get(branch, "")
 
 
 def element_relation(day_master: str, other_stem: str) -> str:

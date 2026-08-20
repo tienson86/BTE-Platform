@@ -53,6 +53,16 @@ def _normalize_snapshot(payload: dict) -> dict:
         key=lambda item: str(item.get("id") or ""),
     )
     normalized["interpretation"] = interpretation
+    luck = normalized.get("luck_cycles") or {}
+    for key in (
+        "current_gan_zhi",
+        "current_year_start",
+        "current_year_end",
+        "current_age_start",
+        "current_age_end",
+    ):
+        luck.pop(key, None)
+    normalized["luck_cycles"] = luck
     return normalized
 
 

@@ -524,11 +524,22 @@ class ReportInputV1Adapter:
                 )
         if not cycles:
             diagnostics.missing_fields.append("luck_cycles.cycles")
+        current = shaped.get("current_cycle") or {}
+        if not isinstance(current, Mapping):
+            current = {}
         return ReportLuckCyclesV1(
             direction=str(shaped.get("direction") or ""),
             start_age=_as_int(shaped.get("start_age")),
             start_date=str(shaped.get("start_date") or ""),
             cycles=cycles,
+            evidence=str(shaped.get("evidence") or ""),
+            method_note=str(shaped.get("method_note") or ""),
+            precision=str(shaped.get("precision") or ""),
+            current_gan_zhi=str(current.get("gan_zhi") or ""),
+            current_year_start=_as_int(current.get("year_start")),
+            current_year_end=_as_int(current.get("year_end")),
+            current_age_start=_as_int(current.get("age_start")),
+            current_age_end=_as_int(current.get("age_end")),
         )
 
     def _build_interpretation(

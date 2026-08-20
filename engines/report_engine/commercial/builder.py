@@ -41,6 +41,8 @@ _GENDER_LABEL = {
     "nam": "Nam",
     "nữ": "Nữ",
     "nu": "Nữ",
+    "m": "Nam",
+    "f": "Nữ",
 }
 
 

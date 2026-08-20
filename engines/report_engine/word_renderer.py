@@ -19,6 +19,8 @@ from docx import Document
 
 from docx.shared import Pt
 
+from engines.report_engine.localization.display import display_text
+
 
 
 
@@ -162,7 +164,7 @@ Giờ sinh:
 {person.get('birth_time','')}
 
 Giới tính:
-{person.get('gender','')}
+{display_text(person.get('gender',''), "gender")}
 """
 
         )

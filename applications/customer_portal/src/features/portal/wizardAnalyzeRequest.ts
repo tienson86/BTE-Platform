@@ -3,6 +3,7 @@
  * No new domain model; reuses AnalyzeChartRequest from models/dto.
  */
 
+import { canonicalGender } from "../../adapters/genderDisplay";
 import type { AnalyzeChartRequest } from "../../models";
 import type { WizardDraft } from "./pages/AnalysisWizard";
 
@@ -29,14 +30,16 @@ export function draftToAnalyzeRequest(draft: WizardDraft): AnalyzeChartRequest |
   if (!Number.isInteger(hourRaw) || hourRaw < 0 || hourRaw > 23) return null;
   if (!Number.isInteger(minuteRaw) || minuteRaw < 0 || minuteRaw > 59) return null;
 
-  const gender = draft.gender.trim();
+  const gender = canonicalGender(draft.gender);
+  if (!gender) return null;
+
   return {
     year,
     month,
     day,
     hour: hourRaw,
     minute: minuteRaw,
-    gender: gender ? gender : null,
+    gender,
     timezone: DEFAULT_TIMEZONE,
     full_name: draft.name.trim(),
     birth_place: draft.place.trim(),

@@ -31,6 +31,7 @@ import {
   fiveElementUnitTotal,
   publishedFiveElementsMethodNote,
 } from "../../adapters/canonicalFiveElements";
+import { customerGenderDisplay } from "../../adapters/genderDisplay";
 import type { AnalysisDataDto, BaziDto, CustomerEchoDto, PillarDto } from "../../models";
 import type {
   CanonicalReportInput,
@@ -448,7 +449,8 @@ function buildTechnical(
   }
 
   if (asText(customer?.birth_place)) metadata.birth_place = customer?.birth_place;
-  if (asText(customer?.gender)) metadata.gender = customer?.gender;
+  const genderLabel = customerGenderDisplay(customer);
+  if (genderLabel !== "—") metadata.gender = genderLabel;
   if (asText(data.stage)) metadata.stage = data.stage;
   if (asText(narrative.status)) metadata.narrative_status = narrative.status;
   if (asText(narrative.contract)) metadata.narrative_contract = narrative.contract;

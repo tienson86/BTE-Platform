@@ -614,19 +614,26 @@ export function adaptResultPageViewModel(
   );
 
   const luckCurrent = source.s01.conditions.rows.find((row) => row.label === "Đại vận");
+  const luckStart = source.s01.conditions.rows.find((row) => row.label === "Tuổi khởi vận");
   const luckSequence = source.s01.conditions.rows.find((row) => row.label === "Lộ trình Đại vận");
   const luckParts = (luckSequence?.value ?? "")
-    .split(" · ")
+    .split(/\s\|\s| · /)
     .map((part) => part.trim())
     .filter((part) => part && part !== UNAVAILABLE_CONCLUSION);
-  const currentGan = (luckCurrent?.value ?? "").split(" ")[0] ?? "";
+  const currentTokens = (luckCurrent?.value ?? "").trim().split(/\s+/);
+  const currentGan =
+    currentTokens.length >= 2 && !/^\d/.test(currentTokens[1] ?? "")
+      ? `${currentTokens[0]} ${currentTokens[1]}`
+      : (currentTokens[0] ?? "");
+  const startAgeText =
+    luckStart && isUsablePreviewText(luckStart.value) ? luckStart.value : "";
   const timelineSource = luckParts.map((part, index) => {
     const isCurrent = Boolean(currentGan) && part.startsWith(currentGan);
     return {
       label: isCurrent ? `Hiện tại · ${part}` : part,
       detail: adaptPreviewText(
-        index === 0 && luckCurrent?.tag
-          ? `Tuổi khởi Đại vận: ${luckCurrent.tag.replace(/^Tuổi\s+/i, "")}`
+        index === 0 && startAgeText
+          ? `Tuổi khởi Đại vận: ${startAgeText}`
           : part,
         "summary",
       ),
@@ -636,7 +643,7 @@ export function adaptResultPageViewModel(
   const timelineSummaryText =
     luckParts.length > 0
       ? [
-          luckCurrent?.tag ? `Tuổi khởi Đại vận: ${luckCurrent.tag.replace(/^Tuổi\s+/i, "")}` : "",
+          startAgeText ? `Tuổi khởi Đại vận: ${startAgeText}` : "",
           luckCurrent && isUsablePreviewText(luckCurrent.value)
             ? `Hiện tại: ${luckCurrent.value}`
             : "",

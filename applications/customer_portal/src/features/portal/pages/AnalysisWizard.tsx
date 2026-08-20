@@ -72,7 +72,10 @@ export function BirthInformationPage({
   onChange: (patch: Partial<WizardDraft>) => void;
   onNavigate: (route: PortalRoute) => void;
 }) {
-  const valid = draft.name.trim().length > 1 && draft.place.trim().length > 1;
+  const valid =
+    draft.name.trim().length > 1 &&
+    draft.place.trim().length > 1 &&
+    (draft.gender === "male" || draft.gender === "female");
   return (
     <section className="pv-page">
       <Stepper current="analyze-birth" />
@@ -91,7 +94,6 @@ export function BirthInformationPage({
           <legend>Giới tính</legend>
           <PvRadio name="gender" label="Nam" value="male" checked={draft.gender === "male"} onChange={() => onChange({ gender: "male" })} />
           <PvRadio name="gender" label="Nữ" value="female" checked={draft.gender === "female"} onChange={() => onChange({ gender: "female" })} />
-          <PvRadio name="gender" label="Không nêu" value="" checked={draft.gender === ""} onChange={() => onChange({ gender: "" })} />
         </fieldset>
         <div className="pv-cta-row">
           <PvButton disabled={!valid} onClick={() => onNavigate("analyze-chart")}>
