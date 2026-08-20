@@ -228,10 +228,10 @@ export function buildFullReportViewModel(
     strengthEvidence: strengthCustomerSummary(data) || stripInternalRuleIds(canonicalStrengthEvidence(data)),
     pattern: text(pattern.cach_cuc || pattern.pattern),
     patternEvidence: patternCustomerEvidence(data),
-    usefulGod: canonicalUsefulDisplay(useful, text(pattern.dung_than)),
+    usefulGod: canonicalUsefulDisplay(useful),
     usefulGodReason: canonicalUsefulShortReason(useful),
-    hyThan: canonicalFavorableDisplay(useful, text(pattern.hy_than)),
-    kyThan: canonicalUnfavorableDisplay(useful, text(pattern.ky_than)),
+    hyThan: canonicalFavorableDisplay(useful),
+    kyThan: canonicalUnfavorableDisplay(useful),
     fiveElements: [
       { name: "Mộc", count: counts.Mộc },
       { name: "Hỏa", count: counts.Hỏa },

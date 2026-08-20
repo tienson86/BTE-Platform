@@ -124,10 +124,19 @@
         if (!data || typeof data !== "object") {
           throw new Error(t("analyze.missing_payload"));
         }
+        const analysisId =
+          (data.analysis_id || data.request_id || (res && res.request_id) || "").toString().trim();
+        if (analysisId && !data.analysis_id) {
+          data.analysis_id = analysisId;
+        }
         clearInterval(loadingTimer);
         btn.textContent = t("analyze.loading_done");
         BtePortal.showFlash(flash, t("analyze.loading_done"), "success");
-        var saved = BtePortal.saveLastResult({ input: input, data: data });
+        var saved = BtePortal.saveLastResult({
+          input: input,
+          data: data,
+          analysis_id: analysisId || undefined,
+        });
         if (!saved) {
           throw new Error(t("analyze.failed"));
         }

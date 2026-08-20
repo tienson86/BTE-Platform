@@ -4,12 +4,17 @@
 
 import {
   adaptAnalysisToCanonicalDesktop,
+  createCanonicalDesktopGateViewModel,
   type CanonicalDesktopViewModel,
 } from "../adapters";
-import type { AnalysisDataDto, AnalyzeChartRequest } from "../models";
+import type { AnalyzeChartRequest } from "../models";
 import { buildFullReportViewModel, type FullReportViewModel } from "../report/fullReportViewModel";
 import {
-  isHistoryViewSearch,
+  customerContractMessage,
+  customerContractStatus,
+} from "../resultState/customerContract";
+import {
+  historyIdFromSearch,
   resolveCurrentStoredResult,
   type StoredResultRecord,
 } from "../resultState/currentResult";
@@ -21,7 +26,7 @@ export type ResultBootProps = {
   readonly initialData?: CanonicalDesktopViewModel;
   readonly previewFallback: boolean;
   readonly analysisId?: string;
-  readonly resultSource?: "current" | "history" | "legacy" | "preview";
+  readonly resultSource?: "current" | "history" | "empty" | "preview" | "contract";
   readonly fullReport?: FullReportViewModel;
 };
 
@@ -54,8 +59,8 @@ export function toAnalyzeRequest(
 
 /**
  * Resolve PortalPage props from ResultStore payload + URL.
- * Production: request/data present → engine ViewModel.
- * Preview: no request → fixture.
+ * Production empty store → empty gate (never mock fixture).
+ * `?preview=1` remains an explicit development preview only.
  */
 export function resolveResultBoot(
   stored: StoredResult | null,
@@ -68,16 +73,31 @@ export function resolveResultBoot(
     return { request: null, previewFallback: true, resultSource: "preview" };
   }
 
+  const historyId = historyIdFromSearch(search);
   const resolved = resolveCurrentStoredResult({
     current: stored,
     historyView,
-    fromHistory: isHistoryViewSearch(search),
+    fromHistory: Boolean(historyId),
+    historyId,
   });
-  const payload = resolved ?? stored;
+  const payload = resolved;
   const request = toAnalyzeRequest(payload?.input ?? null);
 
   if (payload?.data && request) {
-    const analysisId = resolved?.analysisId;
+    const status = customerContractStatus(payload.data);
+    if (status !== "ok") {
+      return {
+        request: null,
+        initialData: createCanonicalDesktopGateViewModel(
+          "error",
+          customerContractMessage(status),
+        ),
+        previewFallback: false,
+        analysisId: payload.analysisId,
+        resultSource: "contract",
+      };
+    }
+    const analysisId = payload.analysisId;
     const fullReport = buildFullReportViewModel(payload.data, {
       input: payload.input,
       analysisId,
@@ -92,14 +112,10 @@ export function resolveResultBoot(
       }),
       previewFallback: false,
       analysisId: fullReport.analysisId,
-      resultSource: resolved?.source ?? "current",
+      resultSource: payload.source,
       fullReport,
     };
   }
 
-  if (request) {
-    return { request, previewFallback: false, resultSource: "current" };
-  }
-
-  return { request: null, previewFallback: true, resultSource: "preview" };
+  return { request: null, previewFallback: false, resultSource: "empty" };
 }

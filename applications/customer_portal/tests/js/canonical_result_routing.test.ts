@@ -39,8 +39,11 @@ const HUYNH: AnalysisDataDto = {
   },
   useful_god: {
     useful_god: "Đinh",
+    useful_display: "Đinh",
     favorable_gods: ["Đinh", "Bính", "Ất"],
+    favorable_display: "Chưa đủ căn cứ xác định Hỷ thần bổ trợ riêng",
     unfavorable_gods: ["Canh", "Tân"],
+    unfavorable_display: "Canh, Tân",
   },
   five_elements: {
     wood: { count: 2 },
@@ -101,6 +104,7 @@ const HUYNH: AnalysisDataDto = {
     ],
   },
   customer: { full_name: "Lương Ngọc Huỳnh", gender: "male" },
+  useful_god_source: { contract: "analysis_result.UsefulGodView@1.5" },
 };
 
 const FRESH: StoredResultRecord = {
@@ -260,11 +264,19 @@ describe("canonical current-result routing", () => {
       current: FRESH,
       historyView: STALE,
       fromHistory: true,
+      historyId: "bte-stale-old",
+    });
+    const implicitHistory = resolveCurrentStoredResult({
+      current: FRESH,
+      historyView: STALE,
+      fromHistory: true,
     });
     expect(isHistoryViewSearch("?from=history")).toBe(true);
     expect(current?.analysisId).toBe("bte-huynh-1966-fresh");
     expect(history?.analysisId).toBe("bte-stale-old");
     expect(history?.source).toBe("history");
+    expect(implicitHistory?.analysisId).toBe("bte-huynh-1966-fresh");
+    expect(implicitHistory?.source).toBe("current");
     const currentAfterHistoryFlag = resolveCurrentStoredResult({
       current: FRESH,
       historyView: STALE,

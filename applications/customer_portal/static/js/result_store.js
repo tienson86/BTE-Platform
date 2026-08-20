@@ -5,9 +5,10 @@
  * sessionStorage / localStorage for results directly.
  *
  * Keys are separated so that browsing never corrupts the analyze result:
- *   bte_last_result  — the result produced by the last Analyze run.
+ *   bte_last_result  — the result produced by the last Analyze run (current).
  *   bte_history      — append-only list of past runs.
- *   bte_view_result  — transient pointer used when opening an older entry.
+ *   bte_view_result  — transient History pointer. Normal /result never reads it.
+ *   loadForView()    — EXPLICIT LEGACY ONLY (`/result?legacy=1`).
  */
 (function (global) {
   const LAST_KEY = "bte_last_result";
@@ -112,7 +113,16 @@
   function normalizeResult(result) {
     if (!result || typeof result !== "object") return null;
     if (!result.data || typeof result.data !== "object") return null;
-    return { input: result.input || {}, data: result.data };
+    const data = Object.assign({}, result.data);
+    const analysisId =
+      result.analysis_id ||
+      result.id ||
+      data.analysis_id ||
+      data.request_id;
+    if (analysisId && !data.analysis_id) {
+      data.analysis_id = String(analysisId);
+    }
+    return { input: result.input || {}, data: data };
   }
 
   function makeAnalysisId(entry) {
@@ -166,31 +176,26 @@
    * Customer display payload.
    *
    * Default: fresh current analysis.
-   * fromHistory: explicit History / older report selection only.
+   * History: only when fromHistory is true AND expectedId matches the view.
    */
-  function resolveForDisplay(fromHistory) {
-    if (fromHistory) {
+  function resolveForDisplay(fromHistory, expectedId) {
+    const wanted = expectedId != null && String(expectedId).trim() ? String(expectedId).trim() : "";
+    if (fromHistory && wanted) {
       const view = peekView();
       if (view && view.data) {
-        return {
-          input: view.input || {},
-          data: view.data,
-          analysis_id: readValue([VIEW_ID_KEY]) || view.analysis_id || view.id || displayAnalysisId(view),
-          source: "history",
-        };
+        const viewId = readValue([VIEW_ID_KEY]) || view.analysis_id || view.id || displayAnalysisId(view);
+        if (String(viewId) === wanted) {
+          return {
+            input: view.input || {},
+            data: view.data,
+            analysis_id: viewId,
+            source: "history",
+          };
+        }
       }
     }
     const current = loadCurrent();
     if (current) return current;
-    const legacy = load();
-    if (legacy && legacy.data) {
-      return {
-        input: legacy.input || {},
-        data: legacy.data,
-        analysis_id: readCurrentAnalysisId() || displayAnalysisId(legacy),
-        source: "legacy",
-      };
-    }
     return null;
   }
 
@@ -203,10 +208,17 @@
 
   function historyRow(entry) {
     const analysisId = readCurrentAnalysisId() || makeAnalysisId(entry);
+    const meta = (entry.data && entry.data.result_meta) || {};
+    const source = (entry.data && entry.data.useful_god_source) || {};
     return {
       id: analysisId,
       analysis_id: analysisId,
       saved_at: new Date().toISOString(),
+      created_at: meta.created_at || new Date().toISOString(),
+      customer_contract: source.contract || meta.customer_contract || null,
+      gate_core_freeze: meta.gate_core_freeze || null,
+      month_pillar_standard: meta.month_pillar_standard || null,
+      release_label: meta.release_label || null,
       input: entry.input || {},
       summary: defaultSummary(entry),
       data: entry.data,
@@ -319,8 +331,8 @@
   }
 
   /**
-   * Read what the Result page should render: the selected entry when the user
-   * opened an older one, otherwise the last Analyze result.
+   * EXPLICIT LEGACY ONLY (`/result?legacy=1` + result.js).
+   * Normal customer /result must use resolveForDisplay, never this path.
    *
    * @returns {{input: object, data: object}|null}
    */

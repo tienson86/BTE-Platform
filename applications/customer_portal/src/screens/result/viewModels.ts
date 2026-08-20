@@ -44,7 +44,19 @@ export type CoreIndicatorsViewModel = {
   readonly reasonLabel: string;
   readonly reason: string;
   readonly hasMore: boolean;
-  /** Priority 3 — omit from hero when false. */
+  /** Dụng / Hỷ / Kỵ + reasoning — primary customer card. */
+  readonly visible: boolean;
+};
+
+export type PatternSnapshotViewModel = {
+  readonly title: string;
+  readonly value: string;
+  readonly visible: boolean;
+};
+
+export type ClimateSnapshotViewModel = {
+  readonly title: string;
+  readonly value: string;
   readonly visible: boolean;
 };
 
@@ -194,9 +206,12 @@ export type KnowledgeZoneViewModel = {
 export type ChartPillarViewModel = {
   readonly label: string;
   readonly stem: string;
+  readonly stemElement: string;
   readonly branch: string;
+  readonly branchElement: string;
   readonly napAm: string;
   readonly hiddenStems: string;
+  readonly hiddenGods: string;
   readonly tenGod: string;
   readonly growthStage: string;
 };
@@ -226,6 +241,8 @@ export type ResultPageViewModel = {
   readonly context: ContextZoneViewModel;
   readonly executive: ExecutiveSummaryViewModel;
   readonly indicators: CoreIndicatorsViewModel;
+  readonly pattern: PatternSnapshotViewModel;
+  readonly climate: ClimateSnapshotViewModel;
   readonly destiny: DestinyDirectionViewModel;
   readonly fiveElements: FiveElementsViewModel;
   readonly strength: StrengthAnalysisViewModel;

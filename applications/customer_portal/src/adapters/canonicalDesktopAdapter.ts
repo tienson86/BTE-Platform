@@ -404,7 +404,7 @@ function mapS00(
     },
     chartId: {
       ...base.chartId,
-      value: asString(requestId ?? data.customer?.customer_id, base.chartId.value),
+      value: asString(requestId || data.analysis_id, ""),
     },
     analyzedAt: {
       ...base.analyzedAt,
@@ -604,14 +604,13 @@ function mapS01(data: AnalysisDataDto): CanonicalDesktopViewModel["s01"] {
 
 function mapS02(data: AnalysisDataDto): CanonicalDesktopViewModel["s02"] {
   const base = cloneFixture().s02;
-  const pattern = data.pattern as Record<string, unknown> | undefined;
   const useful = canonicalUsefulGodPayload(data);
   const distribution = formatFiveElementsCompact(canonicalFiveElementCounts(data));
   const yy = asString(data.bazi?.day_master_yin_yang, "—");
   const than = canonicalStrengthLabel(data) || "—";
-  const dung = canonicalUsefulDisplay(useful, pickStr(pattern, ["dung_than"]) || "—");
-  const hy = canonicalFavorableDisplay(useful, pickStr(pattern, ["hy_than"]) || "—");
-  const ky = canonicalUnfavorableDisplay(useful, pickStr(pattern, ["ky_than"]) || "—");
+  const dung = canonicalUsefulDisplay(useful, "—");
+  const hy = canonicalFavorableDisplay(useful, "—");
+  const ky = canonicalUnfavorableDisplay(useful, "—");
 
   return {
     ...base,
@@ -756,6 +755,7 @@ function mapS05(data: AnalysisDataDto): CanonicalDesktopViewModel["s05"] {
 
   return {
     ...base,
+    title: "Điểm thân",
     level: level || "—",
     score: scoreLabel,
     percent: Math.min(100, Math.max(0, percent)),
@@ -775,7 +775,7 @@ function toGodRows(names: readonly string[]): CanonicalDesktopViewModel["s06"]["
     return {
       name,
       short: name.length > 8 ? `${name.slice(0, 6)}.` : name,
-      score: "1",
+      score: "",
       color,
     };
   });
@@ -823,7 +823,7 @@ function mapS06(data: AnalysisDataDto): CanonicalDesktopViewModel["s06"] {
         {
           name: UNAVAILABLE_CONCLUSION,
           short: "—",
-          score: "0.0",
+          score: "",
           color: "#5c6570",
         },
       ],
@@ -970,10 +970,7 @@ function mapS08(data: AnalysisDataDto): CanonicalDesktopViewModel["s08"] {
   const overviewBody =
     findSectionBody(sections, [/^tính cách$/i, /^kết luận$/i, /tổng quan/i]) ||
     asString(data.score?.recommendation);
-  const dung = canonicalUsefulDisplay(
-    canonicalUsefulGodPayload(data),
-    pickStr(data.pattern as Record<string, unknown> | undefined, ["dung_than"]),
-  );
+  const dung = canonicalUsefulDisplay(canonicalUsefulGodPayload(data), "");
   if (actions.length === 0 && dung) {
     actions.push(`Ưu tiên phát huy Dụng thần: ${dung}`);
   }
@@ -1179,12 +1176,24 @@ export function createCanonicalDesktopGateViewModel(
   status: CanonicalDesktopStatus,
   message?: string,
 ): CanonicalDesktopViewModel {
+  const base = cloneFixture();
   return {
-    ...cloneFixture(),
+    ...base,
     status,
     statusMessage: message,
     source: "mock",
     narrativeResult: null,
+    header: {
+      ...base.header,
+      user: { initials: "", name: "", role: "" },
+      notifications: 0,
+    },
+    s00: {
+      ...base.s00,
+      profile: { ...base.s00.profile, name: "", meta: "" },
+      birth: { ...base.s00.birth, date: "", lunar: "", time: "" },
+      chartId: { ...base.s00.chartId, value: "" },
+    },
   };
 }
 

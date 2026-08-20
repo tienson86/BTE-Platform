@@ -118,6 +118,7 @@ const HUYNH: AnalysisDataDto = {
     ],
   },
   customer: { full_name: "Lương Ngọc Huỳnh", gender: "male", birth_place: "Hà Nội" },
+  useful_god_source: { contract: "analysis_result.UsefulGodView@1.5" },
 };
 
 const FRESH: StoredResultRecord = {

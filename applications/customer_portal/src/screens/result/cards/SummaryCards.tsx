@@ -9,6 +9,8 @@ import type {
   CoreIndicatorsViewModel,
   DestinyDirectionViewModel,
   ExecutiveSummaryViewModel,
+  PatternSnapshotViewModel,
+  ClimateSnapshotViewModel,
 } from "../viewModels";
 import { ResultCardShell } from "./ResultCardShell";
 
@@ -27,7 +29,7 @@ export function ExecutiveSummaryCard({
       data-card="executive-summary"
       data-question="what-is-my-situation"
       data-priority="1"
-      className="rp-card--hero-exec"
+      className="rp-card--hero-exec rp-card--auto"
       footer={
         <div className="rp-cta-row">
           <button
@@ -88,12 +90,26 @@ export function CoreIndicatorsCard({
       title={model.title}
       titleId="rp-indicators-title"
       hasMore={model.hasMore}
-      data-card="core-indicators"
-      data-priority="3"
+      data-card="useful-gods"
+      data-priority="1"
+      className="rp-card--auto rp-card--useful-gods"
     >
       <ul className="rp-indicators">
         {model.items.items.map((item) => (
-          <li key={item.label} className="rp-indicators__row" data-tone={item.color}>
+          <li
+            key={item.label}
+            className="rp-indicators__row"
+            data-tone={item.color}
+            data-field={
+              item.label === "Dụng thần"
+                ? "dung"
+                : item.label === "Hỷ thần"
+                  ? "hy"
+                  : item.label === "Kỵ thần"
+                    ? "ky"
+                    : undefined
+            }
+          >
             <PresentationText typeRole="caption" clamp="subtitle" as="span">
               {item.label}
             </PresentationText>
@@ -104,7 +120,7 @@ export function CoreIndicatorsCard({
         ))}
       </ul>
       {model.reason ? (
-        <p className="rp-indicators__reason">
+        <p className="rp-indicators__reason" data-field="dung-reason">
           <span className="rp-indicators__reason-label">{model.reasonLabel}</span>
           {model.reason}
         </p>
@@ -128,6 +144,7 @@ export function DestinyDirectionCard({
       data-card="destiny-direction"
       data-question="career-direction"
       data-priority="1"
+      className="rp-card--auto"
       footer={
         <button
           type="button"
@@ -151,6 +168,48 @@ export function DestinyDirectionCard({
           </li>
         ))}
       </ul>
+    </ResultCardShell>
+  );
+}
+
+export function PatternSnapshotCard({
+  model,
+}: {
+  model: PatternSnapshotViewModel;
+}): ReactNode {
+  if (!model.visible || !model.value) return null;
+  return (
+    <ResultCardShell
+      title={model.title}
+      titleId="rp-pattern-title"
+      data-card="pattern"
+      data-priority="1"
+      className="rp-card--auto"
+    >
+      <p className="rp-pattern__value" data-field="pattern">
+        {model.value}
+      </p>
+    </ResultCardShell>
+  );
+}
+
+export function ClimateSnapshotCard({
+  model,
+}: {
+  model: ClimateSnapshotViewModel;
+}): ReactNode {
+  if (!model.visible || !model.value) return null;
+  return (
+    <ResultCardShell
+      title={model.title}
+      titleId="rp-climate-title"
+      data-card="climate"
+      data-priority="1"
+      className="rp-card--auto"
+    >
+      <p className="rp-climate__value" data-field="dieu-hau">
+        {model.value}
+      </p>
     </ResultCardShell>
   );
 }

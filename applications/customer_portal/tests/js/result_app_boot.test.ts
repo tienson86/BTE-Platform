@@ -38,11 +38,16 @@ describe("resultBoot helpers", () => {
     expect(toAnalyzeRequest(null)).toBeNull();
   });
 
-  it("uses fixture preview when no stored result", () => {
-    const boot = resolveResultBoot(null);
-    expect(boot.request).toBeNull();
-    expect(boot.previewFallback).toBe(true);
-    expect(boot.initialData).toBeUndefined();
+  it("uses fixture preview only when ?preview=1", () => {
+    const empty = resolveResultBoot(null);
+    expect(empty.request).toBeNull();
+    expect(empty.previewFallback).toBe(false);
+    expect(empty.resultSource).toBe("empty");
+    expect(empty.initialData).toBeUndefined();
+
+    const preview = resolveResultBoot(null, "?preview=1");
+    expect(preview.previewFallback).toBe(true);
+    expect(preview.resultSource).toBe("preview");
   });
 
   it("adapts stored engine payload for production mode", () => {
@@ -57,6 +62,12 @@ describe("resultBoot helpers", () => {
         full_name: "Nguyễn Văn A",
       },
       data: {
+        analysis_id: "req-boot-1",
+        useful_god_source: { contract: "analysis_result.UsefulGodView@1.5" },
+        useful_god: {
+          useful_display: "Hỏa · Đinh · Chính Quan",
+          favorable_display: "Chưa đủ căn cứ xác định Hỷ thần bổ trợ riêng",
+        },
         bazi: {
           day_master: "Bính",
           day_master_element: "Hỏa",

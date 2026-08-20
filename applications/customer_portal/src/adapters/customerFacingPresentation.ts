@@ -31,7 +31,7 @@ const HIDDEN_REPEAT_COUNT = 2;
 
 const RULE_PHRASE_RE = /(?:^|\s|[·|,;])rule\s+[a-z][a-z0-9_]{1,40}/gi;
 const INTERNAL_ID_RE =
-  /\b(?:cli|com_san|pat|str|sea|tmp|flo|flw|ctl|sup|spc|cmb|root)_[a-z0-9_]+\b/gi;
+  /\b(?:cli|com_san|pat|str|sea|tmp|flo|flw|ctl|sup|spc|spe|cmb|root)_[a-z0-9_]+\b/gi;
 const SCORE_SUFFIX_RE = /\s+[+\-]?\d+(?:\.\d+)?\s*$/;
 const SEPARATOR_RE = /\s*[·|,;]\s*/;
 

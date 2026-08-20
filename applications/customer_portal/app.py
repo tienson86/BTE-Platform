@@ -74,7 +74,9 @@ def create_app() -> FastAPI:
 
     @app.get("/result", response_class=HTMLResponse)
     def result_page(request: Request) -> HTMLResponse:
-        """Result page — Canonical Desktop V2 (production). Legacy via ?legacy=1."""
+        """Result page — Canonical Desktop V2 (production).
+        `?legacy=1` is EXPLICIT LEGACY ONLY and never shares Desktop precedence.
+        """
         if request.query_params.get("legacy") == "1":
             return page("result", "result_legacy.html")
         return HTMLResponse(render_desktop_page("result_desktop.html"))

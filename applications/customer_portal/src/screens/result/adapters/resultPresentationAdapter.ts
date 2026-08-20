@@ -14,6 +14,10 @@ import {
   commercialOrUnavailable,
 } from "../../../adapters/contentGuards";
 import {
+  FIVE_ELEMENTS_DISCLAIMER,
+  FIVE_ELEMENTS_TITLE,
+} from "../../../adapters/canonicalFiveElements";
+import {
   executiveFromNarrative,
   hasUsableNarrativeResult,
   paragraphByRole,
@@ -48,6 +52,42 @@ const CANONICAL_NARRATIVE_TITLES: ReadonlyArray<{ match: RegExp; title: string }
   { match: /warning|caution|cảnh báo|lưu ý/i, title: "Lưu ý" },
   { match: /conclusion|kết luận/i, title: "Kết luận" },
 ];
+
+function chartPillarLabel(title: string): string {
+  if (/năm/i.test(title)) return "Năm";
+  if (/tháng/i.test(title)) return "Tháng";
+  if (/ngày|nhật/i.test(title)) return "Ngày";
+  if (/giờ/i.test(title)) return "Giờ";
+  return title.replace(/\s*\(.*\)\s*$/, "").trim() || title;
+}
+
+function mapResultChartPillars(
+  source: CanonicalDesktopViewModel,
+  fullReport?: FullReportViewModel | null,
+): ResultPageViewModel["chart"]["pillars"] {
+  const reportByLabel = new Map(
+    (fullReport?.pillars ?? []).map((pillar) => [pillar.label, pillar]),
+  );
+  return source.s03.pillars.map((pillar) => {
+    const label = chartPillarLabel(pillar.title);
+    const report = reportByLabel.get(label);
+    const tenGod =
+      (pillar.tenGod || report?.tenGod || "").trim() ||
+      (pillar.highlight ? "Nhật Chủ" : "");
+    return {
+      label,
+      stem: pillar.stem.viet || report?.stem || "",
+      stemElement: pillar.stem.element || "",
+      branch: pillar.branch.viet || report?.branch || "",
+      branchElement: pillar.branch.element || "",
+      napAm: report?.napAm || "",
+      hiddenStems: report?.hiddenStems || "",
+      hiddenGods: (pillar.hiddenLines || []).filter(Boolean).join(" · "),
+      tenGod,
+      growthStage: report?.growthStage || "",
+    };
+  });
+}
 
 function isUsablePreviewText(text: string): boolean {
   const trimmed = text.trim();
@@ -492,7 +532,7 @@ function buildKnowledge(
       kind: "appendix",
       title: "Phụ lục",
       definition: formatPreviewField(
-        `Mã lá số ${bindPlaceholder(source.s00.chartId.value, "—")} · ${bindPlaceholder(source.s00.version.value, "—")}.`,
+        `Mã tham chiếu ${bindPlaceholder(source.s00.chartId.value, "—")} · ${bindPlaceholder(source.s00.version.value, "—")}.`,
         "summary",
       ),
       reference: formatPreviewField("Metadata báo cáo", "summary"),
@@ -549,24 +589,8 @@ export function adaptResultPageViewModel(
     ? adaptPreviewText(conclusionText, "summary")
     : null;
 
-  const indicatorSource = [
-    ...source.s02.items,
-    ...source.s01.conditions.rows
-      .filter((row) => row.label === "Điều hậu")
-      .map((row) => ({
-        label: row.label,
-        value: row.value,
-        color: "earth" as const,
-      })),
-  ];
-  const preferred = [
-    "Dụng thần",
-    "Hỷ thần",
-    "Kỵ thần",
-    "Điều hậu",
-    "Thế cục",
-    "Phân bố Ngũ hành",
-  ];
+  const indicatorSource = source.s02.items;
+  const preferred = ["Dụng thần", "Hỷ thần", "Kỵ thần"];
   const byLabel = new Map(indicatorSource.map((item) => [item.label, item]));
   const ordered = preferred
     .map((label) => byLabel.get(label))
@@ -577,9 +601,13 @@ export function adaptResultPageViewModel(
       value: item.value,
       color: item.color,
     })),
-    6,
+    3,
   );
   const dungReason = source.s02.dungReason?.trim() || "";
+  const patternValue =
+    source.s01.conditions.rows.find((row) => row.label === "Cách cục")?.value?.trim() || "";
+  const climateValue =
+    source.s01.conditions.rows.find((row) => row.label === "Điều hậu")?.value?.trim() || "";
 
   const destinyItems = adaptPreviewList(
     source.s01.decisions.map((d) => ({
@@ -700,17 +728,9 @@ export function adaptResultPageViewModel(
   return {
     analysisId: fullReport?.analysisId || source.s00.chartId.value,
     chart: {
-      title: "TỨ TRỤ / BÁT TỰ",
-      pillars: (fullReport?.pillars ?? []).map((pillar) => ({
-        label: pillar.label,
-        stem: pillar.stem,
-        branch: pillar.branch,
-        napAm: pillar.napAm,
-        hiddenStems: pillar.hiddenStems,
-        tenGod: pillar.tenGod,
-        growthStage: pillar.growthStage,
-      })),
-      visible: Boolean(fullReport?.pillars.length),
+      title: "Tứ trụ – Bát Tự",
+      pillars: mapResultChartPillars(source, fullReport),
+      visible: source.s03.pillars.length > 0,
     },
     shenSha: {
       title: "THẦN SÁT",
@@ -753,12 +773,22 @@ export function adaptResultPageViewModel(
       secondaryCtaLabel: "Xem phân tích chi tiết",
     },
     indicators: {
-      title: "CHỈ SỐ CỐT LÕI",
+      title: "Dụng thần · Hỷ · Kỵ",
       items: indicators,
       reasonLabel: "Căn cứ chọn Dụng",
       reason: dungReason,
       hasMore: indicators.hasMore,
-      visible: indicators.items.length > 0,
+      visible: indicators.items.length > 0 || Boolean(dungReason),
+    },
+    pattern: {
+      title: "Cách cục",
+      value: patternValue && patternValue !== UNAVAILABLE_CONCLUSION ? patternValue : "",
+      visible: Boolean(patternValue && patternValue !== UNAVAILABLE_CONCLUSION),
+    },
+    climate: {
+      title: "Điều hậu",
+      value: climateValue && climateValue !== UNAVAILABLE_CONCLUSION ? climateValue : "",
+      visible: Boolean(climateValue && climateValue !== UNAVAILABLE_CONCLUSION),
     },
     destiny: {
       title: "ĐỊNH HƯỚNG NGHỀ NGHIỆP",
@@ -769,14 +799,14 @@ export function adaptResultPageViewModel(
       visible: destinyVisible,
     },
     fiveElements: {
-      title: "PHÂN BỐ NGŨ HÀNH",
+      title: FIVE_ELEMENTS_TITLE,
       rows: elementRows,
-      summary: adaptPreviewText(source.s04.summary, "summary"),
+      summary: adaptPreviewText(FIVE_ELEMENTS_DISCLAIMER, "description"),
       hasMore: elementRows.hasMore,
       visible: elementRows.items.length > 0,
     },
     strength: {
-      title: source.s05.title,
+      title: "Điểm thân",
       level: source.s05.level,
       score: source.s05.score,
       percent: source.s05.percent,
@@ -787,7 +817,7 @@ export function adaptResultPageViewModel(
       visible: strengthVisible,
     },
     tenGods: {
-      title: source.s06.title || "THẬP THẦN NỔI BẬT",
+      title: "Thập thần nổi bật",
       gods,
       othersLine: source.s06.note.startsWith("Các thần khác") ? source.s06.note : "",
       cta: source.s06.link,
@@ -795,7 +825,7 @@ export function adaptResultPageViewModel(
       visible: gods.items.length > 0,
     },
     radar: {
-      title: "BIỂU ĐỒ RADAR NGŨ HÀNH",
+      title: "Phân bố Ngũ hành (biểu đồ)",
       axes: radarAxes,
       summary: radarSummary,
       hasMore: radarSummary.hasMore,

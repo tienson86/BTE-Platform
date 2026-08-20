@@ -102,7 +102,10 @@
           data: item.data,
           analysis_id: item.analysis_id || item.id,
         });
-        window.location.href = "/result?from=history";
+        const analysisId = item.analysis_id || item.id;
+        if (!analysisId) return;
+        window.location.href =
+          "/result?from=history&id=" + encodeURIComponent(String(analysisId));
       });
     });
   }

@@ -9,7 +9,7 @@ import { createCanonicalDesktopGateViewModel } from "../../src/adapters";
 
 describe("PortalPage — Result architecture Sprint D / UI V1", () => {
   it("preserves zones, content, and accessible expand controls", () => {
-    const { container } = render(<PortalPage />);
+    const { container } = render(<PortalPage previewFallback />);
 
     expect(container.querySelector('[data-result-architecture="pack07"]')).toBeTruthy();
     expect(container.querySelector('[data-sprint="D"]')).toBeTruthy();
@@ -78,7 +78,7 @@ describe("PortalPage — Result architecture Sprint D / UI V1", () => {
       />,
     );
     expect(container.querySelector('[data-status="empty"]')).toBeTruthy();
-    expect(screen.getByText("Chưa có kết quả")).toBeTruthy();
+    expect(screen.getByText("Chưa có kết quả phân tích")).toBeTruthy();
 
     rerender(
       <PortalPage

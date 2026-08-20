@@ -10,6 +10,7 @@ from applications.api.routes._helpers import attach_presentation_metadata, run_b
 from applications.api.schemas.common import APIResponse, BirthRequest, DiscussionRequest
 from applications.api.services.knowledge_expert_service import KnowledgeExpertService
 from applications.api.services.orchestrator import OrchestratorService
+from applications.api.services.result_identity import stamp_customer_result_identity
 from engines.knowledge_engine import KnowledgePipeline
 
 router = APIRouter(tags=["engines"])
@@ -145,6 +146,10 @@ def analyze_endpoint(
         timezone=body.timezone,
     )
     payload = attach_presentation_metadata(data, body)
+    payload = stamp_customer_result_identity(
+        payload,
+        getattr(request.state, "request_id", None),
+    )
     # Additive Knowledge Expert status — does not alter pipeline/narrative.
     payload["knowledge_expert"] = KnowledgePipeline.portal_status()
     logger.info(

@@ -88,6 +88,24 @@
 
   function composeHtmlDocument(report) {
     if (hasStructuredAnalysis(report && report.data)) {
+      var status =
+        window.BteFullReport && typeof window.BteFullReport.contractStatus === "function"
+          ? window.BteFullReport.contractStatus(report.data)
+          : "ok";
+      if (status && status !== "ok") {
+        var notice =
+          window.BteFullReport && typeof window.BteFullReport.contractMessage === "function"
+            ? window.BteFullReport.contractMessage(status)
+            : "Kết quả này được tạo bởi phiên bản dữ liệu cũ. Vui lòng phân tích lại để cập nhật kết quả.";
+        return (
+          "<!DOCTYPE html><html lang=\"vi\"><head><meta charset=\"utf-8\" /><title>Báo cáo</title></head><body>" +
+          "<p data-contract-status=\"" +
+          esc(status) +
+          "\">" +
+          esc(notice) +
+          "</p></body></html>"
+        );
+      }
       var full = composeFullCustomerReport(report);
       if (full) return full;
     }
@@ -604,7 +622,8 @@
         data: report.data,
         analysis_id: report.id,
       });
-      window.location.href = "/result?from=history";
+      window.location.href =
+        "/result?from=history&id=" + encodeURIComponent(String(report.id));
       return;
     }
     if (report.has_html || report.data) {

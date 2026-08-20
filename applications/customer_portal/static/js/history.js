@@ -42,13 +42,16 @@
     list.querySelectorAll("button[data-idx]").forEach((btn) => {
       btn.addEventListener("click", () => {
         const item = items[Number(btn.getAttribute("data-idx"))];
+        const analysisId = item.analysis_id || item.id;
+        if (!analysisId) return;
         // Opening a past chart must not rewrite the last Analyze result.
         BtePortal.ResultStore.selectForView({
           input: item.input || {},
           data: item.data,
-          analysis_id: item.analysis_id || item.id,
+          analysis_id: analysisId,
         });
-        window.location.href = "/result?from=history";
+        window.location.href =
+          "/result?from=history&id=" + encodeURIComponent(String(analysisId));
       });
     });
   }

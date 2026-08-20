@@ -41,8 +41,11 @@ const SAMPLE: AnalysisDataDto = {
   },
   useful_god: {
     useful_god: "Thủy",
+    useful_display: "Thủy",
     favorable_gods: ["Kim", "Thủy"],
+    favorable_display: "Kim",
     unfavorable_gods: ["Mộc", "Hỏa"],
+    unfavorable_display: "Mộc, Hỏa",
   },
   strength: {
     strength_level: "strong",

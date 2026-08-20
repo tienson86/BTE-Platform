@@ -38,6 +38,8 @@ export type PortalPageProps = {
    */
   readonly previewFallback?: boolean;
   readonly fullReport?: FullReportViewModel | null;
+  readonly analysisId?: string | null;
+  readonly resultSource?: "current" | "history" | "empty" | "preview" | "contract";
 };
 
 /**
@@ -47,8 +49,10 @@ export function PortalPage({
   request = null,
   initialData,
   enabled = true,
-  previewFallback = true,
+  previewFallback = false,
   fullReport = null,
+  analysisId = null,
+  resultSource = "current",
 }: PortalPageProps = {}): ReactNode {
   const { viewModel } = useCanonicalDesktopResult({
     request,
@@ -62,7 +66,13 @@ export function PortalPage({
     [viewModel, fullReport],
   );
 
-  const mode = viewModel.source === "api" ? "engine-live" : "dashboard-preview";
+  const boundAnalysisId = fullReport?.analysisId || analysisId || resultModel.analysisId || "";
+  const mode =
+    viewModel.status !== "ready"
+      ? viewModel.status
+      : viewModel.source === "api"
+        ? "engine-live"
+        : "dashboard-preview";
 
   return (
     <CanonicalDesktopProvider value={viewModel}>
@@ -74,11 +84,18 @@ export function PortalPage({
           data-presentation="pack04"
           data-mode={mode}
           data-status={viewModel.status}
+          data-analysis-id={boundAnalysisId}
+          data-result-source={resultSource}
           data-sprint="D"
         >
           <PortalSidebar />
           <PortalHeader />
           <main className="cd-content" data-page="result" id="rp-main">
+            {resultSource === "history" && viewModel.status === "ready" ? (
+              <p className="rp-history-banner" role="status">
+                Đang xem kết quả đã lưu. Kết quả phân tích hiện tại không đổi.
+              </p>
+            ) : null}
             {viewModel.status !== "ready" ? (
               <ResultPageStatusGate
                 status={viewModel.status}

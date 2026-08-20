@@ -761,6 +761,83 @@
   padding-left: var(--rp-space-5);
 }
 
+.rp-history-banner {
+  margin: 0 0 var(--rp-space-4);
+  padding: var(--rp-space-3) var(--rp-space-4);
+  border: 1px solid var(--rp-card-border);
+  border-radius: var(--rp-card-radius);
+  background: var(--rp-accent-soft, #eef6f2);
+  color: var(--rp-ink, #1c1c1c);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.rp-status-gate__cta {
+  display: inline-flex;
+  margin-top: var(--rp-space-4);
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  background: var(--rp-accent, #1f6b4a);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.rp-status-gate__cta:focus-visible {
+  outline: var(--rp-focus-ring);
+  outline-offset: var(--rp-focus-offset);
+}
+
+.rp-card--useful-gods .rp-card__body,
+.rp-card[data-card="climate"] .rp-card__body,
+.rp-card[data-card="pattern"] .rp-card__body,
+.rp-card[data-card="four-pillars"] .rp-card__body {
+  overflow: visible;
+}
+
+.rp-card[data-card="five-elements"] .rp-card__summary,
+.rp-card[data-card="useful-gods"] .rp-indicators__reason,
+.rp-card[data-card="climate"] .rp-climate__value {
+  display: block;
+  overflow: visible;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.rp-chart-table td,
+.rp-chart-table th {
+  overflow-wrap: anywhere;
+}
+
+@media print {
+  .cd-sidebar,
+  .cd-header,
+  .cd-footer,
+  .rp-card__footer,
+  .rp-cta-row,
+  .rp-expand-btn {
+    display: none !important;
+  }
+
+  .cd-content {
+    margin: 0;
+    padding: 0;
+  }
+
+  .rp-card,
+  .rp-card--auto {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    break-inside: avoid;
+  }
+
+  .rp-card__body,
+  .rp-indicators__reason {
+    overflow: visible !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .rp-result-page *,
   .rp-result-page *::before,

@@ -15,7 +15,7 @@ export function ChartDetailCard({ model }: { model: ChartDetailViewModel }): Rea
       title={model.title}
       titleId="rp-chart-detail-title"
       data-card="four-pillars"
-      data-priority="2"
+      data-priority="1"
       className="rp-card--auto"
     >
       <div className="rp-table-wrap">
@@ -32,11 +32,23 @@ export function ChartDetailCard({ model }: { model: ChartDetailViewModel }): Rea
           </thead>
           <tbody>
             <DetailRow label="Thiên can" values={model.pillars.map((pillar) => pillar.stem)} />
-            <DetailRow label="Địa chi" values={model.pillars.map((pillar) => pillar.branch)} />
-            <DetailRow label="Nạp âm" values={model.pillars.map((pillar) => pillar.napAm)} />
-            <DetailRow label="Tàng can" values={model.pillars.map((pillar) => pillar.hiddenStems)} />
+            <DetailRow
+              label="Ngũ hành can"
+              values={model.pillars.map((pillar) => pillar.stemElement)}
+            />
             <DetailRow label="Thập thần" values={model.pillars.map((pillar) => pillar.tenGod)} />
-            <DetailRow label="Trường sinh" values={model.pillars.map((pillar) => pillar.growthStage)} />
+            <DetailRow label="Địa chi" values={model.pillars.map((pillar) => pillar.branch)} />
+            <DetailRow
+              label="Ngũ hành chi"
+              values={model.pillars.map((pillar) => pillar.branchElement)}
+            />
+            <DetailRow label="Tàng can" values={model.pillars.map((pillar) => pillar.hiddenStems)} />
+            {model.pillars.some((pillar) => pillar.hiddenGods) ? (
+              <DetailRow
+                label="Thập thần ẩn"
+                values={model.pillars.map((pillar) => pillar.hiddenGods)}
+              />
+            ) : null}
           </tbody>
         </table>
       </div>

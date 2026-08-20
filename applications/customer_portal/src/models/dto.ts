@@ -207,6 +207,10 @@ export type AnalysisDataDto = {
   readonly strength?: StrengthDto;
   readonly temperature?: Record<string, unknown>;
   readonly useful_god?: Record<string, unknown>;
+  readonly useful_god_source?: Record<string, unknown>;
+  readonly result_meta?: Record<string, unknown>;
+  readonly analysis_id?: string | null;
+  readonly request_id?: string | null;
   readonly score?: ScoreDto;
   readonly five_elements?: FiveElementsDto;
   readonly ten_gods?: {

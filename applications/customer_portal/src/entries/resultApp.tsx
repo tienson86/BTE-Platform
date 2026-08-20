@@ -7,7 +7,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { PortalPage } from "../screens/canonical_desktop";
-import { isHistoryViewSearch } from "../resultState/currentResult";
+import { historyIdFromSearch } from "../resultState/currentResult";
 import { resolveResultBoot, type StoredResult } from "./resultBoot";
 
 declare global {
@@ -18,7 +18,7 @@ declare global {
         loadCurrent?: () => StoredResult | null;
         peekView?: () => StoredResult | null;
         loadForView: () => StoredResult | null;
-        resolveForDisplay?: (fromHistory: boolean) => StoredResult | null;
+        resolveForDisplay?: (fromHistory: boolean, expectedId?: string | null) => StoredResult | null;
       };
     };
   }
@@ -29,17 +29,18 @@ function readStoredResult(search: string): {
   historyView: StoredResult | null;
 } {
   const store = window.BtePortal?.ResultStore;
-  const fromHistory = isHistoryViewSearch(search);
+  const historyId = historyIdFromSearch(search);
+  const fromHistory = Boolean(historyId);
   if (store?.resolveForDisplay) {
-    const resolved = store.resolveForDisplay(fromHistory);
+    const resolved = store.resolveForDisplay(fromHistory, historyId);
     return {
       current: fromHistory ? store.loadCurrent?.() ?? store.load?.() ?? null : resolved,
-      historyView: fromHistory ? resolved : store.peekView?.() ?? null,
+      historyView: fromHistory ? resolved : null,
     };
   }
   return {
     current: store?.loadCurrent?.() ?? store?.load?.() ?? null,
-    historyView: store?.peekView?.() ?? store?.loadForView?.() ?? null,
+    historyView: null,
   };
 }
 
@@ -61,6 +62,8 @@ function mount(): void {
         enabled
         previewFallback={boot.previewFallback}
         fullReport={boot.fullReport}
+        analysisId={boot.analysisId}
+        resultSource={boot.resultSource}
       />
     </StrictMode>,
   );

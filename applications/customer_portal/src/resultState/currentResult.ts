@@ -2,11 +2,11 @@
  * Canonical current-result ownership for customer-facing routes.
  *
  * Precedence:
- *   1. fresh analysis in the current session (bte_last_result)
- *   2. explicitly selected history item (?from=history)
- *   3. legacy fallback
+ *   1. explicit fresh current analysis (bte_last_result)
+ *   2. explicit History selection (?from=history&id=...)
+ *   3. no result
  *
- * Fresh successful analyses must never lose to stale history/view keys.
+ * Implicit history/view keys must never win on normal /result.
  */
 
 import type { AnalysisDataDto } from "../models";
@@ -14,6 +14,7 @@ import { canonicalFiveElementCounts } from "../adapters/canonicalFiveElements";
 
 export const HISTORY_VIEW_QUERY = "from";
 export const HISTORY_VIEW_VALUE = "history";
+export const HISTORY_ID_QUERY = "id";
 
 export type StoredResultRecord = {
   readonly input?: Record<string, unknown> | null;
@@ -23,7 +24,7 @@ export type StoredResultRecord = {
   readonly source?: string | null;
 };
 
-export type CurrentResultSource = "current" | "history" | "legacy" | "empty";
+export type CurrentResultSource = "current" | "history" | "empty";
 
 export type ResolvedCurrentResult = {
   readonly input: Record<string, unknown>;
@@ -33,11 +34,28 @@ export type ResolvedCurrentResult = {
 };
 
 /**
- * True when the Result page should render an explicit History selection.
+ * True when the Result page URL asks for History mode.
+ * Production rendering also requires a matching `id` (see historyIdFromSearch).
  */
 export function isHistoryViewSearch(search: string): boolean {
   const params = new URLSearchParams(search.startsWith("?") ? search.slice(1) : search);
   return params.get(HISTORY_VIEW_QUERY) === HISTORY_VIEW_VALUE;
+}
+
+/**
+ * Canonical History record id from `?from=history&id=...`.
+ */
+export function historyIdFromSearch(search: string): string | null {
+  if (!isHistoryViewSearch(search)) return null;
+  const params = new URLSearchParams(search.startsWith("?") ? search.slice(1) : search);
+  return asNonEmpty(params.get(HISTORY_ID_QUERY));
+}
+
+/**
+ * True only when History is explicitly identified in the URL.
+ */
+export function isExplicitHistoryView(search: string): boolean {
+  return Boolean(historyIdFromSearch(search));
 }
 
 /**
@@ -62,21 +80,23 @@ export function analysisIdOf(record: StoredResultRecord | null | undefined): str
  * Resolve which stored payload the customer UI should bind.
  *
  * Default /result, Luận giải, Báo cáo, and export use `current`.
- * History/report "open older" uses `from=history`.
+ * History/report "open older" requires `from=history` and matching `id`.
  */
 export function resolveCurrentStoredResult(options: {
   readonly current: StoredResultRecord | null;
   readonly historyView: StoredResultRecord | null;
   readonly fromHistory: boolean;
+  readonly historyId?: string | null;
 }): ResolvedCurrentResult | null {
-  if (options.fromHistory && options.historyView?.data) {
-    return toResolved(options.historyView, "history");
+  const expectedId = asNonEmpty(options.historyId);
+  if (options.fromHistory && expectedId && options.historyView?.data) {
+    const viewId = analysisIdOf(options.historyView);
+    if (viewId && viewId === expectedId) {
+      return toResolved(options.historyView, "history");
+    }
   }
   if (options.current?.data) {
     return toResolved(options.current, "current");
-  }
-  if (options.historyView?.data) {
-    return toResolved(options.historyView, "legacy");
   }
   return null;
 }

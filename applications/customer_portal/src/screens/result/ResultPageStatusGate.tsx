@@ -12,6 +12,7 @@ import { Skeleton } from "../../components/feedback/Skeleton";
 export type ResultPageStatusGateProps = {
   readonly status: Exclude<CanonicalDesktopStatus, "ready">;
   readonly message?: string | null;
+  readonly action?: ReactNode;
 };
 
 /**
@@ -20,6 +21,7 @@ export type ResultPageStatusGateProps = {
 export function ResultPageStatusGate({
   status,
   message,
+  action,
 }: ResultPageStatusGateProps): ReactNode {
   if (status === "loading") {
     return (
@@ -49,21 +51,40 @@ export function ResultPageStatusGate({
         data-status="empty"
       >
         <EmptyState
-          title="Chưa có kết quả"
-          description={message ?? "Nhập thông tin sinh để xem lá số Bát Tự."}
+          title="Chưa có kết quả phân tích"
+          description={
+            message ??
+            "Vui lòng nhập thông tin ngày giờ sinh để bắt đầu."
+          }
+          action={
+            action ?? (
+              <a className="rp-status-gate__cta" href="/analyze">
+                Nhập ngày giờ sinh
+              </a>
+            )
+          }
         />
       </div>
     );
   }
 
+  const isVersion = Boolean(message && /phiên bản dữ liệu cũ|chưa đủ hợp đồng/i.test(message));
   return (
     <div
       className="rp-status-gate"
       data-status="error"
+      data-reason={isVersion ? "contract" : "error"}
     >
       <ErrorState
-        title="Không tải được kết quả"
+        title={isVersion ? "Kết quả cần phân tích lại" : "Không tải được kết quả"}
         description={message ?? "Vui lòng thử lại sau."}
+        action={
+          action ?? (
+            <a className="rp-status-gate__cta" href="/analyze">
+              Phân tích lại
+            </a>
+          )
+        }
       />
     </div>
   );

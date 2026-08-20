@@ -208,9 +208,15 @@ function testCurrentResultPrecedence() {
     JSON.stringify(store.resolveForDisplay(false))
   );
   check(
-    "current.history_display_is_stale",
-    store.resolveForDisplay(true).data.calendar.lunar_date.indexOf("OLD") !== -1,
+    "current.history_without_id_stays_fresh",
+    store.resolveForDisplay(true).data.calendar.lunar_date.indexOf("FRESH") !== -1,
     JSON.stringify(store.resolveForDisplay(true))
+  );
+  const viewId = JSON.parse(ctx.session.getItem("bte_view_analysis_id"));
+  check(
+    "current.history_display_is_stale",
+    store.resolveForDisplay(true, viewId).data.calendar.lunar_date.indexOf("OLD") !== -1,
+    JSON.stringify(store.resolveForDisplay(true, viewId))
   );
   check(
     "current.analysis_id_present",

@@ -8,6 +8,8 @@ export {
   ExecutiveSummaryCard,
   CoreIndicatorsCard,
   DestinyDirectionCard,
+  PatternSnapshotCard,
+  ClimateSnapshotCard,
 } from "./SummaryCards";
 export {
   FiveElementsCard,

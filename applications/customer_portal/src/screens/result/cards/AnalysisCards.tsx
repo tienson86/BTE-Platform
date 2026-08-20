@@ -52,10 +52,11 @@ export function FiveElementsCard({
       </ul>
       <PresentationText
         typeRole="summary"
-        preview={model.summary}
         className="rp-card__summary"
         as="p"
-      />
+      >
+        {model.summary.fullText || model.summary.text}
+      </PresentationText>
     </ResultCardShell>
   );
 }
@@ -80,9 +81,7 @@ export function StrengthAnalysisCard({
       <div className="rp-strength__hero">
         <PresentationText typeRole="metric" as="div" className="rp-strength__level">
           {model.level}
-        </PresentationText>
-        <PresentationText typeRole="subtitle" as="div" className="rp-strength__score">
-          {model.score}
+          {model.score ? ` · ${model.score}` : ""}
         </PresentationText>
       </div>
       <div
@@ -138,7 +137,7 @@ export function TenGodsAnalysisCard({
               <PresentationText typeRole="body" clamp="subtitle" as="span" className="rp-ten-gods__name">
                 {god.name}
               </PresentationText>
-              {god.score ? (
+              {god.score && !/^\d+(?:\.\d+)?$/.test(god.score.trim()) ? (
                 <PresentationText typeRole="caption" clamp="description" as="span">
                   {god.score}
                 </PresentationText>

@@ -52,7 +52,7 @@ export function useCanonicalDesktopResult(
     request = null,
     enabled = true,
     initialData,
-    previewFallback = true,
+    previewFallback = false,
   } = options;
 
   const asyncState = useAsyncResource(
@@ -77,7 +77,7 @@ export function useCanonicalDesktopResult(
         ? createCanonicalDesktopMockViewModel()
         : createCanonicalDesktopGateViewModel(
             "empty",
-            "Nhập thông tin ngày giờ sinh để xem kết quả phân tích.",
+            "Chưa có kết quả phân tích. Vui lòng nhập thông tin ngày giờ sinh để bắt đầu.",
           );
     }
     if (asyncState.status === "loading" || asyncState.status === "idle") {
@@ -89,7 +89,10 @@ export function useCanonicalDesktopResult(
         asyncState.errorMessage ?? "Không tải được kết quả.",
       );
     }
-    return asyncState.data ?? createCanonicalDesktopMockViewModel();
+    return asyncState.data ?? createCanonicalDesktopGateViewModel(
+      "error",
+      asyncState.errorMessage ?? "Không tải được kết quả.",
+    );
   }, [
     initialData,
     request,

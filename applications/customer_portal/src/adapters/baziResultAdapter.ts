@@ -357,7 +357,7 @@ function mapKnowledge(data: AnalysisDataDto): readonly BaZiKnowledgeItem[] {
       reference: cach,
     });
   }
-  const dung = canonicalUsefulDisplay(useful, asString(pattern?.dung_than));
+  const dung = canonicalUsefulDisplay(useful);
   if (dung) {
     items.push({
       id: "kn-useful-god",
@@ -404,9 +404,9 @@ function mapShenSha(data: AnalysisDataDto): readonly BaZiShenShaItem[] {
 function mapSpiritGods(data: AnalysisDataDto): readonly BaZiSpiritGod[] {
   const pattern = data.pattern as Record<string, unknown> | undefined;
   const useful = canonicalUsefulGodPayload(data);
-  const dung = canonicalUsefulDisplay(useful, asString(pattern?.dung_than));
-  const hy = canonicalFavorableDisplay(useful, asString(pattern?.hy_than));
-  const ky = canonicalUnfavorableDisplay(useful, asString(pattern?.ky_than));
+  const dung = canonicalUsefulDisplay(useful);
+  const hy = canonicalFavorableDisplay(useful);
+  const ky = canonicalUnfavorableDisplay(useful);
 
   const rows: BaZiSpiritGod[] = [];
   if (dung) {
@@ -548,9 +548,9 @@ export function adaptAnalysisToBaZiResult(
       tenGods,
       gender: genderDisplayLabel(options.request?.gender ?? data.customer?.gender),
       yinYang: asString(data.bazi?.day_master_yin_yang) || undefined,
-      dungThan: canonicalUsefulDisplay(useful, asString(pattern?.dung_than)) || undefined,
-      hyThan: canonicalFavorableDisplay(useful, asString(pattern?.hy_than)) || undefined,
-      kyThan: canonicalUnfavorableDisplay(useful, asString(pattern?.ky_than)) || undefined,
+      dungThan: canonicalUsefulDisplay(useful) || undefined,
+      hyThan: canonicalFavorableDisplay(useful) || undefined,
+      kyThan: canonicalUnfavorableDisplay(useful) || undefined,
       pattern: asString(pattern?.cach_cuc ?? pattern?.pattern) || undefined,
       overallGrade: asString(data.score?.grade) || undefined,
       recommendation:

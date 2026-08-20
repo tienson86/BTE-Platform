@@ -58,7 +58,7 @@ export function canonicalUsefulDisplay(
   if (useful?.overall_incomplete) {
     return text(useful?.useful_display) || OVERALL_INCOMPLETE_MESSAGE;
   }
-  return text(useful?.useful_display) || text(useful?.useful_god) || fallback;
+  return text(useful?.useful_display) || fallback;
 }
 
 export function canonicalUsefulShortReason(
