@@ -20,6 +20,7 @@ import {
   canonicalFavorableDisplay,
   canonicalUsefulDisplay,
   canonicalUsefulGodPayload,
+  canonicalUsefulShortReason,
   canonicalUnfavorableDisplay,
 } from "../adapters/canonicalUsefulGod";
 import {
@@ -106,6 +107,7 @@ export type FullReportViewModel = {
   readonly pattern: string;
   readonly patternEvidence: string;
   readonly usefulGod: string;
+  readonly usefulGodReason: string;
   readonly hyThan: string;
   readonly kyThan: string;
   readonly fiveElements: ReadonlyArray<{ readonly name: string; readonly count: number }>;
@@ -227,6 +229,7 @@ export function buildFullReportViewModel(
     pattern: text(pattern.cach_cuc || pattern.pattern),
     patternEvidence: patternCustomerEvidence(data),
     usefulGod: canonicalUsefulDisplay(useful, text(pattern.dung_than)),
+    usefulGodReason: canonicalUsefulShortReason(useful),
     hyThan: canonicalFavorableDisplay(useful, text(pattern.hy_than)),
     kyThan: canonicalUnfavorableDisplay(useful, text(pattern.ky_than)),
     fiveElements: [
@@ -515,6 +518,7 @@ function godsList(model: FullReportViewModel): string {
 function godsSupport(model: FullReportViewModel): string {
   return `<div class="bte-full-grid">
     ${kv("Dụng thần", model.usefulGod)}
+    ${kv("Căn cứ chọn Dụng", model.usefulGodReason)}
     ${kv("Hỷ thần", model.hyThan)}
     ${kv("Kỵ thần", model.kyThan)}
   </div>`;

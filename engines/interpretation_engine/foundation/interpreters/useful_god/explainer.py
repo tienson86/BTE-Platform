@@ -34,6 +34,11 @@ from engines.interpretation_engine.foundation.interpreters.useful_god.templates 
     customer_display_label,
 )
 from engines.interpretation_engine.foundation.status import DataAvailability
+from engines.useful_god_engine.presentation import (
+    EMPTY_CUSTOMER_FAVORABLE_DISPLAY,
+    customer_favorable_tokens,
+    customer_hy_overlay_text,
+)
 
 
 class UsefulGodExplainer:
@@ -269,6 +274,26 @@ def _entity_type_of(facts: UsefulGodInterpretationFacts, value: str) -> str:
 def _customer_label(facts: UsefulGodInterpretationFacts, value: str) -> str:
     """Customer-facing Useful God / Hỷ / Kỵ label from canonical type."""
     return customer_display_label(value, _entity_type_of(facts, value))
+
+
+def _customer_hy_tokens(facts: UsefulGodInterpretationFacts) -> list[str]:
+    """Customer Hỷ tokens with exact Dụng omitted (HK-R1F)."""
+    return customer_favorable_tokens(
+        facts.day_master,
+        facts.selected,
+        list(facts.favorable_gods),
+        winning_rule_id=str(facts.rule_ids[0] if facts.rule_ids else ""),
+    )
+
+
+def _customer_hy_phrase(facts: UsefulGodInterpretationFacts) -> str:
+    """Customer Hỷ phrase. Never reinsert exact Dụng."""
+    return customer_hy_overlay_text(
+        facts.day_master,
+        facts.selected,
+        list(facts.favorable_gods),
+        winning_rule_id=str(facts.rule_ids[0] if facts.rule_ids else ""),
+    ) or EMPTY_CUSTOMER_FAVORABLE_DISPLAY
 
 
 def _build_evidence_items(
@@ -669,7 +694,7 @@ def _build_domain_meaning(
 ) -> list[DomainMeaningItem]:
     """Expert domain meaning — not customer advice."""
     selected_label = _customer_label(facts, facts.selected)
-    hy = ", ".join(_customer_label(facts, item) for item in facts.favorable_gods)
+    hy = _customer_hy_phrase(facts)
     ky = ", ".join(_customer_label(facts, item) for item in facts.unfavorable_gods)
     refs = [
         eid
@@ -713,7 +738,7 @@ def _build_applications(
         if _entity_type_of(facts, selected) == KNOWLEDGE_ENTITY_TYPE_STEM
         else ""
     )
-    hy = facts.favorable_gods
+    hy = _customer_hy_tokens(facts)
     ky = facts.unfavorable_gods
     strong = facts.strength_level == "strong"
     cool = facts.temperature_level in {"cool", "cold"}
@@ -747,18 +772,20 @@ def _build_applications(
             domain="wealth",
             statement=(
                 f"Tài lộc liên quan khả năng điều tiết qua {selected_el or selected}; "
-                f"ưu tiên dòng tiền gắn Hỷ thần ({', '.join(hy[:3])})."
+                f"ưu tiên dòng tiền gắn Hỷ thần "
+                f"({', '.join(hy[:3]) if hy else EMPTY_CUSTOMER_FAVORABLE_DISPLAY})."
             ),
             basis_evidence_ids=base_refs,
             confidence=facts.confidence,
         )
     )
 
+    hy_env = ", ".join(hy[:2]) if hy else EMPTY_CUSTOMER_FAVORABLE_DISPLAY
     rel = (
-        f"Quan hệ cân bằng hơn khi duy trì không khí thuận ({', '.join(hy[:2])}); "
+        f"Quan hệ cân bằng hơn khi duy trì không khí thuận ({hy_env}); "
         f"tránh kích hoạt Kỵ thần ({', '.join(ky[:2])}) trong tranh chấp."
         if ky
-        else f"Quan hệ hưởng lợi từ không khí thuận ({', '.join(hy[:2])})."
+        else f"Quan hệ hưởng lợi từ không khí thuận ({hy_env})."
     )
     apps.append(
         DomainApplication(
@@ -807,7 +834,7 @@ def _build_advice(
 ) -> list[AdviceItem]:
     """Structured advice separate from analysis."""
     selected = facts.selected
-    hy = facts.favorable_gods
+    hy = _customer_hy_tokens(facts)
     ky = facts.unfavorable_gods
     cool = facts.temperature_level in {"cool", "cold"}
     refs = tuple(
@@ -824,14 +851,22 @@ def _build_advice(
         ),
         AdviceItem(
             category="support",
-            action=f"Ưu tiên hành động gắn Hỷ thần: {', '.join(hy)}.",
+            action=(
+                f"Ưu tiên hành động gắn Hỷ thần: {', '.join(hy)}."
+                if hy
+                else f"Ưu tiên hành động gắn Hỷ thần: {EMPTY_CUSTOMER_FAVORABLE_DISPLAY}."
+            ),
             priority="high",
             rationale="Published favorable gods",
             evidence_ids=tuple(_evidence_id("hy", s) for s in hy if _evidence_id("hy", s) in evidence_ids),
         ),
         AdviceItem(
             category="environment",
-            action=f"Môi trường thuận: không khí có yếu tố {', '.join(hy[:3])}.",
+            action=(
+                f"Môi trường thuận: không khí có yếu tố {', '.join(hy[:3])}."
+                if hy
+                else f"Môi trường thuận: {EMPTY_CUSTOMER_FAVORABLE_DISPLAY}."
+            ),
             priority="medium",
             rationale="Supportive element environment",
             evidence_ids=refs,

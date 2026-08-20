@@ -366,6 +366,7 @@ class UsefulGodView:
     unfavorable_roles: list[dict[str, str]] = field(default_factory=list)
     favorable_display: str = ""
     unfavorable_display: str = ""
+    canonical_favorable_display: str = ""
     winning_rule_id: str = ""
     winning_rule_group: str = ""
     candidate_list: list[dict[str, Any]] = field(default_factory=list)
@@ -384,6 +385,11 @@ class UsefulGodView:
     climate_rule_group: str = ""
     climate_reason: str = ""
     climate_preference_label: str = ""
+    short_reason: str = ""
+    reason_archetype: str = ""
+    customer_reason: dict[str, str] = field(default_factory=dict)
+    hy_role_status: str = ""
+    ky_scope_note: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         """Portal-compatible ``data.useful_god`` JSON."""
@@ -402,6 +408,9 @@ class UsefulGodView:
             "favorable_roles": [dict(item) for item in self.favorable_roles],
             "unfavorable_roles": [dict(item) for item in self.unfavorable_roles],
             "favorable_display": self.favorable_display or "",
+            "canonical_favorable_display": self.canonical_favorable_display
+            or self.favorable_display
+            or "",
             "unfavorable_display": self.unfavorable_display or "",
             "winning_rule_id": self.winning_rule_id or "",
             "winning_rule_group": self.winning_rule_group or "",
@@ -420,6 +429,11 @@ class UsefulGodView:
             "climate_rule_group": self.climate_rule_group or "",
             "climate_reason": self.climate_reason or "",
             "climate_preference_label": self.climate_preference_label or "",
+            "short_reason": self.short_reason or "",
+            "reason_archetype": self.reason_archetype or "",
+            "customer_reason": dict(self.customer_reason or {}),
+            "hy_role_status": self.hy_role_status or "",
+            "ky_scope_note": self.ky_scope_note or "",
         }
 
 

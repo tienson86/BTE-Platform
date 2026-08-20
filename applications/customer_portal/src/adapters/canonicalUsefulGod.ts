@@ -20,6 +20,10 @@ export type CanonicalUsefulGodSource = {
   readonly climate_candidate?: unknown;
   readonly climate_display?: unknown;
   readonly climate_preference_label?: unknown;
+  readonly short_reason?: unknown;
+  readonly reason_archetype?: unknown;
+  readonly hy_role_status?: unknown;
+  readonly ky_scope_note?: unknown;
 };
 
 export const OVERALL_INCOMPLETE_MESSAGE =
@@ -57,6 +61,13 @@ export function canonicalUsefulDisplay(
   return text(useful?.useful_display) || text(useful?.useful_god) || fallback;
 }
 
+export function canonicalUsefulShortReason(
+  useful: CanonicalUsefulGodSource | null | undefined,
+  fallback = "",
+): string {
+  return text(useful?.short_reason) || fallback;
+}
+
 export function canonicalClimatePreferenceLabel(
   useful: CanonicalUsefulGodSource | null | undefined,
 ): string {
@@ -67,7 +78,9 @@ export function canonicalFavorableDisplay(
   useful: CanonicalUsefulGodSource | null | undefined,
   fallback = "",
 ): string {
-  return text(useful?.favorable_display) || listText(useful?.favorable_gods) || fallback;
+  // Copy published customer Hỷ. Do not fall back to internal favorable_gods
+  // (that list still contains the Overall Dụng token).
+  return text(useful?.favorable_display) || fallback;
 }
 
 export function canonicalUnfavorableDisplay(

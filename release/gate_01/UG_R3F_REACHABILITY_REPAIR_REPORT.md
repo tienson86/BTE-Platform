@@ -146,7 +146,16 @@ C. Main Pattern → Overall Useful God reconciliation
 D. Flow competitiveness  
 E. Chính Quan vs Thất Sát visibility/weighting research  
 F. Multi-candidate reconciliation rather than fixed class mapping  
-G. `jia_wang` vs `spc_004` chuyên-Ấn mapping (documented omission, not a matcher bug)
+G. `jia_wang` vs `spc_004` chuyên-Ấn mapping (documented omission, not a matcher bug)  
+H. Tiết vs Chế reconciliation when both are reachable  
+I. Absent-element candidate theory  
+J. Same-element Hỷ theory beyond Ten God sibling groups  
+K. Independently derived Hỷ (not CSV leftover)  
+L. Full-chart Kỵ  
+M. Confidence / competing candidates  
+N. Alternative theory explanations on the customer card  
+
+Added from HK-R1G. Non-blocking for V1.0.
 
 ---
 

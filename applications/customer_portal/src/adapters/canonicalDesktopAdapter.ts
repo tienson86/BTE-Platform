@@ -41,6 +41,7 @@ import {
   canonicalClimatePreferenceLabel,
   canonicalUsefulDisplay,
   canonicalUsefulGodPayload,
+  canonicalUsefulShortReason,
   canonicalUnfavorableDisplay,
 } from "./canonicalUsefulGod";
 import {
@@ -660,6 +661,12 @@ function mapS02(data: AnalysisDataDto): CanonicalDesktopViewModel["s02"] {
         icon: "drop" as const,
         label: "Dụng thần",
         value: dung,
+        color: "water",
+      },
+      {
+        icon: "spark" as const,
+        label: "Căn cứ chọn Dụng",
+        value: canonicalUsefulShortReason(useful) || "—",
         color: "water",
       },
       {

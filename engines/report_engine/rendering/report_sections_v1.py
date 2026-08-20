@@ -25,6 +25,10 @@ from engines.report_engine.rendering.customer_facing import (
     temperature_customer_evidence,
     ten_gods_prominence,
 )
+from engines.useful_god_engine.presentation import (
+    EMPTY_CUSTOMER_FAVORABLE_DISPLAY,
+    KY_SCOPE_NOTE,
+)
 
 _DOMAIN_ALIASES: dict[str, tuple[str, ...]] = {
     "career": ("su_nghiep", "career", "nghiep", "nghề"),
@@ -413,14 +417,15 @@ def _section_useful_god(report_input: ReportInputV1) -> PresentedSection:
         meta_rows=_filled_rows(
             [
                 ("Dụng thần", display_text(useful.useful_display or useful.useful_god)),
+                ("Căn cứ chọn Dụng", display_text(useful.short_reason or useful.reasoning)),
                 ("Hỷ thần", display_text(
-                    useful.favorable_display
-                    or ", ".join(item for item in useful.favorable_gods if item)
+                    useful.favorable_display or EMPTY_CUSTOMER_FAVORABLE_DISPLAY
                 )),
                 ("Kỵ thần", display_text(
                     useful.unfavorable_display
                     or ", ".join(item for item in useful.unfavorable_gods if item)
                 )),
+                ("Phạm vi Kỵ", display_text(useful.ky_scope_note or KY_SCOPE_NOTE)),
                 ("Trung tính", ", ".join(display_text(item) for item in useful.neutral_gods)),
                 ("Điều hậu nhiệt", display_text(useful.temperature_adjustment, "temperature")),
                 ("Nhu cầu điều hòa", display_text(useful.balancing_need, "balancing_need")),
@@ -428,7 +433,11 @@ def _section_useful_god(report_input: ReportInputV1) -> PresentedSection:
                 ("Điều hậu ưu tiên", display_text(useful.climate_preference_label)),
             ]
         ),
-        paragraphs=customer_paragraphs(useful.reasoning),
+        paragraphs=(
+            ()
+            if useful.short_reason
+            else customer_paragraphs(useful.reasoning)
+        ),
     )
 
 

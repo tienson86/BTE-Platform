@@ -12,6 +12,8 @@ from typing import Any
 
 from engines.bazi_engine.ten_god import day_master_element
 
+from engines.useful_god_engine.presentation import customer_hy_overlay_text
+
 from .follow_tokens import canonicalize_follow_token, follow_display_label
 from .labels import STRENGTH_LEVEL_LABELS, pattern_display_label
 from .override_eligibility import classify_pattern_override
@@ -252,7 +254,12 @@ def enrich_rule_context_summaries(
     dung_than = str(useful.get("name") or useful.get("useful_god") or "").strip()
     hy_src = useful.get("favorable_gods") or useful.get("favorable") or []
     ky_src = useful.get("unfavorable_gods") or useful.get("unfavorable") or []
-    hy_than = ", ".join(str(x) for x in hy_src if x)
+    hy_than = customer_hy_overlay_text(
+        str(day_master or ""),
+        dung_than,
+        [str(item) for item in hy_src if item],
+        winning_rule_id=str(useful.get("winning_rule_id") or ""),
+    )
     ky_than = ", ".join(str(x) for x in ky_src if x)
     # Điều hậu: month/season producer (not temperature — separate temperature_state).
     dieu_hau = str(month.get("status") or "").strip()

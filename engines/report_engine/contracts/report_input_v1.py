@@ -230,6 +230,10 @@ class ReportUsefulGodV1:
     climate_display: str = ""
     climate_rule_id: str = ""
     climate_rule_group: str = ""
+    short_reason: str = ""
+    reason_archetype: str = ""
+    hy_role_status: str = ""
+    ky_scope_note: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         """Keep legacy keys; G1-06 adds rich Ten God / stem / element."""
@@ -253,6 +257,10 @@ class ReportUsefulGodV1:
                 "balancing_need": self.balancing_need,
                 "climate_evidence": self.climate_evidence,
                 "reasoning": self.reasoning,
+                "short_reason": self.short_reason,
+                "reason_archetype": self.reason_archetype,
+                "hy_role_status": self.hy_role_status,
+                "ky_scope_note": self.ky_scope_note,
             }
         )
 

@@ -17,6 +17,10 @@ from applications.production.interpretation.theme_keys import (
     THEME_NO_EXTRA_LOAD,
     THEME_OUTPUT_RELEASE,
 )
+from engines.useful_god_engine.presentation import (
+    EMPTY_CUSTOMER_FAVORABLE_DISPLAY,
+    INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY,
+)
 
 
 @dataclass(slots=True)
@@ -25,6 +29,7 @@ class UsefulGodPublishedFacts:
 
     useful_god: str = ""
     favorable_gods: list[str] = field(default_factory=list)
+    favorable_display: str = ""
     unfavorable_gods: list[str] = field(default_factory=list)
     reasoning: str = ""
     confidence: float = 0.0
@@ -48,6 +53,7 @@ def build_useful_god_published_facts(useful_god_view: Any) -> UsefulGodPublished
     return UsefulGodPublishedFacts(
         useful_god=useful,
         favorable_gods=[str(item) for item in data.get("favorable_gods") or []],
+        favorable_display=str(data.get("favorable_display") or ""),
         unfavorable_gods=[str(item) for item in data.get("unfavorable_gods") or []],
         reasoning=str(data.get("reasoning") or ""),
         confidence=float(data.get("confidence") or 0.0),
@@ -97,9 +103,14 @@ class UsefulGodDomainComposer:
             ),
         ]
 
-        if facts.favorable_gods:
-            fav = ", ".join(facts.favorable_gods)
-            fav_text = f"Các yếu tố thuận: {fav}."
+        customer_hy = facts.favorable_display.strip()
+        blocked = {
+            "",
+            EMPTY_CUSTOMER_FAVORABLE_DISPLAY,
+            INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY,
+        }
+        if customer_hy and customer_hy not in blocked:
+            fav_text = f"Các yếu tố thuận: {customer_hy}."
             sections.append(
                 DomainSection(
                     section_id="FAVORABLE",

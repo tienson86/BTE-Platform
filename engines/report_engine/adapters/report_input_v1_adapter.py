@@ -36,6 +36,7 @@ from engines.report_engine.contracts.report_input_v1 import (
 )
 from engines.report_engine.foundation_constants import REPORT_VERSION
 from engines.report_engine.interpretation_adapter import interpretation_to_dict
+from engines.useful_god_engine.presentation import EMPTY_CUSTOMER_FAVORABLE_DISPLAY
 from applications.api.services.five_elements_truth import (
     ELEMENT_KEYS,
 )
@@ -427,7 +428,7 @@ class ReportInputV1Adapter:
             unfavorable_roles=list(getattr(useful, "unfavorable_roles", []) or []) if useful else [],
             favorable_display=(
                 (getattr(useful, "favorable_display", "") if useful else "")
-                or ", ".join(useful.favorable_gods if useful else [])
+                or EMPTY_CUSTOMER_FAVORABLE_DISPLAY
             ),
             unfavorable_display=(
                 (getattr(useful, "unfavorable_display", "") if useful else "")
@@ -443,6 +444,10 @@ class ReportInputV1Adapter:
             climate_display=getattr(useful, "climate_display", "") if useful else "",
             climate_rule_id=getattr(useful, "climate_rule_id", "") if useful else "",
             climate_rule_group=getattr(useful, "climate_rule_group", "") if useful else "",
+            short_reason=getattr(useful, "short_reason", "") if useful else "",
+            reason_archetype=getattr(useful, "reason_archetype", "") if useful else "",
+            hy_role_status=getattr(useful, "hy_role_status", "") if useful else "",
+            ky_scope_note=getattr(useful, "ky_scope_note", "") if useful else "",
             neutral_gods=[],
             temperature_adjustment=(
                 (temperature.climate_state if temperature else "")
@@ -450,7 +455,11 @@ class ReportInputV1Adapter:
             ),
             balancing_need=(temperature.balancing_need if temperature else ""),
             climate_evidence=(temperature.evidence_compact if temperature else ""),
-            reasoning=(useful.reasoning if useful else "") or (pattern.dieu_hau if pattern else ""),
+            reasoning=(
+                (getattr(useful, "short_reason", "") if useful else "")
+                or (useful.reasoning if useful else "")
+                or (pattern.dieu_hau if pattern else "")
+            ),
         )
 
     def _build_shensha(
