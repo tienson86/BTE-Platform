@@ -386,6 +386,7 @@ class DirectoryValidator:
             ACTUAL_FOLDER,
             REPORTS_FOLDER,
             SCHEMA_FOLDER,
+            "report_v1",
             "__pycache__",
         }
 

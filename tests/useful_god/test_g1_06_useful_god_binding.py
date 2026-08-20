@@ -288,8 +288,11 @@ def test_api_payload_publishes_rich_fields() -> None:
     assert useful["winning_rule_group"] == "strength"
     assert useful["climate_rule_id"] == "sea_001"
     assert useful["climate_display"] == "Hỏa · Bính · Thất Sát"
-    assert useful["favorable_display"].startswith("Hỏa · Đinh · Chính Quan")
+    assert useful["canonical_favorable_display"].startswith("Hỏa · Đinh · Chính Quan")
+    assert useful["favorable_display"] == "Chưa đủ căn cứ xác định Hỷ thần bổ trợ riêng"
     assert useful["unfavorable_display"].startswith("Kim · Canh · Tỷ Kiên")
-    assert payload["useful_god_source"]["contract"] == "analysis_result.UsefulGodView@1.2"
+    assert payload["useful_god_source"]["contract"] == "analysis_result.UsefulGodView@1.5"
+    assert "str_003" not in useful["short_reason"]
+    assert "Chế" in useful["short_reason"]
     assert payload["strength"]["strength_level"] == "strong"
     assert payload["pattern"]["cach_cuc"] == "Chính Ấn"

@@ -11,7 +11,7 @@ from .roles import format_god_roles, resolve_god_token
 
 EMPTY_CUSTOMER_FAVORABLE_DISPLAY = "Chưa có Hỷ thần bổ trợ riêng"
 INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY = "Chưa đủ căn cứ xác định Hỷ thần bổ trợ riêng"
-KY_SCOPE_NOTE = "Kỵ thần theo rule cân bằng hiện tại"
+KY_SCOPE_NOTE = "Kỵ thần theo quy tắc cân bằng hiện tại"
 
 HY_ROLE_SUPPORTED_INDEPENDENT = "SUPPORTED_INDEPENDENT_ROLE"
 HY_ROLE_STATIC_SAME_ELEMENT = "STATIC_SAME_ELEMENT_SIBLING"

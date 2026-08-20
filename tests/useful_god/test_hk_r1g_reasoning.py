@@ -5,7 +5,8 @@ from __future__ import annotations
 from applications.api.services.orchestrator import OrchestratorService
 from engines.useful_god_engine.presentation import (
     HY_ROLE_STATIC,
-    HY_ROLE_SUPPORTED,
+    HY_ROLE_STATIC_SAME_ELEMENT,
+    HY_ROLE_SUPPORTED_INDEPENDENT,
     INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY,
 )
 from engines.useful_god_engine.reasoning import (
@@ -43,9 +44,10 @@ def test_dung_reason_is_tiet_chain_without_rule_id() -> None:
     assert "Thực Thần" in reason
     assert "mô hình cân bằng V1.0" in reason
     assert useful["favorable_gods"] == ["Thực Thần", "Thương Quan"]
-    assert useful["favorable_display"] == "Thủy · Quý · Thương Quan"
-    assert useful["hy_role_status"] == HY_ROLE_SUPPORTED
+    assert useful["favorable_display"] == INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
+    assert useful["hy_role_status"] == HY_ROLE_STATIC_SAME_ELEMENT
     assert "Nhâm" not in useful["favorable_display"]
+    assert "Quý" not in useful["favorable_display"]
     assert useful["unfavorable_display"].startswith("Kim · Canh · Tỷ Kiên")
     assert useful["climate_display"].startswith("Hỏa")
 
@@ -86,9 +88,10 @@ def test_truong_reason_is_sinh_tro() -> None:
     assert "Kim sinh Thủy" in reason
     assert "Tân" in reason
     assert "Chính Ấn" in reason
-    assert useful["hy_role_status"] == HY_ROLE_SUPPORTED
+    assert useful["hy_role_status"] == HY_ROLE_SUPPORTED_INDEPENDENT
     assert "Chính Ấn" not in useful["favorable_display"]
-    assert "Thiên Ấn" in useful["favorable_display"]
+    assert useful["favorable_display"] == "Thủy · Nhâm · Tỷ Kiên"
+    assert "Thiên Ấn" not in useful["favorable_display"]
 
 
 def test_balanced_wealth_reason_is_honest() -> None:

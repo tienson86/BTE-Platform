@@ -14,8 +14,10 @@ import {
 import type { AnalysisDataDto } from "../../src/models";
 
 const DISPLAY = "Thủy · Nhâm · Thực Thần";
-const HY = "Thủy · Nhâm · Thực Thần / Thủy · Quý · Thương Quan";
+const HY = "Chưa đủ căn cứ xác định Hỷ thần bổ trợ riêng";
 const KY = "Kim · Canh · Tỷ Kiên / Kim · Tân · Kiếp Tài";
+const REASON =
+  "Nhật chủ Canh Kim thân vượng → cần tiết bớt khí Kim → áp dụng nguyên tắc Tiết theo mô hình cân bằng V1.0 → Kim sinh Thủy → Nhâm đối với Canh là Thực Thần → chọn Thủy · Nhâm · Thực Thần làm Dụng.";
 const CLIMATE_PREFERENCE = "Điều hậu ưu tiên Hỏa";
 
 const CASE_0001: AnalysisDataDto = {
@@ -39,6 +41,7 @@ const CASE_0001: AnalysisDataDto = {
     unfavorable_gods: ["Tỷ Kiên", "Kiếp Tài"],
     favorable_display: HY,
     unfavorable_display: KY,
+    short_reason: REASON,
     winning_rule_id: "str_004",
     winning_rule_group: "strength",
     climate_rule_id: "sea_001",
@@ -60,6 +63,7 @@ describe("G1-06 canonical Useful God binding", () => {
     expect(vm.s02.items.find((item) => item.label === "Dụng thần")?.value).toBe(DISPLAY);
     expect(vm.s02.items.find((item) => item.label === "Hỷ thần")?.value).toBe(HY);
     expect(vm.s02.items.find((item) => item.label === "Kỵ thần")?.value).toBe(KY);
+    expect(vm.s02.dungReason).toBe(REASON);
     const dieuHau = vm.s01.conditions.rows.find((row) => row.label === "Điều hậu");
     expect(dieuHau?.value).toContain("Hàn");
     expect(dieuHau?.value).toContain("Cần ôn ấm");
@@ -74,8 +78,12 @@ describe("G1-06 canonical Useful God binding", () => {
     expect(report.usefulGod).toBe(DISPLAY);
     expect(report.hyThan).toBe(HY);
     expect(report.kyThan).toBe(KY);
+    expect(report.usefulGodReason).toBe(REASON);
     const html = renderFullReportHtml(report);
     expect(html).toContain(DISPLAY);
+    expect(html).toContain(HY);
+    expect(html).toContain("Căn cứ chọn Dụng");
+    expect(html).toContain(REASON);
     expect(html).toContain("Hàn");
     expect(html).toContain("Cần ôn ấm");
     expect(html).toContain(CLIMATE_PREFERENCE);

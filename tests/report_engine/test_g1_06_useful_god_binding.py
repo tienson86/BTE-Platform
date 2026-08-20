@@ -13,10 +13,13 @@ from engines.report_engine.rendering.html_report_v1 import render_html
 from engines.report_engine.services.report_export_service_v1 import ReportExportServiceV1
 from tests.report_engine.case_0001_runtime import build_case_0001_source
 
+from engines.useful_god_engine.presentation import INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
+
 CANONICAL_DISPLAY = "Hỏa · Đinh · Chính Quan"
-FAVORABLE_DISPLAY = "Hỏa · Đinh · Chính Quan / Thủy · Nhâm · Thực Thần"
+FAVORABLE_DISPLAY = INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
 UNFAVORABLE_DISPLAY = "Kim · Canh · Tỷ Kiên / Kim · Tân · Kiếp Tài"
 CLIMATE_PREFERENCE = "Điều hậu ưu tiên Hỏa"
+CANONICAL_HY = "Hỏa · Đinh · Chính Quan / Thủy · Nhâm · Thực Thần"
 
 
 def test_case_0001_report_uses_rich_useful_god_not_dieu_hau() -> None:
@@ -63,6 +66,8 @@ def test_case_0001_html_shows_three_layer_useful_god(tmp_path: Path) -> None:
     assert CANONICAL_DISPLAY in html
     assert FAVORABLE_DISPLAY in html
     assert UNFAVORABLE_DISPLAY in html
+    assert "Căn cứ chọn Dụng" in html
+    assert CANONICAL_HY not in html
     assert CLIMATE_PREFERENCE in html
     assert "Hàn" in html
     assert "Cần ôn ấm" in html

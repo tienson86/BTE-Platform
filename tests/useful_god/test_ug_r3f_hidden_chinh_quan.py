@@ -110,7 +110,9 @@ def test_api_tuyen_hy_ky_follow_new_winner() -> None:
     assert useful["useful_display"] == "Mộc · Ất · Chính Quan"
     assert useful["favorable_gods"] == ["Chính Quan", "Thực Thần"]
     assert useful["unfavorable_gods"] == ["Tỷ Kiên", "Kiếp Tài"]
-    assert "Thực Thần" in useful["favorable_display"]
+    assert useful["canonical_favorable_display"].startswith("Mộc · Ất · Chính Quan")
+    assert useful["favorable_display"] == "Chưa đủ căn cứ xác định Hỷ thần bổ trợ riêng"
+    assert "Thực Thần" in useful["canonical_favorable_display"]
     assert "Tỷ Kiên" in useful["unfavorable_display"]
     assert useful["climate_rule_id"] == "sea_002"
     assert useful["useful_god"] != useful["climate_candidate"]

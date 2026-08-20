@@ -98,7 +98,7 @@ def test_useful_god_generic_composition(engine_a) -> None:
     facts = build_useful_god_published_facts(engine_a.analysis.useful_god)
     result = UsefulGodDomainComposer().compose(facts)
     assert result.status == DomainStatus.AVAILABLE
-    assert "Thực Thần" in result.conclusion
+    assert "Chính Quan" in result.conclusion
     assert result.recommendations
 
 
@@ -155,7 +155,7 @@ def test_case_0001_golden_comparison_direction(composition_a) -> None:
     useful = composition_a.domains["useful_god"]
     pattern = composition_a.domains["pattern"]
     assert strength.diagnostics["class_id"] == "strong"
-    assert "Thực Thần" in useful.conclusion
+    assert "Chính Quan" in useful.conclusion
     assert "Chính Ấn" in pattern.conclusion
     # Golden masters remain reference; generic must not copy Part 08 opening.
     assert "# 1. Bạn là ai\n\nBạn là người được xây trên" not in (
@@ -166,8 +166,8 @@ def test_case_0001_golden_comparison_direction(composition_a) -> None:
 
 
 def test_second_request_divergence(composition_a, composition_b) -> None:
-    assert composition_a.domains["strength"].conclusion != (
-        composition_b.domains["strength"].conclusion
+    assert composition_a.domains["useful_god"].conclusion != (
+        composition_b.domains["useful_god"].conclusion
     )
     assert composition_a.domains["pattern"].conclusion != (
         composition_b.domains["pattern"].conclusion

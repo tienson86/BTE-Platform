@@ -200,9 +200,15 @@ describe("canonical current-result routing", () => {
   it("G. Ten Gods uses analytical values, not ten_god_score", () => {
     expect(analyticalTenGods(HUYNH)).toEqual(["Tỷ Kiên", "Kiếp Tài", "Nhật Chủ", "Thiên Tài"]);
     const vm = pageModel(FRESH);
-    expect(vm.tenGods.gods.items.map((god) => god.name)).toEqual(
-      expect.arrayContaining(["Tỷ Kiên", "Kiếp Tài", "Nhật Chủ", "Thiên Tài"]),
+    const featuredNames = vm.tenGods.gods.items.map((god) => god.name);
+    expect(featuredNames).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining("Tỷ Kiên"),
+        expect.stringContaining("Kiếp Tài"),
+        expect.stringContaining("Thiên Tài"),
+      ]),
     );
+    expect(featuredNames.some((name) => name.includes("Lộ rõ"))).toBe(true);
     expect(vm.tenGods.gods.items.some((god) => god.score === "100" || god.name === "Thập thần")).toBe(false);
   });
 

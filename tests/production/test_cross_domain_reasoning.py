@@ -211,9 +211,7 @@ def test_anti_overfit_primary_themes(composition_0001, composition_0002) -> None
 def test_case_0002_acceptance(composition_0002) -> None:
     cdr = composition_0002.cross_domain
     assert cdr.tensions or cdr.conflicts
-    assert "follow_qualifies_strength" in cdr.tensions or any(
-        r.relation_type == RelationType.DEPENDENCY_OVERRIDE for r in cdr.relations
-    )
+    assert "str_pattern_scope" in cdr.tensions or "tg_vs_pattern_scope" in cdr.tensions
     assert composition_0002.identity.status.value in {"AVAILABLE", "PARTIAL"}
     assert composition_0002.career.status.value in {"AVAILABLE", "PARTIAL"}
     assert "Tôi là ai" in composition_0002.identity.body

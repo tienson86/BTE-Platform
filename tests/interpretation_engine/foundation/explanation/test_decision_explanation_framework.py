@@ -106,7 +106,7 @@ def test_d_alternatives_accepted_rejected(huynh_explanation) -> None:
     rejected = [a for a in alts if a.status == "rejected"]
     assert len(selected) == 1
     assert len(rejected) >= 1
-    assert selected[0].candidate == "Đinh"
+    assert selected[0].candidate == "Chính Tài"
     binh = [a for a in alts if a.candidate == "Bính" and a.status == "rejected"]
     assert binh
     assert binh[0].rejection_reason
@@ -116,13 +116,13 @@ def test_e_analytical_truth_ownership(huynh_explanation) -> None:
     """E. Analytical truth ownership cannot be overwritten."""
     validation = validate_decision_explanation(
         huynh_explanation,
-        analytical_selected="Đinh",
+        analytical_selected="Chính Tài",
     )
     assert validation.passed is True
     bad = _mutate_decision(huynh_explanation, selected="Canh")
     bad_validation = validate_decision_explanation(
         bad,
-        analytical_selected="Đinh",
+        analytical_selected="Chính Tài",
     )
     assert bad_validation.passed is False
     assert any(
@@ -236,20 +236,20 @@ def test_i_useful_god_b1_migrated(huynh_explanation) -> None:
     foundation = output.interpretation_foundation
     assert foundation.useful_god_explanation is not None
     assert foundation.useful_god_interpretation is not None
-    assert foundation.useful_god_interpretation.evidence.selected_rule_id == "sea_004"
-    assert foundation.useful_god_interpretation.confidence == pytest.approx(0.85, abs=0.01)
+    assert foundation.useful_god_interpretation.evidence.selected_rule_id == "str_005"
+    assert foundation.useful_god_interpretation.confidence == pytest.approx(0.72, abs=0.01)
 
 
-def test_j_huynh_selects_dinh(huynh_explanation) -> None:
-    """J. Lương Ngọc Huỳnh decision path selects Đinh."""
+def test_j_huynh_selects_chinh_tai(huynh_explanation) -> None:
+    """J. Lương Ngọc Huỳnh decision path selects Chính Tài (UG-R2 Frozen)."""
     assert huynh_explanation.decision is not None
-    assert huynh_explanation.decision.selected == "Đinh"
+    assert huynh_explanation.decision.selected == "Chính Tài"
     select_step = next(
         s for s in huynh_explanation.decision_path if s.step_id == "select_winner"
     )
-    assert "Đinh" in select_step.outcome
-    assert "sea_004" in select_step.rule_refs or any(
-        e.rule_id == "sea_004" for e in huynh_explanation.evidence
+    assert "Chính Tài" in select_step.outcome
+    assert "str_005" in select_step.rule_refs or any(
+        e.rule_id == "str_005" for e in huynh_explanation.evidence
     )
 
 
@@ -300,8 +300,8 @@ def test_o_portal_unchanged() -> None:
     """O. Existing production analysis contract unchanged."""
     output = ProductionEngineRunner().run(HUYNH)
     analysis = output.analysis
-    assert analysis.useful_god.useful_god == "Đinh"
-    assert analysis.strength.strength_level == "strong"
+    assert analysis.useful_god.useful_god == "Chính Tài"
+    assert analysis.strength.strength_level == "balanced"
 
 
 def test_huynh_decision_chain(huynh_explanation) -> None:
@@ -309,13 +309,13 @@ def test_huynh_decision_chain(huynh_explanation) -> None:
     analysis = {item.fact: item.value for item in huynh_explanation.analysis}
     assert "Bính" in analysis["day_master"]
     assert analysis["season"] == "Thu" or "Thu" in analysis["season"]
-    assert "strong" in analysis["strength"]
+    assert "balanced" in analysis["strength"]
     assert analysis["temperature"] == "cool"
-    assert huynh_explanation.decision.selected == "Đinh"
+    assert huynh_explanation.decision.selected == "Chính Tài"
     hy = analysis["favorable_gods"]
     ky = analysis["unfavorable_gods"]
-    assert "Đinh" in hy and "Bính" in hy
-    assert "Canh" in ky and "Tân" in ky
+    assert "Chính Tài" in hy
+    assert "Kiếp Tài" in ky
 
 
 def _mutate_decision(

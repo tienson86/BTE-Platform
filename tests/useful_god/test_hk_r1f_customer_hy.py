@@ -11,6 +11,7 @@ from engines.pattern_engine.utils.context_builder import build_pattern_context
 from engines.useful_god_engine.engine import UsefulGodEngine
 from engines.useful_god_engine.presentation import (
     EMPTY_CUSTOMER_FAVORABLE_DISPLAY,
+    INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY,
     customer_favorable_display,
     customer_favorable_roles,
     is_exact_dung_duplicate,
@@ -72,8 +73,9 @@ def test_dung_customer_hy_omits_exact_dung_keeps_same_element() -> None:
     assert engine.favorable_display.startswith("Thủy · Nhâm · Thực Thần")
     assert view.favorable_gods == engine.favorable_gods
     assert view.canonical_favorable_display == engine.favorable_display
-    assert view.favorable_display == "Thủy · Quý · Thương Quan"
+    assert view.favorable_display == INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
     assert "Nhâm" not in view.favorable_display
+    assert "Quý" not in view.favorable_display
     assert view.unfavorable_display == engine.unfavorable_display
     assert view.useful_display == engine.useful_display
     assert view.winning_rule_id == engine.winning_rule_id
@@ -87,9 +89,9 @@ def test_api_tuyen_customer_hy_is_canh_thuc_than() -> None:
     assert useful["useful_display"] == "Mộc · Ất · Chính Quan"
     assert useful["favorable_gods"] == ["Chính Quan", "Thực Thần"]
     assert useful["canonical_favorable_display"].startswith("Mộc · Ất · Chính Quan")
-    assert useful["favorable_display"] == "Kim · Canh · Thực Thần"
+    assert useful["favorable_display"] == INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
     assert useful["unfavorable_display"].startswith("Thổ · Mậu · Tỷ Kiên")
-    assert payload["pattern"]["hy_than"] == "Thực Thần"
+    assert payload["pattern"]["hy_than"] == INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
     assert "Chính Quan" not in useful["favorable_display"]
 
 
@@ -106,6 +108,6 @@ def test_api_dung_customer_hy_is_quy_thuong_quan() -> None:
     useful = payload["useful_god"]
     assert useful["useful_display"] == "Thủy · Nhâm · Thực Thần"
     assert useful["favorable_gods"] == ["Thực Thần", "Thương Quan"]
-    assert useful["favorable_display"] == "Thủy · Quý · Thương Quan"
+    assert useful["favorable_display"] == INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
     assert useful["unfavorable_display"].startswith("Kim · Canh · Tỷ Kiên")
-    assert payload["pattern"]["hy_than"] == "Thương Quan"
+    assert payload["pattern"]["hy_than"] == INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY

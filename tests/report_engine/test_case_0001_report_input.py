@@ -87,15 +87,14 @@ def test_case_0001_report_input_snapshot() -> None:
     expected = _normalize_snapshot(
         json.loads(_EXPECTED_PATH.read_text(encoding="utf-8"))
     )
-    actual_useful = actual.pop("useful_god")
-    expected.pop("useful_god")
     actual.pop("interpretation")
     expected.pop("interpretation")
     assert actual == expected
-    assert actual_useful["winning_rule_id"] == "str_003"
-    assert actual_useful["winning_rule_group"] == "strength"
-    assert actual_useful["useful_god"] == "Chính Quan"
-    assert actual_useful["useful_display"] == "Hỏa · Đinh · Chính Quan"
+    useful = actual["useful_god"]
+    assert useful["winning_rule_id"] == "str_003"
+    assert useful["useful_display"] == "Hỏa · Đinh · Chính Quan"
+    assert useful["favorable_display"] == "Chưa đủ căn cứ xác định Hỷ thần bổ trợ riêng"
+    assert "str_003" not in useful["short_reason"]
 
 
 def test_case_0001_wp6_assembly_compatibility() -> None:

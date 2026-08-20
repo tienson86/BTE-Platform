@@ -18,41 +18,42 @@ HUYNH = {
 }
 
 
-def test_huynh_strength_remains_strong_downstream() -> None:
-    """B. strong / 0.66 remains strong after Score compose."""
+def test_huynh_strength_remains_balanced_downstream() -> None:
+    """B. balanced / 0.64 remains after Score compose (G1-02R Frozen)."""
     payload = OrchestratorService().analyze(**HUYNH)
     strength = payload["strength"]
-    assert strength["strength_level"] == "strong"
-    assert abs(float(strength["strength_score"]) - 0.66) < 0.01
-    assert strength.get("reasoning") == "Thân vượng"
-    assert payload["pattern"]["than_vuong_nhuoc"] == STRENGTH_LEVEL_LABELS["strong"]
-    assert payload["pattern"]["than_vuong_nhuoc"] != "Trung hòa"
+    assert strength["strength_level"] == "balanced"
+    assert abs(float(strength["strength_score"]) - 0.64) < 0.01
+    assert strength.get("reasoning") == "Trung hòa"
+    assert payload["pattern"]["than_vuong_nhuoc"] == STRENGTH_LEVEL_LABELS["balanced"]
 
     published = _published_then_scored()
-    assert published["strength"]["level"] == "strong"
-    assert abs(float(published["strength"]["score"]) - 0.66) < 0.01
+    assert published["strength"]["level"] == "balanced"
+    assert abs(float(published["strength"]["score"]) - 0.64) < 0.01
 
 
 def test_huynh_hy_than_exposed_downstream() -> None:
-    """G. Hỷ thần reaches pattern, interpretation, narrative, and report."""
+    """G. Customer Hỷ reaches pattern; internal favorable set stays published."""
+    from engines.useful_god_engine.presentation import (
+        INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY,
+    )
+
     payload = OrchestratorService().analyze(**HUYNH)
-    expected = ["Đinh", "Bính", "Ất"]
+    expected = ["Chính Tài", "Thực Thần"]
     assert payload["useful_god"]["favorable_gods"] == expected
-    assert payload["pattern"]["hy_than"] == "Đinh, Bính, Ất"
-    assert payload["pattern"]["hy_than"] not in {"", "--"}
+    assert payload["pattern"]["hy_than"] == INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
     narrative = _narrative_text(payload["narrative_result"])
     interpretation = _section_text(payload["interpretation"], "useful_god")
     assert "Không có Dụng thần" not in interpretation
     assert "Không có Dụng thần" not in narrative
-    assert "Đinh" in interpretation
-    assert "Đinh" in narrative or "Đinh" in payload["pattern"]["hy_than"]
+    assert "Chính Tài" in interpretation
 
 
 def test_huynh_ky_than_exposed_downstream() -> None:
     """H. Kỵ thần reaches pattern and useful-god view."""
     payload = OrchestratorService().analyze(**HUYNH)
-    assert payload["useful_god"]["unfavorable_gods"] == ["Canh", "Tân"]
-    assert payload["pattern"]["ky_than"] == "Canh, Tân"
+    assert payload["useful_god"]["unfavorable_gods"] == ["Kiếp Tài"]
+    assert payload["pattern"]["ky_than"] == "Kiếp Tài"
     assert payload["pattern"]["ky_than"] not in {"", "--"}
 
 
@@ -64,12 +65,12 @@ def test_huynh_pattern_remains_chinh_tai() -> None:
 
 
 def test_huynh_useful_god_ranking_unchanged() -> None:
-    """Useful God ranking remains sea_004 / Đinh."""
+    """Useful God ranking remains str_005 / Chính Tài (UG-R2 Frozen)."""
     payload = OrchestratorService().analyze(**HUYNH)
     useful = payload["useful_god"]
-    assert useful["useful_god"] == "Đinh"
-    assert "sea_004" in useful["matched_rules"]
-    assert abs(float(useful["confidence"]) - 0.85) < 0.01
+    assert useful["useful_god"] == "Chính Tài"
+    assert useful["winning_rule_id"] == "str_005"
+    assert abs(float(useful["confidence"]) - 0.72) < 0.01
 
 
 def test_huynh_production_trace_p0_invariants() -> None:
@@ -87,16 +88,16 @@ def test_huynh_production_trace_p0_invariants() -> None:
         )
     )
     analysis = output.analysis
-    assert analysis.strength.strength_level == "strong"
-    assert abs(float(analysis.strength.strength_score) - 0.66) < 0.01
-    assert analysis.pattern.than_vuong_nhuoc == "Thân vượng"
+    assert analysis.strength.strength_level == "balanced"
+    assert abs(float(analysis.strength.strength_score) - 0.64) < 0.01
+    assert analysis.pattern.than_vuong_nhuoc == "Trung hòa"
     assert analysis.pattern.cach_cuc == "Chính Tài"
-    assert analysis.useful_god.useful_god == "Đinh"
-    assert analysis.useful_god.favorable_gods == ["Đinh", "Bính", "Ất"]
-    assert analysis.useful_god.unfavorable_gods == ["Canh", "Tân"]
-    assert analysis.pattern.dung_than == "Đinh"
-    assert analysis.pattern.hy_than == "Đinh, Bính, Ất"
-    assert analysis.pattern.ky_than == "Canh, Tân"
+    assert analysis.useful_god.useful_god == "Chính Tài"
+    assert analysis.useful_god.favorable_gods == ["Chính Tài", "Thực Thần"]
+    assert analysis.useful_god.unfavorable_gods == ["Kiếp Tài"]
+    assert analysis.pattern.dung_than == "Chính Tài"
+    assert analysis.pattern.hy_than == "Chưa đủ căn cứ xác định Hỷ thần bổ trợ riêng"
+    assert analysis.pattern.ky_than == "Kiếp Tài"
 
 
 def _published_then_scored() -> dict:

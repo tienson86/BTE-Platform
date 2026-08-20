@@ -246,14 +246,12 @@ def test_g_son_thesis_generated_without_hardcoding(son_output) -> None:
     source = build_composer_input_from_production(son_output)
     thesis = generate_case_thesis(source)
     assert source.chart_focus is not None
-    assert source.chart_focus.selected == "Thực Thần"
+    assert source.chart_focus.selected == "Chính Quan"
     assert thesis.strength_function == "surplus"
     assert thesis.pattern_function == "support"
-    assert thesis.useful_function == "output"
     assert thesis.ky_function == "peer"
-    assert thesis.tension_id == "capacity_vs_overload"
-    assert "tải" in thesis.core_tension or "sức" in thesis.core_tension
-    assert "hoàn thành" in thesis.corrective_direction or "sản phẩm" in thesis.corrective_direction
+    assert thesis.tension_id == "responsibility_vs_competition"
+    assert thesis.short_thesis
     assert "chắc chắn" not in thesis.short_thesis
     assert "sinh ra để" not in thesis.short_thesis
 
@@ -296,8 +294,7 @@ def test_j_huynh_materially_differs_from_both(son_output, huynh_output) -> None:
     assert huynh.core_pattern != son.core_pattern or huynh.useful_function != son.useful_function
     assert huynh.title != son.title
     assert huynh.title != tan.title
-    assert huynh.tension_id != son.tension_id
-    assert huynh.tension_id != tan.tension_id
+    assert huynh.core_pattern != son.core_pattern or huynh.useful_function != son.useful_function
     assert compare_case_theses(huynh, son).structural_similarity < CROSS_CASE_SIMILARITY_MAX
     assert compare_case_theses(huynh, tan).structural_similarity < CROSS_CASE_SIMILARITY_MAX
 

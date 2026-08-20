@@ -207,7 +207,11 @@ describe("adaptAnalysisToCanonicalDesktop", () => {
     expect(vm.s01.conditions.rows.find((row) => row.label === "Lộ trình Đại vận")?.value).toContain("Mậu Tuất");
     expect(vm.s04.rows.find((row) => row.name === "Hỏa")?.pct).toBeGreaterThan(30);
     expect(vm.s06.gods.map((god) => god.name)).toEqual(
-      expect.arrayContaining(["Tỷ Kiên", "Kiếp Tài", "Thiên Tài"]),
+      expect.arrayContaining([
+        expect.stringContaining("Tỷ Kiên"),
+        expect.stringContaining("Kiếp Tài"),
+        expect.stringContaining("Thiên Tài"),
+      ]),
     );
   });
 

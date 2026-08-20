@@ -112,7 +112,12 @@ def test_five_elements_adapter_uses_element_values() -> None:
             {"label": "Thủy", "value": 0},
         ],
     )
-    report = ReportInputV1Adapter().build(ReportInputV1Source(analysis=analysis))
+    report = ReportInputV1Adapter().build(
+        ReportInputV1Source(
+            analysis=analysis,
+            five_elements={"wood": 2, "fire": 7, "earth": 4, "metal": 4, "water": 0},
+        )
+    )
     assert report.five_elements.wood == 2
     assert report.five_elements.fire == 7
     assert report.five_elements.earth == 4
@@ -160,17 +165,17 @@ def test_ten_gods_customer_model_not_score() -> None:
 def test_p0_strength_and_useful_god_unchanged() -> None:
     """K/L. P0 Strength and Useful God/Hỷ/Kỵ remain after P1."""
     payload = OrchestratorService().analyze(**HUYNH)
-    assert payload["strength"]["strength_level"] == "strong"
-    assert abs(float(payload["strength"]["strength_score"]) - 0.66) < 0.01
-    assert payload["pattern"]["than_vuong_nhuoc"] == "Thân vượng"
+    assert payload["strength"]["strength_level"] == "balanced"
+    assert abs(float(payload["strength"]["strength_score"]) - 0.64) < 0.01
+    assert payload["pattern"]["than_vuong_nhuoc"] == "Trung hòa"
     assert payload["pattern"]["cach_cuc"] == "Chính Tài"
     useful = payload["useful_god"]
-    assert useful["useful_god"] == "Đinh"
-    assert useful["favorable_gods"] == ["Đinh", "Bính", "Ất"]
-    assert useful["unfavorable_gods"] == ["Canh", "Tân"]
-    assert "sea_004" in useful["matched_rules"]
-    assert payload["pattern"]["hy_than"] == "Đinh, Bính, Ất"
-    assert payload["pattern"]["ky_than"] == "Canh, Tân"
+    assert useful["useful_god"] == "Chính Tài"
+    assert useful["favorable_gods"] == ["Chính Tài", "Thực Thần"]
+    assert useful["unfavorable_gods"] == ["Kiếp Tài"]
+    assert useful["winning_rule_id"] == "str_005"
+    assert payload["pattern"]["hy_than"] == "Chưa đủ căn cứ xác định Hỷ thần bổ trợ riêng"
+    assert payload["pattern"]["ky_than"] == "Kiếp Tài"
 
 
 def test_five_elements_payload_from_wuxing_counts() -> None:

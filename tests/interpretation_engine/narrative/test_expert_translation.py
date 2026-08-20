@@ -191,7 +191,7 @@ def _assert_clean_expert_narrative(output, expected_selected: str) -> None:
 
 def test_golden_huynh_expert_translation(huynh_output) -> None:
     """Lương Ngọc Huỳnh customer narrative has expert language, same decision."""
-    _assert_clean_expert_narrative(huynh_output, "Đinh")
+    _assert_clean_expert_narrative(huynh_output, "Chính Tài")
 
 
 def test_golden_son_expert_translation(son_output) -> None:

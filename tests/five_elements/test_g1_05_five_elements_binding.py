@@ -158,8 +158,9 @@ def test_strength_pattern_temperature_ten_gods_useful_god_unchanged() -> None:
     assert payload["pattern"]["pattern"] == "chinh_an"
     assert payload["temperature"]["climate_state"] == "cold"
     assert payload["temperature"]["balancing_need"] == "warming"
-    assert payload["useful_god"]["useful_god"] == "Bính"
-    assert payload["useful_god"]["useful_display"] == "Hỏa · Bính · Thất Sát"
+    assert payload["useful_god"]["useful_god"] == "Chính Quan"
+    assert payload["useful_god"]["useful_display"] == "Hỏa · Đinh · Chính Quan"
+    assert payload["useful_god"]["climate_display"] == "Hỏa · Bính · Thất Sát"
     ten_gods = payload.get("ten_gods") or {}
     visible = ten_gods.get("visible") or []
     stems = [str(item.get("stem") or "") for item in visible if isinstance(item, dict)]

@@ -139,7 +139,7 @@ def test_interpreter_can_retrieve_example() -> None:
     selected = explanation.decision.selected
     entity = retrieve_knowledge("UsefulGod", selected)
     assert entity is not None
-    assert entity.key == selected == "Đinh"
+    assert entity.key == selected == "Chính Tài"
 
 
 def test_broken_reference_detection() -> None:

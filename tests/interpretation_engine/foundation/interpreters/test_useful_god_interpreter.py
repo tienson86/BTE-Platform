@@ -61,13 +61,13 @@ def test_observation_generated(huynh_interpretation) -> None:
     assert "Dụng thần" in joined
     assert "Hỷ thần" in joined
     assert "Kỵ thần" in joined
-    assert "Đinh" in joined
+    assert "Chính Tài" in joined
 
 
 def test_reasoning_generated(huynh_interpretation) -> None:
     """Reasoning explains selection and rejection."""
     reasoning = " ".join(huynh_interpretation.reasoning)
-    assert "Đinh" in reasoning
+    assert "Chính Tài" in reasoning
     assert len(huynh_interpretation.reasoning) >= 3
     assert "Engine chọn" in reasoning or "Engine chọn" in reasoning
 
@@ -75,9 +75,9 @@ def test_reasoning_generated(huynh_interpretation) -> None:
 def test_evidence_preserved(huynh_interpretation) -> None:
     """Evidence preserves rule IDs and candidate scores."""
     ev = huynh_interpretation.evidence
-    assert "sea_004" in ev.selected_rule_id
-    assert "sea_004" in ev.rule_ids
-    assert ev.confidence == pytest.approx(0.85, abs=0.01)
+    assert "str_005" in ev.selected_rule_id
+    assert "str_005" in ev.rule_ids
+    assert ev.confidence == pytest.approx(0.72, abs=0.01)
     assert ev.engine_source == "UsefulGodEngine"
     assert len(ev.candidate_scores) >= 4
     rule_ids = {item.rule_id for item in ev.candidate_scores}
@@ -87,10 +87,10 @@ def test_evidence_preserved(huynh_interpretation) -> None:
 def test_conclusion_generated(huynh_interpretation) -> None:
     """Conclusion summarizes main useful god and Hỷ/Kỵ."""
     text = " ".join(huynh_interpretation.conclusions)
-    assert "Đinh" in text
+    assert "Chính Tài" in text
     assert "Hỷ thần" in text
     assert "Kỵ thần" in text
-    assert "Canh" in text or "Tân" in text
+    assert "Kiếp Tài" in text
 
 
 def test_impacts_generated(huynh_interpretation) -> None:
@@ -110,8 +110,8 @@ def test_recommendations_generated(huynh_interpretation) -> None:
 def test_warnings_generated(huynh_interpretation) -> None:
     """Warnings reference unfavorable elements and useful god."""
     text = " ".join(huynh_interpretation.warnings)
-    assert "Kỵ thần" in text or "Canh" in text
-    assert "Đinh" in text
+    assert "Kỵ thần" in text or "Kiếp Tài" in text
+    assert "Chính Tài" in text
 
 
 def test_rejected_candidate_explanation(huynh_interpretation) -> None:
@@ -125,7 +125,7 @@ def test_rejected_candidate_explanation(huynh_interpretation) -> None:
 def test_huynh_why_dinh_not_binh(huynh_interpretation) -> None:
     """Huỳnh acceptance: explain why Đinh won and Bính lost."""
     reasoning = " ".join(huynh_interpretation.reasoning)
-    assert "Đinh" in reasoning
+    assert "Chính Tài" in reasoning
     assert "Bính" in reasoning
     assert "mùa" in reasoning.lower() or "lệnh tháng" in reasoning.lower() or "season" in reasoning.lower()
 
@@ -133,10 +133,10 @@ def test_huynh_why_dinh_not_binh(huynh_interpretation) -> None:
 def test_huynh_hy_ky_meaning(huynh_interpretation) -> None:
     """Huỳnh acceptance: Hỷ and Kỵ meaning in conclusions/impacts."""
     conclusion = " ".join(huynh_interpretation.conclusions)
-    assert "Đinh" in conclusion and "Bính" in conclusion
-    assert "Canh" in conclusion or "Tân" in conclusion
+    assert "Chính Tài" in conclusion
+    assert "Kiếp Tài" in conclusion
     impacts = " ".join(item.text for item in huynh_interpretation.impacts)
-    assert "Hỷ" in impacts or "Đinh" in impacts
+    assert "Hỷ" in impacts or "Chính Tài" in impacts
 
 
 def test_huynh_domain_implications(huynh_interpretation) -> None:

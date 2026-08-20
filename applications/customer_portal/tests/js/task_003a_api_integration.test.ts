@@ -164,8 +164,10 @@ describe("TASK_003A BaZi adapter", () => {
     expect(vm.pillars).toHaveLength(4);
     expect(vm.pillars[0]?.heavenlyStem).toBe("Canh");
     expect(vm.fiveElements.find((el) => el.id === "kim")?.score).toBe(4);
-    expect(vm.tenGods[0]?.name).toBe("Thiên Ấn");
-    expect(vm.strength.label).toBe("THÂN VƯỢNG");
+    expect(vm.tenGods[0]?.name).toBe("Chính Quan");
+    expect(vm.tenGods.find((god) => god.name === "Thiên Ấn")?.count).toBe(1);
+    expect(vm.tenGods.find((god) => god.name === "Tỷ Kiên")?.count).toBe(1);
+    expect(vm.strength.label).toBe("Thân vượng");
     expect(vm.metadata.chartId).toBe("req-adapter");
   });
 });
@@ -226,6 +228,6 @@ describe("TASK_003A AnalyzeService with mocked fetch", () => {
 
     expect(vm.profile.fullName).toBe("Test User");
     expect(vm.pillars[2]?.heavenlyStem).toBe("Bính");
-    expect(vm.strength.label).toBe("CÂN BẰNG");
+    expect(vm.strength.label).toBe("Thân cân bằng");
   });
 });

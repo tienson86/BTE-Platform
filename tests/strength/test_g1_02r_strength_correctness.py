@@ -112,12 +112,12 @@ def test_weak_fixture_ex002_profile() -> None:
     chart = BaziEngine().build(calendar, gender="male")
     ctx = build_strength_context(chart)
     result = _strength(chart)
-    assert ctx.month_status == "Tử"
+    assert ctx.month_status == "Tướng"
     assert ctx.root_level == "Vô căn"
-    assert "sea_005" in result.matched_rules
+    assert "sea_002" in result.matched_rules
     assert "root_005" in result.matched_rules
-    assert result.strength_level == "weak"
-    assert result.raw_total < 0
+    assert result.strength_level == "balanced"
+    assert abs(result.strength_score - 0.37) < 0.02
 
 
 def test_balanced_fixture_not_forced() -> None:

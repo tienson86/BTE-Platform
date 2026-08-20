@@ -37,15 +37,15 @@ describe("PortalPage — Result architecture Sprint D / UI V1", () => {
     expect(zones.indexOf("recommendation")).toBeLessThan(zones.indexOf("interpretation"));
     expect(zones.indexOf("interpretation")).toBeLessThan(zones.indexOf("knowledge"));
 
-    // LP-005
+    // LP-005 — Frozen customer priority copy (not English "Critical")
     expect(screen.getByText("KHUYẾN NGHỊ")).toBeTruthy();
-    expect(screen.getByText("Critical")).toBeTruthy();
+    expect(screen.getByText("Ưu tiên cao")).toBeTruthy();
     expect(container.querySelectorAll(".rp-rec-item").length).toBeGreaterThan(0);
     expect(container.querySelectorAll(".rp-rec-item").length).toBeLessThanOrEqual(5);
 
     // LP-006 preview default + expand (accessible name includes title)
     expect(screen.getByText("LUẬN GIẢI")).toBeTruthy();
-    expect(screen.getAllByText("Observation").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Quan sát").length).toBeGreaterThan(0);
     const expandButtons = screen.getAllByRole("button", {
       name: /Mở rộng luận giải/i,
     });
@@ -53,8 +53,8 @@ describe("PortalPage — Result architecture Sprint D / UI V1", () => {
     expect(expandButtons[0]!.getAttribute("aria-expanded")).toBe("false");
     fireEvent.click(expandButtons[0]!);
     expect(expandButtons[0]!.getAttribute("aria-expanded")).toBe("true");
-    expect(screen.getAllByText("Impact").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Suggestion").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Tác động").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Gợi ý").length).toBeGreaterThan(0);
 
     // LP-007 accordion controls
     expect(screen.getByText("KIẾN THỨC")).toBeTruthy();

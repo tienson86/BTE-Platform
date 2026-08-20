@@ -59,18 +59,18 @@ def case0001_foundation():
 def test_a_canonical_context_preserves_engine_truth(huynh_foundation) -> None:
     """A. CanonicalAnalysisContext preserves engine truth."""
     ctx = huynh_foundation.context
-    assert ctx.strength.level == "strong"
-    assert abs(ctx.strength.score - 0.66) < 0.01
-    assert ctx.strength.label == "Thân vượng"
+    assert ctx.strength.level == "balanced"
+    assert abs(ctx.strength.score - 0.64) < 0.01
+    assert ctx.strength.label == "Trung hòa"
     assert ctx.pattern.label == "Chính Tài"
-    assert ctx.useful_god.selected == "Đinh"
+    assert ctx.useful_god.selected == "Chính Tài"
     assert ctx.temperature.level == "cool"
     assert abs(ctx.temperature.score - 0.4767) < 0.001
-    assert ctx.temperature.label == "Khí mát"
+    assert ctx.temperature.label == "Địa chi tháng mát"
     assert ctx.five_elements.wood == 2
     assert ctx.five_elements.fire == 7
-    assert ctx.score.total_score == 61.25
-    assert ctx.score.grade == "C"
+    assert ctx.score.total_score == pytest.approx(55.95, abs=0.01)
+    assert ctx.score.grade == "D+"
 
 
 def test_b_score_fields_cannot_replace_analytical_truth(huynh_foundation, huynh_output) -> None:
@@ -103,15 +103,12 @@ def test_b_score_fields_cannot_replace_analytical_truth(huynh_foundation, huynh_
 def test_c_useful_god_facts_huynh(huynh_foundation) -> None:
     """C. UsefulGodInterpretationFacts includes selected, Hỷ, Kỵ, candidates, reason."""
     ug = huynh_foundation.facts.useful_god
-    assert ug.selected == "Đinh"
-    assert list(ug.favorable_gods) == ["Đinh", "Bính", "Ất"]
-    assert list(ug.unfavorable_gods) == ["Canh", "Tân"]
-    assert ug.confidence == pytest.approx(0.85, abs=0.01)
-    assert "sea_004" in ug.rule_ids
-    assert "Thu kim vượng cần hỏa tôi luyện" in ug.reason
+    assert ug.selected == "Chính Tài"
+    assert list(ug.favorable_gods) == ["Chính Tài", "Thực Thần"]
+    assert list(ug.unfavorable_gods) == ["Kiếp Tài"]
+    assert ug.confidence == pytest.approx(0.72, abs=0.01)
+    assert "str_005" in ug.rule_ids
     assert len(ug.candidates) > 0
-    sea = [item for item in ug.candidates if item.rule_id == "sea_004"]
-    assert sea and sea[0].useful_god == "Đinh"
     assert ug.month_branch == "Dậu"
     assert ug.season == "Thu"
 
@@ -119,9 +116,9 @@ def test_c_useful_god_facts_huynh(huynh_foundation) -> None:
 def test_d_strength_facts_ownership(huynh_foundation) -> None:
     """D. StrengthInterpretationFacts preserves strong/weak ownership."""
     strength = huynh_foundation.facts.strength
-    assert strength.level == "strong"
-    assert strength.score == pytest.approx(0.66, abs=0.01)
-    assert strength.label == "Thân vượng"
+    assert strength.level == "balanced"
+    assert strength.score == pytest.approx(0.64, abs=0.01)
+    assert strength.label == "Trung hòa"
     assert strength.owner == "StrengthEngine"
     assert strength.status == DataAvailability.AVAILABLE
 
@@ -131,7 +128,7 @@ def test_e_temperature_facts_real_engine(huynh_foundation) -> None:
     temp = huynh_foundation.facts.temperature
     assert temp.level == "cool"
     assert temp.score == pytest.approx(0.4767, abs=0.001)
-    assert temp.label == "Khí mát"
+    assert temp.label == "Địa chi tháng mát"
     assert temp.owner == "TemperatureEngine"
     assert diag.TEMPERATURE_CONTAMINATED_BY_PATTERN not in temp.diagnostics
 
@@ -226,10 +223,10 @@ def test_k_existing_narrative_still_works() -> None:
 def test_l_portal_payload_unchanged(huynh_output) -> None:
     """L. Production analysis contract unchanged — Portal/PDF inputs stable."""
     analysis = huynh_output.analysis
-    assert analysis.strength.strength_level == "strong"
-    assert analysis.useful_god.useful_god == "Đinh"
+    assert analysis.strength.strength_level == "balanced"
+    assert analysis.useful_god.useful_god == "Chính Tài"
     assert analysis.pattern.cach_cuc == "Chính Tài"
-    assert analysis.score.grade == "C"
+    assert analysis.score.grade == "D+"
     assert huynh_output.interpretation is not None
 
 

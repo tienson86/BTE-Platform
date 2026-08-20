@@ -376,22 +376,22 @@ def test_default_registry_still_validates(
 
 
 def test_huynh_retrieves_strong_knowledge(huynh_output) -> None:
-    """Lương Ngọc Huỳnh is Strong / ~0.66 / Thân vượng and retrieves that entity."""
+    """Lương Ngọc Huỳnh is balanced / 0.64 / Trung hòa and retrieves that entity."""
     foundation = huynh_output.interpretation_foundation
     assert foundation is not None
     facts = foundation.facts.strength
-    assert facts.level == "strong"
-    assert facts.score == pytest.approx(0.66, abs=0.02)
-    assert facts.label == "Thân vượng"
+    assert facts.level == "balanced"
+    assert facts.score == pytest.approx(0.64, abs=0.02)
+    assert facts.label == "Trung hòa"
     assessment = build_strength_assessment(
         facts,
         strength_result=huynh_output.strength_result,
     )
-    assert assessment.state == "strong"
-    assert assessment.score == pytest.approx(0.66, abs=0.02)
+    assert assessment.state == "balanced"
+    assert assessment.score == pytest.approx(0.64, abs=0.02)
     bundle = build_strength_knowledge_bundle(assessment)
     assert bundle.state_entity is not None
-    assert bundle.state_entity.key == "strong"
+    assert bundle.state_entity.key == "balanced"
     assert bundle.coverage.readiness == KNOWLEDGE_READINESS_READY
     assert bundle.status == DataAvailability.AVAILABLE
 

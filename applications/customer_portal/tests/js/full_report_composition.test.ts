@@ -64,8 +64,11 @@ const HUYNH: AnalysisDataDto = {
   pattern: { cach_cuc: "Chính Tài", than_vuong_nhuoc: "Thân vượng" },
   useful_god: {
     useful_god: "Đinh",
+    useful_display: "Đinh",
     favorable_gods: ["Đinh", "Bính", "Ất"],
+    favorable_display: "Chưa đủ căn cứ xác định Hỷ thần bổ trợ riêng",
     unfavorable_gods: ["Canh", "Tân"],
+    unfavorable_display: "Canh, Tân",
   },
   five_elements: {
     wood: { count: 2 },
@@ -194,7 +197,7 @@ describe("full canonical report composition", () => {
     const report = model();
     expect(report.strengthLabel).toBe("Thân vượng");
     expect(report.usefulGod).toBe("Đinh");
-    expect(report.hyThan).toBe("Đinh, Bính, Ất");
+    expect(report.hyThan).toBe("Chưa đủ căn cứ xác định Hỷ thần bổ trợ riêng");
     expect(report.kyThan).toBe("Canh, Tân");
     expect(report.fiveElements.map((row) => row.count)).toEqual([2, 7, 4, 4, 0]);
     expect(report.tenGods).toEqual(["Tỷ Kiên", "Kiếp Tài", "Nhật Chủ", "Thiên Tài"]);

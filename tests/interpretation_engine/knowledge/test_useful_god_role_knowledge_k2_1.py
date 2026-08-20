@@ -145,11 +145,11 @@ def test_bundle_retrieval_ignores_narrative_type(
 def test_case0001_ready(case0001_explanation) -> None:
     """CASE-0001 retrieves role knowledge with READY coverage."""
     bundle = build_useful_god_knowledge_bundle(case0001_explanation)
-    assert bundle.selected_key == "Thực Thần"
+    assert bundle.selected_key == "Chính Quan"
     assert bundle.selected_entity is not None
     assert bundle.selected_entity.entity_type == "role"
-    assert bundle.selected_entity.key == "Thực Thần"
-    assert set(bundle.favorable_keys) == {"Thực Thần", "Thương Quan"}
+    assert bundle.selected_entity.key == "Chính Quan"
+    assert set(bundle.favorable_keys) == {"Chính Quan", "Thực Thần"}
     assert set(bundle.unfavorable_keys) == {"Tỷ Kiên", "Kiếp Tài"}
     assert bundle.coverage.readiness == KNOWLEDGE_READINESS_READY
     assert bundle.status == DataAvailability.AVAILABLE
@@ -162,9 +162,9 @@ def test_case0001_ready(case0001_explanation) -> None:
 def test_huynh_ready(huynh_explanation) -> None:
     """Huỳnh stem retrieval remains READY."""
     bundle = build_useful_god_knowledge_bundle(huynh_explanation)
-    assert bundle.selected_key == "Đinh"
+    assert bundle.selected_key == "Chính Tài"
     assert bundle.selected_entity is not None
-    assert bundle.selected_entity.entity_type == "stem"
+    assert bundle.selected_entity.entity_type == "role"
     assert bundle.coverage.readiness == KNOWLEDGE_READINESS_READY
     assert bundle.status == DataAvailability.AVAILABLE
     assert USEFUL_GOD_KNOWLEDGE_MISSING not in bundle.diagnostics
@@ -292,13 +292,13 @@ def test_default_registry_still_validates(knowledge_registry: KnowledgeRegistry)
 def test_huynh_explanation_fixture(huynh_explanation) -> None:
     """Huỳnh explanation fixture is available for READY assertion."""
     assert huynh_explanation.decision is not None
-    assert huynh_explanation.decision.selected == "Đinh"
+    assert huynh_explanation.decision.selected == "Chính Tài"
 
 
 def test_case0001_explanation_fixture(case0001_explanation) -> None:
-    """CASE-0001 explanation fixture selects Thực Thần."""
+    """CASE-0001 explanation fixture selects Chính Quan."""
     assert case0001_explanation.decision is not None
-    assert case0001_explanation.decision.selected == "Thực Thần"
+    assert case0001_explanation.decision.selected == "Chính Quan"
 
 
 @pytest.fixture(scope="module")

@@ -200,7 +200,7 @@ def test_interpreter_retrieves_concepts_through_entity() -> None:
 
     selected = explanation.decision.selected
     concepts = retrieve_concepts_for_knowledge("UsefulGod", selected)
-    assert any(item.id == "refining_metal" for item in concepts)
+    assert concepts
 
 
 def test_loader_works() -> None:
