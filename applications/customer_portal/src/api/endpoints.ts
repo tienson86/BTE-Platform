@@ -12,6 +12,8 @@ export const API_ENDPOINTS = {
   score: "/score",
   interpretation: "/interpretation",
   report: "/report",
+  exportPdf: "/export/pdf",
+  exportDocx: "/export/docx",
   narrative: "/narrative",
   discussion: "/discussion",
   cases: "/cases",

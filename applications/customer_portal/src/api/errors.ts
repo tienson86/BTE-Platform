@@ -62,7 +62,7 @@ export function kindFromStatus(status: number): ApiErrorKind {
   if (status === 403) return "forbidden";
   if (status === 404) return "not_found";
   if (status === 408 || status === 504) return "timeout";
-  if (status === 400 || status === 422) return "validation";
+  if (status === 400 || status === 409 || status === 422) return "validation";
   if (status >= 500) return "server";
   return "unknown";
 }

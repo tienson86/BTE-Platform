@@ -3,6 +3,7 @@
  */
 
 export { ResultPageBody } from "./ResultPageBody";
+export { ResultExportBar } from "./ResultExportBar";
 export { ResultPageProvider, useResultPageViewModel } from "./ResultPageContext";
 export { ResultPageStatusGate } from "./ResultPageStatusGate";
 export type { ResultPageStatusGateProps } from "./ResultPageStatusGate";

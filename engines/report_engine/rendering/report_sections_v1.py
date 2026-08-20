@@ -99,8 +99,9 @@ def build_presented_report(report_input: ReportInputV1) -> PresentedReportV1:
         heading="Báo cáo luận giải Bát Tự",
         subtitle=" · ".join(part for part in subtitle_parts if part),
         footer=(
-            f"BTE Platform · Report V1 · {display_text(metadata.report_version)} · "
-            f"{display_text(metadata.engine_version)}"
+            f"BTE V1.0 · Report V{display_text(metadata.report_version)} · "
+            f"Mã phân tích {display_text(metadata.case_id) or '—'} · "
+            f"{display_text(metadata.generated_at)}"
         ),
         sections=_build_sections(report_input),
     )
@@ -312,7 +313,7 @@ def _section_strength(report_input: ReportInputV1) -> PresentedSection:
     rows = _filled_rows(
         [
             ("Nhật chủ", display_text(strength.day_master)),
-            ("Điểm", display_text(strength.score)),
+            ("Điểm thân", display_text(strength.score)),
             ("Mức", display_text(strength.level, "strength")),
             ("Phân loại", display_text(strength.classification, "strength")),
             ("Hỗ trợ mùa", display_text(strength.seasonal_support)),

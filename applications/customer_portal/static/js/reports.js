@@ -245,6 +245,7 @@
       source: raw.source || "local",
       input: input,
       data: raw.data || null,
+      analysis_id: raw.analysis_id || id,
     };
   }
 
@@ -258,6 +259,10 @@
       const entry = normalizeReport(
         {
           id: item.id || "local-" + idx,
+          analysis_id:
+            (data && (data.analysis_id || data.request_id)) ||
+            item.analysis_id ||
+            item.id,
           saved_at: item.saved_at,
           input: item.input,
           summary: item.summary,
@@ -353,6 +358,8 @@
         if (action === "print") printReport(selected);
         if (action === "copy") copyReport(selected);
         if (action === "download") downloadReport(selected);
+        if (action === "download-pdf") downloadOfficial(selected, "pdf");
+        if (action === "download-docx") downloadOfficial(selected, "docx");
         if (action === "share") {
           BtePortal.showFlash(flash, t("reports.share_placeholder"), "success");
         }
@@ -696,13 +703,9 @@
   }
 
   function downloadReport(report) {
-    // PDF only if API already provided a URL/reference — never generate PDF.
+    // HTML/markdown preview only — official PDF/DOCX use downloadOfficial().
     if (viewFormat === "pdf" || (!report.has_html && !report.has_markdown && report.has_pdf)) {
-      if (typeof report.pdf === "string" && /^https?:/i.test(report.pdf)) {
-        window.open(report.pdf, "_blank", "noopener");
-        return;
-      }
-      BtePortal.showFlash(flash, t("reports.pdf_download_unavailable"), "error");
+      downloadOfficial(report, "pdf");
       return;
     }
 
@@ -761,6 +764,72 @@
     a.click();
     a.remove();
     URL.revokeObjectURL(url);
+  }
+
+  function downloadOfficial(report, format) {
+    const data = report && report.data;
+    const analysisId = currentAnalysisId(report);
+    if (!data || !analysisId) {
+      BtePortal.showFlash(flash, t("reports.nothing_to_download"), "error");
+      return;
+    }
+    const source = report.source === "history" ? "history" : "current";
+    BtePortal.showFlash(flash, t("reports.export_generating"), "success");
+    fetch("/backend/api/v1/export/" + format, {
+      method: "POST",
+      headers: {
+        Accept: format === "pdf"
+          ? "application/pdf"
+          : "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        analysis_id: analysisId,
+        source: source,
+        data: data,
+        input: report.input || {},
+      }),
+    })
+      .then(function (res) {
+        if (!res.ok) {
+          return res.text().then(function (text) {
+            var parsed = null;
+            try {
+              parsed = text ? JSON.parse(text) : null;
+            } catch (_) {
+              parsed = null;
+            }
+            var msg =
+              (parsed && parsed.message) || t("reports.export_failed");
+            throw new Error(msg);
+          });
+        }
+        var header = res.headers.get("Content-Disposition") || "";
+        var match = /filename="?([^";]+)"?/i.exec(header);
+        var filename =
+          (match && match[1]) ||
+          safeFilename(report.name) + (format === "pdf" ? ".pdf" : ".docx");
+        return res.blob().then(function (blob) {
+          if (!blob || !blob.size) {
+            throw new Error(t("reports.export_failed"));
+          }
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.href = url;
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(url);
+        });
+      })
+      .catch(function (err) {
+        BtePortal.showFlash(
+          flash,
+          (err && err.message) || t("reports.export_failed"),
+          "error"
+        );
+      });
   }
 
   if (document.readyState === "loading") {

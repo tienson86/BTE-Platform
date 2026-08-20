@@ -16,6 +16,7 @@ import type { AnalyzeChartRequest } from "../../models";
 import { CanonicalDesktopProvider } from "./CanonicalDesktopContext";
 import { PortalFooter, PortalHeader, PortalSidebar } from "./shell/PortalChrome";
 import {
+  ResultExportBar,
   ResultPageBody,
   ResultPageProvider,
   ResultPageStatusGate,
@@ -102,7 +103,10 @@ export function PortalPage({
                 message={viewModel.statusMessage}
               />
             ) : (
-              <ResultPageBody />
+              <>
+                <ResultPageBody />
+                <ResultExportBar />
+              </>
             )}
           </main>
           <PortalFooter />

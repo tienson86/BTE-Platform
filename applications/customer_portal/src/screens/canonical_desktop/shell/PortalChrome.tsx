@@ -37,6 +37,11 @@ function hrefForNav(id: string, table: Record<string, string>): string {
 function handleCanonicalNav(event: MouseEvent<HTMLAnchorElement>, href: string): void {
   if (href !== "#xuat") return;
   event.preventDefault();
+  const target = document.getElementById("xuat");
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
   window.print();
 }
 

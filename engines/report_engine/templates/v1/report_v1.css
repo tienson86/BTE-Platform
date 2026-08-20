@@ -51,7 +51,14 @@ body {
 
 .report-v1__section {
   margin-bottom: 24px;
-  page-break-inside: avoid;
+  page-break-inside: auto;
+}
+
+.report-v1__meta-grid dd,
+.report-v1__table td,
+.report-v1__section-body p {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .report-v1__section-title {
@@ -164,6 +171,18 @@ body {
   }
 
   .report-v1__section {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  #chart-info,
+  #four-pillars,
+  #five-elements,
+  #strength,
+  #pattern,
+  .report-v1__pillars,
+  .report-v1__pillar-card,
+  .report-v1__meta-grid {
     break-inside: avoid;
     page-break-inside: avoid;
   }
@@ -174,8 +193,8 @@ body {
   }
 
   .report-v1__table {
-    break-inside: avoid;
-    page-break-inside: avoid;
+    break-inside: auto;
+    page-break-inside: auto;
   }
 
   .report-v1__pillars {

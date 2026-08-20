@@ -39,6 +39,7 @@ class DocxExporterV1:
         document = Document()
         self._configure_page(document)
         self._apply_styles(document)
+        self._stamp_properties(document, report_input)
         self._render(document, report_input)
         document.save(str(output_path))
         validate_docx_file(output_path)
@@ -73,6 +74,17 @@ class DocxExporterV1:
         normal = document.styles["Normal"]
         normal.font.name = "Arial"
         normal.font.size = Pt(11)
+
+    def _stamp_properties(self, document: Document, report_input: ReportInputV1) -> None:
+        """Embed identity in document properties — not a second analytical model."""
+        props = document.core_properties
+        props.title = "Báo cáo luận giải Bát Tự"
+        props.subject = report_input.profile.full_name or "BTE V1.0"
+        props.identifier = report_input.metadata.case_id
+        props.comments = (
+            f"BTE V1.0 · Report V{report_input.metadata.report_version} · "
+            f"analysis_id={report_input.metadata.case_id}"
+        )
 
     def _render(self, document: Document, report_input: ReportInputV1) -> None:
         presented = build_presented_report(report_input)
