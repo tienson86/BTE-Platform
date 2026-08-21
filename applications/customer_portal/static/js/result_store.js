@@ -20,6 +20,7 @@
   const LEGACY_LAST_KEY = "bte_portal_last_result";
   const LEGACY_HISTORY_KEY = "bte_portal_history";
   const HISTORY_LIMIT = 30;
+  let synthesizedIdSeq = 0;
 
   function sessionStore() {
     try {
@@ -133,7 +134,8 @@
       return String(data.analysis_id || data.request_id || data.case_id);
     }
     const input = (entry && entry.input) || {};
-    return ["bte", input.year || 0, input.month || 0, input.day || 0, input.hour || 0, input.minute || 0, Date.now()].join("-");
+    synthesizedIdSeq += 1;
+    return ["bte", input.year || 0, input.month || 0, input.day || 0, input.hour || 0, input.minute || 0, Date.now(), synthesizedIdSeq].join("-");
   }
 
   function displayAnalysisId(entry) {
@@ -172,27 +174,69 @@
     };
   }
 
+  function rowAnalysisId(row) {
+    if (!row || typeof row !== "object") return "";
+    return String(displayAnalysisId(row) || "").trim();
+  }
+
+  function historyRecordFromRow(row, analysisId) {
+    if (!row || typeof row !== "object") return null;
+    const id = String(analysisId || rowAnalysisId(row) || "").trim();
+    if (!row.data || typeof row.data !== "object") {
+      return {
+        input: row.input || {},
+        data: null,
+        analysis_id: id || null,
+        source: "history",
+        corrupt: true,
+      };
+    }
+    return {
+      input: row.input || {},
+      data: row.data,
+      analysis_id: id,
+      source: "history",
+    };
+  }
+
+  function findHistoryById(expectedId) {
+    const wanted = expectedId != null && String(expectedId).trim() ? String(expectedId).trim() : "";
+    if (!wanted) return null;
+    const view = peekView();
+    if (view) {
+      const viewId = readValue([VIEW_ID_KEY]) || view.analysis_id || view.id || displayAnalysisId(view);
+      if (String(viewId) === wanted) {
+        return historyRecordFromRow(
+          {
+            input: view.input || {},
+            data: view.data,
+            analysis_id: viewId,
+          },
+          wanted,
+        );
+      }
+    }
+    const list = loadHistory();
+    for (let i = 0; i < list.length; i += 1) {
+      const row = list[i];
+      if (rowAnalysisId(row) === wanted) {
+        return historyRecordFromRow(row, wanted);
+      }
+    }
+    return null;
+  }
+
   /**
    * Customer display payload.
    *
    * Default: fresh current analysis.
-   * History: only when fromHistory is true AND expectedId matches the view.
+   * History: only when fromHistory is true AND expectedId matches a stored snapshot.
+   * Explicit History never falls back to current.
    */
   function resolveForDisplay(fromHistory, expectedId) {
     const wanted = expectedId != null && String(expectedId).trim() ? String(expectedId).trim() : "";
     if (fromHistory && wanted) {
-      const view = peekView();
-      if (view && view.data) {
-        const viewId = readValue([VIEW_ID_KEY]) || view.analysis_id || view.id || displayAnalysisId(view);
-        if (String(viewId) === wanted) {
-          return {
-            input: view.input || {},
-            data: view.data,
-            analysis_id: viewId,
-            source: "history",
-          };
-        }
-      }
+      return findHistoryById(wanted);
     }
     const current = loadCurrent();
     if (current) return current;
@@ -206,16 +250,20 @@
     return global.BteI18n ? global.BteI18n.t("api.analyze_result") : "Analyze result";
   }
 
-  function historyRow(entry) {
-    const analysisId = readCurrentAnalysisId() || makeAnalysisId(entry);
+  function historyRow(entry, forcedId) {
+    const analysisId = forcedId || makeAnalysisId(entry);
     const meta = (entry.data && entry.data.result_meta) || {};
     const source = (entry.data && entry.data.useful_god_source) || {};
+    const narrative = (entry.data && entry.data.narrative_result) || {};
+    const createdAt = meta.created_at || new Date().toISOString();
     return {
       id: analysisId,
       analysis_id: analysisId,
-      saved_at: new Date().toISOString(),
-      created_at: meta.created_at || new Date().toISOString(),
+      request_id: (entry.data && entry.data.request_id) || meta.analysis_id || analysisId,
+      saved_at: createdAt,
+      created_at: createdAt,
       customer_contract: source.contract || meta.customer_contract || null,
+      narrative_contract: narrative.contract || null,
       gate_core_freeze: meta.gate_core_freeze || null,
       month_pillar_standard: meta.month_pillar_standard || null,
       release_label: meta.release_label || null,
@@ -238,14 +286,19 @@
     if (raw === null) return false;
     const wrote = writeRaw(LAST_KEY, raw, false);
     if (!wrote) return false;
-    writeCurrentAnalysisId(makeAnalysisId(result) || makeAnalysisId(entry));
+    const declaredId =
+      (result && (result.analysis_id || result.id)) ||
+      (entry.data && (entry.data.analysis_id || entry.data.request_id || entry.data.case_id)) ||
+      "";
+    const analysisId = declaredId ? String(declaredId) : makeAnalysisId(entry);
+    writeCurrentAnalysisId(analysisId);
     // Drop pre-refactor keys so stale pillars cannot shadow the new result.
     removeRaw([LEGACY_LAST_KEY]);
     // A fresh analyze always wins over whatever entry was being viewed.
     clearView();
     // History is best-effort — must not undo a successful last-result write.
     try {
-      saveHistory(entry);
+      saveHistory(entry, analysisId);
     } catch (_) {
       /* ignore */
     }
@@ -275,20 +328,39 @@
 
   /**
    * Append an entry to history. Never touches the last Analyze result.
+   * Same analysis_id is not prepended again (refresh/export-safe).
+   * Existing snapshots are not mutated.
    *
    * @param {object} entry result shape ({input, data}) or a ready history row.
-   * @returns {boolean} true when the entry was appended.
+   * @param {string} [forcedId]
+   * @returns {boolean} true when the entry was appended or already present.
    */
-  function saveHistory(entry) {
+  function saveHistory(entry, forcedId) {
     let row = null;
     if (entry && typeof entry === "object" && entry.saved_at) {
       row = entry;
     } else {
       const normalized = normalizeResult(entry);
-      if (normalized) row = historyRow(normalized);
+      if (normalized) row = historyRow(normalized, forcedId);
     }
     if (!row) return false;
+    if (forcedId && !row.analysis_id) {
+      row.analysis_id = String(forcedId);
+      row.id = String(forcedId);
+    }
     const list = loadHistory();
+    const payloadId = String(
+      (entry && entry.data && (entry.data.analysis_id || entry.data.request_id || entry.data.case_id)) ||
+        (entry && !entry.saved_at && entry.analysis_id) ||
+        "",
+    ).trim();
+    if (payloadId) {
+      for (let i = 0; i < list.length; i += 1) {
+        if (rowAnalysisId(list[i]) === payloadId) {
+          return true;
+        }
+      }
+    }
     list.unshift(row);
     const raw = encode(list.slice(0, HISTORY_LIMIT));
     if (raw === null) return false;
@@ -351,11 +423,13 @@
     HISTORY_KEY: HISTORY_KEY,
     VIEW_KEY: VIEW_KEY,
     CURRENT_ID_KEY: CURRENT_ID_KEY,
+    HISTORY_LIMIT: HISTORY_LIMIT,
     save: save,
     load: load,
     loadCurrent: loadCurrent,
     getCurrentAnalysisId: readCurrentAnalysisId,
     resolveForDisplay: resolveForDisplay,
+    findHistoryById: findHistoryById,
     clear: clear,
     saveHistory: saveHistory,
     loadHistory: loadHistory,

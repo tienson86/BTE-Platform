@@ -69,19 +69,28 @@ export function ResultPageStatusGate({
   }
 
   const isVersion = Boolean(message && /phiên bản dữ liệu cũ|chưa đủ hợp đồng/i.test(message));
+  const isMissing = Boolean(message && /Không tìm thấy hồ sơ/i.test(message));
+  const isCorrupt = Boolean(message && /Không tải được kết quả đã lưu/i.test(message));
+  const title = isMissing
+    ? "Không tìm thấy hồ sơ"
+    : isVersion
+      ? "Kết quả cần phân tích lại"
+      : "Không tải được kết quả";
+  const defaultHref = isMissing ? "/history" : "/analyze";
+  const defaultLabel = isMissing ? "Về lịch sử" : "Phân tích lại";
   return (
     <div
       className="rp-status-gate"
       data-status="error"
-      data-reason={isVersion ? "contract" : "error"}
+      data-reason={isVersion ? "contract" : isMissing ? "missing" : isCorrupt ? "corrupt" : "error"}
     >
       <ErrorState
-        title={isVersion ? "Kết quả cần phân tích lại" : "Không tải được kết quả"}
+        title={title}
         description={message ?? "Vui lòng thử lại sau."}
         action={
           action ?? (
-            <a className="rp-status-gate__cta" href="/analyze">
-              Phân tích lại
+            <a className="rp-status-gate__cta" href={defaultHref}>
+              {defaultLabel}
             </a>
           )
         }

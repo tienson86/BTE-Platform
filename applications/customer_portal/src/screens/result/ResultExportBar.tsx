@@ -17,6 +17,7 @@ import {
   downloadOfficialExport,
   type CustomerExportPayload,
 } from "../../export/customerExport";
+import { buildReportHref } from "../../resultState/currentResult";
 
 export type ResultExportBarProps = {
   readonly payload: CustomerExportPayload | null;
@@ -27,6 +28,7 @@ export function ResultExportBar({ payload }: ResultExportBarProps): ReactNode {
   const [notice, setNotice] = useState("");
   const ready = customerExportReady(payload);
   const block = customerExportBlockMessage(payload);
+  const reportHref = buildReportHref(payload?.source, payload?.analysisId);
 
   async function onDownload(format: "pdf" | "docx"): Promise<void> {
     if (!payload) {
@@ -58,7 +60,7 @@ export function ResultExportBar({ payload }: ResultExportBarProps): ReactNode {
         </p>
       </div>
       <div className="rp-export-bar__actions">
-        <a className="rp-card__cta rp-card__cta--secondary" href="/reports">
+        <a className="rp-card__cta rp-card__cta--secondary" href={reportHref}>
           {VIEW_REPORT_LABEL}
         </a>
         <button

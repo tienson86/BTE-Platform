@@ -18,6 +18,10 @@ export const CONTRACT_MISMATCH_MESSAGE =
 export const CONTRACT_INCOMPLETE_MESSAGE =
   "Kết quả phân tích chưa đủ hợp đồng hiển thị. Vui lòng phân tích lại.";
 
+export const MISSING_HISTORY_MESSAGE = "Không tìm thấy hồ sơ.";
+
+export const CORRUPT_HISTORY_MESSAGE = "Không tải được kết quả đã lưu.";
+
 export type CustomerContractStatus = "ok" | "mismatch" | "unversioned" | "incomplete";
 
 function asRecord(value: unknown): Record<string, unknown> {

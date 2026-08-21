@@ -11,10 +11,13 @@ import type { AnalyzeChartRequest } from "../models";
 import { buildFullReportViewModel, type FullReportViewModel } from "../report/fullReportViewModel";
 import type { CustomerExportPayload } from "../export/customerExport";
 import {
+  CORRUPT_HISTORY_MESSAGE,
+  MISSING_HISTORY_MESSAGE,
   customerContractMessage,
   customerContractStatus,
 } from "../resultState/customerContract";
 import {
+  buildReanalyzeHref,
   historyIdFromSearch,
   resolveCurrentStoredResult,
   type StoredResultRecord,
@@ -22,14 +25,24 @@ import {
 
 export type StoredResult = StoredResultRecord;
 
+export type ResultBootSource =
+  | "current"
+  | "history"
+  | "empty"
+  | "preview"
+  | "contract"
+  | "missing"
+  | "corrupt";
+
 export type ResultBootProps = {
   readonly request: AnalyzeChartRequest | null;
   readonly initialData?: CanonicalDesktopViewModel;
   readonly previewFallback: boolean;
   readonly analysisId?: string;
-  readonly resultSource?: "current" | "history" | "empty" | "preview" | "contract";
+  readonly resultSource?: ResultBootSource;
   readonly fullReport?: FullReportViewModel;
   readonly exportPayload?: CustomerExportPayload | null;
+  readonly reanalyzeHref?: string;
 };
 
 /**
@@ -82,10 +95,26 @@ export function resolveResultBoot(
     fromHistory: Boolean(historyId),
     historyId,
   });
+
+  if (historyId && !resolved) {
+    const corrupt = Boolean(historyView?.corrupt || (historyView && !historyView.data));
+    return {
+      request: null,
+      initialData: createCanonicalDesktopGateViewModel(
+        "error",
+        corrupt ? CORRUPT_HISTORY_MESSAGE : MISSING_HISTORY_MESSAGE,
+      ),
+      previewFallback: false,
+      analysisId: historyId,
+      resultSource: corrupt ? "corrupt" : "missing",
+      reanalyzeHref: corrupt ? buildReanalyzeHref(historyView?.input) : "/history",
+    };
+  }
+
   const payload = resolved;
   const request = toAnalyzeRequest(payload?.input ?? null);
 
-  if (payload?.data && request) {
+  if (payload?.data) {
     const status = customerContractStatus(payload.data);
     if (status !== "ok") {
       return {
@@ -97,6 +126,7 @@ export function resolveResultBoot(
         previewFallback: false,
         analysisId: payload.analysisId,
         resultSource: "contract",
+        reanalyzeHref: buildReanalyzeHref(payload.input),
       };
     }
     const analysisId = payload.analysisId;
@@ -113,7 +143,7 @@ export function resolveResultBoot(
     return {
       request: null,
       initialData: adaptAnalysisToCanonicalDesktop(payload.data, {
-        request,
+        request: request ?? undefined,
         requestId: fullReport.analysisId,
         source: "api",
         status: "ready",
@@ -123,6 +153,7 @@ export function resolveResultBoot(
       resultSource: payload.source,
       fullReport,
       exportPayload,
+      reanalyzeHref: buildReanalyzeHref(payload.input),
     };
   }
 

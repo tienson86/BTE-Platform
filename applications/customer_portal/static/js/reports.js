@@ -163,6 +163,16 @@
     }, 50);
   }
 
+  function historyIdFromLocation() {
+    try {
+      var params = new URLSearchParams(window.location.search || "");
+      if (params.get("from") !== "history") return "";
+      return String(params.get("id") || "").trim();
+    } catch (_) {
+      return "";
+    }
+  }
+
   function boot() {
     if (!window.BtePortal) {
       setEmpty(t("common.api_client_failed"));
@@ -174,8 +184,18 @@
       buildLocalReports();
       bindControls();
       refreshList();
-      if (allReports.length) selectReport(allReports[0].id);
-      else setEmpty(t("reports.empty"));
+      var wanted = historyIdFromLocation();
+      if (wanted) {
+        var found = allReports.find(function (row) {
+          return String(row.id) === wanted || String(row.analysis_id) === wanted;
+        });
+        if (found) selectReport(found.id);
+        else setEmpty(t("history.missing"));
+      } else if (allReports.length) {
+        selectReport(allReports[0].id);
+      } else {
+        setEmpty(t("reports.empty"));
+      }
     });
   }
 
@@ -500,8 +520,12 @@
 
   function selectReport(id) {
     selected = allReports.find(function (r) {
-      return r.id === id;
+      return r.id === id || String(r.analysis_id || "") === String(id);
     }) || null;
+    if (!selected) {
+      setEmpty(t("history.missing"));
+      return;
+    }
     refreshList();
     renderPreview();
   }

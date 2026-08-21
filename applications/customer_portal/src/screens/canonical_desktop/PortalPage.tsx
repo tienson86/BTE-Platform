@@ -41,8 +41,16 @@ export type PortalPageProps = {
   readonly previewFallback?: boolean;
   readonly fullReport?: FullReportViewModel | null;
   readonly analysisId?: string | null;
-  readonly resultSource?: "current" | "history" | "empty" | "preview" | "contract";
+  readonly resultSource?:
+    | "current"
+    | "history"
+    | "empty"
+    | "preview"
+    | "contract"
+    | "missing"
+    | "corrupt";
   readonly exportPayload?: CustomerExportPayload | null;
+  readonly reanalyzeHref?: string | null;
 };
 
 /**
@@ -57,6 +65,7 @@ export function PortalPage({
   analysisId = null,
   resultSource = "current",
   exportPayload = null,
+  reanalyzeHref = null,
 }: PortalPageProps = {}): ReactNode {
   const { viewModel } = useCanonicalDesktopResult({
     request,
@@ -104,6 +113,7 @@ export function PortalPage({
               <ResultPageStatusGate
                 status={viewModel.status}
                 message={viewModel.statusMessage}
+                action={statusGateAction(resultSource, reanalyzeHref)}
               />
             ) : (
               <>
@@ -121,3 +131,24 @@ export function PortalPage({
 
 /** Official Result Page alias (PACK_07). */
 export const ResultPage = PortalPage;
+
+function statusGateAction(
+  resultSource: PortalPageProps["resultSource"],
+  reanalyzeHref?: string | null,
+): ReactNode {
+  if (resultSource === "missing") {
+    return (
+      <a className="rp-status-gate__cta" href="/history">
+        Về lịch sử
+      </a>
+    );
+  }
+  if (resultSource === "contract" || resultSource === "corrupt") {
+    return (
+      <a className="rp-status-gate__cta" href={reanalyzeHref || "/analyze"}>
+        Phân tích lại
+      </a>
+    );
+  }
+  return undefined;
+}

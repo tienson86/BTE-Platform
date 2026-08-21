@@ -21,6 +21,24 @@
       return;
     }
 
+    function prefillFromQuery() {
+      var params;
+      try {
+        params = new URLSearchParams(window.location.search || "");
+      } catch (_) {
+        return;
+      }
+      if (params.get("reanalyze") !== "1") return;
+      ["full_name", "birth_place", "year", "month", "day", "hour", "minute", "gender", "timezone"].forEach(
+        function (id) {
+          var el = document.getElementById(id);
+          if (!el || !params.has(id)) return;
+          el.value = params.get(id) || "";
+        },
+      );
+    }
+    prefillFromQuery();
+
     function clearFieldErrors() {
       form.querySelectorAll(".field-error").forEach(function (el) {
         el.hidden = true;

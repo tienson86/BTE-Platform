@@ -65,6 +65,7 @@ function mount(): void {
         analysisId={boot.analysisId}
         resultSource={boot.resultSource}
         exportPayload={boot.exportPayload}
+        reanalyzeHref={boot.reanalyzeHref}
       />
     </StrictMode>,
   );

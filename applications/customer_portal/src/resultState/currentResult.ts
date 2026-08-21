@@ -22,6 +22,7 @@ export type StoredResultRecord = {
   readonly analysis_id?: string | null;
   readonly id?: string | null;
   readonly source?: string | null;
+  readonly corrupt?: boolean | null;
 };
 
 export type CurrentResultSource = "current" | "history" | "empty";
@@ -81,6 +82,8 @@ export function analysisIdOf(record: StoredResultRecord | null | undefined): str
  *
  * Default /result, Luận giải, Báo cáo, and export use `current`.
  * History/report "open older" requires `from=history` and matching `id`.
+ *
+ * Explicit History with a missing/corrupt snapshot must not fall back to current.
  */
 export function resolveCurrentStoredResult(options: {
   readonly current: StoredResultRecord | null;
@@ -89,16 +92,72 @@ export function resolveCurrentStoredResult(options: {
   readonly historyId?: string | null;
 }): ResolvedCurrentResult | null {
   const expectedId = asNonEmpty(options.historyId);
-  if (options.fromHistory && expectedId && options.historyView?.data) {
-    const viewId = analysisIdOf(options.historyView);
-    if (viewId && viewId === expectedId) {
+  if (options.fromHistory && expectedId) {
+    if (isUsableHistorySnapshot(options.historyView, expectedId)) {
       return toResolved(options.historyView, "history");
     }
+    return null;
   }
   if (options.current?.data) {
     return toResolved(options.current, "current");
   }
   return null;
+}
+
+/**
+ * True when the History pointer is the requested snapshot and has structured data.
+ */
+export function isUsableHistorySnapshot(
+  record: StoredResultRecord | null | undefined,
+  expectedId: string,
+): record is StoredResultRecord {
+  if (!record || record.corrupt || !record.data) return false;
+  const viewId = analysisIdOf(record);
+  return Boolean(viewId && viewId === expectedId);
+}
+
+/**
+ * Analyze URL that prefills stored birth input. Does not overwrite History.
+ */
+export function buildReanalyzeHref(
+  input?: Record<string, unknown> | null,
+): string {
+  if (!input || typeof input !== "object") return "/analyze";
+  const params = new URLSearchParams();
+  params.set("reanalyze", "1");
+  const keys = [
+    "full_name",
+    "birth_place",
+    "year",
+    "month",
+    "day",
+    "hour",
+    "minute",
+    "gender",
+    "timezone",
+  ] as const;
+  keys.forEach((key) => {
+    const value = input[key];
+    if (value == null) return;
+    const text = String(value).trim();
+    if (!text) return;
+    params.set(key, text);
+  });
+  return `/analyze?${params.toString()}`;
+}
+
+/**
+ * Full Report URL for the selected analysis. History keeps explicit context.
+ */
+export function buildReportHref(
+  source: CurrentResultSource | string | null | undefined,
+  analysisId?: string | null,
+): string {
+  const id = asNonEmpty(analysisId);
+  if (source === "history" && id) {
+    return `/reports?from=history&id=${encodeURIComponent(id)}`;
+  }
+  return "/reports";
 }
 
 /**
