@@ -35,6 +35,7 @@ from engines.report_engine.narrative_binding import (
     extract_canonical_sections,
     is_usable_narrative_result,
 )
+from engines.report_engine.rendering.customer_facing import strip_internal_rule_ids
 from engines.useful_god_engine.presentation import (
     INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY,
     KY_SCOPE_NOTE,
@@ -297,7 +298,7 @@ def _pattern(data: Mapping[str, Any], diagnostics: ReportDiagnosticsV1) -> Repor
         diagnostics.missing_fields.append("pattern")
         return ReportPatternV1()
     primary = _text(pattern.get("cach_cuc") or pattern.get("pattern"))
-    evidence = _text(pattern.get("evidence_compact"))
+    evidence = strip_internal_rule_ids(_text(pattern.get("evidence_compact")))
     for phrase in _FORBIDDEN_PATTERN_PHRASES:
         evidence = evidence.replace(phrase, "")
     override = bool(pattern.get("ug_override_eligible"))

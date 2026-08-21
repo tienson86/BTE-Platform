@@ -124,8 +124,11 @@
       return setInterval(showStep, 900);
     }
 
+    var analyzing = false;
+
     async function runAnalyze(event) {
       if (event) event.preventDefault();
+      if (analyzing) return;
       const input = readInput();
       const invalid = validate(input);
       if (invalid) {
@@ -133,6 +136,7 @@
         return;
       }
 
+      analyzing = true;
       setLoading(true);
       var loadingTimer = startFriendlyLoading();
 
@@ -164,6 +168,7 @@
         }
         window.location.assign("/result");
       } catch (err) {
+        analyzing = false;
         clearInterval(loadingTimer);
         setLoading(false);
         const message = (err && err.message) || t("analyze.failed");
