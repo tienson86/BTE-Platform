@@ -1,41 +1,74 @@
-# BTE Applications API — production image
+# BTE Applications API — V1.0 runtime image (G3-02)
 # Build from repository root:
 #   docker build -f deployment/docker/Dockerfile.api -t bte-api:1.0.0 .
+#
+# Status: SMOKE-ONLY until the Linux ten-case probe in this image is 0 diffs.
+# Production Python freeze: CPython 3.14.6 (do not use 3.12 in this image).
+# Do not pass --reload. Do not use constraints-v1.0.txt (Windows/cp314 lockfile).
 
-FROM python:3.12-slim
+FROM python:3.14.6-slim
 
 WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
+    PYTHONIOENCODING=utf-8 \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8 \
     PIP_NO_CACHE_DIR=1 \
+    TZ=UTC \
     HOST=0.0.0.0 \
     PORT=8000 \
     BTE_LOG_LEVEL=INFO \
     BTE_STORAGE_BACKEND=json \
-    BTE_DATA_DIR=/app/applications/data
+    BTE_DATA_DIR=/app/applications/data \
+    PLAYWRIGHT_BROWSERS_PATH=/opt/ms-playwright
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends curl \
+    && apt-get install -y --no-install-recommends \
+        curl \
+        tzdata \
+        fonts-noto-core \
+        fonts-liberation \
+        fonts-dejavu-core \
     && rm -rf /var/lib/apt/lists/* \
+    && ln -snf /usr/share/zoneinfo/UTC /etc/localtime \
+    && echo UTC > /etc/timezone \
     && groupadd --system bte \
-    && useradd --system --gid bte --home /app --shell /usr/sbin/nologin bte
+    && useradd --system --gid bte --create-home --home /home/bte --shell /usr/sbin/nologin bte
 
-COPY requirements.txt /app/requirements.txt
-COPY applications/requirements.txt /app/applications/requirements.txt
-RUN pip install -r /app/requirements.txt -r /app/applications/requirements.txt
+COPY requirements-prod.txt /app/requirements-prod.txt
+RUN pip install --upgrade pip \
+    && pip install -r /app/requirements-prod.txt \
+    && python -m playwright install-deps chromium \
+    && python -m playwright install chromium
 
 COPY engines /app/engines
 COPY applications /app/applications
+COPY database /app/database
+COPY knowledge/expert_translation /app/knowledge/expert_translation
+COPY knowledge/packages /app/knowledge/packages
+COPY knowledge/knowledge_catalog /app/knowledge/knowledge_catalog
 
-RUN mkdir -p /app/applications/data /app/logs /app/reports \
-    && chown -R bte:bte /app/applications/data /app/logs /app/reports
+RUN mkdir -p \
+        /app/applications/data \
+        /app/logs \
+        /app/reports \
+        /tmp/bte_customer_export \
+        /opt/ms-playwright \
+    && chown -R bte:bte \
+        /app/applications/data \
+        /app/logs \
+        /app/reports \
+        /tmp/bte_customer_export \
+        /opt/ms-playwright \
+        /home/bte
 
 USER bte
 
 EXPOSE 8000
 
-HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
-  CMD curl -fsS "http://127.0.0.1:${PORT}/health" || exit 1
+HEALTHCHECK --interval=30s --timeout=5s --start-period=40s --retries=3 \
+  CMD curl -fsS "http://127.0.0.1:8000/health" || exit 1
 
-CMD ["sh", "-c", "uvicorn applications.api.app:app --host ${HOST} --port ${PORT}"]
+CMD ["python", "-m", "uvicorn", "applications.api.app:app", "--host", "0.0.0.0", "--port", "8000"]

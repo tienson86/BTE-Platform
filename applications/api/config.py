@@ -21,7 +21,9 @@ class APISettings(BaseModel):
     request_id_header: str = "X-Request-ID"
     elapsed_header: str = "X-Elapsed-Ms"
     api_key_header: str = "X-API-Key"
-    log_level: str = "INFO"
+    log_level: str = Field(
+        default_factory=lambda: os.getenv("BTE_LOG_LEVEL", "INFO")
+    )
 
     # JWT (secret from env when set; otherwise development default)
     jwt_secret: str = Field(

@@ -1,0 +1,55 @@
+# G3-02 Linux process smoke — NOT production deployment.
+# Publish only on loopback. Do not use this file to open 8000/8081 to the internet.
+#
+# From repository root (requires Docker):
+#   docker compose -f deployment/docker/docker-compose.g3-02-smoke.yml up --build
+#
+# Classification: SMOKE-ONLY
+
+name: bte-g3-02-smoke
+
+services:
+  api:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.api
+    image: bte-api:g3-02-smoke
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "8000"
+      BTE_LOG_LEVEL: "INFO"
+      BTE_STORAGE_BACKEND: json
+      BTE_DATA_DIR: /app/applications/data
+      BTE_JWT_SECRET: g3-02-smoke-not-for-production
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ../../release:/app/release:ro
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 8
+      start_period: 40s
+
+  portal:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.portal
+    image: bte-portal:g3-02-smoke
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "8081"
+      BTE_API_BASE_URL: http://api:8000
+      BTE_LOG_LEVEL: "INFO"
+    ports:
+      - "127.0.0.1:8081:8081"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8081/healthz"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 15s

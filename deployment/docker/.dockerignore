@@ -1,16 +1,27 @@
-# Keep Docker build context lean (build from repo root)
+# Keep Docker build context lean (build from repo root).
+# Do not exclude database/ or knowledge runtime trees.
+
 .git
 .venv
+**/.venv
 **/__pycache__
 **/*.pyc
 **/.pytest_cache
 **/node_modules
-logs/*
-!logs/.gitignore
-!logs/README.md
-reports/*
-!reports/.gitignore
-*.md
-!deployment/docs/**
+**/src/**/__tests__
 .cursor
 agent-transcripts
+
+logs/*
+!logs/.gitignore
+reports/*
+!reports/.gitignore
+
+# Development docs are not runtime. Keep knowledge markdown catalogs.
+*.md
+!knowledge/**/*.md
+!deployment/docs/**
+
+# Portal TypeScript is build-time only; image serves static/dist.
+applications/customer_portal/src
+applications/customer_portal/node_modules
