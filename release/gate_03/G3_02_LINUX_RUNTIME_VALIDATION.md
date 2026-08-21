@@ -2,21 +2,23 @@
 
 ## Result on this freeze host
 
-**NOT EXECUTED** — no Docker engine, no WSL distro, no Linux Python.
+**PASS** — G3-02L-R1. Linux container smoke after knowledge packaging repair.
 
-Windows supporting evidence (not a Linux substitute):
+Evidence: `release/gate_03/G3_02_SMOKE.json`, `release/gate_03/G3_02L_R1_RUNTIME_KNOWLEDGE_PACKAGING_REPAIR.md`.
 
 | Check | Result |
 |-------|--------|
-| CPython | 3.14.6 |
+| CPython | 3.14.6 (`python:3.14.6-slim`) |
+| `runtime.system` | Linux |
 | Ten control cases | 0 diffs |
-| Dũng PDF/DOCX | `%PDF-` 174266 bytes; DOCX zip 39414; Hỷ string present |
-| Tuyền PDF/DOCX | `%PDF-` 171708 bytes; DOCX zip 39497; Hỷ string present |
-| `ZoneInfo("Asia/Ho_Chi_Minh")` | available (`tzdata` 2026.3) |
-| API process restart | Dũng Dụng unchanged (`G3_02_RESTART.json`) |
-| Host locale | Windows `cp1252` (application uses UTF-8 in JSON/files; do not depend on locale for Calendar) |
+| Dũng PDF/DOCX | `%PDF-` 149551 bytes; DOCX zip 40788; Hỷ string present |
+| Tuyền PDF/DOCX | `%PDF-` 146972 bytes; DOCX zip 40859; Hỷ string present |
+| `ZoneInfo("Asia/Ho_Chi_Minh")` | available |
+| Locale | `C.UTF-8` / UTF-8 |
+| Chromium | `/opt/ms-playwright` (Playwright install in API image) |
+| Interpretation registry | `/app/knowledge/interpretation/knowledge_registry.json` present |
 
-Evidence: `release/gate_03/G3_02_SMOKE.json`.
+Windows supporting evidence remains valid and is not a substitute; Linux is now proven in `bte-api:g3-02-smoke`.
 
 ## Required Linux environment
 
@@ -28,7 +30,7 @@ Evidence: `release/gate_03/G3_02_SMOKE.json`.
 | Application timezone | `Asia/Ho_Chi_Minh` (Calendar input / API `default_timezone`). Server OS may stay **UTC**. |
 | Fonts | `fonts-noto-core` + `fonts-liberation` + `fonts-dejavu-core` (no proprietary fonts shipped) |
 | Chromium | `python -m playwright install chromium` after OS deps (`playwright install-deps chromium`) |
-| Layout | repo root: `engines/`, `applications/`, `database/`, `knowledge/expert_translation`, `knowledge/packages`, `knowledge/knowledge_catalog` |
+| Layout | repo root: `engines/`, `applications/`, `database/`, `knowledge/expert_translation`, `knowledge/packages`, `knowledge/knowledge_catalog`, `knowledge/interpretation` |
 
 ## Command to run when Docker exists
 
@@ -41,6 +43,12 @@ Then from a checkout that includes `release/gate_03/_g3_02_linux_smoke.py` (bind
 ```
 python -m pip check
 python release/gate_03/_g3_02_linux_smoke.py
+```
+
+In-image:
+
+```
+docker compose -f deployment/docker/docker-compose.g3-02-smoke.yml exec api python /app/release/gate_03/_g3_02_linux_smoke.py
 ```
 
 Wrapper: `release/gate_03/_g3_02_linux_smoke.sh`.
@@ -60,6 +68,7 @@ Recommended production locale: `C.UTF-8`. Analytical calculations must not depen
 | Missing | Expected |
 |---------|----------|
 | `database/` | loader / engine error, HTTP 500 pipeline — no mock rules |
+| `knowledge/interpretation/knowledge_registry.json` | `KnowledgeLoadError` / HTTP 500 pipeline — no empty/mock registry |
 | `knowledge/expert_translation/*.json` | `ExpertTranslationLoadError` |
 | Chromium | PDF export `CustomerExportError` / renderer failure; Analyze may still succeed |
 | API down | Portal `/healthz` still `ok`; `/backend/*` fails |
@@ -72,10 +81,11 @@ Recommended production locale: `C.UTF-8`. Analytical calculations must not depen
 | `knowledge/expert_translation/` | RUNTIME REQUIRED | Narrative translation JSON |
 | `knowledge/packages/` | RUNTIME REQUIRED | Luck foundation package + related packages |
 | `knowledge/knowledge_catalog/` | RUNTIME REQUIRED (safe copy) | PACK_01 catalog loader path |
+| `knowledge/interpretation/` | RUNTIME REQUIRED | Analyze knowledge registry + domain JSON + concepts |
 | Remainder of `knowledge/` | DOCUMENTATION / BUILD/TEST | not copied (196 MB mostly authoring/docs) |
 
 Do not modify knowledge content.
 
 ## UTF-8 / Vietnamese PDF on Linux
 
-Not empirically verified here. Image installs Noto/Liberation/DejaVu. Report CSS stack remains `"Segoe UI", Arial, "Noto Sans", sans-serif`. Linux should resolve Noto. Tofu check must be done by generating Dũng/Tuyền PDF **on Linux** and inspecting glyphs (naive PDF byte grep is not authoritative; G2-04 `pdf_searchable: false`).
+Image installs Noto/Liberation/DejaVu. Report CSS stack remains `"Segoe UI", Arial, "Noto Sans", sans-serif`. Linux smoke generated Dũng/Tuyền PDF (`%PDF-`) and DOCX (zip + Vietnamese glyphs in DOCX text). Naive PDF byte grep is not an authoritative tofu audit (G2-04 `pdf_searchable: false`); DOCX Vietnamese and Hỷ checks passed.

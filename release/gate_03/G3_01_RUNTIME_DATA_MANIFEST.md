@@ -17,6 +17,7 @@ Engines resolve paths from `__file__` relative to repository root (`engines/` â†
 | Interpretation rules | `database/interpretation_rules/` | Interpretation | Yes | Gate 1 |
 | Report V1 templates | `engines/report_engine/templates/v1/` | HTML/PDF | Yes | G2-04 |
 | Knowledge packages | `knowledge/packages/` | Composer / packages | Runtime as currently loaded | Gate 1 |
+| Interpretation knowledge | `knowledge/interpretation/` (`knowledge_registry.json`, `domains/`, `concepts/`) | JsonKnowledgeLoader / ConceptRegistry | Yes (Analyze narrative) | Gate 1 / G2 |
 | Portal templates | `applications/customer_portal/templates/` | Portal FastAPI | Yes | G2 |
 | Portal static + dist | `applications/customer_portal/static/` | Portal FastAPI | Yes | G2 |
 | WP11 JSON data dir | `applications/data/` (`BTE_DATA_DIR`) | storage factory | Optional for customer Analyze | not History |

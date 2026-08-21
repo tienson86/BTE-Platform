@@ -67,6 +67,12 @@ def _runtime_facts() -> dict[str, object]:
         "luck_package": (
             ROOT / "knowledge" / "packages" / "luck" / "foundation" / "PACKAGE.json"
         ).is_file(),
+        "knowledge_interpretation_registry": (
+            ROOT / "knowledge" / "interpretation" / "knowledge_registry.json"
+        ).is_file(),
+        "knowledge_concept_registry": (
+            ROOT / "knowledge" / "interpretation" / "concepts" / "concept_registry.json"
+        ).is_file(),
     }
 
 
@@ -177,6 +183,7 @@ def main() -> int:
             and not mismatches
             and facts.get("asia_ho_chi_minh") is True
             and facts.get("database_exists") is True
+            and facts.get("knowledge_interpretation_registry") is True
             and all(item.get("pdf_signature") and item.get("docx_zip") for item in exports.values())
         ),
     }
