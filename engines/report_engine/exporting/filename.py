@@ -14,6 +14,7 @@ def ascii_slug(text: str) -> str:
     """Strip diacritics and unsafe characters for cross-platform filenames."""
     normalized = unicodedata.normalize("NFKD", text)
     without_marks = "".join(ch for ch in normalized if not unicodedata.combining(ch))
+    without_marks = without_marks.replace("Đ", "D").replace("đ", "d")
     cleaned = _UNSAFE_FILENAME.sub("", without_marks)
     cleaned = re.sub(r"\s+", "_", cleaned.strip())
     cleaned = re.sub(r"_+", "_", cleaned)

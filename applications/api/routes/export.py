@@ -12,6 +12,8 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 from starlette.background import BackgroundTask
 
+from applications.api.exceptions import CustomerExportError
+from applications.api.services.customer_contract import RENDERER_FAILURE_MESSAGE
 from applications.api.services.customer_export import (
     cleanup_export_file,
     export_customer_file,
@@ -53,47 +55,50 @@ def _file_response(path: Path, download_name: str, media_type: str, analysis_id:
     )
 
 
-@router.post("/export/pdf")
-def export_official_pdf(request: Request, body: CustomerExportRequest) -> FileResponse:
-    """Official customer PDF — Report V1 Playwright, selected analysis only."""
-    del request
-    report_input = prepare_customer_report_input(
-        analysis_id=body.analysis_id,
-        source=body.source,
-        data=body.data,
-        birth_input=body.input,
-    )
-    path, download_name, _result = export_customer_file(
-        report_input=report_input,
-        fmt="pdf",
-    )
+def _export_response(
+    body: CustomerExportRequest,
+    fmt: Literal["pdf", "docx"],
+    media_type: str,
+) -> FileResponse:
+    try:
+        report_input = prepare_customer_report_input(
+            analysis_id=body.analysis_id,
+            source=body.source,
+            data=body.data,
+            birth_input=body.input,
+        )
+        path, download_name, _result = export_customer_file(
+            report_input=report_input,
+            fmt=fmt,
+        )
+    except CustomerExportError:
+        raise
+    except Exception:
+        logger.exception("customer_export_unhandled format=%s", fmt)
+        raise CustomerExportError(
+            RENDERER_FAILURE_MESSAGE,
+            status_code=500,
+            code="export_renderer_failed",
+        ) from None
     logger.info(
-        "customer_export_pdf analysis_id=%s source=%s file=%s",
+        "customer_export format=%s analysis_id=%s source=%s file=%s",
+        fmt,
         body.analysis_id,
         body.source,
         download_name,
     )
-    return _file_response(path, download_name, MEDIA_TYPE_PDF, body.analysis_id)
+    return _file_response(path, download_name, media_type, body.analysis_id)
+
+
+@router.post("/export/pdf")
+def export_official_pdf(request: Request, body: CustomerExportRequest) -> FileResponse:
+    """Official customer PDF — Report V1 Playwright, selected analysis only."""
+    del request
+    return _export_response(body, "pdf", MEDIA_TYPE_PDF)
 
 
 @router.post("/export/docx")
 def export_official_docx(request: Request, body: CustomerExportRequest) -> FileResponse:
     """Official customer DOCX — existing python-docx renderer, selected analysis only."""
     del request
-    report_input = prepare_customer_report_input(
-        analysis_id=body.analysis_id,
-        source=body.source,
-        data=body.data,
-        birth_input=body.input,
-    )
-    path, download_name, _result = export_customer_file(
-        report_input=report_input,
-        fmt="docx",
-    )
-    logger.info(
-        "customer_export_docx analysis_id=%s source=%s file=%s",
-        body.analysis_id,
-        body.source,
-        download_name,
-    )
-    return _file_response(path, download_name, MEDIA_TYPE_DOCX, body.analysis_id)
+    return _export_response(body, "docx", MEDIA_TYPE_DOCX)

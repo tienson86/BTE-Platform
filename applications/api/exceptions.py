@@ -53,6 +53,25 @@ class PipelineAPIError(ApplicationsAPIError):
         )
 
 
+class CustomerExportError(ApplicationsAPIError):
+    """Recoverable customer PDF/DOCX export failure. No engine recalculation."""
+
+    def __init__(
+        self,
+        message: str,
+        *,
+        status_code: int = 422,
+        code: str = "export_error",
+        details: Any = None,
+    ) -> None:
+        super().__init__(
+            message,
+            status_code=status_code,
+            code=code,
+            details=details,
+        )
+
+
 def register_exception_handlers(app: FastAPI) -> None:
     """Attach JSON error handlers."""
 

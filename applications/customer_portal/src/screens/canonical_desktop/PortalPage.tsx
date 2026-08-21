@@ -16,12 +16,13 @@ import type { AnalyzeChartRequest } from "../../models";
 import { CanonicalDesktopProvider } from "./CanonicalDesktopContext";
 import { PortalFooter, PortalHeader, PortalSidebar } from "./shell/PortalChrome";
 import {
-  ResultExportBar,
   ResultPageBody,
   ResultPageProvider,
   ResultPageStatusGate,
   adaptResultPageViewModel,
 } from "../result";
+import type { CustomerExportPayload } from "../../export/customerExport";
+import { ResultExportBar } from "../result/ResultExportBar";
 import "../../styles/canonical-desktop.css";
 import "../../styles/presentation.css";
 import "../../styles/result-page.css";
@@ -41,6 +42,7 @@ export type PortalPageProps = {
   readonly fullReport?: FullReportViewModel | null;
   readonly analysisId?: string | null;
   readonly resultSource?: "current" | "history" | "empty" | "preview" | "contract";
+  readonly exportPayload?: CustomerExportPayload | null;
 };
 
 /**
@@ -54,6 +56,7 @@ export function PortalPage({
   fullReport = null,
   analysisId = null,
   resultSource = "current",
+  exportPayload = null,
 }: PortalPageProps = {}): ReactNode {
   const { viewModel } = useCanonicalDesktopResult({
     request,
@@ -105,7 +108,7 @@ export function PortalPage({
             ) : (
               <>
                 <ResultPageBody />
-                <ResultExportBar />
+                <ResultExportBar payload={exportPayload} />
               </>
             )}
           </main>

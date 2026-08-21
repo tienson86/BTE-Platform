@@ -231,6 +231,7 @@
 
     return {
       id: id,
+      analysis_id: String(raw.analysis_id || id),
       name: title,
       created_at: created,
       type: type,
@@ -245,7 +246,6 @@
       source: raw.source || "local",
       input: input,
       data: raw.data || null,
-      analysis_id: raw.analysis_id || id,
     };
   }
 
@@ -258,11 +258,8 @@
       const data = item.data || {};
       const entry = normalizeReport(
         {
-          id: item.id || "local-" + idx,
-          analysis_id:
-            (data && (data.analysis_id || data.request_id)) ||
-            item.analysis_id ||
-            item.id,
+          id: item.analysis_id || item.id || "local-" + idx,
+          analysis_id: item.analysis_id || item.id,
           saved_at: item.saved_at,
           input: item.input,
           summary: item.summary,
@@ -356,13 +353,8 @@
         const action = btn.getAttribute("data-action");
         if (action === "open") openReport(selected);
         if (action === "print") printReport(selected);
-        if (action === "copy") copyReport(selected);
-        if (action === "download") downloadReport(selected);
         if (action === "download-pdf") downloadOfficial(selected, "pdf");
         if (action === "download-docx") downloadOfficial(selected, "docx");
-        if (action === "share") {
-          BtePortal.showFlash(flash, t("reports.share_placeholder"), "success");
-        }
       });
     }
   }
@@ -702,50 +694,26 @@
     document.body.removeChild(ta);
   }
 
-  function downloadReport(report) {
-    // HTML/markdown preview only — official PDF/DOCX use downloadOfficial().
-    if (viewFormat === "pdf" || (!report.has_html && !report.has_markdown && report.has_pdf)) {
-      downloadOfficial(report, "pdf");
+  function downloadOfficial(report, format) {
+    var exporter = window.BteCustomerExport;
+    if (!exporter || typeof exporter.downloadOfficialExport !== "function") {
+      BtePortal.showFlash(flash, t("reports.pdf_download_unavailable"), "error");
       return;
     }
-
-    if (hasStructuredAnalysis(report.data)) {
-      triggerDownload(
-        safeFilename(report.name) + ".html",
-        composeHtmlDocument(report),
-        "text/html;charset=utf-8"
-      );
+    var payload = {
+      analysisId: currentAnalysisId(report),
+      source: report.source === "history" ? "history" : "current",
+      data: report.data,
+      input: report.input,
+    };
+    var block = exporter.customerExportBlockMessage(payload);
+    if (block) {
+      BtePortal.showFlash(flash, block, "error");
       return;
     }
-
-    if (viewFormat === "markdown" && report.has_markdown) {
-      triggerDownload(
-        safeFilename(report.name) + ".md",
-        composeMarkdownDocument(report),
-        "text/markdown;charset=utf-8"
-      );
-      return;
-    }
-
-    if (report.has_html) {
-      triggerDownload(
-        safeFilename(report.name) + ".html",
-        composeHtmlDocument(report),
-        "text/html;charset=utf-8"
-      );
-      return;
-    }
-
-    if (report.has_markdown) {
-      triggerDownload(
-        safeFilename(report.name) + ".md",
-        composeMarkdownDocument(report),
-        "text/markdown;charset=utf-8"
-      );
-      return;
-    }
-
-    BtePortal.showFlash(flash, t("reports.nothing_to_download"), "error");
+    exporter.downloadOfficialExport(payload, format).catch(function (err) {
+      BtePortal.showFlash(flash, exporter.customerExportErrorMessage(err), "error");
+    });
   }
 
   function safeFilename(name) {
@@ -764,72 +732,6 @@
     a.click();
     a.remove();
     URL.revokeObjectURL(url);
-  }
-
-  function downloadOfficial(report, format) {
-    const data = report && report.data;
-    const analysisId = currentAnalysisId(report);
-    if (!data || !analysisId) {
-      BtePortal.showFlash(flash, t("reports.nothing_to_download"), "error");
-      return;
-    }
-    const source = report.source === "history" ? "history" : "current";
-    BtePortal.showFlash(flash, t("reports.export_generating"), "success");
-    fetch("/backend/api/v1/export/" + format, {
-      method: "POST",
-      headers: {
-        Accept: format === "pdf"
-          ? "application/pdf"
-          : "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        analysis_id: analysisId,
-        source: source,
-        data: data,
-        input: report.input || {},
-      }),
-    })
-      .then(function (res) {
-        if (!res.ok) {
-          return res.text().then(function (text) {
-            var parsed = null;
-            try {
-              parsed = text ? JSON.parse(text) : null;
-            } catch (_) {
-              parsed = null;
-            }
-            var msg =
-              (parsed && parsed.message) || t("reports.export_failed");
-            throw new Error(msg);
-          });
-        }
-        var header = res.headers.get("Content-Disposition") || "";
-        var match = /filename="?([^";]+)"?/i.exec(header);
-        var filename =
-          (match && match[1]) ||
-          safeFilename(report.name) + (format === "pdf" ? ".pdf" : ".docx");
-        return res.blob().then(function (blob) {
-          if (!blob || !blob.size) {
-            throw new Error(t("reports.export_failed"));
-          }
-          var url = URL.createObjectURL(blob);
-          var a = document.createElement("a");
-          a.href = url;
-          a.download = filename;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          URL.revokeObjectURL(url);
-        });
-      })
-      .catch(function (err) {
-        BtePortal.showFlash(
-          flash,
-          (err && err.message) || t("reports.export_failed"),
-          "error"
-        );
-      });
   }
 
   if (document.readyState === "loading") {

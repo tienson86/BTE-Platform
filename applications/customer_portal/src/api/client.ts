@@ -5,7 +5,8 @@
 
 import { getApiRuntimeConfig } from "../config/api";
 import { ApiError, kindFromStatus, type ApiErrorPayload } from "./errors";
-import type { ApiClientConfig, ApiEnvelope, ApiRequestOptions } from "./types";
+import type { ApiClientConfig, ApiEnvelope, ApiRequestOptions, BlobDownload } from "./types";
+import { filenameFromDisposition } from "./types";
 
 const RETRYABLE_KINDS = new Set(["timeout", "network", "server"]);
 
@@ -147,6 +148,92 @@ export class ApiClient {
     options?: Omit<ApiRequestOptions, "method" | "body">,
   ): Promise<TData> {
     return this.request<TData>(path, { ...options, method: "POST", body });
+  }
+
+  /**
+   * POST that returns a file blob (official PDF/DOCX). Does not parse JSON on success.
+   */
+  async requestBlob(
+    path: string,
+    body: unknown,
+    options: Omit<ApiRequestOptions, "method"> & { fallbackFilename: string } = {
+      fallbackFilename: "BTE_BaoCao_V1.bin",
+    },
+  ): Promise<BlobDownload> {
+    const timeoutMs = options.timeoutMs ?? 120_000;
+    const headers: Record<string, string> = {
+      Accept: "application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/json",
+      ...(options.headers ?? {}),
+    };
+    if (headers["Content-Type"] === undefined) {
+      headers["Content-Type"] = "application/json";
+    }
+    if (!options.skipAuth) {
+      const token = this.config.getAccessToken?.();
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
+      }
+    }
+    const { signal, clear } = createTimeoutSignal(timeoutMs, options.signal);
+    let response: Response;
+    try {
+      response = await fetch(joinUrl(this.config.baseUrl, path), {
+        method: "POST",
+        headers,
+        body: JSON.stringify(body),
+        signal,
+      });
+    } catch (error) {
+      clear();
+      const aborted =
+        (error instanceof DOMException && error.name === "AbortError") ||
+        (error instanceof Error && error.name === "AbortError");
+      if (aborted) {
+        throw new ApiError("Request timed out", {
+          kind: "timeout",
+          status: 408,
+          code: "timeout",
+          cause: error,
+        });
+      }
+      throw new ApiError("Network error", {
+        kind: "network",
+        code: "network_error",
+        cause: error,
+      });
+    }
+    clear();
+    if (!response.ok) {
+      const text = await response.text();
+      const parsed = parseJsonSafe(text);
+      const payload =
+        parsed && typeof parsed === "object" ? (parsed as ApiErrorPayload) : null;
+      throw new ApiError(messageFromPayload(payload, response.statusText || "Request failed"), {
+        kind: kindFromStatus(response.status),
+        status: response.status,
+        code: payload?.code ?? kindFromStatus(response.status),
+        details: payload?.details ?? payload?.errors ?? null,
+        requestId: payload?.request_id ?? null,
+        payload,
+      });
+    }
+    const blob = await response.blob();
+    if (!blob.size) {
+      throw new ApiError("Không tạo được tệp xuất. Vui lòng thử lại.", {
+        kind: "server",
+        status: response.status,
+        code: "export_empty_file",
+      });
+    }
+    return {
+      blob,
+      filename: filenameFromDisposition(
+        response.headers.get("Content-Disposition"),
+        options.fallbackFilename,
+      ),
+      analysisId: response.headers.get("X-BTE-Analysis-Id") || "",
+      mediaType: response.headers.get("Content-Type") || blob.type,
+    };
   }
 
   private async requestOnce<TData>(

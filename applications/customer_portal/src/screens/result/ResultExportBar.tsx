@@ -1,77 +1,93 @@
 /**
- * Customer export actions — official PDF/DOCX vs convenience print.
- * Layout of frozen Result cards is unchanged.
+ * Customer export actions for /result.
+ * Official PDF/DOCX vs convenience Print view — labels match behavior.
  */
 
 import { useState, type ReactNode } from "react";
-import { apiErrorUserMessage, isApiError } from "../../api/errors";
 import {
+  OFFICIAL_DOCX_LABEL,
+  OFFICIAL_PDF_HINT,
+  OFFICIAL_PDF_LABEL,
+  PRINT_VIEW_HINT,
+  PRINT_VIEW_LABEL,
+  VIEW_REPORT_LABEL,
+  customerExportBlockMessage,
+  customerExportErrorMessage,
+  customerExportReady,
   downloadOfficialExport,
-  selectedExportFromResultStore,
+  type CustomerExportPayload,
 } from "../../export/customerExport";
 
-type ExportBusy = "pdf" | "docx" | null;
+export type ResultExportBarProps = {
+  readonly payload: CustomerExportPayload | null;
+};
 
-export function ResultExportBar(): ReactNode {
-  const [busy, setBusy] = useState<ExportBusy>(null);
-  const [message, setMessage] = useState("");
+export function ResultExportBar({ payload }: ResultExportBarProps): ReactNode {
+  const [busy, setBusy] = useState<"pdf" | "docx" | null>(null);
+  const [notice, setNotice] = useState("");
+  const ready = customerExportReady(payload);
+  const block = customerExportBlockMessage(payload);
 
-  async function onOfficial(format: "pdf" | "docx"): Promise<void> {
-    const payload = selectedExportFromResultStore();
+  async function onDownload(format: "pdf" | "docx"): Promise<void> {
     if (!payload) {
-      setMessage("Chưa có kết quả phân tích. Vui lòng nhập thông tin ngày giờ sinh để bắt đầu.");
+      setNotice(block);
       return;
     }
     setBusy(format);
-    setMessage("");
+    setNotice("");
     try {
-      await downloadOfficialExport(format, payload);
+      await downloadOfficialExport(payload, format);
     } catch (error) {
-      setMessage(isApiError(error) ? apiErrorUserMessage(error) : "Không thể tạo file xuất. Vui lòng thử lại.");
+      setNotice(customerExportErrorMessage(error));
     } finally {
       setBusy(null);
     }
   }
 
   return (
-    <section className="rp-export-bar" id="xuat" aria-labelledby="rp-export-title">
-      <div className="rp-export-bar__head">
-        <h2 id="rp-export-title">Xuất báo cáo</h2>
+    <section
+      id="xuat"
+      className="rp-export-bar"
+      data-export="customer-v1"
+      aria-label="Xuất báo cáo"
+    >
+      <div className="rp-export-bar__copy">
+        <h2 className="rp-export-bar__title">Xuất báo cáo</h2>
         <p className="rp-export-bar__hint">
-          <strong>Tải PDF</strong> là bản báo cáo chính thức. In trang kết quả chỉ là bản in trình duyệt.
+          {OFFICIAL_PDF_HINT} {PRINT_VIEW_HINT}
         </p>
       </div>
       <div className="rp-export-bar__actions">
-        <a className="rp-export-bar__btn rp-export-bar__btn--secondary" href="/reports">
-          Xem báo cáo
+        <a className="rp-card__cta rp-card__cta--secondary" href="/reports">
+          {VIEW_REPORT_LABEL}
         </a>
         <button
           type="button"
-          className="rp-export-bar__btn rp-export-bar__btn--secondary"
+          className="rp-card__cta rp-card__cta--secondary"
           onClick={() => window.print()}
         >
-          In trang kết quả
+          {PRINT_VIEW_LABEL}
         </button>
         <button
           type="button"
-          className="rp-export-bar__btn"
-          disabled={busy !== null}
-          onClick={() => void onOfficial("pdf")}
+          className="rp-card__cta rp-card__cta--primary"
+          disabled={!ready || busy !== null}
+          onClick={() => void onDownload("pdf")}
         >
-          {busy === "pdf" ? "Đang tạo PDF…" : "Tải PDF"}
+          {busy === "pdf" ? "Đang tạo PDF…" : OFFICIAL_PDF_LABEL}
         </button>
         <button
           type="button"
-          className="rp-export-bar__btn"
-          disabled={busy !== null}
-          onClick={() => void onOfficial("docx")}
+          className="rp-card__cta rp-card__cta--primary"
+          disabled={!ready || busy !== null}
+          onClick={() => void onDownload("docx")}
         >
-          {busy === "docx" ? "Đang tạo DOCX…" : "Tải DOCX"}
+          {busy === "docx" ? "Đang tạo DOCX…" : OFFICIAL_DOCX_LABEL}
         </button>
       </div>
-      {message ? (
-        <p className="rp-export-bar__error" role="alert">
-          {message}
+      {notice || (!ready && block) ? (
+        <p className="rp-export-bar__status" role="status">
+          {notice || block}
         </p>
       ) : null}
     </section>

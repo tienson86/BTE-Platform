@@ -39,7 +39,6 @@ class DocxExporterV1:
         document = Document()
         self._configure_page(document)
         self._apply_styles(document)
-        self._stamp_properties(document, report_input)
         self._render(document, report_input)
         document.save(str(output_path))
         validate_docx_file(output_path)
@@ -75,19 +74,26 @@ class DocxExporterV1:
         normal.font.name = "Arial"
         normal.font.size = Pt(11)
 
-    def _stamp_properties(self, document: Document, report_input: ReportInputV1) -> None:
-        """Embed identity in document properties — not a second analytical model."""
+    def _apply_document_properties(
+        self,
+        document: Document,
+        report_input: ReportInputV1,
+        presented: object,
+    ) -> None:
         props = document.core_properties
-        props.title = "Báo cáo luận giải Bát Tự"
-        props.subject = report_input.profile.full_name or "BTE V1.0"
+        props.title = getattr(presented, "document_title", "") or "Báo cáo luận giải Bát Tự"
+        props.subject = "Báo cáo luận giải Bát Tự"
         props.identifier = report_input.metadata.case_id
+        props.category = "BTE customer report"
         props.comments = (
-            f"BTE V1.0 · Report V{report_input.metadata.report_version} · "
-            f"analysis_id={report_input.metadata.case_id}"
+            f"analysis_id={report_input.metadata.case_id}; "
+            f"generated_at={report_input.metadata.generated_at}; "
+            f"{report_input.metadata.engine_version}"
         )
 
     def _render(self, document: Document, report_input: ReportInputV1) -> None:
         presented = build_presented_report(report_input)
+        self._apply_document_properties(document, report_input, presented)
         document.add_heading("BÁO CÁO LUẬN GIẢI BÁT TỰ", level=0)
         subtitle_name = report_input.profile.full_name or "—"
         document.add_paragraph(subtitle_name)

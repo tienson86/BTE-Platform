@@ -70,6 +70,7 @@ class PresentedSection:
     list_items: list[str] = field(default_factory=list)
     notes: list[str] = field(default_factory=list)
     fallback: str | None = None
+    allow_break: bool = False
 
 
 @dataclass(slots=True)
@@ -94,21 +95,25 @@ def build_presented_report(report_input: ReportInputV1) -> PresentedReportV1:
         display_text(metadata.case_id) or "—",
         display_text(metadata.generated_at),
     ]
+    footer_parts = [
+        "BTE V1.0",
+        f"Report V1 · {display_text(metadata.report_version)}",
+    ]
+    if metadata.case_id:
+        footer_parts.append(f"Mã phân tích {display_text(metadata.case_id)}")
+    if metadata.generated_at:
+        footer_parts.append(display_text(metadata.generated_at))
     return PresentedReportV1(
         document_title=document_title,
         heading="Báo cáo luận giải Bát Tự",
         subtitle=" · ".join(part for part in subtitle_parts if part),
-        footer=(
-            f"BTE V1.0 · Report V{display_text(metadata.report_version)} · "
-            f"Mã phân tích {display_text(metadata.case_id) or '—'} · "
-            f"{display_text(metadata.generated_at)}"
-        ),
+        footer=" · ".join(footer_parts),
         sections=_build_sections(report_input),
     )
 
 
 def _build_sections(report_input: ReportInputV1) -> list[PresentedSection]:
-    return [
+    sections = [
         _section_profile(report_input),
         _section_pillars(report_input),
         _section_five_elements(report_input),
@@ -119,14 +124,22 @@ def _build_sections(report_input: ReportInputV1) -> list[PresentedSection]:
         _section_shensha(report_input),
         _section_luck(report_input),
         _section_executive_summary(report_input),
-        _domain_section(report_input, "11. Nghề nghiệp", "career"),
-        _domain_section(report_input, "12. Tài vận", "wealth"),
-        _domain_section(report_input, "13. Hôn nhân", "marriage"),
-        _domain_section(report_input, "14. Sức khỏe", "health"),
-        _domain_section(report_input, "15. Tử tức", "children"),
-        _section_recommendations(report_input),
-        _section_conclusion(report_input),
     ]
+    if _has_pack05_narrative(report_input):
+        sections.extend(_pack05_narrative_sections(report_input))
+    else:
+        sections.extend(
+            [
+                _domain_section(report_input, "11. Nghề nghiệp", "career"),
+                _domain_section(report_input, "12. Tài vận", "wealth"),
+                _domain_section(report_input, "13. Hôn nhân", "marriage"),
+                _domain_section(report_input, "14. Sức khỏe", "health"),
+                _domain_section(report_input, "15. Tử tức", "children"),
+            ]
+        )
+    sections.append(_section_recommendations(report_input))
+    sections.append(_section_conclusion(report_input))
+    return sections
 
 
 def _section_profile(report_input: ReportInputV1) -> PresentedSection:
@@ -275,6 +288,49 @@ def _five_element_display(value: object) -> str:
     return text
 
 
+def _strength_score_display(value: object) -> str:
+    """Canonical Strength 0–1 as two decimals. Not Score Engine grade."""
+    if value is None or value == "":
+        return ""
+    try:
+        number = float(value)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        return display_text(value)
+    if 0 <= number <= 1:
+        return f"{number:.2f}"
+    return display_text(value)
+
+
+_PACK05_EXTRA_SECTIONS: tuple[tuple[str, str], ...] = (
+    ("sec-observation", "Quan sát"),
+    ("sec-reasoning", "Lý giải"),
+    ("sec-impact", "Tác động"),
+    ("sec-warning", "Lưu ý"),
+)
+
+
+def _has_pack05_narrative(report_input: ReportInputV1) -> bool:
+    ids = {section.id for section in report_input.interpretation.sections}
+    return "sec-executive_summary" in ids or "sec-observation" in ids
+
+
+def _pack05_narrative_sections(report_input: ReportInputV1) -> list[PresentedSection]:
+    extras: list[PresentedSection] = []
+    for section_id, default_title in _PACK05_EXTRA_SECTIONS:
+        section = _find_section(report_input.interpretation.sections, section_id, default_title.lower())
+        if section is None or not section.content:
+            continue
+        extras.append(
+            PresentedSection(
+                id=section_id,
+                title=section.title or default_title,
+                paragraphs=customer_paragraphs(section.content),
+                allow_break=True,
+            )
+        )
+    return extras
+
+
 def _section_five_elements(report_input: ReportInputV1) -> PresentedSection:
     five = report_input.five_elements
     values = (five.wood, five.fire, five.earth, five.metal, five.water)
@@ -311,14 +367,14 @@ def _section_five_elements(report_input: ReportInputV1) -> PresentedSection:
 def _section_strength(report_input: ReportInputV1) -> PresentedSection:
     strength = report_input.strength
     rows = _filled_rows(
-        [
-            ("Nhật chủ", display_text(strength.day_master)),
-            ("Điểm thân", display_text(strength.score)),
-            ("Mức", display_text(strength.level, "strength")),
-            ("Phân loại", display_text(strength.classification, "strength")),
-            ("Hỗ trợ mùa", display_text(strength.seasonal_support)),
-            ("Căn", display_text(strength.root_support)),
-        ]
+            [
+                ("Nhật chủ", display_text(strength.day_master)),
+                ("Điểm thân", _strength_score_display(strength.score)),
+                ("Mức", display_text(strength.level, "strength")),
+                ("Phân loại", display_text(strength.classification, "strength")),
+                ("Hỗ trợ mùa", display_text(strength.seasonal_support)),
+                ("Căn", display_text(strength.root_support)),
+            ]
     )
     paragraphs = customer_paragraphs(strength.summary)
     fallback = None
@@ -515,6 +571,7 @@ def _section_luck(report_input: ReportInputV1) -> PresentedSection:
             ]
         ),
         table=table,
+        allow_break=True,
     )
 
 
@@ -542,11 +599,13 @@ def _section_executive_summary(report_input: ReportInputV1) -> PresentedSection:
             id="executive-summary",
             title="10. Luận giải tổng thể",
             fallback=EXECUTIVE_SUMMARY_MISSING,
+            allow_break=True,
         )
     return PresentedSection(
         id="executive-summary",
         title="10. Luận giải tổng thể",
         paragraphs=paragraphs,
+        allow_break=True,
     )
 
 
@@ -559,9 +618,9 @@ def _domain_section(
     section = _find_section(report_input.interpretation.sections, *aliases)
     paragraphs = customer_paragraphs(section.content) if section is not None else []
     if paragraphs:
-        return PresentedSection(id=key, title=title, paragraphs=paragraphs)
+        return PresentedSection(id=key, title=title, paragraphs=paragraphs, allow_break=True)
     fallback = RUNTIME_GAP_MESSAGE if key in _RUNTIME_GAP_DOMAINS else missing_data_message()
-    return PresentedSection(id=key, title=title, fallback=fallback)
+    return PresentedSection(id=key, title=title, fallback=fallback, allow_break=True)
 
 
 def _section_recommendations(report_input: ReportInputV1) -> PresentedSection:
@@ -575,11 +634,13 @@ def _section_recommendations(report_input: ReportInputV1) -> PresentedSection:
             id="recommendations",
             title="16. Khuyến nghị",
             list_items=items,
+            allow_break=True,
         )
     return PresentedSection(
         id="recommendations",
         title="16. Khuyến nghị",
         fallback=missing_data_message(),
+        allow_break=True,
     )
 
 
@@ -595,11 +656,13 @@ def _section_conclusion(report_input: ReportInputV1) -> PresentedSection:
             id="conclusion",
             title="17. Tổng kết",
             fallback=missing_data_message(),
+            allow_break=True,
         )
     return PresentedSection(
         id="conclusion",
         title="17. Tổng kết",
         paragraphs=paragraphs,
+        allow_break=True,
     )
 
 

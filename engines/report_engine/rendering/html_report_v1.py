@@ -82,7 +82,7 @@ def _render_section(section: PresentedSection) -> str:
         f'<p class="report-v1__fallback">{escape(note)}</p>' for note in section.notes
     )
     return (
-        f'<section class="report-v1__section" id="{escape(section.id)}">'
+        f'<section class="report-v1__section{" report-v1__section--flow" if section.allow_break else ""}" id="{escape(section.id)}">'
         f'<h2 class="report-v1__section-title">{escape(section.title)}</h2>'
         f'<div class="report-v1__section-body">{"".join(body)}</div>'
         "</section>"

@@ -13,6 +13,7 @@ import {
   customerContractMessage,
   customerContractStatus,
 } from "../resultState/customerContract";
+import { attachCustomerExportToWindow } from "../export/customerExport";
 
 declare global {
   interface Window {
@@ -34,3 +35,5 @@ window.BteFullReport = {
   contractMessage: customerContractMessage,
   customerContract: CUSTOMER_USEFUL_GOD_CONTRACT,
 };
+
+attachCustomerExportToWindow();

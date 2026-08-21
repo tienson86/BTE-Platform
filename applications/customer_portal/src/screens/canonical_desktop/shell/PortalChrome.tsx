@@ -42,7 +42,7 @@ function handleCanonicalNav(event: MouseEvent<HTMLAnchorElement>, href: string):
     target.scrollIntoView({ behavior: "smooth", block: "start" });
     return;
   }
-  window.print();
+  window.location.hash = "xuat";
 }
 
 export function PortalHeader(): ReactNode {

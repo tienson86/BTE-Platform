@@ -25,10 +25,10 @@ from applications.api.routes import admin as admin_router
 from applications.api.routes import auth as auth_router
 from applications.api.routes import cases as cases_router
 from applications.api.routes import customers as customers_router
-from applications.api.routes import export as export_router
 from applications.api.routes import health as health_router
 from applications.api.routes import license as license_router
 from applications.api.routes import user as user_router
+from applications.api.routes import export as export_router
 from applications.api.routes import v1 as v1_router
 from applications.monitoring import register_ops_middleware
 
@@ -66,7 +66,6 @@ def create_app() -> FastAPI:
         {"name": "Admin", "description": "Administration & operations (WP13)"},
         {"name": "License", "description": "Licensing & product editions (WP14)"},
         {"name": "engines", "description": "Engine orchestration endpoints"},
-        {"name": "export", "description": "Official customer PDF / DOCX from a selected analysis"},
     ]
     register_middleware(app)
     register_ops_middleware(app)

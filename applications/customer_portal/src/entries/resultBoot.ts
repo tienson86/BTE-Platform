@@ -9,6 +9,7 @@ import {
 } from "../adapters";
 import type { AnalyzeChartRequest } from "../models";
 import { buildFullReportViewModel, type FullReportViewModel } from "../report/fullReportViewModel";
+import type { CustomerExportPayload } from "../export/customerExport";
 import {
   customerContractMessage,
   customerContractStatus,
@@ -28,6 +29,7 @@ export type ResultBootProps = {
   readonly analysisId?: string;
   readonly resultSource?: "current" | "history" | "empty" | "preview" | "contract";
   readonly fullReport?: FullReportViewModel;
+  readonly exportPayload?: CustomerExportPayload | null;
 };
 
 /**
@@ -102,6 +104,12 @@ export function resolveResultBoot(
       input: payload.input,
       analysisId,
     });
+    const exportPayload: CustomerExportPayload = {
+      analysisId,
+      source: payload.source === "history" ? "history" : "current",
+      data: payload.data,
+      input: payload.input,
+    };
     return {
       request: null,
       initialData: adaptAnalysisToCanonicalDesktop(payload.data, {
@@ -114,6 +122,7 @@ export function resolveResultBoot(
       analysisId: fullReport.analysisId,
       resultSource: payload.source,
       fullReport,
+      exportPayload,
     };
   }
 

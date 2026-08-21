@@ -12,12 +12,12 @@ export const API_ENDPOINTS = {
   score: "/score",
   interpretation: "/interpretation",
   report: "/report",
-  exportPdf: "/export/pdf",
-  exportDocx: "/export/docx",
   narrative: "/narrative",
   discussion: "/discussion",
   cases: "/cases",
   customers: "/customers",
+  exportPdf: "/export/pdf",
+  exportDocx: "/export/docx",
 } as const;
 
 export type ApiEndpointKey = keyof typeof API_ENDPOINTS;

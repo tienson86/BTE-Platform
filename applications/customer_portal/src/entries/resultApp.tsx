@@ -64,6 +64,7 @@ function mount(): void {
         fullReport={boot.fullReport}
         analysisId={boot.analysisId}
         resultSource={boot.resultSource}
+        exportPayload={boot.exportPayload}
       />
     </StrictMode>,
   );
