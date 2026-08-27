@@ -9,3 +9,7 @@ class DateSelectionReportError(Exception):
 
 class DateSelectionReportValidationError(DateSelectionReportError):
     """SearchResult or ReportModel failed integrity validation."""
+
+
+class DateSelectionReportTemplateError(DateSelectionReportError):
+    """Presentation or template structure failed validation."""

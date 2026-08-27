@@ -38,3 +38,11 @@ REPORT_FOUNDATION_CONTRACT: dict[str, str] = {
     "pack_05_contract_id": REPORT_CONTRACT_ID,
     "pack_05_report_version": PACK05_REPORT_VERSION,
 }
+
+RENDER_CONTRACT: dict[str, str] = {
+    "input": "DateSelectionReportModel",
+    "output": "DateSelectionRenderTree",
+    "template_id": "date_selection_report",
+    "pack_05_theme_id": "bte.report.theme.v1",
+    "pack_05_placeholder_model": "PlaceholderModel",
+}
