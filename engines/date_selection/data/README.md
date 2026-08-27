@@ -1,15 +1,35 @@
-# Date Selection Cung Phi dataset
+# Date Selection Cung Phi datasets
 
-This table is **not** Cân Xương weight data.
+These tables are **not** Cân Xương weight data.
 
-## Person columns
+## Person Cung Phi
 
-- 60 Hoa Giáp labels and Nạp Âm ngũ hành: `engines/calendar_engine/data/01_nap_am.csv`
-- `cung_nam` / `cung_nu`: person birth Cung for the 1924–1983 Giáp Tý cycle (Feng Shui year-digit method). Used only as a Ganzhi+gender person lookup helper.
-- Runtime **person** Cung Phi uses canonical Feng Shui Engine (`year` + `gender`), not these columns as a date rule.
+Runtime person Cung uses canonical Feng Shui Engine:
 
-## Date / hour column
+`birth year + gender → Cung Phi → element → Đông/Tây Tứ Trạch`
 
-- `cung_ngay`: intrinsic Date Selection Cung for a day or hour Ganzhi (Hạ Nguyên / 60 Hoa Giáp).
-- This column is **empty**. The repository has no canonical date/hour Hạ Nguyên mapping (no Tam Nguyên Cửu Vận date table; `can_xuong_PRO.xlsx` / `Nam_60_Hoa_Giap` is not checked in).
-- Do **not** fill `cung_ngay` from Cung Nam/Nữ, stem polarity, viewer gender, or Feng Shui Engine gender output.
+`hoa_giap_cung_phi.csv` remains a person-reference helper (Cung Nam / Cung Nữ). It is **not** the date/hour rule.
+
+## Date / hour Hạ Nguyên Cung
+
+Canonical file:
+
+`engines/date_selection/data/ha_nguyen_cung.csv`
+
+| Field | Meaning |
+|---|---|
+| `ganzhi` | 60 Hoa Giáp label |
+| `ha_nguyen_cung` | Intrinsic Hạ Nguyên Cung for that Ganzhi |
+| `cung_element` | Ngũ hành of the Cung |
+| `trach_group` | `dong` / `tay` |
+
+This mapping is the Product Owner–approved **Cung → Nam** column from workbook `can_xuong_PRO.xlsx`, sheet `Nam_60_Hoa_Giap`, normalized as intrinsic date/hour Cung.
+
+It is **not** viewer gender. The same Ganzhi always yields the same date/hour Cung.
+
+The Excel workbook is reference only. Runtime reads this CSV. No Excel dependency.
+
+Hạ Nguyên cycle used to normalize the 60 rows: Giáp Tý 1984 through Quý Hợi 2043. Mandatory checks:
+
+- Quý Dậu → Đoài → Kim → Tây
+- Tân Dậu → Tốn → Mộc → Đông

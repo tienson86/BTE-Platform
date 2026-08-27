@@ -9,7 +9,6 @@ from engines.calendar_engine.algorithms.ganzhi import GanzhiAlgorithm
 from engines.calendar_engine.engine import CalendarEngine
 from engines.calendar_engine.julian.julian import JulianDay
 from engines.date_selection.cung_phi import cung_for_date_ganzhi, trach_for_person
-from engines.date_selection.exceptions import DateSelectionMappingError
 from engines.date_selection.hour import window_for_clock
 from engines.date_selection.ke import current_ke_index, ke_slots_for_hour
 from engines.date_selection.liu_ren import day_value, hour_value, ke_value, six_state_from_value
@@ -40,9 +39,12 @@ def test_case_a_27_aug_2026_day_ganzhi() -> None:
     assert calendar.lunar_year == 2026
     assert calendar.lunar_month == 7
     assert calendar.lunar_day == 15
-    with pytest.raises(DateSelectionMappingError, match="Hạ Nguyên"):
-        cung_for_date_ganzhi("Quý Dậu")
-    assert day.trach is None
+    assert cung_for_date_ganzhi("Quý Dậu") == "Đoài"
+    assert day.trach is not None
+    assert day.trach.cung == "Đoài"
+    assert day.trach.element_label == "Kim"
+    assert day.trach.trach_group_label == "Tây Tứ Trạch"
+    assert calendar.to_dict()["lunar_can_chi"]["day"] == "Quý Dậu"
 
 
 def test_case_b_day_cung_identical_for_male_and_female_viewers() -> None:

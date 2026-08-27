@@ -126,3 +126,9 @@ HOUR_BRANCH_CSV = "database/02_quy_tac/hour_branch.csv"
 NAP_AM_CSV = "engines/calendar_engine/data/01_nap_am.csv"
 HOUR_GANZHI_CSV = "engines/calendar_engine/data/04_hour_ganzhi.csv"
 HOA_GIAP_CUNG_PHI_CSV = "engines/date_selection/data/hoa_giap_cung_phi.csv"
+HA_NGUYEN_CUNG_CSV = "engines/date_selection/data/ha_nguyen_cung.csv"
+
+VALID_CUNG = frozenset(CUNG_ELEMENT)
+JIAZI_LABELS: tuple[str, ...] = tuple(
+    f"{STEMS[index % 10]} {BRANCHES[index % 12]}" for index in range(60)
+)

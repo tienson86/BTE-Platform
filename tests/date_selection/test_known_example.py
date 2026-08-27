@@ -43,3 +43,7 @@ def test_known_example_27_aug_2026() -> None:
     assert thin.ganzhi == "Bính Thìn"
     assert thin.window.time_range == "07:01–09:00"
     assert ke1.time_range == "07:01–07:20"
+    assert day.trach is not None
+    assert day.trach.cung == "Đoài"
+    assert day.trach.element_label == "Kim"
+    assert day.trach.trach_group_label == "Tây Tứ Trạch"

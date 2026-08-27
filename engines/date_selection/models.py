@@ -48,6 +48,7 @@ class CalendarSnapshot:
     lunar_leap: bool
     lunar_label: str
     year_ganzhi: str
+    month_ganzhi: str
     day_ganzhi: str
     year_branch: str
     weekday: int
@@ -107,7 +108,9 @@ class HourSelection:
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize for API / presentation."""
-        return {
+        from engines.date_selection.identity import hoa_giap_view
+
+        payload = {
             "window": self.window.to_dict(),
             "ganzhi": self.ganzhi,
             "hour_value": self.hour_value,
@@ -115,6 +118,8 @@ class HourSelection:
             "trach": self.trach.to_dict() if self.trach else None,
             "ke_slots": [slot.to_dict() for slot in self.ke_slots],
         }
+        payload.update(hoa_giap_view(self.ganzhi, self.trach))
+        return payload
 
 
 @dataclass(slots=True)
@@ -129,13 +134,18 @@ class DaySelection:
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize for API / presentation."""
-        return {
+        from engines.date_selection.identity import hoa_giap_view
+
+        payload = {
             "calendar": self.calendar.to_dict(),
             "day_value": self.day_value,
             "six_state": self.six_state.to_dict(),
             "trach": self.trach.to_dict() if self.trach else None,
             "hours": [hour.to_dict() for hour in self.hours],
+            "month_ganzhi": self.calendar.month_ganzhi,
         }
+        payload.update(hoa_giap_view(self.calendar.day_ganzhi, self.trach))
+        return payload
 
 
 @dataclass(slots=True)

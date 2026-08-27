@@ -8,8 +8,11 @@ from pathlib import Path
 
 from engines.date_selection.constants import (
     BRANCHES,
+    CUNG_ELEMENT,
+    HA_NGUYEN_CUNG_CSV,
     HOA_GIAP_CUNG_PHI_CSV,
     HOUR_GANZHI_CSV,
+    JIAZI_LABELS,
     NAP_AM_CSV,
 )
 from engines.date_selection.exceptions import DateSelectionError
@@ -62,8 +65,47 @@ def load_nap_am() -> dict[str, tuple[str, str]]:
 
 
 @lru_cache(maxsize=1)
+def load_ha_nguyen_cung() -> dict[str, dict[str, str]]:
+    """Load the 60-row intrinsic Hạ Nguyên date/hour Cung table."""
+    from engines.date_selection.trach import trach_from_cung
+
+    table: dict[str, dict[str, str]] = {}
+    for row in _read_csv(HA_NGUYEN_CUNG_CSV):
+        key = " ".join(row["ganzhi"].split())
+        cung = (row.get("ha_nguyen_cung") or "").strip()
+        if key in table:
+            raise DateSelectionError(f"duplicate Hạ Nguyên Ganzhi: {key!r}")
+        if cung not in CUNG_ELEMENT:
+            raise DateSelectionError(f"invalid Hạ Nguyên Cung for {key!r}: {cung!r}")
+        info = trach_from_cung(cung)
+        element = (row.get("cung_element") or "").strip()
+        group = (row.get("trach_group") or "").strip()
+        if element != info.element_label:
+            raise DateSelectionError(
+                f"Hạ Nguyên element mismatch for {key!r}: {element!r}"
+            )
+        if group != info.trach_group_code:
+            raise DateSelectionError(
+                f"Hạ Nguyên trạch mismatch for {key!r}: {group!r}"
+            )
+        table[key] = {
+            "ha_nguyen_cung": cung,
+            "cung_element": info.element_label,
+            "trach_group": info.trach_group_code,
+        }
+    expected = set(JIAZI_LABELS)
+    if set(table) != expected:
+        missing = sorted(expected - set(table))
+        extra = sorted(set(table) - expected)
+        raise DateSelectionError(
+            f"Hạ Nguyên table must contain the 60 Hoa Giáp; missing={missing} extra={extra}"
+        )
+    return table
+
+
+@lru_cache(maxsize=1)
 def load_hoa_giap_cung_phi() -> dict[str, dict[str, str]]:
-    """Load 60 Hoa Giáp person Cung Nam/Nữ and empty date/hour ``cung_ngay``."""
+    """Load 60 Hoa Giáp person Cung Nam/Nữ helper table."""
     table: dict[str, dict[str, str]] = {}
     for row in _read_csv(HOA_GIAP_CUNG_PHI_CSV):
         key = " ".join(row["ganzhi"].split())

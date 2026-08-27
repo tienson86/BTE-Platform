@@ -38,6 +38,12 @@ export type HourVm = {
   six_state: SixStateVm;
   trach: TrachVm | null;
   ke_slots: KeSlotVm[];
+  nayin?: string;
+  nayin_element?: string;
+  cung?: string;
+  cung_element?: string;
+  trach_group?: string;
+  trach_group_label?: string;
 };
 
 export type DayVm = {
@@ -45,11 +51,20 @@ export type DayVm = {
     solar_label: string;
     lunar_label: string;
     year_ganzhi: string;
+    month_ganzhi?: string;
     day_ganzhi: string;
   };
   six_state: SixStateVm;
   trach: TrachVm | null;
   hours: HourVm[];
+  ganzhi?: string;
+  month_ganzhi?: string;
+  nayin?: string;
+  nayin_element?: string;
+  cung?: string;
+  cung_element?: string;
+  trach_group?: string;
+  trach_group_label?: string;
 };
 
 export type PersonVm = {

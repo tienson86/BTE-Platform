@@ -5,46 +5,50 @@
   </header>
 
   <div class="ds-layout">
-    <section class="bte-card" aria-labelledby="dsCalTitle">
-      <div class="ds-toolbar">
-        <button type="button" class="secondary" id="dsPrev" data-i18n="date_selection.month_prev"></button>
-        <h2 id="dsCalTitle"></h2>
-        <button type="button" class="secondary" id="dsNext" data-i18n="date_selection.month_next"></button>
-      </div>
-      <div id="dsWeekdays" class="ds-calendar" aria-hidden="true"></div>
-      <div id="dsCalendar" class="ds-calendar" role="grid" aria-label="Lịch tháng"></div>
-    </section>
+    <div class="ds-left" data-ds-col="left">
+      <section class="bte-card ds-calendar-card" aria-labelledby="dsCalTitle">
+        <div class="ds-toolbar">
+          <button type="button" class="secondary" id="dsPrev" data-i18n="date_selection.month_prev"></button>
+          <h2 id="dsCalTitle"></h2>
+          <button type="button" class="secondary" id="dsNext" data-i18n="date_selection.month_next"></button>
+        </div>
+        <div id="dsWeekdays" class="ds-calendar" aria-hidden="true"></div>
+        <div id="dsCalendar" class="ds-calendar" role="grid" aria-label="Lịch tháng"></div>
+      </section>
 
-    <div class="ds-side">
+      <section class="bte-card ds-clock-card" aria-labelledby="dsClockTitle">
+        <h2 id="dsClockTitle" data-i18n="date_selection.clock"></h2>
+        <div class="ds-clock-card__body">
+          <div class="ds-clock" id="dsClock" aria-label="Đồng hồ analog">
+            <span class="ds-clock__num" style="--deg: 0deg">12</span>
+            <span class="ds-clock__num" style="--deg: 30deg">1</span>
+            <span class="ds-clock__num" style="--deg: 60deg">2</span>
+            <span class="ds-clock__num" style="--deg: 90deg">3</span>
+            <span class="ds-clock__num" style="--deg: 120deg">4</span>
+            <span class="ds-clock__num" style="--deg: 150deg">5</span>
+            <span class="ds-clock__num" style="--deg: 180deg">6</span>
+            <span class="ds-clock__num" style="--deg: 210deg">7</span>
+            <span class="ds-clock__num" style="--deg: 240deg">8</span>
+            <span class="ds-clock__num" style="--deg: 270deg">9</span>
+            <span class="ds-clock__num" style="--deg: 300deg">10</span>
+            <span class="ds-clock__num" style="--deg: 330deg">11</span>
+            <div class="ds-clock__hand ds-clock__hand--hour" id="dsHandHour"></div>
+            <div class="ds-clock__hand ds-clock__hand--minute" id="dsHandMinute"></div>
+            <div class="ds-clock__hand ds-clock__hand--second" id="dsHandSecond"></div>
+            <div class="ds-clock__cap"></div>
+          </div>
+          <dl class="ds-kv ds-kv--compact" id="dsLiveHour"></dl>
+        </div>
+      </section>
+    </div>
+
+    <div class="ds-right" data-ds-col="right">
       <section class="bte-card ds-detail" aria-labelledby="dsDetailTitle">
         <h2 id="dsDetailTitle" data-i18n="date_selection.day_result"></h2>
         <dl class="ds-kv" id="dsDetail"></dl>
       </section>
 
-      <section class="bte-card ds-clock-card" aria-labelledby="dsClockTitle">
-        <h2 id="dsClockTitle">Đồng hồ</h2>
-        <div class="ds-clock" id="dsClock" aria-label="Đồng hồ analog">
-          <span class="ds-clock__num" style="--deg: 0deg">12</span>
-          <span class="ds-clock__num" style="--deg: 30deg">1</span>
-          <span class="ds-clock__num" style="--deg: 60deg">2</span>
-          <span class="ds-clock__num" style="--deg: 90deg">3</span>
-          <span class="ds-clock__num" style="--deg: 120deg">4</span>
-          <span class="ds-clock__num" style="--deg: 150deg">5</span>
-          <span class="ds-clock__num" style="--deg: 180deg">6</span>
-          <span class="ds-clock__num" style="--deg: 210deg">7</span>
-          <span class="ds-clock__num" style="--deg: 240deg">8</span>
-          <span class="ds-clock__num" style="--deg: 270deg">9</span>
-          <span class="ds-clock__num" style="--deg: 300deg">10</span>
-          <span class="ds-clock__num" style="--deg: 330deg">11</span>
-          <div class="ds-clock__hand ds-clock__hand--hour" id="dsHandHour"></div>
-          <div class="ds-clock__hand ds-clock__hand--minute" id="dsHandMinute"></div>
-          <div class="ds-clock__hand ds-clock__hand--second" id="dsHandSecond"></div>
-          <div class="ds-clock__cap"></div>
-        </div>
-        <dl class="ds-kv" id="dsLiveHour"></dl>
-      </section>
-
-      <section class="bte-card" aria-labelledby="dsHourTitle">
+      <section class="bte-card ds-hour" aria-labelledby="dsHourTitle">
         <h2 id="dsHourTitle" data-i18n="date_selection.hour_select"></h2>
         <label>
           <span class="visually-hidden" data-i18n="date_selection.hour_select"></span>

@@ -29,6 +29,10 @@ const hour = (branch: string, label: string): HourVm => ({
   ganzhi: "Bính Thìn",
   six_state: { remainder: 4, code: "xich_khau", label },
   trach,
+  nayin: "Thổ",
+  cung: "Ly",
+  cung_element: "Hỏa",
+  trach_group_label: "Đông Tứ Trạch",
   ke_slots: [
     { ke_index: 1, time_range: "07:01–07:20", six_state: { remainder: 5, code: "tieu_cat", label: "Tiểu Cát" } },
     { ke_index: 2, time_range: "07:21–07:40", six_state: { remainder: 0, code: "khong_vong", label: "Không Vong" } },
@@ -44,10 +48,14 @@ const day: DayVm = {
     solar_label: "27/08/2026",
     lunar_label: "15/07/2026",
     year_ganzhi: "Bính Ngọ",
+    month_ganzhi: "Giáp Thân",
     day_ganzhi: "Quý Dậu",
   },
   six_state: { remainder: 5, code: "tieu_cat", label: "Tiểu Cát" },
   trach,
+  nayin: "Kim",
+  cung: "Đoài",
+  cung_element: "Kim",
   hours: [hour("Thìn", "Xích Khẩu"), hour("Tỵ", "Tiểu Cát")],
 };
 
@@ -140,5 +148,95 @@ describe("Date Selection frontend", () => {
       </DateSelectionMobileFrame>,
     );
     expect(screen.getByTestId("mobile-frame").getAttribute("style")).toContain("375");
+    const frame = screen.getByTestId("mobile-frame");
+    expect(frame.querySelector('[data-testid="ds-calendar-card"]')).toBeTruthy();
+    expect(frame.querySelector('[data-testid="ds-day-card"]')).toBeTruthy();
+    expect(frame.querySelector('[data-testid="ds-clock-card"]')).toBeTruthy();
+    expect(frame.querySelector('[data-testid="ds-hour-card"]')).toBeTruthy();
+    expect(frame.querySelector('[data-testid="ds-ke-card"]')).toBeTruthy();
+  });
+
+  it("renders Can Chi tháng and keeps Nạp âm separate from Hành Cung", () => {
+    render(<LookupScreen cells={cells} day={day} />);
+    const detail = screen.getByTestId("day-detail").textContent || "";
+    expect(detail).toContain("Can Chi tháng");
+    expect(detail).toContain("Giáp Thân");
+    expect(detail).toContain("Nạp âm");
+    expect(detail).toContain("Hành Cung");
+    expect(detail).toContain("Nhóm Trạch");
+    expect(detail).not.toContain("Ngũ hành");
+    expect(screen.getByTestId("hour-detail").textContent).toContain("Nạp âm giờ");
+    expect(screen.getByTestId("hour-detail").textContent).toContain("Hành Cung giờ");
+  });
+
+  it("renders Mậu Thìn Nạp âm as Mộc", () => {
+    const mauThin: DayVm = {
+      ...day,
+      calendar: { ...day.calendar, day_ganzhi: "Mậu Thìn" },
+      ganzhi: "Mậu Thìn",
+      nayin: "Mộc",
+      cung: "Chấn",
+      cung_element: "Mộc",
+      trach: {
+        cung: "Chấn",
+        element_code: "moc",
+        element_label: "Mộc",
+        trach_group_code: "dong",
+        trach_group_label: "Đông Tứ Trạch",
+      },
+    };
+    render(<LookupScreen cells={cells} day={mauThin} />);
+    const detail = screen.getByTestId("day-detail").textContent || "";
+    expect(detail).toContain("Mậu Thìn");
+    expect(detail).toContain("Nạp âm");
+    expect(detail).toContain("Mộc");
+    expect(detail).toContain("Chấn");
+    expect(detail).toContain("Đông Tứ Trạch");
+  });
+
+  it("renders Canh Thìn with Nạp âm Kim and Hành Cung Hỏa", () => {
+    const canhThin: DayVm = {
+      ...day,
+      calendar: { ...day.calendar, day_ganzhi: "Canh Thìn" },
+      ganzhi: "Canh Thìn",
+      nayin: "Kim",
+      cung: "Ly",
+      cung_element: "Hỏa",
+      trach: {
+        cung: "Ly",
+        element_code: "hoa",
+        element_label: "Hỏa",
+        trach_group_code: "dong",
+        trach_group_label: "Đông Tứ Trạch",
+      },
+    };
+    render(<LookupScreen cells={cells} day={canhThin} />);
+    const detail = screen.getByTestId("day-detail");
+    expect(detail.textContent).toContain("Canh Thìn");
+    expect(detail.textContent).toContain("Nạp âm");
+    expect(detail.textContent).toContain("Kim");
+    expect(detail.textContent).toContain("Ly");
+    expect(detail.textContent).toContain("Hành Cung");
+    expect(detail.textContent).toContain("Hỏa");
+    const nayinDd = Array.from(detail.querySelectorAll("dt")).find((el) => el.textContent === "Nạp âm")
+      ?.nextElementSibling?.textContent;
+    const hanhDd = Array.from(detail.querySelectorAll("dt")).find((el) => el.textContent === "Hành Cung")
+      ?.nextElementSibling?.textContent;
+    expect(nayinDd).toBe("Kim");
+    expect(hanhDd).toBe("Hỏa");
+    expect(nayinDd).not.toBe(hanhDd);
+  });
+
+  it("places the clock below the calendar on desktop and hour/ke on the right", () => {
+    render(<LookupScreen cells={cells} day={day} />);
+    const left = screen.getByTestId("ds-left");
+    const right = screen.getByTestId("ds-right");
+    expect(left.children[0].getAttribute("data-testid")).toBe("ds-calendar-card");
+    expect(left.children[1].getAttribute("data-testid")).toBe("ds-clock-card");
+    expect(right.children[0].getAttribute("data-testid")).toBe("ds-day-card");
+    expect(right.children[1].getAttribute("data-testid")).toBe("ds-hour-card");
+    expect(right.children[2].getAttribute("data-testid")).toBe("ds-ke-card");
+    expect(screen.getByTestId("ds-hour-card").textContent).toContain("Chọn giờ");
+    expect(screen.getByTestId("ds-ke-card").textContent).toContain("Sáu khắc");
   });
 });

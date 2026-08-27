@@ -19,6 +19,9 @@ def test_date_selection_pages_render() -> None:
     assert "Tiểu Lục Nhâm" not in good.text
     assert "Tiểu Lục Nhâm" not in choose.text
     assert "ds-clock" in good.text
+    assert "ds-left" in good.text
+    assert "ds-right" in good.text
+    assert good.text.find("ds-calendar-card") < good.text.find("ds-clock-card")
     assert "dsFullName" in choose.text
     assert "dsGender" in choose.text
     assert "dsBirth" in choose.text

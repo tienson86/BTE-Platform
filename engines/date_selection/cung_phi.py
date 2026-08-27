@@ -11,7 +11,7 @@ from engines.date_selection.exceptions import (
     DateSelectionMappingError,
     DateSelectionValidationError,
 )
-from engines.date_selection.loader import load_hoa_giap_cung_phi
+from engines.date_selection.loader import load_ha_nguyen_cung, load_hoa_giap_cung_phi
 from engines.date_selection.models import TrachInfo
 from engines.date_selection.trach import trach_from_cung
 from engines.feng_shui_engine import FengShuiEngine, FengShuiEngineError, FengShuiValidationError
@@ -95,11 +95,20 @@ def cung_for_date_ganzhi(ganzhi: str) -> str:
     """
     Intrinsic Date Selection Cung for a day or hour Ganzhi.
 
-    Gender and stem polarity must not select this value. Requires a canonical
-    Hạ Nguyên ``cung_ngay`` mapping; does not invent one from Cung Nam/Nữ.
+    Looks up ``ha_nguyen_cung`` only. Gender is not an argument.
     """
-    row = _row_for_ganzhi(ganzhi)
-    cung = (row.get("cung_ngay") or "").strip()
+    table = load_ha_nguyen_cung()
+    key = _normalize_ganzhi(ganzhi)
+    row = table.get(key)
+    if row is None:
+        collapsed = key.replace(" ", "")
+        for candidate, value in table.items():
+            if candidate.replace(" ", "") == collapsed:
+                row = value
+                break
+    if row is None:
+        raise DateSelectionValidationError(f"unknown Ganzhi: {ganzhi!r}")
+    cung = (row.get("ha_nguyen_cung") or "").strip()
     if not cung:
         raise DateSelectionMappingError(
             "canonical Hạ Nguyên date/hour Cung mapping is missing"

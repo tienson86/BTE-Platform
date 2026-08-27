@@ -20,8 +20,34 @@
   ];
 
   function t(key) {
-    return global.BteI18n ? BteI18n.t(key) : key;
+    var value = global.BteI18n ? BteI18n.t(key) : key;
+    if (value && value !== key) return value;
+    return LABELS[key] || key;
   }
+
+  var LABELS = {
+    "date_selection.solar_date": "Ngày dương",
+    "date_selection.lunar_date": "Ngày âm",
+    "date_selection.year_ganzhi": "Can Chi năm",
+    "date_selection.month_ganzhi": "Can Chi tháng",
+    "date_selection.day_ganzhi": "Can Chi ngày",
+    "date_selection.day_result": "Kết quả ngày",
+    "date_selection.hour_result": "Kết quả giờ",
+    "date_selection.cung_phi": "Cung Phi",
+    "date_selection.nayin": "Nạp âm",
+    "date_selection.hanh_cung": "Hành Cung",
+    "date_selection.trach_group": "Nhóm Trạch",
+    "date_selection.clock": "Đồng hồ",
+    "date_selection.hour_branch": "Giờ",
+    "date_selection.hour_window": "Khung giờ",
+    "date_selection.current_hour": "Giờ hiện hành",
+    "date_selection.hour_ganzhi": "Can Chi giờ",
+    "date_selection.current_ke": "Khắc hiện hành",
+    "date_selection.hour_select": "Chọn giờ",
+    "date_selection.ke_panel": "Sáu khắc",
+    "date_selection.ke_label": "Khắc",
+    "date_selection.weekdays": "T2,T3,T4,T5,T6,T7,CN",
+  };
 
   function apiPost(path, body) {
     if (!global.BtePortal || typeof global.BtePortal.post !== "function") {
@@ -59,6 +85,9 @@
     return index;
   }
 
+  var ELEMENT_TOKEN = { "Mộc": "moc", "Hỏa": "hoa", "Thổ": "tho", "Kim": "kim", "Thủy": "thuy" };
+  var POSITIVE_KE = { dai_an: true, tieu_cat: true, toc_hy: true };
+
   function kv(dl, rows) {
     dl.innerHTML = rows
       .map(function (row) {
@@ -67,49 +96,78 @@
       .join("");
   }
 
+  function elementBadge(label) {
+    if (!label) return "—";
+    var token = ELEMENT_TOKEN[label] || "kim";
+    return '<span class="ds-badge ds-badge--' + token + '">' + label + "</span>";
+  }
+
+  function cungBadge(label) {
+    if (!label) return "—";
+    return '<span class="ds-badge ds-badge--cung">' + label + "</span>";
+  }
+
+  function identityOf(entity) {
+    var trach = entity.trach || {};
+    return {
+      ganzhi: entity.ganzhi || (entity.calendar && entity.calendar.day_ganzhi) || "",
+      nayin: entity.nayin || entity.nayin_element || "",
+      cung: entity.cung || trach.cung || "",
+      hanhCung: entity.cung_element || trach.element_label || "",
+      trachLabel: entity.trach_group_label || trach.trach_group_label || "",
+    };
+  }
+
   function fillDetail(dl, day) {
     var cal = day.calendar;
-    var trach = day.trach || {};
+    var identity = identityOf(day);
     kv(dl, [
       [t("date_selection.solar_date"), cal.solar_label],
       [t("date_selection.lunar_date"), cal.lunar_label],
       [t("date_selection.year_ganzhi"), cal.year_ganzhi],
+      [t("date_selection.month_ganzhi"), cal.month_ganzhi || day.month_ganzhi || "—"],
       [t("date_selection.day_ganzhi"), cal.day_ganzhi],
       [t("date_selection.day_result"), day.six_state.label],
-      [t("date_selection.cung_phi"), trach.cung || "—"],
-      [t("date_selection.element"), trach.element_label || "—"],
-      [t("date_selection.trach_group"), trach.trach_group_label || "—"],
+      [t("date_selection.nayin"), elementBadge(identity.nayin)],
+      [t("date_selection.cung_phi"), cungBadge(identity.cung)],
+      [t("date_selection.hanh_cung"), elementBadge(identity.hanhCung)],
+      [t("date_selection.trach_group"), identity.trachLabel || "—"],
     ]);
   }
 
   function fillHour(dl, hour) {
-    var trach = hour.trach || {};
+    var identity = identityOf(hour);
     kv(dl, [
-      [t("date_selection.current_hour"), hour.window.branch + " · " + hour.window.time_range],
+      [t("date_selection.hour_branch"), hour.window.branch],
+      [t("date_selection.hour_window"), hour.window.time_range],
       [t("date_selection.hour_ganzhi"), hour.ganzhi],
-      [t("date_selection.hour_result") || "Kết quả giờ", hour.six_state.label],
-      [t("date_selection.cung_phi"), trach.cung || "—"],
-      [t("date_selection.element"), trach.element_label || "—"],
-      [t("date_selection.trach_group"), trach.trach_group_label || "—"],
+      [t("date_selection.hour_result"), hour.six_state.label],
+      [t("date_selection.nayin"), elementBadge(identity.nayin)],
+      [t("date_selection.cung_phi"), cungBadge(identity.cung)],
+      [t("date_selection.hanh_cung"), elementBadge(identity.hanhCung)],
+      [t("date_selection.trach_group"), identity.trachLabel || "—"],
     ]);
   }
 
   function fillKe(container, hour, currentIndex) {
     container.innerHTML = hour.ke_slots
       .map(function (slot) {
-        var current = slot.ke_index === currentIndex ? ' data-current="true"' : "";
+        var current = slot.ke_index === currentIndex;
+        var tone = !current && POSITIVE_KE[slot.six_state.code] ? ' data-tone="positive"' : "";
+        var currentAttr = current ? ' data-current="true"' : "";
         return (
           '<div class="ds-ke-row"' +
-          current +
-          "><span>" +
+          currentAttr +
+          tone +
+          '><span class="ds-ke-row__time">' +
           slot.time_range +
-          "</span><span>" +
+          '</span><span class="ds-ke-row__label">' +
           t("date_selection.ke_label") +
           " " +
           slot.ke_index +
-          "</span><strong>" +
+          '</span><span class="ds-ke-row__result">' +
           slot.six_state.label +
-          "</strong></div>"
+          "</span></div>"
         );
       })
       .join("");
@@ -277,11 +335,9 @@
     var ke = live.ke_slots[keIndex - 1];
     kv(document.getElementById("dsLiveHour"), [
       [t("date_selection.current_hour"), live.window.branch],
-      ["Khung giờ", live.window.time_range],
+      [t("date_selection.hour_window"), live.window.time_range],
       [t("date_selection.hour_ganzhi"), live.ganzhi],
-      [t("date_selection.cung_phi"), live.trach.cung],
-      [t("date_selection.element"), live.trach.element_label],
-      [t("date_selection.trach_group"), live.trach.trach_group_label],
+      [t("date_selection.hour_result"), live.six_state.label],
       [t("date_selection.current_ke"), ke ? ke.six_state.label + " · " + ke.time_range : ""],
     ]);
     if (!this.manualHour) {

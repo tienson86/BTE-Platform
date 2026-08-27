@@ -12,6 +12,7 @@ export {
   DateSelectionNav,
   DayDetailPanel,
   HourSelector,
+  KePanel,
   LookupScreen,
   PersonBlock,
   SearchForm,

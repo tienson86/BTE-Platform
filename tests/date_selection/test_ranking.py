@@ -26,6 +26,7 @@ def _snapshot(day: int, ganzhi: str = "Bính Ngọ") -> CalendarSnapshot:
         lunar_leap=False,
         lunar_label=f"{day:02d}/07/2026",
         year_ganzhi="Bính Ngọ",
+        month_ganzhi="Giáp Thân",
         day_ganzhi=ganzhi,
         year_branch="Ngọ",
         weekday=1,

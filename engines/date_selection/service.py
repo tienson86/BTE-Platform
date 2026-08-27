@@ -14,7 +14,7 @@ from engines.date_selection.cung_phi import (
     trach_for_date_ganzhi,
     trach_for_person,
 )
-from engines.date_selection.exceptions import DateSelectionMappingError, DateSelectionValidationError
+from engines.date_selection.exceptions import DateSelectionValidationError
 from engines.date_selection.hour import all_hour_windows, hour_ganzhi, window_for_branch
 from engines.date_selection.ke import current_ke_index, ke_slots_for_hour
 from engines.date_selection.liu_ren import day_value, hour_value, six_state_from_value
@@ -192,10 +192,7 @@ class DateSelectionService:
             snapshot.lunar_day,
         )
         day_stem = snapshot.day_ganzhi.split(" ", 1)[0]
-        try:
-            trach = trach_for_date_ganzhi(snapshot.day_ganzhi)
-        except DateSelectionMappingError:
-            trach = None
+        trach = trach_for_date_ganzhi(snapshot.day_ganzhi)
         hours = [
             self._build_hour(day_stem, window, total)
             for window in all_hour_windows()
@@ -216,10 +213,7 @@ class DateSelectionService:
     ) -> HourSelection:
         hour_total = hour_value(day_total, window.branch_index)
         ganzhi = hour_ganzhi(day_stem, window.branch)
-        try:
-            trach = trach_for_date_ganzhi(ganzhi)
-        except DateSelectionMappingError:
-            trach = None
+        trach = trach_for_date_ganzhi(ganzhi)
         return HourSelection(
             window=window,
             ganzhi=ganzhi,

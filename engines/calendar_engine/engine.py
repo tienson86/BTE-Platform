@@ -31,10 +31,14 @@ class CalendarResult:
     timezone_name: str = "UTC+7"
 
     def to_dict(self) -> dict[str, Any]:
-        """Serialize canonical calendar truth for API / Portal / PDF / Cân Xương."""
+        """Serialize canonical calendar truth for API / Portal / PDF / Cân Xương.
+
+        Day Ganzhi uses integer noon JDN (``JulianDay.day_number``), matching Bazi.
+        """
         leap = bool(self.leap_month)
         lunar_year_can_chi = self.lunar.year_can_chi if self.lunar else None
-        day_ganzhi = GanzhiAlgorithm.day(self.julian_day)
+        jdn = JulianDay.day_number(self.solar_year, self.solar_month, self.solar_day)
+        day_ganzhi = GanzhiAlgorithm.day(jdn)
         lunar_can_chi: dict[str, str] = {}
         if lunar_year_can_chi:
             lunar_can_chi["year"] = lunar_year_can_chi

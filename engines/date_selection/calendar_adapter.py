@@ -53,6 +53,16 @@ def snapshot_for_solar(
     jdn = JulianDay.day_number(year, month, day)
     day_gz = GanzhiAlgorithm.day(jdn)
     day_ganzhi = f"{day_gz['can']} {day_gz['chi']}"
+    year_stem, _year_branch = _split_ganzhi(year_ganzhi)
+    try:
+        year_can_index = GanzhiAlgorithm.STEM.index(year_stem)
+    except ValueError as exc:
+        raise DateSelectionValidationError(f"unknown year stem: {year_stem!r}") from exc
+    lunar_month = int(calendar.lunar_month or 0)
+    if lunar_month < 1 or lunar_month > 12:
+        raise DateSelectionValidationError(f"invalid lunar month: {lunar_month}")
+    month_gz = GanzhiAlgorithm.month(year_can_index, lunar_month - 1)
+    month_ganzhi = f"{month_gz['can']} {month_gz['chi']}"
     lunar_leap = bool(calendar.leap_month)
     lunar_label = calendar.lunar_date or ""
     return CalendarSnapshot(
@@ -66,6 +76,7 @@ def snapshot_for_solar(
         lunar_leap=lunar_leap,
         lunar_label=lunar_label,
         year_ganzhi=year_ganzhi,
+        month_ganzhi=month_ganzhi,
         day_ganzhi=day_ganzhi,
         year_branch=year_branch,
         weekday=_weekday(year, month, day),
