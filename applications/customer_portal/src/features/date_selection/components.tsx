@@ -9,6 +9,7 @@ import {
   type PersonVm,
   type RankedDateVm,
 } from "./types";
+import { maskVnDate, maskVnMonth, parseVnDate, parseVnMonth } from "./vnDate";
 
 export function DateSelectionNav({ activeHref }: { activeHref?: string }): ReactNode {
   return (
@@ -329,71 +330,131 @@ export function LookupScreen({
 export function SearchForm({
   onSubmit,
 }: {
-  onSubmit: (payload: { full_name: string; gender: string; birth: string }) => void;
+  onSubmit: (payload: {
+    full_name: string;
+    gender: string;
+    birth: string;
+    target_month: string;
+  }) => void;
 }): ReactNode {
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [birth, setBirth] = useState("");
+  const now = new Date();
+  const [targetMonth, setTargetMonth] = useState(
+    `${String(now.getMonth() + 1).padStart(2, "0")}/${now.getFullYear()}`,
+  );
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const fullName = String(form.get("full_name") || "").trim();
     const gender = String(form.get("gender") || "");
-    const birth = String(form.get("birth") || "");
+    const parsedBirth = parseVnDate(birth);
+    const parsedMonth = parseVnMonth(targetMonth);
     const next: Record<string, string> = {};
     if (!fullName) next.full_name = "Vui lòng nhập họ và tên.";
     if (!gender) next.gender = "Vui lòng chọn giới tính.";
-    if (!birth) next.birth = "Vui lòng nhập ngày sinh dương lịch.";
+    if (!birth.trim()) next.birth = "Vui lòng nhập ngày sinh dương lịch.";
+    else if (!parsedBirth) next.birth = "Ngày không hợp lệ.";
+    if (!parsedMonth) next.target_month = "Tháng không hợp lệ.";
     setErrors(next);
-    if (Object.keys(next).length) return;
-    onSubmit({ full_name: fullName, gender, birth });
+    if (Object.keys(next).length || !parsedBirth || !parsedMonth) return;
+    onSubmit({
+      full_name: fullName,
+      gender,
+      birth: parsedBirth.iso,
+      target_month: parsedMonth.iso,
+    });
   };
   return (
     <form className="ds-form" onSubmit={handleSubmit} data-testid="search-form" noValidate>
-      <label>
-        Họ và tên
-        <input name="full_name" />
-        {errors.full_name ? <span className="field-error">{errors.full_name}</span> : null}
-      </label>
-      <label>
-        Giới tính
-        <select name="gender" defaultValue="">
-          <option value="">Chọn giới tính</option>
-          <option value="male">Nam</option>
-          <option value="female">Nữ</option>
-        </select>
-        {errors.gender ? <span className="field-error">{errors.gender}</span> : null}
-      </label>
-      <label>
-        Ngày sinh dương lịch
-        <input name="birth" type="date" />
-        {errors.birth ? <span className="field-error">{errors.birth}</span> : null}
-      </label>
+      <div className="ds-form-grid">
+        <label className="full">
+          Họ và tên
+          <input name="full_name" />
+          {errors.full_name ? <span className="field-error">{errors.full_name}</span> : null}
+        </label>
+        <label>
+          Giới tính
+          <select name="gender" defaultValue="">
+            <option value="">Chọn giới tính</option>
+            <option value="male">Nam</option>
+            <option value="female">Nữ</option>
+          </select>
+          {errors.gender ? <span className="field-error">{errors.gender}</span> : null}
+        </label>
+        <label>
+          Ngày sinh dương lịch
+          <input
+            name="birth"
+            type="text"
+            inputMode="numeric"
+            placeholder="DD/MM/YYYY"
+            value={birth}
+            onChange={(event) => setBirth(maskVnDate(event.target.value))}
+          />
+          {errors.birth ? <span className="field-error">{errors.birth}</span> : null}
+        </label>
+        <label className="full">
+          Tháng cần tìm ngày tốt
+          <div
+            className="ds-month-input"
+            data-testid="target-month"
+            data-display={parseVnMonth(targetMonth)?.display ?? ""}
+          >
+            <span className="ds-month-input__prefix">Tháng</span>
+            <input
+              name="target_month"
+              type="text"
+              inputMode="numeric"
+              placeholder="09/2026"
+              aria-label="Tháng cần tìm ngày tốt"
+              value={targetMonth}
+              onChange={(event) => setTargetMonth(maskVnMonth(event.target.value))}
+            />
+          </div>
+          {errors.target_month ? <span className="field-error">{errors.target_month}</span> : null}
+        </label>
+      </div>
       <button type="submit">TÌM NGÀY TỐT</button>
     </form>
   );
 }
 
+function personIdentity(person: PersonVm): {
+  ganzhi: string;
+  nayin: string;
+  cung: string;
+  hanhCung: string;
+  trach: string;
+} {
+  return {
+    ganzhi: person.year_ganzhi || person.ganzhi,
+    nayin: person.nayin || person.nayin_element || "",
+    cung: person.cung_phi || person.cung || person.trach.cung,
+    hanhCung: person.cung_element || person.trach.element_label,
+    trach: person.trach_group_label || person.trach.trach_group_label,
+  };
+}
+
 export function PersonBlock({ person }: { person: PersonVm }): ReactNode {
+  const identity = personIdentity(person);
   return (
     <section data-testid="person-block">
       <h2>Thông tin của bạn</h2>
-      <dl>
-        <dt>Họ tên</dt>
-        <dd>{person.full_name}</dd>
-        <dt>Giới tính</dt>
-        <dd>{person.gender_label}</dd>
-        <dt>Ngày sinh dương</dt>
-        <dd>{person.solar_label}</dd>
-        <dt>Ngày sinh âm</dt>
-        <dd>{person.lunar_label}</dd>
-        <dt>Can Chi</dt>
-        <dd>{person.ganzhi}</dd>
-        <dt>Cung Phi</dt>
-        <dd>{person.trach.cung}</dd>
-        <dt>Ngũ hành</dt>
-        <dd>{person.trach.element_label}</dd>
-        <dt>Nhóm</dt>
-        <dd>{person.trach.trach_group_label}</dd>
-      </dl>
+      <CompactResult
+        testId="person-detail"
+        rows={[
+          ["Họ và tên", person.full_name],
+          ["Giới tính", person.gender_label],
+          ["Ngày sinh dương", person.solar_label],
+          ["Ngày sinh âm", person.lunar_label],
+          ["Can Chi năm", identity.ganzhi],
+          ["Nạp âm", <ElementBadge key="pnayin" value={identity.nayin} />],
+          ["Cung Phi", <CungBadge key="pcung" value={identity.cung} />],
+          ["Hành Cung", <ElementBadge key="phanh" value={identity.hanhCung} />],
+          ["Nhóm Trạch", identity.trach],
+        ]}
+      />
     </section>
   );
 }
@@ -401,18 +462,22 @@ export function PersonBlock({ person }: { person: PersonVm }): ReactNode {
 export function TopResults({ dates }: { dates: RankedDateVm[] }): ReactNode {
   return (
     <div className="ds-cards" data-testid="top-results">
-      {dates.map((item) => (
-        <article key={item.day.calendar.solar_label} className="bte-card">
-          <div className="ds-card-date">{item.day.calendar.solar_label}</div>
-          <div className="ds-card-lunar">{item.day.calendar.lunar_label} âm</div>
-          <div className="ds-card-state">{item.day.six_state.label}</div>
-          <div>
-            {item.day.trach?.cung ?? "—"} · {item.day.trach?.element_label ?? "—"} · {item.day.trach?.trach_group_label ?? "—"}
-          </div>
-          <div>Giờ đề xuất</div>
-          <div>{item.recommendations[0]?.time_range}</div>
-        </article>
-      ))}
+      {dates.map((item) => {
+        const identity = dayIdentity(item.day);
+        return (
+          <article key={item.day.calendar.solar_label} className="bte-card">
+            <div className="ds-card-date">{item.day.calendar.solar_label}</div>
+            <div className="ds-card-lunar">{item.day.calendar.lunar_label} âm</div>
+            <div className="ds-card-state">{item.day.six_state.label}</div>
+            <div>Can Chi ngày: {identity.ganzhi}</div>
+            <div>Nạp âm: {identity.nayin || "—"}</div>
+            <div>Cung Phi: {identity.cung || "—"}</div>
+            <div>Hành Cung: {identity.hanhCung || "—"}</div>
+            <div>Nhóm: {identity.trach}</div>
+            <div>Giờ đề xuất: {item.recommendations[0]?.time_range}</div>
+          </article>
+        );
+      })}
     </div>
   );
 }

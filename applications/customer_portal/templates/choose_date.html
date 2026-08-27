@@ -22,12 +22,33 @@
       </label>
       <label>
         <span data-i18n="date_selection.birth_solar"></span>
-        <input id="dsBirth" name="birth" type="date" required />
+        <input
+          id="dsBirth"
+          name="birth"
+          type="text"
+          inputmode="numeric"
+          autocomplete="bday"
+          placeholder="DD/MM/YYYY"
+          maxlength="10"
+          required
+        />
         <span class="field-error" id="err_birth" hidden></span>
       </label>
-      <label>
+      <label class="full">
         <span data-i18n="date_selection.target_month"></span>
-        <input id="dsTargetMonth" name="target_month" type="month" />
+        <div class="ds-month-input" data-testid="target-month">
+          <span class="ds-month-input__prefix" aria-hidden="true">Tháng</span>
+          <input
+            id="dsTargetMonth"
+            name="target_month"
+            type="text"
+            inputmode="numeric"
+            placeholder="09/2026"
+            maxlength="7"
+            aria-label="Tháng cần tìm ngày tốt"
+          />
+        </div>
+        <span class="field-error" id="err_target_month" hidden></span>
       </label>
     </div>
     <div class="toolbar">

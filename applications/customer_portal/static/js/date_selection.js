@@ -35,7 +35,11 @@
     "date_selection.hour_result": "Kết quả giờ",
     "date_selection.cung_phi": "Cung Phi",
     "date_selection.nayin": "Nạp âm",
+    "date_selection.nayin_hour": "Nạp âm giờ",
     "date_selection.hanh_cung": "Hành Cung",
+    "date_selection.hanh_cung_hour": "Hành Cung giờ",
+    "date_selection.cung_phi_hour": "Cung Phi giờ",
+    "date_selection.trach_group_hour": "Nhóm Trạch giờ",
     "date_selection.trach_group": "Nhóm Trạch",
     "date_selection.clock": "Đồng hồ",
     "date_selection.hour_branch": "Giờ",
@@ -47,7 +51,77 @@
     "date_selection.ke_panel": "Sáu khắc",
     "date_selection.ke_label": "Khắc",
     "date_selection.weekdays": "T2,T3,T4,T5,T6,T7,CN",
+    "date_selection.full_name": "Họ và tên",
+    "date_selection.gender": "Giới tính",
+    "date_selection.birth_solar": "Ngày sinh dương lịch",
+    "date_selection.birth_solar_short": "Ngày sinh dương",
+    "date_selection.birth_lunar": "Ngày sinh âm",
+    "date_selection.target_month": "Tháng cần tìm ngày tốt",
+    "date_selection.invalid_date": "Ngày không hợp lệ.",
+    "date_selection.invalid_month": "Tháng không hợp lệ.",
+    "date_selection.name_required": "Vui lòng nhập họ và tên.",
+    "date_selection.gender_required": "Vui lòng chọn giới tính.",
+    "date_selection.birth_required": "Vui lòng nhập ngày sinh dương lịch.",
+    "date_selection.recommended_hours": "Giờ đề xuất",
+    "date_selection.other_hours": "Khung giờ khác",
   };
+
+  function isLeapYear(year) {
+    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+  }
+
+  function daysInMonth(year, month) {
+    var lengths = [31, isLeapYear(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    return lengths[month - 1] || 0;
+  }
+
+  function pad2(value) {
+    return String(value).padStart(2, "0");
+  }
+
+  function formatVnDate(year, month, day) {
+    return pad2(day) + "/" + pad2(month) + "/" + year;
+  }
+
+  function formatVnMonth(year, month) {
+    return "Tháng " + pad2(month) + "/" + year;
+  }
+
+  function maskVnDate(raw) {
+    var digits = String(raw || "").replace(/\D/g, "").slice(0, 8);
+    if (digits.length <= 2) return digits;
+    if (digits.length <= 4) return digits.slice(0, 2) + "/" + digits.slice(2);
+    return digits.slice(0, 2) + "/" + digits.slice(2, 4) + "/" + digits.slice(4);
+  }
+
+  function maskVnMonth(raw) {
+    var digits = String(raw || "").replace(/\D/g, "").slice(0, 6);
+    if (digits.length <= 2) return digits;
+    return digits.slice(0, 2) + "/" + digits.slice(2);
+  }
+
+  function parseVnDate(text) {
+    var match = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(String(text || "").trim());
+    if (!match) return null;
+    var day = Number(match[1]);
+    var month = Number(match[2]);
+    var year = Number(match[3]);
+    if (month < 1 || month > 12) return null;
+    if (day < 1 || day > daysInMonth(year, month)) return null;
+    return { year: year, month: month, day: day, display: formatVnDate(year, month, day) };
+  }
+
+  function parseVnMonth(text) {
+    var trimmed = String(text || "").trim().replace(/^Tháng\s+/i, "");
+    var compact = /^(\d{2})\/(\d{4})$/.exec(trimmed);
+    if (compact) {
+      var month = Number(compact[1]);
+      var year = Number(compact[2]);
+      if (month < 1 || month > 12 || year < 1) return null;
+      return { year: year, month: month, display: formatVnMonth(year, month) };
+    }
+    return null;
+  }
 
   function apiPost(path, body) {
     if (!global.BtePortal || typeof global.BtePortal.post !== "function") {
@@ -142,10 +216,10 @@
       [t("date_selection.hour_window"), hour.window.time_range],
       [t("date_selection.hour_ganzhi"), hour.ganzhi],
       [t("date_selection.hour_result"), hour.six_state.label],
-      [t("date_selection.nayin"), elementBadge(identity.nayin)],
-      [t("date_selection.cung_phi"), cungBadge(identity.cung)],
-      [t("date_selection.hanh_cung"), elementBadge(identity.hanhCung)],
-      [t("date_selection.trach_group"), identity.trachLabel || "—"],
+      [t("date_selection.nayin_hour"), elementBadge(identity.nayin)],
+      [t("date_selection.cung_phi_hour"), cungBadge(identity.cung)],
+      [t("date_selection.hanh_cung_hour"), elementBadge(identity.hanhCung)],
+      [t("date_selection.trach_group_hour"), identity.trachLabel || "—"],
     ]);
   }
 
@@ -358,8 +432,19 @@
     var self = this;
     var now = new Date();
     var monthInput = document.getElementById("dsTargetMonth");
-    monthInput.value =
-      now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0");
+    monthInput.value = pad2(now.getMonth() + 1) + "/" + now.getFullYear();
+    document.getElementById("dsBirth").addEventListener("input", function (event) {
+      event.target.value = maskVnDate(event.target.value);
+    });
+    monthInput.addEventListener("input", function (event) {
+      event.target.value = maskVnMonth(event.target.value);
+      var parsed = parseVnMonth(event.target.value);
+      event.target.parentElement.setAttribute("data-display", parsed ? parsed.display : "");
+    });
+    var initialMonth = parseVnMonth(monthInput.value);
+    if (initialMonth && monthInput.parentElement) {
+      monthInput.parentElement.setAttribute("data-display", initialMonth.display);
+    }
     this.form.addEventListener("submit", function (event) {
       event.preventDefault();
       self.submit();
@@ -382,26 +467,31 @@
   SearchController.prototype.submit = function () {
     var name = document.getElementById("dsFullName").value.trim();
     var gender = document.getElementById("dsGender").value;
-    var birth = document.getElementById("dsBirth").value;
-    var target = document.getElementById("dsTargetMonth").value;
+    var birth = parseVnDate(document.getElementById("dsBirth").value);
+    var target = parseVnMonth(document.getElementById("dsTargetMonth").value);
     var ok = true;
     if (!name) ok = !this.showError("err_full_name", t("date_selection.name_required")) && ok;
     else this.showError("err_full_name", "");
     if (!gender) ok = !this.showError("err_gender", t("date_selection.gender_required")) && ok;
     else this.showError("err_gender", "");
-    if (!birth) ok = !this.showError("err_birth", t("date_selection.birth_required")) && ok;
-    else this.showError("err_birth", "");
-    if (!ok) return;
-    var birthParts = birth.split("-");
-    var targetParts = (target || "").split("-");
+    if (!document.getElementById("dsBirth").value.trim()) {
+      ok = !this.showError("err_birth", t("date_selection.birth_required")) && ok;
+    } else if (!birth) {
+      ok = !this.showError("err_birth", t("date_selection.invalid_date")) && ok;
+    } else {
+      this.showError("err_birth", "");
+    }
+    if (!target) ok = !this.showError("err_target_month", t("date_selection.invalid_month")) && ok;
+    else this.showError("err_target_month", "");
+    if (!ok || !birth || !target) return;
     var payload = {
       full_name: name,
       gender: gender,
-      birth_year: Number(birthParts[0]),
-      birth_month: Number(birthParts[1]),
-      birth_day: Number(birthParts[2]),
-      target_year: Number(targetParts[0]) || new Date().getFullYear(),
-      target_month: Number(targetParts[1]) || new Date().getMonth() + 1,
+      birth_year: birth.year,
+      birth_month: birth.month,
+      birth_day: birth.day,
+      target_year: target.year,
+      target_month: target.month,
     };
     var self = this;
     apiPost("/api/v1/date-selection/search", payload)
@@ -417,15 +507,17 @@
     var person = data.person;
     var block = document.getElementById("dsPerson");
     block.hidden = false;
+    var personId = identityOf(person);
     kv(document.getElementById("dsPersonDl"), [
       [t("date_selection.full_name"), person.full_name],
       [t("date_selection.gender"), person.gender_label],
-      [t("date_selection.birth_solar"), person.solar_label],
-      [t("date_selection.lunar_date"), person.lunar_label],
-      ["Can Chi", person.ganzhi],
-      [t("date_selection.cung_phi"), person.trach.cung],
-      [t("date_selection.element"), person.trach.element_label],
-      [t("date_selection.trach_group"), person.trach.trach_group_label],
+      [t("date_selection.birth_solar_short"), person.solar_label],
+      [t("date_selection.birth_lunar"), person.lunar_label],
+      [t("date_selection.year_ganzhi"), person.year_ganzhi || person.ganzhi],
+      [t("date_selection.nayin"), elementBadge(personId.nayin)],
+      [t("date_selection.cung_phi"), cungBadge(personId.cung)],
+      [t("date_selection.hanh_cung"), elementBadge(personId.hanhCung)],
+      [t("date_selection.trach_group"), personId.trachLabel || "—"],
     ]);
     var root = document.getElementById("dsResults");
     if (!data.dates.length) {
@@ -435,7 +527,7 @@
     root.innerHTML = data.dates
       .map(function (item) {
         var cal = item.day.calendar;
-        var trach = item.day.trach;
+        var identity = identityOf(item.day);
         var primary = item.recommendations[0];
         var others = item.recommendations.slice(1);
         return (
@@ -445,13 +537,25 @@
           cal.lunar_label +
           ' âm</div><div class="ds-card-state">' +
           item.day.six_state.label +
-          "</div><div>" +
-          trach.cung +
-          " · " +
-          trach.element_label +
-          " · " +
-          trach.trach_group_label +
-          "</div><div><strong>" +
+          "</div><div class='ds-card-row'><dt>" +
+          t("date_selection.day_ganzhi") +
+          "</dt><dd>" +
+          (identity.ganzhi || cal.day_ganzhi) +
+          "</dd></div><div class='ds-card-row'><dt>" +
+          t("date_selection.nayin") +
+          "</dt><dd>" +
+          elementBadge(identity.nayin) +
+          "</dd></div><div class='ds-card-row'><dt>" +
+          t("date_selection.cung_phi") +
+          "</dt><dd>" +
+          cungBadge(identity.cung) +
+          "</dd></div><div class='ds-card-row'><dt>" +
+          t("date_selection.hanh_cung") +
+          "</dt><dd>" +
+          elementBadge(identity.hanhCung) +
+          "</dd></div><div class='ds-card-row'><dt>Nhóm</dt><dd>" +
+          (identity.trachLabel || "—") +
+          "</dd></div><div><strong>" +
           t("date_selection.recommended_hours") +
           "</strong></div><div class='ds-hours'>" +
           (primary ? primary.time_range : "") +
@@ -489,5 +593,9 @@
   global.BteDateSelection = {
     branchFromClock: branchFromClock,
     BRANCHES: BRANCHES,
+    parseVnDate: parseVnDate,
+    parseVnMonth: parseVnMonth,
+    formatVnDate: formatVnDate,
+    formatVnMonth: formatVnMonth,
   };
 })(typeof window !== "undefined" ? window : globalThis);

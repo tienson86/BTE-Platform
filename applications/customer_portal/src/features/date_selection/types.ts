@@ -73,6 +73,14 @@ export type PersonVm = {
   solar_label: string;
   lunar_label: string;
   ganzhi: string;
+  year_ganzhi?: string;
+  nayin?: string;
+  nayin_element?: string;
+  cung?: string;
+  cung_phi?: string;
+  cung_element?: string;
+  trach_group?: string;
+  trach_group_label?: string;
   trach: TrachVm;
 };
 

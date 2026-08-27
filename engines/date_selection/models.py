@@ -208,15 +208,22 @@ class PersonProfile:
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize for API / presentation."""
-        return {
+        from engines.date_selection.identity import hoa_giap_view
+
+        view = hoa_giap_view(self.ganzhi, self.trach)
+        payload = {
             "full_name": self.full_name,
             "gender": self.gender,
             "gender_label": self.gender_label,
             "solar_label": self.solar_label,
             "lunar_label": self.lunar_label,
             "ganzhi": self.ganzhi,
+            "year_ganzhi": self.ganzhi,
             "trach": self.trach.to_dict(),
         }
+        payload.update(view)
+        payload["cung_phi"] = view["cung"]
+        return payload
 
 
 @dataclass(slots=True)
@@ -243,12 +250,17 @@ class RankedDate:
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize for API / presentation."""
+        from engines.date_selection.identity import hoa_giap_view
+
+        day_payload = {
+            "calendar": self.day.calendar.to_dict(),
+            "six_state": self.day.six_state.to_dict(),
+            "trach": self.day.trach.to_dict() if self.day.trach else None,
+            "month_ganzhi": self.day.calendar.month_ganzhi,
+        }
+        day_payload.update(hoa_giap_view(self.day.calendar.day_ganzhi, self.day.trach))
         return {
-            "day": {
-                "calendar": self.day.calendar.to_dict(),
-                "six_state": self.day.six_state.to_dict(),
-                "trach": self.day.trach.to_dict() if self.day.trach else None,
-            },
+            "day": day_payload,
             "recommendations": [item.to_dict() for item in self.recommendations],
         }
 

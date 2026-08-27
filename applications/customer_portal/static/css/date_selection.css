@@ -85,6 +85,7 @@
   flex-direction: column;
   gap: var(--space-2);
 }
+.ds-person[hidden] { display: none; }
 .ds-kv {
   display: grid;
   grid-template-columns: 8.25rem minmax(0, 1fr);
@@ -255,6 +256,37 @@
   font-weight: 650;
 }
 .ds-form .full { grid-column: 1 / -1; }
+.ds-form input,
+.ds-form select {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.ds-month-input {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+}
+.ds-month-input__prefix {
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.ds-month-input input { flex: 1; }
+.ds-card-row {
+  display: flex;
+  gap: 0.35rem;
+  font-size: var(--text-sm);
+}
+.ds-card-row dt {
+  color: var(--muted);
+  font-weight: 550;
+  margin: 0;
+  min-width: 6.5rem;
+}
+.ds-card-row dd { margin: 0; font-weight: 650; }
 .ds-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));

@@ -1,4 +1,10 @@
 export { DATE_SELECTION_NAV, HOUR_BRANCHES, CLOCK_NUMBERS } from "./types";
+export {
+  formatVnDate,
+  formatVnMonth,
+  parseVnDate,
+  parseVnMonth,
+} from "./vnDate";
 export type {
   CalendarCellVm,
   DayVm,

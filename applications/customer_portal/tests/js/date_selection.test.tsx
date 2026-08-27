@@ -9,6 +9,8 @@ import {
   LookupScreen,
   SearchForm,
   SearchScreen,
+  formatVnMonth,
+  parseVnDate,
 } from "../../src/features/date_selection";
 import type { CalendarCellVm, DayVm, HourVm, PersonVm, RankedDateVm } from "../../src/features/date_selection";
 
@@ -75,6 +77,10 @@ const person: PersonVm = {
   solar_label: "15/05/1990",
   lunar_label: "21/04/1990",
   ganzhi: "Canh Ngọ",
+  year_ganzhi: "Canh Ngọ",
+  nayin: "Thổ",
+  cung: "Đoài",
+  cung_element: "Kim",
   trach,
 };
 
@@ -238,5 +244,85 @@ describe("Date Selection frontend", () => {
     expect(right.children[2].getAttribute("data-testid")).toBe("ds-ke-card");
     expect(screen.getByTestId("ds-hour-card").textContent).toContain("Chọn giờ");
     expect(screen.getByTestId("ds-ke-card").textContent).toContain("Sáu khắc");
+  });
+
+  it("parses Vietnamese birth dates and rejects impossible days", () => {
+    expect(parseVnDate("21/01/1987")).toEqual({
+      year: 1987,
+      month: 1,
+      day: 21,
+      iso: "1987-01-21",
+      display: "21/01/1987",
+    });
+    expect(parseVnDate("29/02/2024")?.iso).toBe("2024-02-29");
+    expect(parseVnDate("31/02/2026")).toBeNull();
+    expect(parseVnDate("32/01/2026")).toBeNull();
+    expect(parseVnDate("21/13/1987")).toBeNull();
+    expect(formatVnMonth(2026, 9)).toBe("Tháng 09/2026");
+    expect(formatVnMonth(2026, 9)).not.toContain("September");
+  });
+
+  it("accepts DD/MM/YYYY on the search form and keeps the visible value", () => {
+    const submitted: Array<{ birth: string; target_month: string }> = [];
+    render(
+      <SearchForm
+        onSubmit={(payload) => submitted.push({ birth: payload.birth, target_month: payload.target_month })}
+      />,
+    );
+    fireEvent.change(screen.getByLabelText("Họ và tên"), { target: { value: "Nguyễn Tiến Sơn" } });
+    fireEvent.change(screen.getByLabelText("Giới tính"), { target: { value: "male" } });
+    fireEvent.change(screen.getByPlaceholderText("DD/MM/YYYY"), { target: { value: "21011987" } });
+    expect((screen.getByPlaceholderText("DD/MM/YYYY") as HTMLInputElement).value).toBe("21/01/1987");
+    fireEvent.change(screen.getByPlaceholderText("09/2026"), { target: { value: "092026" } });
+    expect(screen.getByTestId("target-month").getAttribute("data-display")).toBe("Tháng 09/2026");
+    fireEvent.click(screen.getByText("TÌM NGÀY TỐT"));
+    expect(submitted).toEqual([{ birth: "1987-01-21", target_month: "2026-09" }]);
+  });
+
+  it("rejects 31/02/2026 without submitting", () => {
+    const submitted: unknown[] = [];
+    render(<SearchForm onSubmit={(payload) => submitted.push(payload)} />);
+    fireEvent.change(screen.getByLabelText("Họ và tên"), { target: { value: "A" } });
+    fireEvent.change(screen.getByLabelText("Giới tính"), { target: { value: "male" } });
+    fireEvent.change(screen.getByPlaceholderText("DD/MM/YYYY"), { target: { value: "31022026" } });
+    fireEvent.click(screen.getByText("TÌM NGÀY TỐT"));
+    expect(screen.getByText("Ngày không hợp lệ.")).toBeTruthy();
+    expect(submitted).toHaveLength(0);
+  });
+
+  it("renders personal information with explicit semantic labels", () => {
+    render(<SearchScreen person={person} dates={ranked} />);
+    const block = screen.getByTestId("person-block").textContent || "";
+    expect(block).toContain("Ngày sinh dương");
+    expect(block).toContain("15/05/1990");
+    expect(block).toContain("Ngày sinh âm");
+    expect(block).toContain("21/04/1990");
+    expect(block).toContain("Can Chi năm");
+    expect(block).toContain("Nạp âm");
+    expect(block).toContain("Thổ");
+    expect(block).toContain("Cung Phi");
+    expect(block).toContain("Hành Cung");
+    expect(block).toContain("Kim");
+    expect(block).toContain("Nhóm Trạch");
+    expect(block).not.toContain("Ngũ hành");
+    const canChi = Array.from(screen.getByTestId("person-detail").querySelectorAll("dt")).map(
+      (el) => el.textContent,
+    );
+    expect(canChi).not.toContain("Can Chi");
+    expect(screen.getByTestId("top-results").textContent).toContain("27/08/2026");
+    expect(screen.getByTestId("top-results").textContent).not.toContain("September");
+    expect(screen.getByTestId("top-results").textContent).not.toMatch(/\d{4}-\d{2}-\d{2}/);
+  });
+
+  it("keeps search inputs usable on a mobile frame", () => {
+    render(
+      <DateSelectionMobileFrame>
+        <SearchForm onSubmit={() => undefined} />
+      </DateSelectionMobileFrame>,
+    );
+    const birth = screen.getByPlaceholderText("DD/MM/YYYY");
+    expect(birth.getAttribute("type")).toBe("text");
+    expect(screen.getByTestId("target-month")).toBeTruthy();
+    expect(screen.queryByText("Ngũ hành")).toBeNull();
   });
 });

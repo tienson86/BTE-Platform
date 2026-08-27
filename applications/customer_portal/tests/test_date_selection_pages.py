@@ -25,6 +25,10 @@ def test_date_selection_pages_render() -> None:
     assert "dsFullName" in choose.text
     assert "dsGender" in choose.text
     assert "dsBirth" in choose.text
+    assert "DD/MM/YYYY" in choose.text
+    assert 'type="date"' not in choose.text
+    assert "Tháng cần tìm ngày tốt" in choose.text
+    assert 'type="month"' not in choose.text
 
 
 def test_existing_routes_still_work() -> None:
