@@ -151,4 +151,24 @@ export const HOUR_BRANCHES = [
   "Hợi",
 ] as const;
 
+export const HOUR_BRANCH_RANGES: Record<(typeof HOUR_BRANCHES)[number], string> = {
+  Tý: "23:01–01:00",
+  Sửu: "01:01–03:00",
+  Dần: "03:01–05:00",
+  Mão: "05:01–07:00",
+  Thìn: "07:01–09:00",
+  Tỵ: "09:01–11:00",
+  Ngọ: "11:01–13:00",
+  Mùi: "13:01–15:00",
+  Thân: "15:01–17:00",
+  Dậu: "17:01–19:00",
+  Tuất: "19:01–21:00",
+  Hợi: "21:01–23:00",
+};
+
+export function hourOptionLabel(branch: string): string {
+  const range = HOUR_BRANCH_RANGES[branch as keyof typeof HOUR_BRANCH_RANGES];
+  return range ? `Giờ ${branch} (${range})` : `Giờ ${branch}`;
+}
+
 export const CLOCK_NUMBERS = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] as const;

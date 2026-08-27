@@ -10,6 +10,7 @@ import {
   SearchForm,
   SearchScreen,
   formatVnMonth,
+  hourOptionLabel,
   parseVnDate,
 } from "../../src/features/date_selection";
 import type { CalendarCellVm, DayVm, HourVm, PersonVm, RankedDateVm } from "../../src/features/date_selection";
@@ -195,6 +196,48 @@ describe("Date Selection frontend", () => {
     expect(screen.getByTestId("hour-detail").textContent).toContain("Tỵ");
     expect(screen.getByTestId("ke-panel").textContent).toContain("Khắc 1");
     expect(screen.getByTestId("ke-panel").textContent).toContain("07:01–07:20");
+  });
+
+  it("shows full traditional hour labels in the selector", () => {
+    render(<LookupScreen cells={cells} day={day} />);
+    const select = screen.getByLabelText("Chọn giờ") as HTMLSelectElement;
+    const labels = Array.from(select.options).map((option) => option.textContent);
+    expect(labels).toEqual([
+      "Giờ Tý (23:01–01:00)",
+      "Giờ Sửu (01:01–03:00)",
+      "Giờ Dần (03:01–05:00)",
+      "Giờ Mão (05:01–07:00)",
+      "Giờ Thìn (07:01–09:00)",
+      "Giờ Tỵ (09:01–11:00)",
+      "Giờ Ngọ (11:01–13:00)",
+      "Giờ Mùi (13:01–15:00)",
+      "Giờ Thân (15:01–17:00)",
+      "Giờ Dậu (17:01–19:00)",
+      "Giờ Tuất (19:01–21:00)",
+      "Giờ Hợi (21:01–23:00)",
+    ]);
+    expect(Array.from(select.options).map((option) => option.value)).toEqual([
+      "Tý",
+      "Sửu",
+      "Dần",
+      "Mão",
+      "Thìn",
+      "Tỵ",
+      "Ngọ",
+      "Mùi",
+      "Thân",
+      "Dậu",
+      "Tuất",
+      "Hợi",
+    ]);
+    expect(select.value).toBe("Thìn");
+    expect(select.selectedOptions[0].textContent).toBe("Giờ Thìn (07:01–09:00)");
+    fireEvent.change(select, { target: { value: "Tỵ" } });
+    expect(select.selectedOptions[0].textContent).toBe("Giờ Tỵ (09:01–11:00)");
+    expect(screen.getByTestId("hour-detail").textContent).toContain("Can Chi giờ");
+    expect(screen.getByTestId("hour-detail").textContent).toContain("Tỵ");
+    expect(screen.getByTestId("ke-panel").textContent).toContain("Khắc 1");
+    expect(hourOptionLabel("Tý")).toBe("Giờ Tý (23:01–01:00)");
   });
 
   it("renders analog clock with numbers 1-12", () => {

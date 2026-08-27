@@ -3,6 +3,7 @@ import {
   CLOCK_NUMBERS,
   DATE_SELECTION_NAV,
   HOUR_BRANCHES,
+  hourOptionLabel,
   type CalendarCellVm,
   type DayVm,
   type HourVm,
@@ -261,7 +262,7 @@ export function HourSelector({
       >
         {HOUR_BRANCHES.map((branch) => (
           <option key={branch} value={branch}>
-            {branch}
+            {hourOptionLabel(branch)}
           </option>
         ))}
       </select>

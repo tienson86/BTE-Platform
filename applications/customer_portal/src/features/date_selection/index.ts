@@ -1,4 +1,4 @@
-export { DATE_SELECTION_NAV, HOUR_BRANCHES, CLOCK_NUMBERS } from "./types";
+export { DATE_SELECTION_NAV, HOUR_BRANCHES, HOUR_BRANCH_RANGES, CLOCK_NUMBERS, hourOptionLabel } from "./types";
 export {
   formatVnDate,
   formatVnMonth,

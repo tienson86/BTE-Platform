@@ -88,6 +88,32 @@
     return String(value).padStart(2, "0");
   }
 
+  function hourOptionLabel(branch) {
+    var win = null;
+    for (var i = 0; i < HOUR_WINDOWS.length; i += 1) {
+      if (HOUR_WINDOWS[i].branch === branch) {
+        win = HOUR_WINDOWS[i];
+        break;
+      }
+    }
+    if (!win) return "Giờ " + branch;
+    var startHour = Math.floor(win.start / 60) % 24;
+    var endHour = Math.floor(win.end / 60) % 24;
+    return (
+      "Giờ " +
+      branch +
+      " (" +
+      pad2(startHour) +
+      ":" +
+      pad2(win.start % 60) +
+      "–" +
+      pad2(endHour) +
+      ":" +
+      pad2(win.end % 60) +
+      ")"
+    );
+  }
+
   function formatVnDate(year, month, day) {
     return pad2(day) + "/" + pad2(month) + "/" + year;
   }
@@ -286,7 +312,7 @@
     BRANCHES.forEach(function (branch) {
       var option = document.createElement("option");
       option.value = branch;
-      option.textContent = branch;
+      option.textContent = hourOptionLabel(branch);
       select.appendChild(option);
     });
     document.getElementById("dsPrev").addEventListener("click", function () {
@@ -669,6 +695,7 @@
   global.BteDateSelection = {
     branchFromClock: branchFromClock,
     BRANCHES: BRANCHES,
+    hourOptionLabel: hourOptionLabel,
     parseVnDate: parseVnDate,
     parseVnMonth: parseVnMonth,
     formatVnDate: formatVnDate,
