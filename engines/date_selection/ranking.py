@@ -5,12 +5,10 @@ from __future__ import annotations
 from engines.date_selection.constants import (
     DAY_RANK_SCORE,
     DIVERSITY_ORDER,
-    KE_RANK_SCORE,
     MAX_RANKED_DATES,
     POSITIVE_DAY_CODES,
     POSITIVE_KE_CODES,
     REJECT_DAY_CODES,
-    REJECT_KE_CODES,
 )
 from engines.date_selection.models import (
     DaySelection,
@@ -20,33 +18,24 @@ from engines.date_selection.models import (
 
 
 def _hour_recommendations(day: DaySelection, person_trach: str) -> list[HourRecommendation]:
-    picked: list[tuple[int, HourRecommendation]] = []
+    """Collect every positive khắc on same-Trạch hours. Does not pick a single winner."""
+    results: list[HourRecommendation] = []
     for hour in day.hours:
         if hour.trach is None or hour.trach.trach_group_code != person_trach:
             continue
         for slot in hour.ke_slots:
-            if slot.six_state.code in REJECT_KE_CODES:
+            if slot.six_state.code not in POSITIVE_KE_CODES:
                 continue
-            score = KE_RANK_SCORE.get(slot.six_state.code, 0)
-            if slot.six_state.code not in POSITIVE_KE_CODES and score <= 0:
-                continue
-            picked.append(
-                (
-                    score,
-                    HourRecommendation(
-                        branch=hour.window.branch,
-                        time_range=slot.time_range,
-                        ke_index=slot.ke_index,
-                        classification=slot.six_state.label,
-                        primary=False,
-                    ),
+            results.append(
+                HourRecommendation(
+                    branch=hour.window.branch,
+                    time_range=slot.time_range,
+                    ke_index=slot.ke_index,
+                    classification=slot.six_state.label,
+                    primary=False,
                 )
             )
-    picked.sort(key=lambda item: (-item[0], item[1].ke_index, item[1].branch))
-    results = [item[1] for item in picked]
-    if results:
-        results[0].primary = True
-    return results[:4]
+    return results
 
 
 def is_candidate_day(day: DaySelection, person_trach: str) -> bool:

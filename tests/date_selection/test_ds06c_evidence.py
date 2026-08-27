@@ -146,7 +146,7 @@ def test_ranked_payload_exposes_day_and_hour_evidence() -> None:
     assert rec["branch"] == "Dần"
     assert rec["full_time_range"] == hour.window.time_range
     assert rec["ganzhi"] == "Mậu Dần"
-    assert rec["hour_result"]
+    assert "hour_result" not in rec
     assert rec["nayin"] == "Thổ"
     assert rec["cung"] == "Khôn"
     assert rec["cung_element"] == "Thổ"
@@ -266,7 +266,8 @@ def test_choose_date_ui_source_has_evidence_labels() -> None:
     assert "date_selection.trach_group_hour" in js
     assert "date_selection.best_ke" in js
     assert "date_selection.other_good_windows" in js
-    assert "trach-match" in js
+    assert 'data-testid="trach-match"' not in js
+    assert "✓ Phù hợp Nhóm Trạch của bạn" not in js
     assert "Ngũ hành" not in js
     assert "ds-hour-block" in css
     assert "grid-template-columns: 1fr" in css

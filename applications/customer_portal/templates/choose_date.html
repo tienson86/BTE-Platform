@@ -4,62 +4,69 @@
     <p class="muted" data-i18n="date_selection.search_hint"></p>
   </header>
 
-  <form id="dsSearchForm" class="bte-card ds-form" novalidate>
-    <div class="ds-form-grid">
-      <label class="full">
-        <span data-i18n="date_selection.full_name"></span>
-        <input id="dsFullName" name="full_name" type="text" autocomplete="name" required />
-        <span class="field-error" id="err_full_name" hidden></span>
-      </label>
-      <label>
-        <span data-i18n="date_selection.gender"></span>
-        <select id="dsGender" name="gender" required>
-          <option value="" data-i18n="date_selection.gender_placeholder"></option>
-          <option value="male" data-i18n="date_selection.gender_male"></option>
-          <option value="female" data-i18n="date_selection.gender_female"></option>
-        </select>
-        <span class="field-error" id="err_gender" hidden></span>
-      </label>
-      <label>
-        <span data-i18n="date_selection.birth_solar"></span>
-        <input
-          id="dsBirth"
-          name="birth"
-          type="text"
-          inputmode="numeric"
-          autocomplete="bday"
-          placeholder="DD/MM/YYYY"
-          maxlength="10"
-          required
-        />
-        <span class="field-error" id="err_birth" hidden></span>
-      </label>
-      <label class="full">
-        <span data-i18n="date_selection.target_month"></span>
-        <div class="ds-month-input" data-testid="target-month">
-          <span class="ds-month-input__prefix" aria-hidden="true">Tháng</span>
+  <div class="ds-search-row" data-testid="search-row">
+    <form id="dsSearchForm" class="bte-card ds-form" novalidate>
+      <h2 data-i18n="date_selection.input_info">Thông tin nhập</h2>
+      <div class="ds-form-grid">
+        <label>
+          <span data-i18n="date_selection.full_name"></span>
+          <input id="dsFullName" name="full_name" type="text" autocomplete="name" required />
+          <span class="field-error" id="err_full_name" hidden></span>
+        </label>
+        <fieldset id="dsGender" class="ds-gender">
+          <legend data-i18n="date_selection.gender">Giới tính</legend>
+          <div class="ds-gender__options" role="radiogroup" aria-label="Giới tính">
+            <label>
+              <input type="radio" name="gender" value="male" checked />
+              <span data-i18n="date_selection.gender_male"></span>
+            </label>
+            <label>
+              <input type="radio" name="gender" value="female" />
+              <span data-i18n="date_selection.gender_female"></span>
+            </label>
+          </div>
+          <span class="field-error" id="err_gender" hidden></span>
+        </fieldset>
+        <label class="full">
+          <span data-i18n="date_selection.birth_solar"></span>
           <input
-            id="dsTargetMonth"
-            name="target_month"
+            id="dsBirth"
+            name="birth"
             type="text"
             inputmode="numeric"
-            placeholder="09/2026"
-            maxlength="7"
-            aria-label="Tháng cần tìm ngày tốt"
+            autocomplete="bday"
+            placeholder="DD/MM/YYYY"
+            maxlength="10"
+            required
           />
-        </div>
-        <span class="field-error" id="err_target_month" hidden></span>
-      </label>
-    </div>
-    <div class="toolbar">
-      <button type="submit" id="dsSearchBtn" data-i18n="date_selection.submit"></button>
-    </div>
-  </form>
+          <span class="field-error" id="err_birth" hidden></span>
+        </label>
+        <label class="full">
+          <span data-i18n="date_selection.target_month"></span>
+          <div class="ds-month-input" data-testid="target-month">
+            <input
+              id="dsTargetMonth"
+              name="target_month"
+              type="text"
+              inputmode="numeric"
+              placeholder="09/2026"
+              maxlength="7"
+              aria-label="Tháng cần tìm ngày tốt"
+            />
+          </div>
+          <span class="field-error" id="err_target_month" hidden></span>
+        </label>
+      </div>
+      <div class="toolbar">
+        <button type="submit" id="dsSearchBtn" data-i18n="date_selection.submit"></button>
+      </div>
+    </form>
 
-  <section class="bte-card ds-person" id="dsPerson" hidden aria-labelledby="dsPersonTitle">
-    <h2 id="dsPersonTitle" data-i18n="date_selection.your_info"></h2>
-    <dl class="ds-kv" id="dsPersonDl"></dl>
-  </section>
+    <section class="bte-card ds-person" id="dsPerson" hidden aria-labelledby="dsPersonTitle">
+      <h2 id="dsPersonTitle" data-i18n="date_selection.your_info"></h2>
+      <dl class="ds-kv" id="dsPersonDl"></dl>
+    </section>
+  </div>
 
   <section id="dsResults" class="ds-cards" aria-live="polite"></section>
 </div>

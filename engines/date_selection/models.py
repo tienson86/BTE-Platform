@@ -263,10 +263,47 @@ class RankedDate:
         day_payload.update(hoa_giap_view(self.day.calendar.day_ganzhi, self.day.trach))
         return {
             "day": day_payload,
+            "compatible_hours": _compatible_hours_view(self.day),
             "recommendations": [
                 _recommendation_view(item, self.day) for item in self.recommendations
             ],
         }
+
+
+def _compatible_hours_view(day: DaySelection) -> list[dict[str, Any]]:
+    """All same-Trạch hours with their positive khắc. No single-hour winner."""
+    from engines.date_selection.constants import POSITIVE_KE_CODES
+    from engines.date_selection.identity import hoa_giap_view
+
+    group = day.trach.trach_group_code if day.trach else None
+    rows: list[dict[str, Any]] = []
+    for hour in day.hours:
+        if hour.trach is None or hour.trach.trach_group_code != group:
+            continue
+        view = hoa_giap_view(hour.ganzhi, hour.trach)
+        rows.append(
+            {
+                "branch": hour.window.branch,
+                "full_time_range": hour.window.time_range,
+                "ganzhi": hour.ganzhi,
+                "nayin": view["nayin"],
+                "nayin_element": view["nayin_element"],
+                "cung": view["cung"],
+                "cung_element": view["cung_element"],
+                "trach_group": view["trach_group"],
+                "trach_group_label": view["trach_group_label"],
+                "positive_ke": [
+                    {
+                        "index": slot.ke_index,
+                        "time_range": slot.time_range,
+                        "result": slot.six_state.label,
+                    }
+                    for slot in hour.ke_slots
+                    if slot.six_state.code in POSITIVE_KE_CODES
+                ],
+            }
+        )
+    return rows
 
 
 def _recommendation_view(item: HourRecommendation, day: DaySelection) -> dict[str, Any]:
@@ -282,7 +319,6 @@ def _recommendation_view(item: HourRecommendation, day: DaySelection) -> dict[st
         {
             "full_time_range": hour.window.time_range,
             "ganzhi": hour.ganzhi,
-            "hour_result": hour.six_state.label,
             "nayin": view["nayin"],
             "nayin_element": view["nayin_element"],
             "cung": view["cung"],
@@ -329,11 +365,20 @@ class SearchResult:
     def to_dict(self) -> dict[str, Any]:
         """Serialize for API / presentation."""
         person_group = self.person.trach.trach_group_code
+        dates: list[dict[str, Any]] = []
         for item in self.dates:
             _assert_same_trach(person_group, item)
+            payload = item.to_dict()
+            for hour in payload["compatible_hours"]:
+                if hour.get("trach_group") != person_group:
+                    raise DateSelectionError(
+                        f"compatible hour {hour.get('branch')!r} trach "
+                        f"{hour.get('trach_group')!r} != person {person_group!r}"
+                    )
+            dates.append(payload)
         return {
             "person": self.person.to_dict(),
             "target_year": self.target_year,
             "target_month": self.target_month,
-            "dates": [item.to_dict() for item in self.dates],
+            "dates": dates,
         }

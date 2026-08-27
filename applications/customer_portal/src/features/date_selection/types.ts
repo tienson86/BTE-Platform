@@ -92,7 +92,6 @@ export type HourRecommendationVm = {
   primary?: boolean;
   full_time_range?: string;
   ganzhi?: string;
-  hour_result?: string;
   nayin?: string;
   nayin_element?: string;
   cung?: string;
@@ -101,11 +100,35 @@ export type HourRecommendationVm = {
   trach_group_label?: string;
   ke_result?: string;
   ke_time_range?: string;
+  recommended_ke?: {
+    index?: number;
+    time_range?: string;
+    result?: string;
+  };
+};
+
+export type PositiveKeVm = {
+  index: number;
+  time_range: string;
+  result: string;
+};
+
+export type CompatibleHourVm = {
+  branch: string;
+  full_time_range: string;
+  ganzhi: string;
+  nayin?: string;
+  cung?: string;
+  cung_element?: string;
+  trach_group?: string;
+  trach_group_label?: string;
+  positive_ke: PositiveKeVm[];
 };
 
 export type RankedDateVm = {
   day: DayVm;
   recommendations: HourRecommendationVm[];
+  compatible_hours?: CompatibleHourVm[];
 };
 
 export const DATE_SELECTION_NAV = [

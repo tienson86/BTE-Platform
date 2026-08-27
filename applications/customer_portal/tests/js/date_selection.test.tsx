@@ -91,7 +91,6 @@ const westHour = {
   primary: true,
   full_time_range: "09:01–11:00",
   ganzhi: "Canh Tỵ",
-  hour_result: "Tiểu Cát",
   nayin: "Thổ",
   cung: "Càn",
   cung_element: "Kim",
@@ -108,7 +107,6 @@ const mauDanHour = {
   primary: true,
   full_time_range: "03:01–05:00",
   ganzhi: "Mậu Dần",
-  hour_result: "Tiểu Cát",
   nayin: "Thổ",
   cung: "Khôn",
   cung_element: "Thổ",
@@ -121,13 +119,32 @@ const mauDanHour = {
 const ranked: RankedDateVm[] = [
   {
     day,
-    recommendations: [
-      westHour,
+    recommendations: [westHour],
+    compatible_hours: [
+      {
+        branch: "Dần",
+        full_time_range: "03:01–05:00",
+        ganzhi: "Mậu Dần",
+        nayin: "Thổ",
+        cung: "Khôn",
+        cung_element: "Thổ",
+        trach_group: "tay",
+        trach_group_label: "Tây Tứ Trạch",
+        positive_ke: [{ index: 1, time_range: "03:01–03:20", result: "Đại An" }],
+      },
+      {
+        branch: "Tỵ",
+        full_time_range: "09:01–11:00",
+        ganzhi: "Canh Tỵ",
+        nayin: "Thổ",
+        cung: "Càn",
+        cung_element: "Kim",
+        trach_group: "tay",
+        trach_group_label: "Tây Tứ Trạch",
+        positive_ke: [{ index: 3, time_range: "09:41–10:00", result: "Đại An" }],
+      },
       {
         branch: "Mão",
-        time_range: "05:21–05:40",
-        classification: "Tốc Hỷ",
-        primary: false,
         full_time_range: "05:01–07:00",
         ganzhi: "Kỷ Mão",
         nayin: "Thổ",
@@ -135,8 +152,10 @@ const ranked: RankedDateVm[] = [
         cung_element: "Thổ",
         trach_group: "tay",
         trach_group_label: "Tây Tứ Trạch",
-        ke_result: "Tốc Hỷ",
-        ke_time_range: "05:21–05:40",
+        positive_ke: [
+          { index: 2, time_range: "05:21–05:40", result: "Tốc Hỷ" },
+          { index: 5, time_range: "06:21–06:40", result: "Tiểu Cát" },
+        ],
       },
     ],
   },
@@ -190,7 +209,7 @@ describe("Date Selection frontend", () => {
     render(<SearchForm onSubmit={() => undefined} />);
     fireEvent.click(screen.getByText("TÌM NGÀY TỐT"));
     expect(screen.getByText("Vui lòng nhập họ và tên.")).toBeTruthy();
-    expect(screen.getByText("Vui lòng chọn giới tính.")).toBeTruthy();
+    expect(screen.queryByText("Vui lòng chọn giới tính.")).toBeNull();
     render(<SearchScreen person={person} dates={ranked} />);
     expect(screen.getByTestId("person-block").textContent).toContain("21/04/1990");
     expect(screen.getByTestId("person-block").textContent).toContain("Cung Phi");
@@ -224,6 +243,7 @@ describe("Date Selection frontend", () => {
     expect(detail).not.toContain("Ngũ hành");
     expect(screen.getByTestId("hour-detail").textContent).toContain("Nạp âm giờ");
     expect(screen.getByTestId("hour-detail").textContent).toContain("Hành Cung giờ");
+    expect(screen.getByTestId("hour-detail").textContent).not.toContain("Kết quả giờ");
   });
 
   it("renders Mậu Thìn Nạp âm as Mộc", () => {
@@ -321,7 +341,7 @@ describe("Date Selection frontend", () => {
       />,
     );
     fireEvent.change(screen.getByLabelText("Họ và tên"), { target: { value: "Nguyễn Tiến Sơn" } });
-    fireEvent.change(screen.getByLabelText("Giới tính"), { target: { value: "male" } });
+    expect((screen.getByRole("radio", { name: "Nam" }) as HTMLInputElement).checked).toBe(true);
     fireEvent.change(screen.getByPlaceholderText("DD/MM/YYYY"), { target: { value: "21011987" } });
     expect((screen.getByPlaceholderText("DD/MM/YYYY") as HTMLInputElement).value).toBe("21/01/1987");
     fireEvent.change(screen.getByPlaceholderText("09/2026"), { target: { value: "092026" } });
@@ -334,7 +354,6 @@ describe("Date Selection frontend", () => {
     const submitted: unknown[] = [];
     render(<SearchForm onSubmit={(payload) => submitted.push(payload)} />);
     fireEvent.change(screen.getByLabelText("Họ và tên"), { target: { value: "A" } });
-    fireEvent.change(screen.getByLabelText("Giới tính"), { target: { value: "male" } });
     fireEvent.change(screen.getByPlaceholderText("DD/MM/YYYY"), { target: { value: "31022026" } });
     fireEvent.click(screen.getByText("TÌM NGÀY TỐT"));
     expect(screen.getByText("Ngày không hợp lệ.")).toBeTruthy();
@@ -388,7 +407,8 @@ describe("Date Selection frontend", () => {
     expect(card).toContain("Quý Dậu");
     expect(card).toContain("Nạp âm");
     expect(card).toContain("Cung Phi");
-    expect(card).toContain("Hành Cung");
+    expect(card).toContain("Đoài (Kim)");
+    expect(card).not.toContain("Hành Cung");
     expect(card).toContain("Nhóm Trạch");
     expect(card).toContain("Tây Tứ Trạch");
     expect(card).not.toContain("Ngũ hành");
@@ -398,33 +418,50 @@ describe("Date Selection frontend", () => {
     render(
       <SearchScreen
         person={person}
-        dates={[{ day, recommendations: [mauDanHour] }]}
+        dates={[
+          {
+            day,
+            recommendations: [mauDanHour],
+            compatible_hours: [
+              {
+                branch: "Dần",
+                full_time_range: "03:01–05:00",
+                ganzhi: "Mậu Dần",
+                nayin: "Thổ",
+                cung: "Khôn",
+                cung_element: "Thổ",
+                trach_group: "tay",
+                trach_group_label: "Tây Tứ Trạch",
+                positive_ke: [{ index: 1, time_range: "03:01–03:20", result: "Đại An" }],
+              },
+            ],
+          },
+        ]}
       />,
     );
-    const hour = screen.getByTestId("recommended-hour").textContent || "";
-    expect(hour).toContain("Giờ Dần");
-    expect(hour).toContain("03:01–05:00");
-    expect(hour).toContain("Can Chi giờ");
-    expect(hour).toContain("Mậu Dần");
-    expect(hour).toContain("Nạp âm giờ");
-    expect(hour).toContain("Thổ");
-    expect(hour).toContain("Cung Phi giờ");
-    expect(hour).toContain("Khôn");
-    expect(hour).toContain("Hành Cung giờ");
-    expect(hour).toContain("Nhóm Trạch giờ");
-    expect(hour).toContain("Tây Tứ Trạch");
-    expect(screen.getByTestId("trach-match").textContent).toContain("Tây Tứ Trạch");
-    expect(screen.getByTestId("recommended-ke").textContent).toContain("03:01–03:20");
-    expect(screen.getByTestId("recommended-ke").textContent).toContain("Đại An");
-    expect(hour).not.toContain("Ngũ hành");
+    const hours = screen.getByTestId("compatible-hours").textContent || "";
+    expect(hours).toContain("Giờ Dần (03:01–05:00) · Khôn (Thổ)");
+    expect(hours).toContain("Giờ phù hợp Nhóm Trạch của bạn");
+    expect(hours).not.toContain("✓ Phù hợp Nhóm Trạch của bạn");
+    expect(screen.queryByTestId("trach-match")).toBeNull();
+    expect(screen.getByTestId("positive-ke").textContent).toContain("Đại An");
+    expect(screen.getByTestId("positive-ke").textContent).toContain("03:01–03:20");
+    expect(hours).not.toContain("Ngũ hành");
+    expect(hours).not.toContain("Kết quả giờ");
+    expect(hours).not.toContain("Giờ đề xuất");
+    expect(hours).not.toContain("Thời điểm đẹp nhất");
   });
 
   it("keeps additional khắc structured with traditional hour identity", () => {
     render(<SearchScreen person={person} dates={ranked} />);
-    const other = screen.getByTestId("other-ke").textContent || "";
-    expect(other).toContain("Giờ Mão");
-    expect(other).toContain("05:21–05:40");
-    expect(other).toContain("Tốc Hỷ");
+    const ke = screen.getByTestId("positive-ke").textContent || "";
+    expect(ke).toContain("Các thời điểm đẹp");
+    expect(ke).toContain("Đại An");
+    expect(ke).toContain("Tốc Hỷ");
+    expect(ke).toContain("Tiểu Cát");
+    expect(ke).toContain("Giờ Mão");
+    expect(ke).toContain("05:21–05:40");
+    expect(screen.getByTestId("top-results").textContent).not.toContain("Thời điểm đẹp nhất");
     expect(screen.getByTestId("top-results").textContent).not.toContain(
       "05:21–05:40, 03:41–04:00",
     );
@@ -437,22 +474,26 @@ describe("Date Selection frontend", () => {
         dates={[
           {
             day,
-            recommendations: [
+            recommendations: [],
+            compatible_hours: [
               {
                 ...mauDanHour,
                 branch: "Thìn",
+                full_time_range: "07:01–09:00",
                 ganzhi: "Bính Thìn",
                 cung: "Ly",
                 cung_element: "Hỏa",
                 trach_group: "dong",
                 trach_group_label: "Đông Tứ Trạch",
+                positive_ke: [{ index: 1, time_range: "07:01–07:20", result: "Đại An" }],
               },
             ],
           },
         ]}
       />,
     );
-    expect(screen.queryByTestId("recommended-hour")).toBeNull();
+    expect(screen.queryByTestId("compatible-hours")).toBeNull();
+    expect(screen.queryByTestId("positive-ke")).toBeNull();
   });
 
   it("never renders an opposite-trạch day card", () => {
@@ -470,7 +511,7 @@ describe("Date Selection frontend", () => {
     render(
       <SearchScreen
         person={person}
-        dates={[{ day: eastDay, recommendations: [{ ...mauDanHour, trach_group: "dong" }] }]}
+        dates={[{ day: eastDay, recommendations: [], compatible_hours: [] }]}
       />,
     );
     expect(screen.queryByTestId("ranked-card")).toBeNull();
@@ -485,11 +526,55 @@ describe("Date Selection frontend", () => {
     const card = screen.getByTestId("ranked-card");
     expect(card.querySelector("table")).toBeNull();
     expect(card.textContent).toContain("Can Chi năm");
-    expect(card.textContent).toContain("Can Chi giờ");
     expect(card.textContent).toContain("Nạp âm");
     expect(card.textContent).toContain("Cung Phi");
     expect(card.textContent).toContain("Nhóm Trạch");
-    expect(card.textContent).toContain("Khắc đề xuất");
+    expect(card.textContent).toContain("Các thời điểm đẹp");
+    expect(card.textContent).toContain("Giờ phù hợp Nhóm Trạch của bạn");
+    expect(card.textContent).not.toContain("Kết quả giờ");
+    expect(card.textContent).not.toContain("Giờ đề xuất");
+    expect(card.textContent).not.toContain("Thời điểm đẹp nhất");
     expect(screen.getByTestId("mobile-frame").getAttribute("style")).toContain("375");
+  });
+
+  it("never shows Kết quả giờ on lookup or search surfaces", () => {
+    render(<LookupScreen cells={cells} day={day} />);
+    expect(screen.getByTestId("hour-detail").textContent).not.toContain("Kết quả giờ");
+    expect(screen.getByTestId("hour-detail-kv").textContent).toContain("Can Chi giờ");
+    expect(screen.getByTestId("ke-panel").textContent).toContain("Tiểu Cát");
+    cleanup();
+    render(<SearchScreen person={person} dates={ranked} />);
+    const results = screen.getByTestId("top-results").textContent || "";
+    expect(results).not.toContain("Kết quả giờ");
+    expect(results).toContain("Các thời điểm đẹp");
+    expect(results).toContain("Giờ phù hợp Nhóm Trạch của bạn");
+    expect(results).not.toContain("Thời điểm đẹp nhất");
+  });
+
+  it("uses gender radios with Nam selected by default", () => {
+    render(<SearchForm onSubmit={() => undefined} />);
+    const radios = screen.getAllByRole("radio");
+    expect(radios).toHaveLength(2);
+    expect((screen.getByRole("radio", { name: "Nam" }) as HTMLInputElement).checked).toBe(true);
+    expect((screen.getByRole("radio", { name: "Nữ" }) as HTMLInputElement).checked).toBe(false);
+    expect(screen.queryByRole("combobox")).toBeNull();
+  });
+
+  it("places input and person panels in the same desktop row", () => {
+    render(<SearchScreen person={person} dates={ranked} />);
+    const row = screen.getByTestId("search-row");
+    expect(row.className).toContain("ds-search-row");
+    expect(row.querySelector('[data-testid="search-form"]')).toBeTruthy();
+    expect(row.querySelector('[data-testid="person-block"]')).toBeTruthy();
+    expect(row.compareDocumentPosition(screen.getByTestId("top-results")) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+
+  it("does not duplicate Trach confirmation on recommended hours", () => {
+    render(<SearchScreen person={person} dates={ranked} />);
+    const hours = screen.getByTestId("compatible-hours").textContent || "";
+    expect(hours).toContain("Giờ phù hợp Nhóm Trạch của bạn");
+    expect(hours).not.toContain("✓ Phù hợp Nhóm Trạch của bạn");
+    expect(screen.getByTestId("ranked-card").textContent).toContain("Đoài (Kim)");
+    expect(screen.getByTestId("compatible-hours").textContent).toContain("Càn (Kim)");
   });
 });

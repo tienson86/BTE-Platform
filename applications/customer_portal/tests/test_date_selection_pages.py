@@ -24,6 +24,8 @@ def test_date_selection_pages_render() -> None:
     assert good.text.find("ds-calendar-card") < good.text.find("ds-clock-card")
     assert "dsFullName" in choose.text
     assert "dsGender" in choose.text
+    assert 'type="radio"' in choose.text
+    assert 'select id="dsGender"' not in choose.text
     assert "dsBirth" in choose.text
     assert "DD/MM/YYYY" in choose.text
     assert 'type="date"' not in choose.text

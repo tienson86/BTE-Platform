@@ -8,6 +8,7 @@ import {
   type HourVm,
   type PersonVm,
   type RankedDateVm,
+  type CompatibleHourVm,
 } from "./types";
 import { maskVnDate, maskVnMonth, parseVnDate, parseVnMonth } from "./vnDate";
 
@@ -278,7 +279,6 @@ export function HourSelector({
               ["Giờ", selected.window.branch],
               ["Khung giờ", selected.window.time_range],
               ["Can Chi giờ", selected.ganzhi],
-              ["Kết quả giờ", selected.six_state.label],
               ["Nạp âm giờ", <ElementBadge key="hnayin" value={identity.nayin} />],
               ["Cung Phi giờ", <CungBadge key="hcung" value={identity.cung} />],
               ["Hành Cung giờ", <ElementBadge key="hhanh" value={identity.hanhCung} />],
@@ -370,23 +370,29 @@ export function SearchForm({
     });
   };
   return (
-    <form className="ds-form" onSubmit={handleSubmit} data-testid="search-form" noValidate>
+    <form className="bte-card ds-form" onSubmit={handleSubmit} data-testid="search-form" noValidate>
+      <h2>Thông tin nhập</h2>
       <div className="ds-form-grid">
-        <label className="full">
+        <label>
           Họ và tên
           <input name="full_name" />
           {errors.full_name ? <span className="field-error">{errors.full_name}</span> : null}
         </label>
-        <label>
-          Giới tính
-          <select name="gender" defaultValue="">
-            <option value="">Chọn giới tính</option>
-            <option value="male">Nam</option>
-            <option value="female">Nữ</option>
-          </select>
+        <fieldset className="ds-gender" data-testid="gender-radios">
+          <legend>Giới tính</legend>
+          <div className="ds-gender__options" role="radiogroup" aria-label="Giới tính">
+            <label>
+              <input type="radio" name="gender" value="male" defaultChecked />
+              Nam
+            </label>
+            <label>
+              <input type="radio" name="gender" value="female" />
+              Nữ
+            </label>
+          </div>
           {errors.gender ? <span className="field-error">{errors.gender}</span> : null}
-        </label>
-        <label>
+        </fieldset>
+        <label className="full">
           Ngày sinh dương lịch
           <input
             name="birth"
@@ -405,7 +411,6 @@ export function SearchForm({
             data-testid="target-month"
             data-display={parseVnMonth(targetMonth)?.display ?? ""}
           >
-            <span className="ds-month-input__prefix">Tháng</span>
             <input
               name="target_month"
               type="text"
@@ -419,7 +424,9 @@ export function SearchForm({
           {errors.target_month ? <span className="field-error">{errors.target_month}</span> : null}
         </label>
       </div>
-      <button type="submit">TÌM NGÀY TỐT</button>
+      <div className="toolbar">
+        <button type="submit">TÌM NGÀY TỐT</button>
+      </div>
     </form>
   );
 }
@@ -443,7 +450,7 @@ function personIdentity(person: PersonVm): {
 export function PersonBlock({ person }: { person: PersonVm }): ReactNode {
   const identity = personIdentity(person);
   return (
-    <section data-testid="person-block">
+    <section className="bte-card ds-person" data-testid="person-block">
       <h2>Thông tin của bạn</h2>
       <CompactResult
         testId="person-detail"
@@ -463,10 +470,18 @@ export function PersonBlock({ person }: { person: PersonVm }): ReactNode {
   );
 }
 
+function hourRowLabel(hour: CompatibleHourVm): string {
+  const cung = hour.cung
+    ? hour.cung_element
+      ? `${hour.cung} (${hour.cung_element})`
+      : hour.cung
+    : "—";
+  return `→ Giờ ${hour.branch} (${hour.full_time_range}) · ${cung}`;
+}
+
 export function TopResults({
   dates,
   personTrach,
-  personTrachLabel,
 }: {
   dates: RankedDateVm[];
   personTrach?: string;
@@ -476,13 +491,32 @@ export function TopResults({
     const dayGroup = item.day.trach_group || item.day.trach?.trach_group_code;
     return !personTrach || dayGroup === personTrach;
   });
+  const keOrder = ["Đại An", "Tốc Hỷ", "Tiểu Cát"] as const;
   return (
     <div className="ds-cards" data-testid="top-results">
       {visible.map((item) => {
         const identity = dayIdentity(item.day);
-        const recs = item.recommendations.filter((rec) => !personTrach || rec.trach_group === personTrach);
-        const primary = recs[0];
-        const others = recs.slice(1);
+        const hours = (item.compatible_hours || []).filter(
+          (hour) => !personTrach || hour.trach_group === personTrach,
+        );
+        const groups: Record<string, Array<{ branch: string; time_range: string }>> = {
+          "Đại An": [],
+          "Tốc Hỷ": [],
+          "Tiểu Cát": [],
+        };
+        hours.forEach((hour) => {
+          hour.positive_ke.forEach((ke) => {
+            if (groups[ke.result]) groups[ke.result].push({ branch: hour.branch, time_range: ke.time_range });
+          });
+        });
+        const cungText = identity.cung
+          ? (
+              <>
+                <CungBadge value={identity.cung} />
+                {identity.hanhCung ? ` (${identity.hanhCung})` : ""}
+              </>
+            )
+          : "—";
         return (
           <article key={item.day.calendar.solar_label} className="bte-card ds-result" data-testid="ranked-card">
             <div className="ds-card-date">{item.day.calendar.solar_label}</div>
@@ -495,50 +529,39 @@ export function TopResults({
                 ["Can Chi tháng", item.day.calendar.month_ganzhi || item.day.month_ganzhi || "—", "secondary"],
                 ["Can Chi ngày", identity.ganzhi, "medium"],
                 ["Nạp âm", <ElementBadge key="dnayin" value={identity.nayin} />, "medium"],
-                ["Cung Phi", <CungBadge key="dcung" value={identity.cung} />, "medium"],
-                ["Hành Cung", <ElementBadge key="dhanh" value={identity.hanhCung} />, "secondary"],
+                ["Cung Phi", cungText, "medium"],
                 ["Nhóm Trạch", identity.trach, "medium"],
               ]}
             />
-            {primary ? (
-              <div className="ds-hour-block" data-testid="recommended-hour">
-                <h3>Giờ đề xuất</h3>
-                <CompactResult
-                  testId="recommended-hour-detail"
-                  rows={[
-                    ["Giờ", `Giờ ${primary.branch}`, "medium"],
-                    ["Khung giờ", primary.full_time_range || "—", "secondary"],
-                    ["Can Chi giờ", primary.ganzhi || "—", "medium"],
-                    ["Kết quả giờ", primary.hour_result || "—", "medium"],
-                    ["Nạp âm giờ", <ElementBadge key="hnayin" value={primary.nayin} />, "medium"],
-                    ["Cung Phi giờ", <CungBadge key="hcung" value={primary.cung} />, "medium"],
-                    ["Hành Cung giờ", <ElementBadge key="hhanh" value={primary.cung_element} />, "secondary"],
-                    ["Nhóm Trạch giờ", primary.trach_group_label || "—", "medium"],
-                  ]}
-                />
-                {personTrachLabel || primary.trach_group_label ? (
-                  <div className="ds-match" data-testid="trach-match">
-                    ✓ Cùng {primary.trach_group_label || personTrachLabel} với bạn
+            {hours.length ? (
+              <div className="ds-compat-hours" data-testid="compatible-hours">
+                <h3>Giờ phù hợp Nhóm Trạch của bạn</h3>
+                {hours.map((hour) => (
+                  <div key={hour.branch} className="ds-compat-hour" data-testid="compatible-hour">
+                    {hourRowLabel(hour)}
                   </div>
-                ) : null}
-                <div>
-                  <strong>Khắc đề xuất</strong>
-                </div>
-                <div data-testid="recommended-ke">
-                  {primary.ke_time_range || primary.time_range} · {primary.ke_result || primary.classification}
-                </div>
-                {others.length ? (
-                  <div data-testid="other-ke-list">
-                    <div>
-                      <strong>Khung giờ tốt khác</strong>
+                ))}
+              </div>
+            ) : null}
+            {keOrder.some((label) => groups[label].length) ? (
+              <div className="ds-ke-groups" data-testid="positive-ke">
+                <h3>Các thời điểm đẹp</h3>
+                {keOrder.map((label) =>
+                  groups[label].length ? (
+                    <div
+                      key={label}
+                      className="ds-ke-group"
+                      data-testid={`ke-group-${label === "Đại An" ? "dai-an" : label === "Tốc Hỷ" ? "toc-hy" : "tieu-cat"}`}
+                    >
+                      <div className="ds-ke-group__title">{label}</div>
+                      {groups[label].map((row) => (
+                        <div key={`${row.branch}-${row.time_range}`} className="ds-ke-item">
+                          • Giờ {row.branch} · {row.time_range}
+                        </div>
+                      ))}
                     </div>
-                    {others.map((row) => (
-                      <div key={`${row.branch}-${row.time_range}`} className="ds-other-ke" data-testid="other-ke">
-                        Giờ {row.branch} · {row.time_range} · {row.classification}
-                      </div>
-                    ))}
-                  </div>
-                ) : null}
+                  ) : null,
+                )}
               </div>
             ) : null}
           </article>
@@ -558,13 +581,14 @@ export function SearchScreen({
   const [submitted, setSubmitted] = useState(Boolean(person));
   return (
     <div className="ds-page" data-testid="search-screen">
-      <SearchForm onSubmit={() => setSubmitted(true)} />
-      {submitted && person ? <PersonBlock person={person} /> : null}
+      <div className="ds-search-row" data-testid="search-row">
+        <SearchForm onSubmit={() => setSubmitted(true)} />
+        {submitted && person ? <PersonBlock person={person} /> : null}
+      </div>
       {submitted && dates ? (
         <TopResults
           dates={dates}
           personTrach={person?.trach_group || person?.trach.trach_group_code}
-          personTrachLabel={person?.trach_group_label || person?.trach.trach_group_label}
         />
       ) : null}
     </div>
