@@ -4,7 +4,7 @@ export {
   RESULT_TOC_ITEMS,
   resolveActiveNavId,
 } from "./navItems";
-export type { AppNavItem, TocNavItem } from "./navItems";
+export type { AppNavChild, AppNavItem, TocNavItem } from "./navItems";
 export { AppNavigation } from "./AppNavigation";
 export type { AppNavigationProps } from "./AppNavigation";
 export { PrimaryNav } from "./PrimaryNav";

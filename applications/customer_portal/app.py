@@ -72,6 +72,16 @@ def create_app() -> FastAPI:
         """Analyze page."""
         return page("analyze", "analyze.html")
 
+    @app.get("/good-date", response_class=HTMLResponse)
+    def good_date_page() -> HTMLResponse:
+        """General auspicious-date calendar."""
+        return page("good-date", "good_date.html")
+
+    @app.get("/choose-date", response_class=HTMLResponse)
+    def choose_date_page() -> HTMLResponse:
+        """Personalized auspicious-date search."""
+        return page("choose-date", "choose_date.html")
+
     @app.get("/result", response_class=HTMLResponse)
     def result_page(request: Request) -> HTMLResponse:
         """Result page — Canonical Desktop V2 (production).
@@ -148,7 +158,12 @@ def create_app() -> FastAPI:
             "status": "ok",
             "service": "bte-customer-portal",
             "api_base_url": settings.api_base_url,
-            "pages": [LOGIN_ITEM.path, *[i.path for i in NAV_ITEMS]],
+            "pages": [
+                LOGIN_ITEM.path,
+                *[i.path for i in NAV_ITEMS],
+                "/good-date",
+                "/choose-date",
+            ],
         }
 
     return app

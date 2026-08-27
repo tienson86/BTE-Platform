@@ -3,22 +3,38 @@
  * Presentation routes only — no business logic.
  */
 
+export type AppNavChild = {
+  readonly id: string;
+  readonly label: string;
+  readonly href: string;
+};
+
 export type AppNavItem = {
   readonly id: string;
   readonly label: string;
   readonly href: string;
+  readonly children?: readonly AppNavChild[];
 };
 
 /** Top-bar primary destinations (Canonical Portal UI). */
 export const APP_NAV_ITEMS: readonly AppNavItem[] = [
   { id: "dashboard", label: "Trang chủ", href: "/dashboard" },
   { id: "interpretation", label: "Luận giải", href: "/result#interpretation" },
+  {
+    id: "date-selection",
+    label: "Ngày tốt",
+    href: "/good-date",
+    children: [
+      { id: "good-date", label: "Xem ngày tốt/xấu", href: "/good-date" },
+      { id: "choose-date", label: "Chọn ngày tốt", href: "/choose-date" },
+    ],
+  },
   { id: "result", label: "Kết quả", href: "/result" },
   { id: "reports", label: "Báo cáo", href: "/reports" },
   { id: "history", label: "Lịch sử", href: "/history" },
   { id: "profile", label: "Tài khoản", href: "/profile" },
   { id: "login", label: "Đăng nhập", href: "/login" },
-] as const;
+];
 
 export type TocNavItem = {
   readonly id: string;
@@ -52,6 +68,9 @@ export const DASHBOARD_TOC_ITEMS: readonly TocNavItem[] = [
 /** Resolve active primary nav id from a path string. */
 export function resolveActiveNavId(pathname: string): string | undefined {
   const normalized = pathname.split("?")[0]?.replace(/\/+$/, "") || "/";
+  if (normalized === "/good-date" || normalized === "/choose-date") {
+    return "date-selection";
+  }
   const exact = APP_NAV_ITEMS.find((item) => item.href === normalized);
   if (exact) {
     return exact.id;

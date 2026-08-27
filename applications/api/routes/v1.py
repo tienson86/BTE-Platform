@@ -10,10 +10,12 @@ from applications.api.routes._helpers import attach_presentation_metadata, run_b
 from applications.api.schemas.common import APIResponse, BirthRequest, DiscussionRequest
 from applications.api.services.knowledge_expert_service import KnowledgeExpertService
 from applications.api.services.orchestrator import OrchestratorService
+from applications.api.routes import date_selection as date_selection_router
 from applications.api.services.result_identity import stamp_customer_result_identity
 from engines.knowledge_engine import KnowledgePipeline
 
 router = APIRouter(tags=["engines"])
+router.include_router(date_selection_router.router)
 logger = logging.getLogger(__name__)
 
 

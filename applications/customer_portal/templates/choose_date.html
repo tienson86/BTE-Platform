@@ -1,0 +1,45 @@
+<div class="ds-page" data-screen="search">
+  <header>
+    <h1 data-i18n="date_selection.search_title"></h1>
+    <p class="muted" data-i18n="date_selection.search_hint"></p>
+  </header>
+
+  <form id="dsSearchForm" class="bte-card ds-form" novalidate>
+    <div class="ds-form-grid">
+      <label class="full">
+        <span data-i18n="date_selection.full_name"></span>
+        <input id="dsFullName" name="full_name" type="text" autocomplete="name" required />
+        <span class="field-error" id="err_full_name" hidden></span>
+      </label>
+      <label>
+        <span data-i18n="date_selection.gender"></span>
+        <select id="dsGender" name="gender" required>
+          <option value="" data-i18n="date_selection.gender_placeholder"></option>
+          <option value="male" data-i18n="date_selection.gender_male"></option>
+          <option value="female" data-i18n="date_selection.gender_female"></option>
+        </select>
+        <span class="field-error" id="err_gender" hidden></span>
+      </label>
+      <label>
+        <span data-i18n="date_selection.birth_solar"></span>
+        <input id="dsBirth" name="birth" type="date" required />
+        <span class="field-error" id="err_birth" hidden></span>
+      </label>
+      <label>
+        <span data-i18n="date_selection.target_month"></span>
+        <input id="dsTargetMonth" name="target_month" type="month" />
+      </label>
+    </div>
+    <div class="toolbar">
+      <button type="submit" id="dsSearchBtn" data-i18n="date_selection.submit"></button>
+    </div>
+  </form>
+
+  <section class="bte-card ds-person" id="dsPerson" hidden aria-labelledby="dsPersonTitle">
+    <h2 id="dsPersonTitle" data-i18n="date_selection.your_info"></h2>
+    <dl class="ds-kv" id="dsPersonDl"></dl>
+  </section>
+
+  <section id="dsResults" class="ds-cards" aria-live="polite"></section>
+</div>
+<script src="/static/js/date_selection.js"></script>

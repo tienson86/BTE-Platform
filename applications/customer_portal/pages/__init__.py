@@ -25,3 +25,10 @@ NAV_ITEMS: tuple[NavItem, ...] = (
 )
 
 LOGIN_ITEM = NavItem("login", "nav.login", "/login", "login.html")
+
+DATE_SELECTION_NAV: tuple[NavItem, ...] = (
+    NavItem("good-date", "nav.good_date", "/good-date", "good_date.html"),
+    NavItem("choose-date", "nav.choose_date", "/choose-date", "choose_date.html"),
+)
+DATE_SELECTION_MENU_LABEL = "nav.date_selection"
+

@@ -38,4 +38,4 @@ export {
   AppNavigation,
   resolveActiveNavId,
 } from "./Navigation";
-export type { AppNavItem, AppNavigationProps } from "./Navigation";
+export type { AppNavChild, AppNavItem, AppNavigationProps } from "./Navigation";

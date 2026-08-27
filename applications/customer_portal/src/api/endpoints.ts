@@ -18,6 +18,9 @@ export const API_ENDPOINTS = {
   customers: "/customers",
   exportPdf: "/export/pdf",
   exportDocx: "/export/docx",
+  dateSelectionMonth: "/date-selection/month",
+  dateSelectionDay: "/date-selection/day",
+  dateSelectionSearch: "/date-selection/search",
 } as const;
 
 export type ApiEndpointKey = keyof typeof API_ENDPOINTS;

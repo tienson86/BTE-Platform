@@ -69,8 +69,32 @@
     }, 4200);
   }
 
+  function initNavDropdown() {
+    document.querySelectorAll(".nav-dropdown").forEach(function (root) {
+      var toggle = root.querySelector(".nav-dropdown__toggle");
+      if (!toggle || toggle.__bteBound) return;
+      toggle.__bteBound = true;
+      toggle.addEventListener("click", function (event) {
+        event.preventDefault();
+        var open = root.getAttribute("data-open") === "true";
+        root.setAttribute("data-open", open ? "false" : "true");
+        toggle.setAttribute("aria-expanded", open ? "false" : "true");
+      });
+    });
+    document.addEventListener("click", function (event) {
+      document.querySelectorAll(".nav-dropdown").forEach(function (root) {
+        if (!root.contains(event.target)) {
+          root.setAttribute("data-open", "false");
+          var toggle = root.querySelector(".nav-dropdown__toggle");
+          if (toggle) toggle.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+  }
+
   function boot() {
     initThemeToggle();
+    initNavDropdown();
   }
 
   if (document.readyState === "loading") {

@@ -4,9 +4,34 @@ from __future__ import annotations
 
 from applications.customer_portal.config import PORTAL_ROOT, settings
 from applications.customer_portal.i18n import DEFAULT_LOCALE, dump_catalog_json, load_catalog, t
-from applications.customer_portal.pages import LOGIN_ITEM, NAV_ITEMS
+from applications.customer_portal.pages import (
+    DATE_SELECTION_MENU_LABEL,
+    DATE_SELECTION_NAV,
+    LOGIN_ITEM,
+    NAV_ITEMS,
+)
 
 TEMPLATES_DIR = PORTAL_ROOT / "templates"
+
+
+def _date_selection_nav_html(catalog: dict[str, str], active: str) -> str:
+    """Render the Ngày tốt dropdown (exactly two public items)."""
+    toggle_cls = "nav-link nav-dropdown__toggle"
+    if active in {"good-date", "choose-date"}:
+        toggle_cls += " active"
+    links: list[str] = []
+    for item in DATE_SELECTION_NAV:
+        cls = "nav-dropdown__link active" if item.key == active else "nav-dropdown__link"
+        links.append(
+            f'<a class="{cls}" href="{item.path}" role="menuitem">{t(catalog, item.label)}</a>'
+        )
+    return (
+        '<div class="nav-dropdown">'
+        f'<button type="button" class="{toggle_cls}" aria-expanded="false" '
+        f'aria-haspopup="menu">{t(catalog, DATE_SELECTION_MENU_LABEL)}</button>'
+        f'<div class="nav-dropdown__menu" role="menu">{"".join(links)}</div>'
+        "</div>"
+    )
 
 
 def _apply_common_tokens(html: str, *, locale: str, catalog: dict[str, str]) -> str:
@@ -28,6 +53,8 @@ def render_page(template_name: str, *, active: str, locale: str = DEFAULT_LOCALE
         cls = "nav-link active" if item.key == active else "nav-link"
         label = t(catalog, item.label)
         nav_html.append(f'<a class="{cls}" href="{item.path}">{label}</a>')
+        if item.key == "analyze":
+            nav_html.append(_date_selection_nav_html(catalog, active))
     login_label = t(catalog, LOGIN_ITEM.label)
     if active == "login":
         nav_html.insert(

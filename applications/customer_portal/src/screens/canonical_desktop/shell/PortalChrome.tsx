@@ -68,6 +68,19 @@ export function PortalHeader(): ReactNode {
           </a>
           );
         })}
+        <div className="cd-header__dropdown">
+          <button type="button" className="cd-header__link" aria-haspopup="menu">
+            Ngày tốt
+          </button>
+          <div className="cd-header__menu" role="menu">
+            <a className="cd-header__menu-link" href="/good-date" role="menuitem">
+              Xem ngày tốt/xấu
+            </a>
+            <a className="cd-header__menu-link" href="/choose-date" role="menuitem">
+              Chọn ngày tốt
+            </a>
+          </div>
+        </div>
       </nav>
       <div className="cd-header__utils">
         <button type="button" className="cd-header__icon-btn" aria-label="Chế độ sáng">
