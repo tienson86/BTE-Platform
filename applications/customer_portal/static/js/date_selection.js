@@ -63,6 +63,9 @@
     "date_selection.gender_required": "Vui lòng chọn giới tính.",
     "date_selection.birth_required": "Vui lòng nhập ngày sinh dương lịch.",
     "date_selection.recommended_hours": "Giờ đề xuất",
+    "date_selection.best_ke": "Khắc đề xuất",
+    "date_selection.other_good_windows": "Khung giờ tốt khác",
+    "date_selection.trach_match": "Cùng {group} với bạn",
     "date_selection.other_hours": "Khung giờ khác",
   };
 
@@ -520,61 +523,114 @@
       [t("date_selection.trach_group"), personId.trachLabel || "—"],
     ]);
     var root = document.getElementById("dsResults");
-    if (!data.dates.length) {
+    var personGroup = person.trach_group || (person.trach && person.trach.trach_group_code) || "";
+    var personGroupLabel = person.trach_group_label || (person.trach && person.trach.trach_group_label) || "";
+    var dates = data.dates.filter(function (item) {
+      var dayGroup = item.day.trach_group || (item.day.trach && item.day.trach.trach_group_code) || "";
+      return !personGroup || dayGroup === personGroup;
+    });
+    if (!dates.length) {
       root.innerHTML = '<p class="muted">' + t("date_selection.no_results") + "</p>";
       return;
     }
-    root.innerHTML = data.dates
+    root.innerHTML = dates
       .map(function (item) {
-        var cal = item.day.calendar;
-        var identity = identityOf(item.day);
-        var primary = item.recommendations[0];
-        var others = item.recommendations.slice(1);
-        return (
-          '<article class="bte-card ds-result"><div class="ds-card-date">' +
-          cal.solar_label +
-          '</div><div class="ds-card-lunar">' +
-          cal.lunar_label +
-          ' âm</div><div class="ds-card-state">' +
-          item.day.six_state.label +
-          "</div><div class='ds-card-row'><dt>" +
-          t("date_selection.day_ganzhi") +
-          "</dt><dd>" +
-          (identity.ganzhi || cal.day_ganzhi) +
-          "</dd></div><div class='ds-card-row'><dt>" +
-          t("date_selection.nayin") +
-          "</dt><dd>" +
-          elementBadge(identity.nayin) +
-          "</dd></div><div class='ds-card-row'><dt>" +
-          t("date_selection.cung_phi") +
-          "</dt><dd>" +
-          cungBadge(identity.cung) +
-          "</dd></div><div class='ds-card-row'><dt>" +
-          t("date_selection.hanh_cung") +
-          "</dt><dd>" +
-          elementBadge(identity.hanhCung) +
-          "</dd></div><div class='ds-card-row'><dt>Nhóm</dt><dd>" +
-          (identity.trachLabel || "—") +
-          "</dd></div><div><strong>" +
-          t("date_selection.recommended_hours") +
-          "</strong></div><div class='ds-hours'>" +
-          (primary ? primary.time_range : "") +
-          (others.length
-            ? "<div>" +
-              t("date_selection.other_hours") +
-              ": " +
-              others
-                .map(function (row) {
-                  return row.time_range;
-                })
-                .join(", ") +
-              "</div>"
-            : "") +
-          "</div></article>"
-        );
+        return renderRankedCard(item, personGroup, personGroupLabel);
       })
       .join("");
   };
+
+  function recTrachCode(rec) {
+    return rec.trach_group || "";
+  }
+
+  function kvTone(label, value, tone) {
+    var cls = tone ? ' class="ds-result__' + tone + '"' : "";
+    return "<dt" + cls + ">" + label + "</dt><dd" + cls + ">" + value + "</dd>";
+  }
+
+  function renderRankedCard(item, personGroup, personGroupLabel) {
+    var cal = item.day.calendar;
+    var identity = identityOf(item.day);
+    var recs = (item.recommendations || []).filter(function (rec) {
+      return Boolean(personGroup) && recTrachCode(rec) === personGroup;
+    });
+    var primary = recs[0];
+    var others = recs.slice(1);
+    var hourHtml = primary ? renderPrimaryHour(primary, others, personGroupLabel) : "";
+    return (
+      '<article class="bte-card ds-result" data-testid="ranked-card"><div class="ds-card-date">' +
+      cal.solar_label +
+      '</div><div class="ds-card-lunar">' +
+      cal.lunar_label +
+      ' âm</div><div class="ds-card-state">' +
+      item.day.six_state.label +
+      "</div><dl class='ds-kv' data-testid='ranked-day-detail'>" +
+      kvTone(t("date_selection.year_ganzhi"), cal.year_ganzhi || "—", "secondary") +
+      kvTone(t("date_selection.month_ganzhi"), cal.month_ganzhi || item.day.month_ganzhi || "—", "secondary") +
+      kvTone(t("date_selection.day_ganzhi"), identity.ganzhi || cal.day_ganzhi, "medium") +
+      kvTone(t("date_selection.nayin"), elementBadge(identity.nayin), "medium") +
+      kvTone(t("date_selection.cung_phi"), cungBadge(identity.cung), "medium") +
+      kvTone(t("date_selection.hanh_cung"), elementBadge(identity.hanhCung), "secondary") +
+      kvTone(t("date_selection.trach_group"), identity.trachLabel || "—", "medium") +
+      "</dl>" +
+      hourHtml +
+      "</article>"
+    );
+  }
+
+  function renderPrimaryHour(primary, others, personGroupLabel) {
+    var matchLabel = primary.trach_group_label || personGroupLabel;
+    var match =
+      matchLabel && (primary.trach_group_label === personGroupLabel || personGroupLabel)
+        ? '<div class="ds-match" data-testid="trach-match">✓ ' +
+          t("date_selection.trach_match").replace("{group}", matchLabel) +
+          "</div>"
+        : "";
+    var otherHtml = others.length
+      ? "<div data-testid='other-ke-list'><div><strong>" +
+        t("date_selection.other_good_windows") +
+        "</strong></div>" +
+        others
+          .map(function (row) {
+            return (
+              '<div class="ds-other-ke" data-testid="other-ke">Giờ ' +
+              row.branch +
+              " · " +
+              row.time_range +
+              " · " +
+              row.classification +
+              "</div>"
+            );
+          })
+          .join("") +
+        "</div>"
+      : "";
+    return (
+      '<div class="ds-hour-block" data-testid="recommended-hour"><h3>' +
+      t("date_selection.recommended_hours") +
+      "</h3><dl class='ds-kv' data-testid='recommended-hour-detail'>" +
+      kvTone(t("date_selection.hour_branch"), "Giờ " + primary.branch, "medium") +
+      kvTone(t("date_selection.hour_window"), primary.full_time_range || "—", "secondary") +
+      kvTone(t("date_selection.hour_ganzhi"), primary.ganzhi || "—", "medium") +
+      kvTone(t("date_selection.hour_result"), primary.hour_result || "—", "medium") +
+      kvTone(t("date_selection.nayin_hour"), elementBadge(primary.nayin), "medium") +
+      kvTone(t("date_selection.cung_phi_hour"), cungBadge(primary.cung), "medium") +
+      kvTone(t("date_selection.hanh_cung_hour"), elementBadge(primary.cung_element), "secondary") +
+      kvTone(t("date_selection.trach_group_hour"), primary.trach_group_label || "—", "medium") +
+      "</dl>" +
+      match +
+      "<div><strong>" +
+      t("date_selection.best_ke") +
+      "</strong></div><div data-testid='recommended-ke'>" +
+      (primary.ke_time_range || primary.time_range) +
+      " · " +
+      (primary.ke_result || primary.classification) +
+      "</div>" +
+      otherHtml +
+      "</div>"
+    );
+  }
 
   function boot() {
     var page = document.querySelector(".ds-page");

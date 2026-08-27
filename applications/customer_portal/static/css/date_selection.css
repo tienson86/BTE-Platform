@@ -289,13 +289,39 @@
 .ds-card-row dd { margin: 0; font-weight: 650; }
 .ds-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--space-4);
 }
 .ds-card-date { font-size: var(--text-xl); font-weight: 750; }
 .ds-card-lunar { color: var(--muted); font-size: var(--text-sm); }
-.ds-card-state { font-weight: 750; color: var(--primary); }
+.ds-card-state { font-weight: 800; color: var(--primary); letter-spacing: 0.04em; }
 .ds-hours { display: flex; flex-direction: column; gap: 0.25rem; font-size: var(--text-sm); }
+.ds-result { gap: var(--space-3); }
+.ds-result .ds-kv { grid-template-columns: 7.5rem minmax(0, 1fr); }
+.ds-result__medium { font-weight: 650; }
+.ds-result__secondary { color: var(--muted); font-weight: 550; font-size: var(--text-sm); }
+.ds-hour-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--line);
+}
+.ds-hour-block h3 {
+  margin: 0;
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.ds-match {
+  font-size: var(--text-sm);
+  font-weight: 750;
+  color: var(--success);
+}
+.ds-other-ke {
+  font-size: var(--text-sm);
+  color: var(--ink);
+}
 
 @media (max-width: 1023px) {
   .ds-layout { grid-template-columns: 1fr; }
@@ -306,7 +332,9 @@
   .ds-form-grid { grid-template-columns: 1fr; }
   .ds-day { min-height: 3.85rem; padding: 0.25rem 0.1rem; }
   .ds-day__solar { font-size: var(--text-lg); }
+  .ds-cards { grid-template-columns: 1fr; }
   .ds-kv { grid-template-columns: 6.75rem minmax(0, 1fr); }
+  .ds-result .ds-kv { grid-template-columns: 6.75rem minmax(0, 1fr); }
   .ds-identity { grid-template-columns: 1fr 1fr; }
   .ds-clock-card__body { grid-template-columns: 1fr; }
   .ds-ke-row { grid-template-columns: 6.25rem 3.75rem minmax(0, 1fr); padding: 0.28rem 0.45rem; }

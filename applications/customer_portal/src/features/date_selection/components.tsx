@@ -72,17 +72,21 @@ function CompactResult({
   rows,
   testId,
 }: {
-  rows: Array<[string, ReactNode]>;
+  rows: Array<[string, ReactNode] | [string, ReactNode, "secondary" | "medium"]>;
   testId: string;
 }): ReactNode {
   return (
     <dl className="ds-kv" data-testid={testId}>
-      {rows.map(([label, value]) => (
-        <Fragment key={label}>
-          <dt>{label}</dt>
-          <dd>{value}</dd>
-        </Fragment>
-      ))}
+      {rows.map((row) => {
+        const [label, value, tone] = row;
+        const className = tone ? `ds-result__${tone}` : undefined;
+        return (
+          <Fragment key={label}>
+            <dt className={className}>{label}</dt>
+            <dd className={className}>{value}</dd>
+          </Fragment>
+        );
+      })}
     </dl>
   );
 }
@@ -459,22 +463,84 @@ export function PersonBlock({ person }: { person: PersonVm }): ReactNode {
   );
 }
 
-export function TopResults({ dates }: { dates: RankedDateVm[] }): ReactNode {
+export function TopResults({
+  dates,
+  personTrach,
+  personTrachLabel,
+}: {
+  dates: RankedDateVm[];
+  personTrach?: string;
+  personTrachLabel?: string;
+}): ReactNode {
+  const visible = dates.filter((item) => {
+    const dayGroup = item.day.trach_group || item.day.trach?.trach_group_code;
+    return !personTrach || dayGroup === personTrach;
+  });
   return (
     <div className="ds-cards" data-testid="top-results">
-      {dates.map((item) => {
+      {visible.map((item) => {
         const identity = dayIdentity(item.day);
+        const recs = item.recommendations.filter((rec) => !personTrach || rec.trach_group === personTrach);
+        const primary = recs[0];
+        const others = recs.slice(1);
         return (
-          <article key={item.day.calendar.solar_label} className="bte-card">
+          <article key={item.day.calendar.solar_label} className="bte-card ds-result" data-testid="ranked-card">
             <div className="ds-card-date">{item.day.calendar.solar_label}</div>
             <div className="ds-card-lunar">{item.day.calendar.lunar_label} âm</div>
             <div className="ds-card-state">{item.day.six_state.label}</div>
-            <div>Can Chi ngày: {identity.ganzhi}</div>
-            <div>Nạp âm: {identity.nayin || "—"}</div>
-            <div>Cung Phi: {identity.cung || "—"}</div>
-            <div>Hành Cung: {identity.hanhCung || "—"}</div>
-            <div>Nhóm: {identity.trach}</div>
-            <div>Giờ đề xuất: {item.recommendations[0]?.time_range}</div>
+            <CompactResult
+              testId="ranked-day-detail"
+              rows={[
+                ["Can Chi năm", item.day.calendar.year_ganzhi, "secondary"],
+                ["Can Chi tháng", item.day.calendar.month_ganzhi || item.day.month_ganzhi || "—", "secondary"],
+                ["Can Chi ngày", identity.ganzhi, "medium"],
+                ["Nạp âm", <ElementBadge key="dnayin" value={identity.nayin} />, "medium"],
+                ["Cung Phi", <CungBadge key="dcung" value={identity.cung} />, "medium"],
+                ["Hành Cung", <ElementBadge key="dhanh" value={identity.hanhCung} />, "secondary"],
+                ["Nhóm Trạch", identity.trach, "medium"],
+              ]}
+            />
+            {primary ? (
+              <div className="ds-hour-block" data-testid="recommended-hour">
+                <h3>Giờ đề xuất</h3>
+                <CompactResult
+                  testId="recommended-hour-detail"
+                  rows={[
+                    ["Giờ", `Giờ ${primary.branch}`, "medium"],
+                    ["Khung giờ", primary.full_time_range || "—", "secondary"],
+                    ["Can Chi giờ", primary.ganzhi || "—", "medium"],
+                    ["Kết quả giờ", primary.hour_result || "—", "medium"],
+                    ["Nạp âm giờ", <ElementBadge key="hnayin" value={primary.nayin} />, "medium"],
+                    ["Cung Phi giờ", <CungBadge key="hcung" value={primary.cung} />, "medium"],
+                    ["Hành Cung giờ", <ElementBadge key="hhanh" value={primary.cung_element} />, "secondary"],
+                    ["Nhóm Trạch giờ", primary.trach_group_label || "—", "medium"],
+                  ]}
+                />
+                {personTrachLabel || primary.trach_group_label ? (
+                  <div className="ds-match" data-testid="trach-match">
+                    ✓ Cùng {primary.trach_group_label || personTrachLabel} với bạn
+                  </div>
+                ) : null}
+                <div>
+                  <strong>Khắc đề xuất</strong>
+                </div>
+                <div data-testid="recommended-ke">
+                  {primary.ke_time_range || primary.time_range} · {primary.ke_result || primary.classification}
+                </div>
+                {others.length ? (
+                  <div data-testid="other-ke-list">
+                    <div>
+                      <strong>Khung giờ tốt khác</strong>
+                    </div>
+                    {others.map((row) => (
+                      <div key={`${row.branch}-${row.time_range}`} className="ds-other-ke" data-testid="other-ke">
+                        Giờ {row.branch} · {row.time_range} · {row.classification}
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
           </article>
         );
       })}
@@ -494,7 +560,13 @@ export function SearchScreen({
     <div className="ds-page" data-testid="search-screen">
       <SearchForm onSubmit={() => setSubmitted(true)} />
       {submitted && person ? <PersonBlock person={person} /> : null}
-      {submitted && dates ? <TopResults dates={dates} /> : null}
+      {submitted && dates ? (
+        <TopResults
+          dates={dates}
+          personTrach={person?.trach_group || person?.trach.trach_group_code}
+          personTrachLabel={person?.trach_group_label || person?.trach.trach_group_label}
+        />
+      ) : null}
     </div>
   );
 }

@@ -5,6 +5,8 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
+from engines.date_selection.exceptions import DateSelectionError
+
 
 @dataclass(slots=True)
 class SixStateResult:
@@ -261,8 +263,58 @@ class RankedDate:
         day_payload.update(hoa_giap_view(self.day.calendar.day_ganzhi, self.day.trach))
         return {
             "day": day_payload,
-            "recommendations": [item.to_dict() for item in self.recommendations],
+            "recommendations": [
+                _recommendation_view(item, self.day) for item in self.recommendations
+            ],
         }
+
+
+def _recommendation_view(item: HourRecommendation, day: DaySelection) -> dict[str, Any]:
+    """Attach canonical hour identity without changing ranking selection."""
+    from engines.date_selection.identity import hoa_giap_view
+
+    payload = item.to_dict()
+    hour = next((row for row in day.hours if row.window.branch == item.branch), None)
+    if hour is None:
+        return payload
+    view = hoa_giap_view(hour.ganzhi, hour.trach)
+    payload.update(
+        {
+            "full_time_range": hour.window.time_range,
+            "ganzhi": hour.ganzhi,
+            "hour_result": hour.six_state.label,
+            "nayin": view["nayin"],
+            "nayin_element": view["nayin_element"],
+            "cung": view["cung"],
+            "cung_element": view["cung_element"],
+            "trach_group": view["trach_group"],
+            "trach_group_label": view["trach_group_label"],
+            "ke_result": item.classification,
+            "ke_time_range": item.time_range,
+            "recommended_ke": {
+                "index": item.ke_index,
+                "time_range": item.time_range,
+                "result": item.classification,
+            },
+        }
+    )
+    return payload
+
+
+def _assert_same_trach(person_group: str, ranked: RankedDate) -> None:
+    """Fail loudly if a recommended day/hour contradicts the person's Trạch."""
+    day_group = ranked.day.trach.trach_group_code if ranked.day.trach else None
+    if day_group != person_group:
+        raise DateSelectionError(
+            f"recommended day trach {day_group!r} != person {person_group!r}"
+        )
+    for rec in ranked.recommendations:
+        hour = next((row for row in ranked.day.hours if row.window.branch == rec.branch), None)
+        hour_group = hour.trach.trach_group_code if hour is not None and hour.trach else None
+        if hour_group != person_group:
+            raise DateSelectionError(
+                f"recommended hour {rec.branch!r} trach {hour_group!r} != person {person_group!r}"
+            )
 
 
 @dataclass(slots=True)
@@ -276,6 +328,9 @@ class SearchResult:
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize for API / presentation."""
+        person_group = self.person.trach.trach_group_code
+        for item in self.dates:
+            _assert_same_trach(person_group, item)
         return {
             "person": self.person.to_dict(),
             "target_year": self.target_year,

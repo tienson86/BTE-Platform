@@ -84,9 +84,28 @@ export type PersonVm = {
   trach: TrachVm;
 };
 
+export type HourRecommendationVm = {
+  branch: string;
+  time_range: string;
+  ke_index?: number;
+  classification: string;
+  primary?: boolean;
+  full_time_range?: string;
+  ganzhi?: string;
+  hour_result?: string;
+  nayin?: string;
+  nayin_element?: string;
+  cung?: string;
+  cung_element?: string;
+  trach_group?: string;
+  trach_group_label?: string;
+  ke_result?: string;
+  ke_time_range?: string;
+};
+
 export type RankedDateVm = {
   day: DayVm;
-  recommendations: Array<{ time_range: string; primary: boolean }>;
+  recommendations: HourRecommendationVm[];
 };
 
 export const DATE_SELECTION_NAV = [
