@@ -21,7 +21,7 @@ class SixStateResult:
 
 @dataclass(slots=True)
 class TrachInfo:
-    """Cung Phi, ngũ hành, and Đông/Tây Tứ Trạch for a Ganzhi + gender."""
+    """Cung Phi, ngũ hành, and Đông/Tây Tứ Trạch."""
 
     cung: str
     element_code: str
@@ -102,7 +102,7 @@ class HourSelection:
     ganzhi: str
     hour_value: int
     six_state: SixStateResult
-    trach: TrachInfo
+    trach: TrachInfo | None
     ke_slots: list[KeSlot] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
@@ -112,7 +112,7 @@ class HourSelection:
             "ganzhi": self.ganzhi,
             "hour_value": self.hour_value,
             "six_state": self.six_state.to_dict(),
-            "trach": self.trach.to_dict(),
+            "trach": self.trach.to_dict() if self.trach else None,
             "ke_slots": [slot.to_dict() for slot in self.ke_slots],
         }
 
@@ -124,7 +124,7 @@ class DaySelection:
     calendar: CalendarSnapshot
     day_value: int
     six_state: SixStateResult
-    trach: TrachInfo
+    trach: TrachInfo | None
     hours: list[HourSelection] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
@@ -133,7 +133,7 @@ class DaySelection:
             "calendar": self.calendar.to_dict(),
             "day_value": self.day_value,
             "six_state": self.six_state.to_dict(),
-            "trach": self.trach.to_dict(),
+            "trach": self.trach.to_dict() if self.trach else None,
             "hours": [hour.to_dict() for hour in self.hours],
         }
 
@@ -237,7 +237,7 @@ class RankedDate:
             "day": {
                 "calendar": self.day.calendar.to_dict(),
                 "six_state": self.day.six_state.to_dict(),
-                "trach": self.day.trach.to_dict(),
+                "trach": self.day.trach.to_dict() if self.day.trach else None,
             },
             "recommendations": [item.to_dict() for item in self.recommendations],
         }

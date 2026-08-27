@@ -1,7 +1,9 @@
-"""Known example 27/08/2026 against canonical Calendar Engine."""
+"""Known example 27/08/2026 against canonical Calendar / Bazi day Ganzhi."""
 
 from __future__ import annotations
 
+from engines.bazi_engine.engine import BaziEngine
+from engines.calendar_engine.julian.julian import JulianDay
 from engines.date_selection.constants import BRANCH_INDEX
 from engines.date_selection.liu_ren import day_value, hour_value, ke_value, six_state_from_value
 from engines.date_selection.service import DateSelectionService
@@ -34,9 +36,10 @@ def test_known_example_27_aug_2026() -> None:
     assert ke_value(34, 1) == 35
     assert ke1.six_state.label == "Tiểu Cát"
 
-    # Canonical day Ganzhi / Cung Phi from BTE runtime (do not override).
-    assert day.calendar.day_ganzhi == "Nhâm Thân"
-    assert day.trach.cung == "Khôn"
-    assert day.trach.element_label == "Thổ"
-    assert day.trach.trach_group_label == "Tây Tứ Trạch"
-    assert thin.ganzhi == "Giáp Thìn"
+    assert day.calendar.day_ganzhi == "Quý Dậu"
+    chart = BaziEngine().build(2026, 8, 27, 12, 0)
+    assert f"{chart.day_pillar.stem} {chart.day_pillar.branch}" == "Quý Dậu"
+    assert JulianDay.day_number(2026, 8, 27) == 2461280
+    assert thin.ganzhi == "Bính Thìn"
+    assert thin.window.time_range == "07:01–09:00"
+    assert ke1.time_range == "07:01–07:20"

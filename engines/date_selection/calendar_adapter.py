@@ -6,6 +6,7 @@ from datetime import date, datetime
 
 from engines.calendar_engine.algorithms.ganzhi import GanzhiAlgorithm
 from engines.calendar_engine.engine import CalendarEngine
+from engines.calendar_engine.julian.julian import JulianDay
 from engines.date_selection.constants import BRANCH_INDEX
 from engines.date_selection.exceptions import DateSelectionValidationError
 from engines.date_selection.models import CalendarSnapshot
@@ -47,7 +48,10 @@ def snapshot_for_solar(
     _, year_branch = _split_ganzhi(year_ganzhi)
     if year_branch not in BRANCH_INDEX:
         raise DateSelectionValidationError(f"unknown year branch: {year_branch!r}")
-    day_gz = GanzhiAlgorithm.day(calendar.julian_day)
+    # Integer noon JDN (Hồ Ngọc Đức / BaziEngine), not astronomical JD at 00:00 UTC.
+    # CalendarResult.julian_day is N.5 and must not be fed to GanzhiAlgorithm.day().
+    jdn = JulianDay.day_number(year, month, day)
+    day_gz = GanzhiAlgorithm.day(jdn)
     day_ganzhi = f"{day_gz['can']} {day_gz['chi']}"
     lunar_leap = bool(calendar.leap_month)
     lunar_label = calendar.lunar_date or ""

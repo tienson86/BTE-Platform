@@ -36,7 +36,23 @@ STEMS: tuple[str, ...] = (
     "Quý",
 )
 
-YANG_STEMS = frozenset({"Giáp", "Bính", "Mậu", "Canh", "Nhâm"})
+# Date Selection civil-clock convention (not Bazi hour_branch.csv 07:00–08:59).
+# Each odd HH:00 is the inclusive close of the previous two-hour branch.
+# Tý: 23:01–01:00 (cross midnight). Thìn: 07:01–09:00.
+DS_HOUR_WINDOWS: tuple[tuple[str, int, int, int, int, bool], ...] = (
+    ("Tý", 23, 1, 1, 0, True),
+    ("Sửu", 1, 1, 3, 0, False),
+    ("Dần", 3, 1, 5, 0, False),
+    ("Mão", 5, 1, 7, 0, False),
+    ("Thìn", 7, 1, 9, 0, False),
+    ("Tỵ", 9, 1, 11, 0, False),
+    ("Ngọ", 11, 1, 13, 0, False),
+    ("Mùi", 13, 1, 15, 0, False),
+    ("Thân", 15, 1, 17, 0, False),
+    ("Dậu", 17, 1, 19, 0, False),
+    ("Tuất", 19, 1, 21, 0, False),
+    ("Hợi", 21, 1, 23, 0, False),
+)
 
 SIX_STATE_BY_REMAINDER: dict[int, tuple[str, str]] = {
     1: ("dai_an", "Đại An"),

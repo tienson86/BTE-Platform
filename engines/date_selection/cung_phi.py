@@ -1,4 +1,4 @@
-"""Resolve Cung Phi from 60 Hoa Giáp + canonical gender."""
+"""Resolve Cung Phi for a person vs a date/hour Ganzhi."""
 
 from __future__ import annotations
 
@@ -6,12 +6,15 @@ from engines.date_selection.constants import (
     FEMALE_GENDER_ALIASES,
     GENDER_LABELS,
     MALE_GENDER_ALIASES,
-    YANG_STEMS,
 )
-from engines.date_selection.exceptions import DateSelectionValidationError
+from engines.date_selection.exceptions import (
+    DateSelectionMappingError,
+    DateSelectionValidationError,
+)
 from engines.date_selection.loader import load_hoa_giap_cung_phi
 from engines.date_selection.models import TrachInfo
 from engines.date_selection.trach import trach_from_cung
+from engines.feng_shui_engine import FengShuiEngine, FengShuiEngineError, FengShuiValidationError
 
 
 def normalize_gender(gender: str | None) -> str:
@@ -56,7 +59,11 @@ def _row_for_ganzhi(ganzhi: str) -> dict[str, str]:
 
 
 def cung_for_ganzhi(ganzhi: str, gender: str) -> str:
-    """Return Cung Nam or Cung Nữ for a 60 Hoa Giáp label."""
+    """
+    Return Cung Nam or Cung Nữ for a person's 60 Hoa Giáp label.
+
+    This is a person lookup. It must not be used to pick a date/hour Cung.
+    """
     row = _row_for_ganzhi(ganzhi)
     sex = normalize_gender(gender)
     cung = row["cung_nam"] if sex == "male" else row["cung_nu"]
@@ -66,23 +73,40 @@ def cung_for_ganzhi(ganzhi: str, gender: str) -> str:
 
 
 def trach_for_ganzhi(ganzhi: str, gender: str) -> TrachInfo:
-    """Resolve Cung Phi, element, and trạch group from Ganzhi + gender."""
+    """Resolve a PERSON'S Cung Phi, element, and trạch from Ganzhi + gender."""
     return trach_from_cung(cung_for_ganzhi(ganzhi, gender))
 
 
-def polarity_gender_from_ganzhi(ganzhi: str) -> str:
+def trach_for_person(*, lunar_year: int, gender: str) -> TrachInfo:
     """
-    Infer a lookup gender from stem polarity for unpersonalized screens.
+    Personal Cung Phi from canonical birth year + gender.
 
-    Dương stem → male column, Âm stem → female column.
+    Uses Feng Shui Engine (year-digit method), not the date/hour table.
     """
-    key = _normalize_ganzhi(ganzhi)
-    stem = key.split(" ", 1)[0]
-    if stem in YANG_STEMS:
-        return "male"
-    return "female"
+    sex = normalize_gender(gender)
+    try:
+        result = FengShuiEngine().calculate(year=int(lunar_year), gender=sex)
+    except (FengShuiEngineError, FengShuiValidationError) as exc:
+        raise DateSelectionValidationError(str(exc)) from exc
+    return trach_from_cung(result.gua_name)
 
 
-def trach_for_ganzhi_unpersonalized(ganzhi: str) -> TrachInfo:
-    """Day/hour Cung Phi when the caller has no personal gender."""
-    return trach_for_ganzhi(ganzhi, polarity_gender_from_ganzhi(ganzhi))
+def cung_for_date_ganzhi(ganzhi: str) -> str:
+    """
+    Intrinsic Date Selection Cung for a day or hour Ganzhi.
+
+    Gender and stem polarity must not select this value. Requires a canonical
+    Hạ Nguyên ``cung_ngay`` mapping; does not invent one from Cung Nam/Nữ.
+    """
+    row = _row_for_ganzhi(ganzhi)
+    cung = (row.get("cung_ngay") or "").strip()
+    if not cung:
+        raise DateSelectionMappingError(
+            "canonical Hạ Nguyên date/hour Cung mapping is missing"
+        )
+    return cung
+
+
+def trach_for_date_ganzhi(ganzhi: str) -> TrachInfo:
+    """Resolve date/hour Cung Phi from the Hạ Nguyên mapping only."""
+    return trach_from_cung(cung_for_date_ganzhi(ganzhi))

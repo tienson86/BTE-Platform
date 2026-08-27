@@ -9,3 +9,7 @@ class DateSelectionError(Exception):
 
 class DateSelectionValidationError(DateSelectionError):
     """Invalid input for Date Selection."""
+
+
+class DateSelectionMappingError(DateSelectionError):
+    """Required Date Selection mapping is missing from canonical BTE data."""

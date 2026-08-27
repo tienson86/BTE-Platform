@@ -25,17 +25,17 @@ const trach = {
 };
 
 const hour = (branch: string, label: string): HourVm => ({
-  window: { branch, time_range: "07:00–08:59" },
-  ganzhi: "Giáp Thìn",
+  window: { branch, time_range: "07:01–09:00" },
+  ganzhi: "Bính Thìn",
   six_state: { remainder: 4, code: "xich_khau", label },
   trach,
   ke_slots: [
-    { ke_index: 1, time_range: "07:00–07:19", six_state: { remainder: 5, code: "tieu_cat", label: "Tiểu Cát" } },
-    { ke_index: 2, time_range: "07:20–07:39", six_state: { remainder: 0, code: "khong_vong", label: "Không Vong" } },
-    { ke_index: 3, time_range: "07:40–07:59", six_state: { remainder: 1, code: "dai_an", label: "Đại An" } },
-    { ke_index: 4, time_range: "08:00–08:19", six_state: { remainder: 2, code: "luu_lien", label: "Lưu Liên" } },
-    { ke_index: 5, time_range: "08:20–08:39", six_state: { remainder: 3, code: "toc_hy", label: "Tốc Hỷ" } },
-    { ke_index: 6, time_range: "08:40–08:59", six_state: { remainder: 4, code: "xich_khau", label: "Xích Khẩu" } },
+    { ke_index: 1, time_range: "07:01–07:20", six_state: { remainder: 5, code: "tieu_cat", label: "Tiểu Cát" } },
+    { ke_index: 2, time_range: "07:21–07:40", six_state: { remainder: 0, code: "khong_vong", label: "Không Vong" } },
+    { ke_index: 3, time_range: "07:41–08:00", six_state: { remainder: 1, code: "dai_an", label: "Đại An" } },
+    { ke_index: 4, time_range: "08:01–08:20", six_state: { remainder: 2, code: "luu_lien", label: "Lưu Liên" } },
+    { ke_index: 5, time_range: "08:21–08:40", six_state: { remainder: 3, code: "toc_hy", label: "Tốc Hỷ" } },
+    { ke_index: 6, time_range: "08:41–09:00", six_state: { remainder: 4, code: "xich_khau", label: "Xích Khẩu" } },
   ],
 });
 
@@ -44,7 +44,7 @@ const day: DayVm = {
     solar_label: "27/08/2026",
     lunar_label: "15/07/2026",
     year_ganzhi: "Bính Ngọ",
-    day_ganzhi: "Nhâm Thân",
+    day_ganzhi: "Quý Dậu",
   },
   six_state: { remainder: 5, code: "tieu_cat", label: "Tiểu Cát" },
   trach,
@@ -110,7 +110,7 @@ describe("Date Selection frontend", () => {
     fireEvent.change(screen.getByLabelText("Chọn giờ"), { target: { value: "Tỵ" } });
     expect(screen.getByTestId("hour-detail").textContent).toContain("Tỵ");
     expect(screen.getByTestId("ke-panel").textContent).toContain("Khắc 1");
-    expect(screen.getByTestId("ke-panel").textContent).toContain("07:00–07:19");
+    expect(screen.getByTestId("ke-panel").textContent).toContain("07:01–07:20");
   });
 
   it("renders analog clock with numbers 1-12", () => {

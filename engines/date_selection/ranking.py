@@ -22,7 +22,7 @@ from engines.date_selection.models import (
 def _hour_recommendations(day: DaySelection, person_trach: str) -> list[HourRecommendation]:
     picked: list[tuple[int, HourRecommendation]] = []
     for hour in day.hours:
-        if hour.trach.trach_group_code != person_trach:
+        if hour.trach is None or hour.trach.trach_group_code != person_trach:
             continue
         for slot in hour.ke_slots:
             if slot.six_state.code in REJECT_KE_CODES:
@@ -51,7 +51,7 @@ def _hour_recommendations(day: DaySelection, person_trach: str) -> list[HourReco
 
 def is_candidate_day(day: DaySelection, person_trach: str) -> bool:
     """True when the day matches personal trạch and a primary positive class."""
-    if day.trach.trach_group_code != person_trach:
+    if day.trach is None or day.trach.trach_group_code != person_trach:
         return False
     if day.six_state.code in REJECT_DAY_CODES:
         return False

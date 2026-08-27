@@ -19,9 +19,10 @@ def _format_range(start_h: int, start_m: int, end_h: int, end_m: int) -> str:
 
 def ke_slots_for_hour(window: HourWindow, hour_total: int) -> list[KeSlot]:
     """
-    Split a canonical two-hour window into six 20-minute khắc.
+    Split a Date Selection two-hour window into six 20-minute khắc.
 
-    Uses BTE hour_branch.csv start/end, not a second hour-boundary system.
+    Start is inclusive; each slot is 20 minutes inclusive. For Thìn
+    (07:01–09:00) khắc 1 is 07:01–07:20 and khắc 6 is 08:41–09:00.
     """
     slots: list[KeSlot] = []
     for ke_index in range(1, KE_COUNT + 1):

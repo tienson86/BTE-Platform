@@ -11,10 +11,10 @@ from engines.date_selection.constants import BRANCH_INDEX, MAX_RANKED_DATES
 from engines.date_selection.cung_phi import (
     gender_label,
     normalize_gender,
-    trach_for_ganzhi,
-    trach_for_ganzhi_unpersonalized,
+    trach_for_date_ganzhi,
+    trach_for_person,
 )
-from engines.date_selection.exceptions import DateSelectionValidationError
+from engines.date_selection.exceptions import DateSelectionMappingError, DateSelectionValidationError
 from engines.date_selection.hour import all_hour_windows, hour_ganzhi, window_for_branch
 from engines.date_selection.ke import current_ke_index, ke_slots_for_hour
 from engines.date_selection.liu_ren import day_value, hour_value, six_state_from_value
@@ -76,7 +76,8 @@ class DateSelectionService:
         gender: str | None = None,
     ) -> DaySelection:
         """Full day + 12-hour + six-khắc inspection."""
-        day_result = self._build_day(year, month, day, gender=gender)
+        del gender  # Viewer gender must not select date/hour Cung.
+        day_result = self._build_day(year, month, day)
         if hour_branch:
             window_for_branch(hour_branch)
         return day_result
@@ -98,7 +99,8 @@ class DateSelectionService:
         gender: str | None = None,
     ) -> dict[str, object]:
         """Resolve the live traditional hour and khắc for a civil timestamp."""
-        inspected = self.inspect_day(year, month, day, gender=gender)
+        del gender
+        inspected = self.inspect_day(year, month, day)
         window = None
         for item in inspected.hours:
             if item.window.branch == self.current_hour_branch(hour, minute):
@@ -133,7 +135,7 @@ class DateSelectionService:
             birth_day,
             engine=self._calendar,
         )
-        trach = trach_for_ganzhi(snapshot.year_ganzhi, sex)
+        trach = trach_for_person(lunar_year=snapshot.lunar_year, gender=sex)
         return PersonProfile(
             full_name=name,
             gender=sex,
@@ -166,12 +168,7 @@ class DateSelectionService:
         self._validate_year_month(target_year, target_month)
         last_day = gregorian.monthrange(target_year, target_month)[1]
         days = [
-            self._build_day(
-                target_year,
-                target_month,
-                day,
-                gender=person.gender,
-            )
+            self._build_day(target_year, target_month, day)
             for day in range(1, last_day + 1)
         ]
         ranked = rank_dates(days, person.trach.trach_group_code)[:MAX_RANKED_DATES]
@@ -187,8 +184,6 @@ class DateSelectionService:
         year: int,
         month: int,
         day: int,
-        *,
-        gender: str | None = None,
     ) -> DaySelection:
         snapshot = snapshot_for_solar(year, month, day, engine=self._calendar)
         total = day_value(
@@ -197,12 +192,12 @@ class DateSelectionService:
             snapshot.lunar_day,
         )
         day_stem = snapshot.day_ganzhi.split(" ", 1)[0]
-        if gender is None:
-            trach = trach_for_ganzhi_unpersonalized(snapshot.day_ganzhi)
-        else:
-            trach = trach_for_ganzhi(snapshot.day_ganzhi, gender)
+        try:
+            trach = trach_for_date_ganzhi(snapshot.day_ganzhi)
+        except DateSelectionMappingError:
+            trach = None
         hours = [
-            self._build_hour(day_stem, window, total, gender)
+            self._build_hour(day_stem, window, total)
             for window in all_hour_windows()
         ]
         return DaySelection(
@@ -218,14 +213,13 @@ class DateSelectionService:
         day_stem: str,
         window,
         day_total: int,
-        gender: str | None,
     ) -> HourSelection:
         hour_total = hour_value(day_total, window.branch_index)
         ganzhi = hour_ganzhi(day_stem, window.branch)
-        if gender is None:
-            trach = trach_for_ganzhi_unpersonalized(ganzhi)
-        else:
-            trach = trach_for_ganzhi(ganzhi, gender)
+        try:
+            trach = trach_for_date_ganzhi(ganzhi)
+        except DateSelectionMappingError:
+            trach = None
         return HourSelection(
             window=window,
             ganzhi=ganzhi,

@@ -27,7 +27,7 @@ def hour_ganzhi(day_stem: str, branch: str) -> str:
 
 
 def all_hour_windows() -> tuple[HourWindow, ...]:
-    """Return the 12 canonical traditional hour windows."""
+    """Return the 12 Date Selection conventional hour windows."""
     return load_hour_windows()
 
 
@@ -40,5 +40,5 @@ def window_for_branch(branch: str) -> HourWindow:
 
 
 def window_for_clock(hour: int, minute: int) -> HourWindow:
-    """Look up the traditional hour containing a civil clock time."""
+    """Look up the Date Selection hour containing a civil clock time."""
     return hour_window_for_clock(hour, minute)

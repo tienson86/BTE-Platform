@@ -100,11 +100,11 @@ export function DayDetailPanel({ day }: { day: DayVm }): ReactNode {
       <dt>Kết quả ngày</dt>
       <dd>{day.six_state.label}</dd>
       <dt>Cung Phi</dt>
-      <dd>{day.trach.cung}</dd>
+      <dd>{day.trach?.cung ?? "—"}</dd>
       <dt>Ngũ hành</dt>
-      <dd>{day.trach.element_label}</dd>
+      <dd>{day.trach?.element_label ?? "—"}</dd>
       <dt>Nhóm</dt>
-      <dd>{day.trach.trach_group_label}</dd>
+      <dd>{day.trach?.trach_group_label ?? "—"}</dd>
     </dl>
   );
 }
@@ -135,7 +135,7 @@ export function HourSelector({
       {selected ? (
         <div data-testid="hour-detail">
           {selected.window.branch} · {selected.window.time_range} · {selected.ganzhi} · {selected.six_state.label} ·{" "}
-          {selected.trach.cung} · {selected.trach.element_label} · {selected.trach.trach_group_label}
+          {selected.trach?.cung ?? "—"} · {selected.trach?.element_label ?? "—"} · {selected.trach?.trach_group_label ?? "—"}
         </div>
       ) : null}
       <div data-testid="ke-panel">
@@ -251,7 +251,7 @@ export function TopResults({ dates }: { dates: RankedDateVm[] }): ReactNode {
           <div className="ds-card-lunar">{item.day.calendar.lunar_label} âm</div>
           <div className="ds-card-state">{item.day.six_state.label}</div>
           <div>
-            {item.day.trach.cung} · {item.day.trach.element_label} · {item.day.trach.trach_group_label}
+            {item.day.trach?.cung ?? "—"} · {item.day.trach?.element_label ?? "—"} · {item.day.trach?.trach_group_label ?? "—"}
           </div>
           <div>Giờ đề xuất</div>
           <div>{item.recommendations[0]?.time_range}</div>

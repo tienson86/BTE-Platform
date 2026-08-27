@@ -58,5 +58,6 @@ def test_search_returns_at_most_five() -> None:
     )
     assert len(result.dates) <= 5
     for item in result.dates:
+        assert item.day.trach is not None
         assert item.day.trach.trach_group_code == result.person.trach.trach_group_code
         assert item.day.six_state.code in {"dai_an", "toc_hy", "tieu_cat"}

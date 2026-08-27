@@ -36,7 +36,7 @@ export type HourVm = {
   window: { branch: string; time_range: string };
   ganzhi: string;
   six_state: SixStateVm;
-  trach: TrachVm;
+  trach: TrachVm | null;
   ke_slots: KeSlotVm[];
 };
 
@@ -48,7 +48,7 @@ export type DayVm = {
     day_ganzhi: string;
   };
   six_state: SixStateVm;
-  trach: TrachVm;
+  trach: TrachVm | null;
   hours: HourVm[];
 };
 

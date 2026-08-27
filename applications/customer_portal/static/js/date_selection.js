@@ -5,18 +5,18 @@
 (function (global) {
   var BRANCHES = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
   var HOUR_WINDOWS = [
-    { branch: "Tý", start: 23 * 60, end: 59, cross: true },
-    { branch: "Sửu", start: 1 * 60, end: 2 * 60 + 59 },
-    { branch: "Dần", start: 3 * 60, end: 4 * 60 + 59 },
-    { branch: "Mão", start: 5 * 60, end: 6 * 60 + 59 },
-    { branch: "Thìn", start: 7 * 60, end: 8 * 60 + 59 },
-    { branch: "Tỵ", start: 9 * 60, end: 10 * 60 + 59 },
-    { branch: "Ngọ", start: 11 * 60, end: 12 * 60 + 59 },
-    { branch: "Mùi", start: 13 * 60, end: 14 * 60 + 59 },
-    { branch: "Thân", start: 15 * 60, end: 16 * 60 + 59 },
-    { branch: "Dậu", start: 17 * 60, end: 18 * 60 + 59 },
-    { branch: "Tuất", start: 19 * 60, end: 20 * 60 + 59 },
-    { branch: "Hợi", start: 21 * 60, end: 22 * 60 + 59 },
+    { branch: "Tý", start: 23 * 60 + 1, end: 1 * 60, cross: true },
+    { branch: "Sửu", start: 1 * 60 + 1, end: 3 * 60 },
+    { branch: "Dần", start: 3 * 60 + 1, end: 5 * 60 },
+    { branch: "Mão", start: 5 * 60 + 1, end: 7 * 60 },
+    { branch: "Thìn", start: 7 * 60 + 1, end: 9 * 60 },
+    { branch: "Tỵ", start: 9 * 60 + 1, end: 11 * 60 },
+    { branch: "Ngọ", start: 11 * 60 + 1, end: 13 * 60 },
+    { branch: "Mùi", start: 13 * 60 + 1, end: 15 * 60 },
+    { branch: "Thân", start: 15 * 60 + 1, end: 17 * 60 },
+    { branch: "Dậu", start: 17 * 60 + 1, end: 19 * 60 },
+    { branch: "Tuất", start: 19 * 60 + 1, end: 21 * 60 },
+    { branch: "Hợi", start: 21 * 60 + 1, end: 23 * 60 },
   ];
 
   function t(key) {
@@ -69,27 +69,28 @@
 
   function fillDetail(dl, day) {
     var cal = day.calendar;
-    var trach = day.trach;
+    var trach = day.trach || {};
     kv(dl, [
       [t("date_selection.solar_date"), cal.solar_label],
       [t("date_selection.lunar_date"), cal.lunar_label],
       [t("date_selection.year_ganzhi"), cal.year_ganzhi],
       [t("date_selection.day_ganzhi"), cal.day_ganzhi],
       [t("date_selection.day_result"), day.six_state.label],
-      [t("date_selection.cung_phi"), trach.cung],
-      [t("date_selection.element"), trach.element_label],
-      [t("date_selection.trach_group"), trach.trach_group_label],
+      [t("date_selection.cung_phi"), trach.cung || "—"],
+      [t("date_selection.element"), trach.element_label || "—"],
+      [t("date_selection.trach_group"), trach.trach_group_label || "—"],
     ]);
   }
 
   function fillHour(dl, hour) {
+    var trach = hour.trach || {};
     kv(dl, [
       [t("date_selection.current_hour"), hour.window.branch + " · " + hour.window.time_range],
       [t("date_selection.hour_ganzhi"), hour.ganzhi],
       [t("date_selection.hour_result") || "Kết quả giờ", hour.six_state.label],
-      [t("date_selection.cung_phi"), hour.trach.cung],
-      [t("date_selection.element"), hour.trach.element_label],
-      [t("date_selection.trach_group"), hour.trach.trach_group_label],
+      [t("date_selection.cung_phi"), trach.cung || "—"],
+      [t("date_selection.element"), trach.element_label || "—"],
+      [t("date_selection.trach_group"), trach.trach_group_label || "—"],
     ]);
   }
 
