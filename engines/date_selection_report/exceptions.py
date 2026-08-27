@@ -13,3 +13,7 @@ class DateSelectionReportValidationError(DateSelectionReportError):
 
 class DateSelectionReportTemplateError(DateSelectionReportError):
     """Presentation or template structure failed validation."""
+
+
+class DateSelectionReportExportError(DateSelectionReportError):
+    """PDF export failed or received an unsupported format."""

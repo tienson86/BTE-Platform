@@ -46,3 +46,11 @@ RENDER_CONTRACT: dict[str, str] = {
     "pack_05_theme_id": "bte.report.theme.v1",
     "pack_05_placeholder_model": "PlaceholderModel",
 }
+
+EXPORT_CONTRACT: dict[str, str] = {
+    "input": "DateSelectionRenderTree",
+    "pdf_exporter": "DateSelectionPdfExporter",
+    "pack_05_backend": "PlaywrightPdfBackend",
+    "pack_05_template": "templates/v1/report_v1.html",
+    "pack_05_css": "templates/v1/report_v1.css",
+}
