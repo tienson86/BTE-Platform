@@ -287,7 +287,7 @@ body:has(.bte-rw) {
 
 .bte-rw__context {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: var(--rw-gap);
   margin: 0;
 }
@@ -304,6 +304,16 @@ body:has(.bte-rw) {
   margin: var(--space-1, 4px) 0 0;
   font-size: var(--text-sm, 0.875rem);
   color: var(--rw-muted);
+}
+
+.bte-rw__no-result {
+  margin: var(--space-2, 8px) 0 0;
+  font-size: var(--text-sm, 0.875rem);
+  color: var(--rw-accent);
+}
+
+.bte-rw-chip[data-unavailable="true"] {
+  opacity: 0.55;
 }
 
 .bte-rw__grid {
@@ -560,7 +570,7 @@ body:has(.bte-rw) {
 
 .bte-rw-timeline {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(48px, 1fr));
   gap: var(--space-2, 8px);
   margin: 0;
   padding: var(--space-2, 8px) 0 0;

@@ -9,6 +9,7 @@ from fastapi import Request
 from applications.api.schemas.common import APIResponse, BirthRequest
 from applications.api.services.gender_truth import gender_display_label, normalize_luck_gender
 from applications.api.services.orchestrator import OrchestratorService, Stage
+from engines.identity import merge_person_into_identity_payload
 from engines.luck_engine.exceptions import LuckContextError
 
 
@@ -37,6 +38,8 @@ def attach_presentation_metadata(
     payload = dict(data)
     customer = customer_metadata_from_request(body)
     payload["customer"] = customer
+
+    merge_person_into_identity_payload(payload, customer)
 
     # Echo bat_trach only when the client/API already supplied it — never compute.
     bat = None

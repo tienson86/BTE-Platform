@@ -56,4 +56,6 @@ export const ACTION_CHIPS = [
   { id: "health", label: "Sức khỏe" },
 ] as const;
 
-export const EMPTY_COPY = "Chờ dữ liệu";
+export const EMPTY_COPY = "Chưa có dữ liệu";
+
+export const NO_RESULT_COPY = "Chưa có dữ liệu phân tích";

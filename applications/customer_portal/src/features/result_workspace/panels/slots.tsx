@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { EMPTY_COPY } from "../catalog";
 
 /**
- * Empty analytical value — production semantics until BZ-UI-03.
+ * Empty analytical value — field exists on the page but is not published.
  */
 export function EmptyValue(): ReactNode {
   return (
@@ -15,14 +15,21 @@ export function EmptyValue(): ReactNode {
 
 export function SlotValue({
   preview,
+  bound,
   value,
 }: {
-  preview: boolean;
-  value?: string | number;
+  preview?: boolean;
+  bound?: boolean;
+  value?: string | number | null;
 }): ReactNode {
-  if (preview && value !== undefined && value !== "") {
+  const ready = (preview || bound) && value !== undefined && value !== null && value !== "";
+  if (ready) {
     return (
-      <span className="bte-rw-value" data-preview="fixture">
+      <span
+        className="bte-rw-value"
+        data-preview={preview ? "fixture" : undefined}
+        data-bound={bound && !preview ? "canonical" : undefined}
+      >
         {value}
       </span>
     );
@@ -35,15 +42,17 @@ export function VisualMeter({
   max = 100,
   label,
   preview,
+  bound,
   tone,
 }: {
-  value?: number;
+  value?: number | null;
   max?: number;
   label: string;
-  preview: boolean;
+  preview?: boolean;
+  bound?: boolean;
   tone?: string;
 }): ReactNode {
-  const ready = preview && typeof value === "number";
+  const ready = (preview || bound) && typeof value === "number";
   const pct = ready ? Math.max(0, Math.min(100, (value / max) * 100)) : 0;
   return (
     <div

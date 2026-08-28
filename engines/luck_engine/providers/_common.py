@@ -12,6 +12,10 @@ from typing import Any
 from engines.bazi_engine.ten_god import STEM_META, branch_element, ten_god_name
 from engines.calendar_engine.algorithms.ganzhi import GanzhiAlgorithm
 from engines.calendar_engine.julian.julian import JulianDay
+from engines.calendar_engine.month_ganzhi import (
+    month_stem_for,
+    yin_start_stem_index,
+)
 from engines.calendar_engine.solar_terms.engine import SolarTermEngine
 from engines.luck_engine.exceptions import LuckContextError
 from engines.rule_contract.signal_maps import BRANCH_HIDDEN
@@ -19,19 +23,7 @@ from engines.rule_contract.signal_maps import BRANCH_HIDDEN
 STEMS: tuple[str, ...] = tuple(GanzhiAlgorithm.STEM)
 BRANCHES: tuple[str, ...] = tuple(GanzhiAlgorithm.BRANCH)
 
-# Ngũ Hổ Độn: stem index of month Dần for each year stem.
-MONTH_YIN_START_STEM: dict[str, int] = {
-    "Giáp": 2,
-    "Kỷ": 2,
-    "Ất": 4,
-    "Canh": 4,
-    "Bính": 6,
-    "Tân": 6,
-    "Đinh": 8,
-    "Nhâm": 8,
-    "Mậu": 0,
-    "Quý": 0,
-}
+MONTH_YIN_START_STEM: dict[str, int] = yin_start_stem_index()
 
 DAYUN_COUNT = 10
 DAYS_PER_START_AGE_YEAR = 3.0
@@ -172,12 +164,6 @@ def bazi_year_of(year: int, month: int, day: int, terms: SolarTermEngine) -> int
     if terms.is_after_li_chun(year, month, day):
         return year
     return year - 1
-
-
-def month_stem_for(year_stem: str, month_index: int) -> str:
-    """Thiên Can tháng via Ngũ Hổ Độn (month_index 1 = Dần)."""
-    start = MONTH_YIN_START_STEM[year_stem]
-    return STEMS[(start + month_index - 1) % 10]
 
 
 def hour_pillar_for(day_stem: str, hour: int) -> tuple[str, str]:

@@ -147,10 +147,8 @@ class SolarTermEngine:
         """
         Solar-term nguyệt lệnh (12 Tiết) at a Gregorian date.
 
-        Used for season / climate / Luck jie timing.
-
-        Not the Four Pillars month pillar. Four Pillars month uses
-        BTE-MONTH-PILLAR-LUNAR-V1.0 (canonical lunar month number).
+        This is the Four Pillars month branch (BTE-MONTH-PILLAR-SOLAR-TERM-V1.0).
+        Month stem is applied separately via Ngũ Hổ Độn.
         """
         target = (year, month, day)
         best: tuple[tuple[int, int, int], int] | None = None

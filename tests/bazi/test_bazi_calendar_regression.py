@@ -146,7 +146,7 @@ class TestBaziRegressionCases(unittest.TestCase):
         (
             (2000, 2, 4, 12, 0),
             ("Canh", "Thìn"),
-            ("Kỷ", "Sửu"),
+            ("Mậu", "Dần"),
             ("Nhâm", "Thìn"),
             ("Bính", "Ngọ"),
             (1999, 12, 29),

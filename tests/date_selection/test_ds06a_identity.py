@@ -44,8 +44,8 @@ def test_canh_thin_nayin_differs_from_hanh_cung() -> None:
 def test_day_payload_exposes_canonical_identity_fields() -> None:
     day = DateSelectionService().inspect_day(2026, 8, 27)
     payload = day.to_dict()
-    assert payload["calendar"]["month_ganzhi"] == "Giáp Thân"
-    assert payload["month_ganzhi"] == "Giáp Thân"
+    assert payload["calendar"]["month_ganzhi"] == "Bính Thân"
+    assert payload["month_ganzhi"] == "Bính Thân"
     assert payload["ganzhi"] == "Quý Dậu"
     assert payload["nayin"] == "Kim"
     assert payload["nayin_element"] == "Kim"
@@ -74,7 +74,7 @@ def test_calculations_and_routes_unchanged() -> None:
         "/api/v1/date-selection/day",
         json={"year": 2026, "month": 8, "day": 27, "hour_branch": "Thìn"},
     ).json()["data"]
-    assert body["month_ganzhi"] == "Giáp Thân"
+    assert body["month_ganzhi"] == "Bính Thân"
     assert body["nayin"] == "Kim"
     assert body["cung_element"] == "Kim"
     assert body["selected_hour"]["nayin"] == "Thổ"

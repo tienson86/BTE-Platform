@@ -6,6 +6,7 @@ from .algorithms.ganzhi import GanzhiAlgorithm
 from .julian.julian import JulianDay
 from .lunar.converter import solar_to_lunar
 from .lunar.lunar import LunarDate
+from .month_ganzhi import month_pillar
 from .solar.solar import SolarDate
 from .solar_terms.engine import SolarTerm, SolarTermEngine
 
@@ -29,6 +30,9 @@ class CalendarResult:
     lunar_date: str | None = None
     timezone_offset: float = 7.0
     timezone_name: str = "UTC+7"
+    month_stem: str | None = None
+    month_branch: str | None = None
+    month_can_chi: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize canonical calendar truth for API / Portal / PDF / Cân Xương.
@@ -84,6 +88,10 @@ class CalendarResult:
             "lunar_date": self.lunar_date,
             "timezone_offset": self.timezone_offset,
             "timezone_name": self.timezone_name,
+            "year_can_chi": lunar_year_can_chi,
+            "month_stem": self.month_stem,
+            "month_branch": self.month_branch,
+            "month_can_chi": self.month_can_chi,
         }
 
 
@@ -124,6 +132,8 @@ class CalendarEngine:
         )
         solar_date = f"{day:02d}/{month:02d}/{year:04d}"
         lunar_date = _format_lunar_date(parts.day, parts.month, parts.year, parts.leap)
+        month_stem, month_branch = month_pillar(year, month, day)
+        month_can_chi = f"{month_stem} {month_branch}"
         return CalendarResult(
             solar=solar,
             lunar=lunar,
@@ -142,6 +152,9 @@ class CalendarEngine:
             lunar_date=lunar_date,
             timezone_offset=time_zone,
             timezone_name=timezone_name or "UTC+7",
+            month_stem=month_stem,
+            month_branch=month_branch,
+            month_can_chi=month_can_chi,
         )
 
     def calculate(self, birth_datetime: datetime, timezone: str = "Asia/Ho_Chi_Minh") -> CalendarResult:

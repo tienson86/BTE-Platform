@@ -146,7 +146,7 @@ def test_ranking_unchanged() -> None:
 def test_calendar_arithmetic_unchanged() -> None:
     day = DateSelectionService().inspect_day(2026, 8, 27)
     assert day.calendar.day_ganzhi == "Quý Dậu"
-    assert day.calendar.month_ganzhi == "Giáp Thân"
+    assert day.calendar.month_ganzhi == "Bính Thân"
     assert day.six_state.label == "Tiểu Cát"
     thin = next(item for item in day.hours if item.window.branch == "Thìn")
     assert thin.window.time_range == "07:01–09:00"

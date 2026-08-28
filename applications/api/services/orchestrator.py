@@ -21,6 +21,7 @@ from engines.bazi_engine.engine import BaziEngine
 from engines.pattern_engine.utils.context_builder import build_pattern_context
 from engines.calendar_engine.engine import CalendarEngine
 from engines.feng_shui_engine import FengShuiEngine, FengShuiEngineError
+from engines.identity import build_canonical_identity
 from engines.interpretation_engine.engine import InterpretationEngine
 from engines.interpretation_engine.foundation import (
     EngineSources,
@@ -315,6 +316,8 @@ class OrchestratorService:
         self,
         payload: dict[str, Any],
         completed: list[str],
+        *,
+        analysis: AnalysisResult | None = None,
     ) -> dict[str, Any]:
         """
         Publish only the public orchestration contract.
@@ -322,6 +325,22 @@ class OrchestratorService:
         Internal stages continue to run; their names and payloads are stripped
         from the API response.
         """
+        if analysis is not None:
+            analysis.identity = build_canonical_identity(
+                bazi=analysis.bazi,
+                calendar=payload.get("calendar"),
+                input_fields=payload.get("input"),
+                bone_weight=payload.get("bone_weight") or payload.get("can_xuong"),
+                luck=payload.get("luck"),
+                interpretation=payload.get("interpretation"),
+                narrative=payload.get("narrative_result"),
+            )
+            payload["identity"] = analysis.identity_dict()
+        elif payload.get("calendar"):
+            payload["identity"] = build_canonical_identity(
+                calendar=payload.get("calendar"),
+                input_fields=payload.get("input"),
+            ).to_dict()
         for key in _INTERNAL_PAYLOAD_KEYS:
             payload.pop(key, None)
         payload["pipeline"] = self._public_pipeline(completed)
@@ -450,6 +469,7 @@ class OrchestratorService:
         stop_index = PIPELINE_ORDER.index(stop_at)
         completed: list[str] = []
         payload: dict[str, Any] = {"pipeline": []}
+        analysis: AnalysisResult | None = None
         ten_gods_engine_result = None
         logger.info(
             "pipeline.start stage=%s birth=%04d-%02d-%02d %02d:%02d gender=%s",
@@ -484,7 +504,7 @@ class OrchestratorService:
             "validated": True,
         }
         if stop_index == 0:
-            return self._finalize_public_payload(payload, completed)
+            return self._finalize_public_payload(payload, completed, analysis=analysis)
 
         # ----- Stage 1: Calendar -----
         calendar = self.calendar_engine.build(
@@ -498,7 +518,7 @@ class OrchestratorService:
         completed.append("calendar")
         payload["calendar"] = self._shape_calendar(calendar)
         if stop_index == 1:
-            return self._finalize_public_payload(payload, completed)
+            return self._finalize_public_payload(payload, completed, analysis=analysis)
 
         # ----- Stage 2: BaZi -----
         bazi_chart = self.bazi_engine.build(calendar, gender=gender)
@@ -517,7 +537,7 @@ class OrchestratorService:
         payload["bazi_source"] = analysis.meta.bazi_source
         if stop_index == 2:
             payload["calendar"] = self._shape_calendar(calendar, bazi_payload, None)
-            return self._finalize_public_payload(payload, completed)
+            return self._finalize_public_payload(payload, completed, analysis=analysis)
 
         # ----- Stage 3: Feng Shui (optional soft-fail) -----
         lunar = getattr(calendar, "lunar", None)
@@ -533,7 +553,7 @@ class OrchestratorService:
         payload["calendar"] = self._shape_calendar(calendar, bazi_payload, feng_view)
         completed.append("feng_shui")
         if stop_index == 3:
-            return self._finalize_public_payload(payload, completed)
+            return self._finalize_public_payload(payload, completed, analysis=analysis)
 
         # ----- Stage 3.5: Strength (before Pattern; feeds PatternContext) -----
         pattern_context = build_pattern_context(bazi_chart, calendar=calendar)
@@ -574,7 +594,7 @@ class OrchestratorService:
             payload["useful_god"] = analysis.useful_god_dict()
             payload["useful_god_source"] = useful_god_source_fingerprint()
             payload["pattern_source"] = analysis.meta.pattern_source
-            return self._finalize_public_payload(payload, completed)
+            return self._finalize_public_payload(payload, completed, analysis=analysis)
 
         # ----- Stage 5: Consume Pattern-published RuleContext (never rebuild) -----
         published_rule_context = dict(pattern_result.rule_context or {})
@@ -613,7 +633,7 @@ class OrchestratorService:
         }
         payload["unified_context"] = analysis.unified_context_dict()
         if stop_index == 5:
-            return self._finalize_public_payload(payload, completed)
+            return self._finalize_public_payload(payload, completed, analysis=analysis)
 
         # ----- Stage 6: Score (no mutation of published RuleContext) -----
         score_result = self.score_engine.calculate(published_rule_context)
@@ -651,7 +671,7 @@ class OrchestratorService:
             payload["score"].get("grade", ""),
         )
         if stop_index == 6:
-            return self._finalize_public_payload(payload, completed)
+            return self._finalize_public_payload(payload, completed, analysis=analysis)
 
         # ----- Stage 7: Luck (separate LuckContext; never mutates RuleContext) -----
         luck_context = self.luck_engine.build(
@@ -664,14 +684,14 @@ class OrchestratorService:
         completed.append("luck")
         payload["luck"] = shape_luck_payload(luck_context)
         if stop_index == 7:
-            return self._finalize_public_payload(payload, completed)
+            return self._finalize_public_payload(payload, completed, analysis=analysis)
 
         # ----- Stage 8: Knowledge -----
         all_rules = self.interpretation_engine.load_knowledge_rules()
         completed.append("knowledge")
         payload["knowledge"] = {"rule_count": len(all_rules)}
         if stop_index == 8:
-            return self._finalize_public_payload(payload, completed)
+            return self._finalize_public_payload(payload, completed, analysis=analysis)
 
         # ----- Stage 9: Matching -----
         matched_rules = self.interpretation_engine.match_knowledge_rules(
@@ -685,7 +705,7 @@ class OrchestratorService:
         completed.append("matching")
         payload["matching"] = {"matched_count": len(matched_rules)}
         if stop_index == 9:
-            return self._finalize_public_payload(payload, completed)
+            return self._finalize_public_payload(payload, completed, analysis=analysis)
 
         # ----- Stage 10: Priority -----
         ordered_rules = self.interpretation_engine.resolve_priority(
@@ -698,7 +718,7 @@ class OrchestratorService:
             **dict(self.interpretation_engine._last_priority_resolution),
         }
         if stop_index == 10:
-            return self._finalize_public_payload(payload, completed)
+            return self._finalize_public_payload(payload, completed, analysis=analysis)
 
         # ----- Stage 11: Interpretation (LuckContext optional) -----
         interpretation_result = self.interpretation_engine.build_from_resolved(
@@ -758,7 +778,7 @@ class OrchestratorService:
             narrative_result_payload.get("status"),
         )
         if stop_index == 11:
-            return self._finalize_public_payload(payload, completed)
+            return self._finalize_public_payload(payload, completed, analysis=analysis)
 
         # ----- Stage 12: Report (consumes already-built NarrativeResult) -----
         include_narrative = stop_index >= 13
@@ -774,7 +794,7 @@ class OrchestratorService:
         payload["report"] = analysis.report_dict()
         payload["report_source"] = analysis.meta.report_source
         if stop_index == 12:
-            return self._finalize_public_payload(payload, completed)
+            return self._finalize_public_payload(payload, completed, analysis=analysis)
 
         # ----- Stage 13: Delivery -----
         narrative_view = build_narrative_view(report_result)
@@ -793,7 +813,7 @@ class OrchestratorService:
             sorted(payload.get("pattern", {}).keys()),
             sorted(payload.get("interpretation", {}).keys()),
         )
-        return self._finalize_public_payload(payload, completed)
+        return self._finalize_public_payload(payload, completed, analysis=analysis)
 
 
 # Backward-compatible WP8 name.

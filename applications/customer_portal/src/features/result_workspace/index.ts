@@ -15,10 +15,13 @@ export {
   EMPTY_COPY,
   FIVE_ELEMENTS,
   INTERPRETATION_BLOCKS,
+  NO_RESULT_COPY,
   OVERVIEW_SLOTS,
   SHEN_SHA_NAMES,
   TEN_GODS,
 } from "./catalog";
+export { adaptBaziWorkspace, WORKSPACE_SOURCE_MAP } from "./adapter";
+export type { BaziWorkspaceViewModel } from "./adapter";
 export {
   EMPTY_TU_TRU_PILLAR,
   WORKSPACE_BREAKPOINTS,

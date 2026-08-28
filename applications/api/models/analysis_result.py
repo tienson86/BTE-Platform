@@ -5,6 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
+from engines.identity.models import CanonicalIdentity
+
 
 @dataclass(slots=True)
 class PillarView:
@@ -582,6 +584,7 @@ class AnalysisResult:
     """
 
     bazi: BaziView
+    identity: CanonicalIdentity | None = None
     pattern: PatternView | None = None
     strength: StrengthView | None = None
     temperature: TemperatureView | None = None
@@ -599,6 +602,12 @@ class AnalysisResult:
     def bazi_dict(self) -> dict[str, Any]:
         """Serialize authoritative Bazi for ``data.bazi``."""
         return self.bazi.to_dict()
+
+    def identity_dict(self) -> dict[str, Any]:
+        """Serialize canonical ``data.identity`` (person / calendar / four pillars / …)."""
+        if self.identity is None:
+            return {}
+        return self.identity.to_dict()
 
     def pattern_dict(self) -> dict[str, Any]:
         """Serialize authoritative Pattern for ``data.pattern``."""

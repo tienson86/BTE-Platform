@@ -37,8 +37,8 @@ def test_day_payload_year_and_month_have_identity() -> None:
     assert year["can_chi"] == "Bính Ngọ"
     assert year["nayin_element"] == "Thủy"
     assert year["cung_phi"] == "Khảm"
-    assert month["can_chi"] == "Giáp Thân"
-    assert month["nayin_element"] == "Thủy"
+    assert month["can_chi"] == "Bính Thân"
+    assert month["nayin_element"] == "Hỏa"
     assert month["cung_phi"] == "Khôn"
     assert "—" not in year.values()
     assert "—" not in month.values()

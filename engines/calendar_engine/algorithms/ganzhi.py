@@ -95,12 +95,19 @@ class GanzhiAlgorithm:
         month_commander_index
 
     ):
+        """Ngũ Hổ Độn.
+
+        ``month_commander_index`` 0 = Dần … 11 = Sửu.
+        Stem offset ``+ 2`` is required so Bính/Tân years start Dần at Canh.
+        """
 
         stem = (
 
             year_can_index * 2
 
             + month_commander_index
+
+            + 2
 
         ) % 10
 

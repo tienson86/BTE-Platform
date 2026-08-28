@@ -18,6 +18,7 @@ from applications.api.services.five_elements_truth import build_five_elements_pa
 from applications.api.services.luck_truth import shape_luck_payload
 from applications.api.services.ten_gods_truth import shape_ten_gods_payload
 from engines.feng_shui_engine import FengShuiEngineError
+from engines.identity import build_canonical_identity
 from engines.interpretation_engine.legacy_builder import InterpretationResult
 from engines.pattern_engine.rule_context_bridge import (
     enrich_result_from_rule_context,
@@ -275,6 +276,19 @@ class ProductionEngineRunner:
             pattern_dieu_hau=analysis.pattern.dieu_hau if analysis.pattern else "",
         )
         stages.append("interpretation_foundation")
+
+        analysis.identity = build_canonical_identity(
+            bazi=bazi_view,
+            calendar=calendar_payload,
+            person={
+                "full_name": request.full_name,
+                "gender": request.gender,
+                "birth_place": request.birth_place,
+                "timezone": request.timezone,
+            },
+            luck=luck_payload,
+            interpretation=analysis.interpretation_dict(),
+        )
 
         return EnginePipelineOutput(
             analysis=analysis,

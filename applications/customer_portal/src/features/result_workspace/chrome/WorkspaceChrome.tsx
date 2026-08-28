@@ -6,6 +6,8 @@ import {
   IconStarLogo,
   IconSun,
 } from "../../../screens/canonical_desktop/icons";
+import type { WorkspacePersonView } from "../adapter/types";
+import { EMPTY_COPY, NO_RESULT_COPY } from "../catalog";
 import { WORKSPACE_PANELS, WORKSPACE_TOP_NAV } from "../layout";
 
 /**
@@ -14,7 +16,7 @@ import { WORKSPACE_PANELS, WORKSPACE_TOP_NAV } from "../layout";
 export function WorkspaceTopNav(): ReactNode {
   return (
     <header className="bte-rw__topnav" role="banner" data-chrome="top-nav">
-      <button type="button" className="bte-rw__icon-btn bte-rw__menu-toggle" aria-label="Menu">
+      <button type="button" className="bte-rw__icon-btn bte-rw__menu-toggle" aria-label="Menu" data-rw-toggle="sidebar">
         <IconMenu size={20} />
       </button>
       <nav className="bte-rw__nav" aria-label="Điều hướng chính">
@@ -80,29 +82,88 @@ export function WorkspaceSidebar(): ReactNode {
   );
 }
 
+function HeaderValue({
+  slot,
+  label,
+  value,
+  preview,
+}: {
+  slot: string;
+  label: string;
+  value?: string | null;
+  preview?: boolean;
+}): ReactNode {
+  const ready = Boolean(value);
+  return (
+    <div className="bte-rw__context-item" data-slot={slot}>
+      <dt>{label}</dt>
+      <dd data-placeholder={ready ? "false" : "true"} data-preview={preview ? "fixture" : undefined}>
+        {ready ? value : EMPTY_COPY}
+      </dd>
+    </div>
+  );
+}
+
 /**
- * Workspace page header — reserved context slots, no bound chart values.
+ * Workspace page header — current analysis identity.
  */
-export function WorkspaceHeader(): ReactNode {
+export function WorkspaceHeader({
+  person,
+  preview = false,
+  noResult = false,
+}: {
+  person?: WorkspacePersonView;
+  preview?: boolean;
+  noResult?: boolean;
+}): ReactNode {
   return (
     <div className="bte-rw__page-header" data-chrome="header">
       <div>
         <p className="bte-rw__eyebrow">BaZi Result Workspace V2</p>
         <h1 className="bte-rw__page-title">Kết quả Bát Tự</h1>
+        {noResult ? (
+          <p className="bte-rw__no-result" data-empty-page="true">
+            {NO_RESULT_COPY}
+          </p>
+        ) : null}
       </div>
       <dl className="bte-rw__context">
-        <div className="bte-rw__context-item" data-slot="profile">
-          <dt>Hồ sơ</dt>
-          <dd data-placeholder="true">Chờ dữ liệu</dd>
-        </div>
-        <div className="bte-rw__context-item" data-slot="chart-id">
-          <dt>Mã lá số</dt>
-          <dd data-placeholder="true">Chờ dữ liệu</dd>
-        </div>
-        <div className="bte-rw__context-item" data-slot="status">
-          <dt>Trạng thái</dt>
-          <dd data-placeholder="true">Chờ dữ liệu</dd>
-        </div>
+        <HeaderValue
+          slot="profile"
+          label="Hồ sơ"
+          preview={preview}
+          value={preview ? "Bản xem trước" : person?.name.value}
+        />
+        <HeaderValue
+          slot="solar-date"
+          label="Dương lịch"
+          preview={preview}
+          value={preview ? "" : person?.solarDate.value}
+        />
+        <HeaderValue
+          slot="lunar-date"
+          label="Âm lịch"
+          preview={preview}
+          value={preview ? "" : person?.lunarDate.value}
+        />
+        <HeaderValue
+          slot="birth-time"
+          label="Giờ sinh"
+          preview={preview}
+          value={preview ? "" : person?.birthTime.value}
+        />
+        <HeaderValue
+          slot="location"
+          label="Múi giờ / nơi sinh"
+          preview={preview}
+          value={preview ? "" : person?.location.value}
+        />
+        <HeaderValue
+          slot="chart-id"
+          label="Mã lá số"
+          preview={preview}
+          value={preview ? "preview" : person?.analysisId.value}
+        />
       </dl>
     </div>
   );

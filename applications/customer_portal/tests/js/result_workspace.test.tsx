@@ -72,7 +72,7 @@ describe("BZ-UI-01 Result Workspace V2", () => {
     expect(tuTru?.textContent).toContain("Nạp âm");
     expect(tuTru?.textContent).toContain("Cung Phi");
     expect(container.querySelector("[data-empty='true']")).toBeTruthy();
-    expect(container.textContent).toContain("Chờ dữ liệu");
+    expect(container.textContent).toContain("Chưa có dữ liệu");
     expect(container.textContent).not.toContain("4 lượng 8 chỉ");
   });
 

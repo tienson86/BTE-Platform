@@ -2,8 +2,7 @@
 
 Pillars follow BTE V1.0 rules:
 - Year changes at Lập Xuân (not Tết, not Jan 1)
-- Month follows canonical lunar month (BTE-MONTH-PILLAR-LUNAR-V1.0);
-  not 12 Tiết / SolarTermEngine.get_bazi_month
+- Month follows 12 Tiết + Ngũ Hổ Độn (BTE-MONTH-PILLAR-SOLAR-TERM-V1.0)
 - Day uses astronomical Julian Day Number + sexagenary cycle
 - Hour follows Ngũ Thử Độn from Day Stem
 """
@@ -16,8 +15,7 @@ from typing import Any
 
 from engines.calendar_engine.algorithms.ganzhi import GanzhiAlgorithm
 from engines.calendar_engine.julian.julian import JulianDay
-from engines.calendar_engine.lunar.converter import solar_to_lunar
-from engines.calendar_engine.month_pillar import lunar_month_to_branch
+from engines.calendar_engine.month_ganzhi import month_pillar as canonical_month_pillar
 from engines.calendar_engine.solar_terms.engine import SolarTermEngine
 
 from engines.bazi_engine.ten_god import ten_god_name
@@ -43,21 +41,6 @@ HIDDEN: dict[str, list[str]] = {
     "Tuất": ["Mậu", "Tân", "Đinh"],
     "Hợi": ["Nhâm", "Giáp"],
 }
-
-# Ngũ Hổ Độn: Can tháng Dần theo Can năm.
-_MONTH_YIN_START_STEM: dict[str, int] = {
-    "Giáp": 2,
-    "Kỷ": 2,  # Bính
-    "Ất": 4,
-    "Canh": 4,  # Mậu
-    "Bính": 6,
-    "Tân": 6,  # Canh
-    "Đinh": 8,
-    "Nhâm": 8,  # Nhâm
-    "Mậu": 0,
-    "Quý": 0,  # Giáp
-}
-
 
 @dataclass(slots=True)
 class Pillar:
@@ -108,7 +91,6 @@ class BaziEngine:
         gender: str | None = None,
     ) -> BaziChart:
         """Lập Tứ Trụ từ năm/tháng/ngày/giờ dương lịch (giờ địa phương)."""
-        source = year if not isinstance(year, int) else None
         year, month, day, hour, minute = self._normalize_input(
             year, month, day, hour, minute
         )
@@ -118,9 +100,9 @@ class BaziEngine:
         year_gz = GanzhiAlgorithm.year(bazi_year)
         year_pillar = Pillar(stem=year_gz["can"], branch=year_gz["chi"])
 
-        lunar_month = self._resolve_lunar_month(source, year, month, day)
-        month_branch = lunar_month_to_branch(lunar_month)
-        month_stem = self._month_stem(year_pillar.stem, lunar_month)
+        month_stem, month_branch = canonical_month_pillar(
+            year, month, day, terms=self._solar_terms
+        )
         month_pillar = Pillar(stem=month_stem, branch=month_branch)
 
         jdn = JulianDay.day_number(year, month, day)
@@ -188,33 +170,11 @@ class BaziEngine:
             raise ValueError("year, month and day are required")
         return int(year), int(month), int(day), int(hour), int(minute)
 
-    def _resolve_lunar_month(
-        self,
-        source: Any,
-        year: int,
-        month: int,
-        day: int,
-    ) -> int:
-        """Lunar month number from CalendarResult when present, else solar_to_lunar."""
-        if source is not None:
-            lunar_month = getattr(source, "lunar_month", None)
-            if lunar_month is None:
-                lunar = getattr(source, "lunar", None)
-                lunar_month = getattr(lunar, "month", None)
-            if lunar_month is not None:
-                return int(lunar_month)
-        return int(solar_to_lunar(day, month, year).month)
-
     def _bazi_year(self, year: int, month: int, day: int) -> int:
         """Năm Bát Tự: đổi năm tại Lập Xuân."""
         if self._solar_terms.is_after_li_chun(year, month, day):
             return year
         return year - 1
-
-    def _month_stem(self, year_stem: str, month_index: int) -> str:
-        """Thiên Can tháng theo Ngũ Hổ Độn (tháng 1 = Dần)."""
-        start = _MONTH_YIN_START_STEM[year_stem]
-        return STEMS[(start + month_index - 1) % 10]
 
     def _hour_pillar(self, day_stem: str, hour: int) -> Pillar:
         """Trụ giờ: Địa Chi theo canh giờ, Thiên Can theo Ngũ Thử Độn."""

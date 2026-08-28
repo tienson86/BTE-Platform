@@ -1,4 +1,4 @@
-"""BaZi Result Workspace V2 — layout foundation (no data binding)."""
+"""BaZi Result Workspace V2 — canonical data binding from ResultStore current."""
 
 PAGE_KEY = "result-workspace"
 ROUTE = "/result-workspace"

@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 
 import { Card } from "../../../components/base/Card";
 import { TuTruPanel } from "../../../components/canonical";
+import type { BaziWorkspaceViewModel } from "../adapter/types";
 import { EMPTY_TU_TRU_PILLAR, WORKSPACE_PANELS } from "../layout";
 import {
   BoneWeightPanel,
@@ -17,35 +18,47 @@ import {
 import { PREVIEW_TU_TRU } from "../previewFixture";
 import type { WorkspacePanelSpec } from "../types";
 
-function panelBody(panel: WorkspacePanelSpec, preview: boolean): ReactNode {
+function panelBody(
+  panel: WorkspacePanelSpec,
+  preview: boolean,
+  viewModel?: BaziWorkspaceViewModel | null,
+): ReactNode {
+  const pillars = preview
+    ? PREVIEW_TU_TRU
+    : viewModel?.fourPillars ?? {
+        year: EMPTY_TU_TRU_PILLAR,
+        month: EMPTY_TU_TRU_PILLAR,
+        day: EMPTY_TU_TRU_PILLAR,
+        hour: EMPTY_TU_TRU_PILLAR,
+      };
   switch (panel.id) {
     case "tu-tru":
       return (
         <TuTruPanel
-          year={preview ? PREVIEW_TU_TRU.year : EMPTY_TU_TRU_PILLAR}
-          month={preview ? PREVIEW_TU_TRU.month : EMPTY_TU_TRU_PILLAR}
-          day={preview ? PREVIEW_TU_TRU.day : EMPTY_TU_TRU_PILLAR}
-          hour={preview ? PREVIEW_TU_TRU.hour : EMPTY_TU_TRU_PILLAR}
+          year={pillars.year}
+          month={pillars.month}
+          day={pillars.day}
+          hour={pillars.hour}
         />
       );
     case "overview":
-      return <OverviewPanel preview={preview} />;
+      return <OverviewPanel preview={preview} model={viewModel?.overview} />;
     case "five-elements":
-      return <FiveElementsPanel preview={preview} />;
+      return <FiveElementsPanel preview={preview} model={viewModel?.fiveElements} />;
     case "ten-gods":
-      return <TenGodsPanel preview={preview} />;
+      return <TenGodsPanel preview={preview} model={viewModel?.tenGods} />;
     case "destiny":
-      return <DestinyPanel preview={preview} />;
+      return <DestinyPanel preview={preview} model={viewModel?.pattern} />;
     case "shen-sha":
-      return <ShenShaPanel preview={preview} />;
+      return <ShenShaPanel preview={preview} model={viewModel?.shenSha} />;
     case "bone-weight":
-      return <BoneWeightPanel preview={preview} />;
+      return <BoneWeightPanel preview={preview} model={viewModel?.boneWeight} />;
     case "luck-cycles":
-      return <LuckCyclesPanel preview={preview} />;
+      return <LuckCyclesPanel preview={preview} model={viewModel?.luck} />;
     case "interpretation":
-      return <InterpretationPanel preview={preview} />;
+      return <InterpretationPanel preview={preview} model={viewModel?.interpretation} />;
     case "conclusion":
-      return <ConclusionPanel preview={preview} />;
+      return <ConclusionPanel preview={preview} model={viewModel?.conclusion} />;
     default:
       return null;
   }
@@ -57,9 +70,11 @@ function panelBody(panel: WorkspacePanelSpec, preview: boolean): ReactNode {
 export function CanonicalWorkspaceCard({
   panel,
   preview = false,
+  viewModel,
 }: {
   panel: WorkspacePanelSpec;
   preview?: boolean;
+  viewModel?: BaziWorkspaceViewModel | null;
 }): ReactNode {
   const index = WORKSPACE_PANELS.findIndex((item) => item.id === panel.id) + 1;
   const isTuTru = panel.id === "tu-tru";
@@ -83,7 +98,7 @@ export function CanonicalWorkspaceCard({
         }
         data-canonical-card="true"
       >
-        {panelBody(panel, preview)}
+        {panelBody(panel, preview, viewModel)}
       </Card>
     </article>
   );

@@ -234,7 +234,7 @@ def test_good_date_regression_unchanged() -> None:
     day = DateSelectionService().inspect_day(2026, 8, 27)
     payload = day.to_dict()
     assert payload["calendar"]["year_ganzhi"] == "Bính Ngọ"
-    assert payload["calendar"]["month_ganzhi"] == "Giáp Thân"
+    assert payload["calendar"]["month_ganzhi"] == "Bính Thân"
     assert payload["calendar"]["day_ganzhi"] == "Quý Dậu"
     assert payload["six_state"]["label"] == "Tiểu Cát"
     assert payload["nayin"] == "Kim"

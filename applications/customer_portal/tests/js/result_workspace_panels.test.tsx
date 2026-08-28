@@ -171,7 +171,7 @@ describe("BZ-UI-02 Canonical Panels", () => {
     const empty = render(<ResultWorkspace />);
     expect(empty.container.getAttribute).toBeDefined();
     expect(empty.container.querySelector("[data-preview='off']")).toBeTruthy();
-    expect(empty.container.textContent).toContain("Chờ dữ liệu");
+    expect(empty.container.textContent).toContain("Chưa có dữ liệu");
     expect(empty.container.textContent).not.toContain("78 / 100");
     expect(empty.container.textContent).not.toContain("4 lượng 8 chỉ");
     expect(empty.container.textContent).not.toContain("Bính Ngọ");
