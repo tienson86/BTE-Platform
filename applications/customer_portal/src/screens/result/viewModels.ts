@@ -181,6 +181,7 @@ export type InterpretationZoneViewModel = {
 
 /** LP-007 knowledge sections. */
 export type KnowledgeSectionKind =
+  | "consulting"
   | "terminology"
   | "references"
   | "theory"
