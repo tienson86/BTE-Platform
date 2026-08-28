@@ -17,6 +17,7 @@ export type {
   CustomerEchoDto,
   CustomersListData,
   IdentityPillarDto,
+  IntegratedNarrativeDto,
   GenerateReportRequest,
   HealthResponse,
   InterpretationResponse,
