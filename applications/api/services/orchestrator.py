@@ -80,6 +80,9 @@ from applications.api.services.report_truth import (
     build_report_view,
     report_source_fingerprint,
 )
+from applications.api.services.integrated_narrative_publish import (
+    publish_integrated_narrative,
+)
 from applications.api.services.narrative_result_truth import (
     build_narrative_result_dict,
     narrative_result_source_fingerprint,
@@ -326,7 +329,10 @@ class OrchestratorService:
         Internal stages continue to run; their names and payloads are stripped
         from the API response.
         """
+        integrated = publish_integrated_narrative(payload)
+        payload["integrated_narrative"] = integrated
         if analysis is not None:
+            analysis.integrated_narrative = integrated
             analysis.identity = build_canonical_identity(
                 bazi=analysis.bazi,
                 calendar=payload.get("calendar"),
