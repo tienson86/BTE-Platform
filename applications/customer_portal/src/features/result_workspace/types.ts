@@ -33,6 +33,8 @@ export type WorkspaceNavItem = {
 };
 
 export type TuTruSlotPillar = {
+  readonly stem: string;
+  readonly branch: string;
   readonly canChi: string;
   readonly napAm: string;
   readonly cungPhi: string;

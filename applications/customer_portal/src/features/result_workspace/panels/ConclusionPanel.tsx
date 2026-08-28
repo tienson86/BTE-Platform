@@ -24,11 +24,21 @@ export function ConclusionPanel({
     <div className="bte-rw-panel" data-shell="conclusion">
       <div className="bte-rw-stat" data-slot="conclusion-overall">
         <span className="bte-rw-label">Kết luận</span>
-        <p className="bte-rw-caption">
+        <p className="bte-rw-prose bte-rw-prose--lead">
           <SlotValue
             preview={preview}
             bound={bound}
             value={preview ? PREVIEW_CONCLUSION.overall : model?.overall.value}
+          />
+        </p>
+      </div>
+      <div className="bte-rw-stat" data-slot="conclusion-action">
+        <span className="bte-rw-label">Hành động</span>
+        <p className="bte-rw-caption">
+          <SlotValue
+            preview={preview}
+            bound={bound}
+            value={preview ? "" : model?.action.value}
           />
         </p>
       </div>

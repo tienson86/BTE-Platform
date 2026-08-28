@@ -41,7 +41,7 @@ describe("BZ-UI-01 Result Workspace V2", () => {
     expect(container.querySelector("[data-chrome='sidebar']")).toBeTruthy();
     expect(container.querySelector("[data-chrome='header']")).toBeTruthy();
     expect(container.querySelector("[data-workspace-region='result']")).toBeTruthy();
-    expect(screen.getByRole("heading", { name: "Kết quả Bát Tự" })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Kết quả luận giải Bát Tự" })).toBeTruthy();
     expect(screen.getByLabelText("Điều hướng chính").textContent).toContain("Kết quả");
   });
 

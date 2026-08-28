@@ -21,7 +21,7 @@ export function DestinyPanel({
     <div className="bte-rw-panel" data-shell="destiny">
       <div className="bte-rw-stat" data-slot="destiny-pattern">
         <span className="bte-rw-label">Cách cục</span>
-        <p className="bte-rw-primary">
+        <p className="bte-rw-primary bte-rw-primary--xl">
           <SlotValue
             preview={preview}
             bound={bound}

@@ -287,7 +287,9 @@ class ProductionEngineRunner:
                 "timezone": request.timezone,
             },
             luck=luck_payload,
+            luck_engine_raw=luck_context.to_dict(),
             interpretation=analysis.interpretation_dict(),
+            narrative=analysis.narrative_result,
         )
 
         return EnginePipelineOutput(

@@ -105,7 +105,7 @@ function HeaderValue({
 }
 
 /**
- * Workspace page header — current analysis identity.
+ * Workspace page header — customer identity first, analysis id secondary.
  */
 export function WorkspaceHeader({
   person,
@@ -116,53 +116,78 @@ export function WorkspaceHeader({
   preview?: boolean;
   noResult?: boolean;
 }): ReactNode {
+  const hasResult = Boolean(
+    !noResult && (person?.name.value || person?.analysisId.value || person?.solarDate.value),
+  );
+  const status = preview ? "Bản xem trước" : hasResult ? "Đã phân tích" : "";
   return (
     <div className="bte-rw__page-header" data-chrome="header">
-      <div>
-        <p className="bte-rw__eyebrow">BaZi Result Workspace V2</p>
-        <h1 className="bte-rw__page-title">Kết quả Bát Tự</h1>
+      <div className="bte-rw__hero">
+        <h1 className="bte-rw__page-title">Kết quả luận giải Bát Tự</h1>
         {noResult ? (
           <p className="bte-rw__no-result" data-empty-page="true">
             {NO_RESULT_COPY}
           </p>
         ) : null}
+        <dl className="bte-rw__hero-id">
+          <HeaderValue
+            slot="profile"
+            label="Khách hàng"
+            preview={preview}
+            value={preview ? "Bản xem trước" : person?.name.value}
+          />
+          <div className="bte-rw__birthline">
+            <HeaderValue
+              slot="gender"
+              label="Giới tính"
+              preview={preview}
+              value={preview ? "" : person?.gender.value}
+            />
+            <HeaderValue
+              slot="solar-date"
+              label="Ngày sinh"
+              preview={preview}
+              value={preview ? "" : person?.solarDate.value}
+            />
+            <HeaderValue
+              slot="birth-time"
+              label="Giờ sinh"
+              preview={preview}
+              value={preview ? "" : person?.birthTime.value}
+            />
+          </div>
+          <HeaderValue
+            slot="lunar-date"
+            label="Âm lịch"
+            preview={preview}
+            value={preview ? "" : person?.lunarDate.value}
+          />
+        </dl>
       </div>
       <dl className="bte-rw__context">
         <HeaderValue
-          slot="profile"
-          label="Hồ sơ"
+          slot="status"
+          label="Trạng thái"
           preview={preview}
-          value={preview ? "Bản xem trước" : person?.name.value}
+          value={status}
         />
         <HeaderValue
-          slot="solar-date"
-          label="Dương lịch"
+          slot="chart-id"
+          label="Mã phân tích"
           preview={preview}
-          value={preview ? "" : person?.solarDate.value}
-        />
-        <HeaderValue
-          slot="lunar-date"
-          label="Âm lịch"
-          preview={preview}
-          value={preview ? "" : person?.lunarDate.value}
-        />
-        <HeaderValue
-          slot="birth-time"
-          label="Giờ sinh"
-          preview={preview}
-          value={preview ? "" : person?.birthTime.value}
+          value={preview ? "preview" : person?.analysisId.value}
         />
         <HeaderValue
           slot="location"
-          label="Múi giờ / nơi sinh"
+          label="Nơi sinh"
           preview={preview}
           value={preview ? "" : person?.location.value}
         />
         <HeaderValue
-          slot="chart-id"
-          label="Mã lá số"
+          slot="timezone"
+          label="Múi giờ"
           preview={preview}
-          value={preview ? "preview" : person?.analysisId.value}
+          value={preview ? "" : person?.timezone.value}
         />
       </dl>
     </div>

@@ -68,6 +68,16 @@ export function LuckCyclesPanel({
           </dd>
         </div>
       </dl>
+      <div className="bte-rw-stat bte-rw-stat--secondary" data-slot="luck-liunian">
+        <span className="bte-rw-label">Lưu niên</span>
+        <p className="bte-rw-secondary">
+          <SlotValue
+            preview={preview}
+            bound={bound}
+            value={preview ? "" : model?.currentLiunian.value}
+          />
+        </p>
+      </div>
       <ol className="bte-rw-timeline" data-slot="luck-timeline" aria-label="Mốc đại vận">
         {timeline.map((point, index) => (
           <li

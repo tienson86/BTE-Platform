@@ -16,6 +16,10 @@ export function FiveElementsPanel({
   model?: WorkspaceFiveElementsView;
 }): ReactNode {
   const bound = Boolean(model) && !preview;
+  const publishedPercents = (model?.rows ?? [])
+    .map((row) => row.percent.value)
+    .filter((value): value is number => typeof value === "number");
+  const peak = publishedPercents.length ? Math.max(...publishedPercents) : null;
   return (
     <div className="bte-rw-panel" data-shell="five-elements">
       <div className="bte-rw-chart" data-slot="five-elements-chart" aria-hidden="true">
@@ -28,7 +32,7 @@ export function FiveElementsPanel({
             <span
               key={el.id}
               className={`bte-rw-chart__col bte-rw-chart__col--${el.id}`}
-              style={{ height: `${ready ? pct : 18}%` }}
+              style={{ height: ready ? `${pct}%` : "8px" }}
               title={el.name}
             />
           );
@@ -38,12 +42,15 @@ export function FiveElementsPanel({
         {FIVE_ELEMENTS.map((el, index) => {
           const row = model?.rows[index];
           const pct = preview ? PREVIEW_FIVE_ELEMENTS[el.id] : row?.percent.value;
+          const emphasize =
+            !preview && peak != null && typeof pct === "number" && pct === peak && peak > 0;
           return (
             <li
               key={el.id}
               className="bte-rw-row"
               data-slot="five-element"
               data-element={el.id}
+              data-emphasis={emphasize ? "high" : undefined}
             >
               <span className={`bte-rw-swatch bte-rw-swatch--${el.id}`} aria-hidden="true" />
               <span className="bte-rw-label">{el.name}</span>

@@ -101,6 +101,7 @@ class BoneWeightIdentity:
     weight: str = ""
     classification: str = ""
     rating: str = ""
+    summary: str = ""
 
     def to_dict(self) -> dict[str, str]:
         """Serialize bone-weight identity. Empty strings when unavailable."""
@@ -108,18 +109,22 @@ class BoneWeightIdentity:
             "weight": self.weight,
             "classification": self.classification,
             "rating": self.rating,
+            "summary": self.summary,
         }
 
 
 @dataclass(slots=True)
 class LuckIdentity:
-    """Current luck-cycle identity copied from published Luck payload."""
+    """Luck identity copied from LuckEngine output. No derived values."""
 
     current_cycle: str = ""
     current_cycle_age: str = ""
     current_cycle_ganzhi: str = ""
     cycle_index: str = ""
+    reference_year: str = ""
     current_year: str = ""
+    current_liunian_ganzhi: str = ""
+    current_liunian_year: str = ""
 
     def to_dict(self) -> dict[str, str]:
         """Serialize luck identity. Empty strings when unavailable."""
@@ -128,31 +133,41 @@ class LuckIdentity:
             "current_cycle_age": self.current_cycle_age,
             "current_cycle_ganzhi": self.current_cycle_ganzhi,
             "cycle_index": self.cycle_index,
+            "reference_year": self.reference_year,
             "current_year": self.current_year,
+            "current_liunian_ganzhi": self.current_liunian_ganzhi,
+            "current_liunian_year": self.current_liunian_year,
         }
 
 
 @dataclass(slots=True)
 class InterpretationIdentity:
-    """Section identifiers only. Does not copy narrative text."""
+    """Section identifiers and already-published conclusion/action copies."""
 
     observation_id: str = "sec-observation"
     reasoning_id: str = "sec-reasoning"
     recommendation_id: str = "sec-recommendation"
+    conclusion_id: str = "sec-conclusion"
+    conclusion: str = ""
+    action: dict[str, Any] = field(default_factory=dict)
     section_keys: list[str] = field(
         default_factory=lambda: [
             "sec-observation",
             "sec-reasoning",
             "sec-recommendation",
+            "sec-conclusion",
         ]
     )
 
     def to_dict(self) -> dict[str, Any]:
-        """Serialize interpretation identity keys."""
+        """Serialize interpretation identity keys and copied payloads."""
         return {
             "observation_id": self.observation_id,
             "reasoning_id": self.reasoning_id,
             "recommendation_id": self.recommendation_id,
+            "conclusion_id": self.conclusion_id,
+            "conclusion": self.conclusion,
+            "action": dict(self.action),
             "section_keys": list(self.section_keys),
         }
 

@@ -77,7 +77,6 @@ export function CanonicalWorkspaceCard({
   viewModel?: BaziWorkspaceViewModel | null;
 }): ReactNode {
   const index = WORKSPACE_PANELS.findIndex((item) => item.id === panel.id) + 1;
-  const isTuTru = panel.id === "tu-tru";
   return (
     <article
       id={`panel-${panel.id}`}
@@ -87,14 +86,15 @@ export function CanonicalWorkspaceCard({
       data-row={panel.row}
       data-kind={panel.kind}
       data-index={String(index).padStart(2, "0")}
+      data-card-system="canonical"
     >
       <Card
         className="bte-rw-card"
         title={
-          <>
+          <h2 className="bte-rw-card__heading">
             <span className="bte-rw-card__index">{String(index).padStart(2, "0")}</span>
-            {isTuTru ? null : panel.title}
-          </>
+            <span className="bte-rw-card__name">{panel.title}</span>
+          </h2>
         }
         data-canonical-card="true"
       >

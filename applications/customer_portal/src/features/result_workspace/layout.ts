@@ -18,6 +18,8 @@ export const WORKSPACE_BREAKPOINTS = {
 
 /** Empty pillar labels — reserved slot, not bound identity. */
 export const EMPTY_TU_TRU_PILLAR: TuTruSlotPillar = {
+  stem: "",
+  branch: "",
   canChi: "",
   napAm: "",
   cungPhi: "",

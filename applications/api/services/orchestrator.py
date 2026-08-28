@@ -170,6 +170,7 @@ _INTERNAL_PAYLOAD_KEYS: frozenset[str] = frozenset(
         "matching",
         "priority",
         "delivery",
+        "_luck_raw",
     }
 )
 
@@ -332,6 +333,7 @@ class OrchestratorService:
                 input_fields=payload.get("input"),
                 bone_weight=payload.get("bone_weight") or payload.get("can_xuong"),
                 luck=payload.get("luck"),
+                luck_engine_raw=payload.get("_luck_raw"),
                 interpretation=payload.get("interpretation"),
                 narrative=payload.get("narrative_result"),
             )
@@ -682,6 +684,7 @@ class OrchestratorService:
             score=score_result,
         )
         completed.append("luck")
+        payload["_luck_raw"] = luck_context.to_dict()
         payload["luck"] = shape_luck_payload(luck_context)
         if stop_index == 7:
             return self._finalize_public_payload(payload, completed, analysis=analysis)

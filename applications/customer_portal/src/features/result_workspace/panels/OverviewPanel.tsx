@@ -13,8 +13,10 @@ const PREVIEW_MAP = {
   "avoid-god": PREVIEW_OVERVIEW.avoidGod,
 } as const;
 
+const PILL_SLOTS = OVERVIEW_SLOTS.filter((slot) => slot.id !== "strength");
+
 /**
- * Tổng quan lá số — Strength / Useful God / Hỷ / Kỵ / published overall score.
+ * Tổng quan lá số — Strength primary, Useful God / Hỷ / Kỵ as compact pills.
  */
 export function OverviewPanel({
   preview,
@@ -36,12 +38,18 @@ export function OverviewPanel({
     typeof score === "number" ? `${score} / ${scoreMax}` : undefined;
   const confidence = preview ? PREVIEW_OVERVIEW.confidence : model?.confidence.value;
   return (
-    <div className="bte-rw-panel" data-shell="overview">
-      <ul className="bte-rw-stat-grid">
-        {OVERVIEW_SLOTS.map((slot) => (
+    <div className="bte-rw-panel bte-rw-panel--overview" data-shell="overview">
+      <div className="bte-rw-overview__hero" data-slot="strength">
+        <span className="bte-rw-label">{OVERVIEW_SLOTS[0].label}</span>
+        <p className="bte-rw-primary bte-rw-primary--xl">
+          <SlotValue preview={preview} bound={bound} value={values.strength} />
+        </p>
+      </div>
+      <ul className="bte-rw-pills">
+        {PILL_SLOTS.map((slot) => (
           <li key={slot.id} className="bte-rw-stat" data-slot={slot.id}>
             <span className="bte-rw-label">{slot.label}</span>
-            <span className="bte-rw-primary">
+            <span className="bte-rw-pill">
               <SlotValue preview={preview} bound={bound} value={values[slot.id]} />
             </span>
           </li>
@@ -50,7 +58,7 @@ export function OverviewPanel({
       <div className="bte-rw-score" data-slot="overview-score">
         <div className="bte-rw-score__head">
           <span className="bte-rw-label">Điểm tổng quan</span>
-          <span className="bte-rw-primary">
+          <span className="bte-rw-secondary">
             <SlotValue preview={preview} bound={bound} value={scoreLabel} />
           </span>
         </div>

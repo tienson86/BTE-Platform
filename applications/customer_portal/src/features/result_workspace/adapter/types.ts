@@ -13,6 +13,7 @@ export type WorkspaceField<T> = {
 
 export type WorkspacePersonView = {
   readonly name: WorkspaceField<string>;
+  readonly gender: WorkspaceField<string>;
   readonly solarDate: WorkspaceField<string>;
   readonly lunarDate: WorkspaceField<string>;
   readonly birthTime: WorkspaceField<string>;
@@ -94,6 +95,7 @@ export type WorkspaceLuckView = {
   readonly ageRange: WorkspaceField<string>;
   readonly ganZhi: WorkspaceField<string>;
   readonly currentYear: WorkspaceField<string>;
+  readonly currentLiunian: WorkspaceField<string>;
   readonly observation: WorkspaceField<string>;
   readonly cycles: readonly WorkspaceLuckCycleView[];
 };
@@ -103,6 +105,11 @@ export type WorkspaceInterpretationView = {
   readonly reason: WorkspaceField<string>;
   readonly impact: WorkspaceField<string>;
   readonly advice: WorkspaceField<string>;
+  readonly observationId: WorkspaceField<string>;
+  readonly reasoningId: WorkspaceField<string>;
+  readonly recommendationId: WorkspaceField<string>;
+  readonly conclusionId: WorkspaceField<string>;
+  readonly sectionKeys: readonly string[];
 };
 
 export type WorkspaceActionChipView = {
@@ -113,6 +120,7 @@ export type WorkspaceActionChipView = {
 
 export type WorkspaceConclusionView = {
   readonly overall: WorkspaceField<string>;
+  readonly action: WorkspaceField<string>;
   readonly actions: readonly WorkspaceActionChipView[];
 };
 

@@ -38,8 +38,23 @@ export function ResultWorkspace({
         root.setAttribute("data-sidebar", "open");
       }
     };
+    const syncCurrent = () => {
+      const hash = window.location.hash || "#panel-tu-tru";
+      root.querySelectorAll(".bte-rw__sidebar-link").forEach((link) => {
+        if (link.getAttribute("href") === hash) {
+          link.setAttribute("aria-current", "page");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    };
     toggle.addEventListener("click", onClick);
-    return () => toggle.removeEventListener("click", onClick);
+    window.addEventListener("hashchange", syncCurrent);
+    syncCurrent();
+    return () => {
+      toggle.removeEventListener("click", onClick);
+      window.removeEventListener("hashchange", syncCurrent);
+    };
   }, []);
 
   const binding = preview ? "preview" : viewModel ? "canonical" : "none";
@@ -49,6 +64,7 @@ export function ResultWorkspace({
       data-workspace="bazi-result-v2"
       data-sprint="BZ-UI-01"
       data-panels="BZ-UI-02"
+      data-polish="BZ-UI-04"
       data-binding={binding}
       data-grid={WORKSPACE_GRID_COLUMNS}
       data-preview={preview ? "fixture" : "off"}

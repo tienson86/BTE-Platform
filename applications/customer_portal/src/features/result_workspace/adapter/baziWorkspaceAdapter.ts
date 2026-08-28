@@ -1,8 +1,12 @@
 /**
  * BaziWorkspaceAdapter — canonical analysis → workspace view model.
  *
- * May rename, localize, format, and map published arrays.
- * Must not calculate, score, infer, rank, classify, or derive luck / ShenSha.
+ * Identity fields: Analysis Result data.identity only.
+ * Analytical fields: strength / useful_god / score / five_elements / ten_gods /
+ * pattern / temperature / shensha / luck.cycles / narrative body.
+ *
+ * Must not calculate, score, infer, rank, or reconstruct identity from
+ * Calendar, Bazi, customer echo, or frontend lookup tables.
  *
  * Five-element percents: count / canonical total (unit_total or sum of counts).
  * Isolated presentation math. No analytical reweighting.
@@ -30,23 +34,16 @@ import {
   canonicalUsefulDisplay,
   canonicalUsefulGodPayload,
 } from "../../../adapters/canonicalUsefulGod";
-import { UNAVAILABLE_CONCLUSION } from "../../../adapters/contentGuards";
 import {
   asNarrativeResult,
   sectionParagraphTexts,
-  summaryText,
 } from "../../../adapters/narrativeResultAdapter";
-import type { AnalysisDataDto, PillarDto } from "../../../models";
+import type { AnalysisDataDto, CanonicalIdentityDto } from "../../../models";
 import { analyticalTenGods } from "../../../resultState/currentResult";
 import { ACTION_CHIPS, SHEN_SHA_NAMES } from "../catalog";
+import { EMPTY_TU_TRU_PILLAR } from "../layout";
 import type { TuTruSlotPillar } from "../types";
-import {
-  CONCLUSION_SECTION_MAP,
-  CONFIDENCE_LABELS,
-  INTERPRETATION_SECTION_MAP,
-  NAYIN_ELEMENT_ONLY,
-  TEN_GOD_ALIASES,
-} from "./mapping";
+import { CONFIDENCE_LABELS, TEN_GOD_ALIASES } from "./mapping";
 import type {
   BaziWorkspaceViewModel,
   WorkspaceBoneWeightView,
@@ -87,72 +84,8 @@ function asRecord(value: unknown): Record<string, unknown> {
   return value as Record<string, unknown>;
 }
 
-function pad2(value: number): string {
-  return String(value).padStart(2, "0");
-}
-
-function joinStemBranch(pillar: PillarDto | undefined): string {
-  const stem = text(pillar?.stem);
-  const branch = text(pillar?.branch);
-  if (stem && branch) return `${stem} ${branch}`.replace(/\s+/g, " ").trim();
-  return stem || branch;
-}
-
-function nayinElementOnly(pillar: PillarDto | undefined): string {
-  const raw = asRecord(pillar);
-  const candidates = [text(raw.nayin_element), text(raw.nayin)];
-  for (const item of candidates) {
-    if (NAYIN_ELEMENT_ONLY.has(item)) return item;
-  }
-  return "";
-}
-
-function pillarCungPhi(pillar: PillarDto | undefined): string {
-  const raw = asRecord(pillar);
-  return text(raw.cung_phi) || text(raw.cung);
-}
-
-function bindPillar(
-  canChi: string,
-  pillar: PillarDto | undefined,
-  dayCungPhi: string,
-  isDay: boolean,
-): TuTruSlotPillar {
-  const cung = pillarCungPhi(pillar) || (isDay ? dayCungPhi : "");
-  return {
-    canChi: canChi || joinStemBranch(pillar),
-    napAm: nayinElementOnly(pillar),
-    cungPhi: cung,
-  };
-}
-
-function formatLunar(calendar: AnalysisDataDto["calendar"]): string {
-  if (!calendar) return "";
-  const published = text(calendar.lunar_date);
-  if (published) return published;
-  const lunar = calendar.lunar;
-  const day = lunar?.day ?? calendar.lunar_day;
-  const month = lunar?.month ?? calendar.lunar_month;
-  const year = lunar?.year ?? calendar.lunar_year;
-  if (day == null || month == null || year == null) return "";
-  const leap = Boolean(
-    lunar?.is_leap_month ?? lunar?.leap ?? calendar.is_leap_month ?? calendar.leap_month,
-  );
-  const date = `${pad2(Number(day))}/${pad2(Number(month))}/${Number(year)}`;
-  return leap ? `${date} nhuận` : date;
-}
-
-function formatBirthTime(
-  data: AnalysisDataDto,
-  input: Record<string, unknown>,
-): string {
-  const cal = asRecord(data.calendar);
-  const hourRaw = cal.solar_hour ?? input.hour;
-  const minuteRaw = cal.solar_minute ?? input.minute;
-  const hour = Number(hourRaw);
-  const minute = Number(minuteRaw);
-  if (!Number.isFinite(hour) || !Number.isFinite(minute)) return "";
-  return `${pad2(hour)}:${pad2(minute)}`;
+function identityOf(data: AnalysisDataDto): CanonicalIdentityDto {
+  return asRecord(data.identity) as CanonicalIdentityDto;
 }
 
 function pickPattern(data: AnalysisDataDto): Record<string, unknown> {
@@ -191,27 +124,43 @@ function bindPerson(
   data: AnalysisDataDto,
   options: AdaptWorkspaceOptions,
 ): WorkspacePersonView {
-  const input = options.input ?? {};
-  const calendar = data.calendar;
-  const customer = data.customer;
-  const name =
-    text(customer?.full_name) || text(input.full_name) || text(asRecord(data).customer_name);
+  const person = asRecord(identityOf(data).person);
   const analysisId =
     text(options.analysisId) ||
     text(data.analysis_id) ||
     text(data.request_id);
-  const timezone =
-    text(customer?.timezone) || text(input.timezone) || text(calendar?.timezone);
-  const location = text(customer?.birth_place) || text(input.birth_place);
-  const locationLine = [location, timezone].filter(Boolean).join(" · ");
   return {
-    name: field(name, "customer.full_name | input.full_name"),
-    solarDate: field(text(calendar?.solar_date), "calendar.solar_date"),
-    lunarDate: field(formatLunar(calendar), "calendar.lunar_date"),
-    birthTime: field(formatBirthTime(data, input), "calendar.solar_hour/minute | input"),
-    location: field(locationLine, "customer.birth_place + timezone"),
-    timezone: field(timezone, "customer.timezone | input.timezone"),
+    name: field(text(person.full_name), "identity.person.full_name"),
+    gender: field(text(person.gender), "identity.person.gender"),
+    solarDate: field(text(person.solar_birth), "identity.person.solar_birth"),
+    lunarDate: field(text(person.lunar_birth), "identity.person.lunar_birth"),
+    birthTime: field(text(person.birth_time), "identity.person.birth_time"),
+    location: field(text(person.birth_place), "identity.person.birth_place"),
+    timezone: field(text(person.timezone), "identity.person.timezone"),
     analysisId: field(analysisId, "analysis_id | request_id"),
+  };
+}
+
+function bindIdentityPillar(raw: unknown): TuTruSlotPillar {
+  const cell = asRecord(raw);
+  if (!Object.keys(cell).length) return EMPTY_TU_TRU_PILLAR;
+  return {
+    stem: text(cell.stem),
+    branch: text(cell.branch),
+    canChi: text(cell.can_chi),
+    napAm: text(cell.nayin_element),
+    cungPhi: text(cell.cung_phi),
+  };
+}
+
+function bindFourPillars(data: AnalysisDataDto): BaziWorkspaceViewModel["fourPillars"] {
+  /** Owner: identity.four_pillars — no calendar/bazi reconstruction. */
+  const four = asRecord(identityOf(data).four_pillars);
+  return {
+    year: bindIdentityPillar(four.year),
+    month: bindIdentityPillar(four.month),
+    day: bindIdentityPillar(four.day),
+    hour: bindIdentityPillar(four.hour),
   };
 }
 
@@ -322,114 +271,99 @@ function bindShenSha(data: AnalysisDataDto): WorkspaceShenShaView {
 }
 
 function bindBoneWeight(data: AnalysisDataDto): WorkspaceBoneWeightView {
-  const raw = asRecord(data.bone_weight) ;
-  const alt = asRecord(data.can_xuong);
-  const src = Object.keys(raw).length ? raw : alt;
-  const source = Object.keys(raw).length ? "bone_weight" : "can_xuong";
-  const amount =
-    text(src.amount) ||
-    text(src.total) ||
-    text(src.tong_can_luong) ||
-    [text(src.luong) && `${src.luong} lượng`, text(src.chi) && `${src.chi} chỉ`]
-      .filter(Boolean)
-      .join(" ");
+  const src = asRecord(identityOf(data).bone_weight);
   return {
-    amount: field(amount, source),
-    classification: field(
-      text(src.classification) || text(src.grade) || text(src.phan_loai),
-      source,
-    ),
-    interpretation: field(
-      text(src.interpretation) || text(src.text) || text(src.preview),
-      source,
-    ),
+    amount: field(text(src.weight), "identity.bone_weight.weight"),
+    classification: field(text(src.classification), "identity.bone_weight.classification"),
+    interpretation: field(text(src.summary), "identity.bone_weight.summary"),
   };
 }
 
-function cycleGanZhi(cycle: Record<string, unknown>): string {
-  const published = text(cycle.gan_zhi);
-  if (published) return published;
-  const stem = text(cycle.stem);
-  const branch = text(cycle.branch);
-  if (stem && branch) return `${stem} ${branch}`.trim();
-  return stem || branch;
-}
-
 function bindLuck(data: AnalysisDataDto): WorkspaceLuckView {
+  const published = asRecord(identityOf(data).luck);
   const luck = data.luck;
-  const current = luck?.current_cycle;
-  const currentRecord = asRecord(current);
-  const ganZhi = cycleGanZhi(currentRecord);
-  const ageStart = current?.age_start ?? null;
-  const ageEnd = current?.age_end ?? null;
-  const ageRange =
-    ageStart != null && ageEnd != null ? `${ageStart}–${ageEnd}` : "";
-  const years =
-    current?.year_start != null && current?.year_end != null
-      ? `${current.year_start}–${current.year_end}`
-      : "";
+  const ganZhi = text(published.current_cycle_ganzhi) || text(published.current_cycle);
+  const current = text(published.current_cycle) || ganZhi;
   const cycles: WorkspaceLuckCycleView[] = (luck?.cycles ?? []).map((cycle) => {
     const row = asRecord(cycle);
-    const gan = cycleGanZhi(row);
+    const gan = text(row.gan_zhi);
     return {
       ganZhi: gan,
       ageStart: cycle.age_start ?? null,
       ageEnd: cycle.age_end ?? null,
       yearStart: cycle.year_start ?? null,
       yearEnd: cycle.year_end ?? null,
-      current: Boolean(ganZhi && gan === ganZhi && cycle.age_start === ageStart),
+      current: Boolean(ganZhi && gan === ganZhi),
     };
   });
   return {
-    current: field(ganZhi || years, "luck.current_cycle"),
-    ageRange: field(ageRange, "luck.current_cycle.age_start/end"),
-    ganZhi: field(ganZhi, "luck.current_cycle.gan_zhi"),
-    currentYear: field("", "luck has no canonical current calendar year"),
+    current: field(current, "identity.luck.current_cycle"),
+    ageRange: field(text(published.current_cycle_age), "identity.luck.current_cycle_age"),
+    ganZhi: field(ganZhi, "identity.luck.current_cycle_ganzhi"),
+    currentYear: field(text(published.current_year), "identity.luck.current_year"),
+    currentLiunian: field(
+      text(published.current_liunian_ganzhi),
+      "identity.luck.current_liunian_ganzhi",
+    ),
     observation: field(text(luck?.evidence) || text(luck?.method_note), "luck.evidence | method_note"),
     cycles,
   };
 }
 
-function firstSectionText(
+function sectionBodyById(
   narrative: ReturnType<typeof asNarrativeResult>,
-  matcher: RegExp,
+  sectionId: string,
 ): string {
-  if (!narrative) return "";
-  const texts = sectionParagraphTexts(narrative, matcher);
+  if (!narrative || !sectionId) return "";
+  const escaped = sectionId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const texts = sectionParagraphTexts(narrative, new RegExp(escaped, "i"));
   return texts[0] || "";
 }
 
 function bindInterpretation(data: AnalysisDataDto): WorkspaceInterpretationView {
+  const published = asRecord(identityOf(data).interpretation);
   const narrative = asNarrativeResult(data.narrative_result);
+  const observationId = text(published.observation_id);
+  const reasoningId = text(published.reasoning_id);
+  const recommendationId = text(published.recommendation_id);
+  const conclusionId = text(published.conclusion_id);
+  const sectionKeys = Array.isArray(published.section_keys)
+    ? published.section_keys.map((item) => text(item)).filter(Boolean)
+    : [];
+  const impactId = sectionKeys.find((key) => /impact/i.test(key)) || "";
   return {
     observe: field(
-      firstSectionText(narrative, INTERPRETATION_SECTION_MAP.observe),
-      "narrative_result Quan sát",
+      sectionBodyById(narrative, observationId),
+      "identity.interpretation.observation_id + narrative_result",
     ),
     reason: field(
-      firstSectionText(narrative, INTERPRETATION_SECTION_MAP.reason),
-      "narrative_result Lý giải",
+      sectionBodyById(narrative, reasoningId),
+      "identity.interpretation.reasoning_id + narrative_result",
     ),
     impact: field(
-      firstSectionText(narrative, INTERPRETATION_SECTION_MAP.impact),
-      "narrative_result Tác động",
+      sectionBodyById(narrative, impactId),
+      "identity.interpretation.section_keys + narrative_result",
     ),
     advice: field(
-      firstSectionText(narrative, INTERPRETATION_SECTION_MAP.advice),
-      "narrative_result Khuyến nghị",
+      sectionBodyById(narrative, recommendationId),
+      "identity.interpretation.recommendation_id + narrative_result",
     ),
+    observationId: field(observationId, "identity.interpretation.observation_id"),
+    reasoningId: field(reasoningId, "identity.interpretation.reasoning_id"),
+    recommendationId: field(recommendationId, "identity.interpretation.recommendation_id"),
+    conclusionId: field(conclusionId, "identity.interpretation.conclusion_id"),
+    sectionKeys,
   };
 }
 
 function bindConclusion(data: AnalysisDataDto): WorkspaceConclusionView {
-  const narrative = asNarrativeResult(data.narrative_result);
-  const closing =
-    firstSectionText(narrative, CONCLUSION_SECTION_MAP) ||
-    (narrative ? summaryText(narrative.summary, "identity") : "");
+  const published = asRecord(identityOf(data).interpretation);
+  const action = asRecord(published.action);
   return {
-    overall: field(
-      closing && closing !== UNAVAILABLE_CONCLUSION ? closing : "",
-      "narrative_result kết luận",
+    overall: field(text(published.conclusion), "identity.interpretation.conclusion"),
+    action: field(
+      text(action.next_action) || text(action.priority_recommendation),
+      "identity.interpretation.action",
     ),
     actions: ACTION_CHIPS.map((chip) => ({
       id: chip.id,
@@ -447,18 +381,11 @@ export function adaptBaziWorkspace(
   options: AdaptWorkspaceOptions = {},
 ): BaziWorkspaceViewModel | null {
   if (!data) return null;
-  const calendar = data.calendar;
-  const dayCung = text(calendar?.cung_phi);
   const person = bindPerson(data, options);
   return {
     analysisId: person.analysisId.value || "",
     person,
-    fourPillars: {
-      year: bindPillar(text(calendar?.year_can_chi), data.bazi?.year_pillar, dayCung, false),
-      month: bindPillar(text(calendar?.month_can_chi), data.bazi?.month_pillar, dayCung, false),
-      day: bindPillar(text(calendar?.day_can_chi), data.bazi?.day_pillar, dayCung, true),
-      hour: bindPillar(text(calendar?.hour_can_chi), data.bazi?.hour_pillar, dayCung, false),
-    },
+    fourPillars: bindFourPillars(data),
     overview: bindOverview(data),
     fiveElements: bindFiveElements(data),
     tenGods: bindTenGods(data),

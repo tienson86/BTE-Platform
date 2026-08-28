@@ -47,6 +47,79 @@ function withAnalyticalExtras(data: AnalysisDataDto): AnalysisDataDto {
   return {
     ...data,
     analysis_id: "chart-case-001",
+    identity: {
+      person: {
+        full_name: "Nguyen Tien Son",
+        gender: "male",
+        solar_birth: "21/01/1987",
+        lunar_birth: "22/12/Bính Dần",
+        birth_time: "04:30",
+        birth_place: "Ha Noi",
+        timezone: "Asia/Ho_Chi_Minh",
+      },
+      four_pillars: {
+        year: {
+          stem: "Bính",
+          branch: "Dần",
+          can_chi: "Bính Dần",
+          nayin_element: "Hỏa",
+          cung_phi: "Cấn",
+        },
+        month: {
+          stem: "Tân",
+          branch: "Sửu",
+          can_chi: "Tân Sửu",
+          nayin_element: "Thổ",
+          cung_phi: "Khôn",
+        },
+        day: {
+          stem: "Canh",
+          branch: "Ngọ",
+          can_chi: "Canh Ngọ",
+          nayin_element: "Thổ",
+          cung_phi: "Khôn",
+        },
+        hour: {
+          stem: "Mậu",
+          branch: "Dần",
+          can_chi: "Mậu Dần",
+          nayin_element: "Thổ",
+          cung_phi: "Cấn",
+        },
+      },
+      bone_weight: {
+        weight: "",
+        classification: "",
+        rating: "",
+        summary: "",
+      },
+      luck: {
+        current_cycle: "Nhâm Thân",
+        current_cycle_ganzhi: "Nhâm Thân",
+        current_cycle_age: "40",
+        cycle_index: "1",
+        reference_year: "2026",
+        current_year: "2026",
+        current_liunian_ganzhi: "",
+        current_liunian_year: "",
+      },
+      interpretation: {
+        observation_id: "sec-observation",
+        reasoning_id: "sec-reasoning",
+        recommendation_id: "sec-recommendation",
+        conclusion_id: "sec-conclusion",
+        conclusion:
+          "Điểm tổng hợp: 51.25 — hạng D+. Họ nghề hợp bạn: ưu tiên các nhóm việc nuôi trục hỗ trợ Thực Thần trong khung Chính Ấn.",
+        action: { next_action: "Giữ nhịp làm việc hiện tại." },
+        section_keys: [
+          "sec-observation",
+          "sec-reasoning",
+          "sec-impact",
+          "sec-recommendation",
+          "sec-conclusion",
+        ],
+      },
+    },
     five_elements: {
       counts: { wood: 4, fire: 5, earth: 6, metal: 3, water: 1 },
       unit_total: 19,
@@ -136,10 +209,12 @@ describe("BZ-UI-03 Canonical Data Binding", () => {
   it("4. header identity binding", () => {
     const { container } = render(<ResultWorkspace viewModel={viewModel} />);
     expect(container.querySelector("[data-slot='profile']")?.textContent).toContain("Nguyen Tien Son");
+    expect(container.querySelector("[data-slot='gender']")?.textContent).toContain("male");
     expect(container.querySelector("[data-slot='solar-date']")?.textContent).toContain("21/01/1987");
     expect(container.querySelector("[data-slot='lunar-date']")?.textContent).toContain("22/12/Bính Dần");
     expect(container.querySelector("[data-slot='birth-time']")?.textContent).toContain("04:30");
-    expect(container.querySelector("[data-slot='location']")?.textContent).toMatch(/Asia\/Ho_Chi_Minh|Ha Noi/);
+    expect(container.querySelector("[data-slot='location']")?.textContent).toContain("Ha Noi");
+    expect(container.querySelector("[data-slot='timezone']")?.textContent).toContain("Asia/Ho_Chi_Minh");
     expect(container.querySelector("[data-slot='chart-id']")?.textContent).toContain("chart-case-001");
   });
 
@@ -150,7 +225,9 @@ describe("BZ-UI-03 Canonical Data Binding", () => {
     expect(tuTru?.textContent).toContain("Tân Sửu");
     expect(tuTru?.textContent).toContain("Canh Ngọ");
     expect(tuTru?.textContent).toContain("Mậu Dần");
-    expect(viewModel?.fourPillars.year.napAm).toBe("");
+    expect(viewModel?.fourPillars.year.napAm).toBe("Hỏa");
+    expect(viewModel?.fourPillars.year.stem).toBe("Bính");
+    expect(viewModel?.fourPillars.year.branch).toBe("Dần");
     expect(viewModel?.fourPillars.day.cungPhi).toBe("Khôn");
   });
 
@@ -219,7 +296,8 @@ describe("BZ-UI-03 Canonical Data Binding", () => {
     ]);
     const { container } = render(<ResultWorkspace viewModel={viewModel} />);
     expect(container.querySelector("[data-slot='luck-ganzhi']")?.textContent).toContain("Nhâm Thân");
-    expect(container.querySelector("[data-slot='luck-age']")?.textContent).toContain("32–41");
+    expect(container.querySelector("[data-slot='luck-age']")?.textContent).toContain("40");
+    expect(container.querySelector("[data-slot='luck-year']")?.textContent).toContain("2026");
     const nodes = container.querySelectorAll("[data-slot='luck-timeline'] .bte-rw-timeline__node");
     expect(Array.from(nodes).map((node) => node.textContent?.trim())).toEqual([
       "Canh Ngọ",
@@ -235,11 +313,13 @@ describe("BZ-UI-03 Canonical Data Binding", () => {
     expect(container.querySelector("[data-block='impact']")?.textContent).toBeTruthy();
     expect(container.querySelector("[data-block='advice']")?.textContent).toBeTruthy();
     expect(viewModel?.interpretation.observe.available).toBe(true);
+    expect(viewModel?.interpretation.observationId.value).toBe("sec-observation");
   });
 
   it("15. Conclusion binding without invented advice", () => {
     const { container } = render(<ResultWorkspace viewModel={viewModel} />);
     expect(container.querySelector("[data-slot='conclusion-overall']")?.textContent).toMatch(/Điểm tổng hợp|51/);
+    expect(container.querySelector("[data-slot='conclusion-action']")?.textContent).toContain("Giữ nhịp");
     const chips = container.querySelectorAll("[data-slot='action-chip']");
     expect(chips).toHaveLength(4);
     chips.forEach((chip) => expect(chip.getAttribute("data-unavailable")).toBe("true"));

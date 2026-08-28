@@ -32,8 +32,8 @@ export function InterpretationPanel({
             data-slot="reason-block"
             data-block={block.id}
           >
-            <h3 className="bte-rw-label">{block.title}</h3>
-            <p className="bte-rw-caption">
+            <h3 className="bte-rw-block__title">{block.title}</h3>
+            <p className="bte-rw-prose">
               <SlotValue preview={preview} bound={bound} value={values[block.id]} />
             </p>
           </section>

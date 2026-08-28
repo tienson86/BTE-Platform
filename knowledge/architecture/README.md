@@ -374,6 +374,8 @@ pack_04_interpretation_engine/
 
 pack_05_report_engine/
 
+int_02_narrative_framework/
+
 Each Pack contains:
 
 - Architecture

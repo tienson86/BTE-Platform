@@ -20,6 +20,13 @@ from engines.identity.models import (
 _STABLE_OBSERVATION = "sec-observation"
 _STABLE_REASONING = "sec-reasoning"
 _STABLE_RECOMMENDATION = "sec-recommendation"
+_STABLE_CONCLUSION = "sec-conclusion"
+_STABLE_SECTION_KEYS = (
+    _STABLE_OBSERVATION,
+    _STABLE_REASONING,
+    _STABLE_RECOMMENDATION,
+    _STABLE_CONCLUSION,
+)
 
 
 def _text(value: Any) -> str:
@@ -106,44 +113,109 @@ def bone_weight_identity_from_payload(payload: Any | None) -> BoneWeightIdentity
         weight=_text(raw.get("weight") or raw.get("amount") or raw.get("total")),
         classification=_text(raw.get("classification")),
         rating=_text(raw.get("rating") or raw.get("grade")),
+        summary=_text(raw.get("summary")),
     )
 
 
+def luck_payload_for_identity(
+    shaped: Any | None,
+    luck_engine_raw: Any | None = None,
+) -> dict[str, Any]:
+    """Copy LuckContext fields the public luck slice already computed but omitted."""
+    luck = dict(_mapping(shaped))
+    raw = luck_engine_raw
+    if raw is not None and hasattr(raw, "to_dict") and not isinstance(raw, Mapping):
+        raw = raw.to_dict()
+    raw_map = _mapping(raw)
+    liunian = raw_map.get("current_liunian")
+    if liunian is not None and luck.get("current_liunian") is None:
+        luck["current_liunian"] = liunian
+    return luck
+
+
 def luck_identity_from_payload(payload: Any | None) -> LuckIdentity:
-    """Copy current-cycle identity from the already-shaped Luck payload."""
+    """Copy already-computed luck / lưu niên fields. Does not derive new values."""
     raw = _mapping(payload)
     if not raw:
         return LuckIdentity()
     cycle = _mapping(raw.get("current_cycle"))
     dayun = _mapping(raw.get("current_dayun"))
     metadata = _mapping(dayun.get("metadata") or raw.get("metadata"))
-    ganzhi = _text(cycle.get("gan_zhi") or cycle.get("ganzhi"))
+    liunian = _mapping(raw.get("current_liunian"))
+    liunian_meta = _mapping(liunian.get("metadata"))
+    ganzhi = _text(
+        cycle.get("gan_zhi")
+        or cycle.get("ganzhi")
+        or dayun.get("ganzhi")
+    )
     age = raw.get("current_age_for_luck")
+    if age is None:
+        age = metadata.get("current_age_for_luck")
     if age is None:
         age = cycle.get("age_start")
     index = cycle.get("index")
     if index is None:
         index = dayun.get("index")
-    year = metadata.get("reference_year") or raw.get("current_year")
     return LuckIdentity(
         current_cycle=ganzhi,
         current_cycle_age=_text(age),
         current_cycle_ganzhi=ganzhi,
         cycle_index=_text(index),
-        current_year=_text(year),
+        reference_year=_text(metadata.get("reference_year")),
+        current_year=_text(liunian_meta.get("civil_year")),
+        current_liunian_ganzhi=_text(liunian.get("ganzhi")),
+        current_liunian_year=_text(liunian.get("year")),
     )
+
+
+def _section_published_text(row: Mapping[str, Any]) -> str:
+    paragraphs = list(row.get("paragraphs") or [])
+    parts: list[str] = []
+    for item in paragraphs:
+        text = _text(_mapping(item).get("text"))
+        if text:
+            parts.append(text)
+    if parts:
+        return " ".join(parts)
+    return _text(row.get("content") or row.get("text"))
+
+
+def _action_payload_from_narrative(
+    narrative_map: Mapping[str, Any],
+    interpretation_map: Mapping[str, Any],
+) -> dict[str, Any]:
+    summary = _mapping(narrative_map.get("summary") or interpretation_map.get("summary"))
+    recs = list(
+        narrative_map.get("recommendations") or interpretation_map.get("recommendations") or []
+    )
+    recommendation_ids = [
+        _text(_mapping(item).get("id"))
+        for item in recs
+        if _text(_mapping(item).get("id"))
+    ]
+    action: dict[str, Any] = {}
+    next_action = _text(summary.get("next_action"))
+    priority = _text(summary.get("priority_recommendation"))
+    if next_action:
+        action["next_action"] = next_action
+    if priority:
+        action["priority_recommendation"] = priority
+    if recommendation_ids:
+        action["recommendation_ids"] = recommendation_ids
+    return action
 
 
 def interpretation_identity_from_payload(
     interpretation: Any | None = None,
     narrative: Any | None = None,
 ) -> InterpretationIdentity:
-    """Publish observation/reasoning/recommendation ids. No narrative text."""
+    """Publish section ids plus already-written conclusion/action. No new narrative."""
     narrative_map = _mapping(narrative)
     interpretation_map = _mapping(interpretation)
     sections = list(narrative_map.get("sections") or interpretation_map.get("sections") or [])
     found: dict[str, str] = {}
     keys: list[str] = []
+    conclusion = ""
     for item in sections:
         row = _mapping(item)
         section_id = _text(row.get("id") or row.get("section_id"))
@@ -157,12 +229,17 @@ def interpretation_identity_from_payload(
             found["reasoning"] = section_id
         elif "recommendation" in lowered and "recommendation" not in found:
             found["recommendation"] = section_id
+        elif "conclusion" in lowered and "conclusion" not in found:
+            found["conclusion"] = section_id
+            conclusion = _section_published_text(row)
     return InterpretationIdentity(
         observation_id=found.get("observation", _STABLE_OBSERVATION),
         reasoning_id=found.get("reasoning", _STABLE_REASONING),
         recommendation_id=found.get("recommendation", _STABLE_RECOMMENDATION),
-        section_keys=keys
-        or [_STABLE_OBSERVATION, _STABLE_REASONING, _STABLE_RECOMMENDATION],
+        conclusion_id=found.get("conclusion", _STABLE_CONCLUSION),
+        conclusion=conclusion,
+        action=_action_payload_from_narrative(narrative_map, interpretation_map),
+        section_keys=keys or list(_STABLE_SECTION_KEYS),
     )
 
 
@@ -174,6 +251,7 @@ def build_canonical_identity(
     input_fields: Mapping[str, Any] | None = None,
     bone_weight: Any | None = None,
     luck: Any | None = None,
+    luck_engine_raw: Any | None = None,
     interpretation: Any | None = None,
     narrative: Any | None = None,
 ) -> CanonicalIdentity:
@@ -188,7 +266,7 @@ def build_canonical_identity(
         calendar=calendar_identity_from_calendar(calendar),
         four_pillars=four,
         bone_weight=bone_weight_identity_from_payload(bone_weight),
-        luck=luck_identity_from_payload(luck),
+        luck=luck_identity_from_payload(luck_payload_for_identity(luck, luck_engine_raw)),
         interpretation=interpretation_identity_from_payload(interpretation, narrative),
     )
 

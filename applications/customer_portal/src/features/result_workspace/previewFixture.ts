@@ -10,10 +10,10 @@ import type { TuTruSlotPillar } from "./types";
 export const PREVIEW_FIXTURE_KIND = "bz-ui-02-preview-only";
 
 export const PREVIEW_TU_TRU: Record<"year" | "month" | "day" | "hour", TuTruSlotPillar> = {
-  year: { canChi: "Bính Ngọ", napAm: "Thủy", cungPhi: "Khảm" },
-  month: { canChi: "Bính Thân", napAm: "Hỏa", cungPhi: "Khôn" },
-  day: { canChi: "Đinh Sửu", napAm: "Thủy", cungPhi: "Chấn" },
-  hour: { canChi: "Ất Tỵ", napAm: "Hỏa", cungPhi: "Khôn" },
+  year: { stem: "Bính", branch: "Ngọ", canChi: "Bính Ngọ", napAm: "Thủy", cungPhi: "Khảm" },
+  month: { stem: "Bính", branch: "Thân", canChi: "Bính Thân", napAm: "Hỏa", cungPhi: "Khôn" },
+  day: { stem: "Đinh", branch: "Sửu", canChi: "Đinh Sửu", napAm: "Thủy", cungPhi: "Chấn" },
+  hour: { stem: "Ất", branch: "Tỵ", canChi: "Ất Tỵ", napAm: "Hỏa", cungPhi: "Khôn" },
 };
 
 export const PREVIEW_OVERVIEW = {

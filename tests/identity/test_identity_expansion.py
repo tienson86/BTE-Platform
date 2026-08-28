@@ -77,11 +77,12 @@ def test_bone_weight_identity_empty_when_unavailable() -> None:
     assert empty.classification == ""
     assert empty.rating == ""
     copied = bone_weight_identity_from_payload(
-        {"weight": "3.2", "classification": "Trung", "rating": "B"}
+        {"weight": "3.2", "classification": "Trung", "rating": "B", "summary": "S10"}
     )
     assert copied.weight == "3.2"
     assert copied.classification == "Trung"
     assert copied.rating == "B"
+    assert copied.summary == "S10"
 
 
 def test_luck_identity_copies_published_cycle_fields() -> None:
@@ -99,7 +100,10 @@ def test_luck_identity_copies_published_cycle_fields() -> None:
     assert payload["current_cycle_ganzhi"] == "Đinh Dậu"
     assert payload["current_cycle_age"] == "40"
     assert payload["cycle_index"] == "3"
-    assert payload["current_year"] == "2026"
+    assert payload["reference_year"] == "2026"
+    assert payload["current_year"] == ""
+    assert payload["current_liunian_ganzhi"] == ""
+    assert payload["current_liunian_year"] == ""
 
 
 def test_interpretation_identity_uses_stable_keys_without_narrative() -> None:
@@ -107,7 +111,11 @@ def test_interpretation_identity_uses_stable_keys_without_narrative() -> None:
     assert empty["observation_id"] == "sec-observation"
     assert empty["reasoning_id"] == "sec-reasoning"
     assert empty["recommendation_id"] == "sec-recommendation"
+    assert empty["conclusion_id"] == "sec-conclusion"
+    assert empty["conclusion"] == ""
+    assert empty["action"] == {}
     assert "sec-observation" in empty["section_keys"]
+    assert "sec-conclusion" in empty["section_keys"]
     copied = interpretation_identity_from_payload(
         None,
         {
@@ -139,6 +147,11 @@ def test_analysis_result_identity_contains_all_domains() -> None:
     assert payload["calendar"]["solar_date"] == calendar.solar_date
     assert payload["four_pillars"]["month"]["can_chi"] == "Bính Thân"
     assert payload["four_pillars"]["month"]["pillar_type"] == "Month"
-    assert payload["bone_weight"] == {"weight": "", "classification": "", "rating": ""}
+    assert payload["bone_weight"] == {
+        "weight": "",
+        "classification": "",
+        "rating": "",
+        "summary": "",
+    }
     assert payload["luck"]["current_cycle_ganzhi"] == "Bính Ngọ"
     assert payload["interpretation"]["observation_id"] == "sec-observation"

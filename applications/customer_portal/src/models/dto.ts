@@ -240,7 +240,62 @@ export type AnalysisDataDto = {
   /** Pack 05 official commercial NarrativeResult. */
   readonly narrative_result?: Record<string, unknown>;
   readonly customer?: CustomerEchoDto;
+  /** Canonical Identity Layer (BZ-ID). Presentation reads this for identity fields. */
+  readonly identity?: CanonicalIdentityDto;
   readonly [key: string]: unknown;
+};
+
+export type IdentityPillarDto = {
+  readonly stem?: string;
+  readonly branch?: string;
+  readonly can_chi?: string;
+  readonly nayin_element?: string;
+  readonly cung_phi?: string;
+  readonly pillar_type?: string;
+};
+
+export type CanonicalIdentityDto = {
+  readonly person?: {
+    readonly full_name?: string;
+    readonly gender?: string;
+    readonly solar_birth?: string;
+    readonly lunar_birth?: string;
+    readonly birth_time?: string;
+    readonly birth_place?: string;
+    readonly timezone?: string;
+  };
+  readonly calendar?: Record<string, unknown>;
+  readonly four_pillars?: {
+    readonly year?: IdentityPillarDto;
+    readonly month?: IdentityPillarDto;
+    readonly day?: IdentityPillarDto;
+    readonly hour?: IdentityPillarDto;
+  };
+  readonly bone_weight?: {
+    readonly weight?: string;
+    readonly classification?: string;
+    readonly rating?: string;
+    readonly summary?: string;
+  };
+  readonly luck?: {
+    readonly current_cycle?: string;
+    readonly current_cycle_age?: string;
+    readonly current_cycle_ganzhi?: string;
+    readonly cycle_index?: string;
+    readonly reference_year?: string;
+    readonly current_year?: string;
+    readonly current_liunian_ganzhi?: string;
+    readonly current_liunian_year?: string;
+  };
+  readonly interpretation?: {
+    readonly observation_id?: string;
+    readonly reasoning_id?: string;
+    readonly recommendation_id?: string;
+    readonly conclusion_id?: string;
+    readonly conclusion?: string;
+    readonly action?: Record<string, unknown>;
+    readonly section_keys?: readonly string[];
+  };
 };
 
 export type AnalysisResponse = {
