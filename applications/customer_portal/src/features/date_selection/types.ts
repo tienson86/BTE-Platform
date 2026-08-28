@@ -32,6 +32,12 @@ export type KeSlotVm = {
   six_state: SixStateVm;
 };
 
+export type CanonicalPillarVm = {
+  can_chi: string;
+  nayin_element: string;
+  cung_phi: string;
+};
+
 export type HourVm = {
   window: { branch: string; time_range: string };
   ganzhi: string;
@@ -41,6 +47,8 @@ export type HourVm = {
   nayin?: string;
   nayin_element?: string;
   cung?: string;
+  cung_phi?: string;
+  can_chi?: string;
   cung_element?: string;
   trach_group?: string;
   trach_group_label?: string;
@@ -65,6 +73,9 @@ export type DayVm = {
   cung_element?: string;
   trach_group?: string;
   trach_group_label?: string;
+  year?: CanonicalPillarVm;
+  month?: CanonicalPillarVm;
+  day?: CanonicalPillarVm;
 };
 
 export type PersonVm = {
