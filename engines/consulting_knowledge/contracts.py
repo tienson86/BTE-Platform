@@ -109,6 +109,8 @@ def consulting_knowledge_contract() -> dict[str, Any]:
         "catalog_version": CATALOG_VERSION,
         "matching_runtime": False,
         "matching_runtime_id": MATCHING_RUNTIME_ID,
+        "commercial_knowledge_id": COMMERCIAL_KNOWLEDGE_ID,
+        "frozen": CK01_FROZEN,
     }
 
 
