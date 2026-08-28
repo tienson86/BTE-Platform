@@ -320,15 +320,36 @@
     };
   }
 
+  function tuTruPillar(block) {
+    var src = block || {};
+    return {
+      canChi: src.can_chi || src.ganzhi || "",
+      napAm: src.nayin_element || src.nayin || "",
+      cungPhi: src.cung_phi || src.cung || "",
+    };
+  }
+
+  function tuTruData(day, hour) {
+    return {
+      year: tuTruPillar(day && day.year),
+      month: tuTruPillar(day && day.month),
+      day: tuTruPillar(day && day.day),
+      hour: tuTruPillar(hour),
+    };
+  }
+
+  function fillTuTru(day, hour) {
+    var root = document.getElementById("dsTuTru");
+    if (!root || !global.BteTuTruPanel) return;
+    global.BteTuTruPanel.mount(root, tuTruData(day, hour));
+  }
+
   function fillDetail(dl, day) {
     var cal = day.calendar;
     var identity = identityOf(day);
     kv(dl, [
       [t("date_selection.solar_date"), cal.solar_label],
       [t("date_selection.lunar_date"), cal.lunar_label],
-      [t("date_selection.year_ganzhi"), cal.year_ganzhi],
-      [t("date_selection.month_ganzhi"), cal.month_ganzhi || day.month_ganzhi || "—"],
-      [t("date_selection.day_ganzhi"), cal.day_ganzhi],
       [t("date_selection.day_result"), day.six_state.label],
       [t("date_selection.nayin"), elementBadge(identity.nayin)],
       [t("date_selection.cung_phi"), cungBadge(identity.cung)],
@@ -523,6 +544,7 @@
 
   LookupController.prototype.renderHour = function () {
     var hour = this.findHour(this.selectedBranch);
+    fillTuTru(this.dayData, hour);
     if (!hour) return;
     fillHour(document.getElementById("dsHourDetail"), hour);
     fillKe(document.getElementById("dsKeList"), hour, 0);
