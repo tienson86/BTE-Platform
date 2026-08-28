@@ -130,7 +130,7 @@ describe("BZ-UI-04 Commercial Polish", () => {
     expect(css).toContain("--rw-elem-water");
   });
 
-  it("keeps four interpretation blocks", () => {
+  it("keeps six IntegratedNarrative interpretation blocks", () => {
     const { container } = render(<ResultWorkspace />);
     const blocks = container.querySelectorAll("[data-panel='interpretation'] [data-block]");
     expect(Array.from(blocks).map((el) => el.getAttribute("data-block"))).toEqual(
