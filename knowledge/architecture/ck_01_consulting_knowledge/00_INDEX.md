@@ -3,10 +3,10 @@
 | Field | Value |
 |-------|--------|
 | Epic | CK-01 Consulting Knowledge Engine |
-| Sprint | CK-01D Composer Integration |
+| Sprint | CK-01E Commercial Knowledge Final Freeze |
 | Version | 1.0.0 |
-| Status | Catalog freeze + matching runtime + composer integration |
-| Runtime | Match then compose. Composer does not rematch. No LLM. |
+| Status | **FINAL FROZEN** |
+| Runtime | Match then compose. Structured contract only. No HTML/PDF/DOCX rendering. |
 
 ---
 
@@ -31,6 +31,7 @@ It is a deterministic consulting knowledge base: published truth is matched to c
 | `05_CATALOG.md` | Deterministic catalog entries (CK-01B) |
 | `06_MATCHING_RUNTIME.md` | Signal matching runtime (CK-01C) |
 | `07_COMPOSER_INTEGRATION.md` | Matched units → commercial composer (CK-01D) |
+| `08_FINAL_FREEZE.md` | Commercial Knowledge V1 freeze (CK-01E) |
 
 Python freeze:
 
@@ -45,15 +46,19 @@ Tests:
 ## Pipeline
 
 ```
-Integrated Narrative
-Identity
 Canonical Analysis Result
+Identity
+Integrated Narrative
         ↓
-Match signals (read-only)
+match_published_knowledge
         ↓
-Condition match
+compose_commercial_consulting
         ↓
-Consulting Knowledge Units
+CommercialComposerResult
+        ↓
+ReportInputV1.commercial_consulting
+        ↓
+API data.commercial_consulting
 ```
 
 ---
@@ -72,7 +77,9 @@ Consulting Knowledge Units
 
 ## Stop
 
-CK-01D composes commercial consulting from matched units. Do not change Portal UI, PDF, or DOCX until a later sprint. Do not start CK-01E.
+**CK-01 COMMERCIAL KNOWLEDGE V1 FINAL FROZEN.**
+
+Do not start UI, PDF, or DOCX rendering. Do not start CK-02.
 
 ---
 
