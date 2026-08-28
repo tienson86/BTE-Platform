@@ -415,6 +415,7 @@ function buildKnowledge(
   );
 
   const sections: KnowledgeSectionViewModel[] = [
+    ...buildCommercialKnowledgeSections(source.commercialConsulting),
     {
       id: "know-terminology",
       kind: "terminology",
@@ -495,6 +496,29 @@ function buildKnowledge(
     sections,
     visible: sections.length > 0,
   };
+}
+
+function buildCommercialKnowledgeSections(
+  consulting: CanonicalDesktopViewModel["commercialConsulting"],
+): KnowledgeSectionViewModel[] {
+  if (!consulting?.visible || consulting.sections.length === 0) {
+    return [];
+  }
+  return consulting.sections.map((section, index) => {
+    const meaning = section.meaning.filter(Boolean).join(" ");
+    const recommendations = section.recommendations.filter(Boolean).join(" ");
+    const detail = [meaning, recommendations].filter(Boolean).join(" ");
+    return {
+      id: `know-consulting-${section.domain || index}`,
+      kind: "consulting" as const,
+      title: section.title,
+      definition: formatPreviewField(section.summary, "summary"),
+      reference: formatPreviewField("Tư vấn thương mại", "summary"),
+      detail: adaptPreviewText(detail, "narrative"),
+      hasMore: Boolean(detail),
+      defaultOpen: index === 0,
+    };
+  });
 }
 
 /**
