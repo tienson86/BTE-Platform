@@ -418,26 +418,28 @@ class ReportInputV1:
     luck_cycles: ReportLuckCyclesV1 = field(default_factory=ReportLuckCyclesV1)
     interpretation: ReportInterpretationV1 = field(default_factory=ReportInterpretationV1)
     diagnostics: ReportDiagnosticsV1 = field(default_factory=ReportDiagnosticsV1)
+    commercial_consulting: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
         """Deterministic JSON-serializable mapping."""
-        return _normalize_mapping(
-            {
-                "metadata": self.metadata.to_dict(),
-                "profile": self.profile.to_dict(),
-                "calendar": self.calendar.to_dict(),
-                "pillars": self.pillars.to_dict(),
-                "five_elements": self.five_elements.to_dict(),
-                "strength": self.strength.to_dict(),
-                "ten_gods": self.ten_gods.to_dict(),
-                "pattern": self.pattern.to_dict(),
-                "useful_god": self.useful_god.to_dict(),
-                "shensha": [item.to_dict() for item in self.shensha],
-                "luck_cycles": self.luck_cycles.to_dict(),
-                "interpretation": self.interpretation.to_dict(),
-                "diagnostics": self.diagnostics.to_dict(),
-            }
-        )
+        payload: dict[str, Any] = {
+            "metadata": self.metadata.to_dict(),
+            "profile": self.profile.to_dict(),
+            "calendar": self.calendar.to_dict(),
+            "pillars": self.pillars.to_dict(),
+            "five_elements": self.five_elements.to_dict(),
+            "strength": self.strength.to_dict(),
+            "ten_gods": self.ten_gods.to_dict(),
+            "pattern": self.pattern.to_dict(),
+            "useful_god": self.useful_god.to_dict(),
+            "shensha": [item.to_dict() for item in self.shensha],
+            "luck_cycles": self.luck_cycles.to_dict(),
+            "interpretation": self.interpretation.to_dict(),
+            "diagnostics": self.diagnostics.to_dict(),
+        }
+        if self.commercial_consulting is not None:
+            payload["commercial_consulting"] = _normalize_value(self.commercial_consulting)
+        return _normalize_mapping(payload)
 
 
 def missing_data_message() -> str:
