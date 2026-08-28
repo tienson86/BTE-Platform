@@ -594,6 +594,7 @@ class AnalysisResult:
     report: ReportView | None = None
     narrative: NarrativeView | None = None
     narrative_result: dict[str, Any] | None = None
+    integrated_narrative: dict[str, Any] | None = None
     ten_gods_result: dict[str, Any] | None = None
     meta: AnalysisMeta = field(default_factory=AnalysisMeta)
     rule_context: dict[str, Any] = field(default_factory=dict)
@@ -664,3 +665,7 @@ class AnalysisResult:
         if self.narrative is None:
             return {}
         return self.narrative.to_dict()
+
+    def integrated_narrative_dict(self) -> dict[str, Any]:
+        """Serialize IntegratedNarrative for ``data.integrated_narrative``."""
+        return dict(self.integrated_narrative or {})
