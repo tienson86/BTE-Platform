@@ -59,6 +59,9 @@ const day: DayVm = {
   nayin: "Kim",
   cung: "Đoài",
   cung_element: "Kim",
+  year: { can_chi: "Bính Ngọ", nayin_element: "Thủy", cung_phi: "Khảm" },
+  month: { can_chi: "Giáp Thân", nayin_element: "Thủy", cung_phi: "Khôn" },
+  day: { can_chi: "Quý Dậu", nayin_element: "Kim", cung_phi: "Đoài" },
   hours: [hour("Thìn", "Xích Khẩu"), hour("Tỵ", "Tiểu Cát")],
 };
 
