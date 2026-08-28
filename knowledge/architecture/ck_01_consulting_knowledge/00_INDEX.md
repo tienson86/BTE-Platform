@@ -3,10 +3,10 @@
 | Field | Value |
 |-------|--------|
 | Epic | CK-01 Consulting Knowledge Engine |
-| Sprint | CK-01C Knowledge Matching Runtime |
+| Sprint | CK-01D Composer Integration |
 | Version | 1.0.0 |
-| Status | Architecture freeze + catalog freeze + matching runtime |
-| Runtime | Match published signals to frozen catalog. No LLM. |
+| Status | Catalog freeze + matching runtime + composer integration |
+| Runtime | Match then compose. Composer does not rematch. No LLM. |
 
 ---
 
@@ -30,6 +30,7 @@ It is a deterministic consulting knowledge base: published truth is matched to c
 | `04_MATCHING_PIPELINE.md` | Match order, no calculation |
 | `05_CATALOG.md` | Deterministic catalog entries (CK-01B) |
 | `06_MATCHING_RUNTIME.md` | Signal matching runtime (CK-01C) |
+| `07_COMPOSER_INTEGRATION.md` | Matched units → commercial composer (CK-01D) |
 
 Python freeze:
 
@@ -71,7 +72,7 @@ Consulting Knowledge Units
 
 ## Stop
 
-CK-01C matches published signals to the frozen catalog. Do not wire Report, Workspace, PDF, or DOCX until a later sprint.
+CK-01D composes commercial consulting from matched units. Do not change Portal UI, PDF, or DOCX until a later sprint. Do not start CK-01E.
 
 ---
 
