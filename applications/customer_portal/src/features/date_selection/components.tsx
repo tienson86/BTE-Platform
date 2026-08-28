@@ -1,4 +1,5 @@
 import { Fragment, useState, type FormEvent, type ReactNode } from "react";
+import { TuTruPanel, type TuTruPillar } from "../../components/canonical";
 import { DateSelectionExportBar, type DateSelectionExportFn } from "./ExportBar";
 import {
   CLOCK_NUMBERS,
@@ -147,6 +148,30 @@ function hourIdentity(hour: HourVm): { ganzhi: string; nayin: string; cung: stri
   };
 }
 
+function tuTruPillar(pillar: {
+  can_chi?: string;
+  nayin_element?: string;
+  cung_phi?: string;
+  ganzhi?: string;
+  nayin?: string;
+  cung?: string;
+}): TuTruPillar {
+  return {
+    canChi: (pillar.can_chi || pillar.ganzhi || "").trim(),
+    napAm: (pillar.nayin_element || pillar.nayin || "").trim(),
+    cungPhi: (pillar.cung_phi || pillar.cung || "").trim(),
+  };
+}
+
+function tuTruFromDayHour(day: DayVm, hour?: HourVm | null) {
+  return {
+    year: tuTruPillar(day.year ?? {}),
+    month: tuTruPillar(day.month ?? {}),
+    day: tuTruPillar(day.day ?? {}),
+    hour: tuTruPillar(hour ?? {}),
+  };
+}
+
 export function MonthCalendarGrid({
   cells,
   selectedDay,
@@ -185,10 +210,11 @@ export function MonthCalendarGrid({
   );
 }
 
-export function DayDetailPanel({ day }: { day: DayVm }): ReactNode {
+export function DayDetailPanel({ day, hour }: { day: DayVm; hour?: HourVm }): ReactNode {
   const identity = dayIdentity(day);
   return (
     <div data-testid="day-result-card">
+      <TuTruPanel {...tuTruFromDayHour(day, hour)} />
       <HoaGiapStrip
         ganzhi={identity.ganzhi}
         nayin={identity.nayin}
@@ -317,7 +343,7 @@ export function LookupScreen({
         <div className="ds-right" data-testid="ds-right">
           <section className="bte-card ds-detail" data-testid="ds-day-card">
             <h2>Kết quả ngày</h2>
-            <DayDetailPanel day={day} />
+            <DayDetailPanel day={day} hour={selectedHour} />
           </section>
           <section className="bte-card ds-hour" data-testid="ds-hour-card">
             <h2>Chọn giờ</h2>
