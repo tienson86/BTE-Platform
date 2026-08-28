@@ -120,6 +120,38 @@ function withAnalyticalExtras(data: AnalysisDataDto): AnalysisDataDto {
         ],
       },
     },
+    integrated_narrative: {
+      executive_summary: {
+        sentences: ["Tổng quan đã công bố."],
+        available: true,
+        insufficient: false,
+      },
+      observation: {
+        sentences: ["Quan sát Thất Sát."],
+        available: true,
+        insufficient: false,
+      },
+      reasoning: {
+        sentences: ["Lý do Thực Thần."],
+        available: true,
+        insufficient: false,
+      },
+      impact: {
+        sentences: ["Tác động đã công bố."],
+        available: true,
+        insufficient: false,
+      },
+      recommendation: {
+        sentences: ["Khuyến nghị đã công bố."],
+        available: true,
+        insufficient: false,
+      },
+      summary: {
+        sentences: ["Tóm tắt đã công bố."],
+        available: true,
+        insufficient: false,
+      },
+    },
     five_elements: {
       counts: { wood: 4, fire: 5, earth: 6, metal: 3, water: 1 },
       unit_total: 19,
@@ -306,18 +338,24 @@ describe("BZ-UI-03 Canonical Data Binding", () => {
     ]);
   });
 
-  it("14. Interpretation binding maps narrative sections", () => {
+  it("14. Interpretation binding maps IntegratedNarrative", () => {
     const { container } = render(<ResultWorkspace viewModel={viewModel} />);
+    expect(container.querySelector("[data-block='executive']")?.textContent).toContain("Tổng quan");
     expect(container.querySelector("[data-block='observe']")?.textContent).toContain("Thất Sát");
     expect(container.querySelector("[data-block='reason']")?.textContent).toContain("Thực Thần");
-    expect(container.querySelector("[data-block='impact']")?.textContent).toBeTruthy();
-    expect(container.querySelector("[data-block='advice']")?.textContent).toBeTruthy();
+    expect(container.querySelector("[data-block='impact']")?.textContent).toContain("Tác động");
+    expect(container.querySelector("[data-block='advice']")?.textContent).toContain("Khuyến nghị");
+    expect(container.querySelector("[data-block='summary']")?.textContent).toContain("Tóm tắt");
     expect(viewModel?.interpretation.observe.available).toBe(true);
+    expect(viewModel?.interpretation.observe.source).toBe("integrated_narrative.observation");
     expect(viewModel?.interpretation.observationId.value).toBe("sec-observation");
   });
 
   it("15. Conclusion binding without invented advice", () => {
     const { container } = render(<ResultWorkspace viewModel={viewModel} />);
+    expect(container.querySelector("[data-slot='conclusion-summary']")?.textContent).toContain(
+      "Tóm tắt đã công bố",
+    );
     expect(container.querySelector("[data-slot='conclusion-overall']")?.textContent).toMatch(/Điểm tổng hợp|51/);
     expect(container.querySelector("[data-slot='conclusion-action']")?.textContent).toContain("Giữ nhịp");
     const chips = container.querySelectorAll("[data-slot='action-chip']");
