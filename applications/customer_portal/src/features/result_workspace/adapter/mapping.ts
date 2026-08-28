@@ -1,7 +1,7 @@
 /**
  * BZ-ID-04A workspace field ownership.
  *
- * Adapter: Identity + Analysis → Workspace View Model.
+ * Adapter: Identity + Analysis + Integrated Narrative → Workspace View Model.
  * Presentation only. No engine ownership. No frontend identity reconstruction.
  *
  * workspace.person            → identity.person
@@ -17,8 +17,9 @@
  * workspace.luck identity     → identity.luck (current cycle / year)
  * workspace.luck.cycles       → analysis.luck.cycles (timeline, not identity)
  * workspace.interpretation ids → identity.interpretation
- * workspace.interpretation body → narrative_result sections by those ids
- * workspace.conclusion        → identity.interpretation.conclusion + action
+ * workspace.interpretation body → integrated_narrative blocks only
+ * workspace.conclusion.summary → integrated_narrative.summary
+ * workspace.conclusion overall/action → identity.interpretation.conclusion + action
  */
 
 export const WORKSPACE_SOURCE_MAP = {
@@ -33,8 +34,8 @@ export const WORKSPACE_SOURCE_MAP = {
   shensha: "analysis.bazi.shensha_matches | bazi.shensha",
   bone_weight: "identity.bone_weight",
   luck: "identity.luck (identity fields) + analysis.luck.cycles",
-  interpretation: "identity.interpretation ids + narrative_result body",
-  conclusion: "identity.interpretation.conclusion + action",
+  interpretation: "identity.interpretation ids + integrated_narrative body",
+  conclusion: "integrated_narrative.summary + identity.interpretation.conclusion + action",
 } as const;
 
 /** One owner per identity-backed workspace field. */
@@ -57,7 +58,8 @@ export const WORKSPACE_FIELD_OWNERS = {
   "luck.currentYear": "identity.luck.current_year",
   "luck.cycles": "analysis.luck.cycles",
   "interpretation.ids": "identity.interpretation",
-  "interpretation.body": "narrative_result.sections[id]",
+  "interpretation.body": "integrated_narrative",
+  "conclusion.summary": "integrated_narrative.summary",
   "conclusion.overall": "identity.interpretation.conclusion",
   "conclusion.action": "identity.interpretation.action",
 } as const;
