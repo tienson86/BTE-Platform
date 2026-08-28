@@ -112,6 +112,24 @@ export type CanonicalDesktopViewModel = {
   readonly statusMessage?: string;
   /** Pack 05 official commercial narrative (preferred over legacy interpretation). */
   readonly narrativeResult?: NarrativeResultDto | null;
+  /** Composed commercial consulting. Customer fields only; ids stay internal. */
+  readonly commercialConsulting?: CommercialConsultingView | null;
+};
+
+export type CommercialConsultingSectionView = {
+  readonly domain: string;
+  readonly title: string;
+  readonly summary: string;
+  readonly meaning: readonly string[];
+  readonly recommendations: readonly string[];
+  /** Internal trace. Knowledge cards must not render this. */
+  readonly sourceUnitIds: readonly string[];
+};
+
+export type CommercialConsultingView = {
+  readonly visible: boolean;
+  readonly status: string;
+  readonly sections: readonly CommercialConsultingSectionView[];
 };
 
 export type AdaptCanonicalDesktopOptions = {
@@ -1164,9 +1182,49 @@ export function adaptAnalysisToCanonicalDesktop(
     s11: mapS11(data),
     footer: fixture.footer,
     narrativeResult: asNarrativeResult(data.narrative_result),
+    commercialConsulting: mapCommercialConsulting(data.commercial_consulting),
     source: options.source ?? "api",
     status: options.status ?? "ready",
   };
+}
+
+function asStringList(value: unknown): readonly string[] {
+  if (typeof value === "string") {
+    const text = value.trim();
+    return text ? [text] : [];
+  }
+  if (!Array.isArray(value)) return [];
+  return value.map((item) => String(item).trim()).filter(Boolean);
+}
+
+function mapCommercialConsulting(
+  payload: AnalysisDataDto["commercial_consulting"],
+): CommercialConsultingView | null {
+  if (!payload || typeof payload !== "object") return null;
+  const status = asString(payload.status, "insufficient");
+  const sections = (payload.sections ?? [])
+    .map((item) => {
+      const title = asString(item?.title);
+      const summary = asString(item?.summary);
+      const meaning = asStringList(item?.meaning);
+      const recommendations = asStringList(item?.recommendations);
+      if (!title || !(summary || meaning.length || recommendations.length)) {
+        return null;
+      }
+      return {
+        domain: asString(item?.domain),
+        title,
+        summary,
+        meaning,
+        recommendations,
+        sourceUnitIds: asStringList(item?.source_unit_ids),
+      };
+    })
+    .filter((item): item is CommercialConsultingSectionView => item !== null);
+  if (status !== "complete" || sections.length === 0) {
+    return { visible: false, status: "insufficient", sections: [] };
+  }
+  return { visible: true, status: "complete", sections };
 }
 
 /**
@@ -1183,6 +1241,7 @@ export function createCanonicalDesktopGateViewModel(
     statusMessage: message,
     source: "mock",
     narrativeResult: null,
+    commercialConsulting: null,
     header: {
       ...base.header,
       user: { initials: "", name: "", role: "" },
@@ -1204,5 +1263,6 @@ export function createCanonicalDesktopMockViewModel(): CanonicalDesktopViewModel
     status: "ready",
     source: "mock",
     narrativeResult: null,
+    commercialConsulting: null,
   };
 }
