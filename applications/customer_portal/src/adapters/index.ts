@@ -37,6 +37,8 @@ export type {
   AdaptCanonicalDesktopOptions,
   CanonicalDesktopStatus,
   CanonicalDesktopViewModel,
+  CommercialConsultingSectionView,
+  CommercialConsultingView,
 } from "./canonicalDesktopAdapter";
 
 /** PACK_04 — UI Presentation Adapter (preview models + hasMore). */
