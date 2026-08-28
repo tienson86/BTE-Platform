@@ -91,6 +91,11 @@ def create_app() -> FastAPI:
             return page("result", "result_legacy.html")
         return HTMLResponse(render_desktop_page("result_desktop.html"))
 
+    @app.get("/result-workspace", response_class=HTMLResponse)
+    def result_workspace_page() -> HTMLResponse:
+        """BaZi Result Workspace V2 — layout foundation, no data binding."""
+        return HTMLResponse(render_desktop_page("result_workspace.html"))
+
     @app.get("/interpretation", response_class=HTMLResponse)
     def interpretation_page() -> HTMLResponse:
         """Luận giải — same current result as /result, interpretation zone."""
@@ -163,6 +168,7 @@ def create_app() -> FastAPI:
                 *[i.path for i in NAV_ITEMS],
                 "/good-date",
                 "/choose-date",
+                "/result-workspace",
             ],
         }
 
