@@ -14,6 +14,9 @@ from applications.api.services.score_truth import build_score_view
 from applications.api.services.strength_truth import build_strength_view
 from applications.api.services.temperature_truth import build_temperature_view
 from applications.api.services.useful_god_truth import build_useful_god_view
+from applications.api.services.consulting_commercial_publish import (
+    publish_commercial_consulting,
+)
 from applications.api.services.five_elements_truth import build_five_elements_payload
 from applications.api.services.luck_truth import shape_luck_payload
 from applications.api.services.ten_gods_truth import shape_ten_gods_payload
@@ -291,6 +294,20 @@ class ProductionEngineRunner:
             interpretation=analysis.interpretation_dict(),
             narrative=analysis.narrative_result,
         )
+        consulting = publish_commercial_consulting(
+            {
+                "strength": analysis.strength_dict(),
+                "useful_god": analysis.useful_god_dict(),
+                "pattern": analysis.pattern_dict(),
+                "temperature": analysis.temperature_dict(),
+                "luck": luck_payload,
+                "bazi": analysis.bazi_dict(),
+                "identity": analysis.identity_dict(),
+                "integrated_narrative": analysis.integrated_narrative or {},
+            }
+        )
+        analysis.commercial_consulting = consulting
+        report_source.commercial_consulting = consulting
 
         return EnginePipelineOutput(
             analysis=analysis,
