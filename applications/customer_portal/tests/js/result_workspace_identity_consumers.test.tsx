@@ -82,10 +82,42 @@ function payload(identity: CanonicalIdentityDto = IDENTITY): AnalysisDataDto {
     identity,
     narrative_result: {
       sections: [
-        { id: "sec-observation", paragraphs: [{ text: "Quan sát từ narrative." }] },
-        { id: "sec-reasoning", paragraphs: [{ text: "Lý giải từ narrative." }] },
-        { id: "sec-recommendation", paragraphs: [{ text: "Khuyến nghị từ narrative." }] },
+        { id: "sec-observation", paragraphs: [{ text: "DO-NOT-USE-NARRATIVE-RESULT" }] },
+        { id: "sec-reasoning", paragraphs: [{ text: "DO-NOT-USE-NARRATIVE-REASON" }] },
+        { id: "sec-recommendation", paragraphs: [{ text: "DO-NOT-USE-NARRATIVE-ADVICE" }] },
       ],
+    },
+    integrated_narrative: {
+      executive_summary: {
+        sentences: ["Tổng quan từ integrated."],
+        available: true,
+        insufficient: false,
+      },
+      observation: {
+        sentences: ["Quan sát từ integrated."],
+        available: true,
+        insufficient: false,
+      },
+      reasoning: {
+        sentences: ["Lý giải từ integrated."],
+        available: true,
+        insufficient: false,
+      },
+      impact: {
+        sentences: ["Tác động từ integrated."],
+        available: true,
+        insufficient: false,
+      },
+      recommendation: {
+        sentences: ["Khuyến nghị từ integrated."],
+        available: true,
+        insufficient: false,
+      },
+      summary: {
+        sentences: ["Tóm tắt từ integrated."],
+        available: true,
+        insufficient: false,
+      },
     },
     luck: {
       available: true,
@@ -203,14 +235,20 @@ describe("BZ-ID-04A Workspace Identity Consumers", () => {
     expect(viewModel?.luck.cycles.map((cycle) => cycle.ganZhi)).toEqual(["Canh Ngọ", "Nhâm Thân"]);
   });
 
-  it("Interpretation uses identity section ids and narrative body only", () => {
+  it("Interpretation copies IntegratedNarrative and keeps identity section ids", () => {
     const viewModel = adaptBaziWorkspace(payload());
     expect(viewModel?.interpretation.observationId.value).toBe("sec-observation");
-    expect(viewModel?.interpretation.observe.value).toBe("Quan sát từ narrative");
-    expect(viewModel?.interpretation.reason.value).toBe("Lý giải từ narrative");
-    expect(viewModel?.interpretation.advice.value).toBe("Khuyến nghị từ narrative");
+    expect(viewModel?.interpretation.executive.value).toBe("Tổng quan từ integrated.");
+    expect(viewModel?.interpretation.observe.value).toBe("Quan sát từ integrated.");
+    expect(viewModel?.interpretation.reason.value).toBe("Lý giải từ integrated.");
+    expect(viewModel?.interpretation.impact.value).toBe("Tác động từ integrated.");
+    expect(viewModel?.interpretation.advice.value).toBe("Khuyến nghị từ integrated.");
+    expect(viewModel?.interpretation.summary.value).toBe("Tóm tắt từ integrated.");
+    expect(viewModel?.interpretation.observe.source).toBe("integrated_narrative.observation");
+    expect(viewModel?.conclusion.summary.value).toBe("Tóm tắt từ integrated.");
     expect(viewModel?.conclusion.overall.value).toBe("Kết luận đã công bố.");
     expect(viewModel?.conclusion.action.value).toBe("Giữ nhịp làm việc.");
+    expect(viewModel?.interpretation.observe.value).not.toContain("DO-NOT-USE-NARRATIVE-RESULT");
   });
 
   it("does not read calendar, customer, or frontend lookup tables for identity", () => {
