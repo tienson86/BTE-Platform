@@ -1,4 +1,5 @@
 import { Fragment, useState, type FormEvent, type ReactNode } from "react";
+import { DateSelectionExportBar, type DateSelectionExportFn } from "./ExportBar";
 import {
   CLOCK_NUMBERS,
   DATE_SELECTION_NAV,
@@ -575,11 +576,20 @@ export function TopResults({
 export function SearchScreen({
   person,
   dates,
+  searchResult,
+  exportFile,
 }: {
   person?: PersonVm;
   dates?: RankedDateVm[];
+  searchResult?: unknown;
+  exportFile?: DateSelectionExportFn;
 }): ReactNode {
   const [submitted, setSubmitted] = useState(Boolean(person));
+  const personTrach = person?.trach_group || person?.trach.trach_group_code;
+  const visible = (dates || []).filter((item) => {
+    const dayGroup = item.day.trach_group || item.day.trach?.trach_group_code;
+    return !personTrach || dayGroup === personTrach;
+  });
   return (
     <div className="ds-page" data-testid="search-screen">
       <div className="ds-search-row" data-testid="search-row">
@@ -589,7 +599,14 @@ export function SearchScreen({
       {submitted && dates ? (
         <TopResults
           dates={dates}
-          personTrach={person?.trach_group || person?.trach.trach_group_code}
+          personTrach={personTrach}
+        />
+      ) : null}
+      {submitted ? (
+        <DateSelectionExportBar
+          searchResult={searchResult ?? (visible.length ? { person, dates: visible } : null)}
+          hasRecommendations={visible.length > 0}
+          exportFile={exportFile}
         />
       ) : null}
     </div>

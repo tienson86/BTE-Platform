@@ -25,3 +25,4 @@ export {
   SearchScreen,
   TopResults,
 } from "./components";
+export { DateSelectionExportBar } from "./ExportBar";

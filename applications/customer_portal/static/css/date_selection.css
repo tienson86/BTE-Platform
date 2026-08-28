@@ -366,6 +366,31 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--space-3);
 }
+.ds-export {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+.ds-export[hidden] {
+  display: none;
+}
+.ds-export__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.ds-export__actions button {
+  min-height: 2.5rem;
+}
+.ds-export__status {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+.ds-export__status[data-tone="error"] {
+  color: var(--danger, #b42318);
+}
 .ds-cards .ds-result {
   padding: var(--space-4);
   transition: box-shadow 0.15s ease, border-color 0.15s ease;

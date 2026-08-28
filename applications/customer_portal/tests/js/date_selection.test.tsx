@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 
 import { APP_NAV_ITEMS, PrimaryNav, resolveActiveNavId } from "../../src/layouts/Navigation";
@@ -619,5 +619,98 @@ describe("Date Selection frontend", () => {
     expect(hours).not.toContain("✓ Phù hợp Nhóm Trạch của bạn");
     expect(screen.getByTestId("ranked-card").textContent).toContain("Đoài (Kim)");
     expect(screen.getByTestId("compatible-hours").textContent).toContain("Càn (Kim)");
+  });
+
+  it("hides export buttons before search", () => {
+    render(<SearchScreen />);
+    expect(screen.queryByRole("button", { name: /Xuất PDF/ })).toBeNull();
+    expect(screen.queryByRole("button", { name: /Xuất DOCX/ })).toBeNull();
+  });
+
+  it("shows export buttons after a successful search with recommendations", () => {
+    render(<SearchScreen person={person} dates={ranked} />);
+    expect(screen.getByTestId("ds-export")).toBeTruthy();
+    expect(screen.getByRole("button", { name: /Xuất PDF/ })).toBeTruthy();
+    expect(screen.getByRole("button", { name: /Xuất DOCX/ })).toBeTruthy();
+    const results = screen.getByTestId("top-results");
+    expect(
+      results.compareDocumentPosition(screen.getByTestId("ds-export")) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+
+  it("hides export buttons when there are no recommendations", () => {
+    render(<SearchScreen person={person} dates={[]} />);
+    expect(screen.queryByTestId("ds-export")).toBeNull();
+    expect(screen.queryByRole("button", { name: /Xuất PDF/ })).toBeNull();
+  });
+
+  it("hides export buttons when every recommendation is filtered out", () => {
+    const eastDay: DayVm = {
+      ...day,
+      trach_group: "dong",
+      trach: {
+        cung: "Ly",
+        element_code: "hoa",
+        element_label: "Hỏa",
+        trach_group_code: "dong",
+        trach_group_label: "Đông Tứ Trạch",
+      },
+    };
+    render(
+      <SearchScreen
+        person={person}
+        dates={[{ day: eastDay, recommendations: [], compatible_hours: [] }]}
+      />,
+    );
+    expect(screen.queryByTestId("ranked-card")).toBeNull();
+    expect(screen.queryByTestId("ds-export")).toBeNull();
+  });
+
+  it("shows loading then re-enables export buttons after success", async () => {
+    let resolveExport: (() => void) | undefined;
+    const pending = new Promise<void>((resolve) => {
+      resolveExport = resolve;
+    });
+    const calls: string[] = [];
+    render(
+      <SearchScreen
+        person={person}
+        dates={ranked}
+        searchResult={{ person, dates: ranked }}
+        exportFile={async (_result, format) => {
+          calls.push(format);
+          await pending;
+        }}
+      />,
+    );
+    fireEvent.click(screen.getByRole("button", { name: /Xuất PDF/ }));
+    expect(screen.getByRole("button", { name: "Đang tạo PDF..." })).toBeTruthy();
+    expect(screen.getByRole("button", { name: /Xuất DOCX/ })).toHaveProperty("disabled", true);
+    resolveExport?.();
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: /Xuất PDF/ })).toHaveProperty("disabled", false);
+    });
+    expect(calls).toEqual(["pdf"]);
+    expect(screen.queryByText("Đang tạo PDF...")).toBeNull();
+  });
+
+  it("shows an inline error and re-enables buttons after export failure", async () => {
+    render(
+      <SearchScreen
+        person={person}
+        dates={ranked}
+        searchResult={{ person, dates: ranked }}
+        exportFile={async () => {
+          throw new Error("Không tạo được báo cáo. Vui lòng thử lại.");
+        }}
+      />,
+    );
+    fireEvent.click(screen.getByRole("button", { name: /Xuất DOCX/ }));
+    await waitFor(() => {
+      expect(screen.getByRole("status").textContent).toContain("Không tạo được báo cáo");
+    });
+    expect(screen.getByRole("button", { name: /Xuất PDF/ })).toHaveProperty("disabled", false);
+    expect(screen.getByRole("status").textContent).not.toContain(".py");
+    expect(screen.getByRole("status").textContent).not.toContain("Traceback");
   });
 });

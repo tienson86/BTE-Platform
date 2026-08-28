@@ -23,6 +23,15 @@ def test_date_selection_pages_render() -> None:
     assert "ds-right" in good.text
     assert good.text.find("ds-calendar-card") < good.text.find("ds-clock-card")
     assert "dsFullName" in choose.text
+    assert 'id="dsExportPdf"' in choose.text
+    assert "Xuất DOCX" in choose.text
+    assert choose.text.find('id="dsResults"') < choose.text.find('id="dsExport"')
+    assert 'id="dsExport"' in choose.text
+    assert "hidden" in choose.text.split('id="dsExport"', 1)[1].split(">", 1)[0]
+    assert 'id="dsExportPdf"' not in good.text
+    nav_start = choose.text.find("nav-dropdown")
+    nav_chunk = choose.text[nav_start : choose.text.find('class="ds-page"')]
+    assert 'id="dsExportPdf"' not in nav_chunk
     assert "dsGender" in choose.text
     assert 'type="radio"' in choose.text
     assert 'select id="dsGender"' not in choose.text

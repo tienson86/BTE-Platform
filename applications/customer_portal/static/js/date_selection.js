@@ -73,6 +73,11 @@
     "date_selection.other_good_windows": "Các thời điểm đẹp",
     "date_selection.trach_match": "Phù hợp Nhóm Trạch của bạn",
     "date_selection.other_hours": "Khung giờ khác",
+    "date_selection.export_pdf": "📄 Xuất PDF",
+    "date_selection.export_docx": "📝 Xuất DOCX",
+    "date_selection.export_pdf_loading": "Đang tạo PDF...",
+    "date_selection.export_docx_loading": "Đang tạo DOCX...",
+    "date_selection.export_failed": "Không tạo được báo cáo. Vui lòng thử lại.",
   };
 
   function isLeapYear(year) {
@@ -163,6 +168,94 @@
       throw new Error("BtePortal is not loaded");
     }
     return global.BtePortal.post(path, body);
+  }
+
+  function filenameFromDisposition(header, fallback) {
+    var value = String(header || "");
+    var utf = /filename\*=UTF-8''([^;]+)/i.exec(value);
+    if (utf && utf[1]) {
+      try {
+        return decodeURIComponent(utf[1]);
+      } catch (_err) {
+        return utf[1];
+      }
+    }
+    var ascii = /filename="([^"]+)"/i.exec(value);
+    if (ascii && ascii[1]) return ascii[1];
+    return fallback;
+  }
+
+  function safeExportMessage(message) {
+    var text = String(message || "").trim();
+    if (!text || /\.py:|Traceback/i.test(text)) {
+      return t("date_selection.export_failed");
+    }
+    return text;
+  }
+
+  function triggerDownload(blob, filename) {
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    link.rel = "noopener";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.setTimeout(function () {
+      URL.revokeObjectURL(url);
+    }, 1000);
+  }
+
+  function apiPostBlob(path, body) {
+    var headers = {
+      Accept:
+        "application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/json",
+      "Content-Type": "application/json",
+    };
+    if (global.BtePortal && typeof global.BtePortal.getToken === "function") {
+      var token = global.BtePortal.getToken();
+      if (token) headers.Authorization = "Bearer " + token;
+    }
+    return fetch("/backend" + path, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(body),
+    }).then(function (res) {
+      if (!res.ok) {
+        return res.text().then(function (text) {
+          if (typeof console !== "undefined" && console.error) {
+            console.error("date-selection export HTTP " + res.status);
+          }
+          var data = null;
+          try {
+            data = text ? JSON.parse(text) : null;
+          } catch (_err) {
+            data = null;
+          }
+          var rawMessage = "";
+          if (data && typeof data.message === "string") rawMessage = data.message;
+          var message = rawMessage || t("date_selection.export_failed");
+          var err = new Error(safeExportMessage(message));
+          err.status = res.status;
+          throw err;
+        });
+      }
+      return res.blob().then(function (blob) {
+        if (!blob || !blob.size) {
+          throw new Error(t("date_selection.export_failed"));
+        }
+        return {
+          blob: blob,
+          filename: filenameFromDisposition(
+            res.headers.get("Content-Disposition"),
+            path.indexOf("docx") >= 0
+              ? "bao-cao-chon-ngay-tot.docx"
+              : "bao-cao-chon-ngay-tot.pdf",
+          ),
+        };
+      });
+    });
   }
 
   function weekdayLabels() {
@@ -459,6 +552,8 @@
 
   function SearchController() {
     this.form = document.getElementById("dsSearchForm");
+    this.lastSearch = null;
+    this.exportBusy = null;
   }
 
   SearchController.prototype.init = function () {
@@ -482,6 +577,19 @@
       event.preventDefault();
       self.submit();
     });
+    var pdfBtn = document.getElementById("dsExportPdf");
+    var docxBtn = document.getElementById("dsExportDocx");
+    if (pdfBtn) {
+      pdfBtn.addEventListener("click", function () {
+        self.exportReport("pdf");
+      });
+    }
+    if (docxBtn) {
+      docxBtn.addEventListener("click", function () {
+        self.exportReport("docx");
+      });
+    }
+    this.hideExport();
   };
 
   SearchController.prototype.showError = function (id, message) {
@@ -528,11 +636,16 @@
       target_month: target.month,
     };
     var self = this;
+    this.lastSearch = null;
+    this.hideExport();
     apiPost("/api/v1/date-selection/search", payload)
       .then(function (res) {
+        self.lastSearch = res.data;
         self.render(res.data);
       })
       .catch(function (err) {
+        self.lastSearch = null;
+        self.hideExport();
         if (global.BteShell) BteShell.toast(err.message || "Lỗi", "error");
       });
   };
@@ -561,6 +674,7 @@
     });
     if (!dates.length) {
       root.innerHTML = '<p class="muted">' + t("date_selection.no_results") + "</p>";
+      this.hideExport();
       return;
     }
     root.innerHTML = dates
@@ -568,6 +682,72 @@
         return renderRankedCard(item, personGroup);
       })
       .join("");
+    this.showExport();
+  };
+
+  SearchController.prototype.hideExport = function () {
+    var el = document.getElementById("dsExport");
+    if (el) el.hidden = true;
+    this.setExportBusy(null);
+    this.setExportStatus("", "");
+  };
+
+  SearchController.prototype.showExport = function () {
+    var el = document.getElementById("dsExport");
+    if (el) el.hidden = false;
+    this.setExportBusy(null);
+    this.setExportStatus("", "");
+  };
+
+  SearchController.prototype.setExportBusy = function (fmt) {
+    this.exportBusy = fmt;
+    var pdfBtn = document.getElementById("dsExportPdf");
+    var docxBtn = document.getElementById("dsExportDocx");
+    if (pdfBtn) {
+      pdfBtn.disabled = Boolean(fmt);
+      pdfBtn.textContent =
+        fmt === "pdf" ? t("date_selection.export_pdf_loading") : t("date_selection.export_pdf");
+    }
+    if (docxBtn) {
+      docxBtn.disabled = Boolean(fmt);
+      docxBtn.textContent =
+        fmt === "docx" ? t("date_selection.export_docx_loading") : t("date_selection.export_docx");
+    }
+  };
+
+  SearchController.prototype.setExportStatus = function (message, tone) {
+    var el = document.getElementById("dsExportStatus");
+    if (!el) return;
+    if (!message) {
+      el.hidden = true;
+      el.textContent = "";
+      el.removeAttribute("data-tone");
+      return;
+    }
+    el.hidden = false;
+    el.textContent = message;
+    if (tone) el.setAttribute("data-tone", tone);
+    else el.removeAttribute("data-tone");
+  };
+
+  SearchController.prototype.exportReport = function (fmt) {
+    var self = this;
+    if (this.exportBusy || !this.lastSearch) return;
+    var path =
+      fmt === "docx"
+        ? "/api/v1/date-selection/report/docx"
+        : "/api/v1/date-selection/report/pdf";
+    this.setExportBusy(fmt);
+    apiPostBlob(path, { search_result: this.lastSearch })
+      .then(function (file) {
+        triggerDownload(file.blob, file.filename);
+        self.setExportBusy(null);
+        self.setExportStatus("", "");
+      })
+      .catch(function (err) {
+        self.setExportBusy(null);
+        self.setExportStatus(safeExportMessage(err && err.message), "error");
+      });
   };
 
   function kvTone(label, value, tone) {

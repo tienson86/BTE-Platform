@@ -2,18 +2,29 @@
 
 from __future__ import annotations
 
+import logging
 from datetime import date
+from typing import Any, Literal
+from urllib.parse import quote
 
 from fastapi import APIRouter, Request
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
+from starlette.background import BackgroundTask
 
-from applications.api.exceptions import ValidationAPIError
+from applications.api.exceptions import CustomerExportError, ValidationAPIError
 from applications.api.schemas.common import APIResponse
+from applications.api.services.date_selection_report_export import (
+    EXPORT_FAILED_MESSAGE,
+    cleanup_date_selection_export,
+    export_displayed_search_result,
+)
 from engines.date_selection.exceptions import DateSelectionValidationError
 from engines.date_selection.service import DateSelectionService
 
 router = APIRouter(prefix="/date-selection", tags=["date-selection"])
 _SERVICE = DateSelectionService()
+logger = logging.getLogger(__name__)
 
 
 class MonthQuery(BaseModel):
@@ -113,3 +124,60 @@ def search_endpoint(request: Request, body: SearchQuery) -> APIResponse:
         )
     )
     return _ok(request, "Date Selection search OK", result.to_dict())
+
+
+class ReportExportRequest(BaseModel):
+    """Displayed SearchResult. Never a request to rerun Date Selection."""
+
+    search_result: dict[str, Any] = Field(...)
+
+
+def _content_disposition(filename: str) -> str:
+    ascii_name = filename.encode("ascii", "ignore").decode("ascii") or "report.bin"
+    encoded = quote(filename)
+    return f"attachment; filename=\"{ascii_name}\"; filename*=UTF-8''{encoded}"
+
+
+def _report_file_response(
+    body: ReportExportRequest,
+    fmt: Literal["pdf", "docx"],
+) -> FileResponse:
+    try:
+        path, download_name, media_type, result = export_displayed_search_result(
+            body.search_result,
+            fmt,
+        )
+    except CustomerExportError:
+        raise
+    except Exception:
+        logger.exception("date_selection_report_export_unhandled format=%s", fmt)
+        raise CustomerExportError(
+            EXPORT_FAILED_MESSAGE,
+            status_code=500,
+            code="export_renderer_failed",
+        ) from None
+    return FileResponse(
+        path=str(path),
+        media_type=media_type,
+        filename=download_name,
+        background=BackgroundTask(cleanup_date_selection_export, path),
+        headers={
+            "Content-Disposition": _content_disposition(download_name),
+            "X-BTE-Report-Id": result.case_id or "",
+            "X-Content-Type-Options": "nosniff",
+        },
+    )
+
+
+@router.post("/report/pdf")
+def export_date_selection_pdf(request: Request, body: ReportExportRequest) -> FileResponse:
+    """PDF from the SearchResult currently displayed in the portal."""
+    del request
+    return _report_file_response(body, "pdf")
+
+
+@router.post("/report/docx")
+def export_date_selection_docx(request: Request, body: ReportExportRequest) -> FileResponse:
+    """DOCX from the SearchResult currently displayed in the portal."""
+    del request
+    return _report_file_response(body, "docx")
