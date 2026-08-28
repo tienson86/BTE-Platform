@@ -12,6 +12,7 @@ export * from "./navigation";
 export * from "./display";
 export * from "./charts";
 export * from "./business";
+export * from "./canonical";
 
 export {
   SectionHeader,
