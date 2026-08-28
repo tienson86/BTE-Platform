@@ -80,6 +80,9 @@ from applications.api.services.report_truth import (
     build_report_view,
     report_source_fingerprint,
 )
+from applications.api.services.consulting_commercial_publish import (
+    publish_commercial_consulting,
+)
 from applications.api.services.integrated_narrative_publish import (
     publish_integrated_narrative,
 )
@@ -349,6 +352,14 @@ class OrchestratorService:
                 calendar=payload.get("calendar"),
                 input_fields=payload.get("input"),
             ).to_dict()
+        consulting = publish_commercial_consulting(
+            payload,
+            identity=payload.get("identity") if isinstance(payload.get("identity"), dict) else None,
+            integrated_narrative=integrated,
+        )
+        payload["commercial_consulting"] = consulting
+        if analysis is not None:
+            analysis.commercial_consulting = consulting
         for key in _INTERNAL_PAYLOAD_KEYS:
             payload.pop(key, None)
         payload["pipeline"] = self._public_pipeline(completed)
