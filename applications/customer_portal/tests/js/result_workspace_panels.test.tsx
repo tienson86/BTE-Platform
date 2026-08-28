@@ -129,22 +129,25 @@ describe("BZ-UI-02 Canonical Panels", () => {
     expect(panel?.querySelector("[data-slot='luck-note']")).toBeTruthy();
   });
 
-  it("reserves four interpretation reasoning blocks", () => {
+  it("reserves six IntegratedNarrative interpretation blocks", () => {
     const { container } = render(<ResultWorkspace />);
     const blocks = container.querySelectorAll("[data-panel='interpretation'] [data-slot='reason-block']");
-    expect(blocks).toHaveLength(4);
+    expect(blocks).toHaveLength(6);
     expect(Array.from(blocks).map((el) => el.getAttribute("data-block"))).toEqual(
       INTERPRETATION_BLOCKS.map((block) => block.id),
     );
+    expect(container.querySelector("[data-panel='interpretation']")?.textContent).toContain("Tổng quan");
     expect(container.querySelector("[data-panel='interpretation']")?.textContent).toContain("Quan sát");
     expect(container.querySelector("[data-panel='interpretation']")?.textContent).toContain("Lý do");
     expect(container.querySelector("[data-panel='interpretation']")?.textContent).toContain("Tác động");
     expect(container.querySelector("[data-panel='interpretation']")?.textContent).toContain("Khuyến nghị");
+    expect(container.querySelector("[data-panel='interpretation']")?.textContent).toContain("Tóm tắt");
   });
 
   it("reserves conclusion and action-chip structure", () => {
     const { container } = render(<ResultWorkspace />);
     const panel = container.querySelector("[data-panel='conclusion']");
+    expect(panel?.querySelector("[data-slot='conclusion-summary']")?.textContent).toContain("Tóm tắt");
     expect(panel?.querySelector("[data-slot='conclusion-overall']")?.textContent).toContain("Kết luận");
     expect(panel?.querySelectorAll("[data-slot='action-chip']")).toHaveLength(4);
     expect(panel?.textContent).toContain("Công việc");
