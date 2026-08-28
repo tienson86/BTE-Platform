@@ -1,15 +1,8 @@
 /**
  * BaziWorkspaceAdapter — canonical analysis → workspace view model.
  *
- * Identity fields: Analysis Result data.identity only.
- * Analytical fields: strength / useful_god / score / five_elements / ten_gods /
- * pattern / temperature / shensha / luck.cycles / narrative body.
- *
- * Must not calculate, score, infer, rank, or reconstruct identity from
- * Calendar, Bazi, customer echo, or frontend lookup tables.
- *
- * Five-element percents: count / canonical total (unit_total or sum of counts).
- * Isolated presentation math. No analytical reweighting.
+ * View model: Identity + Analysis + Integrated Narrative only.
+ * Panel 9/10 copy published IntegratedNarrative. No topic merge.
  */
 
 import {
@@ -34,10 +27,6 @@ import {
   canonicalUsefulDisplay,
   canonicalUsefulGodPayload,
 } from "../../../adapters/canonicalUsefulGod";
-import {
-  asNarrativeResult,
-  sectionParagraphTexts,
-} from "../../../adapters/narrativeResultAdapter";
 import type { AnalysisDataDto, CanonicalIdentityDto } from "../../../models";
 import { analyticalTenGods } from "../../../resultState/currentResult";
 import { ACTION_CHIPS, SHEN_SHA_NAMES } from "../catalog";
@@ -310,19 +299,19 @@ function bindLuck(data: AnalysisDataDto): WorkspaceLuckView {
   };
 }
 
-function sectionBodyById(
-  narrative: ReturnType<typeof asNarrativeResult>,
-  sectionId: string,
-): string {
-  if (!narrative || !sectionId) return "";
-  const escaped = sectionId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const texts = sectionParagraphTexts(narrative, new RegExp(escaped, "i"));
-  return texts[0] || "";
+function integratedBlockText(raw: unknown): string {
+  const rec = asRecord(raw);
+  if (!Array.isArray(rec.sentences)) return "";
+  return rec.sentences.map((item) => text(item)).filter(Boolean).join(" ");
+}
+
+function bindIntegratedBlock(raw: unknown, source: string): WorkspaceField<string> {
+  return field(integratedBlockText(raw), source);
 }
 
 function bindInterpretation(data: AnalysisDataDto): WorkspaceInterpretationView {
   const published = asRecord(identityOf(data).interpretation);
-  const narrative = asNarrativeResult(data.narrative_result);
+  const integrated = asRecord(data.integrated_narrative);
   const observationId = text(published.observation_id);
   const reasoningId = text(published.reasoning_id);
   const recommendationId = text(published.recommendation_id);
@@ -330,24 +319,19 @@ function bindInterpretation(data: AnalysisDataDto): WorkspaceInterpretationView 
   const sectionKeys = Array.isArray(published.section_keys)
     ? published.section_keys.map((item) => text(item)).filter(Boolean)
     : [];
-  const impactId = sectionKeys.find((key) => /impact/i.test(key)) || "";
   return {
-    observe: field(
-      sectionBodyById(narrative, observationId),
-      "identity.interpretation.observation_id + narrative_result",
+    executive: bindIntegratedBlock(
+      integrated.executive_summary,
+      "integrated_narrative.executive_summary",
     ),
-    reason: field(
-      sectionBodyById(narrative, reasoningId),
-      "identity.interpretation.reasoning_id + narrative_result",
+    observe: bindIntegratedBlock(integrated.observation, "integrated_narrative.observation"),
+    reason: bindIntegratedBlock(integrated.reasoning, "integrated_narrative.reasoning"),
+    impact: bindIntegratedBlock(integrated.impact, "integrated_narrative.impact"),
+    advice: bindIntegratedBlock(
+      integrated.recommendation,
+      "integrated_narrative.recommendation",
     ),
-    impact: field(
-      sectionBodyById(narrative, impactId),
-      "identity.interpretation.section_keys + narrative_result",
-    ),
-    advice: field(
-      sectionBodyById(narrative, recommendationId),
-      "identity.interpretation.recommendation_id + narrative_result",
-    ),
+    summary: bindIntegratedBlock(integrated.summary, "integrated_narrative.summary"),
     observationId: field(observationId, "identity.interpretation.observation_id"),
     reasoningId: field(reasoningId, "identity.interpretation.reasoning_id"),
     recommendationId: field(recommendationId, "identity.interpretation.recommendation_id"),
@@ -359,7 +343,9 @@ function bindInterpretation(data: AnalysisDataDto): WorkspaceInterpretationView 
 function bindConclusion(data: AnalysisDataDto): WorkspaceConclusionView {
   const published = asRecord(identityOf(data).interpretation);
   const action = asRecord(published.action);
+  const integrated = asRecord(data.integrated_narrative);
   return {
+    summary: bindIntegratedBlock(integrated.summary, "integrated_narrative.summary"),
     overall: field(text(published.conclusion), "identity.interpretation.conclusion"),
     action: field(
       text(action.next_action) || text(action.priority_recommendation),
