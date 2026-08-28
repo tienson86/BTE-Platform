@@ -7,7 +7,8 @@ import { PREVIEW_CONCLUSION } from "../previewFixture";
 import { SlotValue } from "./slots";
 
 /**
- * Kết Luận & Hành Động — canonical conclusion only. Action chips stay unpublished.
+ * Kết Luận & Hành Động — integrated summary plus canonical conclusion/action.
+ * No local merge of those payloads.
  */
 export function ConclusionPanel({
   preview,
@@ -22,6 +23,16 @@ export function ConclusionPanel({
     : model?.actions ?? ACTION_CHIPS.map((chip) => ({ ...chip, available: false }));
   return (
     <div className="bte-rw-panel" data-shell="conclusion">
+      <div className="bte-rw-stat" data-slot="conclusion-summary">
+        <span className="bte-rw-label">Tóm tắt</span>
+        <p className="bte-rw-prose">
+          <SlotValue
+            preview={preview}
+            bound={bound}
+            value={preview ? PREVIEW_CONCLUSION.summary : model?.summary.value}
+          />
+        </p>
+      </div>
       <div className="bte-rw-stat" data-slot="conclusion-overall">
         <span className="bte-rw-label">Kết luận</span>
         <p className="bte-rw-prose bte-rw-prose--lead">
