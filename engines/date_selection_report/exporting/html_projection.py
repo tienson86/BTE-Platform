@@ -1,6 +1,6 @@
-"""Project DateSelectionRenderTree onto PACK 05 HTML Report V1.
+"""Project DateSelectionRenderTree onto PACK 05 HTML with commercial print CSS.
 
-Read-only. Does not mutate the render tree. Does not invent a theme.
+Read-only. Does not mutate the render tree.
 """
 
 from __future__ import annotations
@@ -17,55 +17,28 @@ from engines.date_selection_report.rendering.nodes import (
 )
 
 PACK05_TEMPLATE_DIR = Path(report_engine.__file__).resolve().parent / "templates" / "v1"
+COMMERCIAL_CSS_PATH = Path(__file__).resolve().parent / "commercial_report.css"
 PDF_DOCUMENT_TITLE = "Báo cáo Chọn ngày tốt"
 PDF_AUTHOR = "BTE Platform"
 PDF_SUBJECT = "Date Selection"
 
-# Pagination hints only. Colors and type scale stay on PACK 05 tokens.
-_PAGINATION_CSS = """
-.ds-recommendation {
-  border-top: 1px solid var(--report-border);
-  margin: 16px 0 0;
-  padding-top: 12px;
-  break-inside: avoid;
-  page-break-inside: avoid;
+_ELEMENT_PILL_CLASS: dict[str, str] = {
+    "Mộc": "ds-pill-moc",
+    "Hỏa": "ds-pill-hoa",
+    "Thổ": "ds-pill-tho",
+    "Kim": "ds-pill-kim",
+    "Thủy": "ds-pill-thuy",
 }
-.ds-date-day {
-  break-inside: avoid;
-  page-break-inside: avoid;
-}
-.ds-solar {
-  color: var(--report-accent);
-  font-size: 22px;
-  font-weight: 700;
-  margin: 0 0 4px;
-}
-.ds-result {
-  color: var(--report-accent);
-  font-size: 16px;
-  font-weight: 700;
-  margin: 4px 0 10px;
-}
-.ds-positive-times h4 {
-  color: var(--report-accent);
-  font-size: 14px;
-  margin: 12px 0 6px;
-}
-.ds-meta {
-  color: var(--report-muted);
-  font-size: 12px;
-  margin: 8px 0 0;
-}
-"""
 
 
 def project_render_tree_to_html(tree: DateSelectionRenderTree) -> str:
-    """Fill PACK 05 report_v1.html with RenderTree content."""
+    """Fill PACK 05 report_v1.html with RenderTree content and commercial CSS."""
     template = (PACK05_TEMPLATE_DIR / "report_v1.html").read_text(encoding="utf-8")
     css = (PACK05_TEMPLATE_DIR / "report_v1.css").read_text(encoding="utf-8")
+    css += COMMERCIAL_CSS_PATH.read_text(encoding="utf-8")
     html = (
         template.replace("{{TITLE}}", escape(PDF_DOCUMENT_TITLE))
-        .replace("{{CSS}}", css + _PAGINATION_CSS)
+        .replace("{{CSS}}", css)
         .replace("{{CONTENT}}", _render_content(tree))
     )
     html = _inject_document_meta(html)
@@ -106,9 +79,9 @@ def _render_content(tree: DateSelectionRenderTree) -> str:
 def _header(tree: DateSelectionRenderTree) -> str:
     generated = _format_generated_at(tree.header.generated_at)
     return (
-        '<header class="report-v1__header" id="ds-header">'
-        f'<h1 class="report-v1__title">{escape(tree.header.title)}</h1>'
-        f'<p class="report-v1__subtitle">{escape(tree.header.subtitle)}</p>'
+        '<header class="ds-cover" id="ds-header">'
+        f"<h1>{escape(tree.header.title)}</h1>"
+        f'<p class="ds-brand">{escape(tree.header.subtitle)}</p>'
         f'<p class="ds-meta">{escape(generated)}</p>'
         "</header>"
     )
@@ -127,30 +100,41 @@ def _person(tree: DateSelectionRenderTree) -> str:
     return _section(
         section_id="person",
         title=tree.person.title,
-        body=_meta_grid([(row.label, row.value) for row in tree.person.rows]),
+        body=_kv_rows([(row.label, row.value) for row in tree.person.rows]),
     )
 
 
 def _search(tree: DateSelectionRenderTree) -> str:
     period = tree.search_period
-    rows = [
-        (period.month_label, period.month_display),
-        (period.recommendation_count_label, period.recommendation_count),
-    ]
-    body = _meta_grid(rows)
+    body = (
+        '<div class="ds-summary">'
+        + _summary_item(period.month_label, period.month_display)
+        + _summary_item(period.recommendation_count_label, period.recommendation_count)
+        + "</div>"
+    )
     if period.explanation:
-        body += f"<p>{escape(period.explanation)}</p>"
+        body += f'<p class="ds-caption">{escape(period.explanation)}</p>'
     return _section(section_id="search_period", title=period.title, body=body)
+
+
+def _summary_item(label: str, value: str) -> str:
+    return (
+        '<div class="ds-summary-item">'
+        f'<span class="ds-label">{escape(label)}</span>'
+        f'<span class="ds-value">{escape(value)}</span>'
+        "</div>"
+    )
 
 
 def _recommendations(tree: DateSelectionRenderTree) -> str:
     if tree.empty_state is not None:
-        body = f'<p class="report-v1__fallback">{escape(tree.empty_state.message)}</p>'
+        body = f'<p class="ds-caption">{escape(tree.empty_state.message)}</p>'
         return _section(
             section_id="recommendations",
             title=tree.recommendations_title,
             body=body,
             allow_break=True,
+            card=False,
         )
     blocks = "".join(_recommendation(node) for node in tree.recommendations)
     return _section(
@@ -158,6 +142,7 @@ def _recommendations(tree: DateSelectionRenderTree) -> str:
         title=tree.recommendations_title,
         body=blocks,
         allow_break=True,
+        card=False,
     )
 
 
@@ -166,32 +151,38 @@ def _recommendation(node: RecommendationNode) -> str:
     date_day = (
         '<div class="ds-date-day">'
         f'<p class="ds-solar">{escape(header.solar_date)}</p>'
-        f'<p class="report-v1__subtitle">{escape(header.lunar_display)}</p>'
+        f'<p class="ds-lunar">{escape(header.lunar_display)}</p>'
         f'<p class="ds-result">{escape(header.day_result)}</p>'
-        + _meta_grid([(row.label, row.value) for row in node.day_information.rows])
+        "</div>"
+    )
+    info = (
+        '<div class="ds-day-info">'
+        + _kv_rows([(row.label, row.value) for row in node.day_information.rows])
         + "</div>"
     )
     hours = (
+        '<div class="ds-hours">'
         f"<h3>{escape(node.compatible_hours.title)}</h3>"
         + _list([row.display for row in node.compatible_hours.rows])
+        + "</div>"
     )
-    groups = [_positive_group(group.label, group.items) for group in node.positive_times.groups]
+    groups = "".join(_positive_group(group.label, group.items) for group in node.positive_times.groups)
     positive = (
         f'<div class="ds-positive-times" id="positive-times-{node.rank}">'
         f"<h3>{escape(node.positive_times.title)}</h3>"
-        f"{''.join(groups)}"
+        f"{groups}"
         "</div>"
     )
     return (
         f'<article class="ds-recommendation" id="recommendation-{node.rank}">'
-        f"{date_day}{hours}{positive}"
+        f"{date_day}{info}{hours}{positive}"
         "</article>"
     )
 
 
 def _positive_group(label: str, items: tuple) -> str:
     lines = [f"{item.branch_display} · {item.time_range}" for item in items]
-    return f"<h4>{escape(label)}</h4>" + _list(lines)
+    return f'<div class="ds-ke-group"><h4>{escape(label)}</h4>{_list(lines)}</div>'
 
 
 def _guidance(tree: DateSelectionRenderTree) -> str:
@@ -203,30 +194,55 @@ def _guidance(tree: DateSelectionRenderTree) -> str:
 
 def _footer(tree: DateSelectionRenderTree) -> str:
     footer = tree.footer
-    text = (
-        f"{footer.generated_by_label} {footer.generator}"
-        f" · {footer.product}"
-        f" · {footer.report_version}"
-    )
-    return f'<footer class="report-v1__footer" id="ds-footer">{escape(text)}</footer>'
+    text = f"{footer.generator} · {footer.product} · {footer.report_version}"
+    return f'<footer class="ds-footer" id="ds-footer">{escape(text)}</footer>'
 
 
-def _section(*, section_id: str, title: str, body: str, allow_break: bool = False) -> str:
-    flow = " report-v1__section--flow" if allow_break else ""
+def _section(
+    *,
+    section_id: str,
+    title: str,
+    body: str,
+    allow_break: bool = False,
+    card: bool = True,
+) -> str:
+    classes = ["report-v1__section"]
+    if allow_break:
+        classes.append("report-v1__section--flow")
+    if card:
+        classes.append("ds-card")
     return (
-        f'<section class="report-v1__section{flow}" id="{escape(section_id)}">'
+        f'<section class="{" ".join(classes)}" id="{escape(section_id)}">'
         f'<h2 class="report-v1__section-title">{escape(title)}</h2>'
         f'<div class="report-v1__section-body">{body}</div>'
         "</section>"
     )
 
 
-def _meta_grid(rows: list[tuple[str, str]]) -> str:
-    parts = ['<dl class="report-v1__meta-grid">']
+def _kv_rows(rows: list[tuple[str, str]]) -> str:
+    parts = ['<div class="ds-kv">']
     for label, value in rows:
-        parts.append(f"<dt>{escape(label)}</dt><dd>{escape(value)}</dd>")
-    parts.append("</dl>")
+        parts.append(
+            '<div class="ds-kv-row">'
+            f'<span class="ds-label">{escape(label)}</span>'
+            f'<span class="ds-value">{_format_value(value)}</span>'
+            "</div>"
+        )
+    parts.append("</div>")
     return "".join(parts)
+
+
+def _format_value(value: str) -> str:
+    if value in _ELEMENT_PILL_CLASS:
+        return _pill(value)
+    for element, css_class in _ELEMENT_PILL_CLASS.items():
+        if value.endswith(f"({element})") and "·" not in value:
+            return f'<span class="ds-pill {css_class}">{escape(value)}</span>'
+    return escape(value)
+
+
+def _pill(element: str) -> str:
+    return f'<span class="ds-pill {_ELEMENT_PILL_CLASS[element]}">{escape(element)}</span>'
 
 
 def _list(items: list[str]) -> str:

@@ -1,0 +1,280 @@
+/* Date Selection commercial print overlay.
+   Reuses PACK 05 tokens. Does not redefine the Bazi report theme. */
+
+.report-v1 {
+  max-width: none;
+  padding: 0;
+  color: var(--report-text);
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.report-v1__header,
+.report-v1__section,
+.report-v1__footer {
+  font-family: var(--report-font);
+}
+
+/* Cover */
+.ds-cover {
+  padding: 4px 0 26px;
+  margin: 0 0 22px;
+  border-bottom: 1px solid var(--report-accent);
+}
+
+.ds-cover h1 {
+  color: var(--report-accent);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  margin: 0 0 16px;
+}
+
+.ds-cover .ds-brand {
+  color: var(--report-muted);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  margin: 0 0 6px;
+  text-transform: uppercase;
+}
+
+.ds-cover .ds-meta {
+  color: var(--report-muted);
+  font-size: 11px;
+  margin: 0;
+}
+
+/* Section cards: hairline, padding, no web left-bar */
+.ds-card {
+  background: #fff;
+  border-bottom: 1px solid #e7e7e7;
+  margin: 0 0 8px;
+  padding: 4px 0 18px;
+}
+
+.ds-card .report-v1__section-title,
+#recommendations > .report-v1__section-title {
+  border-left: none;
+  border-bottom: 1px solid #e7e7e7;
+  color: var(--report-accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  margin: 0 0 12px;
+  padding: 0 0 8px;
+}
+
+.report-v1__section {
+  margin-bottom: 0;
+}
+
+.report-v1__section-body p {
+  margin: 0;
+}
+
+/* Compact key / value */
+.ds-kv {
+  display: grid;
+  gap: 5px 20px;
+  grid-template-columns: minmax(9.2rem, 36%) 1fr;
+}
+
+.ds-kv-row {
+  display: contents;
+}
+
+.ds-label {
+  color: var(--report-muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.ds-value {
+  color: var(--report-text);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.ds-summary {
+  display: grid;
+  gap: 10px 28px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ds-summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.ds-caption {
+  color: var(--report-muted);
+  font-size: 11px;
+  margin: 10px 0 0;
+}
+
+/* Recommendation block */
+.ds-recommendation {
+  background: #fff;
+  border-bottom: 1px solid #d8d8d8;
+  border-top: 1px solid #d8d8d8;
+  break-inside: avoid;
+  margin: 22px 0 0;
+  padding: 16px 0 18px;
+  page-break-inside: avoid;
+}
+
+.ds-recommendation + .ds-recommendation {
+  margin-top: 32px;
+}
+
+.ds-date-day {
+  border-bottom: 1px solid #ececec;
+  break-inside: avoid;
+  margin: 0 0 12px;
+  padding: 0 0 12px;
+  page-break-inside: avoid;
+}
+
+.ds-solar {
+  color: var(--report-accent);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.ds-lunar {
+  color: var(--report-muted);
+  font-size: 11.5px;
+  font-weight: 400;
+  margin: 4px 0 8px;
+}
+
+.ds-result {
+  color: var(--report-accent);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.ds-day-info {
+  border-bottom: 1px solid #ececec;
+  margin: 0 0 12px;
+  padding: 0 0 12px;
+}
+
+.ds-hours,
+.ds-positive-times {
+  margin: 0;
+  padding: 0;
+}
+
+.ds-hours {
+  border-bottom: 1px solid #ececec;
+  margin: 0 0 12px;
+  padding: 0 0 12px;
+}
+
+.ds-hours h3,
+.ds-positive-times h3 {
+  color: var(--report-accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin: 0 0 8px;
+}
+
+.ds-hours .report-v1__list,
+.ds-positive-times .report-v1__list {
+  margin: 0;
+  padding-left: 1.05rem;
+}
+
+.ds-hours li,
+.ds-positive-times li {
+  margin: 0.15rem 0;
+  padding: 0;
+}
+
+.ds-ke-group {
+  border-bottom: 1px solid #f0f0f0;
+  margin: 0 0 8px;
+  padding: 0 0 8px;
+}
+
+.ds-ke-group:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.ds-ke-group h4 {
+  color: var(--report-accent);
+  font-size: 12.5px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+/* Guidance */
+#guidance h3 {
+  color: var(--report-accent);
+  font-size: 12.5px;
+  font-weight: 700;
+  margin: 12px 0 4px;
+}
+
+#guidance p {
+  color: var(--report-text);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+#guidance h3:first-child {
+  margin-top: 0;
+}
+
+/* Pills */
+.ds-pill {
+  background: #f3f5f7;
+  border-radius: 999px;
+  color: var(--report-text);
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.45;
+  padding: 0 7px;
+}
+
+.ds-pill-moc { background: #eef3ea; }
+.ds-pill-hoa { background: #f6eee9; }
+.ds-pill-tho { background: #f3efe6; }
+.ds-pill-kim { background: #f0f0f0; }
+.ds-pill-thuy { background: #eaf0f5; }
+
+/* Footer */
+.ds-footer {
+  border-top: 1px solid #e7e7e7;
+  color: var(--report-muted);
+  font-size: 10px;
+  margin-top: 22px;
+  padding-top: 8px;
+}
+
+@media print {
+  .ds-recommendation,
+  .ds-date-day,
+  .ds-day-info {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .ds-cover h1 {
+    font-size: 24px;
+  }
+}
