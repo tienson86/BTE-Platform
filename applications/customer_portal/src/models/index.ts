@@ -14,6 +14,8 @@ export type {
   ChartResponse,
   CreateChartRequest,
   CanonicalIdentityDto,
+  CommercialConsultingDto,
+  CommercialConsultingSectionDto,
   CustomerEchoDto,
   CustomersListData,
   IdentityPillarDto,
