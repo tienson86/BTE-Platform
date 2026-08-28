@@ -20,6 +20,10 @@ from engines.report_engine.localization.labels_vi import (
     FULL_LUCK_CYCLES_GAP_NOTE,
     RUNTIME_GAP_MESSAGE,
 )
+from engines.report_engine.adapters.commercial_presentation_adapter import (
+    COMMERCIAL_PRESENTATION_EMPTY,
+    CommercialPresentationAdapter,
+)
 from engines.report_engine.rendering.customer_facing import (
     shensha_customer_line,
     temperature_customer_evidence,
@@ -137,9 +141,43 @@ def _build_sections(report_input: ReportInputV1) -> list[PresentedSection]:
                 _domain_section(report_input, "15. Tử tức", "children"),
             ]
         )
+    sections.extend(_commercial_consulting_sections(report_input))
     sections.append(_section_recommendations(report_input))
     sections.append(_section_conclusion(report_input))
     return sections
+
+
+def _commercial_consulting_sections(report_input: ReportInputV1) -> list[PresentedSection]:
+    """Present composed consulting. Omit when the report field is absent."""
+    raw = report_input.commercial_consulting
+    if raw is None:
+        return []
+    model = CommercialPresentationAdapter().adapt(raw)
+    if not model.visible:
+        return [
+            PresentedSection(
+                id="commercial-consulting",
+                title="Tư vấn thương mại",
+                fallback=COMMERCIAL_PRESENTATION_EMPTY,
+                allow_break=True,
+            )
+        ]
+    presented: list[PresentedSection] = []
+    for section in model.sections:
+        paragraphs: list[str] = []
+        if section.summary:
+            paragraphs.append(section.summary)
+        paragraphs.extend(section.meaning)
+        presented.append(
+            PresentedSection(
+                id=f"commercial-{section.domain or section.title}",
+                title=section.title,
+                paragraphs=paragraphs,
+                list_items=list(section.recommendations),
+                allow_break=True,
+            )
+        )
+    return presented
 
 
 def _section_profile(report_input: ReportInputV1) -> PresentedSection:
