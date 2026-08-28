@@ -120,4 +120,5 @@ def commercial_composer_contract() -> dict[str, Any]:
         "composition_stages": list(COMPOSITION_STAGES),
         "insufficient_copy": INSUFFICIENT_COPY,
         "source_path": SOURCE_PATH,
+        "consulting_compose": "compose_commercial_consulting",
     }
