@@ -183,5 +183,5 @@ def test_integration_does_not_recalculate_or_touch_delivery() -> None:
     assert "calculators" not in joined
     assert "customer_portal" not in joined
     assert "report_engine" not in joined
-    assert "Workspace" not in joined
+    assert "from engines.identity" not in joined
     assert "good_score" not in joined
