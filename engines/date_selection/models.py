@@ -112,6 +112,7 @@ class HourSelection:
         """Serialize for API / presentation."""
         from engines.date_selection.identity import hoa_giap_view
 
+        view = hoa_giap_view(self.ganzhi, self.trach)
         payload = {
             "window": self.window.to_dict(),
             "ganzhi": self.ganzhi,
@@ -120,7 +121,9 @@ class HourSelection:
             "trach": self.trach.to_dict() if self.trach else None,
             "ke_slots": [slot.to_dict() for slot in self.ke_slots],
         }
-        payload.update(hoa_giap_view(self.ganzhi, self.trach))
+        payload.update(view)
+        payload["can_chi"] = view["ganzhi"]
+        payload["cung_phi"] = view["cung"]
         return payload
 
 
@@ -136,7 +139,7 @@ class DaySelection:
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize for API / presentation."""
-        from engines.date_selection.identity import hoa_giap_view
+        from engines.date_selection.identity import hoa_giap_view, pillar_contract
 
         payload = {
             "calendar": self.calendar.to_dict(),
@@ -147,6 +150,9 @@ class DaySelection:
             "month_ganzhi": self.calendar.month_ganzhi,
         }
         payload.update(hoa_giap_view(self.calendar.day_ganzhi, self.trach))
+        payload["year"] = pillar_contract(self.calendar.year_ganzhi)
+        payload["month"] = pillar_contract(self.calendar.month_ganzhi)
+        payload["day"] = pillar_contract(self.calendar.day_ganzhi)
         return payload
 
 
@@ -252,7 +258,7 @@ class RankedDate:
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize for API / presentation."""
-        from engines.date_selection.identity import hoa_giap_view
+        from engines.date_selection.identity import hoa_giap_view, pillar_contract
 
         day_payload = {
             "calendar": self.day.calendar.to_dict(),
@@ -261,6 +267,9 @@ class RankedDate:
             "month_ganzhi": self.day.calendar.month_ganzhi,
         }
         day_payload.update(hoa_giap_view(self.day.calendar.day_ganzhi, self.day.trach))
+        day_payload["year"] = pillar_contract(self.day.calendar.year_ganzhi)
+        day_payload["month"] = pillar_contract(self.day.calendar.month_ganzhi)
+        day_payload["day"] = pillar_contract(self.day.calendar.day_ganzhi)
         return {
             "day": day_payload,
             "compatible_hours": _compatible_hours_view(self.day),
@@ -286,9 +295,11 @@ def _compatible_hours_view(day: DaySelection) -> list[dict[str, Any]]:
                 "branch": hour.window.branch,
                 "full_time_range": hour.window.time_range,
                 "ganzhi": hour.ganzhi,
+                "can_chi": view["ganzhi"],
                 "nayin": view["nayin"],
                 "nayin_element": view["nayin_element"],
                 "cung": view["cung"],
+                "cung_phi": view["cung"],
                 "cung_element": view["cung_element"],
                 "trach_group": view["trach_group"],
                 "trach_group_label": view["trach_group_label"],
@@ -319,9 +330,11 @@ def _recommendation_view(item: HourRecommendation, day: DaySelection) -> dict[st
         {
             "full_time_range": hour.window.time_range,
             "ganzhi": hour.ganzhi,
+            "can_chi": view["ganzhi"],
             "nayin": view["nayin"],
             "nayin_element": view["nayin_element"],
             "cung": view["cung"],
+            "cung_phi": view["cung"],
             "cung_element": view["cung_element"],
             "trach_group": view["trach_group"],
             "trach_group_label": view["trach_group_label"],
