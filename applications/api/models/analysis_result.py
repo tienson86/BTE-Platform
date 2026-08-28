@@ -599,6 +599,7 @@ class AnalysisResult:
     meta: AnalysisMeta = field(default_factory=AnalysisMeta)
     rule_context: dict[str, Any] = field(default_factory=dict)
     unified_context: dict[str, Any] = field(default_factory=dict)
+    commercial_consulting: dict[str, Any] | None = None
 
     def bazi_dict(self) -> dict[str, Any]:
         """Serialize authoritative Bazi for ``data.bazi``."""
@@ -669,3 +670,7 @@ class AnalysisResult:
     def integrated_narrative_dict(self) -> dict[str, Any]:
         """Serialize IntegratedNarrative for ``data.integrated_narrative``."""
         return dict(self.integrated_narrative or {})
+
+    def commercial_consulting_dict(self) -> dict[str, Any]:
+        """Serialize composed commercial consulting for ``data.commercial_consulting``."""
+        return dict(self.commercial_consulting or {})
