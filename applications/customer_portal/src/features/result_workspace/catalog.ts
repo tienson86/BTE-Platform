@@ -43,10 +43,12 @@ export const SHEN_SHA_NAMES = [
 ] as const;
 
 export const INTERPRETATION_BLOCKS = [
+  { id: "executive", title: "Tổng quan" },
   { id: "observe", title: "Quan sát" },
   { id: "reason", title: "Lý do" },
   { id: "impact", title: "Tác động" },
   { id: "advice", title: "Khuyến nghị" },
+  { id: "summary", title: "Tóm tắt" },
 ] as const;
 
 export const ACTION_CHIPS = [
