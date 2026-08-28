@@ -49,3 +49,23 @@ def hoa_giap_view(ganzhi: str, trach: TrachInfo | None) -> dict[str, Any]:
         "trach_group": trach.trach_group_code if trach else None,
         "trach_group_label": trach.trach_group_label if trach else None,
     }
+
+
+def pillar_contract(ganzhi: str) -> dict[str, str]:
+    """
+    Canonical Four Pillars cell for one Hoa Giáp label.
+
+    Uses the same Hạ Nguyên Cung and Nạp âm element lookup already applied
+    to Day and Hour. Does not return the full Nạp âm name.
+    """
+    from engines.date_selection.cung_phi import trach_for_date_ganzhi
+
+    view = hoa_giap_view(ganzhi, trach_for_date_ganzhi(ganzhi))
+    cung = view["cung"]
+    if not cung:
+        raise DateSelectionValidationError(f"missing Cung Phi for {ganzhi!r}")
+    return {
+        "can_chi": view["ganzhi"],
+        "nayin_element": view["nayin_element"],
+        "cung_phi": cung,
+    }
