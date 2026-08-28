@@ -130,5 +130,5 @@ def compose_integrated_narrative(
 
 
 def integrated_block_order() -> tuple[str, ...]:
-    """Public block order for consumers. Workspace is unchanged."""
+    """Public block order for consumers."""
     return INTEGRATED_BLOCKS
