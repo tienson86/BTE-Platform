@@ -261,4 +261,5 @@ def test_pattern_narrative_does_not_recalculate_or_import_other_topics() -> None
     assert "engines.luck" not in joined
     assert "good_score" not in joined
     assert "auspicious_score" not in joined
-    assert not (TOPIC_DIR.parent / "luck").exists()
+    assert "narrative_framework.luck" not in joined
+    assert "compose_luck_narrative" not in joined
