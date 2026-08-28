@@ -83,12 +83,15 @@ export const PREVIEW_LUCK = {
 } as const;
 
 export const PREVIEW_INTERPRETATION: Record<string, string> = {
+  executive: "Khối Tổng quan chờ luận giải.",
   observe: "Khối Quan sát chờ luận giải.",
   reason: "Khối Lý do chờ luận giải.",
   impact: "Khối Tác động chờ luận giải.",
   advice: "Khối Khuyến nghị chờ luận giải.",
+  summary: "Khối Tóm tắt chờ luận giải.",
 };
 
 export const PREVIEW_CONCLUSION = {
+  summary: "Tóm tắt xem trước — chưa phải kết luận thật.",
   overall: "Kết luận xem trước — chưa phải khuyến nghị thật.",
 } as const;
