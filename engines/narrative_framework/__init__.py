@@ -44,6 +44,14 @@ from .useful_god import (
     classify_useful_god_evidence,
     compose_useful_god_narrative,
 )
+from .pattern import (
+    PatternEvidence,
+    PatternNarrativeEvidencePack,
+    PatternNarrativeUnit,
+    bind_pattern_evidence,
+    classify_pattern_evidence,
+    compose_pattern_narrative,
+)
 
 __all__ = [
     "ANALYTICAL_TOPICS",
@@ -79,5 +87,11 @@ __all__ = [
     "bind_useful_god_evidence",
     "classify_useful_god_evidence",
     "compose_useful_god_narrative",
+    "PatternEvidence",
+    "PatternNarrativeEvidencePack",
+    "PatternNarrativeUnit",
+    "bind_pattern_evidence",
+    "classify_pattern_evidence",
+    "compose_pattern_narrative",
     "narrative_framework_contract",
 ]
