@@ -6,7 +6,7 @@ import { PREVIEW_INTERPRETATION } from "../previewFixture";
 import { SlotValue } from "./slots";
 
 /**
- * Luận Giải Tổng Thể — PACK 04 / narrative sections mapped to four blocks.
+ * Luận Giải Tổng Thể — IntegratedNarrative blocks only. No topic merge.
  */
 export function InterpretationPanel({
   preview,
@@ -17,10 +17,12 @@ export function InterpretationPanel({
 }): ReactNode {
   const bound = Boolean(model) && !preview;
   const values = {
+    executive: preview ? PREVIEW_INTERPRETATION.executive : model?.executive.value,
     observe: preview ? PREVIEW_INTERPRETATION.observe : model?.observe.value,
     reason: preview ? PREVIEW_INTERPRETATION.reason : model?.reason.value,
     impact: preview ? PREVIEW_INTERPRETATION.impact : model?.impact.value,
     advice: preview ? PREVIEW_INTERPRETATION.advice : model?.advice.value,
+    summary: preview ? PREVIEW_INTERPRETATION.summary : model?.summary.value,
   } as const;
   return (
     <div className="bte-rw-panel" data-shell="interpretation">
