@@ -52,6 +52,19 @@ from .pattern import (
     classify_pattern_evidence,
     compose_pattern_narrative,
 )
+from .luck import (
+    LuckEvidence,
+    LuckNarrativeEvidencePack,
+    LuckNarrativeUnit,
+    bind_luck_evidence,
+    classify_luck_evidence,
+    compose_luck_narrative,
+)
+from .integration import (
+    INTEGRATED_BLOCKS,
+    IntegratedNarrativeUnit,
+    compose_integrated_narrative,
+)
 
 __all__ = [
     "ANALYTICAL_TOPICS",
@@ -93,5 +106,14 @@ __all__ = [
     "bind_pattern_evidence",
     "classify_pattern_evidence",
     "compose_pattern_narrative",
+    "LuckEvidence",
+    "LuckNarrativeEvidencePack",
+    "LuckNarrativeUnit",
+    "bind_luck_evidence",
+    "classify_luck_evidence",
+    "compose_luck_narrative",
+    "INTEGRATED_BLOCKS",
+    "IntegratedNarrativeUnit",
+    "compose_integrated_narrative",
     "narrative_framework_contract",
 ]
