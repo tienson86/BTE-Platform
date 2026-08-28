@@ -14,12 +14,35 @@ from .contracts import (
     WORKSPACE_BLOCK_ALIASES,
     narrative_framework_contract,
 )
+from .evidence_item import (
+    CLASSIFICATION_NEGATIVE,
+    CLASSIFICATION_NEUTRAL,
+    CLASSIFICATION_POSITIVE,
+    EVIDENCE_CLASSIFICATIONS,
+    NarrativeEvidenceItem,
+)
 from .exceptions import NarrativeFrameworkError
 from .models import (
     NarrativeBlock,
     NarrativeSentence,
     TopicEvidencePack,
     TopicNarrativeUnit,
+)
+from .strength import (
+    StrengthEvidence,
+    StrengthNarrativeEvidencePack,
+    StrengthNarrativeUnit,
+    bind_strength_evidence,
+    classify_strength_evidence,
+    compose_strength_narrative,
+)
+from .useful_god import (
+    UsefulGodEvidence,
+    UsefulGodNarrativeEvidencePack,
+    UsefulGodNarrativeUnit,
+    bind_useful_god_evidence,
+    classify_useful_god_evidence,
+    compose_useful_god_narrative,
 )
 
 __all__ = [
@@ -36,8 +59,25 @@ __all__ = [
     "WORKSPACE_BLOCK_ALIASES",
     "NarrativeBlock",
     "NarrativeFrameworkError",
+    "NarrativeEvidenceItem",
+    "CLASSIFICATION_POSITIVE",
+    "CLASSIFICATION_NEUTRAL",
+    "CLASSIFICATION_NEGATIVE",
+    "EVIDENCE_CLASSIFICATIONS",
     "NarrativeSentence",
     "TopicEvidencePack",
     "TopicNarrativeUnit",
+    "StrengthEvidence",
+    "StrengthNarrativeEvidencePack",
+    "StrengthNarrativeUnit",
+    "bind_strength_evidence",
+    "classify_strength_evidence",
+    "compose_strength_narrative",
+    "UsefulGodEvidence",
+    "UsefulGodNarrativeEvidencePack",
+    "UsefulGodNarrativeUnit",
+    "bind_useful_god_evidence",
+    "classify_useful_god_evidence",
+    "compose_useful_god_narrative",
     "narrative_framework_contract",
 ]
