@@ -197,6 +197,27 @@ export type CustomerEchoDto = {
   readonly customer_id?: string | null;
 };
 
+/** Frozen INT-02 IntegratedNarrative block on Analysis Result. */
+export type IntegratedNarrativeBlockDto = {
+  readonly slot?: string;
+  readonly title?: string;
+  readonly sentences?: readonly string[];
+  readonly available?: boolean;
+  readonly insufficient?: boolean;
+};
+
+/** Frozen INT-02 IntegratedNarrative unit. Workspace reads this only. */
+export type IntegratedNarrativeDto = {
+  readonly topic_id?: string;
+  readonly status?: string;
+  readonly executive_summary?: IntegratedNarrativeBlockDto;
+  readonly observation?: IntegratedNarrativeBlockDto;
+  readonly reasoning?: IntegratedNarrativeBlockDto;
+  readonly impact?: IntegratedNarrativeBlockDto;
+  readonly recommendation?: IntegratedNarrativeBlockDto;
+  readonly summary?: IntegratedNarrativeBlockDto;
+};
+
 /** `data` payload from POST /analyze. */
 export type AnalysisDataDto = {
   readonly pipeline?: readonly string[];
@@ -239,6 +260,8 @@ export type AnalysisDataDto = {
   readonly narrative?: Record<string, unknown>;
   /** Pack 05 official commercial NarrativeResult. */
   readonly narrative_result?: Record<string, unknown>;
+  /** Frozen INT-02 IntegratedNarrative. Workspace Panel 9/10 consume this only. */
+  readonly integrated_narrative?: IntegratedNarrativeDto;
   readonly customer?: CustomerEchoDto;
   /** Canonical Identity Layer (BZ-ID). Presentation reads this for identity fields. */
   readonly identity?: CanonicalIdentityDto;
