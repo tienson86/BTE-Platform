@@ -63,6 +63,7 @@ class ReportInputV1Source:
     knowledge_version: str = ""
     report_view: Mapping[str, Any] | None = None
     ten_gods_result: Any = None
+    commercial_consulting: Mapping[str, Any] | None = None
 
 
 def build_report_input_v1(source: ReportInputV1Source) -> ReportInputV1:
@@ -107,7 +108,23 @@ class ReportInputV1Adapter:
             luck_cycles=luck_cycles,
             interpretation=interpretation,
             diagnostics=diagnostics,
+            commercial_consulting=self._copy_commercial_consulting(source),
         )
+
+    @staticmethod
+    def _copy_commercial_consulting(
+        source: ReportInputV1Source,
+    ) -> dict[str, Any] | None:
+        """Copy a pre-composed consulting result. Do not rematch or render HTML."""
+        payload = source.commercial_consulting
+        if payload is None:
+            return None
+        if hasattr(payload, "to_dict") and callable(payload.to_dict):
+            copied = payload.to_dict()
+            return dict(copied) if isinstance(copied, Mapping) else None
+        if isinstance(payload, Mapping):
+            return dict(payload)
+        return None
 
     def _build_metadata(
         self,
