@@ -101,10 +101,12 @@ export type WorkspaceLuckView = {
 };
 
 export type WorkspaceInterpretationView = {
+  readonly executive: WorkspaceField<string>;
   readonly observe: WorkspaceField<string>;
   readonly reason: WorkspaceField<string>;
   readonly impact: WorkspaceField<string>;
   readonly advice: WorkspaceField<string>;
+  readonly summary: WorkspaceField<string>;
   readonly observationId: WorkspaceField<string>;
   readonly reasoningId: WorkspaceField<string>;
   readonly recommendationId: WorkspaceField<string>;
@@ -119,6 +121,7 @@ export type WorkspaceActionChipView = {
 };
 
 export type WorkspaceConclusionView = {
+  readonly summary: WorkspaceField<string>;
   readonly overall: WorkspaceField<string>;
   readonly action: WorkspaceField<string>;
   readonly actions: readonly WorkspaceActionChipView[];
