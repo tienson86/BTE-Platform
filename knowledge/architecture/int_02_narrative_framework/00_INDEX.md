@@ -28,6 +28,7 @@ It does not change engines, identity, workspace, report, PDF, DOCX, or UI.
 | `02_FRAMEWORK.md` | Five blocks, template hierarchy, sentence ownership |
 | `03_CONTRACTS.md` | Topic / block / sentence contracts |
 | `04_COMPOSITION_PIPELINE.md` | Composition order |
+| `05_EVIDENCE_CLASSIFICATION.md` | Target-relative positive / neutral / negative |
 
 Python freeze (no engine runtime):
 
