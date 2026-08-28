@@ -265,7 +265,26 @@ export type AnalysisDataDto = {
   readonly customer?: CustomerEchoDto;
   /** Canonical Identity Layer (BZ-ID). Presentation reads this for identity fields. */
   readonly identity?: CanonicalIdentityDto;
+  /** Pre-composed CK-01 commercial consulting. Presentation copies only. */
+  readonly commercial_consulting?: CommercialConsultingDto;
   readonly [key: string]: unknown;
+};
+
+export type CommercialConsultingSectionDto = {
+  readonly domain?: string;
+  readonly title?: string;
+  readonly summary?: string;
+  readonly meaning?: readonly string[];
+  readonly recommendations?: readonly string[];
+  readonly references?: readonly string[];
+  readonly source_unit_ids?: readonly string[];
+};
+
+export type CommercialConsultingDto = {
+  readonly status?: string;
+  readonly catalog_id?: string;
+  readonly schema_version?: string;
+  readonly sections?: readonly CommercialConsultingSectionDto[];
 };
 
 export type IdentityPillarDto = {
