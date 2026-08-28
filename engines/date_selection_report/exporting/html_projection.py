@@ -65,6 +65,7 @@ def _assert_exportable_html(html: str) -> None:
 def _render_content(tree: DateSelectionRenderTree) -> str:
     parts = [
         _header(tree),
+        _executive_summary(tree),
         _person(tree),
         _search(tree),
         _recommendations(tree),
@@ -87,6 +88,32 @@ def _header(tree: DateSelectionRenderTree) -> str:
     )
 
 
+def _person_value(tree: DateSelectionRenderTree, key: str) -> str:
+    for row in tree.person.rows:
+        if row.key == key:
+            return row.value
+    return ""
+
+
+def _executive_summary(tree: DateSelectionRenderTree) -> str:
+    """Compact first-page card. Reuses person and search fields only."""
+    period = tree.search_period
+    items = (
+        ("Khách hàng", _person_value(tree, "full_name")),
+        ("Nhóm Trạch", _person_value(tree, "trach_group")),
+        (period.month_label, period.month_display),
+        (period.recommendation_count_label, period.recommendation_count),
+    )
+    cells = "".join(
+        '<div class="ds-exec-item">'
+        f'<span class="ds-label">{escape(label)}</span>'
+        f'<span class="ds-value">{_format_value(value)}</span>'
+        "</div>"
+        for label, value in items
+    )
+    return f'<aside class="ds-exec" id="ds-exec">{cells}</aside>'
+
+
 def _format_generated_at(value: str) -> str:
     date_part = value.split("T", 1)[0]
     pieces = date_part.split("-")
@@ -100,7 +127,10 @@ def _person(tree: DateSelectionRenderTree) -> str:
     return _section(
         section_id="person",
         title=tree.person.title,
-        body=_kv_rows([(row.label, row.value) for row in tree.person.rows]),
+        body=_kv_rows(
+            [(row.label, row.value) for row in tree.person.rows],
+            profile=True,
+        ),
     )
 
 
@@ -150,8 +180,11 @@ def _recommendation(node: RecommendationNode) -> str:
     header = node.date_header
     date_day = (
         '<div class="ds-date-day">'
+        "<div>"
+        f'<p class="ds-rank">{node.rank:02d}</p>'
         f'<p class="ds-solar">{escape(header.solar_date)}</p>'
         f'<p class="ds-lunar">{escape(header.lunar_display)}</p>'
+        "</div>"
         f'<p class="ds-result">{escape(header.day_result)}</p>'
         "</div>"
     )
@@ -219,8 +252,9 @@ def _section(
     )
 
 
-def _kv_rows(rows: list[tuple[str, str]]) -> str:
-    parts = ['<div class="ds-kv">']
+def _kv_rows(rows: list[tuple[str, str]], *, profile: bool = False) -> str:
+    css = "ds-kv ds-kv--profile" if profile else "ds-kv"
+    parts = [f'<div class="{css}">']
     for label, value in rows:
         parts.append(
             '<div class="ds-kv-row">'

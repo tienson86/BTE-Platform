@@ -9,10 +9,11 @@ from engines.date_selection_report.rendering.nodes import DateSelectionRenderTre
 
 PREVIEW_SHOTS: tuple[tuple[str, str], ...] = (
     ("01_cover", "#ds-header"),
-    ("02_person", "#person"),
-    ("03_recommendation", "#recommendation-1"),
-    ("04_positive_times", "#positive-times-1"),
-    ("05_last_page", "#ds-last"),
+    ("02_executive", "#ds-exec"),
+    ("03_person", "#person"),
+    ("04_recommendation", "#recommendation-1"),
+    ("05_positive_times", "#positive-times-1"),
+    ("06_last_page", "#ds-last"),
 )
 
 

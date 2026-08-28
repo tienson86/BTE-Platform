@@ -1,12 +1,12 @@
-/* Date Selection commercial print overlay.
-   Reuses PACK 05 tokens. Does not redefine the Bazi report theme. */
+/* Date Selection executive print overlay.
+   PACK 05 tokens + portal-family warm paper. No new theme engine. */
 
 .report-v1 {
   max-width: none;
   padding: 0;
   color: var(--report-text);
-  font-size: 12.5px;
-  line-height: 1.45;
+  font-size: 12px;
+  line-height: 1.4;
 }
 
 .report-v1__header,
@@ -17,26 +17,26 @@
 
 /* Cover */
 .ds-cover {
-  padding: 4px 0 26px;
-  margin: 0 0 22px;
+  margin: 0 0 14px;
+  padding: 0 0 12px;
   border-bottom: 1px solid var(--report-accent);
 }
 
 .ds-cover h1 {
   color: var(--report-accent);
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  line-height: 1.2;
-  margin: 0 0 16px;
+  letter-spacing: 0.05em;
+  line-height: 1.18;
+  margin: 0 0 8px;
 }
 
 .ds-cover .ds-brand {
   color: var(--report-muted);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  margin: 0 0 3px;
   text-transform: uppercase;
 }
 
@@ -46,24 +46,42 @@
   margin: 0;
 }
 
-/* Section cards: hairline, padding, no web left-bar */
+/* Executive summary — existing fields only */
+.ds-exec {
+  background: #f6f5f2;
+  border: 1px solid #e8e6e3;
+  border-left: 3px solid var(--report-accent);
+  display: grid;
+  gap: 10px 28px;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 0 16px;
+  padding: 12px 16px 13px;
+}
+
+.ds-exec-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Section cards */
 .ds-card {
   background: #fff;
-  border-bottom: 1px solid #e7e7e7;
-  margin: 0 0 8px;
-  padding: 4px 0 18px;
+  border-bottom: 1px solid #e8e6e3;
+  margin: 0 0 6px;
+  padding: 2px 0 12px;
 }
 
 .ds-card .report-v1__section-title,
 #recommendations > .report-v1__section-title {
   border-left: none;
-  border-bottom: 1px solid #e7e7e7;
+  border-bottom: 1px solid #e8e6e3;
   color: var(--report-accent);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.14em;
-  margin: 0 0 12px;
-  padding: 0 0 8px;
+  letter-spacing: 0.16em;
+  margin: 0 0 10px;
+  padding: 0 0 6px;
 }
 
 .report-v1__section {
@@ -74,99 +92,118 @@
   margin: 0;
 }
 
-/* Compact key / value */
+/* Key / value */
 .ds-kv {
   display: grid;
-  gap: 5px 20px;
-  grid-template-columns: minmax(9.2rem, 36%) 1fr;
+  gap: 4px 16px;
+  grid-template-columns: 8.6rem 1fr;
 }
 
 .ds-kv-row {
   display: contents;
 }
 
+.ds-kv--profile {
+  grid-template-columns: 8.2rem 1fr 8.2rem 1fr;
+  gap: 5px 22px;
+}
+
 .ds-label {
   color: var(--report-muted);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
+  line-height: 1.35;
 }
 
 .ds-value {
   color: var(--report-text);
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 600;
+  line-height: 1.35;
 }
 
 .ds-summary {
   display: grid;
-  gap: 10px 28px;
+  gap: 6px 24px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .ds-summary-item {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
 }
 
 .ds-caption {
   color: var(--report-muted);
-  font-size: 11px;
-  margin: 10px 0 0;
+  font-size: 10.5px;
+  line-height: 1.4;
+  margin: 8px 0 0;
 }
 
-/* Recommendation block */
+/* Recommendation report card */
 .ds-recommendation {
-  background: #fff;
-  border-bottom: 1px solid #d8d8d8;
-  border-top: 1px solid #d8d8d8;
+  background: #f7f6f3;
+  border: 1px solid #e8e6e3;
+  border-left: 3px solid var(--report-accent);
   break-inside: avoid;
-  margin: 22px 0 0;
-  padding: 16px 0 18px;
+  margin: 12px 0 0;
+  padding: 12px 14px 14px;
   page-break-inside: avoid;
 }
 
 .ds-recommendation + .ds-recommendation {
-  margin-top: 32px;
+  margin-top: 18px;
 }
 
 .ds-date-day {
-  border-bottom: 1px solid #ececec;
+  align-items: flex-start;
+  border-bottom: 1px solid #e8e6e3;
   break-inside: avoid;
-  margin: 0 0 12px;
-  padding: 0 0 12px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 10px;
+  padding: 0 0 10px;
   page-break-inside: avoid;
+}
+
+.ds-rank {
+  color: var(--report-muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  margin: 0 0 4px;
 }
 
 .ds-solar {
   color: var(--report-accent);
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   letter-spacing: 0.02em;
-  line-height: 1.15;
+  line-height: 1.1;
   margin: 0;
 }
 
 .ds-lunar {
   color: var(--report-muted);
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 400;
-  margin: 4px 0 8px;
+  margin: 3px 0 0;
 }
 
 .ds-result {
   color: var(--report-accent);
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  margin: 0;
+  letter-spacing: 0.14em;
+  margin: 14px 0 0;
   text-transform: uppercase;
 }
 
 .ds-day-info {
-  border-bottom: 1px solid #ececec;
-  margin: 0 0 12px;
-  padding: 0 0 12px;
+  border-bottom: 1px solid #e8e6e3;
+  margin: 0 0 10px;
+  padding: 0 0 10px;
 }
 
 .ds-hours,
@@ -176,36 +213,37 @@
 }
 
 .ds-hours {
-  border-bottom: 1px solid #ececec;
-  margin: 0 0 12px;
-  padding: 0 0 12px;
+  border-bottom: 1px solid #e8e6e3;
+  margin: 0 0 10px;
+  padding: 0 0 10px;
 }
 
 .ds-hours h3,
 .ds-positive-times h3 {
   color: var(--report-accent);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  margin: 0 0 8px;
+  letter-spacing: 0.08em;
+  margin: 0 0 6px;
 }
 
 .ds-hours .report-v1__list,
 .ds-positive-times .report-v1__list {
   margin: 0;
-  padding-left: 1.05rem;
+  padding-left: 1.15rem;
 }
 
 .ds-hours li,
 .ds-positive-times li {
-  margin: 0.15rem 0;
+  line-height: 1.4;
+  margin: 0.12rem 0;
   padding: 0;
 }
 
 .ds-ke-group {
-  border-bottom: 1px solid #f0f0f0;
-  margin: 0 0 8px;
-  padding: 0 0 8px;
+  border-bottom: 1px solid #eceae6;
+  margin: 0 0 7px;
+  padding: 0 0 7px 2px;
 }
 
 .ds-ke-group:last-child {
@@ -216,23 +254,23 @@
 
 .ds-ke-group h4 {
   color: var(--report-accent);
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 700;
-  margin: 0 0 6px;
+  margin: 0 0 4px;
 }
 
 /* Guidance */
 #guidance h3 {
   color: var(--report-accent);
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 700;
-  margin: 12px 0 4px;
+  margin: 8px 0 3px;
 }
 
 #guidance p {
   color: var(--report-text);
-  font-size: 12.5px;
-  line-height: 1.5;
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 #guidance h3:first-child {
@@ -245,10 +283,10 @@
   border-radius: 999px;
   color: var(--report-text);
   display: inline-block;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
-  line-height: 1.45;
-  padding: 0 7px;
+  line-height: 1.4;
+  padding: 0 6px;
 }
 
 .ds-pill-moc { background: #eef3ea; }
@@ -259,22 +297,24 @@
 
 /* Footer */
 .ds-footer {
-  border-top: 1px solid #e7e7e7;
-  color: var(--report-muted);
-  font-size: 10px;
-  margin-top: 22px;
-  padding-top: 8px;
+  border-top: 1px solid #eceae6;
+  color: #9aa0a6;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  margin-top: 14px;
+  padding-top: 6px;
 }
 
 @media print {
   .ds-recommendation,
   .ds-date-day,
-  .ds-day-info {
+  .ds-day-info,
+  .ds-exec {
     break-inside: avoid;
     page-break-inside: avoid;
   }
 
   .ds-cover h1 {
-    font-size: 24px;
+    font-size: 21px;
   }
 }

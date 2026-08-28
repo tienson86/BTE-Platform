@@ -1,6 +1,6 @@
-"""PACK 06 Date Selection report (P6-01 / P6-02 / P6-03).
+"""PACK 06 Date Selection report (P6-01 / P6-02 / P6-03 / P6-04).
 
-Public surface: models, adapter, render tree, PDF export. No DOCX or portal.
+Public surface: models, adapter, render tree, PDF and DOCX export. No portal.
 """
 
 from engines.date_selection_report.adapter import DateSelectionReportAdapter
@@ -17,8 +17,11 @@ from engines.date_selection_report.exceptions import (
     DateSelectionReportValidationError,
 )
 from engines.date_selection_report.exporting import (
+    DateSelectionDocxExporter,
     DateSelectionPdfExporter,
+    build_docx_filename,
     build_pdf_filename,
+    export_docx,
     export_pdf,
     project_render_tree_to_html,
 )
@@ -68,6 +71,7 @@ __all__ = [
     "DateSelectionRenderTree",
     "DateSelectionRenderTreeBuilder",
     "DateSelectionReportAdapter",
+    "DateSelectionDocxExporter",
     "DateSelectionPdfExporter",
     "DateSelectionReportError",
     "DateSelectionReportExportError",
@@ -94,9 +98,11 @@ __all__ = [
     "RecommendedDateReportData",
     "SearchPeriodReportData",
     "SearchPeriodSectionBuilder",
+    "build_docx_filename",
     "build_pdf_filename",
     "build_render_tree",
     "create_render_context",
+    "export_docx",
     "export_pdf",
     "project_render_tree_to_html",
     "load_date_selection_template_package",

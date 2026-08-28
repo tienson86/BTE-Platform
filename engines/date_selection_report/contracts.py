@@ -50,7 +50,9 @@ RENDER_CONTRACT: dict[str, str] = {
 EXPORT_CONTRACT: dict[str, str] = {
     "input": "DateSelectionRenderTree",
     "pdf_exporter": "DateSelectionPdfExporter",
+    "docx_exporter": "DateSelectionDocxExporter",
     "pack_05_backend": "PlaywrightPdfBackend",
+    "pack_05_docx_exporter": "DocxExporterV1",
     "pack_05_template": "templates/v1/report_v1.html",
     "pack_05_css": "templates/v1/report_v1.css",
 }

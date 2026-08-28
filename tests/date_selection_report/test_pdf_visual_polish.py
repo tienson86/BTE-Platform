@@ -26,6 +26,8 @@ def test_commercial_layout_classes(presentation_model: DateSelectionReportModel)
     assert "ds-day-info" in html
     assert "ds-ke-group" in html
     assert "ds-pill" in html
+    assert "ds-exec" in html
+    assert "Khách hàng" in html
     assert "letter-spacing" in html
     assert "page-break-inside: avoid" in html
     assert "Cấn" in html and "Thổ" in html
@@ -64,3 +66,36 @@ def test_polished_pdf_generates(
     assert result.page_count is not None and result.page_count > 0
     assert output.stat().st_size > MIN_PDF_BYTES
     assert "Nguyễn Tiến Sơn" in project_render_tree_to_html(tree)
+
+
+def test_executive_summary_reuses_existing_fields(
+    presentation_model: DateSelectionReportModel,
+) -> None:
+    tree = build_render_tree(create_render_context(presentation_model))
+    html = project_render_tree_to_html(tree)
+    assert "Khách hàng" in html
+    assert tree.person.rows[0].value in html
+    assert "Tây Tứ Trạch" in html
+    assert "09/2026" in html
+    assert tree.search_period.recommendation_count in html
+
+
+def test_recommendation_content_unchanged(
+    presentation_model: DateSelectionReportModel,
+) -> None:
+    tree = build_render_tree(create_render_context(presentation_model))
+    html = project_render_tree_to_html(tree)
+    rec = tree.recommendations[0]
+    assert html.index(rec.date_header.solar_date) < html.index(rec.compatible_hours.rows[0].display)
+    assert [hour.display for hour in rec.compatible_hours.rows] == [
+        "Giờ Thìn (07:01–09:00) · Càn (Kim)",
+        "Giờ Tỵ (09:01–11:00) · Khôn (Thổ)",
+    ]
+    labels = [group.label for group in rec.positive_times.groups]
+    assert labels == ["Đại An", "Tốc Hỷ", "Tiểu Cát"]
+    for hour in rec.compatible_hours.rows:
+        assert hour.display in html
+    for group in rec.positive_times.groups:
+        assert group.label in html
+        for item in group.items:
+            assert item.time_range in html

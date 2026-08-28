@@ -1,4 +1,4 @@
-"""Canonical Date Selection PDF filename. Reuses PACK 05 ascii_slug."""
+"""Canonical Date Selection PDF/DOCX filename. Reuses PACK 05 ascii_slug."""
 
 from __future__ import annotations
 
@@ -24,6 +24,15 @@ def period_filename_token(tree: DateSelectionRenderTree) -> str:
 
 def build_pdf_filename(tree: DateSelectionRenderTree) -> str:
     """Return `bao-cao-chon-ngay-tot_<customer>_<MM-YYYY>.pdf`."""
+    return _stem(tree) + ".pdf"
+
+
+def build_docx_filename(tree: DateSelectionRenderTree) -> str:
+    """Return `bao-cao-chon-ngay-tot_<customer>_<MM-YYYY>.docx`."""
+    return _stem(tree) + ".docx"
+
+
+def _stem(tree: DateSelectionRenderTree) -> str:
     customer = ascii_slug(person_full_name(tree)).lower().replace("_", "-")
     period = period_filename_token(tree)
-    return f"{FILENAME_PREFIX}_{customer}_{period}.pdf"
+    return f"{FILENAME_PREFIX}_{customer}_{period}"
