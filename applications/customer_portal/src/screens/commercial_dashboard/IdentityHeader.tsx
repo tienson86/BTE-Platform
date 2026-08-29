@@ -18,7 +18,7 @@ export function IdentityHeader({ model }: IdentityHeaderProps): ReactNode {
   return (
     <header className="bte-id" data-identity-header="true">
       <IdentityPerson person={model.person} />
-      <FourPillars pillars={model.pillars} dayMaster={model.dayMaster} />
+      <FourPillars pillars={model.pillars} />
       <IdentityFoundation foundation={model.foundation} />
       <IdentityStatus status={model.status} />
     </header>
