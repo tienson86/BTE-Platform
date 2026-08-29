@@ -19,7 +19,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 from applications.customer_portal.config import PORTAL_ROOT, settings
-from applications.customer_portal.pages import LOGIN_ITEM, NAV_ITEMS
+from applications.customer_portal.pages import HOME_PATH, LOGIN_ITEM, NAV_ITEMS
 from applications.customer_portal.templates_util import render_desktop_page, render_page
 
 HOP_BY_HOP = {
@@ -54,8 +54,8 @@ def create_app() -> FastAPI:
 
     @app.get("/", include_in_schema=False)
     def root() -> RedirectResponse:
-        """Default landing → dashboard."""
-        return RedirectResponse(url="/dashboard", status_code=302)
+        """Default landing → Good Date Home (Xem ngày tốt/xấu)."""
+        return RedirectResponse(url=HOME_PATH, status_code=302)
 
     @app.get(LOGIN_ITEM.path, response_class=HTMLResponse)
     def login_page() -> HTMLResponse:
