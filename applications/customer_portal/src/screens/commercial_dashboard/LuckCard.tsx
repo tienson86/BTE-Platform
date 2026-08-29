@@ -7,6 +7,12 @@ import type { DashboardCardSpec, LuckCycleView, LuckView } from "./types";
 
 const COMPACT_LIMIT = 5;
 
+function publishTrend(value: string): string {
+  const next = value.trim();
+  if (!next || next.includes("{") || next.includes("}")) return "";
+  return next;
+}
+
 type LuckCardProps = {
   readonly card: DashboardCardSpec;
   readonly model: LuckView;
@@ -54,6 +60,7 @@ export function LuckCard({ card, model }: LuckCardProps): ReactNode {
   const [expanded, setExpanded] = useState(false);
   const canExpand = model.cycles.length > COMPACT_LIMIT;
   const timeline = windowCycles(model.cycles, expanded);
+  const trend = publishTrend(model.trend);
 
   return (
     <article
@@ -86,34 +93,52 @@ export function LuckCard({ card, model }: LuckCardProps): ReactNode {
           {model.current ? (
             <section className="bte-luck__section" data-luck-section="current">
               <h3 className="bte-luck__heading">Đại Vận hiện tại</h3>
-              <p className="bte-luck__ganzhi" data-luck-current-name="true">
-                {model.current.ganZhi}
+              <p className="bte-luck__value-row" data-luck-current-row="true">
+                <span className="bte-luck__ganzhi" data-luck-current-name="true">
+                  {model.current.ganZhi}
+                </span>
+                <span className="bte-luck__chronology">
+                  {model.current.yearRange ? (
+                    <span className="bte-luck__years">
+                      {" ("}
+                      <span data-luck-current-years="true">{model.current.yearRange}</span>
+                      {")"}
+                    </span>
+                  ) : null}
+                  {model.current.yearRange && model.current.ageRange ? (
+                    <span className="bte-luck__sep" aria-hidden="true">
+                      {" · "}
+                    </span>
+                  ) : null}
+                  {model.current.ageRange ? (
+                    <span className="bte-luck__ages" data-luck-current-ages="true">
+                      {model.current.ageRange}
+                    </span>
+                  ) : null}
+                </span>
               </p>
-              {model.current.yearRange ? (
-                <p className="bte-luck__years" data-luck-current-years="true">
-                  {model.current.yearRange}
-                </p>
-              ) : null}
-              {model.current.ageRange ? (
-                <p className="bte-luck__ages" data-luck-current-ages="true">
-                  {model.current.ageRange}
-                </p>
-              ) : null}
             </section>
           ) : null}
           {model.direction || model.startAge ? (
             <section className="bte-luck__section" data-luck-section="start">
               <h3 className="bte-luck__heading">Khởi vận</h3>
-              {model.direction ? (
-                <p className="bte-luck__meta" data-luck-direction="true">
-                  {model.direction}
-                </p>
-              ) : null}
-              {model.startAge ? (
-                <p className="bte-luck__meta" data-luck-start-age="true">
-                  {model.startAge}
-                </p>
-              ) : null}
+              <p className="bte-luck__value-row bte-luck__value-row--meta" data-luck-start-row="true">
+                {model.direction ? (
+                  <span className="bte-luck__meta" data-luck-direction="true">
+                    {model.direction}
+                  </span>
+                ) : null}
+                {model.direction && model.startAge ? (
+                  <span className="bte-luck__sep" aria-hidden="true">
+                    {" · "}
+                  </span>
+                ) : null}
+                {model.startAge ? (
+                  <span className="bte-luck__meta" data-luck-start-age="true">
+                    {model.startAge}
+                  </span>
+                ) : null}
+              </p>
             </section>
           ) : null}
           {timeline.length ? (
@@ -135,9 +160,9 @@ export function LuckCard({ card, model }: LuckCardProps): ReactNode {
               </p>
             </section>
           ) : null}
-          {model.trend ? (
+          {trend ? (
             <p className="bte-luck__trend" data-luck-trend="true">
-              {model.trend}
+              {trend}
             </p>
           ) : null}
         </>
