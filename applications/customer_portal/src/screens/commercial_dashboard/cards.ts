@@ -32,3 +32,12 @@ export const FIVE_ELEMENTS_HEADING = "PHÂN BỐ NGŨ HÀNH";
 export const TEN_GODS_TITLE = "THẬP THẦN";
 
 export const PATTERN_TITLE = "MỆNH CỤC";
+
+export const SHENSHA_TITLE = "THẦN SÁT";
+
+export const SHENSHA_FALLBACK_HEADING = "Thần Sát nổi bật";
+
+export const SHENSHA_SUPPORTING_NOTE =
+  "Thần Sát là yếu tố bổ trợ và không quyết định toàn bộ lá số.";
+
+export const LUCK_TITLE = "ĐẠI VẬN";
