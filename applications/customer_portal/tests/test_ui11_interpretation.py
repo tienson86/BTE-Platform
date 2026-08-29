@@ -26,7 +26,8 @@ def test_i2_i16_grid_spans_unchanged() -> None:
     assert ".bte-cdash__card--span-12 { grid-column: span 12; }" in css
     grid = _GRID.read_text(encoding="utf-8")
     assert 'card.id === "interpretation"' in grid
-    assert 'card.id === "action-plan"' in grid or "SkeletonCard" in grid
+    assert 'card.id === "action-plan"' in grid
+    assert "ActionPlanCard" in grid
     assert "repeat(12" not in grid
 
 
