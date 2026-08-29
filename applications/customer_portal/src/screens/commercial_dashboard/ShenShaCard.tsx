@@ -1,5 +1,5 @@
 /**
- * ShenSha Card — THẦN SÁT. Supporting evidence only. No invented meaning.
+ * ShenSha Card — THẦN SÁT. Customer items from the presentation adapter.
  */
 
 import { useState, type ReactNode } from "react";
@@ -13,40 +13,37 @@ type ShenShaCardProps = {
   readonly model: ShenShaView;
 };
 
-function ItemRow({
-  item,
-  showPlacement,
-}: {
-  readonly item: ShenShaItemView;
-  readonly showPlacement: boolean;
-}): ReactNode {
+function ItemBlock({ item }: { readonly item: ShenShaItemView }): ReactNode {
   return (
     <li className="bte-ss__item" data-ss-name={item.name}>
-      <span className="bte-ss__chip">{item.name}</span>
-      {showPlacement && item.placement ? (
-        <span className="bte-ss__meta" data-ss-placement="true">
+      <p className="bte-ss__name">{item.name}</p>
+      {item.placement ? (
+        <p className="bte-ss__meta" data-ss-placement="true">
           {item.placement}
-        </span>
+        </p>
       ) : null}
       {item.meaning ? (
-        <span className="bte-ss__meaning" data-ss-meaning="true">
+        <p className="bte-ss__meaning" data-ss-meaning="true">
           {item.meaning}
-        </span>
+        </p>
+      ) : null}
+      {item.evidence ? (
+        <p className="bte-ss__evidence" data-ss-evidence="true">
+          {item.evidence}
+        </p>
       ) : null}
     </li>
   );
 }
 
 /**
- * Compact ShenSha supporting card with progressive disclosure.
+ * Supporting ShenSha card. Renders adapter-prepared customer items only.
  */
 export function ShenShaCard({ card, model }: ShenShaCardProps): ReactNode {
   const [expanded, setExpanded] = useState(false);
-  const canExpand =
-    model.items.length > FEATURED_LIMIT ||
-    model.items.some((item) => Boolean(item.placement || item.meaning)) ||
-    model.groups.some((group) => group.items.some((item) => Boolean(item.placement || item.meaning)));
-  const fallbackItems = expanded ? model.items : model.items.slice(0, FEATURED_LIMIT);
+  const extraItems = model.items.length > FEATURED_LIMIT;
+  const canExpand = extraItems;
+  const fallbackItems = expanded || model.grouped ? model.items : model.items.slice(0, FEATURED_LIMIT);
 
   return (
     <article
@@ -84,7 +81,7 @@ export function ShenShaCard({ card, model }: ShenShaCardProps): ReactNode {
                   <h3 className="bte-ss__heading">{group.heading}</h3>
                   <ul className="bte-ss__list">
                     {group.items.map((item) => (
-                      <ItemRow key={item.name} item={item} showPlacement={expanded} />
+                      <ItemBlock key={item.name} item={item} />
                     ))}
                   </ul>
                 </section>
@@ -95,7 +92,7 @@ export function ShenShaCard({ card, model }: ShenShaCardProps): ReactNode {
               <h3 className="bte-ss__heading">{SHENSHA_FALLBACK_HEADING}</h3>
               <ul className="bte-ss__list">
                 {fallbackItems.map((item) => (
-                  <ItemRow key={item.name} item={item} showPlacement={expanded} />
+                  <ItemBlock key={item.name} item={item} />
                 ))}
               </ul>
             </section>
