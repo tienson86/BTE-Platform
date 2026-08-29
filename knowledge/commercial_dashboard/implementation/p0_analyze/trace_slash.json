@@ -1,0 +1,73 @@
+[
+  {
+    "label": "trace_slash_1",
+    "date_value": "21/01/1987",
+    "typed": true,
+    "inspect": {
+      "btnCount": 1,
+      "formCount": 1,
+      "dateCount": 1,
+      "btnType": "submit",
+      "btnOnclick": null,
+      "formAction": "#",
+      "formMethod": "post",
+      "novalidate": true,
+      "dateValue": "",
+      "datePlaceholder": "DD/MM/YYYY",
+      "scripts": [
+        "\n    window.__BTE_I18N__ = {\"meta\":{\"locale\":\"vi\",\"name\":\"Ti\u1ebfng Vi\u1ec7t\"},\"brand\":{",
+        "http://127.0.0.1:8081/static/js/i18n.js",
+        "http://127.0.0.1:8081/static/js/result_store.js",
+        "http://127.0.0.1:8081/static/js/api.js",
+        "http://127.0.0.1:8081/static/js/ui/components.js",
+        "http://127.0.0.1:8081/static/js/ui/module_registry.js",
+        "http://127.0.0.1:8081/static/js/ui/shell.js",
+        "http://127.0.0.1:8081/static/js/analyze.js",
+        "if (window.BteI18n) BteI18n.apply(document);"
+      ],
+      "hasPortal": true,
+      "hasPost": true,
+      "hasStore": true,
+      "analyzeJsLoaded": true
+    },
+    "after_fill": {
+      "date": "21/01/1987",
+      "time": "04:30",
+      "name": "Nguyen Tien Son",
+      "place": "Ha Tay, Viet Nam",
+      "gender": "male"
+    },
+    "redirected": true,
+    "redirect_url": "http://127.0.0.1:8081/result",
+    "flash": "",
+    "date_err": "",
+    "status": "",
+    "probe": {
+      "stages": [],
+      "console": [],
+      "pageerror": []
+    },
+    "console": [],
+    "pageerror": [],
+    "network": [
+      {
+        "kind": "request",
+        "method": "GET",
+        "url": "http://127.0.0.1:8081/analyze",
+        "post_data": null
+      },
+      {
+        "kind": "request",
+        "method": "POST",
+        "url": "http://127.0.0.1:8081/backend/api/v1/analyze",
+        "post_data": "{\"full_name\":\"Nguyen Tien Son\",\"birth_place\":\"Ha Tay, Viet Nam\",\"year\":1987,\"month\":1,\"day\":21,\"hour\":4,\"minute\":30,\"gender\":\"male\",\"timezone\":\"Asia/Ho_Chi_Minh\"}"
+      },
+      {
+        "kind": "response",
+        "status": 200,
+        "url": "http://127.0.0.1:8081/backend/api/v1/analyze",
+        "body_head": "read_error:Response.text: Protocol error (Network.getResponseBody): No resource with given identifier found\nResponse body is not available for a response that was navigated away from. Read response.body() before triggering any navigation."
+      }
+    ]
+  }
+]
