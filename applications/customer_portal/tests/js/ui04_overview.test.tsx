@@ -145,8 +145,6 @@ describe("UI-04 Overview card", () => {
       (node) => node.getAttribute("data-card"),
     );
     expect(skeletons).toEqual([
-      "five-elements",
-      "ten-gods",
       "pattern",
       "shensha",
       "luck",
