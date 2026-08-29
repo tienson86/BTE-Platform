@@ -24,3 +24,9 @@ export const OVERVIEW_TITLE = "TỔNG QUAN LÁ SỐ";
 export const OVERVIEW_SUBTITLE = "Bức tranh tổng thể về lá số của bạn";
 
 export const BAZI_TITLE = "BÁT TỰ";
+
+export const FIVE_ELEMENTS_TITLE = "NGŨ HÀNH";
+
+export const FIVE_ELEMENTS_HEADING = "PHÂN BỐ NGŨ HÀNH";
+
+export const TEN_GODS_TITLE = "THẬP THẦN";
