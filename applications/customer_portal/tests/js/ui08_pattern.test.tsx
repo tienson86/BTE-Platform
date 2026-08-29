@@ -195,7 +195,7 @@ describe("UI-08 Pattern card", () => {
     const skeletons = [...container.querySelectorAll("[data-card][data-skeleton='true']")].map(
       (node) => node.getAttribute("data-card"),
     );
-    expect(skeletons).toEqual(["action-plan"]);
+    expect(skeletons).toEqual([]);
   });
 
   it("P19 expand/collapse is an accessible button", () => {
