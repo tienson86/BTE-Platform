@@ -159,3 +159,13 @@ export type TenGodsView = {
   readonly distribution: readonly TenGodsPresenceView[];
   readonly summary: string;
 };
+
+export type PatternView = {
+  readonly title: string;
+  readonly available: boolean;
+  readonly primary: string;
+  readonly status: string;
+  readonly secondary: string;
+  readonly formation: readonly string[];
+  readonly summary: string;
+};
