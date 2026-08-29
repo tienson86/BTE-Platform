@@ -198,12 +198,12 @@ describe("UI-07 Ten Gods card", () => {
     );
   });
 
-  it("T17 leaves Pattern and later Cards as skeletons", () => {
+  it("T17 leaves ShenSha and later Cards as skeletons", () => {
     const { container } = renderLive();
     const skeletons = [...container.querySelectorAll("[data-card][data-skeleton='true']")].map(
       (node) => node.getAttribute("data-card"),
     );
-    expect(skeletons).toEqual(["pattern", "shensha", "luck", "interpretation", "action-plan"]);
+    expect(skeletons).toEqual(["shensha", "luck", "interpretation", "action-plan"]);
   });
 
   it("T18 expand/collapse is an accessible button", () => {
