@@ -44,7 +44,7 @@
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 .app-nav a, .nav a, .nav-link {
   color: var(--muted);
@@ -117,6 +117,46 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
+  margin-left: auto;
+}
+
+.app-nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.45rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  cursor: pointer;
+}
+.app-nav-toggle__bar {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--ink);
+  border-radius: 2px;
+}
+
+.app-user {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.app-user__avatar {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: var(--text-sm);
+  font-weight: 700;
 }
 
 .app-main {
@@ -169,6 +209,27 @@
     min-height: var(--header-h);
     flex-wrap: wrap;
     padding: var(--space-3) var(--space-4);
+  }
+  .app-nav-toggle {
+    display: inline-flex;
+    margin-left: auto;
+  }
+  .app-header-actions {
+    margin-left: 0;
+  }
+  .app-nav {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    order: 4;
+    padding-top: var(--space-2);
+  }
+  .app-header[data-nav-open="true"] .app-nav {
+    display: flex;
+  }
+  .app-nav a, .nav a, .nav-link {
+    width: 100%;
   }
   .app-main, .shell {
     width: min(100% - 2 * var(--space-4), var(--content-max));
