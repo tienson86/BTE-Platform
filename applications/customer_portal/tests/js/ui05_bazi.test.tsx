@@ -173,7 +173,7 @@ describe("UI-05 BaZi structure card", () => {
       "Mậu",
     ]);
     const { container } = renderLive();
-    fireEvent.click(screen.getByRole("button", { name: "Xem chi tiết" }));
+    fireEvent.click(baziCard(container).querySelector("button.bte-bazi__toggle") as HTMLButtonElement);
     const monthHidden = baziCard(container).querySelector('[data-pillar="month"][data-bazi-field="hidden"]');
     expect(monthHidden?.textContent).toMatch(/Giáp/);
     expect(monthHidden?.textContent).toMatch(/Bính/);
@@ -190,7 +190,7 @@ describe("UI-05 BaZi structure card", () => {
 
   it("B10 binds canonical Trường Sinh", () => {
     const { container } = renderLive();
-    fireEvent.click(screen.getByRole("button", { name: "Xem chi tiết" }));
+    fireEvent.click(baziCard(container).querySelector("button.bte-bazi__toggle") as HTMLButtonElement);
     const stages = [...baziCard(container).querySelectorAll('[data-bazi-field="stage"]')].map(
       (node) => node.textContent,
     );
@@ -234,17 +234,17 @@ describe("UI-05 BaZi structure card", () => {
 
   it("B14 expand/collapse is an accessible button", () => {
     const { container } = renderLive();
-    const toggle = screen.getByRole("button", { name: "Xem chi tiết" });
+    const toggle = baziCard(container).querySelector("button.bte-bazi__toggle") as HTMLButtonElement;
     expect(toggle.getAttribute("aria-expanded")).toBe("false");
     expect(baziCard(container).querySelector('[data-bazi-row="hidden"]')).toBeNull();
     fireEvent.click(toggle);
-    expect(screen.getByRole("button", { name: "Thu gọn" }).getAttribute("aria-expanded")).toBe("true");
+    expect(toggle.getAttribute("aria-expanded")).toBe("true");
+    expect(toggle.textContent).toBe("Thu gọn");
     expect(baziCard(container).querySelector('[data-bazi-row="hidden"]')).toBeTruthy();
     expect(baziCard(container).querySelector('[data-bazi-row="stage"]')).toBeTruthy();
-    fireEvent.click(screen.getByRole("button", { name: "Thu gọn" }));
-    expect(screen.getByRole("button", { name: "Xem chi tiết" }).getAttribute("aria-expanded")).toBe(
-      "false",
-    );
+    fireEvent.click(toggle);
+    expect(toggle.getAttribute("aria-expanded")).toBe("false");
+    expect(toggle.textContent).toBe("Xem chi tiết");
   });
 
   it("B15 leaves Overview implemented and unchanged in role", () => {
@@ -261,8 +261,6 @@ describe("UI-05 BaZi structure card", () => {
       (node) => node.getAttribute("data-card"),
     );
     expect(skeletons).toEqual([
-      "five-elements",
-      "ten-gods",
       "pattern",
       "shensha",
       "luck",
