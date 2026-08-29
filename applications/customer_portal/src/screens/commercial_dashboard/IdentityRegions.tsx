@@ -65,14 +65,12 @@ export function IdentityFoundation({
 }
 
 /**
- * Region D — subtle analysis metadata. Omits empty values.
+ * Region D — analysis id and date only. Version / Engine / Confidence stay off the header.
  */
 export function IdentityStatus({ status }: { readonly status: IdentityStatusView }): ReactNode {
   const rows: KvRow[] = [];
   if (status.analysisId) rows.push({ label: "Mã phân tích", value: status.analysisId });
-  if (status.version) rows.push({ label: "Phiên bản", value: status.version });
-  if (status.analyzedAt) rows.push({ label: "Thời gian phân tích", value: status.analyzedAt });
-  if (status.confidence) rows.push({ label: "Độ tin cậy", value: status.confidence });
+  if (status.analyzedAt) rows.push({ label: "Ngày phân tích", value: status.analyzedAt });
   return (
     <section className="bte-id__region bte-id__region--status" data-region="status">
       <p className="bte-id__region-label">Trạng thái</p>
