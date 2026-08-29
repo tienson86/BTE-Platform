@@ -13,10 +13,10 @@ import type { BaziHiddenStemView, BaziPillarKey, BaziPillarView, BaziStructureVi
 
 const PILLAR_KEYS: readonly BaziPillarKey[] = ["year", "month", "day", "hour"];
 const PILLAR_LABELS: Record<BaziPillarKey, string> = {
-  year: "Năm",
-  month: "Tháng",
-  day: "Ngày",
-  hour: "Giờ",
+  year: "Năm trụ",
+  month: "Tháng trụ",
+  day: "Ngày trụ",
+  hour: "Giờ trụ",
 };
 const TECHNICAL_TOKEN = /^[a-z][a-z0-9_]*$/;
 
