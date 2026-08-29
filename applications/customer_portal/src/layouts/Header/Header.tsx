@@ -33,7 +33,7 @@ export function Header({
       className={cx("cui-app-header", className)}
       role="banner"
       brand={
-        <a className="cui-app-header__brand" href="/dashboard">
+        <a className="cui-app-header__brand" href="/good-date">
           {brand}
         </a>
       }
