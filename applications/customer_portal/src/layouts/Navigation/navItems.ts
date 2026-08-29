@@ -16,24 +16,11 @@ export type AppNavItem = {
   readonly children?: readonly AppNavChild[];
 };
 
-/** Top-bar primary destinations (Canonical Portal UI). */
+/** Customer Portal V1 primary destinations (Commercial Dashboard 00_NAVIGATION). */
 export const APP_NAV_ITEMS: readonly AppNavItem[] = [
-  { id: "dashboard", label: "Trang chủ", href: "/dashboard" },
-  { id: "interpretation", label: "Luận giải", href: "/result#interpretation" },
-  {
-    id: "date-selection",
-    label: "Ngày tốt",
-    href: "/good-date",
-    children: [
-      { id: "good-date", label: "Xem ngày tốt/xấu", href: "/good-date" },
-      { id: "choose-date", label: "Chọn ngày tốt", href: "/choose-date" },
-    ],
-  },
-  { id: "result", label: "Kết quả", href: "/result" },
-  { id: "reports", label: "Báo cáo", href: "/reports" },
-  { id: "history", label: "Lịch sử", href: "/history" },
-  { id: "profile", label: "Tài khoản", href: "/profile" },
-  { id: "login", label: "Đăng nhập", href: "/login" },
+  { id: "home", label: "Trang chủ", href: "/good-date" },
+  { id: "choose-date", label: "Chọn ngày tốt", href: "/choose-date" },
+  { id: "analyze", label: "Xem lá số", href: "/analyze" },
 ];
 
 export type TocNavItem = {
@@ -68,18 +55,25 @@ export const DASHBOARD_TOC_ITEMS: readonly TocNavItem[] = [
 /** Resolve active primary nav id from a path string. */
 export function resolveActiveNavId(pathname: string): string | undefined {
   const normalized = pathname.split("?")[0]?.replace(/\/+$/, "") || "/";
-  if (normalized === "/good-date" || normalized === "/choose-date") {
-    return "date-selection";
+  if (normalized === "/" || normalized === "" || normalized === "/good-date" || normalized === "/home") {
+    return "home";
+  }
+  if (normalized === "/choose-date") {
+    return "choose-date";
+  }
+  if (
+    normalized === "/analyze" ||
+    normalized.startsWith("/analyze") ||
+    normalized === "/result" ||
+    normalized.startsWith("/result") ||
+    normalized === "/interpretation" ||
+    normalized === "/result-workspace"
+  ) {
+    return "analyze";
   }
   const exact = APP_NAV_ITEMS.find((item) => item.href === normalized);
   if (exact) {
     return exact.id;
   }
-  if (normalized === "/" || normalized === "") {
-    return "dashboard";
-  }
-  if (normalized.startsWith("/analyze")) {
-    return "interpretation";
-  }
-  return APP_NAV_ITEMS.find((item) => normalized.startsWith(item.href))?.id;
+  return undefined;
 }
