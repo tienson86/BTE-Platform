@@ -96,6 +96,9 @@ describe("UI-09R ShenSha commercial content", () => {
     );
     expect(approvedShenShaMeaning("Thiên Ất Quý Nhân")).toBeTruthy();
     expect(approvedShenShaMeaning("Hồng Loan")).toBeTruthy();
+    expect(approvedShenShaMeaning("Thiên Đức Quý Nhân")).toBe(approvedShenShaMeaning("Thiên Đức"));
+    expect(approvedShenShaMeaning("Nguyệt Đức Quý Nhân")).toBe(approvedShenShaMeaning("Nguyệt Đức"));
+    expect(ssCard(container).textContent).not.toMatch(/production list|stems hit/);
   });
 
   it("SR6 no local React meaning dictionary in the card", () => {
