@@ -9,11 +9,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Sequence
 
-from engines.narrative_v2.runtime.runtime_pipeline import (
-    CANONICAL_STAGES,
-    PRE_VALIDATE_STAGES,
-)
-
 
 @dataclass(slots=True)
 class ValidationOutcome:
@@ -31,15 +26,17 @@ class ValidationOutcome:
 class RuntimeValidator:
     """Ordering-only validator."""
 
-    def validate(self, executed_stages: Sequence[str]) -> ValidationOutcome:
-        """PASS unless executed stages violate canonical order.
+    def validate(
+        self,
+        executed_stages: Sequence[str],
+        *,
+        expected: Sequence[str],
+    ) -> ValidationOutcome:
+        """PASS unless executed stages do not match ``expected`` order.
 
         Semantic, language, and customer-safety checks are out of scope.
         """
-        executed = tuple(executed_stages)
-        if executed == PRE_VALIDATE_STAGES:
-            return ValidationOutcome(passed=True)
-        if executed == CANONICAL_STAGES:
+        if tuple(executed_stages) == tuple(expected):
             return ValidationOutcome(passed=True)
         return ValidationOutcome(
             passed=False,
