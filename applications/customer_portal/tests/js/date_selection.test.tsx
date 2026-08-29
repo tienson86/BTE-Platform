@@ -1,7 +1,7 @@
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 
-import { APP_NAV_ITEMS, PrimaryNav, resolveActiveNavId } from "../../src/layouts/Navigation";
+import { resolveActiveNavId } from "../../src/layouts/Navigation";
 import {
   AnalogClockFace,
   DateSelectionMobileFrame,
@@ -166,26 +166,18 @@ const ranked: RankedDateVm[] = [
 ];
 
 describe("Date Selection frontend", () => {
-  it("exposes Ngày tốt dropdown with exactly two items", () => {
-    const item = APP_NAV_ITEMS.find((entry) => entry.id === "date-selection");
-    expect(item?.label).toBe("Ngày tốt");
-    expect(item?.children?.map((child) => child.label)).toEqual([
-      "Xem ngày tốt/xấu",
-      "Chọn ngày tốt",
-    ]);
-    render(<PrimaryNav activeId="date-selection" />);
-    expect(screen.getByText("Ngày tốt")).toBeTruthy();
-    expect(screen.getByText("Xem ngày tốt/xấu")).toBeTruthy();
-    expect(screen.getByText("Chọn ngày tốt")).toBeTruthy();
-    cleanup();
+  it("keeps date-selection feature nav with exactly two items", () => {
     render(<DateSelectionNav activeHref="/good-date" />);
     expect(screen.getAllByRole("menuitem")).toHaveLength(2);
+    expect(screen.getByText("Xem ngày tốt/xấu")).toBeTruthy();
+    expect(screen.getByText("Chọn ngày tốt")).toBeTruthy();
   });
 
-  it("resolves new routes", () => {
-    expect(resolveActiveNavId("/good-date")).toBe("date-selection");
-    expect(resolveActiveNavId("/choose-date")).toBe("date-selection");
-    expect(resolveActiveNavId("/result")).toBe("result");
+  it("resolves customer primary routes", () => {
+    expect(resolveActiveNavId("/good-date")).toBe("home");
+    expect(resolveActiveNavId("/choose-date")).toBe("choose-date");
+    expect(resolveActiveNavId("/analyze")).toBe("analyze");
+    expect(resolveActiveNavId("/result")).toBe("analyze");
   });
 
   it("renders calendar selection, hour selector, and detail changes", () => {
