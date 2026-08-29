@@ -19,6 +19,10 @@ import { adaptShenShaCard } from "./shenShaAdapter";
 import { SHENSHA_VISUAL_FIXTURE } from "./shenShaFixture";
 import { adaptLuckCard } from "./luckAdapter";
 import { LUCK_VISUAL_FIXTURE } from "./luckFixture";
+import { adaptInterpretationCard } from "./interpretationAdapter";
+import { INTERPRETATION_VISUAL_FIXTURE } from "./interpretationFixture";
+import { adaptActionPlanCard } from "./actionPlanAdapter";
+import { ACTION_PLAN_VISUAL_FIXTURE } from "./actionPlanFixture";
 import { adaptOverviewCard } from "./overviewAdapter";
 import { OVERVIEW_VISUAL_FIXTURE } from "./overviewFixture";
 import { RESULT_PAGE_TITLE } from "./cards";
@@ -147,6 +151,18 @@ export function CommercialDashboardPage({
       : layoutMode === "skeleton" || previewFallback
         ? null
         : adaptLuckCard(analysis);
+  const interpretation =
+    layoutMode === "visual"
+      ? INTERPRETATION_VISUAL_FIXTURE
+      : layoutMode === "skeleton" || previewFallback
+        ? null
+        : adaptInterpretationCard(analysis);
+  const actionPlan =
+    layoutMode === "visual"
+      ? ACTION_PLAN_VISUAL_FIXTURE
+      : layoutMode === "skeleton" || previewFallback
+        ? null
+        : adaptActionPlanCard(analysis);
   return (
     <div
       className="bte-cdash"
@@ -164,6 +180,8 @@ export function CommercialDashboardPage({
         pattern={pattern}
         shenSha={shenSha}
         luck={luck}
+        interpretation={interpretation}
+        actionPlan={actionPlan}
       />
     </div>
   );
