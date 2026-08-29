@@ -31,13 +31,8 @@
       return checked ? checked.value : "";
     }
 
-    function parseBirthDate() {
-      var raw = String((document.getElementById("birth_date") || {}).value || "").trim();
-      var match = raw.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-      if (!match) return null;
-      var day = Number(match[1]);
-      var month = Number(match[2]);
-      var year = Number(match[3]);
+    function civilDate(day, month, year) {
+      if (!Number.isFinite(day) || !Number.isFinite(month) || !Number.isFinite(year)) return null;
       var probe = new Date(year, month - 1, day);
       if (
         probe.getFullYear() !== year ||
@@ -47,6 +42,27 @@
         return null;
       }
       return { year: year, month: month, day: day };
+    }
+
+    function parseBirthDate() {
+      var raw = String((document.getElementById("birth_date") || {}).value || "").trim();
+      var match = raw.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+      if (match) {
+        return civilDate(Number(match[1]), Number(match[2]), Number(match[3]));
+      }
+      match = raw.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+      if (match) {
+        return civilDate(Number(match[3]), Number(match[2]), Number(match[1]));
+      }
+      match = raw.match(/^(\d{1,2})[-.](\d{1,2})[-.](\d{4})$/);
+      if (match) {
+        return civilDate(Number(match[1]), Number(match[2]), Number(match[3]));
+      }
+      match = raw.match(/^(\d{2})(\d{2})(\d{4})$/);
+      if (match) {
+        return civilDate(Number(match[1]), Number(match[2]), Number(match[3]));
+      }
+      return null;
     }
 
     function parseBirthTime() {
@@ -191,6 +207,10 @@
       if (invalid) {
         BtePortal.showFlash(flash, invalid, "error");
         return;
+      }
+      var dateEl = document.getElementById("birth_date");
+      if (dateEl) {
+        dateEl.value = pad2(input.day) + "/" + pad2(input.month) + "/" + input.year;
       }
 
       analyzing = true;
