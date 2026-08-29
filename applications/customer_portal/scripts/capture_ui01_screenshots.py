@@ -79,6 +79,7 @@ def _wait(port: int, timeout: float = 20.0) -> None:
 
 
 def main() -> None:
+    """Capture the five UI-01 Product Owner review screenshots."""
     OUT.mkdir(parents=True, exist_ok=True)
     _kill_port(API_PORT)
     _kill_port(PORTAL_PORT)
