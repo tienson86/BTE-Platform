@@ -65,7 +65,7 @@ body:has(.cd-root) {
   min-height: 100vh;
   display: grid;
   grid-template-columns: var(--cd-sidebar-w) minmax(0, 1fr);
-  grid-template-rows: var(--cd-header-h) 1fr auto;
+  grid-template-rows: 1fr auto;
   background: var(--cd-bg);
   color: var(--cd-text);
   font-family: var(--cd-font);
@@ -100,6 +100,17 @@ body:has(.cd-root) {
   align-self: start;
   height: 100vh;
   overflow: auto;
+}
+
+/* Live /result hosts the shared Customer Portal header above .cd-root. */
+body[data-result-ui="canonical-desktop-v2"] .cd-root {
+  min-height: calc(100vh - var(--header-h, 56px));
+}
+
+body[data-result-ui="canonical-desktop-v2"] .cd-sidebar {
+  top: var(--header-h, 56px);
+  height: calc(100vh - var(--header-h, 56px));
+  min-height: calc(100vh - var(--header-h, 56px));
 }
 
 .cd-sidebar__brand {
