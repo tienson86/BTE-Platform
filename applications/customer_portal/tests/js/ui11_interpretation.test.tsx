@@ -232,9 +232,12 @@ describe("UI-11 Interpretation card", () => {
     expect(container.querySelector('[data-card="shensha"]')?.getAttribute("data-implemented")).toBe("shensha");
   });
 
-  it("I18 Action Plan remains skeleton", () => {
+  it("I18 no Dashboard skeleton remains", () => {
     const { container } = renderLive();
-    expect(container.querySelector('[data-card="action-plan"]')?.getAttribute("data-skeleton")).toBe("true");
+    expect(container.querySelectorAll("[data-card][data-skeleton='true']")).toHaveLength(0);
+    expect(container.querySelector('[data-card="action-plan"]')?.getAttribute("data-implemented")).toBe(
+      "action-plan",
+    );
   });
 
   it("I19 expand/collapse is accessible", () => {
