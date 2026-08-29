@@ -1,14 +1,17 @@
 /**
- * Production Result entry — mounts Canonical Desktop V2 on /result.
+ * Production Result entry — mounts Commercial Dashboard on /result.
+ * PortalPage remains the isolated Result architecture host for regression
+ * routes such as /interpretation.
  *
- * Birth Input (/analyze) → ResultStore → this entry → PortalPage.
+ * Birth Input (/analyze) → ResultStore → this entry → CommercialDashboardPage.
  */
 
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { PortalPage } from "../screens/canonical_desktop";
+import { CommercialDashboardPage } from "../screens/commercial_dashboard";
 import { historyIdFromSearch } from "../resultState/currentResult";
-import { resolveResultBoot, type StoredResult } from "./resultBoot";
+import { resolveResultBoot, toAnalyzeRequest, type StoredResult } from "./resultBoot";
 
 declare global {
   interface Window {
@@ -44,6 +47,10 @@ function readStoredResult(search: string): {
   };
 }
 
+function isCanonicalResultPath(pathname: string): boolean {
+  return pathname === "/result" || pathname === "/result/";
+}
+
 function mount(): void {
   const host = document.getElementById("canonical-desktop-root");
   if (!host) {
@@ -53,20 +60,34 @@ function mount(): void {
   const search = window.location.search;
   const stored = readStoredResult(search);
   const boot = resolveResultBoot(stored.current, search, stored.historyView);
+  const commercial = isCanonicalResultPath(window.location.pathname);
 
   createRoot(host).render(
     <StrictMode>
-      <PortalPage
-        request={boot.request}
-        initialData={boot.initialData}
-        enabled
-        previewFallback={boot.previewFallback}
-        fullReport={boot.fullReport}
-        analysisId={boot.analysisId}
-        resultSource={boot.resultSource}
-        exportPayload={boot.exportPayload}
-        reanalyzeHref={boot.reanalyzeHref}
-      />
+      {commercial ? (
+        <CommercialDashboardPage
+          analysis={boot.analysis}
+          request={boot.request ?? toAnalyzeRequest(stored.current?.input ?? null)}
+          initialData={boot.initialData}
+          analysisId={boot.analysisId}
+          resultSource={boot.resultSource}
+          reanalyzeHref={boot.reanalyzeHref}
+          layoutMode={boot.layoutMode}
+          previewFallback={boot.previewFallback}
+        />
+      ) : (
+        <PortalPage
+          request={boot.request}
+          initialData={boot.initialData}
+          enabled
+          previewFallback={boot.previewFallback}
+          fullReport={boot.fullReport}
+          analysisId={boot.analysisId}
+          resultSource={boot.resultSource}
+          exportPayload={boot.exportPayload}
+          reanalyzeHref={boot.reanalyzeHref}
+        />
+      )}
     </StrictMode>,
   );
 }
