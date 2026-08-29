@@ -1,0 +1,437 @@
+[
+  {
+    "label": "verify3_1",
+    "date_value": "21/01/1987",
+    "typed": true,
+    "inspect": {
+      "btnCount": 1,
+      "formCount": 1,
+      "dateCount": 1,
+      "btnType": "submit",
+      "btnOnclick": null,
+      "formAction": "#",
+      "formMethod": "post",
+      "novalidate": true,
+      "dateValue": "",
+      "datePlaceholder": "DD/MM/YYYY",
+      "scripts": [
+        "\n    window.__BTE_I18N__ = {\"meta\":{\"locale\":\"vi\",\"name\":\"Ti\u1ebfng Vi\u1ec7t\"},\"brand\":{",
+        "http://127.0.0.1:8081/static/js/i18n.js",
+        "http://127.0.0.1:8081/static/js/result_store.js",
+        "http://127.0.0.1:8081/static/js/api.js",
+        "http://127.0.0.1:8081/static/js/ui/components.js",
+        "http://127.0.0.1:8081/static/js/ui/module_registry.js",
+        "http://127.0.0.1:8081/static/js/ui/shell.js",
+        "http://127.0.0.1:8081/static/js/analyze.js",
+        "if (window.BteI18n) BteI18n.apply(document);"
+      ],
+      "hasPortal": true,
+      "hasPost": true,
+      "hasStore": true,
+      "analyzeJsLoaded": true
+    },
+    "after_fill": {
+      "date": "21/01/1987",
+      "time": "04:30",
+      "name": "Nguyen Tien Son",
+      "place": "Ha Tay, Viet Nam",
+      "gender": "male"
+    },
+    "redirected": true,
+    "redirect_url": "http://127.0.0.1:8081/result",
+    "flash": "",
+    "date_err": "",
+    "status": "",
+    "stages": [
+      {
+        "stage": "click",
+        "t": 1788013346263,
+        "id": "btnAnalyze",
+        "type": "submit",
+        "disabled": false,
+        "hasOnclick": false,
+        "inForm": true,
+        "formId": "analyzeForm"
+      },
+      {
+        "stage": "submit_capture",
+        "t": 1788013346270,
+        "id": "analyzeForm",
+        "defaultPrevented": false,
+        "action": "#"
+      },
+      {
+        "stage": "fetch_call",
+        "t": 1788013346292,
+        "url": "/backend/api/v1/analyze",
+        "method": "POST"
+      },
+      {
+        "stage": "submit_bubble",
+        "t": 1788013346297,
+        "id": "analyzeForm",
+        "defaultPrevented": true
+      },
+      {
+        "stage": "fetch_response",
+        "t": 1788013347895,
+        "url": "http://127.0.0.1:8081/backend/api/v1/analyze",
+        "status": 200,
+        "ok": true,
+        "body_head": "{\"success\":true,\"message\":\"Analyze OK\",\"data\":{\"pipeline\":[\"calendar\",\"bazi\",\"pattern\",\"score\",\"interpretation\",\"report\",\"narrative\"],\"calendar\":{\"solar\":{\"year\":1987,\"month\":1,\"day\":21,\"hour\":4,\"minute\":30},\"lunar\":{\"year\":1986,\"month\":12,\"day\":22,\"is_leap_month\":false,\"leap\":false,\"year_can_chi\":\"B\u00ednh D\u1ea7n\"},\"lunar_can_chi\":{\"year\":\"B\u00ednh D\u1ea7n\",\"day\":\"Canh Ng\u1ecd\"},\"solar_term\":{\"name\":\"\u0110\u1ea1i H\u00e0n\",\"index\":23},\"timezone\":{\"offset_hours\":7.0,\"name\":\"Asia/Ho_Chi_Minh\"},\"julian_day\":2446816.5,\"solar_year\""
+      },
+      {
+        "stage": "resultstore_save",
+        "t": 1788013347936,
+        "ok": true,
+        "hasData": true
+      },
+      {
+        "stage": "resultstore_load",
+        "t": 1788013347938,
+        "ok": true
+      }
+    ],
+    "console": [
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"click\",\"t\":1788013346263,\"id\":\"btnAnalyze\",\"type\":\"submit\",\"disabled\":false,\"hasOnclick\":false,\"inForm\":true,\"formId\":\"analyzeForm\"}"
+      },
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"submit_capture\",\"t\":1788013346270,\"id\":\"analyzeForm\",\"defaultPrevented\":false,\"action\":\"#\"}"
+      },
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"fetch_call\",\"t\":1788013346292,\"url\":\"/backend/api/v1/analyze\",\"method\":\"POST\"}"
+      },
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"submit_bubble\",\"t\":1788013346297,\"id\":\"analyzeForm\",\"defaultPrevented\":true}"
+      },
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"fetch_response\",\"t\":1788013347895,\"url\":\"http://127.0.0.1:8081/backend/api/v1/analyze\",\"status\":200,\"ok\":true,\"body_head\":\"{\\\"success\\\":true,\\\"message\\\":\\\"Analyze OK\\\",\\\"data\\\":{\\\"pipeline\\\":[\\\"calendar\\\",\\\"bazi\\\",\\\"pattern\\\",\\\"score\\\",\\\"interpretation\\\",\\\"report\\\",\\\"narrative\\\"],\\\"calendar\\\":{\\\"solar\\\":{\\\"year\\\":1987,\\\"month\\\":1,\\\"day\\\":21,\\\"hour\\\":4,\\\"minute\\\":30},\\\"lunar\\\":{\\\"year\\\":1986,\\\"month\\\":12,\\\"day\\\":22,\\\"is_leap_month\\\":false,\\\"leap\\\":false,\\\"year_can_chi\\\":\\\"B\u00ednh D\u1ea7n\\\"},\\\"lunar_can_chi\\\":{\\\"year\\\":\\\"B\u00ednh D\u1ea7n\\\",\\\"day\\\":\\\"Canh Ng\u1ecd\\\"},\\\"solar_term\\\":{\\\"name\\\":\\\"\u0110\u1ea1i H\u00e0n\\\",\\\"index\\\":23},\\\"timezone\\\":{\\\"offset_hours\\\":7.0,\\\"name\\\":\\\"Asia/Ho_Chi_Minh\\\"},\\\"julian_day\\\":2446816.5,\\\"solar_year\\\"\"}"
+      },
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"resultstore_save\",\"t\":1788013347936,\"ok\":true,\"hasData\":true}"
+      },
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"resultstore_load\",\"t\":1788013347938,\"ok\":true}"
+      }
+    ],
+    "pageerror": [],
+    "network": [
+      {
+        "kind": "request",
+        "method": "GET",
+        "url": "http://127.0.0.1:8081/analyze",
+        "post_data": null
+      },
+      {
+        "kind": "request",
+        "method": "POST",
+        "url": "http://127.0.0.1:8081/backend/api/v1/analyze",
+        "post_data": "{\"full_name\":\"Nguyen Tien Son\",\"birth_place\":\"Ha Tay, Viet Nam\",\"year\":1987,\"month\":1,\"day\":21,\"hour\":4,\"minute\":30,\"gender\":\"male\",\"timezone\":\"Asia/Ho_Chi_Minh\"}"
+      },
+      {
+        "kind": "response",
+        "status": 200,
+        "url": "http://127.0.0.1:8081/backend/api/v1/analyze",
+        "body_head": "read_error:Response.text: Protocol error (Network.getResponseBody): No resource with given identifier found\nResponse body is not available for a response that was navigated away from. Read response.body() before triggering any navigation."
+      }
+    ]
+  },
+  {
+    "label": "verify3_2",
+    "date_value": "21/01/1987",
+    "typed": true,
+    "inspect": {
+      "btnCount": 1,
+      "formCount": 1,
+      "dateCount": 1,
+      "btnType": "submit",
+      "btnOnclick": null,
+      "formAction": "#",
+      "formMethod": "post",
+      "novalidate": true,
+      "dateValue": "",
+      "datePlaceholder": "DD/MM/YYYY",
+      "scripts": [
+        "\n    window.__BTE_I18N__ = {\"meta\":{\"locale\":\"vi\",\"name\":\"Ti\u1ebfng Vi\u1ec7t\"},\"brand\":{",
+        "http://127.0.0.1:8081/static/js/i18n.js",
+        "http://127.0.0.1:8081/static/js/result_store.js",
+        "http://127.0.0.1:8081/static/js/api.js",
+        "http://127.0.0.1:8081/static/js/ui/components.js",
+        "http://127.0.0.1:8081/static/js/ui/module_registry.js",
+        "http://127.0.0.1:8081/static/js/ui/shell.js",
+        "http://127.0.0.1:8081/static/js/analyze.js",
+        "if (window.BteI18n) BteI18n.apply(document);"
+      ],
+      "hasPortal": true,
+      "hasPost": true,
+      "hasStore": true,
+      "analyzeJsLoaded": true
+    },
+    "after_fill": {
+      "date": "21/01/1987",
+      "time": "04:30",
+      "name": "Nguyen Tien Son",
+      "place": "Ha Tay, Viet Nam",
+      "gender": "male"
+    },
+    "redirected": true,
+    "redirect_url": "http://127.0.0.1:8081/result",
+    "flash": "",
+    "date_err": "",
+    "status": "",
+    "stages": [
+      {
+        "stage": "click",
+        "t": 1788013381651,
+        "id": "btnAnalyze",
+        "type": "submit",
+        "disabled": false,
+        "hasOnclick": false,
+        "inForm": true,
+        "formId": "analyzeForm"
+      },
+      {
+        "stage": "submit_capture",
+        "t": 1788013381651,
+        "id": "analyzeForm",
+        "defaultPrevented": false,
+        "action": "#"
+      },
+      {
+        "stage": "fetch_call",
+        "t": 1788013381655,
+        "url": "/backend/api/v1/analyze",
+        "method": "POST"
+      },
+      {
+        "stage": "submit_bubble",
+        "t": 1788013381656,
+        "id": "analyzeForm",
+        "defaultPrevented": true
+      },
+      {
+        "stage": "fetch_response",
+        "t": 1788013383245,
+        "url": "http://127.0.0.1:8081/backend/api/v1/analyze",
+        "status": 200,
+        "ok": true,
+        "body_head": "{\"success\":true,\"message\":\"Analyze OK\",\"data\":{\"pipeline\":[\"calendar\",\"bazi\",\"pattern\",\"score\",\"interpretation\",\"report\",\"narrative\"],\"calendar\":{\"solar\":{\"year\":1987,\"month\":1,\"day\":21,\"hour\":4,\"minute\":30},\"lunar\":{\"year\":1986,\"month\":12,\"day\":22,\"is_leap_month\":false,\"leap\":false,\"year_can_chi\":\"B\u00ednh D\u1ea7n\"},\"lunar_can_chi\":{\"year\":\"B\u00ednh D\u1ea7n\",\"day\":\"Canh Ng\u1ecd\"},\"solar_term\":{\"name\":\"\u0110\u1ea1i H\u00e0n\",\"index\":23},\"timezone\":{\"offset_hours\":7.0,\"name\":\"Asia/Ho_Chi_Minh\"},\"julian_day\":2446816.5,\"solar_year\""
+      },
+      {
+        "stage": "resultstore_save",
+        "t": 1788013383297,
+        "ok": true,
+        "hasData": true
+      },
+      {
+        "stage": "resultstore_load",
+        "t": 1788013383301,
+        "ok": true
+      }
+    ],
+    "console": [
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"click\",\"t\":1788013381651,\"id\":\"btnAnalyze\",\"type\":\"submit\",\"disabled\":false,\"hasOnclick\":false,\"inForm\":true,\"formId\":\"analyzeForm\"}"
+      },
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"submit_capture\",\"t\":1788013381651,\"id\":\"analyzeForm\",\"defaultPrevented\":false,\"action\":\"#\"}"
+      },
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"fetch_call\",\"t\":1788013381655,\"url\":\"/backend/api/v1/analyze\",\"method\":\"POST\"}"
+      },
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"submit_bubble\",\"t\":1788013381656,\"id\":\"analyzeForm\",\"defaultPrevented\":true}"
+      },
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"fetch_response\",\"t\":1788013383245,\"url\":\"http://127.0.0.1:8081/backend/api/v1/analyze\",\"status\":200,\"ok\":true,\"body_head\":\"{\\\"success\\\":true,\\\"message\\\":\\\"Analyze OK\\\",\\\"data\\\":{\\\"pipeline\\\":[\\\"calendar\\\",\\\"bazi\\\",\\\"pattern\\\",\\\"score\\\",\\\"interpretation\\\",\\\"report\\\",\\\"narrative\\\"],\\\"calendar\\\":{\\\"solar\\\":{\\\"year\\\":1987,\\\"month\\\":1,\\\"day\\\":21,\\\"hour\\\":4,\\\"minute\\\":30},\\\"lunar\\\":{\\\"year\\\":1986,\\\"month\\\":12,\\\"day\\\":22,\\\"is_leap_month\\\":false,\\\"leap\\\":false,\\\"year_can_chi\\\":\\\"B\u00ednh D\u1ea7n\\\"},\\\"lunar_can_chi\\\":{\\\"year\\\":\\\"B\u00ednh D\u1ea7n\\\",\\\"day\\\":\\\"Canh Ng\u1ecd\\\"},\\\"solar_term\\\":{\\\"name\\\":\\\"\u0110\u1ea1i H\u00e0n\\\",\\\"index\\\":23},\\\"timezone\\\":{\\\"offset_hours\\\":7.0,\\\"name\\\":\\\"Asia/Ho_Chi_Minh\\\"},\\\"julian_day\\\":2446816.5,\\\"solar_year\\\"\"}"
+      },
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"resultstore_save\",\"t\":1788013383297,\"ok\":true,\"hasData\":true}"
+      },
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"resultstore_load\",\"t\":1788013383301,\"ok\":true}"
+      }
+    ],
+    "pageerror": [],
+    "network": [
+      {
+        "kind": "request",
+        "method": "GET",
+        "url": "http://127.0.0.1:8081/analyze",
+        "post_data": null
+      },
+      {
+        "kind": "request",
+        "method": "POST",
+        "url": "http://127.0.0.1:8081/backend/api/v1/analyze",
+        "post_data": "{\"full_name\":\"Nguyen Tien Son\",\"birth_place\":\"Ha Tay, Viet Nam\",\"year\":1987,\"month\":1,\"day\":21,\"hour\":4,\"minute\":30,\"gender\":\"male\",\"timezone\":\"Asia/Ho_Chi_Minh\"}"
+      },
+      {
+        "kind": "response",
+        "status": 200,
+        "url": "http://127.0.0.1:8081/backend/api/v1/analyze",
+        "body_head": "{\"success\":true,\"message\":\"Analyze OK\",\"data\":{\"pipeline\":[\"calendar\",\"bazi\",\"pattern\",\"score\",\"interpretation\",\"report\",\"narrative\"],\"calendar\":{\"solar\":{\"year\":1987,\"month\":1,\"day\":21,\"hour\":4,\"minute\":30},\"lunar\":{\"year\":1986,\"month\":12,\"day\":22,\"is_leap_month\":false,\"leap\":false,\"year_can_chi\":\"B\u00ednh D\u1ea7n\"},\"lunar_can_chi\":{\"year\":\"B\u00ednh D\u1ea7n\",\"day\":\"Canh Ng\u1ecd\"},\"solar_term\":{\"name\":\"\u0110\u1ea1i H\u00e0n\",\"inde"
+      }
+    ]
+  },
+  {
+    "label": "verify3_3",
+    "date_value": "21/01/1987",
+    "typed": true,
+    "inspect": {
+      "btnCount": 1,
+      "formCount": 1,
+      "dateCount": 1,
+      "btnType": "submit",
+      "btnOnclick": null,
+      "formAction": "#",
+      "formMethod": "post",
+      "novalidate": true,
+      "dateValue": "",
+      "datePlaceholder": "DD/MM/YYYY",
+      "scripts": [
+        "\n    window.__BTE_I18N__ = {\"meta\":{\"locale\":\"vi\",\"name\":\"Ti\u1ebfng Vi\u1ec7t\"},\"brand\":{",
+        "http://127.0.0.1:8081/static/js/i18n.js",
+        "http://127.0.0.1:8081/static/js/result_store.js",
+        "http://127.0.0.1:8081/static/js/api.js",
+        "http://127.0.0.1:8081/static/js/ui/components.js",
+        "http://127.0.0.1:8081/static/js/ui/module_registry.js",
+        "http://127.0.0.1:8081/static/js/ui/shell.js",
+        "http://127.0.0.1:8081/static/js/analyze.js",
+        "if (window.BteI18n) BteI18n.apply(document);"
+      ],
+      "hasPortal": true,
+      "hasPost": true,
+      "hasStore": true,
+      "analyzeJsLoaded": true
+    },
+    "after_fill": {
+      "date": "21/01/1987",
+      "time": "04:30",
+      "name": "Nguyen Tien Son",
+      "place": "Ha Tay, Viet Nam",
+      "gender": "male"
+    },
+    "redirected": true,
+    "redirect_url": "http://127.0.0.1:8081/result",
+    "flash": "",
+    "date_err": "",
+    "status": "",
+    "stages": [
+      {
+        "stage": "click",
+        "t": 1788013416518,
+        "id": "btnAnalyze",
+        "type": "submit",
+        "disabled": false,
+        "hasOnclick": false,
+        "inForm": true,
+        "formId": "analyzeForm"
+      },
+      {
+        "stage": "submit_capture",
+        "t": 1788013416518,
+        "id": "analyzeForm",
+        "defaultPrevented": false,
+        "action": "#"
+      },
+      {
+        "stage": "fetch_call",
+        "t": 1788013416521,
+        "url": "/backend/api/v1/analyze",
+        "method": "POST"
+      },
+      {
+        "stage": "submit_bubble",
+        "t": 1788013416523,
+        "id": "analyzeForm",
+        "defaultPrevented": true
+      },
+      {
+        "stage": "fetch_response",
+        "t": 1788013417754,
+        "url": "http://127.0.0.1:8081/backend/api/v1/analyze",
+        "status": 200,
+        "ok": true,
+        "body_head": "{\"success\":true,\"message\":\"Analyze OK\",\"data\":{\"pipeline\":[\"calendar\",\"bazi\",\"pattern\",\"score\",\"interpretation\",\"report\",\"narrative\"],\"calendar\":{\"solar\":{\"year\":1987,\"month\":1,\"day\":21,\"hour\":4,\"minute\":30},\"lunar\":{\"year\":1986,\"month\":12,\"day\":22,\"is_leap_month\":false,\"leap\":false,\"year_can_chi\":\"B\u00ednh D\u1ea7n\"},\"lunar_can_chi\":{\"year\":\"B\u00ednh D\u1ea7n\",\"day\":\"Canh Ng\u1ecd\"},\"solar_term\":{\"name\":\"\u0110\u1ea1i H\u00e0n\",\"index\":23},\"timezone\":{\"offset_hours\":7.0,\"name\":\"Asia/Ho_Chi_Minh\"},\"julian_day\":2446816.5,\"solar_year\""
+      },
+      {
+        "stage": "resultstore_save",
+        "t": 1788013417785,
+        "ok": true,
+        "hasData": true
+      },
+      {
+        "stage": "resultstore_load",
+        "t": 1788013417788,
+        "ok": true
+      }
+    ],
+    "console": [
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"click\",\"t\":1788013416518,\"id\":\"btnAnalyze\",\"type\":\"submit\",\"disabled\":false,\"hasOnclick\":false,\"inForm\":true,\"formId\":\"analyzeForm\"}"
+      },
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"submit_capture\",\"t\":1788013416518,\"id\":\"analyzeForm\",\"defaultPrevented\":false,\"action\":\"#\"}"
+      },
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"fetch_call\",\"t\":1788013416521,\"url\":\"/backend/api/v1/analyze\",\"method\":\"POST\"}"
+      },
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"submit_bubble\",\"t\":1788013416523,\"id\":\"analyzeForm\",\"defaultPrevented\":true}"
+      },
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"fetch_response\",\"t\":1788013417754,\"url\":\"http://127.0.0.1:8081/backend/api/v1/analyze\",\"status\":200,\"ok\":true,\"body_head\":\"{\\\"success\\\":true,\\\"message\\\":\\\"Analyze OK\\\",\\\"data\\\":{\\\"pipeline\\\":[\\\"calendar\\\",\\\"bazi\\\",\\\"pattern\\\",\\\"score\\\",\\\"interpretation\\\",\\\"report\\\",\\\"narrative\\\"],\\\"calendar\\\":{\\\"solar\\\":{\\\"year\\\":1987,\\\"month\\\":1,\\\"day\\\":21,\\\"hour\\\":4,\\\"minute\\\":30},\\\"lunar\\\":{\\\"year\\\":1986,\\\"month\\\":12,\\\"day\\\":22,\\\"is_leap_month\\\":false,\\\"leap\\\":false,\\\"year_can_chi\\\":\\\"B\u00ednh D\u1ea7n\\\"},\\\"lunar_can_chi\\\":{\\\"year\\\":\\\"B\u00ednh D\u1ea7n\\\",\\\"day\\\":\\\"Canh Ng\u1ecd\\\"},\\\"solar_term\\\":{\\\"name\\\":\\\"\u0110\u1ea1i H\u00e0n\\\",\\\"index\\\":23},\\\"timezone\\\":{\\\"offset_hours\\\":7.0,\\\"name\\\":\\\"Asia/Ho_Chi_Minh\\\"},\\\"julian_day\\\":2446816.5,\\\"solar_year\\\"\"}"
+      },
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"resultstore_save\",\"t\":1788013417785,\"ok\":true,\"hasData\":true}"
+      },
+      {
+        "level": "info",
+        "text": "[P0-STAGE] {\"stage\":\"resultstore_load\",\"t\":1788013417788,\"ok\":true}"
+      }
+    ],
+    "pageerror": [],
+    "network": [
+      {
+        "kind": "request",
+        "method": "GET",
+        "url": "http://127.0.0.1:8081/analyze",
+        "post_data": null
+      },
+      {
+        "kind": "request",
+        "method": "POST",
+        "url": "http://127.0.0.1:8081/backend/api/v1/analyze",
+        "post_data": "{\"full_name\":\"Nguyen Tien Son\",\"birth_place\":\"Ha Tay, Viet Nam\",\"year\":1987,\"month\":1,\"day\":21,\"hour\":4,\"minute\":30,\"gender\":\"male\",\"timezone\":\"Asia/Ho_Chi_Minh\"}"
+      },
+      {
+        "kind": "response",
+        "status": 200,
+        "url": "http://127.0.0.1:8081/backend/api/v1/analyze",
+        "body_head": "read_error:Response.text: Protocol error (Network.getResponseBody): No resource with given identifier found\nResponse body is not available for a response that was navigated away from. Read response.body() before triggering any navigation."
+      }
+    ]
+  }
+]
