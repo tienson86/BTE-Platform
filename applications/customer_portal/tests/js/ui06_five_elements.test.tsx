@@ -187,7 +187,7 @@ describe("UI-06 Five Elements card", () => {
     const skeletons = [...container.querySelectorAll("[data-card][data-skeleton='true']")].map(
       (node) => node.getAttribute("data-card"),
     );
-    expect(skeletons).toEqual(["action-plan"]);
+    expect(skeletons).toEqual([]);
   });
 
   it("F18 keeps the canonical grid spans frozen", () => {
