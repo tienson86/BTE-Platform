@@ -86,7 +86,7 @@ export function TuTruPanel({
         <thead>
           <tr>
             <th className="bte-tu-tru__corner" scope="col">
-              <span className="bte-tu-tru__sr-only">Trụ</span>
+              Trụ
             </th>
             {TU_TRU_COLUMNS.map((column) => (
               <th key={column} scope="col">
