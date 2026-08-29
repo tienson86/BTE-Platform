@@ -86,12 +86,75 @@
   font-size: var(--text-sm);
 }
 
-/* Analyze */
-.analyze-page .panel { padding: var(--space-8); }
-.analyze-stack {
+/* Analyze — Screen 01 compact form (aligned with Chọn ngày tốt) */
+.analyze-page {
+  max-width: 32rem;
+  margin: 0 auto;
+  min-width: 0;
+  overflow-x: hidden;
+}
+.analyze-form {
+  width: 100%;
+  max-width: 100%;
+}
+.analyze-fields {
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
+  gap: var(--space-3);
+}
+.analyze-note {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-xs);
+  line-height: 1.45;
+  font-weight: 500;
+}
+.analyze-time-warn {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  line-height: 1.4;
+}
+.analyze-status {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+.analyze-gender .ds-gender__options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+.analyze-gender .ds-gender__options label {
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0 0.75rem;
+  background: var(--panel);
+  min-height: 2.5rem;
+}
+.analyze-gender .ds-gender__options label:has(input:checked) {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+.analyze-gender .ds-gender__options input:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.analyze-page .toolbar {
+  margin-top: var(--space-3);
+  justify-content: stretch;
+}
+.analyze-page .toolbar button {
+  width: 100%;
+  min-height: 2.75rem;
+}
+@media (max-width: 767px) {
+  .analyze-page {
+    max-width: 100%;
+  }
+  .analyze-gender .ds-gender__options label {
+    min-height: 2.75rem;
+  }
 }
 
 /* Shared page hero */
