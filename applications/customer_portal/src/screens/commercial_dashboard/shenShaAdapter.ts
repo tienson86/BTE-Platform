@@ -1,13 +1,17 @@
 /**
- * Bind ShenSha Card from canonical analysis. Copy published fields only.
+ * Bind ShenSha Card from canonical matches + approved ShenSha knowledge.
+ * Does not classify categories or invent interpretation.
  */
 
+import { approvedShenShaMeaning } from "../../adapters/shenShaApprovedKnowledge";
 import { stripInternalRuleIds } from "../../adapters/customerFacingPresentation";
 import type { AnalysisDataDto, ShenShaMatchDto } from "../../models";
 import { SHENSHA_SUPPORTING_NOTE, SHENSHA_TITLE } from "./cards";
 import type { ShenShaGroupView, ShenShaItemView, ShenShaView } from "./types";
 
 const TECHNICAL_TOKEN = /^[a-z][a-z0-9_]*$/;
+const TECHNICAL_EVIDENCE = /→|TIAN_|YUE_|HONG_|HUA_|WEN_|rule_|append|detector|source_value|target_value/i;
+const TECHNICAL_MEANING = /TIAN_|YUE_|HONG_|append|detector|engine|\{/;
 const PILLAR_LABELS: Record<string, string> = {
   year: "Năm",
   month: "Tháng",
@@ -19,12 +23,13 @@ const PILLAR_LABELS: Record<string, string> = {
   Giờ: "Giờ",
 };
 const CATEGORY_KEYS = ["category", "group", "nhom"] as const;
-const MEANING_KEYS = ["meaning", "customer_meaning", "y_nghia"] as const;
+const MEANING_KEYS = ["customer_meaning", "y_nghia"] as const;
 const SUMMARY_KEYS = ["summary", "customer_summary", "shensha_summary"] as const;
 
 function text(value: unknown): string {
-  if (value == null) return "";
-  return String(value).trim();
+  if (typeof value === "string") return value.trim();
+  if (typeof value === "number" && Number.isFinite(value)) return String(value);
+  return "";
 }
 
 function customerLabel(value: string): string {
@@ -41,7 +46,7 @@ function asRecord(value: unknown): Record<string, unknown> {
 function firstText(row: Record<string, unknown>, keys: readonly string[]): string {
   for (const key of keys) {
     const label = customerLabel(stripInternalRuleIds(text(row[key])));
-    if (label) return label;
+    if (label && !TECHNICAL_MEANING.test(label)) return label;
   }
   return "";
 }
@@ -52,14 +57,15 @@ function pillarDisplay(value: string): string {
   return PILLAR_LABELS[key] || (TECHNICAL_TOKEN.test(key) ? "" : key);
 }
 
-function copyPlacement(match: ShenShaMatchDto): string {
+function copyPillars(match: ShenShaMatchDto): string[] {
   const fromOccurrences = unique(
     (match.occurrences ?? [])
       .map((item) => pillarDisplay(text(item.pillar)))
       .filter(Boolean),
   );
-  if (fromOccurrences.length) return fromOccurrences.join(" · ");
-  return pillarDisplay(text(match.pillar));
+  if (fromOccurrences.length) return fromOccurrences;
+  const single = pillarDisplay(text(match.pillar));
+  return single ? [single] : [];
 }
 
 function unique(values: readonly string[]): string[] {
@@ -73,14 +79,36 @@ function unique(values: readonly string[]): string[] {
   return next;
 }
 
+function emptyItem(name: string): ShenShaItemView {
+  return {
+    name,
+    placement: "",
+    meaning: "",
+    chartRelevance: "",
+    evidence: "",
+    category: "",
+  };
+}
+
+function copyEvidence(match: ShenShaMatchDto): string {
+  const raw = customerLabel(stripInternalRuleIds(text(match.evidence_text)));
+  if (!raw || TECHNICAL_EVIDENCE.test(raw)) return "";
+  return raw;
+}
+
 function copyItem(match: ShenShaMatchDto): ShenShaItemView | null {
   const row = match as ShenShaMatchDto & Record<string, unknown>;
   const name = customerLabel(text(match.canonical_name || match.name));
   if (!name) return null;
+  const pillars = copyPillars(match);
+  const placement = pillars.map((pillar) => `Trụ ${pillar}`).join(" · ");
+  const payloadMeaning = firstText(row, MEANING_KEYS);
   return {
     name,
-    placement: copyPlacement(match),
-    meaning: firstText(row, MEANING_KEYS),
+    placement,
+    meaning: approvedShenShaMeaning(name) || payloadMeaning,
+    chartRelevance: pillars.length ? `Xuất hiện tại trụ ${pillars.join(" · ")}.` : "",
+    evidence: copyEvidence(match),
     category: firstText(row, CATEGORY_KEYS),
   };
 }
@@ -89,7 +117,10 @@ function copyFromNames(names: readonly string[] | undefined): ShenShaItemView[] 
   return (names ?? [])
     .map((name) => customerLabel(text(name)))
     .filter(Boolean)
-    .map((name) => ({ name, placement: "", meaning: "", category: "" }));
+    .map((name) => ({
+      ...emptyItem(name),
+      meaning: approvedShenShaMeaning(name),
+    }));
 }
 
 function groupPublished(items: readonly ShenShaItemView[]): ShenShaGroupView[] {
@@ -115,7 +146,7 @@ function copySummary(data: AnalysisDataDto): string {
 }
 
 /**
- * Copy canonical ShenSha names and placements. Does not classify or interpret.
+ * Join canonical ShenSha matches with approved knowledge. Does not calculate stars.
  */
 export function adaptShenShaCard(data: AnalysisDataDto | null | undefined): ShenShaView {
   const matches = data?.bazi?.shensha_matches ?? [];
@@ -129,6 +160,6 @@ export function adaptShenShaCard(data: AnalysisDataDto | null | undefined): Shen
     groups,
     items,
     summary: copySummary(data ?? {}),
-    note: items.length ? SHENSHA_SUPPORTING_NOTE : "",
+    note: items.length ? `Lưu ý: ${SHENSHA_SUPPORTING_NOTE}` : "",
   };
 }
