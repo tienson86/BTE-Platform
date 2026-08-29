@@ -13,6 +13,8 @@ import { adaptFiveElementsCard } from "./fiveElementsAdapter";
 import { FIVE_ELEMENTS_VISUAL_FIXTURE } from "./fiveElementsFixture";
 import { adaptTenGodsCard } from "./tenGodsAdapter";
 import { TEN_GODS_VISUAL_FIXTURE } from "./tenGodsFixture";
+import { adaptPatternCard } from "./patternAdapter";
+import { PATTERN_VISUAL_FIXTURE } from "./patternFixture";
 import { adaptOverviewCard } from "./overviewAdapter";
 import { OVERVIEW_VISUAL_FIXTURE } from "./overviewFixture";
 import { RESULT_PAGE_TITLE } from "./cards";
@@ -123,6 +125,12 @@ export function CommercialDashboardPage({
       : layoutMode === "skeleton" || previewFallback
         ? null
         : adaptTenGodsCard(analysis);
+  const pattern =
+    layoutMode === "visual"
+      ? PATTERN_VISUAL_FIXTURE
+      : layoutMode === "skeleton" || previewFallback
+        ? null
+        : adaptPatternCard(analysis);
   return (
     <div
       className="bte-cdash"
@@ -137,6 +145,7 @@ export function CommercialDashboardPage({
         bazi={bazi}
         fiveElements={fiveElements}
         tenGods={tenGods}
+        pattern={pattern}
       />
     </div>
   );
