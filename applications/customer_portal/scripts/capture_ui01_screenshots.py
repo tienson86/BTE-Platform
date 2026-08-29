@@ -79,7 +79,7 @@ def _wait(port: int, timeout: float = 20.0) -> None:
 
 
 def main() -> None:
-    """Capture the five UI-01 Product Owner review screenshots."""
+    """Capture UI-01 / UI-01A Customer Portal shell screenshots."""
     OUT.mkdir(parents=True, exist_ok=True)
     _kill_port(API_PORT)
     _kill_port(PORTAL_PORT)
@@ -103,6 +103,7 @@ def main() -> None:
 
             page.goto(f"{BASE}/analyze", wait_until="networkidle")
             page.wait_for_selector("#analyzeForm")
+            page.wait_for_selector("h1")
             page.screenshot(path=str(OUT / "03_view_chart_current.png"), full_page=True)
 
             header = page.locator(".app-header")
@@ -114,6 +115,24 @@ def main() -> None:
             page.locator("#btnNavToggle").click()
             page.wait_for_selector('[data-customer-nav="primary"] a')
             page.screenshot(path=str(OUT / "05_mobile_nav.png"), full_page=True)
+
+            page.set_viewport_size({"width": 1440, "height": 1100})
+            page.goto(f"{BASE}/analyze", wait_until="networkidle")
+            page.wait_for_selector("#analyzeForm")
+            page.fill("#full_name", "Nguyễn Văn A")
+            page.fill("#birth_place", "Hà Nội")
+            page.fill("#year", "1990")
+            page.fill("#month", "5")
+            page.fill("#day", "15")
+            page.fill("#hour", "10")
+            page.fill("#minute", "30")
+            page.click("#btnAnalyze")
+            page.wait_for_url("**/result", timeout=120000)
+            page.wait_for_selector('[data-customer-nav="primary"]')
+            page.wait_for_selector("#canonical-desktop-root")
+            page.wait_for_selector(".cd-root")
+            page.screenshot(path=str(OUT / "07_flow_analyze_to_result.png"), full_page=True)
+            page.screenshot(path=str(OUT / "06_result_new_shell.png"), full_page=True)
 
             browser.close()
     finally:
