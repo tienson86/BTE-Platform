@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{{DOC_TITLE}} — Kết quả</title>
+  <link rel="stylesheet" href="/static/css/portal.css" />
   <link rel="stylesheet" href="/static/dist/result.css" />
   <script>
     window.__BTE_I18N__ = {{I18N_JSON}};
@@ -12,6 +13,7 @@
   <script src="/static/js/i18n.js"></script>
   <script src="/static/js/result_store.js"></script>
   <script src="/static/js/api.js"></script>
+  <script src="/static/js/ui/shell.js"></script>
   <style>
     html, body {
       margin: 0;
@@ -19,12 +21,23 @@
       min-height: 100%;
       background: #f2f1ef;
     }
-    #canonical-desktop-root {
+    body[data-result-ui="canonical-desktop-v2"] {
+      display: flex;
+      flex-direction: column;
       min-height: 100vh;
+    }
+    body[data-result-ui="canonical-desktop-v2"] .app-header {
+      flex-shrink: 0;
+    }
+    #canonical-desktop-root {
+      flex: 1;
+      min-width: 0;
+      min-height: 0;
     }
   </style>
 </head>
 <body data-result-ui="canonical-desktop-v2">
+  {{HEADER}}
   <div id="canonical-desktop-root" data-mount="PortalPage"></div>
   <script type="module" src="/static/dist/result.js"></script>
 </body>
