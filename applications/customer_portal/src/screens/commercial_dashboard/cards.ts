@@ -30,3 +30,5 @@ export const FIVE_ELEMENTS_TITLE = "NGŨ HÀNH";
 export const FIVE_ELEMENTS_HEADING = "PHÂN BỐ NGŨ HÀNH";
 
 export const TEN_GODS_TITLE = "THẬP THẦN";
+
+export const PATTERN_TITLE = "MỆNH CỤC";
