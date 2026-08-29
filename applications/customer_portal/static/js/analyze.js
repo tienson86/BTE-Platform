@@ -33,25 +33,31 @@
 
     function parseBirthDate() {
       var raw = String((document.getElementById("birth_date") || {}).value || "").trim();
-      var match = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      var match = raw.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
       if (!match) return null;
-      return {
-        year: Number(match[1]),
-        month: Number(match[2]),
-        day: Number(match[3]),
-      };
+      var day = Number(match[1]);
+      var month = Number(match[2]);
+      var year = Number(match[3]);
+      var probe = new Date(year, month - 1, day);
+      if (
+        probe.getFullYear() !== year ||
+        probe.getMonth() !== month - 1 ||
+        probe.getDate() !== day
+      ) {
+        return null;
+      }
+      return { year: year, month: month, day: day };
     }
 
     function parseBirthTime() {
       var raw = String((document.getElementById("birth_time") || {}).value || "").trim();
       if (!raw) return { hour: 0, minute: 0, missing: true };
-      var match = raw.match(/^(\d{1,2}):(\d{2})/);
+      var match = raw.match(/^(\d{1,2}):(\d{2})$/);
       if (!match) return { hour: 0, minute: 0, missing: true };
-      return {
-        hour: Number(match[1]),
-        minute: Number(match[2]),
-        missing: false,
-      };
+      var hour = Number(match[1]);
+      var minute = Number(match[2]);
+      if (hour > 23 || minute > 59) return { hour: 0, minute: 0, missing: true };
+      return { hour: hour, minute: minute, missing: false };
     }
 
     function prefillFromQuery() {
@@ -71,7 +77,7 @@
       if (placeEl && params.has("birth_place")) placeEl.value = params.get("birth_place") || "";
       if (tzEl && params.has("timezone") && params.get("timezone")) tzEl.value = params.get("timezone");
       if (dateEl && params.has("year") && params.has("month") && params.has("day")) {
-        dateEl.value = params.get("year") + "-" + pad2(params.get("month")) + "-" + pad2(params.get("day"));
+        dateEl.value = pad2(params.get("day")) + "/" + pad2(params.get("month")) + "/" + params.get("year");
       }
       if (timeEl && (params.has("hour") || params.has("minute"))) {
         timeEl.value = pad2(params.get("hour") || "0") + ":" + pad2(params.get("minute") || "0");
