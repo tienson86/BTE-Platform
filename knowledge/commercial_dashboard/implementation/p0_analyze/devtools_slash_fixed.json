@@ -1,0 +1,57 @@
+[
+  {
+    "type": "request",
+    "method": "GET",
+    "url": "http://127.0.0.1:8081/analyze",
+    "post_data": null
+  },
+  {
+    "type": "response",
+    "status": 200,
+    "url": "http://127.0.0.1:8081/analyze"
+  },
+  {
+    "type": "request",
+    "method": "GET",
+    "url": "http://127.0.0.1:8081/static/js/analyze.js",
+    "post_data": null
+  },
+  {
+    "type": "response",
+    "status": 200,
+    "url": "http://127.0.0.1:8081/static/js/analyze.js"
+  },
+  {
+    "type": "preclick_state",
+    "date": "21/01/1987",
+    "time": "04:30",
+    "gender": "male",
+    "hasPortal": true,
+    "hasPost": true,
+    "hasStore": true,
+    "parse": {
+      "raw": "21/01/1987",
+      "match": [
+        "21/01/1987",
+        "21",
+        "01",
+        "1987"
+      ]
+    }
+  },
+  {
+    "type": "request",
+    "method": "POST",
+    "url": "http://127.0.0.1:8081/backend/api/v1/analyze",
+    "post_data": "{\"full_name\":\"Nguyen Tien Son\",\"birth_place\":\"Ha Tay, Viet Nam\",\"year\":1987,\"month\":1,\"day\":21,\"hour\":4,\"minute\":30,\"gender\":\"male\",\"timezone\":\"Asia/Ho_Chi_Minh\"}"
+  },
+  {
+    "type": "response",
+    "status": 200,
+    "url": "http://127.0.0.1:8081/backend/api/v1/analyze"
+  },
+  {
+    "type": "redirect",
+    "url": "http://127.0.0.1:8081/result"
+  }
+]
