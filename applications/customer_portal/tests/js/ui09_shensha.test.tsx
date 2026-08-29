@@ -102,13 +102,11 @@ describe("UI-09 ShenSha card", () => {
     ]);
   });
 
-  it("S5 renders canonical placements when expanded", () => {
+  it("S5 renders canonical placements attached to named items", () => {
     const { container } = renderLive();
-    expect(ssCard(container).querySelector("[data-ss-placement]")).toBeNull();
-    fireEvent.click(toggle(container));
-    expect(ssCard(container).querySelector('[data-ss-name="Thiên Ất Quý Nhân"] [data-ss-placement]')?.textContent).toBe(
-      "Năm · Ngày",
-    );
+    expect(
+      ssCard(container).querySelector('[data-ss-name="Thiên Ất Quý Nhân"] [data-ss-placement]')?.textContent,
+    ).toBe("Trụ Năm · Trụ Ngày");
   });
 
   it("S6 does not build an absent Có/Không checklist", () => {
@@ -128,8 +126,16 @@ describe("UI-09 ShenSha card", () => {
 
   it("S8 does not contain a local meaning dictionary", () => {
     const adapter = readFileSync(resolve(ROOT, "shenShaAdapter.ts"), "utf8");
+    const card = readFileSync(resolve(ROOT, "ShenShaCard.tsx"), "utf8");
     expect(adapter).not.toMatch(/nghệ thuật|tâm linh|tình duyên|đi xa|xuất ngoại|cô độc/);
-    expect(adaptShenShaCard(LIVE_ANALYSIS).items.every((item) => item.meaning === "")).toBe(true);
+    expect(card).not.toMatch(/nghệ thuật|tâm linh|tình duyên/);
+    expect(adapter).toContain("approvedShenShaMeaning");
+    const rebound = adaptShenShaCard({
+      bazi: {
+        shensha_matches: [{ canonical_name: "Đào Hoa" }, { canonical_name: "Dịch Mã" }, { canonical_name: "Cô Thần" }],
+      },
+    });
+    expect(rebound.items.every((item) => item.meaning === "")).toBe(true);
   });
 
   it("S9 does not infer Hung/Cát labels", () => {
@@ -239,7 +245,8 @@ describe("UI-09 ShenSha card", () => {
     });
     const blob = JSON.stringify(rebound);
     expect(rebound.items.map((item) => item.name)).toEqual(["Hoa Cái", "Đào Hoa", "Dịch Mã", "Cô Thần"]);
-    expect(rebound.items.every((item) => item.meaning === "")).toBe(true);
+    expect(rebound.items.filter((item) => item.name !== "Hoa Cái").every((item) => item.meaning === "")).toBe(true);
+    expect(rebound.items.find((item) => item.name === "Hoa Cái")?.meaning).not.toMatch(/cô độc|artist|hôn nhân/);
     expect(blob).not.toMatch(/nghệ thuật|tâm linh|cô độc/);
     expect(blob).not.toMatch(/tình duyên tốt|nhiều người yêu/);
     expect(blob).not.toMatch(/đi xa|xuất ngoại/);
