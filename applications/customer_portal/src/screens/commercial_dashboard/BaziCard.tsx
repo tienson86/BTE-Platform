@@ -1,8 +1,8 @@
 /**
- * BaZi Structure Card — BÁT TỰ. Presentation only. No interpretation.
+ * BaZi Structure Card — BÁT TỰ detail. Presentation only. No interpretation.
  */
 
-import { useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import type { BaziPillarView, BaziStructureView, DashboardCardSpec } from "./types";
 
 type BaziCardProps = {
@@ -39,16 +39,14 @@ function hasRow(pillars: readonly BaziPillarView[], read: (pillar: BaziPillarVie
 }
 
 /**
- * Four-pillar BaZi evidence table with progressive disclosure.
+ * Four-pillar BaZi evidence table. Detail rows stay visible so it is not a Tứ Trụ summary.
  */
 export function BaziCard({ card, model }: BaziCardProps): ReactNode {
-  const [expanded, setExpanded] = useState(false);
   const pillars = model.pillars;
   const showNapAm = hasRow(pillars, (pillar) => Boolean(pillar.napAm));
   const showTenGod = hasRow(pillars, (pillar) => Boolean(pillar.tenGod));
   const showHidden = hasRow(pillars, (pillar) => pillar.hiddenStems.length > 0);
   const showStage = hasRow(pillars, (pillar) => Boolean(pillar.truongSinh));
-  const canExpand = showHidden || showStage || showTenGod;
 
   return (
     <article
@@ -56,21 +54,11 @@ export function BaziCard({ card, model }: BaziCardProps): ReactNode {
       data-card={card.id}
       data-span={card.span}
       data-implemented="bazi"
-      data-expanded={expanded ? "true" : "false"}
+      data-bazi-model="detail"
       aria-label={model.title}
     >
       <header className="bte-bazi__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
-        {canExpand ? (
-          <button
-            type="button"
-            className="bte-bazi__toggle"
-            aria-expanded={expanded}
-            onClick={() => setExpanded((value) => !value)}
-          >
-            {expanded ? "Thu gọn" : "Xem chi tiết"}
-          </button>
-        ) : null}
       </header>
       {!model.available ? (
         <p className="bte-bazi__empty" data-bazi-empty="true">
@@ -89,7 +77,10 @@ export function BaziCard({ card, model }: BaziCardProps): ReactNode {
                     data-pillar={pillar.key}
                     data-day-master={pillar.isDayMaster ? "true" : undefined}
                   >
-                    {pillar.label}
+                    <span className="bte-bazi__col-label">{pillar.label}</span>
+                    {pillar.isDayMaster ? (
+                      <span className="bte-bazi__day-master">Nhật Chủ</span>
+                    ) : null}
                   </th>
                 ))}
               </tr>
@@ -129,6 +120,16 @@ export function BaziCard({ card, model }: BaziCardProps): ReactNode {
                   ))}
                 </tr>
               ) : null}
+              {showHidden ? (
+                <tr data-bazi-row="hidden">
+                  <th scope="row">Tàng Can</th>
+                  {pillars.map((pillar) => (
+                    <td key={`hidden-${pillar.key}`} data-pillar={pillar.key} data-bazi-field="hidden">
+                      <HiddenCell items={pillar.hiddenStems} />
+                    </td>
+                  ))}
+                </tr>
+              ) : null}
               {showTenGod ? (
                 <tr data-bazi-row="ten-god">
                   <th scope="row">Thập Thần</th>
@@ -139,17 +140,7 @@ export function BaziCard({ card, model }: BaziCardProps): ReactNode {
                   ))}
                 </tr>
               ) : null}
-              {expanded && showHidden ? (
-                <tr data-bazi-row="hidden">
-                  <th scope="row">Tàng Can</th>
-                  {pillars.map((pillar) => (
-                    <td key={`hidden-${pillar.key}`} data-pillar={pillar.key} data-bazi-field="hidden">
-                      <HiddenCell items={pillar.hiddenStems} />
-                    </td>
-                  ))}
-                </tr>
-              ) : null}
-              {expanded && showStage ? (
+              {showStage ? (
                 <tr data-bazi-row="stage">
                   <th scope="row">Trường Sinh</th>
                   {pillars.map((pillar) => (
