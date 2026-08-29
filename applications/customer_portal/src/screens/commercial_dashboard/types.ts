@@ -169,3 +169,43 @@ export type PatternView = {
   readonly formation: readonly string[];
   readonly summary: string;
 };
+
+export type ShenShaItemView = {
+  readonly name: string;
+  readonly placement: string;
+  readonly meaning: string;
+  readonly category: string;
+};
+
+export type ShenShaGroupView = {
+  readonly heading: string;
+  readonly items: readonly ShenShaItemView[];
+};
+
+export type ShenShaView = {
+  readonly title: string;
+  readonly available: boolean;
+  readonly grouped: boolean;
+  readonly groups: readonly ShenShaGroupView[];
+  readonly items: readonly ShenShaItemView[];
+  readonly summary: string;
+  readonly note: string;
+};
+
+export type LuckCycleView = {
+  readonly ganZhi: string;
+  readonly yearRange: string;
+  readonly ageRange: string;
+  readonly isCurrent: boolean;
+};
+
+export type LuckView = {
+  readonly title: string;
+  readonly available: boolean;
+  readonly current: LuckCycleView | null;
+  readonly direction: string;
+  readonly startAge: string;
+  readonly cycles: readonly LuckCycleView[];
+  readonly next: LuckCycleView | null;
+  readonly trend: string;
+};
