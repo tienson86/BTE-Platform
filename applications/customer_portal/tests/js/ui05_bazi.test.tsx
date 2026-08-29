@@ -260,13 +260,7 @@ describe("UI-05 BaZi structure card", () => {
     const skeletons = [...container.querySelectorAll("[data-card][data-skeleton='true']")].map(
       (node) => node.getAttribute("data-card"),
     );
-    expect(skeletons).toEqual([
-      "pattern",
-      "shensha",
-      "luck",
-      "interpretation",
-      "action-plan",
-    ]);
+    expect(skeletons).toEqual(["shensha", "luck", "interpretation", "action-plan"]);
   });
 
   it("B17 keeps the canonical grid spans frozen", () => {
