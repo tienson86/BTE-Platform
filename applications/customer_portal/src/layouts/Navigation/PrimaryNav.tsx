@@ -19,6 +19,7 @@ export function PrimaryNav({
     <nav
       className={cx("cui-primary-nav", className)}
       aria-label="Điều hướng chính"
+      data-customer-nav="primary"
     >
       <ul className="cui-primary-nav__list">
         {APP_NAV_ITEMS.map((item) => {
