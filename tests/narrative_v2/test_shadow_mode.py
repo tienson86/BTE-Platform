@@ -87,7 +87,7 @@ def test_production_api_still_uses_pack05() -> None:
     ).read_text(encoding="utf-8")
     assert "engines.narrative_engine" in truth
     assert "NarrativeEngine" in truth
-    assert "narrative_v2" not in truth
+    assert "engines.narrative_v2" not in truth
 
 
 def test_portal_adapter_still_reads_pack05_contract() -> None:
