@@ -349,6 +349,13 @@
   .bte-cdash__card[data-card="shensha"] {
     grid-column: span 6;
   }
+
+  .bte-int__zones {
+    grid-template-columns: 1fr 1fr;
+  }
+  .bte-ap__list--tiles {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 /* Mobile: one column, A → B → C → D then cards. */
@@ -1306,8 +1313,244 @@
   color: var(--cdash-muted);
 }
 
+.bte-int {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bte-int .bte-cdash__card-title {
+  margin: 0;
+}
+
+.bte-int__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.bte-int__toggle {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--cdash-accent);
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: right;
+}
+
+.bte-int__toggle:hover,
+.bte-int__toggle:focus-visible {
+  text-decoration: underline;
+}
+
+.bte-int__lead-block,
+.bte-int__closing-block {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bte-int__lead,
+.bte-int__closing,
+.bte-int__extra,
+.bte-int__empty,
+.bte-int__zone-body {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+  color: var(--cdash-text);
+}
+
+.bte-int__lead {
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.bte-int__empty {
+  font-size: 0.8125rem;
+  color: var(--cdash-muted);
+}
+
+.bte-int__zones {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.bte-int__zone {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid var(--cdash-border);
+  border-radius: var(--cdash-radius);
+  background: var(--cdash-bg);
+  border-top: 3px solid var(--cdash-accent);
+}
+
+.bte-int__zone-title {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cdash-muted);
+}
+
+.bte-ap {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bte-ap .bte-cdash__card-title {
+  margin: 0;
+}
+
+.bte-ap__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.bte-ap__toggle {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--cdash-accent);
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: right;
+}
+
+.bte-ap__toggle:hover,
+.bte-ap__toggle:focus-visible {
+  text-decoration: underline;
+}
+
+.bte-ap__heading {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cdash-muted);
+}
+
+.bte-ap__priority,
+.bte-ap__actions,
+.bte-ap__warnings,
+.bte-ap__watch {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bte-ap__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bte-ap__list--tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.bte-ap__list--priority .bte-ap__item {
+  background: var(--cdash-accent-soft);
+  border-color: transparent;
+}
+
+.bte-ap__item {
+  display: flex;
+  gap: 10px;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--cdash-border);
+  border-radius: var(--cdash-radius);
+  background: var(--cdash-bg);
+}
+
+.bte-ap__marker {
+  flex: 0 0 auto;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--cdash-accent);
+  line-height: 1.45;
+}
+
+.bte-ap__copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bte-ap__domain {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cdash-muted);
+}
+
+.bte-ap__item-title,
+.bte-ap__item-detail,
+.bte-ap__empty {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  color: var(--cdash-text);
+}
+
+.bte-ap__item-title {
+  font-weight: 600;
+}
+
+.bte-ap__item-detail,
+.bte-ap__empty {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--cdash-muted);
+}
+
+.bte-ap__warnings .bte-ap__item {
+  background: #f7f6f4;
+}
+
 @media (max-width: 767px) {
   .bte-ss__list {
+    grid-template-columns: 1fr;
+  }
+  .bte-int__zones {
+    grid-template-columns: 1fr;
+  }
+  .bte-ap__list--tiles {
     grid-template-columns: 1fr;
   }
   .bte-luck__timeline {
