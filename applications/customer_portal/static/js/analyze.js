@@ -3,11 +3,16 @@
     return window.BteI18n ? BteI18n.t(key, vars) : key;
   }
 
+  function pad2(value) {
+    return String(value).padStart(2, "0");
+  }
+
   function boot() {
     const flash = document.getElementById("globalFlash");
     const form = document.getElementById("analyzeForm");
     const btn = document.getElementById("btnAnalyze");
-    const loading = document.getElementById("analyzeLoading");
+    const status = document.getElementById("analyzeStatus");
+    const timeWarn = document.getElementById("analyzeTimeWarn");
 
     if (!window.BtePortal) {
       if (flash) {
@@ -21,6 +26,34 @@
       return;
     }
 
+    function selectedGender() {
+      var checked = form.querySelector('input[name="gender"]:checked');
+      return checked ? checked.value : "";
+    }
+
+    function parseBirthDate() {
+      var raw = String((document.getElementById("birth_date") || {}).value || "").trim();
+      var match = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (!match) return null;
+      return {
+        year: Number(match[1]),
+        month: Number(match[2]),
+        day: Number(match[3]),
+      };
+    }
+
+    function parseBirthTime() {
+      var raw = String((document.getElementById("birth_time") || {}).value || "").trim();
+      if (!raw) return { hour: 0, minute: 0, missing: true };
+      var match = raw.match(/^(\d{1,2}):(\d{2})/);
+      if (!match) return { hour: 0, minute: 0, missing: true };
+      return {
+        hour: Number(match[1]),
+        minute: Number(match[2]),
+        missing: false,
+      };
+    }
+
     function prefillFromQuery() {
       var params;
       try {
@@ -29,13 +62,25 @@
         return;
       }
       if (params.get("reanalyze") !== "1") return;
-      ["full_name", "birth_place", "year", "month", "day", "hour", "minute", "gender", "timezone"].forEach(
-        function (id) {
-          var el = document.getElementById(id);
-          if (!el || !params.has(id)) return;
-          el.value = params.get(id) || "";
-        },
-      );
+      var nameEl = document.getElementById("full_name");
+      var placeEl = document.getElementById("birth_place");
+      var dateEl = document.getElementById("birth_date");
+      var timeEl = document.getElementById("birth_time");
+      var tzEl = document.getElementById("timezone");
+      if (nameEl && params.has("full_name")) nameEl.value = params.get("full_name") || "";
+      if (placeEl && params.has("birth_place")) placeEl.value = params.get("birth_place") || "";
+      if (tzEl && params.has("timezone") && params.get("timezone")) tzEl.value = params.get("timezone");
+      if (dateEl && params.has("year") && params.has("month") && params.has("day")) {
+        dateEl.value = params.get("year") + "-" + pad2(params.get("month")) + "-" + pad2(params.get("day"));
+      }
+      if (timeEl && (params.has("hour") || params.has("minute"))) {
+        timeEl.value = pad2(params.get("hour") || "0") + ":" + pad2(params.get("minute") || "0");
+      }
+      var gender = params.get("gender") || "";
+      if (gender) {
+        var radio = form.querySelector('input[name="gender"][value="' + gender + '"]');
+        if (radio) radio.checked = true;
+      }
     }
     prefillFromQuery();
 
@@ -51,8 +96,15 @@
 
     function setFieldError(id, message) {
       var input = document.getElementById(id);
-      var err = document.getElementById("err_" + id);
-      if (input) input.setAttribute("aria-invalid", "true");
+      var err = document.getElementById("err_" + id.replace(/^gender_male$|^gender_female$/, "gender"));
+      if (id === "gender") {
+        form.querySelectorAll('input[name="gender"]').forEach(function (el) {
+          el.setAttribute("aria-invalid", "true");
+        });
+        err = document.getElementById("err_gender");
+      } else if (input) {
+        input.setAttribute("aria-invalid", "true");
+      }
       if (err) {
         err.hidden = false;
         err.textContent = message;
@@ -60,49 +112,46 @@
     }
 
     function readInput() {
+      var date = parseBirthDate();
+      var time = parseBirthTime();
+      var tzEl = document.getElementById("timezone");
       return {
-        full_name: String(document.getElementById("full_name").value || "").trim(),
-        birth_place: String(document.getElementById("birth_place").value || "").trim(),
-        year: Number(document.getElementById("year").value),
-        month: Number(document.getElementById("month").value),
-        day: Number(document.getElementById("day").value),
-        hour: Number(document.getElementById("hour").value || 0),
-        minute: Number(document.getElementById("minute").value || 0),
-        gender: document.getElementById("gender").value || null,
-        timezone: document.getElementById("timezone").value || "Asia/Ho_Chi_Minh",
+        full_name: String((document.getElementById("full_name") || {}).value || "").trim() || null,
+        birth_place: String((document.getElementById("birth_place") || {}).value || "").trim() || null,
+        year: date ? date.year : NaN,
+        month: date ? date.month : NaN,
+        day: date ? date.day : NaN,
+        hour: time.hour,
+        minute: time.minute,
+        time_missing: time.missing,
+        gender: selectedGender() || null,
+        timezone: (tzEl && tzEl.value) || "Asia/Ho_Chi_Minh",
       };
     }
 
     function validate(input) {
       clearFieldErrors();
       var first = "";
-      if (!input.full_name) {
-        first = t("analyze.full_name_required");
-        setFieldError("full_name", first);
+      if (!input.gender) {
+        first = t("analyze.gender_required");
+        setFieldError("gender", first);
       }
-      if (!input.birth_place) {
-        var placeMsg = t("analyze.birth_place_required");
-        setFieldError("birth_place", placeMsg);
-        if (!first) first = placeMsg;
+      if (!Number.isFinite(input.year) || !Number.isFinite(input.month) || !Number.isFinite(input.day)) {
+        var dateMsg = t("analyze.date_required");
+        setFieldError("birth_date", dateMsg);
+        if (!first) first = dateMsg;
       }
-      if (!Number.isFinite(input.year) || input.year < 1) {
-        var yearMsg = t("analyze.year_required");
-        if (!first) first = yearMsg;
-      }
-      if (!Number.isFinite(input.month) || input.month < 1 || input.month > 12) {
-        var monthMsg = t("analyze.month_range");
-        if (!first) first = monthMsg;
-      }
-      if (!Number.isFinite(input.day) || input.day < 1 || input.day > 31) {
-        var dayMsg = t("analyze.day_range");
-        if (!first) first = dayMsg;
-      }
+      if (timeWarn) timeWarn.hidden = !input.time_missing;
       return first;
     }
 
-    function setLoading(on) {
+    function setLoading(on, message) {
       btn.disabled = on;
-      if (loading) loading.hidden = !on;
+      form.setAttribute("aria-busy", on ? "true" : "false");
+      if (status) {
+        status.hidden = !on;
+        status.textContent = on ? message || t("analyze.analyzing") : "";
+      }
       if (!on) btn.textContent = t("analyze.run");
     }
 
@@ -114,10 +163,12 @@
       ];
       var index = 0;
       function showStep() {
-        var key = steps[Math.min(index, steps.length - 1)];
-        var text = t(key);
+        var text = t(steps[Math.min(index, steps.length - 1)]);
         btn.textContent = text;
-        BtePortal.showFlash(flash, text, "success");
+        if (status) {
+          status.hidden = false;
+          status.textContent = text;
+        }
         index += 1;
       }
       showStep();
@@ -137,11 +188,22 @@
       }
 
       analyzing = true;
-      setLoading(true);
+      setLoading(true, t("analyze.analyzing"));
       var loadingTimer = startFriendlyLoading();
+      var payload = {
+        full_name: input.full_name,
+        birth_place: input.birth_place,
+        year: input.year,
+        month: input.month,
+        day: input.day,
+        hour: input.hour,
+        minute: input.minute,
+        gender: input.gender,
+        timezone: input.timezone,
+      };
 
       try {
-        const res = await BtePortal.post("/api/v1/analyze", input);
+        const res = await BtePortal.post("/api/v1/analyze", payload);
         const data = res && res.data != null ? res.data : res;
         if (!data || typeof data !== "object") {
           throw new Error(t("analyze.missing_payload"));
@@ -153,9 +215,8 @@
         }
         clearInterval(loadingTimer);
         btn.textContent = t("analyze.loading_done");
-        BtePortal.showFlash(flash, t("analyze.loading_done"), "success");
         var saved = BtePortal.saveLastResult({
-          input: input,
+          input: payload,
           data: data,
           analysis_id: analysisId || undefined,
         });
@@ -176,7 +237,6 @@
       }
     }
 
-    btn.addEventListener("click", runAnalyze);
     form.addEventListener("submit", runAnalyze);
   }
 
