@@ -1,0 +1,163 @@
+/**
+ * Bind Ten Gods Card from canonical analysis. Copy published fields only.
+ */
+
+import type { AnalysisDataDto, BaziDto, PillarDto } from "../../models";
+import {
+  asTenGodsPayload,
+  hiddenEntries,
+  tenGodLabel,
+} from "../../adapters/tenGodsDisplay";
+import { TEN_GODS_TITLE } from "./cards";
+import type {
+  TenGodsPillarKey,
+  TenGodsPlacementView,
+  TenGodsPresenceView,
+  TenGodsView,
+} from "./types";
+
+const PILLAR_KEYS: readonly TenGodsPillarKey[] = ["year", "month", "day", "hour"];
+const PILLAR_LABELS: Record<TenGodsPillarKey, string> = {
+  year: "Năm",
+  month: "Tháng",
+  day: "Ngày",
+  hour: "Giờ",
+};
+const TRADITIONAL_ORDER = [
+  "Tỷ Kiên",
+  "Kiếp Tài",
+  "Thực Thần",
+  "Thương Quan",
+  "Thiên Tài",
+  "Chính Tài",
+  "Thất Sát",
+  "Chính Quan",
+  "Thiên Ấn",
+  "Chính Ấn",
+] as const;
+const DAY_MASTER_LABEL = "Nhật Chủ";
+const TECHNICAL_TOKEN = /^[a-z][a-z0-9_]*$/;
+
+function text(value: unknown): string {
+  if (value == null) return "";
+  return String(value).trim();
+}
+
+function customerLabel(value: string): string {
+  const next = text(value);
+  if (!next || TECHNICAL_TOKEN.test(next)) return "";
+  return next;
+}
+
+function asRecord(value: unknown): Record<string, unknown> {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+  return value as Record<string, unknown>;
+}
+
+function isPillar(value: string): value is TenGodsPillarKey {
+  return (PILLAR_KEYS as readonly string[]).includes(value);
+}
+
+function pillarOf(bazi: BaziDto | undefined, key: TenGodsPillarKey): PillarDto | undefined {
+  if (!bazi) return undefined;
+  if (key === "year") return bazi.year_pillar;
+  if (key === "month") return bazi.month_pillar;
+  if (key === "day") return bazi.day_pillar;
+  return bazi.hour_pillar;
+}
+
+function fallbackVisible(bazi: BaziDto | undefined): TenGodsPlacementView[] {
+  return PILLAR_KEYS.map((key) => {
+    const tenGod = customerLabel(text(pillarOf(bazi, key)?.ten_god));
+    if (!tenGod) return null;
+    return {
+      pillar: key,
+      pillarLabel: PILLAR_LABELS[key],
+      stem: customerLabel(text(pillarOf(bazi, key)?.stem)),
+      tenGod,
+      isDayMaster: key === "day" || tenGod === DAY_MASTER_LABEL,
+    };
+  }).filter((item): item is TenGodsPlacementView => Boolean(item));
+}
+
+function bindVisible(payload: ReturnType<typeof asTenGodsPayload>): TenGodsPlacementView[] {
+  const visible = payload?.visible ?? [];
+  const byPillar = new Map<TenGodsPillarKey, TenGodsPlacementView>();
+  for (const item of visible) {
+    const record = typeof item === "string" ? { ten_god: item } : asRecord(item);
+    const pillarRaw = text(record.pillar);
+    const pillar = isPillar(pillarRaw) ? pillarRaw : null;
+    if (!pillar || byPillar.has(pillar)) continue;
+    const tenGod = customerLabel(tenGodLabel(item));
+    if (!tenGod) continue;
+    byPillar.set(pillar, {
+      pillar,
+      pillarLabel: PILLAR_LABELS[pillar],
+      stem: customerLabel(text(record.stem)),
+      tenGod,
+      isDayMaster: pillar === "day" || tenGod === DAY_MASTER_LABEL,
+    });
+  }
+  return PILLAR_KEYS.map((key) => byPillar.get(key)).filter(
+    (item): item is TenGodsPlacementView => Boolean(item),
+  );
+}
+
+function bindHidden(payload: ReturnType<typeof asTenGodsPayload>): TenGodsPlacementView[] {
+  return hiddenEntries(payload)
+    .map((item) => {
+      const pillarRaw = text(item.pillar);
+      const pillar = isPillar(pillarRaw) ? pillarRaw : null;
+      const tenGod = customerLabel(text(item.ten_god));
+      if (!pillar || !tenGod || tenGod === DAY_MASTER_LABEL) return null;
+      return {
+        pillar,
+        pillarLabel: PILLAR_LABELS[pillar],
+        stem: customerLabel(text(item.hidden_stem || item.stem)),
+        tenGod,
+        isDayMaster: false,
+      };
+    })
+    .filter((item): item is TenGodsPlacementView => Boolean(item));
+}
+
+function namesInOrder(names: Iterable<string>): string[] {
+  const present = new Set(names);
+  return TRADITIONAL_ORDER.filter((name) => present.has(name));
+}
+
+function bindDistribution(
+  visible: readonly TenGodsPlacementView[],
+  hidden: readonly TenGodsPlacementView[],
+): TenGodsPresenceView[] {
+  const visibleNames = new Set(
+    visible.map((item) => item.tenGod).filter((name) => name !== DAY_MASTER_LABEL),
+  );
+  const hiddenNames = new Set(hidden.map((item) => item.tenGod));
+  return namesInOrder([...visibleNames, ...hiddenNames]).map((name) => ({
+    name,
+    visible: visibleNames.has(name),
+    hidden: hiddenNames.has(name),
+  }));
+}
+
+/**
+ * Map published Ten Gods onto the structure card. Does not calculate relationships.
+ */
+export function adaptTenGodsCard(data: AnalysisDataDto | null | undefined): TenGodsView {
+  const payload = asTenGodsPayload(data?.ten_gods) ?? asTenGodsPayload(data?.ten_gods_result);
+  const visible = bindVisible(payload);
+  const hidden = bindHidden(payload);
+  const placements = visible.length ? visible : fallbackVisible(data?.bazi);
+  const available = placements.length > 0 || hidden.length > 0;
+  return {
+    title: TEN_GODS_TITLE,
+    available,
+    featured: [],
+    visible: placements,
+    hidden,
+    hiddenNames: namesInOrder(hidden.map((item) => item.tenGod)),
+    distribution: bindDistribution(placements, hidden),
+    summary: "",
+  };
+}
