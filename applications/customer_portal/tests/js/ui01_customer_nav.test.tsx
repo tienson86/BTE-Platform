@@ -46,3 +46,28 @@ describe("UI-01 customer primary navigation", () => {
     expect(resolveActiveNavId("/dashboard")).toBeUndefined();
   });
 });
+
+describe("UI-01A result shell contract", () => {
+  it("A1–A2 keep /result on the three-item customer product nav", () => {
+    expect(APP_NAV_ITEMS.map((item) => item.label)).toEqual([...PRODUCT_LABELS]);
+    expect(APP_NAV_ITEMS.some((item) => item.href === "/result")).toBe(false);
+    expect(resolveActiveNavId("/result")).toBe("analyze");
+    render(<PrimaryNav activeId="analyze" />);
+    const nav = screen.getByRole("navigation", { name: "Điều hướng chính" });
+    expect(Array.from(nav.querySelectorAll("a")).map((link) => link.textContent)).toEqual([
+      ...PRODUCT_LABELS,
+    ]);
+    for (const label of ["Kết quả", "Báo cáo", "Lịch sử"] as const) {
+      expect(screen.queryByText(label)).toBeNull();
+    }
+  });
+
+  it("A8 does not add a competing customer nav list", () => {
+    expect(APP_NAV_ITEMS).toHaveLength(3);
+    expect(APP_NAV_ITEMS.map((item) => item.href)).toEqual([
+      "/good-date",
+      "/choose-date",
+      "/analyze",
+    ]);
+  });
+});
