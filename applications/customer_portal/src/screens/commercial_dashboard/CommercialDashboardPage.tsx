@@ -15,6 +15,10 @@ import { adaptTenGodsCard } from "./tenGodsAdapter";
 import { TEN_GODS_VISUAL_FIXTURE } from "./tenGodsFixture";
 import { adaptPatternCard } from "./patternAdapter";
 import { PATTERN_VISUAL_FIXTURE } from "./patternFixture";
+import { adaptShenShaCard } from "./shenShaAdapter";
+import { SHENSHA_VISUAL_FIXTURE } from "./shenShaFixture";
+import { adaptLuckCard } from "./luckAdapter";
+import { LUCK_VISUAL_FIXTURE } from "./luckFixture";
 import { adaptOverviewCard } from "./overviewAdapter";
 import { OVERVIEW_VISUAL_FIXTURE } from "./overviewFixture";
 import { RESULT_PAGE_TITLE } from "./cards";
@@ -131,6 +135,18 @@ export function CommercialDashboardPage({
       : layoutMode === "skeleton" || previewFallback
         ? null
         : adaptPatternCard(analysis);
+  const shenSha =
+    layoutMode === "visual"
+      ? SHENSHA_VISUAL_FIXTURE
+      : layoutMode === "skeleton" || previewFallback
+        ? null
+        : adaptShenShaCard(analysis);
+  const luck =
+    layoutMode === "visual"
+      ? LUCK_VISUAL_FIXTURE
+      : layoutMode === "skeleton" || previewFallback
+        ? null
+        : adaptLuckCard(analysis);
   return (
     <div
       className="bte-cdash"
@@ -146,6 +162,8 @@ export function CommercialDashboardPage({
         fiveElements={fiveElements}
         tenGods={tenGods}
         pattern={pattern}
+        shenSha={shenSha}
+        luck={luck}
       />
     </div>
   );
