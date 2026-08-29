@@ -190,12 +190,12 @@ describe("UI-08 Pattern card", () => {
     );
   });
 
-  it("P18 leaves ShenSha and later Cards as skeletons", () => {
+  it("P18 leaves Luck and later Cards as skeletons", () => {
     const { container } = renderLive();
     const skeletons = [...container.querySelectorAll("[data-card][data-skeleton='true']")].map(
       (node) => node.getAttribute("data-card"),
     );
-    expect(skeletons).toEqual(["shensha", "luck", "interpretation", "action-plan"]);
+    expect(skeletons).toEqual(["interpretation", "action-plan"]);
   });
 
   it("P19 expand/collapse is an accessible button", () => {
