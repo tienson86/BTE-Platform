@@ -89,7 +89,7 @@ def create_app() -> FastAPI:
         """
         if request.query_params.get("legacy") == "1":
             return page("result", "result_legacy.html")
-        return HTMLResponse(render_desktop_page("result_desktop.html"))
+        return HTMLResponse(render_desktop_page("result_desktop.html", active="result"))
 
     @app.get("/result-workspace", response_class=HTMLResponse)
     def result_workspace_page() -> HTMLResponse:
@@ -99,7 +99,7 @@ def create_app() -> FastAPI:
     @app.get("/interpretation", response_class=HTMLResponse)
     def interpretation_page() -> HTMLResponse:
         """Luận giải — same current result as /result, interpretation zone."""
-        return HTMLResponse(render_desktop_page("result_desktop.html"))
+        return HTMLResponse(render_desktop_page("result_desktop.html", active="interpretation"))
 
     @app.get("/reports", response_class=HTMLResponse)
     def reports_page() -> HTMLResponse:
