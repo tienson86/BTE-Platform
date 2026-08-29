@@ -1,77 +1,79 @@
-<div class="panel analyze-page">
-  <h1 data-i18n="analyze.title"></h1>
-  <p class="muted" data-i18n="analyze.hint"></p>
-  <form id="analyzeForm" class="analyze-stack" method="post" action="#" novalidate>
-    <section class="form-section" aria-labelledby="analyzePersonal">
-      <h2 id="analyzePersonal" data-i18n="analyze.section_personal"></h2>
-      <div class="form-section-grid">
-        <label class="full"><span data-i18n="analyze.full_name"></span><span class="req" aria-hidden="true"> *</span>
-          <input id="full_name" name="full_name" type="text" autocomplete="name" required />
-          <span class="field-error" id="err_full_name" hidden></span>
-        </label>
-      </div>
-    </section>
+<div class="ds-page analyze-page" data-screen="view-chart">
+  <header>
+    <h1 data-i18n="analyze.title">Xem lá số</h1>
+    <p class="muted" data-i18n="analyze.hint">Nhập thông tin để lập và phân tích Bát Tự</p>
+  </header>
 
-    <section class="form-section" aria-labelledby="analyzePlace">
-      <h2 id="analyzePlace" data-i18n="analyze.section_place"></h2>
-      <div class="form-section-grid">
-        <label class="full"><span data-i18n="analyze.birth_place"></span><span class="req" aria-hidden="true"> *</span>
-          <input id="birth_place" name="birth_place" type="text" autocomplete="address-level2" required />
-          <span class="field-error" id="err_birth_place" hidden></span>
-        </label>
-      </div>
-    </section>
+  <form id="analyzeForm" class="bte-card ds-form analyze-form" method="post" action="#" novalidate>
+    <h2 data-i18n="analyze.section_info">Thông tin</h2>
 
-    <section class="form-section" aria-labelledby="analyzeBirthDate">
-      <h2 id="analyzeBirthDate" data-i18n="analyze.section_birth_date"></h2>
-      <div class="form-section-grid">
-        <label><span data-i18n="analyze.year"></span><input id="year" name="year" type="number" value="1990" required /></label>
-        <label><span data-i18n="analyze.month"></span><input id="month" name="month" type="number" value="5" min="1" max="12" required /></label>
-        <label><span data-i18n="analyze.day"></span><input id="day" name="day" type="number" value="15" min="1" max="31" required /></label>
-      </div>
-    </section>
+    <div class="analyze-fields">
+      <label data-analyze-field="full_name">
+        <span data-i18n="analyze.full_name">Họ và tên</span>
+        <input id="full_name" name="full_name" type="text" autocomplete="name" />
+      </label>
 
-    <section class="form-section" aria-labelledby="analyzeBirthTime">
-      <h2 id="analyzeBirthTime" data-i18n="analyze.section_birth_time"></h2>
-      <div class="form-section-grid">
-        <label><span data-i18n="analyze.hour"></span><input id="hour" name="hour" type="number" value="10" min="0" max="23" /></label>
-        <label><span data-i18n="analyze.minute"></span><input id="minute" name="minute" type="number" value="30" min="0" max="59" /></label>
-      </div>
-    </section>
+      <fieldset class="ds-gender analyze-gender" data-analyze-field="gender">
+        <legend data-i18n="analyze.gender">Giới tính</legend>
+        <div class="ds-gender__options" role="radiogroup" aria-label="Giới tính" aria-describedby="err_gender">
+          <label>
+            <input type="radio" name="gender" id="gender_male" value="male" />
+            <span data-i18n="analyze.gender_male">Nam</span>
+          </label>
+          <label>
+            <input type="radio" name="gender" id="gender_female" value="female" />
+            <span data-i18n="analyze.gender_female">Nữ</span>
+          </label>
+        </div>
+        <span class="field-error" id="err_gender" hidden></span>
+      </fieldset>
 
-    <section class="form-section" aria-labelledby="analyzeGender">
-      <h2 id="analyzeGender" data-i18n="analyze.section_gender"></h2>
-      <div class="form-section-grid">
-        <label><span data-i18n="analyze.gender"></span>
-          <select id="gender" name="gender">
-            <option value="male" data-i18n="analyze.gender_male"></option>
-            <option value="female" data-i18n="analyze.gender_female"></option>
-            <option value="" data-i18n="analyze.gender_unspecified"></option>
-          </select>
-        </label>
-      </div>
-    </section>
+      <label data-analyze-field="birth_date">
+        <span data-i18n="analyze.birth_date">Ngày sinh</span>
+        <input id="birth_date" name="birth_date" type="date" autocomplete="bday" required aria-describedby="err_birth_date" />
+        <span class="field-error" id="err_birth_date" hidden></span>
+      </label>
 
-    <section class="form-section" aria-labelledby="analyzeCalendar">
-      <h2 id="analyzeCalendar" data-i18n="analyze.section_calendar"></h2>
-      <div class="form-section-grid">
-        <label><span data-i18n="analyze.calendar_type"></span>
-          <select id="calendar_type" name="calendar_type" disabled>
-            <option value="solar" selected data-i18n="analyze.calendar_solar"></option>
-          </select>
-        </label>
-        <label class="full"><span data-i18n="analyze.timezone"></span><input id="timezone" name="timezone" value="Asia/Ho_Chi_Minh" /></label>
-      </div>
-    </section>
+      <label data-analyze-field="birth_time">
+        <span data-i18n="analyze.birth_time">Giờ sinh</span>
+        <input id="birth_time" name="birth_time" type="time" aria-describedby="analyzeTimeWarn" />
+        <span class="analyze-time-warn muted" id="analyzeTimeWarn" hidden data-i18n="analyze.time_missing">
+          Bạn chưa nhập giờ sinh. Một số kết quả sẽ có độ chính xác thấp hơn.
+        </span>
+      </label>
+
+      <label data-analyze-field="birth_place">
+        <span data-i18n="analyze.birth_place">Nơi sinh</span>
+        <input
+          id="birth_place"
+          name="birth_place"
+          type="text"
+          autocomplete="address-level2"
+          list="analyzePlaces"
+        />
+      </label>
+    </div>
+
+    <datalist id="analyzePlaces">
+      <option value="Hà Nội"></option>
+      <option value="Bắc Ninh"></option>
+      <option value="Hải Phòng"></option>
+      <option value="TP Hồ Chí Minh"></option>
+      <option value="Đà Nẵng"></option>
+      <option value="Huế"></option>
+      <option value="Cần Thơ"></option>
+    </datalist>
+
+    <input type="hidden" id="timezone" name="timezone" value="Asia/Ho_Chi_Minh" />
+
+    <p class="analyze-note muted" data-testid="analyze-accuracy-note" data-i18n="analyze.accuracy_note">
+      Lưu ý: Giờ sinh và nơi sinh càng chính xác thì kết quả luận giải càng đáng tin cậy.
+    </p>
 
     <div class="toolbar">
-      <button type="button" id="btnAnalyze" data-i18n="analyze.run"></button>
+      <button type="submit" id="btnAnalyze" data-i18n="analyze.run">Phân tích lá số</button>
     </div>
-    <div id="analyzeLoading" class="ui-empty" hidden>
-      <strong data-i18n="analyze.analyzing"></strong>
-      <div class="skeleton-line"></div>
-      <div class="skeleton-line"></div>
-    </div>
+    <p id="analyzeStatus" class="analyze-status muted" role="status" aria-live="polite" hidden></p>
   </form>
 </div>
 <script src="/static/js/analyze.js"></script>
