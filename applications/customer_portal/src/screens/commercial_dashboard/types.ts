@@ -176,6 +176,8 @@ export type ShenShaItemView = {
   readonly name: string;
   readonly placement: string;
   readonly meaning: string;
+  readonly chartRelevance: string;
+  readonly evidence: string;
   readonly category: string;
 };
 
