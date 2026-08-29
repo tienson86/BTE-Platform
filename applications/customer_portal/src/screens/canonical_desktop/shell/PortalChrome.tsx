@@ -1,22 +1,11 @@
 import type { MouseEvent, ReactNode } from "react";
 import { useCanonicalDesktop } from "../CanonicalDesktopContext";
 import {
-  IconBell,
   IconMenu,
   IconSun,
   SidebarIcon,
   IconStarLogo,
 } from "../icons";
-
-const HEADER_NAV_HREF: Record<string, string> = {
-  home: "/dashboard",
-  analysis: "/result#interpretation",
-  result: "/result",
-  report: "/reports",
-  history: "/history",
-  account: "/profile",
-  guide: "/dashboard",
-};
 
 const SIDEBAR_NAV_HREF: Record<string, string> = {
   "tom-tat": "#summary",
@@ -46,62 +35,9 @@ function handleCanonicalNav(event: MouseEvent<HTMLAnchorElement>, href: string):
 }
 
 export function PortalHeader(): ReactNode {
-  const data = useCanonicalDesktop();
-  return (
-    <header className="cd-header" role="banner">
-      <button type="button" className="cd-header__toggle" aria-label="Menu">
-        <IconMenu size={20} />
-      </button>
-      <nav className="cd-header__nav" aria-label="Điều hướng chính">
-        {data.header.nav.map((item) => {
-          const href = hrefForNav(item.id, HEADER_NAV_HREF);
-          return (
-          <a
-            key={item.id}
-            href={href}
-            onClick={(event) => handleCanonicalNav(event, href)}
-            className={
-              item.active ? "cd-header__link cd-header__link--active" : "cd-header__link"
-            }
-          >
-            {item.label}
-          </a>
-          );
-        })}
-        <div className="cd-header__dropdown">
-          <button type="button" className="cd-header__link" aria-haspopup="menu">
-            Ngày tốt
-          </button>
-          <div className="cd-header__menu" role="menu">
-            <a className="cd-header__menu-link" href="/good-date" role="menuitem">
-              Xem ngày tốt/xấu
-            </a>
-            <a className="cd-header__menu-link" href="/choose-date" role="menuitem">
-              Chọn ngày tốt
-            </a>
-          </div>
-        </div>
-      </nav>
-      <div className="cd-header__utils">
-        <button type="button" className="cd-header__icon-btn" aria-label="Chế độ sáng">
-          <IconSun size={18} />
-        </button>
-        <button type="button" className="cd-header__icon-btn" aria-label="Thông báo">
-          <IconBell size={18} />
-          <span className="cd-header__badge">{data.header.notifications}</span>
-        </button>
-        <div className="cd-header__user">
-          <div className="cd-header__avatar" aria-hidden="true">
-            {data.header.user.initials}
-          </div>
-          <div className="cd-header__user-meta">
-            <span className="cd-header__user-name">{data.header.user.name}</span>
-            <span className="cd-header__user-role">{data.header.user.role}</span>
-          </div>
-        </div>
-      </div>
-    </header>
-  );
+  // Customer chrome is server-rendered from CUSTOMER_NAV_ITEMS
+  // (templates_util._customer_header_html). Do not reintroduce a second stack.
+  return null;
 }
 
 export function PortalSidebar(): ReactNode {
