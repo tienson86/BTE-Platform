@@ -18,7 +18,8 @@ describe("PortalPage — Result architecture Sprint D / UI V1", () => {
     expect(container.querySelector("#rp-main")).toBeTruthy();
 
     expect(screen.getByText("BTE Portal")).toBeTruthy();
-    expect(screen.getByText("Kết quả")).toBeTruthy();
+    expect(container.querySelector(".cd-header")).toBeNull();
+    expect(container.querySelector("[data-customer-nav]")).toBeNull();
 
     // Frozen Sprint A patterns
     expect(container.querySelector('[data-zone="summary"][data-pattern="LP-001"]')).toBeTruthy();
