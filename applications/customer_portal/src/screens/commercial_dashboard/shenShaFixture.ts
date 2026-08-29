@@ -11,14 +11,18 @@ const VISUAL_GROUPS: readonly ShenShaGroupView[] = [
       items: [
         {
           name: "Thiên Ất Quý Nhân",
-          placement: "Năm · Ngày",
+          placement: "Trụ Năm · Trụ Ngày",
           meaning: "Dễ gặp người hỗ trợ khi khó khăn.",
+          chartRelevance: "Xuất hiện tại trụ Năm · Ngày.",
+          evidence: "",
           category: "Quý Nhân & Hỗ trợ",
         },
         {
           name: "Thiên Đức",
-          placement: "Tháng",
+          placement: "Trụ Tháng",
           meaning: "Yếu tố hỗ trợ ôn hòa.",
+          chartRelevance: "Xuất hiện tại trụ Tháng.",
+          evidence: "",
           category: "Quý Nhân & Hỗ trợ",
         },
       ],
@@ -28,8 +32,10 @@ const VISUAL_GROUPS: readonly ShenShaGroupView[] = [
       items: [
         {
           name: "Văn Xương",
-          placement: "Giờ",
+          placement: "Trụ Giờ",
           meaning: "Nghiên cứu và học thuật.",
+          chartRelevance: "Xuất hiện tại trụ Giờ.",
+          evidence: "",
           category: "Học tập & Danh tiếng",
         },
       ],
@@ -39,8 +45,10 @@ const VISUAL_GROUPS: readonly ShenShaGroupView[] = [
       items: [
         {
           name: "Hồng Loan",
-          placement: "Năm",
+          placement: "Trụ Năm",
           meaning: "Duyên gặp gỡ đáng chú ý.",
+          chartRelevance: "Xuất hiện tại trụ Năm.",
+          evidence: "",
           category: "Quan hệ & Tình cảm",
         },
       ],
@@ -50,8 +58,10 @@ const VISUAL_GROUPS: readonly ShenShaGroupView[] = [
       items: [
         {
           name: "Dịch Mã",
-          placement: "Ngày",
+          placement: "Trụ Ngày",
           meaning: "Biến động môi trường.",
+          chartRelevance: "Xuất hiện tại trụ Ngày.",
+          evidence: "",
           category: "Di chuyển & Biến động",
         },
       ],
@@ -61,8 +71,10 @@ const VISUAL_GROUPS: readonly ShenShaGroupView[] = [
       items: [
         {
           name: "Không Vong",
-          placement: "Giờ",
+          placement: "Trụ Giờ",
           meaning: "Cần xem trong ngữ cảnh tổng thể.",
+          chartRelevance: "Xuất hiện tại trụ Giờ.",
+          evidence: "",
           category: "Điều cần lưu ý",
         },
       ],
@@ -77,5 +89,5 @@ export const SHENSHA_VISUAL_FIXTURE: ShenShaView = {
   groups: VISUAL_GROUPS,
   items: VISUAL_GROUPS.flatMap((group) => group.items),
   summary: "",
-  note: SHENSHA_SUPPORTING_NOTE,
+  note: `Lưu ý: ${SHENSHA_SUPPORTING_NOTE}`,
 };
