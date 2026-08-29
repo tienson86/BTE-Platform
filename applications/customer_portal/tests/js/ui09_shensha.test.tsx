@@ -196,7 +196,7 @@ describe("UI-09 ShenSha card", () => {
     const skeletons = [...container.querySelectorAll("[data-card][data-skeleton='true']")].map(
       (node) => node.getAttribute("data-card"),
     );
-    expect(skeletons).toEqual(["action-plan"]);
+    expect(skeletons).toEqual([]);
   });
 
   it("S18 expand/collapse is an accessible button", () => {
