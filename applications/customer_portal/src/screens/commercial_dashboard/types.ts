@@ -213,3 +213,43 @@ export type LuckView = {
   readonly next: LuckCycleView | null;
   readonly trend: string;
 };
+
+export type InterpretationZoneId = "observation" | "reasoning" | "impact" | "recommendation";
+
+export type InterpretationZoneView = {
+  readonly id: InterpretationZoneId;
+  readonly label: string;
+  readonly body: string;
+  readonly extra: string;
+  readonly source: string;
+};
+
+export type InterpretationView = {
+  readonly title: string;
+  readonly available: boolean;
+  readonly lead: string;
+  readonly leadExtra: string;
+  readonly leadSource: string;
+  readonly zones: readonly InterpretationZoneView[];
+  readonly closing: string;
+  readonly closingSource: string;
+  readonly emptyMessage: string;
+};
+
+export type ActionItemView = {
+  readonly title: string;
+  readonly detail: string;
+  readonly domain: string;
+  readonly source: string;
+};
+
+export type ActionPlanView = {
+  readonly title: string;
+  readonly available: boolean;
+  readonly emptyMessage: string;
+  readonly priority: ActionItemView | null;
+  readonly actions: readonly ActionItemView[];
+  readonly extraActions: readonly ActionItemView[];
+  readonly warnings: readonly ActionItemView[];
+  readonly watch: readonly ActionItemView[];
+};
