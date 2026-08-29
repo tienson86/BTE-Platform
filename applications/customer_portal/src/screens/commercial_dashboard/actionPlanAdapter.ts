@@ -4,7 +4,6 @@
  */
 
 import { isTechnicalRuleText } from "../../adapters/contentGuards";
-import { asNarrativeResult } from "../../adapters/narrativeResultAdapter";
 import type { AnalysisDataDto } from "../../models";
 import { ACTION_PLAN_EMPTY, ACTION_PLAN_TITLE } from "./cards";
 import type { ActionItemView, ActionPlanView } from "./types";
@@ -14,7 +13,7 @@ const RULE_ID = /\b(?:cli|com_san|pat|str|sea|tmp|flo|flw|ctl|sup|spc|spe|cmb|ro
 const TECHNICAL =
   /\{|\}|dayun_runtime|source_unit|rule_id|catalog_id|schema_version|UNKNOWN|matcher|engine_id|chưa đủ căn cứ|đã công bố/i;
 const FEAR = /chắc chắn thất bại|chắc chắn ly hôn|tai họa|bệnh nặng|đại hung/;
-const GENERIC = /sống tích cực|cố gắng hơn|giữ tinh thần lạc quan|làm việc chăm chỉ/;
+const GENERIC = /sống tích cực|cố gắng hơn|giữ tinh thần lạc quan|làm việc chăm chỉ/i
 const RAW_LABEL = /^(bổ hỏa|giảm kim|dùng dụng thần|tránh kỵ thần)$/i;
 const PREFIX = /^(?:\d+\.\s*)?(?:xây|làm|củng cố|tránh|hạn chế)\s*:\s*/i;
 const WATCH_INTENT = /current|watch|giai đoạn hiện tại|current.period|luck.advice/i;
@@ -88,14 +87,42 @@ function consultingDrafts(data: AnalysisDataDto): Draft[] {
   return drafts;
 }
 
+function list(value: unknown): readonly unknown[] {
+  return Array.isArray(value) ? value : [];
+}
+
+function recDraft(rec: Record<string, unknown>, source: string): Draft | null {
+  if (rec.insufficient_data) return null;
+  const line = customerLine(rec.action);
+  if (!line) return null;
+  const item = splitItem(line, "", source);
+  if (!item) return null;
+  if (item.detail) return item;
+  const reason = customerLine(rec.reason);
+  if (!reason || reason === item.title) return item;
+  return { ...item, detail: reason.replace(/[.。]+$/, "") };
+}
+
 function narrativeRecs(data: AnalysisDataDto): Draft[] {
-  const narrative = asNarrativeResult(data.narrative_result);
-  if (!narrative) return [];
+  const narrative = asRecord(data.narrative_result);
   const drafts: Draft[] = [];
-  for (const rec of narrative.recommendations ?? []) {
-    const line = customerLine(rec.action);
-    if (!line) continue;
-    pushUnique(drafts, splitItem(line, "", "narrative_result.recommendations"));
+  for (const row of list(narrative.recommendations)) {
+    pushUnique(drafts, recDraft(asRecord(row), "narrative_result.recommendations"));
+  }
+  for (const row of list(narrative.sections)) {
+    const section = asRecord(row);
+    const blob = `${section.id ?? ""} ${section.intent ?? ""} ${section.title ?? ""}`;
+    if (!/priority|recommend|khuyến nghị|việc nên/i.test(blob)) continue;
+    for (const rec of list(section.recommendations)) {
+      pushUnique(drafts, recDraft(asRecord(rec), "narrative_result.section.recommendations"));
+    }
+    for (const paragraph of list(section.paragraphs)) {
+      const item = asRecord(paragraph);
+      if (item.insufficient_data) continue;
+      const line = customerLine(item.text);
+      if (!line) continue;
+      pushUnique(drafts, splitItem(line, "", "narrative_result.priority"));
+    }
   }
   if (drafts.length) return drafts;
   const summary = asRecord(narrative.summary);
@@ -108,15 +135,16 @@ function narrativeRecs(data: AnalysisDataDto): Draft[] {
 }
 
 function warningDrafts(data: AnalysisDataDto): Draft[] {
-  const narrative = asNarrativeResult(data.narrative_result);
-  if (!narrative) return [];
+  const narrative = asRecord(data.narrative_result);
   const drafts: Draft[] = [];
-  for (const section of narrative.sections ?? []) {
+  for (const row of list(narrative.sections)) {
+    const section = asRecord(row);
     const blob = `${section.id ?? ""} ${section.intent ?? ""} ${section.title ?? ""}`;
     if (!/warning|caution|lưu ý|tránh/i.test(blob)) continue;
-    for (const paragraph of section.paragraphs ?? []) {
-      if (paragraph.insufficient_data) continue;
-      const line = customerLine(paragraph.text);
+    for (const paragraph of list(section.paragraphs)) {
+      const item = asRecord(paragraph);
+      if (item.insufficient_data) continue;
+      const line = customerLine(item.text);
       if (!line) continue;
       pushUnique(drafts, splitItem(line, "", "narrative_result.warning"));
     }
@@ -129,15 +157,17 @@ function watchDrafts(data: AnalysisDataDto): Draft[] {
   const luck = asRecord(data.luck);
   for (const key of ["customer_summary", "trend"] as const) {
     const line = customerLine(luck[key]);
-    if (!line) continue;
+    if (!line || line.length < 24) continue;
     pushUnique(drafts, splitItem(line, "", `luck.${key}`));
   }
-  const narrative = asNarrativeResult(data.narrative_result);
-  for (const section of narrative?.sections ?? []) {
+  const narrative = asRecord(data.narrative_result);
+  for (const row of list(narrative.sections)) {
+    const section = asRecord(row);
     const blob = `${section.id ?? ""} ${section.intent ?? ""} ${section.title ?? ""}`;
     if (!WATCH_INTENT.test(blob)) continue;
-    for (const paragraph of section.paragraphs ?? []) {
-      const line = customerLine(paragraph.text);
+    for (const paragraph of list(section.paragraphs)) {
+      const item = asRecord(paragraph);
+      const line = customerLine(item.text);
       if (!line) continue;
       pushUnique(drafts, splitItem(line, "", "narrative_result.watch"));
     }
