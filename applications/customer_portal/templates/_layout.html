@@ -19,11 +19,19 @@
 <body>
   <a class="skip-link" href="#mainContent">Skip to content</a>
   <div class="app-shell">
-    <header class="app-header">
-      <a class="app-brand" href="/dashboard">BTE <span>Portal</span></a>
-      <nav class="app-nav nav" aria-label="Primary">{{NAV}}</nav>
+    <header class="app-header" id="appHeader">
+      <a class="app-brand" href="/good-date">BTE <span>Portal</span></a>
+      <button type="button" class="app-nav-toggle" id="btnNavToggle" aria-label="Mở điều hướng" aria-controls="appNav" aria-expanded="false">
+        <span class="app-nav-toggle__bar" aria-hidden="true"></span>
+        <span class="app-nav-toggle__bar" aria-hidden="true"></span>
+        <span class="app-nav-toggle__bar" aria-hidden="true"></span>
+      </button>
+      <nav class="app-nav nav" id="appNav" data-customer-nav="primary" aria-label="Điều hướng chính">{{NAV}}</nav>
       <div class="app-header-actions">
         <button type="button" id="btnThemeToggle" class="secondary" aria-pressed="false">Dark</button>
+        <a class="app-user" href="/profile" aria-label="Hồ sơ" title="Hồ sơ">
+          <span class="app-user__avatar" aria-hidden="true">U</span>
+        </a>
       </div>
     </header>
     <div class="app-main">
