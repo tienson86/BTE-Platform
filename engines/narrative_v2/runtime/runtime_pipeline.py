@@ -6,7 +6,7 @@ Stage order only. Every builder stage returns a NotImplemented placeholder.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import TYPE_CHECKING, Callable
+from typing import TYPE_CHECKING
 
 from engines.narrative_v2.runtime.runtime_errors import PipelineError, ValidationError
 from engines.narrative_v2.runtime.runtime_events import (
@@ -18,7 +18,6 @@ from engines.narrative_v2.runtime.runtime_state import RuntimeState, transition
 
 if TYPE_CHECKING:
     from engines.narrative_v2.runtime.narrative_runtime import NarrativeRuntime
-    from engines.narrative_v2.runtime.runtime_events import RuntimeEvent
 
 CANONICAL_STAGES: tuple[str, ...] = (
     "initialize",
@@ -107,15 +106,13 @@ class RuntimePipeline:
         self._assert_next_stage(stage)
         started = now()
         self._on_stage_start(stage, started)
+        status = "failed"
         try:
             result = self._run_stage_body(stage)
-            finished = now()
-            self._on_stage_finish(stage, started, finished, status="placeholder")
+            status = result.status
             return result
-        except Exception:
-            finished = now()
-            self._on_stage_finish(stage, started, finished, status="failed")
-            raise
+        finally:
+            self._on_stage_finish(stage, started, now(), status=status)
 
     def _assert_next_stage(self, stage: str) -> None:
         executed = self._runtime.executed_stages
@@ -199,7 +196,3 @@ def _start_state_for(stage: str) -> RuntimeState:
     if stage == "publish":
         return RuntimeState.VALIDATING
     return RuntimeState.RUNNING
-
-
-# Binding helper used by NarrativeRuntime after construction.
-PipelineFactory = Callable[["NarrativeRuntime"], RuntimePipeline]
