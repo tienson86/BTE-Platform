@@ -26,7 +26,7 @@
         user: data.user && data.user.username ? data.user.username : "",
         role: (data.user && data.user.role) || "",
       });
-      setTimeout(() => (window.location.href = "/dashboard"), 400);
+      setTimeout(() => (window.location.href = "/good-date"), 400);
     } catch (err) {
       BtePortal.showFlash(flash, err.message, "error");
     }
