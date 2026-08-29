@@ -7,7 +7,7 @@ import {
   createCanonicalDesktopGateViewModel,
   type CanonicalDesktopViewModel,
 } from "../adapters";
-import type { AnalyzeChartRequest } from "../models";
+import type { AnalysisDataDto, AnalyzeChartRequest } from "../models";
 import { buildFullReportViewModel, type FullReportViewModel } from "../report/fullReportViewModel";
 import type { CustomerExportPayload } from "../export/customerExport";
 import {
@@ -43,6 +43,8 @@ export type ResultBootProps = {
   readonly fullReport?: FullReportViewModel;
   readonly exportPayload?: CustomerExportPayload | null;
   readonly reanalyzeHref?: string;
+  readonly analysis?: AnalysisDataDto | null;
+  readonly layoutMode?: "live" | "skeleton" | "visual";
 };
 
 /**
@@ -83,9 +85,15 @@ export function resolveResultBoot(
   historyView: StoredResult | null = null,
 ): ResultBootProps {
   const params = new URLSearchParams(search);
+  const layoutParam = params.get("layout");
+  const layoutMode =
+    layoutParam === "skeleton" ? "skeleton" : layoutParam === "visual" ? "visual" : "live";
   const forcePreview = params.get("preview") === "1";
+  if (layoutMode === "skeleton" || layoutMode === "visual") {
+    return { request: null, previewFallback: false, resultSource: "preview", layoutMode };
+  }
   if (forcePreview) {
-    return { request: null, previewFallback: true, resultSource: "preview" };
+    return { request: null, previewFallback: true, resultSource: "preview", layoutMode: "live" };
   }
 
   const historyId = historyIdFromSearch(search);
@@ -108,6 +116,7 @@ export function resolveResultBoot(
       analysisId: historyId,
       resultSource: corrupt ? "corrupt" : "missing",
       reanalyzeHref: corrupt ? buildReanalyzeHref(historyView?.input) : "/history",
+      layoutMode,
     };
   }
 
@@ -127,6 +136,7 @@ export function resolveResultBoot(
         analysisId: payload.analysisId,
         resultSource: "contract",
         reanalyzeHref: buildReanalyzeHref(payload.input),
+        layoutMode,
       };
     }
     const analysisId = payload.analysisId;
@@ -154,8 +164,10 @@ export function resolveResultBoot(
       fullReport,
       exportPayload,
       reanalyzeHref: buildReanalyzeHref(payload.input),
+      analysis: payload.data,
+      layoutMode,
     };
   }
 
-  return { request: null, previewFallback: false, resultSource: "empty" };
+  return { request: null, previewFallback: false, resultSource: "empty", layoutMode };
 }
