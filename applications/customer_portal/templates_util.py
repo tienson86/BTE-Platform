@@ -39,6 +39,37 @@ def _customer_nav_html(catalog: dict[str, Any], active: str) -> str:
     return "\n".join(links)
 
 
+def _customer_header_html(
+    catalog: dict[str, Any],
+    active: str,
+    *,
+    skip_href: str = "#mainContent",
+) -> str:
+    """Render the single Customer Portal chrome used by HTML pages and /result."""
+    nav = _customer_nav_html(catalog, active)
+    return (
+        f'<a class="skip-link" href="{skip_href}">Skip to content</a>\n'
+        '  <header class="app-header" id="appHeader">\n'
+        '      <a class="app-brand" href="/good-date">BTE <span>Portal</span></a>\n'
+        '      <button type="button" class="app-nav-toggle" id="btnNavToggle"'
+        ' aria-label="Mở điều hướng" aria-controls="appNav" aria-expanded="false">\n'
+        '        <span class="app-nav-toggle__bar" aria-hidden="true"></span>\n'
+        '        <span class="app-nav-toggle__bar" aria-hidden="true"></span>\n'
+        '        <span class="app-nav-toggle__bar" aria-hidden="true"></span>\n'
+        "      </button>\n"
+        f'      <nav class="app-nav nav" id="appNav" data-customer-nav="primary"'
+        f' aria-label="Điều hướng chính">{nav}</nav>\n'
+        '      <div class="app-header-actions">\n'
+        '        <button type="button" id="btnThemeToggle" class="secondary"'
+        ' aria-pressed="false">Dark</button>\n'
+        '        <a class="app-user" href="/profile" aria-label="Hồ sơ" title="Hồ sơ">\n'
+        '          <span class="app-user__avatar" aria-hidden="true">U</span>\n'
+        "        </a>\n"
+        "      </div>\n"
+        "    </header>"
+    )
+
+
 def _apply_common_tokens(html: str, *, locale: str, catalog: dict[str, Any]) -> str:
     """Replace shared template tokens."""
     html = html.replace("{{LANG}}", locale)
@@ -53,7 +84,7 @@ def render_page(template_name: str, *, active: str, locale: str = DEFAULT_LOCALE
     catalog = load_catalog(locale)
     base = (TEMPLATES_DIR / "_layout.html").read_text(encoding="utf-8")
     body = (TEMPLATES_DIR / template_name).read_text(encoding="utf-8")
-    html = base.replace("{{NAV}}", _customer_nav_html(catalog, active))
+    html = base.replace("{{HEADER}}", _customer_header_html(catalog, active))
     html = html.replace("{{CONTENT}}", body)
     html = html.replace("{{ACTIVE}}", active)
     return _apply_common_tokens(html, locale=locale, catalog=catalog)
@@ -63,8 +94,15 @@ def render_desktop_page(
     template_name: str = "result_desktop.html",
     *,
     locale: str = DEFAULT_LOCALE,
+    active: str = "analyze",
+    skip_href: str = "#rp-main",
 ) -> str:
-    """Render full-bleed Canonical Desktop V2 host (no legacy app-shell)."""
+    """Render Canonical Desktop V2 host with the shared Customer Portal chrome."""
     catalog = load_catalog(locale)
     html = (TEMPLATES_DIR / template_name).read_text(encoding="utf-8")
+    if "{{HEADER}}" in html:
+        html = html.replace(
+            "{{HEADER}}",
+            _customer_header_html(catalog, active, skip_href=skip_href),
+        )
     return _apply_common_tokens(html, locale=locale, catalog=catalog)
