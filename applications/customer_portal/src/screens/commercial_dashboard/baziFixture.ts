@@ -12,7 +12,7 @@ export const BAZI_VISUAL_FIXTURE: BaziStructureView = {
   pillars: [
     {
       key: "year",
-      label: "Năm",
+      label: "Năm trụ",
       stem: "Giáp",
       stemElement: "Mộc",
       stemYinYang: "Dương",
@@ -26,7 +26,7 @@ export const BAZI_VISUAL_FIXTURE: BaziStructureView = {
     },
     {
       key: "month",
-      label: "Tháng",
+      label: "Tháng trụ",
       stem: "Bính",
       stemElement: "Hỏa",
       stemYinYang: "Dương",
@@ -44,7 +44,7 @@ export const BAZI_VISUAL_FIXTURE: BaziStructureView = {
     },
     {
       key: "day",
-      label: "Ngày",
+      label: "Ngày trụ",
       stem: "Mậu",
       stemElement: "Thổ",
       stemYinYang: "Dương",
@@ -61,7 +61,7 @@ export const BAZI_VISUAL_FIXTURE: BaziStructureView = {
     },
     {
       key: "hour",
-      label: "Giờ",
+      label: "Giờ trụ",
       stem: "Canh",
       stemElement: "Kim",
       stemYinYang: "Dương",
