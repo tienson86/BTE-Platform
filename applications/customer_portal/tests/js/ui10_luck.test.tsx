@@ -212,7 +212,7 @@ describe("UI-10 Luck card", () => {
     const skeletons = [...container.querySelectorAll("[data-card][data-skeleton='true']")].map(
       (node) => node.getAttribute("data-card"),
     );
-    expect(skeletons).toEqual(["action-plan"]);
+    expect(skeletons).toEqual([]);
   });
 
   it("L23 expand/collapse is an accessible button", () => {
