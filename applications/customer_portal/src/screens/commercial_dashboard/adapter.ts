@@ -15,7 +15,13 @@ export type AdaptIdentityOptions = {
   readonly analysisId?: string | null;
 };
 
-const EMPTY_PILLAR: IdentityPillarView = { stem: "", branch: "", napAm: "" };
+const EMPTY_PILLAR: IdentityPillarView = {
+  stem: "",
+  branch: "",
+  canChi: "",
+  napAm: "",
+  cungPhi: "",
+};
 
 function text(value: unknown): string {
   if (value == null) return "";
@@ -41,16 +47,37 @@ function splitCanChi(canChi: string): { stem: string; branch: string } {
   return { stem: canChi, branch: "" };
 }
 
-function bindPillar(identityRaw: unknown, baziPillar?: PillarDto): IdentityPillarView {
+function publishedCanChi(stem: string, branch: string, ...candidates: unknown[]): string {
+  const published = firstText(...candidates);
+  if (published) return published;
+  if (stem && branch) return `${stem} ${branch}`;
+  return stem || branch;
+}
+
+function bindPillar(
+  identityRaw: unknown,
+  baziPillar: PillarDto | undefined,
+  calendarCanChi: string,
+): IdentityPillarView {
   const cell = asRecord(identityRaw);
+  const extra = asRecord(baziPillar);
   const labeled = splitCanChi(text(cell.can_chi));
   const stem = firstText(cell.stem, baziPillar?.stem, labeled.stem);
   const branch = firstText(cell.branch, baziPillar?.branch, labeled.branch);
-  if (!stem && !branch) return EMPTY_PILLAR;
+  if (!stem && !branch && !cell.can_chi && !cell.cung_phi) return EMPTY_PILLAR;
   return {
     stem,
     branch,
-    napAm: firstText(baziPillar?.nap_am, cell.nayin_element),
+    canChi: publishedCanChi(
+      stem,
+      branch,
+      cell.can_chi,
+      extra.can_chi,
+      calendarCanChi,
+    ),
+    // Tứ Trụ summary uses published Ngũ Hành only. Full nap_am stays on Bát Tự.
+    napAm: firstText(cell.nayin_element),
+    cungPhi: firstText(cell.cung_phi),
   };
 }
 
@@ -101,10 +128,27 @@ export function adaptIdentityHeader(
   const four = asRecord(identity.four_pillars);
   const bazi = payload.bazi;
   const request = options.request;
-  const year = bindPillar(four.year, bazi?.year_pillar);
-  const month = bindPillar(four.month, bazi?.month_pillar);
-  const day = bindPillar(four.day, bazi?.day_pillar);
-  const hour = bindPillar(four.hour, bazi?.hour_pillar);
+  const baziCanChi = asRecord(calendar.bazi_can_chi);
+  const year = bindPillar(
+    four.year,
+    bazi?.year_pillar,
+    firstText(calendar.year_can_chi, baziCanChi.year),
+  );
+  const month = bindPillar(
+    four.month,
+    bazi?.month_pillar,
+    firstText(calendar.month_can_chi, baziCanChi.month),
+  );
+  const day = bindPillar(
+    four.day,
+    bazi?.day_pillar,
+    firstText(calendar.day_can_chi, baziCanChi.day),
+  );
+  const hour = bindPillar(
+    four.hour,
+    bazi?.hour_pillar,
+    firstText(calendar.hour_can_chi, baziCanChi.hour),
+  );
   const genderRaw = firstText(person.gender, customer?.gender, request?.gender);
   return {
     person: {
