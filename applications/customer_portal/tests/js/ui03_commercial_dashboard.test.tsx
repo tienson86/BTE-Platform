@@ -28,10 +28,10 @@ const LIVE_ANALYSIS = {
     },
     calendar: { solar_term: "Đại Hàn" },
     four_pillars: {
-      year: { stem: "Bính", branch: "Dần", can_chi: "Bính Dần", nayin_element: "Lư Trung Hỏa" },
-      month: { stem: "Tân", branch: "Sửu", can_chi: "Tân Sửu", nayin_element: "Bích Thượng Thổ" },
-      day: { stem: "Canh", branch: "Ngọ", can_chi: "Canh Ngọ", nayin_element: "Lộ Bàng Thổ" },
-      hour: { stem: "Mậu", branch: "Dần", can_chi: "Mậu Dần", nayin_element: "Thành Đầu Thổ" },
+      year: { stem: "Bính", branch: "Dần", can_chi: "Bính Dần", nayin_element: "Hỏa" },
+      month: { stem: "Tân", branch: "Sửu", can_chi: "Tân Sửu", nayin_element: "Thổ" },
+      day: { stem: "Canh", branch: "Ngọ", can_chi: "Canh Ngọ", nayin_element: "Thổ" },
+      hour: { stem: "Mậu", branch: "Dần", can_chi: "Mậu Dần", nayin_element: "Thổ" },
     },
   },
   bazi: {
@@ -107,31 +107,38 @@ describe("UI-03 commercial dashboard", () => {
     expect(region).toContain("Giờ");
   });
 
-  it("G6 Four Pillars has Thiên Can and Địa Chi", () => {
+  it("G6 Four Pillars is the Tứ Trụ summary (Can Chi / Nạp âm / Cung Phi)", () => {
     const { container } = renderLive();
     const region = container.querySelector('[data-region="pillars"]')?.textContent || "";
-    expect(region).toContain("Thiên Can");
-    expect(region).toContain("Địa Chi");
+    expect(region).toContain("Trụ");
+    expect(region).toContain("Can Chi");
+    expect(region).toContain("Nạp âm");
+    expect(region).toContain("Cung Phi");
+    expect(region).not.toContain("Thiên Can");
+    expect(region).not.toContain("Địa Chi");
   });
 
-  it("G7 Day Master is identified on the Ngày column", () => {
+  it("G7 Day Master is identified on the Bát Tự Ngày trụ column", () => {
     const { container } = renderLive();
-    expect(screen.getByText("NHẬT CHỦ")).toBeTruthy();
-    expect(container.querySelector('[data-day-master-summary]')?.textContent).toMatch(/Canh/);
-    const dayStem = container.querySelector('[data-pillar="day"][data-row="stem"]');
-    expect(dayStem?.getAttribute("data-day-master")).toBe("true");
-    expect(dayStem?.textContent).toBe("Canh");
+    const dayHead = container.querySelector('[data-card="bazi"] thead [data-pillar="day"]');
+    expect(dayHead?.getAttribute("data-day-master")).toBe("true");
+    expect(dayHead?.textContent).toMatch(/Nhật Chủ/);
+    const region = container.querySelector('[data-region="pillars"]')?.textContent || "";
+    expect(region).toMatch(/Canh Ngọ/);
   });
 
   it("G8 Four Nạp Âm values can be rendered", () => {
     const { container } = renderLive();
-    const cells = [...container.querySelectorAll("[data-nap-am]")].map((node) => node.textContent);
-    expect(cells).toEqual(["Lư Trung Hỏa", "Bích Thượng Thổ", "Lộ Bàng Thổ", "Thành Đầu Thổ"]);
+    const region = container.querySelector('[data-region="pillars"]');
+    const cells = [...(region?.querySelectorAll('[data-kind="nap-am"]') ?? [])].map(
+      (node) => node.textContent,
+    );
+    expect(cells).toEqual(["Hỏa", "Thổ", "Thổ", "Thổ"]);
   });
 
   it("G9 Cung Phi / Mệnh Quái / Nhóm Trạch bind when present", () => {
     renderLive();
-    expect(screen.getByText("Cung Phi")).toBeTruthy();
+    expect(screen.getAllByText("Cung Phi").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("Khảm").length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText("Đông Tứ Trạch")).toBeTruthy();
     expect(screen.getByText("Đại Hàn")).toBeTruthy();
