@@ -32,3 +32,13 @@ DATE_SELECTION_NAV: tuple[NavItem, ...] = (
 )
 DATE_SELECTION_MENU_LABEL = "nav.date_selection"
 
+# Customer Portal V1 primary product navigation (Commercial Dashboard 00_NAVIGATION).
+# Routes stay registered in NAV_ITEMS; only these three appear in the header.
+CUSTOMER_NAV_ITEMS: tuple[NavItem, ...] = (
+    NavItem("home", "nav.dashboard", "/good-date", "good_date.html"),
+    NavItem("choose-date", "nav.choose_date", "/choose-date", "choose_date.html"),
+    NavItem("analyze", "nav.view_chart", "/analyze", "analyze.html"),
+)
+
+HOME_PATH = "/good-date"
+
