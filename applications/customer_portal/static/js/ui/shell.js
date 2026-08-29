@@ -92,9 +92,24 @@
     });
   }
 
+  function initCustomerNavToggle() {
+    var header = document.getElementById("appHeader");
+    var toggle = document.getElementById("btnNavToggle");
+    if (!header || !toggle || toggle.__bteBound) return;
+    toggle.__bteBound = true;
+    toggle.addEventListener("click", function () {
+      var open = header.getAttribute("data-nav-open") === "true";
+      var next = open ? "false" : "true";
+      header.setAttribute("data-nav-open", next);
+      toggle.setAttribute("aria-expanded", next);
+      toggle.setAttribute("aria-label", next === "true" ? "Đóng điều hướng" : "Mở điều hướng");
+    });
+  }
+
   function boot() {
     initThemeToggle();
     initNavDropdown();
+    initCustomerNavToggle();
   }
 
   if (document.readyState === "loading") {
