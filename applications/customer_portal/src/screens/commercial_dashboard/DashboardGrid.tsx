@@ -1,20 +1,24 @@
 /**
- * Canonical 12-column dashboard body. UI-08: through Pattern implemented.
+ * Canonical 12-column dashboard body. UI-10: through Luck implemented.
  */
 
 import type { ReactNode } from "react";
 import { BaziCard } from "./BaziCard";
 import { DASHBOARD_CARDS } from "./cards";
 import { FiveElementsCard } from "./FiveElementsCard";
+import { LuckCard } from "./LuckCard";
 import { OverviewCard } from "./OverviewCard";
 import { PatternCard } from "./PatternCard";
+import { ShenShaCard } from "./ShenShaCard";
 import { SkeletonCard } from "./SkeletonCard";
 import { TenGodsCard } from "./TenGodsCard";
 import type {
   BaziStructureView,
   FiveElementsView,
+  LuckView,
   OverviewView,
   PatternView,
+  ShenShaView,
   TenGodsView,
 } from "./types";
 
@@ -24,6 +28,8 @@ type DashboardGridProps = {
   readonly fiveElements?: FiveElementsView | null;
   readonly tenGods?: TenGodsView | null;
   readonly pattern?: PatternView | null;
+  readonly shenSha?: ShenShaView | null;
+  readonly luck?: LuckView | null;
 };
 
 /**
@@ -35,6 +41,8 @@ export function DashboardGrid({
   fiveElements = null,
   tenGods = null,
   pattern = null,
+  shenSha = null,
+  luck = null,
 }: DashboardGridProps): ReactNode {
   return (
     <section className="bte-cdash__grid" data-dashboard-body="canonical-grid">
@@ -53,6 +61,12 @@ export function DashboardGrid({
         }
         if (card.id === "pattern" && pattern) {
           return <PatternCard key={card.id} card={card} model={pattern} />;
+        }
+        if (card.id === "shensha" && shenSha) {
+          return <ShenShaCard key={card.id} card={card} model={shenSha} />;
+        }
+        if (card.id === "luck" && luck) {
+          return <LuckCard key={card.id} card={card} model={luck} />;
         }
         return <SkeletonCard key={card.id} card={card} />;
       })}
