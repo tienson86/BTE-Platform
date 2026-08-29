@@ -14,7 +14,7 @@ import type { FullReportViewModel } from "../../report/fullReportViewModel";
 import { useCanonicalDesktopResult } from "../../hooks";
 import type { AnalyzeChartRequest } from "../../models";
 import { CanonicalDesktopProvider } from "./CanonicalDesktopContext";
-import { PortalFooter, PortalHeader, PortalSidebar } from "./shell/PortalChrome";
+import { PortalFooter, PortalSidebar } from "./shell/PortalChrome";
 import {
   ResultPageBody,
   ResultPageProvider,
@@ -102,7 +102,6 @@ export function PortalPage({
           data-sprint="D"
         >
           <PortalSidebar />
-          <PortalHeader />
           <main className="cd-content" data-page="result" id="rp-main">
             {resultSource === "history" && viewModel.status === "ready" ? (
               <p className="rp-history-banner" role="status">
