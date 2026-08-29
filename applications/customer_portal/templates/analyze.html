@@ -30,13 +30,33 @@
 
       <label data-analyze-field="birth_date">
         <span data-i18n="analyze.birth_date">Ngày sinh</span>
-        <input id="birth_date" name="birth_date" type="date" autocomplete="bday" required aria-describedby="err_birth_date" />
+        <input
+          id="birth_date"
+          name="birth_date"
+          type="text"
+          inputmode="numeric"
+          autocomplete="bday"
+          placeholder="DD/MM/YYYY"
+          maxlength="10"
+          required
+          lang="vi"
+          aria-describedby="err_birth_date"
+        />
         <span class="field-error" id="err_birth_date" hidden></span>
       </label>
 
       <label data-analyze-field="birth_time">
         <span data-i18n="analyze.birth_time">Giờ sinh</span>
-        <input id="birth_time" name="birth_time" type="time" aria-describedby="analyzeTimeWarn" />
+        <input
+          id="birth_time"
+          name="birth_time"
+          type="text"
+          inputmode="numeric"
+          placeholder="HH:mm"
+          maxlength="5"
+          lang="vi"
+          aria-describedby="analyzeTimeWarn"
+        />
         <span class="analyze-time-warn muted" id="analyzeTimeWarn" hidden data-i18n="analyze.time_missing">
           Bạn chưa nhập giờ sinh. Một số kết quả sẽ có độ chính xác thấp hơn.
         </span>
