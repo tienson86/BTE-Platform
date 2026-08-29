@@ -9,6 +9,10 @@ import { ResultPageStatusGate } from "../result";
 import { adaptIdentityHeader } from "./adapter";
 import { adaptBaziCard } from "./baziAdapter";
 import { BAZI_VISUAL_FIXTURE } from "./baziFixture";
+import { adaptFiveElementsCard } from "./fiveElementsAdapter";
+import { FIVE_ELEMENTS_VISUAL_FIXTURE } from "./fiveElementsFixture";
+import { adaptTenGodsCard } from "./tenGodsAdapter";
+import { TEN_GODS_VISUAL_FIXTURE } from "./tenGodsFixture";
 import { adaptOverviewCard } from "./overviewAdapter";
 import { OVERVIEW_VISUAL_FIXTURE } from "./overviewFixture";
 import { RESULT_PAGE_TITLE } from "./cards";
@@ -107,6 +111,18 @@ export function CommercialDashboardPage({
       : layoutMode === "skeleton" || previewFallback
         ? null
         : adaptBaziCard(analysis);
+  const fiveElements =
+    layoutMode === "visual"
+      ? FIVE_ELEMENTS_VISUAL_FIXTURE
+      : layoutMode === "skeleton" || previewFallback
+        ? null
+        : adaptFiveElementsCard(analysis);
+  const tenGods =
+    layoutMode === "visual"
+      ? TEN_GODS_VISUAL_FIXTURE
+      : layoutMode === "skeleton" || previewFallback
+        ? null
+        : adaptTenGodsCard(analysis);
   return (
     <div
       className="bte-cdash"
@@ -116,7 +132,12 @@ export function CommercialDashboardPage({
     >
       <ResultPageHeader />
       <IdentityHeader model={model} />
-      <DashboardGrid overview={overview} bazi={bazi} />
+      <DashboardGrid
+        overview={overview}
+        bazi={bazi}
+        fiveElements={fiveElements}
+        tenGods={tenGods}
+      />
     </div>
   );
 }
