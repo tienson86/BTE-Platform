@@ -113,3 +113,49 @@ export type BaziStructureView = {
   readonly available: boolean;
   readonly pillars: readonly BaziPillarView[];
 };
+
+export type FiveElementKey = "wood" | "fire" | "earth" | "metal" | "water";
+
+export type FiveElementRowView = {
+  readonly key: FiveElementKey;
+  readonly label: string;
+  readonly count: number | null;
+};
+
+export type FiveElementsView = {
+  readonly title: string;
+  readonly available: boolean;
+  readonly sectionHeading: string;
+  readonly balanceStatus: string;
+  readonly rows: readonly FiveElementRowView[];
+  readonly mostPresent: string;
+  readonly leastPresent: string;
+  readonly comment: string;
+};
+
+export type TenGodsPillarKey = "year" | "month" | "day" | "hour";
+
+export type TenGodsPlacementView = {
+  readonly pillar: TenGodsPillarKey;
+  readonly pillarLabel: string;
+  readonly stem: string;
+  readonly tenGod: string;
+  readonly isDayMaster: boolean;
+};
+
+export type TenGodsPresenceView = {
+  readonly name: string;
+  readonly visible: boolean;
+  readonly hidden: boolean;
+};
+
+export type TenGodsView = {
+  readonly title: string;
+  readonly available: boolean;
+  readonly featured: readonly string[];
+  readonly visible: readonly TenGodsPlacementView[];
+  readonly hidden: readonly TenGodsPlacementView[];
+  readonly hiddenNames: readonly string[];
+  readonly distribution: readonly TenGodsPresenceView[];
+  readonly summary: string;
+};
