@@ -78,6 +78,7 @@ def _wait(port: int, timeout: float = 20.0) -> None:
 
 
 def main() -> None:
+    tag = os.environ.get("P0_TAG", "run")
     OUT.mkdir(parents=True, exist_ok=True)
     _kill_port(API_PORT)
     _kill_port(PORTAL_PORT)
@@ -94,7 +95,14 @@ def main() -> None:
             page.on("pageerror", lambda err: logs.append({"type": "pageerror", "text": str(err)}))
             page.on(
                 "request",
-                lambda req: logs.append({"type": "request", "method": req.method, "url": req.url})
+                lambda req: logs.append(
+                    {
+                        "type": "request",
+                        "method": req.method,
+                        "url": req.url,
+                        "post_data": req.post_data,
+                    }
+                )
                 if "/analyze" in req.url or "/backend" in req.url
                 else None,
             )
@@ -106,10 +114,12 @@ def main() -> None:
             )
             page.on("requestfailed", lambda req: logs.append({"type": "requestfailed", "url": req.url, "error": req.failure}))
             page.goto(f"{BASE}/analyze", wait_until="networkidle")
+            iso_date = os.environ.get("P0_DATE", "21/01/1987")
+            iso_time = os.environ.get("P0_TIME", "04:30")
             page.fill("#full_name", "Nguyen Tien Son")
             page.check("#gender_male")
-            page.fill("#birth_date", "21/01/1987")
-            page.fill("#birth_time", "04:30")
+            page.fill("#birth_date", iso_date)
+            page.fill("#birth_time", iso_time)
             page.fill("#birth_place", "Ha Tay, Viet Nam")
             state = page.evaluate(
                 """() => ({
@@ -129,7 +139,7 @@ def main() -> None:
             logs.append({"type": "preclick_state", **state})
             page.click("#btnAnalyze")
             try:
-                page.wait_for_url("**/result", timeout=120000)
+                page.wait_for_url("**/result", timeout=20000)
                 logs.append({"type": "redirect", "url": page.url})
             except Exception as exc:
                 logs.append(
@@ -142,11 +152,12 @@ def main() -> None:
                         "status": page.locator("#analyzeStatus").inner_text(),
                     }
                 )
-            page.screenshot(path=str(OUT / "runtime.png"), full_page=True)
+            page.screenshot(path=str(OUT / f"runtime_{tag}.png"), full_page=True)
             browser.close()
     finally:
-        (OUT / "devtools.json").write_text(json.dumps(logs, ensure_ascii=True, indent=2), encoding="utf-8")
-        print("wrote", OUT / "devtools.json")
+        out_json = OUT / f"devtools_{tag}.json"
+        out_json.write_text(json.dumps(logs, ensure_ascii=True, indent=2), encoding="utf-8")
+        print("wrote", out_json)
         for proc in (portal_proc, api_proc):
             proc.terminate()
             try:
