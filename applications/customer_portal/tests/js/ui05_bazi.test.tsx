@@ -6,7 +6,7 @@ import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { afterEach, describe, expect, it } from "vitest";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, render } from "@testing-library/react";
 import { resolveResultBoot } from "../../src/entries/resultBoot";
 import {
   BAZI_TITLE,
@@ -121,12 +121,12 @@ describe("UI-05 BaZi structure card", () => {
     );
   });
 
-  it("B4 renders Năm / Tháng / Ngày / Giờ column headers", () => {
+  it("B4 renders Năm trụ / Tháng trụ / Ngày trụ / Giờ trụ column headers", () => {
     const { container } = renderLive();
-    const labels = [...baziCard(container).querySelectorAll("thead [data-pillar]")].map(
+    const labels = [...baziCard(container).querySelectorAll("thead [data-pillar] .bte-bazi__col-label")].map(
       (node) => node.textContent,
     );
-    expect(labels).toEqual(["Năm", "Tháng", "Ngày", "Giờ"]);
+    expect(labels).toEqual(["Năm trụ", "Tháng trụ", "Ngày trụ", "Giờ trụ"]);
   });
 
   it("B5 binds canonical Thiên Can values", () => {
@@ -173,7 +173,6 @@ describe("UI-05 BaZi structure card", () => {
       "Mậu",
     ]);
     const { container } = renderLive();
-    fireEvent.click(baziCard(container).querySelector("button.bte-bazi__toggle") as HTMLButtonElement);
     const monthHidden = baziCard(container).querySelector('[data-pillar="month"][data-bazi-field="hidden"]');
     expect(monthHidden?.textContent).toMatch(/Giáp/);
     expect(monthHidden?.textContent).toMatch(/Bính/);
@@ -190,19 +189,18 @@ describe("UI-05 BaZi structure card", () => {
 
   it("B10 binds canonical Trường Sinh", () => {
     const { container } = renderLive();
-    fireEvent.click(baziCard(container).querySelector("button.bte-bazi__toggle") as HTMLButtonElement);
     const stages = [...baziCard(container).querySelectorAll('[data-bazi-field="stage"]')].map(
       (node) => node.textContent,
     );
     expect(stages).toEqual(["Mộ", "Trường Sinh", "Đế Vượng", "Suy"]);
   });
 
-  it("B11 identifies the Day pillar without a second Day Master hero", () => {
+  it("B11 identifies the Day pillar as Nhật Chủ", () => {
     const { container } = renderLive();
     const card = baziCard(container);
     expect(card.querySelectorAll('[data-day-master="true"]').length).toBeGreaterThan(0);
     expect(card.querySelector('thead [data-pillar="day"]')?.getAttribute("data-day-master")).toBe("true");
-    expect(card.textContent).not.toMatch(/NHẬT CHỦ/);
+    expect(card.querySelector("thead [data-pillar='day'] .bte-bazi__day-master")?.textContent).toBe("Nhật Chủ");
   });
 
   it("B12 does not calculate astrology in the UI adapter or card", () => {
@@ -232,19 +230,14 @@ describe("UI-05 BaZi structure card", () => {
     expect(adapter + card).not.toMatch(/Điều này cho thấy|Bạn có xu hướng/);
   });
 
-  it("B14 expand/collapse is an accessible button", () => {
+  it("B14 default Bát Tự shows the detailed dataset without a summary collapse", () => {
     const { container } = renderLive();
-    const toggle = baziCard(container).querySelector("button.bte-bazi__toggle") as HTMLButtonElement;
-    expect(toggle.getAttribute("aria-expanded")).toBe("false");
-    expect(baziCard(container).querySelector('[data-bazi-row="hidden"]')).toBeNull();
-    fireEvent.click(toggle);
-    expect(toggle.getAttribute("aria-expanded")).toBe("true");
-    expect(toggle.textContent).toBe("Thu gọn");
-    expect(baziCard(container).querySelector('[data-bazi-row="hidden"]')).toBeTruthy();
-    expect(baziCard(container).querySelector('[data-bazi-row="stage"]')).toBeTruthy();
-    fireEvent.click(toggle);
-    expect(toggle.getAttribute("aria-expanded")).toBe("false");
-    expect(toggle.textContent).toBe("Xem chi tiết");
+    const card = baziCard(container);
+    expect(card.querySelector("button.bte-bazi__toggle")).toBeNull();
+    expect(card.querySelector('[data-bazi-row="hidden"]')).toBeTruthy();
+    expect(card.querySelector('[data-bazi-row="stage"]')).toBeTruthy();
+    expect(card.querySelector('[data-bazi-row="ten-god"]')).toBeTruthy();
+    expect(card.getAttribute("data-bazi-model")).toBe("detail");
   });
 
   it("B15 leaves Overview implemented and unchanged in role", () => {
