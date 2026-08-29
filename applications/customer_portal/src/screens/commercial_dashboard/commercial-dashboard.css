@@ -576,3 +576,246 @@
   }
 }
 
+/* UI-06 Five Elements — compact structural distribution. Do not change grid spans. */
+.bte-cdash {
+  --cdash-elem-wood: #2f6b3a;
+  --cdash-elem-fire: #b42318;
+  --cdash-elem-earth: #b8860b;
+  --cdash-elem-metal: #6b7280;
+  --cdash-elem-water: #1d4f91;
+}
+
+.bte-fe {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bte-fe .bte-cdash__card-title {
+  margin: 0;
+}
+
+.bte-fe__header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bte-fe__status {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--cdash-accent);
+}
+
+.bte-fe__heading {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--cdash-muted);
+}
+
+.bte-fe__chart {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bte-fe__row {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr) 1.5rem;
+  align-items: center;
+  gap: 8px;
+}
+
+.bte-fe__name {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--cdash-text);
+}
+
+.bte-fe__track {
+  display: block;
+  height: 8px;
+  border-radius: 999px;
+  background: #f1efec;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.bte-fe__fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  min-width: 0;
+}
+
+.bte-fe__fill--wood { background: var(--cdash-elem-wood); }
+.bte-fe__fill--fire { background: var(--cdash-elem-fire); }
+.bte-fe__fill--earth { background: var(--cdash-elem-earth); }
+.bte-fe__fill--metal { background: var(--cdash-elem-metal); }
+.bte-fe__fill--water { background: var(--cdash-elem-water); }
+
+.bte-fe__count {
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--cdash-text);
+}
+
+.bte-fe__comment {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--cdash-muted);
+}
+
+.bte-fe__empty {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--cdash-muted);
+}
+
+/* UI-07 Ten Gods — compact structural placement. Do not change grid spans. */
+.bte-tg {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bte-tg .bte-cdash__card-title {
+  margin: 0;
+}
+
+.bte-tg__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.bte-tg__toggle {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 6px 12px;
+  border: 1px solid var(--cdash-border);
+  border-radius: 999px;
+  background: #f7f5f2;
+  color: var(--cdash-text);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.bte-tg__toggle:hover,
+.bte-tg__toggle:focus-visible {
+  border-color: var(--cdash-accent);
+  color: var(--cdash-accent);
+  outline: 2px solid var(--cdash-accent-soft);
+  outline-offset: 2px;
+}
+
+.bte-tg__section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bte-tg__heading {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--cdash-muted);
+}
+
+.bte-tg__list,
+.bte-tg__badges,
+.bte-tg__dist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bte-tg__list,
+.bte-tg__dist {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bte-tg__item,
+.bte-tg__dist-row {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 8px;
+  padding: 4px 6px;
+  border-radius: 8px;
+}
+
+.bte-tg__item[data-day-master="true"] {
+  background: var(--cdash-accent-soft);
+}
+
+.bte-tg__pillar {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--cdash-muted);
+}
+
+.bte-tg__god {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--cdash-text);
+}
+
+.bte-tg__meta {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--cdash-muted);
+}
+
+.bte-tg__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.bte-tg__badge {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--cdash-accent-soft);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.bte-tg__summary,
+.bte-tg__comment,
+.bte-tg__empty {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--cdash-muted);
+}
+
+.bte-tg__empty {
+  font-size: 0.8125rem;
+}
+
+.bte-tg__dist-row {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+
+
