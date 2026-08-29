@@ -9,17 +9,30 @@ import type { LuckCycleView, LuckView } from "./types";
 
 const TECHNICAL_TOKEN = /^[a-z][a-z0-9_]*$/;
 const TRUSTED_DIRECTION = new Set(["Thuận", "Nghịch"]);
-const TREND_KEYS = ["luck_summary", "trend", "customer_summary", "summary"] as const;
+const CUSTOMER_TREND_KEYS = ["customer_summary", "trend"] as const;
+const JSONISH = /^\s*[{\[]/;
+const RUNTIME_LEAK =
+  /dayun_runtime|runtime_metadata|attack_elements|support_elements|luck_strength|"evaluation"|hidden_stems|luck_stage|liunian_runtime/i;
 const BLOCKED_TREND = /Lưu Niên|lưu nguyệt|cưới|phát tài|tai họa|bệnh tật|kiện tụng|Đại hung|đại cát/i;
 
 function text(value: unknown): string {
-  if (value == null) return "";
-  return String(value).trim();
+  if (typeof value === "string") return value.trim();
+  if (typeof value === "number" && Number.isFinite(value)) return String(value);
+  return "";
 }
 
 function customerLabel(value: string): string {
   const next = text(value);
   if (!next || TECHNICAL_TOKEN.test(next)) return "";
+  return next;
+}
+
+function customerSentence(value: unknown): string {
+  if (typeof value !== "string") return "";
+  const next = customerLabel(stripInternalRuleIds(value));
+  if (!next || JSONISH.test(next) || RUNTIME_LEAK.test(next) || BLOCKED_TREND.test(next)) {
+    return "";
+  }
   return next;
 }
 
@@ -70,9 +83,9 @@ function copyStartAge(luck: LuckDto): string {
 
 function copyTrend(luck: LuckDto): string {
   const row = luck as LuckDto & Record<string, unknown>;
-  for (const key of TREND_KEYS) {
-    const value = customerLabel(stripInternalRuleIds(text(row[key])));
-    if (value && !BLOCKED_TREND.test(value)) return value;
+  for (const key of CUSTOMER_TREND_KEYS) {
+    const value = customerSentence(row[key]);
+    if (value) return value;
   }
   return "";
 }
