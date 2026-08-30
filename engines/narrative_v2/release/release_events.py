@@ -29,6 +29,7 @@ ALLOWED_EVENTS: frozenset[str] = frozenset(
 )
 
 ALLOWED_PROVIDERS: frozenset[str] = frozenset({"pack05", "v2", "auto"})
+# pack05 remains valid on historical events. It is not a production flag.
 
 
 @dataclass(frozen=True, slots=True)
