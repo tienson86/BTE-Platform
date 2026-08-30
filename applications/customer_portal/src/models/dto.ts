@@ -108,6 +108,10 @@ export type CalendarDto = {
   readonly cung_phi?: string;
   readonly menh_quai?: string;
   readonly nhom_trach?: string;
+  readonly house_group?: string;
+  readonly tam_nguyen?: string;
+  readonly cuu_van?: number | string;
+  readonly gua_number?: number;
   readonly [key: string]: unknown;
 };
 
