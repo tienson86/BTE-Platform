@@ -29,17 +29,29 @@ declare global {
   }
 }
 
-function readStoredResult(search: string): {
+function readStoredResult(
+  search: string,
+  pathname: string,
+): {
   current: StoredResult | null;
   historyView: StoredResult | null;
 } {
   const store = window.BtePortal?.ResultStore;
   const historyId = historyIdFromSearch(search);
   const fromHistory = Boolean(historyId);
+  const surface = resolveResultSurface(search, pathname);
   if (store?.resolveForDisplay) {
     const resolved = store.resolveForDisplay(fromHistory, historyId);
+    const productionCurrent = fromHistory
+      ? store.loadCurrent?.() ?? store.load?.() ?? null
+      : resolved;
+    // Shadow review may inspect stored Presentation even when the production
+    // calendar gate withholds loadCurrent.
+    const current =
+      productionCurrent ??
+      (surface !== "production" ? store.load?.() ?? null : null);
     return {
-      current: fromHistory ? store.loadCurrent?.() ?? store.load?.() ?? null : resolved,
+      current,
       historyView: fromHistory ? resolved : null,
     };
   }
@@ -60,7 +72,7 @@ function mount(): void {
   }
 
   const search = window.location.search;
-  const stored = readStoredResult(search);
+  const stored = readStoredResult(search, window.location.pathname);
   const boot = resolveResultBoot(stored.current, search, stored.historyView);
   const commercial = isCanonicalResultPath(window.location.pathname);
   const surface = resolveResultSurface(search, window.location.pathname);
@@ -68,7 +80,10 @@ function mount(): void {
   createRoot(host).render(
     <StrictMode>
       {commercial && surface !== "production" ? (
-        <NarrativeV2ShadowPage analysis={boot.analysis} mode={surface} />
+        <NarrativeV2ShadowPage
+          analysis={boot.analysis ?? stored.current?.data ?? null}
+          mode={surface}
+        />
       ) : commercial ? (
         <CommercialDashboardPage
           analysis={boot.analysis}
