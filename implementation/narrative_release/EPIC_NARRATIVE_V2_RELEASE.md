@@ -2,7 +2,7 @@
 
 Version: V1.0
 
-Status: RELEASE PLAN
+Status: CLOSED — NARRATIVE V2 V1.0 OFFICIALLY RELEASED
 
 Owner: Product Owner
 
