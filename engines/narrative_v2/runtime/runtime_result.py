@@ -1,6 +1,6 @@
 """Narrative V2 runtime result object.
 
-Fields only. No narrative content.
+Presentation is the frozen internal contract. Not production customer publish.
 """
 
 from __future__ import annotations
@@ -13,10 +13,10 @@ from engines.narrative_v2.runtime.runtime_context import PipelineTrace
 
 @dataclass(slots=True)
 class NarrativeRuntimeResult:
-    """Skeleton runtime result. Presentation is empty in N-IMP-01."""
+    """Runtime result. Presentation is set only after internal freeze."""
 
     status: str
     runtime_metadata: Mapping[str, Any]
     pipeline_trace: PipelineTrace
-    presentation: None
+    presentation: object | None
     errors: tuple[str, ...]
