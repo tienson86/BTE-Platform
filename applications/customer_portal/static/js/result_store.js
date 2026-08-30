@@ -16,6 +16,7 @@
   const VIEW_KEY = "bte_view_result";
   const CURRENT_ID_KEY = "bte_current_analysis_id";
   const VIEW_ID_KEY = "bte_view_analysis_id";
+  const CALENDAR_RULE_VERSION = "G1-10B";
   // Pre-refactor keys — read-only, so existing browser sessions keep their data.
   const LEGACY_LAST_KEY = "bte_portal_last_result";
   const LEGACY_HISTORY_KEY = "bte_portal_history";
@@ -163,9 +164,19 @@
    * Last Analyze result plus the current-session analysis id.
    * Does not change load() JSON shape used by existing store tests.
    */
+  function isIncompatibleCalendarRule(data) {
+    const cal = data && data.calendar;
+    if (!cal || typeof cal !== "object") return false;
+    const version = cal.calendar_rule_version;
+    if (version && version !== CALENDAR_RULE_VERSION) return true;
+    if (!version && cal.ganzhi_routing) return true;
+    return false;
+  }
+
   function loadCurrent() {
     const entry = load();
     if (!entry) return null;
+    if (isIncompatibleCalendarRule(entry.data)) return null;
     return {
       input: entry.input || {},
       data: entry.data,
@@ -424,6 +435,7 @@
     VIEW_KEY: VIEW_KEY,
     CURRENT_ID_KEY: CURRENT_ID_KEY,
     HISTORY_LIMIT: HISTORY_LIMIT,
+    CALENDAR_RULE_VERSION: CALENDAR_RULE_VERSION,
     save: save,
     load: load,
     loadCurrent: loadCurrent,
