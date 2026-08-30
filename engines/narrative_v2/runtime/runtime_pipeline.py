@@ -1,6 +1,6 @@
 """Narrative V2 runtime pipeline.
 
-Evidence, reasoning, and knowledge are implemented. Later builder stages remain placeholders.
+Evidence, reasoning, knowledge, and rewrite are implemented. Later builder stages remain placeholders.
 """
 
 from __future__ import annotations
@@ -39,7 +39,7 @@ BUILDER_STAGES: tuple[str, ...] = CANONICAL_STAGES[1:-2]
 
 @dataclass(slots=True)
 class StageResult:
-    """Stage output. Evidence, reasoning, and knowledge are implemented; later builders are placeholders."""
+    """Stage output. Evidence through rewrite are implemented; later builders are placeholders."""
 
     stage: str
     payload: object = field(default=NotImplemented)
@@ -47,7 +47,7 @@ class StageResult:
 
 
 class RuntimePipeline:
-    """Sequential pipeline. Evidence, reasoning, and knowledge are implemented; later builders are placeholders."""
+    """Sequential pipeline. Evidence through rewrite are implemented; later builders are placeholders."""
 
     def __init__(self, runtime: "NarrativeRuntime") -> None:
         self._runtime = runtime
@@ -74,7 +74,7 @@ class RuntimePipeline:
         return self.execute_stage("resolve_knowledge")
 
     def commercial_rewrite(self) -> StageResult:
-        """Stage: commercial rewrite. Not implemented."""
+        """Stage: commercial rewrite. Customer-language units from approved meaning."""
         return self.execute_stage("commercial_rewrite")
 
     def build_summary(self) -> StageResult:
@@ -174,6 +174,8 @@ class RuntimePipeline:
             return self._run_reasoning()
         if stage == "resolve_knowledge":
             return self._run_knowledge()
+        if stage == "commercial_rewrite":
+            return self._run_rewrite()
         if stage == "validate":
             return self._run_validate()
         if stage == "publish":
@@ -225,6 +227,26 @@ class RuntimePipeline:
         return StageResult(
             stage="resolve_knowledge",
             payload=knowledge,
+            status="implemented",
+        )
+
+    def _run_rewrite(self) -> StageResult:
+        from engines.narrative_v2.rewrite import RewriteEngine, RewriteError
+        from engines.narrative_v2.runtime.runtime_errors import BuilderError
+
+        context = self._runtime.require_context()
+        try:
+            rewrite = RewriteEngine().rewrite(
+                context.knowledge,
+                context.reasoning,
+                context.evidence,
+            )
+        except RewriteError as exc:
+            raise BuilderError(str(exc)) from exc
+        context.rewrite = rewrite
+        return StageResult(
+            stage="commercial_rewrite",
+            payload=rewrite,
             status="implemented",
         )
 
