@@ -130,26 +130,30 @@ function bindPerson(
   };
 }
 
-function bindIdentityPillar(raw: unknown): TuTruSlotPillar {
+function bindIdentityPillar(raw: unknown, baziPillar: unknown): TuTruSlotPillar {
   const cell = asRecord(raw);
-  if (!Object.keys(cell).length) return EMPTY_TU_TRU_PILLAR;
+  const extra = asRecord(baziPillar);
+  if (!Object.keys(cell).length && !Object.keys(extra).length) {
+    return EMPTY_TU_TRU_PILLAR;
+  }
   return {
-    stem: text(cell.stem),
-    branch: text(cell.branch),
-    canChi: text(cell.can_chi),
+    stem: text(cell.stem) || text(extra.stem),
+    branch: text(cell.branch) || text(extra.branch),
+    canChi: text(cell.can_chi) || text(extra.ganzhi) || text(extra.can_chi),
     napAm: text(cell.nayin_element),
-    cungPhi: text(cell.cung_phi),
+    cungPhi: text(extra.cung_phi) || text(cell.cung_phi),
   };
 }
 
 function bindFourPillars(data: AnalysisDataDto): BaziWorkspaceViewModel["fourPillars"] {
-  /** Owner: identity.four_pillars — no calendar/bazi reconstruction. */
+  /** Published BaZi Cung Phi first, then identity.four_pillars. No frontend lookup. */
   const four = asRecord(identityOf(data).four_pillars);
+  const bazi = asRecord(data.bazi);
   return {
-    year: bindIdentityPillar(four.year),
-    month: bindIdentityPillar(four.month),
-    day: bindIdentityPillar(four.day),
-    hour: bindIdentityPillar(four.hour),
+    year: bindIdentityPillar(four.year, bazi.year_pillar),
+    month: bindIdentityPillar(four.month, bazi.month_pillar),
+    day: bindIdentityPillar(four.day, bazi.day_pillar),
+    hour: bindIdentityPillar(four.hour, bazi.hour_pillar),
   };
 }
 
