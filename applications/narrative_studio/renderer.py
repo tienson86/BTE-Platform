@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import html
 import json
-from typing import Iterable
+from typing import Any
 
 from applications.narrative_studio.approvals import StudioApproval
 from applications.narrative_studio.catalog import StudioCase
@@ -222,6 +222,10 @@ def _knowledge(review: StudioReview) -> str:
 
 
 def _compare(review: StudioReview) -> str:
+    overview = {}
+    if isinstance(review.presentation, dict) and isinstance(review.presentation.get("overview"), dict):
+        overview = review.presentation["overview"]
+    headline = overview.get("headline") if isinstance(overview, dict) else None
     return f"""
 <section class="ns-compare" data-studio-panel="compare">
   <article class="ns-card">
@@ -230,7 +234,7 @@ def _compare(review: StudioReview) -> str:
   </article>
   <article class="ns-card">
     <h2>Narrative V2</h2>
-    <p>{_e((review.presentation or {}).get("overview", {}) if isinstance((review.presentation or {}).get("overview"), dict) else {}).get("headline") if isinstance(review.presentation, dict) else None)}</p>
+    <p>{_e(headline)}</p>
     <blockquote>{_e(review.consulting_flow)}</blockquote>
   </article>
 </section>
@@ -309,7 +313,7 @@ def _approval(
 """
 
 
-def _action_block(action: dict) -> str:
+def _action_block(action: dict[str, Any]) -> str:
     top = action.get("top_priority") if isinstance(action.get("top_priority"), dict) else {}
     title = top.get("title") if isinstance(top, dict) else None
     description = top.get("description") if isinstance(top, dict) else None
@@ -325,8 +329,3 @@ def _e(value: object) -> str:
     if value is None:
         return "<em>null</em>"
     return html.escape(str(value))
-
-
-def unused_iterable(items: Iterable[object]) -> int:
-    """Keep a typed helper available for tests that inspect renderer exports."""
-    return len(list(items))
