@@ -5,6 +5,7 @@
 import { useState, type ReactNode } from "react";
 import { INTERPRETATION_CLOSE_LABEL, INTERPRETATION_LEAD_LABEL } from "./cards";
 import type { DashboardCardSpec, InterpretationView, InterpretationZoneView } from "./types";
+import { visualCardDom } from "./visualHierarchy";
 
 type InterpretationCardProps = {
   readonly card: DashboardCardSpec;
@@ -42,6 +43,7 @@ export function InterpretationCard({ card, model }: InterpretationCardProps): Re
       data-implemented="interpretation"
       data-expanded={expanded ? "true" : "false"}
       aria-label={model.title}
+      {...visualCardDom(card.id)}
     >
       <header className="bte-int__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
