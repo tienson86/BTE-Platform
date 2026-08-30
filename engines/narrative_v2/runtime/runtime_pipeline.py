@@ -1,6 +1,6 @@
-"""Narrative V2 empty pipeline.
+"""Narrative V2 runtime pipeline.
 
-Stage order only. Every builder stage returns a NotImplemented placeholder.
+Evidence is implemented. Later builder stages remain placeholders.
 """
 
 from __future__ import annotations
@@ -39,7 +39,7 @@ BUILDER_STAGES: tuple[str, ...] = CANONICAL_STAGES[1:-2]
 
 @dataclass(slots=True)
 class StageResult:
-    """Placeholder stage output. No narrative payload in N-IMP-01."""
+    """Stage output. Evidence is implemented; other builders remain placeholders."""
 
     stage: str
     payload: object = field(default=NotImplemented)
@@ -47,7 +47,7 @@ class StageResult:
 
 
 class RuntimePipeline:
-    """Sequential skeleton pipeline. No builder implementations."""
+    """Sequential pipeline. Evidence is implemented; later builders are placeholders."""
 
     def __init__(self, runtime: "NarrativeRuntime") -> None:
         self._runtime = runtime
@@ -62,7 +62,7 @@ class RuntimePipeline:
         return self.execute_stage("initialize")
 
     def build_evidence(self) -> StageResult:
-        """Stage: evidence. Not implemented."""
+        """Stage: evidence. Extracts published CanonicalAnalysis facts."""
         return self.execute_stage("build_evidence")
 
     def build_reasoning(self) -> StageResult:
@@ -168,11 +168,29 @@ class RuntimePipeline:
         self._runtime.emit(finished_cls(timestamp=timestamp, stage=stage))
 
     def _run_stage_body(self, stage: str) -> StageResult:
+        if stage == "build_evidence":
+            return self._run_evidence()
         if stage == "validate":
             return self._run_validate()
         if stage == "publish":
             return StageResult(stage=stage, payload=None, status="placeholder")
         return StageResult(stage=stage)
+
+    def _run_evidence(self) -> StageResult:
+        from engines.narrative_v2.evidence import EvidenceBuilder, EvidenceError
+        from engines.narrative_v2.runtime.runtime_errors import BuilderError
+
+        context = self._runtime.require_context()
+        try:
+            evidence = EvidenceBuilder().build(context.canonical_analysis)
+        except EvidenceError as exc:
+            raise BuilderError(str(exc)) from exc
+        context.evidence = evidence
+        return StageResult(
+            stage="build_evidence",
+            payload=evidence,
+            status="implemented",
+        )
 
     def _run_validate(self) -> StageResult:
         outcome = self._runtime.validator.validate(
