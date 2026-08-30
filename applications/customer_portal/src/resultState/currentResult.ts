@@ -15,7 +15,7 @@ import { canonicalFiveElementCounts } from "../adapters/canonicalFiveElements";
 export const HISTORY_VIEW_QUERY = "from";
 export const HISTORY_VIEW_VALUE = "history";
 export const HISTORY_ID_QUERY = "id";
-export const CALENDAR_RULE_VERSION = "G1-10B";
+export const CALENDAR_RULE_VERSION = "G1-10C";
 
 export type StoredResultRecord = {
   readonly input?: Record<string, unknown> | null;
@@ -79,14 +79,13 @@ export function analysisIdOf(record: StoredResultRecord | null | undefined): str
 }
 
 /**
- * True when a stored analysis was built before G1-10B Year/Month dataset lookup.
+ * True when a stored analysis was built before G1-10C pillar Cung Phi binding.
  */
 export function isIncompatibleCalendarRule(data: AnalysisDataDto | null | undefined): boolean {
   const calendar = data?.calendar as Record<string, unknown> | undefined;
-  if (!calendar || typeof calendar !== "object") return false;
+  if (!calendar || typeof calendar !== "object") return true;
   const version = typeof calendar.calendar_rule_version === "string" ? calendar.calendar_rule_version : "";
-  if (version && version !== CALENDAR_RULE_VERSION) return true;
-  if (!version && calendar.ganzhi_routing) return true;
+  if (!version || version !== CALENDAR_RULE_VERSION) return true;
   return false;
 }
 
