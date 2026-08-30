@@ -5,6 +5,7 @@
 import type { ReactNode } from "react";
 import type { DashboardCardSpec, OverviewEvidenceView, OverviewView } from "./types";
 import { visualCardDom } from "./visualHierarchy";
+import { mobileCardDom } from "./mobile/mobileOrder";
 
 type OverviewCardProps = {
   readonly card: DashboardCardSpec;
@@ -46,6 +47,7 @@ export function OverviewCard({ card, model, priorityTitle = "" }: OverviewCardPr
       data-implemented="overview"
       aria-label={model.title}
       {...visualCardDom(card.id)}
+      {...mobileCardDom(card.id)}
     >
       <header className="bte-ov__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
