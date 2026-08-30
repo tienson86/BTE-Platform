@@ -1,0 +1,248 @@
+/**
+ * UI-17 Print Design System. Print consumer of the Executive Report.
+ * Does not compose Narrative. Does not use Dashboard grid.
+ */
+
+@page {
+  size: A4 portrait;
+  margin: 20mm 18mm 22mm 18mm;
+
+  @bottom-right {
+    content: counter(page);
+    font-family: "Source Sans 3", "Segoe UI", sans-serif;
+    font-size: 8pt;
+    color: #64748b;
+  }
+}
+
+.bte-print__header,
+.bte-print__footer {
+  display: none;
+}
+
+@media print {
+  .app-header,
+  .bte-er__preview-banner {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #1a1d23;
+  }
+
+  .bte-er {
+    --er-paper: #ffffff;
+    --er-ink: #1a1d23;
+    --er-muted: #475569;
+    --er-line: #cbd5e1;
+    --er-accent: var(--bte-color-primary-700);
+    --er-accent-soft: transparent;
+    --er-elem-wood: var(--bte-color-primary-800);
+    --er-elem-fire: #7f1d1d;
+    --er-elem-earth: #92400e;
+    --er-elem-metal: var(--bte-color-secondary-600);
+    --er-elem-water: #1e3a8a;
+
+    background: #fff;
+    color: var(--er-ink);
+    font-size: 10pt;
+    line-height: 1.5;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .bte-er__sheet {
+    max-width: none;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    background: #fff;
+  }
+
+  .bte-print__header {
+    display: flex;
+    position: fixed;
+    top: 6mm;
+    left: 18mm;
+    right: 18mm;
+    z-index: 2;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8mm;
+    height: 8mm;
+    padding-bottom: 2mm;
+    border-bottom: 0.3pt solid var(--er-line);
+    font-family: var(--er-sans);
+    font-size: 8pt;
+    letter-spacing: 0.04em;
+    color: var(--er-muted);
+  }
+
+  .bte-print__header-title {
+    font-weight: 600;
+    color: var(--er-ink);
+  }
+
+  .bte-print__footer {
+    display: flex;
+    position: fixed;
+    bottom: 8mm;
+    left: 18mm;
+    right: 18mm;
+    z-index: 2;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 6mm;
+    height: 8mm;
+    padding-top: 2mm;
+    border-top: 0.3pt solid var(--er-line);
+    font-family: var(--er-sans);
+    font-size: 8pt;
+    color: var(--er-muted);
+  }
+
+  .bte-print__page::after {
+    content: counter(page);
+  }
+
+  .bte-print__cover,
+  .bte-er__cover {
+    min-height: 250mm;
+    padding-top: 24mm;
+    page-break-after: always;
+    break-after: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .bte-er__cover-title {
+    font-size: 26pt;
+  }
+
+  .bte-er__insight {
+    font-size: 14pt;
+  }
+
+  .bte-er__section-title {
+    font-size: 13pt;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .bte-er__subhead,
+  .bte-er__zone-title {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .bte-print__section--break-before {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  .bte-print__section--keep,
+  .bte-er__finding,
+  .bte-er__finding-list,
+  .bte-er__plan-item,
+  .bte-er__plan-block,
+  .bte-print__callout,
+  .bte-er__callout--priority,
+  [data-consulting-flow],
+  .bte-er__zone,
+  .bte-er__tutru,
+  .bte-er__bars,
+  .bte-er__timeline,
+  .bte-er__table,
+  [data-viz] {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .bte-print__callout {
+    margin: 0 0 8mm;
+    padding: 4mm 0 4mm 5mm;
+    border-left: 1.5pt solid var(--er-accent);
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .bte-print__callout--insight .bte-er__insight {
+    margin: 0;
+  }
+
+  .bte-print__divider {
+    margin: 6mm 0;
+    border: 0;
+    border-top: 0.3pt solid var(--er-line);
+  }
+
+  .bte-er__section {
+    padding: 8mm 0;
+  }
+
+  .bte-er__snapshot,
+  .bte-er__findings,
+  .bte-er__luck,
+  .bte-er__support-block {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .bte-er__bar-fill {
+    border: 0.4pt solid currentColor;
+  }
+
+  .bte-er__bar-name,
+  .bte-er__bar-count,
+  .bte-er__tutru-label,
+  .bte-er__finding-label {
+    color: var(--er-ink);
+  }
+
+  .bte-print__signature {
+    margin-top: 10mm;
+    padding-top: 6mm;
+    border-top: 0.3pt solid var(--er-line);
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .bte-print__signature-label {
+    margin: 0 0 2mm;
+    font-size: 8pt;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--er-muted);
+  }
+
+  .bte-print__signature-org {
+    margin: 0 0 4mm;
+    font-family: var(--er-serif);
+    font-size: 12pt;
+    font-weight: 600;
+  }
+
+  .bte-print__signature-meta {
+    margin: 0 0 1mm;
+    font-size: 9pt;
+    color: var(--er-muted);
+  }
+
+  * {
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+  }
+}
