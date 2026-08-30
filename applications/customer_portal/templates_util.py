@@ -76,6 +76,7 @@ def _apply_common_tokens(html: str, *, locale: str, catalog: dict[str, Any]) -> 
     html = html.replace("{{I18N_JSON}}", dump_catalog_json(locale))
     html = html.replace("{{I18N_LOCALE}}", locale)
     html = html.replace("{{DOC_TITLE}}", t(catalog, "brand.title") or settings.title)
+    html = html.replace("{{NARRATIVE_PROVIDER}}", settings.narrative_provider)
     return html
 
 
