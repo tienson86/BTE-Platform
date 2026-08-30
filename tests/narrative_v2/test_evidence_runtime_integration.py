@@ -28,7 +28,12 @@ def test_e12_later_stages_remain_not_implemented(
     runtime = NarrativeRuntime()
     runtime.initialize(case_0001_canonical)
     runtime.pipeline.build_evidence()
-    later = tuple(stage for stage in BUILDER_STAGES if stage != "build_evidence")
+    runtime.pipeline.build_reasoning()
+    later = tuple(
+        stage
+        for stage in BUILDER_STAGES
+        if stage not in {"build_evidence", "build_reasoning"}
+    )
     for stage in later:
         output = runtime.pipeline.execute_stage(stage)
         assert output.payload is NotImplemented
