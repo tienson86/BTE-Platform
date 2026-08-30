@@ -91,11 +91,17 @@ def test_builder_stages_return_not_implemented_placeholder() -> None:
     later_stages = tuple(
         stage
         for stage in BUILDER_STAGES
-        if stage not in {"build_evidence", "build_reasoning", "resolve_knowledge"}
+        if stage not in {
+            "build_evidence",
+            "build_reasoning",
+            "resolve_knowledge",
+            "commercial_rewrite",
+        }
     )
     runtime.pipeline.build_evidence()
     runtime.pipeline.build_reasoning()
     runtime.pipeline.resolve_knowledge()
+    runtime.pipeline.commercial_rewrite()
     for stage in later_stages:
         output = runtime.pipeline.execute_stage(stage)
         assert output.payload is NotImplemented
