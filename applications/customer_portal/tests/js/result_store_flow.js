@@ -375,6 +375,36 @@ function testNarrativeV2ShadowIndependent() {
   );
 }
 
+function testNarrativeProviderLayersStayIndependent() {
+  const ctx = newStore();
+  const payload = {
+    input: { year: 1987, month: 1, day: 21 },
+    data: {
+      calendar: { lunar_date: "SWITCH", calendar_rule_version: "G1-10C" },
+      narrative_result: { contract: "pack05_narrative_result_v1", status: "ok", summary: { identity: "pack05" } },
+      narrative_v2_shadow: {
+        status: "ok",
+        presentation: { metadata: { version: "bte.presentation.v2.1" } },
+        replaces_pack05: false,
+      },
+    },
+  };
+  ctx.store.save(payload);
+  const before = ctx.store.selectNarrativeLayers();
+  check("nrel01.layers_pack05", before.pack05 && before.pack05.contract === "pack05_narrative_result_v1", JSON.stringify(before.pack05));
+  check("nrel01.layers_v2", before.narrative_v2 && before.narrative_v2.status === "ok", JSON.stringify(before.narrative_v2));
+  const afterSwitch = ctx.store.selectNarrativeLayers();
+  check("nrel01.switch_does_not_mutate_pack05", afterSwitch.pack05 === before.pack05, "");
+  check("nrel01.switch_does_not_mutate_v2", afterSwitch.narrative_v2 === before.narrative_v2, "");
+  const reloaded = ctx.store.load();
+  check(
+    "nrel01.reload_preserves_both",
+    reloaded.data.narrative_result.contract === "pack05_narrative_result_v1" &&
+      reloaded.data.narrative_v2_shadow.status === "ok",
+    JSON.stringify(reloaded.data)
+  );
+}
+
 testKeysAreSeparate();
 testFullFlowKeepsLastResult();
 testSelectForViewNeverWritesLastKey();
@@ -384,6 +414,7 @@ testRejectsInvalidPayload();
 testCurrentResultPrecedence();
 testG205HistorySnapshotPolicy();
 testNarrativeV2ShadowIndependent();
+testNarrativeProviderLayersStayIndependent();
 
 let failed = 0;
 results.forEach(function (row) {
