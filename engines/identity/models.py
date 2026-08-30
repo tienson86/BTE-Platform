@@ -54,7 +54,7 @@ class CalendarIdentity:
 
 @dataclass(slots=True)
 class PillarIdentity:
-    """One Four Pillars cell. Lookup fields reuse Hạ Nguyên ``pillar_contract``."""
+    """One Four Pillars cell. Year/Month Cung follow Calendar Tam Nguyên when published."""
 
     stem: str
     branch: str
