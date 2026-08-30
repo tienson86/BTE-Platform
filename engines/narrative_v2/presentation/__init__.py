@@ -28,6 +28,7 @@ from engines.narrative_v2.presentation.presentation_status import (
     FROZEN_CREATED_AT,
     NARRATIVE_VERSION,
     PRESENTATION_VERSION,
+    PREVIOUS_PRESENTATION_VERSION,
 )
 from engines.narrative_v2.presentation.presentation_validator import PresentationValidator
 
@@ -42,6 +43,7 @@ __all__ = [
     "NarrativeV2Presentation",
     "OverviewPresentation",
     "PRESENTATION_VERSION",
+    "PREVIOUS_PRESENTATION_VERSION",
     "PresentationBuilder",
     "PresentationError",
     "PresentationMetadata",
