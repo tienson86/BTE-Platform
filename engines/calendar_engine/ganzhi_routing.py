@@ -235,7 +235,10 @@ def stamp_bazi_source_nguyen(
     bazi: dict[str, Any] | None,
     routing: dict[str, Any] | None,
 ) -> dict[str, Any]:
-    """Copy Nguyên diagnostics onto serialized BaZi pillars. Does not change stems."""
+    """Copy Nguyên diagnostics and Cung Phi onto serialized BaZi pillars.
+
+    Does not change heavenly stem, earthly branch, or Nạp Âm.
+    """
     payload = bazi if isinstance(bazi, dict) else {}
     routes = routing if isinstance(routing, dict) else {}
     for pillar in (PILLAR_YEAR, PILLAR_MONTH, PILLAR_DAY, PILLAR_HOUR):
@@ -245,4 +248,36 @@ def stamp_bazi_source_nguyen(
             continue
         cell["source_nguyen"] = route.get("source_nguyen")
         cell["source_nguyen_code"] = route.get("source_nguyen_code")
+        if route.get("cung_phi"):
+            cell["cung_phi"] = route.get("cung_phi")
+        if route.get("ganzhi"):
+            cell["ganzhi"] = route.get("ganzhi")
+    return payload
+
+
+def stamp_identity_cung_from_routing(
+    identity: dict[str, Any] | None,
+    routing: dict[str, Any] | None,
+) -> dict[str, Any]:
+    """Overwrite published identity pillar Cung with Calendar routing Cung.
+
+    Does not change Can Chi or Nạp âm. Removes Hạ Nguyên identity leftovers
+    on Year/Month when routing already resolved birth Tam Nguyên palaces.
+    """
+    payload = identity if isinstance(identity, dict) else {}
+    four = payload.get("four_pillars")
+    routes = routing if isinstance(routing, dict) else {}
+    if not isinstance(four, dict):
+        return payload
+    for pillar in (PILLAR_YEAR, PILLAR_MONTH, PILLAR_DAY, PILLAR_HOUR):
+        cell = four.get(pillar)
+        route = routes.get(pillar)
+        if not isinstance(cell, dict) or not isinstance(route, dict):
+            continue
+        cung = route.get("cung_phi")
+        if cung:
+            cell["cung_phi"] = cung
+        source = route.get("source_nguyen")
+        if source:
+            cell["source_nguyen"] = source
     return payload
