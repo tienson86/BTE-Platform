@@ -20,10 +20,14 @@ export type IdentityPersonView = {
 };
 
 export type IdentityFoundationView = {
+  readonly available: boolean;
+  readonly displayWeight: string;
   readonly weight: string;
   readonly classification: string;
   readonly rating: string;
   readonly summary: string;
+  readonly interpretation: string;
+  readonly detailHref: string;
 };
 
 export type IdentityStatusView = {
