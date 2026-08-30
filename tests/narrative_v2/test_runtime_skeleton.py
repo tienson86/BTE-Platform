@@ -88,7 +88,11 @@ def test_skipping_a_stage_raises_pipeline_error() -> None:
 def test_builder_stages_return_not_implemented_placeholder() -> None:
     runtime = NarrativeRuntime()
     runtime.initialize(_opaque_analysis())
-    for stage in BUILDER_STAGES:
+    later_stages = tuple(
+        stage for stage in BUILDER_STAGES if stage != "build_evidence"
+    )
+    runtime.pipeline.build_evidence()
+    for stage in later_stages:
         output = runtime.pipeline.execute_stage(stage)
         assert output.payload is NotImplemented
         assert output.status == "not_implemented"
@@ -235,7 +239,12 @@ def test_pipeline_trace_records_stage_spans() -> None:
     assert [entry.stage for entry in entries] == list(CANONICAL_STAGES)
     for entry in entries:
         assert entry.started <= (entry.finished or entry.started)
-        assert entry.status in {"placeholder", "not_implemented", "pass"}
+        assert entry.status in {
+            "placeholder",
+            "not_implemented",
+            "pass",
+            "implemented",
+        }
         assert entry.finished is not None
 
 
