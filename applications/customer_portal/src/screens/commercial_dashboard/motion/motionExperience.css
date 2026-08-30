@@ -1,0 +1,171 @@
+/**
+ * UI-19 Motion & Micro-interactions. Chrome only. Does not change hierarchy or copy.
+ * Durations: --motion-fast 120ms · --motion-normal 200ms · --motion-slow 320ms
+ */
+
+@keyframes bte-motion-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes bte-motion-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes bte-motion-current {
+  from { opacity: var(--opacity-muted); }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.bte-cdash[data-motion="v1"]) {
+    scroll-behavior: smooth;
+  }
+}
+
+.bte-cdash[data-motion="v1"] [data-motion-reveal="priority"] {
+  animation: bte-motion-reveal var(--motion-slow) var(--motion-ease-out) both;
+}
+
+.bte-cdash[data-motion="v1"] [data-motion-reveal="insight"] {
+  animation: bte-motion-reveal var(--motion-slow) var(--motion-ease-out) both;
+  animation-delay: var(--motion-fast);
+}
+
+.bte-cdash[data-motion="v1"] [data-motion-reveal="lead"] {
+  animation: bte-motion-reveal var(--motion-slow) var(--motion-ease-out) both;
+}
+
+.bte-cdash[data-motion="v1"] a:focus-visible,
+.bte-cdash[data-motion="v1"] button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  transition: box-shadow var(--motion-fast) var(--motion-ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bte-cdash[data-motion="v1"] button,
+  .bte-cdash[data-motion="v1"] .bte-cdash__quiet-link,
+  .bte-cdash[data-motion="v1"] .bte-mobile-bar__btn,
+  .bte-er[data-motion="v1"] a {
+    transition:
+      background-color var(--motion-fast) var(--motion-ease-out),
+      border-color var(--motion-fast) var(--motion-ease-out),
+      box-shadow var(--motion-fast) var(--motion-ease-out),
+      color var(--motion-fast) var(--motion-ease-out),
+      opacity var(--motion-fast) var(--motion-ease-out);
+  }
+
+  .bte-cdash[data-motion="v1"] button:hover,
+  .bte-cdash[data-motion="v1"] .bte-mobile-bar__btn:hover {
+    background-color: var(--surface-section);
+    border-color: var(--accent-primary);
+  }
+
+  .bte-cdash[data-motion="v1"] .bte-cdash__quiet-link:hover {
+    color: var(--accent-primary);
+  }
+
+  .bte-cdash[data-motion="v1"] .bte-luck__badge:hover .bte-luck__node {
+    border-color: var(--accent-primary);
+    transition: border-color var(--motion-fast) var(--motion-ease-out);
+  }
+}
+
+.bte-cdash[data-motion="v1"] .bte-int__extra,
+.bte-cdash[data-motion="v1"] .bte-int__closing-block,
+.bte-cdash[data-motion="v1"] [data-expanded="true"] [data-tg-section="hidden"],
+.bte-cdash[data-motion="v1"] [data-expanded="true"] [data-tg-section="distribution"] {
+  animation: bte-motion-fade var(--motion-normal) var(--motion-ease-out) both;
+}
+
+.bte-cdash[data-motion="v1"] .bte-luck__badge[data-luck-current="true"] {
+  animation: bte-motion-current var(--motion-normal) var(--motion-ease-out) both;
+}
+
+.bte-cdash[data-motion="v1"] .bte-cdash__card[data-layout] {
+  transition: opacity var(--motion-fade) var(--motion-ease-out);
+}
+
+@media (max-width: 767px) {
+  .bte-cdash[data-motion="v1"][data-mobile-experience="true"] {
+    padding-bottom: calc(var(--space-7) + 56px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .bte-cdash[data-motion="v1"][data-mobile-experience="true"] .bte-ov__priority {
+    transition: box-shadow var(--motion-fast) var(--motion-ease-out), background-color var(--motion-fast) var(--motion-ease-out);
+  }
+
+  .bte-cdash[data-motion="v1"][data-mobile-experience="true"] [data-mobile-evidence="true"] [data-mobile-body],
+  .bte-cdash[data-motion="v1"][data-mobile-experience="true"] [data-card="interpretation"] [data-mobile-body] {
+    display: block;
+    overflow: hidden;
+    max-height: 64rem;
+    opacity: 1;
+    transition:
+      max-height var(--motion-expand) var(--motion-ease-out),
+      opacity var(--motion-fade) var(--motion-ease-out);
+  }
+
+  .bte-cdash[data-motion="v1"][data-mobile-experience="true"] [data-mobile-evidence="true"]:not([data-mobile-open="true"]) [data-mobile-body],
+  .bte-cdash[data-motion="v1"][data-mobile-experience="true"] [data-card="interpretation"]:not([data-mobile-open="true"]) [data-mobile-body] {
+    display: block;
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .bte-cdash[data-motion="v1"] .bte-mobile-bar {
+    bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
+    animation: bte-motion-reveal var(--motion-slow) var(--motion-ease-out) both;
+  }
+
+  .bte-cdash[data-motion="v1"] .bte-mobile-toggle {
+    transition:
+      background-color var(--motion-fast) var(--motion-ease-out),
+      border-color var(--motion-fast) var(--motion-ease-out);
+  }
+}
+
+@media screen {
+  .bte-er[data-motion="v1"] a:focus-visible,
+  .bte-er[data-motion="v1"] button:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+    transition: box-shadow var(--motion-fast) var(--motion-ease-out);
+  }
+}
+
+@media print {
+  .bte-cdash[data-motion="v1"],
+  .bte-cdash[data-motion="v1"] *,
+  .bte-er[data-motion="v1"],
+  .bte-er[data-motion="v1"] * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(.bte-cdash[data-motion="v1"]) {
+    scroll-behavior: auto;
+  }
+
+  .bte-cdash[data-motion="v1"],
+  .bte-cdash[data-motion="v1"] *,
+  .bte-er[data-motion="v1"],
+  .bte-er[data-motion="v1"] * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
