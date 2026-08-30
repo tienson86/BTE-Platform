@@ -1,6 +1,6 @@
 # NARRATIVE V2 — PRESENTATION CONTRACT
 
-Version: V2.0
+Version: V2.1
 
 Status: DESIGN
 
@@ -9,6 +9,14 @@ Owner: BTE Platform
 Module:
 
 knowledge/narrative_v2/
+
+Revision: N-IMP-09A (2026-08-30)
+
+Additive InterpretationPresentation fields: `meaning`, `consulting_flow`.
+
+Presentation version: `bte.presentation.v2.1`
+
+Structured Interpretation and consulting flow coexist. Presentation copies both. It does not rewrite.
 
 ---
 
@@ -256,12 +264,34 @@ observation
 
 reasoning
 
+meaning
+
 impact
 
 recommendation
 
 closing
+
+consulting_flow
 ```
+
+Structured fields remain available for semantic rendering, progressive disclosure, PDF sections, and accessibility.
+
+`consulting_flow` is the approved customer-facing continuous consulting prose.
+
+Source:
+
+```
+meaning
+        ← InterpretationNarrative.meaning
+
+consulting_flow
+        ← ConsultingNarrative.flow
+```
+
+Presentation copies both. Presentation does not compose `consulting_flow` from structured fields. Presentation does not discard structured fields when flow exists.
+
+Optional fields may be `null` when upstream content is legitimately missing. Do not use empty fake strings.
 
 Dashboard.
 
@@ -276,6 +306,10 @@ DOCX.
 Không expose:
 
 Engine.
+
+Conversation trace.
+
+Consulting style ids.
 
 ---
 
@@ -499,6 +533,7 @@ Không render.
 |-----------|--------|
 | Overview | Overview Builder |
 | Interpretation | Interpretation Builder |
+| Consulting flow | Consulting Style |
 | Action | Action Builder |
 | Commercial | Commercial Builder |
 | Metadata | Narrative |
@@ -515,9 +550,11 @@ Không Consumer nào sở hữu Contract.
 | summary | Overview |
 | observation | Interpretation |
 | reasoning | Interpretation |
+| meaning | Interpretation |
 | impact | Interpretation |
 | recommendation | Interpretation |
 | closing | Interpretation |
+| consulting_flow | Consulting Style |
 | top_priority | Action |
 | actions | Action |
 | warnings | Action |
@@ -697,8 +734,14 @@ Presentation Version.
 Ví dụ
 
 ```
-bte.presentation.v2
+bte.presentation.v2.1
 ```
+
+Additive revision of `bte.presentation.v2`.
+
+New Interpretation fields: `meaning`, `consulting_flow`.
+
+Root Presentation fields are unchanged.
 
 Consumer luôn biết.
 
