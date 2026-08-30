@@ -72,3 +72,4 @@ class NarrativeRuntimeContext:
     knowledge: object | None = None
     rewrite: object | None = None
     summary: object | None = None
+    interpretation: object | None = None
