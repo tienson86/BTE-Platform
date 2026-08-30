@@ -73,28 +73,6 @@ export function ContextZone(): ReactNode {
                 {context.birthLunar} · {context.birthTime}
               </PresentationText>
             </div>
-            {context.cungPhi || context.menhQuai || context.nhomTrach ? (
-              <dl className="rp-identity__tech rp-identity__feng">
-                {context.cungPhi ? (
-                  <div>
-                    <dt>Cung Phi</dt>
-                    <dd>{context.cungPhi}</dd>
-                  </div>
-                ) : null}
-                {context.menhQuai ? (
-                  <div>
-                    <dt>Mệnh Quái</dt>
-                    <dd>{context.menhQuai}</dd>
-                  </div>
-                ) : null}
-                {context.nhomTrach ? (
-                  <div>
-                    <dt>Nhóm Trạch</dt>
-                    <dd>{context.nhomTrach}</dd>
-                  </div>
-                ) : null}
-              </dl>
-            ) : null}
 
             <button
               type="button"
@@ -119,6 +97,36 @@ export function ContextZone(): ReactNode {
                   <dt>Thời điểm phân tích</dt>
                   <dd>{context.analyzedAt}</dd>
                 </div>
+                {context.tamNguyen ? (
+                  <div>
+                    <dt>Tam Nguyên</dt>
+                    <dd>{context.tamNguyen}</dd>
+                  </div>
+                ) : null}
+                {context.cuuVan ? (
+                  <div>
+                    <dt>Cửu Vận</dt>
+                    <dd>{context.cuuVan}</dd>
+                  </div>
+                ) : null}
+                {context.cungPhi ? (
+                  <div>
+                    <dt>Cung Phi</dt>
+                    <dd>{context.cungPhi}</dd>
+                  </div>
+                ) : null}
+                {context.menhQuai ? (
+                  <div>
+                    <dt>Mệnh Quái</dt>
+                    <dd>{context.menhQuai}</dd>
+                  </div>
+                ) : null}
+                {context.nhomTrach ? (
+                  <div>
+                    <dt>Nhóm Trạch</dt>
+                    <dd>{context.nhomTrach}</dd>
+                  </div>
+                ) : null}
               </dl>
             ) : null}
           </article>
