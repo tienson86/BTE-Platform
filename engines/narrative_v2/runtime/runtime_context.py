@@ -74,3 +74,4 @@ class NarrativeRuntimeContext:
     summary: object | None = None
     interpretation: object | None = None
     conversation: object | None = None
+    consulting: object | None = None
