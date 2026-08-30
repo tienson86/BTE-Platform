@@ -271,6 +271,7 @@ class RuntimePipeline:
         )
 
     def _run_interpretation(self) -> StageResult:
+        from engines.narrative_v2.communication import CommunicationEngine, CommunicationError
         from engines.narrative_v2.conversation import ConversationComposer, ConversationError
         from engines.narrative_v2.interpretation import InterpretationBuilder, InterpretationError
         from engines.narrative_v2.runtime.runtime_errors import BuilderError
@@ -279,10 +280,12 @@ class RuntimePipeline:
         try:
             interpretation = InterpretationBuilder().build(context.rewrite)
             conversation = ConversationComposer().compose(context.rewrite, interpretation)
-        except (InterpretationError, ConversationError) as exc:
+            consulting = CommunicationEngine().style(conversation)
+        except (InterpretationError, ConversationError, CommunicationError) as exc:
             raise BuilderError(str(exc)) from exc
         context.interpretation = interpretation
         context.conversation = conversation
+        context.consulting = consulting
         return StageResult(
             stage="build_interpretation",
             payload=interpretation,
