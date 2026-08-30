@@ -192,6 +192,13 @@ _STAGE_ALIASES: dict[str, str] = {
 }
 
 
+def _attach_narrative_v2_shadow(payload: dict[str, Any]) -> dict[str, Any]:
+    """Isolated Narrative V2 shadow envelope. Must not raise."""
+    from applications.api.services.narrative_v2_shadow import attach_narrative_v2_shadow
+
+    return attach_narrative_v2_shadow(payload)
+
+
 class OrchestratorService:
     """
     Coordinates engine Public APIs only — no business logic.
@@ -817,6 +824,7 @@ class OrchestratorService:
         analysis.narrative_result = narrative_result_payload
         payload["narrative_result"] = narrative_result_payload
         payload["narrative_result_source"] = narrative_result_source_fingerprint()
+        payload["narrative_v2_shadow"] = _attach_narrative_v2_shadow(payload)
         logger.info(
             "pipeline.interpretation sections=%s narrative_result_status=%s",
             payload["interpretation"].get("section_count", 0),
