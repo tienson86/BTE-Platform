@@ -34,7 +34,6 @@ _CONTEXT_METADATA: tuple[tuple[str, str], ...] = (
     ("portal_connected", "false"),
     ("layer", "summary"),
     ("summary_version", SUMMARY_VERSION),
-    ("sentence_library", "runtime_gap"),
 )
 
 
@@ -106,6 +105,7 @@ def _assemble(
         used_for_summary.append(supporting)
     if summary_text:
         references.append(_reference("summary", tuple(used_for_summary)))
+    rewrite_library = dict(rewrite.metadata).get("sentence_library", "runtime_gap")
     meta = _CONTEXT_METADATA + (
         ("primary_rewrite_id", primary.rewrite_id),
         ("primary_semantic_key", primary.semantic_key),
@@ -113,6 +113,7 @@ def _assemble(
         ("identity_status", "unresolved"),
         ("balance_status", "unresolved"),
         ("conclusion_status", "omitted"),
+        ("sentence_library", rewrite_library),
     )
     if supporting is not None:
         meta = meta + (("supporting_rewrite_id", supporting.rewrite_id),)
