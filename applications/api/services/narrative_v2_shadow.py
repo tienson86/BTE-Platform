@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import logging
-import os
 import time
 from typing import Any, Mapping
 
@@ -55,9 +54,6 @@ def _elapsed_ms(started: float) -> int:
 
 
 def _configured_provider() -> str:
-    raw = (os.getenv("NARRATIVE_PROVIDER") or "v2").strip().lower()
-    if raw in {"pack05", "v2", "auto"}:
-        return raw
     return "v2"
 
 
