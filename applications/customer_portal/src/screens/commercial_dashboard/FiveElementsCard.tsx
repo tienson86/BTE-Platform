@@ -5,6 +5,7 @@
 import type { ReactNode } from "react";
 import type { DashboardCardSpec, FiveElementRowView, FiveElementsView } from "./types";
 import { visualCardDom } from "./visualHierarchy";
+import { vizDom } from "./vizCatalog";
 
 type FiveElementsCardProps = {
   readonly card: DashboardCardSpec;
@@ -27,6 +28,7 @@ function ChartRow({
   const label = row.count == null ? row.label : `${row.label} ${row.count}`;
   return (
     <li className="bte-fe__row" data-element={row.key} data-fe-row={row.label}>
+      <span className={`bte-fe__swatch bte-fe__fill--${row.key}`} aria-hidden="true" />
       <span className="bte-fe__name">{row.label}</span>
       <span className="bte-fe__track" aria-hidden="true">
         <span
@@ -54,6 +56,7 @@ export function FiveElementsCard({ card, model }: FiveElementsCardProps): ReactN
       data-implemented="five-elements"
       aria-label={model.title}
       {...visualCardDom(card.id)}
+      {...vizDom(card.id)}
     >
       <header className="bte-fe__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
@@ -73,7 +76,7 @@ export function FiveElementsCard({ card, model }: FiveElementsCardProps): ReactN
         </p>
       ) : (
         <>
-          <ul className="bte-fe__chart" data-fe-chart="bars">
+          <ul className="bte-fe__chart" data-fe-chart="bars" data-viz-chart="balance-bars">
             {model.rows.map((row) => (
               <ChartRow key={row.key} row={row} peak={peak} />
             ))}
