@@ -242,7 +242,7 @@ export type CanXuongDto = {
   readonly poem?: string;
 };
 
-/** Narrative V2 shadow envelope stored beside Pack05. Portal diagnostic only. */
+/** Narrative V2 Presentation envelope stored beside Pack05. Switch chooses which to render. */
 export type NarrativeV2ShadowEnvelopeDto = {
   readonly status?: string;
   readonly portal_connection?: string;
@@ -293,7 +293,7 @@ export type AnalysisDataDto = {
   readonly narrative?: Record<string, unknown>;
   /** Pack 05 official commercial NarrativeResult. */
   readonly narrative_result?: Record<string, unknown>;
-  /** Narrative V2 Presentation envelope. Shadow only. Never replaces Pack05. */
+  /** Narrative V2 Presentation envelope. Independent of Pack05. */
   readonly narrative_v2_shadow?: NarrativeV2ShadowEnvelopeDto | null;
   /** Frozen INT-02 IntegratedNarrative. Workspace Panel 9/10 consume this only. */
   readonly integrated_narrative?: IntegratedNarrativeDto;
