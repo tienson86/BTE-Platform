@@ -57,24 +57,17 @@ function publishedCanChi(stem: string, branch: string, ...candidates: unknown[])
 function bindPillar(
   identityRaw: unknown,
   baziPillar: PillarDto | undefined,
-  calendarCanChi: string,
 ): IdentityPillarView {
   const cell = asRecord(identityRaw);
   const extra = asRecord(baziPillar);
   const labeled = splitCanChi(text(cell.can_chi));
-  const stem = firstText(cell.stem, baziPillar?.stem, labeled.stem);
-  const branch = firstText(cell.branch, baziPillar?.branch, labeled.branch);
+  const stem = firstText(baziPillar?.stem, cell.stem, labeled.stem);
+  const branch = firstText(baziPillar?.branch, cell.branch, labeled.branch);
   if (!stem && !branch && !cell.can_chi && !cell.cung_phi) return EMPTY_PILLAR;
   return {
     stem,
     branch,
-    canChi: publishedCanChi(
-      stem,
-      branch,
-      cell.can_chi,
-      extra.can_chi,
-      calendarCanChi,
-    ),
+    canChi: publishedCanChi(stem, branch, extra.can_chi, cell.can_chi),
     // Tứ Trụ summary uses published Ngũ Hành only. Full nap_am stays on Bát Tự.
     napAm: firstText(cell.nayin_element),
     cungPhi: firstText(cell.cung_phi),
@@ -100,6 +93,14 @@ function formatAnalyzedAt(raw: string): string {
 function bindStatus(
   data: AnalysisDataDto,
   options: AdaptIdentityOptions,
+  extra: {
+    readonly cungPhi: string;
+    readonly menhQuai: string;
+    readonly nhomTrach: string;
+    readonly tietKhi: string;
+    readonly tamNguyen: string;
+    readonly cuuVan: string;
+  },
 ): IdentityStatusView {
   const meta = asRecord(data.result_meta);
   const confidence = firstText(data.score?.confidence);
@@ -108,6 +109,12 @@ function bindStatus(
     version: firstText(meta.release_label),
     analyzedAt: formatAnalyzedAt(firstText(meta.created_at, meta.analyzed_at)),
     confidence,
+    cungPhi: extra.cungPhi,
+    menhQuai: extra.menhQuai,
+    nhomTrach: extra.nhomTrach,
+    tietKhi: extra.tietKhi,
+    tamNguyen: extra.tamNguyen,
+    cuuVan: extra.cuuVan,
   };
 }
 
@@ -128,28 +135,20 @@ export function adaptIdentityHeader(
   const four = asRecord(identity.four_pillars);
   const bazi = payload.bazi;
   const request = options.request;
-  const baziCanChi = asRecord(calendar.bazi_can_chi);
-  const year = bindPillar(
-    four.year,
-    bazi?.year_pillar,
-    firstText(calendar.year_can_chi, baziCanChi.year),
-  );
-  const month = bindPillar(
-    four.month,
-    bazi?.month_pillar,
-    firstText(calendar.month_can_chi, baziCanChi.month),
-  );
-  const day = bindPillar(
-    four.day,
-    bazi?.day_pillar,
-    firstText(calendar.day_can_chi, baziCanChi.day),
-  );
-  const hour = bindPillar(
-    four.hour,
-    bazi?.hour_pillar,
-    firstText(calendar.hour_can_chi, baziCanChi.hour),
-  );
+  const year = bindPillar(four.year, bazi?.year_pillar);
+  const month = bindPillar(four.month, bazi?.month_pillar);
+  const day = bindPillar(four.day, bazi?.day_pillar);
+  const hour = bindPillar(four.hour, bazi?.hour_pillar);
   const genderRaw = firstText(person.gender, customer?.gender, request?.gender);
+  const identityBone = asRecord(identity.bone_weight);
+  const cungPhi = firstText(calendar.cung_phi, feng.cung_phi, feng.gua_name);
+  const menhQuai = firstText(calendar.menh_quai, feng.menh_quai, cungPhi);
+  const nhomTrach = firstText(
+    calendar.house_group,
+    calendar.nhom_trach,
+    feng.house_group,
+    feng.nhom_trach,
+  );
   return {
     person: {
       fullName: firstText(person.full_name, customer?.full_name, request?.full_name),
@@ -166,12 +165,19 @@ export function adaptIdentityHeader(
       yinYang: firstText(bazi?.day_master_yin_yang),
     },
     foundation: {
-      cungPhi: firstText(feng.cung_phi, feng.gua_name, calendar.cung_phi),
-      menhQuai: firstText(feng.menh_quai, calendar.menh_quai),
-      nhomTrach: firstText(feng.nhom_trach, calendar.nhom_trach),
-      tietKhi: firstText(identityCalendar.solar_term, solarTermName(calendar)),
+      weight: firstText(identityBone.weight),
+      classification: firstText(identityBone.classification),
+      rating: firstText(identityBone.rating),
+      summary: firstText(identityBone.summary),
     },
-    status: bindStatus(payload, options),
+    status: bindStatus(payload, options, {
+      cungPhi,
+      menhQuai,
+      nhomTrach,
+      tietKhi: firstText(identityCalendar.solar_term, solarTermName(calendar)),
+      tamNguyen: firstText(calendar.tam_nguyen),
+      cuuVan: firstText(calendar.cuu_van),
+    }),
   };
 }
 
