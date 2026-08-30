@@ -19,6 +19,8 @@ export function CanXuongDetail({ foundation }: CanXuongDetailProps): ReactNode {
       id="sec-can-xuong"
       className="bte-id__cx-detail"
       data-module="bone-weight-detail"
+      data-visual-level="4"
+      data-card-type="reference"
     >
       <p className="bte-id__cx-detail-title">Cân Xương Đoán Mệnh</p>
       {foundation.available ? (
