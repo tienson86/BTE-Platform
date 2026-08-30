@@ -93,9 +93,11 @@ def trach_for_person(*, lunar_year: int, gender: str) -> TrachInfo:
 
 def cung_for_date_ganzhi(ganzhi: str) -> str:
     """
-    Intrinsic Date Selection Cung for a day or hour Ganzhi.
+    Intrinsic Date Selection Cung for a day or hour Ganzhi in the current
+    Hạ Nguyên period table.
 
-    Looks up ``ha_nguyen_cung`` only. Gender is not an argument.
+    Personal Cung Phi of a birth chart is Calendar Engine digit-sum, not this
+    table. Pass ``tam_nguyen`` through Calendar when looking up a historical Yuan.
     """
     table = load_ha_nguyen_cung()
     key = _normalize_ganzhi(ganzhi)
