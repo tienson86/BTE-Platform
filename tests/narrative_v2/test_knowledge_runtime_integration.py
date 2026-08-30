@@ -15,6 +15,7 @@ IMPLEMENTED = frozenset(
         "resolve_knowledge",
         "commercial_rewrite",
         "build_summary",
+        "build_interpretation",
     }
 )
 
@@ -44,6 +45,7 @@ def test_k16_later_stages_remain_not_implemented(
     runtime.pipeline.resolve_knowledge()
     runtime.pipeline.commercial_rewrite()
     runtime.pipeline.build_summary()
+    runtime.pipeline.build_interpretation()
     later = tuple(stage for stage in BUILDER_STAGES if stage not in IMPLEMENTED)
     for stage in later:
         output = runtime.pipeline.execute_stage(stage)
