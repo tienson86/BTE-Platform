@@ -146,11 +146,19 @@ class RewriteValidator:
             raise RewriteValidationError("Rewrite missing source meaning")
         if item.normalized_meaning.strip() == "":
             raise RewriteValidationError("Rewrite missing normalized meaning")
+        if _library_backed(item):
+            if not item.customer_language.startswith("Bạn"):
+                raise RewriteValidationError("Library rewrite missing customer address")
+            return
         source_core = _core_text(item.source_meaning)
         customer_core = _core_text(item.customer_language)
         if source_core not in customer_core and customer_core not in source_core:
             if not customer_core.endswith(source_core) and not _address_wraps(source_core, customer_core):
                 raise RewriteValidationError("Rewrite does not preserve source meaning")
+
+
+def _library_backed(item: RewriteItem) -> bool:
+    return dict(item.metadata).get("sentence_source") == "sentence_library"
 
 
 def _core_text(text: str) -> str:
