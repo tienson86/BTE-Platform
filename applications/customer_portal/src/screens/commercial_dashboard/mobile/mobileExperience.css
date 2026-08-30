@@ -51,6 +51,7 @@
     order: 1;
     min-height: 70dvh;
     padding: var(--space-5);
+    padding-bottom: calc(var(--space-7) + 56px);
   }
 
   .bte-cdash[data-mobile-experience="true"] .bte-cdash__card[data-mobile-order="2"] {
@@ -88,7 +89,7 @@
   .bte-cdash[data-mobile-experience="true"] .bte-id [data-region="foundation"],
   .bte-cdash[data-mobile-experience="true"] .bte-id [data-region="status"],
   .bte-cdash[data-mobile-experience="true"] .bte-id [data-region="pillars"],
-  .bte-cdash[data-mobile-experience="true"] .bte-cx,
+  .bte-cdash[data-mobile-experience="true"] .bte-id__cx-detail,
   .bte-cdash[data-mobile-experience="true"] .bte-ov__group {
     display: none;
   }
@@ -125,6 +126,11 @@
 
   .bte-cdash[data-mobile-experience="true"] [data-mobile-evidence="true"]:not([data-mobile-open="true"]) [data-mobile-body],
   .bte-cdash[data-mobile-experience="true"] [data-card="interpretation"]:not([data-mobile-open="true"]) [data-mobile-body] {
+    display: none;
+  }
+
+  .bte-cdash[data-mobile-experience="true"] [data-mobile-evidence="true"]:not([data-mobile-open="true"]) .bte-fe__status,
+  .bte-cdash[data-mobile-experience="true"] [data-mobile-evidence="true"]:not([data-mobile-open="true"]) .bte-fe__heading {
     display: none;
   }
 
