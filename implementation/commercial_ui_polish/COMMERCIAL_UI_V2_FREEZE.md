@@ -36,4 +36,4 @@ Future material visual change requires **Commercial UI V2.1** or the next approv
 
 ## Known accepted limitations
 
-See `ui20/known_limitations.md`.
+See `ui20/known_limitations.md`. Those items are accepted at freeze. They are not open defects requiring a V2.1 design change unless Product reopens them.
