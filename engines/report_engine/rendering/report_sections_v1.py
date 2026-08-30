@@ -198,9 +198,11 @@ def _section_profile(report_input: ReportInputV1) -> PresentedSection:
                 ("Âm lịch", display_text(calendar.lunar_date)),
                 ("Can Chi năm âm", display_text(calendar.lunar_year_can_chi)),
                 ("Tiết khí", display_text(calendar.solar_term)),
+                ("Tam Nguyên", display_text(calendar.tam_nguyen)),
+                ("Cửu Vận", display_text(calendar.cuu_van)),
                 ("Cung Phi", display_text(calendar.cung_phi)),
                 ("Mệnh Quái", display_text(calendar.menh_quai)),
-                ("Nhóm Trạch", display_text(calendar.nhom_trach)),
+                ("Nhóm Trạch", display_text(calendar.nhom_trach or calendar.house_group)),
                 ("Múi giờ lịch", display_text(calendar.timezone)),
             ]
         ),
