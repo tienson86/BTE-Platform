@@ -110,10 +110,15 @@ def bone_weight_identity_from_payload(payload: Any | None) -> BoneWeightIdentity
     if not raw:
         return BoneWeightIdentity()
     return BoneWeightIdentity(
-        weight=_text(raw.get("weight") or raw.get("amount") or raw.get("total")),
-        classification=_text(raw.get("classification")),
-        rating=_text(raw.get("rating") or raw.get("grade")),
-        summary=_text(raw.get("summary")),
+        weight=_text(
+            raw.get("display_weight")
+            or raw.get("weight")
+            or raw.get("amount")
+            or raw.get("total")
+        ),
+        classification=_text(raw.get("classification") or raw.get("phan_loai")),
+        rating=_text(raw.get("rating") or raw.get("grade") or raw.get("danh_gia")),
+        summary=_text(raw.get("summary") or raw.get("tom_tat")),
     )
 
 
