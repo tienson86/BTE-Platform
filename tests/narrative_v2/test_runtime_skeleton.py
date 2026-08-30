@@ -97,6 +97,7 @@ def test_builder_stages_return_not_implemented_placeholder() -> None:
             "resolve_knowledge",
             "commercial_rewrite",
             "build_summary",
+            "build_interpretation",
         }
     )
     runtime.pipeline.build_evidence()
@@ -104,6 +105,7 @@ def test_builder_stages_return_not_implemented_placeholder() -> None:
     runtime.pipeline.resolve_knowledge()
     runtime.pipeline.commercial_rewrite()
     runtime.pipeline.build_summary()
+    runtime.pipeline.build_interpretation()
     for stage in later_stages:
         output = runtime.pipeline.execute_stage(stage)
         assert output.payload is NotImplemented
