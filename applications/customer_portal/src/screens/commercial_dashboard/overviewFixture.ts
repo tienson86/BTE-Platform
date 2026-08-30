@@ -18,7 +18,7 @@ export const OVERVIEW_VISUAL_FIXTURE: OverviewView = {
   identity: [
     { key: "day-master", label: "Nhật Chủ", value: "Canh Kim" },
     { key: "strength", label: "Thân", value: "Thân vượng" },
-    { key: "pattern", label: "Mệnh Cục", value: "Chính Ấn" },
+    { key: "avoid-god", label: "Kỵ Thần", value: "Kim · Canh" },
   ],
   balance: [
     { key: "useful-god", label: "Dụng Thần", value: "Hỏa · Đinh" },
