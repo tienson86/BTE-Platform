@@ -12,6 +12,7 @@ import { PortalPage } from "../screens/canonical_desktop";
 import { CommercialDashboardPage } from "../screens/commercial_dashboard";
 import { NarrativeV2ShadowPage } from "../screens/narrative_v2_shadow";
 import { historyIdFromSearch } from "../resultState/currentResult";
+import { resolveNarrativeProvider } from "../resultState/narrativeProvider";
 import { resolveResultSurface } from "../resultState/narrativeV2Shadow";
 import { resolveResultBoot, toAnalyzeRequest, type StoredResult } from "./resultBoot";
 
@@ -94,6 +95,7 @@ function mount(): void {
           reanalyzeHref={boot.reanalyzeHref}
           layoutMode={boot.layoutMode}
           previewFallback={boot.previewFallback}
+          narrativeProvider={resolveNarrativeProvider(search)}
         />
       ) : (
         <PortalPage
