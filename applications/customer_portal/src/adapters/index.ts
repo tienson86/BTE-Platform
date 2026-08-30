@@ -25,6 +25,9 @@ export {
 } from "./baziResultAdapter";
 export type { AdaptBaZiResultOptions, BaZiResultViewModel } from "./baziResultAdapter";
 
+export { adaptCanXuong, CAN_XUONG_DETAIL_HREF, CAN_XUONG_EMPTY_COPY } from "./canonicalCanXuong";
+export type { CanXuongView } from "./canonicalCanXuong";
+
 export { adaptDashboardViewModel } from "./dashboardAdapter";
 export type { AdaptDashboardOptions, DashboardViewModel } from "./dashboardAdapter";
 
