@@ -5,6 +5,7 @@
 import { useState, type ReactNode } from "react";
 import type { DashboardCardSpec, PatternView } from "./types";
 import { visualCardDom } from "./visualHierarchy";
+import { vizDom } from "./vizCatalog";
 
 type PatternCardProps = {
   readonly card: DashboardCardSpec;
@@ -18,7 +19,7 @@ function FormationFlow({
 }): ReactNode {
   if (!steps.length) return null;
   return (
-    <ol className="bte-pat__flow">
+    <ol className="bte-pat__flow" data-viz-chart="formation-flow">
       {steps.map((step, index) => (
         <li key={`${step}-${index}`} className="bte-pat__step">
           {index > 0 ? (
@@ -48,6 +49,7 @@ export function PatternCard({ card, model }: PatternCardProps): ReactNode {
       data-expanded={expanded ? "true" : "false"}
       aria-label={model.title}
       {...visualCardDom(card.id)}
+      {...vizDom(card.id)}
     >
       <header className="bte-pat__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
