@@ -7,8 +7,13 @@ import re
 from dataclasses import fields
 from typing import Any, Iterable
 
+from engines.narrative_v2.communication.communication_context import ConsultingNarrative
+from engines.narrative_v2.interpretation.interpretation_model import InterpretationNarrative
 from engines.narrative_v2.presentation.presentation_errors import PresentationValidationError
-from engines.narrative_v2.presentation.presentation_model import NarrativeV2Presentation
+from engines.narrative_v2.presentation.presentation_model import (
+    InterpretationPresentation,
+    NarrativeV2Presentation,
+)
 from engines.narrative_v2.presentation.presentation_serializer import serialize_customer
 from engines.narrative_v2.presentation.presentation_status import (
     ALLOWED_STATUSES,
@@ -38,9 +43,11 @@ INTERPRETATION_FIELDS: tuple[str, ...] = (
     "overview",
     "observation",
     "reasoning",
+    "meaning",
     "impact",
     "recommendation",
     "closing",
+    "consulting_flow",
 )
 
 ACTION_PLAN_FIELDS: tuple[str, ...] = (
@@ -69,7 +76,6 @@ FORBIDDEN_KEYS: frozenset[str] = frozenset(
         "rule_id",
         "rule_ids",
         "canonical_analysis",
-        "meaning",
         "flow",
         "debug",
         "trace",
@@ -101,7 +107,13 @@ _JSON_BLOB = re.compile(r"^\s*[\{\[]")
 class PresentationValidator:
     """Validate a packaged Presentation. Does not rewrite content."""
 
-    def validate(self, presentation: NarrativeV2Presentation) -> None:
+    def validate(
+        self,
+        presentation: NarrativeV2Presentation,
+        *,
+        interpretation: InterpretationNarrative | None = None,
+        consulting: ConsultingNarrative | None = None,
+    ) -> None:
         """Raise if the public contract is violated."""
         if not isinstance(presentation, NarrativeV2Presentation):
             raise PresentationValidationError("Expected NarrativeV2Presentation")
@@ -109,6 +121,7 @@ class PresentationValidator:
         payload = serialize_customer(presentation)
         self._validate_payload(payload)
         self._validate_no_leaks(payload)
+        self._validate_provenance(presentation, interpretation, consulting)
 
     def _validate_root(self, presentation: NarrativeV2Presentation) -> None:
         names = tuple(item.name for item in fields(presentation))
@@ -137,11 +150,40 @@ class PresentationValidator:
         interpretation = payload["interpretation"]
         if interpretation is not None:
             self._assert_keys(interpretation, INTERPRETATION_FIELDS, "interpretation")
-            if "meaning" in interpretation or "flow" in interpretation:
-                raise PresentationValidationError("Interpretation must not expose meaning or flow")
         action_plan = payload["action_plan"]
         if action_plan is not None:
             self._assert_keys(action_plan, ACTION_PLAN_FIELDS, "action_plan")
+
+    def _validate_provenance(
+        self,
+        presentation: NarrativeV2Presentation,
+        interpretation: InterpretationNarrative | None,
+        consulting: ConsultingNarrative | None,
+    ) -> None:
+        view = presentation.interpretation
+        if view is None:
+            return
+        if interpretation is not None:
+            if view.overview != interpretation.overview:
+                raise PresentationValidationError("Interpretation overview was rewritten")
+            if view.observation != interpretation.observation:
+                raise PresentationValidationError("Interpretation observation was rewritten")
+            if view.reasoning != interpretation.reasoning:
+                raise PresentationValidationError("Interpretation reasoning was rewritten")
+            if view.meaning != interpretation.meaning:
+                raise PresentationValidationError("Interpretation meaning was rewritten")
+            if view.impact != interpretation.impact:
+                raise PresentationValidationError("Interpretation impact was rewritten")
+            if view.recommendation != interpretation.recommendation:
+                raise PresentationValidationError("Interpretation recommendation was rewritten")
+            if view.closing != interpretation.closing:
+                raise PresentationValidationError("Interpretation closing was rewritten")
+        if consulting is not None:
+            expected = consulting.flow if consulting.flow and consulting.flow.strip() else None
+            if view.consulting_flow != expected:
+                raise PresentationValidationError("consulting_flow must copy ConsultingNarrative.flow")
+            if view.consulting_flow and _is_recomposed_flow(view):
+                raise PresentationValidationError("consulting_flow must not be recomposed")
 
     def _validate_no_leaks(self, payload: dict[str, Any]) -> None:
         leaked = _collect_keys(payload) & FORBIDDEN_KEYS
@@ -182,5 +224,18 @@ def _collect_strings(value: object) -> Iterable[str]:
     elif isinstance(value, list):
         for item in value:
             yield from _collect_strings(item)
+
+
+def _is_recomposed_flow(view: InterpretationPresentation) -> bool:
+    parts = (
+        view.observation,
+        view.reasoning,
+        view.meaning,
+        view.impact,
+        view.recommendation,
+        view.closing,
+    )
+    joined = " ".join(part.strip() for part in parts if part and part.strip())
+    return bool(joined and view.consulting_flow == joined)
 
 
