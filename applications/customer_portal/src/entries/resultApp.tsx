@@ -10,7 +10,9 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { PortalPage } from "../screens/canonical_desktop";
 import { CommercialDashboardPage } from "../screens/commercial_dashboard";
+import { NarrativeV2ShadowPage } from "../screens/narrative_v2_shadow";
 import { historyIdFromSearch } from "../resultState/currentResult";
+import { resolveResultSurface } from "../resultState/narrativeV2Shadow";
 import { resolveResultBoot, toAnalyzeRequest, type StoredResult } from "./resultBoot";
 
 declare global {
@@ -61,10 +63,13 @@ function mount(): void {
   const stored = readStoredResult(search);
   const boot = resolveResultBoot(stored.current, search, stored.historyView);
   const commercial = isCanonicalResultPath(window.location.pathname);
+  const surface = resolveResultSurface(search, window.location.pathname);
 
   createRoot(host).render(
     <StrictMode>
-      {commercial ? (
+      {commercial && surface !== "production" ? (
+        <NarrativeV2ShadowPage analysis={boot.analysis} mode={surface} />
+      ) : commercial ? (
         <CommercialDashboardPage
           analysis={boot.analysis}
           request={boot.request ?? toAnalyzeRequest(stored.current?.input ?? null)}
