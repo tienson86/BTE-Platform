@@ -6,6 +6,7 @@ import { useState, type ReactNode } from "react";
 import { SHENSHA_FALLBACK_HEADING } from "./cards";
 import type { DashboardCardSpec, ShenShaItemView, ShenShaView } from "./types";
 import { visualCardDom } from "./visualHierarchy";
+import { vizDom } from "./vizCatalog";
 
 const FEATURED_LIMIT = 4;
 
@@ -56,6 +57,7 @@ export function ShenShaCard({ card, model }: ShenShaCardProps): ReactNode {
       data-grouped={model.grouped ? "true" : "false"}
       aria-label={model.title}
       {...visualCardDom(card.id)}
+      {...vizDom(card.id)}
     >
       <header className="bte-ss__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
@@ -81,7 +83,7 @@ export function ShenShaCard({ card, model }: ShenShaCardProps): ReactNode {
               {model.groups.map((group) => (
                 <section key={group.heading} className="bte-ss__group" data-ss-group={group.heading}>
                   <h3 className="bte-ss__heading">{group.heading}</h3>
-                  <ul className="bte-ss__list">
+                  <ul className="bte-ss__list" data-viz-chart="grouped-chips">
                     {group.items.map((item) => (
                       <ItemBlock key={item.name} item={item} />
                     ))}
@@ -92,7 +94,7 @@ export function ShenShaCard({ card, model }: ShenShaCardProps): ReactNode {
           ) : (
             <section className="bte-ss__section" data-ss-section="featured">
               <h3 className="bte-ss__heading">{SHENSHA_FALLBACK_HEADING}</h3>
-              <ul className="bte-ss__list">
+              <ul className="bte-ss__list" data-viz-chart="grouped-chips">
                 {fallbackItems.map((item) => (
                   <ItemBlock key={item.name} item={item} />
                 ))}
