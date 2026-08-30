@@ -1,6 +1,7 @@
 """Narrative V2 runtime pipeline.
 
-Evidence through interpretation are implemented. Later builder stages remain placeholders.
+Evidence through action and presentation publish are implemented.
+Commercial remains a placeholder. Publish is internal freeze, not Portal.
 """
 
 from __future__ import annotations
@@ -39,7 +40,7 @@ BUILDER_STAGES: tuple[str, ...] = CANONICAL_STAGES[1:-2]
 
 @dataclass(slots=True)
 class StageResult:
-    """Stage output. Evidence through interpretation are implemented; later builders are placeholders."""
+    """Stage output. Commercial remains a placeholder; publish freezes Presentation."""
 
     stage: str
     payload: object = field(default=NotImplemented)
@@ -47,7 +48,7 @@ class StageResult:
 
 
 class RuntimePipeline:
-    """Sequential pipeline. Evidence through interpretation are implemented; later builders are placeholders."""
+    """Sequential pipeline. Evidence through action are implemented; commercial is a placeholder."""
 
     def __init__(self, runtime: "NarrativeRuntime") -> None:
         self._runtime = runtime
@@ -86,7 +87,7 @@ class RuntimePipeline:
         return self.execute_stage("build_interpretation")
 
     def build_action(self) -> StageResult:
-        """Stage: action. Not implemented."""
+        """Stage: action. Assembles ActionPlanNarrative from rewrite and interpretation."""
         return self.execute_stage("build_action")
 
     def build_commercial(self) -> StageResult:
@@ -98,7 +99,7 @@ class RuntimePipeline:
         return self.execute_stage("validate")
 
     def publish(self) -> StageResult:
-        """Stage: publish. Freeze skeleton result."""
+        """Stage: publish. Freeze NarrativeV2Presentation internally. Not Portal."""
         return self.execute_stage("publish")
 
     def execute_stage(self, stage: str) -> StageResult:
@@ -180,10 +181,12 @@ class RuntimePipeline:
             return self._run_summary()
         if stage == "build_interpretation":
             return self._run_interpretation()
+        if stage == "build_action":
+            return self._run_action()
         if stage == "validate":
             return self._run_validate()
         if stage == "publish":
-            return StageResult(stage=stage, payload=None, status="placeholder")
+            return self._run_publish()
         return StageResult(stage=stage)
 
     def _run_evidence(self) -> StageResult:
@@ -292,6 +295,26 @@ class RuntimePipeline:
             status="implemented",
         )
 
+    def _run_action(self) -> StageResult:
+        from engines.narrative_v2.action import ActionBuilder, ActionError
+        from engines.narrative_v2.runtime.runtime_errors import BuilderError
+
+        context = self._runtime.require_context()
+        try:
+            plan = ActionBuilder().build(
+                context.rewrite,
+                context.interpretation,
+                context.consulting,
+            )
+        except ActionError as exc:
+            raise BuilderError(str(exc)) from exc
+        context.action = plan
+        return StageResult(
+            stage="build_action",
+            payload=plan,
+            status="implemented",
+        )
+
     def _run_validate(self) -> StageResult:
         outcome = self._runtime.validator.validate(
             self._runtime.executed_stages,
@@ -303,6 +326,27 @@ class RuntimePipeline:
             stage="validate",
             payload=outcome,
             status="pass",
+        )
+
+    def _run_publish(self) -> StageResult:
+        from engines.narrative_v2.presentation import PresentationBuilder, PresentationError
+        from engines.narrative_v2.runtime.runtime_errors import BuilderError
+
+        context = self._runtime.require_context()
+        try:
+            presentation = PresentationBuilder().build(
+                context.summary,
+                context.interpretation,
+                context.action,
+                None,
+            )
+        except PresentationError as exc:
+            raise BuilderError(str(exc)) from exc
+        context.presentation = presentation
+        return StageResult(
+            stage="publish",
+            payload=presentation,
+            status="implemented",
         )
 
 
