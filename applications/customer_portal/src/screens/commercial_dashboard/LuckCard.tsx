@@ -5,6 +5,7 @@
 import { useState, type ReactNode } from "react";
 import type { DashboardCardSpec, LuckCycleView, LuckView } from "./types";
 import { visualCardDom } from "./visualHierarchy";
+import { vizDom } from "./vizCatalog";
 
 const COMPACT_LIMIT = 5;
 
@@ -42,6 +43,7 @@ function CycleBadge({
       data-luck-cycle={cycle.ganZhi}
       data-luck-current={cycle.isCurrent ? "true" : undefined}
     >
+      <span className="bte-luck__node" aria-hidden="true" />
       <span className="bte-luck__badge-name">{cycle.ganZhi}</span>
       {cycle.isCurrent ? (
         <span className="bte-luck__now" data-luck-now="true">
@@ -72,6 +74,7 @@ export function LuckCard({ card, model }: LuckCardProps): ReactNode {
       data-expanded={expanded ? "true" : "false"}
       aria-label={model.title}
       {...visualCardDom(card.id)}
+      {...vizDom(card.id)}
     >
       <header className="bte-luck__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
@@ -146,7 +149,7 @@ export function LuckCard({ card, model }: LuckCardProps): ReactNode {
           {timeline.length ? (
             <section className="bte-luck__section" data-luck-section="timeline">
               <h3 className="bte-luck__heading">Timeline Đại Vận</h3>
-              <ol className="bte-luck__timeline">
+              <ol className="bte-luck__timeline" data-viz-chart="timeline">
                 {timeline.map((cycle) => (
                   <CycleBadge key={`${cycle.ganZhi}-${cycle.yearRange}`} cycle={cycle} detail={expanded} />
                 ))}
