@@ -26,6 +26,7 @@ import "./executive-report.css";
 import "./print/print.css";
 import "../commercial_dashboard/mobile/mobileExperience.css";
 import "../commercial_dashboard/motion/motionExperience.css";
+import "../commercial_dashboard/finish.css";
 
 export type ExecutiveReportPageProps = {
   readonly analysis?: AnalysisDataDto | null;
@@ -47,6 +48,7 @@ export function ExecutiveReportPage({
       data-ui="executive-report"
       data-report="preview"
       data-motion="v1"
+      data-finish="v2"
       data-pdf-export="false"
       data-print-ready="true"
       data-narrative-source="presentation-v2"
