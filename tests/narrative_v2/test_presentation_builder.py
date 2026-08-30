@@ -63,6 +63,7 @@ def test_p6_interpretation_copied_without_rewrite(
     assert presentation.interpretation.overview == interpretation.overview
     assert presentation.interpretation.observation == interpretation.observation
     assert presentation.interpretation.reasoning == interpretation.reasoning
+    assert presentation.interpretation.meaning == interpretation.meaning
     assert presentation.interpretation.impact == interpretation.impact
     assert presentation.interpretation.recommendation == interpretation.recommendation
     assert presentation.interpretation.closing == interpretation.closing
