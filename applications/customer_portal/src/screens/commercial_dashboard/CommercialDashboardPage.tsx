@@ -79,7 +79,7 @@ function gateAction(resultSource: CommercialDashboardPageProps["resultSource"], 
 }
 
 /**
- * Canonical `/result` body for Commercial Dashboard V1.0 (UI-03).
+ * Canonical `/result` body for Commercial Dashboard (UI-03 geometry, UI-14 visual hierarchy).
  */
 export function CommercialDashboardPage({
   analysis = null,
@@ -105,6 +105,7 @@ export function CommercialDashboardPage({
         className="bte-cdash"
         data-dashboard="commercial-v1"
         data-canonical-result="ui03"
+        data-visual="v2"
         data-narrative-surface="production"
         data-narrative-provider={requestedProvider}
       >
@@ -181,6 +182,7 @@ export function CommercialDashboardPage({
       className="bte-cdash"
       data-dashboard="commercial-v1"
       data-canonical-result="ui03"
+      data-visual="v2"
       data-narrative-surface="production"
       data-narrative-provider={narrative?.selected ?? requestedProvider}
       data-narrative-fallback={narrative?.fallback ? "true" : "false"}
