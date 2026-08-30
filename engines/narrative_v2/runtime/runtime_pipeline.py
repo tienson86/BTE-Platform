@@ -1,6 +1,6 @@
 """Narrative V2 runtime pipeline.
 
-Evidence is implemented. Later builder stages remain placeholders.
+Evidence and reasoning are implemented. Later builder stages remain placeholders.
 """
 
 from __future__ import annotations
@@ -39,7 +39,7 @@ BUILDER_STAGES: tuple[str, ...] = CANONICAL_STAGES[1:-2]
 
 @dataclass(slots=True)
 class StageResult:
-    """Stage output. Evidence is implemented; other builders remain placeholders."""
+    """Stage output. Evidence and reasoning are implemented; later builders are placeholders."""
 
     stage: str
     payload: object = field(default=NotImplemented)
@@ -47,7 +47,7 @@ class StageResult:
 
 
 class RuntimePipeline:
-    """Sequential pipeline. Evidence is implemented; later builders are placeholders."""
+    """Sequential pipeline. Evidence and reasoning are implemented; later builders are placeholders."""
 
     def __init__(self, runtime: "NarrativeRuntime") -> None:
         self._runtime = runtime
@@ -66,7 +66,7 @@ class RuntimePipeline:
         return self.execute_stage("build_evidence")
 
     def build_reasoning(self) -> StageResult:
-        """Stage: reasoning. Not implemented."""
+        """Stage: reasoning. Connects published Evidence."""
         return self.execute_stage("build_reasoning")
 
     def resolve_knowledge(self) -> StageResult:
@@ -170,6 +170,8 @@ class RuntimePipeline:
     def _run_stage_body(self, stage: str) -> StageResult:
         if stage == "build_evidence":
             return self._run_evidence()
+        if stage == "build_reasoning":
+            return self._run_reasoning()
         if stage == "validate":
             return self._run_validate()
         if stage == "publish":
@@ -189,6 +191,22 @@ class RuntimePipeline:
         return StageResult(
             stage="build_evidence",
             payload=evidence,
+            status="implemented",
+        )
+
+    def _run_reasoning(self) -> StageResult:
+        from engines.narrative_v2.reasoning import ReasoningBuilder, ReasoningError
+        from engines.narrative_v2.runtime.runtime_errors import BuilderError
+
+        context = self._runtime.require_context()
+        try:
+            reasoning = ReasoningBuilder().build(context.evidence)
+        except ReasoningError as exc:
+            raise BuilderError(str(exc)) from exc
+        context.reasoning = reasoning
+        return StageResult(
+            stage="build_reasoning",
+            payload=reasoning,
             status="implemented",
         )
 
