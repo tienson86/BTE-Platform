@@ -225,6 +225,23 @@ export type IntegratedNarrativeDto = {
   readonly summary?: IntegratedNarrativeBlockDto;
 };
 
+/** Canonical Cân Xương Đoán Mệnh object published by the engine. */
+export type CanXuongDto = {
+  readonly total_weight?: number;
+  readonly liang?: number;
+  readonly chi?: number;
+  readonly display_weight?: string;
+  readonly classification?: string;
+  readonly rating?: string;
+  readonly summary?: string;
+  readonly interpretation?: string;
+  readonly source?: string;
+  readonly version?: string;
+  readonly weight?: string;
+  readonly total?: string;
+  readonly poem?: string;
+};
+
 /** `data` payload from POST /analyze. */
 export type AnalysisDataDto = {
   readonly pipeline?: readonly string[];
@@ -272,6 +289,8 @@ export type AnalysisDataDto = {
   readonly customer?: CustomerEchoDto;
   /** Canonical Identity Layer (BZ-ID). Presentation reads this for identity fields. */
   readonly identity?: CanonicalIdentityDto;
+  /** Canonical Cân Xương Đoán Mệnh (G1-11). Header and S10 copy this object. */
+  readonly can_xuong?: CanXuongDto;
   /** Pre-composed CK-01 commercial consulting. Presentation copies only. */
   readonly commercial_consulting?: CommercialConsultingDto;
   readonly [key: string]: unknown;
