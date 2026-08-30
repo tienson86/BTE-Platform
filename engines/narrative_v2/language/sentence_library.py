@@ -52,3 +52,28 @@ class SentenceLibrary:
         if not outcome.passed:
             return None
         return asset
+
+    def select_all(
+        self,
+        semantic_key: str,
+        *,
+        category: str,
+        locale: str = "vi",
+        audience: str = "customer",
+        domain: str | None = None,
+        meaning_key: str | None = None,
+    ) -> tuple[SentenceAsset, ...]:
+        """Return approved assets for one exact key, or empty when unresolved."""
+        selected: list[SentenceAsset] = []
+        for asset in self._selector.select_all(
+            semantic_key,
+            category=category,
+            locale=locale,
+            audience=audience,
+            domain=domain,
+            meaning_key=meaning_key,
+        ):
+            outcome = self._validator.validate(asset)
+            if outcome.passed:
+                selected.append(asset)
+        return tuple(selected)
