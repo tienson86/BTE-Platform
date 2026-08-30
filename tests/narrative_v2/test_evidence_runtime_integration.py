@@ -41,10 +41,12 @@ def test_e12_later_stages_remain_not_implemented(
             "commercial_rewrite",
             "build_summary",
             "build_interpretation",
+            "build_action",
         }
     )
     runtime.pipeline.build_summary()
     runtime.pipeline.build_interpretation()
+    runtime.pipeline.build_action()
     for stage in later:
         output = runtime.pipeline.execute_stage(stage)
         assert output.payload is NotImplemented
@@ -58,6 +60,6 @@ def test_e13_shadow_mode_unchanged(case_0001_canonical: dict[str, Any]) -> None:
     assert runtime.shadow_mode is True
     assert runtime.replaces_pack05 is False
     assert runtime.portal_connected is False
-    assert result.presentation is None
+    assert result.presentation is not None
     assert result.runtime_metadata["shadow_mode"] is True
     assert result.runtime_metadata["generates_narrative"] is False
