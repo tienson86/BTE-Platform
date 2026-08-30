@@ -15,6 +15,7 @@ IMPLEMENTED = frozenset(
         "resolve_knowledge",
         "commercial_rewrite",
         "build_summary",
+        "build_interpretation",
     }
 )
 
@@ -47,8 +48,8 @@ def test_s19_interpretation_and_action_remain_not_implemented(
     runtime.pipeline.resolve_knowledge()
     runtime.pipeline.commercial_rewrite()
     runtime.pipeline.build_summary()
+    runtime.pipeline.build_interpretation()
     later = tuple(stage for stage in BUILDER_STAGES if stage not in IMPLEMENTED)
-    assert "build_interpretation" in later
     assert "build_action" in later
     for stage in later:
         output = runtime.pipeline.execute_stage(stage)
