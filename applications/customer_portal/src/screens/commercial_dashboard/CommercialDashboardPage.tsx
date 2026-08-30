@@ -98,7 +98,7 @@ export function CommercialDashboardPage({
   if (showGate) {
     const gateStatus = status && status !== "ready" ? status : "empty";
     return (
-      <div className="bte-cdash" data-dashboard="commercial-v1" data-canonical-result="ui03">
+      <div className="bte-cdash" data-dashboard="commercial-v1" data-canonical-result="ui03" data-narrative-surface="production">
         <ResultPageHeader />
         <ResultPageStatusGate
           status={gateStatus}
@@ -169,6 +169,7 @@ export function CommercialDashboardPage({
       className="bte-cdash"
       data-dashboard="commercial-v1"
       data-canonical-result="ui03"
+      data-narrative-surface="production"
       data-layout={layoutMode === "skeleton" || previewFallback ? "skeleton" : layoutMode}
     >
       <ResultPageHeader />
