@@ -26,6 +26,7 @@ import { ACTION_PLAN_VISUAL_FIXTURE } from "./actionPlanFixture";
 import { adaptOverviewCard } from "./overviewAdapter";
 import { OVERVIEW_VISUAL_FIXTURE } from "./overviewFixture";
 import { RESULT_PAGE_TITLE } from "./cards";
+import { CanXuongDetail } from "./CanXuongDetail";
 import { DashboardGrid } from "./DashboardGrid";
 import { IdentityHeader } from "./IdentityHeader";
 import "./commercial-dashboard.css";
@@ -183,6 +184,7 @@ export function CommercialDashboardPage({
         interpretation={interpretation}
         actionPlan={actionPlan}
       />
+      <CanXuongDetail foundation={model.foundation} />
     </div>
   );
 }
