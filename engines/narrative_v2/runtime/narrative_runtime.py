@@ -189,6 +189,7 @@ class NarrativeRuntime:
             "shadow_mode": True,
             "replaces_pack05": False,
             "portal_connected": False,
+            "portal_connection": "true_shadow",
             "runtime_version": RUNTIME_VERSION,
             "narrative_version": NARRATIVE_VERSION,
             "generates_narrative": False,
