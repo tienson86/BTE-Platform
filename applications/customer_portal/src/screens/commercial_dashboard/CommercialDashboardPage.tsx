@@ -5,6 +5,11 @@
 import type { ReactNode } from "react";
 import type { CanonicalDesktopViewModel } from "../../adapters";
 import type { AnalysisDataDto, AnalyzeChartRequest } from "../../models";
+import {
+  resolveNarrativeProvider,
+  type NarrativeProvider,
+} from "../../resultState/narrativeProvider";
+import { selectNarrativePresentation } from "../../resultState/narrativePresentationSelection";
 import { ResultPageStatusGate } from "../result";
 import { adaptIdentityHeader } from "./adapter";
 import { adaptBaziCard } from "./baziAdapter";
@@ -19,11 +24,8 @@ import { adaptShenShaCard } from "./shenShaAdapter";
 import { SHENSHA_VISUAL_FIXTURE } from "./shenShaFixture";
 import { adaptLuckCard } from "./luckAdapter";
 import { LUCK_VISUAL_FIXTURE } from "./luckFixture";
-import { adaptInterpretationCard } from "./interpretationAdapter";
 import { INTERPRETATION_VISUAL_FIXTURE } from "./interpretationFixture";
-import { adaptActionPlanCard } from "./actionPlanAdapter";
 import { ACTION_PLAN_VISUAL_FIXTURE } from "./actionPlanFixture";
-import { adaptOverviewCard } from "./overviewAdapter";
 import { OVERVIEW_VISUAL_FIXTURE } from "./overviewFixture";
 import { RESULT_PAGE_TITLE } from "./cards";
 import { CanXuongDetail } from "./CanXuongDetail";
@@ -47,6 +49,7 @@ export type CommercialDashboardPageProps = {
   readonly reanalyzeHref?: string | null;
   readonly layoutMode?: "live" | "skeleton" | "visual";
   readonly previewFallback?: boolean;
+  readonly narrativeProvider?: NarrativeProvider;
 };
 
 function ResultPageHeader(): ReactNode {
@@ -90,15 +93,23 @@ export function CommercialDashboardPage({
   reanalyzeHref = null,
   layoutMode = "live",
   previewFallback = false,
+  narrativeProvider,
 }: CommercialDashboardPageProps): ReactNode {
   const harness = layoutMode === "skeleton" || layoutMode === "visual" || previewFallback;
+  const requestedProvider = narrativeProvider ?? resolveNarrativeProvider();
   const status = initialData?.status;
   const showGate = !harness && ((status && status !== "ready") || (!analysis && resultSource !== "current"));
 
   if (showGate) {
     const gateStatus = status && status !== "ready" ? status : "empty";
     return (
-      <div className="bte-cdash" data-dashboard="commercial-v1" data-canonical-result="ui03" data-narrative-surface="production">
+      <div
+        className="bte-cdash"
+        data-dashboard="commercial-v1"
+        data-canonical-result="ui03"
+        data-narrative-surface="production"
+        data-narrative-provider={requestedProvider}
+      >
         <ResultPageHeader />
         <ResultPageStatusGate
           status={gateStatus}
@@ -110,12 +121,6 @@ export function CommercialDashboardPage({
   }
 
   const model = adaptIdentityHeader(analysis, { request, analysisId });
-  const overview =
-    layoutMode === "visual"
-      ? OVERVIEW_VISUAL_FIXTURE
-      : layoutMode === "skeleton" || previewFallback
-        ? null
-        : adaptOverviewCard(analysis);
   const bazi =
     layoutMode === "visual"
       ? BAZI_VISUAL_FIXTURE
@@ -152,24 +157,36 @@ export function CommercialDashboardPage({
       : layoutMode === "skeleton" || previewFallback
         ? null
         : adaptLuckCard(analysis);
+  const narrative = harness
+    ? null
+    : selectNarrativePresentation(analysis, requestedProvider);
+  const overview =
+    layoutMode === "visual"
+      ? OVERVIEW_VISUAL_FIXTURE
+      : layoutMode === "skeleton" || previewFallback
+        ? null
+        : narrative?.overview ?? null;
   const interpretation =
     layoutMode === "visual"
       ? INTERPRETATION_VISUAL_FIXTURE
       : layoutMode === "skeleton" || previewFallback
         ? null
-        : adaptInterpretationCard(analysis);
+        : narrative?.interpretation ?? null;
   const actionPlan =
     layoutMode === "visual"
       ? ACTION_PLAN_VISUAL_FIXTURE
       : layoutMode === "skeleton" || previewFallback
         ? null
-        : adaptActionPlanCard(analysis);
+        : narrative?.actionPlan ?? null;
   return (
     <div
       className="bte-cdash"
       data-dashboard="commercial-v1"
       data-canonical-result="ui03"
       data-narrative-surface="production"
+      data-narrative-provider={narrative?.selected ?? requestedProvider}
+      data-narrative-fallback={narrative?.fallback ? "true" : "false"}
+      data-presentation-version={narrative?.presentationVersion ?? ""}
       data-layout={layoutMode === "skeleton" || previewFallback ? "skeleton" : layoutMode}
     >
       <ResultPageHeader />
