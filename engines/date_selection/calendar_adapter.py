@@ -41,10 +41,9 @@ def snapshot_for_solar(
     except ValueError as exc:
         raise DateSelectionValidationError(str(exc)) from exc
     calendar = (engine or _ENGINE).build(year, month, day, hour, minute)
-    year_ganzhi = calendar.lunar.year_can_chi or ""
+    year_ganzhi = calendar.year_can_chi or ""
     if not year_ganzhi:
-        gz = GanzhiAlgorithm.year(calendar.lunar_year)
-        year_ganzhi = f"{gz['can']} {gz['chi']}"
+        raise DateSelectionValidationError("calendar year_can_chi is required")
     _, year_branch = _split_ganzhi(year_ganzhi)
     if year_branch not in BRANCH_INDEX:
         raise DateSelectionValidationError(f"unknown year branch: {year_branch!r}")
