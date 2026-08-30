@@ -1,29 +1,33 @@
 /**
- * Commercial Dashboard V1.0 — Identity Header + canonical 12-column grid (UI-03).
+ * Commercial Dashboard — Visual System V2 (UI-14).
+ * Token aliases only. Frozen UI-03 geometry stays on data-span.
  */
 
-@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:wght@600;700&display=swap");
+@import "../../styles/tokens.css";
 
 .bte-cdash {
-  --cdash-bg: #f2f1ef;
-  --cdash-card: #ffffff;
-  --cdash-border: #e8e6e3;
-  --cdash-text: #1c1c1c;
-  --cdash-muted: #5c6570;
-  --cdash-accent: #9a1b1b;
-  --cdash-accent-soft: rgba(154, 27, 27, 0.08);
+  --cdash-bg: var(--surface-background);
+  --cdash-card: var(--surface-report-paper);
+  --cdash-border: var(--border-divider);
+  --cdash-text: var(--text-primary);
+  --cdash-muted: var(--text-secondary);
+  --cdash-accent: var(--accent-primary);
+  --cdash-accent-soft: var(--accent-primary-soft);
   --cdash-radius: 14px;
-  --cdash-gap: 24px;
-  --cdash-pad: 24px;
-  --cdash-shadow: 0 2px 8px rgba(28, 28, 28, 0.06), 0 1px 2px rgba(28, 28, 28, 0.04);
-  --cdash-hero-shadow: 0 10px 28px rgba(154, 27, 27, 0.08), 0 2px 8px rgba(28, 28, 28, 0.06);
-  --cdash-font: "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif;
+  --cdash-gap: var(--space-5);
+  --cdash-pad: var(--space-4);
+  --cdash-shadow: var(--elevation-soft);
+  --cdash-hero-shadow: var(--elevation-overlay);
+  --cdash-font: var(--font-family-body);
 
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 16px 32px 48px;
+  padding: var(--space-4) var(--space-6) var(--space-7);
   color: var(--cdash-text);
   font-family: var(--cdash-font);
   background: var(--cdash-bg);
@@ -37,29 +41,33 @@
 }
 
 #canonical-desktop-root:has(.bte-cdash) {
-  background: #f2f1ef;
+  background: var(--surface-background);
 }
 
 .bte-cdash__page-header {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 10px;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+  order: 1;
 }
 
 .bte-cdash__title {
   margin: 0;
-  font-size: 1.125rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--cdash-text);
+  font-size: var(--font-size-subsection);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-heading);
+  color: var(--text-secondary);
 }
 
 .bte-cdash__quiet-link {
-  font-size: 0.8125rem;
+  font-size: var(--font-size-caption);
   color: var(--cdash-muted);
   text-decoration: none;
+  min-height: var(--touch-target-min);
+  display: inline-flex;
+  align-items: center;
 }
 
 .bte-cdash__quiet-link:hover {
@@ -77,12 +85,13 @@
   min-height: 0;
   max-height: none;
   overflow: visible;
-  margin-bottom: 16px;
-  padding: 12px 16px;
+  margin-bottom: var(--space-5);
+  padding: var(--space-3) var(--space-4);
   background: var(--cdash-card);
   border: 1px solid var(--cdash-border);
   border-radius: var(--cdash-radius);
-  box-shadow: var(--cdash-shadow);
+  box-shadow: var(--elevation-none);
+  order: 2;
 }
 
 .bte-id [data-region="identity"] { grid-area: identity; padding-right: 16px; }
@@ -256,12 +265,13 @@
 }
 
 .bte-id__cx-detail {
-  margin: 0 0 16px;
-  padding: 12px 16px;
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3) var(--space-4);
   background: var(--cdash-card);
   border: 1px solid var(--cdash-border);
   border-radius: var(--cdash-radius);
-  box-shadow: var(--cdash-shadow);
+  box-shadow: var(--elevation-none);
+  order: 4;
 }
 
 .bte-id__cx-detail-title {
@@ -398,6 +408,7 @@
   align-items: start;
   gap: var(--cdash-gap);
   width: 100%;
+  order: 3;
 }
 
 .bte-cdash__card {
@@ -415,24 +426,38 @@
 .bte-cdash__card--span-12 { grid-column: span 12; }
 
 .bte-cdash__card-title {
-  margin: 0 0 16px;
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  margin: 0 0 var(--space-4);
+  font-size: var(--font-size-subsection);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-heading);
+  line-height: var(--line-height-heading);
   color: var(--cdash-text);
 }
 
 .bte-cdash__skel {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-3);
 }
 
 .bte-cdash__skel span {
   display: block;
   height: 10px;
-  border-radius: 999px;
-  background: #efece8;
+  border-radius: var(--bte-radius-9999);
+  background: var(--surface-section);
+  animation: bte-cdash-skel var(--motion-slow) var(--motion-ease-in-out) infinite;
+}
+
+@keyframes bte-cdash-skel {
+  0%,
+  100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bte-cdash__skel span {
+    animation: none;
+  }
 }
 
 .bte-cdash__skel span:nth-child(1) { width: 72%; }
@@ -453,21 +478,24 @@
 }
 
 .bte-cdash .rp-status-gate__cta {
-  display: inline-block;
-  margin-top: 16px;
-  padding: 8px 16px;
-  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--space-4);
+  min-height: var(--touch-target-min);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-control);
   background: var(--cdash-accent);
-  color: #fff;
+  color: var(--text-inverse);
   text-decoration: none;
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-semibold);
 }
 
 /* Tablet: Identity A+B then C+D. Body reflows; semantic order unchanged. */
 @media (max-width: 1199px) {
   .bte-cdash {
-    padding: 20px 24px 40px;
+    padding: var(--space-5) var(--space-5) var(--space-6);
   }
 
   .bte-id {
@@ -522,7 +550,7 @@
 /* Mobile: one column, A → B → C → D then cards. */
 @media (max-width: 767px) {
   .bte-cdash {
-    padding: 16px;
+    padding: var(--space-4);
   }
 
   .bte-cdash__page-header {
@@ -567,9 +595,9 @@
   }
 }
 
-/* UI-03R Overview — Hero Card. Stronger than BaZi. Do not change grid spans. */
+/* UI-14 Hero — Overview is the visual anchor. data-span stays 4. */
 .bte-cdash__card.bte-ov {
-  padding: 28px 24px 28px 22px;
+  padding: var(--space-6);
   border-left: 4px solid var(--cdash-accent);
   box-shadow: var(--cdash-hero-shadow);
 }
@@ -577,35 +605,53 @@
 .bte-ov {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--space-5);
 }
 
 .bte-ov .bte-cdash__card-title {
   margin: 0;
-  font-size: 0.875rem;
-  letter-spacing: 0.08em;
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-metadata);
   color: var(--cdash-accent);
 }
 
 .bte-ov__header {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--space-1);
 }
 
 .bte-ov__subtitle {
   margin: 0;
-  font-size: 0.75rem;
-  font-weight: 500;
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
   color: var(--cdash-muted);
-  line-height: 1.4;
+  line-height: var(--line-height-caption);
+}
+
+.bte-ov__priority {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.bte-ov__priority-title {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-heading);
+  color: var(--cdash-text);
 }
 
 .bte-ov__insight {
   margin: 0;
-  font-size: 1.125rem;
-  font-weight: 700;
-  line-height: 1.45;
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-section);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.35;
+  letter-spacing: var(--letter-spacing-heading);
   color: var(--cdash-text);
   display: -webkit-box;
   -webkit-line-clamp: 4;
@@ -616,7 +662,7 @@
 .bte-ov__group {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .bte-ov__group[data-overview-section="balance"] {
@@ -625,39 +671,39 @@
 
 .bte-ov__badge {
   min-width: 0;
-  padding: 10px 12px;
+  padding: var(--space-3) var(--space-4);
   border-radius: 10px;
   background: var(--cdash-accent-soft);
-  border: 1px solid rgba(154, 27, 27, 0.12);
+  border: 1px solid var(--border-divider);
 }
 
 .bte-ov__badge-label {
   display: block;
-  font-size: 0.625rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-size: var(--font-size-metadata);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-metadata);
   text-transform: uppercase;
   color: var(--cdash-muted);
 }
 
 .bte-ov__badge-value {
   display: block;
-  margin-top: 2px;
-  font-size: 0.8125rem;
-  font-weight: 700;
-  line-height: 1.3;
+  margin-top: var(--space-1);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-heading);
   color: var(--cdash-text);
 }
 
 .bte-ov__conclusion {
   margin: 0;
-  padding: 12px 14px;
+  padding: var(--space-3) var(--space-4);
   border-radius: 10px;
-  background: #f7f5f2;
+  background: var(--surface-section);
   border-left: 3px solid var(--cdash-accent);
-  font-size: 0.875rem;
-  font-weight: 600;
-  line-height: 1.45;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-body);
   color: var(--cdash-text);
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -667,8 +713,9 @@
 
 .bte-ov__empty {
   margin: 0;
-  font-size: 0.8125rem;
+  font-size: var(--font-size-body);
   color: var(--cdash-muted);
+  line-height: var(--line-height-body);
 }
 
 @media (max-width: 767px) {
@@ -680,7 +727,7 @@
 
 /* UI-03R BaZi — detailed evidence table. Do not change grid spans. */
 .bte-cdash__card.bte-bazi {
-  padding: 16px 18px;
+  padding: var(--space-4);
   box-shadow: none;
 }
 
@@ -737,7 +784,7 @@
   padding: 6px 12px;
   border: 1px solid var(--cdash-border);
   border-radius: 999px;
-  background: #f7f5f2;
+  background: var(--surface-section);
   color: var(--cdash-text);
   font-family: inherit;
   font-size: 0.75rem;
@@ -891,7 +938,7 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-3);
 }
 
 .bte-fe__row {
@@ -911,7 +958,7 @@
   display: block;
   height: 8px;
   border-radius: 999px;
-  background: #f1efec;
+  background: var(--surface-section);
   overflow: hidden;
   min-width: 0;
 }
@@ -975,7 +1022,7 @@
   padding: 6px 12px;
   border: 1px solid var(--cdash-border);
   border-radius: 999px;
-  background: #f7f5f2;
+  background: var(--surface-section);
   color: var(--cdash-text);
   font-family: inherit;
   font-size: 0.75rem;
@@ -1671,10 +1718,32 @@
 
 .bte-ap__marker {
   flex: 0 0 auto;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--cdash-accent);
-  line-height: 1.45;
+  width: var(--bte-icon-sm);
+  height: var(--bte-icon-sm);
+  margin-top: 2px;
+  border-radius: var(--bte-radius-9999);
+  border: 1.5px solid var(--cdash-accent);
+  box-sizing: border-box;
+}
+
+.bte-ap__marker--priority {
+  background: var(--cdash-accent);
+  border-color: var(--cdash-accent);
+}
+
+.bte-ap__marker--action {
+  background: transparent;
+  border-color: var(--accent-primary);
+}
+
+.bte-ap__marker--warning {
+  border-color: var(--feedback-warning);
+  background: var(--feedback-warning);
+}
+
+.bte-ap__marker--watch {
+  border-color: var(--text-muted);
+  background: transparent;
 }
 
 .bte-ap__copy {
@@ -1715,7 +1784,7 @@
 }
 
 .bte-ap__warnings .bte-ap__item {
-  background: #f7f6f4;
+  background: var(--feedback-warning-soft);
 }
 
 @media (max-width: 767px) {
@@ -1741,6 +1810,119 @@
     flex-wrap: wrap;
     align-items: baseline;
     gap: 0;
+  }
+}
+
+/* —— UI-14 Visual System V2 overlay —— */
+
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="overview"] {
+  order: 10;
+  grid-column: 1 / -1;
+}
+
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="interpretation"] {
+  order: 20;
+}
+
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="action-plan"] {
+  order: 21;
+}
+
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="bazi"] { order: 30; }
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="five-elements"] { order: 31; }
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="ten-gods"] { order: 32; }
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="pattern"] { order: 33; }
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="shensha"] { order: 34; }
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="luck"] { order: 35; }
+
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-visual-level="3"] {
+  box-shadow: var(--elevation-none);
+}
+
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-visual-level="2"] {
+  padding: var(--space-5);
+  box-shadow: var(--cdash-shadow);
+}
+
+.bte-cdash__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--bte-radius-9999);
+  font-size: var(--font-size-metadata);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+  letter-spacing: var(--letter-spacing-metadata);
+}
+
+.bte-cdash__badge--accent {
+  background: var(--accent-primary-soft);
+  color: var(--accent-primary);
+}
+
+.bte-cdash__badge--neutral {
+  background: var(--surface-section);
+  color: var(--text-secondary);
+}
+
+.bte-id__cx-badge,
+.bte-pat__status,
+.bte-tg__badge,
+.bte-fe__status {
+  border-radius: var(--bte-radius-9999);
+}
+
+.bte-pat__arrow {
+  width: var(--bte-icon-sm);
+  height: var(--bte-icon-sm);
+  margin: 0 0 var(--space-1);
+  border-right: 1.5px solid var(--cdash-muted);
+  border-bottom: 1.5px solid var(--cdash-muted);
+  transform: rotate(45deg);
+  font-size: 0;
+}
+
+.bte-cdash [class$="__empty"] {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--text-secondary);
+}
+
+.bte-cdash a:focus-visible,
+.bte-cdash button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.bte-cdash button {
+  min-height: var(--touch-target-min);
+  min-width: var(--touch-target-min);
+}
+
+.bte-int__lead,
+.bte-int__zone-body,
+.bte-int__closing {
+  max-width: 72ch;
+}
+
+@media (max-width: 1199px) {
+  .bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="overview"],
+  .bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="interpretation"],
+  .bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="action-plan"],
+  .bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="bazi"],
+  .bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="luck"] {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 767px) {
+  .bte-cdash[data-visual="v2"] .bte-cdash__card[data-card] {
+    grid-column: 1 / -1;
+  }
+
+  .bte-ov__insight {
+    font-size: var(--font-size-subsection);
   }
 }
 
