@@ -54,23 +54,41 @@ function publishedCanChi(stem: string, branch: string, ...candidates: unknown[])
   return stem || branch;
 }
 
+function bindPillarCung(
+  extra: Record<string, unknown>,
+  route: Record<string, unknown>,
+  cell: Record<string, unknown>,
+  ruleVersion: string,
+): string {
+  const canonical = firstText(extra.cung_phi, route.cung_phi);
+  if (canonical) return canonical;
+  // G1-10C structured payloads must not fall back to Hạ Nguyên identity palaces.
+  if (ruleVersion === "G1-10C" || ruleVersion.startsWith("G1-10")) {
+    return "";
+  }
+  return firstText(cell.cung_phi);
+}
+
 function bindPillar(
   identityRaw: unknown,
   baziPillar: PillarDto | undefined,
+  routeRaw: unknown,
+  ruleVersion: string,
 ): IdentityPillarView {
   const cell = asRecord(identityRaw);
   const extra = asRecord(baziPillar);
+  const route = asRecord(routeRaw);
   const labeled = splitCanChi(text(cell.can_chi));
   const stem = firstText(baziPillar?.stem, cell.stem, labeled.stem);
   const branch = firstText(baziPillar?.branch, cell.branch, labeled.branch);
-  if (!stem && !branch && !cell.can_chi && !cell.cung_phi) return EMPTY_PILLAR;
+  if (!stem && !branch && !cell.can_chi && !cell.cung_phi && !extra.cung_phi) return EMPTY_PILLAR;
   return {
     stem,
     branch,
-    canChi: publishedCanChi(stem, branch, extra.can_chi, cell.can_chi),
+    canChi: publishedCanChi(stem, branch, extra.can_chi, extra.ganzhi, cell.can_chi),
     // Tứ Trụ summary uses published Ngũ Hành only. Full nap_am stays on Bát Tự.
     napAm: firstText(cell.nayin_element),
-    cungPhi: firstText(cell.cung_phi),
+    cungPhi: bindPillarCung(extra, route, cell, ruleVersion),
   };
 }
 
@@ -135,10 +153,12 @@ export function adaptIdentityHeader(
   const four = asRecord(identity.four_pillars);
   const bazi = payload.bazi;
   const request = options.request;
-  const year = bindPillar(four.year, bazi?.year_pillar);
-  const month = bindPillar(four.month, bazi?.month_pillar);
-  const day = bindPillar(four.day, bazi?.day_pillar);
-  const hour = bindPillar(four.hour, bazi?.hour_pillar);
+  const routing = asRecord(calendar.ganzhi_routing);
+  const ruleVersion = text(calendar.calendar_rule_version);
+  const year = bindPillar(four.year, bazi?.year_pillar, routing.year, ruleVersion);
+  const month = bindPillar(four.month, bazi?.month_pillar, routing.month, ruleVersion);
+  const day = bindPillar(four.day, bazi?.day_pillar, routing.day, ruleVersion);
+  const hour = bindPillar(four.hour, bazi?.hour_pillar, routing.hour, ruleVersion);
   const genderRaw = firstText(person.gender, customer?.gender, request?.gender);
   const identityBone = asRecord(identity.bone_weight);
   const cungPhi = firstText(calendar.cung_phi, feng.cung_phi, feng.gua_name);
