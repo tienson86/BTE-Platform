@@ -8,7 +8,9 @@ from engines.narrative_v2.reasoning import NarrativeReasoningContext
 from engines.narrative_v2.runtime import BUILDER_STAGES, SHADOW_MODE, NarrativeRuntime
 from engines.narrative_v2.runtime.runtime_pipeline import StageResult
 
-IMPLEMENTED = frozenset({"build_evidence", "build_reasoning", "resolve_knowledge"})
+IMPLEMENTED = frozenset(
+    {"build_evidence", "build_reasoning", "resolve_knowledge", "commercial_rewrite"}
+)
 
 
 def test_r14_runtime_build_reasoning_returns_context(
@@ -33,6 +35,7 @@ def test_r15_later_stages_remain_not_implemented(
     runtime.pipeline.build_evidence()
     runtime.pipeline.build_reasoning()
     runtime.pipeline.resolve_knowledge()
+    runtime.pipeline.commercial_rewrite()
     later = tuple(stage for stage in BUILDER_STAGES if stage not in IMPLEMENTED)
     for stage in later:
         output = runtime.pipeline.execute_stage(stage)
