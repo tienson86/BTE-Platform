@@ -4,7 +4,12 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from engines.narrative_v2.language.language_asset_status import CATEGORIES, CUSTOMER_ELIGIBLE
+from engines.narrative_v2.language.language_asset_status import (
+    CATEGORIES,
+    CUSTOMER_ELIGIBLE,
+    MEANING_CATEGORIES,
+    TASK_CATEGORIES,
+)
 from engines.narrative_v2.language.language_errors import SentenceAssetValidationError
 from engines.narrative_v2.language.sentence_asset import SentenceAsset
 
@@ -64,8 +69,6 @@ class SentenceAssetValidator:
             raise SentenceAssetValidationError("Sentence missing semantic_key")
         if asset.category not in CATEGORIES:
             raise SentenceAssetValidationError(f"Invalid category: {asset.category}")
-        if asset.category == "action":
-            raise SentenceAssetValidationError("Action category is not allowed")
         if not asset.source_knowledge_ids:
             raise SentenceAssetValidationError("Sentence missing source Knowledge trace")
         if not asset.meaning_key:
@@ -80,9 +83,12 @@ class SentenceAssetValidator:
         for claim in FORBIDDEN_CLAIMS:
             if claim in blob:
                 raise SentenceAssetValidationError("Unsupported generated claim")
-        for token in ACTION_MARKERS:
-            if token in blob:
-                raise SentenceAssetValidationError("Action in sentence asset")
+        if asset.category in MEANING_CATEGORIES:
+            for token in ACTION_MARKERS:
+                if token in blob:
+                    raise SentenceAssetValidationError("Action in sentence asset")
+        if asset.category in TASK_CATEGORIES and blob.strip() in {"Bạn nên.", "Bạn nên"}:
+            raise SentenceAssetValidationError("Generic filler action")
         for token in PREDICTION_MARKERS:
             if token in blob:
                 raise SentenceAssetValidationError("Prediction in sentence asset")
