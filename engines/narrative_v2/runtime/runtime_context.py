@@ -73,3 +73,4 @@ class NarrativeRuntimeContext:
     rewrite: object | None = None
     summary: object | None = None
     interpretation: object | None = None
+    conversation: object | None = None
