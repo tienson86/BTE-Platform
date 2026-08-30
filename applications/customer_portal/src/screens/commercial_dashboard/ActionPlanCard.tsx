@@ -5,24 +5,25 @@
 import { useState, type ReactNode } from "react";
 import { ACTION_PLAN_LABELS } from "./cards";
 import type { ActionItemView, ActionPlanView, DashboardCardSpec } from "./types";
+import { visualCardDom } from "./visualHierarchy";
 
 type ActionPlanCardProps = {
   readonly card: DashboardCardSpec;
   readonly model: ActionPlanView;
 };
 
+type ActionMarker = "priority" | "action" | "warning" | "watch";
+
 function Item({
   item,
   marker,
 }: {
   readonly item: ActionItemView;
-  readonly marker: string;
+  readonly marker: ActionMarker;
 }): ReactNode {
   return (
     <li className="bte-ap__item" data-ap-source={item.source}>
-      <span className="bte-ap__marker" aria-hidden="true">
-        {marker}
-      </span>
+      <span className={`bte-ap__marker bte-ap__marker--${marker}`} aria-hidden="true" />
       <div className="bte-ap__copy">
         {item.domain ? <p className="bte-ap__domain">{item.domain}</p> : null}
         <p className="bte-ap__item-title">{item.title}</p>
@@ -48,6 +49,7 @@ export function ActionPlanCard({ card, model }: ActionPlanCardProps): ReactNode 
       data-implemented="action-plan"
       data-expanded={expanded ? "true" : "false"}
       aria-label={model.title}
+      {...visualCardDom(card.id)}
     >
       <header className="bte-ap__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
@@ -72,7 +74,7 @@ export function ActionPlanCard({ card, model }: ActionPlanCardProps): ReactNode 
             <section className="bte-ap__priority" data-ap-section="priority">
               <h3 className="bte-ap__heading">{ACTION_PLAN_LABELS.priority}</h3>
               <ul className="bte-ap__list bte-ap__list--priority">
-                <Item item={model.priority} marker="1" />
+                <Item item={model.priority} marker="priority" />
               </ul>
             </section>
           ) : null}
@@ -81,7 +83,7 @@ export function ActionPlanCard({ card, model }: ActionPlanCardProps): ReactNode 
               <h3 className="bte-ap__heading">{ACTION_PLAN_LABELS.actions}</h3>
               <ul className="bte-ap__list bte-ap__list--tiles">
                 {actions.map((item) => (
-                  <Item key={`${item.source}-${item.title}`} item={item} marker="✓" />
+                  <Item key={`${item.source}-${item.title}`} item={item} marker="action" />
                 ))}
               </ul>
             </section>
@@ -91,7 +93,7 @@ export function ActionPlanCard({ card, model }: ActionPlanCardProps): ReactNode 
               <h3 className="bte-ap__heading">{ACTION_PLAN_LABELS.warnings}</h3>
               <ul className="bte-ap__list">
                 {model.warnings.map((item) => (
-                  <Item key={`${item.source}-${item.title}`} item={item} marker="•" />
+                  <Item key={`${item.source}-${item.title}`} item={item} marker="warning" />
                 ))}
               </ul>
             </section>
@@ -101,7 +103,7 @@ export function ActionPlanCard({ card, model }: ActionPlanCardProps): ReactNode 
               <h3 className="bte-ap__heading">{ACTION_PLAN_LABELS.watch}</h3>
               <ul className="bte-ap__list">
                 {model.watch.map((item) => (
-                  <Item key={`${item.source}-${item.title}`} item={item} marker="•" />
+                  <Item key={`${item.source}-${item.title}`} item={item} marker="watch" />
                 ))}
               </ul>
             </section>
