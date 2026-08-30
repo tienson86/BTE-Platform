@@ -18,3 +18,12 @@ export {
   ReportMetric,
   ReportSectionHeader,
 } from "./components/ReportPrimitives";
+export {
+  PrintAppendix,
+  PrintCallout,
+  PrintCover,
+  PrintDivider,
+  PrintFooter,
+  PrintHeader,
+  PrintSection,
+} from "./print";
