@@ -70,3 +70,4 @@ class NarrativeRuntimeContext:
     evidence: object | None = None
     reasoning: object | None = None
     knowledge: object | None = None
+    rewrite: object | None = None
