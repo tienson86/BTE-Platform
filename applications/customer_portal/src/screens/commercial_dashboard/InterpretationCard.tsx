@@ -6,6 +6,8 @@ import { useState, type ReactNode } from "react";
 import { INTERPRETATION_CLOSE_LABEL, INTERPRETATION_LEAD_LABEL } from "./cards";
 import type { DashboardCardSpec, InterpretationView, InterpretationZoneView } from "./types";
 import { visualCardDom } from "./visualHierarchy";
+import { MobileToggle, useMobileOpen } from "./mobile/MobileToggle";
+import { mobileCardDom } from "./mobile/mobileOrder";
 
 type InterpretationCardProps = {
   readonly card: DashboardCardSpec;
@@ -32,18 +34,22 @@ function canReveal(model: InterpretationView): boolean {
  */
 export function InterpretationCard({ card, model }: InterpretationCardProps): ReactNode {
   const [expanded, setExpanded] = useState(false);
+  const mobile = useMobileOpen();
   const reveal = canReveal(model);
   const visibleZones = model.zones.filter((zone) => zone.body);
 
   return (
     <article
       className={`bte-cdash__card bte-cdash__card--span-${card.span} bte-int`}
+      id="bte-card-interpretation"
       data-card={card.id}
       data-span={card.span}
       data-implemented="interpretation"
       data-expanded={expanded ? "true" : "false"}
+      data-mobile-open={mobile.open ? "true" : "false"}
       aria-label={model.title}
       {...visualCardDom(card.id)}
+      {...mobileCardDom(card.id)}
     >
       <header className="bte-int__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
@@ -57,6 +63,7 @@ export function InterpretationCard({ card, model }: InterpretationCardProps): Re
             {expanded ? "Thu gọn" : "Xem luận giải đầy đủ"}
           </button>
         ) : null}
+        <MobileToggle open={mobile.open} label="Xem chi tiết" onToggle={mobile.toggle} />
       </header>
       {!model.available ? (
         <p className="bte-int__empty" data-int-empty="true">
@@ -73,7 +80,7 @@ export function InterpretationCard({ card, model }: InterpretationCardProps): Re
               </p>
             </section>
           ) : null}
-          <div className="bte-int__zones">
+          <div className="bte-int__zones" data-mobile-body="true">
             {visibleZones.map((zone) => (
               <Zone key={zone.id} zone={zone} />
             ))}
