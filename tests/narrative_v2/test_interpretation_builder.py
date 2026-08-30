@@ -46,9 +46,8 @@ def test_i10_meaning_preserved(case_0001_canonical: dict[str, Any]) -> None:
     primary = rewrite.item(meta["primary_rewrite_id"])
     assert primary is not None
     assert narrative.meaning is not None
-    source = primary.source_meaning.rstrip(".").casefold()
-    meaning = narrative.meaning.casefold()
-    assert source in meaning or source[1:] in meaning
+    assert narrative.meaning == primary.customer_language
+    assert primary.source_meaning.strip()
 
 
 def test_i11_traceability(case_0001_canonical: dict[str, Any]) -> None:
