@@ -16,7 +16,7 @@
   const VIEW_KEY = "bte_view_result";
   const CURRENT_ID_KEY = "bte_current_analysis_id";
   const VIEW_ID_KEY = "bte_view_analysis_id";
-  const CALENDAR_RULE_VERSION = "G1-10B";
+  const CALENDAR_RULE_VERSION = "G1-10C";
   // Pre-refactor keys — read-only, so existing browser sessions keep their data.
   const LEGACY_LAST_KEY = "bte_portal_last_result";
   const LEGACY_HISTORY_KEY = "bte_portal_history";
@@ -166,10 +166,9 @@
    */
   function isIncompatibleCalendarRule(data) {
     const cal = data && data.calendar;
-    if (!cal || typeof cal !== "object") return false;
+    if (!cal || typeof cal !== "object") return true;
     const version = cal.calendar_rule_version;
-    if (version && version !== CALENDAR_RULE_VERSION) return true;
-    if (!version && cal.ganzhi_routing) return true;
+    if (!version || version !== CALENDAR_RULE_VERSION) return true;
     return false;
   }
 
