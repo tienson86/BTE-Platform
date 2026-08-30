@@ -1052,18 +1052,21 @@ function mapS09(data: AnalysisDataDto): CanonicalDesktopViewModel["s09"] {
       ? (data.feng_shui as Record<string, unknown>)
       : {};
   const cung = asString(
-    feng.cung_phi ?? cal.cung_phi ?? feng.menh_quai ?? cal.menh_quai,
+    cal.cung_phi ?? feng.cung_phi ?? feng.gua_name ?? cal.gua_name ?? feng.menh_quai ?? cal.menh_quai,
     base.quai.center,
   );
-  const menh = asString(feng.menh_quai ?? cal.menh_quai ?? feng.cung_phi ?? cal.cung_phi, cung);
-  const nhom = asString(feng.nhom_trach ?? cal.nhom_trach, "");
+  const menh = asString(cal.menh_quai ?? feng.menh_quai ?? cal.cung_phi ?? feng.cung_phi, cung);
+  const nhom = asString(cal.house_group ?? cal.nhom_trach ?? feng.house_group ?? feng.nhom_trach, "");
   const guaName = asString(feng.gua_name ?? cal.gua_name, menh);
-  const numberMatch = guaName.match(/\d+/) ?? menh.match(/\d+/);
+  const guaNumber = asString(cal.gua_number ?? feng.gua_number, "");
+  const numberMatch = guaNumber.match(/\d+/) ?? guaName.match(/\d+/) ?? menh.match(/\d+/);
+  const tamNguyen = asString(cal.tam_nguyen);
+  const cuuVan = asString(cal.cuu_van);
   const bullets = [
     `Cung mệnh: ${cung || menh}`,
     nhom ? `Nhóm trạch: ${nhom}` : base.quai.bullets[1],
-    asString(cal.group_label, base.quai.bullets[2]),
-    asString(cal.avoid_label, base.quai.bullets[3]),
+    tamNguyen ? `Tam Nguyên: ${tamNguyen}` : asString(cal.group_label, base.quai.bullets[2]),
+    cuuVan ? `Cửu Vận: ${cuuVan}` : asString(cal.avoid_label, base.quai.bullets[3]),
   ].filter(Boolean);
 
   return {
