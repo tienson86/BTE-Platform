@@ -62,3 +62,4 @@ export type { VisualLevel, VisualCardType } from "./visualHierarchy";
 export { VISUALIZATIONS, vizDom } from "./vizCatalog";
 export type { VisualizationKind } from "./vizCatalog";
 export { MOBILE_EVIDENCE_CARDS, MOBILE_VISUAL_ORDER, mobileCardDom } from "./mobile";
+export { MOTION_DURATIONS, MOTION_EASING } from "./motion";
