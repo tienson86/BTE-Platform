@@ -23,6 +23,7 @@ const LIVE_ANALYSIS = {
   pattern: { cach_cuc: "Chính Ấn" },
   useful_god: {
     useful_display: "Hỏa · Đinh · Chính Quan",
+    unfavorable_display: "Canh, Tân",
     short_reason: "Lá số cần Hỏa để điều tiết khí hậu.",
   },
   temperature: { balancing_need: "warming", balancing_need_label: "Cần ôn ấm" },
@@ -73,10 +74,13 @@ describe("UI-04 Overview card", () => {
     const { container } = renderLive();
     expect(container.querySelector('[data-evidence="day-master"]')?.textContent).toMatch(/Nhật Chủ/);
     expect(container.querySelector('[data-evidence="strength"]')?.textContent).toMatch(/Thân vượng/);
-    expect(container.querySelector('[data-evidence="pattern"]')?.textContent).toMatch(/Chính Ấn/);
+    expect(container.querySelector('[data-evidence="avoid-god"]')?.textContent).toMatch(/Kỵ Thần/);
     expect(container.querySelector('[data-evidence="useful-god"]')?.textContent).toMatch(/Dụng Thần/);
     expect(container.querySelector('[data-evidence="temperature"]')?.textContent).toMatch(/Cần ôn ấm/);
     expect(container.querySelectorAll("[data-evidence]")).toHaveLength(5);
+    const overview = container.querySelector('[data-card="overview"]')?.textContent || "";
+    expect(overview).not.toMatch(/Mệnh Cục/);
+    expect(container.querySelector('[data-card="pattern"]')?.textContent).toMatch(/MỆNH CỤC/);
   });
 
   it("O6 has a Quick Conclusion area", () => {
@@ -106,7 +110,7 @@ describe("UI-04 Overview card", () => {
     const bound = adaptOverviewCard(LIVE_ANALYSIS);
     expect(bound.identity.find((item) => item.key === "day-master")?.value).toBe("Canh Kim");
     expect(bound.identity.find((item) => item.key === "strength")?.value).toBe("Thân vượng");
-    expect(bound.identity.find((item) => item.key === "pattern")?.value).toBe("Chính Ấn");
+    expect(bound.identity.find((item) => item.key === "avoid-god")?.value).toBe("Canh · Tân");
     expect(bound.balance.find((item) => item.key === "useful-god")?.value).toBe(
       "Hỏa · Đinh · Chính Quan",
     );
@@ -165,7 +169,7 @@ describe("UI-04 Overview card", () => {
       "identity",
       "day-master",
       "strength",
-      "pattern",
+      "avoid-god",
       "balance",
       "useful-god",
       "temperature",
