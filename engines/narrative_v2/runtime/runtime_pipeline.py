@@ -1,6 +1,6 @@
 """Narrative V2 runtime pipeline.
 
-Evidence, reasoning, knowledge, and rewrite are implemented. Later builder stages remain placeholders.
+Evidence through summary are implemented. Later builder stages remain placeholders.
 """
 
 from __future__ import annotations
@@ -39,7 +39,7 @@ BUILDER_STAGES: tuple[str, ...] = CANONICAL_STAGES[1:-2]
 
 @dataclass(slots=True)
 class StageResult:
-    """Stage output. Evidence through rewrite are implemented; later builders are placeholders."""
+    """Stage output. Evidence through summary are implemented; later builders are placeholders."""
 
     stage: str
     payload: object = field(default=NotImplemented)
@@ -47,7 +47,7 @@ class StageResult:
 
 
 class RuntimePipeline:
-    """Sequential pipeline. Evidence through rewrite are implemented; later builders are placeholders."""
+    """Sequential pipeline. Evidence through summary are implemented; later builders are placeholders."""
 
     def __init__(self, runtime: "NarrativeRuntime") -> None:
         self._runtime = runtime
@@ -78,7 +78,7 @@ class RuntimePipeline:
         return self.execute_stage("commercial_rewrite")
 
     def build_summary(self) -> StageResult:
-        """Stage: summary. Not implemented."""
+        """Stage: summary. Assembles OverviewSummary from rewrite units."""
         return self.execute_stage("build_summary")
 
     def build_interpretation(self) -> StageResult:
@@ -176,6 +176,8 @@ class RuntimePipeline:
             return self._run_knowledge()
         if stage == "commercial_rewrite":
             return self._run_rewrite()
+        if stage == "build_summary":
+            return self._run_summary()
         if stage == "validate":
             return self._run_validate()
         if stage == "publish":
@@ -247,6 +249,22 @@ class RuntimePipeline:
         return StageResult(
             stage="commercial_rewrite",
             payload=rewrite,
+            status="implemented",
+        )
+
+    def _run_summary(self) -> StageResult:
+        from engines.narrative_v2.runtime.runtime_errors import BuilderError
+        from engines.narrative_v2.summary import SummaryBuilder, SummaryError
+
+        context = self._runtime.require_context()
+        try:
+            summary = SummaryBuilder().build(context.rewrite)
+        except SummaryError as exc:
+            raise BuilderError(str(exc)) from exc
+        context.summary = summary
+        return StageResult(
+            stage="build_summary",
+            payload=summary,
             status="implemented",
         )
 
