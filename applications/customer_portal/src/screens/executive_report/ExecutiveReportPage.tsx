@@ -25,6 +25,7 @@ import { buildExecutiveReportView } from "./reportModel";
 import "./executive-report.css";
 import "./print/print.css";
 import "../commercial_dashboard/mobile/mobileExperience.css";
+import "../commercial_dashboard/motion/motionExperience.css";
 
 export type ExecutiveReportPageProps = {
   readonly analysis?: AnalysisDataDto | null;
@@ -45,6 +46,7 @@ export function ExecutiveReportPage({
       className="bte-er"
       data-ui="executive-report"
       data-report="preview"
+      data-motion="v1"
       data-pdf-export="false"
       data-print-ready="true"
       data-narrative-source="presentation-v2"
