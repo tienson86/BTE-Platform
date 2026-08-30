@@ -7,7 +7,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from fastapi import FastAPI, Form, Query, Request
+from urllib.parse import parse_qs
+
+from fastapi import FastAPI, Query, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -72,14 +74,15 @@ def create_app(
         return HTMLResponse(html)
 
     @app.post("/studio/approval")
-    def record_approval(
-        case: str = Form(DEFAULT_CASE_ID),
-        verdict: str = Form("REVIEW"),
-        comment: str = Form(""),
-        reviewer: str = Form("internal"),
-    ) -> RedirectResponse:
-        case_id = _safe_case(case)
-        store.record(case_id=case_id, verdict=verdict, comment=comment, reviewer=reviewer)
+    async def record_approval(request: Request) -> RedirectResponse:
+        fields = await _read_fields(request)
+        case_id = _safe_case(str(fields.get("case") or DEFAULT_CASE_ID))
+        store.record(
+            case_id=case_id,
+            verdict=str(fields.get("verdict") or "REVIEW"),
+            comment=str(fields.get("comment") or ""),
+            reviewer=str(fields.get("reviewer") or "internal"),
+        )
         return RedirectResponse(
             f"/studio?case={case_id}&panel=approval&notice=recorded",
             status_code=303,
@@ -97,6 +100,19 @@ def _safe_case(case_id: str) -> str:
         return get_case(case_id).case_id
     except KeyError:
         return DEFAULT_CASE_ID
+
+
+async def _read_fields(request: Request) -> dict[str, str]:
+    """Parse JSON or urlencoded body without python-multipart."""
+    content_type = request.headers.get("content-type", "")
+    if "application/json" in content_type:
+        payload = await request.json()
+        if isinstance(payload, dict):
+            return {str(key): str(value) for key, value in payload.items()}
+        return {}
+    raw = (await request.body()).decode("utf-8")
+    parsed = parse_qs(raw, keep_blank_values=True)
+    return {key: (values[0] if values else "") for key, values in parsed.items()}
 
 
 app = create_app()
