@@ -14,12 +14,13 @@ import { ReportSectionHeader } from "./ReportPrimitives";
 
 type ReportAppendixProps = {
   readonly model: ReportAppendixView;
+  readonly children?: ReactNode;
 };
 
 /**
  * Level 4 reference. Omits unpublished metadata fields.
  */
-export function ReportAppendix({ model }: ReportAppendixProps): ReactNode {
+export function ReportAppendix({ model, children }: ReportAppendixProps): ReactNode {
   return (
     <section
       className="bte-er__section bte-er__appendix"
@@ -55,6 +56,7 @@ export function ReportAppendix({ model }: ReportAppendixProps): ReactNode {
           </div>
         ) : null}
       </dl>
+      {children}
     </section>
   );
 }
