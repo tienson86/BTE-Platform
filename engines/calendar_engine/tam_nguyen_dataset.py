@@ -24,7 +24,7 @@ from engines.calendar_engine.tam_nguyen import (
     yuan_start_year,
 )
 
-CALENDAR_RULE_VERSION = "G1-10B"
+CALENDAR_RULE_VERSION = "G1-10C"
 DATASET_NAME = "tam_nguyen_60_hoa_giap.csv"
 
 _DATA_PATH = Path(__file__).resolve().parent / "data" / DATASET_NAME
