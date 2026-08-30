@@ -16,6 +16,8 @@ REPO = Path(__file__).resolve().parents[3]
 OUT = REPO / "implementation" / "commercial_ui_polish" / "ui20" / "screenshots"
 BEFORE_NREL = REPO / "implementation" / "narrative_release" / "n_rel_01" / "screenshots"
 BEFORE_UI14 = REPO / "implementation" / "commercial_ui_polish" / "ui14" / "screenshots"
+BEFORE_UI16 = REPO / "implementation" / "commercial_ui_polish" / "ui16" / "screenshots"
+BEFORE_UI17 = REPO / "implementation" / "commercial_ui_polish" / "ui17" / "screenshots"
 PORTAL = REPO / "applications" / "customer_portal"
 API_PORT = 8000
 PORTAL_PORT = 8081
@@ -100,6 +102,8 @@ def _copy_before() -> None:
     mapping = {
         BEFORE_NREL / "02_narrative_v2_production.png": "before_desktop_full.png",
         BEFORE_UI14 / "mobile_full.png": "before_mobile.png",
+        BEFORE_UI16 / "09_full_report_preview.png": "before_report.png",
+        BEFORE_UI17 / "06_print_preview.png": "before_print.png",
     }
     for src, dest in mapping.items():
         if src.exists():
