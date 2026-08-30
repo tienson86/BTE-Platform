@@ -20,21 +20,22 @@ export function PrintAppendix({ model }: PrintAppendixProps): ReactNode {
   return (
     <PrintSection breakBefore>
       <div data-print="appendix">
-        <ReportAppendix model={model} />
-        <footer className="bte-print__signature" data-print="signature">
-          <p className="bte-print__signature-label">{PRINT_PREPARED_BY}</p>
-          <p className="bte-print__signature-org">{PRINT_PREPARED_ORG}</p>
-          {model.presentationVersion ? (
-            <p className="bte-print__signature-meta">
-              {REPORT_APPENDIX_LABEL.presentationVersion}: {model.presentationVersion}
-            </p>
-          ) : null}
-          {model.analysisDate ? (
-            <p className="bte-print__signature-meta">
-              {REPORT_APPENDIX_LABEL.analysisDate}: {model.analysisDate}
-            </p>
-          ) : null}
-        </footer>
+        <ReportAppendix model={model}>
+          <footer className="bte-print__signature" data-print="signature">
+            <p className="bte-print__signature-label">{PRINT_PREPARED_BY}</p>
+            <p className="bte-print__signature-org">{PRINT_PREPARED_ORG}</p>
+            {model.presentationVersion ? (
+              <p className="bte-print__signature-meta">
+                {REPORT_APPENDIX_LABEL.presentationVersion}: {model.presentationVersion}
+              </p>
+            ) : null}
+            {model.analysisDate ? (
+              <p className="bte-print__signature-meta">
+                {REPORT_APPENDIX_LABEL.analysisDate}: {model.analysisDate}
+              </p>
+            ) : null}
+          </footer>
+        </ReportAppendix>
       </div>
     </PrintSection>
   );
