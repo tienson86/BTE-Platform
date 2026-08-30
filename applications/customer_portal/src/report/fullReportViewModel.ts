@@ -132,6 +132,8 @@ export type FullReportViewModel = {
   readonly cungPhi: string;
   readonly menhQuai: string;
   readonly nhomTrach: string;
+  readonly tamNguyen: string;
+  readonly cuuVan: string;
   readonly scoreLabel: string;
   readonly climateState: string;
   readonly balancingNeed: string;
@@ -261,9 +263,11 @@ export function buildFullReportViewModel(
     luckEvidence: stripInternalRuleIds(text(luck?.evidence)),
     luckMethod: text(luck?.method_note),
     luckCycles: cycles,
-    cungPhi: text(feng.cung_phi || calendar.cung_phi),
-    menhQuai: text(feng.menh_quai || calendar.menh_quai),
-    nhomTrach: text(feng.nhom_trach || calendar.nhom_trach),
+    cungPhi: text(calendar.cung_phi || feng.cung_phi),
+    menhQuai: text(calendar.menh_quai || feng.menh_quai),
+    nhomTrach: text(calendar.house_group || calendar.nhom_trach || feng.house_group || feng.nhom_trach),
+    tamNguyen: text(calendar.tam_nguyen),
+    cuuVan: text(calendar.cuu_van),
     scoreLabel:
       score.total_score != null && score.grade
         ? `${score.total_score} / ${score.grade}`
@@ -449,6 +453,11 @@ function identityGrid(model: FullReportViewModel): string {
     ${kv("Giới tính", model.gender)}
     ${kv("Nơi sinh", model.birthPlace)}
     ${kv("Múi giờ", model.timezone)}
+    ${kv("Tam Nguyên", model.tamNguyen)}
+    ${kv("Cửu Vận", model.cuuVan)}
+    ${kv("Cung Phi", model.cungPhi)}
+    ${kv("Mệnh Quái", model.menhQuai)}
+    ${kv("Nhóm Trạch", model.nhomTrach)}
   </div>`;
 }
 
@@ -561,6 +570,8 @@ function luckBlock(model: FullReportViewModel): string {
 
 function fengBlock(model: FullReportViewModel): string {
   return `<div class="bte-full-grid">
+    ${kv("Tam Nguyên", model.tamNguyen)}
+    ${kv("Cửu Vận", model.cuuVan)}
     ${kv("Cung Phi", model.cungPhi)}
     ${kv("Mệnh Quái", model.menhQuai)}
     ${kv("Nhóm Trạch", model.nhomTrach)}
