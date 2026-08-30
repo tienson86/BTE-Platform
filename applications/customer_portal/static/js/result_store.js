@@ -116,6 +116,12 @@
     if (!result || typeof result !== "object") return null;
     if (!result.data || typeof result.data !== "object") return null;
     const data = Object.assign({}, result.data);
+    if (Object.prototype.hasOwnProperty.call(result.data, "narrative_result")) {
+      data.narrative_result = result.data.narrative_result;
+    }
+    if (Object.prototype.hasOwnProperty.call(result.data, "narrative_v2_shadow")) {
+      data.narrative_v2_shadow = result.data.narrative_v2_shadow;
+    }
     const analysisId =
       result.analysis_id ||
       result.id ||
@@ -427,6 +433,19 @@
     removeRaw([VIEW_KEY, VIEW_ID_KEY]);
   }
 
+  /**
+   * Diagnostic Narrative V2 Presentation envelope. Never overwrites Pack05.
+   *
+   * @returns {object|null}
+   */
+  function loadNarrativeV2Shadow() {
+    const current = loadCurrent() || load();
+    if (!current || !current.data || typeof current.data !== "object") return null;
+    const shadow = current.data.narrative_v2_shadow;
+    if (!shadow || typeof shadow !== "object") return null;
+    return shadow;
+  }
+
   global.BtePortal = global.BtePortal || {};
   global.BtePortal.ResultStore = {
     LAST_KEY: LAST_KEY,
@@ -449,5 +468,6 @@
     loadForView: loadForView,
     peekView: peekView,
     clearView: clearView,
+    loadNarrativeV2Shadow: loadNarrativeV2Shadow,
   };
 })(window);
