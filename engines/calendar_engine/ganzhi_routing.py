@@ -1,11 +1,7 @@
 """Canonical Ganzhi source routing for Year / Month / Day / Hour.
 
-Year and Month identity rows use the Tam Nguyên of the Gregorian year.
-Day and Hour identity rows stay on Hạ Nguyên.
-
-Can Chi stems/branches are still computed by Calendar algorithms
-(solar-term month, JDN day, Ngũ Thử Độn hour). Nguyên routing selects
-which 60 Hoa Giáp Cung dataset those labels resolve against.
+Year and Month Can Chi (stem + branch) come from the Tam Nguyên dataset.
+Day and Hour Can Chi stay on Hạ Nguyên (JDN / Ngũ Thử Độn).
 """
 
 from __future__ import annotations
@@ -14,10 +10,14 @@ from dataclasses import dataclass
 from typing import Any
 
 from engines.calendar_engine.algorithms.ganzhi import GanzhiAlgorithm
-from engines.calendar_engine.cung_phi import cung_for_ganzhi, ganzhi_label_for_year
+from engines.calendar_engine.cung_phi import cung_for_ganzhi
 from engines.calendar_engine.julian.julian import JulianDay
-from engines.calendar_engine.month_ganzhi import month_pillar
-from engines.calendar_engine.tam_nguyen import HA_NGUYEN, calculate_tam_nguyen, tam_nguyen_for_year
+from engines.calendar_engine.tam_nguyen import HA_NGUYEN, calculate_tam_nguyen
+from engines.calendar_engine.tam_nguyen_dataset import (
+    CALENDAR_RULE_VERSION,
+    resolve_month_pillar,
+    resolve_year_pillar,
+)
 
 PILLAR_YEAR = "year"
 PILLAR_MONTH = "month"
@@ -33,10 +33,13 @@ NGUYEN_CODE = {
 
 @dataclass(slots=True)
 class GanzhiRoute:
-    """One pillar's Can Chi plus the Nguyên dataset used for its Cung row."""
+    """One pillar's actual Can Chi plus the Nguyên that supplied it."""
 
     pillar: str
+    heavenly_stem: str
+    earthly_branch: str
     ganzhi: str
+    nap_am: str
     source_nguyen: str
     source_nguyen_code: str
     cung_phi: str
@@ -45,7 +48,10 @@ class GanzhiRoute:
         """Serialize routing diagnostics for Calendar / tests."""
         return {
             "pillar": self.pillar,
+            "heavenly_stem": self.heavenly_stem,
+            "earthly_branch": self.earthly_branch,
             "ganzhi": self.ganzhi,
+            "nap_am": self.nap_am,
             "source_nguyen": self.source_nguyen,
             "source_nguyen_code": self.source_nguyen_code,
             "cung_phi": self.cung_phi,
@@ -64,7 +70,17 @@ def source_nguyen_for_pillar(pillar: str, tam_nguyen: str) -> str:
     return HA_NGUYEN
 
 
-def _route(pillar: str, ganzhi: str, source_nguyen: str, reference_year: int) -> GanzhiRoute:
+def _route(
+    pillar: str,
+    ganzhi: str,
+    source_nguyen: str,
+    reference_year: int,
+    *,
+    nap_am: str = "",
+) -> GanzhiRoute:
+    parts = ganzhi.split()
+    stem = parts[0] if parts else ""
+    branch = parts[1] if len(parts) > 1 else ""
     cung = cung_for_ganzhi(
         ganzhi,
         tam_nguyen=source_nguyen,
@@ -73,25 +89,38 @@ def _route(pillar: str, ganzhi: str, source_nguyen: str, reference_year: int) ->
     )
     return GanzhiRoute(
         pillar=pillar,
+        heavenly_stem=stem,
+        earthly_branch=branch,
         ganzhi=ganzhi,
+        nap_am=nap_am,
         source_nguyen=source_nguyen,
         source_nguyen_code=nguyen_code(source_nguyen),
         cung_phi=cung,
     )
 
 
-def resolve_year_ganzhi(year: int) -> GanzhiRoute:
-    """Look up Year Can Chi in the Tam Nguyên 60 Hoa Giáp block containing ``year``."""
-    yuan = tam_nguyen_for_year(year)
-    label = ganzhi_label_for_year(year)
-    return _route(PILLAR_YEAR, label, yuan, year)
+def resolve_year_ganzhi(year: int, month: int = 6, day: int = 15) -> GanzhiRoute:
+    """Year stem/branch from the Tam Nguyên 60 Hoa Giáp table."""
+    resolved = resolve_year_pillar(year, month=month, day=day)
+    return _route(
+        PILLAR_YEAR,
+        resolved.ganzhi,
+        resolved.source_nguyen,
+        year,
+        nap_am=resolved.nap_am,
+    )
 
 
 def resolve_month_ganzhi(year: int, month: int, day: int) -> GanzhiRoute:
-    """Month Can Chi from solar-term Ngũ Hổ Độn; Cung from the year's Tam Nguyên."""
-    yuan = tam_nguyen_for_year(year)
-    stem, branch = month_pillar(year, month, day)
-    return _route(PILLAR_MONTH, f"{stem} {branch}", yuan, year)
+    """Month stem/branch from the same Tam Nguyên Year stem (Ngũ Hổ Độn)."""
+    resolved = resolve_month_pillar(year, month, day)
+    return _route(
+        PILLAR_MONTH,
+        resolved.ganzhi,
+        resolved.source_nguyen,
+        year,
+        nap_am=resolved.nap_am,
+    )
 
 
 def resolve_day_ganzhi(year: int, month: int, day: int) -> GanzhiRoute:
@@ -132,18 +161,25 @@ def routing_table(
     day_ganzhi: str | None = None,
     hour_ganzhi: str | None = None,
 ) -> dict[str, GanzhiRoute]:
-    """Canonical four-pillar Nguyên routing for one civil datetime.
-
-    Can Chi labels may be supplied from Calendar / BaZi. Nguyên source is
-    always Year/Month = Tam Nguyên of ``year``, Day/Hour = Hạ Nguyên.
-    """
-    yuan = tam_nguyen_for_year(year)
-    year_label = year_ganzhi or ganzhi_label_for_year(year)
+    """Canonical four-pillar routing. Year/Month Can Chi come from the dataset."""
+    year_route = resolve_year_ganzhi(year)
+    month_route = resolve_month_ganzhi(year, month, day)
+    if year_ganzhi:
+        year_route = _route(
+            PILLAR_YEAR,
+            year_ganzhi,
+            year_route.source_nguyen,
+            year,
+            nap_am=year_route.nap_am,
+        )
     if month_ganzhi:
-        month_label = month_ganzhi
-    else:
-        stem, branch = month_pillar(year, month, day)
-        month_label = f"{stem} {branch}"
+        month_route = _route(
+            PILLAR_MONTH,
+            month_ganzhi,
+            month_route.source_nguyen,
+            year,
+            nap_am=month_route.nap_am,
+        )
     if day_ganzhi:
         day_label = day_ganzhi
     else:
@@ -153,8 +189,8 @@ def routing_table(
     else:
         hour_label = resolve_hour_ganzhi(year, month, day, hour).ganzhi
     return {
-        PILLAR_YEAR: _route(PILLAR_YEAR, year_label, yuan, year),
-        PILLAR_MONTH: _route(PILLAR_MONTH, month_label, yuan, year),
+        PILLAR_YEAR: year_route,
+        PILLAR_MONTH: month_route,
         PILLAR_DAY: _route(PILLAR_DAY, day_label, HA_NGUYEN, year),
         PILLAR_HOUR: _route(PILLAR_HOUR, hour_label, HA_NGUYEN, year),
     }
@@ -184,6 +220,7 @@ def routing_payload(
         hour_ganzhi=hour_ganzhi,
     )
     return {
+        "calendar_rule_version": CALENDAR_RULE_VERSION,
         "tam_nguyen": cycle.tam_nguyen,
         "tam_nguyen_code": nguyen_code(cycle.tam_nguyen),
         "cuu_van": cycle.cuu_van,
