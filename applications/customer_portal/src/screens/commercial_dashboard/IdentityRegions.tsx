@@ -3,6 +3,7 @@
  */
 
 import type { ReactNode } from "react";
+import { CAN_XUONG_EMPTY_COPY } from "./canXuongAdapter";
 import type { IdentityFoundationView, IdentityPersonView, IdentityStatusView } from "./types";
 
 type KvRow = { readonly label: string; readonly value: string };
@@ -42,45 +43,97 @@ export function IdentityPerson({ person }: { readonly person: IdentityPersonView
 }
 
 /**
- * Region C — Cân Xương Đoán Mệnh (replaces the former Foundation summary).
+ * Region C — Cân Xương Đoán Mệnh summary card.
  */
 export function IdentityFoundation({
   foundation,
 }: {
   readonly foundation: IdentityFoundationView;
 }): ReactNode {
+  if (!foundation.available) {
+    return (
+      <section
+        className="bte-id__region bte-id__region--cx"
+        data-region="foundation"
+        data-module="bone-weight"
+        data-can-xuong="empty"
+      >
+        <p className="bte-id__region-label">Cân Xương Đoán Mệnh</p>
+        <p className="bte-id__cx-empty">{CAN_XUONG_EMPTY_COPY}</p>
+      </section>
+    );
+  }
   return (
-    <section className="bte-id__region" data-region="foundation" data-module="bone-weight">
+    <section
+      className="bte-id__region bte-id__region--cx"
+      data-region="foundation"
+      data-module="bone-weight"
+      data-can-xuong="summary"
+    >
       <p className="bte-id__region-label">Cân Xương Đoán Mệnh</p>
-      <KvList
-        rows={[
-          { label: "Cân lượng", value: foundation.weight },
-          { label: "Phân loại", value: foundation.classification },
-          { label: "Đánh giá", value: foundation.rating },
-          { label: "Tóm tắt", value: foundation.summary },
-        ]}
-      />
+      <p className="bte-id__cx-weight" data-slot="can-xuong-weight">
+        {foundation.displayWeight}
+      </p>
+      {foundation.classification ? (
+        <p className="bte-id__cx-badge" data-slot="can-xuong-class">
+          {foundation.classification}
+        </p>
+      ) : null}
+      {foundation.summary ? (
+        <p className="bte-id__cx-summary" data-slot="can-xuong-summary">
+          {foundation.summary}
+        </p>
+      ) : null}
+      <a className="bte-id__cx-link" href={foundation.detailHref}>
+        Xem chi tiết
+      </a>
     </section>
   );
 }
 
+type TechRow = { readonly label: string; readonly value: string };
+
 /**
- * Region D — analysis id plus technical calendar / Cung Phi metadata.
+ * Region D — compact technical metadata. UUID stays on one ellipsized line.
  */
 export function IdentityStatus({ status }: { readonly status: IdentityStatusView }): ReactNode {
-  const rows: KvRow[] = [];
-  if (status.analysisId) rows.push({ label: "Mã phân tích", value: status.analysisId });
-  if (status.analyzedAt) rows.push({ label: "Ngày phân tích", value: status.analyzedAt });
-  if (status.tamNguyen) rows.push({ label: "Tam Nguyên", value: status.tamNguyen });
-  if (status.cuuVan) rows.push({ label: "Cửu Vận", value: status.cuuVan });
-  if (status.cungPhi) rows.push({ label: "Cung Phi", value: status.cungPhi });
-  if (status.menhQuai) rows.push({ label: "Mệnh Quái", value: status.menhQuai });
-  if (status.nhomTrach) rows.push({ label: "Nhóm Trạch", value: status.nhomTrach });
-  if (status.tietKhi) rows.push({ label: "Tiết khí", value: status.tietKhi });
+  const primary: TechRow[] = [
+    { label: "Tam Nguyên", value: status.tamNguyen },
+    { label: "Cửu Vận", value: status.cuuVan },
+    { label: "Cung Phi", value: status.cungPhi },
+    { label: "Mệnh Quái", value: status.menhQuai },
+    { label: "Nhóm Trạch", value: status.nhomTrach },
+    { label: "Tiết khí", value: status.tietKhi },
+  ].filter((row) => row.value);
   return (
     <section className="bte-id__region bte-id__region--status" data-region="status">
       <p className="bte-id__region-label">Thông tin kỹ thuật</p>
-      {rows.length > 0 ? <KvList rows={rows} /> : <p className="bte-id__status-empty">—</p>}
+      {primary.length > 0 ? (
+        <dl className="bte-id__tech">
+          {primary.map((row) => (
+            <div key={row.label} className="bte-id__tech-row">
+              <dt>{row.label}</dt>
+              <dd>{row.value}</dd>
+            </div>
+          ))}
+        </dl>
+      ) : (
+        <p className="bte-id__status-empty">—</p>
+      )}
+      <div className="bte-id__tech-meta">
+        {status.analysisId ? (
+          <p className="bte-id__tech-id" title={status.analysisId}>
+            <span>Mã phân tích</span>
+            <span data-slot="analysis-id">{status.analysisId}</span>
+          </p>
+        ) : null}
+        {status.analyzedAt ? (
+          <p className="bte-id__tech-when">
+            <span>Ngày phân tích</span>
+            <span>{status.analyzedAt}</span>
+          </p>
+        ) : null}
+      </div>
     </section>
   );
 }
