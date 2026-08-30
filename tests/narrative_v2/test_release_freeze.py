@@ -98,15 +98,14 @@ def test_golden_case0001_is_release_baseline() -> None:
 
 
 def test_certification_case0001_is_certified_append_only() -> None:
+    original = CERT.read_text(encoding="utf-8")
     history = CertificationHistory(CERT)
     assert history.current_status("CASE-0001") == STATUS_CERTIFIED
     rows = history.list_for("CASE-0001")
     assert len(rows) >= 2
     assert rows[-1]["status"] == STATUS_CERTIFIED
     assert rows[-1]["certification_version"] == CERTIFICATION_VERSION
-    original = CERT.read_text(encoding="utf-8")
-    loaded = history.list_for("CASE-0001")
-    assert json.dumps(loaded, ensure_ascii=False) in original or len(loaded) == len(rows)
+    assert CERT.read_text(encoding="utf-8") == original
 
 
 def test_final_health_has_no_critical_alerts(tmp_path: Path) -> None:
