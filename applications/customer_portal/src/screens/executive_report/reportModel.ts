@@ -75,6 +75,22 @@ export type ExecutiveReportView = {
   readonly appendix: ReportAppendixView;
 };
 
+function publishedMeta(data: AnalysisDataDto | null | undefined): Record<string, unknown> {
+  const meta = data?.result_meta;
+  if (!meta || typeof meta !== "object") return {};
+  return meta as Record<string, unknown>;
+}
+
+function publishedAnalysisDate(data: AnalysisDataDto | null | undefined): string {
+  const meta = publishedMeta(data);
+  const raw = String(meta.created_at || meta.analyzed_at || "").trim();
+  return formatPublishedDate(raw);
+}
+
+function publishedReportVersion(data: AnalysisDataDto | null | undefined): string {
+  return String(publishedMeta(data).release_label || "").trim();
+}
+
 function joinPublished(parts: readonly string[]): string {
   return parts.filter((part) => part.trim()).join(" · ");
 }
@@ -166,8 +182,8 @@ export function buildExecutiveReportView(
   const identity = adaptIdentityHeader(data, { request: request ?? null });
   const pattern = adaptPatternCard(data);
   const luck = adaptLuckCard(data);
-  const analysisDate = formatPublishedDate(identity.status.analyzedAt);
-  const reportVersion = identity.status.version;
+  const analysisDate = publishedAnalysisDate(data);
+  const reportVersion = publishedReportVersion(data);
   return {
     presentation,
     cover: {
