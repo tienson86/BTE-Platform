@@ -7,6 +7,8 @@ import { SHENSHA_FALLBACK_HEADING } from "./cards";
 import type { DashboardCardSpec, ShenShaItemView, ShenShaView } from "./types";
 import { visualCardDom } from "./visualHierarchy";
 import { vizDom } from "./vizCatalog";
+import { MobileToggle, useMobileOpen } from "./mobile/MobileToggle";
+import { mobileCardDom } from "./mobile/mobileOrder";
 
 const FEATURED_LIMIT = 4;
 
@@ -43,6 +45,7 @@ function ItemBlock({ item }: { readonly item: ShenShaItemView }): ReactNode {
  */
 export function ShenShaCard({ card, model }: ShenShaCardProps): ReactNode {
   const [expanded, setExpanded] = useState(false);
+  const mobile = useMobileOpen();
   const extraItems = model.items.length > FEATURED_LIMIT;
   const canExpand = extraItems;
   const fallbackItems = expanded || model.grouped ? model.items : model.items.slice(0, FEATURED_LIMIT);
@@ -55,9 +58,11 @@ export function ShenShaCard({ card, model }: ShenShaCardProps): ReactNode {
       data-implemented="shensha"
       data-expanded={expanded ? "true" : "false"}
       data-grouped={model.grouped ? "true" : "false"}
+      data-mobile-open={mobile.open ? "true" : "false"}
       aria-label={model.title}
       {...visualCardDom(card.id)}
       {...vizDom(card.id)}
+      {...mobileCardDom(card.id)}
     >
       <header className="bte-ss__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
@@ -71,13 +76,16 @@ export function ShenShaCard({ card, model }: ShenShaCardProps): ReactNode {
             {expanded ? "Thu gọn" : "Xem chi tiết"}
           </button>
         ) : null}
+        {model.available ? (
+          <MobileToggle open={mobile.open} label="Xem chi tiết" onToggle={mobile.toggle} />
+        ) : null}
       </header>
       {!model.available ? (
         <p className="bte-ss__empty" data-ss-empty="true">
           Chưa có dữ liệu Thần Sát.
         </p>
       ) : (
-        <>
+        <div data-mobile-body="true">
           {model.grouped ? (
             <div className="bte-ss__groups" data-ss-section="groups">
               {model.groups.map((group) => (
@@ -111,7 +119,7 @@ export function ShenShaCard({ card, model }: ShenShaCardProps): ReactNode {
               {model.note}
             </p>
           ) : null}
-        </>
+        </div>
       )}
     </article>
   );
