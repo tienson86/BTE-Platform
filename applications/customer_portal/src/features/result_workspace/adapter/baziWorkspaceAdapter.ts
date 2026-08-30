@@ -264,11 +264,25 @@ function bindShenSha(data: AnalysisDataDto): WorkspaceShenShaView {
 }
 
 function bindBoneWeight(data: AnalysisDataDto): WorkspaceBoneWeightView {
+  const canonical = asRecord((data as { can_xuong?: unknown }).can_xuong);
   const src = asRecord(identityOf(data).bone_weight);
+  const amount = text(canonical.display_weight) || text(canonical.weight) || text(src.weight);
+  const classification = text(canonical.classification) || text(src.classification);
+  const interpretation =
+    text(canonical.summary) || text(canonical.interpretation) || text(src.summary);
+  const amountSource = text(canonical.display_weight) || text(canonical.weight)
+    ? "can_xuong.display_weight"
+    : "identity.bone_weight.weight";
+  const classSource = text(canonical.classification)
+    ? "can_xuong.classification"
+    : "identity.bone_weight.classification";
+  const interpSource = text(canonical.summary) || text(canonical.interpretation)
+    ? "can_xuong.summary"
+    : "identity.bone_weight.summary";
   return {
-    amount: field(text(src.weight), "identity.bone_weight.weight"),
-    classification: field(text(src.classification), "identity.bone_weight.classification"),
-    interpretation: field(text(src.summary), "identity.bone_weight.summary"),
+    amount: field(amount, amountSource),
+    classification: field(classification, classSource),
+    interpretation: field(interpretation, interpSource),
   };
 }
 
