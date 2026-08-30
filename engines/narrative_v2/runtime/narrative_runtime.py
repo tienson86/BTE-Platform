@@ -180,7 +180,7 @@ class NarrativeRuntime:
             status=context.runtime_state.value,
             runtime_metadata=dict(context.metadata),
             pipeline_trace=context.trace.snapshot(),
-            presentation=None,
+            presentation=context.presentation,
             errors=tuple(self._errors),
         )
 
