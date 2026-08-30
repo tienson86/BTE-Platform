@@ -394,8 +394,16 @@ function testNarrativeProviderLayersStayIndependent() {
   check("nrel01.layers_pack05", before.pack05 && before.pack05.contract === "pack05_narrative_result_v1", JSON.stringify(before.pack05));
   check("nrel01.layers_v2", before.narrative_v2 && before.narrative_v2.status === "ok", JSON.stringify(before.narrative_v2));
   const afterSwitch = ctx.store.selectNarrativeLayers();
-  check("nrel01.switch_does_not_mutate_pack05", afterSwitch.pack05 === before.pack05, "");
-  check("nrel01.switch_does_not_mutate_v2", afterSwitch.narrative_v2 === before.narrative_v2, "");
+  check(
+    "nrel01.switch_does_not_mutate_pack05",
+    JSON.stringify(afterSwitch.pack05) === JSON.stringify(before.pack05),
+    JSON.stringify(afterSwitch.pack05)
+  );
+  check(
+    "nrel01.switch_does_not_mutate_v2",
+    JSON.stringify(afterSwitch.narrative_v2) === JSON.stringify(before.narrative_v2),
+    JSON.stringify(afterSwitch.narrative_v2)
+  );
   const reloaded = ctx.store.load();
   check(
     "nrel01.reload_preserves_both",
