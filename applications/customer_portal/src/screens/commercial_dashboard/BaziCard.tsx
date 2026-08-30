@@ -68,7 +68,9 @@ export function BaziCard({ card, model }: BaziCardProps): ReactNode {
     >
       <header className="bte-bazi__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
-        <MobileToggle open={mobile.open} label="Xem chi tiết" onToggle={mobile.toggle} />
+        {model.available ? (
+          <MobileToggle open={mobile.open} label="Xem chi tiết" onToggle={mobile.toggle} />
+        ) : null}
       </header>
       {!model.available ? (
         <p className="bte-bazi__empty" data-bazi-empty="true">
