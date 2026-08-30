@@ -31,6 +31,7 @@ import { IdentityHeader } from "./IdentityHeader";
 import { MobileActionBar } from "./mobile/MobileActionBar";
 import "./commercial-dashboard.css";
 import "./mobile/mobileExperience.css";
+import "./motion/motionExperience.css";
 
 export type CommercialDashboardPageProps = {
   readonly analysis?: AnalysisDataDto | null;
@@ -109,6 +110,7 @@ export function CommercialDashboardPage({
         data-canonical-result="ui03"
         data-visual="v2"
         data-mobile-experience="true"
+        data-motion="v1"
         data-narrative-surface="production"
         data-narrative-provider={requestedProvider}
       >
@@ -187,6 +189,7 @@ export function CommercialDashboardPage({
       data-canonical-result="ui03"
       data-visual="v2"
       data-mobile-experience="true"
+      data-motion="v1"
       data-narrative-surface="production"
       data-narrative-provider={narrative?.selected ?? requestedProvider}
       data-narrative-fallback={narrative?.fallback ? "true" : "false"}
