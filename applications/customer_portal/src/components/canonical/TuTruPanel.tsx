@@ -41,10 +41,18 @@ function TuTruBadge({
 /**
  * One Tứ Trụ data row. Renders supplied labels only.
  */
-function TuTruRow({ label, pillar }: { label: string; pillar: TuTruPillar }): ReactNode {
+function TuTruRow({
+  label,
+  pillar,
+  rowKey,
+}: {
+  label: string;
+  pillar: TuTruPillar;
+  rowKey: TuTruRowKey;
+}): ReactNode {
   const canChi = pillar.canChi.trim() || EMPTY;
   return (
-    <tr>
+    <tr data-pillar={rowKey}>
       <th scope="row">{label}</th>
       <td className="bte-tu-tru__can-chi">{canChi}</td>
       <td>
@@ -97,7 +105,7 @@ export function TuTruPanel({
         </thead>
         <tbody>
           {TU_TRU_ROWS.map((row) => (
-            <TuTruRow key={row.key} label={row.label} pillar={pillars[row.key]} />
+            <TuTruRow key={row.key} label={row.label} rowKey={row.key} pillar={pillars[row.key]} />
           ))}
         </tbody>
       </table>
