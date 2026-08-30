@@ -69,3 +69,4 @@ class NarrativeRuntimeContext:
     trace: PipelineTrace = field(default_factory=PipelineTrace)
     evidence: object | None = None
     reasoning: object | None = None
+    knowledge: object | None = None
