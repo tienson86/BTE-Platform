@@ -40,9 +40,11 @@ def test_e12_later_stages_remain_not_implemented(
             "resolve_knowledge",
             "commercial_rewrite",
             "build_summary",
+            "build_interpretation",
         }
     )
     runtime.pipeline.build_summary()
+    runtime.pipeline.build_interpretation()
     for stage in later:
         output = runtime.pipeline.execute_stage(stage)
         assert output.payload is NotImplemented
