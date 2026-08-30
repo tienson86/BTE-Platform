@@ -5,6 +5,7 @@
 import { useState, type ReactNode } from "react";
 import { SHENSHA_FALLBACK_HEADING } from "./cards";
 import type { DashboardCardSpec, ShenShaItemView, ShenShaView } from "./types";
+import { visualCardDom } from "./visualHierarchy";
 
 const FEATURED_LIMIT = 4;
 
@@ -54,6 +55,7 @@ export function ShenShaCard({ card, model }: ShenShaCardProps): ReactNode {
       data-expanded={expanded ? "true" : "false"}
       data-grouped={model.grouped ? "true" : "false"}
       aria-label={model.title}
+      {...visualCardDom(card.id)}
     >
       <header className="bte-ss__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
