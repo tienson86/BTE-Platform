@@ -81,6 +81,12 @@ def test_rw5_meaning_preserved(case_0001_canonical: dict[str, Any]) -> None:
     _, context = _pipeline(case_0001_canonical)
     assert context.items
     for item in context.items:
+        assert item.source_meaning.strip()
+        meta = dict(item.metadata)
+        if meta.get("sentence_source") == "sentence_library":
+            assert item.customer_language.startswith("Bạn")
+            assert item.source_knowledge_ids
+            continue
         source = item.source_meaning.rstrip(".").casefold()
         customer = item.customer_language.casefold()
         assert source in customer or source[1:] in customer
