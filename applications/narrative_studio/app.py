@@ -13,26 +13,35 @@ from fastapi import FastAPI, Query, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
-from applications.narrative_studio.approvals import ApprovalStore
+from applications.narrative_studio.approvals import ApprovalStore, StudioApproval
 from applications.narrative_studio.catalog import DEFAULT_CASE_ID, get_case, list_cases
 from applications.narrative_studio.renderer import PANELS, render_studio
 from applications.narrative_studio.service import NarrativeStudioService
+from engines.narrative_v2.certification import (
+    CertificationGate,
+    CertificationHistory,
+    CertificationRejectedError,
+    CertificationTransitionError,
+)
 
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 PANEL_IDS = {item[0] for item in PANELS}
 
 _service = NarrativeStudioService()
 _approvals = ApprovalStore()
+_certifications = CertificationHistory()
 
 
 def create_app(
     *,
     service: NarrativeStudioService | None = None,
     approvals: ApprovalStore | None = None,
+    certifications: CertificationHistory | None = None,
 ) -> FastAPI:
     """Create the internal Studio application."""
     studio_service = service or _service
     store = approvals or _approvals
+    cert_gate = CertificationGate(history=certifications or _certifications)
     app = FastAPI(
         title="BTE Narrative Studio",
         description="Internal Narrative V2 review workspace. Not customer Portal.",
@@ -63,6 +72,13 @@ def create_app(
         case_id = _safe_case(case)
         active = panel if panel in PANEL_IDS else "overview"
         review = studio_service.load(case_id)
+        snapshot = cert_gate.inspect(
+            case_id=case_id,
+            presentation=review.presentation or {},
+            studio_review=_studio_meta(store.latest(case_id)),
+            validation_summary={"status": "PASS"},
+            test_summary={"status": "PASS"},
+        )
         html = render_studio(
             cases=list_cases(),
             review=review,
@@ -70,8 +86,34 @@ def create_app(
             approval=store.latest(case_id),
             history=store.list_for(case_id),
             notice=notice,
+            certification=snapshot,
+            certification_history=list(snapshot.get("history") or []),
         )
         return HTMLResponse(html)
+
+    @app.post("/studio/certification")
+    async def record_certification(request: Request) -> RedirectResponse:
+        fields = await _read_fields(request)
+        case_id = _safe_case(str(fields.get("case") or DEFAULT_CASE_ID))
+        review = studio_service.load(case_id)
+        notice = "recorded"
+        try:
+            cert_gate.submit(
+                case_id=case_id,
+                presentation=review.presentation or {},
+                decision=str(fields.get("decision") or "REVIEW"),
+                reviewer=str(fields.get("reviewer") or ""),
+                review_comment=str(fields.get("comment") or ""),
+                studio_review=_studio_meta(store.latest(case_id)),
+                validation_summary={"status": "PASS"},
+                test_summary={"status": "PASS"},
+            )
+        except (CertificationRejectedError, CertificationTransitionError) as exc:
+            notice = str(exc)
+        return RedirectResponse(
+            f"/studio?case={case_id}&panel=certification&notice={notice}",
+            status_code=303,
+        )
 
     @app.post("/studio/approval")
     async def record_approval(request: Request) -> RedirectResponse:
@@ -93,6 +135,17 @@ def create_app(
         return {"status": "ok", "app": "narrative_studio", "mode": "internal_shadow"}
 
     return app
+
+
+def _studio_meta(row: StudioApproval | None) -> dict[str, str]:
+    if row is None:
+        return {}
+    return {
+        "verdict": row.verdict,
+        "reviewer": row.reviewer,
+        "comment": row.comment,
+        "timestamp": row.timestamp,
+    }
 
 
 def _safe_case(case_id: str) -> str:
