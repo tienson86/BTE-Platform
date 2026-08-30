@@ -189,9 +189,10 @@ describe("N-REL-01 rollback", () => {
     expect(third.selected).toBe("pack05");
     expect(first.interpretation.lead).toBe(third.interpretation.lead);
     expect(second.interpretation.lead).toBe(CONSULTING);
-    expect(ANALYSIS.narrative_result).toEqual(first.overview === third.overview ? ANALYSIS.narrative_result : ANALYSIS.narrative_result);
-    expect((ANALYSIS.narrative_result as { contract: string }).contract).toBe("pack05_narrative_result_v1");
     expect(ANALYSIS.narrative_v2_shadow?.presentation).toBe(PRESENTATION);
+    expect((ANALYSIS.narrative_result as { contract: string }).contract).toBe(
+      "pack05_narrative_result_v1",
+    );
   });
 });
 
