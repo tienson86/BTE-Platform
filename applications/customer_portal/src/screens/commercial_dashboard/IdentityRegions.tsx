@@ -8,6 +8,14 @@ import type { IdentityFoundationView, IdentityPersonView, IdentityStatusView } f
 
 type KvRow = { readonly label: string; readonly value: string };
 
+function formatCustomerDate(value: string): string {
+  const trimmed = value.trim();
+  if (!trimmed) return "";
+  const iso = trimmed.match(/^(\d{4})-(\d{2})-(\d{2})(?:$|[T\s])/);
+  if (!iso) return trimmed;
+  return `${iso[3]}/${iso[2]}/${iso[1]}`;
+}
+
 function KvList({ rows }: { readonly rows: readonly KvRow[] }): ReactNode {
   return (
     <dl className="bte-id__kv">
@@ -32,7 +40,7 @@ export function IdentityPerson({ person }: { readonly person: IdentityPersonView
       <KvList
         rows={[
           { label: "Giới tính", value: person.gender },
-          { label: "Dương lịch", value: person.solarBirth },
+          { label: "Dương lịch", value: formatCustomerDate(person.solarBirth) },
           { label: "Âm lịch", value: person.lunarBirth },
           { label: "Giờ sinh", value: person.birthTime },
           { label: "Nơi sinh", value: person.birthPlace },
