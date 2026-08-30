@@ -74,7 +74,9 @@ export function FiveElementsCard({ card, model }: FiveElementsCardProps): ReactN
             {model.sectionHeading}
           </p>
         ) : null}
-        <MobileToggle open={mobile.open} label="Xem chi tiết" onToggle={mobile.toggle} />
+        {model.available ? (
+          <MobileToggle open={mobile.open} label="Xem chi tiết" onToggle={mobile.toggle} />
+        ) : null}
       </header>
       {!model.available ? (
         <p className="bte-fe__empty" data-fe-empty="true">
