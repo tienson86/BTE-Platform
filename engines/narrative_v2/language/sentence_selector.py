@@ -41,3 +41,39 @@ class SentenceSelector:
             return None
         ordered = sorted(eligible, key=lambda asset: (-asset.priority, asset.sentence_id))
         return ordered[0]
+
+    def select_all(
+        self,
+        semantic_key: str,
+        *,
+        category: str,
+        locale: str = "vi",
+        audience: str = "customer",
+        domain: str | None = None,
+        meaning_key: str | None = None,
+    ) -> tuple[SentenceAsset, ...]:
+        """Return every exact-match approved asset in deterministic order."""
+        first = self.select(
+            semantic_key,
+            category=category,
+            locale=locale,
+            audience=audience,
+            domain=domain,
+            meaning_key=meaning_key,
+        )
+        if first is None:
+            return ()
+        eligible = [
+            asset
+            for asset in self._registry.assets()
+            if asset.status in CUSTOMER_ELIGIBLE
+            and asset.semantic_key == semantic_key
+            and asset.category == category
+            and asset.locale == locale
+            and asset.audience == audience
+        ]
+        if domain is not None:
+            eligible = [asset for asset in eligible if asset.domain == domain]
+        if meaning_key is not None:
+            eligible = [asset for asset in eligible if asset.meaning_key == meaning_key]
+        return tuple(sorted(eligible, key=lambda asset: (-asset.priority, asset.sentence_id)))
