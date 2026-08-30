@@ -9,10 +9,14 @@ from .ganzhi_routing import hour_ganzhi_from_day_stem, routing_payload
 from .julian.julian import JulianDay
 from .lunar.converter import solar_to_lunar
 from .lunar.lunar import LunarDate
-from .month_ganzhi import month_pillar
 from .solar.solar import SolarDate
 from .solar_terms.engine import SolarTerm, SolarTermEngine
 from .tam_nguyen import calculate_tam_nguyen
+from .tam_nguyen_dataset import (
+    CALENDAR_RULE_VERSION,
+    resolve_month_pillar,
+    resolve_year_pillar,
+)
 
 
 @dataclass(slots=True)
@@ -35,9 +39,13 @@ class CalendarResult:
     lunar_date: str | None = None
     timezone_offset: float = 7.0
     timezone_name: str = "UTC+7"
+    year_stem: str | None = None
+    year_branch: str | None = None
+    year_can_chi: str | None = None
     month_stem: str | None = None
     month_branch: str | None = None
     month_can_chi: str | None = None
+    calendar_rule_version: str = CALENDAR_RULE_VERSION
     tam_nguyen: str | None = None
     cuu_van: int | None = None
     cung_phi: str | None = None
@@ -102,10 +110,13 @@ class CalendarResult:
             "lunar_date": self.lunar_date,
             "timezone_offset": self.timezone_offset,
             "timezone_name": self.timezone_name,
-            "year_can_chi": lunar_year_can_chi,
+            "year_can_chi": self.year_can_chi,
+            "year_stem": self.year_stem,
+            "year_branch": self.year_branch,
             "month_stem": self.month_stem,
             "month_branch": self.month_branch,
             "month_can_chi": self.month_can_chi,
+            "calendar_rule_version": self.calendar_rule_version,
             "tam_nguyen": self.tam_nguyen,
             "cuu_van": self.cuu_van,
             "cung_phi": self.cung_phi,
@@ -145,19 +156,19 @@ class CalendarEngine:
         solar = SolarDate(year, month, day)
         # Must convert via lunar algorithm — never copy solar Y/M/D into lunar.
         parts = solar_to_lunar(day, month, year, time_zone=time_zone)
-        ganzhi = GanzhiAlgorithm.year(parts.year)
-        year_can_chi = f"{ganzhi['can']} {ganzhi['chi']}"
+        lunar_ganzhi = GanzhiAlgorithm.year(parts.year)
+        lunar_year_can_chi = f"{lunar_ganzhi['can']} {lunar_ganzhi['chi']}"
         lunar = LunarDate(
             year=parts.year,
             month=parts.month,
             day=parts.day,
             leap=parts.leap,
-            year_can_chi=year_can_chi,
+            year_can_chi=lunar_year_can_chi,
         )
         solar_date = f"{day:02d}/{month:02d}/{year:04d}"
         lunar_date = _format_lunar_date(parts.day, parts.month, parts.year, parts.leap)
-        month_stem, month_branch = month_pillar(year, month, day)
-        month_can_chi = f"{month_stem} {month_branch}"
+        year_resolved = resolve_year_pillar(year, month=month, day=day)
+        month_resolved = resolve_month_pillar(year, month, day)
         cycle = calculate_tam_nguyen(year)
         cung = _cung_phi_for_gender(year, gender)
         jdn = JulianDay.day_number(year, month, day)
@@ -169,8 +180,8 @@ class CalendarEngine:
             month,
             day,
             hour,
-            year_ganzhi=year_can_chi,
-            month_ganzhi=month_can_chi,
+            year_ganzhi=year_resolved.ganzhi,
+            month_ganzhi=month_resolved.ganzhi,
             day_ganzhi=day_can_chi,
             hour_ganzhi=hour_can_chi,
         )
@@ -192,9 +203,13 @@ class CalendarEngine:
             lunar_date=lunar_date,
             timezone_offset=time_zone,
             timezone_name=timezone_name or "UTC+7",
-            month_stem=month_stem,
-            month_branch=month_branch,
-            month_can_chi=month_can_chi,
+            year_stem=year_resolved.heavenly_stem,
+            year_branch=year_resolved.earthly_branch,
+            year_can_chi=year_resolved.ganzhi,
+            month_stem=month_resolved.heavenly_stem,
+            month_branch=month_resolved.earthly_branch,
+            month_can_chi=month_resolved.ganzhi,
+            calendar_rule_version=CALENDAR_RULE_VERSION,
             tam_nguyen=cycle.tam_nguyen,
             cuu_van=cycle.cuu_van,
             cung_phi=None if cung is None else cung.cung_phi,
