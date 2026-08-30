@@ -1,0 +1,30 @@
+/**
+ * UI-20 Commercial Finish. Token consistency only. No new visual language.
+ */
+
+.bte-cdash[data-finish="v2"] {
+  max-width: min(1440px, 100%);
+}
+
+.bte-cdash[data-finish="v2"] .bte-cdash__card,
+.bte-cdash[data-finish="v2"] .bte-id {
+  overflow-wrap: anywhere;
+}
+
+.bte-cdash[data-finish="v2"] .bte-ss[data-viz="grouped-chips"] .bte-ss__item {
+  border-radius: var(--bte-radius-12);
+}
+
+@media (max-width: 767px) {
+  .bte-cdash[data-finish="v2"] {
+    overflow-x: clip;
+  }
+}
+
+@media print {
+  .bte-cdash[data-finish="v2"],
+  .bte-er[data-finish="v2"] {
+    animation: none !important;
+    transition: none !important;
+  }
+}
