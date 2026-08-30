@@ -5,6 +5,7 @@
 import type { ReactNode } from "react";
 import type { DashboardCardSpec } from "./types";
 import { visualCardDom } from "./visualHierarchy";
+import { mobileCardDom } from "./mobile/mobileOrder";
 
 type SkeletonCardProps = {
   readonly card: DashboardCardSpec;
@@ -22,6 +23,7 @@ export function SkeletonCard({ card }: SkeletonCardProps): ReactNode {
       data-skeleton="true"
       aria-label={card.title}
       {...visualCardDom(card.id)}
+      {...mobileCardDom(card.id)}
     >
       <h2 className="bte-cdash__card-title">{card.title}</h2>
       <div className="bte-cdash__skel" aria-hidden="true">
