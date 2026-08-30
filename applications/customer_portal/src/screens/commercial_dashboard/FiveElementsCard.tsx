@@ -4,6 +4,7 @@
 
 import type { ReactNode } from "react";
 import type { DashboardCardSpec, FiveElementRowView, FiveElementsView } from "./types";
+import { visualCardDom } from "./visualHierarchy";
 
 type FiveElementsCardProps = {
   readonly card: DashboardCardSpec;
@@ -52,6 +53,7 @@ export function FiveElementsCard({ card, model }: FiveElementsCardProps): ReactN
       data-span={card.span}
       data-implemented="five-elements"
       aria-label={model.title}
+      {...visualCardDom(card.id)}
     >
       <header className="bte-fe__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
