@@ -245,7 +245,7 @@ function testG205HistorySnapshotPolicy() {
         release_label: "BTE V1.0 — Gate 1 Core Engine",
       },
       useful_god_source: { contract: "analysis_result.UsefulGodView@1.5" },
-      calendar: { lunar_date: "DUNG" },
+      calendar: { lunar_date: "DUNG", calendar_rule_version: "G1-10C" },
       useful_god: { useful_display: "Thủy · Nhâm · Thực Thần" },
     },
   };
@@ -264,7 +264,7 @@ function testG205HistorySnapshotPolicy() {
       request_id: "id-b",
       result_meta: { created_at: "2026-08-21T02:00:00.000Z", customer_contract: "analysis_result.UsefulGodView@1.5" },
       useful_god_source: { contract: "analysis_result.UsefulGodView@1.5" },
-      calendar: { lunar_date: "TUYEN" },
+      calendar: { lunar_date: "TUYEN", calendar_rule_version: "G1-10C" },
       useful_god: { useful_display: "Mộc · Ất · Chính Quan" },
     },
   };
@@ -307,7 +307,11 @@ function testG205HistorySnapshotPolicy() {
   const third = {
     analysis_id: "id-a-re",
     input: first.input,
-    data: Object.assign({}, first.data, { analysis_id: "id-a-re", request_id: "id-a-re", calendar: { lunar_date: "REANALYZE" } }),
+    data: Object.assign({}, first.data, {
+      analysis_id: "id-a-re",
+      request_id: "id-a-re",
+      calendar: { lunar_date: "REANALYZE", calendar_rule_version: "G1-10C" },
+    }),
   };
   store.save(third);
   check("g205.reanalyze_creates_new_row", store.loadHistory().length === 3, String(store.loadHistory().length));
