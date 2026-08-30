@@ -1,6 +1,6 @@
 """Narrative V2 runtime pipeline.
 
-Evidence through summary are implemented. Later builder stages remain placeholders.
+Evidence through interpretation are implemented. Later builder stages remain placeholders.
 """
 
 from __future__ import annotations
@@ -39,7 +39,7 @@ BUILDER_STAGES: tuple[str, ...] = CANONICAL_STAGES[1:-2]
 
 @dataclass(slots=True)
 class StageResult:
-    """Stage output. Evidence through summary are implemented; later builders are placeholders."""
+    """Stage output. Evidence through interpretation are implemented; later builders are placeholders."""
 
     stage: str
     payload: object = field(default=NotImplemented)
@@ -47,7 +47,7 @@ class StageResult:
 
 
 class RuntimePipeline:
-    """Sequential pipeline. Evidence through summary are implemented; later builders are placeholders."""
+    """Sequential pipeline. Evidence through interpretation are implemented; later builders are placeholders."""
 
     def __init__(self, runtime: "NarrativeRuntime") -> None:
         self._runtime = runtime
@@ -82,7 +82,7 @@ class RuntimePipeline:
         return self.execute_stage("build_summary")
 
     def build_interpretation(self) -> StageResult:
-        """Stage: interpretation. Not implemented."""
+        """Stage: interpretation. Assembles InterpretationNarrative from rewrite units."""
         return self.execute_stage("build_interpretation")
 
     def build_action(self) -> StageResult:
@@ -178,6 +178,8 @@ class RuntimePipeline:
             return self._run_rewrite()
         if stage == "build_summary":
             return self._run_summary()
+        if stage == "build_interpretation":
+            return self._run_interpretation()
         if stage == "validate":
             return self._run_validate()
         if stage == "publish":
@@ -265,6 +267,22 @@ class RuntimePipeline:
         return StageResult(
             stage="build_summary",
             payload=summary,
+            status="implemented",
+        )
+
+    def _run_interpretation(self) -> StageResult:
+        from engines.narrative_v2.interpretation import InterpretationBuilder, InterpretationError
+        from engines.narrative_v2.runtime.runtime_errors import BuilderError
+
+        context = self._runtime.require_context()
+        try:
+            interpretation = InterpretationBuilder().build(context.rewrite)
+        except InterpretationError as exc:
+            raise BuilderError(str(exc)) from exc
+        context.interpretation = interpretation
+        return StageResult(
+            stage="build_interpretation",
+            payload=interpretation,
             status="implemented",
         )
 
