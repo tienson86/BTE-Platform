@@ -1,0 +1,135 @@
+body {
+  margin: 0;
+  font-family: "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif;
+  background: #ece8e2;
+  color: #1c1c1c;
+}
+
+.ns-banner {
+  background: #3b1d1d;
+  color: #f7efe8;
+  padding: 20px 28px;
+}
+
+.ns-kicker {
+  margin: 0 0 8px;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.ns-banner h1 {
+  margin: 0 0 6px;
+  font-size: 1.5rem;
+}
+
+.ns-banner p {
+  margin: 0;
+  color: #d9cfc6;
+}
+
+.ns-shell {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: calc(100vh - 110px);
+}
+
+.ns-side {
+  background: #f7f4ef;
+  border-right: 1px solid #ddd6cc;
+  padding: 20px;
+}
+
+.ns-side h2 {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+}
+
+.ns-side select,
+.ns-side input,
+.ns-side textarea,
+.ns-card select,
+.ns-card input,
+.ns-card textarea,
+.ns-card button {
+  width: 100%;
+  margin: 6px 0 12px;
+  padding: 8px;
+  font: inherit;
+}
+
+.ns-side nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ns-side a {
+  color: #5c2a2a;
+  text-decoration: none;
+  padding: 6px 8px;
+  border-radius: 8px;
+}
+
+.ns-side a[aria-current="page"] {
+  background: #e8d4d0;
+  font-weight: 700;
+}
+
+.ns-main {
+  padding: 24px;
+}
+
+.ns-card {
+  background: #fff;
+  border: 1px solid #ddd6cc;
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(28, 28, 28, 0.05);
+}
+
+.ns-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.ns-muted,
+.ns-muted em {
+  color: #66707a;
+}
+
+.ns-notice {
+  background: #e8f0e8;
+  border: 1px solid #b7cbb7;
+  padding: 10px 14px;
+  border-radius: 10px;
+}
+
+pre {
+  white-space: pre-wrap;
+  font-size: 0.8rem;
+  background: #f6f3ee;
+  padding: 12px;
+  border-radius: 8px;
+  overflow: auto;
+}
+
+blockquote {
+  margin: 0;
+  padding: 12px 16px;
+  border-left: 3px solid #9a1b1b;
+  background: #fbf6f4;
+}
+
+details {
+  margin: 8px 0;
+}
+
+@media (max-width: 900px) {
+  .ns-shell,
+  .ns-compare {
+    grid-template-columns: 1fr;
+  }
+}
