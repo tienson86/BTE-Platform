@@ -24,6 +24,7 @@ export type {
   GenerateReportRequest,
   HealthResponse,
   InterpretationResponse,
+  NarrativeV2ShadowEnvelopeDto,
   PillarDto,
   ReportResponse,
   ScoreDto,
