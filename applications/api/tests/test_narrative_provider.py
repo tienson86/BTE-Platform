@@ -36,7 +36,7 @@ def test_attach_records_duration_and_version_without_replacing_pack05() -> None:
     assert envelope["presentation_version"] == PRESENTATION_VERSION
     assert isinstance(envelope["runtime_ms"], int)
     assert envelope["runtime_ms"] >= 0
-    assert envelope["presentation"]["interpretation"]["consulting_flow"]
+    assert envelope["presentation"]["metadata"]["version"] == PRESENTATION_VERSION
     assert envelope["error"] is None
 
 
