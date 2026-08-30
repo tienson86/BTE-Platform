@@ -42,7 +42,7 @@ export function IdentityPerson({ person }: { readonly person: IdentityPersonView
 }
 
 /**
- * Region C — compact foundation badges.
+ * Region C — Cân Xương Đoán Mệnh (replaces the former Foundation summary).
  */
 export function IdentityFoundation({
   foundation,
@@ -50,14 +50,14 @@ export function IdentityFoundation({
   readonly foundation: IdentityFoundationView;
 }): ReactNode {
   return (
-    <section className="bte-id__region" data-region="foundation">
-      <p className="bte-id__region-label">Nền tảng</p>
+    <section className="bte-id__region" data-region="foundation" data-module="bone-weight">
+      <p className="bte-id__region-label">Cân Xương Đoán Mệnh</p>
       <KvList
         rows={[
-          { label: "Cung Phi", value: foundation.cungPhi },
-          { label: "Mệnh Quái", value: foundation.menhQuai },
-          { label: "Nhóm Trạch", value: foundation.nhomTrach },
-          { label: "Tiết khí", value: foundation.tietKhi },
+          { label: "Cân lượng", value: foundation.weight },
+          { label: "Phân loại", value: foundation.classification },
+          { label: "Đánh giá", value: foundation.rating },
+          { label: "Tóm tắt", value: foundation.summary },
         ]}
       />
     </section>
@@ -65,15 +65,21 @@ export function IdentityFoundation({
 }
 
 /**
- * Region D — analysis id and date only. Version / Engine / Confidence stay off the header.
+ * Region D — analysis id plus technical calendar / Cung Phi metadata.
  */
 export function IdentityStatus({ status }: { readonly status: IdentityStatusView }): ReactNode {
   const rows: KvRow[] = [];
   if (status.analysisId) rows.push({ label: "Mã phân tích", value: status.analysisId });
   if (status.analyzedAt) rows.push({ label: "Ngày phân tích", value: status.analyzedAt });
+  if (status.tamNguyen) rows.push({ label: "Tam Nguyên", value: status.tamNguyen });
+  if (status.cuuVan) rows.push({ label: "Cửu Vận", value: status.cuuVan });
+  if (status.cungPhi) rows.push({ label: "Cung Phi", value: status.cungPhi });
+  if (status.menhQuai) rows.push({ label: "Mệnh Quái", value: status.menhQuai });
+  if (status.nhomTrach) rows.push({ label: "Nhóm Trạch", value: status.nhomTrach });
+  if (status.tietKhi) rows.push({ label: "Tiết khí", value: status.tietKhi });
   return (
     <section className="bte-id__region bte-id__region--status" data-region="status">
-      <p className="bte-id__region-label">Trạng thái</p>
+      <p className="bte-id__region-label">Thông tin kỹ thuật</p>
       {rows.length > 0 ? <KvList rows={rows} /> : <p className="bte-id__status-empty">—</p>}
     </section>
   );
