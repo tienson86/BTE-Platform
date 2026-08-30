@@ -59,3 +59,5 @@ export type {
 } from "./types";
 export { VISUAL_HIERARCHY, visualCardDom } from "./visualHierarchy";
 export type { VisualLevel, VisualCardType } from "./visualHierarchy";
+export { VISUALIZATIONS, vizDom } from "./vizCatalog";
+export type { VisualizationKind } from "./vizCatalog";
