@@ -20,7 +20,10 @@ from typing import Any, Literal
 from engines.bazi_engine.engine import BaziEngine
 from engines.pattern_engine.utils.context_builder import build_pattern_context
 from engines.calendar_engine.engine import CalendarEngine
-from engines.calendar_engine.ganzhi_routing import stamp_bazi_source_nguyen
+from engines.calendar_engine.ganzhi_routing import (
+    stamp_bazi_source_nguyen,
+    stamp_identity_cung_from_routing,
+)
 from engines.feng_shui_engine import FengShuiEngine, FengShuiEngineError
 from engines.identity import build_canonical_identity
 from engines.interpretation_engine.engine import InterpretationEngine
@@ -357,6 +360,11 @@ class OrchestratorService:
                 calendar=payload.get("calendar"),
                 input_fields=payload.get("input"),
             ).to_dict()
+        calendar_payload = payload.get("calendar") if isinstance(payload.get("calendar"), dict) else {}
+        stamp_identity_cung_from_routing(
+            payload.get("identity") if isinstance(payload.get("identity"), dict) else None,
+            calendar_payload.get("ganzhi_routing") if isinstance(calendar_payload, dict) else None,
+        )
         consulting = publish_commercial_consulting(
             payload,
             identity=payload.get("identity") if isinstance(payload.get("identity"), dict) else None,
