@@ -3,16 +3,21 @@ from datetime import datetime
 from typing import Any
 
 from .algorithms.ganzhi import GanzhiAlgorithm
+from .cung_phi import CungPhiResult, calculate_cung_phi
+from .exceptions import CalendarValidationError
+from .ganzhi_routing import hour_ganzhi_from_day_stem, routing_payload
 from .julian.julian import JulianDay
 from .lunar.converter import solar_to_lunar
 from .lunar.lunar import LunarDate
 from .month_ganzhi import month_pillar
 from .solar.solar import SolarDate
 from .solar_terms.engine import SolarTerm, SolarTermEngine
+from .tam_nguyen import calculate_tam_nguyen
 
 
 @dataclass(slots=True)
 class CalendarResult:
+    """Canonical calendar output, including Tam Nguyên and personal Cung Phi."""
     solar: SolarDate
     lunar: LunarDate
     julian_day: float
@@ -33,6 +38,15 @@ class CalendarResult:
     month_stem: str | None = None
     month_branch: str | None = None
     month_can_chi: str | None = None
+    tam_nguyen: str | None = None
+    cuu_van: int | None = None
+    cung_phi: str | None = None
+    menh_quai: str | None = None
+    house_group: str | None = None
+    nhom_trach: str | None = None
+    gua_number: int | None = None
+    cung_phi_remainder: int | None = None
+    ganzhi_routing: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize canonical calendar truth for API / Portal / PDF / Cân Xương.
@@ -92,6 +106,15 @@ class CalendarResult:
             "month_stem": self.month_stem,
             "month_branch": self.month_branch,
             "month_can_chi": self.month_can_chi,
+            "tam_nguyen": self.tam_nguyen,
+            "cuu_van": self.cuu_van,
+            "cung_phi": self.cung_phi,
+            "menh_quai": self.menh_quai,
+            "house_group": self.house_group,
+            "nhom_trach": self.nhom_trach or self.house_group,
+            "gua_number": self.gua_number,
+            "cung_phi_remainder": self.cung_phi_remainder,
+            "ganzhi_routing": self.ganzhi_routing or {},
         }
 
 
@@ -115,6 +138,7 @@ class CalendarEngine:
         minute: int = 0,
         time_zone: float = 7.0,
         timezone_name: str | None = None,
+        gender: str | None = None,
     ) -> CalendarResult:
         """Build calendar result from Gregorian civil date/time (Vietnam UTC+7 by default)."""
         datetime(year, month, day, hour, minute)
@@ -134,6 +158,22 @@ class CalendarEngine:
         lunar_date = _format_lunar_date(parts.day, parts.month, parts.year, parts.leap)
         month_stem, month_branch = month_pillar(year, month, day)
         month_can_chi = f"{month_stem} {month_branch}"
+        cycle = calculate_tam_nguyen(year)
+        cung = _cung_phi_for_gender(year, gender)
+        jdn = JulianDay.day_number(year, month, day)
+        day_gz = GanzhiAlgorithm.day(jdn)
+        day_can_chi = f"{day_gz['can']} {day_gz['chi']}"
+        hour_can_chi = hour_ganzhi_from_day_stem(day_gz["can"], hour)
+        routing = routing_payload(
+            year,
+            month,
+            day,
+            hour,
+            year_ganzhi=year_can_chi,
+            month_ganzhi=month_can_chi,
+            day_ganzhi=day_can_chi,
+            hour_ganzhi=hour_can_chi,
+        )
         return CalendarResult(
             solar=solar,
             lunar=lunar,
@@ -155,9 +195,23 @@ class CalendarEngine:
             month_stem=month_stem,
             month_branch=month_branch,
             month_can_chi=month_can_chi,
+            tam_nguyen=cycle.tam_nguyen,
+            cuu_van=cycle.cuu_van,
+            cung_phi=None if cung is None else cung.cung_phi,
+            menh_quai=None if cung is None else cung.menh_quai,
+            house_group=None if cung is None else cung.house_group,
+            nhom_trach=None if cung is None else cung.house_group,
+            gua_number=None if cung is None else cung.gua_number,
+            cung_phi_remainder=None if cung is None else cung.remainder,
+            ganzhi_routing=routing,
         )
 
-    def calculate(self, birth_datetime: datetime, timezone: str = "Asia/Ho_Chi_Minh") -> CalendarResult:
+    def calculate(
+        self,
+        birth_datetime: datetime,
+        timezone: str = "Asia/Ho_Chi_Minh",
+        gender: str | None = None,
+    ) -> CalendarResult:
         """Wrapper: build from a datetime (timezone label stored, conversion stays UTC+7)."""
         return self.build(
             birth_datetime.year,
@@ -166,4 +220,15 @@ class CalendarEngine:
             birth_datetime.hour,
             birth_datetime.minute,
             timezone_name=timezone,
+            gender=gender,
         )
+
+
+def _cung_phi_for_gender(year: int, gender: str | None) -> CungPhiResult | None:
+    """Cung Phi when gender is present and valid. Leave empty otherwise."""
+    if gender is None or str(gender).strip() == "":
+        return None
+    try:
+        return calculate_cung_phi(year=year, gender=gender)
+    except CalendarValidationError:
+        return None
