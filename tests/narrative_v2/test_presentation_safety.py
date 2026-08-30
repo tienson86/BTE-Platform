@@ -40,7 +40,7 @@ def test_p11_p16_no_internal_leaks(
     rendered = json.dumps(payload, ensure_ascii=False)
     for token in FORBIDDEN_TOKENS:
         assert token not in rendered
-    assert "meaning" not in payload.get("interpretation", {})
+    assert payload["interpretation"]["meaning"] == interpretation.meaning
     assert "flow" not in payload.get("interpretation", {})
     assert "references" not in rendered
 
