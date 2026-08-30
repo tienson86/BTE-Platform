@@ -24,6 +24,7 @@ import {
 import { buildExecutiveReportView } from "./reportModel";
 import "./executive-report.css";
 import "./print/print.css";
+import "../commercial_dashboard/mobile/mobileExperience.css";
 
 export type ExecutiveReportPageProps = {
   readonly analysis?: AnalysisDataDto | null;
