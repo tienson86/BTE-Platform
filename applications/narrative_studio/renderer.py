@@ -242,8 +242,9 @@ def _compare(review: StudioReview) -> str:
     headline = overview.get("headline") if isinstance(overview, dict) else None
     return f"""
 <section class="ns-compare" data-studio-panel="compare">
-  <article class="ns-card">
-    <h2>Pack05</h2>
+  <article class="ns-card" data-pack05-archive="historical">
+    <h2>Pack05 (legacy archive)</h2>
+    <p class="ns-muted">Historical comparison only. Not a production provider.</p>
     {_json_pre(review.pack05)}
   </article>
   <article class="ns-card">
