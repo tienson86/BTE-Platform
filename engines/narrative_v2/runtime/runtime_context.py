@@ -67,3 +67,4 @@ class NarrativeRuntimeContext:
     runtime_state: RuntimeState
     metadata: dict[str, Any]
     trace: PipelineTrace = field(default_factory=PipelineTrace)
+    evidence: object | None = None
