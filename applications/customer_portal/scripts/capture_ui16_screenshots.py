@@ -81,6 +81,7 @@ def _wait(port: int, timeout: float = 45.0) -> None:
 
 
 def _preflight() -> None:
+    """Fail fast if the preview route is missing from the running portal."""
     import urllib.request
 
     deadline = time.time() + 20
