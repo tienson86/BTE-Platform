@@ -1,6 +1,6 @@
 """Narrative V2 runtime pipeline.
 
-Evidence and reasoning are implemented. Later builder stages remain placeholders.
+Evidence, reasoning, and knowledge are implemented. Later builder stages remain placeholders.
 """
 
 from __future__ import annotations
@@ -39,7 +39,7 @@ BUILDER_STAGES: tuple[str, ...] = CANONICAL_STAGES[1:-2]
 
 @dataclass(slots=True)
 class StageResult:
-    """Stage output. Evidence and reasoning are implemented; later builders are placeholders."""
+    """Stage output. Evidence, reasoning, and knowledge are implemented; later builders are placeholders."""
 
     stage: str
     payload: object = field(default=NotImplemented)
@@ -47,7 +47,7 @@ class StageResult:
 
 
 class RuntimePipeline:
-    """Sequential pipeline. Evidence and reasoning are implemented; later builders are placeholders."""
+    """Sequential pipeline. Evidence, reasoning, and knowledge are implemented; later builders are placeholders."""
 
     def __init__(self, runtime: "NarrativeRuntime") -> None:
         self._runtime = runtime
@@ -70,7 +70,7 @@ class RuntimePipeline:
         return self.execute_stage("build_reasoning")
 
     def resolve_knowledge(self) -> StageResult:
-        """Stage: knowledge. Not implemented."""
+        """Stage: knowledge. Resolves approved knowledge for reasoning semantics."""
         return self.execute_stage("resolve_knowledge")
 
     def commercial_rewrite(self) -> StageResult:
@@ -172,6 +172,8 @@ class RuntimePipeline:
             return self._run_evidence()
         if stage == "build_reasoning":
             return self._run_reasoning()
+        if stage == "resolve_knowledge":
+            return self._run_knowledge()
         if stage == "validate":
             return self._run_validate()
         if stage == "publish":
@@ -207,6 +209,22 @@ class RuntimePipeline:
         return StageResult(
             stage="build_reasoning",
             payload=reasoning,
+            status="implemented",
+        )
+
+    def _run_knowledge(self) -> StageResult:
+        from engines.narrative_v2.knowledge import KnowledgeError, KnowledgeResolver
+        from engines.narrative_v2.runtime.runtime_errors import BuilderError
+
+        context = self._runtime.require_context()
+        try:
+            knowledge = KnowledgeResolver().resolve(context.reasoning, context.evidence)
+        except KnowledgeError as exc:
+            raise BuilderError(str(exc)) from exc
+        context.knowledge = knowledge
+        return StageResult(
+            stage="resolve_knowledge",
+            payload=knowledge,
             status="implemented",
         )
 
