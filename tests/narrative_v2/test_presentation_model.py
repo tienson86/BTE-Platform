@@ -50,7 +50,8 @@ def test_nested_public_fields_match_frozen_contract(
     assert tuple(item.name for item in fields(presentation.overview)) == OVERVIEW_FIELDS
     assert presentation.interpretation is not None
     assert tuple(item.name for item in fields(presentation.interpretation)) == INTERPRETATION_FIELDS
-    assert "meaning" not in INTERPRETATION_FIELDS
+    assert "meaning" in INTERPRETATION_FIELDS
+    assert "consulting_flow" in INTERPRETATION_FIELDS
     assert "flow" not in INTERPRETATION_FIELDS
     assert presentation.action_plan is not None
     assert tuple(item.name for item in fields(presentation.action_plan)) == ACTION_PLAN_FIELDS
