@@ -339,6 +339,7 @@ class RuntimePipeline:
                 context.interpretation,
                 context.action,
                 None,
+                consulting=context.consulting,
             )
         except PresentationError as exc:
             raise BuilderError(str(exc)) from exc
