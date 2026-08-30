@@ -9,7 +9,7 @@ export const NARRATIVE_V2_COMPARE_VALUE = "v2-compare";
 export type ResultNarrativeSurface = "production" | "v2-shadow" | "v2-compare";
 
 /**
- * Resolve which Result surface to mount. Default is production Pack05.
+ * Resolve which Result surface to mount. Default is production Narrative V2.
  */
 export function resolveResultSurface(
   search: string,
