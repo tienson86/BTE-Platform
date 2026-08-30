@@ -5,6 +5,7 @@
 import { useState, type ReactNode } from "react";
 import type { DashboardCardSpec, TenGodsPlacementView, TenGodsView } from "./types";
 import { visualCardDom } from "./visualHierarchy";
+import { vizDom } from "./vizCatalog";
 
 type TenGodsCardProps = {
   readonly card: DashboardCardSpec;
@@ -62,6 +63,7 @@ export function TenGodsCard({ card, model }: TenGodsCardProps): ReactNode {
       data-expanded={expanded ? "true" : "false"}
       aria-label={model.title}
       {...visualCardDom(card.id)}
+      {...vizDom(card.id)}
     >
       <header className="bte-tg__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
@@ -94,12 +96,12 @@ export function TenGodsCard({ card, model }: TenGodsCardProps): ReactNode {
               </ul>
             </section>
           ) : null}
-          <section className="bte-tg__section" data-tg-section="visible">
+          <section className="bte-tg__section" data-tg-section="visible" data-viz-layer="visible">
             <h3 className="bte-tg__heading">Lộ rõ</h3>
             <PlacementList items={model.visible} showStem={expanded} />
           </section>
           {!expanded && model.hiddenNames.length ? (
-            <section className="bte-tg__section" data-tg-section="hidden-summary">
+            <section className="bte-tg__section" data-tg-section="hidden-summary" data-viz-layer="hidden">
               <h3 className="bte-tg__heading">Tàng Can</h3>
               <p className="bte-tg__summary" data-tg-hidden-names="true">
                 {model.hiddenNames.join(" · ")}
@@ -107,13 +109,13 @@ export function TenGodsCard({ card, model }: TenGodsCardProps): ReactNode {
             </section>
           ) : null}
           {expanded && model.hidden.length ? (
-            <section className="bte-tg__section" data-tg-section="hidden">
+            <section className="bte-tg__section" data-tg-section="hidden" data-viz-layer="hidden">
               <h3 className="bte-tg__heading">Tàng Can</h3>
               <PlacementList items={model.hidden} showStem />
             </section>
           ) : null}
           {expanded && model.distribution.length ? (
-            <section className="bte-tg__section" data-tg-section="distribution">
+            <section className="bte-tg__section" data-tg-section="distribution" data-viz-layer="relation">
               <h3 className="bte-tg__heading">Phân bố</h3>
               <ul className="bte-tg__dist">
                 {model.distribution.map((row) => (
