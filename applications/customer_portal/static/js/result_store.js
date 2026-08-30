@@ -468,6 +468,16 @@
     };
   }
 
+  /**
+   * Read stored Pack05 as a historical archive. Does not select it for production.
+   *
+   * @returns {object|null}
+   */
+  function loadPack05Archive() {
+    const layers = selectNarrativeLayers();
+    return layers.pack05;
+  }
+
   global.BtePortal = global.BtePortal || {};
   global.BtePortal.ResultStore = {
     LAST_KEY: LAST_KEY,
@@ -492,5 +502,6 @@
     clearView: clearView,
     loadNarrativeV2Shadow: loadNarrativeV2Shadow,
     selectNarrativeLayers: selectNarrativeLayers,
+    loadPack05Archive: loadPack05Archive,
   };
 })(window);
