@@ -5,10 +5,7 @@
 import type { ReactNode } from "react";
 import type { CanonicalDesktopViewModel } from "../../adapters";
 import type { AnalysisDataDto, AnalyzeChartRequest } from "../../models";
-import {
-  resolveNarrativeProvider,
-  type NarrativeProvider,
-} from "../../resultState/narrativeProvider";
+import { resolveNarrativeProvider } from "../../resultState/narrativeProvider";
 import { selectNarrativePresentation } from "../../resultState/narrativePresentationSelection";
 import { ResultPageStatusGate } from "../result";
 import { adaptIdentityHeader } from "./adapter";
@@ -49,7 +46,7 @@ export type CommercialDashboardPageProps = {
   readonly reanalyzeHref?: string | null;
   readonly layoutMode?: "live" | "skeleton" | "visual";
   readonly previewFallback?: boolean;
-  readonly narrativeProvider?: NarrativeProvider;
+  readonly narrativeProvider?: string;
 };
 
 function ResultPageHeader(): ReactNode {
@@ -93,10 +90,11 @@ export function CommercialDashboardPage({
   reanalyzeHref = null,
   layoutMode = "live",
   previewFallback = false,
-  narrativeProvider,
+  narrativeProvider: _narrativeProvider,
 }: CommercialDashboardPageProps): ReactNode {
   const harness = layoutMode === "skeleton" || layoutMode === "visual" || previewFallback;
-  const requestedProvider = narrativeProvider ?? resolveNarrativeProvider();
+  const requestedProvider = resolveNarrativeProvider();
+  void _narrativeProvider;
   const status = initialData?.status;
   const showGate = !harness && ((status && status !== "ready") || (!analysis && resultSource !== "current"));
 
