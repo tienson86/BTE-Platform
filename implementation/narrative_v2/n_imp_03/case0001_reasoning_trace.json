@@ -1,0 +1,296 @@
+{
+  "case_id": "CASE-0001",
+  "builder": "engines.narrative_v2.reasoning.ReasoningBuilder",
+  "shadow_mode": true,
+  "status": "active",
+  "contract_gaps": [
+    {
+      "field": "reasoning.shensha.meaning",
+      "reason": "REASONING CONTRACT GAP: no approved ShenSha meaning relationship",
+      "rule_id": null
+    },
+    {
+      "field": "reasoning.career",
+      "reason": "REASONING CONTRACT GAP: career reasoning is out of N-IMP-03 scope",
+      "rule_id": null
+    },
+    {
+      "field": "reasoning.finance",
+      "reason": "REASONING CONTRACT GAP: finance reasoning is out of N-IMP-03 scope",
+      "rule_id": null
+    },
+    {
+      "field": "reasoning.relationship",
+      "reason": "REASONING CONTRACT GAP: relationship reasoning is out of N-IMP-03 scope",
+      "rule_id": null
+    },
+    {
+      "field": "reasoning.luck.quality",
+      "reason": "REASONING CONTRACT GAP: luck quality interpretation is not approved",
+      "rule_id": null
+    },
+    {
+      "field": "reasoning.impact.structure_preference",
+      "reason": "REASONING CONTRACT GAP: no approved impact relationship catalog",
+      "rule_id": null
+    },
+    {
+      "field": "reasoning.strength.customer_meaning",
+      "reason": "REASONING CONTRACT GAP: strength customer meaning belongs to Rewrite",
+      "rule_id": null
+    },
+    {
+      "field": "reasoning.pattern.customer_meaning",
+      "reason": "REASONING CONTRACT GAP: pattern customer meaning belongs to Rewrite",
+      "rule_id": null
+    },
+    {
+      "field": "reasoning.useful_god.action",
+      "reason": "REASONING CONTRACT GAP: useful-god action belongs to Action Builder",
+      "rule_id": null
+    },
+    {
+      "field": "reasoning.identity.structured_self_direction",
+      "reason": "REASONING CONTRACT GAP: identity meaning key is not an approved rule",
+      "rule_id": null
+    }
+  ],
+  "nodes": [
+    {
+      "reasoning_id": "reasoning.observation.luck.available",
+      "semantic_key": "core.luck.available",
+      "evidence_ids": [
+        "evidence.luck.available"
+      ],
+      "relation": "",
+      "priority": 0,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.observation.luck.current_cycle",
+      "semantic_key": "core.luck.current_cycle",
+      "evidence_ids": [
+        "evidence.luck.current_cycle"
+      ],
+      "relation": "",
+      "priority": 0,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.observation.luck.direction",
+      "semantic_key": "core.luck.direction",
+      "evidence_ids": [
+        "evidence.luck.direction"
+      ],
+      "relation": "",
+      "priority": 0,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.observation.pattern.cach_cuc",
+      "semantic_key": "core.pattern.cach_cuc",
+      "evidence_ids": [
+        "evidence.pattern.cach_cuc"
+      ],
+      "relation": "",
+      "priority": 0,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.observation.pattern.primary",
+      "semantic_key": "core.pattern.primary",
+      "evidence_ids": [
+        "evidence.pattern.primary"
+      ],
+      "relation": "",
+      "priority": 0,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.observation.strength.level",
+      "semantic_key": "core.strength.level",
+      "evidence_ids": [
+        "evidence.strength.level"
+      ],
+      "relation": "",
+      "priority": 0,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.observation.temperature.balancing_need",
+      "semantic_key": "core.temperature.balancing_need",
+      "evidence_ids": [
+        "evidence.temperature.balancing_need"
+      ],
+      "relation": "",
+      "priority": 0,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.observation.temperature.climate_state",
+      "semantic_key": "core.temperature.climate_state",
+      "evidence_ids": [
+        "evidence.temperature.climate_state"
+      ],
+      "relation": "",
+      "priority": 0,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.observation.ten_gods.visible_labels",
+      "semantic_key": "core.ten_gods.visible_labels",
+      "evidence_ids": [
+        "evidence.ten_gods.visible_labels"
+      ],
+      "relation": "",
+      "priority": 0,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.observation.useful_god.element",
+      "semantic_key": "core.useful_god.element",
+      "evidence_ids": [
+        "evidence.useful_god.element"
+      ],
+      "relation": "",
+      "priority": 0,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.observation.useful_god.primary",
+      "semantic_key": "core.useful_god.primary",
+      "evidence_ids": [
+        "evidence.useful_god.primary"
+      ],
+      "relation": "",
+      "priority": 0,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.observation.core.pattern_context",
+      "semantic_key": "core.pattern_context",
+      "evidence_ids": [
+        "evidence.strength.level",
+        "evidence.pattern.primary",
+        "evidence.pattern.cach_cuc"
+      ],
+      "relation": "contextualizes",
+      "priority": 10,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.relation.core.pattern_context",
+      "semantic_key": "core.pattern_context",
+      "evidence_ids": [
+        "evidence.strength.level",
+        "evidence.pattern.primary",
+        "evidence.pattern.cach_cuc"
+      ],
+      "relation": "contextualizes",
+      "priority": 10,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.observation.core.useful_god_context",
+      "semantic_key": "core.useful_god_context",
+      "evidence_ids": [
+        "evidence.strength.level",
+        "evidence.useful_god.primary",
+        "evidence.useful_god.element"
+      ],
+      "relation": "contextualizes",
+      "priority": 20,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.relation.core.useful_god_context",
+      "semantic_key": "core.useful_god_context",
+      "evidence_ids": [
+        "evidence.strength.level",
+        "evidence.useful_god.primary",
+        "evidence.useful_god.element"
+      ],
+      "relation": "contextualizes",
+      "priority": 20,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.observation.core.temperature_balancing_context",
+      "semantic_key": "core.temperature_balancing_context",
+      "evidence_ids": [
+        "evidence.temperature.climate_state",
+        "evidence.temperature.balancing_need"
+      ],
+      "relation": "contextualizes",
+      "priority": 30,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.relation.core.temperature_balancing_context",
+      "semantic_key": "core.temperature_balancing_context",
+      "evidence_ids": [
+        "evidence.temperature.climate_state",
+        "evidence.temperature.balancing_need"
+      ],
+      "relation": "contextualizes",
+      "priority": 30,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.observation.core.pattern_ten_gods_relation",
+      "semantic_key": "core.pattern_ten_gods_relation",
+      "evidence_ids": [
+        "evidence.pattern.primary",
+        "evidence.ten_gods.visible_labels"
+      ],
+      "relation": "qualifies",
+      "priority": 40,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.relation.core.pattern_ten_gods_relation",
+      "semantic_key": "core.pattern_ten_gods_relation",
+      "evidence_ids": [
+        "evidence.pattern.primary",
+        "evidence.ten_gods.visible_labels"
+      ],
+      "relation": "qualifies",
+      "priority": 40,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.observation.core.luck_temporal_context",
+      "semantic_key": "core.luck_temporal_context",
+      "evidence_ids": [
+        "evidence.luck.current_cycle",
+        "evidence.luck.available",
+        "evidence.luck.direction"
+      ],
+      "relation": "contextualizes",
+      "priority": 50,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.relation.core.luck_temporal_context",
+      "semantic_key": "core.luck_temporal_context",
+      "evidence_ids": [
+        "evidence.luck.current_cycle",
+        "evidence.luck.available",
+        "evidence.luck.direction"
+      ],
+      "relation": "contextualizes",
+      "priority": 50,
+      "status": "active"
+    },
+    {
+      "reasoning_id": "reasoning.boundary.shensha.approved_rule_unavailable",
+      "semantic_key": "boundary.approved_rule_unavailable",
+      "evidence_ids": [
+        "evidence.shensha.names"
+      ],
+      "relation": "",
+      "priority": 90,
+      "status": "gap"
+    }
+  ]
+}
