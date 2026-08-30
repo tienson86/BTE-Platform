@@ -20,10 +20,10 @@ export type IdentityPersonView = {
 };
 
 export type IdentityFoundationView = {
-  readonly cungPhi: string;
-  readonly menhQuai: string;
-  readonly nhomTrach: string;
-  readonly tietKhi: string;
+  readonly weight: string;
+  readonly classification: string;
+  readonly rating: string;
+  readonly summary: string;
 };
 
 export type IdentityStatusView = {
@@ -31,6 +31,12 @@ export type IdentityStatusView = {
   readonly version: string;
   readonly analyzedAt: string;
   readonly confidence: string;
+  readonly cungPhi: string;
+  readonly menhQuai: string;
+  readonly nhomTrach: string;
+  readonly tietKhi: string;
+  readonly tamNguyen: string;
+  readonly cuuVan: string;
 };
 
 export type IdentityDayMasterView = {
