@@ -2,11 +2,11 @@
  * Bind Overview Card from canonical analysis. Copy published labels only.
  */
 
-import { canonicalPatternLabel } from "../../adapters/canonicalPattern";
 import { canonicalStrengthLabel } from "../../adapters/canonicalStrength";
 import { canonicalBalancingNeedLabel } from "../../adapters/canonicalTemperature";
 import {
   OVERALL_INCOMPLETE_MESSAGE,
+  canonicalUnfavorableDisplay,
   canonicalUsefulDisplay,
   canonicalUsefulGodPayload,
 } from "../../adapters/canonicalUsefulGod";
@@ -55,6 +55,21 @@ function usefulDisplay(data: AnalysisDataDto): string {
   return customerLabel(display);
 }
 
+function compactCanonicalList(value: string): string {
+  return value
+    .split(/\s*[,/|]\s*/)
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .join(" · ");
+}
+
+function avoidDisplay(data: AnalysisDataDto): string {
+  const payload = canonicalUsefulGodPayload(data);
+  const display = compactCanonicalList(canonicalUnfavorableDisplay(payload));
+  if (!display || display === OVERALL_INCOMPLETE_MESSAGE) return "";
+  return customerLabel(display);
+}
+
 function evidence(
   key: OverviewEvidenceView["key"],
   label: string,
@@ -71,12 +86,11 @@ function evidence(
 export function composeOverviewInsight(input: {
   readonly strength: string;
   readonly dayMaster: string;
-  readonly pattern: string;
+  readonly pattern?: string;
 }): string {
   const sentences: string[] = [];
   if (input.strength) sentences.push(`Bạn thuộc nhóm ${input.strength}.`);
   if (input.dayMaster) sentences.push(`Nhật chủ ${input.dayMaster}.`);
-  if (input.pattern) sentences.push(`Mệnh cục ${input.pattern}.`);
   return clampCopy(sentences.join(" "), INSIGHT_MAX);
 }
 
