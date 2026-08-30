@@ -80,6 +80,23 @@ def _wait(port: int, timeout: float = 45.0) -> None:
     raise RuntimeError(f"port {port} did not open")
 
 
+def _preflight() -> None:
+    import urllib.request
+
+    deadline = time.time() + 20
+    last_error = ""
+    while time.time() < deadline:
+        try:
+            with urllib.request.urlopen(f"{BASE}/report-preview", timeout=3) as response:
+                if response.status == 200:
+                    return
+                last_error = f"status {response.status}"
+        except Exception as exc:
+            last_error = str(exc)
+        time.sleep(0.4)
+    raise RuntimeError(f"/report-preview not ready: {last_error}")
+
+
 def _fill_case_0001(page) -> None:
     page.fill("#full_name", "Nguyễn Tiến Sơn")
     page.check("#gender_male")
@@ -114,6 +131,7 @@ def main() -> None:
         try:
             _wait(API_PORT)
             _wait(PORTAL_PORT)
+            _preflight()
             _capture()
         finally:
             for proc in (portal_proc, api_proc):
@@ -139,7 +157,7 @@ def _capture() -> None:
         page.wait_for_url("**/result", timeout=180000)
         page.wait_for_selector('[data-dashboard="commercial-v1"]')
         page.goto(f"{BASE}/report-preview", wait_until="networkidle")
-        page.wait_for_selector('[data-ui="executive-report"]')
+        page.wait_for_selector('[data-ui="executive-report"]', timeout=60000)
         page.wait_for_selector('[data-consulting-flow="true"]')
 
         _shot(page, '[data-report-section="cover"]', "01_cover.png")
