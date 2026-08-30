@@ -56,7 +56,7 @@ const ANALYSIS = {
       {
         intent: "overview",
         title: "Tóm tắt điều hành",
-        paragraphs: [{ text: "Pack05 overview sentence for rollback." }],
+        paragraphs: [{ text: "Người định khung. Lá số cho thấy xu hướng sức gánh cao trên nền Chính Ấn." }],
       },
     ],
   },
@@ -124,7 +124,7 @@ describe("N-REL-01 presentation selection", () => {
     const selected = selectNarrativePresentation(ANALYSIS, "pack05");
     expect(selected.selected).toBe("pack05");
     expect(selected.fallback).toBe(false);
-    expect(selected.interpretation.lead).toContain("Pack05 overview sentence");
+    expect(selected.interpretation.lead).toContain("Người định khung");
     expect(selected.overview.insight).toBe(adaptOverviewCard(ANALYSIS).insight);
   });
 
@@ -153,7 +153,7 @@ describe("N-REL-01 fallback", () => {
     expect(selected.selected).toBe("pack05");
     expect(selected.fallback).toBe(true);
     expect(selected.fallbackReason).toBe("incompatible_presentation_version");
-    expect(selected.interpretation.lead).toContain("Pack05 overview sentence");
+    expect(selected.interpretation.lead).toContain("Người định khung");
     expect(getNarrativeFallbackCount()).toBe(1);
   });
 
@@ -241,7 +241,7 @@ describe("N-REL-01 portal rendering", () => {
     );
     expect(container.querySelector('[data-narrative-provider="pack05"]')).toBeTruthy();
     expect(container.querySelector('[data-narrative-fallback="false"]')).toBeTruthy();
-    expect(container.textContent).toContain("Pack05 overview sentence for rollback.");
+    expect(container.textContent).toContain("Người định khung");
     expect(container.textContent).not.toContain(CONSULTING);
   });
 
@@ -280,7 +280,7 @@ describe("N-REL-01 regression", () => {
     const interpretation = adaptInterpretationCard(ANALYSIS);
     const action = adaptActionPlanCard(ANALYSIS);
     expect(overview.insight).toMatch(/Thân vượng|Canh/);
-    expect(interpretation.lead).toContain("Pack05 overview sentence");
+    expect(interpretation.lead).toContain("Người định khung");
     expect(action.title).toBe("KẾ HOẠCH HÀNH ĐỘNG");
   });
 
