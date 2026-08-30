@@ -30,10 +30,16 @@ def test_e12_later_stages_remain_not_implemented(
     runtime.pipeline.build_evidence()
     runtime.pipeline.build_reasoning()
     runtime.pipeline.resolve_knowledge()
+    runtime.pipeline.commercial_rewrite()
     later = tuple(
         stage
         for stage in BUILDER_STAGES
-        if stage not in {"build_evidence", "build_reasoning", "resolve_knowledge"}
+        if stage not in {
+            "build_evidence",
+            "build_reasoning",
+            "resolve_knowledge",
+            "commercial_rewrite",
+        }
     )
     for stage in later:
         output = runtime.pipeline.execute_stage(stage)
