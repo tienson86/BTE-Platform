@@ -6,6 +6,7 @@ import { useState, type ReactNode } from "react";
 import { ACTION_PLAN_LABELS } from "./cards";
 import type { ActionItemView, ActionPlanView, DashboardCardSpec } from "./types";
 import { visualCardDom } from "./visualHierarchy";
+import { mobileCardDom } from "./mobile/mobileOrder";
 
 type ActionPlanCardProps = {
   readonly card: DashboardCardSpec;
@@ -44,12 +45,14 @@ export function ActionPlanCard({ card, model }: ActionPlanCardProps): ReactNode 
   return (
     <article
       className={`bte-cdash__card bte-cdash__card--span-${card.span} bte-ap`}
+      id="bte-card-action-plan"
       data-card={card.id}
       data-span={card.span}
       data-implemented="action-plan"
       data-expanded={expanded ? "true" : "false"}
       aria-label={model.title}
       {...visualCardDom(card.id)}
+      {...mobileCardDom(card.id)}
     >
       <header className="bte-ap__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
