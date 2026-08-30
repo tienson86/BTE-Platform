@@ -5,6 +5,7 @@
 import type { ReactNode } from "react";
 import type { BaziPillarView, BaziStructureView, DashboardCardSpec } from "./types";
 import { visualCardDom } from "./visualHierarchy";
+import { vizDom } from "./vizCatalog";
 
 type BaziCardProps = {
   readonly card: DashboardCardSpec;
@@ -58,6 +59,7 @@ export function BaziCard({ card, model }: BaziCardProps): ReactNode {
       data-bazi-model="detail"
       aria-label={model.title}
       {...visualCardDom(card.id)}
+      {...vizDom(card.id)}
     >
       <header className="bte-bazi__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
@@ -67,7 +69,7 @@ export function BaziCard({ card, model }: BaziCardProps): ReactNode {
           Chưa đủ dữ liệu Bát Tự.
         </p>
       ) : (
-        <div className="bte-bazi__scroll">
+        <div className="bte-bazi__scroll" data-viz-chart="structure">
           <table className="bte-bazi__table">
             <thead>
               <tr>
