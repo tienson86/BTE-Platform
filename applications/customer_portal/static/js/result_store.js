@@ -446,6 +446,28 @@
     return shadow;
   }
 
+  /**
+   * Return stored Pack05 and Narrative V2 layers without choosing or mutating.
+   * Portal switch reads this; it never overwrites either layer.
+   *
+   * @returns {{pack05: object|null, narrative_v2: object|null}}
+   */
+  function selectNarrativeLayers() {
+    const current = loadCurrent() || load();
+    const data = current && current.data && typeof current.data === "object" ? current.data : null;
+    if (!data) {
+      return { pack05: null, narrative_v2: null };
+    }
+    return {
+      pack05: Object.prototype.hasOwnProperty.call(data, "narrative_result")
+        ? data.narrative_result
+        : null,
+      narrative_v2: Object.prototype.hasOwnProperty.call(data, "narrative_v2_shadow")
+        ? data.narrative_v2_shadow
+        : null,
+    };
+  }
+
   global.BtePortal = global.BtePortal || {};
   global.BtePortal.ResultStore = {
     LAST_KEY: LAST_KEY,
@@ -469,5 +491,6 @@
     peekView: peekView,
     clearView: clearView,
     loadNarrativeV2Shadow: loadNarrativeV2Shadow,
+    selectNarrativeLayers: selectNarrativeLayers,
   };
 })(window);
