@@ -57,3 +57,5 @@ export type {
   InterpretationView,
   ActionPlanView,
 } from "./types";
+export { VISUAL_HIERARCHY, visualCardDom } from "./visualHierarchy";
+export type { VisualLevel, VisualCardType } from "./visualHierarchy";
