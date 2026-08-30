@@ -16,6 +16,7 @@ IMPLEMENTED = frozenset(
         "commercial_rewrite",
         "build_summary",
         "build_interpretation",
+        "build_action",
     }
 )
 
@@ -47,8 +48,9 @@ def test_i14_action_remains_not_implemented(case_0001_canonical: dict[str, Any])
     runtime.pipeline.commercial_rewrite()
     runtime.pipeline.build_summary()
     runtime.pipeline.build_interpretation()
+    runtime.pipeline.build_action()
     later = tuple(stage for stage in BUILDER_STAGES if stage not in IMPLEMENTED)
-    assert "build_action" in later
+    assert "build_action" not in later
     assert "build_commercial" in later
     for stage in later:
         output = runtime.pipeline.execute_stage(stage)
@@ -63,6 +65,6 @@ def test_i15_shadow_mode_unchanged(case_0001_canonical: dict[str, Any]) -> None:
     assert runtime.shadow_mode is True
     assert runtime.replaces_pack05 is False
     assert runtime.portal_connected is False
-    assert result.presentation is None
+    assert result.presentation is not None
     assert result.runtime_metadata["shadow_mode"] is True
     assert result.runtime_metadata["generates_narrative"] is False
