@@ -156,12 +156,9 @@ describe("UI-17 print experience", () => {
     expect(PAGE_SRC).not.toContain("fullReportViewModel");
     expect(PAGE_SRC).not.toMatch(/engines\./);
     expect(APP_PY).toMatch(/return page\("reports", "reports\.html"\)/);
-    expect(renderReport().container.querySelector("[data-pdf-export]")?.getAttribute("data-pdf-export")).toBe(
-      "false",
-    );
-    expect(renderReport().container.querySelector("[data-print-ready]")?.getAttribute("data-print-ready")).toBe(
-      "true",
-    );
+    const { container } = renderReport();
+    expect(container.querySelector("[data-pdf-export]")?.getAttribute("data-pdf-export")).toBe("false");
+    expect(container.querySelector("[data-print-ready]")?.getAttribute("data-print-ready")).toBe("true");
   });
 
   it("keeps visualization labels so print remains readable without color", () => {
