@@ -4,6 +4,7 @@
 
 import { useState, type ReactNode } from "react";
 import type { DashboardCardSpec, LuckCycleView, LuckView } from "./types";
+import { visualCardDom } from "./visualHierarchy";
 
 const COMPACT_LIMIT = 5;
 
@@ -70,6 +71,7 @@ export function LuckCard({ card, model }: LuckCardProps): ReactNode {
       data-implemented="luck"
       data-expanded={expanded ? "true" : "false"}
       aria-label={model.title}
+      {...visualCardDom(card.id)}
     >
       <header className="bte-luck__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
