@@ -6,6 +6,8 @@ import { useState, type ReactNode } from "react";
 import type { DashboardCardSpec, TenGodsPlacementView, TenGodsView } from "./types";
 import { visualCardDom } from "./visualHierarchy";
 import { vizDom } from "./vizCatalog";
+import { MobileToggle, useMobileOpen } from "./mobile/MobileToggle";
+import { mobileCardDom } from "./mobile/mobileOrder";
 
 type TenGodsCardProps = {
   readonly card: DashboardCardSpec;
@@ -52,6 +54,7 @@ function presenceLabel(visible: boolean, hidden: boolean): string {
  */
 export function TenGodsCard({ card, model }: TenGodsCardProps): ReactNode {
   const [expanded, setExpanded] = useState(false);
+  const mobile = useMobileOpen();
   const canExpand = model.hidden.length > 0 || model.distribution.length > 0;
 
   return (
@@ -61,9 +64,11 @@ export function TenGodsCard({ card, model }: TenGodsCardProps): ReactNode {
       data-span={card.span}
       data-implemented="ten-gods"
       data-expanded={expanded ? "true" : "false"}
+      data-mobile-open={mobile.open ? "true" : "false"}
       aria-label={model.title}
       {...visualCardDom(card.id)}
       {...vizDom(card.id)}
+      {...mobileCardDom(card.id)}
     >
       <header className="bte-tg__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
@@ -77,13 +82,16 @@ export function TenGodsCard({ card, model }: TenGodsCardProps): ReactNode {
             {expanded ? "Thu gọn" : "Xem chi tiết"}
           </button>
         ) : null}
+        {model.available ? (
+          <MobileToggle open={mobile.open} label="Xem chi tiết" onToggle={mobile.toggle} />
+        ) : null}
       </header>
       {!model.available ? (
         <p className="bte-tg__empty" data-tg-empty="true">
           Chưa đủ dữ liệu Thập Thần.
         </p>
       ) : (
-        <>
+        <div data-mobile-body="true">
           {model.featured.length ? (
             <section className="bte-tg__section" data-tg-section="featured">
               <h3 className="bte-tg__heading">Nổi bật</h3>
@@ -132,7 +140,7 @@ export function TenGodsCard({ card, model }: TenGodsCardProps): ReactNode {
               {model.summary}
             </p>
           ) : null}
-        </>
+        </div>
       )}
     </article>
   );
