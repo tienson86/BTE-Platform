@@ -88,7 +88,7 @@ function bindPillar(
   const identity = asRecord(identityRaw);
   const extra = asRecord(pillar);
   const visible = visibleEntryForPillar(tenGods, key);
-  const stem = firstText(identity.stem, pillar?.stem);
+  const stem = firstText(pillar?.stem, identity.stem);
   const isDay = key === "day";
   return {
     key,
@@ -106,7 +106,7 @@ function bindPillar(
       asRecord(visible).yin_yang,
       isDay ? dayMaster.yinYang : "",
     ),
-    branch: firstText(identity.branch, pillar?.branch),
+    branch: firstText(pillar?.branch, identity.branch),
     branchElement: firstText(extra.branch_element),
     napAm: firstText(pillar?.nap_am, identity.nayin_element),
     tenGod: firstText(pillar?.ten_god, visible?.ten_god),
