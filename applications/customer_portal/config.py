@@ -20,17 +20,21 @@ class PortalSettings(BaseModel):
         )
     )
     narrative_provider: str = Field(default_factory=lambda: _narrative_provider())
+    pack05_legacy: bool = Field(default_factory=lambda: _pack05_legacy())
     host: str = "127.0.0.1"
     port: int = 8081
     title: str = "BTE Portal"
 
 
 def _narrative_provider() -> str:
-    """Release flag. Rollback is NARRATIVE_PROVIDER=pack05. No rebuild."""
-    raw = (os.getenv("NARRATIVE_PROVIDER") or "v2").strip().lower()
-    if raw in {"pack05", "v2", "auto"}:
-        return raw
+    """Production provider is Narrative V2 only. Pack05 flags are ignored."""
     return "v2"
+
+
+def _pack05_legacy() -> bool:
+    """Read-only Pack05 archive flag. Not a production switch."""
+    raw = (os.getenv("PACK05_LEGACY") or "").strip().lower()
+    return raw in {"1", "true", "pack05", "yes"}
 
 
 settings = PortalSettings()
