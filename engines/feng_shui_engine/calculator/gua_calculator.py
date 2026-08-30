@@ -1,7 +1,11 @@
-"""Cung Phi / Mệnh Quái calculator (V1 — year + gender only)."""
+"""Cung Phi / Mệnh Quái calculator — Gregorian digit-sum (Calendar SSOT)."""
 
 from __future__ import annotations
 
+from engines.calendar_engine.cung_phi import (
+    calculate_cung_phi,
+)
+from engines.calendar_engine.exceptions import CalendarValidationError
 from engines.feng_shui_engine.data import load_json
 from engines.feng_shui_engine.exceptions import FengShuiValidationError
 
@@ -14,19 +18,12 @@ def _reduce_to_single_digit(value: int) -> int:
     return 9 if n == 0 else n
 
 
-def _normalize_gender(gender: str | None) -> str:
-    if gender is None or str(gender).strip() == "":
-        raise FengShuiValidationError("gender is required for Cung Phi calculation")
-    key = str(gender).strip().lower()
-    if key in {"male", "nam", "m", "man", "boy"}:
-        return "male"
-    if key in {"female", "nu", "nữ", "f", "woman", "girl"}:
-        return "female"
-    raise FengShuiValidationError(f"unsupported gender: {gender!r}")
-
-
 def year_digit_sum(year: int) -> int:
-    """Sum the last two digits of ``year`` down to 1–9."""
+    """Sum the last two digits of ``year`` down to 1–9.
+
+    Kept for callers that still inspect the legacy helper. Personal Cung Phi
+    uses ``calculate_cung_phi`` (all Gregorian digits).
+    """
     if year < 1:
         raise FengShuiValidationError(f"invalid birth year: {year}")
     return _reduce_to_single_digit(year % 100)
@@ -34,34 +31,12 @@ def year_digit_sum(year: int) -> int:
 
 def calculate_gua_number(*, year: int, gender: str | None) -> int:
     """
-    Compute Mệnh Quái number (1–9, never 5) from birth year and gender.
-
-    Uses the common Bát Trạch digit method with pre-/post-2000 branches.
+    Compute Mệnh Quái Lo Shu number (1–9, never 5) from Gregorian year + gender.
     """
-    sex = _normalize_gender(gender)
-    digit = year_digit_sum(year)
-    table = load_json("gua_table.json")
-    male_five = int(table.get("male_five_maps_to", 2))
-    female_five = int(table.get("female_five_maps_to", 8))
-
-    if year < 2000:
-        if sex == "male":
-            gua = 10 - digit
-        else:
-            gua = _reduce_to_single_digit(5 + digit)
-    else:
-        if sex == "male":
-            gua = 9 - digit
-            if gua == 0:
-                gua = 9
-        else:
-            gua = _reduce_to_single_digit(6 + digit)
-
-    if gua == 5:
-        gua = male_five if sex == "male" else female_five
-    if gua not in {1, 2, 3, 4, 6, 7, 8, 9}:
-        raise FengShuiValidationError(f"invalid gua number computed: {gua}")
-    return gua
+    try:
+        return calculate_cung_phi(year=year, gender=gender).gua_number
+    except CalendarValidationError as exc:
+        raise FengShuiValidationError(str(exc)) from exc
 
 
 def gua_name_for_number(gua_number: int) -> str:
