@@ -98,6 +98,7 @@ def test_builder_stages_return_not_implemented_placeholder() -> None:
             "commercial_rewrite",
             "build_summary",
             "build_interpretation",
+            "build_action",
         }
     )
     runtime.pipeline.build_evidence()
@@ -106,6 +107,7 @@ def test_builder_stages_return_not_implemented_placeholder() -> None:
     runtime.pipeline.commercial_rewrite()
     runtime.pipeline.build_summary()
     runtime.pipeline.build_interpretation()
+    runtime.pipeline.build_action()
     for stage in later_stages:
         output = runtime.pipeline.execute_stage(stage)
         assert output.payload is NotImplemented
@@ -269,7 +271,7 @@ def test_result_object_has_skeleton_fields_and_no_narrative() -> None:
     result = NarrativeRuntime().run(_opaque_analysis())
     assert isinstance(result, NarrativeRuntimeResult)
     assert result.status == RuntimeState.PUBLISHED.value
-    assert result.presentation is None
+    assert result.presentation is not None
     assert result.errors == ()
     assert "shadow_mode" in result.runtime_metadata
     assert result.runtime_metadata["shadow_mode"] is True
