@@ -16,6 +16,7 @@ from engines.narrative_v2.knowledge.knowledge_context import (
 )
 from engines.narrative_v2.knowledge.knowledge_item import KnowledgeItem
 from engines.narrative_v2.knowledge.knowledge_status import STATUS_APPROVED
+from engines.narrative_v2.language.language_asset_status import SENTENCE_LIBRARY_VERSION
 from engines.narrative_v2.rewrite.language_profile import LanguageProfile
 from engines.narrative_v2.rewrite.rewrite_context import (
     CommercialRewriteContext,
@@ -46,14 +47,11 @@ logger = logging.getLogger(__name__)
 
 _REPO_ROOT = Path(__file__).resolve().parents[3]
 
-_CONTEXT_METADATA: tuple[tuple[str, str], ...] = (
-    ("shadow_mode", "true"),
-    ("replaces_pack05", "false"),
-    ("portal_connected", "false"),
-    ("layer", "rewrite"),
-    ("rewrite_version", REWRITE_VERSION),
-    ("sentence_library", "runtime_gap"),
-)
+_SOURCE_LIBRARY = "sentence_library"
+_SOURCE_WRAP = "address_wrap"
+_COVERAGE_APPROVED = "approved"
+_COVERAGE_PARTIAL = "partial"
+_COVERAGE_GAP = "runtime_gap"
 
 _SOURCE_CACHE: dict[str, Mapping[str, Any] | None] = {}
 
@@ -89,10 +87,6 @@ class RewriteEngine:
         unresolved: list[RewriteUnresolved] = []
         gaps = [
             RewriteContractGap(
-                field="sentence_library",
-                reason="SENTENCE LIBRARY RUNTIME GAP: no approved runtime sentence library keyed to Narrative V2 semantic_key",
-            ),
-            RewriteContractGap(
                 field="grammar_assembly",
                 reason="REWRITE CONTRACT GAP: paragraph grammar is out of N-IMP-05 scope",
             ),
@@ -102,7 +96,7 @@ class RewriteEngine:
             ),
         ]
         for knowledge_item in knowledge.items:
-            rewritten = self._rewrite_item(knowledge_item, gaps)
+            rewritten = self._rewrite_item(knowledge_item)
             if rewritten is None:
                 unresolved.append(
                     RewriteUnresolved(
@@ -120,40 +114,46 @@ class RewriteEngine:
         ordered_unresolved = tuple(
             sorted(unresolved, key=lambda entry: (entry.semantic_key, entry.reason))
         )
+        coverage = _library_coverage(ordered)
+        gaps.extend(_library_gaps(coverage))
         context = CommercialRewriteContext(
             items=ordered,
             unresolved=ordered_unresolved,
             references=tuple(item.references[0] for item in ordered if item.references),
-            metadata=_CONTEXT_METADATA,
+            metadata=_context_metadata(coverage),
             status=_context_status(ordered, ordered_unresolved),
             contract_gaps=tuple(gaps),
         )
         self._validator.assert_valid(context, knowledge)
         return context
 
-    def _rewrite_item(
-        self,
-        knowledge_item: KnowledgeItem,
-        gaps: list[RewriteContractGap],
-    ) -> RewriteItem | None:
+    def _rewrite_item(self, knowledge_item: KnowledgeItem) -> RewriteItem | None:
         source = _select_source_meaning(knowledge_item)
         if source is None:
             return None
         if not _is_customer_safe(source):
             return None
-        library = self._sentences.select(knowledge_item.semantic_key, profile=self._profile)
-        if library is not None:
-            gaps.append(
-                RewriteContractGap(
-                    field=knowledge_item.knowledge_id,
-                    reason="SENTENCE LIBRARY RUNTIME GAP: unexpected library hit",
-                )
-            )
+        asset = self._sentences.select(
+            knowledge_item.semantic_key,
+            profile=self._profile,
+            category="meaning",
+            domain=knowledge_item.domain,
+            meaning_key=knowledge_item.knowledge_id,
+        )
         strategy = self._selector.select(source_meaning=source, profile=self._profile)
         if not self._registry.contains(strategy):
             return None
-        customer, status = _to_customer_language(source, self._profile.address)
-        terminology = _terminology(knowledge_item)
+        if asset is not None:
+            customer = asset.text.strip()
+            status = STATUS_REWRITTEN
+            extra = (
+                ("sentence_source", _SOURCE_LIBRARY),
+                ("sentence_id", asset.sentence_id),
+            )
+        else:
+            customer, status = _to_customer_language(source, self._profile.address)
+            extra = (("sentence_source", _SOURCE_WRAP),)
+        terminology = _terminology(knowledge_item, extra)
         ref = knowledge_item.references[0] if knowledge_item.references else None
         reasoning_ids = ref.reasoning_ids if ref is not None else ()
         evidence_ids = ref.evidence_ids if ref is not None else ()
@@ -256,9 +256,55 @@ def _to_customer_language(source: str, address: str) -> tuple[str, str]:
     return f"{address} {body}", STATUS_REWRITTEN
 
 
-def _terminology(item: KnowledgeItem) -> tuple[tuple[str, str], ...]:
+def _terminology(
+    item: KnowledgeItem,
+    extra: tuple[tuple[str, str], ...],
+) -> tuple[tuple[str, str], ...]:
     slug = item.knowledge_id.rsplit(".", 1)[-1]
-    return (("terminology", slug), ("knowledge_id", item.knowledge_id))
+    return (("terminology", slug), ("knowledge_id", item.knowledge_id)) + extra
+
+
+def _library_coverage(items: tuple[RewriteItem, ...]) -> str:
+    if not items:
+        return _COVERAGE_GAP
+    library_hits = sum(
+        1 for item in items if dict(item.metadata).get("sentence_source") == _SOURCE_LIBRARY
+    )
+    if library_hits == 0:
+        return _COVERAGE_GAP
+    if library_hits == len(items):
+        return _COVERAGE_APPROVED
+    return _COVERAGE_PARTIAL
+
+
+def _library_gaps(coverage: str) -> list[RewriteContractGap]:
+    if coverage == _COVERAGE_APPROVED:
+        return []
+    if coverage == _COVERAGE_PARTIAL:
+        return [
+            RewriteContractGap(
+                field="sentence_library",
+                reason="SENTENCE LIBRARY PARTIAL: remaining rewritten units still use address wrap",
+            )
+        ]
+    return [
+        RewriteContractGap(
+            field="sentence_library",
+            reason="SENTENCE LIBRARY RUNTIME GAP: no approved runtime sentence library keyed to Narrative V2 semantic_key",
+        )
+    ]
+
+
+def _context_metadata(coverage: str) -> tuple[tuple[str, str], ...]:
+    return (
+        ("shadow_mode", "true"),
+        ("replaces_pack05", "false"),
+        ("portal_connected", "false"),
+        ("layer", "rewrite"),
+        ("rewrite_version", REWRITE_VERSION),
+        ("sentence_library", coverage),
+        ("sentence_library_version", SENTENCE_LIBRARY_VERSION),
+    )
 
 
 def _rewrite_id(item: KnowledgeItem) -> str:
