@@ -74,7 +74,7 @@ export function InterpretationCard({ card, model }: InterpretationCardProps): Re
       ) : (
         <>
           {model.lead ? (
-            <section className="bte-int__lead-block" data-int-lead="true">
+            <section className="bte-int__lead-block" data-int-lead="true" data-motion-reveal="lead">
               <h3 className="bte-int__zone-title">{INTERPRETATION_LEAD_LABEL}</h3>
               <p className="bte-int__lead">
                 {model.lead}
