@@ -56,7 +56,14 @@ export function DashboardGrid({
     <section className="bte-cdash__grid" data-dashboard-body="canonical-grid">
       {DASHBOARD_CARDS.map((card) => {
         if (card.id === "overview" && overview) {
-          return <OverviewCard key={card.id} card={card} model={overview} />;
+          return (
+            <OverviewCard
+              key={card.id}
+              card={card}
+              model={overview}
+              priorityTitle={actionPlan?.priority?.title ?? ""}
+            />
+          );
         }
         if (card.id === "bazi" && bazi) {
           return <BaziCard key={card.id} card={card} model={bazi} />;
