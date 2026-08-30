@@ -6,6 +6,8 @@ import { useState, type ReactNode } from "react";
 import type { DashboardCardSpec, PatternView } from "./types";
 import { visualCardDom } from "./visualHierarchy";
 import { vizDom } from "./vizCatalog";
+import { MobileToggle, useMobileOpen } from "./mobile/MobileToggle";
+import { mobileCardDom } from "./mobile/mobileOrder";
 
 type PatternCardProps = {
   readonly card: DashboardCardSpec;
@@ -37,6 +39,7 @@ function FormationFlow({
  */
 export function PatternCard({ card, model }: PatternCardProps): ReactNode {
   const [expanded, setExpanded] = useState(false);
+  const mobile = useMobileOpen();
   const canExpand = model.formation.length > 1;
   const formationSteps = expanded || !canExpand ? model.formation : model.formation.slice(0, 1);
 
@@ -47,9 +50,11 @@ export function PatternCard({ card, model }: PatternCardProps): ReactNode {
       data-span={card.span}
       data-implemented="pattern"
       data-expanded={expanded ? "true" : "false"}
+      data-mobile-open={mobile.open ? "true" : "false"}
       aria-label={model.title}
       {...visualCardDom(card.id)}
       {...vizDom(card.id)}
+      {...mobileCardDom(card.id)}
     >
       <header className="bte-pat__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
@@ -63,13 +68,16 @@ export function PatternCard({ card, model }: PatternCardProps): ReactNode {
             {expanded ? "Thu gọn" : "Xem quá trình hình thành"}
           </button>
         ) : null}
+        {model.available ? (
+          <MobileToggle open={mobile.open} label="Xem chi tiết" onToggle={mobile.toggle} />
+        ) : null}
       </header>
       {!model.available ? (
         <p className="bte-pat__empty" data-pat-empty="true">
           Chưa đủ dữ liệu Mệnh Cục.
         </p>
       ) : (
-        <>
+        <div data-mobile-body="true">
           <section className="bte-pat__section" data-pat-section="primary">
             <h3 className="bte-pat__heading">Mệnh Cục chính</h3>
             <p className="bte-pat__primary" data-pat-primary="true">
@@ -106,7 +114,7 @@ export function PatternCard({ card, model }: PatternCardProps): ReactNode {
               </p>
             </section>
           ) : null}
-        </>
+        </div>
       )}
     </article>
   );
