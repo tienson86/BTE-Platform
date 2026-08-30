@@ -72,7 +72,7 @@ function sameJson(a, b) {
 function result(tag) {
   return {
     input: { year: 1987, month: 1, day: 21, tag: tag },
-    data: { calendar: { solar_date: "21/01/1987", lunar_date: "22/12/" + tag } },
+    data: { calendar: { solar_date: "21/01/1987", lunar_date: "22/12/" + tag, calendar_rule_version: "G1-10C" } },
   };
 }
 
@@ -337,6 +337,40 @@ function testG205HistorySnapshotPolicy() {
   check("g205.legacy_not_backfilled", legacy && legacy.customer_contract == null, JSON.stringify(legacy));
 }
 
+function testNarrativeV2ShadowIndependent() {
+  const ctx = newStore();
+  const payload = {
+    input: { year: 1987, month: 1, day: 21 },
+    data: {
+      calendar: { lunar_date: "SHADOW", calendar_rule_version: "G1-10C" },
+      narrative_result: { contract: "pack05_narrative_result_v1", status: "ok" },
+      narrative_v2_shadow: { status: "ok", presentation: { status: "partial" }, replaces_pack05: false },
+    },
+  };
+  ctx.store.save(payload);
+  const loaded = ctx.store.load();
+  check(
+    "nimp10.pack05_preserved",
+    loaded.data.narrative_result.contract === "pack05_narrative_result_v1",
+    JSON.stringify(loaded.data.narrative_result)
+  );
+  check(
+    "nimp10.shadow_preserved",
+    loaded.data.narrative_v2_shadow.status === "ok",
+    JSON.stringify(loaded.data.narrative_v2_shadow)
+  );
+  check(
+    "nimp10.layers_distinct",
+    loaded.data.narrative_result !== loaded.data.narrative_v2_shadow,
+    ""
+  );
+  check(
+    "nimp10.shadow_loader",
+    ctx.store.loadNarrativeV2Shadow() && ctx.store.loadNarrativeV2Shadow().status === "ok",
+    JSON.stringify(ctx.store.loadNarrativeV2Shadow())
+  );
+}
+
 testKeysAreSeparate();
 testFullFlowKeepsLastResult();
 testSelectForViewNeverWritesLastKey();
@@ -345,6 +379,7 @@ testLegacyKeysStillReadable();
 testRejectsInvalidPayload();
 testCurrentResultPrecedence();
 testG205HistorySnapshotPolicy();
+testNarrativeV2ShadowIndependent();
 
 let failed = 0;
 results.forEach(function (row) {
