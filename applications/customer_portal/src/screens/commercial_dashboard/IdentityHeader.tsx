@@ -16,7 +16,12 @@ type IdentityHeaderProps = {
  */
 export function IdentityHeader({ model }: IdentityHeaderProps): ReactNode {
   return (
-    <header className="bte-id" data-identity-header="true">
+    <header
+      className="bte-id"
+      data-identity-header="true"
+      data-visual-level="4"
+      data-card-type="status"
+    >
       <IdentityPerson person={model.person} />
       <FourPillars pillars={model.pillars} />
       <IdentityFoundation foundation={model.foundation} />
