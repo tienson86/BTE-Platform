@@ -6,6 +6,7 @@ import { useState, type ReactNode } from "react";
 import type { DashboardCardSpec, LuckCycleView, LuckView } from "./types";
 import { visualCardDom } from "./visualHierarchy";
 import { vizDom } from "./vizCatalog";
+import { mobileCardDom } from "./mobile/mobileOrder";
 
 const COMPACT_LIMIT = 5;
 
@@ -75,6 +76,7 @@ export function LuckCard({ card, model }: LuckCardProps): ReactNode {
       aria-label={model.title}
       {...visualCardDom(card.id)}
       {...vizDom(card.id)}
+      {...mobileCardDom(card.id)}
     >
       <header className="bte-luck__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
