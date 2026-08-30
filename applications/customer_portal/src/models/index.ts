@@ -9,6 +9,7 @@ export type {
   ApiErrorResponse,
   BaziDto,
   CalendarDto,
+  CanXuongDto,
   CaseDto,
   CasesListData,
   ChartResponse,
