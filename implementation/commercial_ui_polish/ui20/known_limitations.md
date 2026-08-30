@@ -9,3 +9,5 @@
 - `/report-preview` is the HTML preview. Production PDF remains the existing export contract.
 - CASE-0002 was reviewed from the existing editorial HTML export, not re-run through a new engine fixture.
 - Portal app shell (logo, menu, theme) sits above the dashboard and is outside Commercial UI V2 freeze of the result surface.
+- Dashboard Action chips show Presentation `category` keys (for CASE-0001: `practice` → `PRACTICE`). Translating them would invent UI copy. The executive report does not display those keys.
+- Chromium print-media screenshots can overlay the fixed running footer on the appendix crop. Real A4 uses `@page` margins (20/18/22/18 mm). Print architecture is unchanged.
