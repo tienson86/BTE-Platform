@@ -54,13 +54,13 @@ export function OverviewCard({ card, model, priorityTitle = "" }: OverviewCardPr
         {model.subtitle ? <p className="bte-ov__subtitle">{model.subtitle}</p> : null}
       </header>
       {topPriority ? (
-        <p className="bte-ov__priority" data-overview-section="top-priority">
+        <p className="bte-ov__priority" data-overview-section="top-priority" data-motion-reveal="priority">
           <span className="bte-cdash__badge bte-cdash__badge--accent">Ưu tiên</span>
           <span className="bte-ov__priority-title">{topPriority}</span>
         </p>
       ) : null}
       {model.insight ? (
-        <p className="bte-ov__insight" data-overview-section="insight">
+        <p className="bte-ov__insight" data-overview-section="insight" data-motion-reveal="insight">
           {model.insight}
         </p>
       ) : null}
