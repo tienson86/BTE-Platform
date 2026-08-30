@@ -20,6 +20,8 @@ export type ContextZoneViewModel = {
   readonly cungPhi: string;
   readonly menhQuai: string;
   readonly nhomTrach: string;
+  readonly tamNguyen: string;
+  readonly cuuVan: string;
 };
 
 export type ExecutiveSummaryViewModel = {
