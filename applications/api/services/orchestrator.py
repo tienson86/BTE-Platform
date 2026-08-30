@@ -20,6 +20,7 @@ from typing import Any, Literal
 from engines.bazi_engine.engine import BaziEngine
 from engines.pattern_engine.utils.context_builder import build_pattern_context
 from engines.calendar_engine.engine import CalendarEngine
+from engines.calendar_engine.ganzhi_routing import stamp_bazi_source_nguyen
 from engines.feng_shui_engine import FengShuiEngine, FengShuiEngineError
 from engines.identity import build_canonical_identity
 from engines.interpretation_engine.engine import InterpretationEngine
@@ -236,9 +237,13 @@ class OrchestratorService:
             if bazi_can_chi:
                 data["bazi_can_chi"] = bazi_can_chi
         if feng_data:
-            for key in ("cung_phi", "menh_quai", "nhom_trach", "gua_name"):
-                if feng_data.get(key):
+            for key in ("cung_phi", "menh_quai", "nhom_trach", "house_group", "gua_name"):
+                if feng_data.get(key) and not data.get(key):
                     data[key] = feng_data[key]
+        if data.get("house_group") and not data.get("nhom_trach"):
+            data["nhom_trach"] = data["house_group"]
+        if data.get("nhom_trach") and not data.get("house_group"):
+            data["house_group"] = data["nhom_trach"]
         return data
 
     def run_stage(
@@ -533,6 +538,7 @@ class OrchestratorService:
             hour,
             minute,
             timezone_name=timezone,
+            gender=gender,
         )
         completed.append("calendar")
         payload["calendar"] = self._shape_calendar(calendar)
@@ -552,6 +558,7 @@ class OrchestratorService:
         )
         completed.append("bazi")
         bazi_payload = analysis.bazi_dict()
+        stamp_bazi_source_nguyen(bazi_payload, calendar.ganzhi_routing)
         payload["bazi"] = bazi_payload
         payload["bazi_source"] = analysis.meta.bazi_source
         if stop_index == 2:
@@ -559,11 +566,9 @@ class OrchestratorService:
             return self._finalize_public_payload(payload, completed, analysis=analysis)
 
         # ----- Stage 3: Feng Shui (optional soft-fail) -----
-        lunar = getattr(calendar, "lunar", None)
-        feng_year = getattr(lunar, "year", None) or year
         feng_view: dict[str, Any] | None
         try:
-            feng = self.feng_shui_engine.calculate(year=int(feng_year), gender=gender)
+            feng = self.feng_shui_engine.calculate(year=int(year), gender=gender)
             feng_view = feng.to_dict()
             payload["feng_shui"] = feng_view
         except FengShuiEngineError:
