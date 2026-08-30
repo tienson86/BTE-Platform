@@ -4,6 +4,7 @@
 
 import { useState, type ReactNode } from "react";
 import type { DashboardCardSpec, TenGodsPlacementView, TenGodsView } from "./types";
+import { visualCardDom } from "./visualHierarchy";
 
 type TenGodsCardProps = {
   readonly card: DashboardCardSpec;
@@ -60,6 +61,7 @@ export function TenGodsCard({ card, model }: TenGodsCardProps): ReactNode {
       data-implemented="ten-gods"
       data-expanded={expanded ? "true" : "false"}
       aria-label={model.title}
+      {...visualCardDom(card.id)}
     >
       <header className="bte-tg__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
