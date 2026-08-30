@@ -1,10 +1,33 @@
-"""Narrative V2 release monitoring — dual-run operations.
+"""Narrative V2 release monitoring and V1.0 freeze record.
 
-Internal only. Does not retire Pack05. Does not freeze Presentation.
+Internal only. Does not change Runtime or Presentation.
 """
 
 from __future__ import annotations
 
+from engines.narrative_v2.release.release_freeze import ReleaseFreeze, ReleaseFreezeError
+from engines.narrative_v2.release.release_manifest import (
+    FREEZE_STATUS_FROZEN,
+    FROZEN_SURFACES,
+    NARRATIVE_PRODUCTION_OFF,
+    NARRATIVE_PRODUCTION_ON,
+    NEXT_VERSION,
+    PACK05_STATUS_ARCHIVED,
+    RELEASE_VERSION,
+    ReleaseManifest,
+    build_v1_manifest,
+)
+    EXPORT_SOURCE_ARCHIVE,
+    EXPORT_SOURCE_V2,
+    PACK05_CONTRACT,
+    PRODUCTION_PROVIDER,
+    Pack05Archive,
+    load_pack05_archive,
+    pack05_legacy_enabled,
+    presentation_payload,
+    resolve_production_provider,
+    select_export_source,
+)
 from engines.narrative_v2.release.release_alerts import (
     ALERT_FALLBACK,
     ALERT_GOLDEN,
@@ -15,6 +38,18 @@ from engines.narrative_v2.release.release_alerts import (
 )
 from engines.narrative_v2.release.release_dashboard import render_dashboard_html, write_dashboard
 from engines.narrative_v2.release.release_errors import ReleaseError, ReleaseHistoryError
+from engines.narrative_v2.release.release_freeze import ReleaseFreeze, ReleaseFreezeError
+from engines.narrative_v2.release.release_manifest import (
+    FREEZE_STATUS_FROZEN,
+    FROZEN_SURFACES,
+    NARRATIVE_PRODUCTION_OFF,
+    NARRATIVE_PRODUCTION_ON,
+    NEXT_VERSION,
+    PACK05_STATUS_ARCHIVED,
+    RELEASE_VERSION,
+    ReleaseManifest,
+    build_v1_manifest,
+)
 from engines.narrative_v2.release.release_events import (
     ALLOWED_EVENTS,
     ALLOWED_PROVIDERS,
@@ -65,18 +100,33 @@ __all__ = [
     "EVENT_PRESENTATION",
     "EVENT_PROVIDER",
     "EVENT_RUNTIME",
+    "EXPORT_SOURCE_ARCHIVE",
+    "EXPORT_SOURCE_V2",
+    "FREEZE_STATUS_FROZEN",
+    "FROZEN_SURFACES",
     "HEALTH_FAIL",
     "HEALTH_PASS",
     "HEALTH_UNKNOWN",
     "HEALTH_WARNING",
+    "NARRATIVE_PRODUCTION_OFF",
+    "NARRATIVE_PRODUCTION_ON",
+    "NEXT_VERSION",
+    "PACK05_CONTRACT",
+    "PACK05_STATUS_ARCHIVED",
+    "PRODUCTION_PROVIDER",
+    "Pack05Archive",
+    "RELEASE_VERSION",
     "ReleaseAlert",
     "ReleaseError",
     "ReleaseEvent",
+    "ReleaseFreeze",
+    "ReleaseFreezeError",
     "ReleaseHealth",
     "ReleaseHistory",
     "ReleaseHistoryError",
     "ReleaseMetrics",
     "ReleaseMonitor",
+    "ReleaseManifest",
     "ReleaseSnapshot",
     "assess_certification",
     "assess_export",
@@ -85,11 +135,17 @@ __all__ = [
     "assess_presentation",
     "assess_runtime",
     "build_health",
+    "build_v1_manifest",
     "content_hash",
     "evaluate_alerts",
+    "load_pack05_archive",
     "make_event",
     "metrics_from_events",
+    "pack05_legacy_enabled",
     "parity_hashes",
+    "presentation_payload",
     "render_dashboard_html",
+    "resolve_production_provider",
+    "select_export_source",
     "write_dashboard",
 ]
