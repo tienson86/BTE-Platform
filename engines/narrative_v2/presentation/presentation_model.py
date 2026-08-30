@@ -20,14 +20,16 @@ class OverviewPresentation:
 
 @dataclass(frozen=True, slots=True)
 class InterpretationPresentation:
-    """Public interpretation sections. Frozen contract fields only."""
+    """Public interpretation: structured sections plus consulting flow."""
 
     overview: str | None
     observation: str | None
     reasoning: str | None
+    meaning: str | None
     impact: str | None
     recommendation: str | None
     closing: str | None
+    consulting_flow: str | None
 
 
 @dataclass(frozen=True, slots=True)
