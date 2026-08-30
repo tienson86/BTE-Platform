@@ -693,6 +693,20 @@ export function adaptResultPageViewModel(
       .slice(1)
       .join(":")
       .trim() || "";
+  const tamNguyen =
+    source.s09.quai.bullets
+      .find((item) => item.toLowerCase().includes("nguyên"))
+      ?.split(":")
+      .slice(1)
+      .join(":")
+      .trim() || "";
+  const cuuVan =
+    source.s09.quai.bullets
+      .find((item) => item.toLowerCase().includes("vận"))
+      ?.split(":")
+      .slice(1)
+      .join(":")
+      .trim() || "";
 
   return {
     analysisId: fullReport?.analysisId || source.s00.chartId.value,
@@ -728,6 +742,8 @@ export function adaptResultPageViewModel(
       cungPhi,
       menhQuai: source.s09.quai.center,
       nhomTrach,
+      tamNguyen,
+      cuuVan,
     },
     executive: {
       title: "TÓM TẮT TƯ VẤN",
