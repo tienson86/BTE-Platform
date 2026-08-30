@@ -111,62 +111,74 @@ def main() -> None:
     """Render CASE-0001 Narrative V2 Presentation visualizations."""
     OUT.mkdir(parents=True, exist_ok=True)
     _copy_before()
-    _build_result()
-    _kill_port(API_PORT)
-    _kill_port(PORTAL_PORT)
-    api_proc = _spawn("applications.api.app:app", API_PORT)
-    portal_proc = _spawn("applications.customer_portal.app:app", PORTAL_PORT)
-    try:
-        _wait(API_PORT)
-        _wait(PORTAL_PORT)
-        with sync_playwright() as playwright:
-            browser = playwright.chromium.launch()
-            page = browser.new_page(viewport={"width": 1440, "height": 1100})
-            page.goto(f"{BASE}/analyze", wait_until="networkidle")
-            page.wait_for_selector("#analyzeForm")
-            _fill_case_0001(page)
-            page.click("#btnAnalyze")
-            page.wait_for_url("**/result", timeout=180000)
-            page.wait_for_selector('[data-dashboard="commercial-v1"]')
-            page.wait_for_selector('[data-visual="v2"]')
-            page.goto(f"{BASE}/result?provider=v2", wait_until="networkidle")
-            page.wait_for_selector('[data-narrative-provider="v2"]')
-            page.wait_for_selector('[data-viz="balance-bars"]')
+    reuse = os.environ.get("BTE_CAPTURE_REUSE") == "1"
+    api_proc = None
+    portal_proc = None
+    if not reuse:
+        _build_result()
+        _kill_port(API_PORT)
+        _kill_port(PORTAL_PORT)
+        api_proc = _spawn("applications.api.app:app", API_PORT)
+        portal_proc = _spawn("applications.customer_portal.app:app", PORTAL_PORT)
+        try:
+            _wait(API_PORT)
+            _wait(PORTAL_PORT)
+            _capture()
+        finally:
+            for proc in (portal_proc, api_proc):
+                if proc is None:
+                    continue
+                proc.terminate()
+                try:
+                    proc.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    proc.kill()
+        return
+    _capture()
 
-            _expand(page, '[data-card="luck"]')
-            _expand(page, '[data-card="pattern"]')
-            _expand(page, '[data-card="ten-gods"]')
-            _expand(page, '[data-card="shensha"]')
 
-            page.screenshot(path=str(OUT / "desktop_full.png"), full_page=True)
-            page.locator('[data-card="five-elements"]').screenshot(path=str(OUT / "five_elements.png"))
-            page.locator('[data-card="luck"]').screenshot(path=str(OUT / "luck.png"))
-            page.locator('[data-card="pattern"]').screenshot(path=str(OUT / "pattern.png"))
-            page.locator('[data-card="bazi"]').screenshot(path=str(OUT / "bazi.png"))
-            page.locator('[data-card="ten-gods"]').screenshot(path=str(OUT / "ten_gods.png"))
-            page.locator('[data-card="shensha"]').screenshot(path=str(OUT / "shensha.png"))
+def _capture() -> None:
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch()
+        page = browser.new_page(viewport={"width": 1440, "height": 1100})
+        page.goto(f"{BASE}/analyze", wait_until="networkidle")
+        page.wait_for_selector("#analyzeForm")
+        _fill_case_0001(page)
+        page.click("#btnAnalyze")
+        page.wait_for_url("**/result", timeout=180000)
+        page.wait_for_selector('[data-dashboard="commercial-v1"]')
+        page.wait_for_selector('[data-visual="v2"]')
+        page.goto(f"{BASE}/result?provider=v2", wait_until="networkidle")
+        page.wait_for_selector('[data-narrative-provider="v2"]')
+        page.wait_for_selector('[data-viz="balance-bars"]')
 
-            page.set_viewport_size({"width": 834, "height": 1112})
-            page.reload(wait_until="networkidle")
-            page.wait_for_selector('[data-viz="balance-bars"]')
-            page.screenshot(path=str(OUT / "tablet_full.png"), full_page=True)
-            page.locator('[data-card="five-elements"]').screenshot(path=str(OUT / "tablet_five_elements.png"))
-            page.locator('[data-card="luck"]').screenshot(path=str(OUT / "tablet_luck.png"))
+        _expand(page, '[data-card="luck"]')
+        _expand(page, '[data-card="pattern"]')
+        _expand(page, '[data-card="ten-gods"]')
+        _expand(page, '[data-card="shensha"]')
 
-            page.set_viewport_size({"width": 390, "height": 844})
-            page.reload(wait_until="networkidle")
-            page.wait_for_selector('[data-viz="balance-bars"]')
-            page.screenshot(path=str(OUT / "mobile_full.png"), full_page=True)
-            page.locator('[data-card="five-elements"]').screenshot(path=str(OUT / "mobile_five_elements.png"))
-            page.locator('[data-card="luck"]').screenshot(path=str(OUT / "mobile_luck.png"))
-            browser.close()
-    finally:
-        for proc in (portal_proc, api_proc):
-            proc.terminate()
-            try:
-                proc.wait(timeout=5)
-            except subprocess.TimeoutExpired:
-                proc.kill()
+        page.screenshot(path=str(OUT / "desktop_full.png"), full_page=True)
+        page.locator('[data-card="five-elements"]').screenshot(path=str(OUT / "five_elements.png"))
+        page.locator('[data-card="luck"]').screenshot(path=str(OUT / "luck.png"))
+        page.locator('[data-card="pattern"]').screenshot(path=str(OUT / "pattern.png"))
+        page.locator('[data-card="bazi"]').screenshot(path=str(OUT / "bazi.png"))
+        page.locator('[data-card="ten-gods"]').screenshot(path=str(OUT / "ten_gods.png"))
+        page.locator('[data-card="shensha"]').screenshot(path=str(OUT / "shensha.png"))
+
+        page.set_viewport_size({"width": 834, "height": 1112})
+        page.reload(wait_until="networkidle")
+        page.wait_for_selector('[data-viz="balance-bars"]')
+        page.screenshot(path=str(OUT / "tablet_full.png"), full_page=True)
+        page.locator('[data-card="five-elements"]').screenshot(path=str(OUT / "tablet_five_elements.png"))
+        page.locator('[data-card="luck"]').screenshot(path=str(OUT / "tablet_luck.png"))
+
+        page.set_viewport_size({"width": 390, "height": 844})
+        page.reload(wait_until="networkidle")
+        page.wait_for_selector('[data-viz="balance-bars"]')
+        page.screenshot(path=str(OUT / "mobile_full.png"), full_page=True)
+        page.locator('[data-card="five-elements"]').screenshot(path=str(OUT / "mobile_five_elements.png"))
+        page.locator('[data-card="luck"]').screenshot(path=str(OUT / "mobile_luck.png"))
+        browser.close()
 
 
 if __name__ == "__main__":
