@@ -5,6 +5,7 @@
 import type { ReactNode } from "react";
 import type { NarrativeV2OverviewView } from "../../../adapters/narrativeV2PresentationAdapter";
 import { REPORT_SECTION } from "../copy";
+import { PrintCallout } from "../print/PrintCallout";
 import { ReportSectionHeader } from "./ReportPrimitives";
 
 type ExecutiveSummarySectionProps = {
@@ -26,9 +27,11 @@ export function ExecutiveSummarySection({ overview }: ExecutiveSummarySectionPro
     >
       <ReportSectionHeader title={REPORT_SECTION.summary} level="executive" />
       {headline ? (
-        <p className="bte-er__insight" data-report-overview="headline">
-          {headline}
-        </p>
+        <PrintCallout tone="insight">
+          <p className="bte-er__insight" data-report-overview="headline">
+            {headline}
+          </p>
+        </PrintCallout>
       ) : null}
       {summary ? (
         <p className="bte-er__lead" data-report-overview="summary">
