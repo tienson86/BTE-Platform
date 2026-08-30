@@ -4,6 +4,7 @@
 
 import { useState, type ReactNode } from "react";
 import type { DashboardCardSpec, PatternView } from "./types";
+import { visualCardDom } from "./visualHierarchy";
 
 type PatternCardProps = {
   readonly card: DashboardCardSpec;
@@ -21,9 +22,7 @@ function FormationFlow({
       {steps.map((step, index) => (
         <li key={`${step}-${index}`} className="bte-pat__step">
           {index > 0 ? (
-            <span className="bte-pat__arrow" aria-hidden="true">
-              ↓
-            </span>
+            <span className="bte-pat__arrow" aria-hidden="true" />
           ) : null}
           <span className="bte-pat__step-text">{step}</span>
         </li>
@@ -48,6 +47,7 @@ export function PatternCard({ card, model }: PatternCardProps): ReactNode {
       data-implemented="pattern"
       data-expanded={expanded ? "true" : "false"}
       aria-label={model.title}
+      {...visualCardDom(card.id)}
     >
       <header className="bte-pat__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
