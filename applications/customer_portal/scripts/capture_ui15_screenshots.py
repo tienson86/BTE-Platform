@@ -73,7 +73,7 @@ def _spawn(module: str, port: int) -> subprocess.Popen[bytes]:
     )
 
 
-def _wait(port: int, timeout: float = 20.0) -> None:
+def _wait(port: int, timeout: float = 45.0) -> None:
     deadline = time.time() + timeout
     while time.time() < deadline:
         if _listening(port):
