@@ -14,6 +14,7 @@ IMPLEMENTED = frozenset(
         "build_reasoning",
         "resolve_knowledge",
         "commercial_rewrite",
+        "build_summary",
     }
 )
 
@@ -43,6 +44,7 @@ def test_rw18_later_stages_remain_not_implemented(
     runtime.pipeline.build_reasoning()
     runtime.pipeline.resolve_knowledge()
     runtime.pipeline.commercial_rewrite()
+    runtime.pipeline.build_summary()
     later = tuple(stage for stage in BUILDER_STAGES if stage not in IMPLEMENTED)
     for stage in later:
         output = runtime.pipeline.execute_stage(stage)
