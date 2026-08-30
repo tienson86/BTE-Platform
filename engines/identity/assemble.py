@@ -256,7 +256,20 @@ def build_canonical_identity(
     narrative: Any | None = None,
 ) -> CanonicalIdentity:
     """Assemble identity from existing outputs. Four pillars require Bazi Can Chi."""
-    four = four_pillar_identity_from_bazi(bazi) if bazi is not None else None
+    cal = _calendar_mapping(calendar)
+    solar = cal.get("solar") if isinstance(cal.get("solar"), Mapping) else {}
+    tam_nguyen = _text(cal.get("tam_nguyen")) or None
+    reference_raw = solar.get("year", cal.get("solar_year"))
+    reference_year = int(reference_raw) if reference_raw not in (None, "") else None
+    four = (
+        four_pillar_identity_from_bazi(
+            bazi,
+            tam_nguyen=tam_nguyen,
+            reference_year=reference_year,
+        )
+        if bazi is not None
+        else None
+    )
     return CanonicalIdentity(
         person=person_identity_from_sources(
             person=person,
