@@ -10,14 +10,20 @@ import { ExecutiveSummarySection } from "./components/ExecutiveSummarySection";
 import { InterpretationSection } from "./components/InterpretationSection";
 import { KeyFindingsSection } from "./components/KeyFindingsSection";
 import { LuckSection } from "./components/LuckSection";
-import { ReportAppendix } from "./components/ReportAppendix";
-import { ReportCover } from "./components/ReportCover";
 import { ReportIdentity } from "./components/ReportIdentity";
-import { ReportDivider } from "./components/ReportPrimitives";
 import { SupportingAnalysisSection } from "./components/SupportingAnalysisSection";
-import { REPORT_PREVIEW_BANNER } from "./copy";
+import { REPORT_ANALYSIS_TITLE, REPORT_PREVIEW_BANNER } from "./copy";
+import {
+  PrintAppendix,
+  PrintCover,
+  PrintDivider,
+  PrintFooter,
+  PrintHeader,
+  PrintSection,
+} from "./print";
 import { buildExecutiveReportView } from "./reportModel";
 import "./executive-report.css";
+import "./print/print.css";
 
 export type ExecutiveReportPageProps = {
   readonly analysis?: AnalysisDataDto | null;
@@ -39,24 +45,42 @@ export function ExecutiveReportPage({
       data-ui="executive-report"
       data-report="preview"
       data-pdf-export="false"
+      data-print-ready="true"
       data-narrative-source="presentation-v2"
     >
       <p className="bte-er__preview-banner">{REPORT_PREVIEW_BANNER}</p>
+      <PrintHeader
+        title={REPORT_ANALYSIS_TITLE}
+        customer={model.cover.customerName}
+        version={model.cover.reportVersion}
+      />
       <div className="bte-er__sheet">
-        <ReportCover model={model.cover} />
+        <PrintCover model={model.cover} />
         <ReportIdentity rows={model.identityRows} />
-        <ReportDivider />
-        <ExecutiveSummarySection overview={presentation?.overview ?? null} />
-        <ChartSnapshotSection
-          bazi={model.bazi}
-          fiveElements={model.fiveElements}
-          pattern={model.pattern}
-          luck={model.luck}
-        />
-        <KeyFindingsSection findings={model.findings} />
-        <InterpretationSection interpretation={presentation?.interpretation ?? null} />
-        <ActionPlanSection plan={presentation?.action_plan ?? null} />
-        <LuckSection luck={model.luck} />
+        <PrintDivider />
+        <PrintSection breakBefore>
+          <ExecutiveSummarySection overview={presentation?.overview ?? null} />
+        </PrintSection>
+        <PrintSection keepTogether>
+          <ChartSnapshotSection
+            bazi={model.bazi}
+            fiveElements={model.fiveElements}
+            pattern={model.pattern}
+            luck={model.luck}
+          />
+        </PrintSection>
+        <PrintSection keepTogether>
+          <KeyFindingsSection findings={model.findings} />
+        </PrintSection>
+        <PrintSection breakBefore>
+          <InterpretationSection interpretation={presentation?.interpretation ?? null} />
+        </PrintSection>
+        <PrintSection breakBefore>
+          <ActionPlanSection plan={presentation?.action_plan ?? null} />
+        </PrintSection>
+        <PrintSection keepTogether>
+          <LuckSection luck={model.luck} />
+        </PrintSection>
         <SupportingAnalysisSection
           bazi={model.bazi}
           fiveElements={model.fiveElements}
@@ -64,8 +88,9 @@ export function ExecutiveReportPage({
           pattern={model.pattern}
           shenSha={model.shenSha}
         />
-        <ReportAppendix model={model.appendix} />
+        <PrintAppendix model={model.appendix} />
       </div>
+      <PrintFooter version={model.cover.reportVersion} />
     </article>
   );
 }
