@@ -145,8 +145,7 @@ export function adaptOverviewCard(data: AnalysisDataDto | null | undefined): Ove
     title: OVERVIEW_TITLE,
     subtitle: OVERVIEW_SUBTITLE,
     insight: composeOverviewInsight({ strength, dayMaster }),
-    insightSource:
-      "canonical labels: strength.strength_level + bazi.day_master + useful_god.unfavorable_display",
+    insightSource: "canonical labels: strength.strength_level + bazi.day_master",
     conclusion: conclusion.text,
     conclusionSource: conclusion.source,
     identity,
