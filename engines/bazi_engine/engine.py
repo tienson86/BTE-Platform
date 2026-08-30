@@ -1,10 +1,10 @@
 """Public facade for building a Bazi chart from civil datetime.
 
-Pillars follow BTE V1.0 rules:
-- Year changes at Lập Xuân (not Tết, not Jan 1)
-- Month follows 12 Tiết + Ngũ Hổ Độn (BTE-MONTH-PILLAR-SOLAR-TERM-V1.0)
-- Day uses astronomical Julian Day Number + sexagenary cycle
-- Hour follows Ngũ Thử Độn from Day Stem
+Pillars follow BTE G1-10B rules:
+- Year Can Chi is looked up from the Tam Nguyên 60 Hoa Giáp table of the Gregorian year
+- Month Can Chi uses that Year stem (Ngũ Hổ Độn) plus 12-Tiết month branch
+- Day uses astronomical Julian Day Number + sexagenary cycle (Hạ Nguyên)
+- Hour follows Ngũ Thử Độn from Day Stem (Hạ Nguyên)
 """
 
 from __future__ import annotations
@@ -15,8 +15,8 @@ from typing import Any
 
 from engines.calendar_engine.algorithms.ganzhi import GanzhiAlgorithm
 from engines.calendar_engine.julian.julian import JulianDay
-from engines.calendar_engine.month_ganzhi import month_pillar as canonical_month_pillar
 from engines.calendar_engine.solar_terms.engine import SolarTermEngine
+from engines.calendar_engine.tam_nguyen_dataset import resolve_month_pillar, resolve_year_pillar
 
 from engines.bazi_engine.ten_god import ten_god_name
 from engines.bazi_engine.shensha.models import ShenShaDetectionResult
@@ -96,14 +96,11 @@ class BaziEngine:
         )
         datetime(int(year), int(month), int(day), int(hour), int(minute))
 
-        bazi_year = self._bazi_year(year, month, day)
-        year_gz = GanzhiAlgorithm.year(bazi_year)
-        year_pillar = Pillar(stem=year_gz["can"], branch=year_gz["chi"])
+        year_resolved = resolve_year_pillar(int(year), month=int(month), day=int(day))
+        year_pillar = Pillar(stem=year_resolved.heavenly_stem, branch=year_resolved.earthly_branch)
 
-        month_stem, month_branch = canonical_month_pillar(
-            year, month, day, terms=self._solar_terms
-        )
-        month_pillar = Pillar(stem=month_stem, branch=month_branch)
+        month_resolved = resolve_month_pillar(int(year), int(month), int(day))
+        month_pillar = Pillar(stem=month_resolved.heavenly_stem, branch=month_resolved.earthly_branch)
 
         jdn = JulianDay.day_number(year, month, day)
         day_gz = GanzhiAlgorithm.day(jdn)
