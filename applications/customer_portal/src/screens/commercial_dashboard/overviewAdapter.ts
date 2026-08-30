@@ -56,11 +56,7 @@ function usefulDisplay(data: AnalysisDataDto): string {
 }
 
 function compactCanonicalList(value: string): string {
-  return value
-    .split(/\s*[,/|]\s*/)
-    .map((part) => part.trim())
-    .filter(Boolean)
-    .join(" · ");
+  return value.replace(/\s*,\s*/g, " · ").replace(/\s{2,}/g, " ").trim();
 }
 
 function avoidDisplay(data: AnalysisDataDto): string {
@@ -101,18 +97,22 @@ export function composeOverviewConclusion(input: {
   readonly strength: string;
   readonly usefulGod: string;
   readonly climate: string;
+  readonly avoidGod?: string;
 }): { readonly text: string; readonly source: string } {
   const sentences: string[] = [];
   if (input.strength) sentences.push(`Đây là lá số ${input.strength}.`);
   if (input.usefulGod && input.usefulGod !== OVERALL_INCOMPLETE_MESSAGE) {
     sentences.push(`Dụng thần ${input.usefulGod}.`);
   }
+  if (input.avoidGod && input.avoidGod !== OVERALL_INCOMPLETE_MESSAGE) {
+    sentences.push(`Kỵ thần ${input.avoidGod}.`);
+  }
   if (input.climate) {
     sentences.push(input.climate.endsWith(".") ? input.climate : `${input.climate}.`);
   }
   return {
     text: clampCopy(sentences.join(" "), CONCLUSION_MAX),
-    source: "canonical labels: strength + useful_display + temperature.balancing_need",
+    source: "canonical labels: strength + useful_display + unfavorable_display + temperature.balancing_need",
   };
 }
 
@@ -123,18 +123,19 @@ export function adaptOverviewCard(data: AnalysisDataDto | null | undefined): Ove
   const payload = data ?? {};
   const dayMaster = dayMasterDisplay(payload);
   const strength = strengthDisplay(payload);
-  const pattern = customerLabel(canonicalPatternLabel(payload));
+  const avoidGod = avoidDisplay(payload);
   const usefulGod = usefulDisplay(payload);
   const climate = customerLabel(canonicalBalancingNeedLabel(payload));
   const conclusion = composeOverviewConclusion({
     strength,
     usefulGod,
+    avoidGod,
     climate,
   });
   const identity = [
     evidence("day-master", "Nhật Chủ", dayMaster),
     evidence("strength", "Thân", strength),
-    evidence("pattern", "Mệnh Cục", pattern),
+    evidence("avoid-god", "Kỵ Thần", avoidGod),
   ].filter((item): item is OverviewEvidenceView => item != null);
   const balance = [
     evidence("useful-god", "Dụng Thần", usefulGod),
@@ -143,9 +144,9 @@ export function adaptOverviewCard(data: AnalysisDataDto | null | undefined): Ove
   return {
     title: OVERVIEW_TITLE,
     subtitle: OVERVIEW_SUBTITLE,
-    insight: composeOverviewInsight({ strength, dayMaster, pattern }),
+    insight: composeOverviewInsight({ strength, dayMaster }),
     insightSource:
-      "canonical labels: strength.strength_level + bazi.day_master + pattern.cach_cuc",
+      "canonical labels: strength.strength_level + bazi.day_master + useful_god.unfavorable_display",
     conclusion: conclusion.text,
     conclusionSource: conclusion.source,
     identity,
