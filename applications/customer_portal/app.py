@@ -106,6 +106,11 @@ def create_app() -> FastAPI:
         """Reports page."""
         return page("reports", "reports.html")
 
+    @app.get("/report-preview", response_class=HTMLResponse)
+    def report_preview_page() -> HTMLResponse:
+        """UI-16 executive report HTML preview. Does not replace /reports PDF."""
+        return HTMLResponse(render_desktop_page("result_desktop.html", active="result"))
+
     @app.get("/history", response_class=HTMLResponse)
     def history_page() -> HTMLResponse:
         """History page."""
