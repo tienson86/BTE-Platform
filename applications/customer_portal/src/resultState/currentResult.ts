@@ -15,6 +15,7 @@ import { canonicalFiveElementCounts } from "../adapters/canonicalFiveElements";
 export const HISTORY_VIEW_QUERY = "from";
 export const HISTORY_VIEW_VALUE = "history";
 export const HISTORY_ID_QUERY = "id";
+export const CALENDAR_RULE_VERSION = "G1-10B";
 
 export type StoredResultRecord = {
   readonly input?: Record<string, unknown> | null;
@@ -78,6 +79,18 @@ export function analysisIdOf(record: StoredResultRecord | null | undefined): str
 }
 
 /**
+ * True when a stored analysis was built before G1-10B Year/Month dataset lookup.
+ */
+export function isIncompatibleCalendarRule(data: AnalysisDataDto | null | undefined): boolean {
+  const calendar = data?.calendar as Record<string, unknown> | undefined;
+  if (!calendar || typeof calendar !== "object") return false;
+  const version = typeof calendar.calendar_rule_version === "string" ? calendar.calendar_rule_version : "";
+  if (version && version !== CALENDAR_RULE_VERSION) return true;
+  if (!version && calendar.ganzhi_routing) return true;
+  return false;
+}
+
+/**
  * Resolve which stored payload the customer UI should bind.
  *
  * Default /result, Luận giải, Báo cáo, and export use `current`.
@@ -99,6 +112,7 @@ export function resolveCurrentStoredResult(options: {
     return null;
   }
   if (options.current?.data) {
+    if (isIncompatibleCalendarRule(options.current.data)) return null;
     return toResolved(options.current, "current");
   }
   return null;
