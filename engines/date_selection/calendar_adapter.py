@@ -76,4 +76,6 @@ def snapshot_for_solar(
         day_ganzhi=day_ganzhi,
         year_branch=year_branch,
         weekday=_weekday(year, month, day),
+        tam_nguyen=calendar.tam_nguyen or "",
+        cuu_van=calendar.cuu_van,
     )
