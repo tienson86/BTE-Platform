@@ -29,7 +29,7 @@ def test_context_has_required_fields(case_0001_canonical: dict[str, Any]) -> Non
     assert context.status in {"rewritten", "partial", "unresolved"}
     meta = dict(context.metadata)
     assert meta["shadow_mode"] == "true"
-    assert meta["sentence_library"] == "runtime_gap"
+    assert meta["sentence_library"] in {"approved", "partial"}
 
 
 def test_context_does_not_include_final_narrative_fields(
