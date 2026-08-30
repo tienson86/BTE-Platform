@@ -21,4 +21,5 @@ class GuaResult:
         data["cung_phi"] = self.gua_name
         data["menh_quai"] = self.gua_name
         data["nhom_trach"] = self.group
+        data["house_group"] = self.group
         return data
