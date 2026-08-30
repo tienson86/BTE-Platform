@@ -40,6 +40,9 @@ export type PillarDto = {
   readonly element?: string;
   readonly nap_am?: string;
   readonly truong_sinh?: string;
+  readonly cung_phi?: string;
+  readonly source_nguyen?: string;
+  readonly ganzhi?: string;
 };
 
 export type ShenShaOccurrenceDto = {
