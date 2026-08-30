@@ -54,6 +54,8 @@ class CalendarSnapshot:
     day_ganzhi: str
     year_branch: str
     weekday: int
+    tam_nguyen: str = ""
+    cuu_van: int | None = None
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize for API / presentation."""
@@ -139,7 +141,7 @@ class DaySelection:
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize for API / presentation."""
-        from engines.date_selection.identity import hoa_giap_view, pillar_contract
+        from engines.date_selection.identity import hoa_giap_view, snapshot_pillar_payloads
 
         payload = {
             "calendar": self.calendar.to_dict(),
@@ -150,9 +152,7 @@ class DaySelection:
             "month_ganzhi": self.calendar.month_ganzhi,
         }
         payload.update(hoa_giap_view(self.calendar.day_ganzhi, self.trach))
-        payload["year"] = pillar_contract(self.calendar.year_ganzhi)
-        payload["month"] = pillar_contract(self.calendar.month_ganzhi)
-        payload["day"] = pillar_contract(self.calendar.day_ganzhi)
+        payload.update(snapshot_pillar_payloads(self.calendar))
         return payload
 
 
@@ -258,7 +258,7 @@ class RankedDate:
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize for API / presentation."""
-        from engines.date_selection.identity import hoa_giap_view, pillar_contract
+        from engines.date_selection.identity import hoa_giap_view, snapshot_pillar_payloads
 
         day_payload = {
             "calendar": self.day.calendar.to_dict(),
@@ -267,9 +267,7 @@ class RankedDate:
             "month_ganzhi": self.day.calendar.month_ganzhi,
         }
         day_payload.update(hoa_giap_view(self.day.calendar.day_ganzhi, self.day.trach))
-        day_payload["year"] = pillar_contract(self.day.calendar.year_ganzhi)
-        day_payload["month"] = pillar_contract(self.day.calendar.month_ganzhi)
-        day_payload["day"] = pillar_contract(self.day.calendar.day_ganzhi)
+        day_payload.update(snapshot_pillar_payloads(self.day.calendar))
         return {
             "day": day_payload,
             "compatible_hours": _compatible_hours_view(self.day),
