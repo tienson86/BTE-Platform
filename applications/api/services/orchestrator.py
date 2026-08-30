@@ -18,6 +18,7 @@ from types import SimpleNamespace
 from typing import Any, Literal
 
 from engines.bazi_engine.engine import BaziEngine
+from engines.can_xuong_engine import CanXuongEngine, CanXuongEngineError
 from engines.pattern_engine.utils.context_builder import build_pattern_context
 from engines.calendar_engine.engine import CalendarEngine
 from engines.calendar_engine.ganzhi_routing import (
@@ -201,6 +202,7 @@ class OrchestratorService:
     def __init__(self) -> None:
         self.calendar_engine = CalendarEngine()
         self.bazi_engine = BaziEngine()
+        self.can_xuong_engine = CanXuongEngine()
         self.feng_shui_engine = FengShuiEngine()
         self.pattern_engine = PatternEngine()
         self.strength_engine = StrengthEngine()
@@ -377,6 +379,15 @@ class OrchestratorService:
             payload.pop(key, None)
         payload["pipeline"] = self._public_pipeline(completed)
         return payload
+
+    def _attach_can_xuong(self, payload: dict[str, Any], calendar: Any, bazi_chart: Any) -> None:
+        """Publish analysis.can_xuong from the dedicated engine. Soft-fail."""
+        try:
+            result = self.can_xuong_engine.calculate_from_calendar_bazi(calendar, bazi_chart)
+            payload["can_xuong"] = result.to_dict()
+        except CanXuongEngineError:
+            logger.warning("can_xuong.unavailable", exc_info=True)
+            payload.setdefault("can_xuong", None)
 
     def _pillars_from_bazi(self, bazi_view: Any) -> dict[str, dict[str, str]]:
         """Copy four-pillar stems and branches for TenGodsEngine."""
@@ -569,6 +580,7 @@ class OrchestratorService:
         stamp_bazi_source_nguyen(bazi_payload, calendar.ganzhi_routing)
         payload["bazi"] = bazi_payload
         payload["bazi_source"] = analysis.meta.bazi_source
+        self._attach_can_xuong(payload, calendar, bazi_chart)
         if stop_index == 2:
             payload["calendar"] = self._shape_calendar(calendar, bazi_payload, None)
             return self._finalize_public_payload(payload, completed, analysis=analysis)
