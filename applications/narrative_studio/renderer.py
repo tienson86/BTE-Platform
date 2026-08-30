@@ -22,6 +22,7 @@ PANELS: tuple[tuple[str, str], ...] = (
     ("quality", "Quality"),
     ("golden", "Golden"),
     ("approval", "Approval"),
+    ("certification", "Certification"),
 )
 
 
@@ -33,10 +34,19 @@ def render_studio(
     approval: StudioApproval | None,
     history: list[StudioApproval],
     notice: str = "",
+    certification: dict[str, Any] | None = None,
+    certification_history: list[dict[str, Any]] | None = None,
 ) -> str:
     """Return a complete HTML document for one case + panel."""
     active = panel if panel in {item[0] for item in PANELS} else "overview"
-    body = _panel_html(review, active, approval, history)
+    body = _panel_html(
+        review,
+        active,
+        approval,
+        history,
+        certification or {},
+        certification_history or [],
+    )
     return f"""<!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -101,6 +111,8 @@ def _panel_html(
     panel: str,
     approval: StudioApproval | None,
     history: list[StudioApproval],
+    certification: dict[str, Any],
+    certification_history: list[dict[str, Any]],
 ) -> str:
     if panel == "overview":
         return _overview(review)
@@ -122,6 +134,8 @@ def _panel_html(
         return _quality(review)
     if panel == "golden":
         return _golden(review)
+    if panel == "certification":
+        return _certification(review, certification, certification_history)
     return _approval(review, approval, history)
 
 
@@ -271,6 +285,53 @@ def _golden(review: StudioReview) -> str:
   <p class="ns-muted">{html.escape(note)}</p>
   <p>differences: {len(review.golden_diffs)}</p>
   {_json_pre(review.golden_diffs)}
+</section>
+"""
+
+
+def _certification(
+    review: StudioReview,
+    certification: dict[str, Any],
+    history: list[dict[str, Any]],
+) -> str:
+    status = str(certification.get("status") or "DRAFT")
+    eligible = "YES" if certification.get("golden_eligible") else "NO"
+    quality = certification.get("quality_summary") or {}
+    latest = certification.get("latest") or {}
+    reviewer = str(latest.get("reviewer") or "—")
+    comment = str(latest.get("review_comment") or "")
+    past = "".join(
+        f"<li>{html.escape(str(row.get('review_time') or ''))} · "
+        f"{html.escape(str(row.get('status') or ''))} · "
+        f"{html.escape(str(row.get('reviewer') or ''))}</li>"
+        for row in reversed(history)
+    )
+    return f"""
+<section class="ns-card" data-studio-panel="certification">
+  <h2>Certification</h2>
+  <p class="ns-muted">Records a decision only. Does not modify Narrative, Knowledge, or Presentation. Only CERTIFIED may enter Golden Dataset.</p>
+  <p>Current status: <strong data-certification-status>{html.escape(status)}</strong></p>
+  <p>Golden eligible: <strong>{html.escape(eligible)}</strong></p>
+  <p>Reviewer: {html.escape(reviewer)}</p>
+  <p>Comment: {html.escape(comment) if comment else "—"}</p>
+  <h3>Quality gates</h3>
+  {_json_pre(quality)}
+  <form method="post" action="/studio/certification" data-studio-certification>
+    <input type="hidden" name="case" value="{html.escape(review.case_id)}" />
+    <label>Decision
+      <select name="decision">
+        <option>REVIEW</option>
+        <option>CERTIFIED</option>
+        <option>REJECTED</option>
+        <option>REVOKED</option>
+      </select>
+    </label>
+    <label>Reviewer <input name="reviewer" value="product-owner" /></label>
+    <label>Comment <textarea name="comment" rows="4"></textarea></label>
+    <button type="submit">Record certification decision</button>
+  </form>
+  <h3>History</h3>
+  <ul data-certification-history>{past or '<li class="ns-muted">empty</li>'}</ul>
 </section>
 """
 
