@@ -84,7 +84,7 @@ export type DashboardCardSpec = {
 export type OverviewEvidenceView = {
   readonly label: string;
   readonly value: string;
-  readonly key: "day-master" | "strength" | "pattern" | "useful-god" | "temperature";
+  readonly key: "day-master" | "strength" | "avoid-god" | "useful-god" | "temperature";
 };
 
 export type OverviewView = {
