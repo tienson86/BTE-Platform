@@ -242,6 +242,15 @@ export type CanXuongDto = {
   readonly poem?: string;
 };
 
+/** Narrative V2 shadow envelope stored beside Pack05. Portal diagnostic only. */
+export type NarrativeV2ShadowEnvelopeDto = {
+  readonly status?: string;
+  readonly portal_connection?: string;
+  readonly replaces_pack05?: boolean;
+  readonly presentation?: Record<string, unknown> | null;
+  readonly error?: string | null;
+};
+
 /** `data` payload from POST /analyze. */
 export type AnalysisDataDto = {
   readonly pipeline?: readonly string[];
