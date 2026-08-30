@@ -63,7 +63,9 @@ export function InterpretationCard({ card, model }: InterpretationCardProps): Re
             {expanded ? "Thu gọn" : "Xem luận giải đầy đủ"}
           </button>
         ) : null}
-        <MobileToggle open={mobile.open} label="Xem chi tiết" onToggle={mobile.toggle} />
+        {model.available ? (
+          <MobileToggle open={mobile.open} label="Xem chi tiết" onToggle={mobile.toggle} />
+        ) : null}
       </header>
       {!model.available ? (
         <p className="bte-int__empty" data-int-empty="true">
