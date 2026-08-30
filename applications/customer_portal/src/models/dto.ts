@@ -284,6 +284,8 @@ export type AnalysisDataDto = {
   readonly narrative?: Record<string, unknown>;
   /** Pack 05 official commercial NarrativeResult. */
   readonly narrative_result?: Record<string, unknown>;
+  /** Narrative V2 Presentation envelope. Shadow only. Never replaces Pack05. */
+  readonly narrative_v2_shadow?: NarrativeV2ShadowEnvelopeDto | null;
   /** Frozen INT-02 IntegratedNarrative. Workspace Panel 9/10 consume this only. */
   readonly integrated_narrative?: IntegratedNarrativeDto;
   readonly customer?: CustomerEchoDto;
