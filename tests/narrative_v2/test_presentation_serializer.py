@@ -16,7 +16,7 @@ def test_p10_public_metadata_safe(
     overview, interpretation, action_plan = case_0001_narratives
     payload = serialize_customer(PresentationBuilder().build(overview, interpretation, action_plan))
     assert set(payload["metadata"].keys()) == {"status", "language", "version", "created_at"}
-    assert payload["metadata"]["version"] == "bte.presentation.v2"
+    assert payload["metadata"]["version"] == "bte.presentation.v2.1"
     assert payload["metadata"]["language"] == "vi"
 
 
