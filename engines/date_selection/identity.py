@@ -51,21 +51,80 @@ def hoa_giap_view(ganzhi: str, trach: TrachInfo | None) -> dict[str, Any]:
     }
 
 
-def pillar_contract(ganzhi: str) -> dict[str, str]:
+def pillar_contract(
+    ganzhi: str,
+    *,
+    tam_nguyen: str | None = None,
+    reference_year: int | None = None,
+) -> dict[str, str]:
     """
     Canonical Four Pillars cell for one Hoa Giáp label.
 
-    Uses the same Hạ Nguyên Cung and Nạp âm element lookup already applied
-    to Day and Hour. Does not return the full Nạp âm name.
+    Day/Hour (no ``tam_nguyen``) keep the Hạ Nguyên Cung CSV.
+    Year/Month pass Calendar Tam Nguyên and resolve Cung from that dataset.
+    Does not return the full Nạp âm name.
     """
+    from engines.calendar_engine.cung_phi import cung_for_ganzhi
     from engines.date_selection.cung_phi import trach_for_date_ganzhi
+    from engines.date_selection.trach import trach_from_cung
 
-    view = hoa_giap_view(ganzhi, trach_for_date_ganzhi(ganzhi))
-    cung = view["cung"]
-    if not cung:
+    if tam_nguyen:
+        year = int(reference_year) if reference_year is not None else 1984
+        cung = cung_for_ganzhi(
+            ganzhi,
+            tam_nguyen=tam_nguyen,
+            reference_year=year,
+            gender="male",
+        )
+        trach = trach_from_cung(cung)
+    else:
+        trach = trach_for_date_ganzhi(ganzhi)
+    view = hoa_giap_view(ganzhi, trach)
+    cung_name = view["cung"]
+    if not cung_name:
         raise DateSelectionValidationError(f"missing Cung Phi for {ganzhi!r}")
     return {
         "can_chi": view["ganzhi"],
         "nayin_element": view["nayin_element"],
-        "cung_phi": cung,
+        "cung_phi": cung_name,
+    }
+
+
+def routed_pillar_contract(
+    ganzhi: str,
+    *,
+    tam_nguyen: str,
+    reference_year: int,
+) -> dict[str, str]:
+    """``pillar_contract`` plus the Nguyên that supplied the Cung row."""
+    cell = pillar_contract(
+        ganzhi,
+        tam_nguyen=tam_nguyen,
+        reference_year=reference_year,
+    )
+    return {**cell, "source_nguyen": tam_nguyen}
+
+
+def snapshot_pillar_payloads(calendar: Any) -> dict[str, dict[str, str]]:
+    """Year/Month use the snapshot Tam Nguyên; Day stays Hạ Nguyên."""
+    from engines.calendar_engine.tam_nguyen import HA_NGUYEN, tam_nguyen_for_year
+
+    year = int(calendar.solar_year)
+    yuan = (calendar.tam_nguyen or "").strip() or tam_nguyen_for_year(year)
+    return {
+        "year": routed_pillar_contract(
+            calendar.year_ganzhi,
+            tam_nguyen=yuan,
+            reference_year=year,
+        ),
+        "month": routed_pillar_contract(
+            calendar.month_ganzhi,
+            tam_nguyen=yuan,
+            reference_year=year,
+        ),
+        "day": routed_pillar_contract(
+            calendar.day_ganzhi,
+            tam_nguyen=HA_NGUYEN,
+            reference_year=year,
+        ),
     }
