@@ -72,6 +72,7 @@ import {
   summaryText,
   type NarrativeResultDto,
 } from "./narrativeResultAdapter";
+import { adaptCanXuong } from "./canonicalCanXuong";
 
 export type CanonicalDesktopStatus = "ready" | "loading" | "error" | "empty";
 
@@ -1025,21 +1026,39 @@ function mapS08(data: AnalysisDataDto): CanonicalDesktopViewModel["s08"] {
   };
 }
 
-function mapS10(): CanonicalDesktopViewModel["s10"] {
+function mapS10(data: AnalysisDataDto): CanonicalDesktopViewModel["s10"] {
   const base = cloneFixture().s10;
+  const cx = adaptCanXuong(data);
+  if (!cx.available) {
+    return {
+      ...base,
+      stars: 0,
+      weight: "—",
+      grade: UNAVAILABLE_CONCLUSION,
+      insight: UNAVAILABLE_CONCLUSION,
+      verse: {
+        ...base.verse,
+        lines: [UNAVAILABLE_CONCLUSION],
+      },
+      interpretation: {
+        ...base.interpretation,
+        body: UNAVAILABLE_CONCLUSION,
+      },
+    };
+  }
   return {
     ...base,
     stars: 0,
-    weight: "—",
-    grade: UNAVAILABLE_CONCLUSION,
-    insight: UNAVAILABLE_CONCLUSION,
+    weight: cx.displayWeight,
+    grade: cx.classification,
+    insight: cx.summary,
     verse: {
       ...base.verse,
-      lines: [UNAVAILABLE_CONCLUSION],
+      lines: cx.interpretation ? [cx.interpretation] : [cx.summary],
     },
     interpretation: {
       ...base.interpretation,
-      body: UNAVAILABLE_CONCLUSION,
+      body: cx.interpretation || cx.summary,
     },
   };
 }
@@ -1180,8 +1199,7 @@ export function adaptAnalysisToCanonicalDesktop(
     s07: mapS07(data),
     s08: mapS08(data),
     s09: mapS09(data),
-    // S10 — bone-weight engine not in production pipeline; no fixture leakage.
-    s10: mapS10(),
+    s10: mapS10(data),
     s11: mapS11(data),
     footer: fixture.footer,
     narrativeResult: asNarrativeResult(data.narrative_result),
