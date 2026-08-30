@@ -1,6 +1,6 @@
 /**
  * S10 — Dashboard Preview Card: CÂN XƯƠNG ĐOÁN MỆNH
- * Bone-weight engine is not in the production pipeline; ViewModel shows unavailable copy.
+ * Copies analysis.can_xuong. Does not calculate weight.
  */
 
 import type { ReactNode } from "react";
@@ -12,7 +12,12 @@ import { useCanonicalDesktop } from "../CanonicalDesktopContext";
 export function S10BoneWeightFortune(): ReactNode {
   const data = useCanonicalDesktop().s10;
   return (
-    <section className="cd-s10 cd-preview-card" aria-labelledby="cd-s10-title">
+    <section
+      id="sec-can-xuong"
+      className="cd-s10 cd-preview-card"
+      aria-labelledby="cd-s10-title"
+      data-module="bone-weight-detail"
+    >
       <div className="cd-s10__card">
         <h2 id="cd-s10-title" className="cd-s10__title">
           {data.title}
