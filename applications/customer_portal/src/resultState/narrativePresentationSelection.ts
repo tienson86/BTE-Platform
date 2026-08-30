@@ -1,6 +1,6 @@
 /**
- * Choose which stored Presentation the Portal renders.
- * ResultStore keeps Pack05 and Narrative V2 independently.
+ * Production Portal always renders Narrative V2.
+ * Pack05 remains in ResultStore as a read-only archive.
  */
 
 import {
@@ -13,9 +13,14 @@ import {
   type NarrativeV2PresentationView,
 } from "../adapters/narrativeV2PresentationAdapter";
 import type { AnalysisDataDto } from "../models";
-import { adaptActionPlanCard } from "../screens/commercial_dashboard/actionPlanAdapter";
-import { adaptInterpretationCard } from "../screens/commercial_dashboard/interpretationAdapter";
 import { adaptOverviewCard } from "../screens/commercial_dashboard/overviewAdapter";
+import {
+  ACTION_PLAN_EMPTY,
+  ACTION_PLAN_TITLE,
+  INTERPRETATION_EMPTY,
+  INTERPRETATION_TITLE,
+  INTERPRETATION_ZONE_LABELS,
+} from "../screens/commercial_dashboard/cards";
 import type {
   ActionPlanView,
   InterpretationView,
@@ -28,7 +33,7 @@ import {
 } from "./narrativeProvider";
 import { recordNarrativeSelection } from "./narrativeReleaseMonitor";
 
-export type SelectedNarrative = "pack05" | "v2";
+export type SelectedNarrative = "v2";
 
 export type NarrativePresentationSelection = {
   readonly requested: NarrativeProvider;
@@ -43,76 +48,91 @@ export type NarrativePresentationSelection = {
 };
 
 /**
- * Select Overview / Interpretation / Action Plan for the production dashboard.
+ * Select production Narrative cards. Pack05 is never chosen.
  */
 export function selectNarrativePresentation(
   analysis: AnalysisDataDto | null | undefined,
-  requested: NarrativeProvider = resolveNarrativeProvider(),
+  requested: string = resolveNarrativeProvider(),
 ): NarrativePresentationSelection {
+  void requested;
   const started =
     typeof performance !== "undefined" && typeof performance.now === "function"
       ? performance.now()
       : Date.now();
-  const v2View = requested === "pack05" ? null : readV2View(analysis);
-  const pack05 = {
-    overview: adaptOverviewCard(analysis),
-    interpretation: adaptInterpretationCard(analysis),
-    actionPlan: adaptActionPlanCard(analysis),
-  };
-
-  let selection: Omit<NarrativePresentationSelection, "durationMs">;
-  if (requested === "pack05") {
-    selection = pack05Selection(requested, pack05, null);
-  } else if (v2View && v2Usable(v2View)) {
-    selection = {
-      requested,
-      selected: "v2",
-      fallback: false,
-      fallbackReason: null,
-      presentationVersion: v2View.version,
-      overview: adaptOverviewFromPresentation(v2View),
-      interpretation: adaptInterpretationFromPresentation(v2View),
-      actionPlan: adaptActionPlanFromPresentation(v2View),
-    };
-  } else {
-    const reason = v2View?.error ?? "presentation_unavailable";
-    selection = pack05Selection(requested, pack05, reason);
-  }
-
+  const provider: NarrativeProvider = "v2";
+  const v2View = readV2View(analysis);
+  const usable = v2View != null && v2Usable(v2View);
+  const overview =
+    v2View != null && usable && hasOverview(v2View)
+      ? adaptOverviewFromPresentation(v2View)
+      : adaptOverviewCard(analysis);
+  const interpretation =
+    v2View != null && usable
+      ? adaptInterpretationFromPresentation(v2View)
+      : emptyInterpretation();
+  const actionPlan =
+    v2View != null && usable ? adaptActionPlanFromPresentation(v2View) : emptyActionPlan();
   const ended =
     typeof performance !== "undefined" && typeof performance.now === "function"
       ? performance.now()
       : Date.now();
   const durationMs = Math.max(0, Math.round(ended - started));
+  const selection: NarrativePresentationSelection = {
+    requested: provider,
+    selected: "v2",
+    fallback: false,
+    fallbackReason: usable ? null : v2View?.error ?? "presentation_unavailable",
+    presentationVersion: usable && v2View != null ? v2View.version : null,
+    durationMs,
+    overview,
+    interpretation,
+    actionPlan,
+  };
   recordNarrativeSelection({
     provider: selection.requested,
-    selected: selection.selected,
+    selected: "v2",
     presentationVersion: selection.presentationVersion,
-    fallback: selection.fallback,
+    fallback: false,
     fallbackReason: selection.fallbackReason,
     durationMs,
   });
-  return { ...selection, durationMs };
+  return selection;
 }
 
-function pack05Selection(
-  requested: NarrativeProvider,
-  pack05: {
-    readonly overview: OverviewView;
-    readonly interpretation: InterpretationView;
-    readonly actionPlan: ActionPlanView;
-  },
-  fallbackReason: string | null,
-): Omit<NarrativePresentationSelection, "durationMs"> {
+function hasOverview(view: NarrativeV2PresentationView): boolean {
+  return Boolean(view.overview?.headline || view.overview?.summary || view.overview?.conclusion);
+}
+
+function emptyInterpretation(): InterpretationView {
   return {
-    requested,
-    selected: "pack05",
-    fallback: fallbackReason != null,
-    fallbackReason,
-    presentationVersion: null,
-    overview: pack05.overview,
-    interpretation: pack05.interpretation,
-    actionPlan: pack05.actionPlan,
+    title: INTERPRETATION_TITLE,
+    available: false,
+    lead: "",
+    leadExtra: "",
+    leadSource: "",
+    zones: (["observation", "reasoning", "impact", "recommendation"] as const).map((id) => ({
+      id,
+      label: INTERPRETATION_ZONE_LABELS[id],
+      body: "",
+      extra: "",
+      source: "",
+    })),
+    closing: "",
+    closingSource: "",
+    emptyMessage: INTERPRETATION_EMPTY,
+  };
+}
+
+function emptyActionPlan(): ActionPlanView {
+  return {
+    title: ACTION_PLAN_TITLE,
+    available: false,
+    emptyMessage: ACTION_PLAN_EMPTY,
+    priority: null,
+    actions: [],
+    extraActions: [],
+    warnings: [],
+    watch: [],
   };
 }
 
