@@ -5,7 +5,8 @@
 import type { ReactNode } from "react";
 import type { NarrativeV2ActionView } from "../../../adapters/narrativeV2PresentationAdapter";
 import { REPORT_ACTION_LABEL, REPORT_SECTION } from "../copy";
-import { ReportCallout, ReportSectionHeader } from "./ReportPrimitives";
+import { PrintCallout } from "../print/PrintCallout";
+import { ReportSectionHeader } from "./ReportPrimitives";
 
 type ActionPlanSectionProps = {
   readonly plan: NarrativeV2ActionView | null;
@@ -30,7 +31,7 @@ export function ActionPlanSection({ plan }: ActionPlanSectionProps): ReactNode {
     >
       <ReportSectionHeader title={REPORT_SECTION.action} level="primary" />
       {priority ? (
-        <ReportCallout label={REPORT_ACTION_LABEL.priority} tone="priority">
+        <PrintCallout label={REPORT_ACTION_LABEL.priority} tone="priority">
           <p
             className="bte-er__priority-title"
             data-action-priority-title="true"
@@ -43,7 +44,7 @@ export function ActionPlanSection({ plan }: ActionPlanSectionProps): ReactNode {
               {priority.description}
             </p>
           ) : null}
-        </ReportCallout>
+        </PrintCallout>
       ) : null}
       {actions.length ? (
         <div className="bte-er__plan-block" data-action-block="actions">
