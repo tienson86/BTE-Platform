@@ -473,6 +473,8 @@ observation
 
 reasoning
 
+meaning
+
 impact
 
 recommendation
@@ -483,6 +485,10 @@ references
 ```
 
 Đây là Narrative đầy đủ.
+
+`meaning` is a canonical formula stage. Presentation must copy it when present.
+
+Revision N-IMP-09A: restored `meaning` on the public Interpretation Presentation contract. Continuous consulting prose is owned by ConsultingNarrative (`flow`) and published as Presentation `consulting_flow`.
 
 ---
 
