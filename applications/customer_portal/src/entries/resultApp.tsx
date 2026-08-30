@@ -10,6 +10,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { PortalPage } from "../screens/canonical_desktop";
 import { CommercialDashboardPage } from "../screens/commercial_dashboard";
+import { ExecutiveReportPage } from "../screens/executive_report";
 import { NarrativeV2ShadowPage } from "../screens/narrative_v2_shadow";
 import { historyIdFromSearch } from "../resultState/currentResult";
 import { resolveNarrativeProvider } from "../resultState/narrativeProvider";
@@ -66,6 +67,10 @@ function isCanonicalResultPath(pathname: string): boolean {
   return pathname === "/result" || pathname === "/result/";
 }
 
+function isReportPreviewPath(pathname: string): boolean {
+  return pathname === "/report-preview" || pathname === "/report-preview/";
+}
+
 function mount(): void {
   const host = document.getElementById("canonical-desktop-root");
   if (!host) {
@@ -76,11 +81,17 @@ function mount(): void {
   const stored = readStoredResult(search, window.location.pathname);
   const boot = resolveResultBoot(stored.current, search, stored.historyView);
   const commercial = isCanonicalResultPath(window.location.pathname);
+  const reportPreview = isReportPreviewPath(window.location.pathname);
   const surface = resolveResultSurface(search, window.location.pathname);
 
   createRoot(host).render(
     <StrictMode>
-      {commercial && surface !== "production" ? (
+      {reportPreview ? (
+        <ExecutiveReportPage
+          analysis={boot.analysis ?? stored.current?.data ?? null}
+          request={boot.request ?? toAnalyzeRequest(stored.current?.input ?? null)}
+        />
+      ) : commercial && surface !== "production" ? (
         <NarrativeV2ShadowPage
           analysis={boot.analysis ?? stored.current?.data ?? null}
           mode={surface}
