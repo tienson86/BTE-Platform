@@ -20,4 +20,22 @@ CATEGORIES: tuple[str, ...] = (
     "recommendation",
     "transition",
     "closing",
+    "decision",
+    "action",
+    "warning",
 )
+
+MEANING_CATEGORIES: frozenset[str] = frozenset(
+    {
+        "headline",
+        "observation",
+        "reasoning",
+        "meaning",
+        "impact",
+        "recommendation",
+        "transition",
+        "closing",
+    }
+)
+
+TASK_CATEGORIES: frozenset[str] = frozenset({"decision", "action", "warning"})
