@@ -4,6 +4,7 @@
 
 import type { ReactNode } from "react";
 import type { BaziPillarView, BaziStructureView, DashboardCardSpec } from "./types";
+import { visualCardDom } from "./visualHierarchy";
 
 type BaziCardProps = {
   readonly card: DashboardCardSpec;
@@ -56,6 +57,7 @@ export function BaziCard({ card, model }: BaziCardProps): ReactNode {
       data-implemented="bazi"
       data-bazi-model="detail"
       aria-label={model.title}
+      {...visualCardDom(card.id)}
     >
       <header className="bte-bazi__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
