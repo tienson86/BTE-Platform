@@ -1,11 +1,11 @@
 /**
- * Controlled-release narrative provider flag.
- * Rollback is a flag change only: NARRATIVE_PROVIDER=pack05.
+ * Production narrative provider. Pack05 is retired from production flags.
+ * Archive access is PACK05_LEGACY (read-only), not a production switch.
  */
 
 export const NARRATIVE_PROVIDER_QUERY = "provider";
 export const NARRATIVE_PROVIDER_DEFAULT = "v2";
-export const NARRATIVE_PROVIDERS = ["pack05", "v2", "auto"] as const;
+export const NARRATIVE_PROVIDERS = ["v2"] as const;
 
 export type NarrativeProvider = (typeof NARRATIVE_PROVIDERS)[number];
 
@@ -14,19 +14,23 @@ type EnvBag = Record<string, string | undefined>;
 declare global {
   interface Window {
     __BTE_NARRATIVE_PROVIDER__?: string;
+    __BTE_PACK05_LEGACY__?: string;
   }
 }
 
 /**
- * True when value is an allowed release provider.
+ * True when value is a production provider. Pack05 is not allowed.
  */
 export function isNarrativeProvider(value: unknown): value is NarrativeProvider {
-  return value === "pack05" || value === "v2" || value === "auto";
+  return value === "v2";
 }
 
 function normalizeProvider(value: unknown): NarrativeProvider | null {
   if (typeof value !== "string") return null;
   const next = value.trim().toLowerCase();
+  if (next === "pack05" || next === "auto") {
+    return null;
+  }
   return isNarrativeProvider(next) ? next : null;
 }
 
@@ -60,8 +64,7 @@ function readEnvProvider(env?: EnvBag): NarrativeProvider | null {
 }
 
 /**
- * Resolve the release provider without rebuild.
- * Query overrides boot/env so rollback drills can run on a live session.
+ * Resolve the production provider. Pack05 flags are ignored.
  */
 export function resolveNarrativeProvider(
   search: string = typeof window !== "undefined" ? window.location.search : "",
