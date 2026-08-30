@@ -6,6 +6,8 @@ import type { ReactNode } from "react";
 import type { BaziPillarView, BaziStructureView, DashboardCardSpec } from "./types";
 import { visualCardDom } from "./visualHierarchy";
 import { vizDom } from "./vizCatalog";
+import { MobileToggle, useMobileOpen } from "./mobile/MobileToggle";
+import { mobileCardDom } from "./mobile/mobileOrder";
 
 type BaziCardProps = {
   readonly card: DashboardCardSpec;
@@ -49,6 +51,7 @@ export function BaziCard({ card, model }: BaziCardProps): ReactNode {
   const showTenGod = hasRow(pillars, (pillar) => Boolean(pillar.tenGod));
   const showHidden = hasRow(pillars, (pillar) => pillar.hiddenStems.length > 0);
   const showStage = hasRow(pillars, (pillar) => Boolean(pillar.truongSinh));
+  const mobile = useMobileOpen();
 
   return (
     <article
@@ -57,19 +60,22 @@ export function BaziCard({ card, model }: BaziCardProps): ReactNode {
       data-span={card.span}
       data-implemented="bazi"
       data-bazi-model="detail"
+      data-mobile-open={mobile.open ? "true" : "false"}
       aria-label={model.title}
       {...visualCardDom(card.id)}
       {...vizDom(card.id)}
+      {...mobileCardDom(card.id)}
     >
       <header className="bte-bazi__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
+        <MobileToggle open={mobile.open} label="Xem chi tiết" onToggle={mobile.toggle} />
       </header>
       {!model.available ? (
         <p className="bte-bazi__empty" data-bazi-empty="true">
           Chưa đủ dữ liệu Bát Tự.
         </p>
       ) : (
-        <div className="bte-bazi__scroll" data-viz-chart="structure">
+        <div className="bte-bazi__scroll" data-viz-chart="structure" data-mobile-body="true">
           <table className="bte-bazi__table">
             <thead>
               <tr>
