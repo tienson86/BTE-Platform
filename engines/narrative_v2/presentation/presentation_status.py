@@ -16,7 +16,8 @@ ALLOWED_STATUSES: frozenset[str] = frozenset(
     }
 )
 
-PRESENTATION_VERSION = "bte.presentation.v2"
+PRESENTATION_VERSION = "bte.presentation.v2.1"
+PREVIOUS_PRESENTATION_VERSION = "bte.presentation.v2"
 NARRATIVE_VERSION = "bte.narrative.v2"
 DEFAULT_LANGUAGE = "vi"
 FROZEN_CREATED_AT = "1970-01-01T00:00:00Z"
