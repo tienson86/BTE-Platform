@@ -4,6 +4,7 @@
 
 import { genderDisplayLabel } from "../../adapters/genderDisplay";
 import type { AnalysisDataDto, AnalyzeChartRequest, PillarDto } from "../../models";
+import { CAN_XUONG_DETAIL_HREF, adaptCanXuong } from "./canXuongAdapter";
 import type {
   IdentityHeaderView,
   IdentityPillarView,
@@ -160,7 +161,7 @@ export function adaptIdentityHeader(
   const day = bindPillar(four.day, bazi?.day_pillar, routing.day, ruleVersion);
   const hour = bindPillar(four.hour, bazi?.hour_pillar, routing.hour, ruleVersion);
   const genderRaw = firstText(person.gender, customer?.gender, request?.gender);
-  const identityBone = asRecord(identity.bone_weight);
+  const canXuong = adaptCanXuong(payload);
   const cungPhi = firstText(calendar.cung_phi, feng.cung_phi, feng.gua_name);
   const menhQuai = firstText(calendar.menh_quai, feng.menh_quai, cungPhi);
   const nhomTrach = firstText(
@@ -185,10 +186,14 @@ export function adaptIdentityHeader(
       yinYang: firstText(bazi?.day_master_yin_yang),
     },
     foundation: {
-      weight: firstText(identityBone.weight),
-      classification: firstText(identityBone.classification),
-      rating: firstText(identityBone.rating),
-      summary: firstText(identityBone.summary),
+      available: canXuong.available,
+      displayWeight: canXuong.displayWeight,
+      weight: canXuong.displayWeight,
+      classification: canXuong.classification,
+      rating: canXuong.rating,
+      summary: canXuong.summary,
+      interpretation: canXuong.interpretation,
+      detailHref: canXuong.detailHref || CAN_XUONG_DETAIL_HREF,
     },
     status: bindStatus(payload, options, {
       cungPhi,
