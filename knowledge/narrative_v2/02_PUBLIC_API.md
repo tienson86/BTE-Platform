@@ -225,6 +225,8 @@ observation
 
 reasoning
 
+meaning
+
 impact
 
 recommendation
@@ -232,9 +234,41 @@ recommendation
 closing
 ```
 
+Public Presentation contract (N-IMP-09A):
+
+```
+InterpretationPresentation
+
+overview
+
+observation
+
+reasoning
+
+meaning
+
+impact
+
+recommendation
+
+closing
+
+consulting_flow
+```
+
+`meaning` is copied from InterpretationNarrative.
+
+`consulting_flow` is copied from ConsultingNarrative.flow.
+
+Structured fields and consulting flow coexist. Consumers must not regenerate either.
+
 Không expose:
 
 Engine reasoning.
+
+Conversation trace.
+
+Consulting style ids.
 
 ---
 
