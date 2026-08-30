@@ -1,4 +1,4 @@
-"""Assemble a read-only Narrative Studio review from runtime + Pack05."""
+"""Assemble a read-only Narrative Studio review from runtime + Pack05 archive."""
 
 from __future__ import annotations
 
