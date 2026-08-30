@@ -20,6 +20,7 @@ from applications.api.services.consulting_commercial_publish import (
 from applications.api.services.five_elements_truth import build_five_elements_payload
 from applications.api.services.luck_truth import shape_luck_payload
 from applications.api.services.ten_gods_truth import shape_ten_gods_payload
+from engines.calendar_engine.ganzhi_routing import stamp_bazi_source_nguyen
 from engines.feng_shui_engine import FengShuiEngineError
 from engines.identity import build_canonical_identity
 from engines.interpretation_engine.legacy_builder import InterpretationResult
@@ -86,6 +87,7 @@ class ProductionEngineRunner:
             request.hour,
             request.minute,
             timezone_name=request.timezone,
+            gender=request.gender,
         )
         stages.append("calendar")
 
@@ -94,12 +96,9 @@ class ProductionEngineRunner:
         sync_chart_from_view(bazi_chart, bazi_view)
         stages.append("bazi")
 
-        lunar = getattr(calendar, "lunar", None)
-        feng_year = getattr(lunar, "year", None) or request.year
-        feng_view: dict[str, Any] | None
         try:
             feng = orch.feng_shui_engine.calculate(
-                year=int(feng_year),
+                year=int(request.year),
                 gender=request.gender,
             )
             feng_view = feng.to_dict()
@@ -222,9 +221,11 @@ class ProductionEngineRunner:
         analysis.interpretation = build_interpretation_view(interpretation_result)
         stages.append("interpretation_v1")
 
+        bazi_payload = analysis.bazi_dict()
+        stamp_bazi_source_nguyen(bazi_payload, calendar.ganzhi_routing)
         calendar_payload = orch._shape_calendar(
             calendar,
-            analysis.bazi_dict(),
+            bazi_payload,
             feng_view,
         )
         profile = ReportProfileV1(
@@ -301,7 +302,7 @@ class ProductionEngineRunner:
                 "pattern": analysis.pattern_dict(),
                 "temperature": analysis.temperature_dict(),
                 "luck": luck_payload,
-                "bazi": analysis.bazi_dict(),
+                "bazi": bazi_payload,
                 "identity": analysis.identity_dict(),
                 "integrated_narrative": analysis.integrated_narrative or {},
             }
