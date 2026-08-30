@@ -6,6 +6,8 @@ import type { ReactNode } from "react";
 import type { DashboardCardSpec, FiveElementRowView, FiveElementsView } from "./types";
 import { visualCardDom } from "./visualHierarchy";
 import { vizDom } from "./vizCatalog";
+import { MobileToggle, useMobileOpen } from "./mobile/MobileToggle";
+import { mobileCardDom } from "./mobile/mobileOrder";
 
 type FiveElementsCardProps = {
   readonly card: DashboardCardSpec;
@@ -48,15 +50,18 @@ function ChartRow({
  */
 export function FiveElementsCard({ card, model }: FiveElementsCardProps): ReactNode {
   const peak = Math.max(0, ...model.rows.map((row) => row.count ?? 0));
+  const mobile = useMobileOpen();
   return (
     <article
       className={`bte-cdash__card bte-cdash__card--span-${card.span} bte-fe`}
       data-card={card.id}
       data-span={card.span}
       data-implemented="five-elements"
+      data-mobile-open={mobile.open ? "true" : "false"}
       aria-label={model.title}
       {...visualCardDom(card.id)}
       {...vizDom(card.id)}
+      {...mobileCardDom(card.id)}
     >
       <header className="bte-fe__header">
         <h2 className="bte-cdash__card-title">{model.title}</h2>
@@ -69,13 +74,14 @@ export function FiveElementsCard({ card, model }: FiveElementsCardProps): ReactN
             {model.sectionHeading}
           </p>
         ) : null}
+        <MobileToggle open={mobile.open} label="Xem chi tiết" onToggle={mobile.toggle} />
       </header>
       {!model.available ? (
         <p className="bte-fe__empty" data-fe-empty="true">
           Chưa đủ dữ liệu Ngũ Hành.
         </p>
       ) : (
-        <>
+        <div data-mobile-body="true">
           <ul className="bte-fe__chart" data-fe-chart="bars" data-viz-chart="balance-bars">
             {model.rows.map((row) => (
               <ChartRow key={row.key} row={row} peak={peak} />
@@ -86,7 +92,7 @@ export function FiveElementsCard({ card, model }: FiveElementsCardProps): ReactN
               {model.comment}
             </p>
           ) : null}
-        </>
+        </div>
       )}
     </article>
   );
