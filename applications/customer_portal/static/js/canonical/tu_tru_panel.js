@@ -105,7 +105,9 @@
       var pillar = pillarOf(data, row.key);
       var canChi = String(pillar.canChi || "").trim() || "—";
       return (
-        "<tr><th scope=\"row\">" +
+        "<tr data-pillar=\"" +
+        esc(row.key) +
+        "\"><th scope=\"row\">" +
         esc(row.label) +
         '</th><td class="bte-tu-tru__can-chi">' +
         esc(canChi) +
