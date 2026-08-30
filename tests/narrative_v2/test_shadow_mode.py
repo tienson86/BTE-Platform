@@ -8,6 +8,7 @@ from __future__ import annotations
 import ast
 from pathlib import Path
 
+from engines.narrative_v2.presentation import NarrativeV2Presentation
 from engines.narrative_v2.runtime import SHADOW_MODE, NarrativeRuntime
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -44,7 +45,7 @@ def test_runtime_metadata_declares_shadow_mode() -> None:
     assert result.runtime_metadata["shadow_mode"] is True
     assert result.runtime_metadata["replaces_pack05"] is False
     assert result.runtime_metadata["portal_connected"] is False
-    assert result.presentation is None
+    assert isinstance(result.presentation, NarrativeV2Presentation)
 
 
 def test_narrative_v2_does_not_import_pack05() -> None:
