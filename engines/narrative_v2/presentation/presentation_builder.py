@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from engines.narrative_v2.action.action_model import ActionPlanNarrative
+from engines.narrative_v2.communication.communication_context import ConsultingNarrative
 from engines.narrative_v2.interpretation.interpretation_model import InterpretationNarrative
 from engines.narrative_v2.presentation.presentation_errors import PresentationError
 from engines.narrative_v2.presentation.presentation_freeze import freeze
@@ -50,15 +51,18 @@ class PresentationBuilder:
         interpretation: object,
         action_plan: object,
         commercial: object = None,
+        *,
+        consulting: object = None,
     ) -> NarrativeV2Presentation:
         """Copy approved public fields. Reject CanonicalAnalysis and internals."""
         summary = _require_overview(overview)
         narrative = _require_interpretation(interpretation)
         plan = _require_action(action_plan)
+        consulting_narrative = _require_consulting(consulting)
         if commercial is not None:
             raise PresentationError("CommercialNarrative is not implemented")
         overview_view = _copy_overview(summary)
-        interpretation_view = _copy_interpretation(narrative)
+        interpretation_view = _copy_interpretation(narrative, consulting_narrative)
         action_view = _copy_action(plan)
         status = _aggregate_status(summary, narrative, plan, overview_view, interpretation_view, action_view)
         presentation = NarrativeV2Presentation(
@@ -74,7 +78,11 @@ class PresentationBuilder:
                 created_at=self._created_at,
             ),
         )
-        self._validator.validate(presentation)
+        self._validator.validate(
+            presentation,
+            interpretation=narrative,
+            consulting=consulting_narrative,
+        )
         return freeze(presentation)
 
 
@@ -102,6 +110,14 @@ def _require_action(value: object) -> ActionPlanNarrative | None:
     raise PresentationError("PresentationBuilder accepts ActionPlanNarrative only")
 
 
+def _require_consulting(value: object) -> ConsultingNarrative | None:
+    if value is None:
+        return None
+    if isinstance(value, ConsultingNarrative):
+        return value
+    raise PresentationError("PresentationBuilder accepts ConsultingNarrative only")
+
+
 def _copy_overview(summary: OverviewSummary | None) -> OverviewPresentation | None:
     if summary is None:
         return None
@@ -116,6 +132,7 @@ def _copy_overview(summary: OverviewSummary | None) -> OverviewPresentation | No
 
 def _copy_interpretation(
     narrative: InterpretationNarrative | None,
+    consulting: ConsultingNarrative | None,
 ) -> InterpretationPresentation | None:
     if narrative is None:
         return None
@@ -123,9 +140,11 @@ def _copy_interpretation(
         overview=narrative.overview,
         observation=narrative.observation,
         reasoning=narrative.reasoning,
+        meaning=narrative.meaning,
         impact=narrative.impact,
         recommendation=narrative.recommendation,
         closing=narrative.closing,
+        consulting_flow=_optional_text(None if consulting is None else consulting.flow),
     )
 
 
@@ -212,9 +231,11 @@ def _has_usable_narrative(
             interpretation.overview,
             interpretation.observation,
             interpretation.reasoning,
+            interpretation.meaning,
             interpretation.impact,
             interpretation.recommendation,
             interpretation.closing,
+            interpretation.consulting_flow,
         )
     ):
         return True
@@ -229,3 +250,9 @@ def _has_usable_narrative(
 
 def _has_text(value: str | None) -> bool:
     return bool(value and value.strip())
+
+
+def _optional_text(value: str | None) -> str | None:
+    if value is None or not value.strip():
+        return None
+    return value
