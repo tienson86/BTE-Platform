@@ -1,6 +1,7 @@
 export { CommercialDashboardPage } from "./CommercialDashboardPage";
 export type { CommercialDashboardPageProps } from "./CommercialDashboardPage";
 export { IdentityHeader } from "./IdentityHeader";
+export { LifeConsultingSection } from "./LifeConsultingSection";
 export { DashboardGrid } from "./DashboardGrid";
 export { OverviewCard } from "./OverviewCard";
 export { BaziCard } from "./BaziCard";
@@ -24,6 +25,7 @@ export { adaptFiveElementsCard } from "./fiveElementsAdapter";
 export { adaptTenGodsCard } from "./tenGodsAdapter";
 export { tenGodCommercialAsset } from "./tenGodsCommercialAssets";
 export {
+  classifyTenGodCombination,
   listTenGodCombinationCatalog,
   tenGodCombinationAsset,
 } from "./tenGodsCombinationAssets";
@@ -32,6 +34,8 @@ export { adaptShenShaCard } from "./shenShaAdapter";
 export { adaptLuckCard } from "./luckAdapter";
 export { adaptInterpretationCard } from "./interpretationAdapter";
 export { adaptActionPlanCard } from "./actionPlanAdapter";
+export { adaptLifeConsulting } from "./lifeConsultingAdapter";
+export { lifeDomainProfileFor, LIFE_DOMAIN_PROFILES } from "./lifeConsultingAssets";
 export { OVERVIEW_VISUAL_FIXTURE } from "./overviewFixture";
 export { BAZI_VISUAL_FIXTURE } from "./baziFixture";
 export { FIVE_ELEMENTS_VISUAL_FIXTURE } from "./fiveElementsFixture";
@@ -41,6 +45,7 @@ export { SHENSHA_VISUAL_FIXTURE } from "./shenShaFixture";
 export { LUCK_VISUAL_FIXTURE } from "./luckFixture";
 export { INTERPRETATION_VISUAL_FIXTURE } from "./interpretationFixture";
 export { ACTION_PLAN_VISUAL_FIXTURE } from "./actionPlanFixture";
+export { LIFE_CONSULTING_VISUAL_FIXTURE } from "./lifeConsultingFixture";
 export {
   DASHBOARD_CARDS,
   RESULT_PAGE_TITLE,
@@ -66,6 +71,8 @@ export type {
   LuckView,
   InterpretationView,
   ActionPlanView,
+  LifeConsultingView,
+  LifeDomainView,
 } from "./types";
 export { VISUAL_HIERARCHY, visualCardDom } from "./visualHierarchy";
 export type { VisualLevel, VisualCardType } from "./visualHierarchy";

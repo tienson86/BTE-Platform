@@ -1,5 +1,5 @@
 /**
- * Commercial Dashboard page header + Identity Header + canonical grid.
+ * Commercial Dashboard page header + Identity + Life Consulting + canonical grid.
  */
 
 import type { ReactNode } from "react";
@@ -21,11 +21,12 @@ import { adaptShenShaCard } from "./shenShaAdapter";
 import { SHENSHA_VISUAL_FIXTURE } from "./shenShaFixture";
 import { adaptLuckCard } from "./luckAdapter";
 import { LUCK_VISUAL_FIXTURE } from "./luckFixture";
+import { adaptLifeConsulting } from "./lifeConsultingAdapter";
+import { LIFE_CONSULTING_VISUAL_FIXTURE } from "./lifeConsultingFixture";
 import { INTERPRETATION_VISUAL_FIXTURE } from "./interpretationFixture";
 import { ACTION_PLAN_VISUAL_FIXTURE } from "./actionPlanFixture";
 import { OVERVIEW_VISUAL_FIXTURE } from "./overviewFixture";
 import { RESULT_PAGE_TITLE } from "./cards";
-import { CanXuongDetail } from "./CanXuongDetail";
 import { DashboardGrid } from "./DashboardGrid";
 import { IdentityHeader } from "./IdentityHeader";
 import { MobileActionBar } from "./mobile/MobileActionBar";
@@ -163,6 +164,12 @@ export function CommercialDashboardPage({
       : layoutMode === "skeleton" || previewFallback
         ? null
         : adaptLuckCard(analysis);
+  const lifeConsulting =
+    layoutMode === "visual"
+      ? LIFE_CONSULTING_VISUAL_FIXTURE
+      : layoutMode === "skeleton" || previewFallback
+        ? null
+        : adaptLifeConsulting(analysis, { request });
   const narrative = harness
     ? null
     : selectNarrativePresentation(analysis, requestedProvider);
@@ -211,9 +218,9 @@ export function CommercialDashboardPage({
         luck={luck}
         interpretation={interpretation}
         actionPlan={actionPlan}
+        lifeConsulting={lifeConsulting}
       />
       <MobileActionBar />
-      <CanXuongDetail foundation={model.foundation} />
     </div>
   );
 }

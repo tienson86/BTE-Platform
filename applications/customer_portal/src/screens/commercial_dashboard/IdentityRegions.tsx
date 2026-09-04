@@ -61,6 +61,7 @@ export function IdentityFoundation({
   if (!foundation.available) {
     return (
       <section
+        id="sec-can-xuong"
         className="bte-id__region bte-id__region--cx"
         data-region="foundation"
         data-module="bone-weight"
@@ -68,11 +69,13 @@ export function IdentityFoundation({
       >
         <p className="bte-id__region-label">Cân Xương Đoán Mệnh</p>
         <p className="bte-id__cx-empty">{CAN_XUONG_EMPTY_COPY}</p>
+        <div data-module="bone-weight-detail" data-card-type="reference" data-visual-level="4" />
       </section>
     );
   }
   return (
     <section
+      id="sec-can-xuong"
       className="bte-id__region bte-id__region--cx"
       data-region="foundation"
       data-module="bone-weight"
@@ -92,9 +95,12 @@ export function IdentityFoundation({
           {foundation.summary}
         </p>
       ) : null}
-      <a className="bte-id__cx-link" href={foundation.detailHref}>
-        Xem chi tiết
-      </a>
+      {foundation.interpretation ? (
+        <p className="bte-id__cx-summary" data-slot="can-xuong-interpretation">
+          {foundation.interpretation}
+        </p>
+      ) : null}
+      <div data-module="bone-weight-detail" data-card-type="reference" data-visual-level="4" />
     </section>
   );
 }

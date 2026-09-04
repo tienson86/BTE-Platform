@@ -14,11 +14,13 @@ import { PatternCard } from "./PatternCard";
 import { ShenShaCard } from "./ShenShaCard";
 import { SkeletonCard } from "./SkeletonCard";
 import { TenGodsCard } from "./TenGodsCard";
+import { LifeConsultingSection } from "./LifeConsultingSection";
 import type {
   ActionPlanView,
   BaziStructureView,
   FiveElementsView,
   InterpretationView,
+  LifeConsultingView,
   LuckView,
   OverviewView,
   PatternView,
@@ -36,6 +38,7 @@ type DashboardGridProps = {
   readonly luck?: LuckView | null;
   readonly interpretation?: InterpretationView | null;
   readonly actionPlan?: ActionPlanView | null;
+  readonly lifeConsulting?: LifeConsultingView | null;
 };
 
 /**
@@ -51,6 +54,7 @@ export function DashboardGrid({
   luck = null,
   interpretation = null,
   actionPlan = null,
+  lifeConsulting = null,
 }: DashboardGridProps): ReactNode {
   return (
     <section className="bte-cdash__grid" data-dashboard-body="canonical-grid">
@@ -91,6 +95,7 @@ export function DashboardGrid({
         }
         return <SkeletonCard key={card.id} card={card} />;
       })}
+      {lifeConsulting ? <LifeConsultingSection model={lifeConsulting} /> : null}
     </section>
   );
 }

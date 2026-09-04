@@ -1919,6 +1919,11 @@
   grid-column: 1 / -1;
 }
 
+.bte-cdash[data-visual="v2"] .bte-cdash__grid > .bte-life {
+  order: 15;
+  grid-column: 1 / -1;
+}
+
 .bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="interpretation"] {
   order: 20;
 }
@@ -1927,9 +1932,9 @@
   order: 21;
 }
 
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="ten-gods"] { order: 22; }
 .bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="bazi"] { order: 30; }
 .bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="five-elements"] { order: 31; }
-.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="ten-gods"] { order: 32; }
 .bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="pattern"] { order: 33; }
 .bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="shensha"] { order: 34; }
 .bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="luck"] { order: 35; }
@@ -2280,6 +2285,100 @@
 
   .bte-ss[data-viz="grouped-chips"] .bte-ss__item {
     flex-basis: 100%;
+  }
+}
+
+/* P-004 / P-004R Life Consulting — full-width grid row, not a data-card. */
+.bte-cdash__grid > .bte-life {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin: 0;
+  padding: var(--space-4);
+  background: var(--cdash-card);
+  border: 1px solid var(--cdash-border);
+  border-radius: var(--cdash-radius);
+  box-shadow: var(--cdash-shadow);
+}
+
+.bte-life__header {
+  margin: 0 0 var(--space-4);
+}
+
+.bte-life__title {
+  margin: 0;
+  font-size: var(--font-size-subsection);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-heading);
+  line-height: var(--line-height-heading);
+  color: var(--cdash-text);
+}
+
+.bte-life__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.bte-life__domain {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--border-divider);
+  border-radius: 10px;
+  background: var(--cdash-card);
+}
+
+.bte-life__domain-head {
+  margin: 0 0 var(--space-2);
+}
+
+.bte-life__domain-title {
+  margin: 0;
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-heading);
+  color: var(--cdash-text);
+}
+
+.bte-life__insight {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-heading);
+  color: var(--cdash-text);
+}
+
+.bte-life__fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.bte-life__fields dt {
+  margin: 0;
+  font-size: var(--font-size-metadata);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-metadata);
+  text-transform: uppercase;
+  color: var(--cdash-muted);
+}
+
+.bte-life__fields dd {
+  margin: 2px 0 0;
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-body);
+  color: var(--cdash-text);
+}
+
+@media (max-width: 767px) {
+  .bte-life {
+    padding: var(--space-4);
+  }
+
+  .bte-life__grid {
+    grid-template-columns: 1fr;
   }
 }
 

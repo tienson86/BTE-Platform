@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bte-platform.org/schema/consulting/ten_gods_combination.schema.json",
+  "title": "Ten Gods Combination Knowledge Unit",
+  "type": "object",
+  "required": [
+    "id",
+    "domain",
+    "status",
+    "review_status",
+    "members",
+    "title",
+    "executive_insight",
+    "commercial_value",
+    "capability",
+    "income_model",
+    "career_model",
+    "management_style",
+    "growth_model",
+    "risk_model",
+    "recommendation",
+    "metadata"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "domain": { "const": "TenGodsCombination" },
+    "status": {
+      "enum": [
+        "SUPPORTED",
+        "DUPLICATE",
+        "LOW_VALUE",
+        "CONFLICTING",
+        "NOT_CUSTOMER_SAFE",
+        "DEFERRED"
+      ]
+    },
+    "review_status": { "type": "string" },
+    "members": {
+      "type": "array",
+      "minItems": 2,
+      "items": { "type": "string" }
+    },
+    "title": { "type": "string" },
+    "executive_insight": { "type": "string" },
+    "commercial_value": { "type": "string" },
+    "capability": { "type": "string" },
+    "income_model": { "type": "string" },
+    "career_model": { "type": "string" },
+    "management_style": { "type": "string" },
+    "growth_model": { "type": "string" },
+    "risk_model": { "type": "string" },
+    "recommendation": { "type": "string" },
+    "metadata": {
+      "type": "object",
+      "required": ["author", "version", "status", "source"]
+    }
+  }
+}

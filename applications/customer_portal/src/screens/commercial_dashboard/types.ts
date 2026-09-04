@@ -300,3 +300,28 @@ export type ActionPlanView = {
   readonly warnings: readonly ActionItemView[];
   readonly watch: readonly ActionItemView[];
 };
+
+export type LifeDomainId =
+  | "marriage"
+  | "children"
+  | "health"
+  | "career"
+  | "finance"
+  | "property";
+
+export type LifeDomainView = {
+  readonly id: LifeDomainId;
+  readonly title: string;
+  readonly insight: string;
+  readonly tendency: string;
+  readonly strength: string;
+  readonly opportunity: string;
+  readonly risk: string;
+  readonly recommendation: string;
+};
+
+export type LifeConsultingView = {
+  readonly title: string;
+  readonly available: boolean;
+  readonly domains: readonly LifeDomainView[];
+};
