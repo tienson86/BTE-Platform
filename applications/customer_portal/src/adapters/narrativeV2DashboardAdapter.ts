@@ -38,8 +38,10 @@ export function adaptOverviewFromPresentation(
   return {
     title: OVERVIEW_TITLE,
     subtitle: OVERVIEW_SUBTITLE,
-    insight: headline || summary,
-    insightSource: headline ? "narrative_v2.overview.headline" : "narrative_v2.overview.summary",
+    insight: headline,
+    insightSource: headline ? "narrative_v2.overview.headline" : "",
+    summary,
+    summarySource: summary ? "narrative_v2.overview.summary" : "",
     conclusion,
     conclusionSource: conclusion ? "narrative_v2.overview.conclusion" : "",
     identity: [],

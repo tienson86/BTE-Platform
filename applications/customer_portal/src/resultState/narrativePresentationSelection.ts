@@ -13,7 +13,10 @@ import {
   type NarrativeV2PresentationView,
 } from "../adapters/narrativeV2PresentationAdapter";
 import type { AnalysisDataDto } from "../models";
-import { adaptOverviewCard } from "../screens/commercial_dashboard/overviewAdapter";
+import {
+  adaptOverviewCard,
+  adaptOverviewExecutiveFacts,
+} from "../screens/commercial_dashboard/overviewAdapter";
 import {
   ACTION_PLAN_EMPTY,
   ACTION_PLAN_TITLE,
@@ -64,7 +67,7 @@ export function selectNarrativePresentation(
   const usable = v2View != null && v2Usable(v2View);
   const overview =
     v2View != null && usable && hasOverview(v2View)
-      ? adaptOverviewFromPresentation(v2View)
+      ? attachExecutiveFacts(adaptOverviewFromPresentation(v2View), analysis)
       : adaptOverviewCard(analysis);
   const interpretation =
     v2View != null && usable
@@ -97,6 +100,18 @@ export function selectNarrativePresentation(
     durationMs,
   });
   return selection;
+}
+
+function attachExecutiveFacts(
+  overview: OverviewView,
+  analysis: AnalysisDataDto | null | undefined,
+): OverviewView {
+  const facts = adaptOverviewExecutiveFacts(analysis);
+  return {
+    ...overview,
+    identity: facts.identity,
+    balance: facts.balance,
+  };
 }
 
 function hasOverview(view: NarrativeV2PresentationView): boolean {

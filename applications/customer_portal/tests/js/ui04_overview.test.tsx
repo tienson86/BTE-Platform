@@ -70,16 +70,16 @@ describe("UI-04 Overview card", () => {
     expect(insight?.textContent).toMatch(/Canh Kim/);
   });
 
-  it("O5 supports exactly five canonical evidence concepts", () => {
+  it("O5 presents published executive facts as compact chips", () => {
     const { container } = renderLive();
     expect(container.querySelector('[data-evidence="day-master"]')?.textContent).toMatch(/Nhật Chủ/);
     expect(container.querySelector('[data-evidence="strength"]')?.textContent).toMatch(/Thân vượng/);
+    expect(container.querySelector('[data-evidence="pattern"]')?.textContent).toMatch(/Mệnh Cục/);
+    expect(container.querySelector('[data-evidence="pattern"]')?.textContent).toMatch(/Chính Ấn/);
     expect(container.querySelector('[data-evidence="avoid-god"]')?.textContent).toMatch(/Kỵ Thần/);
     expect(container.querySelector('[data-evidence="useful-god"]')?.textContent).toMatch(/Dụng Thần/);
-    expect(container.querySelector('[data-evidence="temperature"]')?.textContent).toMatch(/Cần ôn ấm/);
+    expect(container.querySelector('[data-evidence="temperature"]')).toBeNull();
     expect(container.querySelectorAll("[data-evidence]")).toHaveLength(5);
-    const overview = container.querySelector('[data-card="overview"]')?.textContent || "";
-    expect(overview).not.toMatch(/Mệnh Cục/);
     expect(container.querySelector('[data-card="pattern"]')?.textContent).toMatch(/MỆNH CỤC/);
   });
 
@@ -110,11 +110,13 @@ describe("UI-04 Overview card", () => {
     const bound = adaptOverviewCard(LIVE_ANALYSIS);
     expect(bound.identity.find((item) => item.key === "day-master")?.value).toBe("Canh Kim");
     expect(bound.identity.find((item) => item.key === "strength")?.value).toBe("Thân vượng");
-    expect(bound.identity.find((item) => item.key === "avoid-god")?.value).toBe("Canh · Tân");
+    expect(bound.identity.find((item) => item.key === "pattern")?.value).toBe("Chính Ấn");
+    expect(bound.identity.find((item) => item.key === "avoid-god")).toBeUndefined();
     expect(bound.balance.find((item) => item.key === "useful-god")?.value).toBe(
       "Hỏa · Đinh · Chính Quan",
     );
-    expect(bound.balance.find((item) => item.key === "temperature")?.value).toBe("Cần ôn ấm");
+    expect(bound.balance.find((item) => item.key === "avoid-god")?.value).toBe("Canh · Tân");
+    expect(bound.balance.some((item) => item.label === "Điều Hậu")).toBe(false);
     const rebound = adaptOverviewCard({
       bazi: { day_master: "Ất", day_master_element: "Mộc" },
       strength: { strength_level: "weak" },
@@ -165,14 +167,13 @@ describe("UI-04 Overview card", () => {
     const order = [...(overview?.querySelectorAll("[data-overview-section], [data-evidence]") ?? [])]
       .map((node) => node.getAttribute("data-overview-section") || node.getAttribute("data-evidence"));
     expect(order).toEqual([
-      "insight",
-      "identity",
+      "facts",
       "day-master",
       "strength",
-      "avoid-god",
-      "balance",
+      "pattern",
       "useful-god",
-      "temperature",
+      "avoid-god",
+      "insight",
       "conclusion",
     ]);
   });

@@ -2,10 +2,12 @@
  * Bind Overview Card from canonical analysis. Copy published labels only.
  */
 
+import { canonicalPatternLabel } from "../../adapters/canonicalPattern";
 import { canonicalStrengthLabel } from "../../adapters/canonicalStrength";
 import { canonicalBalancingNeedLabel } from "../../adapters/canonicalTemperature";
 import {
   OVERALL_INCOMPLETE_MESSAGE,
+  canonicalFavorableDisplay,
   canonicalUnfavorableDisplay,
   canonicalUsefulDisplay,
   canonicalUsefulGodPayload,
@@ -51,8 +53,12 @@ function strengthDisplay(data: AnalysisDataDto): string {
 function usefulDisplay(data: AnalysisDataDto): string {
   const payload = canonicalUsefulGodPayload(data);
   const display = canonicalUsefulDisplay(payload);
-  if (!display || display === OVERALL_INCOMPLETE_MESSAGE) return "";
-  return customerLabel(display);
+  return publishedChipValue(display);
+}
+
+function favorableDisplay(data: AnalysisDataDto): string {
+  const payload = canonicalUsefulGodPayload(data);
+  return publishedChipValue(compactCanonicalList(canonicalFavorableDisplay(payload)));
 }
 
 function compactCanonicalList(value: string): string {
@@ -61,9 +67,34 @@ function compactCanonicalList(value: string): string {
 
 function avoidDisplay(data: AnalysisDataDto): string {
   const payload = canonicalUsefulGodPayload(data);
-  const display = compactCanonicalList(canonicalUnfavorableDisplay(payload));
-  if (!display || display === OVERALL_INCOMPLETE_MESSAGE) return "";
-  return customerLabel(display);
+  return publishedChipValue(compactCanonicalList(canonicalUnfavorableDisplay(payload)));
+}
+
+function publishedChipValue(value: string): string {
+  const next = customerLabel(value);
+  if (!next || next === OVERALL_INCOMPLETE_MESSAGE || /chưa đủ căn cứ/i.test(next)) return "";
+  return next;
+}
+
+/**
+ * Copy published executive facts only. Omits empty or incomplete fields.
+ */
+export function adaptOverviewExecutiveFacts(data: AnalysisDataDto | null | undefined): {
+  readonly identity: readonly OverviewEvidenceView[];
+  readonly balance: readonly OverviewEvidenceView[];
+} {
+  const payload = data ?? {};
+  const identity = [
+    evidence("day-master", "Nhật Chủ", dayMasterDisplay(payload)),
+    evidence("strength", "Thân", strengthDisplay(payload)),
+    evidence("pattern", "Mệnh Cục", customerLabel(canonicalPatternLabel(payload))),
+  ].filter((item): item is OverviewEvidenceView => item != null);
+  const balance = [
+    evidence("useful-god", "Dụng Thần", usefulDisplay(payload)),
+    evidence("favorable-god", "Hỷ Thần", favorableDisplay(payload)),
+    evidence("avoid-god", "Kỵ Thần", avoidDisplay(payload)),
+  ].filter((item): item is OverviewEvidenceView => item != null);
+  return { identity, balance };
 }
 
 function evidence(
@@ -132,23 +163,17 @@ export function adaptOverviewCard(data: AnalysisDataDto | null | undefined): Ove
     avoidGod,
     climate,
   });
-  const identity = [
-    evidence("day-master", "Nhật Chủ", dayMaster),
-    evidence("strength", "Thân", strength),
-    evidence("avoid-god", "Kỵ Thần", avoidGod),
-  ].filter((item): item is OverviewEvidenceView => item != null);
-  const balance = [
-    evidence("useful-god", "Dụng Thần", usefulGod),
-    evidence("temperature", "Điều Hậu", climate),
-  ].filter((item): item is OverviewEvidenceView => item != null);
+  const facts = adaptOverviewExecutiveFacts(payload);
   return {
     title: OVERVIEW_TITLE,
     subtitle: OVERVIEW_SUBTITLE,
     insight: composeOverviewInsight({ strength, dayMaster }),
     insightSource: "canonical labels: strength.strength_level + bazi.day_master",
+    summary: "",
+    summarySource: "",
     conclusion: conclusion.text,
     conclusionSource: conclusion.source,
-    identity,
-    balance,
+    identity: facts.identity,
+    balance: facts.balance,
   };
 }

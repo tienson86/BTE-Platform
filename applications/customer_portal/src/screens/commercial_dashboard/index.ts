@@ -13,7 +13,12 @@ export { InterpretationCard } from "./InterpretationCard";
 export { ActionPlanCard } from "./ActionPlanCard";
 export { adaptIdentityHeader, isDayMasterPillar } from "./adapter";
 export { adaptCanXuong, CAN_XUONG_EMPTY_COPY, CAN_XUONG_DETAIL_HREF } from "./canXuongAdapter";
-export { adaptOverviewCard, composeOverviewInsight, composeOverviewConclusion } from "./overviewAdapter";
+export {
+  adaptOverviewCard,
+  adaptOverviewExecutiveFacts,
+  composeOverviewInsight,
+  composeOverviewConclusion,
+} from "./overviewAdapter";
 export { adaptBaziCard } from "./baziAdapter";
 export { adaptFiveElementsCard } from "./fiveElementsAdapter";
 export { adaptTenGodsCard } from "./tenGodsAdapter";

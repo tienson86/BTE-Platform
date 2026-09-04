@@ -13,16 +13,14 @@ type OverviewCardProps = {
   readonly priorityTitle?: string;
 };
 
-function EvidenceGroup({
-  region,
+function ExecutiveFacts({
   items,
 }: {
-  readonly region: "identity" | "balance";
   readonly items: readonly OverviewEvidenceView[];
 }): ReactNode {
   if (!items.length) return null;
   return (
-    <div className="bte-ov__group" data-overview-section={region}>
+    <div className="bte-ov__facts" data-overview-section="facts">
       {items.map((item) => (
         <div key={item.key} className="bte-ov__badge" data-evidence={item.key}>
           <span className="bte-ov__badge-label">{item.label}</span>
@@ -34,10 +32,15 @@ function EvidenceGroup({
 }
 
 /**
- * Hero Overview card: Top Priority → Insight → identity → balance → quick conclusion.
+ * Hero Overview card: executive facts → narrative. No new copy.
  */
 export function OverviewCard({ card, model, priorityTitle = "" }: OverviewCardProps): ReactNode {
-  const empty = !model.insight && !model.conclusion && !model.identity.length && !model.balance.length;
+  const facts = [...model.identity, ...model.balance];
+  const empty =
+    !model.insight &&
+    !model.summary &&
+    !model.conclusion &&
+    !facts.length;
   const topPriority = priorityTitle.trim();
   return (
     <article
@@ -53,22 +56,26 @@ export function OverviewCard({ card, model, priorityTitle = "" }: OverviewCardPr
         <h2 className="bte-cdash__card-title">{model.title}</h2>
         {model.subtitle ? <p className="bte-ov__subtitle">{model.subtitle}</p> : null}
       </header>
-      {topPriority ? (
-        <p className="bte-ov__priority" data-overview-section="top-priority" data-motion-reveal="priority">
-          <span className="bte-cdash__badge bte-cdash__badge--accent">Ưu tiên</span>
-          <span className="bte-ov__priority-title">{topPriority}</span>
-        </p>
-      ) : null}
+      <ExecutiveFacts items={facts} />
       {model.insight ? (
         <p className="bte-ov__insight" data-overview-section="insight" data-motion-reveal="insight">
           {model.insight}
         </p>
       ) : null}
-      <EvidenceGroup region="identity" items={model.identity} />
-      <EvidenceGroup region="balance" items={model.balance} />
+      {model.summary ? (
+        <p className="bte-ov__summary" data-overview-section="summary">
+          {model.summary}
+        </p>
+      ) : null}
       {model.conclusion ? (
         <p className="bte-ov__conclusion" data-overview-section="conclusion">
           {model.conclusion}
+        </p>
+      ) : null}
+      {topPriority ? (
+        <p className="bte-ov__priority" data-overview-section="top-priority" data-motion-reveal="priority">
+          <span className="bte-cdash__badge bte-cdash__badge--accent">Ưu tiên</span>
+          <span className="bte-ov__priority-title">{topPriority}</span>
         </p>
       ) : null}
       {empty ? (

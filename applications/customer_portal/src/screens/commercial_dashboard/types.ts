@@ -81,10 +81,18 @@ export type DashboardCardSpec = {
   readonly span: DashboardCardSpan;
 };
 
+export type OverviewEvidenceKey =
+  | "day-master"
+  | "strength"
+  | "pattern"
+  | "useful-god"
+  | "favorable-god"
+  | "avoid-god";
+
 export type OverviewEvidenceView = {
   readonly label: string;
   readonly value: string;
-  readonly key: "day-master" | "strength" | "avoid-god" | "useful-god" | "temperature";
+  readonly key: OverviewEvidenceKey;
 };
 
 export type OverviewView = {
@@ -92,6 +100,8 @@ export type OverviewView = {
   readonly subtitle: string;
   readonly insight: string;
   readonly insightSource: string;
+  readonly summary: string;
+  readonly summarySource: string;
   readonly conclusion: string;
   readonly conclusionSource: string;
   readonly identity: readonly OverviewEvidenceView[];

@@ -89,9 +89,14 @@
   .bte-cdash[data-mobile-experience="true"] .bte-id [data-region="foundation"],
   .bte-cdash[data-mobile-experience="true"] .bte-id [data-region="status"],
   .bte-cdash[data-mobile-experience="true"] .bte-id [data-region="pillars"],
-  .bte-cdash[data-mobile-experience="true"] .bte-id__cx-detail,
-  .bte-cdash[data-mobile-experience="true"] .bte-ov__group {
+  .bte-cdash[data-mobile-experience="true"] .bte-id__cx-detail {
     display: none;
+  }
+
+  .bte-cdash[data-mobile-experience="true"] .bte-ov__facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
   }
 
   .bte-cdash[data-mobile-experience="true"] .bte-ov__priority {

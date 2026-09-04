@@ -1,5 +1,6 @@
 /**
- * G1-12 — Tổng Quan replaces Mệnh Cục with Kỵ Thần. Dedicated Mệnh Cục card stays.
+ * G1-12 — Tổng Quan keeps Kỵ Thần and restores Mệnh Cục as a compact chip.
+ * Dedicated Mệnh Cục card stays.
  */
 
 import { afterEach, describe, expect, it } from "vitest";
@@ -22,11 +23,12 @@ const LIVE = {
 } as AnalysisDataDto;
 
 describe("G1-12 Overview Kỵ Thần", () => {
-  it("shows Kỵ Thần from canonical unfavorable_display and omits Mệnh Cục from Tổng Quan", () => {
+  it("shows Kỵ Thần from canonical unfavorable_display and Mệnh Cục as a chip", () => {
     const bound = adaptOverviewCard(LIVE);
-    expect(bound.identity.map((item) => item.label)).toEqual(["Nhật Chủ", "Thân", "Kỵ Thần"]);
-    expect(bound.identity.find((item) => item.key === "avoid-god")?.value).toBe("Canh · Tân");
-    expect(bound.balance.map((item) => item.label)).toEqual(["Dụng Thần", "Điều Hậu"]);
+    expect(bound.identity.map((item) => item.label)).toEqual(["Nhật Chủ", "Thân", "Mệnh Cục"]);
+    expect(bound.identity.find((item) => item.key === "pattern")?.value).toBe("Chính Tài");
+    expect(bound.balance.map((item) => item.label)).toEqual(["Dụng Thần", "Kỵ Thần"]);
+    expect(bound.balance.find((item) => item.key === "avoid-god")?.value).toBe("Canh · Tân");
     expect(bound.conclusion).toContain("Kỵ thần Canh · Tân");
     expect(bound.insight).not.toMatch(/Mệnh cục/i);
     expect(bound.conclusion).not.toMatch(/Mệnh cục/i);
@@ -37,7 +39,8 @@ describe("G1-12 Overview Kỵ Thần", () => {
     const overview = container.querySelector('[data-card="overview"]');
     expect(overview?.querySelector('[data-evidence="avoid-god"]')?.textContent).toMatch(/Kỵ Thần/);
     expect(overview?.querySelector('[data-evidence="avoid-god"]')?.textContent).toMatch(/Canh · Tân/);
-    expect(overview?.textContent).not.toMatch(/Mệnh Cục/);
+    expect(overview?.querySelector('[data-evidence="pattern"]')?.textContent).toMatch(/Mệnh Cục/);
+    expect(overview?.querySelector('[data-evidence="pattern"]')?.textContent).toMatch(/Chính Tài/);
     expect(overview?.querySelector('[data-overview-section="conclusion"]')?.textContent).toContain(
       "Kỵ thần Canh · Tân",
     );
