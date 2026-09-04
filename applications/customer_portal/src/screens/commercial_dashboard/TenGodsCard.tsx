@@ -1,5 +1,6 @@
 /**
  * Ten Gods Card — THẬP THẦN. Visible consulting first. Hidden stays support.
+ * P-003C layout only. Copy and calculation stay in the adapters.
  */
 
 import { useState, type ReactNode } from "react";
@@ -19,6 +20,19 @@ type TenGodsCardProps = {
   readonly card: DashboardCardSpec;
   readonly model: TenGodsView;
 };
+
+const COMBO_DETAIL: readonly {
+  readonly key: "capability" | "income" | "career" | "leadership" | "growth" | "risk" | "recommendation";
+  readonly label: string;
+}[] = [
+  { key: "capability", label: "Năng lực" },
+  { key: "income", label: "Thu nhập" },
+  { key: "career", label: "Công việc" },
+  { key: "leadership", label: "Cầm việc" },
+  { key: "growth", label: "Tăng trưởng" },
+  { key: "risk", label: "Rủi ro" },
+  { key: "recommendation", label: "Hướng đi" },
+];
 
 function PlacementList({
   items,
@@ -55,9 +69,22 @@ function presenceLabel(visible: boolean, hidden: boolean): string {
   return "Ẩn";
 }
 
-function CombinationCard({ item }: { readonly item: TenGodCombinationView }): ReactNode {
+function CombinationCard({
+  item,
+  open,
+  onToggle,
+}: {
+  readonly item: TenGodCombinationView;
+  readonly open: boolean;
+  readonly onToggle: () => void;
+}): ReactNode {
   return (
-    <article className="bte-tg__combo" data-tg-combination="true">
+    <article
+      className="bte-tg__combo"
+      data-tg-combination="true"
+      data-tg-hero="combination"
+      data-tg-combo-open={open ? "true" : "false"}
+    >
       <header className="bte-tg__consult-head">
         <h4 className="bte-tg__combo-title">{item.title}</h4>
       </header>
@@ -73,43 +100,41 @@ function CombinationCard({ item }: { readonly item: TenGodCombinationView }): Re
       <p className="bte-tg__consult-insight" data-tg-field="insight">
         {item.insight}
       </p>
-      <dl className="bte-tg__consult-grid">
-        <div data-tg-field="capability">
-          <dt>Năng lực</dt>
-          <dd>{item.capability}</dd>
-        </div>
-        <div data-tg-field="income">
-          <dt>Thu nhập</dt>
-          <dd>{item.income}</dd>
-        </div>
-        <div data-tg-field="career">
-          <dt>Công việc</dt>
-          <dd>{item.career}</dd>
-        </div>
-        <div data-tg-field="leadership">
-          <dt>Cầm việc</dt>
-          <dd>{item.leadership}</dd>
-        </div>
-        <div data-tg-field="growth">
-          <dt>Tăng trưởng</dt>
-          <dd>{item.growth}</dd>
-        </div>
-        <div data-tg-field="risk">
-          <dt>Rủi ro</dt>
-          <dd>{item.risk}</dd>
-        </div>
-        <div data-tg-field="recommendation">
-          <dt>Hướng đi</dt>
-          <dd>{item.recommendation}</dd>
-        </div>
+      <button
+        type="button"
+        className="bte-tg__more"
+        aria-expanded={open}
+        onClick={onToggle}
+      >
+        {open ? "Thu gọn mô hình" : "Xem mô hình chi tiết"}
+      </button>
+      <dl className="bte-tg__consult-grid" data-tg-combo-detail="true" hidden={!open}>
+        {COMBO_DETAIL.map((field) => (
+          <div key={field.key} data-tg-field={field.key}>
+            <dt>{field.label}</dt>
+            <dd>{item[field.key]}</dd>
+          </div>
+        ))}
       </dl>
     </article>
   );
 }
 
-function CommercialCard({ item }: { readonly item: TenGodCommercialView }): ReactNode {
+function CommercialCard({
+  item,
+  open,
+  onToggle,
+}: {
+  readonly item: TenGodCommercialView;
+  readonly open: boolean;
+  readonly onToggle: () => void;
+}): ReactNode {
   return (
-    <article className="bte-tg__consult" data-tg-commercial={item.name}>
+    <article
+      className="bte-tg__consult"
+      data-tg-commercial={item.name}
+      data-tg-open={open ? "true" : "false"}
+    >
       <header className="bte-tg__consult-head">
         <h4 className="bte-tg__consult-name">{item.name}</h4>
         {item.pillarLabel ? <span className="bte-tg__meta">{item.pillarLabel}</span> : null}
@@ -117,7 +142,7 @@ function CommercialCard({ item }: { readonly item: TenGodCommercialView }): Reac
       <p className="bte-tg__consult-insight" data-tg-field="insight">
         {item.insight}
       </p>
-      <dl className="bte-tg__consult-grid">
+      <dl className="bte-tg__consult-grid" data-tg-compact="true">
         <div data-tg-field="capability">
           <dt>Năng lực</dt>
           <dd>{item.capability}</dd>
@@ -126,6 +151,16 @@ function CommercialCard({ item }: { readonly item: TenGodCommercialView }): Reac
           <dt>Thu nhập</dt>
           <dd>{item.income}</dd>
         </div>
+      </dl>
+      <button
+        type="button"
+        className="bte-tg__more"
+        aria-expanded={open}
+        onClick={onToggle}
+      >
+        {open ? "Thu gọn" : "Xem phân tích đầy đủ"}
+      </button>
+      <dl className="bte-tg__consult-grid" data-tg-detail="true" hidden={!open}>
         <div data-tg-field="career">
           <dt>Công việc</dt>
           <dd>{item.career}</dd>
@@ -148,6 +183,8 @@ function CommercialCard({ item }: { readonly item: TenGodCommercialView }): Reac
  */
 export function TenGodsCard({ card, model }: TenGodsCardProps): ReactNode {
   const [expanded, setExpanded] = useState(false);
+  const [comboOpen, setComboOpen] = useState(false);
+  const [openGod, setOpenGod] = useState<string | null>(null);
   const mobile = useMobileOpen();
   const canExpand = model.hidden.length > 0 || model.distribution.length > 0;
 
@@ -159,6 +196,7 @@ export function TenGodsCard({ card, model }: TenGodsCardProps): ReactNode {
       data-implemented="ten-gods"
       data-expanded={expanded ? "true" : "false"}
       data-mobile-open={mobile.open ? "true" : "false"}
+      data-tg-layout="consulting-v1"
       aria-label={model.title}
       {...visualCardDom(card.id)}
       {...vizDom(card.id)}
@@ -201,15 +239,26 @@ export function TenGodsCard({ card, model }: TenGodsCardProps): ReactNode {
           {model.combination ? (
             <section className="bte-tg__section" data-tg-section="combination" data-viz-layer="visible">
               <h3 className="bte-tg__heading">Mô hình tạo giá trị</h3>
-              <CombinationCard item={model.combination} />
+              <CombinationCard
+                item={model.combination}
+                open={comboOpen}
+                onToggle={() => setComboOpen((value) => !value)}
+              />
             </section>
           ) : null}
           {model.commercial.length ? (
             <section className="bte-tg__section" data-tg-section="commercial" data-viz-layer="visible">
               <h3 className="bte-tg__heading">Lộ rõ — giá trị thương mại</h3>
-              <div className="bte-tg__consult-list">
+              <div className="bte-tg__consult-list" data-tg-count={String(model.commercial.length)}>
                 {model.commercial.map((item) => (
-                  <CommercialCard key={item.name} item={item} />
+                  <CommercialCard
+                    key={item.name}
+                    item={item}
+                    open={openGod === item.name}
+                    onToggle={() =>
+                      setOpenGod((current) => (current === item.name ? null : item.name))
+                    }
+                  />
                 ))}
               </div>
             </section>
@@ -220,7 +269,7 @@ export function TenGodsCard({ card, model }: TenGodsCardProps): ReactNode {
           </section>
           {!expanded && model.hiddenNames.length ? (
             <section className="bte-tg__section" data-tg-section="hidden-summary" data-viz-layer="hidden">
-              <h3 className="bte-tg__heading">Tàng Can</h3>
+              <h3 className="bte-tg__heading">Tàng Can hỗ trợ</h3>
               <p className="bte-tg__summary" data-tg-hidden-names="true">
                 {model.hiddenNames.join(" · ")}
               </p>
@@ -233,7 +282,7 @@ export function TenGodsCard({ card, model }: TenGodsCardProps): ReactNode {
           ) : null}
           {expanded && model.hidden.length ? (
             <section className="bte-tg__section" data-tg-section="hidden" data-viz-layer="hidden">
-              <h3 className="bte-tg__heading">Tàng Can</h3>
+              <h3 className="bte-tg__heading">Tàng Can hỗ trợ</h3>
               <PlacementList items={model.hidden} showStem />
               {model.hiddenSupport ? (
                 <p className="bte-tg__summary" data-tg-combo-hidden="true">
