@@ -171,6 +171,30 @@ export type TenGodsPresenceView = {
   readonly hidden: boolean;
 };
 
+export type TenGodCommercialView = {
+  readonly name: string;
+  readonly pillarLabel: string;
+  readonly insight: string;
+  readonly capability: string;
+  readonly income: string;
+  readonly career: string;
+  readonly risk: string;
+  readonly recommendation: string;
+};
+
+export type TenGodCombinationView = {
+  readonly title: string;
+  readonly members: readonly string[];
+  readonly insight: string;
+  readonly capability: string;
+  readonly income: string;
+  readonly career: string;
+  readonly leadership: string;
+  readonly growth: string;
+  readonly risk: string;
+  readonly recommendation: string;
+};
+
 export type TenGodsView = {
   readonly title: string;
   readonly available: boolean;
@@ -179,6 +203,9 @@ export type TenGodsView = {
   readonly hidden: readonly TenGodsPlacementView[];
   readonly hiddenNames: readonly string[];
   readonly distribution: readonly TenGodsPresenceView[];
+  readonly combination: TenGodCombinationView | null;
+  readonly hiddenSupport: string;
+  readonly commercial: readonly TenGodCommercialView[];
   readonly summary: string;
 };
 

@@ -1,9 +1,15 @@
 /**
- * Ten Gods Card — THẬP THẦN. Structural placement only. No interpretation.
+ * Ten Gods Card — THẬP THẦN. Visible consulting first. Hidden stays support.
  */
 
 import { useState, type ReactNode } from "react";
-import type { DashboardCardSpec, TenGodsPlacementView, TenGodsView } from "./types";
+import type {
+  DashboardCardSpec,
+  TenGodCombinationView,
+  TenGodCommercialView,
+  TenGodsPlacementView,
+  TenGodsView,
+} from "./types";
 import { visualCardDom } from "./visualHierarchy";
 import { vizDom } from "./vizCatalog";
 import { MobileToggle, useMobileOpen } from "./mobile/MobileToggle";
@@ -49,8 +55,96 @@ function presenceLabel(visible: boolean, hidden: boolean): string {
   return "Ẩn";
 }
 
+function CombinationCard({ item }: { readonly item: TenGodCombinationView }): ReactNode {
+  return (
+    <article className="bte-tg__combo" data-tg-combination="true">
+      <header className="bte-tg__consult-head">
+        <h4 className="bte-tg__combo-title">{item.title}</h4>
+      </header>
+      {item.members.length ? (
+        <ul className="bte-tg__badges" data-tg-combo-members="true">
+          {item.members.map((name) => (
+            <li key={name} className="bte-tg__badge">
+              {name}
+            </li>
+          ))}
+        </ul>
+      ) : null}
+      <p className="bte-tg__consult-insight" data-tg-field="insight">
+        {item.insight}
+      </p>
+      <dl className="bte-tg__consult-grid">
+        <div data-tg-field="capability">
+          <dt>Năng lực</dt>
+          <dd>{item.capability}</dd>
+        </div>
+        <div data-tg-field="income">
+          <dt>Thu nhập</dt>
+          <dd>{item.income}</dd>
+        </div>
+        <div data-tg-field="career">
+          <dt>Công việc</dt>
+          <dd>{item.career}</dd>
+        </div>
+        <div data-tg-field="leadership">
+          <dt>Cầm việc</dt>
+          <dd>{item.leadership}</dd>
+        </div>
+        <div data-tg-field="growth">
+          <dt>Tăng trưởng</dt>
+          <dd>{item.growth}</dd>
+        </div>
+        <div data-tg-field="risk">
+          <dt>Rủi ro</dt>
+          <dd>{item.risk}</dd>
+        </div>
+        <div data-tg-field="recommendation">
+          <dt>Hướng đi</dt>
+          <dd>{item.recommendation}</dd>
+        </div>
+      </dl>
+    </article>
+  );
+}
+
+function CommercialCard({ item }: { readonly item: TenGodCommercialView }): ReactNode {
+  return (
+    <article className="bte-tg__consult" data-tg-commercial={item.name}>
+      <header className="bte-tg__consult-head">
+        <h4 className="bte-tg__consult-name">{item.name}</h4>
+        {item.pillarLabel ? <span className="bte-tg__meta">{item.pillarLabel}</span> : null}
+      </header>
+      <p className="bte-tg__consult-insight" data-tg-field="insight">
+        {item.insight}
+      </p>
+      <dl className="bte-tg__consult-grid">
+        <div data-tg-field="capability">
+          <dt>Năng lực</dt>
+          <dd>{item.capability}</dd>
+        </div>
+        <div data-tg-field="income">
+          <dt>Thu nhập</dt>
+          <dd>{item.income}</dd>
+        </div>
+        <div data-tg-field="career">
+          <dt>Công việc</dt>
+          <dd>{item.career}</dd>
+        </div>
+        <div data-tg-field="risk">
+          <dt>Rủi ro</dt>
+          <dd>{item.risk}</dd>
+        </div>
+        <div data-tg-field="recommendation">
+          <dt>Hướng đi</dt>
+          <dd>{item.recommendation}</dd>
+        </div>
+      </dl>
+    </article>
+  );
+}
+
 /**
- * Compact Ten Gods evidence card with progressive disclosure.
+ * Visible Ten Gods get consulting cards. Hidden names stay secondary.
  */
 export function TenGodsCard({ card, model }: TenGodsCardProps): ReactNode {
   const [expanded, setExpanded] = useState(false);
@@ -104,6 +198,22 @@ export function TenGodsCard({ card, model }: TenGodsCardProps): ReactNode {
               </ul>
             </section>
           ) : null}
+          {model.combination ? (
+            <section className="bte-tg__section" data-tg-section="combination" data-viz-layer="visible">
+              <h3 className="bte-tg__heading">Mô hình tạo giá trị</h3>
+              <CombinationCard item={model.combination} />
+            </section>
+          ) : null}
+          {model.commercial.length ? (
+            <section className="bte-tg__section" data-tg-section="commercial" data-viz-layer="visible">
+              <h3 className="bte-tg__heading">Lộ rõ — giá trị thương mại</h3>
+              <div className="bte-tg__consult-list">
+                {model.commercial.map((item) => (
+                  <CommercialCard key={item.name} item={item} />
+                ))}
+              </div>
+            </section>
+          ) : null}
           <section className="bte-tg__section" data-tg-section="visible" data-viz-layer="visible">
             <h3 className="bte-tg__heading">Lộ rõ</h3>
             <PlacementList items={model.visible} showStem={expanded} />
@@ -114,12 +224,22 @@ export function TenGodsCard({ card, model }: TenGodsCardProps): ReactNode {
               <p className="bte-tg__summary" data-tg-hidden-names="true">
                 {model.hiddenNames.join(" · ")}
               </p>
+              {model.hiddenSupport ? (
+                <p className="bte-tg__summary" data-tg-combo-hidden="true">
+                  {model.hiddenSupport}
+                </p>
+              ) : null}
             </section>
           ) : null}
           {expanded && model.hidden.length ? (
             <section className="bte-tg__section" data-tg-section="hidden" data-viz-layer="hidden">
               <h3 className="bte-tg__heading">Tàng Can</h3>
               <PlacementList items={model.hidden} showStem />
+              {model.hiddenSupport ? (
+                <p className="bte-tg__summary" data-tg-combo-hidden="true">
+                  {model.hiddenSupport}
+                </p>
+              ) : null}
             </section>
           ) : null}
           {expanded && model.distribution.length ? (

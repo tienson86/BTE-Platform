@@ -9,7 +9,14 @@ import {
   tenGodLabel,
 } from "../../adapters/tenGodsDisplay";
 import { TEN_GODS_TITLE } from "./cards";
+import { tenGodCommercialAsset } from "./tenGodsCommercialAssets";
+import {
+  tenGodCombinationAsset,
+  tenGodHiddenCombinationSupport,
+} from "./tenGodsCombinationAssets";
 import type {
+  TenGodCombinationView,
+  TenGodCommercialView,
   TenGodsPillarKey,
   TenGodsPlacementView,
   TenGodsPresenceView,
@@ -126,6 +133,57 @@ function namesInOrder(names: Iterable<string>): string[] {
   return TRADITIONAL_ORDER.filter((name) => present.has(name));
 }
 
+function bindCombination(visible: readonly TenGodsPlacementView[]): TenGodCombinationView | null {
+  const names = visible.filter((item) => !item.isDayMaster).map((item) => item.tenGod);
+  const asset = tenGodCombinationAsset(names);
+  if (!asset) return null;
+  return {
+    title: asset.title,
+    members: asset.members,
+    insight: asset.insight,
+    capability: asset.capability,
+    income: asset.income,
+    career: asset.career,
+    leadership: asset.leadership,
+    growth: asset.growth,
+    risk: asset.risk,
+    recommendation: asset.recommendation,
+  };
+}
+
+function bindHiddenSupport(
+  hidden: readonly TenGodsPlacementView[],
+  visible: readonly TenGodsPlacementView[],
+): string {
+  const visibleNames = new Set(visible.map((item) => item.tenGod));
+  const hiddenOnly = hidden
+    .map((item) => item.tenGod)
+    .filter((name) => name && !visibleNames.has(name));
+  return tenGodHiddenCombinationSupport(hiddenOnly);
+}
+
+function bindCommercial(visible: readonly TenGodsPlacementView[]): TenGodCommercialView[] {
+  const seen = new Set<string>();
+  const cards: TenGodCommercialView[] = [];
+  for (const item of visible) {
+    if (item.isDayMaster || seen.has(item.tenGod)) continue;
+    const asset = tenGodCommercialAsset(item.tenGod);
+    if (!asset) continue;
+    seen.add(item.tenGod);
+    cards.push({
+      name: item.tenGod,
+      pillarLabel: item.pillarLabel,
+      insight: asset.insight,
+      capability: asset.capability,
+      income: asset.income,
+      career: asset.career,
+      risk: asset.risk,
+      recommendation: asset.recommendation,
+    });
+  }
+  return cards;
+}
+
 function bindDistribution(
   visible: readonly TenGodsPlacementView[],
   hidden: readonly TenGodsPlacementView[],
@@ -158,6 +216,9 @@ export function adaptTenGodsCard(data: AnalysisDataDto | null | undefined): TenG
     hidden,
     hiddenNames: namesInOrder(hidden.map((item) => item.tenGod)),
     distribution: bindDistribution(placements, hidden),
+    combination: bindCombination(placements),
+    hiddenSupport: bindHiddenSupport(hidden, placements),
+    commercial: bindCommercial(placements),
     summary: "",
   };
 }

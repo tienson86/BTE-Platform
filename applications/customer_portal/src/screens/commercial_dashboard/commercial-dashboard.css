@@ -1142,6 +1142,92 @@
   font-size: 0.8125rem;
 }
 
+.bte-tg__consult-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.bte-tg__consult {
+  padding: var(--space-3);
+  border: 1px solid var(--border-divider);
+  border-radius: 10px;
+  background: var(--cdash-accent-soft);
+}
+
+.bte-tg__consult-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.bte-tg__consult-name {
+  margin: 0;
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-semibold);
+  color: var(--cdash-text);
+}
+
+.bte-tg__consult-insight {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-heading);
+  color: var(--cdash-text);
+}
+
+.bte-tg__consult-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.bte-tg__consult-grid dt {
+  margin: 0;
+  font-size: var(--font-size-metadata);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-metadata);
+  text-transform: uppercase;
+  color: var(--cdash-muted);
+}
+
+.bte-tg__consult-grid dd {
+  margin: 2px 0 0;
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-body);
+  color: var(--cdash-text);
+}
+
+.bte-tg__combo {
+  padding: var(--space-4);
+  border: 1px solid var(--border-divider);
+  border-radius: 10px;
+  background: var(--cdash-card);
+}
+
+.bte-tg__combo-title {
+  margin: 0;
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-heading);
+  color: var(--cdash-text);
+}
+
+.bte-tg__combo .bte-tg__badges {
+  margin: 0 0 var(--space-3);
+}
+
+.bte-tg [data-tg-section="hidden-summary"],
+.bte-tg [data-tg-section="hidden"],
+.bte-tg [data-tg-section="distribution"] {
+  opacity: 0.82;
+}
+
 .bte-tg__dist-row {
   grid-template-columns: minmax(0, 1fr) auto;
 }
