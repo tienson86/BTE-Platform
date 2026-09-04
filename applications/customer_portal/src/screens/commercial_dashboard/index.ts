@@ -23,7 +23,10 @@ export { adaptBaziCard } from "./baziAdapter";
 export { adaptFiveElementsCard } from "./fiveElementsAdapter";
 export { adaptTenGodsCard } from "./tenGodsAdapter";
 export { tenGodCommercialAsset } from "./tenGodsCommercialAssets";
-export { tenGodCombinationAsset } from "./tenGodsCombinationAssets";
+export {
+  listTenGodCombinationCatalog,
+  tenGodCombinationAsset,
+} from "./tenGodsCombinationAssets";
 export { adaptPatternCard } from "./patternAdapter";
 export { adaptShenShaCard } from "./shenShaAdapter";
 export { adaptLuckCard } from "./luckAdapter";

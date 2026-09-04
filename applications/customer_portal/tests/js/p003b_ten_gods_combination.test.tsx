@@ -99,11 +99,17 @@ describe("P-003B Ten Gods combination consulting", () => {
 
   it("looks up published pair patterns without calculating new gods", () => {
     const output = tenGodCombinationAsset(["Thiên Tài", "Thực Thần"]);
-    expect(output?.title).toBe("Đổi cửa lệch thành món thấy được");
+    expect(output?.title).toBe("Biến cơ hội không cố định thành sản phẩm có hạn");
     expect(output?.members).toEqual(["Thực Thần", "Thiên Tài"]);
-    expect(tenGodCombinationAsset(["Thiên Tài", "Thương Quan"])?.title).toBe("Sửa khung bằng cửa không cố");
-    expect(tenGodCombinationAsset(["Chính Quan", "Chính Ấn"])?.title).toBe("Chạy việc trong khung có nền");
-    expect(tenGodCombinationAsset(["Kiếp Tài", "Thất Sát"])?.title).toBe("Mở cửa khi việc đang khó");
+    expect(tenGodCombinationAsset(["Thiên Tài", "Thương Quan"])?.title).toBe(
+      "Sửa quy trình kém và mở kênh phụ",
+    );
+    expect(tenGodCombinationAsset(["Chính Quan", "Chính Ấn"])?.title).toBe(
+      "Làm việc có chuẩn, có chỗ tích lũy trước khi bung",
+    );
+    expect(tenGodCombinationAsset(["Kiếp Tài", "Thất Sát"])?.title).toBe(
+      "Chớp việc khó đúng lúc nguồn đang kẹt",
+    );
 
     const pair = adaptTenGodsCard(analysisWithVisible(["Thiên Tài", "Thực Thần"]));
     expect(pair.combination?.title).toBe(output?.title);
@@ -114,7 +120,7 @@ describe("P-003B Ten Gods combination consulting", () => {
     const one = adaptTenGodsCard(analysisWithVisible(["Nhật Chủ"]));
     expect(one.combination).toBeNull();
     expect(one.hiddenSupport).toBe("");
-    const unknown = adaptTenGodsCard(analysisWithVisible(["Tỷ Kiên", "Chính Tài"]));
+    const unknown = adaptTenGodsCard(analysisWithVisible(["Tỷ Kiên", "Thiên Ấn"]));
     expect(unknown.combination).toBeNull();
     expect(tenGodCombinationAsset(["Không Có", "Thiên Tài"])).toBeNull();
   });
