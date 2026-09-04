@@ -93,9 +93,9 @@ describe("UI-18 mobile experience", () => {
     expect(order).toEqual([...DOM_ORDER]);
     expect(DASHBOARD_CARDS.map((card) => card.span)).toEqual([4, 8, 4, 4, 4, 6, 6, 12, 12]);
     expect(VISUAL_HIERARCHY.overview).toEqual({ level: 1, type: "hero" });
-    expect(CSS).toMatch(/data-card="overview"][\s\S]*order:\s*10/);
-    expect(CSS).toMatch(/data-card="interpretation"][\s\S]*order:\s*20/);
-    expect(CSS).toMatch(/data-card="action-plan"][\s\S]*order:\s*21/);
+    expect(CSS).toMatch(/data-card="overview"] \{ order: 30; \}/);
+    expect(CSS).toMatch(/data-card="interpretation"][\s\S]*order:\s*41/);
+    expect(CSS).toMatch(/data-card="action-plan"][\s\S]*order:\s*42/);
   });
 
   it("M4 assigns the mobile visual order without rewriting source order", () => {
@@ -195,7 +195,6 @@ describe("UI-18 mobile experience", () => {
   it("M11 reorganizes mobile and intermediates tablet without changing desktop CSS", () => {
     expect(MOBILE_CSS).toContain("@media (max-width: 1199px) and (min-width: 768px)");
     expect(MOBILE_CSS).toContain("@media (max-width: 767px)");
-    expect(MOBILE_CSS).toContain("order: 16");
     expect(MOBILE_CSS).toContain("gap: var(--space-7) 0");
     expect(CSS).toContain('.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="overview"]');
     expect(CSS).toContain("grid-column: 1 / -1");

@@ -74,11 +74,13 @@
   color: var(--cdash-accent);
 }
 
-/* Identity Header — A/B/C/D. Region B is canonical Tứ Trụ summary (readable over 2/5/3/2). */
+/* Identity Header — UI-05A: S00 full width, then Tứ Trụ | Cân Xương | Cung Phi. */
 .bte-id {
   display: grid;
-  grid-template-columns: minmax(0, 15%) minmax(0, 49%) minmax(0, 20%) minmax(0, 16%);
-  grid-template-areas: "identity pillars foundation status";
+  grid-template-columns: minmax(0, 5fr) minmax(0, 2.2fr) minmax(0, 2.2fr);
+  grid-template-areas:
+    "identity identity identity"
+    "pillars foundation status";
   align-items: start;
   gap: 10px 0;
   width: 100%;
@@ -94,19 +96,39 @@
   order: 2;
 }
 
-.bte-id [data-region="identity"] { grid-area: identity; padding-right: 16px; }
+.bte-id [data-region="identity"] {
+  grid-area: identity;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2) var(--space-6);
+  padding: 0 0 var(--space-3);
+  border-bottom: 1px solid var(--cdash-border);
+}
+.bte-id [data-region="identity"] .bte-id__kv {
+  flex: 1 1 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px var(--space-5);
+}
+.bte-id [data-region="identity"] .bte-id__kv-row {
+  grid-template-columns: auto auto;
+}
 .bte-id [data-region="pillars"] {
   grid-area: pillars;
-  padding: 0 16px;
-  border-left: 1px solid var(--cdash-border);
+  padding: var(--space-3) var(--space-4) 0 0;
   border-right: 1px solid var(--cdash-border);
 }
 .bte-id [data-region="foundation"] {
   grid-area: foundation;
-  padding: 0 16px;
+  padding: var(--space-3) var(--space-4) 0;
   border-right: 1px solid var(--cdash-border);
 }
-.bte-id [data-region="status"] { grid-area: status; padding-left: 16px; min-width: 0; }
+.bte-id [data-region="status"] {
+  grid-area: status;
+  padding: var(--space-3) 0 0 var(--space-4);
+  min-width: 0;
+}
 
 .bte-id__region-label {
   margin: 0 0 4px;
@@ -492,36 +514,21 @@
   font-weight: var(--font-weight-semibold);
 }
 
-/* Tablet: Identity A+B then C+D. Body reflows; semantic order unchanged. */
+/* Tablet: identity strip, then Tứ Trụ | Cân Xương | Cung Phi. Semantic DOM unchanged. */
 @media (max-width: 1199px) {
   .bte-cdash {
     padding: var(--space-5) var(--space-5) var(--space-6);
   }
 
   .bte-id {
-    grid-template-columns: 4fr 8fr;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 2.2fr) minmax(0, 2.2fr);
     grid-template-areas:
-      "identity pillars"
-      "foundation status";
+      "identity identity identity"
+      "pillars foundation status";
     min-height: 0;
     max-height: none;
     overflow: visible;
     gap: 12px 0;
-  }
-
-  .bte-id [data-region="foundation"],
-  .bte-id [data-region="status"] {
-    padding-top: 10px;
-    border-top: 1px solid var(--cdash-border);
-  }
-
-  .bte-id [data-region="foundation"] {
-    border-right: 1px solid var(--cdash-border);
-    padding-right: 16px;
-  }
-
-  .bte-id [data-region="status"] {
-    padding-left: 16px;
   }
 
   .bte-cdash__card[data-card="overview"],
@@ -1968,27 +1975,44 @@
   }
 }
 
-/* —— UI-14 Visual System V2 overlay —— */
+/* —— UI-05A result information architecture (visual order only) —— */
 
-.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="overview"] {
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="bazi"] {
   order: 10;
   grid-column: 1 / -1;
 }
 
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="five-elements"] {
+  order: 20;
+  grid-column: span 6;
+}
+
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="pattern"] {
+  order: 21;
+  grid-column: span 6;
+}
+
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="overview"] { order: 30; }
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="overview"] {
+  grid-column: 1 / -1;
+}
+
 .bte-cdash[data-visual="v2"] .bte-cdash__grid > .bte-life {
-  order: 15;
+  order: 40;
   grid-column: 1 / -1;
 }
 
 .bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="interpretation"] {
-  order: 20;
+  order: 41;
+  grid-column: 1 / -1;
 }
 
 .bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="action-plan"] {
-  order: 21;
+  order: 42;
+  grid-column: 1 / -1;
 }
 
-.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="ten-gods"] { order: 22; }
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="ten-gods"] { order: 50; }
 .bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="ten-gods"] {
   grid-column: 1 / -1;
 }
@@ -1998,11 +2022,8 @@
   flex-direction: column;
   gap: var(--space-5);
 }
-.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="bazi"] { order: 30; }
-.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="five-elements"] { order: 31; }
-.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="pattern"] { order: 33; }
-.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="shensha"] { order: 34; }
-.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="luck"] { order: 35; }
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="shensha"] { order: 51; }
+.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="luck"] { order: 52; }
 
 .bte-cdash[data-visual="v2"] .bte-cdash__card[data-visual-level="3"] {
   box-shadow: var(--elevation-none);

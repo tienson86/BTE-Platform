@@ -103,10 +103,10 @@ describe("UI-14 dashboard transformation", () => {
   it("promotes Overview to a full-width hero via CSS order, not data-span", () => {
     expect(CSS).toContain('.bte-cdash[data-visual="v2"] .bte-cdash__card[data-card="overview"]');
     expect(CSS).toContain("grid-column: 1 / -1");
-    expect(CSS).toMatch(/data-card="overview"][\s\S]*order:\s*10/);
-    expect(CSS).toMatch(/data-card="interpretation"][\s\S]*order:\s*20/);
-    expect(CSS).toMatch(/data-card="action-plan"][\s\S]*order:\s*21/);
-    expect(CSS).toMatch(/data-card="bazi"]\s*\{\s*order:\s*30/);
+    expect(CSS).toMatch(/data-card="overview"] \{ order: 30; \}/);
+    expect(CSS).toMatch(/data-card="interpretation"][\s\S]*order:\s*41/);
+    expect(CSS).toMatch(/data-card="action-plan"][\s\S]*order:\s*42/);
+    expect(CSS).toMatch(/data-card="bazi"][\s\S]*order:\s*10/);
   });
 
   it("preserves hierarchy at tablet and mobile breakpoints", () => {

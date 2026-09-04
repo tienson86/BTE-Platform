@@ -336,8 +336,8 @@ describe("P-RUNTIME-01 live /result integration", () => {
     expect(root?.querySelector("[data-tg-section='commercial']")).toBeTruthy();
     expect(root?.querySelector("[data-tg-combination]")).toBeTruthy();
     expect(root?.querySelector("[data-life-consulting]")).toBeTruthy();
-    expect(CSS).toMatch(/data-card="overview"][\s\S]*order:\s*10/);
-    expect(CSS).toMatch(/\.bte-cdash__grid > \.bte-life[\s\S]*order:\s*15/);
-    expect(CSS).toMatch(/data-card="ten-gods"] \{ order: 22; \}/);
+    expect(CSS).toMatch(/data-card="overview"] \{ order: 30; \}/);
+    expect(CSS).toMatch(/\.bte-cdash__grid > \.bte-life[\s\S]*order:\s*40/);
+    expect(CSS).toMatch(/data-card="ten-gods"] \{ order: 50; \}/);
   });
 });

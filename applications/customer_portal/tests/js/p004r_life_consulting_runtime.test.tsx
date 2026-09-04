@@ -164,9 +164,9 @@ describe("P-004R Life Consulting live runtime integration", () => {
   });
 
   it("R9 desktop visual order places Life Consulting after Overview", () => {
-    expect(CSS).toMatch(/data-card="overview"][\s\S]*order:\s*10/);
-    expect(CSS).toMatch(/\.bte-cdash__grid > \.bte-life[\s\S]*order:\s*15/);
-    expect(CSS).toMatch(/data-card="interpretation"][\s\S]*order:\s*20/);
+    expect(CSS).toMatch(/data-card="overview"] \{ order: 30; \}/);
+    expect(CSS).toMatch(/\.bte-cdash__grid > \.bte-life[\s\S]*order:\s*40/);
+    expect(CSS).toMatch(/data-card="interpretation"][\s\S]*order:\s*41/);
     const { container } = render(
       <CommercialDashboardPage
         analysis={LIVE_STORE.data}
@@ -179,7 +179,7 @@ describe("P-004R Life Consulting live runtime integration", () => {
     const life = grid?.querySelector("[data-life-consulting]");
     expect(overview).toBeTruthy();
     expect(life).toBeTruthy();
-    expect(window.getComputedStyle(life as Element).order === "15" || CSS.includes("order: 15")).toBe(
+    expect(window.getComputedStyle(life as Element).order === "40" || CSS.includes("order: 40")).toBe(
       true,
     );
   });

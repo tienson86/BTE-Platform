@@ -76,7 +76,7 @@ describe("P-003C Ten Gods consulting layout", () => {
     expect(card.getAttribute("data-span")).toBe("4");
     expect(card.className).toMatch(/bte-cdash__card--span-4/);
     expect(card.getAttribute("data-tg-layout")).toBe("consulting-v1");
-    expect(CSS).toMatch(/data-card="ten-gods"] \{ order: 22; \}/);
+    expect(CSS).toMatch(/data-card="ten-gods"] \{ order: 50; \}/);
     expect(CSS).toMatch(/data-card="ten-gods"][\s\S]*grid-column:\s*1 \/ -1/);
   });
 
@@ -219,8 +219,8 @@ describe("P-003C Ten Gods consulting layout", () => {
   });
 
   it("TG-L14 Live /result verified", () => {
-    expect(HTML).toContain("/static/dist/result.js?v=PRUNTIME01-P003C2");
-    expect(HTML).toContain("/static/dist/result.css?v=PRUNTIME01-P003C2");
+    expect(HTML).toContain("/static/dist/result.js?v=PRUNTIME01-UI05A");
+    expect(HTML).toContain("/static/dist/result.css?v=PRUNTIME01-UI05A");
     const entry = readFileSync(resolve(PORTAL, "src/entries/resultApp.tsx"), "utf8");
     expect(entry).toContain("CommercialDashboardPage");
     const capture = readFileSync(resolve(PORTAL, "scripts/capture_p003c_live.py"), "utf8");
