@@ -106,6 +106,38 @@ export function PatternCard({ card, model }: PatternCardProps): ReactNode {
               <FormationFlow steps={formationSteps} />
             </section>
           ) : null}
+          {model.purity ? (
+            <section className="bte-pat__section" data-pat-section="purity">
+              <h3 className="bte-pat__heading">Độ thuần</h3>
+              <p className="bte-pat__status" data-pat-purity="true">
+                {model.purity}
+              </p>
+            </section>
+          ) : null}
+          {model.patternStrength ? (
+            <section className="bte-pat__section" data-pat-section="strength">
+              <h3 className="bte-pat__heading">Lực cách</h3>
+              <p className="bte-pat__status" data-pat-strength="true">
+                {model.patternStrength}
+              </p>
+            </section>
+          ) : null}
+          {model.integrity ? (
+            <section className="bte-pat__section" data-pat-section="integrity">
+              <h3 className="bte-pat__heading">Toàn vẹn</h3>
+              <p className="bte-pat__status" data-pat-integrity="true">
+                {model.integrity}
+              </p>
+            </section>
+          ) : null}
+          {model.grade ? (
+            <section className="bte-pat__section" data-pat-section="grade">
+              <h3 className="bte-pat__heading">Hạng cấu trúc</h3>
+              <p className="bte-pat__status" data-pat-grade="true">
+                {model.grade}
+              </p>
+            </section>
+          ) : null}
           {model.summary ? (
             <section className="bte-pat__section" data-pat-section="summary">
               <h3 className="bte-pat__heading">Tóm tắt</h3>

@@ -51,11 +51,24 @@ from engines.ten_gods_engine.engine import TenGodsEngine
 from engines.detailed_interpretation_engine.builders import (
     build_canonical_analysis_context_from_payload,
 )
+from engines.detailed_interpretation_engine.mc01 import attach_mc01_reference
+from engines.mingju import (
+    analyze_mingju,
+    build_mingju_context,
+    to_pack07_snapshot,
+    to_public_dict,
+)
+from engines.mingju.views import customer_structure_labels
 from engines.detailed_interpretation_engine.ten_gods.engine import interpret_and_bind_ten_gods
 from engines.detailed_interpretation_engine.ten_gods.presentation import (
     present_combinations_customer,
     present_ecosystem_customer,
     present_ten_gods_customer,
+)
+from engines.detailed_interpretation_engine.shen_sha.engine import interpret_and_bind_shen_sha
+from engines.detailed_interpretation_engine.shen_sha.presentation import (
+    present_shen_sha_customer,
+    present_shen_sha_ecosystem_customer,
 )
 
 from applications.api.exceptions import PipelineAPIError, ValidationAPIError
@@ -193,6 +206,11 @@ _INTERNAL_PAYLOAD_KEYS: frozenset[str] = frozenset(
         "_luck_raw",
         "_pack07_context",
         "pack07_context",
+        "mc01",
+        "mingju",
+        "_mingju",
+        "_mc01_snapshot",
+        "_mc01_reject",
     }
 )
 
@@ -401,30 +419,82 @@ class OrchestratorService:
         payload["pipeline"] = self._public_pipeline(completed)
         return payload
 
+    def _attach_mingju_decision(
+        self,
+        analysis: AnalysisResult,
+        payload: dict[str, Any],
+    ) -> None:
+        """Publish canonical MC-01 result. Does not use ScoreEngine grade."""
+        if not payload.get("pattern"):
+            return
+        incoming: dict[str, Any] = {}
+        raw_input = payload.get("input")
+        if isinstance(raw_input, dict):
+            incoming = dict(raw_input)
+        if not payload.get("chart_id"):
+            year = incoming.get("year")
+            month = incoming.get("month")
+            day = incoming.get("day")
+            if year and month and day:
+                payload["chart_id"] = f"{int(year):04d}-{int(month):02d}-{int(day):02d}"
+        context = build_mingju_context(payload=payload)
+        result = analyze_mingju(context)
+        snapshot = to_pack07_snapshot(result)
+        public = to_public_dict(result)
+        analysis.mingju = public
+        payload["_mingju"] = snapshot
+        payload["mingju"] = public
+        payload["damage_ids"] = list(snapshot.get("damage_ids") or [])
+        payload["rescue_ids"] = list(snapshot.get("rescue_ids") or [])
+        payload["integrity"] = {"state": result.integrity.state}
+        payload["achievement"] = snapshot.get("achievement") or ""
+        payload["wealth_profile"] = snapshot.get("wealth_profile") or ""
+        payload["career_profile"] = snapshot.get("career_profile") or ""
+        pattern_payload = payload.get("pattern")
+        if isinstance(pattern_payload, dict):
+            pattern_payload.update(customer_structure_labels(result))
+        logger.info(
+            "pipeline.mingju pattern=%s purity=%s strength=%s integrity=%s grade=%s",
+            result.pattern.label,
+            result.purity.classification,
+            result.pattern_strength.classification,
+            result.integrity.state,
+            result.grade.grade,
+        )
+
     def _attach_pack07_context(
         self,
         analysis: AnalysisResult | None,
         payload: dict[str, Any],
     ) -> None:
-        """Build Pack 07 context and bind natal Ten Gods. Full contract stays internal."""
+        """Build Pack 07 context after canonical MC-01 binding. Full contract stays internal."""
         if analysis is None or not payload.get("pattern"):
             return
+        attach_mc01_reference(payload)
         context = build_canonical_analysis_context_from_payload(payload)
         context = interpret_and_bind_ten_gods(context, payload)
+        context = interpret_and_bind_shen_sha(context, payload)
         analysis.pack07_context = context
         natal = context.runtime.interpretation.ten_gods.natal
-        if not natal.items:
-            return
-        ten_gods = payload.get("ten_gods")
-        if isinstance(ten_gods, dict):
-            ten_gods["detailed"] = present_ten_gods_customer(natal)
-            ten_gods["relations"] = present_combinations_customer(
-                context.runtime.interpretation.ten_gods.combinations
-            )
-            ten_gods["ecosystem"] = present_ecosystem_customer(
-                context.runtime.interpretation.ten_gods.ecosystem
-            )
-            analysis.ten_gods_result = dict(ten_gods)
+        if natal.items:
+            ten_gods = payload.get("ten_gods")
+            if isinstance(ten_gods, dict):
+                ten_gods["detailed"] = present_ten_gods_customer(natal)
+                ten_gods["relations"] = present_combinations_customer(
+                    context.runtime.interpretation.ten_gods.combinations
+                )
+                ten_gods["ecosystem"] = present_ecosystem_customer(
+                    context.runtime.interpretation.ten_gods.ecosystem
+                )
+                analysis.ten_gods_result = dict(ten_gods)
+        shen = context.runtime.interpretation.shen_sha
+        if shen.individual.items:
+            bazi = payload.get("bazi")
+            if isinstance(bazi, dict):
+                bazi["shen_sha"] = {
+                    "individual": present_shen_sha_customer(shen.individual),
+                    "ecosystem": present_shen_sha_ecosystem_customer(shen.ecosystem),
+                }
 
     def _attach_can_xuong(self, payload: dict[str, Any], calendar: Any, bazi_chart: Any) -> None:
         """Publish analysis.can_xuong from the dedicated engine. Soft-fail."""
@@ -755,6 +825,7 @@ class OrchestratorService:
         analysis.ten_gods_result = ten_gods_payload
         payload["ten_gods"] = ten_gods_payload
         payload["ten_gods_source"] = ten_gods_source_fingerprint()
+        self._attach_mingju_decision(analysis, payload)
         logger.info(
             "pipeline.score total=%.2f grade=%s",
             payload["score"].get("total_score", 0.0),

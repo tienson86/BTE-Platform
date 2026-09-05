@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import replace
+from dataclasses import dataclass, replace
 
 from engines.detailed_interpretation_engine.enums import (
     ChainQuality,
@@ -54,6 +54,32 @@ from engines.detailed_interpretation_engine.ten_gods.models import (
     TenGodInterpretationResult,
 )
 from engines.detailed_interpretation_engine.value_objects import ConfidenceValue
+
+
+@dataclass(frozen=True, slots=True)
+class Mc01ComboRefs:
+    """Consumed MC-01 structural IDs. Pack 07 does not create them."""
+
+    bound: bool = False
+    damage_ids: tuple[str, ...] = ()
+    rescue_ids: tuple[str, ...] = ()
+    purity_ref: str = ""
+
+    def ids_for(self, spec: CombinationSpec) -> tuple[str, ...]:
+        """Return canonical MC-01 IDs required by this combination, if any."""
+        if spec.requires_mc01 == "damage":
+            return self.damage_ids
+        if spec.requires_mc01 == "rescue":
+            return self.rescue_ids
+        if spec.requires_mc01 == "purity" and self.purity_ref.strip():
+            return (self.purity_ref.strip(),)
+        return ()
+
+    def requirement_met(self, spec: CombinationSpec) -> bool:
+        """True when this spec has no MC-01 ID gate, or those IDs exist."""
+        if spec.requires_mc01 in {"", "optional"}:
+            return True
+        return bool(self.ids_for(spec))
 
 
 def _confidence(*items: TenGodInterpretationResult | None, mc01_bound: bool) -> ConfidenceValue:
@@ -316,6 +342,7 @@ def _control_or_transform(
     natal: TenGodInterpretationCollection,
     index: dict[str, TenGodInterpretationResult],
     mc01_bound: bool,
+    refs: Mc01ComboRefs,
 ) -> TenGodCombinationResult:
     source, target = _pick(spec, index)
     mediator = best_member(family_items(index, spec.mediation_family)) if spec.mediation_family else None
@@ -357,25 +384,40 @@ def _control_or_transform(
             ),
             power=CombinationRelativePower.MEDIATED,
         )
-    conditions = [CONDITION_UNRESOLVED_DEPENDENCY]
+    conditions = []
+    structural_ids = refs.ids_for(spec)
+    if not refs.requirement_met(spec):
+        conditions.append(CONDITION_UNRESOLVED_DEPENDENCY)
     if not mc01_bound:
         conditions.append(CONDITION_MC01_NOT_BOUND)
     quality = quality_from_ranks((rank_of(source) or 0, rank_of(target) or 0))
-    if quality is ChainQuality.STRONG:
+    if quality is ChainQuality.STRONG and not structural_ids:
         quality = ChainQuality.CONDITIONAL
+    if structural_ids:
+        state = generation_state(quality, residual=False)
+        role = structural_role_for((source, target), state)
+        link_state = "intact" if state is CombinationState.CONFIRMED else "conditional"
+        chain_quality = quality
+    else:
+        state = CombinationState.UNRESOLVED
+        role = CombinationStructuralRole.UNRESOLVED
+        link_state = "conditional"
+        chain_quality = ChainQuality.CONDITIONAL
+        if quality is ChainQuality.STRONG:
+            quality = ChainQuality.CONDITIONAL
     chain = two_node_chain(
         f"CH-{spec.combination_id}",
         source,
         target,
         "transforms" if spec.kind == "transform" else "controls",
-        quality,
+        chain_quality,
         CombinationReach.DIRECT,
-        "conditional",
+        link_state,
     )
     return TenGodCombinationResult(
         combination_id=spec.combination_id,
         combination_type=spec.types,
-        state=CombinationState.UNRESOLVED,
+        state=state,
         participants=(as_participant(source, "source"), as_participant(target, "target")),
         source=source.ten_god_id,
         target=target.ten_god_id,
@@ -383,18 +425,20 @@ def _control_or_transform(
         relationship="transforms" if spec.kind == "transform" else "controls",
         relative_power=relative_power(source, target),
         chain=chain,
-        chain_quality=ChainQuality.CONDITIONAL,
-        structural_role=CombinationStructuralRole.UNRESOLVED,
+        chain_quality=chain_quality,
+        structural_role=role,
         day_master_context=source.day_master_context,
         pattern_context=pattern_of(source, target),
         useful_god_context=useful_of(source, target),
-        damage_ids=(),
-        rescue_ids=(),
+        damage_ids=structural_ids if spec.requires_mc01 == "damage" else (),
+        rescue_ids=structural_ids if spec.requires_mc01 == "rescue" else (),
         conditions=tuple(conditions),
         causal_group=spec.causal_group,
         evidence_ids=source.evidence_ids + target.evidence_ids,
         trace_ids=(f"TR-P7-COMB-{spec.combination_id}",),
-        confidence=ConfidenceValue(summary=TenGodConfidenceBand.LOW.value),
+        confidence=ConfidenceValue(summary=TenGodConfidenceBand.LOW.value)
+        if not structural_ids
+        else _confidence(source, target, mc01_bound=mc01_bound),
     )
 
 
@@ -403,6 +447,7 @@ def _mixed(
     natal: TenGodInterpretationCollection,
     index: dict[str, TenGodInterpretationResult],
     mc01_bound: bool,
+    refs: Mc01ComboRefs,
 ) -> TenGodCombinationResult:
     left, right = index.get(spec.source_god), index.get(spec.target_god)
     if not is_present(left) or not is_present(right) or left is None or right is None:
@@ -415,10 +460,17 @@ def _mixed(
             target=right.ten_god_id,
             conditions=(CONDITION_RESIDUAL_ONLY,),
         )
+    structural_ids = refs.ids_for(spec)
+    conditions = []
+    if not refs.requirement_met(spec):
+        conditions.append(CONDITION_UNRESOLVED_DEPENDENCY)
+    if not mc01_bound:
+        conditions.append(CONDITION_MC01_NOT_BOUND)
+    state = CombinationState.CONDITIONAL if structural_ids else CombinationState.UNRESOLVED
     return TenGodCombinationResult(
         combination_id=spec.combination_id,
         combination_type=spec.types,
-        state=CombinationState.UNRESOLVED,
+        state=state,
         participants=(as_participant(left, "source"), as_participant(right, "target")),
         source=left.ten_god_id,
         target=right.ten_god_id,
@@ -429,13 +481,13 @@ def _mixed(
         day_master_context=left.day_master_context,
         pattern_context=pattern_of(left, right),
         damage_ids=(),
-        conditions=(CONDITION_UNRESOLVED_DEPENDENCY, CONDITION_MC01_NOT_BOUND)
-        if not mc01_bound
-        else (CONDITION_UNRESOLVED_DEPENDENCY,),
+        conditions=tuple(conditions),
         causal_group=spec.causal_group,
         evidence_ids=left.evidence_ids + right.evidence_ids,
         trace_ids=(f"TR-P7-COMB-{spec.combination_id}",),
-        confidence=ConfidenceValue(summary=TenGodConfidenceBand.LOW.value),
+        confidence=ConfidenceValue(summary=TenGodConfidenceBand.LOW.value)
+        if not structural_ids
+        else _confidence(left, right, mc01_bound=mc01_bound),
     )
 
 
@@ -444,6 +496,7 @@ def _capacity(
     natal: TenGodInterpretationCollection,
     index: dict[str, TenGodInterpretationResult],
     mc01_bound: bool,
+    refs: Mc01ComboRefs,
 ) -> TenGodCombinationResult:
     force = index.get(spec.source_god) if spec.source_god else best_member(family_items(index, spec.source_family))
     dm = natal.items[0].day_master_context if natal.items else DayMasterBand.UNRESOLVED
@@ -461,8 +514,16 @@ def _capacity(
     if not is_material(force) or not meets_min_strength(force, spec.min_strength):
         return _inactive(spec, natal, source=force.ten_god_id, target="day_master")
     optional = spec.requires_mc01 == "optional"
-    state = CombinationState.CONDITIONAL if optional else CombinationState.UNRESOLVED
-    conditions = [CONDITION_UNRESOLVED_DEPENDENCY]
+    structural_ids = refs.ids_for(spec)
+    if optional:
+        state = CombinationState.CONDITIONAL
+    elif structural_ids:
+        state = CombinationState.CONDITIONAL
+    else:
+        state = CombinationState.UNRESOLVED
+    conditions = []
+    if not optional and not refs.requirement_met(spec):
+        conditions.append(CONDITION_UNRESOLVED_DEPENDENCY)
     if not mc01_bound:
         conditions.append(CONDITION_MC01_NOT_BOUND)
     return TenGodCombinationResult(
@@ -485,6 +546,8 @@ def _capacity(
         chain_quality=ChainQuality.CONDITIONAL,
         day_master_context=dm,
         pattern_context=pattern_of(force),
+        damage_ids=structural_ids if spec.requires_mc01 == "damage" else (),
+        rescue_ids=structural_ids if spec.requires_mc01 == "rescue" else (),
         positive_expressions=POSITIVE_CODES.get(spec.combination_id, ())[:1],
         risk_expressions=RISK_CODES.get(spec.combination_id, ())[:1],
         conditions=tuple(conditions),
@@ -551,19 +614,28 @@ def evaluate_spec(
     natal: TenGodInterpretationCollection,
     *,
     mc01_bound: bool,
+    damage_ids: tuple[str, ...] = (),
+    rescue_ids: tuple[str, ...] = (),
+    purity_ref: str = "",
 ) -> TenGodCombinationResult:
     """Evaluate one V1 combination from DI-01 profiles."""
     index = natal_index(natal.items)
+    refs = Mc01ComboRefs(
+        bound=mc01_bound,
+        damage_ids=damage_ids,
+        rescue_ids=rescue_ids,
+        purity_ref=purity_ref,
+    )
     if spec.kind == "generation":
         return _generation(spec, natal, index, mc01_bound)
     if spec.kind == "chain":
         return _three_node_chain(spec, natal, index, mc01_bound)
     if spec.kind in {"control", "transform"}:
-        return _control_or_transform(spec, natal, index, mc01_bound)
+        return _control_or_transform(spec, natal, index, mc01_bound, refs)
     if spec.kind == "mixed":
-        return _mixed(spec, natal, index, mc01_bound)
+        return _mixed(spec, natal, index, mc01_bound, refs)
     if spec.kind == "capacity":
-        return _capacity(spec, natal, index, mc01_bound)
+        return _capacity(spec, natal, index, mc01_bound, refs)
     return _use(spec, natal, index, mc01_bound)
 
 

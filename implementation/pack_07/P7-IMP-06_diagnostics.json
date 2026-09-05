@@ -1,0 +1,154 @@
+{
+  "health": {
+    "status": 200,
+    "body": {
+      "status": "ok",
+      "service": "bte-applications-api",
+      "version": "1.0.0"
+    }
+  },
+  "analyze": {
+    "status": 200,
+    "pipeline": [
+      "calendar",
+      "bazi",
+      "pattern",
+      "score",
+      "interpretation",
+      "report",
+      "narrative"
+    ],
+    "has_pack07_context": false,
+    "detected_matches": [
+      "Thiên Ất Quý Nhân",
+      "Hồng Loan",
+      "Thiên Đức Quý Nhân",
+      "Nguyệt Đức Quý Nhân"
+    ],
+    "individual": {
+      "state": "partially_resolved",
+      "items": [
+        {
+          "name": "Thiên Ất Quý Nhân",
+          "category": "Hỗ trợ · Bảo hộ",
+          "state_label": "Chưa đủ dữ liệu",
+          "placement": "Trụ Tháng",
+          "explanation": "Thiên Ất là tín hiệu hỗ trợ; chưa đủ dữ liệu cấu trúc để khẳng định quý nhân.",
+          "unresolved": true,
+          "warning": false
+        },
+        {
+          "name": "Hồng Loan",
+          "category": "Quan hệ",
+          "state_label": "Chưa đủ dữ liệu",
+          "placement": "Trụ Tháng",
+          "explanation": "Hồng Loan chưa đủ dữ liệu cấu trúc để luận về quan hệ hay hôn nhân.",
+          "unresolved": true,
+          "warning": false
+        },
+        {
+          "name": "Thiên Đức Quý Nhân",
+          "category": "Bảo hộ · Hỗ trợ",
+          "state_label": "Chưa đủ dữ liệu",
+          "placement": "Trụ Ngày",
+          "explanation": "Thiên Đức là tín hiệu hỗ trợ/phục hồi; chưa đủ dữ liệu cấu trúc để kết luận.",
+          "unresolved": true,
+          "warning": false
+        },
+        {
+          "name": "Nguyệt Đức Quý Nhân",
+          "category": "Bảo hộ · Hỗ trợ",
+          "state_label": "Chưa đủ dữ liệu",
+          "placement": "Trụ Ngày",
+          "explanation": "Nguyệt Đức là tín hiệu hỗ trợ/phục hồi; chưa đủ dữ liệu cấu trúc để kết luận.",
+          "unresolved": true,
+          "warning": false
+        }
+      ]
+    },
+    "ecosystem": {
+      "state": "partially_resolved",
+      "dominant": "Chưa đủ dữ liệu",
+      "dominant_unresolved": true,
+      "supporting": "",
+      "warning": "",
+      "unresolved_label": "Chưa đủ điều kiện",
+      "clusters": []
+    }
+  },
+  "history_portal": 200,
+  "diagnostics_post": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "message": "Pack 07 diagnostics OK",
+      "data": {
+        "analysis_id": "e19ae7df-65e6-40d7-a6de-ff55151d556b",
+        "contracts": "PASS",
+        "contexts": "PASS",
+        "validators": "PASS",
+        "mc01_reference": "NOT_BOUND",
+        "ten_gods": "PARTIAL",
+        "ten_god_combination": "PARTIAL",
+        "ten_gods_ecosystem": "PARTIAL",
+        "shen_sha": "PARTIAL",
+        "shen_sha_ecosystem": "PARTIAL",
+        "evidence_priority": "NOT_IMPLEMENTED",
+        "domains": "NOT_EVALUATED",
+        "luck": "NOT_IMPLEMENTED",
+        "temporal": "NOT_EVALUATED",
+        "optimization": "NOT_EVALUATED",
+        "narrative": "NOT_EVALUATED",
+        "runtime_contract": "PASS",
+        "overall_status": "PASS",
+        "issues": [
+          {
+            "code": "P7V-CTX-MC01-NOT-BOUND",
+            "severity": "warning",
+            "layer": "interpretation",
+            "field": "mc01",
+            "message": "MC-01 reference not yet bound",
+            "expected": "bound Mc01Reference",
+            "actual": "not_bound",
+            "trace_id": "p7v-d819545ad8d2",
+            "validator": "validate_interpretation_context",
+            "analysis_id": "e19ae7df-65e6-40d7-a6de-ff55151d556b"
+          }
+        ],
+        "validation": {
+          "status": "PASS_WITH_WARNINGS",
+          "errors": [],
+          "warnings": [
+            {
+              "code": "P7V-CTX-MC01-NOT-BOUND",
+              "severity": "warning",
+              "layer": "interpretation",
+              "field": "mc01",
+              "message": "MC-01 reference not yet bound",
+              "expected": "bound Mc01Reference",
+              "actual": "not_bound",
+              "trace_id": "p7v-d819545ad8d2",
+              "validator": "validate_interpretation_context",
+              "analysis_id": "e19ae7df-65e6-40d7-a6de-ff55151d556b"
+            }
+          ],
+          "validated_at": "2026-09-05T03:43:20.937030+00:00",
+          "validator_version": "1.0.0",
+          "analysis_id": "e19ae7df-65e6-40d7-a6de-ff55151d556b",
+          "trace_ids": [
+            "p7v-d819545ad8d2"
+          ]
+        }
+      },
+      "request_id": "e19ae7df-65e6-40d7-a6de-ff55151d556b"
+    }
+  },
+  "screenshots": {
+    "overview": "implementation/pack_07/screenshots/p7_imp_06_result_overview.png",
+    "shen_sha_desktop": "implementation/pack_07/screenshots/p7_imp_06_shen_sha_desktop.png",
+    "star_expanded": "implementation/pack_07/screenshots/p7_imp_06_shen_sha_expanded.png",
+    "ecosystem": "implementation/pack_07/screenshots/p7_imp_06_shen_sha_ecosystem.png",
+    "cluster_expanded": "implementation/pack_07/screenshots/p7_imp_06_cluster_expanded.png",
+    "shen_sha_mobile": "implementation/pack_07/screenshots/p7_imp_06_shen_sha_mobile.png"
+  }
+}

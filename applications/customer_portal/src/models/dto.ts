@@ -81,6 +81,7 @@ export type BaziDto = {
   readonly ten_gods?: readonly string[];
   readonly shensha?: readonly string[];
   readonly shensha_matches?: readonly ShenShaMatchDto[];
+  readonly shen_sha?: ShenShaPack07Dto;
 };
 
 export type CalendarDto = {
@@ -277,6 +278,46 @@ export type TenGodsEcosystemDto = {
   readonly flow_quality?: string;
 };
 
+/** Pack 07 Shen Sha customer projection. Labels only; no traces. */
+export type ShenShaStarItemDto = {
+  readonly name?: string;
+  readonly category?: string;
+  readonly state_label?: string;
+  readonly placement?: string;
+  readonly explanation?: string;
+  readonly unresolved?: boolean;
+  readonly warning?: boolean;
+};
+
+export type ShenShaIndividualDto = {
+  readonly state?: string;
+  readonly items?: readonly ShenShaStarItemDto[];
+};
+
+export type ShenShaClusterItemDto = {
+  readonly name?: string;
+  readonly state_label?: string;
+  readonly explanation?: string;
+  readonly warning?: boolean;
+  readonly unresolved?: boolean;
+  readonly prominent?: boolean;
+};
+
+export type ShenShaEcosystemDto = {
+  readonly state?: string;
+  readonly dominant?: string;
+  readonly dominant_unresolved?: boolean;
+  readonly supporting?: string;
+  readonly warning?: string;
+  readonly unresolved_label?: string;
+  readonly clusters?: readonly ShenShaClusterItemDto[];
+};
+
+export type ShenShaPack07Dto = {
+  readonly individual?: ShenShaIndividualDto;
+  readonly ecosystem?: ShenShaEcosystemDto;
+};
+
 /** Canonical Cân Xương Đoán Mệnh object published by the engine. */
 export type CanXuongDto = {
   readonly total_weight?: number;
@@ -310,6 +351,7 @@ export type AnalysisDataDto = {
   readonly calendar?: CalendarDto;
   readonly bazi?: BaziDto;
   readonly pattern?: Record<string, unknown>;
+  readonly mingju?: Record<string, unknown>;
   readonly strength?: StrengthDto;
   readonly temperature?: Record<string, unknown>;
   readonly useful_god?: Record<string, unknown>;

@@ -42,6 +42,7 @@ class UpstreamTenGodFacts:
     mc01_bound: bool = False
     damage_ids: tuple[str, ...] = ()
     rescue_ids: tuple[str, ...] = ()
+    purity_ref: str = ""
 
 
 def _mapping(value: Any) -> Mapping[str, Any]:
@@ -146,6 +147,22 @@ def _day_master_band(raw: str) -> DayMasterBand:
     return DayMasterBand.UNRESOLVED
 
 
+def _id_tuple(value: Any) -> tuple[str, ...]:
+    if isinstance(value, str) and value.strip():
+        return (value.strip(),)
+    if not isinstance(value, (list, tuple)):
+        return ()
+    found: list[str] = []
+    for item in value:
+        if isinstance(item, Mapping):
+            token = as_str(item.get("id") or item.get("damage_id") or item.get("rescue_id")).strip()
+        else:
+            token = as_str(item).strip()
+        if token and token not in found:
+            found.append(token)
+    return tuple(found)
+
+
 def _ids_from_labels(values: Any) -> tuple[str, ...]:
     found: list[str] = []
     if isinstance(values, str):
@@ -196,6 +213,8 @@ def extract_ten_god_facts(payload: Mapping[str, Any] | None) -> UpstreamTenGodFa
     pattern = _mapping(data.get("pattern"))
     mc01 = _mapping(data.get("mc01")) or _mapping(data.get("mingju"))
     useful_ids = _ids_from_labels(useful.get("useful_ten_god") or useful.get("useful_god"))
+    damage_ids = _id_tuple(mc01.get("damage_ids") or mc01.get("damage") or data.get("damage_ids"))
+    rescue_ids = _id_tuple(mc01.get("rescue_ids") or mc01.get("rescue") or data.get("rescue_ids"))
     return UpstreamTenGodFacts(
         available=True,
         occurrences={key: tuple(items) for key, items in bucket.items()},
@@ -223,8 +242,9 @@ def extract_ten_god_facts(payload: Mapping[str, Any] | None) -> UpstreamTenGodFa
         if not _ids_from_labels(useful.get("unfavorable_gods"))
         else (),
         mc01_bound=bool(as_str(mc01.get("mingju_result_id") or mc01.get("id"))),
-        damage_ids=tuple(),
-        rescue_ids=tuple(),
+        damage_ids=damage_ids,
+        rescue_ids=rescue_ids,
+        purity_ref=as_str(mc01.get("purity")).strip(),
     )
 
 

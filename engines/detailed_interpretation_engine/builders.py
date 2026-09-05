@@ -50,6 +50,13 @@ class InterpretationContextBuilder:
             useful_god_ref=refs.useful_god_ref,
             temperature_ref=refs.temperature_ref,
             five_elements_ref=refs.five_elements_ref,
+            purity_ref=refs.purity_ref,
+            pattern_strength_ref=refs.pattern_strength_ref,
+            damage_ids=refs.damage_ids,
+            rescue_ids=refs.rescue_ids,
+            achievement_ref=refs.achievement_ref,
+            wealth_profile_ref=refs.wealth_profile_ref,
+            career_profile_ref=refs.career_profile_ref,
             chart_identity=refs.chart_identity,
         )
 

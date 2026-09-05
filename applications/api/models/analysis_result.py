@@ -604,6 +604,7 @@ class AnalysisResult:
     unified_context: dict[str, Any] = field(default_factory=dict)
     commercial_consulting: dict[str, Any] | None = None
     pack07_context: CanonicalAnalysisContext | None = None
+    mingju: dict[str, Any] | None = None
 
     def bazi_dict(self) -> dict[str, Any]:
         """Serialize authoritative Bazi for ``data.bazi``."""

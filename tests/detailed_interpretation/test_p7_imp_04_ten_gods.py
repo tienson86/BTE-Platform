@@ -272,6 +272,7 @@ def test_no_thien_quan_alias_identity() -> None:
 def test_analyze_payload_diagnostics_from_shaped_facts() -> None:
     payload = _payload(visible=[_item("shi_shen", pillar="hour")])
     diagnostics = diagnostics_from_payload(payload)
-    assert diagnostics.ten_gods is DiagnosticStatus.PARTIAL
+    assert diagnostics.mc01_reference is DiagnosticStatus.PASS
+    assert diagnostics.ten_gods is DiagnosticStatus.PASS
     assert diagnostics.contracts is DiagnosticStatus.PASS
     assert diagnostics.runtime_contract is DiagnosticStatus.PASS

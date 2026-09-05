@@ -89,12 +89,69 @@ function copySummary(row: Record<string, unknown>): string {
   return "";
 }
 
+const PURITY_LABEL: Record<string, string> = {
+  very_pure: "Rất thuần",
+  pure: "Thuần",
+  moderately_pure: "Thuần vừa",
+  mixed: "Pha tạp",
+  heavily_mixed: "Pha tạp mạnh",
+  structurally_impure: "Không thuần cấu trúc",
+};
+
+const STRENGTH_LABEL: Record<string, string> = {
+  very_strong: "Rất mạnh",
+  strong: "Mạnh",
+  moderate: "Vừa",
+  weak: "Yếu",
+  very_weak: "Rất yếu",
+};
+
+const INTEGRITY_LABEL: Record<string, string> = {
+  complete: "Toàn vẹn",
+  substantially_complete: "Gần toàn vẹn",
+  conditionally_complete: "Toàn vẹn có điều kiện",
+  mixed: "Hỗn hợp",
+  damaged_but_rescued: "Tổn thương đã cứu",
+  damaged: "Tổn thương",
+  failed: "Không giữ được",
+};
+
+const GRADE_LABEL = new Set(["SS", "S", "A", "B", "C", "D"]);
+
+function nestedText(row: Record<string, unknown>, keys: readonly string[]): string {
+  for (const key of keys) {
+    const value = row[key];
+    if (value && typeof value === "object" && !Array.isArray(value)) {
+      const nested = value as Record<string, unknown>;
+      const mapped = nestedText(nested, ["classification", "state", "grade", "label"]);
+      if (mapped) return mapped;
+    }
+    const raw = text(value);
+    if (raw) return raw;
+  }
+  return "";
+}
+
+function copyMingJuField(
+  mingju: Record<string, unknown>,
+  keys: readonly string[],
+  labels: Record<string, string> | Set<string>,
+): string {
+  const raw = nestedText(mingju, keys);
+  if (!raw) return "";
+  if (labels instanceof Set) return labels.has(raw) ? raw : "";
+  return labels[raw] || customerLabel(raw);
+}
+
 /**
  * Copy canonical Pattern labels into the Card view. Does not classify cách.
  */
 export function adaptPatternCard(data: AnalysisDataDto | null | undefined): PatternView {
   const row = asRecord(data?.pattern);
-  const primary = customerLabel(canonicalPatternLabel(data));
+  const mingju = asRecord(data?.mingju);
+  const primary = customerLabel(canonicalPatternLabel(data)) || customerLabel(nestedText(mingju, ["pattern"]));
+  const summary =
+    copySummary(row) || customerLabel(nestedText(asRecord(mingju.decision), ["summary", "headline"]));
   return {
     title: PATTERN_TITLE,
     available: Boolean(primary),
@@ -102,6 +159,12 @@ export function adaptPatternCard(data: AnalysisDataDto | null | undefined): Patt
     status: copyStatus(row),
     secondary: copySecondary(row),
     formation: copyFormation(row),
-    summary: copySummary(row),
+    summary,
+    purity: customerLabel(text(row.structural_purity)) || copyMingJuField(mingju, ["purity"], PURITY_LABEL),
+    patternStrength:
+      customerLabel(text(row.structural_strength)) || copyMingJuField(mingju, ["pattern_strength"], STRENGTH_LABEL),
+    integrity:
+      customerLabel(text(row.structural_integrity)) || copyMingJuField(mingju, ["integrity"], INTEGRITY_LABEL),
+    grade: copyMingJuField({ grade: row.structural_grade }, ["grade"], GRADE_LABEL) || copyMingJuField(mingju, ["grade"], GRADE_LABEL),
   };
 }

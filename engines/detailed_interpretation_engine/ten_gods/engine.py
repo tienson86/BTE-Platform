@@ -113,7 +113,13 @@ def interpret_and_bind_ten_gods(
     facts = extract_ten_god_facts(payload)
     collection = interpret_ten_gods(payload, analysis_id=context.analysis_id)
     assert_valid(validate_ten_gods_collection(collection))
-    combinations = interpret_ten_god_combinations(collection, mc01_bound=facts.mc01_bound)
+    combinations = interpret_ten_god_combinations(
+        collection,
+        mc01_bound=facts.mc01_bound,
+        damage_ids=facts.damage_ids,
+        rescue_ids=facts.rescue_ids,
+        purity_ref=facts.purity_ref,
+    )
     assert_valid(validate_ten_god_combinations(combinations, natal=collection))
     ecosystem = interpret_ten_gods_ecosystem(
         collection, combinations, mc01_bound=facts.mc01_bound

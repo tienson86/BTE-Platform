@@ -14,6 +14,10 @@ from engines.detailed_interpretation_engine.constants import (
     SCHEMA_RESULT,
 )
 from engines.detailed_interpretation_engine.enums import EvaluationStatus
+from engines.detailed_interpretation_engine.shen_sha.models import (
+    ShenShaEcosystemResult,
+    ShenShaInterpretationCollection,
+)
 from engines.detailed_interpretation_engine.ten_gods.combinations.models import TenGodCombinationCollection
 from engines.detailed_interpretation_engine.ten_gods.ecosystem.models import TenGodEcosystemResult
 from engines.detailed_interpretation_engine.ten_gods.models import TenGodInterpretationCollection
@@ -62,17 +66,21 @@ class TenGodEcosystem:
 
 @dataclass(frozen=True, slots=True)
 class ShenShaEcosystem:
-    """Placeholder for DI-05–06 Shen Sha ecosystem. No logic."""
+    """Shen Sha natal interpretation plus DI-06 ecosystem shell."""
 
     schema_version: str = SCHEMA_RESULT
     status: EvaluationStatus = EvaluationStatus.NOT_EVALUATED
     finding_ids: tuple[str, ...] = ()
     trace: TraceRef = field(default_factory=TraceRef)
+    individual: ShenShaInterpretationCollection = field(default_factory=ShenShaInterpretationCollection)
+    ecosystem: ShenShaEcosystemResult = field(default_factory=ShenShaEcosystemResult)
 
     @classmethod
     def from_dict(cls, data: Mapping[str, Any] | None) -> ShenShaEcosystem:
         """Rebuild a Shen Sha ecosystem shell."""
         payload = data or {}
+        individual_raw = payload.get("individual")
+        ecosystem_raw = payload.get("ecosystem")
         return cls(
             schema_version=as_str(payload.get("schema_version"), SCHEMA_RESULT),
             status=as_enum(
@@ -82,6 +90,12 @@ class ShenShaEcosystem:
             ),
             finding_ids=as_str_tuple(payload.get("finding_ids")),
             trace=TraceRef.from_dict(payload.get("trace") if isinstance(payload.get("trace"), Mapping) else payload),
+            individual=ShenShaInterpretationCollection.from_dict(
+                individual_raw if isinstance(individual_raw, Mapping) else None
+            ),
+            ecosystem=ShenShaEcosystemResult.from_dict(
+                ecosystem_raw if isinstance(ecosystem_raw, Mapping) else None
+            ),
         )
 
 

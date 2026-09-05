@@ -53,7 +53,11 @@ from engines.detailed_interpretation_engine.models import (
     OptimizationResult,
     RelationshipResult,
     RuntimeMetadata,
+    ShenShaClusterResult,
     ShenShaEcosystem,
+    ShenShaEcosystemResult,
+    ShenShaInterpretationCollection,
+    ShenShaInterpretationResult,
     TemporalActivationResult,
     TemporalContext,
     TenGodCombinationCollection,
@@ -83,6 +87,8 @@ from engines.detailed_interpretation_engine.validators import (
     validate_ten_god_combinations,
     validate_ten_god_ecosystem,
     validate_ten_gods_collection,
+    validate_shen_sha_collection,
+    validate_shen_sha_ecosystem,
 )
 
 __all__ = [
@@ -120,7 +126,11 @@ __all__ = [
     "Pack07RuntimeDiagnostics",
     "RelationshipResult",
     "RuntimeMetadata",
+    "ShenShaClusterResult",
     "ShenShaEcosystem",
+    "ShenShaEcosystemResult",
+    "ShenShaInterpretationCollection",
+    "ShenShaInterpretationResult",
     "TemporalActivationResult",
     "TemporalContext",
     "TemporalContextBuilder",
@@ -154,4 +164,6 @@ __all__ = [
     "validate_ten_god_combinations",
     "validate_ten_god_ecosystem",
     "validate_ten_gods_collection",
+    "validate_shen_sha_collection",
+    "validate_shen_sha_ecosystem",
 ]

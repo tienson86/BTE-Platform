@@ -46,6 +46,12 @@ from engines.detailed_interpretation_engine.runtime import (
     CanonicalRuntimeResult,
     ChartHandle,
 )
+from engines.detailed_interpretation_engine.shen_sha.models import (
+    ShenShaClusterResult,
+    ShenShaEcosystemResult,
+    ShenShaInterpretationCollection,
+    ShenShaInterpretationResult,
+)
 from engines.detailed_interpretation_engine.temporal import (
     LuckActivationResult,
     LuckInteractionResult,
@@ -106,7 +112,11 @@ __all__ = [
     "OptimizationResult",
     "RelationshipResult",
     "RuntimeMetadata",
+    "ShenShaClusterResult",
     "ShenShaEcosystem",
+    "ShenShaEcosystemResult",
+    "ShenShaInterpretationCollection",
+    "ShenShaInterpretationResult",
     "TemporalActivationResult",
     "TemporalContext",
     "TemporalSection",

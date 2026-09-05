@@ -357,3 +357,69 @@ class EcosystemState(str, Enum):
     FRAGMENTED = "fragmented"
     BLOCKED = "blocked"
     UNRESOLVED = "unresolved"
+
+
+class ShenShaInterpretationState(str, Enum):
+    """DI-05 per-star interpretation state. Not a life outcome."""
+
+    APPLIED = "applied"
+    BLOCKED_NO_DEPENDENCY = "blocked_no_dependency"
+    DETECTED_NOT_MATERIAL = "detected_not_material"
+    NOT_DETECTED = "not_detected"
+    UNRESOLVED = "unresolved"
+
+
+class ShenShaDependencyState(str, Enum):
+    """Required structural dependency availability."""
+
+    SATISFIED = "satisfied"
+    PARTIAL = "partial"
+    BLOCKED = "blocked"
+    UNRESOLVED = "unresolved"
+    NOT_AVAILABLE = "not_available"
+
+
+class ShenShaModifierState(str, Enum):
+    """How the star may modify interpretation confidence. Never good/bad."""
+
+    APPLIED = "applied"
+    WEAK_SUPPORT = "weak_support"
+    QUALIFIED = "qualified"
+    WARNING = "warning"
+    BLOCKED = "blocked"
+    INACTIVE = "inactive"
+    UNRESOLVED = "unresolved"
+
+
+class ShenShaConfidenceModifier(str, Enum):
+    """Categorical confidence change. Does not change source classification."""
+
+    STRENGTHEN = "strengthen"
+    WEAKEN = "weaken"
+    QUALIFY = "qualify"
+    WARN = "warn"
+    HIGHLIGHT = "highlight"
+    NO_EFFECT = "no_effect"
+    BLOCKED = "blocked"
+
+
+class ShenShaClusterState(str, Enum):
+    """DI-06 cluster state. Raw star count is not a state."""
+
+    ACTIVE = "active"
+    INACTIVE = "inactive"
+    BLOCKED = "blocked"
+    CONDITIONAL = "conditional"
+    UNRESOLVED = "unresolved"
+
+
+class ShenShaClusterStrength(str, Enum):
+    """Cluster quality. Not a count of detected names."""
+
+    NONE = "none"
+    WEAK = "weak"
+    MODERATE = "moderate"
+    STRONG = "strong"
+    VERY_STRONG = "very_strong"
+    CONDITIONAL = "conditional"
+    UNRESOLVED = "unresolved"

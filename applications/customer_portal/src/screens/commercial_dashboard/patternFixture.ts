@@ -20,4 +20,8 @@ export const PATTERN_VISUAL_FIXTURE: PatternView = {
     "Đắc cách",
   ],
   summary: "Lá số hình thành Chính Ấn Cách với nền ổn định.",
+  purity: "",
+  patternStrength: "",
+  integrity: "",
+  grade: "",
 };

@@ -5,9 +5,20 @@
 
 import { approvedShenShaMeaning } from "../../adapters/shenShaApprovedKnowledge";
 import { stripInternalRuleIds } from "../../adapters/customerFacingPresentation";
-import type { AnalysisDataDto, ShenShaMatchDto } from "../../models";
+import type {
+  AnalysisDataDto,
+  ShenShaEcosystemDto,
+  ShenShaMatchDto,
+  ShenShaStarItemDto,
+} from "../../models";
 import { SHENSHA_SUPPORTING_NOTE, SHENSHA_TITLE } from "./cards";
-import type { ShenShaGroupView, ShenShaItemView, ShenShaView } from "./types";
+import type {
+  ShenShaClusterView,
+  ShenShaEcosystemView,
+  ShenShaGroupView,
+  ShenShaItemView,
+  ShenShaView,
+} from "./types";
 
 const TECHNICAL_TOKEN = /^[a-z][a-z0-9_]*$/;
 const TECHNICAL_EVIDENCE = /→|TIAN_|YUE_|HONG_|HUA_|WEN_|rule_|append|detector|source_value|target_value/i;
@@ -87,6 +98,8 @@ function emptyItem(name: string): ShenShaItemView {
     chartRelevance: "",
     evidence: "",
     category: "",
+    stateLabel: "",
+    explanation: "",
   };
 }
 
@@ -110,6 +123,8 @@ function copyItem(match: ShenShaMatchDto): ShenShaItemView | null {
     chartRelevance: pillars.length ? `Xuất hiện tại trụ ${pillars.join(" · ")}.` : "",
     evidence: copyEvidence(match),
     category: firstText(row, CATEGORY_KEYS),
+    stateLabel: "",
+    explanation: "",
   };
 }
 
@@ -147,19 +162,94 @@ function copySummary(data: AnalysisDataDto): string {
 
 /**
  * Join canonical ShenSha matches with approved knowledge. Does not calculate stars.
+ * Pack 07 overlay replaces dictionary prose when structured interpretation is present.
  */
 export function adaptShenShaCard(data: AnalysisDataDto | null | undefined): ShenShaView {
   const matches = data?.bazi?.shensha_matches ?? [];
   const fromMatches = matches.map(copyItem).filter((item): item is ShenShaItemView => Boolean(item));
   const items = fromMatches.length ? fromMatches : copyFromNames(data?.bazi?.shensha);
-  const groups = groupPublished(items);
+  const pack07 = overlayPack07(items, data);
+  const groups = pack07.usePack07 ? [] : groupPublished(pack07.items);
   return {
     title: SHENSHA_TITLE,
-    available: items.length > 0,
+    available: pack07.items.length > 0,
     grouped: groups.length > 0,
     groups,
-    items,
-    summary: copySummary(data ?? {}),
-    note: items.length ? `Lưu ý: ${SHENSHA_SUPPORTING_NOTE}` : "",
+    items: pack07.items,
+    summary: pack07.usePack07 ? "" : copySummary(data ?? {}),
+    note: pack07.items.length ? `Lưu ý: ${SHENSHA_SUPPORTING_NOTE}` : "",
+    usePack07: pack07.usePack07,
+    ecosystem: pack07.ecosystem,
+  };
+}
+
+function overlayPack07(
+  items: readonly ShenShaItemView[],
+  data: AnalysisDataDto | null | undefined,
+): { items: ShenShaItemView[]; usePack07: boolean; ecosystem: ShenShaEcosystemView | null } {
+  const block = data?.bazi?.shen_sha;
+  const detailed = block?.individual?.items ?? [];
+  if (!detailed.length) {
+    return { items: [...items], usePack07: false, ecosystem: null };
+  }
+  const byName = new Map<string, ShenShaStarItemDto>();
+  for (const row of detailed) {
+    const name = customerLabel(text(row.name));
+    if (name) byName.set(name, row);
+  }
+  const merged = items.map((item) => {
+    const row = byName.get(item.name);
+    if (!row) {
+      return {
+        ...item,
+        meaning: "",
+        explanation: "Tín hiệu phụ; chưa gắn kết luận cấu trúc.",
+        stateLabel: "Chưa đủ dữ liệu",
+      };
+    }
+    const explanation = customerLabel(text(row.explanation));
+    return {
+      ...item,
+      meaning: "",
+      category: customerLabel(text(row.category)) || item.category,
+      placement: customerLabel(text(row.placement)) || item.placement,
+      stateLabel: customerLabel(text(row.state_label)) || "Chưa đủ dữ liệu",
+      explanation,
+    };
+  });
+  const known = new Set(merged.map((item) => item.name));
+  for (const row of detailed) {
+    const name = customerLabel(text(row.name));
+    if (!name || known.has(name)) continue;
+    merged.push({
+      ...emptyItem(name),
+      category: customerLabel(text(row.category)),
+      placement: customerLabel(text(row.placement)),
+      stateLabel: customerLabel(text(row.state_label)) || "Chưa đủ dữ liệu",
+      explanation: customerLabel(text(row.explanation)),
+    });
+  }
+  return { items: merged, usePack07: true, ecosystem: copyEcosystem(block?.ecosystem) };
+}
+
+function copyEcosystem(raw: ShenShaEcosystemDto | undefined): ShenShaEcosystemView | null {
+  if (!raw) return null;
+  const clusters: ShenShaClusterView[] = (raw.clusters ?? [])
+    .filter((item) => item.prominent !== false)
+    .map((item) => ({
+      name: customerLabel(text(item.name)),
+      stateLabel: customerLabel(text(item.state_label)),
+      explanation: customerLabel(text(item.explanation)),
+      warning: Boolean(item.warning),
+      unresolved: Boolean(item.unresolved),
+    }))
+    .filter((item) => item.name);
+  return {
+    dominant: customerLabel(text(raw.dominant)),
+    dominantUnresolved: Boolean(raw.dominant_unresolved),
+    supporting: customerLabel(text(raw.supporting)),
+    warning: customerLabel(text(raw.warning)),
+    unresolvedLabel: customerLabel(text(raw.unresolved_label)),
+    clusters,
   };
 }

@@ -59,6 +59,13 @@ def build_interpretation_context(
     useful_god_ref: str = "",
     temperature_ref: str = "",
     five_elements_ref: str = "",
+    purity_ref: str = "",
+    pattern_strength_ref: str = "",
+    damage_ids: tuple[str, ...] = (),
+    rescue_ids: tuple[str, ...] = (),
+    achievement_ref: str = "",
+    wealth_profile_ref: str = "",
+    career_profile_ref: str = "",
     chart_identity: ChartIdentity | None = None,
 ) -> InterpretationContext:
     """Build an identity-only interpretation context."""
@@ -87,6 +94,13 @@ def build_interpretation_context(
         useful_god_ref=useful_god_ref,
         temperature_ref=temperature_ref,
         five_elements_ref=five_elements_ref,
+        purity_ref=purity_ref,
+        pattern_strength_ref=pattern_strength_ref,
+        damage_ids=damage_ids,
+        rescue_ids=rescue_ids,
+        achievement_ref=achievement_ref,
+        wealth_profile_ref=wealth_profile_ref,
+        career_profile_ref=career_profile_ref,
         chart_identity=resolved_identity,
     )
 
@@ -135,7 +149,15 @@ def _context_ref_from_interpretation(interpretation: InterpretationContext) -> s
             "useful_god_ref": interpretation.useful_god_ref,
             "temperature_ref": interpretation.temperature_ref,
             "five_elements_ref": interpretation.five_elements_ref,
+            "purity_ref": interpretation.purity_ref,
+            "pattern_strength_ref": interpretation.pattern_strength_ref,
+            "damage_ids": list(interpretation.damage_ids),
+            "rescue_ids": list(interpretation.rescue_ids),
+            "achievement_ref": interpretation.achievement_ref,
+            "wealth_profile_ref": interpretation.wealth_profile_ref,
+            "career_profile_ref": interpretation.career_profile_ref,
             "mingju_result_id": interpretation.mingju_result_id,
+            "mingju_content_hash": interpretation.mingju_content_hash,
         }
     )
     return f"ctx-{digest[:16]}"
@@ -168,6 +190,13 @@ def build_canonical_analysis_context(
         useful_god_ref=snapshot.useful_god_ref,
         temperature_ref=snapshot.temperature_ref,
         five_elements_ref=snapshot.five_elements_ref,
+        purity_ref=snapshot.purity_ref,
+        pattern_strength_ref=snapshot.pattern_strength_ref,
+        damage_ids=snapshot.damage_ids,
+        rescue_ids=snapshot.rescue_ids,
+        achievement_ref=snapshot.achievement_ref,
+        wealth_profile_ref=snapshot.wealth_profile_ref,
+        career_profile_ref=snapshot.career_profile_ref,
         chart_identity=snapshot.chart_identity,
     )
     context_ref = _context_ref_from_interpretation(interpretation)
@@ -177,6 +206,7 @@ def build_canonical_analysis_context(
         locale=snapshot.locale,
         context_ref=context_ref,
         mc01=snapshot.mc01,
+        mc01_snapshot=snapshot.mc01_snapshot or None,
     )
     return CanonicalAnalysisContext(
         analysis_id=resolved_id,
@@ -199,6 +229,7 @@ def empty_canonical_runtime_result(
     created_at: str | None = None,
     context_ref: str = "",
     mc01: Mc01Reference | None = None,
+    mc01_snapshot: str | None = None,
 ) -> CanonicalRuntimeResult:
     """Instantiate a not-evaluated CanonicalRuntimeResult that serializes."""
     timestamp = created_at if created_at is not None else datetime.now(timezone.utc).isoformat()
@@ -209,12 +240,14 @@ def empty_canonical_runtime_result(
         locale=locale,
     )
     resolved_mc01 = mc01 if mc01 is not None else Mc01Reference()
+    snapshot_text = mc01_snapshot if mc01_snapshot else None
     draft = CanonicalRuntimeResult(
         identity=identity,
         chart=ChartHandle(chart_id=chart_id),
         mc01=resolved_mc01,
         metadata=metadata,
         context_ref=context_ref,
+        mc01_snapshot=snapshot_text,
     )
     payload = serialize_runtime_result(draft)
     hashed = RuntimeMetadata(
@@ -236,6 +269,7 @@ def empty_canonical_runtime_result(
         mc01=resolved_mc01,
         metadata=hashed,
         context_ref=context_ref,
+        mc01_snapshot=snapshot_text,
     )
 
 

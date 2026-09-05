@@ -19,6 +19,9 @@ def interpret_ten_god_combinations(
     natal: TenGodInterpretationCollection,
     *,
     mc01_bound: bool = False,
+    damage_ids: tuple[str, ...] = (),
+    rescue_ids: tuple[str, ...] = (),
+    purity_ref: str = "",
 ) -> TenGodCombinationCollection:
     """Evaluate all V1 combinations from DI-01 natal results."""
     if natal.state is EvaluationStatus.NOT_EVALUATED and not natal.items:
@@ -29,7 +32,17 @@ def interpret_ten_god_combinations(
             state=EvaluationStatus.UNRESOLVED,
             confidence=ConfidenceValue(summary="unresolved"),
         )
-    raw = tuple(evaluate_spec(spec, natal, mc01_bound=mc01_bound) for spec in V1_SPECS)
+    raw = tuple(
+        evaluate_spec(
+            spec,
+            natal,
+            mc01_bound=mc01_bound,
+            damage_ids=damage_ids,
+            rescue_ids=rescue_ids,
+            purity_ref=purity_ref,
+        )
+        for spec in V1_SPECS
+    )
     items = apply_chain_dedupe(raw)
     evidence_ids = tuple(eid for item in items for eid in item.evidence_ids)
     trace_ids = tuple(tid for item in items for tid in item.trace_ids)

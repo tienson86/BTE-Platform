@@ -35,6 +35,13 @@ class InterpretationContext:
     useful_god_ref: str = ""
     temperature_ref: str = ""
     five_elements_ref: str = ""
+    purity_ref: str = ""
+    pattern_strength_ref: str = ""
+    damage_ids: tuple[str, ...] = ()
+    rescue_ids: tuple[str, ...] = ()
+    achievement_ref: str = ""
+    wealth_profile_ref: str = ""
+    career_profile_ref: str = ""
     chart_identity: ChartIdentity = field(default_factory=ChartIdentity)
 
     @classmethod
@@ -71,6 +78,13 @@ class InterpretationContext:
             useful_god_ref=as_str(payload.get("useful_god_ref")),
             temperature_ref=as_str(payload.get("temperature_ref")),
             five_elements_ref=as_str(payload.get("five_elements_ref")),
+            purity_ref=as_str(payload.get("purity_ref")),
+            pattern_strength_ref=as_str(payload.get("pattern_strength_ref")),
+            damage_ids=as_str_tuple(payload.get("damage_ids")),
+            rescue_ids=as_str_tuple(payload.get("rescue_ids")),
+            achievement_ref=as_str(payload.get("achievement_ref")),
+            wealth_profile_ref=as_str(payload.get("wealth_profile_ref")),
+            career_profile_ref=as_str(payload.get("career_profile_ref")),
             chart_identity=ChartIdentity.from_dict(
                 identity_raw if isinstance(identity_raw, Mapping) else None
             ),

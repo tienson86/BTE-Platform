@@ -25,6 +25,8 @@ from engines.detailed_interpretation_engine.constants import (
     SCHEMA_TEN_GODS,
     SCHEMA_TEN_GOD_COMBINATIONS,
     SCHEMA_TEN_GODS_BALANCE,
+    SCHEMA_SHEN_SHA,
+    SCHEMA_SHEN_SHA_ECOSYSTEM,
     SCHEMA_VITALITY,
     SCHEMA_WEALTH,
 )
@@ -46,6 +48,10 @@ from engines.detailed_interpretation_engine.temporal import (
     LuckActivationResult,
     LuckInteractionResult,
     TemporalActivationResult,
+)
+from engines.detailed_interpretation_engine.shen_sha.models import (
+    ShenShaEcosystemResult,
+    ShenShaInterpretationCollection,
 )
 from engines.detailed_interpretation_engine.ten_gods.combinations.models import TenGodCombinationCollection
 from engines.detailed_interpretation_engine.ten_gods.ecosystem.models import TenGodEcosystemResult
@@ -71,6 +77,8 @@ PACK07_SCHEMA_REGISTRY: dict[str, type[Any]] = {
     SCHEMA_TEN_GODS: TenGodInterpretationCollection,
     SCHEMA_TEN_GOD_COMBINATIONS: TenGodCombinationCollection,
     SCHEMA_TEN_GODS_BALANCE: TenGodEcosystemResult,
+    SCHEMA_SHEN_SHA: ShenShaInterpretationCollection,
+    SCHEMA_SHEN_SHA_ECOSYSTEM: ShenShaEcosystemResult,
 }
 
 

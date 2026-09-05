@@ -30,4 +30,7 @@ export type {
   ScoreDto,
   SeriesItemDto,
   ShenShaMatchDto,
+  ShenShaPack07Dto,
+  ShenShaStarItemDto,
+  ShenShaEcosystemDto,
 } from "./dto";

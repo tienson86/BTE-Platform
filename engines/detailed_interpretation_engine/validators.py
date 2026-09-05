@@ -2,17 +2,28 @@
 
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass, field
 from typing import Any, Mapping
 from uuid import uuid4
 
 from engines.detailed_interpretation_engine.constants import (
     FORBIDDEN_OWNED_TRUTH_KEYS,
+    MC01_GRADE_MISSING_CODE,
+    MC01_HASH_MISMATCH_CODE,
+    MC01_HASH_MISSING_CODE,
+    MC01_LINEAGE_MISMATCH_CODE,
     MC01_NOT_BOUND_CODE,
     MC01_NOT_BOUND_MESSAGE,
+    MC01_OWNERSHIP_DAMAGE_CODE,
+    MC01_OWNERSHIP_RESCUE_CODE,
+    MC01_PATTERN_MISSING_CODE,
+    MC01_SNAPSHOT_HASH_CODE,
     PUBLISHED_DOMAIN_IDS,
     SCHEMA_CONTEXT,
     SCHEMA_RUNTIME_CONTRACT,
+    SCHEMA_SHEN_SHA,
+    SCHEMA_SHEN_SHA_ECOSYSTEM,
     SCHEMA_TEN_GOD_COMBINATIONS,
     SCHEMA_TEN_GODS,
     SCHEMA_TEN_GODS_BALANCE,
@@ -32,10 +43,14 @@ from engines.detailed_interpretation_engine.enums import (
     DomainState,
     EvaluationStatus,
     IssueSeverity,
+    ShenShaClusterState,
+    ShenShaInterpretationState,
+    ShenShaModifierState,
     TemporalLayer,
     ValidationStatus,
 )
 from engines.detailed_interpretation_engine.exceptions import DetailedInterpretationValidationError
+from engines.detailed_interpretation_engine.mc01 import snapshot_hash_matches
 from engines.detailed_interpretation_engine.runtime import (
     CanonicalAPIModel,
     CanonicalConsultingModel,
@@ -47,6 +62,15 @@ from engines.detailed_interpretation_engine.serialization import (
     compute_content_hash,
     serialize_runtime_result,
     to_jsonable,
+)
+from engines.detailed_interpretation_engine.shen_sha.constants import (
+    APPLIED_MODIFIERS,
+    CANONICAL_CLUSTER_IDS,
+    KNOWN_STAR_IDS,
+)
+from engines.detailed_interpretation_engine.shen_sha.models import (
+    ShenShaEcosystemResult,
+    ShenShaInterpretationCollection,
 )
 from engines.detailed_interpretation_engine.ten_gods.combinations.constants import (
     FAMILY_MEMBERS,
@@ -205,6 +229,54 @@ def validate_interpretation_context(context: InterpretationContext) -> Validatio
             expected="bound Mc01Reference",
             actual="not_bound",
         )
+        return bag.finish()
+    if not context.mc01.content_hash:
+        bag.add(
+            MC01_HASH_MISSING_CODE,
+            IssueSeverity.CRITICAL,
+            "interpretation",
+            "bound MC-01 reference requires content_hash",
+            field="mc01.content_hash",
+        )
+    if not context.pattern_ref:
+        bag.add(
+            MC01_PATTERN_MISSING_CODE,
+            IssueSeverity.CRITICAL,
+            "interpretation",
+            "bound MC-01 reference requires Pattern",
+            field="pattern_ref",
+        )
+    if not context.grade_ref:
+        bag.add(
+            MC01_GRADE_MISSING_CODE,
+            IssueSeverity.CRITICAL,
+            "interpretation",
+            "bound MC-01 reference requires Grade",
+            field="grade_ref",
+        )
+    if context.analysis_id and context.mc01.mingju_result_id.startswith("mc01:"):
+        lineage = context.mc01.mingju_result_id[5:]
+        if lineage != context.analysis_id and not lineage.startswith(f"{context.chart_id}:"):
+            bag.add(
+                MC01_LINEAGE_MISMATCH_CODE,
+                IssueSeverity.CRITICAL,
+                "interpretation",
+                "MC-01 lineage does not match analysis_id",
+                field="mc01.mingju_result_id",
+                expected=f"mc01:{context.analysis_id}",
+                actual=context.mc01.mingju_result_id,
+            )
+    if context.mingju_content_hash and context.mc01.content_hash:
+        if context.mingju_content_hash != context.mc01.content_hash:
+            bag.add(
+                MC01_HASH_MISMATCH_CODE,
+                IssueSeverity.CRITICAL,
+                "interpretation",
+                "MC-01 content_hash mismatch",
+                field="mc01.content_hash",
+                expected=context.mingju_content_hash,
+                actual=context.mc01.content_hash,
+            )
     return bag.finish()
 
 
@@ -391,6 +463,36 @@ def _scan_owned_truth(bag: _Bag, payload: Mapping[str, Any], layer: str) -> None
         )
 
 
+def _collect_ids(items: Any, field_name: str) -> set[str]:
+    found: set[str] = set()
+    if not isinstance(items, (list, tuple)):
+        return found
+    for item in items:
+        if not isinstance(item, Mapping):
+            continue
+        for token in item.get(field_name) or ():
+            text = str(token).strip()
+            if text:
+                found.add(text)
+    return found
+
+
+def _allowed_structural_ids(runtime: CanonicalRuntimeResult, field_name: str) -> set[str]:
+    snapshot = runtime.mc01_snapshot
+    payload: Mapping[str, Any] = {}
+    if isinstance(snapshot, Mapping):
+        payload = snapshot
+    elif snapshot:
+        try:
+            loaded = json.loads(snapshot)
+        except (TypeError, ValueError):
+            loaded = {}
+        if isinstance(loaded, Mapping):
+            payload = loaded
+    allowed = {str(item).strip() for item in payload.get(field_name) or () if str(item).strip()}
+    return allowed
+
+
 def validate_canonical_runtime(
     result: CanonicalRuntimeResult | Mapping[str, Any],
 ) -> ValidationResult:
@@ -436,6 +538,56 @@ def validate_canonical_runtime(
     domains = payload.get("domains")
     if isinstance(domains, Mapping):
         _scan_owned_truth(bag, domains, "domains")
+    if runtime.mc01.mingju_result_id and runtime.mc01.content_hash:
+        if runtime.mc01_snapshot and not snapshot_hash_matches(
+            runtime.mc01_snapshot, runtime.mc01.content_hash
+        ):
+            bag.add(
+                MC01_SNAPSHOT_HASH_CODE,
+                IssueSeverity.CRITICAL,
+                "runtime",
+                "MC-01 snapshot hash does not match content_hash",
+                field="mc01_snapshot",
+                expected=runtime.mc01.content_hash,
+            )
+        allowed_damage = _allowed_structural_ids(runtime, "damage_ids")
+        allowed_rescue = _allowed_structural_ids(runtime, "rescue_ids")
+        ten_gods = payload.get("interpretation")
+        natal_items = ()
+        combo_items = ()
+        if isinstance(ten_gods, Mapping):
+            shell = ten_gods.get("ten_gods")
+            if isinstance(shell, Mapping):
+                natal = shell.get("natal")
+                combos = shell.get("combinations")
+                if isinstance(natal, Mapping):
+                    natal_items = natal.get("items") or ()
+                if isinstance(combos, Mapping):
+                    combo_items = combos.get("items") or ()
+        claimed_damage = _collect_ids(natal_items, "damage_ids") | _collect_ids(combo_items, "damage_ids")
+        claimed_rescue = _collect_ids(natal_items, "rescue_ids") | _collect_ids(combo_items, "rescue_ids")
+        invented_damage = claimed_damage - allowed_damage
+        invented_rescue = claimed_rescue - allowed_rescue
+        if invented_damage:
+            bag.add(
+                MC01_OWNERSHIP_DAMAGE_CODE,
+                IssueSeverity.CRITICAL,
+                "interpretation",
+                "Pack 07 must not create Damage IDs",
+                field="damage_ids",
+                expected="MC-01 damage refs only",
+                actual=",".join(sorted(invented_damage)),
+            )
+        if invented_rescue:
+            bag.add(
+                MC01_OWNERSHIP_RESCUE_CODE,
+                IssueSeverity.CRITICAL,
+                "interpretation",
+                "Pack 07 must not create Rescue IDs",
+                field="rescue_ids",
+                expected="MC-01 rescue refs only",
+                actual=",".join(sorted(invented_rescue)),
+            )
     expected_hash = compute_content_hash(_payload_for_stable_hash(payload))
     actual_hash = runtime.metadata.content_hash
     if actual_hash and actual_hash != expected_hash:
@@ -720,6 +872,139 @@ def validate_ten_god_ecosystem(
     return bag.finish()
 
 
+def validate_shen_sha_collection(collection: ShenShaInterpretationCollection) -> ValidationResult:
+    """Validate known star IDs, traces, and no structural ownership."""
+    bag = _Bag("validate_shen_sha_collection", collection.analysis_id)
+    if collection.state is EvaluationStatus.NOT_EVALUATED and not collection.items:
+        return bag.finish()
+    _check_schema(bag, collection.schema_version or SCHEMA_SHEN_SHA, "shen_sha")
+    _match_id(
+        bag,
+        collection.analysis_id,
+        collection.analysis_id,
+        "shen_sha",
+        "analysis_id",
+        "P7V-SS-ANALYSIS-ID",
+    )
+    payload = to_jsonable(collection)
+    if isinstance(payload, Mapping):
+        _scan_owned_truth(bag, payload, "shen_sha")
+        for forbidden in ("pattern", "grade", "driver", "bottleneck", "wealth_profile", "career_profile"):
+            if forbidden in payload and payload.get(forbidden) not in (None, "", {}, []):
+                bag.add(
+                    "P7V-SS-NO-STRUCTURAL-OWNERSHIP",
+                    IssueSeverity.CRITICAL,
+                    "shen_sha",
+                    "Shen Sha must not own structural truth",
+                    field=forbidden,
+                )
+    for item in collection.items:
+        if item.shen_sha_id not in KNOWN_STAR_IDS:
+            bag.add(
+                "P7V-SS-UNKNOWN-ID",
+                IssueSeverity.CRITICAL,
+                "shen_sha",
+                "unknown star ID",
+                field="shen_sha_id",
+                actual=item.shen_sha_id,
+            )
+        if item.detected and item.modifier_state is ShenShaModifierState.APPLIED:
+            if not item.supported_domains:
+                bag.add(
+                    "P7V-SS-UNSUPPORTED-PROMOTION",
+                    IssueSeverity.CRITICAL,
+                    "shen_sha",
+                    "applied modifier requires a supported domain",
+                    field=item.shen_sha_id,
+                )
+        if item.detected and item.state is not ShenShaInterpretationState.NOT_DETECTED:
+            if not item.trace_ids:
+                bag.add(
+                    "P7V-SS-TRACE",
+                    IssueSeverity.ERROR,
+                    "shen_sha",
+                    "detected star requires trace",
+                    field=item.shen_sha_id,
+                )
+    return bag.finish()
+
+
+def validate_shen_sha_ecosystem(
+    result: ShenShaEcosystemResult,
+    *,
+    individual: ShenShaInterpretationCollection | None = None,
+) -> ValidationResult:
+    """Validate cluster IDs, member refs, and blocked-star activation."""
+    bag = _Bag("validate_shen_sha_ecosystem", result.analysis_id)
+    if result.state is EvaluationStatus.NOT_EVALUATED and not result.clusters:
+        return bag.finish()
+    _check_schema(bag, result.schema_version or SCHEMA_SHEN_SHA_ECOSYSTEM, "shen_sha_ecosystem")
+    if individual is not None and individual.analysis_id and result.analysis_id:
+        _match_id(
+            bag,
+            individual.analysis_id,
+            result.analysis_id,
+            "shen_sha_ecosystem",
+            "analysis_id",
+            "P7V-SS-ECO-ANALYSIS-ID",
+        )
+    known_stars = {item.shen_sha_id for item in individual.items} if individual is not None else set(KNOWN_STAR_IDS)
+    lookup = {item.shen_sha_id: item for item in individual.items} if individual is not None else {}
+    for cluster in result.clusters:
+        if cluster.cluster_id not in CANONICAL_CLUSTER_IDS:
+            bag.add(
+                "P7V-SS-UNKNOWN-CLUSTER",
+                IssueSeverity.CRITICAL,
+                "shen_sha_ecosystem",
+                "unknown cluster id",
+                field="cluster_id",
+                actual=cluster.cluster_id,
+            )
+        for member in cluster.members:
+            if member.shen_sha_id and member.shen_sha_id not in known_stars:
+                bag.add(
+                    "P7V-SS-CLUSTER-MEMBER-REF",
+                    IssueSeverity.CRITICAL,
+                    "shen_sha_ecosystem",
+                    "cluster member is not in individual Shen Sha results",
+                    field=cluster.cluster_id,
+                    actual=member.shen_sha_id,
+                )
+        if cluster.state is ShenShaClusterState.ACTIVE:
+            if not cluster.applied_members:
+                bag.add(
+                    "P7V-SS-BLOCKED-CLUSTER-ACTIVE",
+                    IssueSeverity.CRITICAL,
+                    "shen_sha_ecosystem",
+                    "blocked stars cannot form an applied cluster alone",
+                    field=cluster.cluster_id,
+                )
+            if individual is not None:
+                blocked_only = True
+                for star_id in cluster.applied_members:
+                    item = lookup.get(star_id)
+                    if item is not None and item.modifier_state.value in APPLIED_MODIFIERS:
+                        blocked_only = False
+                        break
+                if cluster.applied_members and blocked_only:
+                    bag.add(
+                        "P7V-SS-BLOCKED-CLUSTER-ACTIVE",
+                        IssueSeverity.CRITICAL,
+                        "shen_sha_ecosystem",
+                        "blocked stars cannot form an applied cluster alone",
+                        field=cluster.cluster_id,
+                    )
+        if cluster.state is ShenShaClusterState.ACTIVE and not cluster.trace_ids:
+            bag.add(
+                "P7V-SS-CLUSTER-TRACE",
+                IssueSeverity.ERROR,
+                "shen_sha_ecosystem",
+                "applied cluster requires trace",
+                field=cluster.cluster_id,
+            )
+    return bag.finish()
+
+
 def validate_canonical_analysis_context(context: CanonicalAnalysisContext) -> ValidationResult:
     """Validate the full context chain and nested runtime."""
     bag = _Bag("validate_canonical_analysis_context", context.analysis_id)
@@ -775,4 +1060,6 @@ PACK07_VALIDATOR_REGISTRY: dict[str, str] = {
     "validate_ten_gods_collection": "validate_ten_gods_collection",
     "validate_ten_god_combinations": "validate_ten_god_combinations",
     "validate_ten_god_ecosystem": "validate_ten_god_ecosystem",
+    "validate_shen_sha_collection": "validate_shen_sha_collection",
+    "validate_shen_sha_ecosystem": "validate_shen_sha_ecosystem",
 }

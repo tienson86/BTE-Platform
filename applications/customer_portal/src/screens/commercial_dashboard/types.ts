@@ -261,6 +261,10 @@ export type PatternView = {
   readonly secondary: string;
   readonly formation: readonly string[];
   readonly summary: string;
+  readonly purity: string;
+  readonly patternStrength: string;
+  readonly integrity: string;
+  readonly grade: string;
 };
 
 export type ShenShaItemView = {
@@ -270,11 +274,30 @@ export type ShenShaItemView = {
   readonly chartRelevance: string;
   readonly evidence: string;
   readonly category: string;
+  readonly stateLabel: string;
+  readonly explanation: string;
 };
 
 export type ShenShaGroupView = {
   readonly heading: string;
   readonly items: readonly ShenShaItemView[];
+};
+
+export type ShenShaClusterView = {
+  readonly name: string;
+  readonly stateLabel: string;
+  readonly explanation: string;
+  readonly warning: boolean;
+  readonly unresolved: boolean;
+};
+
+export type ShenShaEcosystemView = {
+  readonly dominant: string;
+  readonly dominantUnresolved: boolean;
+  readonly supporting: string;
+  readonly warning: string;
+  readonly unresolvedLabel: string;
+  readonly clusters: readonly ShenShaClusterView[];
 };
 
 export type ShenShaView = {
@@ -285,6 +308,8 @@ export type ShenShaView = {
   readonly items: readonly ShenShaItemView[];
   readonly summary: string;
   readonly note: string;
+  readonly usePack07: boolean;
+  readonly ecosystem: ShenShaEcosystemView | null;
 };
 
 export type LuckCycleView = {

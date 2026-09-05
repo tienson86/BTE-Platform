@@ -15,7 +15,9 @@ from engines.detailed_interpretation_engine.factories import (
     consulting_model_from_runtime,
     export_model_from_runtime,
 )
+from engines.detailed_interpretation_engine.mc01 import attach_mc01_reference
 from engines.detailed_interpretation_engine.ten_gods.engine import interpret_and_bind_ten_gods
+from engines.detailed_interpretation_engine.shen_sha.engine import interpret_and_bind_shen_sha
 from engines.detailed_interpretation_engine.validation import ValidationIssue, ValidationResult
 from engines.detailed_interpretation_engine.validators import (
     validate_api_projection,
@@ -39,6 +41,7 @@ class Pack07RuntimeDiagnostics:
     ten_god_combination: DiagnosticStatus
     ten_gods_ecosystem: DiagnosticStatus
     shen_sha: DiagnosticStatus
+    shen_sha_ecosystem: DiagnosticStatus
     evidence_priority: DiagnosticStatus
     domains: DiagnosticStatus
     luck: DiagnosticStatus
@@ -62,6 +65,7 @@ class Pack07RuntimeDiagnostics:
             "ten_god_combination": self.ten_god_combination.value,
             "ten_gods_ecosystem": self.ten_gods_ecosystem.value,
             "shen_sha": self.shen_sha.value,
+            "shen_sha_ecosystem": self.shen_sha_ecosystem.value,
             "evidence_priority": self.evidence_priority.value,
             "domains": self.domains.value,
             "luck": self.luck.value,
@@ -110,9 +114,10 @@ def build_pack07_diagnostics(context: CanonicalAnalysisContext) -> Pack07Runtime
     )
     issues = context_result.issues + extra
     mc01 = (
-        DiagnosticStatus.NOT_BOUND
-        if not context.interpretation.mc01.mingju_result_id
-        else DiagnosticStatus.PASS
+        DiagnosticStatus.PASS
+        if context.interpretation.mc01.mingju_result_id
+        and context.interpretation.mc01.content_hash
+        else DiagnosticStatus.NOT_BOUND
     )
     validator_status = DiagnosticStatus.FAIL if any(
         item.severity.value == "critical" for item in issues
@@ -124,6 +129,11 @@ def build_pack07_diagnostics(context: CanonicalAnalysisContext) -> Pack07Runtime
     )
     ecosystem_status = _layer_status(
         natal.ecosystem.state, not natal.ecosystem.trace_ids and natal.ecosystem.driver.state.value == "not_applicable"
+    )
+    shen = context.runtime.interpretation.shen_sha
+    shen_sha_status = _layer_status(shen.status, not shen.individual.items)
+    shen_eco_status = _layer_status(
+        shen.ecosystem.state, not shen.ecosystem.clusters and not shen.ecosystem.trace_ids
     )
     overall = (
         DiagnosticStatus.FAIL
@@ -139,7 +149,8 @@ def build_pack07_diagnostics(context: CanonicalAnalysisContext) -> Pack07Runtime
         ten_gods=ten_gods_status,
         ten_god_combination=combination_status,
         ten_gods_ecosystem=ecosystem_status,
-        shen_sha=DiagnosticStatus.NOT_IMPLEMENTED,
+        shen_sha=shen_sha_status,
+        shen_sha_ecosystem=shen_eco_status,
         evidence_priority=DiagnosticStatus.NOT_IMPLEMENTED,
         domains=DiagnosticStatus.NOT_EVALUATED,
         luck=DiagnosticStatus.NOT_IMPLEMENTED,
@@ -155,8 +166,13 @@ def build_pack07_diagnostics(context: CanonicalAnalysisContext) -> Pack07Runtime
 
 def diagnostics_from_payload(payload: Mapping[str, Any]) -> Pack07RuntimeDiagnostics:
     """Build diagnostics from an analyze-shaped payload."""
-    context = interpret_and_bind_ten_gods(
-        build_canonical_analysis_context_from_payload(payload),
-        payload,
+    bound = dict(payload)
+    attach_mc01_reference(bound)
+    context = interpret_and_bind_shen_sha(
+        interpret_and_bind_ten_gods(
+            build_canonical_analysis_context_from_payload(bound),
+            bound,
+        ),
+        bound,
     )
     return build_pack07_diagnostics(context)
