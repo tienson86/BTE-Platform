@@ -51,6 +51,12 @@ from engines.ten_gods_engine.engine import TenGodsEngine
 from engines.detailed_interpretation_engine.builders import (
     build_canonical_analysis_context_from_payload,
 )
+from engines.detailed_interpretation_engine.ten_gods.engine import interpret_and_bind_ten_gods
+from engines.detailed_interpretation_engine.ten_gods.presentation import (
+    present_combinations_customer,
+    present_ecosystem_customer,
+    present_ten_gods_customer,
+)
 
 from applications.api.exceptions import PipelineAPIError, ValidationAPIError
 from applications.api.services.gender_truth import (
@@ -400,10 +406,25 @@ class OrchestratorService:
         analysis: AnalysisResult | None,
         payload: dict[str, Any],
     ) -> None:
-        """Build Pack 07 context after structural truth. Not published on API."""
+        """Build Pack 07 context and bind natal Ten Gods. Full contract stays internal."""
         if analysis is None or not payload.get("pattern"):
             return
-        analysis.pack07_context = build_canonical_analysis_context_from_payload(payload)
+        context = build_canonical_analysis_context_from_payload(payload)
+        context = interpret_and_bind_ten_gods(context, payload)
+        analysis.pack07_context = context
+        natal = context.runtime.interpretation.ten_gods.natal
+        if not natal.items:
+            return
+        ten_gods = payload.get("ten_gods")
+        if isinstance(ten_gods, dict):
+            ten_gods["detailed"] = present_ten_gods_customer(natal)
+            ten_gods["relations"] = present_combinations_customer(
+                context.runtime.interpretation.ten_gods.combinations
+            )
+            ten_gods["ecosystem"] = present_ecosystem_customer(
+                context.runtime.interpretation.ten_gods.ecosystem
+            )
+            analysis.ten_gods_result = dict(ten_gods)
 
     def _attach_can_xuong(self, payload: dict[str, Any], calendar: Any, bazi_chart: Any) -> None:
         """Publish analysis.can_xuong from the dedicated engine. Soft-fail."""

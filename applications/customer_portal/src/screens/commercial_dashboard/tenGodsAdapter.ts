@@ -17,6 +17,9 @@ import {
 import type {
   TenGodCombinationView,
   TenGodCommercialView,
+  TenGodDetailedView,
+  TenGodEcosystemView,
+  TenGodRelationView,
   TenGodsPillarKey,
   TenGodsPlacementView,
   TenGodsPresenceView,
@@ -199,6 +202,75 @@ function bindDistribution(
   }));
 }
 
+function bindDetailed(data: AnalysisDataDto | null | undefined): TenGodDetailedView[] {
+  const items = data?.ten_gods?.detailed?.items ?? [];
+  const cards: TenGodDetailedView[] = [];
+  for (const item of items) {
+    const name = customerLabel(text(item.name));
+    if (!name) continue;
+    cards.push({
+      name,
+      statusLabel: text(item.status_label),
+      roleLabel: text(item.role_label),
+      positives: (item.positives ?? []).map((value) => text(value)).filter(Boolean),
+      risks: (item.risks ?? []).map((value) => text(value)).filter(Boolean),
+      conditions: (item.conditions ?? []).map((value) => text(value)).filter(Boolean),
+      unresolved: Boolean(item.unresolved),
+      fallback: text(item.fallback) || "Chưa đủ dữ liệu để kết luận chi tiết",
+    });
+  }
+  return cards;
+}
+
+function bindRelations(data: AnalysisDataDto | null | undefined): TenGodRelationView[] {
+  const items = data?.ten_gods?.relations?.items ?? [];
+  const rows: TenGodRelationView[] = [];
+  for (const item of items) {
+    const name = customerLabel(text(item.name));
+    if (!name) continue;
+    rows.push({
+      name,
+      stateLabel: text(item.state_label),
+      mechanism: text(item.mechanism),
+      condition: text(item.condition),
+      unresolved: Boolean(item.unresolved),
+      fallback: text(item.fallback) || "Chưa đủ dữ liệu để chốt",
+    });
+  }
+  return rows;
+}
+
+function bindEcosystemRole(value: { label?: string; unresolved?: boolean } | undefined): {
+  readonly label: string;
+  readonly unresolved: boolean;
+} {
+  const unresolved = Boolean(value?.unresolved);
+  const label = text(value?.label);
+  return {
+    label: label || (unresolved ? "Chưa đủ dữ liệu để chốt" : "Không áp dụng"),
+    unresolved,
+  };
+}
+
+function bindEcosystem(data: AnalysisDataDto | null | undefined): TenGodEcosystemView | null {
+  const payload = data?.ten_gods?.ecosystem;
+  if (!payload) return null;
+  return {
+    unresolved: Boolean(payload.unresolved),
+    fallback: text(payload.fallback) || "Chưa đủ dữ liệu để chốt",
+    driver: bindEcosystemRole(payload.driver),
+    support: bindEcosystemRole(payload.support),
+    bottleneck: bindEcosystemRole(payload.bottleneck),
+    blocked: bindEcosystemRole(payload.blocked),
+    suppressed: bindEcosystemRole(payload.suppressed),
+    excessive: bindEcosystemRole(payload.excessive),
+    deficient: bindEcosystemRole(payload.deficient),
+    missing: bindEcosystemRole(payload.missing),
+    flow: text(payload.flow) || "Chưa đủ dữ liệu để chốt",
+    flowQuality: text(payload.flow_quality) || "Chưa đủ dữ liệu để chốt",
+  };
+}
+
 /**
  * Map published Ten Gods onto the structure card. Does not calculate relationships.
  */
@@ -208,6 +280,10 @@ export function adaptTenGodsCard(data: AnalysisDataDto | null | undefined): TenG
   const hidden = bindHidden(payload);
   const placements = visible.length ? visible : fallbackVisible(data?.bazi);
   const available = placements.length > 0 || hidden.length > 0;
+  const detailed = bindDetailed(data);
+  const relations = bindRelations(data);
+  const ecosystem = bindEcosystem(data);
+  const usePack07 = detailed.length > 0;
   return {
     title: TEN_GODS_TITLE,
     available,
@@ -216,9 +292,12 @@ export function adaptTenGodsCard(data: AnalysisDataDto | null | undefined): TenG
     hidden,
     hiddenNames: namesInOrder(hidden.map((item) => item.tenGod)),
     distribution: bindDistribution(placements, hidden),
-    combination: bindCombination(placements),
-    hiddenSupport: bindHiddenSupport(hidden, placements),
-    commercial: bindCommercial(placements),
+    combination: usePack07 ? null : bindCombination(placements),
+    hiddenSupport: usePack07 ? "" : bindHiddenSupport(hidden, placements),
+    commercial: usePack07 ? [] : bindCommercial(placements),
+    detailed,
+    relations: usePack07 ? relations : [],
+    ecosystem: usePack07 ? ecosystem : null,
     summary: "",
   };
 }

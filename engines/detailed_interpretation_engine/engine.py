@@ -23,6 +23,7 @@ from engines.detailed_interpretation_engine.serialization import (
     deserialize_runtime_result,
     serialize_runtime_result,
 )
+from engines.detailed_interpretation_engine.ten_gods.engine import interpret_and_bind_ten_gods
 from engines.detailed_interpretation_engine.validation import ValidationResult
 from engines.detailed_interpretation_engine.validators import (
     assert_valid,
@@ -71,6 +72,15 @@ class DetailedInterpretationEngine:
         outcome = validate_canonical_runtime(result)
         assert_valid(outcome)
         return outcome
+
+    def interpret_ten_gods(
+        self,
+        payload: Mapping[str, Any],
+        context: CanonicalAnalysisContext | None = None,
+    ) -> CanonicalAnalysisContext:
+        """Evaluate natal Ten Gods and bind into CanonicalRuntimeResult."""
+        resolved = context if context is not None else self.build_contexts(payload)
+        return interpret_and_bind_ten_gods(resolved, payload)
 
     def diagnostics(self, context: CanonicalAnalysisContext) -> Pack07RuntimeDiagnostics:
         """Development-only runtime diagnostics."""

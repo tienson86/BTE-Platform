@@ -54,6 +54,7 @@ class DiagnosticStatus(str, Enum):
 
     PASS = "PASS"
     READY = "READY"
+    PARTIAL = "PARTIAL"
     NOT_BOUND = "NOT_BOUND"
     NOT_EVALUATED = "NOT_EVALUATED"
     NOT_IMPLEMENTED = "NOT_IMPLEMENTED"
@@ -151,3 +152,208 @@ class HourCompleteness(str, Enum):
     COMPLETE = "complete"
     MISSING = "missing"
     UNKNOWN = "unknown"
+
+
+class TenGodPresenceState(str, Enum):
+    """DI-01 presence, including overlays. Not importance."""
+
+    ABSENT = "absent"
+    HIDDEN_ONLY = "hidden_only"
+    VISIBLE = "visible"
+    VISIBLE_AND_ROOTED = "visible_and_rooted"
+    REPEATED = "repeated"
+    CONCENTRATED = "concentrated"
+    STRUCTURALLY_DOMINANT = "structurally_dominant"
+    UNRESOLVED = "unresolved"
+
+
+class TenGodVisibilitySummary(str, Enum):
+    """Summary visibility. Occurrences stay unflattened."""
+
+    EXPOSED = "exposed"
+    HIDDEN = "hidden"
+    MIXED = "mixed"
+    ABSENT = "absent"
+    UNRESOLVED = "unresolved"
+
+
+class TenGodRootState(str, Enum):
+    """Root availability consumed from upstream hidden-stem facts."""
+
+    NO_ROOT = "no_root"
+    WEAK_ROOT = "weak_root"
+    MODERATE_ROOT = "moderate_root"
+    STRONG_ROOT = "strong_root"
+    MULTIPLE_ROOTS = "multiple_roots"
+    UNRESOLVED = "unresolved"
+    NOT_APPLICABLE = "not_applicable"
+
+
+class TenGodEffectiveStrength(str, Enum):
+    """Local Ten God strength. Not Day Master Strength or Pattern Strength."""
+
+    ABSENT = "absent"
+    VERY_WEAK = "very_weak"
+    WEAK = "weak"
+    MODERATE = "moderate"
+    STRONG = "strong"
+    VERY_STRONG = "very_strong"
+    UNRESOLVED = "unresolved"
+    NOT_APPLICABLE = "not_applicable"
+
+
+class TenGodStructuralRole(str, Enum):
+    """Structural role consumed from upstream Pattern / capacity evidence."""
+
+    PRIMARY_PATTERN = "primary_pattern"
+    SECONDARY_PATTERN = "secondary_pattern"
+    PATTERN_GENERATOR = "pattern_generator"
+    PATTERN_SUPPORT = "pattern_support"
+    PATTERN_CONTROLLER = "pattern_controller"
+    DAMAGE_SOURCE = "damage_source"
+    RESCUE_SOURCE = "rescue_source"
+    CAPACITY_SUPPORT = "capacity_support"
+    CAPACITY_PRESSURE = "capacity_pressure"
+    NEUTRAL = "neutral"
+    UNRESOLVED = "unresolved"
+
+
+class TenGodUsability(str, Enum):
+    """Contextual usability. Never good/bad."""
+
+    SUPPORTIVE = "supportive"
+    USABLE = "usable"
+    CONDITIONALLY_USABLE = "conditionally_usable"
+    NEUTRAL = "neutral"
+    PRESSURING = "pressuring"
+    CONFLICTING = "conflicting"
+    DAMAGING = "damaging"
+    RESCUED = "rescued"
+    UNRESOLVED = "unresolved"
+    NOT_APPLICABLE = "not_applicable"
+
+
+class TenGodUsefulGodContext(str, Enum):
+    """Useful God binding for one Ten God. Not inferred Dụng/Hỷ/Kỵ."""
+
+    USEFUL = "useful"
+    FAVORABLE = "favorable"
+    UNFAVORABLE = "unfavorable"
+    MIXED = "mixed"
+    NEUTRAL = "neutral"
+    UNRESOLVED = "unresolved"
+    NOT_APPLICABLE = "not_applicable"
+
+
+class DayMasterBand(str, Enum):
+    """Consumed Strength Engine classification, collapsed for Ten God context."""
+
+    WEAK = "weak"
+    MODERATE = "moderate"
+    STRONG = "strong"
+    UNRESOLVED = "unresolved"
+
+
+class TenGodConfidenceBand(str, Enum):
+    """Categorical confidence. No fake numeric precision."""
+
+    LOW = "low"
+    MODERATE = "moderate"
+    HIGH = "high"
+    UNRESOLVED = "unresolved"
+
+
+class CombinationState(str, Enum):
+    """DI-02 combination state. Co-presence is not confirmed."""
+
+    CONFIRMED = "confirmed"
+    CONDITIONAL = "conditional"
+    WEAK = "weak"
+    INACTIVE = "inactive"
+    BROKEN = "broken"
+    UNRESOLVED = "unresolved"
+
+
+class CombinationReach(str, Enum):
+    """How a source reaches a target. Not a combination type."""
+
+    DIRECT = "direct"
+    INDIRECT = "indirect"
+    MEDIATED = "mediated"
+    CONDITIONAL = "conditional"
+    UNRESOLVED = "unresolved"
+
+
+class CombinationRelativePower(str, Enum):
+    """Relative power between source and target. Not a raw count."""
+
+    SOURCE_DOMINANT = "source_dominant"
+    TARGET_DOMINANT = "target_dominant"
+    BALANCED = "balanced"
+    MEDIATED = "mediated"
+    UNCERTAIN = "uncertain"
+
+
+class ChainQuality(str, Enum):
+    """Chain quality is limited by the weakest meaningful link."""
+
+    BROKEN = "broken"
+    VERY_WEAK = "very_weak"
+    WEAK = "weak"
+    FUNCTIONAL = "functional"
+    STRONG = "strong"
+    VERY_STRONG = "very_strong"
+    CONDITIONAL = "conditional"
+    UNRESOLVED = "unresolved"
+
+
+class CombinationStructuralRole(str, Enum):
+    """Importance of a combination. Not Pattern identity."""
+
+    PRIMARY_STRUCTURAL_CHAIN = "primary_structural_chain"
+    SECONDARY_STRUCTURAL_CHAIN = "secondary_structural_chain"
+    SUPPORTING_CHAIN = "supporting_chain"
+    DOMAIN_SPECIFIC_CHAIN = "domain_specific_chain"
+    INCIDENTAL_RELATION = "incidental_relation"
+    UNRESOLVED = "unresolved"
+
+
+class EcosystemRole(str, Enum):
+    """DI-04 ecosystem role. Not Ten God identity."""
+
+    DRIVER = "driver"
+    SUPPORTING = "supporting"
+    SUPPRESSED = "suppressed"
+    BLOCKED = "blocked"
+    EXCESSIVE = "excessive"
+    DEFICIENT = "deficient"
+    MISSING = "missing"
+    BOTTLENECK = "bottleneck"
+    BALANCER = "balancer"
+    NEUTRAL = "neutral"
+    UNRESOLVED = "unresolved"
+
+
+class FlowQuality(str, Enum):
+    """Global flow quality. Cannot outrun the weakest meaningful link."""
+
+    BROKEN = "broken"
+    RESTRICTED = "restricted"
+    CONDITIONAL = "conditional"
+    FUNCTIONAL = "functional"
+    STRONG = "strong"
+    EXCELLENT = "excellent"
+    UNRESOLVED = "unresolved"
+
+
+class EcosystemState(str, Enum):
+    """Whole-system balance. Not a second Grade."""
+
+    HIGHLY_BALANCED = "highly_balanced"
+    BALANCED = "balanced"
+    SLIGHTLY_UNBALANCED = "slightly_unbalanced"
+    MODERATELY_UNBALANCED = "moderately_unbalanced"
+    HEAVILY_UNBALANCED = "heavily_unbalanced"
+    FRAGMENTED = "fragmented"
+    BLOCKED = "blocked"
+    UNRESOLVED = "unresolved"

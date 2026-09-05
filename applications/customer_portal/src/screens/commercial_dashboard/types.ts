@@ -196,6 +196,46 @@ export type TenGodCombinationView = {
   readonly recommendation: string;
 };
 
+export type TenGodDetailedView = {
+  readonly name: string;
+  readonly statusLabel: string;
+  readonly roleLabel: string;
+  readonly positives: readonly string[];
+  readonly risks: readonly string[];
+  readonly conditions: readonly string[];
+  readonly unresolved: boolean;
+  readonly fallback: string;
+};
+
+export type TenGodRelationView = {
+  readonly name: string;
+  readonly stateLabel: string;
+  readonly mechanism: string;
+  readonly condition: string;
+  readonly unresolved: boolean;
+  readonly fallback: string;
+};
+
+export type TenGodEcosystemRoleView = {
+  readonly label: string;
+  readonly unresolved: boolean;
+};
+
+export type TenGodEcosystemView = {
+  readonly unresolved: boolean;
+  readonly fallback: string;
+  readonly driver: TenGodEcosystemRoleView;
+  readonly support: TenGodEcosystemRoleView;
+  readonly bottleneck: TenGodEcosystemRoleView;
+  readonly blocked: TenGodEcosystemRoleView;
+  readonly suppressed: TenGodEcosystemRoleView;
+  readonly excessive: TenGodEcosystemRoleView;
+  readonly deficient: TenGodEcosystemRoleView;
+  readonly missing: TenGodEcosystemRoleView;
+  readonly flow: string;
+  readonly flowQuality: string;
+};
+
 export type TenGodsView = {
   readonly title: string;
   readonly available: boolean;
@@ -207,6 +247,9 @@ export type TenGodsView = {
   readonly combination: TenGodCombinationView | null;
   readonly hiddenSupport: string;
   readonly commercial: readonly TenGodCommercialView[];
+  readonly detailed: readonly TenGodDetailedView[];
+  readonly relations: readonly TenGodRelationView[];
+  readonly ecosystem: TenGodEcosystemView | null;
   readonly summary: string;
 };
 

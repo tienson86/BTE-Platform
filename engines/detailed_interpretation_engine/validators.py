@@ -13,6 +13,9 @@ from engines.detailed_interpretation_engine.constants import (
     PUBLISHED_DOMAIN_IDS,
     SCHEMA_CONTEXT,
     SCHEMA_RUNTIME_CONTRACT,
+    SCHEMA_TEN_GOD_COMBINATIONS,
+    SCHEMA_TEN_GODS,
+    SCHEMA_TEN_GODS_BALANCE,
     TEMPORAL_LAYER_PARENT,
 )
 from engines.detailed_interpretation_engine.context import InterpretationContext
@@ -25,6 +28,7 @@ from engines.detailed_interpretation_engine.context_layers import (
     TemporalContext,
 )
 from engines.detailed_interpretation_engine.enums import (
+    CombinationState,
     DomainState,
     EvaluationStatus,
     IssueSeverity,
@@ -44,6 +48,20 @@ from engines.detailed_interpretation_engine.serialization import (
     serialize_runtime_result,
     to_jsonable,
 )
+from engines.detailed_interpretation_engine.ten_gods.combinations.constants import (
+    FAMILY_MEMBERS,
+    V1_COMBINATION_IDS,
+)
+from engines.detailed_interpretation_engine.ten_gods.combinations.models import (
+    TenGodCombinationCollection,
+)
+from engines.detailed_interpretation_engine.ten_gods.constants import (
+    CANONICAL_TEN_GOD_IDS,
+    FORBIDDEN_ALIAS_IDS,
+)
+from engines.detailed_interpretation_engine.ten_gods.ecosystem.constants import FAMILY_GODS
+from engines.detailed_interpretation_engine.ten_gods.ecosystem.models import TenGodEcosystemResult
+from engines.detailed_interpretation_engine.ten_gods.models import TenGodInterpretationCollection
 from engines.detailed_interpretation_engine.validation import ValidationIssue, ValidationResult, result_from_issues
 
 
@@ -488,6 +506,220 @@ def validate_consulting_projection(
     return bag.finish()
 
 
+def validate_ten_gods_collection(collection: TenGodInterpretationCollection) -> ValidationResult:
+    """Validate natal Ten God collection. No identity-only conclusions."""
+    bag = _Bag("validate_ten_gods_collection", collection.analysis_id)
+    if collection.state is EvaluationStatus.NOT_EVALUATED and not collection.items:
+        return bag.finish()
+    _check_schema(bag, collection.schema_version or SCHEMA_TEN_GODS, "ten_gods")
+    ids = tuple(item.ten_god_id for item in collection.items)
+    if len(collection.items) != len(CANONICAL_TEN_GOD_IDS):
+        bag.add(
+            "P7V-TG-COUNT",
+            IssueSeverity.CRITICAL,
+            "ten_gods",
+            "collection must include all 10 Ten Gods",
+            field="items",
+            expected=str(len(CANONICAL_TEN_GOD_IDS)),
+            actual=str(len(collection.items)),
+        )
+    if any(god_id in FORBIDDEN_ALIAS_IDS for god_id in ids):
+        bag.add(
+            "P7V-TG-ALIAS",
+            IssueSeverity.CRITICAL,
+            "ten_gods",
+            "Thiên Quan is not a separate Ten God identity",
+            field="ten_god_id",
+            expected="qi_sha",
+            actual="thien_quan",
+        )
+    missing = [god_id for god_id in CANONICAL_TEN_GOD_IDS if god_id not in ids]
+    if missing:
+        bag.add(
+            "P7V-TG-MISSING",
+            IssueSeverity.ERROR,
+            "ten_gods",
+            "canonical Ten God missing from collection",
+            field="items",
+            expected=",".join(CANONICAL_TEN_GOD_IDS),
+            actual=",".join(missing),
+        )
+    for item in collection.items:
+        if item.state not in {EvaluationStatus.UNRESOLVED, EvaluationStatus.NOT_EVALUATED}:
+            if not item.trace_ids:
+                bag.add(
+                    "P7V-TG-TRACE",
+                    IssueSeverity.ERROR,
+                    "ten_gods",
+                    "material Ten God result requires trace",
+                    field=item.ten_god_id,
+                )
+    return bag.finish()
+
+
+_KNOWN_SUBJECTS: frozenset[str] = frozenset(
+    CANONICAL_TEN_GOD_IDS
+    + ("day_master",)
+    + tuple(FAMILY_MEMBERS)
+    + tuple(FAMILY_GODS)
+)
+
+
+def validate_ten_god_combinations(
+    collection: TenGodCombinationCollection,
+    *,
+    natal: TenGodInterpretationCollection | None = None,
+) -> ValidationResult:
+    """Validate combination analysis_id, participants, and chain refs."""
+    bag = _Bag("validate_ten_god_combinations", collection.analysis_id)
+    if collection.state is EvaluationStatus.NOT_EVALUATED and not collection.items:
+        return bag.finish()
+    _check_schema(bag, collection.schema_version or SCHEMA_TEN_GOD_COMBINATIONS, "ten_god_combinations")
+    natal_ids = {item.ten_god_id for item in natal.items} if natal is not None else set(CANONICAL_TEN_GOD_IDS)
+    known_ids = natal_ids | {"day_master"} | set(FAMILY_MEMBERS) | set(FAMILY_GODS)
+    combo_ids = {item.combination_id for item in collection.items}
+    for item in collection.items:
+        if item.combination_id and item.combination_id not in V1_COMBINATION_IDS:
+            bag.add(
+                "P7V-COMB-UNKNOWN-ID",
+                IssueSeverity.ERROR,
+                "ten_god_combinations",
+                "unknown combination id",
+                field="combination_id",
+                actual=item.combination_id,
+            )
+        if item.state not in {CombinationState.INACTIVE, CombinationState.UNRESOLVED}:
+            if not item.trace_ids:
+                bag.add(
+                    "P7V-COMB-TRACE",
+                    IssueSeverity.ERROR,
+                    "ten_god_combinations",
+                    "material combination requires trace",
+                    field=item.combination_id,
+                )
+        for participant in item.participants:
+            if participant.ten_god_id and participant.ten_god_id not in known_ids:
+                bag.add(
+                    "P7V-COMB-PARTICIPANT",
+                    IssueSeverity.CRITICAL,
+                    "ten_god_combinations",
+                    "participant does not exist in natal Ten Gods",
+                    field=item.combination_id,
+                    actual=participant.ten_god_id,
+                )
+        for node in item.chain.nodes:
+            if node and node not in known_ids:
+                bag.add(
+                    "P7V-COMB-CHAIN-REF",
+                    IssueSeverity.CRITICAL,
+                    "ten_god_combinations",
+                    "chain node is not a known Ten God or family",
+                    field=item.combination_id,
+                    actual=node,
+                )
+        if item.source_combination_id and item.source_combination_id not in combo_ids:
+            bag.add(
+                "P7V-COMB-CHAIN-REF",
+                IssueSeverity.CRITICAL,
+                "ten_god_combinations",
+                "source_combination_id is unknown",
+                field=item.combination_id,
+                actual=item.source_combination_id,
+            )
+    return bag.finish()
+
+
+def validate_ten_god_ecosystem(
+    result: TenGodEcosystemResult,
+    *,
+    natal: TenGodInterpretationCollection | None = None,
+    combinations: TenGodCombinationCollection | None = None,
+) -> ValidationResult:
+    """Validate ecosystem refs, driver basis, and bottleneck chain membership."""
+    bag = _Bag("validate_ten_god_ecosystem", result.analysis_id)
+    if result.state is EvaluationStatus.NOT_EVALUATED and not result.trace_ids:
+        return bag.finish()
+    _check_schema(bag, result.schema_version or SCHEMA_TEN_GODS_BALANCE, "ten_gods_ecosystem")
+    forbidden_basis = {"count", "occurrence_count", "frequency", "raw_count"}
+    if any(token in forbidden_basis for token in result.driver.basis):
+        bag.add(
+            "P7V-ECO-DRIVER-COUNT",
+            IssueSeverity.CRITICAL,
+            "ten_gods_ecosystem",
+            "driver must not be derived from raw frequency",
+            field="driver.basis",
+            actual=",".join(result.driver.basis),
+        )
+    active_chain_ids: set[str] = set()
+    if combinations is not None:
+        active_chain_ids = {
+            item.chain.chain_id
+            for item in combinations.items
+            if item.state
+            in {
+                CombinationState.CONFIRMED,
+                CombinationState.CONDITIONAL,
+                CombinationState.WEAK,
+            }
+            and item.chain.chain_id
+        }
+        known_chains = {item.chain.chain_id for item in combinations.items if item.chain.chain_id}
+        for chain_id in (
+            result.bottleneck.source_chain_ids
+            + result.support.source_chain_ids
+            + result.blocked.source_chain_ids
+        ):
+            if chain_id and chain_id not in known_chains:
+                bag.add(
+                    "P7V-ECO-CHAIN-REF",
+                    IssueSeverity.CRITICAL,
+                    "ten_gods_ecosystem",
+                    "ecosystem references unknown combination chain",
+                    field="source_chain_ids",
+                    actual=chain_id,
+                )
+    if result.bottleneck.state in EVALUATED_STATUSES:
+        if not result.bottleneck.source_chain_ids:
+            bag.add(
+                "P7V-ECO-BOTTLENECK-CHAIN",
+                IssueSeverity.CRITICAL,
+                "ten_gods_ecosystem",
+                "bottleneck must belong to an active chain",
+                field="bottleneck.source_chain_ids",
+            )
+        elif combinations is not None and not set(result.bottleneck.source_chain_ids) & active_chain_ids:
+            bag.add(
+                "P7V-ECO-BOTTLENECK-CHAIN",
+                IssueSeverity.CRITICAL,
+                "ten_gods_ecosystem",
+                "bottleneck must belong to an active chain",
+                field="bottleneck.source_chain_ids",
+                actual=",".join(result.bottleneck.source_chain_ids),
+            )
+    natal_ids = {item.ten_god_id for item in natal.items} if natal is not None else set(CANONICAL_TEN_GOD_IDS)
+    for assignment in (
+        result.driver,
+        result.support,
+        result.suppressed,
+        result.blocked,
+        result.excessive,
+        result.deficient,
+        result.missing,
+        result.bottleneck,
+        result.balancer,
+    ) + result.neutral:
+        if assignment.subject and assignment.subject not in natal_ids | _KNOWN_SUBJECTS:
+            bag.add(
+                "P7V-ECO-SUBJECT",
+                IssueSeverity.CRITICAL,
+                "ten_gods_ecosystem",
+                "ecosystem subject is not a known Ten God or family",
+                field=assignment.role.value,
+                actual=assignment.subject,
+            )
+    return bag.finish()
+
+
 def validate_canonical_analysis_context(context: CanonicalAnalysisContext) -> ValidationResult:
     """Validate the full context chain and nested runtime."""
     bag = _Bag("validate_canonical_analysis_context", context.analysis_id)
@@ -540,4 +772,7 @@ PACK07_VALIDATOR_REGISTRY: dict[str, str] = {
     "validate_export_projection": "validate_export_projection",
     "validate_api_projection": "validate_api_projection",
     "validate_consulting_projection": "validate_consulting_projection",
+    "validate_ten_gods_collection": "validate_ten_gods_collection",
+    "validate_ten_god_combinations": "validate_ten_god_combinations",
+    "validate_ten_god_ecosystem": "validate_ten_god_ecosystem",
 }

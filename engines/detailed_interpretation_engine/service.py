@@ -67,6 +67,10 @@ class DetailedInterpretationService:
         """Validate CanonicalRuntimeResult."""
         return self._engine.validate_runtime(result)
 
+    def interpret_ten_gods(self, payload: Mapping[str, Any]) -> CanonicalAnalysisContext:
+        """Evaluate natal Ten Gods and bind into canonical runtime."""
+        return self._engine.interpret_ten_gods(payload)
+
     def diagnostics(self, context: CanonicalAnalysisContext) -> Pack07RuntimeDiagnostics:
         """Development-only Pack 07 diagnostics."""
         return self._engine.diagnostics(context)

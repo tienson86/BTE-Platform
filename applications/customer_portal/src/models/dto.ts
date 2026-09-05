@@ -225,6 +225,58 @@ export type IntegratedNarrativeDto = {
   readonly summary?: IntegratedNarrativeBlockDto;
 };
 
+/** Pack 07 natal Ten God customer projection. Labels only; no traces. */
+export type TenGodDetailedItemDto = {
+  readonly name?: string;
+  readonly status_label?: string;
+  readonly role_label?: string;
+  readonly positives?: readonly string[];
+  readonly risks?: readonly string[];
+  readonly conditions?: readonly string[];
+  readonly unresolved?: boolean;
+  readonly fallback?: string;
+};
+
+export type TenGodsDetailedDto = {
+  readonly state?: string;
+  readonly items?: readonly TenGodDetailedItemDto[];
+};
+
+export type TenGodRelationItemDto = {
+  readonly name?: string;
+  readonly state_label?: string;
+  readonly mechanism?: string;
+  readonly condition?: string;
+  readonly unresolved?: boolean;
+  readonly fallback?: string;
+};
+
+export type TenGodsRelationsDto = {
+  readonly state?: string;
+  readonly items?: readonly TenGodRelationItemDto[];
+};
+
+export type TenGodEcosystemRoleDto = {
+  readonly label?: string;
+  readonly unresolved?: boolean;
+};
+
+export type TenGodsEcosystemDto = {
+  readonly state?: string;
+  readonly unresolved?: boolean;
+  readonly fallback?: string;
+  readonly driver?: TenGodEcosystemRoleDto;
+  readonly support?: TenGodEcosystemRoleDto;
+  readonly bottleneck?: TenGodEcosystemRoleDto;
+  readonly blocked?: TenGodEcosystemRoleDto;
+  readonly suppressed?: TenGodEcosystemRoleDto;
+  readonly excessive?: TenGodEcosystemRoleDto;
+  readonly deficient?: TenGodEcosystemRoleDto;
+  readonly missing?: TenGodEcosystemRoleDto;
+  readonly flow?: string;
+  readonly flow_quality?: string;
+};
+
 /** Canonical Cân Xương Đoán Mệnh object published by the engine. */
 export type CanXuongDto = {
   readonly total_weight?: number;
@@ -276,6 +328,9 @@ export type AnalysisDataDto = {
     readonly hidden_summary?: string;
     readonly summary?: string;
     readonly note?: string;
+    readonly detailed?: TenGodsDetailedDto;
+    readonly relations?: TenGodsRelationsDto;
+    readonly ecosystem?: TenGodsEcosystemDto;
   };
   readonly ten_gods_result?: {
     readonly visible?: readonly unknown[];

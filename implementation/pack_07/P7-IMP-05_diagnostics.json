@@ -1,0 +1,161 @@
+{
+  "health": {
+    "status": 200,
+    "body": {
+      "status": "ok",
+      "service": "bte-applications-api",
+      "version": "1.0.0"
+    }
+  },
+  "analyze": {
+    "status": 200,
+    "pipeline": [
+      "calendar",
+      "bazi",
+      "pattern",
+      "score",
+      "interpretation",
+      "report",
+      "narrative"
+    ],
+    "has_pack07_context": false,
+    "detailed_count": 10,
+    "relations_count": 9,
+    "relations_names": [
+      "Thực Thần → Tài",
+      "Thương Quan → Tài",
+      "Tài → Quan → Ấn",
+      "Sát → Ấn → Thân",
+      "Tỷ Kiếp đoạt Tài",
+      "Quan Sát hỗn tạp",
+      "Thân vượng dụng Tài",
+      "Thân vượng dụng Quan",
+      "Thân vượng dụng Thực/Thương"
+    ],
+    "ecosystem": {
+      "state": "partially_resolved",
+      "unresolved": false,
+      "fallback": "",
+      "driver": {
+        "label": "Chính Ấn",
+        "unresolved": false
+      },
+      "support": {
+        "label": "Thất Sát",
+        "unresolved": false
+      },
+      "bottleneck": {
+        "label": "Thiên Tài",
+        "unresolved": false
+      },
+      "blocked": {
+        "label": "Không áp dụng",
+        "unresolved": false
+      },
+      "suppressed": {
+        "label": "Không áp dụng",
+        "unresolved": false
+      },
+      "excessive": {
+        "label": "Không áp dụng",
+        "unresolved": false
+      },
+      "deficient": {
+        "label": "Thực Thương",
+        "unresolved": false
+      },
+      "missing": {
+        "label": "Không áp dụng",
+        "unresolved": false
+      },
+      "flow": "Thương Quan → Thiên Tài",
+      "flow_quality": "Bị hạn",
+      "role_labels": {
+        "driver": "Động lực chính",
+        "supporting": "Hỗ trợ",
+        "bottleneck": "Điểm nghẽn",
+        "blocked": "Lực bị chặn",
+        "suppressed": "Lực bị kìm",
+        "excessive": "Lực dư",
+        "deficient": "Lực thiếu",
+        "missing": "Không hiện chức năng",
+        "balancer": "Lực cân",
+        "neutral": "Trung tính"
+      }
+    }
+  },
+  "history_portal": 200,
+  "diagnostics_post": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "message": "Pack 07 diagnostics OK",
+      "data": {
+        "analysis_id": "0468cdc7-e799-406d-abfd-6a417b51d904",
+        "contracts": "PASS",
+        "contexts": "PASS",
+        "validators": "PASS",
+        "mc01_reference": "NOT_BOUND",
+        "ten_gods": "PARTIAL",
+        "ten_god_combination": "PARTIAL",
+        "ten_gods_ecosystem": "PARTIAL",
+        "shen_sha": "NOT_IMPLEMENTED",
+        "evidence_priority": "NOT_IMPLEMENTED",
+        "domains": "NOT_EVALUATED",
+        "luck": "NOT_IMPLEMENTED",
+        "temporal": "NOT_EVALUATED",
+        "optimization": "NOT_EVALUATED",
+        "narrative": "NOT_EVALUATED",
+        "runtime_contract": "PASS",
+        "overall_status": "PASS",
+        "issues": [
+          {
+            "code": "P7V-CTX-MC01-NOT-BOUND",
+            "severity": "warning",
+            "layer": "interpretation",
+            "field": "mc01",
+            "message": "MC-01 reference not yet bound",
+            "expected": "bound Mc01Reference",
+            "actual": "not_bound",
+            "trace_id": "p7v-22a29185b022",
+            "validator": "validate_interpretation_context",
+            "analysis_id": "0468cdc7-e799-406d-abfd-6a417b51d904"
+          }
+        ],
+        "validation": {
+          "status": "PASS_WITH_WARNINGS",
+          "errors": [],
+          "warnings": [
+            {
+              "code": "P7V-CTX-MC01-NOT-BOUND",
+              "severity": "warning",
+              "layer": "interpretation",
+              "field": "mc01",
+              "message": "MC-01 reference not yet bound",
+              "expected": "bound Mc01Reference",
+              "actual": "not_bound",
+              "trace_id": "p7v-22a29185b022",
+              "validator": "validate_interpretation_context",
+              "analysis_id": "0468cdc7-e799-406d-abfd-6a417b51d904"
+            }
+          ],
+          "validated_at": "2026-09-05T03:03:07.514043+00:00",
+          "validator_version": "1.0.0",
+          "analysis_id": "0468cdc7-e799-406d-abfd-6a417b51d904",
+          "trace_ids": [
+            "p7v-22a29185b022"
+          ]
+        }
+      },
+      "request_id": "0468cdc7-e799-406d-abfd-6a417b51d904"
+    }
+  },
+  "screenshots": {
+    "overview": "implementation/pack_07/screenshots/p7_imp_05_result_overview.png",
+    "ten_gods_desktop": "implementation/pack_07/screenshots/p7_imp_05_ten_gods_desktop.png",
+    "combinations": "implementation/pack_07/screenshots/p7_imp_05_combinations.png",
+    "ecosystem": "implementation/pack_07/screenshots/p7_imp_05_ecosystem.png",
+    "combination_expanded": "implementation/pack_07/screenshots/p7_imp_05_combination_expanded.png",
+    "ten_gods_mobile": "implementation/pack_07/screenshots/p7_imp_05_ten_gods_mobile.png"
+  }
+}

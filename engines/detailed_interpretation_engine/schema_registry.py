@@ -22,6 +22,9 @@ from engines.detailed_interpretation_engine.constants import (
     SCHEMA_RESULT,
     SCHEMA_RUNTIME_CONTRACT,
     SCHEMA_TEMPORAL,
+    SCHEMA_TEN_GODS,
+    SCHEMA_TEN_GOD_COMBINATIONS,
+    SCHEMA_TEN_GODS_BALANCE,
     SCHEMA_VITALITY,
     SCHEMA_WEALTH,
 )
@@ -44,6 +47,9 @@ from engines.detailed_interpretation_engine.temporal import (
     LuckInteractionResult,
     TemporalActivationResult,
 )
+from engines.detailed_interpretation_engine.ten_gods.combinations.models import TenGodCombinationCollection
+from engines.detailed_interpretation_engine.ten_gods.ecosystem.models import TenGodEcosystemResult
+from engines.detailed_interpretation_engine.ten_gods.models import TenGodInterpretationCollection
 
 PACK07_SCHEMA_REGISTRY: dict[str, type[Any]] = {
     SCHEMA_CONTEXT: InterpretationContext,
@@ -62,6 +68,9 @@ PACK07_SCHEMA_REGISTRY: dict[str, type[Any]] = {
     SCHEMA_VITALITY: VitalityResult,
     SCHEMA_LIFE_OPTIMIZATION: LifeOptimizationResult,
     SCHEMA_COMPOSER: NarrativeResult,
+    SCHEMA_TEN_GODS: TenGodInterpretationCollection,
+    SCHEMA_TEN_GOD_COMBINATIONS: TenGodCombinationCollection,
+    SCHEMA_TEN_GODS_BALANCE: TenGodEcosystemResult,
 }
 
 

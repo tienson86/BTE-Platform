@@ -14,22 +14,31 @@ from engines.detailed_interpretation_engine.constants import (
     SCHEMA_RESULT,
 )
 from engines.detailed_interpretation_engine.enums import EvaluationStatus
+from engines.detailed_interpretation_engine.ten_gods.combinations.models import TenGodCombinationCollection
+from engines.detailed_interpretation_engine.ten_gods.ecosystem.models import TenGodEcosystemResult
+from engines.detailed_interpretation_engine.ten_gods.models import TenGodInterpretationCollection
 from engines.detailed_interpretation_engine.value_objects import ConfidenceValue, TraceRef
 
 
 @dataclass(frozen=True, slots=True)
 class TenGodEcosystem:
-    """Placeholder for DI-01–04 structured Ten God ecosystem. No logic."""
+    """Ten God natal interpretation plus DI-04 ecosystem shell."""
 
     schema_version: str = SCHEMA_RESULT
     status: EvaluationStatus = EvaluationStatus.NOT_EVALUATED
     finding_ids: tuple[str, ...] = ()
     trace: TraceRef = field(default_factory=TraceRef)
+    natal: TenGodInterpretationCollection = field(default_factory=TenGodInterpretationCollection)
+    combinations: TenGodCombinationCollection = field(default_factory=TenGodCombinationCollection)
+    ecosystem: TenGodEcosystemResult = field(default_factory=TenGodEcosystemResult)
 
     @classmethod
     def from_dict(cls, data: Mapping[str, Any] | None) -> TenGodEcosystem:
         """Rebuild a Ten God ecosystem shell."""
         payload = data or {}
+        natal_raw = payload.get("natal")
+        combinations_raw = payload.get("combinations")
+        ecosystem_raw = payload.get("ecosystem")
         return cls(
             schema_version=as_str(payload.get("schema_version"), SCHEMA_RESULT),
             status=as_enum(
@@ -39,6 +48,15 @@ class TenGodEcosystem:
             ),
             finding_ids=as_str_tuple(payload.get("finding_ids")),
             trace=TraceRef.from_dict(payload.get("trace") if isinstance(payload.get("trace"), Mapping) else payload),
+            natal=TenGodInterpretationCollection.from_dict(
+                natal_raw if isinstance(natal_raw, Mapping) else None
+            ),
+            combinations=TenGodCombinationCollection.from_dict(
+                combinations_raw if isinstance(combinations_raw, Mapping) else None
+            ),
+            ecosystem=TenGodEcosystemResult.from_dict(
+                ecosystem_raw if isinstance(ecosystem_raw, Mapping) else None
+            ),
         )
 
 

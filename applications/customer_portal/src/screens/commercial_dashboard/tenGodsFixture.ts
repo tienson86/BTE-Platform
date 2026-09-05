@@ -67,5 +67,8 @@ export const TEN_GODS_VISUAL_FIXTURE: TenGodsView = {
   combination: fixtureCombination(),
   hiddenSupport: tenGodHiddenCombinationSupport(["Thiên Tài", "Chính Ấn"]),
   commercial: fixtureCommercial(),
+  detailed: [],
+  relations: [],
+  ecosystem: null,
   summary: "",
 };

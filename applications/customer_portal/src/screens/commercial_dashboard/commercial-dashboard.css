@@ -1246,6 +1246,93 @@
   font-size: var(--font-size-body);
 }
 
+.bte-tg__detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
+  gap: var(--space-2);
+}
+
+.bte-tg__detail {
+  min-width: 0;
+  padding: var(--space-3);
+  border: 1px solid var(--cdash-border);
+  border-radius: var(--bte-radius-8);
+  background: var(--cdash-card);
+}
+
+.bte-tg__detail-toggle {
+  display: flex;
+  width: 100%;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.bte-tg__detail-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.bte-tg__detail-body[hidden] {
+  display: none;
+}
+
+.bte-tg__points {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: var(--font-size-caption);
+}
+
+.bte-tg__points[data-tg-field="risks"] {
+  color: var(--cdash-muted);
+}
+
+.bte-tg__relation-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.bte-tg__relation {
+  min-width: 0;
+  padding: var(--space-3);
+  border: 1px solid var(--cdash-border);
+  border-radius: var(--bte-radius-8);
+  background: var(--cdash-card);
+}
+
+.bte-tg__eco-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.bte-tg__eco-grid div {
+  min-width: 0;
+}
+
+.bte-tg__eco-grid dt {
+  margin: 0 0 var(--space-1);
+  color: var(--cdash-muted);
+  font-size: var(--font-size-caption);
+}
+
+.bte-tg__eco-grid dd {
+  margin: 0;
+  font-size: var(--font-size-body);
+}
+
 .bte-tg__more {
   display: inline-flex;
   align-items: center;

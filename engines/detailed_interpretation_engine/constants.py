@@ -30,6 +30,12 @@ SCHEMA_CONSISTENCY: str = "bte.detailed_interpretation.system_consistency.v1"
 SCHEMA_VERIFICATION: str = "bte.detailed_interpretation.verification.v1"
 SCHEMA_MESSAGES: str = "bte.detailed_interpretation.messages.vi.v1"
 SCHEMA_MINGJU_DECISION: str = "bte.mingju.decision.v1"
+SCHEMA_TEN_GODS: str = "bte.detailed_interpretation.ten_gods.v1"
+TEN_GODS_RULESET_VERSION: str = "bte.detailed_interpretation.ten_gods.rules.v1"
+SCHEMA_TEN_GOD_COMBINATIONS: str = "bte.detailed_interpretation.ten_god_combinations.v1"
+TEN_GOD_COMBINATIONS_RULESET_VERSION: str = "bte.detailed_interpretation.ten_god_combinations.rules.v1"
+SCHEMA_TEN_GODS_BALANCE: str = "bte.detailed_interpretation.ten_gods_balance.v1"
+TEN_GODS_BALANCE_RULESET_VERSION: str = "bte.detailed_interpretation.ten_gods_balance.rules.v1"
 
 PACK07_VALIDATOR_VERSION: str = "1.0.0"
 

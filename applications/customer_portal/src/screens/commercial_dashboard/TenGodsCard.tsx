@@ -8,6 +8,9 @@ import type {
   DashboardCardSpec,
   TenGodCombinationView,
   TenGodCommercialView,
+  TenGodDetailedView,
+  TenGodEcosystemView,
+  TenGodRelationView,
   TenGodsPlacementView,
   TenGodsView,
 } from "./types";
@@ -120,6 +123,128 @@ function CombinationCard({
   );
 }
 
+function RelationCard({
+  item,
+  open,
+  onToggle,
+}: {
+  readonly item: TenGodRelationView;
+  readonly open: boolean;
+  readonly onToggle: () => void;
+}): ReactNode {
+  return (
+    <article
+      className="bte-tg__relation"
+      data-tg-relation={item.name}
+      data-tg-open={open ? "true" : "false"}
+      data-tg-unresolved={item.unresolved ? "true" : undefined}
+    >
+      <button type="button" className="bte-tg__detail-toggle" aria-expanded={open} onClick={onToggle}>
+        <span className="bte-tg__consult-name">{item.name}</span>
+        <span className="bte-tg__meta">{item.stateLabel}</span>
+      </button>
+      <div className="bte-tg__detail-body" hidden={!open}>
+        {item.unresolved ? (
+          <p className="bte-tg__summary">{item.fallback}</p>
+        ) : (
+          <>
+            {item.mechanism ? (
+              <p className="bte-tg__summary" data-tg-field="mechanism">
+                {item.mechanism}
+              </p>
+            ) : null}
+            {item.condition ? (
+              <p className="bte-tg__summary" data-tg-field="condition">
+                {item.condition}
+              </p>
+            ) : null}
+          </>
+        )}
+      </div>
+    </article>
+  );
+}
+
+function EcosystemSummary({ model }: { readonly model: TenGodEcosystemView }): ReactNode {
+  const rows: readonly { readonly key: string; readonly title: string; readonly value: string }[] = [
+    { key: "driver", title: "Động lực chính", value: model.driver.label },
+    { key: "support", title: "Hỗ trợ", value: model.support.label },
+    { key: "bottleneck", title: "Điểm nghẽn", value: model.bottleneck.label },
+    { key: "blocked", title: "Lực bị chặn", value: model.blocked.label },
+    { key: "excessive", title: "Lực dư", value: model.excessive.label },
+    { key: "deficient", title: "Lực thiếu", value: model.deficient.label },
+    { key: "missing", title: "Không hiện chức năng", value: model.missing.label },
+    { key: "flow", title: "Dòng vận hành", value: model.flow },
+    { key: "flow-quality", title: "Chất lượng dòng", value: model.flowQuality },
+  ];
+  return (
+    <dl className="bte-tg__eco-grid" data-tg-ecosystem="true">
+      {rows.map((row) => (
+        <div key={row.key} data-tg-eco={row.key}>
+          <dt>{row.title}</dt>
+          <dd>{row.value}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+function DetailedCard({
+  item,
+  open,
+  onToggle,
+}: {
+  readonly item: TenGodDetailedView;
+  readonly open: boolean;
+  readonly onToggle: () => void;
+}): ReactNode {
+  return (
+    <article
+      className="bte-tg__detail"
+      data-tg-detailed={item.name}
+      data-tg-open={open ? "true" : "false"}
+      data-tg-unresolved={item.unresolved ? "true" : undefined}
+    >
+      <button type="button" className="bte-tg__detail-toggle" aria-expanded={open} onClick={onToggle}>
+        <span className="bte-tg__consult-name">{item.name}</span>
+        <span className="bte-tg__meta">{item.statusLabel}</span>
+      </button>
+      <div className="bte-tg__detail-body" hidden={!open}>
+        {item.unresolved ? (
+          <p className="bte-tg__summary">{item.fallback}</p>
+        ) : (
+          <>
+            {item.roleLabel ? (
+              <p className="bte-tg__summary" data-tg-field="role">
+                Vai trò: {item.roleLabel}
+              </p>
+            ) : null}
+            {item.positives.length ? (
+              <ul className="bte-tg__points" data-tg-field="positives">
+                {item.positives.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            ) : null}
+            {item.risks.length ? (
+              <ul className="bte-tg__points" data-tg-field="risks">
+                {item.risks.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            ) : null}
+            {item.conditions.length ? (
+              <p className="bte-tg__summary" data-tg-field="conditions">
+                {item.conditions.join(" · ")}
+              </p>
+            ) : null}
+          </>
+        )}
+      </div>
+    </article>
+  );
+}
+
 function CommercialCard({
   item,
   open,
@@ -185,6 +310,7 @@ export function TenGodsCard({ card, model }: TenGodsCardProps): ReactNode {
   const [expanded, setExpanded] = useState(false);
   const [comboOpen, setComboOpen] = useState(false);
   const [openGod, setOpenGod] = useState<string | null>(null);
+  const [openRelation, setOpenRelation] = useState<string | null>(null);
   const mobile = useMobileOpen();
   const canExpand = model.hidden.length > 0 || model.distribution.length > 0;
 
@@ -234,6 +360,46 @@ export function TenGodsCard({ card, model }: TenGodsCardProps): ReactNode {
                   </li>
                 ))}
               </ul>
+            </section>
+          ) : null}
+          {model.detailed.length ? (
+            <section className="bte-tg__section" data-tg-section="detailed" data-viz-layer="visible">
+              <h3 className="bte-tg__heading">Luận giải chi tiết</h3>
+              <div className="bte-tg__detail-grid" data-tg-count={String(model.detailed.length)}>
+                {model.detailed.map((item) => (
+                  <DetailedCard
+                    key={item.name}
+                    item={item}
+                    open={openGod === item.name}
+                    onToggle={() =>
+                      setOpenGod((current) => (current === item.name ? null : item.name))
+                    }
+                  />
+                ))}
+              </div>
+            </section>
+          ) : null}
+          {model.relations.length ? (
+            <section className="bte-tg__section" data-tg-section="relations" data-viz-layer="visible">
+              <h3 className="bte-tg__heading">Quan hệ Thập Thần</h3>
+              <div className="bte-tg__relation-list" data-tg-count={String(model.relations.length)}>
+                {model.relations.map((item) => (
+                  <RelationCard
+                    key={item.name}
+                    item={item}
+                    open={openRelation === item.name}
+                    onToggle={() =>
+                      setOpenRelation((current) => (current === item.name ? null : item.name))
+                    }
+                  />
+                ))}
+              </div>
+            </section>
+          ) : null}
+          {model.ecosystem ? (
+            <section className="bte-tg__section" data-tg-section="ecosystem" data-viz-layer="visible">
+              <h3 className="bte-tg__heading">Hệ Thập Thần</h3>
+              <EcosystemSummary model={model.ecosystem} />
             </section>
           ) : null}
           {model.combination ? (
