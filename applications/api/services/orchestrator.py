@@ -70,6 +70,12 @@ from engines.detailed_interpretation_engine.shen_sha.presentation import (
     present_shen_sha_customer,
     present_shen_sha_ecosystem_customer,
 )
+from engines.detailed_interpretation_engine.evidence_priority.engine import (
+    interpret_and_bind_evidence_priority,
+)
+from engines.detailed_interpretation_engine.evidence_priority.presentation import (
+    present_evidence_priority_customer,
+)
 
 from applications.api.exceptions import PipelineAPIError, ValidationAPIError
 from applications.api.services.gender_truth import (
@@ -474,6 +480,7 @@ class OrchestratorService:
         context = build_canonical_analysis_context_from_payload(payload)
         context = interpret_and_bind_ten_gods(context, payload)
         context = interpret_and_bind_shen_sha(context, payload)
+        context = interpret_and_bind_evidence_priority(context, payload)
         analysis.pack07_context = context
         natal = context.runtime.interpretation.ten_gods.natal
         if natal.items:
@@ -495,6 +502,9 @@ class OrchestratorService:
                     "individual": present_shen_sha_customer(shen.individual),
                     "ecosystem": present_shen_sha_ecosystem_customer(shen.ecosystem),
                 }
+        ranked = context.runtime.interpretation.evidence_priority
+        if ranked.findings:
+            payload["evidence_priority"] = present_evidence_priority_customer(ranked)
 
     def _attach_can_xuong(self, payload: dict[str, Any], calendar: Any, bazi_chart: Any) -> None:
         """Publish analysis.can_xuong from the dedicated engine. Soft-fail."""

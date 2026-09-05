@@ -344,6 +344,16 @@ export type NarrativeV2ShadowEnvelopeDto = {
   readonly error?: string | null;
 };
 
+/** Compact Evidence Priority customer summary. Labels only. */
+export type EvidencePrioritySummaryDto = {
+  readonly title?: string;
+  readonly driver?: string;
+  readonly bottleneck?: string;
+  readonly risk?: string;
+  readonly opportunity?: string;
+  readonly condition?: string;
+};
+
 /** `data` payload from POST /analyze. */
 export type AnalysisDataDto = {
   readonly pipeline?: readonly string[];
@@ -401,6 +411,7 @@ export type AnalysisDataDto = {
   readonly can_xuong?: CanXuongDto;
   /** Pre-composed CK-01 commercial consulting. Presentation copies only. */
   readonly commercial_consulting?: CommercialConsultingDto;
+  readonly evidence_priority?: EvidencePrioritySummaryDto;
   readonly [key: string]: unknown;
 };
 

@@ -46,6 +46,8 @@ export function adaptOverviewFromPresentation(
     conclusionSource: conclusion ? "narrative_v2.overview.conclusion" : "",
     identity: [],
     balance: [],
+    focusTitle: "",
+    focus: [],
   };
 }
 

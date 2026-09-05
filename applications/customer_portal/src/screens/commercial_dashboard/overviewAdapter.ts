@@ -14,7 +14,7 @@ import {
 } from "../../adapters/canonicalUsefulGod";
 import type { AnalysisDataDto } from "../../models";
 import { OVERVIEW_SUBTITLE, OVERVIEW_TITLE } from "./cards";
-import type { OverviewEvidenceView, OverviewView } from "./types";
+import type { OverviewEvidenceView, OverviewFocusView, OverviewView } from "./types";
 
 const INSIGHT_MAX = 220;
 const CONCLUSION_MAX = 220;
@@ -164,6 +164,7 @@ export function adaptOverviewCard(data: AnalysisDataDto | null | undefined): Ove
     climate,
   });
   const facts = adaptOverviewExecutiveFacts(payload);
+  const focus = adaptOverviewFocus(payload);
   return {
     title: OVERVIEW_TITLE,
     subtitle: OVERVIEW_SUBTITLE,
@@ -175,5 +176,37 @@ export function adaptOverviewCard(data: AnalysisDataDto | null | undefined): Ove
     conclusionSource: conclusion.source,
     identity: facts.identity,
     balance: facts.balance,
+    focusTitle: focus.title,
+    focus: focus.items,
   };
+}
+
+const FOCUS_ROWS: readonly { key: OverviewFocusView["key"]; label: string; field: string }[] = [
+  { key: "driver", label: "Động lực chính", field: "driver" },
+  { key: "bottleneck", label: "Điểm nghẽn", field: "bottleneck" },
+  { key: "risk", label: "Rủi ro chính", field: "risk" },
+  { key: "opportunity", label: "Cơ hội chính", field: "opportunity" },
+  { key: "condition", label: "Điều kiện phát huy", field: "condition" },
+];
+
+/**
+ * Copy published Evidence Priority labels only. No IDs or traces.
+ */
+export function adaptOverviewFocus(data: AnalysisDataDto | null | undefined): {
+  readonly title: string;
+  readonly items: readonly OverviewFocusView[];
+} {
+  const block = data?.evidence_priority;
+  if (!block || typeof block !== "object") {
+    return { title: "", items: [] };
+  }
+  const record = block as Record<string, unknown>;
+  const items = FOCUS_ROWS.map((row) => {
+    const value = customerLabel(text(record[row.field]));
+    if (!value) return null;
+    return { key: row.key, label: row.label, value };
+  }).filter((item): item is OverviewFocusView => item != null);
+  if (!items.length) return { title: "", items: [] };
+  const title = customerLabel(text(record.title)) || "Trọng tâm lá số";
+  return { title, items };
 }

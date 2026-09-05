@@ -25,6 +25,7 @@ from engines.detailed_interpretation_engine.domains import (
     WealthResult,
 )
 from engines.detailed_interpretation_engine.evidence import (
+    EvidencePriorityFinding,
     EvidencePriorityResult,
     InterpretationSection,
     ShenShaEcosystem,
@@ -94,6 +95,7 @@ __all__ = [
     "DomainInterpretationResult",
     "DomainSection",
     "EvidenceContext",
+    "EvidencePriorityFinding",
     "EvidencePriorityResult",
     "InterpretationContext",
     "InterpretationSection",

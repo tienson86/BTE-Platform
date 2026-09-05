@@ -16,6 +16,7 @@ import type { AnalysisDataDto } from "../models";
 import {
   adaptOverviewCard,
   adaptOverviewExecutiveFacts,
+  adaptOverviewFocus,
 } from "../screens/commercial_dashboard/overviewAdapter";
 import {
   ACTION_PLAN_EMPTY,
@@ -107,10 +108,13 @@ function attachExecutiveFacts(
   analysis: AnalysisDataDto | null | undefined,
 ): OverviewView {
   const facts = adaptOverviewExecutiveFacts(analysis);
+  const focus = adaptOverviewFocus(analysis);
   return {
     ...overview,
     identity: facts.identity,
     balance: facts.balance,
+    focusTitle: focus.title,
+    focus: focus.items,
   };
 }
 

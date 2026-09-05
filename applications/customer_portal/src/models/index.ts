@@ -19,6 +19,7 @@ export type {
   CommercialConsultingSectionDto,
   CustomerEchoDto,
   CustomersListData,
+  EvidencePrioritySummaryDto,
   IdentityPillarDto,
   IntegratedNarrativeDto,
   GenerateReportRequest,

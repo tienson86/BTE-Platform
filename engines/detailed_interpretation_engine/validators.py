@@ -21,6 +21,7 @@ from engines.detailed_interpretation_engine.constants import (
     MC01_SNAPSHOT_HASH_CODE,
     PUBLISHED_DOMAIN_IDS,
     SCHEMA_CONTEXT,
+    SCHEMA_EVIDENCE_PRIORITY,
     SCHEMA_RUNTIME_CONTRACT,
     SCHEMA_SHEN_SHA,
     SCHEMA_SHEN_SHA_ECOSYSTEM,
@@ -43,6 +44,7 @@ from engines.detailed_interpretation_engine.enums import (
     DomainState,
     EvaluationStatus,
     IssueSeverity,
+    PriorityTier,
     ShenShaClusterState,
     ShenShaInterpretationState,
     ShenShaModifierState,
@@ -50,6 +52,12 @@ from engines.detailed_interpretation_engine.enums import (
     ValidationStatus,
 )
 from engines.detailed_interpretation_engine.exceptions import DetailedInterpretationValidationError
+from engines.detailed_interpretation_engine.evidence import EvidencePriorityResult
+from engines.detailed_interpretation_engine.evidence_priority.constants import (
+    SHEN_SHA_SOURCE_KINDS,
+    SHEN_SHA_TIER_CEILING,
+    TIER_INDEX,
+)
 from engines.detailed_interpretation_engine.mc01 import snapshot_hash_matches
 from engines.detailed_interpretation_engine.runtime import (
     CanonicalAPIModel,
@@ -1005,6 +1013,112 @@ def validate_shen_sha_ecosystem(
     return bag.finish()
 
 
+def validate_evidence_priority_result(
+    result: EvidencePriorityResult,
+    *,
+    context: CanonicalAnalysisContext | None = None,
+    payload: Mapping[str, Any] | None = None,
+) -> ValidationResult:
+    """Validate ranked evidence: tiers, traces, merge, Shen Sha ceiling, grade split."""
+    analysis_id = result.analysis_id or (context.analysis_id if context else "")
+    bag = _Bag("validate_evidence_priority_result", analysis_id)
+    _check_schema(bag, result.schema_version or SCHEMA_EVIDENCE_PRIORITY, "evidence_priority")
+    if context is not None:
+        _match_id(
+            bag,
+            context.analysis_id,
+            result.analysis_id or context.analysis_id,
+            "evidence_priority",
+            "analysis_id",
+            "P7V-EPR-ANALYSIS-ID",
+        )
+    evaluated = result.status in EVALUATED_STATUSES
+    if not evaluated:
+        return bag.finish()
+    if not result.trace_ids and not result.evidence_ids:
+        bag.add(
+            "P7V-EVIDENCE-EVALUATED-EMPTY",
+            IssueSeverity.ERROR,
+            "evidence_priority",
+            "evaluated evidence requires source refs",
+            field="evidence_ids",
+            expected="evidence_ids or trace_ids",
+            actual="empty",
+        )
+        return bag.finish()
+    known_tiers = {item.value for item in PriorityTier}
+    seen_keys: set[str] = set()
+    ceiling = TIER_INDEX.get(SHEN_SHA_TIER_CEILING.value, 2)
+    for finding in result.findings:
+        if finding.tier.value not in known_tiers:
+            bag.add(
+                "P7V-EPR-UNKNOWN-TIER",
+                IssueSeverity.ERROR,
+                "evidence_priority",
+                "unknown priority tier",
+                field=finding.finding_id,
+                actual=finding.tier.value,
+            )
+        if not finding.source_refs:
+            bag.add(
+                "P7V-EPR-SOURCE-MISSING",
+                IssueSeverity.ERROR,
+                "evidence_priority",
+                "ranked finding requires source refs",
+                field=finding.finding_id,
+            )
+        if not finding.trace_ids:
+            bag.add(
+                "P7V-EPR-TRACE-MISSING",
+                IssueSeverity.ERROR,
+                "evidence_priority",
+                "ranked finding requires trace",
+                field=finding.finding_id,
+            )
+        if finding.semantic_key:
+            if finding.semantic_key in seen_keys:
+                bag.add(
+                    "P7V-EPR-DUPLICATE-SEMANTIC",
+                    IssueSeverity.ERROR,
+                    "evidence_priority",
+                    "duplicate semantic finding after merge",
+                    field=finding.semantic_key,
+                )
+            seen_keys.add(finding.semantic_key)
+        if finding.source_kind in SHEN_SHA_SOURCE_KINDS:
+            if TIER_INDEX.get(finding.tier.value, 99) < ceiling:
+                bag.add(
+                    "P7V-EPR-SHEN-SHA-CEILING",
+                    IssueSeverity.CRITICAL,
+                    "evidence_priority",
+                    "Shen Sha cannot outrank its P2 ceiling",
+                    field=finding.finding_id,
+                    actual=finding.tier.value,
+                )
+            if finding.finding_id in result.dominant_evidence:
+                bag.add(
+                    "P7V-EPR-SHEN-SHA-DOMINANT",
+                    IssueSeverity.CRITICAL,
+                    "evidence_priority",
+                    "Shen Sha cannot be dominant evidence",
+                    field=finding.finding_id,
+                )
+        if finding.source_kind == "grade" and result.mc01_grade and result.score_engine_grade:
+            if result.mc01_grade != result.score_engine_grade:
+                if finding.customer_label == result.score_engine_grade:
+                    bag.add(
+                        "P7V-EPR-GRADE-SEMANTIC",
+                        IssueSeverity.CRITICAL,
+                        "evidence_priority",
+                        "ScoreEngine grade must not replace MC-01 Grade",
+                        field=finding.finding_id,
+                        expected=result.mc01_grade,
+                        actual=finding.customer_label,
+                    )
+    _ = payload
+    return bag.finish()
+
+
 def validate_canonical_analysis_context(context: CanonicalAnalysisContext) -> ValidationResult:
     """Validate the full context chain and nested runtime."""
     bag = _Bag("validate_canonical_analysis_context", context.analysis_id)
@@ -1062,4 +1176,5 @@ PACK07_VALIDATOR_REGISTRY: dict[str, str] = {
     "validate_ten_god_ecosystem": "validate_ten_god_ecosystem",
     "validate_shen_sha_collection": "validate_shen_sha_collection",
     "validate_shen_sha_ecosystem": "validate_shen_sha_ecosystem",
+    "validate_evidence_priority_result": "validate_evidence_priority_result",
 }

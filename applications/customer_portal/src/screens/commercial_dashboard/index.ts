@@ -17,6 +17,7 @@ export { adaptCanXuong, CAN_XUONG_EMPTY_COPY, CAN_XUONG_DETAIL_HREF } from "./ca
 export {
   adaptOverviewCard,
   adaptOverviewExecutiveFacts,
+  adaptOverviewFocus,
   composeOverviewInsight,
   composeOverviewConclusion,
 } from "./overviewAdapter";

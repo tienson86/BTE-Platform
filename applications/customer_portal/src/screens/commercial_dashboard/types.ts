@@ -96,6 +96,19 @@ export type OverviewEvidenceView = {
   readonly key: OverviewEvidenceKey;
 };
 
+export type OverviewFocusKey =
+  | "driver"
+  | "bottleneck"
+  | "risk"
+  | "opportunity"
+  | "condition";
+
+export type OverviewFocusView = {
+  readonly label: string;
+  readonly value: string;
+  readonly key: OverviewFocusKey;
+};
+
 export type OverviewView = {
   readonly title: string;
   readonly subtitle: string;
@@ -107,6 +120,8 @@ export type OverviewView = {
   readonly conclusionSource: string;
   readonly identity: readonly OverviewEvidenceView[];
   readonly balance: readonly OverviewEvidenceView[];
+  readonly focusTitle: string;
+  readonly focus: readonly OverviewFocusView[];
 };
 
 export type BaziPillarKey = "year" | "month" | "day" | "hour";

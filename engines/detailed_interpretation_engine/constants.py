@@ -42,6 +42,8 @@ SCHEMA_SHEN_SHA: str = "bte.detailed_interpretation.shen_sha.v1"
 SHEN_SHA_RULESET_VERSION: str = "bte.detailed_interpretation.shen_sha.rules.v1"
 SCHEMA_SHEN_SHA_ECOSYSTEM: str = "bte.detailed_interpretation.shen_sha_ecosystem.v1"
 SHEN_SHA_ECOSYSTEM_RULESET_VERSION: str = "bte.detailed_interpretation.shen_sha_ecosystem.rules.v1"
+EVIDENCE_PRIORITY_RULESET_VERSION: str = "bte.detailed_interpretation.evidence_priority.rules.v1"
+DOMAIN_INTERPRETATION_RULESET_VERSION: str = "bte.detailed_interpretation.domain.rules.v1"
 
 PACK07_VALIDATOR_VERSION: str = "1.0.0"
 

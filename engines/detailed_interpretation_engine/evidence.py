@@ -1,6 +1,7 @@
 """Evidence Priority and supporting ecosystem shells.
 
-These objects hold structure only. Ranking and inference are not implemented.
+Ranking is implemented by evidence_priority.engine. These objects are the
+canonical result containers.
 """
 
 from __future__ import annotations
@@ -13,7 +14,7 @@ from engines.detailed_interpretation_engine.constants import (
     SCHEMA_EVIDENCE_PRIORITY,
     SCHEMA_RESULT,
 )
-from engines.detailed_interpretation_engine.enums import EvaluationStatus
+from engines.detailed_interpretation_engine.enums import EvaluationStatus, PriorityTier
 from engines.detailed_interpretation_engine.shen_sha.models import (
     ShenShaEcosystemResult,
     ShenShaInterpretationCollection,
@@ -99,16 +100,74 @@ class ShenShaEcosystem:
         )
 
 
+def _as_int(value: Any, default: int = 0) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
+@dataclass(frozen=True, slots=True)
+class EvidencePriorityFinding:
+    """One ranked evidence node after merge. Codes and labels, not prose."""
+
+    finding_id: str = ""
+    node_id: str = ""
+    tier: PriorityTier = PriorityTier.P5
+    rank: int = 0
+    domain: str = ""
+    category: str = ""
+    importance: str = ""
+    confidence: ConfidenceValue = field(default_factory=ConfidenceValue)
+    source_refs: tuple[str, ...] = ()
+    supporting_evidence: tuple[str, ...] = ()
+    conditions: tuple[str, ...] = ()
+    trace_ids: tuple[str, ...] = ()
+    tier_reason: str = ""
+    merge_origin: str = ""
+    confidence_source: str = ""
+    source_kind: str = ""
+    semantic_key: str = ""
+    customer_label: str = ""
+
+    @classmethod
+    def from_dict(cls, data: Mapping[str, Any] | None) -> EvidencePriorityFinding:
+        """Rebuild one ranked finding."""
+        payload = data or {}
+        return cls(
+            finding_id=as_str(payload.get("finding_id")),
+            node_id=as_str(payload.get("node_id")),
+            tier=as_enum(PriorityTier, payload.get("tier"), PriorityTier.P5),
+            rank=_as_int(payload.get("rank")),
+            domain=as_str(payload.get("domain")),
+            category=as_str(payload.get("category")),
+            importance=as_str(payload.get("importance")),
+            confidence=ConfidenceValue.from_dict(payload.get("confidence")),
+            source_refs=as_str_tuple(payload.get("source_refs")),
+            supporting_evidence=as_str_tuple(payload.get("supporting_evidence")),
+            conditions=as_str_tuple(payload.get("conditions")),
+            trace_ids=as_str_tuple(payload.get("trace_ids")),
+            tier_reason=as_str(payload.get("tier_reason")),
+            merge_origin=as_str(payload.get("merge_origin")),
+            confidence_source=as_str(payload.get("confidence_source")),
+            source_kind=as_str(payload.get("source_kind")),
+            semantic_key=as_str(payload.get("semantic_key")),
+            customer_label=as_str(payload.get("customer_label")),
+        )
+
+
 @dataclass(frozen=True, slots=True)
 class EvidencePriorityResult:
-    """DI-07 ranked-evidence container. Empty until the engine is implemented."""
+    """DI-07 ranked-evidence container bound on interpretation.evidence_priority."""
 
     schema_version: str = SCHEMA_EVIDENCE_PRIORITY
     ruleset_version: str = ""
+    analysis_id: str = ""
     status: EvaluationStatus = EvaluationStatus.NOT_EVALUATED
     dominant_evidence: tuple[str, ...] = ()
     supporting_evidence: tuple[str, ...] = ()
     risk_evidence: tuple[str, ...] = ()
+    opportunity_evidence: tuple[str, ...] = ()
     conditions: tuple[str, ...] = ()
     warnings: tuple[str, ...] = ()
     ranked_domains: tuple[str, ...] = ()
@@ -117,6 +176,16 @@ class EvidencePriorityResult:
     evidence_ids: tuple[str, ...] = ()
     trace_ids: tuple[str, ...] = ()
     warnings_engine: tuple[str, ...] = ()
+    findings: tuple[EvidencePriorityFinding, ...] = ()
+    mc01_grade: str = ""
+    score_engine_grade: str = ""
+    driver_ids: tuple[str, ...] = ()
+    bottleneck_ids: tuple[str, ...] = ()
+
+    @property
+    def state(self) -> EvaluationStatus:
+        """Frozen contract alias for status."""
+        return self.status
 
     @classmethod
     def from_dict(cls, data: Mapping[str, Any] | None) -> EvidencePriorityResult:
@@ -125,17 +194,21 @@ class EvidencePriorityResult:
         graph_raw = payload.get("graph")
         graph = dict(graph_raw) if isinstance(graph_raw, Mapping) else {}
         confidence_raw = payload.get("confidence")
+        findings_raw = payload.get("findings") or ()
+        status_raw = payload.get("status") if payload.get("status") is not None else payload.get("state")
         return cls(
             schema_version=as_str(payload.get("schema_version"), SCHEMA_EVIDENCE_PRIORITY),
             ruleset_version=as_str(payload.get("ruleset_version")),
+            analysis_id=as_str(payload.get("analysis_id")),
             status=as_enum(
                 EvaluationStatus,
-                payload.get("status"),
+                status_raw,
                 EvaluationStatus.NOT_EVALUATED,
             ),
             dominant_evidence=as_str_tuple(payload.get("dominant_evidence")),
             supporting_evidence=as_str_tuple(payload.get("supporting_evidence")),
             risk_evidence=as_str_tuple(payload.get("risk_evidence")),
+            opportunity_evidence=as_str_tuple(payload.get("opportunity_evidence")),
             conditions=as_str_tuple(payload.get("conditions")),
             warnings=as_str_tuple(payload.get("warnings")),
             ranked_domains=as_str_tuple(payload.get("ranked_domains")),
@@ -144,6 +217,14 @@ class EvidencePriorityResult:
             evidence_ids=as_str_tuple(payload.get("evidence_ids")),
             trace_ids=as_str_tuple(payload.get("trace_ids")),
             warnings_engine=as_str_tuple(payload.get("warnings_engine")),
+            findings=tuple(
+                EvidencePriorityFinding.from_dict(item if isinstance(item, Mapping) else None)
+                for item in findings_raw
+            ),
+            mc01_grade=as_str(payload.get("mc01_grade")),
+            score_engine_grade=as_str(payload.get("score_engine_grade")),
+            driver_ids=as_str_tuple(payload.get("driver_ids")),
+            bottleneck_ids=as_str_tuple(payload.get("bottleneck_ids")),
         )
 
 

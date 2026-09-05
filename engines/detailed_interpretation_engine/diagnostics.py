@@ -18,11 +18,15 @@ from engines.detailed_interpretation_engine.factories import (
 from engines.detailed_interpretation_engine.mc01 import attach_mc01_reference
 from engines.detailed_interpretation_engine.ten_gods.engine import interpret_and_bind_ten_gods
 from engines.detailed_interpretation_engine.shen_sha.engine import interpret_and_bind_shen_sha
+from engines.detailed_interpretation_engine.evidence_priority.engine import (
+    interpret_and_bind_evidence_priority,
+)
 from engines.detailed_interpretation_engine.validation import ValidationIssue, ValidationResult
 from engines.detailed_interpretation_engine.validators import (
     validate_api_projection,
     validate_canonical_runtime,
     validate_consulting_projection,
+    validate_evidence_priority_result,
     validate_export_projection,
     validate_pack07_context,
 )
@@ -111,6 +115,10 @@ def build_pack07_diagnostics(context: CanonicalAnalysisContext) -> Pack07Runtime
         validate_export_projection(export, context.runtime).issues
         + validate_api_projection(api, context.runtime).issues
         + validate_consulting_projection(consulting, context.runtime).issues
+        + validate_evidence_priority_result(
+            context.runtime.interpretation.evidence_priority,
+            context=context,
+        ).issues
     )
     issues = context_result.issues + extra
     mc01 = (
@@ -151,7 +159,11 @@ def build_pack07_diagnostics(context: CanonicalAnalysisContext) -> Pack07Runtime
         ten_gods_ecosystem=ecosystem_status,
         shen_sha=shen_sha_status,
         shen_sha_ecosystem=shen_eco_status,
-        evidence_priority=DiagnosticStatus.NOT_IMPLEMENTED,
+        evidence_priority=_layer_status(
+            context.runtime.interpretation.evidence_priority.status,
+            not context.runtime.interpretation.evidence_priority.findings
+            and not context.runtime.interpretation.evidence_priority.dominant_evidence,
+        ),
         domains=DiagnosticStatus.NOT_EVALUATED,
         luck=DiagnosticStatus.NOT_IMPLEMENTED,
         temporal=DiagnosticStatus.NOT_EVALUATED,
@@ -168,9 +180,12 @@ def diagnostics_from_payload(payload: Mapping[str, Any]) -> Pack07RuntimeDiagnos
     """Build diagnostics from an analyze-shaped payload."""
     bound = dict(payload)
     attach_mc01_reference(bound)
-    context = interpret_and_bind_shen_sha(
-        interpret_and_bind_ten_gods(
-            build_canonical_analysis_context_from_payload(bound),
+    context = interpret_and_bind_evidence_priority(
+        interpret_and_bind_shen_sha(
+            interpret_and_bind_ten_gods(
+                build_canonical_analysis_context_from_payload(bound),
+                bound,
+            ),
             bound,
         ),
         bound,

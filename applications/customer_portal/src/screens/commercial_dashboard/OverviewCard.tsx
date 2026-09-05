@@ -3,7 +3,7 @@
  */
 
 import type { ReactNode } from "react";
-import type { DashboardCardSpec, OverviewEvidenceView, OverviewView } from "./types";
+import type { DashboardCardSpec, OverviewEvidenceView, OverviewFocusView, OverviewView } from "./types";
 import { visualCardDom } from "./visualHierarchy";
 import { mobileCardDom } from "./mobile/mobileOrder";
 
@@ -12,6 +12,29 @@ type OverviewCardProps = {
   readonly model: OverviewView;
   readonly priorityTitle?: string;
 };
+
+function FocusSummary({
+  title,
+  items,
+}: {
+  readonly title: string;
+  readonly items: readonly OverviewFocusView[];
+}): ReactNode {
+  if (!items.length) return null;
+  return (
+    <section className="bte-ov__focus" data-overview-section="evidence-priority" aria-label={title}>
+      <h3 className="bte-ov__focus-title">{title}</h3>
+      <div className="bte-ov__focus-list">
+        {items.map((item) => (
+          <div key={item.key} className="bte-ov__focus-row" data-evidence-focus={item.key}>
+            <span className="bte-ov__focus-label">{item.label}</span>
+            <span className="bte-ov__focus-value">{item.value}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
 
 function ExecutiveFacts({
   items,
@@ -40,7 +63,8 @@ export function OverviewCard({ card, model, priorityTitle = "" }: OverviewCardPr
     !model.insight &&
     !model.summary &&
     !model.conclusion &&
-    !facts.length;
+    !facts.length &&
+    !model.focus.length;
   const topPriority = priorityTitle.trim();
   return (
     <article
@@ -57,6 +81,7 @@ export function OverviewCard({ card, model, priorityTitle = "" }: OverviewCardPr
         {model.subtitle ? <p className="bte-ov__subtitle">{model.subtitle}</p> : null}
       </header>
       <ExecutiveFacts items={facts} />
+      <FocusSummary title={model.focusTitle} items={model.focus} />
       {model.insight ? (
         <p className="bte-ov__insight" data-overview-section="insight" data-motion-reveal="insight">
           {model.insight}

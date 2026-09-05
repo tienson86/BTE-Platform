@@ -42,6 +42,7 @@ from engines.detailed_interpretation_engine.models import (
     DomainContext,
     DomainInterpretationResult,
     EvidenceContext,
+    EvidencePriorityFinding,
     EvidencePriorityResult,
     InterpretationContext,
     LegacyResult,
@@ -89,6 +90,7 @@ from engines.detailed_interpretation_engine.validators import (
     validate_ten_gods_collection,
     validate_shen_sha_collection,
     validate_shen_sha_ecosystem,
+    validate_evidence_priority_result,
 )
 
 __all__ = [
@@ -110,6 +112,7 @@ __all__ = [
     "DomainInterpretationResult",
     "EvidenceContext",
     "EvidenceContextBuilder",
+    "EvidencePriorityFinding",
     "EvidencePriorityResult",
     "InterpretationContext",
     "InterpretationContextBuilder",
@@ -166,4 +169,5 @@ __all__ = [
     "validate_ten_gods_collection",
     "validate_shen_sha_collection",
     "validate_shen_sha_ecosystem",
+    "validate_evidence_priority_result",
 ]
