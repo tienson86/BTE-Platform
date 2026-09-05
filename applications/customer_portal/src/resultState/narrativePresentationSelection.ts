@@ -115,6 +115,8 @@ function attachExecutiveFacts(
     balance: facts.balance,
     focusTitle: focus.title,
     focus: focus.items,
+    domainTitle: overview.domainTitle,
+    domains: overview.domains,
   };
 }
 
@@ -139,6 +141,8 @@ function emptyInterpretation(): InterpretationView {
     closing: "",
     closingSource: "",
     emptyMessage: INTERPRETATION_EMPTY,
+    domainTitle: "",
+    domains: [],
   };
 }
 

@@ -28,4 +28,6 @@ export const LUCK_VISUAL_FIXTURE: LuckView = {
   cycles: CYCLES,
   next: CYCLES[4],
   trend: "Đây là giai đoạn có xu hướng phát triển.",
+  activation: null,
+  interaction: null,
 };

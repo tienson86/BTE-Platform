@@ -202,5 +202,7 @@ export function adaptInterpretationCard(data: AnalysisDataDto | null | undefined
     closing: closing.body,
     closingSource: closing.source,
     emptyMessage: INTERPRETATION_EMPTY,
+    domainTitle: "",
+    domains: [],
   };
 }

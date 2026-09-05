@@ -353,4 +353,4 @@ def test_diagnostics_from_payload_binds_current_result() -> None:
     assert diagnostics.mc01_reference is DiagnosticStatus.PASS
     assert diagnostics.ten_gods in {DiagnosticStatus.PASS, DiagnosticStatus.PARTIAL}
     assert diagnostics.evidence_priority is DiagnosticStatus.PASS
-    assert diagnostics.domains is DiagnosticStatus.NOT_EVALUATED
+    assert diagnostics.domains is DiagnosticStatus.PASS

@@ -58,6 +58,10 @@ export const INTERPRETATION_LEAD_LABEL = "Tổng quan";
 
 export const INTERPRETATION_CLOSE_LABEL = "Kết luận";
 
+export const DOMAIN_PILLARS_TITLE = "6 trụ cột luận giải";
+
+export const DOMAIN_UNRESOLVED_COPY = "Chưa đủ dữ liệu để kết luận chi tiết";
+
 export const ACTION_PLAN_TITLE = "KẾ HOẠCH HÀNH ĐỘNG";
 
 export const ACTION_PLAN_EMPTY = "Chưa có đủ dữ liệu để tạo kế hoạch hành động.";

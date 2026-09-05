@@ -9,7 +9,13 @@ from engines.detailed_interpretation_engine.builders import (
     build_canonical_analysis_context_from_payload,
 )
 from engines.detailed_interpretation_engine.context_layers import CanonicalAnalysisContext
-from engines.detailed_interpretation_engine.enums import DiagnosticStatus, EvaluationStatus, ValidationStatus
+from engines.detailed_interpretation_engine.domains import DomainSection
+from engines.detailed_interpretation_engine.enums import (
+    DiagnosticStatus,
+    DomainState,
+    EvaluationStatus,
+    ValidationStatus,
+)
 from engines.detailed_interpretation_engine.factories import (
     api_model_from_runtime,
     consulting_model_from_runtime,
@@ -18,6 +24,15 @@ from engines.detailed_interpretation_engine.factories import (
 from engines.detailed_interpretation_engine.mc01 import attach_mc01_reference
 from engines.detailed_interpretation_engine.ten_gods.engine import interpret_and_bind_ten_gods
 from engines.detailed_interpretation_engine.shen_sha.engine import interpret_and_bind_shen_sha
+from engines.detailed_interpretation_engine.domain_interpretation.engine import (
+    interpret_and_bind_domain_interpretation,
+)
+from engines.detailed_interpretation_engine.luck_activation.engine import (
+    interpret_and_bind_luck_activation,
+)
+from engines.detailed_interpretation_engine.luck_interaction.engine import (
+    interpret_and_bind_luck_interaction,
+)
 from engines.detailed_interpretation_engine.evidence_priority.engine import (
     interpret_and_bind_evidence_priority,
 )
@@ -26,8 +41,11 @@ from engines.detailed_interpretation_engine.validators import (
     validate_api_projection,
     validate_canonical_runtime,
     validate_consulting_projection,
+    validate_domain_interpretation_result,
     validate_evidence_priority_result,
     validate_export_projection,
+    validate_luck_activation_result,
+    validate_luck_interaction_result,
     validate_pack07_context,
 )
 
@@ -49,6 +67,7 @@ class Pack07RuntimeDiagnostics:
     evidence_priority: DiagnosticStatus
     domains: DiagnosticStatus
     luck: DiagnosticStatus
+    luck_interaction: DiagnosticStatus
     temporal: DiagnosticStatus
     optimization: DiagnosticStatus
     narrative: DiagnosticStatus
@@ -73,6 +92,7 @@ class Pack07RuntimeDiagnostics:
             "evidence_priority": self.evidence_priority.value,
             "domains": self.domains.value,
             "luck": self.luck.value,
+            "luck_interaction": self.luck_interaction.value,
             "temporal": self.temporal.value,
             "optimization": self.optimization.value,
             "narrative": self.narrative.value,
@@ -104,6 +124,32 @@ def _layer_status(status: EvaluationStatus, empty: bool) -> DiagnosticStatus:
     return DiagnosticStatus.NOT_IMPLEMENTED
 
 
+def _domains_status(section: DomainSection) -> DiagnosticStatus:
+    states = (
+        section.authority.natal.state,
+        section.career.natal.state,
+        section.wealth.natal.state,
+        section.relationship.natal.state,
+        section.legacy.natal.state,
+        section.vitality.natal.state,
+    )
+    if all(item is DomainState.NOT_EVALUATED for item in states):
+        return DiagnosticStatus.NOT_EVALUATED
+    if any(item is DomainState.NOT_EVALUATED for item in states):
+        return DiagnosticStatus.PARTIAL
+    return DiagnosticStatus.PASS
+
+
+def _luck_status(result: Any) -> DiagnosticStatus:
+    empty = not result.items
+    return _layer_status(result.status, empty)
+
+
+def _luck_interaction_status(result: Any) -> DiagnosticStatus:
+    empty = not result.findings and not result.graph.edges
+    return _layer_status(result.status, empty)
+
+
 def build_pack07_diagnostics(context: CanonicalAnalysisContext) -> Pack07RuntimeDiagnostics:
     """Build development diagnostics from a Pack 07 context chain."""
     context_result = validate_pack07_context(context)
@@ -117,6 +163,18 @@ def build_pack07_diagnostics(context: CanonicalAnalysisContext) -> Pack07Runtime
         + validate_consulting_projection(consulting, context.runtime).issues
         + validate_evidence_priority_result(
             context.runtime.interpretation.evidence_priority,
+            context=context,
+        ).issues
+        + validate_domain_interpretation_result(
+            context.runtime.domains,
+            context=context,
+        ).issues
+        + validate_luck_activation_result(
+            context.runtime.temporal.luck_activation,
+            context=context,
+        ).issues
+        + validate_luck_interaction_result(
+            context.runtime.temporal.luck_interaction,
             context=context,
         ).issues
     )
@@ -164,8 +222,9 @@ def build_pack07_diagnostics(context: CanonicalAnalysisContext) -> Pack07Runtime
             not context.runtime.interpretation.evidence_priority.findings
             and not context.runtime.interpretation.evidence_priority.dominant_evidence,
         ),
-        domains=DiagnosticStatus.NOT_EVALUATED,
-        luck=DiagnosticStatus.NOT_IMPLEMENTED,
+        domains=_domains_status(context.runtime.domains),
+        luck=_luck_status(context.runtime.temporal.luck_activation),
+        luck_interaction=_luck_interaction_status(context.runtime.temporal.luck_interaction),
         temporal=DiagnosticStatus.NOT_EVALUATED,
         optimization=DiagnosticStatus.NOT_EVALUATED,
         narrative=DiagnosticStatus.NOT_EVALUATED,
@@ -180,14 +239,22 @@ def diagnostics_from_payload(payload: Mapping[str, Any]) -> Pack07RuntimeDiagnos
     """Build diagnostics from an analyze-shaped payload."""
     bound = dict(payload)
     attach_mc01_reference(bound)
-    context = interpret_and_bind_evidence_priority(
-        interpret_and_bind_shen_sha(
-            interpret_and_bind_ten_gods(
-                build_canonical_analysis_context_from_payload(bound),
+    context = interpret_and_bind_luck_interaction(
+        interpret_and_bind_luck_activation(
+            interpret_and_bind_domain_interpretation(
+                interpret_and_bind_evidence_priority(
+                    interpret_and_bind_shen_sha(
+                        interpret_and_bind_ten_gods(
+                            build_canonical_analysis_context_from_payload(bound),
+                            bound,
+                        ),
+                        bound,
+                    ),
+                    bound,
+                ),
                 bound,
             ),
             bound,
-        ),
-        bound,
+        )
     )
     return build_pack07_diagnostics(context)

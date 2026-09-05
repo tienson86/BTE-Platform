@@ -26,6 +26,9 @@ import { LIFE_CONSULTING_VISUAL_FIXTURE } from "./lifeConsultingFixture";
 import { INTERPRETATION_VISUAL_FIXTURE } from "./interpretationFixture";
 import { ACTION_PLAN_VISUAL_FIXTURE } from "./actionPlanFixture";
 import { OVERVIEW_VISUAL_FIXTURE } from "./overviewFixture";
+import { adaptOverviewCard } from "./overviewAdapter";
+import { adaptInterpretationCard } from "./interpretationAdapter";
+import { attachInterpretationDomains, attachOverviewDomains } from "./domainAdapter";
 import { RESULT_PAGE_TITLE } from "./cards";
 import { DashboardGrid } from "./DashboardGrid";
 import { IdentityHeader } from "./IdentityHeader";
@@ -179,13 +182,18 @@ export function CommercialDashboardPage({
       ? OVERVIEW_VISUAL_FIXTURE
       : layoutMode === "skeleton" || previewFallback
         ? null
-        : narrative?.overview ?? null;
+        : attachOverviewDomains(narrative?.overview ?? adaptOverviewCard(analysis), analysis);
   const interpretation =
     layoutMode === "visual"
       ? INTERPRETATION_VISUAL_FIXTURE
       : layoutMode === "skeleton" || previewFallback
         ? null
-        : narrative?.interpretation ?? null;
+        : attachInterpretationDomains(
+            narrative?.interpretation?.available
+              ? narrative.interpretation
+              : adaptInterpretationCard(analysis),
+            analysis,
+          );
   const actionPlan =
     layoutMode === "visual"
       ? ACTION_PLAN_VISUAL_FIXTURE

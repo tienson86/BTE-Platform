@@ -48,6 +48,8 @@ export function adaptOverviewFromPresentation(
     balance: [],
     focusTitle: "",
     focus: [],
+    domainTitle: "",
+    domains: [],
   };
 }
 
@@ -79,6 +81,8 @@ export function adaptInterpretationFromPresentation(
     closing,
     closingSource: closing ? "narrative_v2.interpretation.closing" : "",
     emptyMessage: INTERPRETATION_EMPTY,
+    domainTitle: "",
+    domains: [],
   };
 }
 

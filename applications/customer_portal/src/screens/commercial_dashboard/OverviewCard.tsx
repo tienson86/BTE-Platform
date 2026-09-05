@@ -3,7 +3,7 @@
  */
 
 import type { ReactNode } from "react";
-import type { DashboardCardSpec, OverviewEvidenceView, OverviewFocusView, OverviewView } from "./types";
+import type { DashboardCardSpec, DomainSummaryView, OverviewEvidenceView, OverviewFocusView, OverviewView } from "./types";
 import { visualCardDom } from "./visualHierarchy";
 import { mobileCardDom } from "./mobile/mobileOrder";
 
@@ -36,6 +36,28 @@ function FocusSummary({
   );
 }
 
+function DomainSummary({
+  title,
+  items,
+}: {
+  readonly title: string;
+  readonly items: readonly DomainSummaryView[];
+}): ReactNode {
+  if (!items.length) return null;
+  return (
+    <section className="bte-ov__domains" data-overview-section="domains" aria-label={title}>
+      <h3 className="bte-ov__focus-title">{title}</h3>
+      <div className="bte-ov__domain-list">
+        {items.map((item) => (
+          <div key={item.id} className="bte-ov__domain-chip" data-domain-summary={item.id}>
+            <span className="bte-ov__domain-name">{item.title}</span>
+            <span className="bte-ov__domain-state">{item.stateLabel}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
 function ExecutiveFacts({
   items,
 }: {
@@ -64,7 +86,8 @@ export function OverviewCard({ card, model, priorityTitle = "" }: OverviewCardPr
     !model.summary &&
     !model.conclusion &&
     !facts.length &&
-    !model.focus.length;
+    !model.focus.length &&
+    !model.domains.length;
   const topPriority = priorityTitle.trim();
   return (
     <article
@@ -82,6 +105,7 @@ export function OverviewCard({ card, model, priorityTitle = "" }: OverviewCardPr
       </header>
       <ExecutiveFacts items={facts} />
       <FocusSummary title={model.focusTitle} items={model.focus} />
+      <DomainSummary title={model.domainTitle} items={model.domains} />
       {model.insight ? (
         <p className="bte-ov__insight" data-overview-section="insight" data-motion-reveal="insight">
           {model.insight}

@@ -27,6 +27,8 @@ export const OVERVIEW_VISUAL_FIXTURE: OverviewView = {
     { key: "favorable-god", label: "Hỷ Thần", value: "Thủy · Nhâm" },
     { key: "avoid-god", label: "Kỵ Thần", value: "Kim · Canh" },
   ],
-  focusTitle: "",
-  focus: [],
-};
+    focusTitle: "",
+    focus: [],
+    domainTitle: "",
+    domains: [],
+  };

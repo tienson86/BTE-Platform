@@ -70,6 +70,24 @@ from engines.detailed_interpretation_engine.shen_sha.presentation import (
     present_shen_sha_customer,
     present_shen_sha_ecosystem_customer,
 )
+from engines.detailed_interpretation_engine.domain_interpretation.engine import (
+    interpret_and_bind_domain_interpretation,
+)
+from engines.detailed_interpretation_engine.domain_interpretation.presentation import (
+    present_domains_customer,
+)
+from engines.detailed_interpretation_engine.luck_activation.engine import (
+    interpret_and_bind_luck_activation,
+)
+from engines.detailed_interpretation_engine.luck_activation.presentation import (
+    present_luck_activation_customer,
+)
+from engines.detailed_interpretation_engine.luck_interaction.engine import (
+    interpret_and_bind_luck_interaction,
+)
+from engines.detailed_interpretation_engine.luck_interaction.presentation import (
+    present_luck_interaction_customer,
+)
 from engines.detailed_interpretation_engine.evidence_priority.engine import (
     interpret_and_bind_evidence_priority,
 )
@@ -481,6 +499,9 @@ class OrchestratorService:
         context = interpret_and_bind_ten_gods(context, payload)
         context = interpret_and_bind_shen_sha(context, payload)
         context = interpret_and_bind_evidence_priority(context, payload)
+        context = interpret_and_bind_domain_interpretation(context, payload)
+        context = interpret_and_bind_luck_activation(context, payload)
+        context = interpret_and_bind_luck_interaction(context)
         analysis.pack07_context = context
         natal = context.runtime.interpretation.ten_gods.natal
         if natal.items:
@@ -505,6 +526,22 @@ class OrchestratorService:
         ranked = context.runtime.interpretation.evidence_priority
         if ranked.findings:
             payload["evidence_priority"] = present_evidence_priority_customer(ranked)
+        domains = context.runtime.domains
+        customer_domains = present_domains_customer(domains)
+        if customer_domains:
+            payload["domains"] = customer_domains
+        luck_payload = payload.get("luck")
+        if isinstance(luck_payload, dict):
+            customer_luck = present_luck_activation_customer(
+                context.runtime.temporal.luck_activation
+            )
+            if customer_luck:
+                luck_payload["activation"] = customer_luck
+            customer_interaction = present_luck_interaction_customer(
+                context.runtime.temporal.luck_interaction
+            )
+            if customer_interaction:
+                luck_payload["interaction"] = customer_interaction
 
     def _attach_can_xuong(self, payload: dict[str, Any], calendar: Any, bazi_chart: Any) -> None:
         """Publish analysis.can_xuong from the dedicated engine. Soft-fail."""

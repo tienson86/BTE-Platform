@@ -122,6 +122,36 @@ export type OverviewView = {
   readonly balance: readonly OverviewEvidenceView[];
   readonly focusTitle: string;
   readonly focus: readonly OverviewFocusView[];
+  readonly domainTitle: string;
+  readonly domains: readonly DomainSummaryView[];
+};
+
+export type DomainSummaryView = {
+  readonly id: string;
+  readonly title: string;
+  readonly stateLabel: string;
+};
+
+export type DomainDimensionView = {
+  readonly label: string;
+  readonly value: string;
+};
+
+export type DomainPillarView = {
+  readonly id: string;
+  readonly title: string;
+  readonly state: string;
+  readonly stateLabel: string;
+  readonly driver: string;
+  readonly support: string;
+  readonly bottleneck: string;
+  readonly opportunity: string;
+  readonly caution: string;
+  readonly condition: string;
+  readonly confidence: string;
+  readonly summary: string;
+  readonly dimensions: readonly DomainDimensionView[];
+  readonly unresolved: boolean;
 };
 
 export type BaziPillarKey = "year" | "month" | "day" | "hour";
@@ -334,6 +364,42 @@ export type LuckCycleView = {
   readonly isCurrent: boolean;
 };
 
+export type LuckActivationItemView = {
+  readonly id: string;
+  readonly title: string;
+  readonly state: string;
+  readonly stateLabel: string;
+  readonly driver: string;
+  readonly marker: string;
+  readonly bottleneck: string;
+  readonly conditions: readonly string[];
+};
+
+export type LuckActivationView = {
+  readonly title: string;
+  readonly timeWindow: string;
+  readonly ganZhi: string;
+  readonly items: readonly LuckActivationItemView[];
+};
+
+export type LuckInteractionEdgeView = {
+  readonly source: string;
+  readonly target: string;
+  readonly type: string;
+  readonly explanation: string;
+  readonly condition: string;
+};
+
+export type LuckInteractionView = {
+  readonly title: string;
+  readonly situation: string;
+  readonly driver: string;
+  readonly bottleneck: string;
+  readonly opportunity: string;
+  readonly risk: string;
+  readonly edges: readonly LuckInteractionEdgeView[];
+};
+
 export type LuckView = {
   readonly title: string;
   readonly available: boolean;
@@ -343,6 +409,8 @@ export type LuckView = {
   readonly cycles: readonly LuckCycleView[];
   readonly next: LuckCycleView | null;
   readonly trend: string;
+  readonly activation: LuckActivationView | null;
+  readonly interaction: LuckInteractionView | null;
 };
 
 export type InterpretationZoneId = "observation" | "reasoning" | "impact" | "recommendation";
@@ -365,6 +433,8 @@ export type InterpretationView = {
   readonly closing: string;
   readonly closingSource: string;
   readonly emptyMessage: string;
+  readonly domainTitle: string;
+  readonly domains: readonly DomainPillarView[];
 };
 
 export type ActionItemView = {

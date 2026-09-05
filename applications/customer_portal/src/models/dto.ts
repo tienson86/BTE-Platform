@@ -147,6 +147,44 @@ export type LuckCycleDto = {
   readonly branch_element?: string;
 };
 
+export type LuckActivationItemDto = {
+  readonly id?: string;
+  readonly title?: string;
+  readonly state?: string;
+  readonly state_label?: string;
+  readonly driver?: string;
+  readonly support?: string;
+  readonly stress?: string;
+  readonly marker?: string;
+  readonly bottleneck?: string;
+  readonly conditions?: readonly string[];
+};
+
+export type LuckActivationDto = {
+  readonly title?: string;
+  readonly time_window?: string;
+  readonly gan_zhi?: string;
+  readonly items?: readonly LuckActivationItemDto[];
+};
+
+export type LuckInteractionEdgeDto = {
+  readonly source?: string;
+  readonly target?: string;
+  readonly type?: string;
+  readonly explanation?: string;
+  readonly condition?: string;
+};
+
+export type LuckInteractionDto = {
+  readonly title?: string;
+  readonly situation?: string;
+  readonly driver?: string;
+  readonly bottleneck?: string;
+  readonly opportunity?: string;
+  readonly risk?: string;
+  readonly edges?: readonly LuckInteractionEdgeDto[];
+};
+
 export type LuckDto = {
   readonly available?: boolean;
   readonly direction?: string;
@@ -159,6 +197,8 @@ export type LuckDto = {
   readonly precision?: string;
   readonly current_age_for_luck?: number;
   readonly gender_label?: string;
+  readonly activation?: LuckActivationDto | null;
+  readonly interaction?: LuckInteractionDto | null;
 };
 
 export type SeriesItemDto = {
@@ -354,6 +394,29 @@ export type EvidencePrioritySummaryDto = {
   readonly condition?: string;
 };
 
+export type DomainSummaryDto = {
+  readonly id?: string;
+  readonly title?: string;
+  readonly state?: string;
+  readonly state_label?: string;
+  readonly driver?: string;
+  readonly driver_id?: string;
+  readonly support?: string;
+  readonly bottleneck?: string;
+  readonly opportunity?: string;
+  readonly caution?: string;
+  readonly condition?: string;
+  readonly confidence?: string;
+  readonly summary?: string;
+  readonly dimensions?: readonly { readonly label?: string; readonly value?: string }[];
+  readonly unresolved?: boolean;
+};
+
+export type DomainInterpretationSummaryDto = {
+  readonly title?: string;
+  readonly items?: readonly DomainSummaryDto[];
+};
+
 /** `data` payload from POST /analyze. */
 export type AnalysisDataDto = {
   readonly pipeline?: readonly string[];
@@ -412,6 +475,7 @@ export type AnalysisDataDto = {
   /** Pre-composed CK-01 commercial consulting. Presentation copies only. */
   readonly commercial_consulting?: CommercialConsultingDto;
   readonly evidence_priority?: EvidencePrioritySummaryDto;
+  readonly domains?: DomainInterpretationSummaryDto;
   readonly [key: string]: unknown;
 };
 

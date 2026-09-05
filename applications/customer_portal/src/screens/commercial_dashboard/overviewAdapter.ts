@@ -178,6 +178,8 @@ export function adaptOverviewCard(data: AnalysisDataDto | null | undefined): Ove
     balance: facts.balance,
     focusTitle: focus.title,
     focus: focus.items,
+    domainTitle: "",
+    domains: [],
   };
 }
 

@@ -376,7 +376,7 @@ def test_diagnostics_and_public_analyze_case_0001() -> None:
     assert body.get("score", {}).get("grade") == "D+"
     diagnostics = diagnostics_from_payload(body)
     assert diagnostics.evidence_priority is DiagnosticStatus.PASS
-    assert diagnostics.domains is DiagnosticStatus.NOT_EVALUATED
+    assert diagnostics.domains is DiagnosticStatus.PASS
     live = client.post("/api/v1/dev/pack07/diagnostics", json=CASE_0001)
     assert live.status_code == 200
     assert live.json()["data"]["evidence_priority"] == "PASS"

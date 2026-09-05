@@ -86,6 +86,21 @@ class DomainState(str, Enum):
     NOT_EVALUATED = "not_evaluated"
 
 
+class ActivationState(str, Enum):
+    """Luck-window expression state (DI-09). Not natal DomainState."""
+
+    DORMANT = "dormant"
+    WEAK = "weak"
+    MODERATE = "moderate"
+    STRONG = "strong"
+    PEAK = "peak"
+    OVERLOADED = "overloaded"
+    BLOCKED = "blocked"
+    SUPPRESSED = "suppressed"
+    CONDITIONAL = "conditional"
+    UNRESOLVED = "unresolved"
+
+
 class PriorityTier(str, Enum):
     """Evidence Priority tiers (DI-07)."""
 

@@ -1,10 +1,15 @@
 /**
- * Interpretation Card — LUẬN GIẢI TỔNG THỂ. Published narrative only.
+ * Interpretation Card — LUẬN GIẢI TỔNG THỂ plus compact Domain pillars.
  */
 
 import { useState, type ReactNode } from "react";
 import { INTERPRETATION_CLOSE_LABEL, INTERPRETATION_LEAD_LABEL } from "./cards";
-import type { DashboardCardSpec, InterpretationView, InterpretationZoneView } from "./types";
+import type {
+  DashboardCardSpec,
+  DomainPillarView,
+  InterpretationView,
+  InterpretationZoneView,
+} from "./types";
 import { visualCardDom } from "./visualHierarchy";
 import { MobileToggle, useMobileOpen } from "./mobile/MobileToggle";
 import { mobileCardDom } from "./mobile/mobileOrder";
@@ -24,19 +29,100 @@ function Zone({ zone }: { readonly zone: InterpretationZoneView }): ReactNode {
   );
 }
 
+function DomainRow({
+  label,
+  value,
+}: {
+  readonly label: string;
+  readonly value: string;
+}): ReactNode {
+  if (!value) return null;
+  return (
+    <div className="bte-dom__row">
+      <span className="bte-dom__label">{label}</span>
+      <span className="bte-dom__value">{value}</span>
+    </div>
+  );
+}
+
+function DomainPillars({
+  title,
+  items,
+}: {
+  readonly title: string;
+  readonly items: readonly DomainPillarView[];
+}): ReactNode {
+  const [openId, setOpenId] = useState("");
+  if (!items.length) return null;
+  return (
+    <section className="bte-dom" data-domain-section="pillars" aria-label={title}>
+      <h3 className="bte-int__zone-title">{title}</h3>
+      <div className="bte-dom__list">
+        {items.map((item) => {
+          const open = openId === item.id;
+          return (
+            <article
+              key={item.id}
+              className="bte-dom__card"
+              data-domain-id={item.id}
+              data-domain-open={open ? "true" : "false"}
+            >
+              <button
+                type="button"
+                className="bte-dom__summary"
+                aria-expanded={open}
+                onClick={() => setOpenId(open ? "" : item.id)}
+              >
+                <span className="bte-dom__title">{item.title}</span>
+                <span className="bte-dom__state">{item.stateLabel}</span>
+              </button>
+              <div className="bte-dom__preview">
+                <DomainRow label="Động lực" value={item.unresolved ? "" : item.driver} />
+                <DomainRow label="Điểm nghẽn" value={item.unresolved ? "" : item.bottleneck} />
+                <DomainRow label="Cơ hội" value={item.unresolved ? "" : item.opportunity} />
+                <DomainRow label="Lưu ý" value={item.unresolved ? "" : item.caution} />
+                {item.unresolved ? <p className="bte-dom__empty">{item.summary}</p> : null}
+              </div>
+              {open ? (
+                <div className="bte-dom__detail" data-domain-detail={item.id}>
+                  {item.summary && !item.unresolved ? <p className="bte-dom__copy">{item.summary}</p> : null}
+                  <DomainRow label="Hỗ trợ" value={item.support} />
+                  <DomainRow label="Điều kiện" value={item.condition} />
+                  <DomainRow label="Độ tin cậy" value={item.confidence} />
+                  {item.dimensions.length ? (
+                    <div className="bte-dom__dims">
+                      {item.dimensions.map((dimension) => (
+                        <div key={dimension.label} className="bte-dom__dim">
+                          <span>{dimension.label}</span>
+                          <strong>{dimension.value}</strong>
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              ) : null}
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 function canReveal(model: InterpretationView): boolean {
   if (model.leadExtra || model.closing) return true;
   return model.zones.some((zone) => Boolean(zone.extra));
 }
 
 /**
- * Full-width synthesis card. Renders adapter-prepared narrative blocks only.
+ * Full-width synthesis card. Renders adapter-prepared narrative and domain labels.
  */
 export function InterpretationCard({ card, model }: InterpretationCardProps): ReactNode {
   const [expanded, setExpanded] = useState(false);
   const mobile = useMobileOpen();
   const reveal = canReveal(model);
   const visibleZones = model.zones.filter((zone) => zone.body);
+  const hasDomains = model.domains.length > 0;
 
   return (
     <article
@@ -73,6 +159,7 @@ export function InterpretationCard({ card, model }: InterpretationCardProps): Re
         </p>
       ) : (
         <>
+          <DomainPillars title={model.domainTitle} items={model.domains} />
           {model.lead ? (
             <section className="bte-int__lead-block" data-int-lead="true" data-motion-reveal="lead">
               <h3 className="bte-int__zone-title">{INTERPRETATION_LEAD_LABEL}</h3>
@@ -101,6 +188,11 @@ export function InterpretationCard({ card, model }: InterpretationCardProps): Re
               <h3 className="bte-int__zone-title">{INTERPRETATION_CLOSE_LABEL}</h3>
               <p className="bte-int__closing">{model.closing}</p>
             </section>
+          ) : null}
+          {!hasDomains && !model.lead && !visibleZones.length && !model.closing ? (
+            <p className="bte-int__empty" data-int-empty="true">
+              {model.emptyMessage}
+            </p>
           ) : null}
         </>
       )}

@@ -22,6 +22,7 @@ from engines.detailed_interpretation_engine.constants import (
     PUBLISHED_DOMAIN_IDS,
     SCHEMA_CONTEXT,
     SCHEMA_EVIDENCE_PRIORITY,
+    SCHEMA_LUCK_ACTIVATION,
     SCHEMA_RUNTIME_CONTRACT,
     SCHEMA_SHEN_SHA,
     SCHEMA_SHEN_SHA_ECOSYSTEM,
@@ -40,6 +41,7 @@ from engines.detailed_interpretation_engine.context_layers import (
     TemporalContext,
 )
 from engines.detailed_interpretation_engine.enums import (
+    ActivationState,
     CombinationState,
     DomainState,
     EvaluationStatus,
@@ -52,6 +54,33 @@ from engines.detailed_interpretation_engine.enums import (
     ValidationStatus,
 )
 from engines.detailed_interpretation_engine.exceptions import DetailedInterpretationValidationError
+from engines.detailed_interpretation_engine.domains import DomainInterpretationResult, DomainSection
+from engines.detailed_interpretation_engine.domain_interpretation.constants import (
+    DOMAIN_DRIVER_IDS,
+    FORBIDDEN_AUTHORITY_DRIVER_IDS,
+    FORBIDDEN_VITALITY_DRIVER_IDS,
+    FORBIDDEN_WEALTH_DRIVER_IDS,
+    GRAPH_RELATIONS,
+    KNOWN_DOMAIN_IDS,
+    MAIN_DOMAIN_IDS,
+    MAJOR_DAMAGE_TYPES,
+    SHEN_SHA_SOURCE_KINDS as DOMAIN_SHEN_SHA_KINDS,
+)
+from engines.detailed_interpretation_engine.domain_interpretation.labels import DAMAGE_LABELS, DRIVER_LABELS
+from engines.detailed_interpretation_engine.luck_activation.constants import (
+    ACTIVATION_DRIVER_IDS,
+    ACTIVATION_TYPES,
+    KNOWN_ACTIVATION_IDS,
+    MAIN_ACTIVATION_IDS,
+)
+from engines.detailed_interpretation_engine.luck_activation.models import (
+    ACTIVATION_GRAPH_RELATIONS,
+    DomainActivationResult,
+)
+from engines.detailed_interpretation_engine.luck_interaction.validation import (
+    validate_luck_interaction_result,
+)
+from engines.detailed_interpretation_engine.temporal import LuckActivationResult
 from engines.detailed_interpretation_engine.evidence import EvidencePriorityResult
 from engines.detailed_interpretation_engine.evidence_priority.constants import (
     SHEN_SHA_SOURCE_KINDS,
@@ -330,13 +359,22 @@ def validate_domain_context(context: DomainContext) -> ValidationResult:
                 actual=natal.domain_id,
             )
         evaluated = natal.state not in (DomainState.NOT_EVALUATED, DomainState.UNRESOLVED)
-        if evaluated and not natal.supporting_evidence_ids and not natal.trace_ids:
+        if evaluated and not natal.supporting_evidence_ids and not natal.trace_ids and not natal.evidence_ids:
             bag.add(
                 "P7V-DOMAIN-EVALUATED-EMPTY",
                 IssueSeverity.ERROR,
                 "domain",
                 "evaluated domain shell requires source refs",
                 field=f"{natal.domain_id}.supporting_evidence_ids",
+            )
+        if natal.driver_source.lower().startswith("shen_sha") or "shen_sha" in natal.driver_source:
+            bag.add(
+                "P7V-DOMAIN-SHEN-SHA-DRIVER",
+                IssueSeverity.CRITICAL,
+                "domain",
+                "Shen Sha cannot be Domain Driver",
+                field=f"{natal.domain_id}.driver_source",
+                actual=natal.driver_source,
             )
     return bag.finish()
 
@@ -1119,6 +1157,397 @@ def validate_evidence_priority_result(
     return bag.finish()
 
 
+def validate_domain_interpretation_result(
+    section: DomainSection,
+    context: CanonicalAnalysisContext | None = None,
+) -> ValidationResult:
+    """Guard domain IDs, Evidence Priority refs, and Shen Sha / ownership boundaries."""
+    analysis_id = context.analysis_id if context is not None else ""
+    bag = _Bag("validate_domain_interpretation_result", analysis_id)
+    ep = context.runtime.interpretation.evidence_priority if context is not None else EvidencePriorityResult()
+    ep_ids = set(ep.evidence_ids) | {item.finding_id for item in ep.findings if item.finding_id}
+    if context is not None:
+        _match_id(
+            bag,
+            context.analysis_id,
+            ep.analysis_id or context.analysis_id,
+            "domain",
+            "evidence_priority.analysis_id",
+            "P7V-DOMAIN-ANALYSIS-ID",
+        )
+    natals = [
+        section.authority.natal,
+        section.career.natal,
+        section.wealth.natal,
+        section.relationship.natal,
+        section.legacy.natal,
+        section.vitality.natal,
+        *section.supporting.values(),
+    ]
+    seen: set[str] = set()
+    for natal in natals:
+        if natal.domain_id not in KNOWN_DOMAIN_IDS:
+            bag.add(
+                "P7V-DOMAIN-UNKNOWN-ID",
+                IssueSeverity.ERROR,
+                "domain",
+                "unknown domain id",
+                field="domain_id",
+                actual=natal.domain_id,
+            )
+        if natal.domain_id in MAIN_DOMAIN_IDS and natal.domain_id in seen:
+            bag.add(
+                "P7V-DOMAIN-DUPLICATE",
+                IssueSeverity.ERROR,
+                "domain",
+                "published domain duplicated",
+                field=natal.domain_id,
+            )
+        seen.add(natal.domain_id)
+        evaluated = natal.state not in (DomainState.NOT_EVALUATED, DomainState.UNRESOLVED)
+        refs = natal.evidence_ids or natal.supporting_evidence_ids
+        if evaluated and refs and ep_ids:
+            unknown = [item for item in refs if item not in ep_ids]
+            if unknown:
+                bag.add(
+                    "P7V-DOMAIN-EVIDENCE-REF",
+                    IssueSeverity.ERROR,
+                    "domain",
+                    "domain evidence_ids must reference Evidence Priority",
+                    field=f"{natal.domain_id}.evidence_ids",
+                    actual=",".join(unknown[:4]),
+                )
+        source = f"{natal.driver_source} {natal.bottleneck_source} {natal.support_source}".lower()
+        if any(kind in source for kind in DOMAIN_SHEN_SHA_KINDS) and natal.driver_source:
+            if any(kind in natal.driver_source.lower() for kind in DOMAIN_SHEN_SHA_KINDS):
+                bag.add(
+                    "P7V-DOMAIN-SHEN-SHA-DRIVER",
+                    IssueSeverity.CRITICAL,
+                    "domain",
+                    "Shen Sha cannot be Domain Driver",
+                    field=f"{natal.domain_id}.driver_source",
+                    actual=natal.driver_source,
+                )
+        _validate_domain_driver_contract(bag, natal)
+        for key in ("pattern", "grade", "achievement", "wealth_profile", "career_profile"):
+            if key in natal.dimensions:
+                bag.add(
+                    "P7V-DOMAIN-PROFILE-COPY",
+                    IssueSeverity.CRITICAL,
+                    "domain",
+                    "domain must not duplicate MC-01 owned profiles",
+                    field=f"{natal.domain_id}.dimensions.{key}",
+                )
+    for edge in section.graph.edges:
+        if edge.relation not in GRAPH_RELATIONS:
+            bag.add(
+                "P7V-DOMAIN-GRAPH-RELATION",
+                IssueSeverity.ERROR,
+                "domain",
+                "unknown domain graph relation",
+                field="graph.edges.relation",
+                actual=edge.relation,
+            )
+        if not edge.evidence_ids:
+            bag.add(
+                "P7V-DOMAIN-GRAPH-EVIDENCE",
+                IssueSeverity.ERROR,
+                "domain",
+                "domain graph edge requires evidence",
+                field=f"{edge.source}->{edge.target}",
+            )
+        if edge.source == edge.target:
+            bag.add(
+                "P7V-DOMAIN-GRAPH-SELF",
+                IssueSeverity.ERROR,
+                "domain",
+                "domain graph edge cannot copy a node onto itself",
+                field=edge.source,
+            )
+    return bag.finish()
+
+
+def _validate_domain_driver_contract(_bag: _Bag, natal: DomainInterpretationResult) -> None:
+    """Reject unknown, damage, dimension, and risk-as-driver values."""
+    if natal.domain_id not in MAIN_DOMAIN_IDS:
+        return
+    if natal.state in {DomainState.NOT_EVALUATED, DomainState.UNRESOLVED}:
+        return
+    allowed = DOMAIN_DRIVER_IDS.get(natal.domain_id, frozenset())
+    driver_id = natal.driver_id.strip()
+    if not driver_id:
+        _bag.add(
+            "P7V-DOMAIN-DRIVER-MISSING",
+            IssueSeverity.ERROR,
+            "domain",
+            "evaluated domain requires canonical driver_id",
+            field=f"{natal.domain_id}.driver_id",
+        )
+        return
+    if driver_id not in allowed:
+        _bag.add(
+            "P7V-DOMAIN-DRIVER-UNKNOWN",
+            IssueSeverity.ERROR,
+            "domain",
+            "unknown domain driver",
+            field=f"{natal.domain_id}.driver_id",
+            actual=driver_id,
+        )
+    forbidden = set(MAJOR_DAMAGE_TYPES)
+    if natal.domain_id == "authority":
+        forbidden |= set(FORBIDDEN_AUTHORITY_DRIVER_IDS)
+    if natal.domain_id == "wealth":
+        forbidden |= set(FORBIDDEN_WEALTH_DRIVER_IDS)
+    if natal.domain_id == "vitality":
+        forbidden |= set(FORBIDDEN_VITALITY_DRIVER_IDS)
+    if driver_id in forbidden:
+        _bag.add(
+            "P7V-DOMAIN-DRIVER-TYPE",
+            IssueSeverity.CRITICAL,
+            "domain",
+            "damage, dimension, or risk cannot be Domain Driver",
+            field=f"{natal.domain_id}.driver_id",
+            actual=driver_id,
+        )
+    label = natal.driver.strip()
+    if label and label in set(DAMAGE_LABELS.values()):
+        _bag.add(
+            "P7V-DOMAIN-DRIVER-DAMAGE",
+            IssueSeverity.CRITICAL,
+            "domain",
+            "Damage cannot become Domain Driver",
+            field=f"{natal.domain_id}.driver",
+            actual=label,
+        )
+    expected_label = DRIVER_LABELS.get(driver_id, "")
+    if driver_id not in {"not_applicable", "unresolved"} and expected_label and label != expected_label:
+        _bag.add(
+            "P7V-DOMAIN-DRIVER-LABEL",
+            IssueSeverity.ERROR,
+            "domain",
+            "driver label must map from canonical driver_id",
+            field=f"{natal.domain_id}.driver",
+            expected=expected_label,
+            actual=label,
+        )
+    if label and natal.bottleneck.strip() and label == natal.bottleneck.strip():
+        _bag.add(
+            "P7V-DOMAIN-DRIVER-BOTTLENECK",
+            IssueSeverity.ERROR,
+            "domain",
+            "same semantic finding cannot be driver and bottleneck",
+            field=f"{natal.domain_id}.driver",
+            actual=label,
+        )
+
+
+def validate_luck_activation_result(
+    result: LuckActivationResult,
+    context: CanonicalAnalysisContext | None = None,
+) -> ValidationResult:
+    """Guard luck activation IDs, natal immutability, and temporal-only drivers."""
+    analysis_id = context.analysis_id if context is not None else result.analysis_id
+    bag = _Bag("validate_luck_activation_result", analysis_id)
+    _check_schema(bag, result.schema_version or SCHEMA_LUCK_ACTIVATION, "luck_activation")
+    if result.analysis_id and analysis_id:
+        _match_id(
+            bag,
+            analysis_id,
+            result.analysis_id,
+            "luck_activation",
+            "analysis_id",
+            "P7V-LUCK-ANALYSIS-ID",
+        )
+    if result.status in {EvaluationStatus.NOT_EVALUATED, EvaluationStatus.NOT_APPLICABLE}:
+        return bag.finish()
+    if not result.cycle_id and not result.luck_cycle_id:
+        bag.add(
+            "P7V-LUCK-CYCLE-ID",
+            IssueSeverity.ERROR,
+            "luck_activation",
+            "evaluated luck activation requires luck_cycle_id",
+            field="luck_cycle_id",
+        )
+    if not result.time_window or "–" not in result.time_window:
+        bag.add(
+            "P7V-LUCK-TIME-WINDOW",
+            IssueSeverity.ERROR,
+            "luck_activation",
+            "evaluated luck activation requires an explicit year window",
+            field="time_window",
+            actual=result.time_window,
+        )
+    natal_map = _natal_domain_map(context)
+    natal_driver_ids = {
+        item for values in DOMAIN_DRIVER_IDS.values() for item in values
+    } - {"not_applicable", "unresolved"}
+    seen: set[str] = set()
+    for domain_id in MAIN_ACTIVATION_IDS:
+        item = result.items.get(domain_id)
+        if item is None:
+            bag.add(
+                "P7V-LUCK-MAIN-MISSING",
+                IssueSeverity.ERROR,
+                "luck_activation",
+                "main domain missing activation result",
+                field=domain_id,
+            )
+            continue
+        _validate_activation_item(bag, item, natal_map.get(domain_id), natal_driver_ids)
+        seen.add(domain_id)
+    for domain_id, item in result.items.items():
+        if domain_id in seen:
+            continue
+        if domain_id == "pattern":
+            bag.add(
+                "P7V-LUCK-PATTERN-TARGET",
+                IssueSeverity.CRITICAL,
+                "luck_activation",
+                "Pattern is never an activation target",
+                field="pattern",
+            )
+            continue
+        if domain_id not in KNOWN_ACTIVATION_IDS:
+            bag.add(
+                "P7V-LUCK-UNKNOWN-ID",
+                IssueSeverity.ERROR,
+                "luck_activation",
+                "unknown activation domain",
+                field="domain_id",
+                actual=domain_id,
+            )
+            continue
+        _validate_activation_item(bag, item, natal_map.get(domain_id), natal_driver_ids)
+    for item in result.items.values():
+        for type_id in item.activation_types:
+            if type_id not in ACTIVATION_TYPES:
+                bag.add(
+                    "P7V-LUCK-TYPE",
+                    IssueSeverity.ERROR,
+                    "luck_activation",
+                    "unknown activation type",
+                    field="activation_types",
+                    actual=type_id,
+                )
+    for edge in result.graph.edges:
+        if edge.relation not in ACTIVATION_GRAPH_RELATIONS:
+            bag.add(
+                "P7V-LUCK-GRAPH-RELATION",
+                IssueSeverity.ERROR,
+                "luck_activation",
+                "unknown activation graph relation",
+                field="graph.edges.relation",
+                actual=edge.relation,
+            )
+        if edge.source in KNOWN_ACTIVATION_IDS and edge.target in KNOWN_ACTIVATION_IDS:
+            bag.add(
+                "P7V-LUCK-GRAPH-DOMAIN",
+                IssueSeverity.CRITICAL,
+                "luck_activation",
+                "activation graph cannot connect domain to domain",
+                field=f"{edge.source}->{edge.target}",
+            )
+        if edge.target and edge.target not in KNOWN_ACTIVATION_IDS:
+            bag.add(
+                "P7V-LUCK-GRAPH-TARGET",
+                IssueSeverity.ERROR,
+                "luck_activation",
+                "activation graph target must be a known domain",
+                field="graph.edges.target",
+                actual=edge.target,
+            )
+    return bag.finish()
+
+
+def _natal_domain_map(
+    context: CanonicalAnalysisContext | None,
+) -> dict[str, DomainInterpretationResult]:
+    if context is None:
+        return {}
+    section = context.runtime.domains
+    items = {
+        "authority": section.authority.natal,
+        "career": section.career.natal,
+        "wealth": section.wealth.natal,
+        "relationship": section.relationship.natal,
+        "legacy": section.legacy.natal,
+        "vitality": section.vitality.natal,
+    }
+    items.update(section.supporting)
+    return items
+
+
+def _validate_activation_item(
+    bag: _Bag,
+    item: DomainActivationResult,
+    natal: DomainInterpretationResult | None,
+    natal_driver_ids: set[str],
+) -> None:
+    if item.domain_id not in KNOWN_ACTIVATION_IDS:
+        bag.add(
+            "P7V-LUCK-UNKNOWN-ID",
+            IssueSeverity.ERROR,
+            "luck_activation",
+            "unknown activation domain",
+            field="domain_id",
+            actual=item.domain_id,
+        )
+    if natal is not None:
+        if item.natal_state and item.natal_state != natal.state.value:
+            bag.add(
+                "P7V-LUCK-NATAL-STATE",
+                IssueSeverity.CRITICAL,
+                "luck_activation",
+                "luck must copy natal state without rewriting it",
+                field=f"{item.domain_id}.natal_state",
+                expected=natal.state.value,
+                actual=item.natal_state,
+            )
+        if item.natal_driver_id and natal.driver_id and item.natal_driver_id != natal.driver_id:
+            bag.add(
+                "P7V-LUCK-NATAL-DRIVER",
+                IssueSeverity.CRITICAL,
+                "luck_activation",
+                "luck must copy natal driver without rewriting it",
+                field=f"{item.domain_id}.natal_driver_id",
+                expected=natal.driver_id,
+                actual=item.natal_driver_id,
+            )
+    driver_id = item.activation_driver_id.strip()
+    if driver_id and driver_id not in ACTIVATION_DRIVER_IDS:
+        bag.add(
+            "P7V-LUCK-DRIVER-UNKNOWN",
+            IssueSeverity.ERROR,
+            "luck_activation",
+            "unknown activation driver",
+            field=f"{item.domain_id}.activation_driver_id",
+            actual=driver_id,
+        )
+    if driver_id and driver_id in natal_driver_ids:
+        bag.add(
+            "P7V-LUCK-DRIVER-NATAL",
+            IssueSeverity.CRITICAL,
+            "luck_activation",
+            "activation driver cannot copy natal Domain Driver",
+            field=f"{item.domain_id}.activation_driver_id",
+            actual=driver_id,
+        )
+    if item.activation_state is ActivationState.PEAK and item.natal_state in {
+        "conditional",
+        "fragmented",
+        "weak",
+        "unresolved",
+        "blocked",
+    }:
+        bag.add(
+            "P7V-LUCK-PEAK-CAPACITY",
+            IssueSeverity.ERROR,
+            "luck_activation",
+            "peak activation cannot ignore natal carrying capacity",
+            field=f"{item.domain_id}.activation_state",
+        )
+
+
 def validate_canonical_analysis_context(context: CanonicalAnalysisContext) -> ValidationResult:
     """Validate the full context chain and nested runtime."""
     bag = _Bag("validate_canonical_analysis_context", context.analysis_id)
@@ -1177,4 +1606,7 @@ PACK07_VALIDATOR_REGISTRY: dict[str, str] = {
     "validate_shen_sha_collection": "validate_shen_sha_collection",
     "validate_shen_sha_ecosystem": "validate_shen_sha_ecosystem",
     "validate_evidence_priority_result": "validate_evidence_priority_result",
+    "validate_domain_interpretation_result": "validate_domain_interpretation_result",
+    "validate_luck_activation_result": "validate_luck_activation_result",
+    "validate_luck_interaction_result": "validate_luck_interaction_result",
 }

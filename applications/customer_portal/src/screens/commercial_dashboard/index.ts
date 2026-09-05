@@ -34,6 +34,7 @@ export { adaptPatternCard } from "./patternAdapter";
 export { adaptShenShaCard } from "./shenShaAdapter";
 export { adaptLuckCard } from "./luckAdapter";
 export { adaptInterpretationCard } from "./interpretationAdapter";
+export { attachInterpretationDomains, attachOverviewDomains, adaptDomainInterpretation } from "./domainAdapter";
 export { adaptActionPlanCard } from "./actionPlanAdapter";
 export { adaptLifeConsulting } from "./lifeConsultingAdapter";
 export { lifeDomainProfileFor, LIFE_DOMAIN_PROFILES } from "./lifeConsultingAssets";
@@ -71,6 +72,8 @@ export type {
   ShenShaView,
   LuckView,
   InterpretationView,
+  DomainPillarView,
+  DomainSummaryView,
   ActionPlanView,
   LifeConsultingView,
   LifeDomainView,

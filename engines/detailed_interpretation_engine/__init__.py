@@ -91,6 +91,9 @@ from engines.detailed_interpretation_engine.validators import (
     validate_shen_sha_collection,
     validate_shen_sha_ecosystem,
     validate_evidence_priority_result,
+    validate_domain_interpretation_result,
+    validate_luck_activation_result,
+    validate_luck_interaction_result,
 )
 
 __all__ = [
@@ -170,4 +173,7 @@ __all__ = [
     "validate_shen_sha_collection",
     "validate_shen_sha_ecosystem",
     "validate_evidence_priority_result",
+    "validate_domain_interpretation_result",
+    "validate_luck_activation_result",
+    "validate_luck_interaction_result",
 ]

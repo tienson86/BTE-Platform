@@ -2,7 +2,7 @@
  * Phase A visual fixture for Interpretation. Not production content.
  */
 
-import { INTERPRETATION_TITLE, INTERPRETATION_ZONE_LABELS } from "./cards";
+import { INTERPRETATION_EMPTY, INTERPRETATION_TITLE, INTERPRETATION_ZONE_LABELS } from "./cards";
 import type { InterpretationView } from "./types";
 
 /** Deterministic consultant layout sample. Isolated from live narrative. */
@@ -44,4 +44,7 @@ export const INTERPRETATION_VISUAL_FIXTURE: InterpretationView = {
   ],
   closing: "Đây là cấu trúc có nền để phát triển bền. Giữ trọng tâm và kỷ luật nhịp sẽ rõ hơn trong trung hạn.",
   closingSource: "visual-fixture",
+  emptyMessage: INTERPRETATION_EMPTY,
+  domainTitle: "",
+  domains: [],
 };
