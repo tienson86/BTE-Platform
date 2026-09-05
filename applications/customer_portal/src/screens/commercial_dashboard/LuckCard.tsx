@@ -6,6 +6,7 @@ import { useState, type ReactNode } from "react";
 import type {
   DashboardCardSpec,
   LuckActivationItemView,
+  LuckAnnualItemView,
   LuckCycleView,
   LuckInteractionEdgeView,
   LuckView,
@@ -175,6 +176,7 @@ export function LuckCard({ card, model }: LuckCardProps): ReactNode {
           ) : null}
           {model.activation ? <ActivationSummary model={model.activation} /> : null}
           {model.interaction ? <InteractionSummary model={model.interaction} /> : null}
+          {model.annual ? <AnnualSummary model={model.annual} /> : null}
           {trend ? (
             <p className="bte-luck__trend" data-luck-trend="true">
               {trend}
@@ -355,6 +357,104 @@ function InteractionEdge({
         <div className="bte-luck__interaction-detail" data-luck-interaction-detail="true">
           {edge.explanation ? <p>{edge.explanation}</p> : null}
           {edge.condition ? <p>{edge.condition}</p> : null}
+        </div>
+      ) : null}
+    </li>
+  );
+}
+
+function AnnualSummary({
+  model,
+}: {
+  readonly model: NonNullable<LuckView["annual"]>;
+}): ReactNode {
+  const [openId, setOpenId] = useState<string | null>(null);
+  return (
+    <section className="bte-luck__section bte-luck__annual" data-luck-section="annual">
+      <h3 className="bte-luck__heading">{model.title}</h3>
+      <dl className="bte-luck__annual-summary">
+        <div className="bte-luck__annual-row">
+          <dt>Năm</dt>
+          <dd data-luck-annual-year="true">{`Năm ${model.year}`}</dd>
+        </div>
+        {model.ganZhi ? (
+          <div className="bte-luck__annual-row">
+            <dt>Lưu niên</dt>
+            <dd data-luck-annual-pillar="true">{model.ganZhi}</dd>
+          </div>
+        ) : null}
+        {model.dominantActivation ? (
+          <div className="bte-luck__annual-row">
+            <dt>Kích hoạt chính</dt>
+            <dd data-luck-annual-activation="true">{model.dominantActivation}</dd>
+          </div>
+        ) : null}
+        {model.dominantSuppression ? (
+          <div className="bte-luck__annual-row">
+            <dt>Kìm chính</dt>
+            <dd data-luck-annual-suppression="true">{model.dominantSuppression}</dd>
+          </div>
+        ) : null}
+        {model.stress ? (
+          <div className="bte-luck__annual-row">
+            <dt>Áp lực</dt>
+            <dd data-luck-annual-stress="true">{model.stress}</dd>
+          </div>
+        ) : null}
+        {model.recovery ? (
+          <div className="bte-luck__annual-row">
+            <dt>Phục hồi</dt>
+            <dd data-luck-annual-recovery="true">{model.recovery}</dd>
+          </div>
+        ) : null}
+      </dl>
+      <ul className="bte-luck__annual-grid">
+        {model.items.map((item) => (
+          <AnnualDomainRow
+            key={item.id}
+            item={item}
+            year={model.year}
+            open={openId === item.id}
+            onToggle={() => setOpenId((current) => (current === item.id ? null : item.id))}
+          />
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+function AnnualDomainRow({
+  item,
+  year,
+  open,
+  onToggle,
+}: {
+  readonly item: LuckAnnualItemView;
+  readonly year: string;
+  readonly open: boolean;
+  readonly onToggle: () => void;
+}): ReactNode {
+  return (
+    <li
+      className="bte-luck__annual-item"
+      data-luck-annual-id={item.id}
+      data-luck-annual-open={open ? "true" : undefined}
+    >
+      <button type="button" className="bte-luck__annual-row-btn" onClick={onToggle}>
+        <span className="bte-luck__annual-title">{item.title}</span>
+        <span className="bte-luck__annual-compare">
+          <span data-luck-annual-natal="true">{`Nền: ${item.natalLabel}`}</span>
+          <span data-luck-annual-luck="true">{`Đại vận: ${item.luckLabel}`}</span>
+          <span data-luck-annual-year-state="true">{`Năm ${year}: ${item.annualLabel}`}</span>
+        </span>
+      </button>
+      {open ? (
+        <div className="bte-luck__annual-detail" data-luck-annual-detail="true">
+          {item.driver ? <p data-luck-annual-driver="true">{item.driver}</p> : null}
+          {item.bottleneck ? <p data-luck-annual-bottleneck="true">{item.bottleneck}</p> : null}
+          {item.conditions.map((condition) => (
+            <p key={condition}>{condition}</p>
+          ))}
         </div>
       ) : null}
     </li>

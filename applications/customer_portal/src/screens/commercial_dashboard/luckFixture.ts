@@ -30,4 +30,5 @@ export const LUCK_VISUAL_FIXTURE: LuckView = {
   trend: "Đây là giai đoạn có xu hướng phát triển.",
   activation: null,
   interaction: null,
+  annual: null,
 };

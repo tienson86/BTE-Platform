@@ -30,6 +30,8 @@ export type {
   NarrativeV2ShadowEnvelopeDto,
   LuckActivationDto,
   LuckActivationItemDto,
+  LuckAnnualDto,
+  LuckAnnualItemDto,
   LuckCycleDto,
   LuckDto,
   LuckInteractionDto,

@@ -32,6 +32,7 @@ from engines.detailed_interpretation_engine.evidence import (
     TenGodEcosystem,
 )
 from engines.detailed_interpretation_engine.narrative import (
+    NarrativeBlock,
     NarrativeEdge,
     NarrativeGraph,
     NarrativeNode,
@@ -105,6 +106,7 @@ __all__ = [
     "LuckInteractionResult",
     "Mc01Reference",
     "NarrativeContext",
+    "NarrativeBlock",
     "NarrativeEdge",
     "NarrativeGraph",
     "NarrativeNode",

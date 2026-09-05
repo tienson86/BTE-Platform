@@ -67,6 +67,41 @@ class NarrativeEdge:
 
 
 @dataclass(frozen=True, slots=True)
+class NarrativeBlock:
+    """One composed narrative unit. Title/summary are catalog keys or consumed labels."""
+
+    block_id: str = ""
+    block_type: str = ""
+    priority: str = ""
+    title: str = ""
+    summary: str = ""
+    details: tuple[str, ...] = ()
+    confidence: ConfidenceValue = field(default_factory=ConfidenceValue)
+    evidence_ids: tuple[str, ...] = ()
+    trace_ids: tuple[str, ...] = ()
+    qualifiers: tuple[str, ...] = ()
+    domain: str = ""
+
+    @classmethod
+    def from_dict(cls, data: Mapping[str, Any] | None) -> NarrativeBlock:
+        """Rebuild one narrative block."""
+        payload = data or {}
+        return cls(
+            block_id=as_str(payload.get("block_id")),
+            block_type=as_str(payload.get("block_type")),
+            priority=as_str(payload.get("priority")),
+            title=as_str(payload.get("title")),
+            summary=as_str(payload.get("summary")),
+            details=as_str_tuple(payload.get("details")),
+            confidence=ConfidenceValue.from_dict(payload.get("confidence")),
+            evidence_ids=as_str_tuple(payload.get("evidence_ids")),
+            trace_ids=as_str_tuple(payload.get("trace_ids")),
+            qualifiers=as_str_tuple(payload.get("qualifiers")),
+            domain=as_str(payload.get("domain")),
+        )
+
+
+@dataclass(frozen=True, slots=True)
 class NarrativeGraph:
     """Single narrative graph for all consumers (DI-19)."""
 
@@ -105,11 +140,13 @@ class NarrativeResult:
     opportunities: tuple[str, ...] = ()
     domains: dict[str, str] = field(default_factory=dict)
     temporal: str = ""
+    luck: str = ""
     optimization: str = ""
     closing_summary: str = ""
     confidence: ConfidenceValue = field(default_factory=ConfidenceValue)
     trace: tuple[str, ...] = ()
     graph: NarrativeGraph = field(default_factory=NarrativeGraph)
+    blocks: tuple[NarrativeBlock, ...] = ()
     mc01_summary_ref: str = ""
     warnings: tuple[str, ...] = ()
     layers: dict[str, tuple[str, ...]] = field(default_factory=dict)
@@ -133,6 +170,8 @@ class NarrativeResult:
                 else:
                     layers[str(key)] = as_str_tuple(item)
         graph_raw = payload.get("graph")
+        blocks_raw = payload.get("blocks") or ()
+        luck = as_str(payload.get("luck") or payload.get("temporal"))
         return cls(
             schema_version=as_str(payload.get("schema_version"), SCHEMA_COMPOSER),
             status=as_enum(
@@ -145,12 +184,16 @@ class NarrativeResult:
             risks=as_str_tuple(payload.get("risks")),
             opportunities=as_str_tuple(payload.get("opportunities")),
             domains=domains,
-            temporal=as_str(payload.get("temporal")),
+            temporal=as_str(payload.get("temporal") or luck),
+            luck=luck,
             optimization=as_str(payload.get("optimization")),
             closing_summary=as_str(payload.get("closing_summary")),
             confidence=ConfidenceValue.from_dict(payload.get("confidence")),
             trace=as_str_tuple(payload.get("trace")),
             graph=NarrativeGraph.from_dict(graph_raw if isinstance(graph_raw, Mapping) else None),
+            blocks=tuple(
+                NarrativeBlock.from_dict(item) for item in blocks_raw if isinstance(item, Mapping)
+            ),
             mc01_summary_ref=as_str(payload.get("mc01_summary_ref")),
             warnings=as_str_tuple(payload.get("warnings")),
             layers=layers,

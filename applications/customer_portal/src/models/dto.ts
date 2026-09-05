@@ -185,6 +185,35 @@ export type LuckInteractionDto = {
   readonly edges?: readonly LuckInteractionEdgeDto[];
 };
 
+export type LuckAnnualItemDto = {
+  readonly id?: string;
+  readonly title?: string;
+  readonly year?: string;
+  readonly natal_state?: string;
+  readonly natal_label?: string;
+  readonly luck_state?: string;
+  readonly luck_label?: string;
+  readonly annual_state?: string;
+  readonly annual_label?: string;
+  readonly driver?: string;
+  readonly bottleneck?: string;
+  readonly support?: string;
+  readonly stress?: string;
+  readonly recovery?: string;
+  readonly conditions?: readonly string[];
+};
+
+export type LuckAnnualDto = {
+  readonly title?: string;
+  readonly year?: string;
+  readonly gan_zhi?: string;
+  readonly dominant_activation?: string;
+  readonly dominant_suppression?: string;
+  readonly stress?: string;
+  readonly recovery?: string;
+  readonly items?: readonly LuckAnnualItemDto[];
+};
+
 export type LuckDto = {
   readonly available?: boolean;
   readonly direction?: string;
@@ -199,6 +228,7 @@ export type LuckDto = {
   readonly gender_label?: string;
   readonly activation?: LuckActivationDto | null;
   readonly interaction?: LuckInteractionDto | null;
+  readonly annual?: LuckAnnualDto | null;
 };
 
 export type SeriesItemDto = {
@@ -476,6 +506,9 @@ export type AnalysisDataDto = {
   readonly commercial_consulting?: CommercialConsultingDto;
   readonly evidence_priority?: EvidencePrioritySummaryDto;
   readonly domains?: DomainInterpretationSummaryDto;
+  readonly optimization?: Record<string, unknown>;
+  /** Pack 07 Narrative Composer customer compact. Does not replace payload.narrative. */
+  readonly detailed_narrative?: Record<string, unknown>;
   readonly [key: string]: unknown;
 };
 

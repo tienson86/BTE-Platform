@@ -5,8 +5,17 @@
 
 import { isTechnicalRuleText } from "../../adapters/contentGuards";
 import type { AnalysisDataDto } from "../../models";
-import { ACTION_PLAN_EMPTY, ACTION_PLAN_TITLE } from "./cards";
-import type { ActionItemView, ActionPlanView } from "./types";
+import { ACTION_PLAN_EMPTY, ACTION_PLAN_TITLE, OPTIMIZATION_LABELS } from "./cards";
+import type {
+  ActionItemView,
+  ActionPlanView,
+  OptimizationActionView,
+  OptimizationConflictView,
+  OptimizationDomainView,
+  OptimizationElementView,
+  OptimizationPlanView,
+  OptimizationPriorityView,
+} from "./types";
 
 const ACTION_LIMIT = 6;
 const RULE_ID = /\b(?:cli|com_san|pat|str|sea|tmp|flo|flw|ctl|sup|spc|spe|cmb|root)_[a-z0-9_]+\b/gi;
@@ -222,4 +231,165 @@ export function adaptActionPlanCard(data: AnalysisDataDto | null | undefined): A
     warnings: warnings.map(toView),
     watch: watch.map(toView),
   };
+}
+
+/**
+ * Bind Pack 07 Life Optimization compact. Returns null when the engine did not publish.
+ */
+export function adaptOptimizationPlan(
+  data: AnalysisDataDto | null | undefined,
+): ActionPlanView | null {
+  const raw = asRecord(data?.optimization);
+  const topRaw = Array.isArray(raw.top_priorities) ? raw.top_priorities : [];
+  const natalRaw = asRecord(raw.natal);
+  const temporalRaw = asRecord(raw.temporal);
+  if (!topRaw.length && !Array.isArray(natalRaw.items) && !Array.isArray(temporalRaw.items)) {
+    return null;
+  }
+  const groupsRaw = asRecord(raw.groups);
+  const topPriorities = topRaw.map((item, index) => toPriority(item, index));
+  const groups = {
+    develop: toActionList(groupsRaw.develop),
+    improve: toActionList(groupsRaw.improve),
+    control: toActionList(groupsRaw.control),
+    avoid: toActionList(groupsRaw.avoid),
+    temporal: toActionList(groupsRaw.temporal),
+  };
+  const natalItems = toActionList(natalRaw.items);
+  const temporalItems = toActionList(temporalRaw.items);
+  const usefulRaw = asRecord(raw.useful_god);
+  const optimization: OptimizationPlanView = {
+    subtitle: text(raw.title) || OPTIMIZATION_LABELS.subtitle,
+    topPriorities,
+    groups,
+    natal: {
+      title: text(natalRaw.title) || OPTIMIZATION_LABELS.natal,
+      items: natalItems,
+    },
+    temporal: {
+      title: text(temporalRaw.title) || OPTIMIZATION_LABELS.temporal,
+      year: text(temporalRaw.year),
+      items: temporalItems,
+    },
+    domains: toDomainList(raw.domains),
+    conflicts: toConflictList(raw.conflicts),
+    usefulGod: text(usefulRaw.element)
+      ? {
+          element: text(usefulRaw.element),
+          functions: Array.isArray(usefulRaw.functions)
+            ? usefulRaw.functions.map((item) => text(item)).filter(Boolean).join(" · ")
+            : text(usefulRaw.functions),
+          reason: text(usefulRaw.reason),
+        }
+      : null,
+    elements: toElementList(raw.elements),
+  };
+  const first = topPriorities[0];
+  return {
+    title: ACTION_PLAN_TITLE,
+    available: true,
+    emptyMessage: ACTION_PLAN_EMPTY,
+    priority: first
+      ? { title: first.title, detail: first.reason, domain: first.domain, source: "optimization" }
+      : null,
+    actions: topPriorities.slice(1).map((item) => ({
+      title: item.title,
+      detail: item.reason,
+      domain: item.domain,
+      source: "optimization",
+    })),
+    extraActions: [],
+    warnings: groups.avoid.map((item) => ({
+      title: item.title,
+      detail: item.caution || item.reason,
+      domain: item.domain,
+      source: "optimization",
+    })),
+    watch: temporalItems.map((item) => ({
+      title: item.title,
+      detail: item.reason,
+      domain: item.domain,
+      source: "optimization",
+    })),
+    optimization,
+  };
+}
+
+function toPriority(value: unknown, index: number): OptimizationPriorityView {
+  const item = toOptAction(value);
+  const row = asRecord(value);
+  return {
+    ...item,
+    rank: Number(row.rank) || index + 1,
+    label: text(row.label) || `Ưu tiên ${index + 1}`,
+  };
+}
+
+function toActionList(value: unknown): OptimizationActionView[] {
+  if (!Array.isArray(value)) return [];
+  return value.map((item) => toOptAction(item)).filter((item) => item.title);
+}
+
+function toOptAction(value: unknown): OptimizationActionView {
+  const row = asRecord(value);
+  return {
+    domain: customerLine(row.domain),
+    title: customerLine(row.title),
+    reason: customerLine(row.reason),
+    action: customerLine(row.action),
+    effect: customerLine(row.effect),
+    scope: customerLine(row.scope),
+    condition: customerLine(row.condition),
+    caution: customerLine(row.caution),
+  };
+}
+
+function toDomainList(value: unknown): OptimizationDomainView[] {
+  if (!Array.isArray(value)) return [];
+  return value.map((item) => {
+    const row = asRecord(item);
+    return {
+      id: text(row.id),
+      title: customerLine(row.title),
+      target: customerLine(row.target),
+      driver: customerLine(row.driver),
+      bottleneck: customerLine(row.bottleneck),
+      leakage: customerLine(row.leakage),
+      why: customerLine(row.why),
+      action: customerLine(row.action),
+      condition: customerLine(row.condition),
+      caution: customerLine(row.caution),
+      temporal: customerLine(row.temporal),
+    };
+  }).filter((item) => item.title);
+}
+
+function toConflictList(value: unknown): OptimizationConflictView[] {
+  if (!Array.isArray(value)) return [];
+  return value.map((item) => {
+    const row = asRecord(item);
+    return {
+      title: customerLine(row.title),
+      domains: customerLine(row.domains),
+      resolution: customerLine(row.resolution),
+      condition: customerLine(row.condition),
+    };
+  }).filter((item) => item.title);
+}
+
+function toElementList(value: unknown): OptimizationElementView[] {
+  if (!Array.isArray(value)) return [];
+  return value.map((item) => {
+    const row = asRecord(item);
+    const domains = Array.isArray(row.domains)
+      ? row.domains.map((entry) => customerLine(entry)).filter(Boolean).join(" · ")
+      : customerLine(row.domains);
+    return {
+      element: customerLine(row.element),
+      function: customerLine(row.function),
+      direction: customerLine(row.direction),
+      domains,
+      reason: customerLine(row.reason),
+    };
+  }).filter((item) => item.element);
 }

@@ -12,6 +12,7 @@ from engines.detailed_interpretation_engine.constants import (
     SCHEMA_LUCK_ACTIVATION,
     SCHEMA_LUCK_INTERACTION,
     SCHEMA_TEMPORAL,
+    TEMPORAL_ACTIVATION_RULESET_VERSION,
 )
 from engines.detailed_interpretation_engine.enums import EvaluationStatus
 from engines.detailed_interpretation_engine.luck_activation.models import (
@@ -25,6 +26,10 @@ from engines.detailed_interpretation_engine.luck_interaction.models import (
     LuckInteractionGraph,
     ResourceShift,
     StressTransfer,
+)
+from engines.detailed_interpretation_engine.temporal_activation.models import (
+    TemporalDomainActivationResult,
+    TemporalLayerResult,
 )
 from engines.detailed_interpretation_engine.value_objects import ConfidenceValue
 
@@ -203,48 +208,69 @@ class LuckInteractionResult:
 
 @dataclass(frozen=True, slots=True)
 class TemporalActivationResult:
-    """DI-11 temporal activation shell. Specificity is not dominance."""
+    """DI-11 temporal activation. Specificity is not dominance."""
 
     schema_version: str = SCHEMA_TEMPORAL
-    ruleset_version: str = ""
+    ruleset_version: str = TEMPORAL_ACTIVATION_RULESET_VERSION
     state: EvaluationStatus = EvaluationStatus.NOT_EVALUATED
+    analysis_id: str = ""
     requested_layers: tuple[str, ...] = ()
     evaluated_layers: tuple[str, ...] = ()
     time_window: str = ""
     active_layer: str = ""
     parent_layer: str = ""
-    layer_results: dict[str, str] = field(default_factory=dict)
-    domain_results: dict[str, str] = field(default_factory=dict)
+    layer_results: dict[str, TemporalLayerResult] = field(default_factory=dict)
+    domain_results: dict[str, TemporalDomainActivationResult] = field(default_factory=dict)
+    temporal_salience: tuple[str, ...] = ()
+    dominant_activation: str = ""
+    dominant_suppression: str = ""
+    bottlenecks: tuple[str, ...] = ()
+    stress: tuple[str, ...] = ()
+    recovery: tuple[str, ...] = ()
     conditions: tuple[str, ...] = ()
     warnings: tuple[str, ...] = ()
     confidence: ConfidenceValue = field(default_factory=ConfidenceValue)
     evidence_ids: tuple[str, ...] = ()
     trace_ids: tuple[str, ...] = ()
 
+    @property
+    def status(self) -> EvaluationStatus:
+        """Ticket alias for evaluation status."""
+        return self.state
+
     @classmethod
     def from_dict(cls, data: Mapping[str, Any] | None) -> TemporalActivationResult:
-        """Rebuild temporal activation from a mapping."""
+        """Rebuild temporal activation from a mapping. String shells stay compatible."""
         payload = data or {}
         layer_raw = payload.get("layer_results")
         domain_raw = payload.get("domain_results")
-        layer_results = (
-            {str(key): str(item) for key, item in layer_raw.items()}
-            if isinstance(layer_raw, Mapping)
-            else {}
-        )
-        domain_results = (
-            {str(key): str(item) for key, item in domain_raw.items()}
-            if isinstance(domain_raw, Mapping)
-            else {}
-        )
+        layer_results: dict[str, TemporalLayerResult] = {}
+        if isinstance(layer_raw, Mapping):
+            for key, item in layer_raw.items():
+                if isinstance(item, Mapping):
+                    layer_results[str(key)] = TemporalLayerResult.from_dict(item, str(key))
+                else:
+                    layer_results[str(key)] = TemporalLayerResult(
+                        layer=str(key),
+                        state=as_enum(EvaluationStatus, item, EvaluationStatus.NOT_EVALUATED),
+                    )
+        domain_results: dict[str, TemporalDomainActivationResult] = {}
+        if isinstance(domain_raw, Mapping):
+            for key, item in domain_raw.items():
+                if isinstance(item, Mapping):
+                    domain_results[str(key)] = TemporalDomainActivationResult.from_dict(item, str(key))
         return cls(
             schema_version=as_str(payload.get("schema_version"), SCHEMA_TEMPORAL),
-            ruleset_version=as_str(payload.get("ruleset_version")),
+            ruleset_version=as_str(
+                payload.get("ruleset_version"),
+                TEMPORAL_ACTIVATION_RULESET_VERSION,
+            ),
             state=as_enum(
                 EvaluationStatus,
                 payload.get("state") or payload.get("status"),
                 EvaluationStatus.NOT_EVALUATED,
             ),
+            analysis_id=as_str(payload.get("analysis_id")),
             requested_layers=as_str_tuple(payload.get("requested_layers")),
             evaluated_layers=as_str_tuple(payload.get("evaluated_layers")),
             time_window=as_str(payload.get("time_window")),
@@ -252,6 +278,12 @@ class TemporalActivationResult:
             parent_layer=as_str(payload.get("parent_layer")),
             layer_results=layer_results,
             domain_results=domain_results,
+            temporal_salience=as_str_tuple(payload.get("temporal_salience")),
+            dominant_activation=as_str(payload.get("dominant_activation")),
+            dominant_suppression=as_str(payload.get("dominant_suppression")),
+            bottlenecks=as_str_tuple(payload.get("bottlenecks")),
+            stress=as_str_tuple(payload.get("stress")),
+            recovery=as_str_tuple(payload.get("recovery")),
             conditions=as_str_tuple(payload.get("conditions")),
             warnings=as_str_tuple(payload.get("warnings")),
             confidence=ConfidenceValue.from_dict(payload.get("confidence")),

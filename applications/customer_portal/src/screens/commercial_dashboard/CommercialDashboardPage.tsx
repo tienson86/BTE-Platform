@@ -25,9 +25,11 @@ import { adaptLifeConsulting } from "./lifeConsultingAdapter";
 import { LIFE_CONSULTING_VISUAL_FIXTURE } from "./lifeConsultingFixture";
 import { INTERPRETATION_VISUAL_FIXTURE } from "./interpretationFixture";
 import { ACTION_PLAN_VISUAL_FIXTURE } from "./actionPlanFixture";
+import { adaptActionPlanCard, adaptOptimizationPlan } from "./actionPlanAdapter";
 import { OVERVIEW_VISUAL_FIXTURE } from "./overviewFixture";
 import { adaptOverviewCard } from "./overviewAdapter";
 import { adaptInterpretationCard } from "./interpretationAdapter";
+import { adaptPack07Narrative } from "./narrativeComposerAdapter";
 import { attachInterpretationDomains, attachOverviewDomains } from "./domainAdapter";
 import { RESULT_PAGE_TITLE } from "./cards";
 import { DashboardGrid } from "./DashboardGrid";
@@ -183,23 +185,31 @@ export function CommercialDashboardPage({
       : layoutMode === "skeleton" || previewFallback
         ? null
         : attachOverviewDomains(narrative?.overview ?? adaptOverviewCard(analysis), analysis);
+  const pack07Narrative =
+    layoutMode === "visual" || layoutMode === "skeleton" || previewFallback
+      ? null
+      : adaptPack07Narrative(analysis);
   const interpretation =
     layoutMode === "visual"
       ? INTERPRETATION_VISUAL_FIXTURE
       : layoutMode === "skeleton" || previewFallback
         ? null
-        : attachInterpretationDomains(
+        : pack07Narrative
+          ?? attachInterpretationDomains(
             narrative?.interpretation?.available
               ? narrative.interpretation
               : adaptInterpretationCard(analysis),
             analysis,
           );
+  const consultingPlan = adaptActionPlanCard(analysis);
   const actionPlan =
     layoutMode === "visual"
       ? ACTION_PLAN_VISUAL_FIXTURE
       : layoutMode === "skeleton" || previewFallback
         ? null
-        : narrative?.actionPlan ?? null;
+        : adaptOptimizationPlan(analysis)
+          ?? (narrative?.actionPlan?.available ? narrative.actionPlan : null)
+          ?? consultingPlan;
   return (
     <div
       className="bte-cdash"

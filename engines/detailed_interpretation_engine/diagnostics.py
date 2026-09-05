@@ -33,6 +33,15 @@ from engines.detailed_interpretation_engine.luck_activation.engine import (
 from engines.detailed_interpretation_engine.luck_interaction.engine import (
     interpret_and_bind_luck_interaction,
 )
+from engines.detailed_interpretation_engine.temporal_activation.engine import (
+    interpret_and_bind_temporal_activation,
+)
+from engines.detailed_interpretation_engine.life_optimization.engine import (
+    interpret_and_bind_life_optimization,
+)
+from engines.detailed_interpretation_engine.narrative_composer.engine import (
+    interpret_and_bind_narrative,
+)
 from engines.detailed_interpretation_engine.evidence_priority.engine import (
     interpret_and_bind_evidence_priority,
 )
@@ -47,6 +56,9 @@ from engines.detailed_interpretation_engine.validators import (
     validate_luck_activation_result,
     validate_luck_interaction_result,
     validate_pack07_context,
+    validate_temporal_activation_result,
+    validate_life_optimization_result,
+    validate_narrative_result,
 )
 
 
@@ -150,6 +162,29 @@ def _luck_interaction_status(result: Any) -> DiagnosticStatus:
     return _layer_status(result.status, empty)
 
 
+def _temporal_status(result: Any) -> DiagnosticStatus:
+    empty = not result.evaluated_layers and not result.domain_results
+    if result.state is EvaluationStatus.NOT_EVALUATED and empty:
+        return DiagnosticStatus.NOT_EVALUATED
+    return _layer_status(result.state, empty)
+
+
+def _optimization_status(result: Any) -> DiagnosticStatus:
+    empty = not result.actions and not result.top_priorities
+    if result.state is EvaluationStatus.NOT_EVALUATED and empty:
+        return DiagnosticStatus.NOT_EVALUATED
+    return _layer_status(result.state, empty)
+
+
+def _narrative_status(section: Any) -> DiagnosticStatus:
+    result = getattr(section, "result", section)
+    empty = not getattr(result, "executive_summary", "") and not getattr(result, "blocks", ())
+    status = getattr(result, "status", EvaluationStatus.NOT_EVALUATED)
+    if status is EvaluationStatus.NOT_EVALUATED and empty:
+        return DiagnosticStatus.NOT_EVALUATED
+    return _layer_status(status, empty)
+
+
 def build_pack07_diagnostics(context: CanonicalAnalysisContext) -> Pack07RuntimeDiagnostics:
     """Build development diagnostics from a Pack 07 context chain."""
     context_result = validate_pack07_context(context)
@@ -175,6 +210,18 @@ def build_pack07_diagnostics(context: CanonicalAnalysisContext) -> Pack07Runtime
         ).issues
         + validate_luck_interaction_result(
             context.runtime.temporal.luck_interaction,
+            context=context,
+        ).issues
+        + validate_temporal_activation_result(
+            context.runtime.temporal.temporal_activation,
+            context=context,
+        ).issues
+        + validate_life_optimization_result(
+            context.runtime.optimization,
+            context=context,
+        ).issues
+        + validate_narrative_result(
+            context.runtime.narrative.result,
             context=context,
         ).issues
     )
@@ -225,9 +272,9 @@ def build_pack07_diagnostics(context: CanonicalAnalysisContext) -> Pack07Runtime
         domains=_domains_status(context.runtime.domains),
         luck=_luck_status(context.runtime.temporal.luck_activation),
         luck_interaction=_luck_interaction_status(context.runtime.temporal.luck_interaction),
-        temporal=DiagnosticStatus.NOT_EVALUATED,
-        optimization=DiagnosticStatus.NOT_EVALUATED,
-        narrative=DiagnosticStatus.NOT_EVALUATED,
+        temporal=_temporal_status(context.runtime.temporal.temporal_activation),
+        optimization=_optimization_status(context.runtime.optimization),
+        narrative=_narrative_status(context.runtime.narrative),
         runtime_contract=_pass_or_fail(runtime_result),
         overall_status=overall,
         issues=issues,
@@ -239,22 +286,31 @@ def diagnostics_from_payload(payload: Mapping[str, Any]) -> Pack07RuntimeDiagnos
     """Build diagnostics from an analyze-shaped payload."""
     bound = dict(payload)
     attach_mc01_reference(bound)
-    context = interpret_and_bind_luck_interaction(
-        interpret_and_bind_luck_activation(
-            interpret_and_bind_domain_interpretation(
-                interpret_and_bind_evidence_priority(
-                    interpret_and_bind_shen_sha(
-                        interpret_and_bind_ten_gods(
-                            build_canonical_analysis_context_from_payload(bound),
+    context = interpret_and_bind_narrative(
+        interpret_and_bind_life_optimization(
+            interpret_and_bind_temporal_activation(
+                interpret_and_bind_luck_interaction(
+                    interpret_and_bind_luck_activation(
+                        interpret_and_bind_domain_interpretation(
+                            interpret_and_bind_evidence_priority(
+                                interpret_and_bind_shen_sha(
+                                    interpret_and_bind_ten_gods(
+                                        build_canonical_analysis_context_from_payload(bound),
+                                        bound,
+                                    ),
+                                    bound,
+                                ),
+                                bound,
+                            ),
                             bound,
                         ),
                         bound,
-                    ),
-                    bound,
+                    )
                 ),
                 bound,
             ),
             bound,
-        )
+        ),
+        bound,
     )
     return build_pack07_diagnostics(context)

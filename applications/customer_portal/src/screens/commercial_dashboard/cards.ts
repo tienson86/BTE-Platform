@@ -72,3 +72,22 @@ export const ACTION_PLAN_LABELS = {
   warnings: "Điều cần lưu ý",
   watch: "Trong giai đoạn hiện tại",
 } as const;
+
+export const OPTIMIZATION_LABELS = {
+  subtitle: "KẾ HOẠCH TỐI ƯU",
+  develop: "NÊN PHÁT HUY",
+  improve: "CẦN CẢI THIỆN",
+  control: "CẦN KIỂM SOÁT",
+  avoid: "NÊN TRÁNH / HẠN CHẾ",
+  temporal: "THEO VẬN HIỆN TẠI",
+  natal: "Dài hạn",
+  domains: "Theo trụ cột",
+  conflicts: "Cần cân bằng",
+  usefulGod: "Chức năng Dụng thần",
+  elements: "Chức năng ngũ hành",
+  target: "Mục tiêu",
+  why: "Vì sao",
+  action: "Việc làm",
+  condition: "Điều kiện",
+  caution: "Lưu ý",
+} as const;

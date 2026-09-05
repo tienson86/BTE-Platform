@@ -56,7 +56,7 @@ def shape_luck_payload(luck: Any) -> dict[str, Any]:
     method_note = str(metadata.get("method_note") or METHOD_NOTE_VI)
     precision = str(metadata.get("precision") or PRECISION_LEVEL)
     current_age_for_luck = metadata.get("current_age_for_luck", metadata.get("age_at_reference"))
-    return {
+    payload = {
         "available": bool(raw.get("available")),
         "reason": raw.get("reason"),
         "direction": direction,
@@ -85,6 +85,10 @@ def shape_luck_payload(luck: Any) -> dict[str, Any]:
         "luck_summary": raw.get("luck_summary"),
         "confidence": raw.get("confidence"),
     }
+    annual_identity = _annual_identity(raw.get("current_liunian"))
+    if annual_identity:
+        payload["annual_identity"] = annual_identity
+    return payload
 
 
 def _evidence_line(
@@ -124,4 +128,33 @@ def _cycle_from_item(item: Any, fallback_index: int) -> dict[str, Any]:
         "branch": branch,
         "stem_element": stem_el,
         "branch_element": branch_el,
+    }
+
+
+def _annual_identity(raw: Any) -> dict[str, Any] | None:
+    """Compact canonical Lưu niên identity. Does not recalculate Gan-Zhi."""
+    data = raw if isinstance(raw, Mapping) else {}
+    if not data:
+        return None
+    stem = str(data.get("heavenly_stem") or data.get("stem") or "")
+    branch = str(data.get("earthly_branch") or data.get("branch") or "")
+    gan_zhi = str(data.get("ganzhi") or data.get("gan_zhi") or "").strip()
+    if not gan_zhi:
+        gan_zhi = f"{stem} {branch}".strip()
+    if not gan_zhi:
+        return None
+    metadata = data.get("metadata") if isinstance(data.get("metadata"), Mapping) else {}
+    stem_el = str(data.get("stem_element") or data.get("element") or stem_element(stem))
+    branch_el = str(data.get("branch_element") or branch_element(branch))
+    return {
+        "year": data.get("year") or metadata.get("bazi_year"),
+        "civil_year": metadata.get("civil_year") or data.get("civil_year") or data.get("year"),
+        "gan_zhi": gan_zhi,
+        "stem": stem,
+        "branch": branch,
+        "stem_element": stem_el,
+        "branch_element": branch_el,
+        "ten_god": str(data.get("ten_god") or "").strip(),
+        "source": "engines.luck_engine.providers.liunian.DefaultLiunianProvider",
+        "relations": list(data.get("relations") or metadata.get("relations") or []),
     }

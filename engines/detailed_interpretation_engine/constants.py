@@ -46,6 +46,9 @@ EVIDENCE_PRIORITY_RULESET_VERSION: str = "bte.detailed_interpretation.evidence_p
 DOMAIN_INTERPRETATION_RULESET_VERSION: str = "bte.detailed_interpretation.domain.rules.v1"
 LUCK_ACTIVATION_RULESET_VERSION: str = "bte.detailed_interpretation.luck_activation.rules.v1"
 LUCK_INTERACTION_RULESET_VERSION: str = "bte.detailed_interpretation.luck_interaction.rules.v1"
+TEMPORAL_ACTIVATION_RULESET_VERSION: str = "bte.detailed_interpretation.temporal_activation.rules.v1"
+LIFE_OPTIMIZATION_RULESET_VERSION: str = "bte.detailed_interpretation.life_optimization.rules.v1"
+NARRATIVE_COMPOSER_RULESET_VERSION: str = "bte.detailed_interpretation.composer.rules.v1"
 
 PACK07_VALIDATOR_VERSION: str = "1.0.0"
 

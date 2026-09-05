@@ -6,6 +6,7 @@ import { stripInternalRuleIds } from "../../adapters/customerFacingPresentation"
 import type {
   AnalysisDataDto,
   LuckActivationDto,
+  LuckAnnualDto,
   LuckCycleDto,
   LuckDto,
   LuckInteractionDto,
@@ -14,6 +15,8 @@ import { LUCK_TITLE } from "./cards";
 import type {
   LuckActivationItemView,
   LuckActivationView,
+  LuckAnnualItemView,
+  LuckAnnualView,
   LuckCycleView,
   LuckInteractionEdgeView,
   LuckInteractionView,
@@ -143,6 +146,7 @@ export function adaptLuckCard(data: AnalysisDataDto | null | undefined): LuckVie
     trend: luck ? copyTrend(luck) : "",
     activation: luck ? copyActivation(luck.activation) : null,
     interaction: luck ? copyInteraction(luck.interaction) : null,
+    annual: luck ? copyAnnual(luck.annual) : null,
   };
 }
 
@@ -208,5 +212,41 @@ function copyInteraction(raw: LuckInteractionDto | null | undefined): LuckIntera
     opportunity,
     risk,
     edges,
+  };
+}
+
+function copyAnnual(raw: LuckAnnualDto | null | undefined): LuckAnnualView | null {
+  if (!raw || !Array.isArray(raw.items) || raw.items.length === 0) return null;
+  const year = text(raw.year);
+  if (!year || !/^\d{4}$/.test(year)) return null;
+  const items: LuckAnnualItemView[] = [];
+  for (const item of raw.items) {
+    const id = text(item.id);
+    const title = customerLabel(text(item.title));
+    if (!id || !title) continue;
+    const conditions = (item.conditions ?? [])
+      .map((row) => customerSentence(row))
+      .filter((row): row is string => Boolean(row));
+    items.push({
+      id,
+      title,
+      natalLabel: customerLabel(text(item.natal_label) || text(item.natal_state)),
+      luckLabel: customerLabel(text(item.luck_label) || text(item.luck_state)),
+      annualLabel: customerLabel(text(item.annual_label) || text(item.annual_state)),
+      driver: customerLabel(text(item.driver)),
+      bottleneck: customerLabel(text(item.bottleneck)),
+      conditions,
+    });
+  }
+  if (!items.length) return null;
+  return {
+    title: customerLabel(text(raw.title)) || "Biểu hiện lưu niên",
+    year,
+    ganZhi: customerLabel(text(raw.gan_zhi)),
+    dominantActivation: customerLabel(text(raw.dominant_activation)),
+    dominantSuppression: customerLabel(text(raw.dominant_suppression)),
+    stress: customerLabel(text(raw.stress)),
+    recovery: customerLabel(text(raw.recovery)),
+    items,
   };
 }

@@ -94,6 +94,7 @@ from engines.detailed_interpretation_engine.validators import (
     validate_domain_interpretation_result,
     validate_luck_activation_result,
     validate_luck_interaction_result,
+    validate_temporal_activation_result,
 )
 
 __all__ = [
@@ -176,4 +177,5 @@ __all__ = [
     "validate_domain_interpretation_result",
     "validate_luck_activation_result",
     "validate_luck_interaction_result",
+    "validate_temporal_activation_result",
 ]

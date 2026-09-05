@@ -88,6 +88,24 @@ from engines.detailed_interpretation_engine.luck_interaction.engine import (
 from engines.detailed_interpretation_engine.luck_interaction.presentation import (
     present_luck_interaction_customer,
 )
+from engines.detailed_interpretation_engine.temporal_activation.engine import (
+    interpret_and_bind_temporal_activation,
+)
+from engines.detailed_interpretation_engine.temporal_activation.presentation import (
+    present_temporal_activation_customer,
+)
+from engines.detailed_interpretation_engine.life_optimization.engine import (
+    interpret_and_bind_life_optimization,
+)
+from engines.detailed_interpretation_engine.life_optimization.presentation import (
+    present_life_optimization_customer,
+)
+from engines.detailed_interpretation_engine.narrative_composer.engine import (
+    interpret_and_bind_narrative,
+)
+from engines.detailed_interpretation_engine.narrative_composer.presentation import (
+    present_narrative_customer,
+)
 from engines.detailed_interpretation_engine.evidence_priority.engine import (
     interpret_and_bind_evidence_priority,
 )
@@ -502,6 +520,9 @@ class OrchestratorService:
         context = interpret_and_bind_domain_interpretation(context, payload)
         context = interpret_and_bind_luck_activation(context, payload)
         context = interpret_and_bind_luck_interaction(context)
+        context = interpret_and_bind_temporal_activation(context, payload)
+        context = interpret_and_bind_life_optimization(context, payload)
+        context = interpret_and_bind_narrative(context, payload)
         analysis.pack07_context = context
         natal = context.runtime.interpretation.ten_gods.natal
         if natal.items:
@@ -542,6 +563,21 @@ class OrchestratorService:
             )
             if customer_interaction:
                 luck_payload["interaction"] = customer_interaction
+            customer_annual = present_temporal_activation_customer(
+                context.runtime.temporal.temporal_activation
+            )
+            if customer_annual:
+                luck_payload["annual"] = customer_annual
+        customer_optimization = present_life_optimization_customer(
+            context.runtime.optimization
+        )
+        if customer_optimization:
+            payload["optimization"] = customer_optimization
+        customer_narrative = present_narrative_customer(
+            context.runtime.narrative.result
+        )
+        if customer_narrative:
+            payload["detailed_narrative"] = customer_narrative
 
     def _attach_can_xuong(self, payload: dict[str, Any], calendar: Any, bazi_chart: Any) -> None:
         """Publish analysis.can_xuong from the dedicated engine. Soft-fail."""

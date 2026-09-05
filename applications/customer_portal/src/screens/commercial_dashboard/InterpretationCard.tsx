@@ -9,6 +9,9 @@ import type {
   DomainPillarView,
   InterpretationView,
   InterpretationZoneView,
+  Pack07NarrativeComposerView,
+  Pack07NarrativeDomainView,
+  Pack07NarrativeItemView,
 } from "./types";
 import { visualCardDom } from "./visualHierarchy";
 import { MobileToggle, useMobileOpen } from "./mobile/MobileToggle";
@@ -109,7 +112,93 @@ function DomainPillars({
   );
 }
 
+function ComposerList({
+  id,
+  title,
+  items,
+}: {
+  readonly id: string;
+  readonly title: string;
+  readonly items: readonly Pack07NarrativeItemView[];
+}): ReactNode {
+  if (!items.length) return null;
+  return (
+    <section className="bte-int__composer-section" data-int-section={id}>
+      <h3 className="bte-int__zone-title">{title}</h3>
+      <ul className="bte-int__composer-list">
+        {items.map((entry, index) => (
+          <li key={`${id}-${index}`} className="bte-int__composer-item">
+            {entry.title ? <strong className="bte-int__composer-item-title">{entry.title}</strong> : null}
+            {entry.summary ? <p className="bte-int__zone-body">{entry.summary}</p> : null}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+function ComposerDomains({
+  title,
+  items,
+  fields,
+}: {
+  readonly title: string;
+  readonly items: readonly Pack07NarrativeDomainView[];
+  readonly fields: Pack07NarrativeComposerView["labels"]["fields"];
+}): ReactNode {
+  if (!items.length) return null;
+  return (
+    <section className="bte-int__composer-section" data-int-section="domains">
+      <h3 className="bte-int__zone-title">{title}</h3>
+      <div className="bte-int__composer-domains">
+        {items.map((entry) => (
+          <article key={entry.id || entry.title} className="bte-dom__card" data-int-domain={entry.id}>
+            <div className="bte-dom__summary">
+              <span className="bte-dom__title">{entry.title}</span>
+              <span className="bte-dom__state">{entry.state}</span>
+            </div>
+            <DomainRow label={fields.state} value={entry.state} />
+            <DomainRow label={fields.driver} value={entry.driver} />
+            <DomainRow label={fields.bottleneck} value={entry.bottleneck} />
+            <DomainRow label={fields.opportunity} value={entry.opportunity} />
+            <DomainRow label={fields.caution} value={entry.caution} />
+            <DomainRow label={fields.condition} value={entry.condition} />
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function ComposerBody({ composer }: { readonly composer: Pack07NarrativeComposerView }): ReactNode {
+  return (
+    <div className="bte-int__composer" data-int-composer="true">
+      {composer.executive ? (
+        <section className="bte-int__lead-block" data-int-section="executive" data-int-lead="true">
+          <h3 className="bte-int__zone-title">{composer.labels.executive}</h3>
+          <p className="bte-int__lead">{composer.executive}</p>
+        </section>
+      ) : null}
+      <div className="bte-int__composer-body" data-mobile-body="true">
+        <ComposerList id="strengths" title={composer.labels.strengths} items={composer.strengths} />
+        <ComposerList id="risks" title={composer.labels.risks} items={composer.risks} />
+        <ComposerList id="opportunities" title={composer.labels.opportunities} items={composer.opportunities} />
+        <ComposerDomains title={composer.labels.domains} items={composer.domains} fields={composer.labels.fields} />
+        <ComposerList id="luck" title={composer.labels.luck} items={composer.luck} />
+        <ComposerList id="actions" title={composer.labels.actions} items={composer.actions} />
+        {composer.closing ? (
+          <section className="bte-int__closing-block" data-int-section="closing" data-int-closing="true">
+            <h3 className="bte-int__zone-title">{composer.labels.closing}</h3>
+            <p className="bte-int__closing">{composer.closing}</p>
+          </section>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
 function canReveal(model: InterpretationView): boolean {
+  if (model.composer) return false;
   if (model.leadExtra || model.closing) return true;
   return model.zones.some((zone) => Boolean(zone.extra));
 }
@@ -157,6 +246,8 @@ export function InterpretationCard({ card, model }: InterpretationCardProps): Re
         <p className="bte-int__empty" data-int-empty="true">
           {model.emptyMessage}
         </p>
+      ) : model.composer ? (
+        <ComposerBody composer={model.composer} />
       ) : (
         <>
           <DomainPillars title={model.domainTitle} items={model.domains} />

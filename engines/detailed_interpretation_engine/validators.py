@@ -80,6 +80,15 @@ from engines.detailed_interpretation_engine.luck_activation.models import (
 from engines.detailed_interpretation_engine.luck_interaction.validation import (
     validate_luck_interaction_result,
 )
+from engines.detailed_interpretation_engine.temporal_activation.validation import (
+    validate_temporal_activation_result,
+)
+from engines.detailed_interpretation_engine.life_optimization.validation import (
+    validate_life_optimization_result,
+)
+from engines.detailed_interpretation_engine.narrative_composer.validation import (
+    validate_narrative_result,
+)
 from engines.detailed_interpretation_engine.temporal import LuckActivationResult
 from engines.detailed_interpretation_engine.evidence import EvidencePriorityResult
 from engines.detailed_interpretation_engine.evidence_priority.constants import (
@@ -1609,4 +1618,7 @@ PACK07_VALIDATOR_REGISTRY: dict[str, str] = {
     "validate_domain_interpretation_result": "validate_domain_interpretation_result",
     "validate_luck_activation_result": "validate_luck_activation_result",
     "validate_luck_interaction_result": "validate_luck_interaction_result",
+    "validate_temporal_activation_result": "validate_temporal_activation_result",
+    "validate_life_optimization_result": "validate_life_optimization_result",
+    "validate_narrative_result": "validate_narrative_result",
 }

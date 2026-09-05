@@ -400,6 +400,28 @@ export type LuckInteractionView = {
   readonly edges: readonly LuckInteractionEdgeView[];
 };
 
+export type LuckAnnualItemView = {
+  readonly id: string;
+  readonly title: string;
+  readonly natalLabel: string;
+  readonly luckLabel: string;
+  readonly annualLabel: string;
+  readonly driver: string;
+  readonly bottleneck: string;
+  readonly conditions: readonly string[];
+};
+
+export type LuckAnnualView = {
+  readonly title: string;
+  readonly year: string;
+  readonly ganZhi: string;
+  readonly dominantActivation: string;
+  readonly dominantSuppression: string;
+  readonly stress: string;
+  readonly recovery: string;
+  readonly items: readonly LuckAnnualItemView[];
+};
+
 export type LuckView = {
   readonly title: string;
   readonly available: boolean;
@@ -411,6 +433,7 @@ export type LuckView = {
   readonly trend: string;
   readonly activation: LuckActivationView | null;
   readonly interaction: LuckInteractionView | null;
+  readonly annual: LuckAnnualView | null;
 };
 
 export type InterpretationZoneId = "observation" | "reasoning" | "impact" | "recommendation";
@@ -435,6 +458,55 @@ export type InterpretationView = {
   readonly emptyMessage: string;
   readonly domainTitle: string;
   readonly domains: readonly DomainPillarView[];
+  readonly composer?: Pack07NarrativeComposerView | null;
+};
+
+export type Pack07NarrativeItemView = {
+  readonly title: string;
+  readonly summary: string;
+  readonly domain: string;
+  readonly priority: string;
+};
+
+export type Pack07NarrativeDomainView = {
+  readonly id: string;
+  readonly title: string;
+  readonly summary: string;
+  readonly state: string;
+  readonly driver: string;
+  readonly bottleneck: string;
+  readonly opportunity: string;
+  readonly caution: string;
+  readonly condition: string;
+};
+
+export type Pack07NarrativeComposerView = {
+  readonly executive: string;
+  readonly strengths: readonly Pack07NarrativeItemView[];
+  readonly risks: readonly Pack07NarrativeItemView[];
+  readonly opportunities: readonly Pack07NarrativeItemView[];
+  readonly domains: readonly Pack07NarrativeDomainView[];
+  readonly luck: readonly Pack07NarrativeItemView[];
+  readonly actions: readonly Pack07NarrativeItemView[];
+  readonly closing: string;
+  readonly labels: {
+    readonly executive: string;
+    readonly strengths: string;
+    readonly risks: string;
+    readonly opportunities: string;
+    readonly domains: string;
+    readonly luck: string;
+    readonly actions: string;
+    readonly closing: string;
+    readonly fields: {
+      readonly state: string;
+      readonly driver: string;
+      readonly bottleneck: string;
+      readonly opportunity: string;
+      readonly caution: string;
+      readonly condition: string;
+    };
+  };
 };
 
 export type ActionItemView = {
@@ -442,6 +514,77 @@ export type ActionItemView = {
   readonly detail: string;
   readonly domain: string;
   readonly source: string;
+};
+
+export type OptimizationActionView = {
+  readonly domain: string;
+  readonly title: string;
+  readonly reason: string;
+  readonly action: string;
+  readonly effect: string;
+  readonly scope: string;
+  readonly condition: string;
+  readonly caution: string;
+};
+
+export type OptimizationPriorityView = OptimizationActionView & {
+  readonly rank: number;
+  readonly label: string;
+};
+
+export type OptimizationDomainView = {
+  readonly id: string;
+  readonly title: string;
+  readonly target: string;
+  readonly driver: string;
+  readonly bottleneck: string;
+  readonly leakage: string;
+  readonly why: string;
+  readonly action: string;
+  readonly condition: string;
+  readonly caution: string;
+  readonly temporal: string;
+};
+
+export type OptimizationConflictView = {
+  readonly title: string;
+  readonly domains: string;
+  readonly resolution: string;
+  readonly condition: string;
+};
+
+export type OptimizationElementView = {
+  readonly element: string;
+  readonly function: string;
+  readonly direction: string;
+  readonly domains: string;
+  readonly reason: string;
+};
+
+export type OptimizationPlanView = {
+  readonly subtitle: string;
+  readonly topPriorities: readonly OptimizationPriorityView[];
+  readonly groups: {
+    readonly develop: readonly OptimizationActionView[];
+    readonly improve: readonly OptimizationActionView[];
+    readonly control: readonly OptimizationActionView[];
+    readonly avoid: readonly OptimizationActionView[];
+    readonly temporal: readonly OptimizationActionView[];
+  };
+  readonly natal: { readonly title: string; readonly items: readonly OptimizationActionView[] };
+  readonly temporal: {
+    readonly title: string;
+    readonly year: string;
+    readonly items: readonly OptimizationActionView[];
+  };
+  readonly domains: readonly OptimizationDomainView[];
+  readonly conflicts: readonly OptimizationConflictView[];
+  readonly usefulGod: {
+    readonly element: string;
+    readonly functions: string;
+    readonly reason: string;
+  } | null;
+  readonly elements: readonly OptimizationElementView[];
 };
 
 export type ActionPlanView = {
@@ -453,6 +596,7 @@ export type ActionPlanView = {
   readonly extraActions: readonly ActionItemView[];
   readonly warnings: readonly ActionItemView[];
   readonly watch: readonly ActionItemView[];
+  readonly optimization?: OptimizationPlanView | null;
 };
 
 export type LifeDomainId =
