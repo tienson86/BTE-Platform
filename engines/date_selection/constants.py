@@ -54,9 +54,10 @@ DS_HOUR_WINDOWS: tuple[tuple[str, int, int, int, int, bool], ...] = (
     ("Hợi", 21, 1, 23, 0, False),
 )
 
+# Remainder 2 keeps code luu_lien for API compatibility; public label is Lưu Niên.
 SIX_STATE_BY_REMAINDER: dict[int, tuple[str, str]] = {
     1: ("dai_an", "Đại An"),
-    2: ("luu_lien", "Lưu Liên"),
+    2: ("luu_lien", "Lưu Niên"),
     3: ("toc_hy", "Tốc Hỷ"),
     4: ("xich_khau", "Xích Khẩu"),
     5: ("tieu_cat", "Tiểu Cát"),

@@ -202,6 +202,7 @@ def _section_profile(report_input: ReportInputV1) -> PresentedSection:
                 ("Cửu Vận", display_text(calendar.cuu_van)),
                 ("Cung Phi", display_text(calendar.cung_phi)),
                 ("Mệnh Quái", display_text(calendar.menh_quai)),
+                ("Hành Cung", display_text(calendar.hanh_cung)),
                 ("Nhóm Trạch", display_text(calendar.nhom_trach or calendar.house_group)),
                 ("Múi giờ lịch", display_text(calendar.timezone)),
             ]

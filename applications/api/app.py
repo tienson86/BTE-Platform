@@ -31,6 +31,7 @@ from applications.api.routes import user as user_router
 from applications.api.routes import export as export_router
 from applications.api.routes import v1 as v1_router
 from applications.monitoring import register_ops_middleware
+from engines.core.register_engines import register_all_engines
 
 
 def _configure_logging() -> None:
@@ -43,6 +44,7 @@ def _configure_logging() -> None:
 def create_app() -> FastAPI:
     """Create Applications API V1 FastAPI application."""
     _configure_logging()
+    register_all_engines()
     app = FastAPI(
         title="BTE Platform API",
         description=(
@@ -66,6 +68,7 @@ def create_app() -> FastAPI:
         {"name": "Admin", "description": "Administration & operations (WP13)"},
         {"name": "License", "description": "Licensing & product editions (WP14)"},
         {"name": "engines", "description": "Engine orchestration endpoints"},
+        {"name": "pack07-dev", "description": "Development-only Pack 07 diagnostics"},
     ]
     register_middleware(app)
     register_ops_middleware(app)

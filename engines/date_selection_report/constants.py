@@ -19,10 +19,13 @@ SOURCE = "date_selection"
 ENGINE_VERSION = "1.0.0"
 
 DAY_RESULTS: frozenset[str] = frozenset(
-    {"Đại An", "Lưu Liên", "Tốc Hỷ", "Xích Khẩu", "Tiểu Cát", "Không Vong"}
+    {"Đại An", "Lưu Niên", "Tốc Hỷ", "Xích Khẩu", "Tiểu Cát", "Không Vong"}
 )
 POSITIVE_KE_RESULTS: frozenset[str] = frozenset({"Đại An", "Tốc Hỷ", "Tiểu Cát"})
-NEGATIVE_KE_RESULTS: frozenset[str] = frozenset({"Lưu Liên", "Xích Khẩu", "Không Vong"})
+# Lưu Liên is a legacy misspelling; keep it rejected so old payloads cannot leak.
+NEGATIVE_KE_RESULTS: frozenset[str] = frozenset(
+    {"Lưu Niên", "Lưu Liên", "Xích Khẩu", "Không Vong"}
+)
 ALLOWED_CUNG: frozenset[str] = frozenset(
     {"Khảm", "Ly", "Chấn", "Tốn", "Càn", "Khôn", "Cấn", "Đoài"}
 )

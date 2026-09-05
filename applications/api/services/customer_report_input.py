@@ -187,6 +187,7 @@ def _calendar(
         timezone=timezone,
         cung_phi=_text(payload.get("cung_phi")),
         menh_quai=_text(payload.get("menh_quai")),
+        hanh_cung=_text(payload.get("hanh_cung")),
         nhom_trach=_text(payload.get("nhom_trach")),
     )
     if not calendar.lunar_date:

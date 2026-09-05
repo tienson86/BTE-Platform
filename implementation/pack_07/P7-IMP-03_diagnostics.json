@@ -1,0 +1,180 @@
+{
+  "health": {
+    "status": 200,
+    "body": {
+      "status": "ok",
+      "service": "bte-applications-api",
+      "version": "1.0.0"
+    }
+  },
+  "analyze": {
+    "status": 200,
+    "pipeline": [
+      "calendar",
+      "bazi",
+      "pattern",
+      "score",
+      "interpretation",
+      "report",
+      "narrative"
+    ],
+    "has_pack07_context": false
+  },
+  "history_portal": 200,
+  "result_portal": 200,
+  "diagnostics_get": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "message": "Pack 07 diagnostics OK",
+      "data": {
+        "analysis_id": "dev-pack07",
+        "contracts": "PASS",
+        "contexts": "PASS",
+        "validators": "PASS",
+        "mc01_reference": "NOT_BOUND",
+        "ten_gods": "NOT_IMPLEMENTED",
+        "shen_sha": "NOT_IMPLEMENTED",
+        "evidence_priority": "NOT_IMPLEMENTED",
+        "domains": "NOT_EVALUATED",
+        "luck": "NOT_IMPLEMENTED",
+        "temporal": "NOT_EVALUATED",
+        "optimization": "NOT_EVALUATED",
+        "narrative": "NOT_EVALUATED",
+        "runtime_contract": "PASS",
+        "overall_status": "PASS",
+        "issues": [
+          {
+            "code": "P7V-CTX-CALENDAR-IDENTITY",
+            "severity": "warning",
+            "layer": "interpretation",
+            "field": "chart_identity",
+            "message": "calendar identity is empty",
+            "expected": "",
+            "actual": "",
+            "trace_id": "p7v-cef710a30e9e",
+            "validator": "validate_interpretation_context",
+            "analysis_id": "dev-pack07"
+          },
+          {
+            "code": "P7V-CTX-MC01-NOT-BOUND",
+            "severity": "warning",
+            "layer": "interpretation",
+            "field": "mc01",
+            "message": "MC-01 reference not yet bound",
+            "expected": "bound Mc01Reference",
+            "actual": "not_bound",
+            "trace_id": "p7v-1a4aaece1e43",
+            "validator": "validate_interpretation_context",
+            "analysis_id": "dev-pack07"
+          }
+        ],
+        "validation": {
+          "status": "PASS_WITH_WARNINGS",
+          "errors": [],
+          "warnings": [
+            {
+              "code": "P7V-CTX-CALENDAR-IDENTITY",
+              "severity": "warning",
+              "layer": "interpretation",
+              "field": "chart_identity",
+              "message": "calendar identity is empty",
+              "expected": "",
+              "actual": "",
+              "trace_id": "p7v-cef710a30e9e",
+              "validator": "validate_interpretation_context",
+              "analysis_id": "dev-pack07"
+            },
+            {
+              "code": "P7V-CTX-MC01-NOT-BOUND",
+              "severity": "warning",
+              "layer": "interpretation",
+              "field": "mc01",
+              "message": "MC-01 reference not yet bound",
+              "expected": "bound Mc01Reference",
+              "actual": "not_bound",
+              "trace_id": "p7v-1a4aaece1e43",
+              "validator": "validate_interpretation_context",
+              "analysis_id": "dev-pack07"
+            }
+          ],
+          "validated_at": "2026-09-05T00:58:21.078658+00:00",
+          "validator_version": "1.0.0",
+          "analysis_id": "dev-pack07",
+          "trace_ids": [
+            "p7v-cef710a30e9e",
+            "p7v-1a4aaece1e43"
+          ]
+        }
+      },
+      "request_id": null
+    }
+  },
+  "diagnostics_post": {
+    "status": 200,
+    "body": {
+      "success": true,
+      "message": "Pack 07 diagnostics OK",
+      "data": {
+        "analysis_id": "213d89db-b7c5-4739-aef2-143e804a1be8",
+        "contracts": "PASS",
+        "contexts": "PASS",
+        "validators": "PASS",
+        "mc01_reference": "NOT_BOUND",
+        "ten_gods": "NOT_IMPLEMENTED",
+        "shen_sha": "NOT_IMPLEMENTED",
+        "evidence_priority": "NOT_IMPLEMENTED",
+        "domains": "NOT_EVALUATED",
+        "luck": "NOT_IMPLEMENTED",
+        "temporal": "NOT_EVALUATED",
+        "optimization": "NOT_EVALUATED",
+        "narrative": "NOT_EVALUATED",
+        "runtime_contract": "PASS",
+        "overall_status": "PASS",
+        "issues": [
+          {
+            "code": "P7V-CTX-MC01-NOT-BOUND",
+            "severity": "warning",
+            "layer": "interpretation",
+            "field": "mc01",
+            "message": "MC-01 reference not yet bound",
+            "expected": "bound Mc01Reference",
+            "actual": "not_bound",
+            "trace_id": "p7v-07973e556bb6",
+            "validator": "validate_interpretation_context",
+            "analysis_id": "213d89db-b7c5-4739-aef2-143e804a1be8"
+          }
+        ],
+        "validation": {
+          "status": "PASS_WITH_WARNINGS",
+          "errors": [],
+          "warnings": [
+            {
+              "code": "P7V-CTX-MC01-NOT-BOUND",
+              "severity": "warning",
+              "layer": "interpretation",
+              "field": "mc01",
+              "message": "MC-01 reference not yet bound",
+              "expected": "bound Mc01Reference",
+              "actual": "not_bound",
+              "trace_id": "p7v-07973e556bb6",
+              "validator": "validate_interpretation_context",
+              "analysis_id": "213d89db-b7c5-4739-aef2-143e804a1be8"
+            }
+          ],
+          "validated_at": "2026-09-05T00:58:22.537601+00:00",
+          "validator_version": "1.0.0",
+          "analysis_id": "213d89db-b7c5-4739-aef2-143e804a1be8",
+          "trace_ids": [
+            "p7v-07973e556bb6"
+          ]
+        }
+      },
+      "request_id": "213d89db-b7c5-4739-aef2-143e804a1be8"
+    }
+  },
+  "screenshots": {
+    "desktop": "implementation/pack_07/screenshots/p7_imp_03_result_desktop.png",
+    "mobile": "implementation/pack_07/screenshots/p7_imp_03_result_mobile.png"
+  }
+}

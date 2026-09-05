@@ -28,6 +28,7 @@ import {
   canonicalClimateStateLabel,
 } from "../adapters/canonicalTemperature";
 import { shenShaEntriesFromAnalysis, type ShenShaEntryView } from "../adapters/canonicalShenSha";
+import { bindPersonalCungPhiIdentity } from "../adapters/personalCungPhi";
 import {
   asTenGodsPayload,
   hiddenLinesForPillar,
@@ -131,6 +132,7 @@ export type FullReportViewModel = {
   }>;
   readonly cungPhi: string;
   readonly menhQuai: string;
+  readonly hanhCung: string;
   readonly nhomTrach: string;
   readonly tamNguyen: string;
   readonly cuuVan: string;
@@ -175,7 +177,7 @@ export function buildFullReportViewModel(
   const pattern = asRecord(data.pattern);
   const useful = canonicalUsefulGodPayload(data);
   const prominence = tenGodsProminenceFromAnalysis(data);
-  const feng = asRecord(data.feng_shui);
+  const personalCung = bindPersonalCungPhiIdentity(data as Record<string, unknown>);
   const score = data.score || {};
   const luck = data.luck;
   const narrative = asNarrativeResult(data.narrative_result);
@@ -263,9 +265,10 @@ export function buildFullReportViewModel(
     luckEvidence: stripInternalRuleIds(text(luck?.evidence)),
     luckMethod: text(luck?.method_note),
     luckCycles: cycles,
-    cungPhi: text(calendar.cung_phi || feng.cung_phi),
-    menhQuai: text(calendar.menh_quai || feng.menh_quai),
-    nhomTrach: text(calendar.house_group || calendar.nhom_trach || feng.house_group || feng.nhom_trach),
+    cungPhi: personalCung.cungPhi,
+    menhQuai: personalCung.menhQuai,
+    hanhCung: personalCung.hanhCung,
+    nhomTrach: personalCung.nhomTrach,
     tamNguyen: text(calendar.tam_nguyen),
     cuuVan: text(calendar.cuu_van),
     scoreLabel:
@@ -457,6 +460,7 @@ function identityGrid(model: FullReportViewModel): string {
     ${kv("Cửu Vận", model.cuuVan)}
     ${kv("Cung Phi", model.cungPhi)}
     ${kv("Mệnh Quái", model.menhQuai)}
+    ${kv("Hành Cung", model.hanhCung)}
     ${kv("Nhóm Trạch", model.nhomTrach)}
   </div>`;
 }
@@ -574,6 +578,7 @@ function fengBlock(model: FullReportViewModel): string {
     ${kv("Cửu Vận", model.cuuVan)}
     ${kv("Cung Phi", model.cungPhi)}
     ${kv("Mệnh Quái", model.menhQuai)}
+    ${kv("Hành Cung", model.hanhCung)}
     ${kv("Nhóm Trạch", model.nhomTrach)}
   </div>`;
 }

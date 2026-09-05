@@ -53,6 +53,16 @@ EAST_HOUSE_GROUP = "Đông Tứ Trạch"
 WEST_HOUSE_GROUP = "Tây Tứ Trạch"
 EAST_CUNG = frozenset({"Khảm", "Ly", "Chấn", "Tốn"})
 WEST_CUNG = frozenset({"Càn", "Khôn", "Cấn", "Đoài"})
+ELEMENT_LABEL_BY_CUNG: dict[str, str] = {
+    "Khảm": "Thủy",
+    "Ly": "Hỏa",
+    "Chấn": "Mộc",
+    "Tốn": "Mộc",
+    "Càn": "Kim",
+    "Khôn": "Thổ",
+    "Cấn": "Thổ",
+    "Đoài": "Kim",
+}
 
 _MALE_GENDER_ALIASES = frozenset({"male", "nam", "m", "1", "man", "boy"})
 _FEMALE_GENDER_ALIASES = frozenset({"female", "nu", "nữ", "f", "2", "woman", "girl"})
@@ -113,6 +123,54 @@ def house_group_for_cung(cung: str) -> str:
     if key in WEST_CUNG:
         return WEST_HOUSE_GROUP
     raise CalendarValidationError(f"unknown Cung Phi: {cung!r}")
+
+
+def element_label_for_cung(cung: str) -> str:
+    """Return Hành Cung (ngũ hành) from a palace name. Does not score."""
+    key = (cung or "").strip()
+    try:
+        return ELEMENT_LABEL_BY_CUNG[key]
+    except KeyError as exc:
+        raise CalendarValidationError(f"unknown Cung Phi: {cung!r}") from exc
+
+
+def cung_phi_result_from_palace(cung: str, *, remainder: int | None = None) -> CungPhiResult:
+    """Build CungPhiResult from an already-resolved palace. No second lookup."""
+    palace = (cung or "").strip()
+    gua = gua_number_for_cung(palace)
+    return CungPhiResult(
+        remainder=gua if remainder is None else int(remainder),
+        cung_phi=palace,
+        menh_quai=palace,
+        house_group=house_group_for_cung(palace),
+        gua_number=gua,
+    )
+
+
+def personal_cung_phi_from_year_ganzhi(
+    *,
+    year_ganzhi: str,
+    tam_nguyen: str,
+    reference_year: int,
+    gender: str | None,
+) -> CungPhiResult | None:
+    """Personal Cung Phi from the Tam Nguyên year of the year Ganzhi.
+
+    Uses the same yuan-year mapping as Tứ Trụ Year Cung, with the person's
+    gender. Must not use the raw Gregorian birth-year digit sum when that
+    year is not the yuan-year of the published year Can Chi.
+    """
+    if gender is None or str(gender).strip() == "":
+        return None
+    if not year_ganzhi or not tam_nguyen:
+        return None
+    palace = cung_for_ganzhi(
+        year_ganzhi,
+        tam_nguyen=tam_nguyen,
+        reference_year=reference_year,
+        gender=gender,
+    )
+    return cung_phi_result_from_palace(palace)
 
 
 def gua_number_for_cung(cung: str) -> int:

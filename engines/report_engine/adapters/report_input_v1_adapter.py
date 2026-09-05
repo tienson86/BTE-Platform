@@ -227,6 +227,7 @@ class ReportInputV1Adapter:
             timezone=timezone,
             cung_phi=str(payload.get("cung_phi") or ""),
             menh_quai=str(payload.get("menh_quai") or ""),
+            hanh_cung=str(payload.get("hanh_cung") or ""),
             nhom_trach=str(payload.get("nhom_trach") or payload.get("house_group") or ""),
             house_group=str(payload.get("house_group") or payload.get("nhom_trach") or ""),
             tam_nguyen=str(payload.get("tam_nguyen") or ""),

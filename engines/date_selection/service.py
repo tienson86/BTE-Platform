@@ -12,8 +12,8 @@ from engines.date_selection.cung_phi import (
     gender_label,
     normalize_gender,
     trach_for_date_ganzhi,
-    trach_for_person,
 )
+from engines.date_selection.trach import trach_from_cung
 from engines.date_selection.exceptions import DateSelectionValidationError
 from engines.date_selection.hour import all_hour_windows, hour_ganzhi, window_for_branch
 from engines.date_selection.ke import current_ke_index, ke_slots_for_hour
@@ -135,7 +135,15 @@ class DateSelectionService:
             birth_day,
             engine=self._calendar,
         )
-        trach = trach_for_person(lunar_year=snapshot.lunar_year, gender=sex)
+        calendar = self._calendar.build(
+            birth_year,
+            birth_month,
+            birth_day,
+            gender=sex,
+        )
+        if not calendar.cung_phi:
+            raise DateSelectionValidationError("personal Cung Phi is required")
+        trach = trach_from_cung(calendar.cung_phi)
         return PersonProfile(
             full_name=name,
             gender=sex,

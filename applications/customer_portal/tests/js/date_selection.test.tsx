@@ -40,7 +40,7 @@ const hour = (branch: string, label: string): HourVm => ({
     { ke_index: 1, time_range: "07:01–07:20", six_state: { remainder: 5, code: "tieu_cat", label: "Tiểu Cát" } },
     { ke_index: 2, time_range: "07:21–07:40", six_state: { remainder: 0, code: "khong_vong", label: "Không Vong" } },
     { ke_index: 3, time_range: "07:41–08:00", six_state: { remainder: 1, code: "dai_an", label: "Đại An" } },
-    { ke_index: 4, time_range: "08:01–08:20", six_state: { remainder: 2, code: "luu_lien", label: "Lưu Liên" } },
+    { ke_index: 4, time_range: "08:01–08:20", six_state: { remainder: 2, code: "luu_lien", label: "Lưu Niên" } },
     { ke_index: 5, time_range: "08:21–08:40", six_state: { remainder: 3, code: "toc_hy", label: "Tốc Hỷ" } },
     { ke_index: 6, time_range: "08:41–09:00", six_state: { remainder: 4, code: "xich_khau", label: "Xích Khẩu" } },
   ],

@@ -11,11 +11,13 @@ from applications.api.schemas.common import APIResponse, BirthRequest, Discussio
 from applications.api.services.knowledge_expert_service import KnowledgeExpertService
 from applications.api.services.orchestrator import OrchestratorService
 from applications.api.routes import date_selection as date_selection_router
+from applications.api.routes import pack07_dev as pack07_dev_router
 from applications.api.services.result_identity import stamp_customer_result_identity
 from engines.knowledge_engine import KnowledgePipeline
 
 router = APIRouter(tags=["engines"])
 router.include_router(date_selection_router.router)
+router.include_router(pack07_dev_router.router)
 logger = logging.getLogger(__name__)
 
 

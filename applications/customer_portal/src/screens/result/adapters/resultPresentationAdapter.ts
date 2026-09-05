@@ -35,6 +35,7 @@ import {
   truncatePrimaryList,
 } from "../presentation/previewBuilder";
 import type { FullReportViewModel } from "../../../report/fullReportViewModel";
+import { elementLabelForCung } from "../../../adapters/personalCungPhi";
 import type {
   InterpretationBlockViewModel,
   KnowledgeSectionViewModel,
@@ -680,19 +681,23 @@ export function adaptResultPageViewModel(
   const knowledge = buildKnowledge(source);
 
   const cungPhi =
+    fullReport?.cungPhi ||
     source.s09.quai.bullets
       .find((item) => item.toLowerCase().includes("cung"))
       ?.split(":")
       .slice(1)
       .join(":")
-      .trim() || source.s09.quai.center;
+      .trim() ||
+    source.s09.quai.center;
   const nhomTrach =
+    fullReport?.nhomTrach ||
     source.s09.quai.bullets
       .find((item) => item.toLowerCase().includes("nhóm") || item.toLowerCase().includes("trạch"))
       ?.split(":")
       .slice(1)
       .join(":")
-      .trim() || "";
+      .trim() ||
+    "";
   const tamNguyen =
     source.s09.quai.bullets
       .find((item) => item.toLowerCase().includes("nguyên"))
@@ -740,7 +745,8 @@ export function adaptResultPageViewModel(
       status: source.s00.status.value,
       analyzedAt: source.s00.analyzedAt.value,
       cungPhi,
-      menhQuai: source.s09.quai.center,
+      menhQuai: fullReport?.menhQuai || cungPhi,
+      hanhCung: elementLabelForCung(cungPhi),
       nhomTrach,
       tamNguyen,
       cuuVan,

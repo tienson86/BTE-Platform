@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from engines.identity.models import CanonicalIdentity
+
+if TYPE_CHECKING:
+    from engines.detailed_interpretation_engine.context_layers import CanonicalAnalysisContext
 
 
 @dataclass(slots=True)
@@ -600,6 +603,7 @@ class AnalysisResult:
     rule_context: dict[str, Any] = field(default_factory=dict)
     unified_context: dict[str, Any] = field(default_factory=dict)
     commercial_consulting: dict[str, Any] | None = None
+    pack07_context: CanonicalAnalysisContext | None = None
 
     def bazi_dict(self) -> dict[str, Any]:
         """Serialize authoritative Bazi for ``data.bazi``."""

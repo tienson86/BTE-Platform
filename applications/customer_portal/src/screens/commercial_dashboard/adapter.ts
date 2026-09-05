@@ -3,6 +3,7 @@
  */
 
 import { genderDisplayLabel } from "../../adapters/genderDisplay";
+import { bindPersonalCungPhiIdentity } from "../../adapters/personalCungPhi";
 import type { AnalysisDataDto, AnalyzeChartRequest, PillarDto } from "../../models";
 import { CAN_XUONG_DETAIL_HREF, adaptCanXuong } from "./canXuongAdapter";
 import type {
@@ -115,6 +116,7 @@ function bindStatus(
   extra: {
     readonly cungPhi: string;
     readonly menhQuai: string;
+    readonly hanhCung: string;
     readonly nhomTrach: string;
     readonly tietKhi: string;
     readonly tamNguyen: string;
@@ -130,6 +132,7 @@ function bindStatus(
     confidence,
     cungPhi: extra.cungPhi,
     menhQuai: extra.menhQuai,
+    hanhCung: extra.hanhCung,
     nhomTrach: extra.nhomTrach,
     tietKhi: extra.tietKhi,
     tamNguyen: extra.tamNguyen,
@@ -150,7 +153,6 @@ export function adaptIdentityHeader(
   const customer = payload.customer;
   const calendar = asRecord(payload.calendar);
   const identityCalendar = asRecord(identity.calendar);
-  const feng = asRecord(payload.feng_shui);
   const four = asRecord(identity.four_pillars);
   const bazi = payload.bazi;
   const request = options.request;
@@ -162,14 +164,10 @@ export function adaptIdentityHeader(
   const hour = bindPillar(four.hour, bazi?.hour_pillar, routing.hour, ruleVersion);
   const genderRaw = firstText(person.gender, customer?.gender, request?.gender);
   const canXuong = adaptCanXuong(payload);
-  const cungPhi = firstText(calendar.cung_phi, feng.cung_phi, feng.gua_name);
-  const menhQuai = firstText(calendar.menh_quai, feng.menh_quai, cungPhi);
-  const nhomTrach = firstText(
-    calendar.house_group,
-    calendar.nhom_trach,
-    feng.house_group,
-    feng.nhom_trach,
-  );
+  const personal = bindPersonalCungPhiIdentity(payload as Record<string, unknown>, genderRaw);
+  const cungPhi = personal.cungPhi;
+  const menhQuai = personal.menhQuai;
+  const nhomTrach = personal.nhomTrach;
   return {
     person: {
       fullName: firstText(person.full_name, customer?.full_name, request?.full_name),
@@ -198,6 +196,7 @@ export function adaptIdentityHeader(
     status: bindStatus(payload, options, {
       cungPhi,
       menhQuai,
+      hanhCung: personal.hanhCung,
       nhomTrach,
       tietKhi: firstText(identityCalendar.solar_term, solarTermName(calendar)),
       tamNguyen: firstText(calendar.tam_nguyen),

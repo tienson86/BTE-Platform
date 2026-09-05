@@ -121,6 +121,12 @@ export function ContextZone(): ReactNode {
                     <dd>{context.menhQuai}</dd>
                   </div>
                 ) : null}
+                {context.hanhCung ? (
+                  <div>
+                    <dt>Hành Cung</dt>
+                    <dd>{context.hanhCung}</dd>
+                  </div>
+                ) : null}
                 {context.nhomTrach ? (
                   <div>
                     <dt>Nhóm Trạch</dt>

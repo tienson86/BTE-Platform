@@ -23,7 +23,7 @@ from tests.date_selection.test_ds06c_evidence import _day
 
 REPO = Path(__file__).resolve().parents[2]
 JS = REPO / "applications" / "customer_portal" / "static" / "js" / "date_selection.js"
-NEGATIVE_KE = {"Lưu Liên", "Xích Khẩu", "Không Vong"}
+NEGATIVE_KE = {"Lưu Niên", "Lưu Liên", "Xích Khẩu", "Không Vong"}
 POSITIVE_KE = {"Đại An", "Tốc Hỷ", "Tiểu Cát"}
 
 

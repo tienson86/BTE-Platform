@@ -11,7 +11,7 @@ from engines.date_selection.liu_ren import day_value, six_state_from_value
     ("remainder", "code", "label"),
     [
         (1, "dai_an", "Đại An"),
-        (2, "luu_lien", "Lưu Liên"),
+        (2, "luu_lien", "Lưu Niên"),
         (3, "toc_hy", "Tốc Hỷ"),
         (4, "xich_khau", "Xích Khẩu"),
         (5, "tieu_cat", "Tiểu Cát"),

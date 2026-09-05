@@ -116,6 +116,7 @@ export function IdentityStatus({ status }: { readonly status: IdentityStatusView
     { label: "Cửu Vận", value: status.cuuVan },
     { label: "Cung Phi", value: status.cungPhi },
     { label: "Mệnh Quái", value: status.menhQuai },
+    { label: "Hành Cung", value: status.hanhCung },
     { label: "Nhóm Trạch", value: status.nhomTrach },
     { label: "Tiết khí", value: status.tietKhi },
   ].filter((row) => row.value);

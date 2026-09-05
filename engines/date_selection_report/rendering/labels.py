@@ -48,6 +48,7 @@ FORBIDDEN_PUBLIC_TERMS: frozenset[str] = frozenset(
         "Month Ganzhi",
         "Hour Result",
         "hour_result",
+        "Lưu Liên",
     }
 )
 

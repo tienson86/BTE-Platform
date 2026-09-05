@@ -48,6 +48,14 @@ from engines.interpretation_engine.engine import (
 
 from engines.report_engine.engine import ReportEngine
 
+# ==========================================================
+# Detailed Interpretation (Pack 07 foundation)
+# ==========================================================
+
+from engines.detailed_interpretation_engine.engine import (
+    DetailedInterpretationEngine,
+)
+
 
 def register_all_engines() -> None:
     """
@@ -99,6 +107,13 @@ def register_all_engines() -> None:
             ReportEngine,
             "Report Engine",
             "Xuất báo cáo PDF, HTML và JSON."
+        ),
+
+        (
+            "detailed_interpretation",
+            DetailedInterpretationEngine,
+            "Detailed Interpretation Engine",
+            "Pack 07 canonical runtime contract (foundation models only).",
         ),
 
     ]

@@ -48,6 +48,9 @@ from engines.useful_god_engine.utils.context_builder import build_useful_god_con
 from engines.report_engine.engine import ReportEngine
 from engines.score_engine.engine import ScoreEngine
 from engines.ten_gods_engine.engine import TenGodsEngine
+from engines.detailed_interpretation_engine.builders import (
+    build_canonical_analysis_context_from_payload,
+)
 
 from applications.api.exceptions import PipelineAPIError, ValidationAPIError
 from applications.api.services.gender_truth import (
@@ -182,6 +185,8 @@ _INTERNAL_PAYLOAD_KEYS: frozenset[str] = frozenset(
         "priority",
         "delivery",
         "_luck_raw",
+        "_pack07_context",
+        "pack07_context",
     }
 )
 
@@ -248,7 +253,9 @@ class OrchestratorService:
                     bazi_can_chi[part] = text
             if bazi_can_chi:
                 data["bazi_can_chi"] = bazi_can_chi
-        if feng_data:
+        # Canonical personal Cung Phi already lives on calendar. Do not fill
+        # leftover Feng Shui digit-sum keys (gua_name=Tốn for 1987 male).
+        if feng_data and not data.get("cung_phi"):
             for key in ("cung_phi", "menh_quai", "nhom_trach", "house_group", "gua_name"):
                 if feng_data.get(key) and not data.get(key):
                     data[key] = feng_data[key]
@@ -382,10 +389,21 @@ class OrchestratorService:
         payload["commercial_consulting"] = consulting
         if analysis is not None:
             analysis.commercial_consulting = consulting
+        self._attach_pack07_context(analysis, payload)
         for key in _INTERNAL_PAYLOAD_KEYS:
             payload.pop(key, None)
         payload["pipeline"] = self._public_pipeline(completed)
         return payload
+
+    def _attach_pack07_context(
+        self,
+        analysis: AnalysisResult | None,
+        payload: dict[str, Any],
+    ) -> None:
+        """Build Pack 07 context after structural truth. Not published on API."""
+        if analysis is None or not payload.get("pattern"):
+            return
+        analysis.pack07_context = build_canonical_analysis_context_from_payload(payload)
 
     def _attach_can_xuong(self, payload: dict[str, Any], calendar: Any, bazi_chart: Any) -> None:
         """Publish analysis.can_xuong from the dedicated engine. Soft-fail."""

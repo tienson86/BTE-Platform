@@ -93,6 +93,7 @@ class ReportCalendarV1:
     house_group: str = ""
     tam_nguyen: str = ""
     cuu_van: str = ""
+    hanh_cung: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return _normalize_mapping(asdict(self))

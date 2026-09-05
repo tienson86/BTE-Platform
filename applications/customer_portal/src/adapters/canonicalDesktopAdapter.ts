@@ -4,6 +4,7 @@
  */
 
 import { canonicalGender } from "./genderDisplay";
+import { bindPersonalCungPhiIdentity } from "./personalCungPhi";
 import type { AnalysisDataDto, AnalyzeChartRequest, PillarDto } from "../models";
 import {
   CANONICAL_DESKTOP_MOCK,
@@ -1066,18 +1067,12 @@ function mapS10(data: AnalysisDataDto): CanonicalDesktopViewModel["s10"] {
 function mapS09(data: AnalysisDataDto): CanonicalDesktopViewModel["s09"] {
   const base = cloneFixture().s09;
   const cal = data.calendar ?? {};
-  const feng =
-    data.feng_shui && typeof data.feng_shui === "object"
-      ? (data.feng_shui as Record<string, unknown>)
-      : {};
-  const cung = asString(
-    cal.cung_phi ?? feng.cung_phi ?? feng.gua_name ?? cal.gua_name ?? feng.menh_quai ?? cal.menh_quai,
-    base.quai.center,
-  );
-  const menh = asString(cal.menh_quai ?? feng.menh_quai ?? cal.cung_phi ?? feng.cung_phi, cung);
-  const nhom = asString(cal.house_group ?? cal.nhom_trach ?? feng.house_group ?? feng.nhom_trach, "");
-  const guaName = asString(feng.gua_name ?? cal.gua_name, menh);
-  const guaNumber = asString(cal.gua_number ?? feng.gua_number, "");
+  const personal = bindPersonalCungPhiIdentity(data as Record<string, unknown>);
+  const cung = personal.cungPhi || asString(cal.cung_phi, base.quai.center);
+  const menh = personal.menhQuai || cung;
+  const nhom = personal.nhomTrach;
+  const guaName = menh;
+  const guaNumber = asString(cal.gua_number, "");
   const numberMatch = guaNumber.match(/\d+/) ?? guaName.match(/\d+/) ?? menh.match(/\d+/);
   const tamNguyen = asString(cal.tam_nguyen);
   const cuuVan = asString(cal.cuu_van);

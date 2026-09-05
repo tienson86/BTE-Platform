@@ -1,0 +1,543 @@
+"""Pack 07 stage validators. Guard contracts; do not reason."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import Any, Mapping
+from uuid import uuid4
+
+from engines.detailed_interpretation_engine.constants import (
+    FORBIDDEN_OWNED_TRUTH_KEYS,
+    MC01_NOT_BOUND_CODE,
+    MC01_NOT_BOUND_MESSAGE,
+    PUBLISHED_DOMAIN_IDS,
+    SCHEMA_CONTEXT,
+    SCHEMA_RUNTIME_CONTRACT,
+    TEMPORAL_LAYER_PARENT,
+)
+from engines.detailed_interpretation_engine.context import InterpretationContext
+from engines.detailed_interpretation_engine.context_layers import (
+    CanonicalAnalysisContext,
+    DomainContext,
+    EvidenceContext,
+    NarrativeContext,
+    OptimizationContext,
+    TemporalContext,
+)
+from engines.detailed_interpretation_engine.enums import (
+    DomainState,
+    EvaluationStatus,
+    IssueSeverity,
+    TemporalLayer,
+    ValidationStatus,
+)
+from engines.detailed_interpretation_engine.exceptions import DetailedInterpretationValidationError
+from engines.detailed_interpretation_engine.runtime import (
+    CanonicalAPIModel,
+    CanonicalConsultingModel,
+    CanonicalExportModel,
+    CanonicalRuntimeResult,
+)
+from engines.detailed_interpretation_engine.schema_registry import registered_schema_ids
+from engines.detailed_interpretation_engine.serialization import (
+    compute_content_hash,
+    serialize_runtime_result,
+    to_jsonable,
+)
+from engines.detailed_interpretation_engine.validation import ValidationIssue, ValidationResult, result_from_issues
+
+
+EVALUATED_STATUSES: frozenset[EvaluationStatus] = frozenset(
+    {
+        EvaluationStatus.RESOLVED,
+        EvaluationStatus.PARTIALLY_RESOLVED,
+        EvaluationStatus.CONFLICTING_EVIDENCE,
+        EvaluationStatus.INSUFFICIENT_EVIDENCE,
+    }
+)
+_LAYER_VALUES: frozenset[str] = frozenset(item.value for item in TemporalLayer)
+_OWNER_CODES: dict[str, str] = {
+    "pattern": "P7V-OWNERSHIP-PATTERN",
+    "grade": "P7V-OWNERSHIP-GRADE",
+    "integrity": "P7V-OWNERSHIP-INTEGRITY",
+    "achievement": "P7V-OWNERSHIP-ACHIEVEMENT",
+    "wealth_profile": "P7V-OWNERSHIP-WEALTH-PROFILE",
+    "career_profile": "P7V-OWNERSHIP-CAREER-PROFILE",
+}
+
+
+@dataclass(slots=True)
+class _Bag:
+    """Mutable issue collector for one validator pass."""
+
+    validator: str
+    analysis_id: str
+    issues: list[ValidationIssue] = field(default_factory=list)
+
+    def add(
+        self,
+        code: str,
+        severity: IssueSeverity,
+        layer: str,
+        message: str,
+        *,
+        field: str = "",
+        expected: str = "",
+        actual: str = "",
+        trace_id: str = "",
+    ) -> None:
+        """Record one issue with validator, analysis_id, and trace."""
+        self.issues.append(
+            ValidationIssue(
+                code=code,
+                severity=severity,
+                layer=layer,
+                field=field,
+                message=message,
+                expected=expected,
+                actual=actual,
+                trace_id=trace_id or f"p7v-{uuid4().hex[:12]}",
+                validator=self.validator,
+                analysis_id=self.analysis_id,
+            )
+        )
+
+    def finish(self) -> ValidationResult:
+        """Fold collected issues."""
+        return result_from_issues(self.issues, analysis_id=self.analysis_id)
+
+
+def _supported_schema(version: str) -> bool:
+    if not version:
+        return False
+    if version in registered_schema_ids():
+        return True
+    prefix = version.rsplit(".", 1)[0]
+    return any(item.startswith(prefix) for item in registered_schema_ids())
+
+
+def _require_analysis_id(bag: _Bag, analysis_id: str, layer: str) -> None:
+    if not (analysis_id or "").strip():
+        bag.add(
+            "P7V-CTX-ANALYSIS-ID-MISSING",
+            IssueSeverity.CRITICAL,
+            layer,
+            "analysis_id is required",
+            field="analysis_id",
+            expected="non-empty analysis_id",
+            actual=analysis_id,
+        )
+
+
+def _match_id(
+    bag: _Bag,
+    expected: str,
+    actual: str,
+    layer: str,
+    field: str,
+    code: str = "P7V-CTX-ANALYSIS-ID-MISMATCH",
+) -> None:
+    if actual and expected and actual != expected:
+        bag.add(
+            code,
+            IssueSeverity.CRITICAL,
+            layer,
+            "analysis_id mismatch",
+            field=field,
+            expected=expected,
+            actual=actual,
+        )
+
+
+def _check_schema(bag: _Bag, version: str, layer: str, field: str = "schema_version") -> None:
+    if not _supported_schema(version):
+        bag.add(
+            "P7V-VERSION-UNSUPPORTED",
+            IssueSeverity.CRITICAL,
+            layer,
+            "unsupported schema version",
+            field=field,
+            expected="registered Pack 07 schema id",
+            actual=version,
+        )
+
+
+def validate_interpretation_context(context: InterpretationContext) -> ValidationResult:
+    """Validate identity-only InterpretationContext. No interpretation."""
+    bag = _Bag("validate_interpretation_context", context.analysis_id)
+    _require_analysis_id(bag, context.analysis_id, "interpretation")
+    _match_id(bag, context.analysis_id, context.chart_identity.analysis_id, "interpretation", "chart_identity.analysis_id")
+    _check_schema(bag, context.schema_version or SCHEMA_CONTEXT, "interpretation")
+    _check_schema(bag, context.versions.contract_version, "interpretation", "versions.contract_version")
+    if not context.chart_identity.analysis_id and not context.chart_identity.birth_civil:
+        bag.add(
+            "P7V-CTX-CALENDAR-IDENTITY",
+            IssueSeverity.WARNING,
+            "interpretation",
+            "calendar identity is empty",
+            field="chart_identity",
+        )
+    if not context.mc01.mingju_result_id:
+        bag.add(
+            MC01_NOT_BOUND_CODE,
+            IssueSeverity.WARNING,
+            "interpretation",
+            MC01_NOT_BOUND_MESSAGE,
+            field="mc01",
+            expected="bound Mc01Reference",
+            actual="not_bound",
+        )
+    return bag.finish()
+
+
+def validate_evidence_context(context: EvidenceContext) -> ValidationResult:
+    """Empty not_evaluated evidence is valid. Evaluated without sources is not."""
+    bag = _Bag("validate_evidence_context", context.analysis_id)
+    _require_analysis_id(bag, context.analysis_id, "evidence")
+    _check_schema(bag, context.schema_version, "evidence")
+    evaluated = context.status in EVALUATED_STATUSES or context.evidence.status in EVALUATED_STATUSES
+    if evaluated and not (context.evidence.evidence_ids or context.evidence.trace_ids):
+        bag.add(
+            "P7V-EVIDENCE-EVALUATED-EMPTY",
+            IssueSeverity.ERROR,
+            "evidence",
+            "evaluated evidence requires source refs",
+            field="evidence.evidence_ids",
+            expected="evidence_ids or trace_ids",
+            actual="empty",
+        )
+    return bag.finish()
+
+
+def validate_domain_context(context: DomainContext) -> ValidationResult:
+    """Six natal shells may be empty not_evaluated. Evaluated needs sources."""
+    bag = _Bag("validate_domain_context", context.analysis_id)
+    _require_analysis_id(bag, context.analysis_id, "domain")
+    _check_schema(bag, context.schema_version, "domain")
+    for natal in (
+        context.authority.natal,
+        context.career.natal,
+        context.wealth.natal,
+        context.relationship.natal,
+        context.legacy.natal,
+        context.vitality.natal,
+    ):
+        if natal.domain_id not in PUBLISHED_DOMAIN_IDS:
+            bag.add(
+                "P7V-CTX-REF-SHAPE",
+                IssueSeverity.ERROR,
+                "domain",
+                "unknown domain shell id",
+                field="domain_id",
+                actual=natal.domain_id,
+            )
+        evaluated = natal.state not in (DomainState.NOT_EVALUATED, DomainState.UNRESOLVED)
+        if evaluated and not natal.supporting_evidence_ids and not natal.trace_ids:
+            bag.add(
+                "P7V-DOMAIN-EVALUATED-EMPTY",
+                IssueSeverity.ERROR,
+                "domain",
+                "evaluated domain shell requires source refs",
+                field=f"{natal.domain_id}.supporting_evidence_ids",
+            )
+    return bag.finish()
+
+
+def validate_temporal_context(context: TemporalContext) -> ValidationResult:
+    """Validate layer enum and parent relation. No activation."""
+    bag = _Bag("validate_temporal_context", context.analysis_id)
+    _require_analysis_id(bag, context.analysis_id, "temporal")
+    _check_schema(bag, context.schema_version, "temporal")
+    activation = context.temporal
+    for layer in activation.requested_layers + activation.evaluated_layers:
+        if layer and layer not in _LAYER_VALUES:
+            bag.add(
+                "P7V-TEMPORAL-LAYER",
+                IssueSeverity.ERROR,
+                "temporal",
+                "unknown temporal layer",
+                field="requested_layers",
+                expected="luck_cycle|annual|monthly|daily|hourly",
+                actual=layer,
+            )
+    if "hourly" in activation.requested_layers and "hourly" not in activation.evaluated_layers:
+        bag.add(
+            "P7V-TEMPORAL-LAYER",
+            IssueSeverity.WARNING,
+            "temporal",
+            "hourly layer not evaluated",
+            field="evaluated_layers",
+        )
+    if "monthly" in activation.requested_layers and "monthly" not in activation.evaluated_layers:
+        bag.add(
+            "P7V-TEMPORAL-LAYER",
+            IssueSeverity.WARNING,
+            "temporal",
+            "optional monthly layer not evaluated",
+            field="evaluated_layers",
+        )
+    if activation.active_layer in TEMPORAL_LAYER_PARENT:
+        expected_parent = TEMPORAL_LAYER_PARENT[activation.active_layer]
+        if activation.parent_layer and activation.parent_layer != expected_parent:
+            bag.add(
+                "P7V-TEMPORAL-PARENT",
+                IssueSeverity.ERROR,
+                "temporal",
+                "parent-child layer relation is invalid",
+                field="parent_layer",
+                expected=expected_parent,
+                actual=activation.parent_layer,
+            )
+    return bag.finish()
+
+
+def validate_optimization_context(context: OptimizationContext) -> ValidationResult:
+    """not_evaluated is valid. Actions without a supporting result fail."""
+    bag = _Bag("validate_optimization_context", context.analysis_id)
+    _require_analysis_id(bag, context.analysis_id, "optimization")
+    _check_schema(bag, context.schema_version, "optimization")
+    inputs = context.inputs
+    if inputs.actions and (inputs.state is EvaluationStatus.NOT_EVALUATED or not inputs.evidence_ids):
+        bag.add(
+            "P7V-OPTIMIZATION-ACTION-NO-RESULT",
+            IssueSeverity.ERROR,
+            "optimization",
+            "optimization actions require a supporting result",
+            field="inputs.actions",
+        )
+    for domain_id in inputs.domain_plans:
+        if domain_id not in PUBLISHED_DOMAIN_IDS:
+            bag.add(
+                "P7V-CTX-REF-SHAPE",
+                IssueSeverity.ERROR,
+                "optimization",
+                "action references unknown domain",
+                field="inputs.domain_plans",
+                actual=domain_id,
+            )
+    return bag.finish()
+
+
+def validate_narrative_context(context: NarrativeContext) -> ValidationResult:
+    """not_evaluated is valid. Nodes must not invent unknown evidence."""
+    bag = _Bag("validate_narrative_context", context.analysis_id)
+    _require_analysis_id(bag, context.analysis_id, "narrative")
+    _check_schema(bag, context.schema_version, "narrative")
+    known = set(context.inputs.result.trace)
+    evaluated = context.inputs.result.status in EVALUATED_STATUSES
+    for node in context.inputs.graph.nodes:
+        for evidence_id in node.evidence_ids:
+            if known and evidence_id not in known:
+                bag.add(
+                    "P7V-NARRATIVE-UNKNOWN-EVIDENCE",
+                    IssueSeverity.ERROR,
+                    "narrative",
+                    "narrative node references unknown evidence IDs",
+                    field="graph.nodes.evidence_ids",
+                    actual=evidence_id,
+                )
+        if evaluated and not node.evidence_ids:
+            bag.add(
+                "P7V-NARRATIVE-UNKNOWN-EVIDENCE",
+                IssueSeverity.ERROR,
+                "narrative",
+                "evaluated narrative claims require source refs",
+                field="graph.nodes",
+            )
+    return bag.finish()
+
+
+def _payload_for_stable_hash(payload: Mapping[str, Any]) -> dict[str, Any]:
+    """Match factory hashing: created_at excluded, content_hash not part of digest."""
+    clone = to_jsonable(payload)
+    if not isinstance(clone, dict):
+        return {}
+    meta = clone.get("metadata")
+    if isinstance(meta, dict):
+        meta["content_hash"] = ""
+    return clone
+
+
+def _scan_owned_truth(bag: _Bag, payload: Mapping[str, Any], layer: str) -> None:
+    for key in FORBIDDEN_OWNED_TRUTH_KEYS:
+        if key not in payload or payload.get(key) in (None, "", {}, []):
+            continue
+        bag.add(
+            _OWNER_CODES.get(key, "P7V-RUNTIME-LAYER-OWNERSHIP"),
+            IssueSeverity.CRITICAL,
+            layer,
+            "Pack 07 must not publish this upstream truth as owned",
+            field=key,
+            expected="reference only",
+            actual="owned payload present",
+        )
+
+
+def validate_canonical_runtime(
+    result: CanonicalRuntimeResult | Mapping[str, Any],
+) -> ValidationResult:
+    """Validate CanonicalRuntimeResult: one analysis_id, versions, ownership."""
+    payload = result if isinstance(result, Mapping) else serialize_runtime_result(result)
+    if not isinstance(payload, Mapping):
+        bag = _Bag("validate_canonical_runtime", "")
+        bag.add(
+            "P7V-RUNTIME-ROOT",
+            IssueSeverity.CRITICAL,
+            "runtime",
+            "invalid runtime root",
+            field="CanonicalRuntimeResult",
+        )
+        return bag.finish()
+    runtime = (
+        result
+        if isinstance(result, CanonicalRuntimeResult)
+        else CanonicalRuntimeResult.from_dict(payload)
+    )
+    analysis_id = runtime.analysis_id
+    bag = _Bag("validate_canonical_runtime", analysis_id)
+    _require_analysis_id(bag, analysis_id, "runtime")
+    _match_id(
+        bag, analysis_id, runtime.identity.analysis_id, "runtime", "identity.analysis_id",
+        "P7V-RUNTIME-ANALYSIS-ID",
+    )
+    _match_id(
+        bag, analysis_id, runtime.metadata.analysis_id, "runtime", "metadata.analysis_id",
+        "P7V-RUNTIME-ANALYSIS-ID",
+    )
+    _check_schema(
+        bag,
+        runtime.metadata.contract_version or SCHEMA_RUNTIME_CONTRACT,
+        "runtime",
+        "contract_version",
+    )
+    _check_schema(bag, runtime.metadata.schema_version, "runtime", "schema_version")
+    _scan_owned_truth(bag, payload, "runtime")
+    interpretation = payload.get("interpretation")
+    if isinstance(interpretation, Mapping):
+        _scan_owned_truth(bag, interpretation, "interpretation")
+    domains = payload.get("domains")
+    if isinstance(domains, Mapping):
+        _scan_owned_truth(bag, domains, "domains")
+    expected_hash = compute_content_hash(_payload_for_stable_hash(payload))
+    actual_hash = runtime.metadata.content_hash
+    if actual_hash and actual_hash != expected_hash:
+        bag.add(
+            "P7V-RUNTIME-HASH",
+            IssueSeverity.ERROR,
+            "runtime",
+            "content_hash is not stable for canonical payload",
+            field="metadata.content_hash",
+            expected=expected_hash,
+            actual=actual_hash,
+        )
+    return bag.finish()
+
+
+def validate_export_projection(
+    model: CanonicalExportModel,
+    result: CanonicalRuntimeResult,
+) -> ValidationResult:
+    """Export projection must share analysis_id and not create a second truth."""
+    bag = _Bag("validate_export_projection", result.analysis_id)
+    _require_analysis_id(bag, model.analysis_id, "export")
+    _match_id(
+        bag, result.analysis_id, model.analysis_id, "export", "analysis_id",
+        "P7V-PROJECTION-ANALYSIS-ID",
+    )
+    return bag.finish()
+
+
+def validate_api_projection(model: CanonicalAPIModel, result: CanonicalRuntimeResult) -> ValidationResult:
+    """API projection must wrap the same CanonicalRuntimeResult."""
+    bag = _Bag("validate_api_projection", result.analysis_id)
+    _require_analysis_id(bag, model.analysis_id, "api")
+    _match_id(
+        bag, result.analysis_id, model.analysis_id, "api", "analysis_id",
+        "P7V-PROJECTION-ANALYSIS-ID",
+    )
+    _match_id(
+        bag, result.analysis_id, model.contract.analysis_id, "api", "contract.analysis_id",
+        "P7V-PROJECTION-ANALYSIS-ID",
+    )
+    left = model.contract.metadata.content_hash
+    right = result.metadata.content_hash
+    if left and right and left != right:
+        bag.add(
+            "P7V-PROJECTION-SECOND-TRUTH",
+            IssueSeverity.CRITICAL,
+            "api",
+            "API projection must not create a second truth",
+            field="contract.metadata.content_hash",
+            expected=right,
+            actual=left,
+        )
+    return bag.finish()
+
+
+def validate_consulting_projection(
+    model: CanonicalConsultingModel,
+    result: CanonicalRuntimeResult,
+) -> ValidationResult:
+    """Consulting projection must share analysis_id."""
+    bag = _Bag("validate_consulting_projection", result.analysis_id)
+    _require_analysis_id(bag, model.analysis_id, "consulting")
+    _match_id(
+        bag, result.analysis_id, model.analysis_id, "consulting", "analysis_id",
+        "P7V-PROJECTION-ANALYSIS-ID",
+    )
+    return bag.finish()
+
+
+def validate_canonical_analysis_context(context: CanonicalAnalysisContext) -> ValidationResult:
+    """Validate the full context chain and nested runtime."""
+    bag = _Bag("validate_canonical_analysis_context", context.analysis_id)
+    _require_analysis_id(bag, context.analysis_id, "context")
+    _check_schema(bag, context.schema_version or SCHEMA_CONTEXT, "context")
+    nested = (
+        validate_interpretation_context(context.interpretation),
+        validate_evidence_context(context.evidence),
+        validate_domain_context(context.domain),
+        validate_temporal_context(context.temporal),
+        validate_optimization_context(context.optimization),
+        validate_narrative_context(context.narrative),
+        validate_canonical_runtime(context.runtime),
+    )
+    for result in nested:
+        bag.issues.extend(result.issues)
+    for child_id, label in (
+        (context.interpretation.analysis_id, "interpretation.analysis_id"),
+        (context.evidence.analysis_id, "evidence.analysis_id"),
+        (context.domain.analysis_id, "domain.analysis_id"),
+        (context.temporal.analysis_id, "temporal.analysis_id"),
+        (context.optimization.analysis_id, "optimization.analysis_id"),
+        (context.narrative.analysis_id, "narrative.analysis_id"),
+        (context.runtime.analysis_id, "runtime.analysis_id"),
+    ):
+        _match_id(bag, context.analysis_id, child_id, "context", label)
+    return bag.finish()
+
+
+def validate_pack07_context(context: CanonicalAnalysisContext) -> ValidationResult:
+    """Registry entry: validate Pack 07 context chain."""
+    return validate_canonical_analysis_context(context)
+
+
+def assert_valid(result: ValidationResult) -> None:
+    """Fail closed on critical / error contract corruption."""
+    if result.status is ValidationStatus.FAIL and result.errors:
+        first = result.errors[0]
+        raise DetailedInterpretationValidationError(f"{first.code}: {first.message}")
+
+
+def payload_unchanged(before: Mapping[str, Any], after: Mapping[str, Any]) -> bool:
+    """True when builders did not mutate the upstream mapping in place."""
+    return to_jsonable(before) == to_jsonable(after)
+
+
+PACK07_VALIDATOR_REGISTRY: dict[str, str] = {
+    "validate_pack07_context": "validate_pack07_context",
+    "validate_canonical_runtime": "validate_canonical_runtime",
+    "validate_export_projection": "validate_export_projection",
+    "validate_api_projection": "validate_api_projection",
+    "validate_consulting_projection": "validate_consulting_projection",
+}

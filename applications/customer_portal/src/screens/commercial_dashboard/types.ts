@@ -37,6 +37,7 @@ export type IdentityStatusView = {
   readonly confidence: string;
   readonly cungPhi: string;
   readonly menhQuai: string;
+  readonly hanhCung: string;
   readonly nhomTrach: string;
   readonly tietKhi: string;
   readonly tamNguyen: string;

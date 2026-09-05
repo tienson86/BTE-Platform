@@ -19,6 +19,7 @@ export type ContextZoneViewModel = {
   readonly analyzedAt: string;
   readonly cungPhi: string;
   readonly menhQuai: string;
+  readonly hanhCung: string;
   readonly nhomTrach: string;
   readonly tamNguyen: string;
   readonly cuuVan: string;

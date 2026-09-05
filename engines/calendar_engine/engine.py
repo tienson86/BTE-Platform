@@ -3,8 +3,7 @@ from datetime import datetime
 from typing import Any
 
 from .algorithms.ganzhi import GanzhiAlgorithm
-from .cung_phi import CungPhiResult, calculate_cung_phi
-from .exceptions import CalendarValidationError
+from .cung_phi import element_label_for_cung, personal_cung_phi_from_year_ganzhi
 from .ganzhi_routing import hour_ganzhi_from_day_stem, routing_payload
 from .julian.julian import JulianDay
 from .lunar.converter import solar_to_lunar
@@ -50,6 +49,7 @@ class CalendarResult:
     cuu_van: int | None = None
     cung_phi: str | None = None
     menh_quai: str | None = None
+    hanh_cung: str | None = None
     house_group: str | None = None
     nhom_trach: str | None = None
     gua_number: int | None = None
@@ -121,6 +121,7 @@ class CalendarResult:
             "cuu_van": self.cuu_van,
             "cung_phi": self.cung_phi,
             "menh_quai": self.menh_quai,
+            "hanh_cung": self.hanh_cung,
             "house_group": self.house_group,
             "nhom_trach": self.nhom_trach or self.house_group,
             "gua_number": self.gua_number,
@@ -170,7 +171,6 @@ class CalendarEngine:
         year_resolved = resolve_year_pillar(year, month=month, day=day)
         month_resolved = resolve_month_pillar(year, month, day)
         cycle = calculate_tam_nguyen(year)
-        cung = _cung_phi_for_gender(year, gender)
         jdn = JulianDay.day_number(year, month, day)
         day_gz = GanzhiAlgorithm.day(jdn)
         day_can_chi = f"{day_gz['can']} {day_gz['chi']}"
@@ -185,6 +185,15 @@ class CalendarEngine:
             day_ganzhi=day_can_chi,
             hour_ganzhi=hour_can_chi,
         )
+        year_route = routing.get("year") if isinstance(routing, dict) else None
+        year_route = year_route if isinstance(year_route, dict) else {}
+        cung = personal_cung_phi_from_year_ganzhi(
+            year_ganzhi=str(year_route.get("ganzhi") or year_resolved.ganzhi),
+            tam_nguyen=str(year_route.get("source_nguyen") or cycle.tam_nguyen),
+            reference_year=year,
+            gender=gender,
+        )
+        hanh = None if cung is None else element_label_for_cung(cung.cung_phi)
         return CalendarResult(
             solar=solar,
             lunar=lunar,
@@ -214,6 +223,7 @@ class CalendarEngine:
             cuu_van=cycle.cuu_van,
             cung_phi=None if cung is None else cung.cung_phi,
             menh_quai=None if cung is None else cung.menh_quai,
+            hanh_cung=hanh,
             house_group=None if cung is None else cung.house_group,
             nhom_trach=None if cung is None else cung.house_group,
             gua_number=None if cung is None else cung.gua_number,
@@ -237,13 +247,3 @@ class CalendarEngine:
             timezone_name=timezone,
             gender=gender,
         )
-
-
-def _cung_phi_for_gender(year: int, gender: str | None) -> CungPhiResult | None:
-    """Cung Phi when gender is present and valid. Leave empty otherwise."""
-    if gender is None or str(gender).strip() == "":
-        return None
-    try:
-        return calculate_cung_phi(year=year, gender=gender)
-    except CalendarValidationError:
-        return None

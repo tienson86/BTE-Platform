@@ -156,13 +156,51 @@
     };
   }
 
+  var EAST_CUNG = { Khảm: 1, Ly: 1, Chấn: 1, Tốn: 1 };
+  var WEST_CUNG = { Càn: 1, Khôn: 1, Cấn: 1, Đoài: 1 };
+
+  function isFemaleGender(raw) {
+    if (raw == null || raw === "") return false;
+    var key = String(raw).toLowerCase();
+    return key === "female" || key === "nu" || key === "nữ" || key === "f" || key === "2" || key === "woman" || key === "girl";
+  }
+
+  function pickAcross(sources, keys) {
+    for (var i = 0; i < sources.length; i++) {
+      var value = pick(sources[i], keys);
+      if (value != null && value !== "") return value;
+    }
+    return null;
+  }
+
+  function houseGroupForCung(cung) {
+    if (!cung) return null;
+    if (EAST_CUNG[cung]) return "Đông Tứ Trạch";
+    if (WEST_CUNG[cung]) return "Tây Tứ Trạch";
+    return null;
+  }
+
   /**
-   * Resolve Bát Trạch fields when API provides them — never compute.
+   * Resolve Bát Trạch fields when API provides them — never invent palaces.
+   * Canonical calendar / year-routing identity beats Feng Shui digit-sum.
    */
   function resolveBatTrach(data) {
     var payload = data && typeof data === "object" ? data : {};
-    // Prefer engine output (feng_shui) over client metadata echoes.
-    var sources = [
+    var calendar = payload.calendar && typeof payload.calendar === "object" ? payload.calendar : {};
+    var routing = calendar.ganzhi_routing && typeof calendar.ganzhi_routing === "object" ? calendar.ganzhi_routing : {};
+    var yearRoute = routing.year && typeof routing.year === "object" ? routing.year : {};
+    var yearPillar =
+      payload.bazi && payload.bazi.year_pillar && typeof payload.bazi.year_pillar === "object"
+        ? payload.bazi.year_pillar
+        : {};
+    var identity = payload.identity && typeof payload.identity === "object" ? payload.identity : {};
+    var person = identity.person && typeof identity.person === "object" ? identity.person : {};
+    var customer = payload.customer && typeof payload.customer === "object" ? payload.customer : {};
+    var female = isFemaleGender(person.gender || customer.gender);
+    var identitySources = female
+      ? [calendar, yearRoute, yearPillar]
+      : [yearRoute, yearPillar, calendar];
+    var fallbackSources = [
       payload.feng_shui,
       payload.bat_trach,
       payload.batrach,
@@ -171,23 +209,16 @@
         payload.customer.metadata &&
         (payload.customer.metadata.bat_trach || payload.customer.metadata.batrach),
     ];
-    var src = null;
-    for (var i = 0; i < sources.length; i++) {
-      if (sources[i] && typeof sources[i] === "object") {
-        src = sources[i];
-        break;
-      }
-    }
-    src = src || {};
+    var sources = identitySources.concat(fallbackSources);
 
-    var cungPhi = pick(src, [
+    var cungPhi = pickAcross(sources, [
       "cung_phi",
       "cungPhi",
       "gua_name",
       "flying_star",
       "phi_cung",
     ]);
-    var menhQuai = pick(src, [
+    var menhQuai = pickAcross(sources, [
       "menh_quai",
       "menhQuai",
       "ming_gua",
@@ -195,15 +226,17 @@
       "gua",
       "quai",
     ]);
+    if (cungPhi) menhQuai = cungPhi;
     var nhom =
-      pick(src, [
+      houseGroupForCung(cungPhi) ||
+      pickAcross(sources, [
         "nhom_trach",
         "nhomTrach",
         "group",
         "trach_group",
         "east_west",
         "dong_tay_trach",
-      ]) || null;
+      ]);
 
     // Normalize known group codes to display labels when already textual.
     var nhomLabel = nhom;
