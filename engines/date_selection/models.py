@@ -56,10 +56,24 @@ class CalendarSnapshot:
     weekday: int
     tam_nguyen: str = ""
     cuu_van: int | None = None
+    lunar_year_ganzhi: str = ""
+    lunar_month_ganzhi: str = ""
+    lunar_day_ganzhi: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize for API / presentation."""
-        return asdict(self)
+        payload = asdict(self)
+        payload["lunar_date"] = {
+            "year": self.lunar_year,
+            "month": self.lunar_month,
+            "day": self.lunar_day,
+            "is_leap_month": self.lunar_leap,
+        }
+        payload["lunar_year_can_chi"] = self.lunar_year_ganzhi
+        payload["lunar_month_can_chi"] = self.lunar_month_ganzhi
+        payload["lunar_day_can_chi"] = self.lunar_day_ganzhi or self.day_ganzhi
+        payload["is_leap_month"] = self.lunar_leap
+        return payload
 
 
 @dataclass(slots=True)
@@ -141,7 +155,11 @@ class DaySelection:
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize for API / presentation."""
-        from engines.date_selection.identity import hoa_giap_view, snapshot_pillar_payloads
+        from engines.date_selection.identity import (
+            good_date_identity_payloads,
+            hoa_giap_view,
+            snapshot_pillar_payloads,
+        )
 
         payload = {
             "calendar": self.calendar.to_dict(),
@@ -150,9 +168,20 @@ class DaySelection:
             "trach": self.trach.to_dict() if self.trach else None,
             "hours": [hour.to_dict() for hour in self.hours],
             "month_ganzhi": self.calendar.month_ganzhi,
+            "lunar_month_ganzhi": self.calendar.lunar_month_ganzhi,
+            "lunar_year_ganzhi": self.calendar.lunar_year_ganzhi,
+            "lunar_day_ganzhi": self.calendar.lunar_day_ganzhi or self.calendar.day_ganzhi,
         }
         payload.update(hoa_giap_view(self.calendar.day_ganzhi, self.trach))
         payload.update(snapshot_pillar_payloads(self.calendar))
+        identity = good_date_identity_payloads(self.calendar)
+        if identity:
+            payload["good_date_identity"] = identity
+        payload["bazi"] = {
+            "year_pillar": payload["year"]["can_chi"],
+            "month_pillar": payload["month"]["can_chi"],
+            "day_pillar": payload["day"]["can_chi"],
+        }
         return payload
 
 
@@ -258,16 +287,27 @@ class RankedDate:
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize for API / presentation."""
-        from engines.date_selection.identity import hoa_giap_view, snapshot_pillar_payloads
+        from engines.date_selection.identity import (
+            good_date_identity_payloads,
+            hoa_giap_view,
+            snapshot_pillar_payloads,
+        )
 
         day_payload = {
             "calendar": self.day.calendar.to_dict(),
             "six_state": self.day.six_state.to_dict(),
             "trach": self.day.trach.to_dict() if self.day.trach else None,
             "month_ganzhi": self.day.calendar.month_ganzhi,
+            "lunar_month_ganzhi": self.day.calendar.lunar_month_ganzhi,
+            "lunar_year_ganzhi": self.day.calendar.lunar_year_ganzhi,
+            "lunar_day_ganzhi": self.day.calendar.lunar_day_ganzhi
+            or self.day.calendar.day_ganzhi,
         }
         day_payload.update(hoa_giap_view(self.day.calendar.day_ganzhi, self.day.trach))
         day_payload.update(snapshot_pillar_payloads(self.day.calendar))
+        identity = good_date_identity_payloads(self.day.calendar)
+        if identity:
+            day_payload["good_date_identity"] = identity
         return {
             "day": day_payload,
             "compatible_hours": _compatible_hours_view(self.day),

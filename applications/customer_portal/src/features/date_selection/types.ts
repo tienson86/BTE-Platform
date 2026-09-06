@@ -61,12 +61,20 @@ export type DayVm = {
     year_ganzhi: string;
     month_ganzhi?: string;
     day_ganzhi: string;
+    lunar_year_ganzhi?: string;
+    lunar_month_ganzhi?: string;
+    lunar_day_ganzhi?: string;
+    lunar_year_can_chi?: string;
+    lunar_month_can_chi?: string;
+    lunar_day_can_chi?: string;
   };
   six_state: SixStateVm;
   trach: TrachVm | null;
   hours: HourVm[];
   ganzhi?: string;
   month_ganzhi?: string;
+  lunar_month_ganzhi?: string;
+  lunar_year_ganzhi?: string;
   nayin?: string;
   nayin_element?: string;
   cung?: string;
@@ -76,6 +84,14 @@ export type DayVm = {
   year?: CanonicalPillarVm;
   month?: CanonicalPillarVm;
   day?: CanonicalPillarVm;
+  good_date_identity?: {
+    year_can_chi?: string;
+    month_can_chi?: string;
+    day_can_chi?: string;
+    year?: CanonicalPillarVm;
+    month?: CanonicalPillarVm;
+    day?: CanonicalPillarVm;
+  };
 };
 
 export type PersonVm = {

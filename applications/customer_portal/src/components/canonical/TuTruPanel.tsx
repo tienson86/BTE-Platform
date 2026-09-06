@@ -76,6 +76,7 @@ export function TuTruPanel({
   month,
   day,
   hour,
+  title = TU_TRU_TITLE,
   className,
 }: TuTruPanelProps): ReactNode {
   const titleId = useId();
@@ -88,7 +89,7 @@ export function TuTruPanel({
       aria-labelledby={titleId}
     >
       <h3 id={titleId} className="bte-tu-tru__title">
-        {TU_TRU_TITLE}
+        {title}
       </h3>
       <table className="bte-tu-tru__table">
         <thead>

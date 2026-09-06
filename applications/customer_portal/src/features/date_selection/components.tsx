@@ -164,10 +164,12 @@ function tuTruPillar(pillar: {
 }
 
 function tuTruFromDayHour(day: DayVm, hour?: HourVm | null) {
+  const identity = day.good_date_identity;
   return {
-    year: tuTruPillar(day.year ?? {}),
-    month: tuTruPillar(day.month ?? {}),
-    day: tuTruPillar(day.day ?? {}),
+    title: "CAN CHI NGÀY",
+    year: tuTruPillar(identity?.year ?? { can_chi: lunarYearGanzhi(day) }),
+    month: tuTruPillar(identity?.month ?? { can_chi: lunarMonthGanzhi(day) }),
+    day: tuTruPillar(identity?.day ?? day.day ?? {}),
     hour: tuTruPillar(hour ?? {}),
   };
 }
@@ -210,6 +212,26 @@ export function MonthCalendarGrid({
   );
 }
 
+function lunarMonthGanzhi(day: DayVm): string {
+  return (
+    day.good_date_identity?.month_can_chi ||
+    day.calendar.lunar_month_ganzhi ||
+    day.calendar.lunar_month_can_chi ||
+    day.lunar_month_ganzhi ||
+    "—"
+  );
+}
+
+function lunarYearGanzhi(day: DayVm): string {
+  return (
+    day.good_date_identity?.year_can_chi ||
+    day.calendar.lunar_year_ganzhi ||
+    day.calendar.lunar_year_can_chi ||
+    day.lunar_year_ganzhi ||
+    "—"
+  );
+}
+
 export function DayDetailPanel({ day, hour }: { day: DayVm; hour?: HourVm }): ReactNode {
   const identity = dayIdentity(day);
   return (
@@ -226,12 +248,12 @@ export function DayDetailPanel({ day, hour }: { day: DayVm; hour?: HourVm }): Re
         rows={[
           ["Ngày dương", day.calendar.solar_label],
           ["Ngày âm", day.calendar.lunar_label],
-          ["Can Chi năm", day.calendar.year_ganzhi],
-          ["Can Chi tháng", day.calendar.month_ganzhi || day.month_ganzhi || "—"],
+          ["Can Chi năm âm", lunarYearGanzhi(day)],
+          ["Can Chi tháng âm", lunarMonthGanzhi(day)],
           ["Can Chi ngày", day.calendar.day_ganzhi],
           ["Kết quả ngày", day.six_state.label],
-          ["Nạp âm", <ElementBadge key="nayin" value={identity.nayin} />],
-          ["Cung Phi", <CungBadge key="cung" value={identity.cung} />],
+          ["Nạp âm ngày", <ElementBadge key="nayin" value={identity.nayin} />],
+          ["Cung Phi ngày", <CungBadge key="cung" value={identity.cung} />],
           ["Hành Cung", <ElementBadge key="hanh" value={identity.hanhCung} />],
           ["Nhóm Trạch", identity.trach],
         ]}
@@ -553,8 +575,8 @@ export function TopResults({
             <CompactResult
               testId="ranked-day-detail"
               rows={[
-                ["Can Chi năm", item.day.calendar.year_ganzhi, "secondary"],
-                ["Can Chi tháng", item.day.calendar.month_ganzhi || item.day.month_ganzhi || "—", "secondary"],
+                ["Can Chi năm âm", lunarYearGanzhi(item.day), "secondary"],
+                ["Can Chi tháng âm", lunarMonthGanzhi(item.day), "secondary"],
                 ["Can Chi ngày", identity.ganzhi, "medium"],
                 ["Nạp âm", <ElementBadge key="dnayin" value={identity.nayin} />, "medium"],
                 ["Cung Phi", cungText, "medium"],

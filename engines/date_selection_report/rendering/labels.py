@@ -19,7 +19,7 @@ LABELS: dict[str, str] = {
     "birth_solar": "Ngày sinh dương",
     "birth_lunar": "Ngày sinh âm",
     "year_ganzhi": "Can Chi năm",
-    "month_ganzhi": "Can Chi tháng",
+    "month_ganzhi": "Can Chi tháng âm",
     "day_ganzhi": "Can Chi ngày",
     "nayin": "Nạp âm",
     "cung_phi": "Cung Phi",

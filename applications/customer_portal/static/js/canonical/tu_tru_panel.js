@@ -118,10 +118,11 @@
         "</td></tr>"
       );
     }).join("");
+    var title = (data && data.title) || TITLE;
     return (
       '<section class="bte-tu-tru" data-canonical="tu-tru-panel" data-testid="tu-tru-panel" aria-labelledby="bte-tu-tru-title">' +
       '<h3 id="bte-tu-tru-title" class="bte-tu-tru__title">' +
-      TITLE +
+      esc(title) +
       "</h3>" +
       '<table class="bte-tu-tru__table"><thead><tr>' +
       head +

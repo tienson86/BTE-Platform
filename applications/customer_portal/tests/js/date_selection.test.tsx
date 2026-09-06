@@ -52,6 +52,8 @@ const day: DayVm = {
     lunar_label: "15/07/2026",
     year_ganzhi: "Bính Ngọ",
     month_ganzhi: "Giáp Thân",
+    lunar_year_ganzhi: "Bính Ngọ",
+    lunar_month_ganzhi: "Giáp Thân",
     day_ganzhi: "Quý Dậu",
   },
   six_state: { remainder: 5, code: "tieu_cat", label: "Tiểu Cát" },
@@ -284,6 +286,36 @@ describe("Date Selection frontend", () => {
     expect(screen.getByTestId("hour-detail").textContent).not.toContain("Kết quả giờ");
   });
 
+  it("binds Can Chi tháng âm to lunar month, not the BaZi solar-term month pillar", () => {
+    const hanLo: DayVm = {
+      ...day,
+      calendar: {
+        ...day.calendar,
+        solar_label: "08/10/2026",
+        lunar_label: "28/08/2026",
+        year_ganzhi: "Bính Ngọ",
+        month_ganzhi: "Mậu Tuất",
+        lunar_year_ganzhi: "Bính Ngọ",
+        lunar_month_ganzhi: "Đinh Dậu",
+        day_ganzhi: "Giáp Tý",
+      },
+      month: { can_chi: "Mậu Tuất", nayin_element: "Hỏa", cung_phi: "Càn" },
+    };
+    render(<LookupScreen cells={cells} day={hanLo} />);
+    const detail = screen.getByTestId("day-detail").textContent || "";
+    expect(detail).toContain("Can Chi tháng âm");
+    expect(detail).toContain("Đinh Dậu");
+    const monthDd = Array.from(screen.getByTestId("day-detail").querySelectorAll("dt"))
+      .find((el) => el.textContent === "Can Chi tháng âm")
+      ?.nextElementSibling?.textContent;
+    expect(monthDd).toBe("Đinh Dậu");
+    expect(screen.queryByTestId("tu-tru-month-note")).toBeNull();
+    const panel = screen.getByTestId("tu-tru-panel");
+    expect(panel.textContent).toContain("CAN CHI NGÀY");
+    expect(panel.querySelector('[data-pillar="month"]')?.textContent).toContain("Đinh Dậu");
+    expect(panel.querySelector('[data-pillar="month"]')?.textContent).not.toContain("Mậu Tuất");
+  });
+
   it("renders Mậu Thìn Nạp âm as Mộc", () => {
     const mauThin: DayVm = {
       ...day,
@@ -333,7 +365,7 @@ describe("Date Selection frontend", () => {
     expect(detail.textContent).toContain("Ly");
     expect(detail.textContent).toContain("Hành Cung");
     expect(detail.textContent).toContain("Hỏa");
-    const nayinDd = Array.from(detail.querySelectorAll("dt")).find((el) => el.textContent === "Nạp âm")
+    const nayinDd = Array.from(detail.querySelectorAll("dt")).find((el) => el.textContent === "Nạp âm ngày")
       ?.nextElementSibling?.textContent;
     const hanhDd = Array.from(detail.querySelectorAll("dt")).find((el) => el.textContent === "Hành Cung")
       ?.nextElementSibling?.textContent;

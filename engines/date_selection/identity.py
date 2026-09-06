@@ -106,25 +106,83 @@ def routed_pillar_contract(
 
 
 def snapshot_pillar_payloads(calendar: Any) -> dict[str, dict[str, str]]:
-    """Year/Month use the snapshot Tam Nguyên; Day stays Hạ Nguyên."""
+    """Year/Month use the snapshot Tam Nguyên; Day stays Hạ Nguyên.
+
+    These cells are BaZi / Four Pillars (solar-term month). They are not the
+    Good Date customer-facing lunar identity.
+    """
     from engines.calendar_engine.tam_nguyen import HA_NGUYEN, tam_nguyen_for_year
 
     year = int(calendar.solar_year)
     yuan = (calendar.tam_nguyen or "").strip() or tam_nguyen_for_year(year)
     return {
-        "year": routed_pillar_contract(
-            calendar.year_ganzhi,
-            tam_nguyen=yuan,
-            reference_year=year,
-        ),
-        "month": routed_pillar_contract(
-            calendar.month_ganzhi,
-            tam_nguyen=yuan,
-            reference_year=year,
-        ),
+        "year": {
+            **routed_pillar_contract(
+                calendar.year_ganzhi,
+                tam_nguyen=yuan,
+                reference_year=year,
+            ),
+            "ganzhi_system": "bazi_solar_term",
+        },
+        "month": {
+            **routed_pillar_contract(
+                calendar.month_ganzhi,
+                tam_nguyen=yuan,
+                reference_year=year,
+            ),
+            "ganzhi_system": "bazi_solar_term",
+        },
         "day": routed_pillar_contract(
             calendar.day_ganzhi,
             tam_nguyen=HA_NGUYEN,
             reference_year=year,
         ),
+    }
+
+
+def good_date_identity_payloads(calendar: Any) -> dict[str, Any] | None:
+    """Customer-facing Good Date Can Chi: lunar year / lunar month / day.
+
+    ``month_can_chi`` is always ``calendar.lunar_month_ganzhi``.
+    It is never derived from the BaZi solar-term month pillar.
+    """
+    from engines.calendar_engine.tam_nguyen import HA_NGUYEN, tam_nguyen_for_year
+
+    year = int(calendar.solar_year)
+    yuan = (calendar.tam_nguyen or "").strip() or tam_nguyen_for_year(year)
+    year_can_chi = (getattr(calendar, "lunar_year_ganzhi", None) or "").strip()
+    month_can_chi = (getattr(calendar, "lunar_month_ganzhi", None) or "").strip()
+    day_can_chi = (
+        getattr(calendar, "lunar_day_ganzhi", None) or getattr(calendar, "day_ganzhi", None) or ""
+    ).strip()
+    if not year_can_chi or not month_can_chi or not day_can_chi:
+        return None
+    return {
+        "year_can_chi": year_can_chi,
+        "month_can_chi": month_can_chi,
+        "day_can_chi": day_can_chi,
+        "year": {
+            **routed_pillar_contract(
+                year_can_chi,
+                tam_nguyen=yuan,
+                reference_year=year,
+            ),
+            "ganzhi_system": "lunar_calendar",
+        },
+        "month": {
+            **routed_pillar_contract(
+                month_can_chi,
+                tam_nguyen=yuan,
+                reference_year=year,
+            ),
+            "ganzhi_system": "lunar_calendar",
+        },
+        "day": {
+            **routed_pillar_contract(
+                day_can_chi,
+                tam_nguyen=HA_NGUYEN,
+                reference_year=year,
+            ),
+            "ganzhi_system": "lunar_calendar",
+        },
     }

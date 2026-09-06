@@ -10,6 +10,8 @@ class LunarDate:
     day: int
     leap: bool = False
     year_can_chi: str | None = None
+    month_can_chi: str | None = None
+    day_can_chi: str | None = None
 
     @property
     def is_leap_month(self) -> bool:
@@ -30,4 +32,8 @@ class LunarDate:
         }
         if self.year_can_chi:
             data["year_can_chi"] = self.year_can_chi
+        if self.month_can_chi:
+            data["month_can_chi"] = self.month_can_chi
+        if self.day_can_chi:
+            data["day_can_chi"] = self.day_can_chi
         return data

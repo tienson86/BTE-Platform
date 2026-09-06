@@ -8,6 +8,7 @@ from .ganzhi_routing import hour_ganzhi_from_day_stem, routing_payload
 from .julian.julian import JulianDay
 from .lunar.converter import solar_to_lunar
 from .lunar.lunar import LunarDate
+from .month_pillar import lunar_month_ganzhi
 from .solar.solar import SolarDate
 from .solar_terms.engine import SolarTerm, SolarTermEngine
 from .tam_nguyen import calculate_tam_nguyen
@@ -44,6 +45,9 @@ class CalendarResult:
     month_stem: str | None = None
     month_branch: str | None = None
     month_can_chi: str | None = None
+    lunar_year_can_chi: str | None = None
+    lunar_month_can_chi: str | None = None
+    lunar_day_can_chi: str | None = None
     calendar_rule_version: str = CALENDAR_RULE_VERSION
     tam_nguyen: str | None = None
     cuu_van: int | None = None
@@ -62,13 +66,21 @@ class CalendarResult:
         Day Ganzhi uses integer noon JDN (``JulianDay.day_number``), matching Bazi.
         """
         leap = bool(self.leap_month)
-        lunar_year_can_chi = self.lunar.year_can_chi if self.lunar else None
+        lunar_year_can_chi = self.lunar_year_can_chi or (
+            self.lunar.year_can_chi if self.lunar else None
+        )
         jdn = JulianDay.day_number(self.solar_year, self.solar_month, self.solar_day)
         day_ganzhi = GanzhiAlgorithm.day(jdn)
+        lunar_day_can_chi = self.lunar_day_can_chi or f"{day_ganzhi['can']} {day_ganzhi['chi']}"
+        lunar_month_can_chi = self.lunar_month_can_chi or (
+            self.lunar.month_can_chi if self.lunar else None
+        )
         lunar_can_chi: dict[str, str] = {}
         if lunar_year_can_chi:
             lunar_can_chi["year"] = lunar_year_can_chi
-        lunar_can_chi["day"] = f"{day_ganzhi['can']} {day_ganzhi['chi']}"
+        if lunar_month_can_chi:
+            lunar_can_chi["month"] = lunar_month_can_chi
+        lunar_can_chi["day"] = lunar_day_can_chi
         solar_term = {
             "name": getattr(self.solar_term, "name", None),
             "index": getattr(self.solar_term, "index", None),
@@ -88,6 +100,8 @@ class CalendarResult:
                 "is_leap_month": leap,
                 "leap": leap,
                 "year_can_chi": lunar_year_can_chi,
+                "month_can_chi": lunar_month_can_chi,
+                "day_can_chi": lunar_day_can_chi,
             },
             "lunar_can_chi": lunar_can_chi,
             "solar_term": solar_term,
@@ -116,6 +130,9 @@ class CalendarResult:
             "month_stem": self.month_stem,
             "month_branch": self.month_branch,
             "month_can_chi": self.month_can_chi,
+            "lunar_year_can_chi": lunar_year_can_chi,
+            "lunar_month_can_chi": lunar_month_can_chi,
+            "lunar_day_can_chi": lunar_day_can_chi,
             "calendar_rule_version": self.calendar_rule_version,
             "tam_nguyen": self.tam_nguyen,
             "cuu_van": self.cuu_van,
@@ -159,13 +176,7 @@ class CalendarEngine:
         parts = solar_to_lunar(day, month, year, time_zone=time_zone)
         lunar_ganzhi = GanzhiAlgorithm.year(parts.year)
         lunar_year_can_chi = f"{lunar_ganzhi['can']} {lunar_ganzhi['chi']}"
-        lunar = LunarDate(
-            year=parts.year,
-            month=parts.month,
-            day=parts.day,
-            leap=parts.leap,
-            year_can_chi=lunar_year_can_chi,
-        )
+        lunar_month_can_chi = lunar_month_ganzhi(lunar_ganzhi["can"], parts.month)
         solar_date = f"{day:02d}/{month:02d}/{year:04d}"
         lunar_date = _format_lunar_date(parts.day, parts.month, parts.year, parts.leap)
         year_resolved = resolve_year_pillar(year, month=month, day=day)
@@ -174,6 +185,15 @@ class CalendarEngine:
         jdn = JulianDay.day_number(year, month, day)
         day_gz = GanzhiAlgorithm.day(jdn)
         day_can_chi = f"{day_gz['can']} {day_gz['chi']}"
+        lunar = LunarDate(
+            year=parts.year,
+            month=parts.month,
+            day=parts.day,
+            leap=parts.leap,
+            year_can_chi=lunar_year_can_chi,
+            month_can_chi=lunar_month_can_chi,
+            day_can_chi=day_can_chi,
+        )
         hour_can_chi = hour_ganzhi_from_day_stem(day_gz["can"], hour)
         routing = routing_payload(
             year,
@@ -218,6 +238,9 @@ class CalendarEngine:
             month_stem=month_resolved.heavenly_stem,
             month_branch=month_resolved.earthly_branch,
             month_can_chi=month_resolved.ganzhi,
+            lunar_year_can_chi=lunar_year_can_chi,
+            lunar_month_can_chi=lunar_month_can_chi,
+            lunar_day_can_chi=day_can_chi,
             calendar_rule_version=CALENDAR_RULE_VERSION,
             tam_nguyen=cycle.tam_nguyen,
             cuu_van=cycle.cuu_van,

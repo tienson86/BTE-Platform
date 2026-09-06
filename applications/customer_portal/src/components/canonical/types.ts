@@ -14,6 +14,7 @@ export type TuTruPanelProps = {
   month: TuTruPillar;
   day: TuTruPillar;
   hour: TuTruPillar;
+  title?: string;
   className?: string;
 };
 

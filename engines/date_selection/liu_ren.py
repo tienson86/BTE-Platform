@@ -22,7 +22,11 @@ def six_state_from_value(value: int) -> SixStateResult:
 
 
 def day_value(year_branch_index: int, lunar_month: int, lunar_day: int) -> int:
-    """DAY_VALUE = lunar year branch index + lunar month + lunar day."""
+    """DAY_VALUE = year branch index + lunar month number + lunar day number.
+
+    ``lunar_month`` is the lunar calendar month number (1–12), including leap
+    months of the same number. It is never inferred from the BaZi month pillar.
+    """
     return int(year_branch_index) + int(lunar_month) + int(lunar_day)
 
 

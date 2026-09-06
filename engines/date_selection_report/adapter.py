@@ -128,8 +128,19 @@ def _recommendations(dates: list) -> tuple[RecommendedDateReportData, ...]:
                 rank=rank,
                 solar_date=str(calendar["solar_label"]).strip(),
                 lunar_date=str(calendar["lunar_label"]).strip(),
-                year_ganzhi=str(calendar["year_ganzhi"]).strip(),
-                month_ganzhi=str(calendar.get("month_ganzhi") or day.get("month_ganzhi") or "").strip(),
+                year_ganzhi=str(
+                    calendar.get("lunar_year_ganzhi")
+                    or calendar.get("lunar_year_can_chi")
+                    or calendar["year_ganzhi"]
+                ).strip(),
+                month_ganzhi=str(
+                    calendar.get("lunar_month_ganzhi")
+                    or calendar.get("lunar_month_can_chi")
+                    or calendar.get("month_ganzhi")
+                    or day.get("lunar_month_ganzhi")
+                    or day.get("month_ganzhi")
+                    or ""
+                ).strip(),
                 day_ganzhi=str(day.get("ganzhi") or calendar.get("day_ganzhi") or "").strip(),
                 day_result=str(six["label"]).strip(),
                 nayin=str(day["nayin"]).strip(),

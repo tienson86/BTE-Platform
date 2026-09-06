@@ -29,8 +29,13 @@
     "date_selection.solar_date": "Ngày dương",
     "date_selection.lunar_date": "Ngày âm",
     "date_selection.year_ganzhi": "Can Chi năm",
+    "date_selection.lunar_year_ganzhi": "Can Chi năm âm",
     "date_selection.month_ganzhi": "Can Chi tháng",
+    "date_selection.lunar_month_ganzhi": "Can Chi tháng âm",
     "date_selection.day_ganzhi": "Can Chi ngày",
+    "date_selection.nayin_day": "Nạp âm ngày",
+    "date_selection.cung_phi_day": "Cung Phi ngày",
+    "date_selection.can_chi_day_title": "CAN CHI NGÀY",
     "date_selection.day_result": "Kết quả ngày",
     "date_selection.best_time": "Các thời điểm đẹp",
     "date_selection.cung_phi": "Cung Phi",
@@ -329,11 +334,25 @@
     };
   }
 
+  function lunarMonthGanzhi(day) {
+    var cal = (day && day.calendar) || {};
+    var identity = (day && day.good_date_identity) || {};
+    return identity.month_can_chi || cal.lunar_month_ganzhi || cal.lunar_month_can_chi || (day && day.lunar_month_ganzhi) || "—";
+  }
+
+  function lunarYearGanzhi(day) {
+    var cal = (day && day.calendar) || {};
+    var identity = (day && day.good_date_identity) || {};
+    return identity.year_can_chi || cal.lunar_year_ganzhi || cal.lunar_year_can_chi || (day && day.lunar_year_ganzhi) || "—";
+  }
+
   function tuTruData(day, hour) {
+    var identity = (day && day.good_date_identity) || {};
     return {
-      year: tuTruPillar(day && day.year),
-      month: tuTruPillar(day && day.month),
-      day: tuTruPillar(day && day.day),
+      title: t("date_selection.can_chi_day_title"),
+      year: tuTruPillar(identity.year || { can_chi: lunarYearGanzhi(day) }),
+      month: tuTruPillar(identity.month || { can_chi: lunarMonthGanzhi(day) }),
+      day: tuTruPillar(identity.day || (day && day.day)),
       hour: tuTruPillar(hour),
     };
   }
@@ -342,6 +361,11 @@
     var root = document.getElementById("dsTuTru");
     if (!root || !global.BteTuTruPanel) return;
     global.BteTuTruPanel.mount(root, tuTruData(day, hour));
+    var note = document.getElementById("dsTuTruNote");
+    if (note) {
+      note.hidden = true;
+      note.textContent = "";
+    }
   }
 
   function fillDetail(dl, day) {
@@ -350,9 +374,12 @@
     kv(dl, [
       [t("date_selection.solar_date"), cal.solar_label],
       [t("date_selection.lunar_date"), cal.lunar_label],
+      [t("date_selection.lunar_year_ganzhi"), lunarYearGanzhi(day)],
+      [t("date_selection.lunar_month_ganzhi"), lunarMonthGanzhi(day)],
+      [t("date_selection.day_ganzhi"), identity.ganzhi || cal.lunar_day_ganzhi || cal.day_ganzhi],
       [t("date_selection.day_result"), day.six_state.label],
-      [t("date_selection.nayin"), elementBadge(identity.nayin)],
-      [t("date_selection.cung_phi"), cungBadge(identity.cung)],
+      [t("date_selection.nayin_day"), elementBadge(identity.nayin)],
+      [t("date_selection.cung_phi_day"), cungBadge(identity.cung)],
       [t("date_selection.hanh_cung"), elementBadge(identity.hanhCung)],
       [t("date_selection.trach_group"), identity.trachLabel || "—"],
     ]);
@@ -799,8 +826,8 @@
       ' âm</div><div class="ds-card-state">' +
       item.day.six_state.label +
       "</div><dl class='ds-kv' data-testid='ranked-day-detail'>" +
-      kvTone(t("date_selection.year_ganzhi"), cal.year_ganzhi || "—", "secondary") +
-      kvTone(t("date_selection.month_ganzhi"), cal.month_ganzhi || item.day.month_ganzhi || "—", "secondary") +
+      kvTone(t("date_selection.lunar_year_ganzhi"), lunarYearGanzhi(item.day), "secondary") +
+      kvTone(t("date_selection.lunar_month_ganzhi"), lunarMonthGanzhi(item.day), "secondary") +
       kvTone(t("date_selection.day_ganzhi"), identity.ganzhi || cal.day_ganzhi, "medium") +
       kvTone(t("date_selection.nayin"), elementBadge(identity.nayin), "medium") +
       kvTone(t("date_selection.cung_phi"), cungText, "medium") +

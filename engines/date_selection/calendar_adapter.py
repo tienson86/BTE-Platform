@@ -55,11 +55,23 @@ def snapshot_for_solar(
     lunar_month = int(calendar.lunar_month or 0)
     if lunar_month < 1 or lunar_month > 12:
         raise DateSelectionValidationError(f"invalid lunar month: {lunar_month}")
+    # BaZi / Four Pillars month (solar-term). Not lunar-month Can Chi.
     month_ganzhi = calendar.month_can_chi or ""
     if not month_ganzhi:
         raise DateSelectionValidationError("calendar month_can_chi is required")
     lunar_leap = bool(calendar.leap_month)
     lunar_label = calendar.lunar_date or ""
+    lunar_year_ganzhi = calendar.lunar_year_can_chi or (
+        calendar.lunar.year_can_chi if calendar.lunar else ""
+    ) or ""
+    lunar_month_ganzhi = calendar.lunar_month_can_chi or (
+        calendar.lunar.month_can_chi if calendar.lunar else ""
+    ) or ""
+    if not lunar_year_ganzhi:
+        raise DateSelectionValidationError("calendar lunar year Can Chi is required")
+    if not lunar_month_ganzhi:
+        raise DateSelectionValidationError("calendar lunar month Can Chi is required")
+    lunar_day_ganzhi = calendar.lunar_day_can_chi or day_ganzhi
     return CalendarSnapshot(
         solar_year=year,
         solar_month=month,
@@ -77,4 +89,7 @@ def snapshot_for_solar(
         weekday=_weekday(year, month, day),
         tam_nguyen=calendar.tam_nguyen or "",
         cuu_van=calendar.cuu_van,
+        lunar_year_ganzhi=lunar_year_ganzhi,
+        lunar_month_ganzhi=lunar_month_ganzhi,
+        lunar_day_ganzhi=lunar_day_ganzhi,
     )
