@@ -257,6 +257,30 @@ describe("Date Selection frontend", () => {
     expect(screen.getByTestId("top-results").textContent).toContain("09:41–10:00");
   });
 
+  it("renders every returned candidate, including more than five cards", () => {
+    const many: RankedDateVm[] = Array.from({ length: 6 }, (_, index) => ({
+      ...ranked[0],
+      day: {
+        ...ranked[0].day,
+        calendar: {
+          ...ranked[0].day.calendar,
+          solar_label: `${10 + index}/11/2026`,
+        },
+      },
+    }));
+    render(
+      <SearchScreen
+        person={person}
+        dates={many}
+        searchResult={{ requested_month: "11/2026", target_year: 2026, target_month: 11 }}
+      />,
+    );
+    expect(screen.getAllByTestId("ranked-card")).toHaveLength(6);
+    expect(screen.getByTestId("result-count").textContent).toContain(
+      "Tìm thấy 6 ngày phù hợp trong tháng 11/2026",
+    );
+  });
+
   it("has a mobile layout frame", () => {
     render(
       <DateSelectionMobileFrame>

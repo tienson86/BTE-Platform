@@ -122,7 +122,8 @@ def test_jkl_personalized_top5_matches_trach() -> None:
         target_year=2026,
         target_month=8,
     )
-    assert 1 <= len(result.dates) <= 5
+    assert 1 <= len(result.dates)
+    assert len(result.dates) == result.total_eligible
     person_group = result.person.trach.trach_group_code
     for item in result.dates:
         assert item.day.trach is not None

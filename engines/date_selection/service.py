@@ -7,7 +7,7 @@ from datetime import date
 
 from engines.calendar_engine.engine import CalendarEngine
 from engines.date_selection.calendar_adapter import snapshot_for_solar
-from engines.date_selection.constants import BRANCH_INDEX, MAX_RANKED_DATES
+from engines.date_selection.constants import BRANCH_INDEX
 from engines.date_selection.cung_phi import (
     gender_label,
     normalize_gender,
@@ -34,7 +34,7 @@ class DateSelectionService:
     Public Date Selection API.
 
     Calendar truth comes from CalendarEngine. This service only classifies
-    dates, hours, and khắc, and ranks personalized candidates.
+    dates, hours, and khắc, then returns every eligible date for the month.
     """
 
     def __init__(self, calendar_engine: CalendarEngine | None = None) -> None:
@@ -165,7 +165,7 @@ class DateSelectionService:
         target_year: int,
         target_month: int,
     ) -> SearchResult:
-        """Return up to five personalized candidate dates for a target month."""
+        """Return every personalized candidate date in the requested month."""
         person = self.person_profile(
             full_name=full_name,
             gender=gender,
@@ -179,12 +179,19 @@ class DateSelectionService:
             self._build_day(target_year, target_month, day)
             for day in range(1, last_day + 1)
         ]
-        ranked = rank_dates(days, person.trach.trach_group_code)[:MAX_RANKED_DATES]
+        if len(days) != last_day:
+            raise DateSelectionValidationError(
+                f"month scan incomplete: evaluated {len(days)} of {last_day} days"
+            )
+        ranked = rank_dates(days, person.trach.trach_group_code)
         return SearchResult(
             person=person,
             target_year=target_year,
             target_month=target_month,
             dates=ranked,
+            requested_month=f"{target_month:02d}/{target_year:04d}",
+            total_days_scanned=last_day,
+            total_eligible=len(ranked),
         )
 
     def _build_day(

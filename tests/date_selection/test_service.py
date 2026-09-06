@@ -46,7 +46,7 @@ def test_search_requires_gender() -> None:
         )
 
 
-def test_search_returns_at_most_five() -> None:
+def test_search_returns_all_eligible_dates() -> None:
     result = DateSelectionService().search(
         full_name="Nguyễn Văn A",
         gender="male",
@@ -56,7 +56,8 @@ def test_search_returns_at_most_five() -> None:
         target_year=2026,
         target_month=8,
     )
-    assert len(result.dates) <= 5
+    assert len(result.dates) == result.total_eligible
+    assert result.total_days_scanned == 31
     for item in result.dates:
         assert item.day.trach is not None
         assert item.day.trach.trach_group_code == result.person.trach.trach_group_code

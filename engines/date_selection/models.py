@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
+from engines.date_selection.constants import FEATURED_DATES_LIMIT
 from engines.date_selection.exceptions import DateSelectionError
 
 
@@ -406,12 +407,15 @@ def _assert_same_trach(person_group: str, ranked: RankedDate) -> None:
 
 @dataclass(slots=True)
 class SearchResult:
-    """Personalized Top-N date search."""
+    """Personalized monthly date search. ``dates`` is the complete eligible set."""
 
     person: PersonProfile
     target_year: int
     target_month: int
     dates: list[RankedDate]
+    requested_month: str = ""
+    total_days_scanned: int = 0
+    total_eligible: int = 0
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize for API / presentation."""
@@ -427,9 +431,17 @@ class SearchResult:
                         f"{hour.get('trach_group')!r} != person {person_group!r}"
                     )
             dates.append(payload)
+        requested_month = self.requested_month or (
+            f"{self.target_month:02d}/{self.target_year:04d}"
+        )
+        total_eligible = self.total_eligible or len(dates)
         return {
             "person": self.person.to_dict(),
             "target_year": self.target_year,
             "target_month": self.target_month,
+            "requested_month": requested_month,
+            "total_days_scanned": self.total_days_scanned,
+            "total_eligible": total_eligible,
             "dates": dates,
+            "featured_dates": dates[:FEATURED_DATES_LIMIT],
         }

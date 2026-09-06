@@ -85,6 +85,8 @@ KE_RANK_SCORE: dict[str, int] = {
 
 DIVERSITY_ORDER: tuple[str, ...] = ("dai_an", "tieu_cat", "toc_hy")
 
+FEATURED_DATES_LIMIT = 3
+# Kept for compatibility. Monthly search no longer truncates to this count.
 MAX_RANKED_DATES = 5
 KE_COUNT = 6
 KE_MINUTES = 20

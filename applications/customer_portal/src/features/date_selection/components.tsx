@@ -529,20 +529,44 @@ function hourRowLabel(hour: CompatibleHourVm): string {
   return `→ Giờ ${hour.branch} (${hour.full_time_range}) · ${cung}`;
 }
 
+function monthLabelFromSearch(searchResult: unknown): string {
+  if (!searchResult || typeof searchResult !== "object") return "";
+  const row = searchResult as {
+    requested_month?: string;
+    target_year?: number;
+    target_month?: number;
+  };
+  if (row.requested_month) return row.requested_month;
+  if (row.target_year && row.target_month) {
+    return `${String(row.target_month).padStart(2, "0")}/${row.target_year}`;
+  }
+  return "";
+}
+
 export function TopResults({
   dates,
   personTrach,
+  monthLabel,
 }: {
   dates: RankedDateVm[];
   personTrach?: string;
   personTrachLabel?: string;
+  monthLabel?: string;
 }): ReactNode {
   const visible = dates.filter((item) => {
     const dayGroup = item.day.trach_group || item.day.trach?.trach_group_code;
     return !personTrach || dayGroup === personTrach;
   });
   const keOrder = ["Đại An", "Tốc Hỷ", "Tiểu Cát"] as const;
+  const countLine = monthLabel
+    ? `Tìm thấy ${visible.length} ngày phù hợp trong tháng ${monthLabel}`
+    : `Tìm thấy ${visible.length} ngày phù hợp`;
   return (
+    <div className="ds-results-wrap">
+      <p className="ds-result-count" data-testid="result-count">
+        {countLine}
+      </p>
+      {visible.length ? (
     <div className="ds-cards" data-testid="top-results">
       {visible.map((item) => {
         const identity = dayIdentity(item.day);
@@ -618,6 +642,12 @@ export function TopResults({
         );
       })}
     </div>
+      ) : (
+        <p className="muted" data-testid="no-results">
+          Không có ngày phù hợp trong tháng này.
+        </p>
+      )}
+    </div>
   );
 }
 
@@ -638,6 +668,7 @@ export function SearchScreen({
     const dayGroup = item.day.trach_group || item.day.trach?.trach_group_code;
     return !personTrach || dayGroup === personTrach;
   });
+  const monthLabel = monthLabelFromSearch(searchResult);
   return (
     <div className="ds-page" data-testid="search-screen">
       <div className="ds-search-row" data-testid="search-row">
@@ -648,6 +679,7 @@ export function SearchScreen({
         <TopResults
           dates={dates}
           personTrach={personTrach}
+          monthLabel={monthLabel}
         />
       ) : null}
       {submitted ? (

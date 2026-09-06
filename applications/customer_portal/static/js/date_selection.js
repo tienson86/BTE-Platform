@@ -78,6 +78,8 @@
     "date_selection.other_good_windows": "Các thời điểm đẹp",
     "date_selection.trach_match": "Phù hợp Nhóm Trạch của bạn",
     "date_selection.other_hours": "Khung giờ khác",
+    "date_selection.no_results": "Không có ngày phù hợp trong tháng này.",
+    "date_selection.found_in_month": "Tìm thấy {count} ngày phù hợp trong tháng {month}",
     "date_selection.export_pdf": "📄 Xuất PDF",
     "date_selection.export_docx": "📝 Xuất DOCX",
     "date_selection.export_pdf_loading": "Đang tạo PDF...",
@@ -717,20 +719,35 @@
     ]);
     var root = document.getElementById("dsResults");
     var personGroup = person.trach_group || (person.trach && person.trach.trach_group_code) || "";
-    var dates = data.dates.filter(function (item) {
+    var dates = (data.dates || []).filter(function (item) {
       var dayGroup = item.day.trach_group || (item.day.trach && item.day.trach.trach_group_code) || "";
       return !personGroup || dayGroup === personGroup;
     });
+    var monthLabel =
+      data.requested_month ||
+      (data.target_month && data.target_year
+        ? String(data.target_month).padStart(2, "0") + "/" + data.target_year
+        : "");
+    var countLine = t("date_selection.found_in_month")
+      .replace("{count}", String(dates.length))
+      .replace("{month}", monthLabel);
+    var countHtml =
+      '<p class="ds-result-count" data-testid="result-count">' + countLine + "</p>";
     if (!dates.length) {
-      root.innerHTML = '<p class="muted">' + t("date_selection.no_results") + "</p>";
+      root.innerHTML =
+        countHtml + '<p class="muted" data-testid="no-results">' + t("date_selection.no_results") + "</p>";
       this.hideExport();
       return;
     }
-    root.innerHTML = dates
-      .map(function (item) {
-        return renderRankedCard(item, personGroup);
-      })
-      .join("");
+    root.innerHTML =
+      countHtml +
+      '<div class="ds-cards" data-testid="top-results">' +
+      dates
+        .map(function (item) {
+          return renderRankedCard(item, personGroup);
+        })
+        .join("") +
+      "</div>";
     this.showExport();
   };
 

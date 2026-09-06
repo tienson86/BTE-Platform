@@ -72,5 +72,6 @@ def test_search_returns_person_lunar_block() -> None:
     data = response.json()["data"]
     assert data["person"]["lunar_label"]
     assert data["person"]["trach"]["cung"]
-    assert len(data["dates"]) <= 5
+    assert len(data["dates"]) == data["total_eligible"]
+    assert data["total_days_scanned"] == 31
     assert "Tiểu Lục Nhâm" not in response.text

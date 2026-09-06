@@ -118,4 +118,4 @@ def test_positive_ke_prioritized_and_diversity() -> None:
     assert "toc_hy" in codes
     assert all(item.recommendations[0].classification != "Xích Khẩu" for item in ranked)
     assert all(item.day.trach.trach_group_code == "tay" for item in ranked)
-    assert len(ranked) <= 5
+    assert len(ranked) == 4

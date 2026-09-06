@@ -173,7 +173,7 @@ def test_search_same_trach_assertion_and_fields() -> None:
     payload = result.to_dict()
     assert payload["person"]["trach_group"] == person_group
     assert payload["dates"]
-    assert len(payload["dates"]) <= 5
+    assert len(payload["dates"]) == payload["total_eligible"]
     for item in payload["dates"]:
         assert item["day"]["trach_group"] == person_group
         assert item["day"]["calendar"]["year_ganzhi"]

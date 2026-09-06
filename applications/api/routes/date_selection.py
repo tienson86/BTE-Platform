@@ -108,7 +108,7 @@ def day_endpoint(request: Request, body: DayQuery) -> APIResponse:
 
 @router.post("/search", response_model=APIResponse)
 def search_endpoint(request: Request, body: SearchQuery) -> APIResponse:
-    """Return personal verification plus up to five recommended dates."""
+    """Return personal verification plus every eligible date in the month."""
     today = date.today()
     target_year = body.target_year or today.year
     target_month = body.target_month or today.month
