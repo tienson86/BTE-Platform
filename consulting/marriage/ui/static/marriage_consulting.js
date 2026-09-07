@@ -211,33 +211,49 @@
                 return "<li>" + escapeHtml(item) + "</li>";
               })
               .join("");
-            const meaning = card.meaning
-              ? '<p class="mc-assessment-card__meaning">' + escapeHtml(card.meaning) + "</p>"
+            const guidance = card.quick_guidance
+              ? '<p class="mc-assessment-card__guidance">' + escapeHtml(card.quick_guidance) + "</p>"
               : "";
-            const closing = card.closing ? "<p>" + escapeHtml(card.closing) + "</p>" : "";
+            const meaning = card.meaning
+              ? '<p class="mc-assessment-card__meaning"><span class="mc-assessment-card__label">Ý nghĩa</span>' +
+                escapeHtml(card.meaning) +
+                "</p>"
+              : "";
+            const factsBlock = facts
+              ? '<div><p class="mc-assessment-card__label">Cơ sở</p><ul class="mc-assessment-card__facts">' +
+                facts +
+                "</ul></div>"
+              : "";
+            const limitsBlock = limits
+              ? '<div><p class="mc-assessment-card__label mc-assessment-card__label--muted">Lưu ý</p><ul class="mc-assessment-card__limits">' +
+                limits +
+                "</ul></div>"
+              : "";
             const technical = card.technical_explanation
-              ? '<details class="mc-assessment-card__technical"><summary>Giải thích kỹ thuật</summary><p>' +
+              ? '<details class="mc-assessment-card__technical" data-testid="assessment-technical-' +
+                escapeHtml(card.question_id) +
+                '"><summary>Giải thích kỹ thuật</summary><p>' +
                 escapeHtml(card.technical_explanation) +
                 "</p></details>"
               : "";
+            const details =
+              meaning || facts || guidance || limits
+                ? '<details class="mc-assessment-card__more"><summary>Chi tiết</summary>' +
+                  meaning +
+                  factsBlock +
+                  guidance +
+                  limitsBlock +
+                  "</details>"
+                : "";
             return (
               '<article class="bte-card mc-assessment-card" data-testid="assessment-card-' +
               escapeHtml(card.question_id) +
               '"><p class="mc-assessment-card__question">' +
               escapeHtml(card.question) +
-              '</p><p class="mc-assessment-card__answer">' +
-              escapeHtml(card.headline || card.answer) +
+              '</p><p class="mc-assessment-card__verdict">' +
+              escapeHtml(card.verdict || card.headline || card.answer) +
               "</p>" +
-              meaning +
-              '<details class="mc-assessment-card__more"><summary>Cơ sở và giới hạn</summary>' +
-              '<ul class="mc-assessment-card__facts">' +
-              facts +
-              "</ul>" +
-              (limits ? '<ul class="mc-assessment-card__limits">' + limits + "</ul>" : "") +
-              closing +
-              '<p class="muted">Độ tin cậy: ' +
-              escapeHtml(card.confidence) +
-              "</p></details>" +
+              details +
               technical +
               "</article>"
             );

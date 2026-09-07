@@ -36,7 +36,11 @@ CUSTOMER_QUESTIONS = {
 
 @dataclass(slots=True)
 class MarriageAssessmentCard:
-    """One customer Assessment card. Object, not an essay."""
+    """One Assessment card. Semantic truth only for customer rendering.
+
+    ``answer`` is a compatibility seam for Assessment Golden. Customer
+    Narrative, Report, and UI must not use it. Language Pack owns wording.
+    """
 
     question_id: str
     question: str

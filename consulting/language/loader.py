@@ -125,6 +125,8 @@ def _parse_entry(
         technical_explanation=str(raw.get("technical_explanation") or ""),
         supporting_fact_templates=_parse_templates(raw.get("supporting_fact_templates")),
         limitation_templates=_parse_templates(raw.get("limitation_templates")),
+        main_risk_templates=_parse_templates(raw.get("main_risk_templates")),
+        main_rescue_templates=_parse_templates(raw.get("main_rescue_templates")),
         closing=str(raw.get("closing") or ""),
         variants=_parse_variants(raw.get("variants")),
         forbidden_terms=[str(item) for item in raw.get("forbidden_terms") or []],

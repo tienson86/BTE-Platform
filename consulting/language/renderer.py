@@ -28,6 +28,50 @@ def compact_text(text: str) -> str:
     return " ".join(text.split()).strip()
 
 
+def clip_sentences(text: str, *, limit: int = 3) -> str:
+    """Keep the first customer sentences. Does not invent wording."""
+    compact = compact_text(text)
+    if not compact:
+        return ""
+    parts = [item.strip() for item in compact.replace("?", ".").split(".") if item.strip()]
+    if "?" in compact_text(text) and not parts:
+        return compact
+    clipped = ". ".join(parts[:limit])
+    if clipped and not clipped.endswith("."):
+        clipped += "."
+    return clipped
+
+
+def pick_customer_meaning(entry: LanguageEntry, verdict: str) -> str:
+    """Choose one meaning block. Do not repeat the verdict."""
+    candidates = [entry.meaning, entry.plain_customer_text]
+    for raw in candidates:
+        meaning = clip_sentences(raw)
+        if meaning and not _restates(verdict, meaning):
+            return meaning
+    for raw in candidates:
+        meaning = clip_sentences(raw)
+        if meaning:
+            return meaning
+    return ""
+
+
+def _restates(left: str, right: str) -> bool:
+    """True when two customer strings largely repeat the same wording."""
+    a = compact_text(left).casefold().rstrip(".")
+    b = compact_text(right).casefold().rstrip(".")
+    if not a or not b:
+        return False
+    if a == b or a in b or b in a:
+        return True
+    tokens_a = {item for item in a.split() if len(item) > 2}
+    tokens_b = {item for item in b.split() if len(item) > 2}
+    if not tokens_a or not tokens_b:
+        return False
+    overlap = len(tokens_a & tokens_b) / min(len(tokens_a), len(tokens_b))
+    return overlap >= 0.72
+
+
 def fill_template(template: str, slots: dict[str, str]) -> str:
     """Substitute known slots. Unknown slots stay empty rather than crashing."""
 
@@ -84,15 +128,16 @@ def render_card(
         for text in (fill_template(item.template, slots) for item in entry.limitation_templates)
         if text and not _ID_LEAK.search(text)
     ][:MAX_LIMITATIONS]
+    verdict = compact_text(entry.headline or selected.headline)
     return LanguageCardWording(
         question_id=question_id,
         question=question,
         language_key=entry.language_key,
-        headline=compact_text(selected.headline or entry.headline),
-        meaning=compact_text(selected.meaning or entry.meaning or entry.plain_customer_text),
+        headline=verdict,
+        meaning=pick_customer_meaning(entry, verdict),
         supporting_facts=facts,
         limitations=limits,
-        closing=compact_text(entry.closing),
+        closing="",
         technical_explanation=compact_text(entry.technical_explanation) if include_technical else "",
         variant_id=selected.variant_id,
         confidence=confidence,

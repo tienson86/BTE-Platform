@@ -44,10 +44,13 @@ export type MarriagePersonSummary = {
 export type AssessmentCardDto = {
   question_id: string;
   question: string;
+  semantic_key?: string;
+  verdict?: string;
   answer: string;
   headline?: string;
   meaning?: string;
   supporting_facts: string[];
+  quick_guidance?: string;
   confidence: string;
   limitations: string[];
   closing?: string;
@@ -132,9 +135,9 @@ export type AssessmentCardVm = {
   answer: string;
   meaning: string;
   supportingFacts: string[];
+  quickGuidance: string;
   confidence: string;
   limitations: string[];
-  closing: string;
   technicalExplanation: string;
 };
 

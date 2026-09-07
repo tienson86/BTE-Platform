@@ -267,7 +267,7 @@ def serialize_assessment_cards(
     *,
     expert: bool = False,
 ) -> list[dict[str, object]]:
-    """Public Assessment cards from Language Pack. Assessment semantics stay internal."""
+    """Public Assessment cards from Language Pack. Assessment prose stays internal."""
     if result.assessment is None:
         result.assessment = project_marriage_assessment(result)
     rendered = render_marriage_language_cards(result, include_technical=expert)
@@ -276,17 +276,23 @@ def serialize_assessment_cards(
         payload: dict[str, object] = {
             "question_id": card.question_id,
             "question": card.question,
-            "answer": card.headline,
-            "headline": card.headline,
+            "semantic_key": card.language_key,
+            "verdict": card.headline,
             "meaning": card.meaning,
             "supporting_facts": list(card.supporting_facts),
-            "confidence": card.confidence,
+            "quick_guidance": card.quick_guidance,
             "limitations": list(card.limitations),
-            "closing": card.closing,
+            "confidence": card.confidence,
+            "answer": card.headline,
+            "headline": card.headline,
             "language_key": card.language_key,
         }
         if expert and card.technical_explanation:
             payload["technical_explanation"] = card.technical_explanation
+        if expert and card.quick_guidance_recommendation_id:
+            payload["quick_guidance_recommendation_id"] = card.quick_guidance_recommendation_id
+        if expert:
+            payload["fact_source_keys"] = list(card.fact_source_keys)
         cards.append(payload)
     return cards
 

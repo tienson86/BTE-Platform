@@ -155,7 +155,7 @@ def _executive_summary(
 
 
 def _language_assessment_section(language_cards: list) -> ReportSection:
-    """Render Question / Headline / Meaning / Facts / Limitations / Closing."""
+    """Render the same customer card content as UI. No separate wording engine."""
     blocks: list[ReportBlock] = []
     for card in language_cards:
         prefix = card.question_id.lower()
@@ -198,15 +198,21 @@ def _language_assessment_section(language_cards: list) -> ReportSection:
                     semantic_key=key,
                 )
             )
-        blocks.append(
-            ReportBlock(
-                block_id=f"{prefix}-confidence",
-                kind="confidence",
-                title="Độ tin cậy",
-                body=card.confidence,
-                semantic_key=key,
+        if card.quick_guidance:
+            blocks.append(
+                ReportBlock(
+                    block_id=f"{prefix}-guidance",
+                    kind="guidance",
+                    title="Gợi ý",
+                    body=card.quick_guidance,
+                    semantic_key=key,
+                    source_recommendation_ids=(
+                        [card.quick_guidance_recommendation_id]
+                        if card.quick_guidance_recommendation_id
+                        else []
+                    ),
+                )
             )
-        )
         if card.limitations:
             blocks.append(
                 ReportBlock(
@@ -214,16 +220,6 @@ def _language_assessment_section(language_cards: list) -> ReportSection:
                     kind="limitations",
                     title="Lưu ý",
                     body="\n".join(f"• {item}" for item in card.limitations),
-                    semantic_key=key,
-                )
-            )
-        if card.closing:
-            blocks.append(
-                ReportBlock(
-                    block_id=f"{prefix}-closing",
-                    kind="closing",
-                    title="Kết",
-                    body=card.closing,
                     semantic_key=key,
                 )
             )

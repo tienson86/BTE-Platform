@@ -44,6 +44,8 @@ class LanguageEntry:
     technical_explanation: str = ""
     supporting_fact_templates: list[LanguageFactTemplate] = field(default_factory=list)
     limitation_templates: list[LanguageFactTemplate] = field(default_factory=list)
+    main_risk_templates: list[LanguageFactTemplate] = field(default_factory=list)
+    main_rescue_templates: list[LanguageFactTemplate] = field(default_factory=list)
     closing: str = ""
     variants: list[LanguageVariant] = field(default_factory=list)
     forbidden_terms: list[str] = field(default_factory=list)
@@ -104,3 +106,7 @@ class LanguageCardWording:
     variant_id: str
     confidence: str
     fallback: bool = False
+    quick_guidance: str = ""
+    quick_guidance_recommendation_id: str = ""
+    quick_guidance_action_type: str = ""
+    fact_source_keys: list[str] = field(default_factory=list)

@@ -174,5 +174,5 @@ def test_ui_surfaces_render_language_pack_slots() -> None:
     ).read_text(encoding="utf-8")
     for source in (portal, host):
         assert "mc-assessment-card__meaning" in source
-        assert "Cơ sở và giới hạn" in source
+        assert "Chi tiết" in source
         assert "Giải thích kỹ thuật" in source

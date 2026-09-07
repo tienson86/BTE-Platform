@@ -225,28 +225,49 @@ export function ResultView({ view, expertMode, onToggleExpert }: ResultViewProps
 }
 
 function AssessmentCard({ card }: { card: AssessmentCardVm }): ReactNode {
+  const hasDetails =
+    Boolean(card.meaning) ||
+    card.supportingFacts.length > 0 ||
+    Boolean(card.quickGuidance) ||
+    card.limitations.length > 0;
   return (
     <article className="bte-card mc-assessment-card" data-testid={`assessment-card-${card.questionId}`}>
       <p className="mc-assessment-card__question">{card.question}</p>
-      <p className="mc-assessment-card__answer">{card.answer}</p>
-      {card.meaning ? <p className="mc-assessment-card__meaning">{card.meaning}</p> : null}
-      <details className="mc-assessment-card__more">
-        <summary>Cơ sở và giới hạn</summary>
-        <ul className="mc-assessment-card__facts">
-          {card.supportingFacts.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-        {card.limitations.length ? (
-          <ul className="mc-assessment-card__limits">
-            {card.limitations.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        ) : null}
-        {card.closing ? <p>{card.closing}</p> : null}
-        <p className="muted">Độ tin cậy: {card.confidence}</p>
-      </details>
+      <p className="mc-assessment-card__verdict">{card.answer}</p>
+      {hasDetails ? (
+        <details className="mc-assessment-card__more">
+          <summary>Chi tiết</summary>
+          {card.meaning ? (
+            <p className="mc-assessment-card__meaning">
+              <span className="mc-assessment-card__label">Ý nghĩa</span>
+              {card.meaning}
+            </p>
+          ) : null}
+          {card.supportingFacts.length ? (
+            <div>
+              <p className="mc-assessment-card__label">Cơ sở</p>
+              <ul className="mc-assessment-card__facts">
+                {card.supportingFacts.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+          {card.quickGuidance ? (
+            <p className="mc-assessment-card__guidance">{card.quickGuidance}</p>
+          ) : null}
+          {card.limitations.length ? (
+            <div>
+              <p className="mc-assessment-card__label mc-assessment-card__label--muted">Lưu ý</p>
+              <ul className="mc-assessment-card__limits">
+                {card.limitations.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+        </details>
+      ) : null}
       {card.technicalExplanation ? (
         <details className="mc-assessment-card__technical" data-testid={`assessment-technical-${card.questionId}`}>
           <summary>Giải thích kỹ thuật</summary>
@@ -287,7 +308,7 @@ function customerText(view: MarriageViewModel): string {
       card.answer,
       card.meaning,
       ...card.supportingFacts,
-      card.closing,
+      card.quickGuidance,
     ]),
     ...view.strengths,
     ...view.risks,
