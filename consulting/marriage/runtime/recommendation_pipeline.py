@@ -53,6 +53,10 @@ class MarriageRecommendationOrchestrator(MarriageDecisionOrchestrator):
     def _after_decision(self, session: MarriageRuntimeSession) -> None:
         """Continue from DECISION_READY through RECOMMENDATION_READY."""
         self._run_recommendation_layer(session)
+        self._after_recommendation(session)
+
+    def _after_recommendation(self, session: MarriageRuntimeSession) -> None:
+        """B04 stop. Later phases continue from recommendation-ready through this seam."""
         session.transition(RuntimeLifecycleState.COMPLETED)
 
     def _run_recommendation_layer(self, session: MarriageRuntimeSession) -> None:

@@ -11,7 +11,9 @@ from consulting.marriage.models.confidence import MarriageConfidenceResult
 from consulting.marriage.models.decision import MarriageDomainResults, MarriageOverallDecision
 from consulting.marriage.models.evidence import MarriageEvidence, ResolvedMarriageEvidence
 from consulting.marriage.models.finding import MarriageFinding
+from consulting.marriage.models.narrative import MarriageNarrativeResult
 from consulting.marriage.models.recommendation import MarriageRecommendation
+from consulting.marriage.models.report import MarriageReportModel
 from consulting.marriage.models.result import MarriageDecisionResult
 from consulting.marriage.models.snapshot import MarriageCanonicalSnapshot
 from consulting.marriage.models.timing import MarriageTimingResult
@@ -39,6 +41,8 @@ class MarriageRuntimeContext:
     decision_result: MarriageDecisionResult | None = None
     timing: MarriageTimingResult | None = None
     recommendations: list[MarriageRecommendation] | None = None
+    narrative: MarriageNarrativeResult | None = None
+    report_model: MarriageReportModel | None = None
     confidence: MarriageConfidenceResult | None = None
     warnings: list[RuntimeWarning] = field(default_factory=list)
     timings: list[StageTiming] = field(default_factory=list)

@@ -6,7 +6,7 @@ from enum import Enum
 
 
 class RuntimeLifecycleState(str, Enum):
-    """Allowed runtime states through decision completion. No report/UI states."""
+    """Allowed runtime states through report completion. No API/UI delivery states."""
 
     CREATED = "CREATED"
     VALIDATED = "VALIDATED"
@@ -15,6 +15,8 @@ class RuntimeLifecycleState(str, Enum):
     EVIDENCE_READY = "EVIDENCE_READY"
     DECISION_READY = "DECISION_READY"
     RECOMMENDATION_READY = "RECOMMENDATION_READY"
+    NARRATIVE_READY = "NARRATIVE_READY"
+    REPORT_READY = "REPORT_READY"
     COMPLETED = "COMPLETED"
 
 
@@ -26,5 +28,7 @@ LIFECYCLE_ORDER: tuple[RuntimeLifecycleState, ...] = (
     RuntimeLifecycleState.EVIDENCE_READY,
     RuntimeLifecycleState.DECISION_READY,
     RuntimeLifecycleState.RECOMMENDATION_READY,
+    RuntimeLifecycleState.NARRATIVE_READY,
+    RuntimeLifecycleState.REPORT_READY,
     RuntimeLifecycleState.COMPLETED,
 )

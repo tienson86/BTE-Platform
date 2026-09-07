@@ -7,9 +7,11 @@ from consulting.marriage.report.contract import (
     MarriageReportProfileDescriptor,
 )
 from consulting.marriage.report.placeholder import PlaceholderMarriageReportProfile
+from consulting.marriage.report.profile import MarriageReportProfileV1
 
 __all__ = [
     "MarriageReportProfile",
     "MarriageReportProfileDescriptor",
+    "MarriageReportProfileV1",
     "PlaceholderMarriageReportProfile",
 ]

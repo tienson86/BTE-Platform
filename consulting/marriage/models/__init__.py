@@ -46,7 +46,19 @@ from consulting.marriage.models.person import (
     CanonicalVersionReference,
     MarriagePersonReference,
 )
+from consulting.marriage.models.narrative import (
+    MarriageNarrativeBlock,
+    MarriageNarrativeHighlight,
+    MarriageNarrativeResult,
+    MarriageNarrativeSection,
+)
 from consulting.marriage.models.recommendation import MarriageRecommendation
+from consulting.marriage.models.report import (
+    MarriageReportModel,
+    ReportBlock,
+    ReportMetadata,
+    ReportSection,
+)
 from consulting.marriage.models.result import MarriageDecisionResult
 from consulting.marriage.models.snapshot import (
     DayMasterSnapshot,
@@ -109,10 +121,18 @@ __all__ = [
     "MarriageEvidenceType",
     "MarriageFinding",
     "MarriageLuckWindow",
+    "MarriageNarrativeBlock",
+    "MarriageNarrativeHighlight",
+    "MarriageNarrativeResult",
+    "MarriageNarrativeSection",
     "MarriageOverallDecision",
     "MarriagePersonReference",
     "MarriageRecommendation",
     "MarriageRelationshipContext",
+    "MarriageReportModel",
+    "ReportBlock",
+    "ReportMetadata",
+    "ReportSection",
     "ResolvedMarriageOptions",
     "MarriageRuntimeStatus",
     "MarriageTimingPeriod",
