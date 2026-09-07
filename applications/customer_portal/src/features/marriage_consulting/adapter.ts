@@ -16,6 +16,7 @@ import {
 } from "./labels";
 import type {
   ActionCardVm,
+  ComparisonGroupVm,
   DomainCardVm,
   MarriageConsultationDto,
   MarriageEnvelope,
@@ -27,7 +28,7 @@ import type {
   MarriageWarning,
 } from "./types";
 
-const HERO_LABEL_MAX = 48;
+const HERO_LABEL_MAX = 120;
 
 export function customerErrorMessage(error: MarriagePublicError | undefined, fallback?: string): string {
   if (!error) {
@@ -52,6 +53,7 @@ export function adaptMarriageView(
   const executive = section(report, "executive_summary");
   const strengthsSec = section(report, "strengths");
   const risksSec = section(report, "risks");
+  const comparisonGroups = comparisonGroupsFrom(report);
   const domainsSec = section(report, "domain_analysis");
   const timingSec = section(report, "timing");
   const actionsSec = section(report, "action_plan");
@@ -61,10 +63,10 @@ export function adaptMarriageView(
   const state = consultation.overall_state;
   const heroHighlights = (hero?.blocks || []).filter((item) => item.kind === "highlight");
   const heroStrengths = heroHighlights
-    .filter((item) => item.title?.includes("hỗ trợ"))
+    .filter((item) => (item.title || "").includes("hòa hợp") || (item.title || "").includes("hỗ trợ"))
     .map((item) => shortLabel(item.body || item.title || ""));
   const heroRisks = heroHighlights
-    .filter((item) => !item.title?.includes("hỗ trợ"))
+    .filter((item) => (item.title || "").includes("xung") || (item.title || "").includes("lưu ý"))
     .map((item) => shortLabel(item.body || item.title || ""));
   return {
     consultationId: consultation.consultation_id,
@@ -88,6 +90,7 @@ export function adaptMarriageView(
     executiveSummary: executive?.blocks[0]?.body || executive?.summary || "",
     strengths: highlightBodies(strengthsSec),
     risks: highlightBodies(risksSec),
+    comparisonGroups,
     domains: groupDomains(domainsSec),
     unavailableNote: unavailableNote(warnings, domainsSec),
     timingSummary: timingBody(timingSec),
@@ -121,6 +124,24 @@ function firstText(sec: MarriageReportSection | undefined, kind: string): string
   if (!sec) return "";
   const block = sec.blocks.find((item) => item.kind === kind);
   return block?.body || block?.title || sec.summary || "";
+}
+
+function comparisonGroupsFrom(report: MarriageReportDto): ComparisonGroupVm[] {
+  const specs = [
+    { id: "comparison_a_to_b", title: "A bổ trợ B" },
+    { id: "comparison_b_to_a", title: "B bổ trợ A" },
+    { id: "comparison_harmony", title: "Điểm hòa hợp" },
+    { id: "comparison_conflict", title: "Điểm xung" },
+    { id: "comparison_rescue", title: "Yếu tố cứu giải" },
+  ];
+  const groups: ComparisonGroupVm[] = [];
+  for (const spec of specs) {
+    const sec = section(report, spec.id);
+    const items = highlightBodies(sec);
+    if (!items.length) continue;
+    groups.push({ id: spec.id, title: spec.title, items });
+  }
+  return groups;
 }
 
 function highlightBodies(sec: MarriageReportSection | undefined): string[] {

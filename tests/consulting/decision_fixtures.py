@@ -255,6 +255,7 @@ def build_test_decision(
     **policy_kwargs: object,
 ) -> MarriageDecisionResult:
     """Build a B03 Decision Result from snapshots. Does not generate recommendations."""
+    from consulting.marriage.decision.comparison import build_marriage_comparison
     from consulting.marriage.decision.context import MarriageDecisionContext
     from consulting.marriage.decision.resolver import MarriageDecisionResolverV1, build_confidence
     from consulting.marriage.evidence.extractor import CanonicalEvidenceBuilder
@@ -299,7 +300,7 @@ def build_test_decision(
         )
         if item.availability.available
     ) / 8.0
-    return MarriageDecisionResult(
+    result = MarriageDecisionResult(
         consultation_id=context.consultation_id,
         person_a=snapshot_a.person,
         person_b=snapshot_b.person,
@@ -325,3 +326,5 @@ def build_test_decision(
         findings=findings,
         limitations=list(context.limitations),
     )
+    result.comparison = build_marriage_comparison(result)
+    return result

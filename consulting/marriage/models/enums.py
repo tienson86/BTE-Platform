@@ -236,3 +236,56 @@ class TenGodVisibility(str, Enum):
 
     VISIBLE = "visible"
     HIDDEN = "hidden"
+
+
+class DirectionalSupportState(str, Enum):
+    """Five-element directional comparison state. Not a numeric score."""
+
+    A_SUPPORTS_B = "A_SUPPORTS_B"
+    B_SUPPORTS_A = "B_SUPPORTS_A"
+    MUTUAL_SUPPORT = "MUTUAL_SUPPORT"
+    ASYMMETRIC_SUPPORT = "ASYMMETRIC_SUPPORT"
+    MUTUAL_PRESSURE = "MUTUAL_PRESSURE"
+    MIXED_SUPPORT_PRESSURE = "MIXED_SUPPORT_PRESSURE"
+    INSUFFICIENT = "INSUFFICIENT"
+
+
+class DirectionalAssessmentState(str, Enum):
+    """One-way assessment between Person A and Person B."""
+
+    SUPPORT = "support"
+    PRESSURE = "pressure"
+    MIXED = "mixed"
+    NEUTRAL = "neutral"
+    INSUFFICIENT = "insufficient"
+
+
+class ComparisonFactKind(str, Enum):
+    """Customer-safe comparison fact class."""
+
+    SUPPORT = "support"
+    CONFLICT = "conflict"
+    RESCUE = "rescue"
+    LIMITATION = "limitation"
+    NEED = "need"
+    DERIVED = "derived"
+
+
+class PresenceBand(str, Enum):
+    """Qualitative presence of support, conflict, or rescue. Not a score."""
+
+    NONE = "none"
+    PRESENT = "present"
+    PROMINENT = "prominent"
+
+
+class CompatibilityLevel(str, Enum):
+    """Richer semantic classification allowed by resolved evidence."""
+
+    VERY_SUPPORTIVE = "very_supportive"
+    SUPPORTIVE = "supportive"
+    MODERATELY_SUPPORTIVE = "moderately_supportive"
+    MIXED = "mixed"
+    PRESSURED = "pressured"
+    HIGHLY_PRESSURED = "highly_pressured"
+    INSUFFICIENT = "insufficient"

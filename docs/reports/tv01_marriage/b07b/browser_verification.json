@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "checks": {
+    "success_url_uses_8081": true,
+    "success_result": true,
+    "success_loading_cleared": true,
+    "blank_b_time_omitted": true,
+    "iso_dates": true,
+    "failure_error": true,
+    "failure_retry": true,
+    "controlled_message": true
+  },
+  "success": {
+    "post_url": "http://127.0.0.1:8081/backend/api/v1/consulting/marriage",
+    "post_status": 201,
+    "has_result": true,
+    "has_hero": true,
+    "has_domains": true,
+    "has_actions": true,
+    "has_birth_time_note": true,
+    "loading_cleared": true,
+    "payload_omits_person_b_time": true,
+    "person_a_has_time": true,
+    "person_a_iso": true
+  },
+  "failure": {
+    "error_shown": true,
+    "error_text": "Không thể hoàn tất phân tích lúc này.\n\nThử lại",
+    "loading_cleared": true,
+    "has_retry": true
+  },
+  "network": [
+    {
+      "phase": "request",
+      "url": "http://127.0.0.1:8081/backend/api/v1/consulting/marriage",
+      "method": "POST",
+      "post_data": "{\"person_a\":{\"gender\":\"male\",\"birth_date\":\"1987-01-21\",\"full_name\":\"An\",\"birth_time\":\"07:30\",\"birth_place\":{\"display_name\":\"Hà Nội\"}},\"person_b\":{\"gender\":\"female\",\"birth_date\":\"1990-05-15\",\"full_name\":\"Binh\",\"birth_place\":{\"display_name\":\"Hà Nội\"}},\"options\":{\"language\":\"vi\",\"audience\":\"customer\",\"expert_mode\":false}}"
+    },
+    {
+      "phase": "response",
+      "url": "http://127.0.0.1:8081/backend/api/v1/consulting/marriage",
+      "status": 201
+    },
+    {
+      "phase": "request",
+      "url": "http://127.0.0.1:8081/backend/api/v1/consulting/marriage/MC-20260907-630M1J/report",
+      "method": "GET",
+      "post_data": null
+    },
+    {
+      "phase": "response",
+      "url": "http://127.0.0.1:8081/backend/api/v1/consulting/marriage/MC-20260907-630M1J/report",
+      "status": 200
+    },
+    {
+      "phase": "request",
+      "url": "http://127.0.0.1:8081/backend/api/v1/consulting/marriage/MC-20260907-630M1J",
+      "method": "GET",
+      "post_data": null
+    },
+    {
+      "phase": "response",
+      "url": "http://127.0.0.1:8081/backend/api/v1/consulting/marriage/MC-20260907-630M1J",
+      "status": 200
+    },
+    {
+      "phase": "request",
+      "url": "http://127.0.0.1:8081/backend/api/v1/consulting/marriage",
+      "method": "POST",
+      "post_data": "{\"person_a\":{\"gender\":\"male\",\"birth_date\":\"1987-01-21\",\"full_name\":\"An\",\"birth_time\":\"07:30\",\"birth_place\":{\"display_name\":\"Hà Nội\"}},\"person_b\":{\"gender\":\"female\",\"birth_date\":\"1990-05-15\",\"full_name\":\"Binh\",\"birth_place\":{\"display_name\":\"Hà Nội\"}},\"options\":{\"language\":\"vi\",\"audience\":\"customer\",\"expert_mode\":false}}"
+    },
+    {
+      "phase": "response",
+      "url": "http://127.0.0.1:8081/backend/api/v1/consulting/marriage",
+      "status": 503
+    }
+  ],
+  "marriage_health": "http://127.0.0.1:8082/healthz",
+  "portal_left_running": true,
+  "marriage_left_running": true
+}

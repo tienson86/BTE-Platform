@@ -13,8 +13,9 @@ from consulting.marriage.dto.presentation import (
     MarriageTimingView,
 )
 from consulting.marriage.models.decision import MarriageDomainDecision
-from consulting.marriage.models.enums import FindingType, MarriageDomain
+from consulting.marriage.models.enums import ComparisonFactKind, FindingType, MarriageDomain
 from consulting.marriage.models.result import MarriageDecisionResult
+from consulting.marriage.narrative.facts import render_fact
 from consulting.marriage.presentation.contract import MarriagePresentationAdapter
 from consulting.marriage.presentation.labels import (
     CONFIDENCE_LABEL,
@@ -72,13 +73,19 @@ def _findings_of(
     decision: MarriageDecisionResult,
     *kinds: FindingType,
 ) -> list[MarriageFindingView]:
-    """Copy finding identity labels. Do not expose internal finding ids to titles."""
+    """Copy finding labels from comparison facts when present."""
     allowed = set(kinds)
+    fact_titles = _fact_titles(decision)
     views: list[MarriageFindingView] = []
     for item in decision.findings:
         if item.type not in allowed:
             continue
-        title = "Điểm hỗ trợ" if item.type in {FindingType.STRENGTH, FindingType.SUPPORT} else "Điểm cần lưu ý"
+        fallback = (
+            "Điểm hỗ trợ"
+            if item.type in {FindingType.STRENGTH, FindingType.SUPPORT}
+            else "Điểm cần lưu ý"
+        )
+        title = fact_titles.get(item.finding_id, fallback)
         views.append(
             MarriageFindingView(
                 finding_id=item.finding_id,
@@ -88,6 +95,23 @@ def _findings_of(
             )
         )
     return views
+
+
+def _fact_titles(decision: MarriageDecisionResult) -> dict[str, str]:
+    """Map findings onto the first specific comparison sentence."""
+    comparison = decision.comparison
+    if comparison is None:
+        return {}
+    person_a = decision.person_a.display_name or "Người A"
+    person_b = decision.person_b.display_name or "Người B"
+    titles: dict[str, str] = {}
+    for fact in comparison.facts:
+        if fact.kind is ComparisonFactKind.NEED:
+            continue
+        text = render_fact(fact, person_a, person_b)
+        for finding_id in fact.finding_ids:
+            titles.setdefault(finding_id, text)
+    return titles
 
 
 def _published_domains(decision: MarriageDecisionResult) -> list[MarriageDomainView]:

@@ -105,6 +105,12 @@ export type ActionCardVm = {
   outcome: string;
 };
 
+export type ComparisonGroupVm = {
+  id: string;
+  title: string;
+  items: string[];
+};
+
 export type MarriageViewModel = {
   consultationId: string;
   overallState: string | null;
@@ -123,6 +129,7 @@ export type MarriageViewModel = {
   executiveSummary: string;
   strengths: string[];
   risks: string[];
+  comparisonGroups: ComparisonGroupVm[];
   domains: DomainCardVm[];
   unavailableNote: string | null;
   timingSummary: string | null;

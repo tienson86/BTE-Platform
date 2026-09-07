@@ -123,6 +123,33 @@
     const confidence = section(report, "confidence_limitations");
     const conclusion = section(report, "conclusion");
     const appendix = section(report, "appendix");
+    const comparisonSpecs = [
+      ["comparison_a_to_b", "A bổ trợ B"],
+      ["comparison_b_to_a", "B bổ trợ A"],
+      ["comparison_harmony", "Điểm hòa hợp"],
+      ["comparison_conflict", "Điểm xung"],
+      ["comparison_rescue", "Yếu tố cứu giải"],
+    ];
+    const comparisonHtml = comparisonSpecs
+      .map(function (spec) {
+        const sec = section(report, spec[0]);
+        const items = bodies(sec, "highlight");
+        if (!items.length) return "";
+        return (
+          '<article class="bte-card mc-comparison-card" data-testid="' +
+          spec[0] +
+          '"><h3>' +
+          spec[1] +
+          "</h3><ul>" +
+          items
+            .map(function (item) {
+              return "<li>" + escapeHtml(item) + "</li>";
+            })
+            .join("") +
+          "</ul></article>"
+        );
+      })
+      .join("");
     const state = consultation.overall_state;
     const domainCards = {};
     (domains && domains.blocks ? domains.blocks : []).forEach(function (block) {
@@ -195,20 +222,25 @@
       '<section class="bte-card" data-testid="executive-summary"><h2>Tóm tắt tư vấn</h2><p>' +
       escapeHtml((exec && exec.blocks && exec.blocks[0] && exec.blocks[0].body) || "") +
       "</p></section>" +
-      '<section class="bte-card" data-testid="key-strengths"><h2>Điểm hỗ trợ then chốt</h2><ul>' +
+      '<section class="bte-card" data-testid="key-strengths"><h2>Điểm hòa hợp nổi bật</h2><ul>' +
       bodies(strengths, "highlight")
         .map(function (item) {
           return "<li>" + escapeHtml(item) + "</li>";
         })
         .join("") +
       "</ul></section>" +
-      '<section class="bte-card" data-testid="key-risks"><h2>Điểm cần lưu ý</h2><ul>' +
+      '<section class="bte-card" data-testid="key-risks"><h2>Điểm xung đột cần lưu ý</h2><ul>' +
       bodies(risks, "highlight")
         .map(function (item) {
           return "<li>" + escapeHtml(item) + "</li>";
         })
         .join("") +
       "</ul></section>" +
+      (comparisonHtml
+        ? '<section class="mc-comparison" data-testid="comparison-board"><h2>So sánh hai chiều</h2><div class="mc-comparison-grid">' +
+          comparisonHtml +
+          "</div></section>"
+        : "") +
       '<section class="mc-domains" data-testid="domain-analysis"><h2>Hiểu vì sao</h2><div class="mc-domain-grid">' +
       domainHtml +
       "</div>" +

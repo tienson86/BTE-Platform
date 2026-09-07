@@ -19,10 +19,18 @@
       "port": 8081,
       "health": "/healthz",
       "log": "logs/portal.log"
+    },
+    "marriage_api": {
+      "module": "consulting.marriage.api.http:create_marriage_api_app",
+      "factory": true,
+      "port": 8082,
+      "health": "/healthz",
+      "log": "logs/marriage_api.log"
     }
   },
   "environment": {
     "BTE_API_BASE_URL": "http://127.0.0.1:8000",
+    "BTE_MARRIAGE_API_BASE_URL": "http://127.0.0.1:8082",
     "BTE_STORAGE_BACKEND": "json",
     "BTE_LICENSE_PATH": "applications/data/licenses.json",
     "BTE_REPORT_PATH": "reports",

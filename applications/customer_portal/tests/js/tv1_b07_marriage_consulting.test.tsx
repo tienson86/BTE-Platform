@@ -305,6 +305,23 @@ describe("TV1-B07 Marriage Consulting UI", () => {
     expect(screen.getByTestId("retry-analysis")).toBeTruthy();
   });
 
+  it("B07B fetch rejection exits loading with a controlled error", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() => Promise.reject(new TypeError("Failed to fetch"))),
+    );
+    render(<MarriageConsultingPage />);
+    fillValidForm();
+    fireEvent.submit(screen.getByTestId("marriage-form"));
+    const alert = await screen.findByTestId("error-state");
+    expect(alert.textContent).toContain("Không thể hoàn tất phân tích lúc này");
+    expect(screen.queryByTestId("loading-state")).toBeNull();
+    expect(screen.getByTestId("retry-analysis")).toBeTruthy();
+    const post = vi.mocked(fetch).mock.calls.find((call) => String(call[1]?.method) === "POST");
+    expect(String(post?.[0])).not.toBe("http://127.0.0.1/backend/api/v1/consulting/marriage");
+    expect(String(post?.[0])).toContain("/backend/api/v1/consulting/marriage");
+  });
+
   it("25 mobile layout stacks people via CSS", () => {
     const here = dirname(fileURLToPath(import.meta.url));
     const css = readFileSync(resolve(here, "../../static/css/marriage_consulting.css"), "utf8");

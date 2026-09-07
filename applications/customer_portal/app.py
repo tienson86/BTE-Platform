@@ -158,7 +158,9 @@ def create_app() -> FastAPI:
             f"{MARRIAGE_API_PROXY_PREFIX}/"
         )
         try:
-            async with httpx.AsyncClient(timeout=120.0) as client:
+            async with httpx.AsyncClient(
+                timeout=httpx.Timeout(120.0, connect=5.0, write=30.0, pool=5.0)
+            ) as client:
                 upstream = await client.request(
                     request.method,
                     url,

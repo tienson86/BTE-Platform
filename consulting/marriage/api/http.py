@@ -39,6 +39,16 @@ def create_marriage_api_app(container: MarriageContainer | None = None):
 
     bound = container or wire_marriage_api_runtime()
     app = FastAPI(title="TV-01 Marriage Consulting API", version=API_VERSION)
+
+    @app.get("/healthz")
+    def healthz() -> dict[str, object]:
+        """Marriage Public API process liveness. No consultation semantics."""
+        return {
+            "status": "ok",
+            "service": "tv01-marriage-api",
+            "api_version": API_VERSION,
+        }
+
     app.include_router(build_marriage_router(bound), prefix="/api/v1")
     return app
 

@@ -24,10 +24,12 @@ stop_pidfile() {
 stop_pidfile api
 stop_pidfile admin
 stop_pidfile portal
+stop_pidfile marriage
 
 # Fallback: match uvicorn command lines
 pkill -f "uvicorn applications.api.app:app" 2>/dev/null || true
 pkill -f "uvicorn applications.web_admin.app:app" 2>/dev/null || true
 pkill -f "uvicorn applications.customer_portal.app:app" 2>/dev/null || true
+pkill -f "uvicorn consulting.marriage.api.http" 2>/dev/null || true
 
 echo "Done."

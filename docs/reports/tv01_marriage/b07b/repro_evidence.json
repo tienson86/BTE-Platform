@@ -1,0 +1,64 @@
+{
+  "ports": {
+    "8081": true,
+    "8082": false,
+    "8000": true,
+    "80": false
+  },
+  "direct_8082_get": {
+    "url": "http://127.0.0.1:8082/api/v1/consulting/marriage",
+    "method": "GET",
+    "status": null,
+    "duration_ms": 2573.2,
+    "error": "URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+  },
+  "direct_8082_post": {
+    "url": "http://127.0.0.1:8082/api/v1/consulting/marriage",
+    "method": "POST",
+    "status": null,
+    "duration_ms": 2031.4,
+    "error": "URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+  },
+  "proxy_post": {
+    "url": "http://127.0.0.1:8081/backend/api/v1/consulting/marriage",
+    "method": "POST",
+    "status": 503,
+    "duration_ms": 2362.7,
+    "body": "{\"status\":\"FAILED\",\"data\":null,\"warnings\":[],\"errors\":[{\"code\":\"INTERNAL_ERROR\",\"stage\":\"transport\",\"message\":\"Không thể hoàn tất phân tích lúc này.\",\"retryable\":true,\"consultation_id\":null}],\"version_bundle\":{\"api_version\":\"v1\"}}"
+  },
+  "wrong_port80_post": {
+    "url": "http://127.0.0.1/backend/api/v1/consulting/marriage",
+    "method": "POST",
+    "status": null,
+    "duration_ms": 2028.6,
+    "error": "URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+  },
+  "browser": {
+    "requests": [
+      {
+        "phase": "request",
+        "url": "http://127.0.0.1/backend/api/v1/consulting/marriage",
+        "method": "POST",
+        "headers": {
+          "sec-ch-ua-platform": "\"Windows\"",
+          "referer": "http://127.0.0.1:8081/",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+          "accept": "application/json",
+          "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+          "content-type": "application/json",
+          "sec-ch-ua-mobile": "?0"
+        },
+        "post_data": "{\"person_a\":{\"gender\":\"male\",\"birth_date\":\"1987-01-21\",\"full_name\":\"An\",\"birth_time\":\"07:30\",\"birth_place\":{\"display_name\":\"Hà Nội\"}},\"person_b\":{\"gender\":\"female\",\"birth_date\":\"1990-05-15\",\"full_name\":\"Binh\",\"birth_place\":{\"display_name\":\"Hà Nội\"}},\"options\":{\"language\":\"vi\",\"audience\":\"customer\",\"expert_mode\":false}}"
+      }
+    ],
+    "console": [
+      "error: Failed to load resource: net::ERR_CONNECTION_REFUSED",
+      "pageerror: Failed to fetch"
+    ],
+    "loading": 1,
+    "error": 0,
+    "result": 0,
+    "loading_text": "Đang phân tích hôn nhân...",
+    "error_text": null
+  }
+}

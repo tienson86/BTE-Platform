@@ -58,6 +58,7 @@ class ServiceSpec:
     port: int
     health_path: str
     log_name: str
+    factory: bool = False
 
     @property
     def base_url(self) -> str:
@@ -120,10 +121,11 @@ def load_services() -> list[ServiceSpec]:
     raw = json.loads(SERVICES_CONFIG.read_text(encoding="utf-8"))
     services = raw.get("services") or {}
     host = "127.0.0.1"
-    order = ("api", "web_admin", "customer_portal")
+    order = ("api", "web_admin", "marriage_api", "customer_portal")
     labels = {
         "api": "API",
         "web_admin": "Admin",
+        "marriage_api": "Marriage",
         "customer_portal": "Portal",
     }
     result: list[ServiceSpec] = []
@@ -138,6 +140,7 @@ def load_services() -> list[ServiceSpec]:
                 port=int(entry["port"]),
                 health_path=str(entry["health"]),
                 log_name=f"{key}.log",
+                factory=bool(entry.get("factory", False)),
             )
         )
     return result
@@ -156,6 +159,7 @@ def load_environment() -> dict[str, str]:
         for key, value in (raw.get("environment") or {}).items():
             env.setdefault(str(key), str(value))
     env.setdefault("BTE_API_BASE_URL", "http://127.0.0.1:8000")
+    env.setdefault("BTE_MARRIAGE_API_BASE_URL", "http://127.0.0.1:8082")
     env.setdefault("HOST", "127.0.0.1")
     return env
 
@@ -425,6 +429,8 @@ def _start_service(spec: ServiceSpec, env: dict[str, str]) -> None:
         "--log-level",
         "info",
     ]
+    if spec.factory:
+        cmd.append("--factory")
     popen_kwargs: dict[str, Any] = {
         "cwd": str(ROOT),
         "env": env,

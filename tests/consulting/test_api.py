@@ -6,8 +6,11 @@ import inspect
 import json
 import re
 
+from fastapi.testclient import TestClient
+
 from consulting.marriage.api import http as http_module
 from consulting.marriage.api import service as service_module
+from consulting.marriage.api.http import create_marriage_api_app
 from consulting.marriage.api.placeholder import PlaceholderMarriageApi
 from consulting.marriage.api.service import MarriageConsultationApi
 from consulting.marriage.api.versions import API_VERSION
@@ -180,6 +183,16 @@ def test_no_route_side_narrative_or_decision() -> None:
     assert "CanonicalNarrativeComposer" not in http_src
     assert "CanonicalRecommendationProvider" not in http_src
     assert "overall_entry" not in service_src
+
+
+def test_healthz_is_available() -> None:
+    """Marriage API process exposes a non-semantic liveness route."""
+    _client, container = api_client()
+    response = TestClient(create_marriage_api_app(container)).get("/healthz")
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["status"] == "ok"
+    assert payload["service"] == "tv01-marriage-api"
 
 
 def test_b05_wiring_still_placeholder_api() -> None:

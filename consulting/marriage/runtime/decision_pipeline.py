@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 
 from consulting.marriage.adapters.canonical_runtime import CanonicalOrchestratorAdapter
 from consulting.marriage.constants import MODULE_VERSION
+from consulting.marriage.decision.comparison import build_marriage_comparison
 from consulting.marriage.decision.context import MarriageDecisionContext
 from consulting.marriage.decision.resolver import MarriageDecisionResolverV1, build_confidence
 from consulting.marriage.exceptions import MarriageInternalError
@@ -150,6 +151,7 @@ class MarriageDecisionOrchestrator(MarriageRuntimeOrchestrator):
             findings=findings,
             limitations=list(policy_context.limitations),
         )
+        result.comparison = _build_comparison(result)
         self._run_stage(
             consultation_id,
             session,
@@ -253,3 +255,8 @@ def _coverage(domains) -> float:
         domains.luck.availability.available,
     ]
     return sum(1 for flag in flags if flag) / len(flags)
+
+
+def _build_comparison(result: MarriageDecisionResult):
+    """Attach comparative decision structure without mutating evidence."""
+    return build_marriage_comparison(result)

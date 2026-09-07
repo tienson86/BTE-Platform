@@ -34,31 +34,37 @@ export function MarriageConsultingPage(): ReactNode {
   const layout = useMemo(() => "customer-dashboard", []);
 
   async function loadResult(id: string, expert: boolean): Promise<void> {
-    const reportEnvelope = await getReport(id, expert);
-    const report = reportEnvelope.data;
-    if (!report) {
+    try {
+      const reportEnvelope = await getReport(id, expert);
+      const report = reportEnvelope.data;
+      if (!report) {
+        setStatus("error");
+        setErrorMessage(customerErrorMessage(envelopeErrors(reportEnvelope)[0]));
+        setRetryable(true);
+        return;
+      }
+      const consultationEnvelope = await getConsultation(id, expert);
+      const consultation = consultationEnvelope.data;
+      if (!consultation) {
+        setStatus("error");
+        setErrorMessage(customerErrorMessage(envelopeErrors(consultationEnvelope)[0]));
+        setRetryable(true);
+        return;
+      }
+      setView(
+        adaptMarriageView(
+          consultation,
+          report,
+          [...(consultationEnvelope.warnings || []), ...(reportEnvelope.warnings || [])],
+          expert ? (consultation.expert as Record<string, unknown> | undefined) || null : null,
+        ),
+      );
+      setStatus("success");
+    } catch {
       setStatus("error");
-      setErrorMessage(customerErrorMessage(envelopeErrors(reportEnvelope)[0]));
+      setErrorMessage(customerErrorMessage(undefined));
       setRetryable(true);
-      return;
     }
-    const consultationEnvelope = await getConsultation(id, expert);
-    const consultation = consultationEnvelope.data;
-    if (!consultation) {
-      setStatus("error");
-      setErrorMessage(customerErrorMessage(envelopeErrors(consultationEnvelope)[0]));
-      setRetryable(true);
-      return;
-    }
-    setView(
-      adaptMarriageView(
-        consultation,
-        report,
-        [...(consultationEnvelope.warnings || []), ...(reportEnvelope.warnings || [])],
-        expert ? (consultation.expert as Record<string, unknown> | undefined) || null : null,
-      ),
-    );
-    setStatus("success");
   }
 
   async function run(body = lastBody, expert = expertMode): Promise<void> {
@@ -66,17 +72,23 @@ export function MarriageConsultingPage(): ReactNode {
     setStatus("loading");
     setErrorMessage("");
     setRetryable(false);
-    const created = await createConsultation(body, expert);
-    const createErrors = envelopeErrors(created);
-    if (!created.data || created.status !== "SUCCESS") {
-      const err = createErrors[0];
+    try {
+      const created = await createConsultation(body, expert);
+      const createErrors = envelopeErrors(created);
+      if (!created.data || created.status !== "SUCCESS") {
+        const err = createErrors[0];
+        setStatus("error");
+        setErrorMessage(customerErrorMessage(err));
+        setRetryable(Boolean(err?.retryable));
+        return;
+      }
+      setConsultationId(created.data.consultation_id);
+      await loadResult(created.data.consultation_id, expert);
+    } catch {
       setStatus("error");
-      setErrorMessage(customerErrorMessage(err));
-      setRetryable(Boolean(err?.retryable));
-      return;
+      setErrorMessage(customerErrorMessage(undefined));
+      setRetryable(true);
     }
-    setConsultationId(created.data.consultation_id);
-    await loadResult(created.data.consultation_id, expert);
   }
 
   function onSubmit(event: FormEvent<HTMLFormElement>): void {

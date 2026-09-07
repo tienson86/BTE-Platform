@@ -27,9 +27,10 @@ def compose_report(
         _identity(payload),
         _executive_summary(payload, narrative),
         _hero(payload, narrative),
-        _highlight_section("strengths", "Điểm hỗ trợ then chốt", "strength", narrative),
-        _highlight_section("risks", "Điểm cần điều chỉnh", "risk", narrative),
+        _highlight_section("strengths", "Điểm hòa hợp nổi bật", "strength", narrative),
+        _highlight_section("risks", "Điểm xung đột cần lưu ý", "risk", narrative),
     ]
+    sections.extend(_comparison_report_sections(narrative))
     if "timing" in by_id:
         sections.append(_from_narrative("timing", "Nhịp thời điểm", by_id["timing"], "timeline"))
     sections.append(_domains(payload, by_id.get("domains")))
@@ -70,17 +71,29 @@ def _executive_summary(
     narrative: MarriageNarrativeResult,
 ) -> ReportSection:
     """Short overall conclusion, supports, risks, and action themes."""
+    questions = payload.overall_comparison
     overall = overall_entry(payload.overall_state.value)
-    strengths = [item.text for item in narrative.highlights if item.kind == "strength"][:3]
-    risks = [item.text for item in narrative.highlights if item.kind == "risk"][:3]
-    actions = _action_themes(payload.recommendations)
-    parts = [overall.observation]
-    if strengths:
-        parts.append("Điểm hỗ trợ: " + "; ".join(strengths) + ".")
-    if risks:
-        parts.append("Điểm cần lưu ý: " + "; ".join(risks) + ".")
-    if actions:
-        parts.append("Hướng hành động: " + "; ".join(actions) + ".")
+    if questions is not None:
+        parts = [
+            _as_sentence(questions.q1_text),
+            _as_sentence(questions.q2_text),
+            _as_sentence(questions.q3_text),
+            _as_sentence(f"Điểm xung lớn nhất: {questions.q4_text}"),
+            _as_sentence(questions.q5_text),
+            _as_sentence(questions.q6_text),
+            _as_sentence(questions.q7_text),
+        ]
+    else:
+        strengths = [item.text for item in narrative.highlights if item.kind == "strength"][:3]
+        risks = [item.text for item in narrative.highlights if item.kind == "risk"][:3]
+        actions = _action_themes(payload.recommendations)
+        parts = [overall.observation]
+        if strengths:
+            parts.append("Điểm hỗ trợ: " + "; ".join(strengths) + ".")
+        if risks:
+            parts.append("Điểm cần lưu ý: " + "; ".join(risks) + ".")
+        if actions:
+            parts.append("Hướng hành động: " + "; ".join(actions) + ".")
     if payload.confidence_level.value != "high":
         parts.append("Nên đọc kèm phần giới hạn dữ liệu.")
     blocks = [
@@ -142,7 +155,7 @@ def _hero(payload: NarrativeInput, narrative: MarriageNarrativeResult) -> Report
             ReportBlock(
                 block_id=f"hero-{item.highlight_id}",
                 kind="highlight",
-                title="Điểm hỗ trợ",
+                title="Điểm hòa hợp",
                 body=item.text,
                 semantic_key=item.catalog_key,
                 source_finding_ids=list(item.source_finding_ids),
@@ -153,7 +166,7 @@ def _hero(payload: NarrativeInput, narrative: MarriageNarrativeResult) -> Report
             ReportBlock(
                 block_id=f"hero-{item.highlight_id}",
                 kind="highlight",
-                title="Điểm cần lưu ý",
+                title="Điểm xung",
                 body=item.text,
                 semantic_key=item.catalog_key,
                 source_finding_ids=list(item.source_finding_ids),
@@ -202,6 +215,39 @@ def _highlight_section(
             for item in items
         ]
     return ReportSection(section_id=section_id, title=title, blocks=blocks)
+
+
+def _comparison_report_sections(narrative: MarriageNarrativeResult) -> list[ReportSection]:
+    """Group comparison facts into visible cards. Skip empty groups."""
+    source = next((item for item in narrative.sections if item.section_id == "comparison"), None)
+    specs = (
+        ("comparison_a_to_b", "A bổ trợ B", "a_to_b"),
+        ("comparison_b_to_a", "B bổ trợ A", "b_to_a"),
+        ("comparison_harmony", "Điểm hòa hợp", "harmony"),
+        ("comparison_conflict", "Điểm xung", "conflict"),
+        ("comparison_rescue", "Yếu tố cứu giải", "rescue"),
+    )
+    sections: list[ReportSection] = []
+    if source is None:
+        return sections
+    for section_id, title, stage in specs:
+        blocks = [
+            ReportBlock(
+                block_id=item.block_id,
+                kind="highlight",
+                title=title,
+                body=item.text,
+                semantic_key=item.catalog_key,
+                domain=item.domain,
+                source_finding_ids=list(item.source_finding_ids),
+            )
+            for item in source.blocks
+            if item.stage == stage
+        ]
+        if not blocks:
+            continue
+        sections.append(ReportSection(section_id=section_id, title=title, blocks=blocks))
+    return sections
 
 
 def _domains(
@@ -344,7 +390,14 @@ def _conclusion(
 ) -> ReportSection:
     """Close the consultation journey without a new decision."""
     overall = overall_entry(payload.overall_state.value)
-    body = f"{overall.headline}. {overall.action_bridge}"
+    questions = payload.overall_comparison
+    if questions is not None:
+        body = (
+            f"{overall.headline}. {questions.q1_text} {questions.q2_text} "
+            f"{questions.q6_text} {questions.q7_text}"
+        )
+    else:
+        body = f"{overall.headline}. {overall.action_bridge}"
     return ReportSection(
         section_id="conclusion",
         title="Kết luận",
@@ -443,6 +496,16 @@ def _action_themes(recommendations: list[RecommendationNarrativeInput]) -> list[
         if len(seen) >= 3:
             break
     return seen
+
+
+def _as_sentence(text: str) -> str:
+    """Ensure one comparison answer is a complete sentence."""
+    cleaned = text.strip()
+    if not cleaned:
+        return cleaned
+    if cleaned.endswith("."):
+        return cleaned
+    return f"{cleaned}."
 
 
 def _assert_story_order(section_ids: list[str]) -> None:

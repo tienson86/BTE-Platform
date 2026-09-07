@@ -9,6 +9,7 @@ import type {
 } from "./types";
 
 export const DEFAULT_MARRIAGE_API_BASE = "/backend/api/v1/consulting/marriage";
+export const MARRIAGE_FETCH_TIMEOUT_MS = 120_000;
 
 export type PersonRequestBody = {
   full_name?: string;
@@ -64,7 +65,27 @@ function resolvedUrl(url: string): string {
   if (url.startsWith("http://") || url.startsWith("https://")) {
     return url;
   }
-  return `http://127.0.0.1${url}`;
+  if (typeof window !== "undefined" && window.location?.origin) {
+    return `${window.location.origin}${url}`;
+  }
+  return url;
+}
+
+function transportFailure<T>(): MarriageEnvelope<T> {
+  return {
+    status: "FAILED",
+    data: null,
+    warnings: [],
+    errors: [
+      {
+        code: "INTERNAL_ERROR",
+        stage: "transport",
+        message: "Không thể hoàn tất phân tích lúc này.",
+        retryable: true,
+        consultation_id: null,
+      },
+    ],
+  };
 }
 
 async function request<T>(
@@ -74,33 +95,29 @@ async function request<T>(
 ): Promise<MarriageEnvelope<T>> {
   const headers: Record<string, string> = { Accept: "application/json" };
   if (body !== undefined) headers["Content-Type"] = "application/json";
-  const response = await fetch(resolvedUrl(url), {
-    method,
-    headers,
-    body: body === undefined ? undefined : JSON.stringify(body),
-  });
-  const text = await response.text();
-  let payload: MarriageEnvelope<T> | null = null;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), MARRIAGE_FETCH_TIMEOUT_MS);
   try {
-    payload = text ? (JSON.parse(text) as MarriageEnvelope<T>) : null;
+    const response = await fetch(resolvedUrl(url), {
+      method,
+      headers,
+      body: body === undefined ? undefined : JSON.stringify(body),
+      signal: controller.signal,
+    });
+    const text = await response.text();
+    let payload: MarriageEnvelope<T> | null = null;
+    try {
+      payload = text ? (JSON.parse(text) as MarriageEnvelope<T>) : null;
+    } catch {
+      payload = null;
+    }
+    if (!payload) {
+      return transportFailure<T>();
+    }
+    return payload;
   } catch {
-    payload = null;
+    return transportFailure<T>();
+  } finally {
+    clearTimeout(timer);
   }
-  if (!payload) {
-    return {
-      status: "FAILED",
-      data: null,
-      warnings: [],
-      errors: [
-        {
-          code: "INTERNAL_ERROR",
-          stage: "transport",
-          message: "Không thể hoàn tất phân tích lúc này.",
-          retryable: true,
-          consultation_id: null,
-        },
-      ],
-    };
-  }
-  return payload;
 }

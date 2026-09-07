@@ -117,7 +117,7 @@ def _fill_domain(domain: str, stem: str) -> None:
     )
     _DOMAIN_STATE[(domain, "mixed")] = _e(
         f"marriage.domain.{stem}.mixed",
-        f"{_DOMAIN_TITLE[domain]} vừa hỗ trợ vừa cần điều chỉnh",
+        f"{_DOMAIN_TITLE[domain]} có cả bổ trợ và áp lực cụ thể",
         f"Lớp {_DOMAIN_TITLE[domain].lower()} có cả điểm nâng đỡ và điểm tạo áp lực.",
         "Các tín hiệu trong cùng miền không cùng một hướng.",
         "Trong giai đoạn căng, điểm này có thể lộ ra thành khác biệt cách làm.",
@@ -153,7 +153,7 @@ _fill_domain(MarriageDomain.LUCK.value, "luck")
 _FINDING: dict[tuple[str, str], NarrativeEntry] = {
     (MarriageDomain.FIVE_ELEMENTS.value, FindingType.SUPPORT.value): _e(
         "marriage.finding.five_elements.support",
-        "Điểm hỗ trợ nền tảng",
+        "Điểm ngũ hành hỗ trợ nhu cầu cốt lõi",
         "Có tín hiệu hỗ trợ ở tầng ngũ hành.",
         "Phần hỗ trợ này xuất phát từ cấu trúc đã được kết luận, không phải suy diễn thêm.",
         "Trên thực tế, hai người dễ nâng đỡ nhau ở nhu cầu cốt lõi.",
@@ -161,7 +161,7 @@ _FINDING: dict[tuple[str, str], NarrativeEntry] = {
     ),
     (MarriageDomain.FIVE_ELEMENTS.value, FindingType.RISK.value): _e(
         "marriage.finding.five_elements.risk",
-        "Điểm cần lưu ý ở nền tảng",
+        "Điểm ngũ hành tạo áp lực cần điều chỉnh",
         "Có tín hiệu áp lực ở tầng ngũ hành.",
         "Đây là kết luận cấu trúc, không phải lời phán về số phận.",
         "Khi căng thẳng, khác biệt nhu cầu có thể lộ rõ hơn.",
@@ -177,7 +177,7 @@ _FINDING: dict[tuple[str, str], NarrativeEntry] = {
     ),
     (MarriageDomain.STEM_BRANCH.value, FindingType.RISK.value): _e(
         "marriage.finding.stem_branch.risk",
-        "Điểm ma sát Can Chi",
+        "Điểm Can Chi có quan hệ xung hoặc ma sát",
         "Có tín hiệu căng ở lớp can chi. Đây là điểm cần lưu ý.",
         "Xu hướng này không đồng nghĩa hai người không nên gắn bó.",
         "Trong giai đoạn áp lực, khác biệt nhịp phản ứng có thể tăng.",
@@ -185,7 +185,7 @@ _FINDING: dict[tuple[str, str], NarrativeEntry] = {
     ),
     (MarriageDomain.TEN_GODS.value, FindingType.SUPPORT.value): _e(
         "marriage.finding.ten_gods.support",
-        "Điểm bổ trợ vai trò",
+        "Điểm vai trò được bổ sung cụ thể",
         "Có tín hiệu bổ trợ ở lớp vai trò.",
         "Phần này phản ánh cách hai người có thể nâng đỡ trách nhiệm của nhau.",
         "Trên thực tế, phân vai rõ sẽ giúp việc chung trôi hơn.",
@@ -201,7 +201,7 @@ _FINDING: dict[tuple[str, str], NarrativeEntry] = {
     ),
     (MarriageDomain.FINANCE.value, FindingType.SUPPORT.value): _e(
         "marriage.finding.finance.support",
-        "Điểm bổ trợ tài chính",
+        "Điểm phối hợp nguồn lực tài chính",
         "Có tín hiệu bổ trợ trong cách phối hợp nguồn lực.",
         "Phần này xuất phát từ kết luận tài chính đã có, không suy ra giàu nghèo.",
         "Hai người có thể phối hợp chi tiêu dễ hơn nếu giữ quy ước chung.",

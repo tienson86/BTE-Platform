@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from consulting.marriage.models.enums import FindingType, MarriageDomain
+from consulting.marriage.models.enums import ComparisonFactKind, FindingType, MarriageDomain, RelationshipSubject
 from consulting.marriage.models.narrative import (
     MarriageNarrativeBlock,
     MarriageNarrativeHighlight,
@@ -23,6 +23,7 @@ from consulting.marriage.narrative.catalog import (
     timing_entry,
 )
 from consulting.marriage.narrative.input import (
+    ComparisonNarrativeFact,
     DomainNarrativeInput,
     FindingNarrativeInput,
     NarrativeInput,
@@ -57,6 +58,7 @@ class CanonicalNarrativeComposer:
         sections = [
             _identity_section(payload),
             _overall_section(payload, guard),
+            _comparison_section(payload, guard),
             _domain_section(payload, findings, guard),
             *_timing_sections(payload, guard),
             _action_section(payload, guard),
@@ -94,10 +96,11 @@ def _overall_section(
     payload: NarrativeInput,
     guard: RepetitionGuard,
 ) -> MarriageNarrativeSection:
-    """Brief overall conclusion. Domain explanation stays out of this section."""
+    """Marriage conclusion first: compatibility, support, conflict, horizon, condition."""
     entry = overall_entry(payload.overall_state.value)
     guard.claim_catalog(entry.key)
     guard.register_text(entry.observation)
+    questions = payload.overall_comparison
     blocks = [
         _block(
             "overall-headline",
@@ -116,11 +119,115 @@ def _overall_section(
             confidence=payload.overall_confidence,
         ),
     ]
+    if questions is not None:
+        blocks.extend(
+            [
+                _block(
+                    "overall-q1",
+                    "observation",
+                    "marriage.overall.q1",
+                    f"Mức tương hợp: {questions.q1_text}",
+                    source_finding_ids=list(payload.headline_finding_ids),
+                ),
+                _block(
+                    "overall-q2",
+                    "observation",
+                    "marriage.overall.q2",
+                    f"Bổ trợ hai chiều: {questions.q2_text}",
+                    source_finding_ids=list(payload.headline_finding_ids),
+                ),
+                _block(
+                    "overall-q3",
+                    "observation",
+                    "marriage.overall.q3",
+                    questions.q3_text,
+                    source_finding_ids=list(payload.headline_finding_ids),
+                ),
+                _block(
+                    "overall-q4",
+                    "observation",
+                    "marriage.overall.q4",
+                    f"Điểm xung lớn nhất: {questions.q4_text}",
+                    source_finding_ids=list(payload.headline_finding_ids),
+                ),
+                _block(
+                    "overall-q5",
+                    "observation",
+                    "marriage.overall.q5",
+                    questions.q5_text,
+                    source_finding_ids=list(payload.headline_finding_ids),
+                ),
+                _block(
+                    "overall-q6",
+                    "observation",
+                    "marriage.overall.q6",
+                    f"Khả năng đi lâu dài: {questions.q6_text}",
+                    source_finding_ids=list(payload.headline_finding_ids),
+                ),
+                _block(
+                    "overall-q7",
+                    "observation",
+                    "marriage.overall.q7",
+                    f"Điều kiện quan trọng: {questions.q7_text}",
+                    source_finding_ids=list(payload.headline_finding_ids),
+                ),
+            ]
+        )
     return MarriageNarrativeSection(
         section_id="overall",
         title_key="marriage.section.overall",
         blocks=blocks,
     )
+
+
+def _comparison_section(
+    payload: NarrativeInput,
+    guard: RepetitionGuard,
+) -> MarriageNarrativeSection | None:
+    """Render directional comparison facts. Does not invent new conclusions."""
+    facts = list(payload.comparison_facts)
+    if not facts:
+        return None
+    blocks: list[MarriageNarrativeBlock] = []
+    for item in facts:
+        catalog_key = f"marriage.fact.{item.template_key}"
+        if not guard.claim_text(item.text):
+            continue
+        guard.register_text(item.text)
+        stage = _comparison_stage(item)
+        text = item.text
+        if item.rescued and item.kind is ComparisonFactKind.CONFLICT:
+            text = f"{text}. {rescued_sentence()}"
+        blocks.append(
+            _block(
+                f"cmp-{item.fact_id.lower()}",
+                stage,
+                catalog_key,
+                text,
+                domain=item.domain,
+                source_finding_ids=list(item.finding_ids),
+            )
+        )
+    if not blocks:
+        return None
+    return MarriageNarrativeSection(
+        section_id="comparison",
+        title_key="marriage.section.comparison",
+        blocks=blocks,
+    )
+
+
+def _comparison_stage(item: ComparisonNarrativeFact) -> str:
+    """Group comparison facts for report cards without extra prose."""
+    if item.kind is ComparisonFactKind.RESCUE:
+        return "rescue"
+    if item.kind is ComparisonFactKind.CONFLICT:
+        return "conflict"
+    if item.subject is RelationshipSubject.A_TO_B:
+        return "a_to_b"
+    if item.subject is RelationshipSubject.B_TO_A:
+        return "b_to_a"
+    return "harmony"
 
 
 def _domain_section(
@@ -315,6 +422,14 @@ def _domain_blocks(
             continue
         if not guard.claim_finding(finding.semantic_key, finding.finding_id):
             continue
+        matching = [
+            item
+            for item in payload.comparison_facts
+            if finding_id in item.finding_ids and item.kind is not ComparisonFactKind.NEED
+        ]
+        if matching:
+            blocks.extend(_domain_fact_blocks(payload, domain.domain, finding.finding_id, guard))
+            continue
         finding_text = _finding_text(finding)
         if finding_text is None:
             continue
@@ -355,6 +470,40 @@ def _domain_blocks(
     return blocks
 
 
+def _domain_fact_blocks(
+    payload: NarrativeInput,
+    domain: MarriageDomain,
+    finding_id: str,
+    guard: RepetitionGuard,
+) -> list[MarriageNarrativeBlock]:
+    """Explain a finding with specific comparison facts when they exist."""
+    blocks: list[MarriageNarrativeBlock] = []
+    for item in payload.comparison_facts:
+        if item.domain is not domain:
+            continue
+        if finding_id not in item.finding_ids:
+            continue
+        if item.kind is ComparisonFactKind.NEED:
+            continue
+        if not guard.claim_text(item.text):
+            continue
+        guard.register_text(item.text)
+        text = item.text
+        if item.rescued and item.kind is ComparisonFactKind.CONFLICT:
+            text = f"{text}. {rescued_sentence()}"
+        blocks.append(
+            _block(
+                f"finding-{finding_id}-{item.template_key}",
+                "reason",
+                f"marriage.fact.{item.template_key}",
+                text,
+                domain=domain,
+                source_finding_ids=[finding_id],
+            )
+        )
+    return blocks
+
+
 def _finding_text(finding: FindingNarrativeInput) -> NarrativeEntry | None:
     """Map a finding onto catalog wording. Preserve rescued condition."""
     entry = finding_entry(finding.domain, finding.finding_type)
@@ -370,10 +519,44 @@ def _highlights(
     payload: NarrativeInput,
     findings: dict[str, FindingNarrativeInput],
 ) -> list[MarriageNarrativeHighlight]:
-    """Short strength and risk highlights for the hero. Not new findings."""
-    items: list[MarriageNarrativeHighlight] = []
+    """Short specific comparison highlights. Generic finding labels are not used."""
+    if payload.comparison_facts:
+        items: list[MarriageNarrativeHighlight] = []
+        items.extend(_fact_highlights("strength", payload.comparison_facts, ComparisonFactKind.SUPPORT, 4))
+        items.extend(_fact_highlights("risk", payload.comparison_facts, ComparisonFactKind.CONFLICT, 4))
+        return items
+    items = []
     items.extend(_highlight_group("strength", payload.strength_finding_ids, findings, 3))
     items.extend(_highlight_group("risk", payload.risk_finding_ids, findings, 3))
+    return items
+
+
+def _fact_highlights(
+    kind: str,
+    facts: list[ComparisonNarrativeFact],
+    fact_kind: ComparisonFactKind,
+    limit: int,
+) -> list[MarriageNarrativeHighlight]:
+    """Build highlights from comparison sentences."""
+    items: list[MarriageNarrativeHighlight] = []
+    seen: set[str] = set()
+    for fact in facts:
+        if fact.kind is not fact_kind:
+            continue
+        if fact.text in seen:
+            continue
+        seen.add(fact.text)
+        items.append(
+            MarriageNarrativeHighlight(
+                highlight_id=f"{kind}-{fact.template_key}-{len(items)}",
+                kind=kind,
+                catalog_key=f"marriage.fact.{fact.template_key}",
+                text=fact.text,
+                source_finding_ids=list(fact.finding_ids),
+            )
+        )
+        if len(items) >= limit:
+            break
     return items
 
 

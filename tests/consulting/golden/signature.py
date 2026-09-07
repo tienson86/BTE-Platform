@@ -103,6 +103,7 @@ def semantic_signature(
         ],
         "report_sections": [item.section_id for item in report.sections],
         "has_timing_section": any(item.section_id == "timing" for item in report.sections),
+        "comparison": comparison_signature(decision),
     }
 
 
@@ -114,3 +115,57 @@ def evidence_type_set(signature: dict[str, Any]) -> set[str]:
 def recommendation_types(signature: dict[str, Any]) -> set[str]:
     """Return unique recommendation action types from a signature."""
     return {item["action_type"] for item in signature["recommendations"]}
+
+
+def comparison_signature(decision: MarriageDecisionResult) -> dict[str, Any] | None:
+    """Stable comparison semantics for TV1-R01 Golden cases."""
+    comparison = decision.comparison
+    if comparison is None:
+        return None
+    overall = comparison.overall
+    return {
+        "d1_mutual": comparison.five_elements.mutual_state,
+        "d1_a_to_b": comparison.five_elements.a_to_b.state.value,
+        "d1_b_to_a": comparison.five_elements.b_to_a.state.value,
+        "d2_mutual": comparison.stem_branch.mutual_state,
+        "d2_templates": sorted(
+            {
+                item.template_key
+                for item in comparison.facts
+                if item.domain.value == "stem_branch" and item.kind.value != "need"
+            }
+        ),
+        "d3_mutual": comparison.ten_gods.mutual_state,
+        "d3_themes": sorted(
+            {
+                item.slots.get("theme") or ""
+                for item in comparison.facts
+                if item.domain.value == "ten_gods" and item.slots.get("theme")
+            }
+        ),
+        "d4_available": comparison.interaction.available,
+        "d4_templates": sorted(
+            {
+                item.template_key
+                for item in comparison.facts
+                if item.domain.value == "interaction"
+            }
+        ),
+        "d5_available": comparison.finance.available,
+        "d5_mutual": comparison.finance.mutual_state,
+        "d6_available": comparison.family.available,
+        "d7_available": comparison.children.available,
+        "d8_mutual": comparison.luck.mutual_state,
+        "q1": overall.q1_compatibility,
+        "q2": overall.q2_mutual_support,
+        "q3": overall.q3_asymmetry,
+        "q4": overall.q4_conflict,
+        "q5": overall.q5_rescue,
+        "q6": overall.q6_long_term,
+        "q7": overall.q7_condition,
+        "support_strength": overall.support_strength.value,
+        "conflict_strength": overall.conflict_strength.value,
+        "rescue_strength": overall.rescue_strength.value,
+        "compatibility_level": overall.compatibility_level.value,
+        "five_element_state": overall.five_element_state.value,
+    }

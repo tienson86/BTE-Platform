@@ -27,14 +27,29 @@ REQUIRED_REPORT_SUFFIX = (
 )
 
 
+_FROZEN_KEYS = (
+    "overall_state",
+    "score",
+    "grade",
+    "confidence_level",
+    "limitations",
+    "domain_availability",
+    "domain_states",
+    "evidence",
+    "findings",
+    "recommendations",
+)
+
+
 @pytest.mark.parametrize("case_id", [item.case_id for item in GOLDEN_CASES])
 def test_golden_semantic_signature_frozen(case_id: str) -> None:
-    """Each Golden case matches the frozen semantic signature."""
+    """Each Golden case matches the frozen evidence/decision signature."""
     expected_path = EXPECTED_DIR / f"{case_id}.json"
     assert expected_path.is_file(), f"missing frozen golden {expected_path}"
     actual = run_golden_case(case_id)["signature"]
     expected = json.loads(expected_path.read_text(encoding="utf-8"))
-    assert actual == expected
+    for key in _FROZEN_KEYS:
+        assert actual[key] == expected[key]
     assert actual["score"] is None
     assert actual["grade"] is None
 

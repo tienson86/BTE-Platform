@@ -53,7 +53,7 @@ export function ResultView({ view, expertMode, onToggleExpert }: ResultViewProps
       </section>
 
       <section className="bte-card" data-testid="key-strengths">
-        <h2>Điểm hỗ trợ then chốt</h2>
+        <h2>Điểm hòa hợp nổi bật</h2>
         <ul>
           {view.strengths.map((item) => (
             <li key={item}>{item}</li>
@@ -62,13 +62,35 @@ export function ResultView({ view, expertMode, onToggleExpert }: ResultViewProps
       </section>
 
       <section className="bte-card" data-testid="key-risks">
-        <h2>Điểm cần lưu ý</h2>
+        <h2>Điểm xung đột cần lưu ý</h2>
         <ul>
           {view.risks.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
       </section>
+
+      {view.comparisonGroups.length ? (
+        <section className="mc-comparison" data-testid="comparison-board">
+          <h2>So sánh hai chiều</h2>
+          <div className="mc-comparison-grid">
+            {view.comparisonGroups.map((group) => (
+              <article
+                key={group.id}
+                className="bte-card mc-comparison-card"
+                data-testid={group.id}
+              >
+                <h3>{group.title}</h3>
+                <ul>
+                  {group.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <section className="mc-domains" data-testid="domain-analysis">
         <h2>Hiểu vì sao</h2>
@@ -210,6 +232,7 @@ function customerText(view: MarriageViewModel): string {
     view.executiveSummary,
     ...view.strengths,
     ...view.risks,
+    ...view.comparisonGroups.flatMap((group) => group.items),
     ...view.domains.map((item) => item.summary),
     ...view.actions.map((item) => item.what),
     view.conclusion,

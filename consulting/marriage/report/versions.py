@@ -5,8 +5,8 @@ from __future__ import annotations
 from typing import Final
 
 REPORT_PROFILE_ID: Final[str] = "marriage.report.profile.v1"
-REPORT_PROFILE_VERSION: Final[str] = "1.0.0"
-REPORT_MODEL_VERSION: Final[str] = "marriage.report.model.v1@1.0.0"
+REPORT_PROFILE_VERSION: Final[str] = "1.1.0"
+REPORT_MODEL_VERSION: Final[str] = "marriage.report.model.v1@1.1.0"
 
 CUSTOMER_STORY_ORDER: Final[tuple[str, ...]] = (
     "identity",
@@ -14,6 +14,11 @@ CUSTOMER_STORY_ORDER: Final[tuple[str, ...]] = (
     "compatibility_hero",
     "strengths",
     "risks",
+    "comparison_a_to_b",
+    "comparison_b_to_a",
+    "comparison_harmony",
+    "comparison_conflict",
+    "comparison_rescue",
     "timing",
     "domain_analysis",
     "action_plan",

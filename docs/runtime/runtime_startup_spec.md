@@ -86,7 +86,11 @@ Loaded from `configs/services.json` (order fixed):
 
 1. API  
 2. Web Admin  
-3. Customer Portal  
+3. Marriage Public API (`127.0.0.1:8082`)  
+4. Customer Portal  
+
+Customer Portal proxies TV-01 Marriage routes to `BTE_MARRIAGE_API_BASE_URL`.
+The Marriage API is a separate process. Portal must not import `consulting.marriage`. 
 
 Each service: spawn uvicorn module, PID file under `runtime/run/`, log under `runtime/logs/`, health URL poll.
 
