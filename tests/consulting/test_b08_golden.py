@@ -78,8 +78,9 @@ def test_case_m04_asymmetric_a_to_b() -> None:
     signature = run_golden_case("CASE-M04")["signature"]
     useful = [item for item in signature["evidence"] if item["type"] == "useful_god_support"]
     subjects = {item["subject"] for item in useful}
-    assert "a_to_b" in subjects
-    assert "mutual" not in subjects
+    assert "A_TO_B" in subjects
+    assert "MUTUAL" not in subjects
+    assert "B_TO_A" not in subjects
 
 
 def test_case_m05_asymmetric_b_to_a() -> None:
@@ -87,8 +88,9 @@ def test_case_m05_asymmetric_b_to_a() -> None:
     signature = run_golden_case("CASE-M05")["signature"]
     useful = [item for item in signature["evidence"] if item["type"] == "useful_god_support"]
     subjects = {item["subject"] for item in useful}
-    assert "b_to_a" in subjects
-    assert "mutual" not in subjects
+    assert "B_TO_A" in subjects
+    assert "MUTUAL" not in subjects
+    assert "A_TO_B" not in subjects
 
 
 def test_case_m06_secondary_cannot_rewrite_overall() -> None:

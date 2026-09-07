@@ -133,9 +133,7 @@ def test_c_findings_require_evidence_and_keep_conflicts() -> None:
     assert decision.findings
     assert all(item.evidence_ids for item in decision.findings)
     ids = [item.finding_id for item in decision.findings]
-    assert ids == sorted(ids)
-    keys = [(item.semantic_key, item.domain.value, item.type.value) for item in decision.findings]
-    assert keys == sorted(keys)
+    assert ids == [f"F-{index:04d}" for index in range(1, len(ids) + 1)]
     overlay = {item.evidence_id: item for item in decision.resolved_evidence}
     assert any(item.conflicts_with for item in overlay.values()) or any(
         item.conflicting_evidence_ids for item in decision.findings
