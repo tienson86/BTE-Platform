@@ -1,0 +1,58 @@
+# Q5 Children / parenting — language skeleton only.
+# No fertility, child count, or gender claims.
+
+schema_version: "1.0.0"
+catalog_version: "consulting.language.marriage@0.1.0-skeleton"
+module_language_version: "marriage.language@0.1.0-skeleton"
+module: marriage
+question_id: Q5
+audience: customer
+status: skeleton
+
+entries:
+  marriage.q5.insufficient:
+    semantic_state: insufficient
+    tone: reference
+    version: "0.1.0"
+    status: placeholder
+    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    supporting_fact_templates: []
+    limitation_templates:
+      - id: children_unsupported
+        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+        status: placeholder
+    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    variants: []
+    forbidden_terms:
+      - vô sinh
+      - số con sẽ là
+      - giới tính con là
+
+  marriage.q5.parenting_support:
+    semantic_state: parenting_support
+    tone: professional_warm
+    version: "0.1.0"
+    status: placeholder
+    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    supporting_fact_templates:
+      - id: parenting_fact
+        source_fact: children
+        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+        slots: []
+        status: placeholder
+    limitation_templates:
+      - id: not_fertility
+        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+        status: placeholder
+    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    variants: []
+    forbidden_terms:
+      - vô sinh
+      - số con sẽ là
+      - giới tính con là
