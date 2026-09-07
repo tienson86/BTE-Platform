@@ -388,9 +388,16 @@ Decision Result gồm:
 - Structural States;
 - Domain States;
 - Findings;
-- Recommendations;
 - Confidence;
 - Metadata.
+
+Decision Result không chứa Assessment.
+
+Decision Result không chứa Recommendation.
+
+Assessment Projector đọc Decision Result.
+
+Recommendation Engine đọc Assessment.
 
 Score
 

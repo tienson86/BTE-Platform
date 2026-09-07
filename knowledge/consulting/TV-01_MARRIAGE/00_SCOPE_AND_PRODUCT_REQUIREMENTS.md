@@ -73,9 +73,26 @@ Quyết định cuối cùng thuộc về người sử dụng.
 
 # 3. Mục tiêu sản phẩm
 
-TV-01 phải trả lời được câu hỏi thực tế:
+TV-01 phải trả lời được sáu câu hỏi Assessment:
+
+1. Overall Compatibility
+2. Mutual Support
+3. Personality Balance
+4. Marriage Stability
+5. Children
+6. Overall Marriage Assessment
+
+Câu hỏi sản phẩm không còn là:
 
 > “Hai người này khi tiến tới hôn nhân sẽ bổ trợ và xung đột với nhau ở đâu?”
+
+mà là:
+
+> “Marriage Assessment của hai người này là gì?”
+
+Decision nội bộ vẫn phân tích bổ trợ và xung đột.
+
+Khách hàng nhận Assessment, không nhận Decision.
 
 Không được chỉ trả lời:
 

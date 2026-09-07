@@ -29,7 +29,7 @@ Report Profile không định nghĩa:
 
 Những thành phần trên được kế thừa từ:
 
-COMMON/08_REPORT_STANDARD.md
+COMMON/09_REPORT_STANDARD.md
 
 TV-01 chỉ định nghĩa:
 
@@ -50,7 +50,7 @@ Một tập hợp Section.
 
 Report là:
 
-Một hành trình giúp khách hàng hiểu Decision.
+Một hành trình giúp khách hàng hiểu Marriage Assessment.
 
 Khách hàng không nên cảm thấy:
 
@@ -70,23 +70,11 @@ Identity
 
 ↓
 
-Compatibility
+Marriage Assessment
 
 ↓
 
-Why
-
-↓
-
-Strengths
-
-↓
-
-Risks
-
-↓
-
-Timing
+Detailed Analysis
 
 ↓
 
@@ -108,15 +96,11 @@ Tôi là ai?
 
 ↓
 
-Hai người hợp đến đâu?
+Marriage Assessment là gì?
 
 ↓
 
-Vì sao?
-
-↓
-
-Điều gì cần chú ý?
+Chi tiết vì sao?
 
 ↓
 
@@ -134,39 +118,29 @@ Kết luận.
 
 Report mặc định gồm:
 
-Executive Summary
+Marriage Assessment
 
-Compatibility Hero
-
-Relationship Overview
-
-Five Elements
-
-Stem / Branch
-
-Ten Gods
-
-Interaction
-
-Finance
-
-Family
-
-Children
-
-Timing
+Detailed Analysis
 
 Recommendations
 
 Appendix
 
+Marriage Assessment luôn đứng đầu.
+
+Detailed Analysis chứa D1–D8.
+
+Collapsed by default.
+
+Không đưa Decision nội bộ lên đầu báo cáo.
+
 ---
 
 # 6. Executive Summary
 
-Luôn đứng đầu.
+Luôn đứng đầu, bên trong Marriage Assessment.
 
-Executive Summary phải trả lời:
+Executive Summary phải trả lời sáu câu Assessment, không trả lời action plan.
 
 - Kết luận chung.
 - Điểm mạnh.
@@ -179,21 +153,11 @@ Không quá dài.
 
 # 7. Compatibility Hero
 
-Hero gồm:
+Hero không còn đứng độc lập trên Assessment.
 
-Compatibility Score
+Nếu giữ visual highlight, Hero chỉ tóm tắt Q1 và Q6.
 
-Grade
-
-Headline
-
-Compatibility Level
-
-Top Strengths
-
-Top Risks
-
-Đây là phần khách hàng nhìn đầu tiên.
+Không thay sáu Assessment cards.
 
 ---
 
@@ -638,7 +602,7 @@ FREEZE khi:
 - [ ] Customer Mode.
 - [ ] Explainability.
 - [ ] Renderer Independence.
-- [ ] COMMON/08 được kế thừa đầy đủ.
+- [ ] COMMON/09 được kế thừa đầy đủ.
 
 ---
 

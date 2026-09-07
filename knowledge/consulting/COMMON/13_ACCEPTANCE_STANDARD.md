@@ -1,8 +1,8 @@
 # COMMON — CONSULTING FRAMEWORK
 
-# 12_ACCEPTANCE_STANDARD.md
+# 13_ACCEPTANCE_STANDARD.md
 
-**Document ID:** COMMON-12
+**Document ID:** COMMON-13
 
 **Product:** BTE Platform
 
@@ -71,6 +71,10 @@ Finding Acceptance
 ↓
 
 Decision Acceptance
+
+↓
+
+Assessment Acceptance
 
 ↓
 
@@ -392,6 +396,8 @@ Framework phải Audit được:
 
 Decision.
 
+Assessment.
+
 Policy.
 
 Version.
@@ -661,7 +667,7 @@ Framework chưa được phép Freeze.
 
 # 39. Status
 
-COMMON-12
+COMMON-13
 
 STATUS:
 

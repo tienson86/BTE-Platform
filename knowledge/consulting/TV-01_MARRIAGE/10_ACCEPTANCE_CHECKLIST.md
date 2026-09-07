@@ -29,7 +29,7 @@ TV-01 — Marriage Consulting.
 
 TV-01 kế thừa:
 
-COMMON/12_ACCEPTANCE_STANDARD.md
+COMMON/13_ACCEPTANCE_STANDARD.md
 
 và chỉ bổ sung các Acceptance Rule đặc thù của Marriage Consulting.
 
@@ -59,6 +59,7 @@ Module tuân thủ toàn bộ Consulting Framework.
 - [ ] Không duplicate Decision Mathematics.
 - [ ] Không duplicate Decision Engine.
 - [ ] Chỉ sử dụng Marriage Policy.
+- [ ] Chỉ sử dụng Marriage Assessment Profile.
 - [ ] Chỉ sử dụng Report Profile.
 - [ ] Chỉ sử dụng UI Layout Profile.
 
@@ -71,7 +72,8 @@ PASS khi tất cả đều đúng.
 - [ ] Runtime đúng Pipeline.
 - [ ] Không Skip Stage.
 - [ ] Decision sau Finding.
-- [ ] Recommendation sau Decision.
+- [ ] Assessment sau Decision.
+- [ ] Recommendation sau Assessment.
 - [ ] Narrative sau Recommendation.
 - [ ] Report sau Narrative.
 - [ ] Presentation sau Report.

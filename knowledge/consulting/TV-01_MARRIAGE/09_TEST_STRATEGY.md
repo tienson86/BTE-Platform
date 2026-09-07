@@ -37,7 +37,9 @@ UI đẹp.
 
 Testing kiểm tra:
 
-Decision đúng.
+Assessment đúng.
+
+Decision nội bộ đúng.
 
 Recommendation đúng.
 

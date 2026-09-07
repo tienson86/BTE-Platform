@@ -1,8 +1,8 @@
 # COMMON — CONSULTING FRAMEWORK
 
-# 10_VALIDATION_STANDARD.md
+# 11_VALIDATION_STANDARD.md
 
-Document ID: COMMON-10
+Document ID: COMMON-11
 
 Version: 1.0
 
@@ -48,6 +48,8 @@ Finding Validation
 
 Decision Validation
 
+Assessment Validation
+
 Recommendation Validation
 
 Narrative Validation
@@ -75,6 +77,10 @@ Finding
 ↓
 
 Decision
+
+↓
+
+Assessment
 
 ↓
 
@@ -408,7 +414,7 @@ FREEZE khi:
 
 # 24. Status
 
-COMMON-10
+COMMON-11
 
 STATUS
 

@@ -1,8 +1,8 @@
 # COMMON — CONSULTING FRAMEWORK
 
-# 07_NARRATIVE_STANDARD.md
+# 08_NARRATIVE_STANDARD.md
 
-Document ID: COMMON-07
+Document ID: COMMON-08
 
 Version: 1.0
 
@@ -30,7 +30,7 @@ Narrative chỉ truyền đạt.
 
 Narrative trả lời:
 
-"Làm thế nào để người dùng hiểu Decision."
+"Làm thế nào để người dùng hiểu Assessment."
 
 Narrative không trả lời:
 
@@ -46,11 +46,11 @@ Communication Layer.
 
 Narrative luôn được sinh từ:
 
-Recommendation
+Assessment
 
 và
 
-Decision.
+Recommendation.
 
 ---
 
@@ -69,6 +69,10 @@ Finding
 ↓
 
 Decision
+
+↓
+
+Assessment
 
 ↓
 
@@ -595,13 +599,13 @@ Narrative không suy luận.
 
 Narrative không chấm điểm.
 
-Narrative chỉ giúp con người hiểu đúng những gì Decision Engine đã kết luận.
+Narrative chỉ giúp con người hiểu đúng những gì Assessment đã chiếu từ Decision.
 
 ---
 
 # 31. Status
 
-COMMON-07
+COMMON-08
 
 STATUS:
 

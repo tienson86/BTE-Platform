@@ -1,8 +1,8 @@
 # COMMON — CONSULTING FRAMEWORK
 
-# 06_RECOMMENDATION_MODEL.md
+# 07_RECOMMENDATION_MODEL.md
 
-Document ID: COMMON-06
+Document ID: COMMON-07
 
 Version: 1.0
 
@@ -34,11 +34,15 @@ Recommendation trả lời:
 
 Không trả lời:
 
-"Tại sao?"
+"Câu trả lời là gì?"
 
-"Tại sao"
+"Câu trả lời"
 
-đã nằm trong Finding.
+đã nằm trong Assessment.
+
+Recommendation never contains compatibility conclusions.
+
+Assessment never contains action plans.
 
 ---
 
@@ -46,7 +50,7 @@ Không trả lời:
 
 Recommendation là:
 
-Một Action được sinh từ Decision.
+Một Action được sinh từ Assessment.
 
 Recommendation luôn có:
 
@@ -77,6 +81,10 @@ Finding
 ↓
 
 Decision
+
+↓
+
+Assessment
 
 ↓
 
@@ -111,6 +119,8 @@ Dependencies
 Expected Outcome
 
 Source Findings
+
+Source Assessment
 
 Source Decision
 
@@ -196,7 +206,7 @@ Low
 
 Reference
 
-Priority được sinh từ Decision.
+Priority được sinh từ Assessment.
 
 Không do Narrative quyết định.
 
@@ -423,6 +433,8 @@ Action Description.
 FREEZE khi:
 
 - [ ] Action Model.
+- [ ] Recommendation sinh từ Assessment, không từ Decision công bố.
+- [ ] Recommendation không chứa compatibility conclusions.
 - [ ] Action Types.
 - [ ] Priority.
 - [ ] Urgency.
@@ -437,7 +449,7 @@ FREEZE khi:
 
 # 23. Status
 
-COMMON-06
+COMMON-07
 
 STATUS
 

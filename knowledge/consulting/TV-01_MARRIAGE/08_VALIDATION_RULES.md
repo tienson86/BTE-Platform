@@ -21,7 +21,7 @@ Tài liệu này định nghĩa Business Validation Rules của module TV-01.
 
 Validation Framework được kế thừa từ:
 
-COMMON/10_VALIDATION_STANDARD.md
+COMMON/11_VALIDATION_STANDARD.md
 
 TV-01 chỉ bổ sung các Rule nghiệp vụ đặc thù của tư vấn hôn nhân.
 
@@ -46,6 +46,8 @@ TV-01 Validation áp dụng cho:
 Marriage Request
 
 Marriage Decision
+
+Marriage Assessment
 
 Marriage Recommendation
 

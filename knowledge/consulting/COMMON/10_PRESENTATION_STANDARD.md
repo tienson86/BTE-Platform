@@ -1,8 +1,8 @@
 # COMMON — CONSULTING FRAMEWORK
 
-# 09_PRESENTATION_STANDARD.md
+# 10_PRESENTATION_STANDARD.md
 
-Document ID: COMMON-09
+Document ID: COMMON-10
 
 Version: 1.0
 
@@ -45,6 +45,10 @@ Không trả lời:
 # 3. Presentation Pipeline
 
 Decision
+
+↓
+
+Assessment
 
 ↓
 
@@ -380,7 +384,7 @@ FREEZE khi:
 
 # 20. Status
 
-COMMON-09
+COMMON-10
 
 STATUS
 

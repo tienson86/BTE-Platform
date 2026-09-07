@@ -31,6 +31,10 @@ API chỉ công bố:
 
 Contract giữa Client và Consulting Framework.
 
+Public resource chính:
+
+Marriage Assessment.
+
 ---
 
 # 2. API Philosophy
@@ -41,9 +45,11 @@ Raw Truth.
 
 API trả về:
 
-Decision Resource.
+Marriage Assessment Resource.
 
 Client không cần biết Framework nội bộ.
+
+TV-01 không công bố Decision Resource như mặt hàng mặc định.
 
 ---
 
@@ -215,11 +221,13 @@ Summary
 
 ---
 
-# 10. Decision Resource
+# 10. Assessment Resource
 
-Decision Resource gồm:
+Assessment Resource gồm:
 
-Decision
+Marriage Assessment
+
+Six Answers
 
 Recommendation
 
@@ -231,7 +239,11 @@ Metadata
 
 Không trả:
 
+Decision nội bộ mặc định.
+
 Evidence mặc định.
+
+Finding Graph.
 
 ---
 
@@ -239,7 +251,7 @@ Evidence mặc định.
 
 Summary chỉ gồm:
 
-Compatibility
+Six Assessment Answers
 
 Headline
 

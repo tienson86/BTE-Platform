@@ -1,8 +1,8 @@
 # COMMON — CONSULTING FRAMEWORK
 
-# 11_VERSIONING_STANDARD.md
+# 12_VERSIONING_STANDARD.md
 
-**Document ID:** COMMON-11
+**Document ID:** COMMON-12
 
 **Product:** BTE Platform
 
@@ -597,7 +597,7 @@ Breaking Changes
 
 # 40. Freeze Conditions
 
-COMMON-11 chỉ được FREEZE khi:
+COMMON-12 chỉ được FREEZE khi:
 
 - [ ] Có Version Bundle.
 - [ ] Có Semantic Versioning.
@@ -625,7 +625,7 @@ Version dùng để biết:
 
 # 42. Status
 
-COMMON-11
+COMMON-12
 
 STATUS:
 
@@ -633,6 +633,6 @@ FREEZE READY
 
 Next:
 
-COMMON-12
+COMMON-13
 
 ACCEPTANCE_STANDARD.md

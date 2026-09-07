@@ -62,11 +62,11 @@ Thập thần
 
 Khách hàng muốn biết:
 
-"Tôi có hợp người này không?"
+"Câu trả lời hôn nhân là gì?"
 
 ↓
 
-"Tại sao?"
+"Vì sao?"
 
 ↓
 
@@ -82,15 +82,11 @@ Landing
 
 ↓
 
-Compatibility
+Marriage Assessment
 
 ↓
 
-Understanding
-
-↓
-
-Details
+Detailed Analysis
 
 ↓
 
@@ -130,47 +126,53 @@ Không hiển thị toàn bộ dữ liệu cùng lúc.
 
 Level 1
 
-Compatibility Hero
+Marriage Assessment
+
+Six cards
+
+Q1 Overall Compatibility
+
+Q2 Mutual Support
+
+Q3 Personality Balance
+
+Q4 Marriage Stability
+
+Q5 Children
+
+Q6 Overall Marriage Assessment
 
 Level 2
 
-Executive Summary
+Detailed Analysis
+
+Collapsed by default
+
+D1–D8
 
 Level 3
 
-Domain Cards
+Recommendations
 
 Level 4
 
-Recommendations
-
-Level 5
-
 Evidence
 
-Level 6
+Level 5
 
 Audit
 
 ---
 
-# 6. Hero Section
+# 6. Marriage Assessment
 
-Hero luôn đứng đầu.
+Top of page luôn là Marriage Assessment.
 
-Hiển thị:
+Sáu cards.
 
-Compatibility Score
+Không Hero score đơn độc thay Assessment.
 
-Grade
-
-Headline
-
-Top Strengths
-
-Top Risks
-
-CTA
+Score nếu có chỉ là optional trong Q1.
 
 ---
 
@@ -188,13 +190,13 @@ Kết luận.
 
 ---
 
-# 8. Domain Cards
+# 8. Detailed Analysis
 
-Mỗi Domain.
+D1–D8 đứng dưới Assessment.
 
-↓
+Collapsed by default.
 
-Một Card.
+Mỗi Domain một Card.
 
 Card gồm:
 

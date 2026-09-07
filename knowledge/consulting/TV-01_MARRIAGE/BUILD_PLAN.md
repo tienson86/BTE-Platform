@@ -77,6 +77,10 @@ TV1-B03
 
 Marriage Decision Policy
 
+TV1-B03A
+
+Marriage Assessment Projector
+
 TV1-B04
 
 Recommendation Integration
@@ -178,6 +182,34 @@ Decision PASS
 STOP
 
 Không viết Report.
+
+---
+
+# 7A. TV1-B03A
+
+Objective
+
+Marriage Assessment Projector.
+
+Deliverables
+
+Question Set TV-01-QSET-1.0
+
+Six Assessment Answers
+
+Public contract = Marriage Assessment
+
+PASS
+
+Assessment PASS
+
+STOP
+
+Không sửa Canonical Mathematics.
+
+Không sửa Decision Mathematics.
+
+Không rewrite Decision để trả lời khách hàng.
 
 ---
 

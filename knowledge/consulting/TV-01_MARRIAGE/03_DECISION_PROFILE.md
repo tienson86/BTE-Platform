@@ -14,11 +14,19 @@
 
 # 1. Mục đích tài liệu
 
-Tài liệu này định nghĩa **Decision Profile** cho module:
+Tài liệu này định nghĩa **Decision Profile** nội bộ cho module:
 
 > **TV-01 — Tư vấn hôn nhân**
 
-Decision Profile trả lời câu hỏi:
+Decision Profile không còn là public semantic contract.
+
+Public contract là:
+
+`03A_ASSESSMENT_PROFILE.md`
+
+Marriage Assessment.
+
+Decision Profile vẫn trả lời câu hỏi:
 
 > “Khi hai lá số đã được tính đúng theo BTE canonical, TV-01 sẽ sử dụng những tiêu chí nào để đánh giá hôn nhân, tiêu chí nào quan trọng hơn, tiêu chí nào chỉ là bằng chứng phụ, và cách các tiêu chí ảnh hưởng lẫn nhau ra sao?”
 

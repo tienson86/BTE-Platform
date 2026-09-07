@@ -26,6 +26,7 @@ Mục tiêu là xác định rõ:
 - thời điểm nào bắt đầu Marriage Consulting Layer;
 - Evidence được tạo ở đâu;
 - Decision được tổng hợp ở đâu;
+- Assessment được chiếu ở đâu;
 - Score được tính ở đâu;
 - Narrative được tạo ở đâu;
 - lỗi và missing data được xử lý ở đâu;
@@ -51,6 +52,8 @@ Canonical BTE Analysis
 Marriage Evidence
     ↓
 Marriage Decision
+    ↓
+Marriage Assessment
     ↓
 Marriage Score
     ↓
@@ -155,6 +158,9 @@ Canonical A         Canonical B
                   │
                   ▼
 [13] Confidence Engine
+                  │
+                  ▼
+[14A] Assessment Projector
                   │
                   ▼
 [14] Recommendation Builder
@@ -1044,11 +1050,60 @@ Không nhất thiết giảm toàn bộ score.
 
 ---
 
+# 42A. Stage 14A — Assessment Projector
+
+Input:
+
+```text
+MarriageDecisionResult
+```
+
+Output:
+
+```text
+MarriageAssessment
+```
+
+Contract:
+
+Assessment là projection của Decision.
+
+Không tạo Decision mới.
+
+Không sửa Evidence.
+
+Không sửa Finding.
+
+Phải trả lời đúng sáu câu:
+
+Q1 Overall Compatibility
+
+Q2 Mutual Support
+
+Q3 Personality Balance
+
+Q4 Marriage Stability
+
+Q5 Children
+
+Q6 Overall Marriage Assessment
+
+Public contract là Assessment.
+
+Decision Result không công bố mặc định.
+
+Chi tiết:
+
+`03A_ASSESSMENT_PROFILE.md`
+
+---
+
 # 43. Stage 14 — Recommendation Builder
 
 Input:
 
 ```text
+MarriageAssessment
 Findings
 Overall Decision
 Timing
@@ -1071,8 +1126,11 @@ Contract:
 Recommendation Builder chỉ được tạo action từ:
 
 ```text
+source_assessment_ids
 source_finding_ids
 ```
+
+Không được chứa compatibility conclusions.
 
 Không được có recommendation không truy nguồn.
 
@@ -1206,6 +1264,7 @@ Không được cố tạo customer report từ factual result lỗi.
 Input:
 
 ```text
+MarriageAssessment
 MarriageDecisionResult
 ```
 
@@ -2196,7 +2255,9 @@ Các invariant bắt buộc:
 
 > Evidence phải tồn tại trước Finding.
 
-> Finding phải tồn tại trước Recommendation.
+> Finding phải tồn tại trước Decision.
+> Assessment phải tồn tại trước Recommendation.
+> Recommendation không chứa compatibility conclusions.
 
 > Decision phải được validate trước Narrative.
 
@@ -2259,6 +2320,7 @@ Request
 Canonical Snapshot
 Evidence
 Decision
+Assessment
 Score
 Confidence
 Recommendation
@@ -2282,6 +2344,7 @@ consulting/
     ├── context
     ├── evidence
     ├── decision
+    ├── assessment
     ├── scoring
     ├── confidence
     ├── timing
@@ -2324,9 +2387,11 @@ Cursor / developer không được:
 - [ ] Có domain decision.
 - [ ] Có cross-domain resolver.
 - [ ] Có overall decision.
+- [ ] Có Assessment Projector.
+- [ ] Public contract là Marriage Assessment.
 - [ ] Score tách khỏi Evidence Builder.
 - [ ] Confidence tách khỏi score.
-- [ ] Recommendation dựa trên finding.
+- [ ] Recommendation dựa trên Assessment.
 - [ ] Timing là activation layer.
 - [ ] Decision validation chạy trước Narrative.
 - [ ] Narrative không thay factual result.

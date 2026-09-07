@@ -1,8 +1,8 @@
 # COMMON — CONSULTING FRAMEWORK
 
-# 08_REPORT_STANDARD.md
+# 09_REPORT_STANDARD.md
 
-Document ID: COMMON-08
+Document ID: COMMON-09
 
 Version: 1.0
 
@@ -50,7 +50,7 @@ Một tài liệu có cấu trúc.
 
 Report luôn được tạo từ:
 
-Decision
+Assessment
 
 Recommendation
 
@@ -61,6 +61,10 @@ Narrative
 # 4. Report Pipeline
 
 Decision
+
+↓
+
+Assessment
 
 ↓
 
@@ -112,9 +116,9 @@ Framework chuẩn hóa:
 
 Executive Summary
 
-Decision Summary
+Assessment
 
-Domain Analysis
+Detailed Analysis
 
 Recommendations
 
@@ -326,7 +330,7 @@ FREEZE khi:
 
 # 18. Status
 
-COMMON-08
+COMMON-09
 
 STATUS
 

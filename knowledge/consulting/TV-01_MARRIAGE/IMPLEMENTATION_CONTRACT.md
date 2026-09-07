@@ -194,11 +194,27 @@ API
 
 ---
 
+# 8A. Assessment Contract
+
+TV-01 phải triển khai Assessment Projector theo:
+
+COMMON/06_ASSESSMENT_MODEL.md
+
+TV-01/03A_ASSESSMENT_PROFILE.md
+
+Public API, Report, UI chỉ công bố Marriage Assessment.
+
+Không công bố Decision như mặt hàng mặc định.
+
+Assessment không được tạo hoặc sửa Decision.
+
+---
+
 # 9. Recommendation Contract
 
 Recommendation chỉ được sinh từ:
 
-Decision.
+Assessment.
 
 Không được sinh từ:
 
@@ -208,13 +224,15 @@ Finding
 
 Narrative
 
+Decision công bố
+
 ---
 
 # 10. Narrative Contract
 
 Narrative chỉ được đọc:
 
-Decision
+Assessment
 
 Recommendation
 

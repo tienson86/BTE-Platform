@@ -45,6 +45,8 @@ Domain Findings
        ↓
 Marriage Decision Result
        ↓
+Marriage Assessment
+       ↓
 Narrative / UI / Report
 
 Không cho phép:
@@ -728,7 +730,7 @@ interface MarriageDecisionResult {
 
   overall: MarriageOverallDecision;
 
-  recommendations: MarriageRecommendation[];
+  recommendations: MarriageRecommendation[]; // internal compatibility only; public recommendations attach after Assessment
 
   timing?: MarriageTimingResult;
 
@@ -738,7 +740,29 @@ interface MarriageDecisionResult {
 
   created_at: string;
 }
-Đây là factual canonical output chính của TV-01.
+MarriageDecisionResult là factual output nội bộ.
+
+Public semantic output là Marriage Assessment. Xem `03A_ASSESSMENT_PROFILE.md`.
+
+interface MarriageAssessment {
+  assessment_id: string;
+
+  consultation_id: string;
+
+  question_set_id: "TV-01-QSET-1.0";
+
+  answers: MarriageAssessmentAnswer[];
+
+  overall: MarriageAssessmentAnswer;
+
+  source_decision_id: string;
+
+  confidence: MarriageConfidenceResult;
+
+  versions: MarriageVersionBundle;
+}
+
+Đây không được dùng để sửa Decision.
 53. MarriageOverallDecision
 interface MarriageOverallDecision {
   score: number;
