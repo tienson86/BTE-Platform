@@ -50,18 +50,18 @@ Decision
 # 3. Canonical Position
 
 ```
-Decision
-        │
-        ▼
-Business Assessment
-        │
-        ▼
-Recommendation
+                    Decision
+                   /        \
+         Assessment      Recommendation
 ```
 
-Assessment = "What is the answer?"
+Assessment = "What does the customer want to know?"
 
-Recommendation = "What should I do?"
+Recommendation = "What should the customer do?"
+
+Hai tầng độc lập.
+
+Cả hai chỉ consume Decision.
 
 ---
 

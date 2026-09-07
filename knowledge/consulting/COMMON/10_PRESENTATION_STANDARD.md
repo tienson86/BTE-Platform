@@ -46,17 +46,10 @@ Không trả lời:
 
 Decision
 
-↓
-
-Assessment
-
-↓
-
-Recommendation
-
-↓
-
-Narrative
+        /        \
+Assessment      Recommendation
+        \        /
+         Narrative
 
 ↓
 

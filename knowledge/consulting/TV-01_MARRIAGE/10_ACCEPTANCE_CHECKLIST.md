@@ -73,8 +73,9 @@ PASS khi tất cả đều đúng.
 - [ ] Không Skip Stage.
 - [ ] Decision sau Finding.
 - [ ] Assessment sau Decision.
-- [ ] Recommendation sau Assessment.
-- [ ] Narrative sau Recommendation.
+- [ ] Recommendation sau Decision.
+- [ ] Assessment và Recommendation độc lập.
+- [ ] Narrative sau cả Assessment và Recommendation.
 - [ ] Report sau Narrative.
 - [ ] Presentation sau Report.
 

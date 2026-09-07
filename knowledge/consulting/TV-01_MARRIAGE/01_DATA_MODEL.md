@@ -44,10 +44,10 @@ Relationship Evidence
 Domain Findings
        ↓
 Marriage Decision Result
-       ↓
-Marriage Assessment
-       ↓
-Narrative / UI / Report
+          /                \
+Marriage Assessment    Recommendation
+          \                /
+         Narrative / UI / Report
 
 Không cho phép:
 Birth Input
@@ -730,7 +730,7 @@ interface MarriageDecisionResult {
 
   overall: MarriageOverallDecision;
 
-  recommendations: MarriageRecommendation[]; // internal compatibility only; public recommendations attach after Assessment
+  recommendations: MarriageRecommendation[]; // sibling of Assessment; both attach from Decision
 
   timing?: MarriageTimingResult;
 

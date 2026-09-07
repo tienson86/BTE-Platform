@@ -78,17 +78,10 @@ Finding
 
 Decision
 
-↓
-
-Assessment
-
-↓
-
-Recommendation
-
-↓
-
-Narrative
+        /        \
+Assessment      Recommendation
+        \        /
+         Narrative
 
 ↓
 

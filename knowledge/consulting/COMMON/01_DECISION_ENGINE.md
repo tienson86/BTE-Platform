@@ -397,7 +397,9 @@ Decision Result không chứa Recommendation.
 
 Assessment Projector đọc Decision Result.
 
-Recommendation Engine đọc Assessment.
+Recommendation Engine đọc Decision Result.
+
+Không engine nào được đọc output của engine kia.
 
 Score
 

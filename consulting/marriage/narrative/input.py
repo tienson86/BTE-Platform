@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+from consulting.marriage.assessment.projector import project_marriage_assessment
+from consulting.marriage.models.assessment import MarriageAssessmentCard
 from consulting.marriage.models.enums import (
     CanonicalGender,
     ComparisonFactKind,
@@ -135,6 +137,7 @@ class NarrativeInput:
     person_b_correlation_id: str
     comparison_facts: list[ComparisonNarrativeFact]
     overall_comparison: OverallComparisonNarrative | None
+    assessment_cards: list[MarriageAssessmentCard]
 
 
 def narrative_input_from_decision(
@@ -209,6 +212,7 @@ def narrative_input_from_decision(
         person_b_correlation_id=result.person_b.analysis_id,
         comparison_facts=comparison_facts,
         overall_comparison=_overall_comparison(result, comparison_facts, person_a_label, person_b_label),
+        assessment_cards=_assessment_cards(result),
     )
 
 
@@ -330,6 +334,13 @@ def _domain_input(decision: object) -> DomainNarrativeInput:
         finding_ids=[finding.finding_id for finding in item.findings],
         unavailable_reason=item.availability.reason,
     )
+
+
+def _assessment_cards(result: MarriageDecisionResult) -> list[MarriageAssessmentCard]:
+    """Copy Assessment cards. Project once if the Decision result lacks them."""
+    if result.assessment is None:
+        result.assessment = project_marriage_assessment(result)
+    return list(result.assessment.cards)
 
 
 def _iter_domains(result: MarriageDecisionResult) -> tuple[object, ...]:

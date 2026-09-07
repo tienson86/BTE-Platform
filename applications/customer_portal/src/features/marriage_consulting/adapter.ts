@@ -16,6 +16,7 @@ import {
 } from "./labels";
 import type {
   ActionCardVm,
+  AssessmentCardVm,
   ComparisonGroupVm,
   DomainCardVm,
   MarriageConsultationDto,
@@ -87,7 +88,8 @@ export function adaptMarriageView(
     heroStrengths,
     heroRisks,
     confidenceLabel: CONFIDENCE_LABEL[consultation.confidence.level] || consultation.confidence.level,
-    executiveSummary: executive?.blocks[0]?.body || executive?.summary || "",
+    executiveSummary: executive?.blocks.find((item) => item.kind === "answer")?.body || executive?.blocks[0]?.body || executive?.summary || "",
+    assessmentCards: assessmentCardsFrom(consultation, executive),
     strengths: highlightBodies(strengthsSec),
     risks: highlightBodies(risksSec),
     comparisonGroups,
@@ -124,6 +126,49 @@ function firstText(sec: MarriageReportSection | undefined, kind: string): string
   if (!sec) return "";
   const block = sec.blocks.find((item) => item.kind === kind);
   return block?.body || block?.title || sec.summary || "";
+}
+
+function assessmentCardsFrom(
+  consultation: MarriageConsultationDto,
+  executive: MarriageReportSection | undefined,
+): AssessmentCardVm[] {
+  const fromApi = consultation.assessment_cards || [];
+  if (fromApi.length) {
+    return fromApi.map((card) => ({
+      questionId: card.question_id,
+      question: card.question,
+      answer: card.answer,
+      supportingFacts: card.supporting_facts || [],
+      confidence: card.confidence,
+      limitations: card.limitations || [],
+    }));
+  }
+  return cardsFromExecutive(executive);
+}
+
+function cardsFromExecutive(executive: MarriageReportSection | undefined): AssessmentCardVm[] {
+  if (!executive) return [];
+  const questions = executive.blocks.filter((item) => item.kind === "question");
+  const cards: AssessmentCardVm[] = [];
+  for (const question of questions) {
+    const prefix = (question.block_id || "").replace(/-question$/, "");
+    const answer = executive.blocks.find((item) => item.block_id === `${prefix}-answer`);
+    const facts = executive.blocks.find((item) => item.block_id === `${prefix}-facts`);
+    const confidence = executive.blocks.find((item) => item.block_id === `${prefix}-confidence`);
+    const limitations = executive.blocks.find((item) => item.block_id === `${prefix}-limitations`);
+    cards.push({
+      questionId: prefix.toUpperCase(),
+      question: question.body || question.title || "",
+      answer: answer?.body || "",
+      supportingFacts: (facts?.body || "")
+        .split("\n")
+        .map((line) => line.replace(/^•\s*/, "").trim())
+        .filter(Boolean),
+      confidence: confidence?.body || "",
+      limitations: limitations?.body ? limitations.body.split("; ").filter(Boolean) : [],
+    });
+  }
+  return cards;
 }
 
 function comparisonGroupsFrom(report: MarriageReportDto): ComparisonGroupVm[] {

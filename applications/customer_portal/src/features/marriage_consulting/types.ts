@@ -41,6 +41,15 @@ export type MarriagePersonSummary = {
   correlation_id?: string | null;
 };
 
+export type AssessmentCardDto = {
+  question_id: string;
+  question: string;
+  answer: string;
+  supporting_facts: string[];
+  confidence: string;
+  limitations: string[];
+};
+
 export type MarriageConsultationDto = {
   consultation_id: string;
   status: string;
@@ -54,6 +63,7 @@ export type MarriageConsultationDto = {
   limitations: string[];
   headline: string | null;
   action_themes?: string[];
+  assessment_cards?: AssessmentCardDto[];
   expert?: Record<string, unknown>;
 };
 
@@ -111,6 +121,15 @@ export type ComparisonGroupVm = {
   items: string[];
 };
 
+export type AssessmentCardVm = {
+  questionId: string;
+  question: string;
+  answer: string;
+  supportingFacts: string[];
+  confidence: string;
+  limitations: string[];
+};
+
 export type MarriageViewModel = {
   consultationId: string;
   overallState: string | null;
@@ -127,6 +146,7 @@ export type MarriageViewModel = {
   heroRisks: string[];
   confidenceLabel: string;
   executiveSummary: string;
+  assessmentCards: AssessmentCardVm[];
   strengths: string[];
   risks: string[];
   comparisonGroups: ComparisonGroupVm[];

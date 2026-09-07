@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+from consulting.marriage.models.assessment import MarriageAssessmentResult
 from consulting.marriage.models.comparison import MarriageComparisonResult
 from consulting.marriage.models.confidence import MarriageConfidenceResult
 from consulting.marriage.models.decision import MarriageDomainResults, MarriageOverallDecision
@@ -37,3 +38,4 @@ class MarriageDecisionResult:
     findings: list[MarriageFinding] = field(default_factory=list)
     limitations: list[str] = field(default_factory=list)
     comparison: MarriageComparisonResult | None = None
+    assessment: MarriageAssessmentResult | None = None

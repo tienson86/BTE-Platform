@@ -4,7 +4,7 @@
 
 Document ID: COMMON-06
 
-Version: 1.0
+Version: 1.1
 
 Status: DRAFT FOR PRODUCT OWNER REVIEW
 
@@ -12,103 +12,79 @@ Status: DRAFT FOR PRODUCT OWNER REVIEW
 
 # 1. Purpose
 
-Định nghĩa Assessment Model của toàn bộ Consulting Framework.
+Định nghĩa Assessment Engine của toàn bộ Consulting Framework.
 
-Assessment là tầng công bố kết quả ngữ nghĩa cho khách hàng.
+Assessment không phải Executive Summary.
 
-Assessment trả lời:
-
-"Câu trả lời là gì?"
-
-Recommendation trả lời:
-
-"Nên làm gì?"
-
-Assessment không phải Decision.
-
-Assessment không phải Recommendation.
-
-Assessment không phải Narrative.
+Assessment không phải Executive Interpretation.
 
 Assessment là:
 
-Executive Interpretation của một Decision đã hoàn tất.
+Question-driven Projection Engine.
+
+Assessment trả lời:
+
+"Khách hàng muốn biết điều gì?"
+
+Recommendation trả lời:
+
+"Khách hàng nên làm gì?"
+
+Narrative giải thích cả hai.
+
+Hai tầng Assessment và Recommendation độc lập.
+
+Không tầng nào được consume tầng kia.
 
 ---
 
 # 2. Architecture Position
 
-Assessment đứng giữa Decision và Recommendation.
-
-Canonical pipeline:
+Decision tách thành hai phép chiếu độc lập.
 
 ```
-Truth
-        │
-        ▼
-Evidence
-        │
-        ▼
-Finding
-        │
-        ▼
-Decision
-        │
-        ▼
-Assessment
-        │
-        ▼
-Recommendation
-        │
-        ▼
-Narrative
-        │
-        ▼
-Report
-        │
-        ▼
-Presentation
+                    Decision
+                   /        \
+                  /          \
+         Assessment      Recommendation
+                  \          /
+                   \        /
+                  Narrative
+                      ↓
+                   Report
+                      ↓
+                Presentation
 ```
 
-Assessment là public semantic contract.
+Assessment và Recommendation là siblings.
 
-Decision là internal semantic contract.
+Cả hai chỉ được consume:
 
-Khách hàng không mua Evidence.
+Decision.
 
-Khách hàng không mua Finding.
+Assessment must never create Recommendation.
 
-Khách hàng không mua Decision.
+Recommendation must never consume Assessment.
 
-Khách hàng mua Decision Assessment.
+Pipeline bị từ chối:
+
+```
+Decision → Assessment → Recommendation → Narrative
+```
 
 ---
 
 # 3. Assessment Philosophy
 
-Assessment trả lời câu hỏi nghiệp vụ của khách hàng.
+Assessment answers customer questions.
 
-Recommendation trả lời hành động của khách hàng.
+Assessment does NOT summarize the report.
 
-Hai tầng này không được trộn.
+Assessment does NOT create action plans.
 
-## 3.1 Assessment never contains action plans
+Recommendation never contains compatibility conclusions.
 
-Assessment không chứa:
-
-- việc cần làm;
-- kế hoạch hành động;
-- bước thực thi;
-- lời khuyên "nên / không nên làm".
-
-## 3.2 Recommendation never contains compatibility conclusions
-
-Recommendation không chứa:
-
-- kết luận tương hợp;
-- kết luận hỗ trợ lẫn nhau;
-- kết luận ổn định;
-- kết luận tổng thể của Assessment.
+Assessment never contains action plans.
 
 Nếu một câu vừa là kết luận vừa là hành động:
 
@@ -116,47 +92,77 @@ Nếu một câu vừa là kết luận vừa là hành động:
 
 FAIL.
 
-Phải tách thành:
+Phải tách thành hai Object độc lập.
 
-Assessment Object
+Cả hai truy về cùng Decision.
 
-và
-
-Recommendation Object.
+Không truy về nhau.
 
 ---
 
-# 4. Assessment Model
+# 4. Question Engine
 
-Assessment là phép chiếu (Projection) của Decision.
+Framework project theo:
 
 ```
 Decision
         │
         ▼
-Assessment Projector
+Assessment Question Set
         │
         ▼
-Assessment Result
+Projection Rules
+        │
+        ▼
+Assessment Answers
 ```
 
-Assessment phải:
+Question Set là public semantic contract.
 
-- đọc Decision đã hoàn tất;
-- trả lời đúng bộ câu hỏi của module;
-- giữ nguyên Evidence;
-- giữ nguyên Finding;
-- giữ nguyên Decision.
+Framework giữ generic.
 
-Assessment không được:
+Chỉ Question Set đổi theo module.
+
+Không module nào được:
+
+đổi Assessment Engine
+
+để phù hợp sản phẩm.
+
+Chỉ được:
+
+đổi Question Set.
+
+---
+
+# 5. Assessment Engine definition
+
+Assessment Engine nhận:
+
+Decision đã hoàn tất
+
++
+
+Assessment Question Set
+
++
+
+Projection Rules
+
+Output:
+
+Assessment Answers
+
+Assessment Engine không được:
 
 - tạo Decision;
 - sửa Decision;
 - đổi Evidence;
 - đổi Finding;
-- đổi Score;
-- đổi Grade;
-- đổi Canonical Truth.
+- tạo Recommendation;
+- đọc Recommendation;
+- tóm tắt Report;
+- viết action plan.
 
 Nếu Decision thay đổi.
 
@@ -174,7 +180,45 @@ FAIL.
 
 ---
 
-# 5. Assessment Objects
+# 6. Assessment Answer Object
+
+Assessment Answer là object.
+
+Không phải câu văn.
+
+Mỗi Answer phải chứa:
+
+Question ID
+
+Question
+
+Semantic Answer
+
+Confidence
+
+Supporting Findings
+
+Conflicting Findings
+
+Conditions
+
+Limitations
+
+Version
+
+Trace Reference
+
+Score là optional.
+
+Score không phải Semantic Answer.
+
+Headline / customer wording thuộc Narrative.
+
+Không thuộc Assessment Answer bắt buộc.
+
+---
+
+# 7. Assessment Result
 
 Assessment Result gồm:
 
@@ -184,15 +228,9 @@ Module ID
 
 Question Set ID
 
+Question Set Version
+
 Answers
-
-Overall Assessment
-
-Support Status
-
-Confidence
-
-Explainability Trace
 
 Source Decision ID
 
@@ -200,186 +238,78 @@ Version Bundle
 
 Metadata
 
-Mỗi Answer là một Assessment Answer Object.
+Không chứa Recommendation.
+
+Không chứa Narrative.
+
+Không chứa Report Summary.
 
 ---
 
-# 6. Assessment Answer Object
+# 8. Projection Rules
 
-Mỗi câu trả lời khách hàng là một Object riêng.
+Mỗi Question có Projection Rule.
 
-Assessment Answer gồm:
+Projection Rule ánh xạ:
 
-Question ID
+Decision Findings / Domain States
 
-Question Label
+↓
 
-Answer State
+Semantic Answer
 
-Answer Level
-
-Direction
-
-Headline
-
-Explanation
-
-Support Status
-
-Main Risk
-
-Main Rescue
-
-Source Decision References
-
-Source Finding References
-
-Confidence
-
-Version
-
-Score là optional.
-
-Score không phải Answer.
-
-Nếu module không công bố Score.
-
-Answer vẫn hợp lệ.
-
----
-
-# 7. Assessment Projection
-
-Projection là ánh xạ:
-
-```
-Decision Domains
-        │
-        ▼
-Customer Questions
-```
-
-Không phải ánh xạ:
-
-```
-Customer Questions
-        │
-        ▼
-Decision Domains
-```
+cho đúng Question ID.
 
 Decision hoàn tất trước.
 
-Câu hỏi khách hàng được trả lời sau.
+Question được trả lời sau.
+
+Không đảo:
+
+```
+Question → invent Decision
+```
 
 Mỗi Answer phải truy được về:
 
-một hoặc nhiều Domain Decision
+Decision
 
-và
+Finding
 
-một hoặc nhiều Finding
+Evidence
 
-và
-
-một hoặc nhiều Evidence.
-
-Không có Answer mồ côi.
-
-Không có Answer từ Narrative.
+Truth
 
 Không có Answer từ Recommendation.
 
----
+Không có Answer từ Narrative.
 
-# 8. Assessment Categories
-
-Framework chuẩn hóa bốn nhóm Assessment.
-
-Không module nào được invent category ngoài các nhóm này mà không mở rộng COMMON.
-
-## 8.1 Compatibility Assessment
-
-Trả lời mức độ phù hợp / tương hợp.
-
-Dùng cho:
-
-TV-01 Marriage
-
-TV-02 Business Cooperation
-
-## 8.2 Capacity Assessment
-
-Trả lời năng lực / vai trò / phù hợp nghề.
-
-Dùng cho:
-
-TV-03 Career
-
-## 8.3 Stability Assessment
-
-Trả lời khả năng ổn định, rủi ro chính, yếu tố cứu giải.
-
-Dùng cho:
-
-TV-01 Marriage
-
-TV-02 Business
-
-TV-04 Child
-
-## 8.4 Overall Assessment
-
-Tổng kết executive.
-
-Mọi module phải có Overall Assessment.
-
-Overall Assessment không được copy nguyên Decision Summary.
-
-Overall Assessment phải trả lời đúng câu hỏi tổng thể của module.
+Không có Answer mồ côi.
 
 ---
 
 # 9. Question Set Contract
 
-Mỗi Consulting Module phải công bố:
-
-một Question Set đóng.
+Mỗi Consulting Module công bố một Question Set đóng.
 
 Question Set:
 
 - hữu hạn;
 - đánh số;
-- không đổi thứ tự công bố;
-- versioned.
+- versioned;
+- không đổi thứ tự công bố nếu chưa tăng version.
 
-TV-01 Question Set:
+Framework không định nghĩa sẵn Assessment Categories.
 
-Q1 Overall Compatibility
+Question Set thay thế Categories.
 
-Q2 Mutual Support
-
-Q3 Personality Balance
-
-Q4 Marriage Stability
-
-Q5 Children
-
-Q6 Overall Marriage Assessment
-
-TV-02, TV-03, TV-04 Question Set được định nghĩa tại template của từng module.
-
-Không module nào được:
-
-trả lời câu hỏi ngoài Question Set
-
-mà không version Question Set mới.
+TV-01, TV-02, TV-03, TV-04 chỉ khác nhau ở Question Set.
 
 ---
 
-# 10. Semantic Levels
+# 10. Semantic Answer
 
-Assessment dùng semantic level, không dùng jargon Decision.
+Semantic Answer dùng mức ngữ nghĩa.
 
 Ví dụ hợp lệ:
 
@@ -395,7 +325,7 @@ Insufficient Evidence
 
 Unsupported
 
-Ví dụ không hợp lệ khi công bố cho khách hàng:
+Không công bố:
 
 Domain State enum nội bộ
 
@@ -405,68 +335,201 @@ Evidence Type
 
 Rule ID
 
-Score có thể đi kèm.
-
-Score không thay thế semantic level.
+làm câu trả lời khách hàng.
 
 ---
 
-# 11. Directional Assessment
+# 11. Directional Questions
 
-Khi câu hỏi có chiều:
+Khi Question có chiều:
 
 A → B
 
 B → A
 
-Assessment phải giữ hướng.
+Answer phải giữ hướng.
 
-Không được gộp thành:
-
-"Hai người hỗ trợ nhau."
-
-nếu Decision phân biệt chiều.
+Không gộp thành một chiều trung tính nếu Decision phân biệt chiều.
 
 Vượng Phu / Vượng Thê
 
-và mọi nhãn tương đương
+chỉ được điền khi Canonical Evidence hỗ trợ.
 
-chỉ được công bố khi Canonical Evidence hỗ trợ.
+Nếu không hỗ trợ:
 
-Nếu không hỗ trợ.
-
-↓
-
-Support Status = unsupported
+Limitations ghi unsupported.
 
 Không suy diễn.
 
 ---
 
-# 12. Unsupported Answers
+# 12. Conditions and Limitations
 
-Không phải câu hỏi nào cũng luôn trả lời được.
+Conditions:
 
-Nếu Decision không đủ Evidence:
+điều kiện Decision cho phép trả lời Question.
 
-Answer State = unsupported
+Limitations:
 
-hoặc
+phạm vi không được vượt.
+
+Ví dụ hợp lệ:
 
 insufficient_evidence
 
-Không được:
+hour_missing
 
-- bịa câu trả lời;
-- đoán fertility;
-- đoán số con;
-- đoán tuyệt đối "sẽ / không sẽ".
+children_unsupported
 
-Unsupported là kết quả hợp lệ.
+canonical_label_unsupported
+
+Unsupported là Answer hợp lệ.
+
+Không được bịa fertility, số con, hay kết luận tuyệt đối khi Decision không hỗ trợ.
 
 ---
 
-# 13. Assessment Versioning
+# 13. Independent Traceability
+
+Assessment và Recommendation truy ngược độc lập.
+
+```
+Assessment Answer
+        │
+        ▼
+Decision
+        │
+        ▼
+Finding
+        │
+        ▼
+Evidence
+        │
+        ▼
+Truth
+```
+
+```
+Recommendation
+        │
+        ▼
+Decision
+        │
+        ▼
+Finding
+        │
+        ▼
+Evidence
+        │
+        ▼
+Truth
+```
+
+Không tồn tại:
+
+```
+Recommendation → Assessment → Decision
+```
+
+Không tồn tại:
+
+```
+Assessment → Recommendation
+```
+
+---
+
+# 14. TV-01 Question Set
+
+Question Set ID:
+
+TV-01-QSET-1.0
+
+Q1 Overall Compatibility
+
+Q2 Mutual Support
+
+- A → B
+- B → A
+- Vượng Phu
+- Vượng Thê
+- chỉ khi Canonical hỗ trợ
+
+Q3 Personality Balance
+
+Q4 Marriage Stability
+
+Q5 Children
+
+Q6 Overall Marriage Assessment
+
+Overall Marriage Assessment là Question.
+
+Không phải Executive Summary của Report.
+
+---
+
+# 15. TV-02 Question Set
+
+Question Set ID:
+
+TV-02-QSET-1.0
+
+Q1 Should we cooperate?
+
+Q2 Who complements whom?
+
+Q3 Leadership balance?
+
+Q4 Financial cooperation?
+
+Q5 Business risks?
+
+Q6 Overall Business Assessment?
+
+---
+
+# 16. TV-03 Question Set
+
+Question Set ID:
+
+TV-03-QSET-1.0
+
+Q1 Career suitability
+
+Q2 Leadership
+
+Q3 Entrepreneurship
+
+Q4 Strengths
+
+Q5 Weaknesses
+
+Q6 Overall Career Assessment
+
+---
+
+# 17. TV-04 Question Set
+
+Question Set ID:
+
+TV-04-QSET-1.0
+
+Q1 Child Planning
+
+Q2 Timing
+
+Q3 Parent Support
+
+Q4 Family Balance
+
+Q5 Risks
+
+Q6 Overall Child Assessment
+
+---
+
+# 18. Versioning
 
 Assessment Version gồm:
 
@@ -490,83 +553,53 @@ Cùng version bundle.
 
 ↓
 
-Cùng Assessment.
+Cùng Assessment Answers.
 
 Nếu Question Set đổi.
 
-Assessment Version phải tăng.
+Question Set Version tăng.
 
-Không được tái sử dụng Answer ID cũ cho câu hỏi mới.
+Không tái sử dụng Answer ID cũ cho Question mới.
 
-Chi tiết versioning:
+Chi tiết:
 
 COMMON/12_VERSIONING_STANDARD.md
 
 ---
 
-# 14. Assessment Validation
+# 19. Validation
 
 Assessment Validation kiểm tra:
 
-- Decision đã complete trước khi project;
+- Decision complete trước khi project;
 - mọi Answer thuộc Question Set;
 - không thiếu Question bắt buộc;
-- không có action plan trong Assessment;
-- không có compatibility conclusion trong Recommendation;
-- mọi Answer có source Decision / Finding;
+- Answer là object, không phải câu văn thuần;
+- đủ fields bắt buộc;
+- không chứa action plan;
+- không đọc Recommendation;
+- không tạo Recommendation;
 - directional answers giữ hướng;
 - unsupported không bị nâng thành conclusion;
-- Overall Assessment không mâu thuẫn Answer thành phần;
-- Assessment không sửa Decision.
+- Trace Reference tới Decision / Finding.
 
-FAIL nếu Assessment tạo Decision mới.
+FAIL nếu Assessment tóm tắt Report thay vì trả lời Question.
 
-Chi tiết validation:
+Chi tiết:
 
 COMMON/11_VALIDATION_STANDARD.md
 
 ---
 
-# 15. Assessment Explainability
+# 20. Public Semantic Contract
 
-Mọi Assessment Answer phải truy ngược:
+Public API, Report, UI công bố:
 
-```
-Customer Answer
-        │
-        ▼
-Assessment Object
-        │
-        ▼
-Decision
-        │
-        ▼
-Finding
-        │
-        ▼
-Evidence
-        │
-        ▼
-Canonical Truth
-```
+Question Set
 
-Khách hàng nhìn Answer.
+và
 
-Audit nhìn Trace.
-
-Narrative chỉ mô tả Assessment.
-
-Narrative không phải nguồn Explainability.
-
----
-
-# 16. Public Semantic Contract
-
-Public API, Report, UI, PDF, DOCX
-
-công bố:
-
-Assessment
+Assessment Answers
 
 Không công bố mặc định:
 
@@ -578,128 +611,91 @@ Finding Graph
 
 Rule Engine
 
-Decision vẫn tồn tại.
+Decision phục vụ Audit, Validation, Reproducibility.
 
-Decision phục vụ:
-
-Audit
-
-Validation
-
-Reproducibility
-
-Internal Explainability
-
-Decision không phải mặt hàng khách hàng đọc đầu tiên.
+Question Set là mặt hàng khách hàng đọc.
 
 ---
 
-# 17. Relationship to Other Layers
+# 21. Relationship to Other Layers
 
 ## Decision
 
-Tạo kết luận nội bộ.
+Kết luận nội bộ.
 
-Không trả lời câu hỏi khách hàng.
+Nguồn duy nhất cho Assessment và Recommendation.
 
 ## Assessment
 
-Chiếu Decision thành câu trả lời khách hàng.
+Question-driven projection của Decision.
 
-Không tạo kết luận mới.
+Không tóm tắt Report.
+
+Không tạo hành động.
 
 ## Recommendation
 
-Sinh hành động từ Assessment.
+Action projection của Decision.
 
-Không lặp lại kết luận Assessment.
+Không consume Assessment.
+
+Không chứa compatibility conclusions.
 
 ## Narrative
 
-Truyền đạt Assessment và Recommendation.
+Giải thích Assessment và Recommendation.
 
-Không tạo Assessment.
+Không tạo Answer.
 
-## Report
+Không tạo Action.
 
-Sắp xếp:
+## Report / Presentation
 
-Assessment
+Sắp xếp hai sibling outputs.
 
-↓
-
-Detailed Analysis
-
-↓
-
-Recommendations
-
-↓
-
-Appendix
-
-## Presentation
-
-Hiển thị Assessment trước.
-
-Detailed Analysis sau.
-
-Collapsed by default nếu là phân tích kỹ thuật.
+Thứ tự hiển thị không tạo dependency.
 
 ---
 
-# 18. Assessment Freeze Rules
+# 22. Freeze Rules
 
-Assessment Model chỉ được FREEZE khi:
+FREEZE khi:
 
-- [ ] Pipeline có Assessment giữa Decision và Recommendation.
-- [ ] Assessment là public semantic contract.
-- [ ] Decision không còn là mặt hàng công bố mặc định.
-- [ ] Assessment không tạo / sửa Decision.
-- [ ] Assessment không chứa action plan.
-- [ ] Recommendation không chứa compatibility conclusion.
-- [ ] Mọi module có Question Set đóng.
-- [ ] Projection deterministic.
-- [ ] Explainability đầy đủ.
-- [ ] Unsupported được mô hình hóa.
-- [ ] Versioned.
-- [ ] TV-01, TV-02, TV-03, TV-04 dùng cùng Assessment Model.
-
-Sau FREEZE.
-
-Không được:
-
-đưa Decision ra mặt public
-
-thay cho Assessment.
+- [ ] Assessment và Recommendation là siblings.
+- [ ] Cả hai chỉ consume Decision.
+- [ ] Assessment không tạo Recommendation.
+- [ ] Recommendation không consume Assessment.
+- [ ] Assessment là Question-driven Projection Engine.
+- [ ] Assessment không phải Executive Summary.
+- [ ] Assessment Answer là object đủ fields bắt buộc.
+- [ ] Question Set là public semantic contract.
+- [ ] Traceability độc lập.
+- [ ] TV-01 / TV-02 / TV-03 / TV-04 chỉ khác Question Set.
 
 ---
 
-# 19. Migration Rules
+# 23. Migration Rules
 
-Implementation chưa được phép chạy cho đến khi Product Owner phê duyệt ticket này.
+Không implement cho đến khi Product Owner phê duyệt R1A.
 
 Khi implementation được mở:
 
-1. Giữ nguyên Canonical Mathematics.
-2. Giữ nguyên Decision Mathematics.
-3. Giữ nguyên TV-01 Decision runtime hiện tại.
-4. Thêm Assessment Projector sau Decision.
-5. Chuyển Public API / Report / UI sang Assessment.
-6. Recommendation đọc Assessment, không đọc Decision như public contract.
-7. D1–D8 chuyển xuống Detailed Analysis.
+1. Giữ Canonical Mathematics.
+2. Giữ Decision Mathematics.
+3. Giữ TV-01 Decision runtime.
+4. Thêm Assessment Engine song song với Recommendation Engine.
+5. Cả hai đọc Decision. Không đọc nhau.
+6. Narrative consume cả hai.
+7. Question Set trở thành public contract.
 8. Golden Dataset Decision không sửa.
-9. Không expose Decision enum kỹ thuật trên UI chính.
 
 Không được:
 
-viết lại Decision để "trả lời khách hàng".
-
-Đó là trách nhiệm của Assessment.
+xâu chuỗi Assessment → Recommendation.
 
 ---
 
-# 20. Status
+# 24. Status
 
 COMMON-06
 

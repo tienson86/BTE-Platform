@@ -30,7 +30,7 @@ Narrative chỉ truyền đạt.
 
 Narrative trả lời:
 
-"Làm thế nào để người dùng hiểu Assessment."
+"Làm thế nào để người dùng hiểu Assessment và Recommendation."
 
 Narrative không trả lời:
 
@@ -52,6 +52,14 @@ và
 
 Recommendation.
 
+Hai nguồn độc lập.
+
+Cả hai sinh từ Decision.
+
+Narrative không được suy Assessment từ Recommendation.
+
+Narrative không được suy Recommendation từ Assessment.
+
 ---
 
 # 4. Narrative Pipeline
@@ -70,17 +78,10 @@ Finding
 
 Decision
 
-↓
-
-Assessment
-
-↓
-
-Recommendation
-
-↓
-
-Narrative
+        /        \
+Assessment      Recommendation
+        \        /
+         Narrative
 
 ↓
 
@@ -599,7 +600,7 @@ Narrative không suy luận.
 
 Narrative không chấm điểm.
 
-Narrative chỉ giúp con người hiểu đúng những gì Assessment đã chiếu từ Decision.
+Narrative chỉ giúp con người hiểu đúng Assessment Answers và Recommendations đã chiếu độc lập từ Decision.
 
 ---
 

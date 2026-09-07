@@ -70,47 +70,83 @@ def _executive_summary(
     payload: NarrativeInput,
     narrative: MarriageNarrativeResult,
 ) -> ReportSection:
-    """Short overall conclusion, supports, risks, and action themes."""
-    questions = payload.overall_comparison
-    overall = overall_entry(payload.overall_state.value)
-    if questions is not None:
-        parts = [
-            _as_sentence(questions.q1_text),
-            _as_sentence(questions.q2_text),
-            _as_sentence(questions.q3_text),
-            _as_sentence(f"Điểm xung lớn nhất: {questions.q4_text}"),
-            _as_sentence(questions.q5_text),
-            _as_sentence(questions.q6_text),
-            _as_sentence(questions.q7_text),
-        ]
-    else:
-        strengths = [item.text for item in narrative.highlights if item.kind == "strength"][:3]
-        risks = [item.text for item in narrative.highlights if item.kind == "risk"][:3]
-        actions = _action_themes(payload.recommendations)
-        parts = [overall.observation]
-        if strengths:
-            parts.append("Điểm hỗ trợ: " + "; ".join(strengths) + ".")
-        if risks:
-            parts.append("Điểm cần lưu ý: " + "; ".join(risks) + ".")
-        if actions:
-            parts.append("Hướng hành động: " + "; ".join(actions) + ".")
-    if payload.confidence_level.value != "high":
-        parts.append("Nên đọc kèm phần giới hạn dữ liệu.")
-    blocks = [
-        ReportBlock(
-            block_id="exec-conclusion",
-            kind="summary",
-            title=overall.headline,
-            body=" ".join(parts),
-            semantic_key=overall.key,
-            state=payload.overall_state.value,
-            source_finding_ids=list(payload.headline_finding_ids),
+    """Marriage Assessment cards. Not an essay executive summary."""
+    _ = narrative
+    cards = payload.assessment_cards
+    if not cards:
+        overall = overall_entry(payload.overall_state.value)
+        return ReportSection(
+            section_id="executive_summary",
+            title="Đánh giá hôn nhân",
+            summary=overall.headline,
+            blocks=[
+                ReportBlock(
+                    block_id="exec-conclusion",
+                    kind="summary",
+                    title=overall.headline,
+                    body=overall.observation,
+                    semantic_key=overall.key,
+                    state=payload.overall_state.value,
+                    source_finding_ids=list(payload.headline_finding_ids),
+                )
+            ],
         )
-    ]
+    blocks: list[ReportBlock] = []
+    for card in cards:
+        prefix = card.question_id.lower()
+        blocks.append(
+            ReportBlock(
+                block_id=f"{prefix}-question",
+                kind="question",
+                title=card.question,
+                body=card.question,
+                semantic_key=f"marriage.assessment.{card.question_id}",
+            )
+        )
+        blocks.append(
+            ReportBlock(
+                block_id=f"{prefix}-answer",
+                kind="answer",
+                title=card.question,
+                body=card.answer,
+                semantic_key=card.semantic_key,
+                source_finding_ids=list(card.finding_ids),
+            )
+        )
+        if card.supporting_facts:
+            blocks.append(
+                ReportBlock(
+                    block_id=f"{prefix}-facts",
+                    kind="facts",
+                    title="Cơ sở",
+                    body="\n".join(f"• {item}" for item in card.supporting_facts),
+                    semantic_key=card.semantic_key,
+                    source_finding_ids=list(card.finding_ids),
+                )
+            )
+        blocks.append(
+            ReportBlock(
+                block_id=f"{prefix}-confidence",
+                kind="confidence",
+                title="Độ tin cậy",
+                body=card.confidence,
+                semantic_key=card.semantic_key,
+            )
+        )
+        if card.limitations:
+            blocks.append(
+                ReportBlock(
+                    block_id=f"{prefix}-limitations",
+                    kind="limitations",
+                    title="Giới hạn",
+                    body="; ".join(card.limitations),
+                    semantic_key=card.semantic_key,
+                )
+            )
     return ReportSection(
         section_id="executive_summary",
-        title="Tóm tắt tư vấn",
-        summary=overall.headline,
+        title="Đánh giá hôn nhân",
+        summary=cards[0].answer if cards else None,
         blocks=blocks,
     )
 
@@ -302,7 +338,7 @@ def _domains(
     ]
     return ReportSection(
         section_id="domain_analysis",
-        title="Hiểu vì sao",
+        title="Phân tích chi tiết",
         blocks=blocks + expert_blocks,
     )
 

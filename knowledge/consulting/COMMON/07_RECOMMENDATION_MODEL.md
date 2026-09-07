@@ -38,11 +38,15 @@ Không trả lời:
 
 "Câu trả lời"
 
-đã nằm trong Assessment.
+nằm trong Assessment, chiếu từ Decision.
+
+Không nằm trong Recommendation.
 
 Recommendation never contains compatibility conclusions.
 
 Assessment never contains action plans.
+
+Assessment và Recommendation không consume lẫn nhau.
 
 ---
 
@@ -50,7 +54,7 @@ Assessment never contains action plans.
 
 Recommendation là:
 
-Một Action được sinh từ Assessment.
+Một Action được sinh từ Decision.
 
 Recommendation luôn có:
 
@@ -82,17 +86,10 @@ Finding
 
 Decision
 
-↓
-
-Assessment
-
-↓
-
-Recommendation
-
-↓
-
-Narrative
+        /        \
+Assessment      Recommendation
+        \        /
+         Narrative
 
 ---
 
@@ -119,8 +116,6 @@ Dependencies
 Expected Outcome
 
 Source Findings
-
-Source Assessment
 
 Source Decision
 
@@ -206,7 +201,7 @@ Low
 
 Reference
 
-Priority được sinh từ Assessment.
+Priority được sinh từ Decision.
 
 Không do Narrative quyết định.
 
@@ -433,7 +428,8 @@ Action Description.
 FREEZE khi:
 
 - [ ] Action Model.
-- [ ] Recommendation sinh từ Assessment, không từ Decision công bố.
+- [ ] Recommendation sinh từ Decision.
+- [ ] Recommendation không consume Assessment.
 - [ ] Recommendation không chứa compatibility conclusions.
 - [ ] Action Types.
 - [ ] Priority.

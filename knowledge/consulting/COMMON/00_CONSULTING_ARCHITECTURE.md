@@ -130,7 +130,7 @@ Narrative Framework
 
 Mục tiêu:
 
-Biến Assessment thành:
+Biến Assessment và Recommendation thành:
 
 - lời giải thích;
 - báo cáo;
@@ -139,7 +139,7 @@ Biến Assessment thành:
 - DOCX;
 - API Presentation.
 
-World 3 không được phép thay đổi Decision hoặc Assessment.
+World 3 không được phép thay đổi Decision, Assessment, hoặc Recommendation.
 
 ---
 
@@ -155,7 +155,7 @@ World 2 trả lời:
 
 World 3 trả lời:
 
-> Làm thế nào để người dùng hiểu được Assessment đó?
+> Làm thế nào để người dùng hiểu Assessment và Recommendation?
 
 Ba câu hỏi này tuyệt đối không được trộn lẫn.
 
@@ -194,12 +194,8 @@ Domain State
 │
 ▼
 Decision
-│
-▼
-Assessment
-│
-▼
-Recommendation
+        /        \
+Assessment      Recommendation
 
 ════════════════════════════════════
 
@@ -331,17 +327,31 @@ Không tồn tại Decision nếu không có Evidence.
 
 Không tồn tại Assessment nếu không có Decision.
 
-Không tồn tại Recommendation nếu không có Assessment.
+Không tồn tại Recommendation nếu không có Decision.
+
+Assessment và Recommendation độc lập.
+
+Không tồn tại dependency giữa Assessment và Recommendation.
 
 ---
 
 ## Philosophy 3
 
-Decision before Assessment before Narrative
+Decision before independent projections
 
-Assessment chỉ được phép chiếu Decision.
+Decision tách thành hai phép chiếu độc lập:
 
-Narrative chỉ được phép mô tả Assessment.
+Assessment
+
+và
+
+Recommendation.
+
+Cả hai chỉ chiếu Decision.
+
+Không chiếu lẫn nhau.
+
+Narrative giải thích cả hai.
 
 Narrative không được:
 
@@ -386,30 +396,16 @@ Mọi kết luận đều phải truy ngược được.
 ```
 
 Narrative
-
-↓
-
-Assessment
-
-↓
-
-Decision
-
-↓
-
-Finding
-
-↓
-
-Evidence
-
-↓
-
-Canonical Truth
+        │
+        ├── Assessment ──► Decision ──► Finding ──► Evidence ──► Truth
+        │
+        └── Recommendation ──► Decision ──► Finding ──► Evidence ──► Truth
 
 ```
 
-Nếu một kết luận không truy được về Canonical Truth thì kết luận đó không hợp lệ.
+Assessment và Recommendation truy ngược độc lập.
+
+Không truy qua nhau.
 
 ---
 
@@ -427,7 +423,9 @@ Không có Decision nào tồn tại nếu không có Canonical Truth.
 
 Không có Assessment nào tồn tại nếu không có Decision.
 
-Không có Narrative nào tồn tại nếu không có Assessment.
+Không có Recommendation nào tồn tại nếu không có Decision.
+
+Không có Narrative nào tồn tại nếu không có Assessment và Recommendation.
 
 ---
 
@@ -459,51 +457,39 @@ Mọi kết luận phải Explainable.
 
 # 10. Architectural Layers
 
-Framework chia thành các lớp tuần tự.
+Framework chia thành các lớp.
 
-Layer 1
-
-Canonical Layer
+Layer 1 Canonical Layer
 
 ↓
 
-Layer 2
-
-Evidence Layer
+Layer 2 Evidence Layer
 
 ↓
 
-Layer 3
+Layer 3 Decision Layer
 
-Decision Layer
+        /                    \
+Layer 4 Assessment     Layer 4 Recommendation
 
-↓
-
-Layer 4
-
-Assessment Layer
+        \                    /
+Layer 5 Narrative Layer
 
 ↓
 
-Layer 5
+Layer 6 Presentation Layer
 
-Recommendation Layer
+Assessment và Recommendation cùng cấp.
 
-↓
+Không layer nào đứng trên layer kia.
 
-Layer 6
+Mỗi projection chỉ biết Decision.
 
-Narrative Layer
-
-↓
-
-Layer 7
-
-Presentation Layer
-
-Mỗi Layer chỉ biết Layer ngay phía dưới.
+Narrative biết cả hai sibling outputs.
 
 Không được nhảy tầng.
+
+Không được để Recommendation consume Assessment.
 
 ---
 
@@ -537,7 +523,7 @@ Assessment Layer
 
 chịu trách nhiệm:
 
-"Chiếu Decision thành câu trả lời cho khách hàng."
+"Chiếu Decision thành câu trả lời Question Set."
 
 ---
 
@@ -545,7 +531,7 @@ Recommendation Layer
 
 chịu trách nhiệm:
 
-"Sinh hành động từ Assessment."
+"Chiếu Decision thành hành động."
 
 ---
 
@@ -553,7 +539,7 @@ Narrative Layer
 
 chịu trách nhiệm:
 
-"Giải thích Assessment."
+"Giải thích Assessment và Recommendation."
 
 ---
 
@@ -599,19 +585,19 @@ Mục tiêu cuối cùng của Consulting Framework không phải:
 
 Mục tiêu là:
 
-"Tạo ra Decision đúng, rồi chiếu thành Assessment đúng."
+"Tạo ra Decision đúng, rồi chiếu độc lập thành Assessment đúng và Recommendation đúng."
 
-Assessment là kết quả ngữ nghĩa công bố.
+Assessment là Question-driven projection.
+
+Recommendation là Action projection.
+
+Hai phép chiếu không phụ thuộc nhau.
 
 Narrative chỉ là lớp truyền đạt.
 
 Nếu Decision sai,
 
-Assessment sai.
-
-Nếu Assessment sai,
-
-Narrative hay đến đâu cũng vô nghĩa.
+cả Assessment và Recommendation sai.
 
 ---
 
@@ -662,21 +648,14 @@ Finding
 │
 ▼
 Decision
-│
-▼
-Assessment
-│
-▼
-Recommendation
-│
-▼
-Narrative
-│
-▼
-Report
-│
-▼
-Presentation
+        /        \
+Assessment      Recommendation
+        \        /
+         Narrative
+             ↓
+          Report
+             ↓
+       Presentation
 
 ```
 
@@ -709,18 +688,13 @@ Domain State Resolver
         │
         ▼
 Decision Engine
-        │
-        ▼
-Assessment Engine
-        │
-        ▼
-Recommendation Engine
-        │
-        ▼
-Narrative Engine
-        │
-        ▼
-Presentation
+        /                    \
+Assessment Engine     Recommendation Engine
+        \                    /
+              Narrative Engine
+                    │
+                    ▼
+              Presentation
 
 ```
 
@@ -941,7 +915,9 @@ Assessment không được:
 - đổi Evidence;
 - đổi Finding.
 
-Assessment là public semantic result.
+Assessment là Question-driven Projection Engine.
+
+Assessment không phải Executive Summary.
 
 Decision không còn là mặt hàng công bố mặc định.
 
@@ -965,13 +941,17 @@ Can Chi.
 
 Recommendation chỉ được sinh từ:
 
-Assessment.
+Decision.
+
+Recommendation không được đọc Assessment.
+
+Assessment không được đọc Recommendation.
 
 Recommendation không chứa compatibility conclusions.
 
 Assessment không chứa action plans.
 
-Nếu Assessment thay đổi.
+Nếu Decision thay đổi.
 
 Recommendation thay đổi.
 
@@ -988,6 +968,10 @@ Decision.
 Narrative chỉ chuyển:
 
 Assessment
+
+và
+
+Recommendation
 
 ↓
 
@@ -1122,17 +1106,21 @@ Evidence không đổi.
 
 ---
 
-# 29A. Assessment is a Projection
+# 29A. Assessment is a Question-driven Projection
 
 Assessment không phải Decision mới.
 
-Assessment luôn được chiếu từ Decision.
+Assessment không phải Executive Summary.
+
+Assessment luôn được chiếu từ Decision theo Question Set.
 
 Do đó:
 
 Assessment có thể regenerate.
 
 Decision không đổi.
+
+Recommendation regenerate độc lập từ cùng Decision.
 
 ---
 
@@ -1614,15 +1602,12 @@ Domain State
 
 Decision
 
-↓
-
-Assessment
-
-↓
-
-Recommendation
+        /        \
+Assessment      Recommendation
 
 Không module nào được bỏ qua bước.
+
+Không module nào được xâu chuỗi Assessment → Recommendation.
 
 ---
 
@@ -1670,12 +1655,16 @@ Assessment luôn phải sinh từ:
 
 Decision đã hoàn tất.
 
+Assessment là Question-driven Projection Engine.
+
 Assessment không được:
 
 - tạo Decision;
-- chứa action plan.
+- chứa action plan;
+- tóm tắt Report;
+- tạo hoặc đọc Recommendation.
 
-Assessment là public semantic contract.
+Question Set là public semantic contract.
 
 ---
 
@@ -1683,11 +1672,11 @@ Assessment là public semantic contract.
 
 Recommendation luôn phải sinh từ:
 
+Decision.
+
+Không được sinh từ:
+
 Assessment.
-
-Không được sinh trực tiếp từ:
-
-Decision công bố.
 
 Evidence.
 
@@ -1699,7 +1688,17 @@ Evidence
 
 Customer Advice
 
-mà chưa qua Decision và Assessment.
+mà chưa qua Decision.
+
+và tránh:
+
+Assessment
+
+↓
+
+Recommendation
+
+làm hai sibling phụ thuộc nhau.
 
 ---
 
@@ -1774,9 +1773,13 @@ Decision luôn đứng sau Evidence.
 
 Invariant 3
 
-Assessment luôn đứng sau Decision.
+Assessment và Recommendation luôn đứng sau Decision.
 
-Narrative luôn đứng sau Assessment.
+Hai tầng này độc lập.
+
+Invariant 3A
+
+Narrative luôn đứng sau cả Assessment và Recommendation.
 
 Invariant 4
 
@@ -2236,10 +2239,12 @@ mà không cần sửa kiến trúc.
 COMMON chỉ được FREEZE khi:
 
 - [ ] Truth và Decision tách biệt hoàn toàn.
-- [ ] Assessment đứng giữa Decision và Recommendation.
-- [ ] Assessment là public semantic contract.
-- [ ] Narrative không tạo Decision hoặc Assessment.
-- [ ] Presentation không sửa Decision hoặc Assessment.
+- [ ] Assessment và Recommendation là siblings, cùng consume Decision.
+- [ ] Assessment không tạo Recommendation.
+- [ ] Recommendation không consume Assessment.
+- [ ] Assessment là Question-driven Projection Engine, không phải Executive Summary.
+- [ ] Narrative không tạo Decision, Assessment, hoặc Recommendation.
+- [ ] Presentation không sửa Decision, Assessment, hoặc Recommendation.
 - [ ] Chỉ có một Runtime.
 - [ ] Chỉ có một Truth.
 - [ ] Framework dùng chung cho mọi Module.
@@ -2280,7 +2285,13 @@ Assessment
 
 xác định
 
-Câu trả lời công bố.
+Câu trả lời Question Set.
+
+Recommendation
+
+xác định
+
+Hành động.
 
 Narrative Framework
 
@@ -2304,7 +2315,11 @@ Nhưng liên kết chặt chẽ.
 
 > Every Assessment must originate from a Decision.
 
-> Every Narrative must originate from an Assessment.
+> Every Recommendation must originate from a Decision.
+
+> Assessment and Recommendation must never consume each other.
+
+> Every Narrative must originate from Assessment and Recommendation.
 
 > Every Presentation must faithfully represent the Narrative.
 

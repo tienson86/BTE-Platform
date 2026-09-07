@@ -19,9 +19,11 @@
 
 # 1. Purpose
 
-Tài liệu này định nghĩa Marriage Assessment của TV-01.
+Tài liệu này định nghĩa Marriage Assessment Question Set của TV-01.
 
-Marriage Assessment là public semantic result.
+Marriage Assessment là Question-driven projection của Decision.
+
+Không phải Executive Summary.
 
 TV-01 không còn công bố Decision trực tiếp.
 
@@ -34,31 +36,22 @@ Assessment Profile là hợp đồng khách hàng.
 # 2. Architecture Position
 
 ```
-Canonical Truth
-        │
-        ▼
-Evidence
-        │
-        ▼
-Finding
-        │
-        ▼
-Marriage Decision
-        │
-        ▼
-Marriage Assessment
-        │
-        ▼
-Recommendation
-        │
-        ▼
-Narrative
-        │
-        ▼
-Report / UI
+                    Marriage Decision
+                   /                 \
+         Marriage Assessment    Recommendation
+                   \                 /
+                         Narrative
+                             ↓
+                       Report / UI
 ```
 
-Assessment không tạo Decision.
+Assessment và Recommendation là siblings.
+
+Cả hai chỉ consume Decision.
+
+Assessment không tạo Recommendation.
+
+Recommendation không consume Assessment.
 
 Assessment không sửa D1–D8.
 
@@ -246,7 +239,11 @@ Growth potential
 
 Overall conclusion
 
-Overall không được mâu thuẫn Q1–Q5.
+Overall Marriage Assessment là Question.
+
+Không phải Executive Summary của Report.
+
+Overall không được mâu thuẫn Q1–Q5 vì cùng Decision.
 
 Overall không được chứa action plan.
 
@@ -273,22 +270,21 @@ MarriageAssessment
   versions
 ```
 
-Mỗi Answer:
+Mỗi Answer là object, không phải câu văn:
 
 ```text
 question_id
-answer_state
-semantic_level
-direction?          # bắt buộc với Q2
-headline
-explanation
-support_status
-main_risk?
-main_rescue?
-score?              # optional
-source_decision_refs
-source_finding_refs
+question
+semantic_answer
 confidence
+supporting_findings
+conflicting_findings
+conditions
+limitations
+version
+trace_reference
+direction?          # bắt buộc với Q2
+score?              # optional
 ```
 
 ---
@@ -305,9 +301,13 @@ Q4 chiếu từ conflict / rescue / stability findings.
 
 Q5 chiếu từ children / family findings khi available.
 
-Q6 chiếu từ Q1–Q5 đã project, không chiếu bypass Decision.
+Q6 chiếu từ Overall Decision, không tóm tắt Report, không consume Q1–Q5 như nguồn.
+
+Q6 phải nhất quán với Q1–Q5 vì cùng Decision.
 
 Không Question nào được sinh từ Narrative.
+
+Không Question nào được sinh từ Recommendation.
 
 ---
 
@@ -399,7 +399,15 @@ change Evidence
 
 change Finding
 
+create Recommendation
+
+read Recommendation
+
+summarize the Report
+
 Recommendation MUST NOT:
+
+consume Assessment
 
 contain compatibility conclusions
 
@@ -418,6 +426,8 @@ FAIL nếu:
 - Q2 không có hướng;
 - Q5 dự đoán fertility hoặc số con;
 - Assessment chứa action plan;
+- Assessment đọc hoặc tạo Recommendation;
+- Recommendation consume Assessment;
 - UI công bố Decision thay Assessment;
 - Detailed Analysis đứng trước Assessment.
 

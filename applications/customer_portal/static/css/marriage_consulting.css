@@ -116,10 +116,40 @@
   border: 0;
 }
 
+.mc-assessment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.mc-assessment-card__question {
+  font-weight: 600;
+}
+
+.mc-assessment-card__answer {
+  font-size: 1.05rem;
+}
+
+.mc-assessment-card__more > summary {
+  cursor: pointer;
+}
+
+.mc-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.mc-details > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
 @media (max-width: 1024px) {
   .mc-domain-grid,
   .mc-action-grid,
-  .mc-comparison-grid {
+  .mc-comparison-grid,
+  .mc-assessment-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 }
@@ -128,7 +158,8 @@
   .mc-people,
   .mc-domain-grid,
   .mc-action-grid,
-  .mc-comparison-grid {
+  .mc-comparison-grid,
+  .mc-assessment-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 

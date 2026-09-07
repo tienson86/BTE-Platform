@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 
 from consulting.marriage.adapters.canonical_runtime import CanonicalOrchestratorAdapter
 from consulting.marriage.constants import MODULE_VERSION
+from consulting.marriage.assessment.projector import project_marriage_assessment
 from consulting.marriage.decision.comparison import build_marriage_comparison
 from consulting.marriage.decision.context import MarriageDecisionContext
 from consulting.marriage.decision.resolver import MarriageDecisionResolverV1, build_confidence
@@ -152,6 +153,7 @@ class MarriageDecisionOrchestrator(MarriageRuntimeOrchestrator):
             limitations=list(policy_context.limitations),
         )
         result.comparison = _build_comparison(result)
+        result.assessment = project_marriage_assessment(result)
         self._run_stage(
             consultation_id,
             session,

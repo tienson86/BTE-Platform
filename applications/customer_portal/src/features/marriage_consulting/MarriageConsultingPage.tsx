@@ -130,17 +130,19 @@ export function MarriageConsultingPage(): ReactNode {
         </p>
       </header>
 
-      <form className="mc-form" data-testid="marriage-form" onSubmit={onSubmit} noValidate>
-        <div className="mc-people" data-testid="people-layout">
-          <PersonPanel side="a" value={personA} errors={errorsA} onChange={setPersonA} />
-          <PersonPanel side="b" value={personB} errors={errorsB} onChange={setPersonB} />
-        </div>
-        <div className="mc-cta">
-          <button type="submit" id="btnMarriageAnalyze" data-testid="submit-marriage" disabled={status === "loading"}>
-            {SUBMIT_LABEL}
-          </button>
-        </div>
-      </form>
+      {view && status !== "loading" ? null : (
+        <form className="mc-form" data-testid="marriage-form" onSubmit={onSubmit} noValidate>
+          <div className="mc-people" data-testid="people-layout">
+            <PersonPanel side="a" value={personA} errors={errorsA} onChange={setPersonA} />
+            <PersonPanel side="b" value={personB} errors={errorsB} onChange={setPersonB} />
+          </div>
+          <div className="mc-cta">
+            <button type="submit" id="btnMarriageAnalyze" data-testid="submit-marriage" disabled={status === "loading"}>
+              {SUBMIT_LABEL}
+            </button>
+          </div>
+        </form>
+      )}
 
       {status === "idle" && !view ? (
         <p className="muted" data-testid="empty-state">

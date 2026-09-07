@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from consulting.marriage.assessment.projector import project_marriage_assessment
 from consulting.marriage.api.versions import API_VERSION, API_VERSION_TOKEN
 from consulting.marriage.dto.history import MarriageHistoryRecord, MarriageStoredResult
 from consulting.marriage.dto.response import MarriageConsultationSummary, RuntimeError, RuntimeWarning
@@ -125,6 +126,7 @@ def serialize_consultation(stored: MarriageStoredResult, *, expert: bool) -> dic
         "versions": public_version_bundle(result),
         "headline": _headline(stored.narrative),
         "action_themes": _action_themes(result),
+        "assessment_cards": serialize_assessment_cards(result),
     }
     if expert:
         payload["expert"] = _expert_trace(stored)
@@ -143,6 +145,7 @@ def serialize_summary(stored: MarriageStoredResult) -> dict[str, object]:
         "top_strengths": _section_titles(report, "strengths"),
         "top_risks": _section_titles(report, "risks"),
         "top_action_themes": _action_themes(result),
+        "assessment_cards": serialize_assessment_cards(result),
         "confidence": {
             "level": result.confidence.level.value,
             "overall": result.confidence.overall,
@@ -258,6 +261,25 @@ def _person_summary(result: MarriageDecisionResult, side: str) -> dict[str, str 
     }
 
 
+def serialize_assessment_cards(result: MarriageDecisionResult) -> list[dict[str, object]]:
+    """Public Assessment cards. Raw Decision stays internal."""
+    if result.assessment is None:
+        result.assessment = project_marriage_assessment(result)
+    cards: list[dict[str, object]] = []
+    for card in result.assessment.cards:
+        cards.append(
+            {
+                "question_id": card.question_id,
+                "question": card.question,
+                "answer": card.answer,
+                "supporting_facts": list(card.supporting_facts),
+                "confidence": card.confidence,
+                "limitations": list(card.limitations),
+            }
+        )
+    return cards
+
+
 def _headline(narrative: MarriageNarrativeResult | None) -> str | None:
     """Copy the overall headline already composed by Narrative."""
     if narrative is None:
@@ -282,10 +304,13 @@ def _action_themes(result: MarriageDecisionResult) -> list[str]:
 
 
 def _section_body(report: MarriageReportModel | None, section_id: str) -> str | None:
-    """Copy an existing report section body."""
+    """Copy an existing report section body. Prefer the first Assessment answer."""
     section = _find_section(report, section_id)
     if section is None:
         return None
+    for block in section.blocks:
+        if block.kind == "answer" and block.body:
+            return block.body
     for block in section.blocks:
         if block.body:
             return block.body

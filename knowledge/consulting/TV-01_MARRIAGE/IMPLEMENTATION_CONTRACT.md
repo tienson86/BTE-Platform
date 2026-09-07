@@ -202,11 +202,15 @@ COMMON/06_ASSESSMENT_MODEL.md
 
 TV-01/03A_ASSESSMENT_PROFILE.md
 
-Public API, Report, UI chỉ công bố Marriage Assessment.
+Public API, Report, UI công bố Question Set và Assessment Answers.
 
 Không công bố Decision như mặt hàng mặc định.
 
 Assessment không được tạo hoặc sửa Decision.
+
+Assessment không được tạo hoặc đọc Recommendation.
+
+Recommendation không được consume Assessment.
 
 ---
 
@@ -214,17 +218,17 @@ Assessment không được tạo hoặc sửa Decision.
 
 Recommendation chỉ được sinh từ:
 
-Assessment.
+Decision.
 
 Không được sinh từ:
+
+Assessment
 
 Evidence
 
 Finding
 
 Narrative
-
-Decision công bố
 
 ---
 

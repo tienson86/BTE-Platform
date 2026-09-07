@@ -209,7 +209,9 @@ Không sửa Canonical Mathematics.
 
 Không sửa Decision Mathematics.
 
-Không rewrite Decision để trả lời khách hàng.
+Song song với Recommendation Engine.
+
+Cả hai đọc Decision. Không đọc nhau.
 
 ---
 

@@ -196,6 +196,39 @@
         escapeHtml(bodies(timing).join(" ")) +
         "</p></section>"
       : '<div data-testid="timing-omitted" hidden></div>';
+    const cards = consultation.assessment_cards || [];
+    const assessmentHtml = cards.length
+      ? '<section class="mc-assessment" data-testid="marriage-assessment"><h2>Đánh giá hôn nhân</h2><div class="mc-assessment-grid">' +
+        cards
+          .map(function (card) {
+            const facts = (card.supporting_facts || [])
+              .map(function (item) {
+                return "<li>" + escapeHtml(item) + "</li>";
+              })
+              .join("");
+            const limits = (card.limitations || []).length
+              ? '<p class="mc-limitation">' + escapeHtml((card.limitations || []).join("; ")) + "</p>"
+              : "";
+            return (
+              '<article class="bte-card mc-assessment-card" data-testid="assessment-card-' +
+              escapeHtml(card.question_id) +
+              '"><p class="mc-assessment-card__question">' +
+              escapeHtml(card.question) +
+              '</p><p class="mc-assessment-card__answer">' +
+              escapeHtml(card.answer) +
+              '</p><details class="mc-assessment-card__more"><summary>Cơ sở và giới hạn</summary>' +
+              '<ul class="mc-assessment-card__facts">' +
+              facts +
+              "</ul><p class=\"muted\">Độ tin cậy: " +
+              escapeHtml(card.confidence) +
+              "</p>" +
+              limits +
+              "</details></article>"
+            );
+          })
+          .join("") +
+        "</div></section>"
+      : "";
     return (
       '<div class="mc-result" data-testid="marriage-result">' +
       '<section class="bte-card mc-identity" data-testid="couple-identity"><h2>Hồ sơ cặp đôi</h2>' +
@@ -204,7 +237,10 @@
       " và " +
       escapeHtml((consultation.person_b && consultation.person_b.display_name) || "Người B") +
       "</p></section>" +
-      '<section class="bte-card mc-hero" data-testid="compatibility-hero" data-semantic-only="true">' +
+      assessmentHtml +
+      '<section class="bte-card mc-hero" data-testid="compatibility-hero" data-semantic-only="true"' +
+      (cards.length ? " hidden" : "") +
+      ">" +
       '<p class="mc-hero__eyebrow">Tương hợp hôn nhân</p>' +
       '<h2 data-testid="hero-headline">' +
       escapeHtml(consultation.headline || (hero && hero.summary) || "") +
@@ -219,9 +255,12 @@
       escapeHtml(CONFIDENCE[(consultation.confidence && consultation.confidence.level) || ""] || "") +
       "</p>" +
       '<p class="sr-only" data-testid="hero-score-absent">Điểm số tương hợp chưa khả dụng</p></section>' +
-      '<section class="bte-card" data-testid="executive-summary"><h2>Tóm tắt tư vấn</h2><p>' +
+      '<section class="bte-card" data-testid="executive-summary"' +
+      (cards.length ? " hidden" : "") +
+      "><h2>Đánh giá hôn nhân</h2><p>" +
       escapeHtml((exec && exec.blocks && exec.blocks[0] && exec.blocks[0].body) || "") +
       "</p></section>" +
+      '<details class="mc-details" data-testid="detailed-analysis"><summary>Phân tích chi tiết</summary>' +
       '<section class="bte-card" data-testid="key-strengths"><h2>Điểm hòa hợp nổi bật</h2><ul>' +
       bodies(strengths, "highlight")
         .map(function (item) {
@@ -241,13 +280,13 @@
           comparisonHtml +
           "</div></section>"
         : "") +
-      '<section class="mc-domains" data-testid="domain-analysis"><h2>Hiểu vì sao</h2><div class="mc-domain-grid">' +
+      '<section class="mc-domains" data-testid="domain-analysis"><h2>Phân tích chi tiết theo miền</h2><div class="mc-domain-grid">' +
       domainHtml +
       "</div>" +
       (unavailable
         ? '<p class="mc-limitation" data-testid="unavailable-domains">Một số miền chưa đủ dữ liệu cấu trúc để luận riêng.</p>'
         : "") +
-      "</section>" +
+      "</section></details>" +
       timingHtml +
       '<section class="mc-actions" data-testid="action-plan"><h2>Kế hoạch hành động</h2><div class="mc-action-grid">' +
       actionHtml +
@@ -320,6 +359,9 @@
         status.innerHTML = '<div class="bte-card mc-error" data-testid="error-state" role="alert"><p>' + message + "</p></div>";
         return;
       }
+      form.hidden = true;
+      const empty = root.querySelector("[data-testid='empty-state']");
+      if (empty) empty.hidden = true;
       const reportEnv = await request("GET", API + "/" + created.data.consultation_id + "/report");
       status.innerHTML = renderResult(created.data, reportEnv.data, [].concat(created.warnings || [], reportEnv.warnings || []));
     });

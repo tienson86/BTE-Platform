@@ -62,17 +62,10 @@ Narrative
 
 Decision
 
-↓
-
-Assessment
-
-↓
-
-Recommendation
-
-↓
-
-Narrative
+        /        \
+Assessment      Recommendation
+        \        /
+         Narrative
 
 ↓
 
@@ -114,8 +107,6 @@ Metadata
 
 Framework chuẩn hóa:
 
-Executive Summary
-
 Assessment
 
 Detailed Analysis
@@ -125,6 +116,12 @@ Recommendations
 Action Plan
 
 Appendix
+
+Assessment không phải Executive Summary.
+
+Assessment là Question Answers.
+
+Recommendations là sibling, không derive từ Assessment.
 
 ---
 

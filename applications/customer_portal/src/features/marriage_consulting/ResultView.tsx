@@ -2,7 +2,7 @@ import { useState, type ReactNode } from "react";
 
 import { warningNotes } from "./adapter";
 import { FORBIDDEN_ID_PATTERN, FORBIDDEN_SCORE_PATTERN } from "./labels";
-import type { DomainCardVm, MarriageViewModel } from "./types";
+import type { AssessmentCardVm, DomainCardVm, MarriageViewModel } from "./types";
 
 type ResultViewProps = {
   view: MarriageViewModel;
@@ -22,7 +22,23 @@ export function ResultView({ view, expertMode, onToggleExpert }: ResultViewProps
         <p className="muted">{view.identityTitle}</p>
       </section>
 
-      <section className="bte-card mc-hero" data-testid="compatibility-hero" data-semantic-only="true">
+      {view.assessmentCards.length ? (
+        <section className="mc-assessment" data-testid="marriage-assessment">
+          <h2>Đánh giá hôn nhân</h2>
+          <div className="mc-assessment-grid">
+            {view.assessmentCards.map((card) => (
+              <AssessmentCard key={card.questionId} card={card} />
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      <section
+        className="bte-card mc-hero"
+        data-testid="compatibility-hero"
+        data-semantic-only="true"
+        hidden={view.assessmentCards.length > 0}
+      >
         <p className="mc-hero__eyebrow">{view.heroEyebrow}</p>
         <h2 data-testid="hero-headline">{view.heroHeadline}</h2>
         <p data-testid="hero-state">{view.heroStateLabel}</p>
@@ -47,64 +63,67 @@ export function ResultView({ view, expertMode, onToggleExpert }: ResultViewProps
         </p>
       </section>
 
-      <section className="bte-card" data-testid="executive-summary">
-        <h2>Tóm tắt tư vấn</h2>
+      <section className="bte-card" data-testid="executive-summary" hidden={view.assessmentCards.length > 0}>
+        <h2>Đánh giá hôn nhân</h2>
         <p>{view.executiveSummary}</p>
       </section>
 
-      <section className="bte-card" data-testid="key-strengths">
-        <h2>Điểm hòa hợp nổi bật</h2>
-        <ul>
-          {view.strengths.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      </section>
+      <details className="mc-details" data-testid="detailed-analysis">
+        <summary>Phân tích chi tiết</summary>
+        <section className="bte-card" data-testid="key-strengths">
+          <h2>Điểm hòa hợp nổi bật</h2>
+          <ul>
+            {view.strengths.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
 
-      <section className="bte-card" data-testid="key-risks">
-        <h2>Điểm xung đột cần lưu ý</h2>
-        <ul>
-          {view.risks.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      </section>
+        <section className="bte-card" data-testid="key-risks">
+          <h2>Điểm xung đột cần lưu ý</h2>
+          <ul>
+            {view.risks.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
 
-      {view.comparisonGroups.length ? (
-        <section className="mc-comparison" data-testid="comparison-board">
-          <h2>So sánh hai chiều</h2>
-          <div className="mc-comparison-grid">
-            {view.comparisonGroups.map((group) => (
-              <article
-                key={group.id}
-                className="bte-card mc-comparison-card"
-                data-testid={group.id}
-              >
-                <h3>{group.title}</h3>
-                <ul>
-                  {group.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </article>
+        {view.comparisonGroups.length ? (
+          <section className="mc-comparison" data-testid="comparison-board">
+            <h2>So sánh hai chiều</h2>
+            <div className="mc-comparison-grid">
+              {view.comparisonGroups.map((group) => (
+                <article
+                  key={group.id}
+                  className="bte-card mc-comparison-card"
+                  data-testid={group.id}
+                >
+                  <h3>{group.title}</h3>
+                  <ul>
+                    {group.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        <section className="mc-domains" data-testid="domain-analysis">
+          <h2>Phân tích chi tiết theo miền</h2>
+          <div className="mc-domain-grid">
+            {view.domains.map((domain) => (
+              <DomainCard key={domain.domain} domain={domain} />
             ))}
           </div>
+          {view.unavailableNote ? (
+            <p className="mc-limitation" data-testid="unavailable-domains">
+              {view.unavailableNote}
+            </p>
+          ) : null}
         </section>
-      ) : null}
-
-      <section className="mc-domains" data-testid="domain-analysis">
-        <h2>Hiểu vì sao</h2>
-        <div className="mc-domain-grid">
-          {view.domains.map((domain) => (
-            <DomainCard key={domain.domain} domain={domain} />
-          ))}
-        </div>
-        {view.unavailableNote ? (
-          <p className="mc-limitation" data-testid="unavailable-domains">
-            {view.unavailableNote}
-          </p>
-        ) : null}
-      </section>
+      </details>
 
       {view.timingSummary ? (
         <section className="bte-card" data-testid="timing-section">
@@ -205,6 +224,27 @@ export function ResultView({ view, expertMode, onToggleExpert }: ResultViewProps
   );
 }
 
+function AssessmentCard({ card }: { card: AssessmentCardVm }): ReactNode {
+  return (
+    <article className="bte-card mc-assessment-card" data-testid={`assessment-card-${card.questionId}`}>
+      <p className="mc-assessment-card__question">{card.question}</p>
+      <p className="mc-assessment-card__answer">{card.answer}</p>
+      <details className="mc-assessment-card__more">
+        <summary>Cơ sở và giới hạn</summary>
+        <ul className="mc-assessment-card__facts">
+          {card.supportingFacts.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+        <p className="muted">Độ tin cậy: {card.confidence}</p>
+        {card.limitations.length ? (
+          <p className="mc-limitation">{card.limitations.join("; ")}</p>
+        ) : null}
+      </details>
+    </article>
+  );
+}
+
 function DomainCard({ domain }: { domain: DomainCardVm }): ReactNode {
   const [open, setOpen] = useState(false);
   return (
@@ -230,6 +270,7 @@ function customerText(view: MarriageViewModel): string {
     view.heroHeadline,
     view.heroSummary,
     view.executiveSummary,
+    ...view.assessmentCards.flatMap((card) => [card.question, card.answer, ...card.supportingFacts]),
     ...view.strengths,
     ...view.risks,
     ...view.comparisonGroups.flatMap((group) => group.items),
