@@ -10,7 +10,8 @@ from applications.customer_portal.app import create_app
 from applications.customer_portal.config import PORTAL_ROOT
 from applications.customer_portal.i18n import load_catalog, t
 
-_PRODUCT_LABELS = ("Trang chủ", "Chọn ngày tốt", "Xem lá số")
+_PRODUCT_LABELS = ("Trang chủ", "Chọn ngày tốt", "Xem lá số", "Tư vấn hôn nhân")
+_ORIGINAL_THREE_LABELS = ("Trang chủ", "Chọn ngày tốt", "Xem lá số")
 _CANONICAL_FIELDS = ("full_name", "gender", "birth_date", "birth_time", "birth_place")
 _ACCURACY_NOTE = (
     "Lưu ý: Giờ sinh và nơi sinh càng chính xác thì kết quả luận giải càng đáng tin cậy."
@@ -122,9 +123,12 @@ def test_v9_successful_analysis_still_routes_to_result() -> None:
     assert 'data-mount="PortalPage"' in response.text
 
 
-def test_v10_customer_nav_remains_three_items() -> None:
+def test_v10_customer_nav_keeps_original_items() -> None:
+    """TV1-B07A: original three destinations remain; fourth item is approved."""
     nav = _primary_nav(_client().get("/analyze").text)
-    assert _nav_labels(nav) == list(_PRODUCT_LABELS)
+    labels = _nav_labels(nav)
+    assert labels[:3] == list(_ORIGINAL_THREE_LABELS)
+    assert labels == list(_PRODUCT_LABELS)
     for label in ("Kết quả", "Báo cáo", "Lịch sử", "Hướng dẫn"):
         assert label not in nav
     assert 'data-nav-id="analyze"' in nav

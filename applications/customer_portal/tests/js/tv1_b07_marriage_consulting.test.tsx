@@ -322,8 +322,17 @@ describe("TV1-B07 Marriage Consulting UI", () => {
     expect(screen.getByTestId("submit-marriage").tagName).toBe("BUTTON");
   });
 
-  it("27 existing customer portal navigation stays three items", () => {
-    expect(APP_NAV_ITEMS).toHaveLength(3);
-    expect(APP_NAV_ITEMS.map((item) => item.href)).toEqual(["/good-date", "/choose-date", "/analyze"]);
+  it("27 existing three destinations stay; TV1-B07A adds the fourth primary item", () => {
+    expect(APP_NAV_ITEMS.slice(0, 3).map((item) => item.href)).toEqual([
+      "/good-date",
+      "/choose-date",
+      "/analyze",
+    ]);
+    expect(APP_NAV_ITEMS).toHaveLength(4);
+    expect(APP_NAV_ITEMS[3]).toEqual({
+      id: "marriage-consulting",
+      label: "Tư vấn hôn nhân",
+      href: "/marriage-consulting",
+    });
   });
 });

@@ -6,7 +6,7 @@ from typing import Any
 
 from applications.customer_portal.config import PORTAL_ROOT, settings
 from applications.customer_portal.i18n import DEFAULT_LOCALE, dump_catalog_json, load_catalog, t
-from applications.customer_portal.pages import CUSTOMER_NAV_ITEMS, MARRIAGE_CONSULTING_PATH
+from applications.customer_portal.pages import CUSTOMER_NAV_ITEMS
 
 TEMPLATES_DIR = PORTAL_ROOT / "templates"
 
@@ -26,7 +26,7 @@ def _is_customer_nav_active(item_key: str, active: str) -> bool:
 
 
 def _customer_nav_html(catalog: dict[str, Any], active: str) -> str:
-    """Render the three canonical customer product links."""
+    """Render the live customer primary product links."""
     links: list[str] = []
     for item in CUSTOMER_NAV_ITEMS:
         is_active = _is_customer_nav_active(item.key, active)
@@ -47,13 +47,6 @@ def _customer_header_html(
 ) -> str:
     """Render the single Customer Portal chrome used by HTML pages and /result."""
     nav = _customer_nav_html(catalog, active)
-    consulting_current = ' aria-current="page"' if active == "marriage-consulting" else ""
-    consulting_cls = "nav-link active" if active == "marriage-consulting" else "nav-link"
-    consulting = (
-        f'<a class="{consulting_cls}" href="{MARRIAGE_CONSULTING_PATH}"'
-        f' data-nav-id="marriage-consulting" data-nav-family="consulting"{consulting_current}>'
-        f"{t(catalog, 'nav.marriage_consulting')}</a>"
-    )
     return (
         f'<a class="skip-link" href="{skip_href}">Skip to content</a>\n'
         '  <header class="app-header" id="appHeader">\n'
@@ -67,7 +60,6 @@ def _customer_header_html(
         f'      <nav class="app-nav nav" id="appNav" data-customer-nav="primary"'
         f' aria-label="Điều hướng chính">{nav}</nav>\n'
         '      <div class="app-header-actions">\n'
-        f"        {consulting}\n"
         '        <button type="button" id="btnThemeToggle" class="secondary"'
         ' aria-pressed="false">Dark</button>\n'
         '        <a class="app-user" href="/profile" aria-label="Hồ sơ" title="Hồ sơ">\n'

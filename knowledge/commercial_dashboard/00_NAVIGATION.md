@@ -6,6 +6,11 @@ Version: V1.0
 Status: CANONICAL
 Owner: BTE Platform
 
+TV1-B07A amendment (approved): the live Customer Portal header
+exposes a fourth primary item, "Tư vấn hôn nhân" → `/marriage-consulting`.
+This is a visible primary nav item, not a dropdown and not a header-action.
+The original three destinations and routes are unchanged.
+
 ---
 
 # 1. Mục đích
@@ -49,7 +54,7 @@ Các chức năng này thuộc Admin Portal.
 
 # 3. Navigation chính
 
-Portal V1 chỉ có 3 màn hình chính.
+Portal V1 có 4 màn hình chính (TV1-B07A).
 
 ```
 Trang chủ
@@ -59,9 +64,13 @@ Chọn ngày tốt
 ↓
 
 Xem lá số
+↓
+
+Tư vấn hôn nhân
 ```
 
-Không có menu khác.
+Không dùng dropdown / grouped navigation cho ticket này.
+Không thêm mục quản trị.
 
 ---
 
@@ -182,6 +191,28 @@ PHÂN TÍCH LÁ SỐ
 
 ---
 
+# 7A. Tư vấn hôn nhân (TV1-B07A)
+
+Tên hiển thị:
+
+```
+Tư vấn hôn nhân
+```
+
+Route:
+
+```
+/marriage-consulting
+```
+
+Đây là mục điều hướng chính thứ tư, được duyệt cho TV1-B07A.
+
+Không thay thế Trang chủ, Chọn ngày tốt, hoặc Xem lá số.
+
+Không dùng dropdown.
+
+---
+
 # 8. Luồng xem lá số
 
 ```
@@ -255,6 +286,8 @@ Chọn ngày tốt
 
 Xem lá số
 
+Tư vấn hôn nhân
+
 [ Dark ]
 
 [ Thông báo ]
@@ -307,7 +340,7 @@ Không hiển thị trong Customer Portal.
 
 Rule 1
 
-Không quá 3 menu chính.
+Không quá 4 menu chính (TV1-B07A approved fourth item: Tư vấn hôn nhân).
 
 ---
 
@@ -358,11 +391,19 @@ Chọn ngày tốt
 ```
 
 ```
-/view-chart
+/analyze
 
 ↓
 
 Xem lá số
+```
+
+```
+/marriage-consulting
+
+↓
+
+Tư vấn hôn nhân
 ```
 
 ```
@@ -379,11 +420,12 @@ Dashboard không được truy cập trực tiếp nếu chưa có dữ liệu.
 
 # 16. Mobile Navigation
 
-Mobile giữ nguyên 3 mục:
+Mobile giữ nguyên 4 mục:
 
 - Trang chủ
 - Chọn ngày tốt
 - Xem lá số
+- Tư vấn hôn nhân
 
 Dashboard mở toàn màn hình.
 
@@ -393,7 +435,7 @@ Không tạo Navigation riêng.
 
 # 17. Acceptance Checklist
 
-✓ Chỉ có 3 menu chính.
+✓ Chỉ có 4 menu chính (TV1-B07A: Tư vấn hôn nhân is the approved fourth item).
 
 ✓ Dashboard không phải menu.
 
@@ -415,10 +457,8 @@ Không tạo Navigation riêng.
 
 Navigation V1 được phép mở rộng.
 
-Nhưng mọi module mới phải nằm dưới một trong ba nhóm:
+TV1-B07A is the approved architecture decision for a fourth
+primary item: Tư vấn hôn nhân → `/marriage-consulting`.
 
-- Trang chủ
-- Chọn ngày tốt
-- Xem lá số
-
-Không bổ sung menu chính nếu chưa có quyết định kiến trúc mới.
+Further modules should still prefer grouping under existing items
+rather than adding more primary menu entries without a new decision.

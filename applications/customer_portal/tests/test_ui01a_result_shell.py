@@ -13,7 +13,8 @@ from applications.customer_portal.i18n import load_catalog, t
 from applications.customer_portal.pages import CUSTOMER_NAV_ITEMS
 
 _FORBIDDEN_NAV_LABELS = ("Kết quả", "Báo cáo", "Lịch sử")
-_PRODUCT_LABELS = ("Trang chủ", "Chọn ngày tốt", "Xem lá số")
+_PRODUCT_LABELS = ("Trang chủ", "Chọn ngày tốt", "Xem lá số", "Tư vấn hôn nhân")
+_ORIGINAL_THREE_LABELS = ("Trang chủ", "Chọn ngày tốt", "Xem lá số")
 
 
 def _client() -> TestClient:
@@ -39,9 +40,12 @@ def _main_html(html: str) -> str:
     return match.group(1) if match else html
 
 
-def test_a1_result_primary_nav_has_three_product_items() -> None:
+def test_a1_result_primary_nav_has_four_product_items() -> None:
+    """TV1-B07A: /result uses the same four-item live chrome; original three stay first."""
     nav = _primary_nav(_client().get("/result").text)
-    assert _nav_labels(nav) == list(_PRODUCT_LABELS)
+    labels = _nav_labels(nav)
+    assert labels[:3] == list(_ORIGINAL_THREE_LABELS)
+    assert labels == list(_PRODUCT_LABELS)
 
 
 def test_a2_result_primary_nav_hides_legacy_items() -> None:
@@ -91,9 +95,11 @@ def test_a6_result_routing_host_is_unchanged() -> None:
 
 
 def test_a7_good_date_and_choose_date_nav_unchanged() -> None:
+    """Original three destinations remain; TV1-B07A adds the approved fourth item."""
     client = _client()
     for path in ("/good-date", "/choose-date"):
         labels = _nav_labels(_primary_nav(client.get(path).text))
+        assert labels[:3] == list(_ORIGINAL_THREE_LABELS)
         assert labels == list(_PRODUCT_LABELS)
         for label in _FORBIDDEN_NAV_LABELS:
             assert label not in _primary_nav(client.get(path).text)
@@ -127,9 +133,17 @@ def test_a8_single_customer_header_source() -> None:
     assert "<PortalHeader" not in portal_page
     assert "cd-header__nav" not in chrome
     assert 'label: "Xem lá số"' in nav_items
+    assert 'label: "Tư vấn hôn nhân"' in nav_items
+    assert 'href: "/marriage-consulting"' in nav_items
     assert [item.path for item in CUSTOMER_NAV_ITEMS] == [
         "/good-date",
         "/choose-date",
         "/analyze",
+        "/marriage-consulting",
     ]
-    assert [item.key for item in CUSTOMER_NAV_ITEMS] == ["home", "choose-date", "analyze"]
+    assert [item.key for item in CUSTOMER_NAV_ITEMS] == [
+        "home",
+        "choose-date",
+        "analyze",
+        "marriage-consulting",
+    ]

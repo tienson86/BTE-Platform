@@ -25,24 +25,30 @@ def test_marriage_consulting_route_loads() -> None:
     assert 'data-customer-nav="primary"' in response.text
 
 
-def test_primary_nav_still_has_three_product_items() -> None:
-    """UI-01 three-item primary nav stays frozen."""
+def test_primary_nav_includes_approved_fourth_item() -> None:
+    """TV1-B07A: Tư vấn hôn nhân is the fourth live primary nav item."""
     html = _client().get("/good-date").text
-    assert len(CUSTOMER_NAV_ITEMS) == 3
+    assert len(CUSTOMER_NAV_ITEMS) == 4
     assert html.count('data-customer-nav="primary"') == 1
     nav_start = html.index('data-customer-nav="primary"')
     nav_html = html[nav_start : html.index("</nav>", nav_start)]
     assert "Trang chủ" in nav_html
     assert "Chọn ngày tốt" in nav_html
     assert "Xem lá số" in nav_html
-    assert "Tư vấn hôn nhân" not in nav_html
+    assert "Tư vấn hôn nhân" in nav_html
+    assert 'href="/marriage-consulting"' in nav_html
+    assert 'data-nav-family="consulting"' not in html
 
 
-def test_consulting_family_entry_is_registered() -> None:
-    """Marriage sits in the consulting family without replacing primary nav."""
+def test_consulting_entry_is_mounted_in_primary_nav() -> None:
+    """Marriage is reachable from live primary chrome, not a hidden header-action."""
     html = _client().get(MARRIAGE_CONSULTING_PATH).text
-    assert 'data-nav-family="consulting"' in html
-    assert 'href="/marriage-consulting"' in html
+    nav_start = html.index('data-customer-nav="primary"')
+    nav_html = html[nav_start : html.index("</nav>", nav_start)]
+    assert 'href="/marriage-consulting"' in nav_html
+    assert 'data-nav-id="marriage-consulting"' in nav_html
+    assert 'aria-current="page"' in nav_html
+    assert 'id="marriage-consulting-root"' in html
     assert _client().get("/good-date").status_code == 200
     assert _client().get("/analyze").status_code == 200
     assert _client().get("/choose-date").status_code == 200

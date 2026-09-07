@@ -35,11 +35,18 @@ def _nav_labels(nav_html: str) -> list[str]:
     return re.findall(r">([^<]+)</a>", nav_html)
 
 
-def test_n1_customer_navigation_has_three_product_items() -> None:
+def test_n1_customer_navigation_has_four_product_items() -> None:
+    """TV1-B07A: four visible primary items; original three destinations unchanged."""
     html = _client().get("/good-date").text
     labels = _nav_labels(_primary_nav(html))
-    assert labels == ["Trang chủ", "Chọn ngày tốt", "Xem lá số"]
-    assert len(CUSTOMER_NAV_ITEMS) == 3
+    assert labels == ["Trang chủ", "Chọn ngày tốt", "Xem lá số", "Tư vấn hôn nhân"]
+    assert len(CUSTOMER_NAV_ITEMS) == 4
+    assert [item.path for item in CUSTOMER_NAV_ITEMS[:3]] == [
+        "/good-date",
+        "/choose-date",
+        "/analyze",
+    ]
+    assert CUSTOMER_NAV_ITEMS[3].path == "/marriage-consulting"
 
 
 def test_n2_reports_not_in_customer_navigation() -> None:
@@ -95,6 +102,24 @@ def test_n7_xem_la_so_opens_input_screen() -> None:
     assert "Luận giải" not in nav
 
 
+def test_n11_marriage_consulting_is_fourth_primary_item() -> None:
+    """TV1-B07A: Tư vấn hôn nhân is a visible primary item with active state."""
+    client = _client()
+    home_nav = _primary_nav(client.get("/good-date").text)
+    assert re.search(r'href="/marriage-consulting"[^>]*>Tư vấn hôn nhân<', home_nav)
+    response = client.get("/marriage-consulting")
+    assert response.status_code == 200
+    nav = _primary_nav(response.text)
+    assert 'data-nav-id="marriage-consulting"' in nav
+    assert 'aria-current="page"' in nav
+    assert re.search(
+        r'class="nav-link active"[^>]*href="/marriage-consulting"[^>]*>Tư vấn hôn nhân<',
+        nav,
+    )
+    assert 'id="marriage-consulting-root"' in response.text
+    assert "{{HEADER}}" not in response.text
+
+
 def test_n8_result_route_still_works() -> None:
     response = _client().get("/result")
     assert response.status_code == 200
@@ -121,6 +146,6 @@ def test_n10_legacy_welcome_is_not_production_landing() -> None:
     dashboard = client.get("/dashboard")
     assert dashboard.status_code == 200
     nav = _primary_nav(dashboard.text)
-    assert _nav_labels(nav) == ["Trang chủ", "Chọn ngày tốt", "Xem lá số"]
+    assert _nav_labels(nav) == ["Trang chủ", "Chọn ngày tốt", "Xem lá số", "Tư vấn hôn nhân"]
     for label in _FORBIDDEN_NAV_LABELS:
         assert label not in nav
