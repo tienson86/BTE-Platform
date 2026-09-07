@@ -1,141 +1,537 @@
-# Q2 Mutual Support — language skeleton only.
+# knowledge/consulting/language/marriage/support.yaml
 
 schema_version: "1.0.0"
-catalog_version: "consulting.language.marriage@0.1.0-skeleton"
-module_language_version: "marriage.language@0.1.0-skeleton"
+catalog_version: "consulting.language.marriage@1.0.0"
+module_language_version: "marriage.language@1.0.0"
 module: marriage
 question_id: Q2
 audience: customer
-status: skeleton
+status: approved
 
 entries:
+
   marriage.q2.mutual_support:
     semantic_state: mutual_support
     tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    version: "1.0.0"
+    status: approved
+
+    headline: "Hai người có khả năng bổ trợ cho nhau theo cả hai chiều."
+
+    meaning: >
+      Đây là dạng quan hệ mà mỗi người đều mang đến những yếu tố có ích cho người kia.
+      Sự hỗ trợ không chỉ nghiêng về một phía, vì vậy khả năng cùng nhau phát triển
+      thường tốt hơn những mối quan hệ chỉ có một người liên tục nâng đỡ người còn lại.
+
+    plain_customer_text: >
+      Cả hai đều có thể trở thành điểm tựa cho nhau theo những cách khác nhau.
+      Một người có thể hỗ trợ về động lực, sự nghiệp hoặc khả năng phát triển,
+      trong khi người còn lại giúp tăng tính ổn định, cân bằng hoặc khả năng tích lũy.
+      Đây là nền tảng tích cực cho một mối quan hệ cùng tiến.
+
+    technical_explanation: >
+      Kết luận chỉ được sử dụng khi Decision ghi nhận hỗ trợ có ý nghĩa ở cả A→B và B→A,
+      dựa trên các Finding đã được xác nhận như bổ trợ Dụng thần, hành thuận,
+      vai trò hỗ trợ hoặc các tương tác thuận lợi có hướng rõ ràng.
+
     supporting_fact_templates:
-      - id: a_to_b
-        source_fact: useful_god_support
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        slots: [person_a, person_b, element]
-        status: placeholder
-      - id: b_to_a
-        source_fact: useful_god_support
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        slots: [person_b, person_a, element]
-        status: placeholder
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    variants: []
-    forbidden_terms: []
+      - id: a_supports_b_useful_god
+        source_fact: useful_god_support_a_to_b
+        template: "{person_a} có yếu tố phù hợp với Dụng thần của {person_b}, tạo ra chiều hỗ trợ rõ từ {person_a} sang {person_b}."
+        slots: [person_a, person_b]
+        status: approved
+
+      - id: b_supports_a_useful_god
+        source_fact: useful_god_support_b_to_a
+        template: "{person_b} cũng có yếu tố phù hợp với Dụng thần của {person_a}, vì vậy sự bổ trợ diễn ra theo chiều ngược lại."
+        slots: [person_a, person_b]
+        status: approved
+
+      - id: mutual_favorable_elements
+        source_fact: mutual_favorable_support
+        template: "Hai lá số đều có những yếu tố mà người còn lại có thể sử dụng theo hướng thuận lợi."
+        slots: []
+        status: approved
+
+      - id: mutual_role_support
+        source_fact: mutual_role_support
+        template: "Cấu trúc vai trò cho thấy hai người có khả năng nâng đỡ nhau thay vì chỉ cạnh tranh hoặc gây áp lực."
+        slots: []
+        status: approved
+
+    limitation_templates:
+      - id: support_not_guarantee
+        source_fact: support_not_guarantee
+        template: "Sự bổ trợ trong Bát Tự là một lợi thế, nhưng không tự động bảo đảm hôn nhân thuận lợi nếu cách sống thực tế không phù hợp."
+        slots: []
+        status: approved
+
+      - id: different_support_domains
+        source_fact: support_domains_differ
+        template: "Hai người có thể hỗ trợ nhau ở những phương diện khác nhau, vì vậy không nên chỉ nhìn một yếu tố để kết luận ai quan trọng hơn."
+        slots: []
+        status: approved
+
+    closing: >
+      Nhìn tổng thể, đây là kiểu quan hệ có tiềm năng cùng nhau phát triển.
+      Điều đáng giá nhất không nằm ở việc ai được lợi nhiều hơn,
+      mà ở khả năng mỗi người đều tạo ra giá trị cho cuộc sống của người kia.
+
+    forbidden_terms:
+      - "chắc chắn phát tài"
+      - "lấy nhau sẽ giàu"
+      - "cưới nhau chắc chắn thành công"
+
+    variants:
+      - id: v1
+        headline: "Hai người bổ trợ cho nhau khá rõ."
+        meaning: >
+          Sự hỗ trợ xuất hiện ở cả hai chiều,
+          cho thấy đây không phải mối quan hệ mà chỉ một người liên tục phải nâng đỡ người còn lại.
+
+      - id: v2
+        headline: "Đây là mối quan hệ có tính hỗ trợ hai chiều."
+        meaning: >
+          Cả hai đều có những yếu tố giúp người kia cân bằng và phát huy tốt hơn thế mạnh của mình.
+
 
   marriage.q2.a_supports_b:
     semantic_state: a_supports_b
     tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates: []
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    version: "1.0.0"
+    status: approved
+
+    headline: "{person_a} là người tạo ra sự bổ trợ rõ hơn cho {person_b}."
+
+    meaning: >
+      Chiều hỗ trợ từ {person_a} sang {person_b} đang nổi bật hơn chiều ngược lại.
+      Điều này thường cho thấy {person_a} có khả năng giúp {person_b} cân bằng tốt hơn,
+      phát huy thuận lợi hơn hoặc giảm bớt một phần bất lợi trong cấu trúc lá số.
+
+    plain_customer_text: >
+      Trong mối quan hệ này, {person_a} có xu hướng là người nâng đỡ {person_b} nhiều hơn.
+      Sự hỗ trợ có thể thể hiện ở khả năng tạo động lực, ổn định cuộc sống,
+      hỗ trợ công việc hoặc giúp {person_b} phát triển đúng thế mạnh,
+      tùy vào Finding cụ thể mà hệ thống đã xác nhận.
+
+    technical_explanation: >
+      Chỉ sử dụng trạng thái này khi Decision ghi nhận số lượng hoặc chất lượng Finding hỗ trợ
+      ở chiều A→B rõ hơn B→A, và sự khác biệt đó đủ để tạo kết luận bất đối xứng.
+
+    supporting_fact_templates:
+      - id: a_useful_god_supports_b
+        source_fact: useful_god_support_a_to_b
+        template: "{person_a} mang yếu tố phù hợp với phần mà {person_b} đang cần để cân bằng tốt hơn."
+        slots: [person_a, person_b]
+        status: approved
+
+      - id: a_favorable_supports_b
+        source_fact: favorable_support_a_to_b
+        template: "Những yếu tố thuận từ {person_a} tạo tác động tích cực rõ hơn lên lá số của {person_b}."
+        slots: [person_a, person_b]
+        status: approved
+
+      - id: weaker_reverse_support
+        source_fact: reverse_support_weaker
+        template: "Chiều hỗ trợ từ {person_b} trở lại {person_a} vẫn có, nhưng hiện chưa nổi bật bằng."
+        slots: [person_a, person_b]
+        status: approved
+
+    limitation_templates:
+      - id: no_value_judgment
+        source_fact: directional_support_is_not_value
+        template: "Việc một người hỗ trợ nhiều hơn không có nghĩa người kia kém giá trị hoặc phụ thuộc hoàn toàn."
+        slots: []
+        status: approved
+
+      - id: real_life_required
+        source_fact: real_life_required
+        template: "Mức bổ trợ chỉ phát huy tốt khi hai người biết sử dụng đúng thế mạnh của nhau trong đời sống thực tế."
+        slots: []
+        status: approved
+
+    closing: >
+      Đây là mối quan hệ có chiều nâng đỡ khá rõ từ {person_a} sang {person_b}.
+      Nếu vai trò này được duy trì một cách cân bằng,
+      nó có thể trở thành lợi thế lớn cho sự phát triển lâu dài của hai người.
+
+    forbidden_terms:
+      - "{person_b} phải dựa vào {person_a}"
+      - "{person_a} nuôi vận {person_b}"
+      - "không có {person_a} thì {person_b} không phát triển"
+
     variants: []
-    forbidden_terms: []
+
 
   marriage.q2.b_supports_a:
     semantic_state: b_supports_a
     tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates: []
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    version: "1.0.0"
+    status: approved
+
+    headline: "{person_b} là người tạo ra sự bổ trợ rõ hơn cho {person_a}."
+
+    meaning: >
+      Chiều hỗ trợ từ {person_b} sang {person_a} hiện nổi bật hơn.
+      Điều này cho thấy {person_b} có những yếu tố phù hợp với nhu cầu cân bằng
+      hoặc hướng phát triển của {person_a}.
+
+    plain_customer_text: >
+      Trong mối quan hệ này, {person_b} có xu hướng là người nâng đỡ {person_a} nhiều hơn.
+      Sự hỗ trợ có thể thể hiện ở việc giúp {person_a} ổn định hơn,
+      phát huy tốt năng lực hoặc thuận lợi hơn trong những phương diện mà lá số đang cần bổ trợ.
+
+    technical_explanation: >
+      Trạng thái này chỉ được chọn khi Decision xác nhận Finding hỗ trợ B→A
+      nổi bật hơn A→B và chiều ưu thế đủ rõ để tạo kết luận bất đối xứng.
+
+    supporting_fact_templates:
+      - id: b_useful_god_supports_a
+        source_fact: useful_god_support_b_to_a
+        template: "{person_b} mang yếu tố phù hợp với phần mà {person_a} đang cần để cân bằng tốt hơn."
+        slots: [person_a, person_b]
+        status: approved
+
+      - id: b_favorable_supports_a
+        source_fact: favorable_support_b_to_a
+        template: "Những yếu tố thuận từ {person_b} tạo tác động tích cực rõ hơn lên lá số của {person_a}."
+        slots: [person_a, person_b]
+        status: approved
+
+      - id: weaker_forward_support
+        source_fact: forward_support_weaker
+        template: "Chiều hỗ trợ từ {person_a} sang {person_b} vẫn tồn tại, nhưng chưa nổi bật bằng."
+        slots: [person_a, person_b]
+        status: approved
+
+    limitation_templates:
+      - id: no_dependence
+        source_fact: directional_support_is_not_dependence
+        template: "Kết luận này phản ánh hướng bổ trợ trong Bát Tự, không có nghĩa một người phải phụ thuộc vào người còn lại."
+        slots: []
+        status: approved
+
+      - id: real_relationship_matters
+        source_fact: real_relationship_matters
+        template: "Khả năng hỗ trợ chỉ trở thành lợi thế thực sự khi hai người biết phối hợp trong cuộc sống."
+        slots: []
+        status: approved
+
+    closing: >
+      Chiều bổ trợ từ {person_b} sang {person_a} là một điểm tích cực đáng chú ý.
+      Nếu được phát huy đúng cách, đây có thể là nguồn hỗ trợ tốt cho sự phát triển của {person_a}.
+
+    forbidden_terms:
+      - "{person_a} phải dựa vào {person_b}"
+      - "{person_b} quyết định vận mệnh của {person_a}"
+      - "chắc chắn giúp phát tài"
+
     variants: []
-    forbidden_terms: []
+
 
   marriage.q2.asymmetric_support:
     semantic_state: asymmetric_support
     tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates: []
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    version: "1.0.0"
+    status: approved
+
+    headline: "Hai người có bổ trợ, nhưng mức hỗ trợ giữa hai chiều chưa cân bằng."
+
+    meaning: >
+      Một người đang tạo tác động thuận lợi rõ hơn lên người còn lại.
+      Mối quan hệ vẫn có giá trị bổ trợ, nhưng cần tránh để vai trò nâng đỡ trở thành gánh nặng kéo dài cho một phía.
+
+    plain_customer_text: >
+      Đây không phải là mối quan hệ thiếu hỗ trợ.
+      Điểm đáng chú ý là một người đang đóng vai trò nâng đỡ nổi bật hơn,
+      trong khi chiều ngược lại chưa thể hiện mạnh tương đương.
+
+    technical_explanation: >
+      Assessment sử dụng trạng thái này khi cả A→B và B→A đều có Finding hỗ trợ,
+      nhưng độ mạnh, độ tin cậy hoặc vai trò của hai chiều chênh lệch đáng kể.
+
+    supporting_fact_templates:
+      - id: dominant_a_to_b
+        source_fact: a_to_b_dominant
+        template: "Chiều hỗ trợ từ {person_a} sang {person_b} hiện rõ hơn."
+        slots: [person_a, person_b]
+        status: approved
+
+      - id: dominant_b_to_a
+        source_fact: b_to_a_dominant
+        template: "Chiều hỗ trợ từ {person_b} sang {person_a} hiện rõ hơn."
+        slots: [person_a, person_b]
+        status: approved
+
+      - id: both_support_exist
+        source_fact: both_support_exist
+        template: "Cả hai chiều đều có hỗ trợ, nhưng mức độ chưa cân bằng."
+        slots: []
+        status: approved
+
+    limitation_templates:
+      - id: avoid_overburden
+        source_fact: avoid_overburden
+        template: "Nếu một người phải liên tục gánh phần lớn trách nhiệm hỗ trợ, sự mất cân bằng thực tế có thể gây mệt mỏi về lâu dài."
+        slots: []
+        status: approved
+
+      - id: support_can_change_by_phase
+        source_fact: support_can_change_by_phase
+        template: "Vai trò hỗ trợ có thể thay đổi theo từng giai đoạn cuộc sống và vận trình."
+        slots: []
+        status: approved
+
+    closing: >
+      Đây là mối quan hệ vẫn có khả năng cùng phát triển,
+      nhưng cần giữ sự công bằng trong việc chia sẻ trách nhiệm và nâng đỡ lẫn nhau.
+
+    forbidden_terms:
+      - "một người hưởng, một người chịu"
+      - "một người ăn vận người kia"
+      - "lấy nhau để đổi vận"
+
     variants: []
-    forbidden_terms: []
+
 
   marriage.q2.vuong_phu:
     semantic_state: vuong_phu
     tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    version: "1.0.0"
+    status: approved
+
+    headline: "Người vợ có dấu hiệu hỗ trợ tốt cho vận phát triển của người chồng."
+
+    meaning: >
+      Đây là trường hợp có thể gọi là Vượng Phu theo nghĩa người vợ mang những yếu tố
+      phù hợp với phần mà lá số người chồng đang cần.
+      Sự hỗ trợ có thể tạo thuận lợi cho khả năng phát triển, ổn định hoặc khai mở cơ hội của người chồng.
+
+    plain_customer_text: >
+      Người vợ không “tạo ra thành công” thay cho người chồng,
+      nhưng sự hiện diện và cách hai người kết hợp có thể giúp người chồng phát huy tốt hơn năng lực,
+      giữ được sự ổn định và thuận lợi hơn trên con đường phát triển.
+
+    technical_explanation: >
+      Chỉ được sử dụng khi người hỗ trợ là nữ, người nhận hỗ trợ là nam,
+      và Decision xác nhận ít nhất một Finding đủ mạnh về Dụng thần hoặc hỗ trợ thuận chiều
+      theo tiêu chuẩn TV-01 đã phê duyệt.
+
     supporting_fact_templates:
-      - id: useful_god_wife_to_husband
-        source_fact: useful_god_support
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        slots: [person_offer, person_need, element]
-        status: placeholder
+      - id: wife_supports_husband_useful_god
+        source_fact: wife_supports_husband_useful_god
+        template: "Người vợ có yếu tố phù hợp với Dụng thần của người chồng."
+        slots: []
+        status: approved
+
+      - id: wife_supports_husband_favorable
+        source_fact: wife_supports_husband_favorable
+        template: "Các yếu tố thuận từ lá số người vợ tạo thêm sự hỗ trợ cho hướng phát triển của người chồng."
+        slots: []
+        status: approved
+
+      - id: career_finance_support
+        source_fact: husband_career_finance_support
+        template: "Sự bổ trợ có liên hệ đến phương diện phát triển, công việc hoặc tài vận khi Finding tương ứng được xác nhận."
+        slots: []
+        status: approved
+
     limitation_templates:
-      - id: only_if_canonical_supports
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        status: placeholder
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    variants: []
-    forbidden_terms: []
+      - id: no_guaranteed_wealth
+        source_fact: no_guaranteed_wealth
+        template: "Vượng Phu không đồng nghĩa với việc kết hôn xong người chồng chắc chắn giàu lên."
+        slots: []
+        status: approved
+
+      - id: requires_personal_capacity
+        source_fact: requires_personal_capacity
+        template: "Sự hỗ trợ chỉ phát huy trên nền năng lực, lựa chọn và nỗ lực thực tế của người chồng."
+        slots: []
+        status: approved
+
+    closing: >
+      Nếu hai người biết phối hợp đúng thế mạnh,
+      đây là dạng quan hệ trong đó người vợ có thể trở thành một nguồn hỗ trợ tích cực
+      cho quá trình phát triển của người chồng.
+
+    forbidden_terms:
+      - "cưới vợ sẽ phát tài"
+      - "vợ mang tiền về cho chồng"
+      - "lấy người này chắc chắn giàu"
+      - "đổi vận nhờ vợ"
+
+    variants:
+      - id: v1
+        headline: "Người vợ có khả năng hỗ trợ khá tốt cho sự phát triển của người chồng."
+        meaning: >
+          Lá số người vợ có những yếu tố phù hợp với phần mà người chồng đang cần,
+          vì vậy có thể tạo thêm thuận lợi cho quá trình phát triển của người chồng.
+
 
   marriage.q2.vuong_the:
     semantic_state: vuong_the
     tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    version: "1.0.0"
+    status: approved
+
+    headline: "Người chồng có dấu hiệu hỗ trợ tốt cho vận phát triển của người vợ."
+
+    meaning: >
+      Đây là trường hợp có thể gọi là Vượng Thê theo nghĩa người chồng mang những yếu tố
+      phù hợp với phần mà lá số người vợ đang cần.
+      Sự hỗ trợ có thể giúp người vợ tăng tính ổn định, phát huy năng lực hoặc thuận lợi hơn trong quá trình phát triển.
+
+    plain_customer_text: >
+      Người chồng không quyết định thành công của người vợ,
+      nhưng mối quan hệ này có khả năng tạo ra một môi trường thuận lợi
+      để người vợ phát huy tốt hơn thế mạnh của mình và giảm bớt một số điểm bất lợi.
+
+    technical_explanation: >
+      Chỉ được sử dụng khi người hỗ trợ là nam, người nhận hỗ trợ là nữ,
+      và Decision xác nhận Finding đủ mạnh về Dụng thần hoặc hỗ trợ thuận chiều
+      theo tiêu chuẩn TV-01.
+
     supporting_fact_templates:
-      - id: useful_god_husband_to_wife
-        source_fact: useful_god_support
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        slots: [person_offer, person_need, element]
-        status: placeholder
+      - id: husband_supports_wife_useful_god
+        source_fact: husband_supports_wife_useful_god
+        template: "Người chồng có yếu tố phù hợp với Dụng thần của người vợ."
+        slots: []
+        status: approved
+
+      - id: husband_supports_wife_favorable
+        source_fact: husband_supports_wife_favorable
+        template: "Các yếu tố thuận từ lá số người chồng tạo thêm sự hỗ trợ cho hướng phát triển của người vợ."
+        slots: []
+        status: approved
+
+      - id: stability_finance_support
+        source_fact: wife_stability_finance_support
+        template: "Sự hỗ trợ có thể thể hiện ở tính ổn định, khả năng phối hợp tài chính hoặc phát triển khi Finding tương ứng được xác nhận."
+        slots: []
+        status: approved
+
     limitation_templates:
-      - id: only_if_canonical_supports
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        status: placeholder
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    variants: []
-    forbidden_terms: []
+      - id: no_guaranteed_success
+        source_fact: no_guaranteed_success
+        template: "Vượng Thê không có nghĩa người vợ chắc chắn thành công hoặc giàu lên sau khi kết hôn."
+        slots: []
+        status: approved
+
+      - id: personal_effort_required
+        source_fact: personal_effort_required
+        template: "Năng lực và lựa chọn của người vợ vẫn là yếu tố quyết định kết quả thực tế."
+        slots: []
+        status: approved
+
+    closing: >
+      Nếu hai người phối hợp tốt,
+      người chồng có thể trở thành một điểm tựa thuận lợi
+      giúp người vợ ổn định và phát triển tốt hơn.
+
+    forbidden_terms:
+      - "lấy chồng đổi đời"
+      - "chồng mang tài lộc cho vợ"
+      - "cưới người này chắc chắn giàu"
+      - "đổi vận nhờ chồng"
+
+    variants:
+      - id: v1
+        headline: "Người chồng có khả năng hỗ trợ khá tốt cho sự phát triển của người vợ."
+        meaning: >
+          Lá số người chồng có những yếu tố phù hợp với phần mà người vợ đang cần,
+          tạo nên một chiều hỗ trợ tích cực trong hôn nhân.
+
 
   marriage.q2.insufficient:
     semantic_state: insufficient
-    tone: reference
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates: []
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    tone: professional_warm
+    version: "1.0.0"
+    status: approved
+
+    headline: "Hiện chưa đủ căn cứ để xác định ai bổ trợ cho ai rõ hơn."
+
+    meaning: >
+      Dữ liệu hiện tại chưa đủ để kết luận chắc chắn về hướng hỗ trợ giữa hai người.
+      Đây là giới hạn của dữ liệu, không phải dấu hiệu cho thấy mối quan hệ thiếu sự bổ trợ.
+
+    plain_customer_text: >
+      Hệ thống chưa có đủ bằng chứng để nói rằng người này nâng đỡ người kia nhiều hơn.
+      Vì vậy kết quả ở mục này nên được xem là chưa xác định thay vì tốt hoặc xấu.
+
+    technical_explanation: >
+      Trạng thái này được sử dụng khi các Finding hỗ trợ có độ tin cậy chưa đủ,
+      hướng A→B/B→A chưa rõ hoặc dữ liệu đầu vào còn thiếu.
+
+    supporting_fact_templates:
+      - id: support_direction_unclear
+        source_fact: support_direction_unclear
+        template: "Chiều hỗ trợ giữa hai người hiện chưa đủ rõ để tạo kết luận đáng tin cậy."
+        slots: []
+        status: approved
+
+      - id: birth_time_unknown
+        source_fact: birth_time_unknown
+        template: "Thiếu giờ sinh có thể làm giảm độ chi tiết của một số kết luận."
+        slots: []
+        status: approved
+
+    limitation_templates:
+      - id: insufficient_not_bad
+        source_fact: insufficient_not_bad
+        template: "Chưa đủ dữ liệu không đồng nghĩa với việc hai người không hỗ trợ được nhau."
+        slots: []
+        status: approved
+
+      - id: add_data
+        source_fact: add_data
+        template: "Nếu có thể bổ sung dữ liệu còn thiếu, kết luận về chiều bổ trợ sẽ đáng tin cậy hơn."
+        slots: []
+        status: approved
+
+    closing: >
+      Mục này nên được giữ ở trạng thái chưa xác định cho đến khi có đủ căn cứ,
+      thay vì đưa ra một kết luận mạnh không được dữ liệu chứng minh.
+
+    forbidden_terms:
+      - "không bổ trợ nhau"
+      - "không vượng phu"
+      - "không vượng thê"
+
     variants: []
-    forbidden_terms: []
+
+
+forbidden_terms:
+  - "chắc chắn phát tài"
+  - "lấy nhau sẽ giàu"
+  - "cưới để đổi vận"
+  - "vợ khắc chồng"
+  - "chồng khắc vợ"
+  - "một người ăn vận người kia"
+  - "không nên cưới"
+
+render_rules:
+  verdict_first: true
+  customer_first: true
+  explain_jargon: true
+  technical_explanation_collapsed_by_default: true
+
+  max_headline_sentences: 1
+  max_meaning_sentences: 3
+  max_supporting_facts: 4
+  max_limitations: 2
+
+  directional_display:
+    enabled: true
+    show_a_to_b: true
+    show_b_to_a: true
+    hide_empty_direction: false
+
+  prosperity_labels:
+    vuong_phu_requires_canonical_support: true
+    vuong_the_requires_canonical_support: true
+    prohibit_automatic_wealth_claim: true
+
+review_status:
+  architecture: approved
+  customer_wording: approved
+  runtime_binding: not_started

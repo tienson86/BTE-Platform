@@ -1,123 +1,390 @@
-# Q1 Overall Compatibility — language skeleton only.
-# Commercial Vietnamese must be authored by Product Owner.
+# knowledge/consulting/language/marriage/compatibility.yaml
 
 schema_version: "1.0.0"
-catalog_version: "consulting.language.marriage@0.1.0-skeleton"
-module_language_version: "marriage.language@0.1.0-skeleton"
+catalog_version: "consulting.language.marriage@1.0.0"
+module_language_version: "marriage.language@1.0.0"
 module: marriage
 question_id: Q1
 audience: customer
-status: skeleton
+status: approved
 
 entries:
   marriage.q1.supportive:
     semantic_state: supportive
     tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    version: "1.0.0"
+    status: approved
+
+    headline: "Hai người khá hợp nhau."
+
+    meaning: >
+      Hai người có nền tảng tương hợp tốt để xây dựng cuộc sống chung.
+      Các yếu tố hỗ trợ đang nhiều hơn các yếu tố tạo áp lực,
+      vì vậy khả năng đồng hành lâu dài nhìn chung là tích cực.
+
+    plain_customer_text: >
+      Đây là mối quan hệ có nhiều điểm thuận hơn điểm xung.
+      Nếu hai người biết tôn trọng khác biệt và giữ cách trao đổi rõ ràng,
+      khả năng đi đường dài khá tốt.
+
+    technical_explanation: >
+      Đánh giá dựa trên tương quan Nhật Chủ, mức độ bổ trợ Dụng thần,
+      các quan hệ Can Chi và trạng thái hỗ trợ/xung khắc đã được Decision xác nhận.
+
     supporting_fact_templates:
-      - id: compatibility_support
+      - id: useful_god_support
         source_fact: useful_god_support
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        slots: [person_a, person_b, element]
-        status: placeholder
+        template: "{person_a} và {person_b} có yếu tố bổ trợ phù hợp với nhu cầu cân bằng của nhau."
+        slots: [person_a, person_b]
+        status: approved
+
+      - id: directional_support
+        source_fact: directional_support
+        template: "Có sự hỗ trợ theo ít nhất một chiều giữa hai lá số."
+        slots: []
+        status: approved
+
+      - id: support_outweighs_conflict
+        source_fact: support_outweighs_conflict
+        template: "Các yếu tố thuận hiện nhỉnh hơn các yếu tố tạo áp lực."
+        slots: []
+        status: approved
+
+      - id: rescue_present
+        source_fact: rescue_present
+        template: "Một số điểm xung có yếu tố hỗ trợ đi kèm nên mức ảnh hưởng được giảm."
+        slots: []
+        status: approved
+
     limitation_templates:
-      - id: data_bounds
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        status: placeholder
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    variants: []
-    forbidden_terms: []
+      - id: normal_difference
+        source_fact: normal_difference
+        template: "Độ hòa hợp tốt không có nghĩa hai người sẽ không có bất đồng."
+        slots: []
+        status: approved
+
+      - id: pressure_period
+        source_fact: pressure_period
+        template: "Khi áp lực tăng, hai người vẫn cần chủ động trao đổi để tránh tích tụ mâu thuẫn."
+        slots: []
+        status: approved
+
+    closing: >
+      Nhìn tổng thể, đây là cặp đôi có nền tảng khá thuận để tiến tới,
+      miễn là hai người tiếp tục phát huy phần bổ trợ và quản lý tốt những khác biệt còn lại.
+
+    forbidden_terms:
+      - "chắc chắn hạnh phúc"
+      - "nhất định viên mãn"
+      - "không thể ly hôn"
+
+    variants:
+      - id: v1
+        headline: "Hai người khá hợp nhau."
+        meaning: >
+          Hai người có nhiều điểm thuận để đồng hành và xây dựng cuộc sống chung.
+          Phần hỗ trợ hiện rõ hơn phần xung khắc.
+
+      - id: v2
+        headline: "Nền tảng hôn nhân của hai người khá tốt."
+        meaning: >
+          Hai lá số cho thấy khả năng bổ trợ và phối hợp tương đối tích cực.
+          Những khác biệt hiện có vẫn nằm trong mức có thể điều chỉnh.
 
   marriage.q1.mixed:
     semantic_state: mixed
     tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    version: "1.0.0"
+    status: approved
+
+    headline: "Hai người vừa có điểm hợp, vừa có điểm cần điều chỉnh."
+
+    meaning: >
+      Mối quan hệ có cả yếu tố thuận và yếu tố căng.
+      Hai người không phải là cặp xung khắc mạnh,
+      nhưng cũng chưa phải dạng tự nhiên bổ trợ hoàn toàn.
+
+    plain_customer_text: >
+      Hai người vẫn có nền tảng để phát triển mối quan hệ,
+      nhưng khả năng đi lâu dài phụ thuộc khá nhiều vào cách xử lý các khác biệt trong thực tế.
+      Nếu hiểu đúng điểm mạnh và điểm dễ va chạm của nhau,
+      mối quan hệ vẫn có thể ổn định.
+
+    technical_explanation: >
+      Decision hiện ghi nhận đồng thời các Finding hỗ trợ và Finding tạo áp lực.
+      Không có phía nào đủ mạnh để kết luận hoàn toàn thuận hoặc hoàn toàn bất lợi.
+
     supporting_fact_templates:
       - id: mixed_support
-        source_fact: useful_god_support
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        slots: [person_a, person_b, element]
-        status: placeholder
-      - id: mixed_pressure
-        source_fact: unfavorable_activation
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        slots: [person_a, person_b, element]
-        status: placeholder
+        source_fact: mixed_support
+        template: "Hai người có những yếu tố hỗ trợ lẫn nhau."
+        slots: []
+        status: approved
+
+      - id: mixed_conflict
+        source_fact: mixed_conflict
+        template: "Đồng thời vẫn tồn tại một số điểm xung hoặc áp lực cần được quản lý."
+        slots: []
+        status: approved
+
+      - id: rescue_partial
+        source_fact: rescue_partial
+        template: "Một số xung khắc có yếu tố cứu giải nhưng phần ảnh hưởng còn lại vẫn cần lưu ý."
+        slots: []
+        status: approved
+
+      - id: directional_support_present
+        source_fact: directional_support_present
+        template: "Khả năng bổ trợ có xuất hiện, nhưng chưa đủ mạnh để lấn át hoàn toàn các điểm căng."
+        slots: []
+        status: approved
+
     limitation_templates:
-      - id: data_bounds
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        status: placeholder
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    # Two placeholder variants exist so selector determinism can be tested
-    # without Product Owner copy.
+      - id: manage_difference
+        source_fact: manage_difference
+        template: "Điều quan trọng là không để các khác biệt nhỏ tích tụ thành mâu thuẫn lớn."
+        slots: []
+        status: approved
+
+      - id: practical_management
+        source_fact: practical_management
+        template: "Nên thống nhất sớm về giao tiếp, tài chính và trách nhiệm nếu đây là những điểm đang dễ phát sinh bất đồng."
+        slots: []
+        status: approved
+
+    closing: >
+      Đây là kiểu quan hệ có thể đi tiếp,
+      nhưng cần sự chủ động vun đắp nhiều hơn so với những cặp có độ bổ trợ tự nhiên cao.
+
+    forbidden_terms:
+      - "không hợp nhau"
+      - "không nên cưới"
+      - "dễ ly hôn"
+
     variants:
       - id: v1
-        headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        status: placeholder
+        headline: "Độ hòa hợp ở mức trung bình."
+        meaning: >
+          Hai người có cả điểm thuận và điểm xung,
+          vì vậy kết quả lâu dài phụ thuộc nhiều vào cách hai người xử lý khác biệt.
+
       - id: v2
-        headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        status: placeholder
-    forbidden_terms: []
+        headline: "Hai người có nền tảng đan xen giữa thuận và xung."
+        meaning: >
+          Mối quan hệ vẫn có khả năng phát triển,
+          nhưng cần hiểu rõ các điểm dễ gây căng ngay từ đầu.
 
   marriage.q1.pressured:
     semantic_state: pressured
     tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates: []
+    version: "1.0.0"
+    status: approved
+
+    headline: "Hai người có khá nhiều điểm cần điều chỉnh."
+
+    meaning: >
+      Các yếu tố tạo áp lực đang rõ hơn phần bổ trợ.
+      Điều này khiến hai người dễ khó hiểu nhau hoặc dễ lặp lại mâu thuẫn
+      trong những giai đoạn căng thẳng.
+
+    plain_customer_text: >
+      Mối quan hệ vẫn có thể phát triển,
+      nhưng sẽ cần nhiều nỗ lực hơn về giao tiếp, trách nhiệm và cách ra quyết định.
+      Nếu cả hai cùng giữ quan điểm cứng,
+      xung đột có thể lặp lại ở một số chủ đề quen thuộc.
+
+    technical_explanation: >
+      Decision cho thấy các Finding tạo áp lực có độ ưu tiên hoặc mức ảnh hưởng
+      lớn hơn phần hỗ trợ hiện có.
+
+    supporting_fact_templates:
+      - id: conflict_dominant
+        source_fact: conflict_dominant
+        template: "Một số tương tác giữa hai lá số đang tạo áp lực tương đối rõ."
+        slots: []
+        status: approved
+
+      - id: support_not_enough
+        source_fact: support_not_enough
+        template: "Phần bổ trợ có xuất hiện nhưng chưa đủ để cân bằng hoàn toàn các điểm xung."
+        slots: []
+        status: approved
+
+      - id: residual_conflict
+        source_fact: residual_conflict
+        template: "Một số xung vẫn còn phần ảnh hưởng sau khi xét yếu tố cứu giải."
+        slots: []
+        status: approved
+
     limitation_templates:
-      - id: data_bounds
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        status: placeholder
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    variants: []
-    forbidden_terms: []
+      - id: not_absolute
+        source_fact: not_absolute
+        template: "Kết quả này không có nghĩa hai người chắc chắn không thể xây dựng hôn nhân."
+        slots: []
+        status: approved
+
+      - id: reality_matters
+        source_fact: reality_matters
+        template: "Khả năng đi lâu dài vẫn phụ thuộc rất lớn vào cách hai người ứng xử trong thực tế."
+        slots: []
+        status: approved
+
+    closing: >
+      Trường hợp này nên nhìn kỹ các điểm xung cụ thể trước khi đưa ra quyết định quan trọng,
+      thay vì chỉ dựa vào một kết luận tổng quát.
+
+    forbidden_terms:
+      - "chắc chắn ly hôn"
+      - "không thể sống với nhau"
+      - "không nên cưới"
+
+    variants:
+      - id: v1
+        headline: "Mối quan hệ có mức áp lực tương đối rõ."
+        meaning: >
+          Hai người vẫn có thể đồng hành,
+          nhưng cần chủ động điều chỉnh những điểm dễ phát sinh căng thẳng.
+
+      - id: v2
+        headline: "Độ hòa hợp hiện chưa cao."
+        meaning: >
+          Phần xung đang rõ hơn phần bổ trợ,
+          vì vậy cần nhiều sự thấu hiểu và phối hợp hơn để giữ ổn định.
 
   marriage.q1.needs_adjustment:
     semantic_state: needs_adjustment
     tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates: []
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    version: "1.0.0"
+    status: approved
+
+    headline: "Mối quan hệ cần thêm sự điều chỉnh để ổn định."
+
+    meaning: >
+      Hai người vẫn có điểm hợp,
+      nhưng hiện có một số khác biệt đáng chú ý ảnh hưởng đến khả năng phối hợp lâu dài.
+
+    plain_customer_text: >
+      Nếu hai người thống nhất được cách giao tiếp,
+      cách xử lý tài chính và vai trò trong cuộc sống chung,
+      khả năng hòa hợp có thể được cải thiện đáng kể.
+
+    technical_explanation: >
+      Assessment sử dụng trạng thái Decision có hỗ trợ nhưng tồn tại các Finding gây áp lực
+      đủ rõ để yêu cầu quản lý chủ động.
+
+    supporting_fact_templates:
+      - id: support_exists
+        source_fact: support_exists
+        template: "Hai người vẫn có nền tảng hỗ trợ nhất định."
+        slots: []
+        status: approved
+
+      - id: adjustment_needed
+        source_fact: adjustment_needed
+        template: "Một số điểm khác biệt cần được thống nhất rõ nếu muốn duy trì sự ổn định lâu dài."
+        slots: []
+        status: approved
+
+    limitation_templates:
+      - id: not_negative
+        source_fact: not_negative
+        template: "Trạng thái cần điều chỉnh không đồng nghĩa với việc mối quan hệ là bất lợi."
+        slots: []
+        status: approved
+
+    closing: >
+      Đây là dạng quan hệ mà cách hai người cùng xử lý khác biệt
+      sẽ quan trọng hơn bản thân những khác biệt đó.
+
+    forbidden_terms:
+      - "xấu"
+      - "đại hung"
+      - "không nên cưới"
+
     variants: []
-    forbidden_terms: []
 
   marriage.q1.insufficient:
     semantic_state: insufficient
-    tone: reference
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates: []
+    tone: professional_warm
+    version: "1.0.0"
+    status: approved
+
+    headline: "Hiện chưa đủ dữ liệu để đánh giá chính xác."
+
+    meaning: >
+      Một số dữ liệu hoặc miền phân tích quan trọng chưa đủ,
+      nên hệ thống chưa nên đưa ra kết luận mạnh về độ hòa hợp.
+
+    plain_customer_text: >
+      Điều này không có nghĩa hai người không hợp.
+      Chỉ đơn giản là dữ liệu hiện tại chưa đủ để đưa ra một nhận định đáng tin cậy.
+
+    technical_explanation: >
+      Confidence bị giới hạn do thiếu dữ liệu đầu vào
+      hoặc do một số domain chưa đủ Evidence/Finding để tạo Assessment ổn định.
+
+    supporting_fact_templates:
+      - id: missing_input
+        source_fact: missing_input
+        template: "Một phần dữ liệu đầu vào đang thiếu hoặc chưa đủ độ chính xác."
+        slots: []
+        status: approved
+
+      - id: domain_unavailable
+        source_fact: domain_unavailable
+        template: "Một số miền phân tích chưa đủ bằng chứng để đưa ra kết luận."
+        slots: []
+        status: approved
+
     limitation_templates:
-      - id: missing_structure
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        status: placeholder
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+      - id: add_birth_time
+        source_fact: birth_time_unknown
+        template: "Nếu có thể, nên bổ sung giờ sinh để tăng độ tin cậy của kết quả."
+        slots: []
+        status: approved
+
+      - id: not_negative_signal
+        source_fact: insufficient_is_not_negative
+        template: "Thiếu dữ liệu không được xem là một tín hiệu bất lợi về hôn nhân."
+        slots: []
+        status: approved
+
+    closing: >
+      Khi dữ liệu đầy đủ hơn, hệ thống có thể đưa ra đánh giá cụ thể và đáng tin cậy hơn.
+
+    forbidden_terms:
+      - "không hợp"
+      - "xấu"
+      - "không nên cưới"
+
     variants: []
-    forbidden_terms: []
+
+forbidden_terms:
+  - "chắc chắn ly hôn"
+  - "nhất định hạnh phúc"
+  - "không nên cưới"
+  - "khắc chết"
+  - "vô sinh"
+  - "chắc chắn ngoại tình"
+  - "đại hung"
+
+render_rules:
+  verdict_first: true
+  customer_first: true
+  explain_jargon: true
+  technical_explanation_collapsed_by_default: true
+
+  max_headline_sentences: 1
+  max_meaning_sentences: 3
+  max_supporting_facts: 4
+  max_limitations: 2
+
+  score:
+    enabled: false
+    reason: "Numeric compatibility projection has not been approved."
+
+review_status:
+  architecture: approved
+  customer_wording: approved
+  runtime_binding: not_started
+

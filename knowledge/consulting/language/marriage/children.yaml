@@ -1,58 +1,380 @@
-# Q5 Children / parenting — language skeleton only.
-# No fertility, child count, or gender claims.
+# knowledge/consulting/language/marriage/children.yaml
 
 schema_version: "1.0.0"
-catalog_version: "consulting.language.marriage@0.1.0-skeleton"
-module_language_version: "marriage.language@0.1.0-skeleton"
+catalog_version: "consulting.language.marriage@1.0.0"
+module_language_version: "marriage.language@1.0.0"
+
 module: marriage
 question_id: Q5
 audience: customer
-status: skeleton
+status: approved
 
 entries:
-  marriage.q5.insufficient:
-    semantic_state: insufficient
-    tone: reference
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates: []
-    limitation_templates:
-      - id: children_unsupported
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        status: placeholder
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    variants: []
-    forbidden_terms:
-      - vô sinh
-      - số con sẽ là
-      - giới tính con là
 
   marriage.q5.parenting_support:
+
     semantic_state: parenting_support
     tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    version: "1.0.0"
+    status: approved
+
+    headline: >
+      Hai người có khả năng phối hợp khá tốt trong việc nuôi dạy con.
+
+    meaning: >
+      Cách phân chia vai trò và trách nhiệm giữa hai người có những điểm bổ trợ.
+      Nếu cùng thống nhất nguyên tắc từ sớm,
+      hai người có khả năng tạo được môi trường tương đối ổn định cho con.
+
+    plain_customer_text: >
+      Một người có thể thiên về định hướng và nguyên tắc,
+      trong khi người còn lại giữ vai trò chăm sóc, cân bằng hoặc lắng nghe nhiều hơn.
+      Nếu biết phối hợp thay vì tranh quyền quyết định,
+      đây là nền tảng tốt cho việc cùng nuôi dạy con.
+
+    technical_explanation: >
+      Chỉ sử dụng trạng thái này khi Decision có đủ Finding liên quan
+      đến vai trò, trách nhiệm, sự phối hợp hoặc Parenting Compatibility.
+      Không được suy ra từ khả năng sinh sản.
+
     supporting_fact_templates:
-      - id: parenting_fact
-        source_fact: children
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+
+      - id: role_complement
+        source_fact: parenting_role_complement
+        template: >
+          Hai người có xu hướng bổ sung cho nhau trong cách đảm nhận trách nhiệm với con.
         slots: []
-        status: placeholder
+        status: approved
+
+      - id: responsibility_balance
+        source_fact: parenting_responsibility_balance
+        template: >
+          Việc chia sẻ trách nhiệm có nền tảng tương đối cân bằng.
+        slots: []
+        status: approved
+
+      - id: supportive_family_structure
+        source_fact: supportive_family_structure
+        template: >
+          Cấu trúc gia đình có những yếu tố thuận lợi cho việc cùng chăm sóc và định hướng con.
+        slots: []
+        status: approved
+
+      - id: communication_support
+        source_fact: parenting_communication_support
+        template: >
+          Hai người có khả năng trao đổi và thống nhất tương đối tốt về các vấn đề liên quan đến con.
+        slots: []
+        status: approved
+
     limitation_templates:
-      - id: not_fertility
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        status: placeholder
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    variants: []
+
+      - id: parenting_requires_alignment
+        source_fact: parenting_requires_alignment
+        template: >
+          Sự phối hợp chỉ phát huy tốt khi hai người thống nhất được nguyên tắc nuôi dạy con.
+        slots: []
+        status: approved
+
+      - id: no_fertility_claim
+        source_fact: no_fertility_claim
+        template: >
+          Kết quả này chỉ đánh giá khả năng phối hợp trong vai trò cha mẹ,
+          không phải đánh giá khả năng sinh sản.
+        slots: []
+        status: approved
+
+    closing: >
+      Nếu hai người cùng thống nhất cách chăm sóc, giáo dục và phân chia trách nhiệm,
+      đây là nền tảng khá tích cực cho việc xây dựng một gia đình có con.
+
     forbidden_terms:
-      - vô sinh
-      - số con sẽ là
-      - giới tính con là
+      - "dễ sinh con"
+      - "khó sinh con"
+      - "vô sinh"
+      - "hiếm muộn"
+      - "sinh con trai"
+      - "sinh con gái"
+      - "khắc con"
+
+    variants:
+
+      - id: v1
+        headline: >
+          Hai người có nền tảng khá tốt để cùng nuôi dạy con.
+        meaning: >
+          Khả năng chia sẻ vai trò và trách nhiệm đang tạo ra sự hỗ trợ tích cực.
+
+      - id: v2
+        headline: >
+          Cách phối hợp của hai người khá thuận cho vai trò làm cha mẹ.
+        meaning: >
+          Nếu cùng giữ nguyên tắc rõ ràng,
+          hai người có thể bổ trợ nhau khá tốt trong việc chăm sóc và định hướng con.
+
+
+  marriage.q5.parenting_mixed:
+
+    semantic_state: parenting_mixed
+    tone: professional_warm
+    version: "1.0.0"
+    status: approved
+
+    headline: >
+      Hai người có thể cùng nuôi dạy con tốt,
+      nhưng cần thống nhất rõ cách phối hợp.
+
+    meaning: >
+      Cả hai đều có những điểm phù hợp cho vai trò làm cha mẹ,
+      nhưng cách tiếp cận hoặc cách đặt nguyên tắc có thể khác nhau.
+      Nếu không thống nhất từ đầu,
+      sự khác biệt này dễ làm một người cảm thấy người kia quá nghiêm hoặc quá mềm.
+
+    plain_customer_text: >
+      Hai người có thể đều muốn điều tốt cho con,
+      nhưng cách thể hiện có thể không giống nhau.
+      Một người thiên về nguyên tắc,
+      người còn lại có thể thiên về cảm xúc hoặc linh hoạt hơn.
+      Đây là điểm cần được phối hợp thay vì tranh luận ai đúng hơn.
+
+    technical_explanation: >
+      Trạng thái này được sử dụng khi Decision ghi nhận đồng thời
+      Finding hỗ trợ và Finding tạo áp lực trong vai trò gia đình hoặc Parenting Compatibility.
+
+    supporting_fact_templates:
+
+      - id: parenting_support_exists
+        source_fact: parenting_support_exists
+        template: >
+          Hai người vẫn có khả năng chia sẻ trách nhiệm với con.
+        slots: []
+        status: approved
+
+      - id: parenting_style_difference
+        source_fact: parenting_style_difference
+        template: >
+          Cách đặt nguyên tắc hoặc cách phản ứng với con có thể khác nhau.
+        slots: []
+        status: approved
+
+      - id: decision_difference
+        source_fact: parenting_decision_difference
+        template: >
+          Hai người cần thống nhất cách đưa ra những quyết định quan trọng liên quan đến con.
+        slots: []
+        status: approved
+
+    limitation_templates:
+
+      - id: alignment_needed
+        source_fact: alignment_needed
+        template: >
+          Nếu cha mẹ đưa ra hai nguyên tắc quá khác nhau,
+          trẻ dễ khó xác định ranh giới rõ ràng.
+        slots: []
+        status: approved
+
+      - id: no_child_outcome_prediction
+        source_fact: no_child_outcome_prediction
+        template: >
+          Kết quả này không dự đoán tính cách hay tương lai của con.
+        slots: []
+        status: approved
+
+    closing: >
+      Điểm quan trọng nhất là hai người nên thống nhất nguyên tắc trước,
+      rồi mới linh hoạt trong cách mỗi người thể hiện vai trò của mình.
+
+    forbidden_terms:
+      - "con sẽ hư"
+      - "con khó nuôi"
+      - "khắc con"
+
+    variants: []
+
+
+  marriage.q5.parenting_pressure:
+
+    semantic_state: parenting_pressure
+    tone: professional_warm
+    version: "1.0.0"
+    status: approved
+
+    headline: >
+      Hai người cần đặc biệt chú ý cách phối hợp khi cùng nuôi dạy con.
+
+    meaning: >
+      Sự khác biệt về vai trò, nguyên tắc hoặc cách ra quyết định hiện khá rõ.
+      Nếu mỗi người đều giữ cách của mình,
+      những vấn đề liên quan đến con có thể trở thành nguồn gây căng thẳng trong gia đình.
+
+    plain_customer_text: >
+      Điểm cần lưu ý không nằm ở việc ai thương con nhiều hơn,
+      mà ở cách hai người cùng đưa ra nguyên tắc và trách nhiệm.
+      Nếu một người quá cứng còn người kia liên tục phá bỏ nguyên tắc,
+      cả cha mẹ lẫn con đều dễ rơi vào trạng thái khó phối hợp.
+
+    technical_explanation: >
+      Trạng thái này chỉ được sử dụng khi Decision có đủ Finding
+      cho thấy áp lực vai trò, trách nhiệm hoặc cách phối hợp gia đình
+      đang rõ hơn phần hỗ trợ.
+
+    supporting_fact_templates:
+
+      - id: parenting_role_pressure
+        source_fact: parenting_role_pressure
+        template: >
+          Hai người có thể dễ bất đồng về việc ai nên quyết định trong những vấn đề liên quan đến con.
+        slots: []
+        status: approved
+
+      - id: responsibility_conflict
+        source_fact: parenting_responsibility_conflict
+        template: >
+          Phân chia trách nhiệm chăm sóc con là điểm cần được làm rõ.
+        slots: []
+        status: approved
+
+      - id: discipline_difference
+        source_fact: discipline_difference
+        template: >
+          Cách đặt giới hạn và kỷ luật có thể khác nhau khá rõ.
+        slots: []
+        status: approved
+
+    limitation_templates:
+
+      - id: manageable_with_agreement
+        source_fact: manageable_with_agreement
+        template: >
+          Những khác biệt này có thể giảm đáng kể nếu hai người thống nhất nguyên tắc trước.
+        slots: []
+        status: approved
+
+      - id: not_fertility
+        source_fact: not_fertility
+        template: >
+          Đây là đánh giá về khả năng phối hợp làm cha mẹ,
+          không phải đánh giá khả năng có con.
+        slots: []
+        status: approved
+
+    closing: >
+      Nếu hai người dự định có con,
+      việc thống nhất cách chăm sóc, kỷ luật và phân chia trách nhiệm
+      nên được trao đổi từ trước thay vì chờ khi vấn đề phát sinh.
+
+    forbidden_terms:
+      - "không nên có con"
+      - "khắc con"
+      - "con cái phá hôn nhân"
+      - "khó sinh"
+
+    variants: []
+
+
+  marriage.q5.insufficient:
+
+    semantic_state: insufficient
+    tone: professional_warm
+    version: "1.0.0"
+    status: approved
+
+    headline: >
+      Hiện chưa đủ căn cứ để đánh giá khả năng phối hợp trong việc nuôi dạy con.
+
+    meaning: >
+      Các dữ liệu hiện có chưa đủ để hệ thống đưa ra nhận định đáng tin cậy
+      về sự phối hợp của hai người trong vai trò cha mẹ.
+
+    plain_customer_text: >
+      Điều này không có nghĩa hai người bất lợi về đường con cái.
+      Chỉ là hệ thống hiện chưa có đủ bằng chứng để đánh giá
+      cách hai người sẽ phối hợp khi cùng chăm sóc và nuôi dạy con.
+
+    technical_explanation: >
+      Trạng thái này được sử dụng khi D7 Children chưa đủ Finding
+      hoặc Confidence chưa đạt ngưỡng cần thiết.
+      Không được suy diễn thiếu dữ liệu thành bất lợi về sinh sản.
+
+    supporting_fact_templates:
+
+      - id: children_domain_unavailable
+        source_fact: children_domain_unavailable
+        template: >
+          Miền phân tích liên quan đến vai trò nuôi dạy con hiện chưa đủ bằng chứng.
+        slots: []
+        status: approved
+
+      - id: input_limitation
+        source_fact: input_limitation
+        template: >
+          Một số dữ liệu đầu vào có thể chưa đủ để đánh giá chi tiết.
+        slots: []
+        status: approved
+
+    limitation_templates:
+
+      - id: not_fertility_signal
+        source_fact: insufficient_not_fertility_signal
+        template: >
+          Thiếu dữ liệu không được xem là dấu hiệu khó có con hoặc bất lợi về sinh sản.
+        slots: []
+        status: approved
+
+      - id: professional_review
+        source_fact: professional_review
+        template: >
+          Nếu cần đánh giá sâu về gia đình hoặc kế hoạch sinh con,
+          nên sử dụng module tư vấn con cái riêng khi hoàn thiện.
+        slots: []
+        status: approved
+
+    closing: >
+      Mục này nên giữ ở trạng thái chưa xác định
+      cho đến khi có đủ căn cứ để đưa ra một đánh giá có trách nhiệm.
+
+    forbidden_terms:
+      - "vô sinh"
+      - "hiếm muộn"
+      - "khó có con"
+      - "khắc con"
+      - "không có số con"
+
+    variants: []
+
+
+forbidden_terms:
+  - "vô sinh"
+  - "hiếm muộn"
+  - "khó sinh"
+  - "khó có con"
+  - "khắc con"
+  - "khắc tử"
+  - "sinh con trai"
+  - "sinh con gái"
+  - "bao nhiêu con"
+  - "không có số con"
+
+render_rules:
+  verdict_first: true
+  customer_first: true
+  explain_jargon: true
+  technical_explanation_collapsed_by_default: true
+
+  max_headline_sentences: 1
+  max_meaning_sentences: 3
+  max_supporting_facts: 4
+  max_limitations: 2
+
+  children_scope:
+    fertility_prediction: false
+    child_count_prediction: false
+    child_gender_prediction: false
+    parenting_compatibility: true
+    family_role_coordination: true
+
+review_status:
+  architecture: approved
+  customer_wording: approved
+  runtime_binding: not_started

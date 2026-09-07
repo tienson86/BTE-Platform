@@ -2,115 +2,751 @@
 # Non-fatalistic. No divorce prediction.
 
 schema_version: "1.0.0"
-catalog_version: "consulting.language.marriage@0.1.0-skeleton"
-module_language_version: "marriage.language@0.1.0-skeleton"
+catalog_version: "consulting.language.marriage@1.0.0"
+module_language_version: "marriage.language@1.0.0"
 module: marriage
 question_id: Q4
 audience: customer
-status: skeleton
+status: approved
 
 entries:
-  marriage.q4.stable_with_rescue:
-    semantic_state: stable_with_rescue
+  marriage.q4.stable:
+
+    semantic_state: stable
+
     tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+
+    version: "1.0.0"
+
+    status: approved
+
+    headline: >
+      Nền tảng hôn nhân của hai người khá ổn định.
+
+    meaning: >
+      Hai người có nhiều yếu tố thuận lợi để cùng xây dựng cuộc sống chung.
+      Những khác biệt hiện có chưa đủ lớn để làm mất sự cân bằng của mối quan hệ.
+
+    plain_customer_text: >
+      Đây là kiểu hôn nhân có nền tảng khá tốt.
+      Hai người có khả năng đồng hành lâu dài nếu tiếp tục duy trì cách giao tiếp tích cực
+      và cùng chia sẻ trách nhiệm trong cuộc sống.
+
+    technical_explanation: >
+      Trạng thái này chỉ xuất hiện khi Decision xác nhận phần hỗ trợ
+      chiếm ưu thế rõ hơn phần tạo áp lực,
+      đồng thời không xuất hiện các Finding xung đột có mức ảnh hưởng lớn.
+
     supporting_fact_templates:
-      - id: main_conflict
-        source_fact: conflict
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        slots: []
-        status: placeholder
-      - id: main_rescue
-        source_fact: rescue
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        slots: []
-        status: placeholder
-      - id: main_condition
-        source_fact: condition
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        slots: []
-        status: placeholder
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    variants: []
-    forbidden_terms: []
 
+      - id: mutual_support
+        source_fact: mutual_support
+        template: >
+          Hai người có nhiều yếu tố hỗ trợ lẫn nhau trong cấu trúc lá số.
+        slots: []
+        status: approved
+
+      - id: balanced_roles
+        source_fact: balanced_roles
+        template: >
+          Vai trò của hai người khá cân bằng nên dễ phối hợp trong cuộc sống.
+        slots: []
+        status: approved
+
+      - id: low_conflict
+        source_fact: low_conflict
+        template: >
+          Không thấy các điểm xung đủ mạnh để chi phối toàn bộ mối quan hệ.
+        slots: []
+        status: approved
+
+      - id: rescue_available
+        source_fact: rescue_available
+        template: >
+          Một số khác biệt nếu có đều được giảm nhờ các yếu tố hỗ trợ đi kèm.
+        slots: []
+        status: approved
+
+    main_risk_templates:
+
+      - id: communication
+        source_fact: communication_difference
+        template: >
+          Khác biệt nhỏ trong cách giao tiếp nếu để kéo dài có thể tạo khoảng cách.
+        status: approved
+
+      - id: finance
+        source_fact: finance_difference
+        template: >
+          Quan điểm tài chính cần được thống nhất từ sớm.
+        status: approved
+
+    main_rescue_templates:
+
+      - id: mutual_respect
+        source_fact: mutual_respect
+        template: >
+          Hai người có khả năng lắng nghe và điều chỉnh khi cần.
+        status: approved
+
+      - id: support_two_way
+        source_fact: support_two_way
+        template: >
+          Sự bổ trợ hai chiều giúp giảm đáng kể tác động của các khác biệt.
+        status: approved
+
+    limitation_templates:
+
+      - id: no_perfect_marriage
+        source_fact: no_perfect_marriage
+        template: >
+          Không có cuộc hôn nhân nào hoàn toàn không có mâu thuẫn.
+        status: approved
+
+      - id: maintain_relationship
+        source_fact: maintain_relationship
+        template: >
+          Sự ổn định lâu dài vẫn phụ thuộc vào cách hai người duy trì mối quan hệ trong thực tế.
+        status: approved
+
+    closing: >
+      Đây là kiểu hôn nhân có nền tảng khá vững.
+      Nếu tiếp tục phát huy những điểm mạnh hiện có,
+      hai người có nhiều điều kiện để xây dựng cuộc sống lâu dài và ổn định.
+
+    forbidden_terms:
+
+      - "chắc chắn hạnh phúc"
+
+      - "không bao giờ cãi nhau"
+
+      - "hôn nhân hoàn hảo"
+
+    variants:
+
+      - id: v1
+
+        headline: >
+          Hai người có nền tảng hôn nhân khá tốt.
+
+        meaning: >
+          Phần lớn các yếu tố trong hai lá số đang hỗ trợ cho khả năng đồng hành lâu dài.
+
+      - id: v2
+
+        headline: >
+          Đây là mối quan hệ có khả năng duy trì ổn định.
+
+        meaning: >
+          Các yếu tố thuận lợi đang chiếm ưu thế,
+          giúp hai người dễ cùng nhau xây dựng cuộc sống chung.
+  marriage.q4.stable_with_rescue:
+
+    semantic_state: stable_with_rescue
+
+    tone: professional_warm
+
+    version: "1.0.0"
+
+    status: approved
+
+    headline: >
+      Mối quan hệ có nền tảng khá tốt và có khả năng ổn định lâu dài.
+
+    meaning: >
+      Hai người vẫn tồn tại một số điểm xung,
+      nhưng đồng thời cũng có nhiều yếu tố giúp cân bằng và giảm bớt tác động của các điểm xung đó.
+      Vì vậy, nhìn trên tổng thể đây vẫn là mối quan hệ có khả năng duy trì ổn định.
+
+    plain_customer_text: >
+      Không phải mọi khác biệt đều là điều bất lợi.
+      Trong trường hợp này, những điểm chưa hòa hợp đã được bù đắp bởi các yếu tố hỗ trợ khác.
+      Nếu hai người biết lắng nghe và cùng điều chỉnh,
+      những khác biệt này thường không trở thành trở ngại lớn cho cuộc sống hôn nhân.
+
+    technical_explanation: >
+      Chỉ sử dụng trạng thái này khi Decision xác nhận đồng thời có Finding xung
+      và Finding cứu giải hoặc bổ trợ đủ mạnh.
+      Các yếu tố cứu giải không xóa hoàn toàn xung,
+      nhưng làm giảm đáng kể mức ảnh hưởng của chúng.
+
+    supporting_fact_templates:
+
+      - id: rescue_exists
+        source_fact: rescue_exists
+        template: >
+          Các điểm xung hiện có đều đi kèm yếu tố hỗ trợ hoặc cứu giải.
+
+      - id: mutual_support
+        source_fact: mutual_support
+        template: >
+          Hai người vẫn duy trì được nhiều điểm bổ trợ hai chiều.
+
+      - id: support_stronger
+        source_fact: support_stronger_than_conflict
+        template: >
+          Tổng thể các yếu tố thuận đang nhỉnh hơn phần tạo áp lực.
+
+      - id: role_balance
+        source_fact: balanced_roles
+        template: >
+          Vai trò của hai người vẫn có khả năng giữ được sự cân bằng.
+
+    main_risk_templates:
+
+      - id: communication_difference
+        source_fact: communication_difference
+        template: >
+          Khác biệt trong cách giao tiếp là điểm dễ phát sinh mâu thuẫn nhất.
+
+      - id: finance_difference
+        source_fact: finance_difference
+        template: >
+          Quan điểm về tài chính nên được thống nhất ngay từ đầu.
+
+    main_rescue_templates:
+
+      - id: rescue_day_master
+        source_fact: rescue_day_master
+        template: >
+          Nhật Chủ có yếu tố bổ trợ giúp giảm bớt phần xung.
+
+      - id: rescue_useful_god
+        source_fact: rescue_useful_god
+        template: >
+          Dụng thần giữa hai lá số tạo thêm khả năng cân bằng.
+
+      - id: rescue_direction
+        source_fact: directional_support
+        template: >
+          Hai chiều hỗ trợ giúp hạn chế tác động của các điểm khác biệt.
+
+    limitation_templates:
+
+      - id: rescue_not_cancel
+        source_fact: rescue_not_cancel
+        template: >
+          Yếu tố cứu giải không làm mất hoàn toàn các điểm xung.
+
+      - id: relationship_effort
+        source_fact: relationship_effort
+        template: >
+          Hai người vẫn cần chủ động xây dựng cách giao tiếp và chia sẻ trách nhiệm.
+
+    closing: >
+      Đây là kiểu hôn nhân có nền tảng tích cực.
+      Những khác biệt vẫn tồn tại,
+      nhưng đã có nhiều yếu tố giúp cân bằng.
+      Nếu cả hai cùng trưởng thành trong cách ứng xử,
+      khả năng đồng hành lâu dài là khá khả quan.
+
+    forbidden_terms:
+
+      - "chắc chắn hạnh phúc"
+
+      - "không bao giờ cãi nhau"
+
+      - "không thể ly hôn"
+
+    variants:
+
+      - id: v1
+
+        headline: >
+          Có khác biệt nhưng cũng có nhiều yếu tố cứu giải.
+
+        meaning: >
+          Điểm mạnh của mối quan hệ là khả năng tự cân bằng những khác biệt.
+
+      - id: v2
+
+        headline: >
+          Mối quan hệ có khả năng ổn định nếu biết phát huy phần bổ trợ.
+
+        meaning: >
+          Những điểm xung hiện nay chưa đủ để lấn át phần thuận lợi.
   marriage.q4.mixed_with_conflict:
+
     semantic_state: mixed_with_conflict
-    tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates: []
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    variants: []
-    forbidden_terms: []
 
-  marriage.q4.pressured:
-    semantic_state: pressured
     tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates: []
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    variants: []
-    forbidden_terms: []
 
-  marriage.q4.stable_if_kept:
-    semantic_state: stable_if_kept
-    tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates: []
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    variants: []
-    forbidden_terms: []
+    version: "1.0.0"
 
+    status: approved
+
+    headline: >
+      Hai người có nền tảng để đồng hành,
+      nhưng vẫn tồn tại một số khác biệt cần được quản lý.
+
+    meaning: >
+      Đây không phải là dạng hôn nhân xung khắc mạnh.
+      Tuy nhiên các yếu tố hỗ trợ và các yếu tố tạo áp lực hiện đang tồn tại song song.
+      Vì vậy khả năng đi lâu dài sẽ phụ thuộc nhiều vào cách hai người xử lý những khác biệt trong thực tế.
+
+    plain_customer_text: >
+      Hai người vẫn có thể xây dựng cuộc sống hôn nhân.
+      Điều quan trọng là nhận diện sớm những điểm dễ phát sinh mâu thuẫn
+      và cùng thống nhất cách giải quyết ngay từ đầu.
+      Nếu làm được điều đó,
+      phần lớn những khác biệt hiện nay đều có thể kiểm soát.
+
+    technical_explanation: >
+      Trạng thái này được sử dụng khi Decision xác nhận
+      các Finding hỗ trợ và Finding tạo áp lực cùng tồn tại,
+      nhưng chưa có nhóm nào đủ mạnh để hoàn toàn chi phối kết luận.
+
+    supporting_fact_templates:
+
+      - id: support_exists
+        source_fact: support_exists
+        template: >
+          Hai người vẫn có nhiều yếu tố thuận lợi để cùng đồng hành.
+
+      - id: conflict_exists
+        source_fact: conflict_exists
+        template: >
+          Đồng thời vẫn tồn tại những điểm khác biệt cần được lưu ý.
+
+      - id: rescue_partial
+        source_fact: rescue_partial
+        template: >
+          Một số điểm xung đã có yếu tố giúp giảm bớt tác động.
+
+      - id: long_term_possible
+        source_fact: long_term_possible
+        template: >
+          Nếu biết điều chỉnh,
+          mối quan hệ vẫn có khả năng phát triển ổn định.
+
+    main_risk_templates:
+
+      - id: communication
+        source_fact: communication_difference
+        template: >
+          Khác biệt trong cách giao tiếp là nguyên nhân dễ tạo khoảng cách nhất.
+
+      - id: finance
+        source_fact: finance_difference
+        template: >
+          Quan điểm tài chính nên được trao đổi rõ ngay từ đầu.
+
+      - id: responsibility
+        source_fact: responsibility_difference
+        template: >
+          Việc phân chia trách nhiệm cần được thống nhất sớm.
+
+    main_rescue_templates:
+
+      - id: support
+        source_fact: mutual_support
+        template: >
+          Hai người vẫn có nhiều yếu tố bổ trợ hai chiều.
+
+      - id: useful_god
+        source_fact: useful_god_support
+        template: >
+          Dụng thần giữa hai lá số tạo thêm khả năng cân bằng.
+
+      - id: respect
+        source_fact: mutual_respect
+        template: >
+          Khả năng lắng nghe và điều chỉnh sẽ giúp giảm đáng kể các điểm xung.
+
+    limitation_templates:
+
+      - id: conflict_not_failure
+        source_fact: conflict_not_failure
+        template: >
+          Khác biệt không đồng nghĩa với việc cuộc hôn nhân sẽ thất bại.
+
+      - id: need_effort
+        source_fact: need_effort
+        template: >
+          Đây là kiểu quan hệ cần nhiều sự chủ động vun đắp hơn những cặp có độ bổ trợ rất cao.
+
+    closing: >
+      Nhìn tổng thể,
+      đây là mối quan hệ có thể tiến tới hôn nhân.
+      Thành công lâu dài phụ thuộc nhiều vào cách hai người cùng xây dựng,
+      hơn là vào bản thân các điểm xung hiện có.
+
+    forbidden_terms:
+
+      - "dễ ly hôn"
+
+      - "không hợp"
+
+      - "không nên cưới"
+
+      - "khắc nhau"
+
+    variants:
+
+      - id: v1
+
+        headline: >
+          Hai người có cả điểm thuận và điểm cần điều chỉnh.
+
+        meaning: >
+          Nếu hiểu đúng những khác biệt ngay từ đầu,
+          đây vẫn là mối quan hệ có khả năng phát triển tốt.
+
+      - id: v2
+
+        headline: >
+          Mối quan hệ cần sự đồng hành nhiều hơn.
+
+        meaning: >
+          Điều tạo nên sự bền vững của hai người
+          sẽ nằm ở cách cùng nhau giải quyết khác biệt.
   marriage.q4.needs_management:
-    semantic_state: needs_management
-    tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates: []
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    variants: []
-    forbidden_terms: []
 
-  marriage.q4.insufficient:
-    semantic_state: insufficient
-    tone: reference
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates: []
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    semantic_state: needs_management
+
+    tone: professional_warm
+
+    version: "1.0.0"
+
+    status: approved
+
+    headline: >
+      Mối quan hệ này cần được vun đắp và quản lý chủ động.
+
+    meaning: >
+      Hai người vẫn có nền tảng để xây dựng hôn nhân,
+      nhưng những khác biệt hiện tại nếu để kéo dài
+      sẽ dễ trở thành nguyên nhân của các mâu thuẫn lớn hơn.
+
+    plain_customer_text: >
+      Điều quan trọng không phải là tránh hoàn toàn bất đồng,
+      mà là học cách giải quyết bất đồng đúng lúc.
+      Khi hai người biết trao đổi thẳng thắn và tôn trọng vai trò của nhau,
+      phần lớn các áp lực đều có thể giảm đi.
+
+    technical_explanation: >
+      Trạng thái này chỉ xuất hiện khi Decision xác nhận
+      có các Finding tạo áp lực ở mức trung bình,
+      nhưng vẫn tồn tại nền tảng hỗ trợ đủ để duy trì mối quan hệ.
+
+    supporting_fact_templates:
+
+      - id: support_remains
+        source_fact: support_remains
+        template: >
+          Hai người vẫn còn nhiều điểm thuận để tiếp tục đồng hành.
+
+      - id: management_required
+        source_fact: management_required
+        template: >
+          Một số khác biệt cần được quản lý chủ động thay vì để tự phát triển.
+
+      - id: rescue_exists
+        source_fact: rescue_exists
+        template: >
+          Các yếu tố hỗ trợ vẫn hiện diện và có thể giúp giảm áp lực.
+
+    main_risk_templates:
+
+      - id: communication
+        source_fact: communication_difference
+        template: >
+          Khác biệt trong giao tiếp là điểm cần quan tâm đầu tiên.
+
+      - id: expectations
+        source_fact: expectation_difference
+        template: >
+          Kỳ vọng khác nhau về cuộc sống dễ tạo ra hiểu lầm.
+
+      - id: responsibility
+        source_fact: responsibility_difference
+        template: >
+          Việc phân chia trách nhiệm nên được thống nhất rõ.
+
+    main_rescue_templates:
+
+      - id: mutual_adjustment
+        source_fact: mutual_adjustment
+        template: >
+          Hai người đều có khả năng điều chỉnh khi nhận ra vấn đề.
+
+      - id: support
+        source_fact: support_exists
+        template: >
+          Nền tảng hỗ trợ vẫn đủ để giúp mối quan hệ cân bằng trở lại.
+
+    limitation_templates:
+
+      - id: no_self_fix
+        source_fact: no_self_fix
+        template: >
+          Những khác biệt này sẽ không tự biến mất nếu hai người không cùng giải quyết.
+
+      - id: effort
+        source_fact: effort
+        template: >
+          Mối quan hệ cần sự chủ động từ cả hai phía.
+
+    closing: >
+      Đây là kiểu hôn nhân mà sự trưởng thành trong cách ứng xử
+      quan trọng hơn chính những khác biệt của lá số.
+
+    forbidden_terms:
+      - "không hợp"
+      - "dễ ly hôn"
+
     variants: []
-    forbidden_terms: []
+  marriage.q4.pressured:
+
+    semantic_state: pressured
+
+    tone: professional_warm
+
+    version: "1.0.0"
+
+    status: approved
+
+    headline: >
+      Hai người có khá nhiều điểm cần lưu ý trước khi tiến xa hơn.
+
+    meaning: >
+      Các yếu tố tạo áp lực hiện nhiều hơn các yếu tố hỗ trợ.
+      Điều này khiến việc duy trì sự ổn định sẽ khó khăn hơn
+      nếu hai người không chủ động thay đổi cách phối hợp.
+
+    plain_customer_text: >
+      Mối quan hệ này không phải không thể xây dựng,
+      nhưng sẽ cần nhiều sự kiên nhẫn,
+      lắng nghe và thống nhất hơn bình thường.
+
+    technical_explanation: >
+      Decision ghi nhận các Finding gây áp lực
+      đang chiếm ưu thế so với phần hỗ trợ.
+
+    supporting_fact_templates:
+
+      - id: conflict_high
+        source_fact: conflict_high
+        template: >
+          Các điểm tạo áp lực xuất hiện ở nhiều nhóm phân tích.
+
+      - id: support_exists
+        source_fact: support_exists
+        template: >
+          Một số yếu tố hỗ trợ vẫn còn nhưng chưa đủ mạnh.
+
+    main_risk_templates:
+
+      - id: communication
+        source_fact: communication_difference
+        template: >
+          Khác biệt trong giao tiếp có thể lặp lại nhiều lần.
+
+      - id: finance
+        source_fact: finance_difference
+        template: >
+          Quan điểm tài chính cần được thống nhất ngay từ đầu.
+
+      - id: ego
+        source_fact: ego_difference
+        template: >
+          Cái tôi của mỗi người có thể làm mâu thuẫn kéo dài.
+
+    main_rescue_templates:
+
+      - id: respect
+        source_fact: respect
+        template: >
+          Nếu biết tôn trọng vai trò của nhau,
+          nhiều áp lực vẫn có thể giảm.
+
+    limitation_templates:
+
+      - id: not_prediction
+        source_fact: not_prediction
+        template: >
+          Đây không phải là dự đoán rằng cuộc hôn nhân sẽ thất bại.
+
+      - id: counseling
+        source_fact: counseling
+        template: >
+          Trường hợp này nên được xem xét sâu hơn trước khi đưa ra quyết định lâu dài.
+
+    closing: >
+      Điều quyết định không nằm ở việc hai người có khác biệt hay không,
+      mà ở khả năng cùng vượt qua những khác biệt đó.
+
+    forbidden_terms:
+      - "chắc chắn ly hôn"
+      - "không nên cưới"
+
+    variants: []
+  marriage.q4.highly_pressured:
+
+    semantic_state: highly_pressured
+
+    tone: professional_warm
+
+    version: "1.0.0"
+
+    status: approved
+
+    headline: >
+      Mối quan hệ hiện có mức áp lực khá cao.
+
+    meaning: >
+      Hai lá số cho thấy nhiều khác biệt quan trọng.
+      Điều này không có nghĩa hai người chắc chắn không thể sống cùng nhau,
+      nhưng sẽ cần nhiều nỗ lực hơn đáng kể để duy trì sự ổn định.
+
+    plain_customer_text: >
+      Đây là trường hợp nên tìm hiểu kỹ hơn,
+      đặc biệt về cách sống,
+      quan điểm,
+      tài chính
+      và trách nhiệm trước khi đưa ra quyết định lâu dài.
+
+    technical_explanation: >
+      Trạng thái này chỉ được sử dụng
+      khi Decision ghi nhận phần lớn Finding
+      đều nghiêng về nhóm tạo áp lực.
+
+    supporting_fact_templates:
+
+      - id: pressure
+        source_fact: pressure
+        template: >
+          Các yếu tố tạo áp lực đang chiếm ưu thế rõ.
+
+      - id: weak_support
+        source_fact: weak_support
+        template: >
+          Phần hỗ trợ hiện chưa đủ để cân bằng toàn bộ khác biệt.
+
+    main_risk_templates:
+
+      - id: lifestyle
+        source_fact: lifestyle_difference
+        template: >
+          Khác biệt về cách sống là điểm cần cân nhắc nhất.
+
+      - id: values
+        source_fact: value_difference
+        template: >
+          Quan điểm sống khác nhau có thể tạo khoảng cách lâu dài.
+
+      - id: communication
+        source_fact: communication_difference
+        template: >
+          Nếu thiếu trao đổi,
+          mâu thuẫn dễ tích tụ theo thời gian.
+
+    main_rescue_templates:
+
+      - id: willingness
+        source_fact: willingness
+        template: >
+          Nếu cả hai thực sự sẵn sàng điều chỉnh,
+          vẫn có khả năng cải thiện đáng kể.
+
+    limitation_templates:
+
+      - id: no_absolute
+        source_fact: no_absolute
+        template: >
+          Không nên xem đây là kết luận tuyệt đối về tương lai hôn nhân.
+
+      - id: deep_consulting
+        source_fact: deep_consulting
+        template: >
+          Đây là trường hợp rất nên được tư vấn chuyên sâu.
+
+    closing: >
+      Kết quả này nên được xem như lời nhắc để cân nhắc kỹ hơn,
+      chứ không phải một kết luận thay cho quyết định của hai người.
+
+    forbidden_terms:
+      - "không thể cưới"
+      - "đại hung"
+      - "khắc chết"
+
+    variants: []
+  marriage.q4.insufficient:
+
+    semantic_state: insufficient
+
+    tone: professional_warm
+
+    version: "1.0.0"
+
+    status: approved
+
+    headline: >
+      Hiện chưa đủ dữ liệu để đánh giá độ ổn định của hôn nhân.
+
+    meaning: >
+      Một số dữ liệu hoặc miền phân tích quan trọng
+      chưa đủ để hệ thống đưa ra kết luận đáng tin cậy.
+
+    plain_customer_text: >
+      Điều này không có nghĩa mối quan hệ tốt hay xấu.
+      Chỉ là hiện chưa có đủ căn cứ
+      để đánh giá khả năng duy trì hôn nhân.
+
+    technical_explanation: >
+      Confidence chưa đạt ngưỡng cần thiết
+      hoặc một số Domain chưa đủ Finding.
+
+    supporting_fact_templates:
+
+      - id: insufficient_data
+        source_fact: insufficient_data
+        template: >
+          Dữ liệu hiện chưa đủ để tạo kết luận ổn định.
+
+    main_risk_templates: []
+
+    main_rescue_templates: []
+
+    limitation_templates:
+
+      - id: add_birth_time
+        source_fact: add_birth_time
+        template: >
+          Nếu có thể,
+          nên bổ sung giờ sinh để tăng độ tin cậy.
+
+      - id: insufficient_not_negative
+        source_fact: insufficient_not_negative
+        template: >
+          Thiếu dữ liệu không phải là dấu hiệu bất lợi về hôn nhân.
+
+    closing: >
+      Khi có đầy đủ dữ liệu hơn,
+      hệ thống sẽ đưa ra đánh giá cụ thể và đáng tin cậy hơn.
+
+    forbidden_terms:
+      - "không hợp"
+      - "không nên cưới"
+
+    variants: []
+forbidden_terms:
+  - "chắc chắn"
+  - "bản chất"
+  - "không thể thay đổi"
+
+render_rules:
+  verdict_first: true
+  customer_first: true
+  explain_jargon: true
+  technical_explanation_collapsed_by_default: true
+
+  max_headline_sentences: 1
+  max_meaning_sentences: 3
+  max_supporting_facts: 4
+  max_limitations: 2
+
+review_status:
+  architecture: approved
+  customer_wording: approved
+  runtime_binding: not_started

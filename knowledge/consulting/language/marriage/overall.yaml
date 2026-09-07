@@ -1,96 +1,526 @@
-# Q6 Overall Marriage Assessment — language skeleton only.
-# Foundation conclusion. Not a command to marry or not marry.
+# knowledge/consulting/language/marriage/overall.yaml
 
 schema_version: "1.0.0"
-catalog_version: "consulting.language.marriage@0.1.0-skeleton"
-module_language_version: "marriage.language@0.1.0-skeleton"
+catalog_version: "consulting.language.marriage@1.0.0"
+module_language_version: "marriage.language@1.0.0"
+
 module: marriage
 question_id: Q6
 audience: customer
-status: skeleton
+status: approved
 
 entries:
-  marriage.q6.can_progress:
-    semantic_state: can_progress
-    tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates:
-      - id: relationship
-        source_fact: q1
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        slots: []
-        status: placeholder
-      - id: financial_cooperation
-        source_fact: finance
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        slots: []
-        status: placeholder
-      - id: growth
-        source_fact: luck
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        slots: []
-        status: placeholder
-      - id: long_term
-        source_fact: q6_long_term
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        slots: []
-        status: placeholder
-      - id: main_condition
-        source_fact: condition
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        slots: []
-        status: placeholder
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    variants: []
-    forbidden_terms: []
-
-  marriage.q6.needs_more_review:
-    semantic_state: needs_more_review
-    tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates: []
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    variants: []
-    forbidden_terms: []
-
-  marriage.q6.high_pressure:
-    semantic_state: high_pressure
-    tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates: []
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    variants: []
-    forbidden_terms: []
 
   marriage.q6.good_foundation:
+
     semantic_state: good_foundation
     tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates: []
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    version: "1.0.0"
+    status: approved
+
+    headline: >
+      Hai người có nền tảng khá tốt để tiến tới hôn nhân.
+
+    meaning: >
+      Tổng thể cho thấy phần hòa hợp và bổ trợ đang chiếm ưu thế.
+      Hai người không chỉ có khả năng gắn bó về tình cảm,
+      mà còn có những điều kiện thuận lợi để cùng xây dựng cuộc sống lâu dài.
+
+    plain_customer_text: >
+      Đây là cặp đôi có nhiều điểm tích cực để phát triển thành một mối quan hệ bền vững.
+      Hai người có khả năng cùng nâng đỡ nhau,
+      phối hợp trong cuộc sống và vượt qua những khác biệt nếu biết giữ sự tôn trọng và chia sẻ.
+
+    technical_explanation: >
+      Trạng thái này chỉ được sử dụng khi Assessment tổng hợp Q1–Q4
+      cho thấy độ hòa hợp, khả năng bổ trợ và độ ổn định đều ở mức thuận lợi,
+      đồng thời không có Finding áp lực lớn đủ để làm thay đổi kết luận tổng thể.
+
+    supporting_fact_templates:
+
+      - id: compatibility_good
+        source_fact: compatibility_good
+        template: >
+          Độ hòa hợp tổng thể giữa hai người đang ở mức tích cực.
+        slots: []
+        status: approved
+
+      - id: mutual_support
+        source_fact: mutual_support
+        template: >
+          Hai người có khả năng bổ trợ cho nhau theo cả hai chiều.
+        slots: []
+        status: approved
+
+      - id: personality_balance
+        source_fact: personality_balance
+        template: >
+          Tính cách có những điểm tương đồng hoặc bù trừ đủ để tạo sự cân bằng.
+        slots: []
+        status: approved
+
+      - id: stability_good
+        source_fact: stability_good
+        template: >
+          Nền tảng hôn nhân có khả năng duy trì ổn định nếu tiếp tục được vun đắp.
+        slots: []
+        status: approved
+
+      - id: finance_support
+        source_fact: finance_support
+        template: >
+          Khả năng phối hợp về tài chính và phát triển chung có tín hiệu thuận lợi.
+        slots: []
+        status: approved
+
+    limitation_templates:
+
+      - id: no_guarantee
+        source_fact: no_guarantee
+        template: >
+          Nền tảng tốt không có nghĩa cuộc hôn nhân sẽ tự nhiên thuận lợi mà không cần sự vun đắp.
+        slots: []
+        status: approved
+
+      - id: practical_relationship
+        source_fact: practical_relationship
+        template: >
+          Kết quả thực tế vẫn phụ thuộc vào cách hai người giao tiếp,
+          chia sẻ trách nhiệm và cùng giải quyết khó khăn.
+        slots: []
+        status: approved
+
+    closing: >
+      Nếu tình cảm thực tế của hai người cũng đang ổn định,
+      đây là mối quan hệ có nhiều điều kiện thuận lợi để tiến tới hôn nhân và cùng xây dựng lâu dài.
+
+    forbidden_terms:
+      - "chắc chắn hạnh phúc"
+      - "cưới nhau chắc chắn phát tài"
+      - "không bao giờ ly hôn"
+
+    variants:
+
+      - id: v1
+        headline: >
+          Đây là cặp đôi có nền tảng hôn nhân khá tốt.
+        meaning: >
+          Các yếu tố hòa hợp và bổ trợ đang tạo điều kiện thuận lợi
+          cho khả năng đồng hành lâu dài.
+
+      - id: v2
+        headline: >
+          Hai người có nhiều điều kiện thuận để xây dựng cuộc sống chung.
+        meaning: >
+          Sự hòa hợp, khả năng hỗ trợ và độ ổn định tổng thể
+          đang nghiêng về phía tích cực.
+
+
+  marriage.q6.can_progress:
+
+    semantic_state: can_progress
+    tone: professional_warm
+    version: "1.0.0"
+    status: approved
+
+    headline: >
+      Hai người có thể tiến tới hôn nhân.
+
+    meaning: >
+      Mối quan hệ có đủ nền tảng để tiếp tục phát triển,
+      dù vẫn còn một số khác biệt cần được hai người nhận diện và điều chỉnh.
+      Những điểm này hiện chưa đủ lớn để phủ nhận khả năng đồng hành lâu dài.
+
+    plain_customer_text: >
+      Nếu hai người thực sự có tình cảm và cùng sẵn sàng xây dựng,
+      đây là mối quan hệ có thể tiến thêm một bước.
+      Điều quan trọng là nên thống nhất sớm về những vấn đề dễ phát sinh bất đồng
+      thay vì để chúng xuất hiện sau khi đã bước vào cuộc sống hôn nhân.
+
+    technical_explanation: >
+      Trạng thái này được sử dụng khi Assessment cho thấy
+      nền tảng quan hệ vẫn đủ khả năng duy trì,
+      nhưng còn tồn tại một hoặc nhiều Finding cần quản lý
+      ở các phương diện như giao tiếp, vai trò, tài chính hoặc Can Chi.
+
+    supporting_fact_templates:
+
+      - id: compatibility_acceptable
+        source_fact: compatibility_acceptable
+        template: >
+          Độ hòa hợp tổng thể vẫn nằm trong vùng có thể xây dựng lâu dài.
+        slots: []
+        status: approved
+
+      - id: support_present
+        source_fact: support_present
+        template: >
+          Hai người vẫn có những yếu tố hỗ trợ và nâng đỡ lẫn nhau.
+        slots: []
+        status: approved
+
+      - id: conflict_manageable
+        source_fact: conflict_manageable
+        template: >
+          Các điểm xung hiện có vẫn nằm trong mức có thể quản lý.
+        slots: []
+        status: approved
+
+      - id: rescue_present
+        source_fact: rescue_present
+        template: >
+          Một số điểm căng đã có yếu tố bổ trợ hoặc cứu giải đi kèm.
+        slots: []
+        status: approved
+
+      - id: long_term_possible
+        source_fact: long_term_possible
+        template: >
+          Cấu trúc tổng thể vẫn có khả năng duy trì sự đồng hành lâu dài.
+        slots: []
+        status: approved
+
+    limitation_templates:
+
+      - id: resolve_before_marriage
+        source_fact: resolve_before_marriage
+        template: >
+          Nên trao đổi rõ những vấn đề dễ bất đồng trước khi tiến tới hôn nhân.
+        slots: []
+        status: approved
+
+      - id: effort_required
+        source_fact: effort_required
+        template: >
+          Mối quan hệ sẽ tốt hơn khi cả hai cùng chủ động điều chỉnh,
+          thay vì chỉ kỳ vọng người kia thay đổi.
+        slots: []
+        status: approved
+
+    closing: >
+      Nhìn tổng thể, hai người có thể tiến tới.
+      Điều nên làm trước khi quyết định lâu dài là hiểu rõ những điểm khác biệt chính
+      và thống nhất cách cùng nhau xử lý chúng.
+
+    forbidden_terms:
+      - "chắc chắn nên cưới"
+      - "đây là người định mệnh"
+      - "cưới là tốt"
+
+    variants:
+
+      - id: v1
+        headline: >
+          Mối quan hệ có đủ nền tảng để tiến thêm một bước.
+        meaning: >
+          Hai người vẫn có những điểm cần điều chỉnh,
+          nhưng phần thuận lợi hiện đủ để tiếp tục xây dựng.
+
+      - id: v2
+        headline: >
+          Hai người có khả năng xây dựng hôn nhân lâu dài.
+        meaning: >
+          Điều quan trọng là giải quyết tốt những khác biệt đã được nhận diện
+          trước khi chúng trở thành áp lực lớn hơn.
+
+
+  marriage.q6.needs_more_review:
+
+    semantic_state: needs_more_review
+    tone: professional_warm
+    version: "1.0.0"
+    status: approved
+
+    headline: >
+      Hai người nên tìm hiểu kỹ hơn trước khi đưa ra quyết định lâu dài.
+
+    meaning: >
+      Mối quan hệ vẫn có những điểm tích cực,
+      nhưng hiện tồn tại một số khác biệt đủ rõ để cần được cân nhắc nghiêm túc.
+      Đây chưa phải trường hợp nên đưa ra kết luận vội vàng.
+
+    plain_customer_text: >
+      Hai người không nhất thiết phải dừng lại,
+      nhưng cũng không nên chỉ dựa vào cảm xúc hiện tại để quyết định.
+      Những vấn đề đang khác nhau về cách sống,
+      tài chính, trách nhiệm hoặc cách giao tiếp nên được trao đổi rõ trước khi tiến xa hơn.
+
+    technical_explanation: >
+      Trạng thái này được sử dụng khi Assessment cho thấy
+      các Finding hỗ trợ vẫn tồn tại nhưng các Finding tạo áp lực đã đủ rõ
+      để làm giảm độ chắc chắn của kết luận tiến tới hôn nhân.
+
+    supporting_fact_templates:
+
+      - id: support_exists
+        source_fact: support_exists
+        template: >
+          Hai người vẫn có những điểm phù hợp và hỗ trợ lẫn nhau.
+        slots: []
+        status: approved
+
+      - id: material_conflict
+        source_fact: material_conflict
+        template: >
+          Đồng thời có một số khác biệt quan trọng cần được xem xét kỹ.
+        slots: []
+        status: approved
+
+      - id: unstable_role
+        source_fact: unstable_role
+        template: >
+          Việc phân chia vai trò hoặc trách nhiệm có thể trở thành chủ đề dễ phát sinh áp lực.
+        slots: []
+        status: approved
+
+      - id: financial_difference
+        source_fact: financial_difference
+        template: >
+          Quan điểm về tài chính cần được thống nhất rõ nếu muốn đi đường dài.
+        slots: []
+        status: approved
+
+    limitation_templates:
+
+      - id: no_rush
+        source_fact: no_rush
+        template: >
+          Không nên đưa ra quyết định chỉ dựa trên một kết luận tổng quát của phần mềm.
+        slots: []
+        status: approved
+
+      - id: deep_review
+        source_fact: deep_review
+        template: >
+          Nếu đây là mối quan hệ nghiêm túc,
+          nên xem sâu hơn các điểm xung chính trước khi quyết định.
+        slots: []
+        status: approved
+
+    closing: >
+      Đây là trường hợp cần thêm sự quan sát và trao đổi thực tế.
+      Nếu hai người giải quyết được những khác biệt quan trọng hiện có,
+      khả năng tiến tới vẫn hoàn toàn còn mở.
+
+    forbidden_terms:
+      - "không nên cưới"
+      - "không có tương lai"
+      - "sớm muộn cũng chia tay"
+
+    variants:
+
+      - id: v1
+        headline: >
+          Mối quan hệ cần thêm thời gian để đánh giá.
+        meaning: >
+          Có điểm thuận nhưng cũng có những khác biệt quan trọng
+          chưa nên bỏ qua.
+
+      - id: v2
+        headline: >
+          Nên tìm hiểu sâu hơn trước khi quyết định kết hôn.
+        meaning: >
+          Mối quan hệ chưa phải bất lợi,
+          nhưng một số vấn đề cần được làm rõ trước khi cam kết lâu dài.
+
+
+  marriage.q6.high_pressure:
+
+    semantic_state: high_pressure
+    tone: professional_warm
+    version: "1.0.0"
+    status: approved
+
+    headline: >
+      Hai người có khá nhiều khác biệt cần cân nhắc trước khi tiến tới hôn nhân.
+
+    meaning: >
+      Các yếu tố tạo áp lực đang nổi bật hơn phần bổ trợ.
+      Điều này không có nghĩa hai người chắc chắn không thể xây dựng cuộc sống chung,
+      nhưng mối quan hệ sẽ cần nhiều nỗ lực và sự thay đổi thực tế hơn bình thường.
+
+    plain_customer_text: >
+      Nếu hai người đang cân nhắc hôn nhân,
+      nên nhìn thẳng vào những vấn đề đang khác nhau thay vì kỳ vọng rằng sau khi cưới chúng sẽ tự biến mất.
+      Những chủ đề về cách sống, tài chính, trách nhiệm và giao tiếp cần được làm rõ trước tiên.
+
+    technical_explanation: >
+      Trạng thái này chỉ được sử dụng khi Assessment tổng hợp
+      cho thấy các Finding tạo áp lực đang chiếm ưu thế rõ
+      và phần cứu giải hiện chưa đủ mạnh để đưa kết luận sang nhóm thuận lợi hơn.
+
+    supporting_fact_templates:
+
+      - id: conflict_dominant
+        source_fact: conflict_dominant
+        template: >
+          Các yếu tố tạo áp lực đang xuất hiện rõ hơn phần hỗ trợ.
+        slots: []
+        status: approved
+
+      - id: weak_rescue
+        source_fact: weak_rescue
+        template: >
+          Yếu tố cứu giải hiện có nhưng chưa đủ mạnh để cân bằng toàn bộ khác biệt.
+        slots: []
+        status: approved
+
+      - id: lifestyle_risk
+        source_fact: lifestyle_risk
+        template: >
+          Khác biệt về cách sống có thể trở thành vấn đề kéo dài nếu không được thống nhất.
+        slots: []
+        status: approved
+
+      - id: communication_risk
+        source_fact: communication_risk
+        template: >
+          Cách giao tiếp và xử lý mâu thuẫn là điểm cần đặc biệt lưu ý.
+        slots: []
+        status: approved
+
+    limitation_templates:
+
+      - id: no_absolute_rejection
+        source_fact: no_absolute_rejection
+        template: >
+          Kết quả này không phải là một phán quyết rằng hai người không thể kết hôn.
+        slots: []
+        status: approved
+
+      - id: specialist_review
+        source_fact: specialist_review
+        template: >
+          Trường hợp này phù hợp hơn với tư vấn chuyên sâu
+          trước khi đưa ra quyết định lớn.
+        slots: []
+        status: approved
+
+    closing: >
+      Nếu vẫn muốn tiến tới,
+      điều quan trọng nhất là hai người phải thực sự hiểu những điểm bất đồng chính
+      và có khả năng cùng thay đổi để xử lý chúng.
+      Đây là trường hợp nên cân nhắc kỹ hơn thay vì quyết định vội vàng.
+
+    forbidden_terms:
+      - "không nên cưới"
+      - "chắc chắn ly hôn"
+      - "hôn nhân thất bại"
+      - "khắc vợ"
+      - "khắc chồng"
+
+    variants:
+
+      - id: v1
+        headline: >
+          Mối quan hệ cần được cân nhắc khá kỹ trước khi tiến xa.
+        meaning: >
+          Phần áp lực hiện rõ hơn phần thuận,
+          vì vậy khả năng đồng hành lâu dài cần được đánh giá thận trọng.
+
+      - id: v2
+        headline: >
+          Hai người có nhiều khác biệt quan trọng cần làm rõ.
+        meaning: >
+          Nếu những khác biệt này chưa được giải quyết trong thực tế,
+          việc tiến tới hôn nhân sẽ tạo thêm nhiều áp lực cho cả hai.
+
+
+  marriage.q6.insufficient:
+
+    semantic_state: insufficient
+    tone: professional_warm
+    version: "1.0.0"
+    status: approved
+
+    headline: >
+      Hiện chưa đủ căn cứ để đưa ra kết luận cuối cùng.
+
+    meaning: >
+      Một số dữ liệu hoặc miền phân tích quan trọng vẫn còn thiếu,
+      nên hệ thống chưa nên kết luận hai người có phù hợp để tiến tới hôn nhân hay không.
+
+    plain_customer_text: >
+      Trạng thái này không phải là một kết quả xấu.
+      Nó chỉ cho biết dữ liệu hiện tại chưa đủ để đưa ra một nhận định cuối cùng đáng tin cậy.
+
+    technical_explanation: >
+      Trạng thái được sử dụng khi Assessment Question Set
+      còn một hoặc nhiều câu hỏi trọng yếu có confidence chưa đạt ngưỡng
+      hoặc Decision thiếu Finding cần thiết để tạo kết luận tổng hợp.
+
+    supporting_fact_templates:
+
+      - id: missing_data
+        source_fact: missing_data
+        template: >
+          Một phần dữ liệu cần thiết cho đánh giá hiện chưa đầy đủ.
+        slots: []
+        status: approved
+
+      - id: core_question_unavailable
+        source_fact: core_question_unavailable
+        template: >
+          Một hoặc nhiều câu hỏi quan trọng chưa có đủ căn cứ để trả lời.
+        slots: []
+        status: approved
+
+    limitation_templates:
+
+      - id: birth_time
+        source_fact: birth_time_unknown
+        template: >
+          Nếu có thể, nên bổ sung giờ sinh để tăng độ chi tiết và độ tin cậy.
+        slots: []
+        status: approved
+
+      - id: not_negative
+        source_fact: insufficient_not_negative
+        template: >
+          Thiếu dữ liệu không được xem là dấu hiệu bất lợi cho hôn nhân.
+        slots: []
+        status: approved
+
+    closing: >
+      Nên bổ sung dữ liệu còn thiếu hoặc sử dụng tư vấn chuyên sâu
+      trước khi đưa ra một quyết định quan trọng.
+
+    forbidden_terms:
+      - "không hợp"
+      - "không nên cưới"
+      - "xấu"
+
     variants: []
-    forbidden_terms: []
+
+
+forbidden_terms:
+  - "chắc chắn ly hôn"
+  - "nhất định hạnh phúc"
+  - "không nên cưới"
+  - "cưới nhau chắc chắn giàu"
+  - "khắc chết"
+  - "đại hung"
+  - "người định mệnh"
+  - "duyên trời định"
+
+render_rules:
+  verdict_first: true
+  customer_first: true
+  explain_jargon: true
+  technical_explanation_collapsed_by_default: true
+
+  max_headline_sentences: 1
+  max_meaning_sentences: 3
+  max_supporting_facts: 5
+  max_limitations: 2
+
+  final_opinion:
+    enabled: true
+    must_reference_assessment: true
+    must_not_invent_recommendation: true
+    must_not_use_numeric_score_if_unavailable: true
+
+review_status:
+  architecture: approved
+  customer_wording: approved
+  runtime_binding: not_started

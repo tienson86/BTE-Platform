@@ -1,100 +1,311 @@
-# Q3 Personality Balance — language skeleton only.
+# knowledge/consulting/language/marriage/personality.yaml
 
 schema_version: "1.0.0"
-catalog_version: "consulting.language.marriage@0.1.0-skeleton"
-module_language_version: "marriage.language@0.1.0-skeleton"
+catalog_version: "consulting.language.marriage@1.0.0"
+module_language_version: "marriage.language@1.0.0"
+
 module: marriage
 question_id: Q3
 audience: customer
-status: skeleton
+status: approved
 
 entries:
   marriage.q3.similar_temperament:
+
     semantic_state: similar_temperament
-    tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates:
-      - id: day_master_a
-        source_fact: day_master
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        slots: [person_a, day_master_a]
-        status: placeholder
-      - id: day_master_b
-        source_fact: day_master
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        slots: [person_b, day_master_b]
-        status: placeholder
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    variants: []
-    forbidden_terms: []
 
+    tone: professional_warm
+
+    version: "1.0.0"
+
+    status: approved
+
+    headline: >
+      Hai người có tính cách khá giống nhau.
+
+    meaning: >
+      Hai người có xu hướng suy nghĩ và xử lý vấn đề theo cách gần giống nhau.
+      Điều này giúp hai người dễ đồng cảm nhưng cũng dễ trở nên cứng đầu khi bất đồng.
+
+    plain_customer_text: >
+      Đây là kiểu quan hệ mà cả hai thường hiểu nhau khá nhanh.
+      Tuy nhiên khi xảy ra tranh luận,
+      cả hai đều có xu hướng giữ quan điểm của mình.
+
+    technical_explanation: >
+      Trạng thái này chỉ xuất hiện khi Decision xác nhận hai Nhật Chủ
+      hoặc cấu trúc vai trò tạo ra xu hướng tính cách tương đồng.
+
+    supporting_fact_templates:
+
+      - id: same_day_master
+        source_fact: same_day_master
+        template: >
+          Hai người có nền tảng tính cách tương đối giống nhau.
+
+      - id: similar_roles
+        source_fact: similar_role_structure
+        template: >
+          Cách phản ứng và xử lý tình huống của hai người khá gần nhau.
+
+    limitation_templates:
+
+      - id: stubborn
+        source_fact: similar_stubbornness
+        template: >
+          Khi bất đồng,
+          cả hai nên chủ động lắng nghe để tránh kéo dài tranh luận.
+
+    closing: >
+      Đây là kiểu quan hệ dễ hiểu nhau,
+      nhưng càng giống nhau càng cần học cách nhường nhau.
+  
   marriage.q3.complementary:
+
     semantic_state: complementary
-    tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates: []
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    variants: []
-    forbidden_terms: []
 
-  marriage.q3.balanced:
-    semantic_state: balanced
     tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates: []
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    variants: []
-    forbidden_terms: []
 
-  marriage.q3.role_pressure:
-    semantic_state: role_pressure
-    tone: professional_warm
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
+    version: "1.0.0"
+
+    status: approved
+
+    headline: >
+      Hai người có tính cách bổ trợ cho nhau.
+
+    meaning: >
+      Mỗi người đều có những điểm mạnh mà người còn lại đang thiếu.
+      Nếu biết tôn trọng sự khác biệt,
+      đây là kiểu kết hợp khá cân bằng.
+
+    plain_customer_text: >
+      Một người thiên về hành động,
+      người còn lại thiên về quan sát và cân nhắc.
+      Chính sự khác biệt này giúp hai người dễ bù trừ cho nhau
+      hơn là cạnh tranh.
+
+    technical_explanation: >
+      Trạng thái này chỉ xuất hiện khi Decision xác nhận
+      cấu trúc Nhật Chủ và vai trò tạo nên tính bổ sung.
+
     supporting_fact_templates:
-      - id: role_tension
-        source_fact: role_pressure
-        template: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-        slots: [person_a, person_b, role]
-        status: placeholder
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    variants: []
+
+      - id: opposite_strength
+        source_fact: complementary_roles
+        template: >
+          Hai người có những thế mạnh khác nhau nhưng có thể hỗ trợ lẫn nhau.
+
+      - id: balanced_decision
+        source_fact: balanced_decision_style
+        template: >
+          Một người thiên về quyết định,
+          người còn lại thiên về cân nhắc.
+
+      - id: complementary_day_master
+        source_fact: complementary_day_master
+        template: >
+          Nhật Chủ của hai người tạo ra xu hướng bổ sung thay vì cạnh tranh.
+
+    limitation_templates:
+
+      - id: respect_difference
+        source_fact: respect_difference
+        template: >
+          Khác biệt chỉ trở thành lợi thế khi hai người tôn trọng vai trò của nhau.
+
+      - id: avoid_forcing
+        source_fact: avoid_forcing
+        template: >
+          Không nên cố biến người kia thành giống mình.
+
+    closing: >
+      Đây là kiểu kết hợp có nhiều tiềm năng phát triển lâu dài,
+      vì mỗi người đều có thể bù đắp cho điểm còn thiếu của người kia.
+
     forbidden_terms: []
 
-  marriage.q3.insufficient:
-    semantic_state: insufficient
-    tone: reference
-    version: "0.1.0"
-    status: placeholder
-    headline: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    meaning: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    plain_customer_text: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    technical_explanation: "__PRODUCT_OWNER_WORDING_REQUIRED__"
-    supporting_fact_templates: []
-    limitation_templates: []
-    closing: "__PRODUCT_OWNER_WORDING_REQUIRED__"
     variants: []
+  marriage.q3.balanced:
+
+    semantic_state: balanced
+
+    tone: professional_warm
+
+    version: "1.0.0"
+
+    status: approved
+
+    headline: >
+      Hai người có sự cân bằng khá tốt.
+
+    meaning: >
+      Không bên nào quá nổi trội hoặc quá yếu.
+      Mỗi người đều có khả năng giữ vai trò của mình
+      trong mối quan hệ.
+
+    plain_customer_text: >
+      Đây là kiểu quan hệ tương đối ổn định.
+      Hai người dễ chia sẻ trách nhiệm
+      và ít xảy ra cảm giác một người phải gánh toàn bộ.
+
+    technical_explanation: >
+      Decision xác nhận sự cân bằng
+      giữa cấu trúc vai trò và Nhật Chủ.
+
+    supporting_fact_templates:
+
+      - id: balanced_roles
+        source_fact: balanced_roles
+        template: >
+          Hai người có xu hướng chia sẻ vai trò khá cân bằng.
+
+      - id: mutual_respect
+        source_fact: mutual_respect
+        template: >
+          Không thấy bên nào tạo áp lực quá lớn lên người còn lại.
+
+    limitation_templates:
+
+      - id: maintain_balance
+        source_fact: maintain_balance
+        template: >
+          Sự cân bằng chỉ được giữ khi cả hai tiếp tục cùng chia sẻ trách nhiệm.
+
+    closing: >
+      Đây là kiểu quan hệ tương đối dễ duy trì
+      nếu hai người tiếp tục đồng hành theo đúng vai trò của mình.
+
     forbidden_terms: []
+
+    variants: []
+  marriage.q3.conflicting_temperament:
+
+    semantic_state: conflicting_temperament
+
+    tone: professional_warm
+
+    version: "1.0.0"
+
+    status: approved
+
+    headline: >
+      Hai người có một số khác biệt khá rõ về tính cách.
+
+    meaning: >
+      Những khác biệt này không phải là điều xấu,
+      nhưng nếu thiếu sự lắng nghe
+      sẽ dễ trở thành nguyên nhân gây tranh luận.
+
+    plain_customer_text: >
+      Một người có xu hướng quyết định nhanh,
+      người còn lại muốn cân nhắc nhiều hơn.
+      Điều này khiến hai người đôi lúc khó tìm được tiếng nói chung.
+
+    technical_explanation: >
+      Trạng thái này xuất hiện
+      khi Decision xác nhận
+      có các Finding về khác biệt vai trò hoặc Nhật Chủ.
+
+    supporting_fact_templates:
+
+      - id: different_decision_style
+        source_fact: decision_style_difference
+        template: >
+          Hai người có cách tiếp cận vấn đề khá khác nhau.
+
+      - id: different_priority
+        source_fact: value_difference
+        template: >
+          Mỗi người thường ưu tiên những điều khác nhau.
+
+    limitation_templates:
+
+      - id: communication_needed
+        source_fact: communication_needed
+        template: >
+          Nếu trao đổi rõ ràng ngay từ đầu,
+          phần lớn khác biệt đều có thể dung hòa.
+
+    closing: >
+      Khác biệt không phải là trở ngại lớn,
+      miễn là hai người hiểu và tôn trọng góc nhìn của nhau.
+
+    forbidden_terms: []
+
+    variants: []
+  marriage.q3.role_pressure:
+
+    semantic_state: role_pressure
+
+    tone: professional_warm
+
+    version: "1.0.0"
+
+    status: approved
+
+    headline: >
+      Hai người dễ tạo áp lực lên nhau trong cách phối hợp.
+
+    meaning: >
+      Cả hai đều có xu hướng muốn giữ quan điểm của mình.
+      Điều này khiến việc thống nhất quyết định
+      đôi lúc mất nhiều thời gian hơn.
+
+    plain_customer_text: >
+      Mâu thuẫn nếu xuất hiện
+      thường đến từ cách giao tiếp,
+      phân chia trách nhiệm
+      hoặc mong muốn kiểm soát tình huống.
+
+    technical_explanation: >
+      Decision xác nhận
+      các Finding về áp lực vai trò
+      hoặc cạnh tranh trách nhiệm.
+
+    supporting_fact_templates:
+
+      - id: role_competition
+        source_fact: role_competition
+        template: >
+          Hai người đều muốn chủ động trong cùng một số tình huống.
+
+      - id: responsibility_pressure
+        source_fact: responsibility_pressure
+        template: >
+          Việc phân chia trách nhiệm có thể là chủ đề dễ phát sinh bất đồng.
+
+    limitation_templates:
+
+      - id: role_clarity
+        source_fact: role_clarity
+        template: >
+          Nếu thống nhất vai trò ngay từ đầu,
+          áp lực này sẽ giảm đáng kể.
+
+    closing: >
+      Điều quan trọng không phải ai đúng,
+      mà là cả hai cùng thống nhất cách phối hợp.
+
+    forbidden_terms: []
+
+    variants: []
+forbidden_terms:
+  - "chắc chắn"
+  - "bản chất"
+  - "không thể thay đổi"
+
+render_rules:
+  verdict_first: true
+  customer_first: true
+  explain_jargon: true
+  technical_explanation_collapsed_by_default: true
+
+  max_headline_sentences: 1
+  max_meaning_sentences: 3
+  max_supporting_facts: 4
+  max_limitations: 2
+
+review_status:
+  architecture: approved
+  customer_wording: approved
+  runtime_binding: not_started
