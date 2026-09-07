@@ -33,6 +33,7 @@ export default defineConfig(({ mode }) => {
           result: path.resolve(rootDir, "src/entries/resultApp.tsx"),
           report: path.resolve(rootDir, "src/entries/reportComposer.ts"),
           workspace: path.resolve(rootDir, "src/entries/workspaceApp.tsx"),
+          marriage: path.resolve(rootDir, "src/entries/marriageConsultingApp.tsx"),
         },
         output: {
           entryFileNames: "[name].js",

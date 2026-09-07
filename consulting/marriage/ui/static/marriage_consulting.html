@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tư vấn hôn nhân</title>
+  <link rel="stylesheet" href="/tv01-static/marriage_consulting.css" />
+  <style>
+    :root {
+      --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px;
+      --space-6: 32px; --space-8: 64px; --text-sm: 0.875rem; --muted: #5c5854;
+      --primary: #6b4f3a; --line: #e4dfd8; --panel: #fff; --ink: #221e1a;
+      --radius-xl: 16px; --shadow: 0 8px 24px rgba(40, 32, 24, 0.06);
+    }
+    body { margin: 0; font-family: "Segoe UI", sans-serif; color: var(--ink); background: #f2f1ef; }
+    .bte-card { border: 1px solid var(--line); border-radius: var(--radius-xl); background: var(--panel); padding: var(--space-5); box-shadow: var(--shadow); }
+    .muted { color: var(--muted); }
+    button { background: var(--primary); color: #fff; border: 0; border-radius: 10px; padding: 12px 20px; cursor: pointer; }
+    button.secondary { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+    input[type="text"] { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+    .ds-gender__options { display: flex; gap: 12px; }
+    .app-header { display: flex; gap: 16px; align-items: center; padding: 12px 20px; background: #fff; border-bottom: 1px solid var(--line); }
+    .app-header a { color: var(--ink); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a href="/marriage-consulting">BTE TV-01</a>
+    <span data-nav-family="consulting">Tư vấn hôn nhân</span>
+  </header>
+  <main id="marriage-consulting-root"></main>
+  <script src="/tv01-static/marriage_consulting.js"></script>
+</body>
+</html>

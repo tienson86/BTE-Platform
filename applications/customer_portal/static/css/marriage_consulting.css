@@ -1,0 +1,140 @@
+/* TV-01 Marriage Consulting — portal tokens only */
+
+.mc-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4) var(--space-8);
+  min-width: 0;
+}
+
+.mc-intro h1 {
+  margin: var(--space-2) 0;
+}
+
+.mc-people {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-5);
+}
+
+.mc-person,
+.mc-hero,
+.mc-identity,
+.mc-actions .mc-action,
+.mc-domain {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.mc-person label,
+.mc-person fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.mc-person input[type="text"] {
+  width: 100%;
+  min-width: 0;
+}
+
+.mc-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-5);
+}
+
+.mc-cta button {
+  min-width: 16rem;
+}
+
+.mc-hero__eyebrow {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: var(--text-sm);
+  color: var(--muted);
+  margin: 0;
+}
+
+.mc-hero ul,
+.mc-result ul {
+  margin: 0;
+  padding-left: var(--space-5);
+}
+
+.mc-domain-grid,
+.mc-action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.mc-limitation {
+  margin-top: var(--space-3);
+  color: var(--muted);
+}
+
+.mc-error {
+  border-color: var(--danger, #a33);
+}
+
+.mc-loading .skeleton-card {
+  min-height: 4rem;
+}
+
+.mc-expert pre {
+  overflow: auto;
+  max-height: 24rem;
+  font-size: var(--text-sm);
+}
+
+.mc-page :focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.field-error {
+  color: var(--danger, #a33);
+  font-size: var(--text-sm);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 1024px) {
+  .mc-domain-grid,
+  .mc-action-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .mc-people,
+  .mc-domain-grid,
+  .mc-action-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mc-page {
+    padding: var(--space-4) var(--space-3) var(--space-6);
+  }
+
+  .mc-cta button {
+    width: 100%;
+    min-width: 0;
+  }
+}

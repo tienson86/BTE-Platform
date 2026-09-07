@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="{{LANG}}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{DOC_TITLE}} — Tư vấn hôn nhân</title>
+  <link rel="stylesheet" href="/static/css/portal.css" />
+  <link rel="stylesheet" href="/static/css/marriage_consulting.css" />
+  <script>
+    window.__BTE_I18N__ = {{I18N_JSON}};
+    window.__BTE_I18N_LOCALE__ = "{{I18N_LOCALE}}";
+    window.__BTE_MARRIAGE_API_BASE__ = "/backend/api/v1/consulting/marriage";
+  </script>
+  <script src="/static/js/i18n.js"></script>
+  <script src="/static/js/ui/shell.js"></script>
+</head>
+<body data-screen="marriage-consulting">
+  <div class="app-shell">
+    {{HEADER}}
+    <div class="app-main">
+      <div id="globalFlash" class="flash" role="status"></div>
+      <main id="mainContent">
+        <div id="marriage-consulting-root" data-mount="MarriageConsultingPage"></div>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="/static/dist/marriage.js"></script>
+</body>
+</html>

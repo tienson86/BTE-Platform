@@ -15,11 +15,17 @@ from typing import Mapping
 
 import httpx
 from fastapi import FastAPI, Request, Response
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 from applications.customer_portal.config import PORTAL_ROOT, settings
-from applications.customer_portal.pages import HOME_PATH, LOGIN_ITEM, NAV_ITEMS
+from applications.customer_portal.pages import (
+    HOME_PATH,
+    LOGIN_ITEM,
+    MARRIAGE_API_PROXY_PREFIX,
+    MARRIAGE_CONSULTING_PATH,
+    NAV_ITEMS,
+)
 from applications.customer_portal.templates_util import render_desktop_page, render_page
 
 HOP_BY_HOP = {
@@ -34,6 +40,13 @@ HOP_BY_HOP = {
     "host",
     "content-length",
 }
+
+
+def _proxy_upstream_url(path: str) -> str:
+    """HTTP-only composition: marriage Public API is a separate origin."""
+    if path == MARRIAGE_API_PROXY_PREFIX or path.startswith(f"{MARRIAGE_API_PROXY_PREFIX}/"):
+        return f"{settings.marriage_api_base_url.rstrip('/')}/{path}"
+    return f"{settings.api_base_url.rstrip('/')}/{path}"
 
 
 def create_app() -> FastAPI:
@@ -121,13 +134,18 @@ def create_app() -> FastAPI:
         """Profile page."""
         return page("profile", "profile.html")
 
+    @app.get(MARRIAGE_CONSULTING_PATH, response_class=HTMLResponse)
+    def marriage_consulting_page() -> HTMLResponse:
+        """TV-01 Marriage Consulting customer page."""
+        return page("marriage-consulting", "marriage_consulting.html")
+
     @app.api_route(
         "/backend/{path:path}",
         methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     )
     async def backend_proxy(path: str, request: Request) -> Response:
-        """Proxy to Applications API (no business logic)."""
-        url = f"{settings.api_base_url.rstrip('/')}/{path}"
+        """Proxy REST. Marriage routes go to the isolated TV-01 API origin."""
+        url = _proxy_upstream_url(path)
         if request.url.query:
             url = f"{url}?{request.url.query}"
         headers = {
@@ -136,13 +154,38 @@ def create_app() -> FastAPI:
             if key.lower() not in HOP_BY_HOP
         }
         body = await request.body()
-        async with httpx.AsyncClient(timeout=120.0) as client:
-            upstream = await client.request(
-                request.method,
-                url,
-                headers=headers,
-                content=body,
-            )
+        marriage_route = path == MARRIAGE_API_PROXY_PREFIX or path.startswith(
+            f"{MARRIAGE_API_PROXY_PREFIX}/"
+        )
+        try:
+            async with httpx.AsyncClient(timeout=120.0) as client:
+                upstream = await client.request(
+                    request.method,
+                    url,
+                    headers=headers,
+                    content=body,
+                )
+        except httpx.RequestError:
+            if marriage_route:
+                return JSONResponse(
+                    status_code=503,
+                    content={
+                        "status": "FAILED",
+                        "data": None,
+                        "warnings": [],
+                        "errors": [
+                            {
+                                "code": "INTERNAL_ERROR",
+                                "stage": "transport",
+                                "message": "Không thể hoàn tất phân tích lúc này.",
+                                "retryable": True,
+                                "consultation_id": None,
+                            }
+                        ],
+                        "version_bundle": {"api_version": "v1"},
+                    },
+                )
+            raise
         excluded = {
             "content-encoding",
             "content-length",
@@ -174,7 +217,9 @@ def create_app() -> FastAPI:
                 "/good-date",
                 "/choose-date",
                 "/result-workspace",
+                MARRIAGE_CONSULTING_PATH,
             ],
+            "marriage_api_base_url": settings.marriage_api_base_url,
         }
 
     return app

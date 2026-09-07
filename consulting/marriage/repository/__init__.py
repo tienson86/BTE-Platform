@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 from consulting.marriage.repository.contract import MarriageRepository
+from consulting.marriage.repository.memory import InMemoryMarriageRepository
 from consulting.marriage.repository.placeholder import PlaceholderMarriageRepository
 
 __all__ = [
+    "InMemoryMarriageRepository",
     "MarriageRepository",
     "PlaceholderMarriageRepository",
 ]

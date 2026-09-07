@@ -52,11 +52,19 @@ class MarriageRuntimeResponse:
 
 @dataclass(slots=True)
 class MarriageConsultationSummary:
-    """Compact consultation summary resource."""
+    """Compact consultation summary resource. Score/grade remain nullable."""
 
     consultation_id: str
     person_a_analysis_id: str
     person_b_analysis_id: str
-    score: float
-    grade: str
-    confidence: float
+    score: float | None = None
+    grade: str | None = None
+    confidence: float | None = None
+    overall_state: str | None = None
+    headline: str | None = None
+    executive_summary: str | None = None
+    top_strengths: list[str] = field(default_factory=list)
+    top_risks: list[str] = field(default_factory=list)
+    top_action_themes: list[str] = field(default_factory=list)
+    limitations: list[str] = field(default_factory=list)
+    confidence_level: str | None = None
