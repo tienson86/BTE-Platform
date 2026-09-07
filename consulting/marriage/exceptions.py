@@ -48,3 +48,7 @@ class MarriagePersistenceError(MarriageConsultingError):
 
 class MarriageInternalError(MarriageConsultingError):
     """Unexpected internal failure."""
+
+
+class MarriageRecommendationError(MarriageConsultingError):
+    """Recommendation construction or validation failed."""

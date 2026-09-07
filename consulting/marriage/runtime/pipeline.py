@@ -184,6 +184,10 @@ class MarriageRuntimeOrchestrator(MarriageOrchestrator):
 
         self._run_stage(consultation_id, session, B02_PIPELINE_STAGES[5], build_snapshots)
         session.transition(RuntimeLifecycleState.SNAPSHOT_READY)
+        self._after_snapshots(session)
+
+    def _after_snapshots(self, session: MarriageRuntimeSession) -> None:
+        """B02 stop. Later phases continue from snapshot-ready through this seam."""
         session.transition(RuntimeLifecycleState.COMPLETED)
 
     def _create_session(

@@ -36,3 +36,8 @@ class MarriageFinding:
     summary_key: str | None = None
     recommendation_ids: list[str] = field(default_factory=list)
     technical_summary: str | None = None
+    semantic_key: str | None = None
+    conflicting_evidence_ids: list[str] = field(default_factory=list)
+    conditions: list[str] = field(default_factory=list)
+    dependencies: list[str] = field(default_factory=list)
+    version: str | None = None

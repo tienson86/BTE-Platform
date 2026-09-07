@@ -14,8 +14,10 @@ from consulting.marriage.models.decision import (
 from consulting.marriage.models.enums import (
     CanonicalGender,
     ConfidenceLevel,
+    DomainDecisionState,
     DomainGrade,
     EvidenceDirection,
+    EvidenceResolutionStatus,
     EvidenceSignificance,
     FindingPriority,
     FindingRelation,
@@ -25,13 +27,19 @@ from consulting.marriage.models.enums import (
     MarriageEvidenceType,
     MarriageRuntimeStatus,
     PersonSide,
+    RecommendationPriority,
     RecommendationType,
+    RecommendationUrgency,
     RelationshipSubject,
     TenGodVisibility,
     TimingStatus,
     YinYang,
 )
-from consulting.marriage.models.evidence import EvidenceSourceRef, MarriageEvidence
+from consulting.marriage.models.evidence import (
+    EvidenceSourceRef,
+    MarriageEvidence,
+    ResolvedMarriageEvidence,
+)
 from consulting.marriage.models.finding import FindingReference, MarriageFinding
 from consulting.marriage.models.person import (
     BirthDataQuality,
@@ -73,7 +81,9 @@ __all__ = [
     "ConfidenceLevel",
     "DayMasterSnapshot",
     "DomainAvailability",
+    "DomainDecisionState",
     "DomainGrade",
+    "EvidenceResolutionStatus",
     "ElementOrStemReference",
     "EvidenceDirection",
     "EvidenceReference",
@@ -95,6 +105,7 @@ __all__ = [
     "MarriageDomainDecision",
     "MarriageDomainResults",
     "MarriageEvidence",
+    "ResolvedMarriageEvidence",
     "MarriageEvidenceType",
     "MarriageFinding",
     "MarriageLuckWindow",
@@ -111,7 +122,9 @@ __all__ = [
     "PersonSide",
     "PillarSnapshot",
     "PillarValue",
+    "RecommendationPriority",
     "RecommendationType",
+    "RecommendationUrgency",
     "RelationshipSubject",
     "RuntimeMeta",
     "ShenShaItem",

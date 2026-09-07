@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from consulting.marriage.models.confidence import MarriageConfidenceResult
 from consulting.marriage.models.decision import MarriageDomainResults, MarriageOverallDecision
-from consulting.marriage.models.evidence import MarriageEvidence
+from consulting.marriage.models.evidence import MarriageEvidence, ResolvedMarriageEvidence
+from consulting.marriage.models.finding import MarriageFinding
 from consulting.marriage.models.person import MarriagePersonReference
 from consulting.marriage.models.recommendation import MarriageRecommendation
 from consulting.marriage.models.snapshot import MarriageCanonicalSnapshot
@@ -31,3 +32,6 @@ class MarriageDecisionResult:
     versions: MarriageVersionBundle
     created_at: str
     timing: MarriageTimingResult | None = None
+    resolved_evidence: list[ResolvedMarriageEvidence] = field(default_factory=list)
+    findings: list[MarriageFinding] = field(default_factory=list)
+    limitations: list[str] = field(default_factory=list)

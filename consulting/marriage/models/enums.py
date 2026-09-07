@@ -109,6 +109,27 @@ class PersonSide(str, Enum):
     B = "B"
 
 
+class DomainDecisionState(str, Enum):
+    """Semantic structural state for a domain or overall decision."""
+
+    SUPPORTIVE = "supportive"
+    BALANCED = "balanced"
+    MIXED = "mixed"
+    PRESSURED = "pressured"
+    CRITICAL = "critical"
+    INSUFFICIENT = "insufficient"
+
+
+class EvidenceResolutionStatus(str, Enum):
+    """Derived resolution status. Does not mutate raw evidence."""
+
+    ACTIVE = "active"
+    DAMAGED = "damaged"
+    RESCUED = "rescued"
+    SUPPRESSED = "suppressed"
+    CONFLICTING = "conflicting"
+
+
 class FindingType(str, Enum):
     """Finding semantic type."""
 
@@ -150,6 +171,26 @@ class FindingRelation(str, Enum):
     REDUCES = "reduces"
     CONFLICTS = "conflicts"
     DEPENDS_ON = "depends_on"
+
+
+class RecommendationPriority(str, Enum):
+    """Recommendation priority derived from findings. Not a fear label."""
+
+    CRITICAL = "critical"
+    HIGH = "high"
+    MEDIUM = "medium"
+    LOW = "low"
+    REFERENCE = "reference"
+
+
+class RecommendationUrgency(str, Enum):
+    """Recommendation urgency. Independent of priority."""
+
+    IMMEDIATE = "immediate"
+    NEAR_TERM = "near_term"
+    LONG_TERM = "long_term"
+    CONTINUOUS = "continuous"
+    EVENT_DRIVEN = "event_driven"
 
 
 class RecommendationType(str, Enum):

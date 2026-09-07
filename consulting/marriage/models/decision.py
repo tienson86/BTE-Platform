@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-from consulting.marriage.models.enums import DomainGrade, MarriageDomain
+from consulting.marriage.models.enums import DomainDecisionState, DomainGrade, MarriageDomain
 from consulting.marriage.models.finding import FindingReference, MarriageFinding
 
 
@@ -28,6 +28,7 @@ class MarriageDomainDecision:
     evidence_ids: list[str]
     score: float | None = None
     grade: DomainGrade | None = None
+    state: DomainDecisionState | None = None
     cross_domain_refs: list[FindingReference] = field(default_factory=list)
 
 
@@ -49,11 +50,12 @@ class MarriageDomainResults:
 class MarriageOverallDecision:
     """Overall marriage decision. Finding IDs only. No customer prose."""
 
-    score: float
-    grade: DomainGrade
+    score: float | None
+    grade: DomainGrade | None
     confidence: float
     headline_finding_ids: list[str]
     strength_finding_ids: list[str]
     risk_finding_ids: list[str]
     condition_finding_ids: list[str]
     domain_scores: dict[MarriageDomain, float]
+    state: DomainDecisionState | None = None
