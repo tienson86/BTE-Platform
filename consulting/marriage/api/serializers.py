@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from consulting.marriage.language_render import render_marriage_language_cards
 from consulting.marriage.assessment.projector import project_marriage_assessment
 from consulting.marriage.api.versions import API_VERSION, API_VERSION_TOKEN
 from consulting.marriage.dto.history import MarriageHistoryRecord, MarriageStoredResult
@@ -126,7 +127,7 @@ def serialize_consultation(stored: MarriageStoredResult, *, expert: bool) -> dic
         "versions": public_version_bundle(result),
         "headline": _headline(stored.narrative),
         "action_themes": _action_themes(result),
-        "assessment_cards": serialize_assessment_cards(result),
+        "assessment_cards": serialize_assessment_cards(result, expert=expert),
     }
     if expert:
         payload["expert"] = _expert_trace(stored)
@@ -145,7 +146,7 @@ def serialize_summary(stored: MarriageStoredResult) -> dict[str, object]:
         "top_strengths": _section_titles(report, "strengths"),
         "top_risks": _section_titles(report, "risks"),
         "top_action_themes": _action_themes(result),
-        "assessment_cards": serialize_assessment_cards(result),
+        "assessment_cards": serialize_assessment_cards(result, expert=False),
         "confidence": {
             "level": result.confidence.level.value,
             "overall": result.confidence.overall,
@@ -261,22 +262,32 @@ def _person_summary(result: MarriageDecisionResult, side: str) -> dict[str, str 
     }
 
 
-def serialize_assessment_cards(result: MarriageDecisionResult) -> list[dict[str, object]]:
-    """Public Assessment cards. Raw Decision stays internal."""
+def serialize_assessment_cards(
+    result: MarriageDecisionResult,
+    *,
+    expert: bool = False,
+) -> list[dict[str, object]]:
+    """Public Assessment cards from Language Pack. Assessment semantics stay internal."""
     if result.assessment is None:
         result.assessment = project_marriage_assessment(result)
+    rendered = render_marriage_language_cards(result, include_technical=expert)
     cards: list[dict[str, object]] = []
-    for card in result.assessment.cards:
-        cards.append(
-            {
-                "question_id": card.question_id,
-                "question": card.question,
-                "answer": card.answer,
-                "supporting_facts": list(card.supporting_facts),
-                "confidence": card.confidence,
-                "limitations": list(card.limitations),
-            }
-        )
+    for card in rendered:
+        payload: dict[str, object] = {
+            "question_id": card.question_id,
+            "question": card.question,
+            "answer": card.headline,
+            "headline": card.headline,
+            "meaning": card.meaning,
+            "supporting_facts": list(card.supporting_facts),
+            "confidence": card.confidence,
+            "limitations": list(card.limitations),
+            "closing": card.closing,
+            "language_key": card.language_key,
+        }
+        if expert and card.technical_explanation:
+            payload["technical_explanation"] = card.technical_explanation
+        cards.append(payload)
     return cards
 
 

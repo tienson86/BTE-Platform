@@ -206,8 +206,19 @@
                 return "<li>" + escapeHtml(item) + "</li>";
               })
               .join("");
-            const limits = (card.limitations || []).length
-              ? '<p class="mc-limitation">' + escapeHtml((card.limitations || []).join("; ")) + "</p>"
+            const limits = (card.limitations || [])
+              .map(function (item) {
+                return "<li>" + escapeHtml(item) + "</li>";
+              })
+              .join("");
+            const meaning = card.meaning
+              ? '<p class="mc-assessment-card__meaning">' + escapeHtml(card.meaning) + "</p>"
+              : "";
+            const closing = card.closing ? "<p>" + escapeHtml(card.closing) + "</p>" : "";
+            const technical = card.technical_explanation
+              ? '<details class="mc-assessment-card__technical"><summary>Giải thích kỹ thuật</summary><p>' +
+                escapeHtml(card.technical_explanation) +
+                "</p></details>"
               : "";
             return (
               '<article class="bte-card mc-assessment-card" data-testid="assessment-card-' +
@@ -215,15 +226,20 @@
               '"><p class="mc-assessment-card__question">' +
               escapeHtml(card.question) +
               '</p><p class="mc-assessment-card__answer">' +
-              escapeHtml(card.answer) +
-              '</p><details class="mc-assessment-card__more"><summary>Cơ sở và giới hạn</summary>' +
+              escapeHtml(card.headline || card.answer) +
+              "</p>" +
+              meaning +
+              '<details class="mc-assessment-card__more"><summary>Cơ sở và giới hạn</summary>' +
               '<ul class="mc-assessment-card__facts">' +
               facts +
-              "</ul><p class=\"muted\">Độ tin cậy: " +
+              "</ul>" +
+              (limits ? '<ul class="mc-assessment-card__limits">' + limits + "</ul>" : "") +
+              closing +
+              '<p class="muted">Độ tin cậy: ' +
               escapeHtml(card.confidence) +
-              "</p>" +
-              limits +
-              "</details></article>"
+              "</p></details>" +
+              technical +
+              "</article>"
             );
           })
           .join("") +

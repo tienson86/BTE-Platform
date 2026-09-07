@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+from consulting.marriage.language_render import render_marriage_language_cards
+from consulting.language.models import LanguageCardWording
 from consulting.marriage.assessment.projector import project_marriage_assessment
 from consulting.marriage.models.assessment import MarriageAssessmentCard
 from consulting.marriage.models.enums import (
@@ -138,6 +140,7 @@ class NarrativeInput:
     comparison_facts: list[ComparisonNarrativeFact]
     overall_comparison: OverallComparisonNarrative | None
     assessment_cards: list[MarriageAssessmentCard]
+    language_cards: list[LanguageCardWording]
 
 
 def narrative_input_from_decision(
@@ -213,6 +216,7 @@ def narrative_input_from_decision(
         comparison_facts=comparison_facts,
         overall_comparison=_overall_comparison(result, comparison_facts, person_a_label, person_b_label),
         assessment_cards=_assessment_cards(result),
+        language_cards=render_marriage_language_cards(result, include_technical=True),
     )
 
 

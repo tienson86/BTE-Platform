@@ -10,10 +10,10 @@ import pytest
 
 from consulting.language.bindings.marriage import R02_SEMANTIC_TO_LANGUAGE_KEY, language_key_for
 from consulting.language.catalog import get_entry, load_validated_marriage_catalog
-from consulting.language.exceptions import LanguageCatalogError, LanguagePackNotIntegratedError
+from consulting.language.exceptions import LanguageCatalogError
 from consulting.language.loader import load_schema
 from consulting.language.models import LanguageCatalog, LanguageCatalogFile, LanguageEntry
-from consulting.language.renderer import render_for_live_tv01
+from consulting.language.renderer import compact_text
 from consulting.language.selector import select_wording
 from consulting.language.validator import validate_catalog
 from consulting.language.versions import (
@@ -93,7 +93,7 @@ def test_variant_selection_is_deterministic() -> None:
     )
     assert first.variant_id == second.variant_id
     assert first.variant_id in {"v1", "v2"}
-    assert first.headline == PLACEHOLDER_TOKEN
+    assert PLACEHOLDER_TOKEN not in first.headline
 
 
 def test_forbidden_term_is_rejected() -> None:
@@ -132,33 +132,37 @@ def test_r02_binding_keys_exist_in_catalog() -> None:
     assert language_key_for("Q5", "insufficient") == "marriage.q5.insufficient"
 
 
-def test_live_renderer_is_not_integrated() -> None:
-    """LANG-01 must not replace live TV-01 wording."""
+def test_approved_catalog_has_no_placeholder_token() -> None:
+    """Live Marriage catalogs must not ship Product Owner placeholder tokens."""
     catalog = load_validated_marriage_catalog()
-    entry = get_entry(catalog, "marriage.q1.mixed")
-    selected = select_wording(
-        entry,
-        semantic_signature="Q1|average",
-        catalog_version=catalog.catalog_version,
+    blob = " ".join(
+        compact_text(part)
+        for entry in catalog.entries_by_key.values()
+        for part in [
+            entry.headline,
+            entry.meaning,
+            entry.closing,
+            *[item.template for item in entry.supporting_fact_templates],
+        ]
     )
-    with pytest.raises(LanguagePackNotIntegratedError):
-        render_for_live_tv01(entry, selected)
+    assert PLACEHOLDER_TOKEN not in blob
 
 
-def test_language_pack_not_imported_by_tv01_runtime() -> None:
-    """Marriage Decision / Assessment / Narrative must not import Language Pack yet."""
+def test_decision_assessment_recommendation_do_not_import_language_pack() -> None:
+    """Language Pack wording must not leak into Decision or Assessment logic."""
     leaked: list[str] = []
-    for path in MARRIAGE_ROOT.rglob("*.py"):
-        tree = ast.parse(path.read_text(encoding="utf-8"))
-        for node in ast.walk(tree):
-            if isinstance(node, ast.Import):
-                names = [alias.name for alias in node.names]
-            elif isinstance(node, ast.ImportFrom) and node.module:
-                names = [node.module]
-            else:
-                continue
-            if any(name == "consulting.language" or name.startswith("consulting.language.") for name in names):
-                leaked.append(str(path.relative_to(ROOT)))
+    for folder in ("decision", "assessment", "recommendation", "evidence", "finding"):
+        for path in (MARRIAGE_ROOT / folder).rglob("*.py"):
+            tree = ast.parse(path.read_text(encoding="utf-8"))
+            for node in ast.walk(tree):
+                if isinstance(node, ast.Import):
+                    names = [alias.name for alias in node.names]
+                elif isinstance(node, ast.ImportFrom) and node.module:
+                    names = [node.module]
+                else:
+                    continue
+                if any(name == "consulting.language" or name.startswith("consulting.language.") for name in names):
+                    leaked.append(str(path.relative_to(ROOT)))
     assert leaked == []
 
 

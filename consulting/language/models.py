@@ -86,3 +86,21 @@ class SelectedWording:
     meaning: str
     catalog_version: str
     entry_version: str
+
+
+@dataclass(slots=True)
+class LanguageCardWording:
+    """Rendered Assessment Card wording. Not a Decision and not an Assessment."""
+
+    question_id: str
+    question: str
+    language_key: str
+    headline: str
+    meaning: str
+    supporting_facts: list[str]
+    limitations: list[str]
+    closing: str
+    technical_explanation: str
+    variant_id: str
+    confidence: str
+    fallback: bool = False

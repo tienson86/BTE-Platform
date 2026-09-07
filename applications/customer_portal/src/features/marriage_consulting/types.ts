@@ -45,9 +45,14 @@ export type AssessmentCardDto = {
   question_id: string;
   question: string;
   answer: string;
+  headline?: string;
+  meaning?: string;
   supporting_facts: string[];
   confidence: string;
   limitations: string[];
+  closing?: string;
+  language_key?: string;
+  technical_explanation?: string;
 };
 
 export type MarriageConsultationDto = {
@@ -125,9 +130,12 @@ export type AssessmentCardVm = {
   questionId: string;
   question: string;
   answer: string;
+  meaning: string;
   supportingFacts: string[];
   confidence: string;
   limitations: string[];
+  closing: string;
+  technicalExplanation: string;
 };
 
 export type MarriageViewModel = {

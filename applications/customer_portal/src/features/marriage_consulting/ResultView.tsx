@@ -229,6 +229,7 @@ function AssessmentCard({ card }: { card: AssessmentCardVm }): ReactNode {
     <article className="bte-card mc-assessment-card" data-testid={`assessment-card-${card.questionId}`}>
       <p className="mc-assessment-card__question">{card.question}</p>
       <p className="mc-assessment-card__answer">{card.answer}</p>
+      {card.meaning ? <p className="mc-assessment-card__meaning">{card.meaning}</p> : null}
       <details className="mc-assessment-card__more">
         <summary>Cơ sở và giới hạn</summary>
         <ul className="mc-assessment-card__facts">
@@ -236,11 +237,22 @@ function AssessmentCard({ card }: { card: AssessmentCardVm }): ReactNode {
             <li key={item}>{item}</li>
           ))}
         </ul>
-        <p className="muted">Độ tin cậy: {card.confidence}</p>
         {card.limitations.length ? (
-          <p className="mc-limitation">{card.limitations.join("; ")}</p>
+          <ul className="mc-assessment-card__limits">
+            {card.limitations.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
         ) : null}
+        {card.closing ? <p>{card.closing}</p> : null}
+        <p className="muted">Độ tin cậy: {card.confidence}</p>
       </details>
+      {card.technicalExplanation ? (
+        <details className="mc-assessment-card__technical" data-testid={`assessment-technical-${card.questionId}`}>
+          <summary>Giải thích kỹ thuật</summary>
+          <p>{card.technicalExplanation}</p>
+        </details>
+      ) : null}
     </article>
   );
 }
@@ -270,7 +282,13 @@ function customerText(view: MarriageViewModel): string {
     view.heroHeadline,
     view.heroSummary,
     view.executiveSummary,
-    ...view.assessmentCards.flatMap((card) => [card.question, card.answer, ...card.supportingFacts]),
+    ...view.assessmentCards.flatMap((card) => [
+      card.question,
+      card.answer,
+      card.meaning,
+      ...card.supportingFacts,
+      card.closing,
+    ]),
     ...view.strengths,
     ...view.risks,
     ...view.comparisonGroups.flatMap((group) => group.items),

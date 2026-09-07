@@ -137,10 +137,13 @@ function assessmentCardsFrom(
     return fromApi.map((card) => ({
       questionId: card.question_id,
       question: card.question,
-      answer: card.answer,
+      answer: card.headline || card.answer,
+      meaning: card.meaning || "",
       supportingFacts: card.supporting_facts || [],
       confidence: card.confidence,
       limitations: card.limitations || [],
+      closing: card.closing || "",
+      technicalExplanation: card.technical_explanation || "",
     }));
   }
   return cardsFromExecutive(executive);
@@ -160,12 +163,19 @@ function cardsFromExecutive(executive: MarriageReportSection | undefined): Asses
       questionId: prefix.toUpperCase(),
       question: question.body || question.title || "",
       answer: answer?.body || "",
+      meaning: executive.blocks.find((item) => item.block_id === `${prefix}-meaning`)?.body || "",
       supportingFacts: (facts?.body || "")
         .split("\n")
         .map((line) => line.replace(/^•\s*/, "").trim())
         .filter(Boolean),
       confidence: confidence?.body || "",
-      limitations: limitations?.body ? limitations.body.split("; ").filter(Boolean) : [],
+      limitations: (limitations?.body || "")
+        .split("\n")
+        .map((line) => line.replace(/^•\s*/, "").trim())
+        .filter(Boolean),
+      closing: executive.blocks.find((item) => item.block_id === `${prefix}-closing`)?.body || "",
+      technicalExplanation:
+        executive.blocks.find((item) => item.block_id === `${prefix}-technical`)?.body || "",
     });
   }
   return cards;

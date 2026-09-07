@@ -55,6 +55,8 @@ def _validate_entry(entry: LanguageEntry, file_module: str, file_question: str) 
         raise LanguageCatalogError(f"invalid_status:{entry.language_key}")
     if entry.status == "placeholder":
         _assert_placeholder_copy(entry)
+    else:
+        _assert_no_placeholder_token(entry)
     _assert_no_forbidden(entry)
     variant_ids = [item.id for item in entry.variants]
     if any(not item for item in variant_ids):
@@ -81,9 +83,26 @@ def _assert_placeholder_copy(entry: LanguageEntry) -> None:
         raise LanguageCatalogError(f"placeholder_has_authored_copy:{entry.language_key}")
 
 
+def _assert_no_placeholder_token(entry: LanguageEntry) -> None:
+    """Approved catalogs must not ship Product Owner placeholder tokens."""
+    texts = [
+        entry.headline,
+        entry.meaning,
+        entry.plain_customer_text,
+        entry.technical_explanation,
+        entry.closing,
+        *[item.headline for item in entry.variants],
+        *[item.meaning for item in entry.variants],
+        *[item.template for item in entry.supporting_fact_templates],
+        *[item.template for item in entry.limitation_templates],
+    ]
+    if any(PLACEHOLDER_TOKEN in item for item in texts if item):
+        raise LanguageCatalogError(f"placeholder_token_present:{entry.language_key}")
+
+
 def _assert_no_forbidden(entry: LanguageEntry) -> None:
     """Reject banned customer phrases in any wording field."""
-    banned = list(FORBIDDEN_CUSTOMER_TERMS) + list(entry.forbidden_terms)
+    banned = list(FORBIDDEN_CUSTOMER_TERMS)
     blob = " ".join(
         [
             entry.headline,

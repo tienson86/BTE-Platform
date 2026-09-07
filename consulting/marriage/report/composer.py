@@ -70,8 +70,11 @@ def _executive_summary(
     payload: NarrativeInput,
     narrative: MarriageNarrativeResult,
 ) -> ReportSection:
-    """Marriage Assessment cards. Not an essay executive summary."""
+    """Marriage Assessment cards from Language Pack. Frozen section_id."""
     _ = narrative
+    language_cards = payload.language_cards
+    if language_cards:
+        return _language_assessment_section(language_cards)
     cards = payload.assessment_cards
     if not cards:
         overall = overall_entry(payload.overall_state.value)
@@ -147,6 +150,98 @@ def _executive_summary(
         section_id="executive_summary",
         title="Đánh giá hôn nhân",
         summary=cards[0].answer if cards else None,
+        blocks=blocks,
+    )
+
+
+def _language_assessment_section(language_cards: list) -> ReportSection:
+    """Render Question / Headline / Meaning / Facts / Limitations / Closing."""
+    blocks: list[ReportBlock] = []
+    for card in language_cards:
+        prefix = card.question_id.lower()
+        key = card.language_key or f"marriage.assessment.{card.question_id}"
+        blocks.append(
+            ReportBlock(
+                block_id=f"{prefix}-question",
+                kind="question",
+                title=card.question,
+                body=card.question,
+                semantic_key=f"marriage.assessment.{card.question_id}",
+            )
+        )
+        blocks.append(
+            ReportBlock(
+                block_id=f"{prefix}-answer",
+                kind="answer",
+                title=card.question,
+                body=card.headline,
+                semantic_key=key,
+            )
+        )
+        if card.meaning:
+            blocks.append(
+                ReportBlock(
+                    block_id=f"{prefix}-meaning",
+                    kind="meaning",
+                    title="Ý nghĩa",
+                    body=card.meaning,
+                    semantic_key=key,
+                )
+            )
+        if card.supporting_facts:
+            blocks.append(
+                ReportBlock(
+                    block_id=f"{prefix}-facts",
+                    kind="facts",
+                    title="Cơ sở",
+                    body="\n".join(f"• {item}" for item in card.supporting_facts),
+                    semantic_key=key,
+                )
+            )
+        blocks.append(
+            ReportBlock(
+                block_id=f"{prefix}-confidence",
+                kind="confidence",
+                title="Độ tin cậy",
+                body=card.confidence,
+                semantic_key=key,
+            )
+        )
+        if card.limitations:
+            blocks.append(
+                ReportBlock(
+                    block_id=f"{prefix}-limitations",
+                    kind="limitations",
+                    title="Lưu ý",
+                    body="\n".join(f"• {item}" for item in card.limitations),
+                    semantic_key=key,
+                )
+            )
+        if card.closing:
+            blocks.append(
+                ReportBlock(
+                    block_id=f"{prefix}-closing",
+                    kind="closing",
+                    title="Kết",
+                    body=card.closing,
+                    semantic_key=key,
+                )
+            )
+        if card.technical_explanation:
+            blocks.append(
+                ReportBlock(
+                    block_id=f"{prefix}-technical",
+                    kind="technical",
+                    title="Giải thích kỹ thuật",
+                    body=card.technical_explanation,
+                    semantic_key=key,
+                    visibility="expert",
+                )
+            )
+    return ReportSection(
+        section_id="executive_summary",
+        title="Đánh giá hôn nhân",
+        summary=language_cards[0].headline if language_cards else None,
         blocks=blocks,
     )
 
