@@ -74,6 +74,16 @@ A Canon ID is immutable after publication.
 |----------|-------|------|--------|
 | CANON-0001 | Day Master Canon | [CANON_0001_DAY_MASTER.md](CANON_0001_DAY_MASTER.md) | Official |
 
+### Canonical Data Tables
+
+| ID | Title | File | Status |
+|----|-------|------|--------|
+| canon.du_nien.8x8 | Du Niên 8×8 Cung Phi Matrix | [du_nien_8x8.yaml](du_nien_8x8.yaml) | Official |
+
+This table is the single runtime source for ordered Cung Phi / Du Niên pair lookup.
+
+Modules consume it through `consulting.canon.du_nien`. They do not keep a second matrix.
+
 ---
 
 ## Reserved Roadmap

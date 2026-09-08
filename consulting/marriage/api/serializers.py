@@ -23,10 +23,10 @@ _PUBLIC_ERROR_MESSAGES = {
 }
 
 _WARNING_DESCRIPTIONS = {
-    "BIRTH_TIME_UNKNOWN": "Birth time was not provided. This is a data limitation, not a marital indication.",
-    "TIMEZONE_UNSPECIFIED": "Timezone was not provided.",
-    "DOMAIN_UNAVAILABLE": "This domain does not have enough structural data.",
-    "TIMING_UNAVAILABLE": "Timing coverage is not available for this consultation.",
+    "BIRTH_TIME_UNKNOWN": "Chưa có giờ sinh. Đây là giới hạn dữ liệu, không phải nhận định về hôn nhân.",
+    "TIMEZONE_UNSPECIFIED": "Múi giờ chưa được ghi nhận. Đây là giới hạn dữ liệu, không phải nhận định về hôn nhân.",
+    "DOMAIN_UNAVAILABLE": "Một số phần chưa đủ dữ liệu nên không luận riêng.",
+    "TIMING_UNAVAILABLE": "Phần nhịp thời điểm chưa đủ dữ liệu nên không hiển thị.",
 }
 
 _OPTIONAL_DOMAINS = (

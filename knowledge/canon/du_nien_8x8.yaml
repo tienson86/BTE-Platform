@@ -1,0 +1,137 @@
+# Canonical Du Niên 8×8 Cung Phi relationship matrix.
+# Lookup only. Directional ordered pairs. No score/grade.
+version: "1.0.0"
+id: canon.du_nien.8x8
+title: Du Niên 8×8 Cung Phi Matrix
+directional: true
+palaces:
+  - Khảm
+  - Khôn
+  - Chấn
+  - Tốn
+  - Càn
+  - Đoài
+  - Cấn
+  - Ly
+relationships:
+  sinh_khi:
+    id: sinh_khi
+    label: Sinh Khí
+    category: favorable
+    customer_summary: thiên về phát triển và sức sống
+    expert_summary: Tín hiệu phụ thiên về phát triển và sức sống.
+  thien_y:
+    id: thien_y
+    label: Thiên Y
+    category: favorable
+    customer_summary: thiên về sự hỗ trợ và ổn định
+    expert_summary: Tín hiệu phụ thiên về hỗ trợ và ổn định.
+  dien_nien:
+    id: dien_nien
+    label: Diên Niên
+    category: favorable
+    customer_summary: thiên về hòa hợp và bền lâu
+    expert_summary: Tín hiệu phụ thiên về hòa hợp và bền lâu.
+  phuc_vi:
+    id: phuc_vi
+    label: Phục Vị
+    category: favorable
+    customer_summary: thiên về ổn định, đồng hành và củng cố nền tảng
+    expert_summary: Tín hiệu phụ thiên về ổn định và củng cố nền tảng.
+  tuyet_menh:
+    id: tuyet_menh
+    label: Tuyệt Mệnh
+    category: unfavorable
+    customer_summary: mức xung mạnh, cần thận trọng khi dùng làm yếu tố xác nhận phụ
+    expert_summary: Tín hiệu phụ mức xung mạnh. Không thay thế đánh giá chính.
+  ngu_quy:
+    id: ngu_quy
+    label: Ngũ Quỷ
+    category: unfavorable
+    customer_summary: dễ tạo bất ổn hoặc ma sát
+    expert_summary: Tín hiệu phụ về ma sát hoặc bất ổn nhỏ.
+  luc_sat:
+    id: luc_sat
+    label: Lục Sát
+    category: unfavorable
+    customer_summary: dễ phát sinh căng thẳng trong quan hệ/giao tiếp
+    expert_summary: Tín hiệu phụ về căng thẳng giao tiếp hoặc quan hệ.
+  hoa_hai:
+    id: hoa_hai
+    label: Họa Hại
+    category: unfavorable
+    customer_summary: có xu hướng tạo phiền nhiễu hoặc trở ngại nhỏ kéo dài
+    expert_summary: Tín hiệu phụ về phiền nhiễu hoặc trở ngại nhỏ.
+matrix:
+  Khảm:
+    Khảm: phuc_vi
+    Khôn: tuyet_menh
+    Chấn: thien_y
+    Tốn: sinh_khi
+    Càn: luc_sat
+    Đoài: hoa_hai
+    Cấn: ngu_quy
+    Ly: dien_nien
+  Khôn:
+    Khảm: tuyet_menh
+    Khôn: phuc_vi
+    Chấn: ngu_quy
+    Tốn: thien_y
+    Càn: hoa_hai
+    Đoài: dien_nien
+    Cấn: sinh_khi
+    Ly: luc_sat
+  Chấn:
+    Khảm: thien_y
+    Khôn: luc_sat
+    Chấn: phuc_vi
+    Tốn: dien_nien
+    Càn: tuyet_menh
+    Đoài: ngu_quy
+    Cấn: hoa_hai
+    Ly: sinh_khi
+  Tốn:
+    Khảm: ngu_quy
+    Khôn: thien_y
+    Chấn: tuyet_menh
+    Tốn: phuc_vi
+    Càn: sinh_khi
+    Đoài: luc_sat
+    Cấn: dien_nien
+    Ly: hoa_hai
+  Càn:
+    Khảm: hoa_hai
+    Khôn: dien_nien
+    Chấn: luc_sat
+    Tốn: tuyet_menh
+    Càn: phuc_vi
+    Đoài: sinh_khi
+    Cấn: thien_y
+    Ly: ngu_quy
+  Đoài:
+    Khảm: tuyet_menh
+    Khôn: luc_sat
+    Chấn: ngu_quy
+    Tốn: hoa_hai
+    Càn: sinh_khi
+    Đoài: phuc_vi
+    Cấn: dien_nien
+    Ly: thien_y
+  Cấn:
+    Khảm: luc_sat
+    Khôn: sinh_khi
+    Chấn: hoa_hai
+    Tốn: dien_nien
+    Càn: thien_y
+    Đoài: ngu_quy
+    Cấn: phuc_vi
+    Ly: tuyet_menh
+  Ly:
+    Khảm: sinh_khi
+    Khôn: luc_sat
+    Chấn: hoa_hai
+    Tốn: ngu_quy
+    Càn: dien_nien
+    Đoài: thien_y
+    Cấn: tuyet_menh
+    Ly: phuc_vi

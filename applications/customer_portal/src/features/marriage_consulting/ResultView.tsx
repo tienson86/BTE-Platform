@@ -19,7 +19,6 @@ export function ResultView({ view, expertMode, onToggleExpert }: ResultViewProps
         <p data-testid="couple-names">
           {view.personAName} và {view.personBName}
         </p>
-        <p className="muted">{view.identityTitle}</p>
       </section>
 
       {view.assessmentCards.length ? (
@@ -80,7 +79,7 @@ export function ResultView({ view, expertMode, onToggleExpert }: ResultViewProps
         </section>
 
         <section className="bte-card" data-testid="key-risks">
-          <h2>Điểm xung đột cần lưu ý</h2>
+          <h2>Điểm cần lưu ý</h2>
           <ul>
             {view.risks.map((item) => (
               <li key={item}>{item}</li>
@@ -88,117 +87,155 @@ export function ResultView({ view, expertMode, onToggleExpert }: ResultViewProps
           </ul>
         </section>
 
-        {view.comparisonGroups.length ? (
-          <section className="mc-comparison" data-testid="comparison-board">
-            <h2>So sánh hai chiều</h2>
-            <div className="mc-comparison-grid">
-              {view.comparisonGroups.map((group) => (
+        {view.mutualSupport ? (
+          <section className="bte-card mc-mutual" data-testid="mutual-support">
+            <h2>{view.mutualSupport.title}</h2>
+            {view.mutualSupport.contributions.map((item) => (
+              <div key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </div>
+            ))}
+            {view.mutualSupport.overall ? (
+              <p>
+                <strong>Nhận định chung.</strong> {view.mutualSupport.overall}
+              </p>
+            ) : null}
+          </section>
+        ) : null}
+
+        {view.cungPhi ? (
+          <section className="bte-card mc-cung" data-testid="cung-phi">
+            <h2>{view.cungPhi.title}</h2>
+            {view.cungPhi.people.map((item) => (
+              <p key={item.label}>
+                <strong>{item.label}</strong>
+                <span> — Cung: {item.cung}</span>
+              </p>
+            ))}
+            {view.cungPhi.relation ? (
+              <p>
+                <strong>Quan hệ.</strong> {view.cungPhi.relation}
+              </p>
+            ) : null}
+            {view.cungPhi.meaning ? (
+              <p>
+                <strong>Ý nghĩa.</strong> {view.cungPhi.meaning}
+              </p>
+            ) : null}
+            {view.cungPhi.disclaimer ? <p className="muted">{view.cungPhi.disclaimer}</p> : null}
+          </section>
+        ) : null}
+
+        <details className="mc-technical" data-testid="technical-details">
+          <summary>Chi tiết bổ sung</summary>
+          <section className="mc-domains" data-testid="domain-analysis">
+            <h2>Phân tích chi tiết theo miền</h2>
+            <div className="mc-domain-grid">
+              {view.domains.map((domain) => (
+                <DomainCard key={domain.domain} domain={domain} />
+              ))}
+            </div>
+            {view.unavailableNote ? (
+              <p className="mc-limitation" data-testid="unavailable-domains">
+                {view.unavailableNote}
+              </p>
+            ) : null}
+          </section>
+
+          {view.timingSummary ? (
+            <section className="bte-card" data-testid="timing-section">
+              <h2>Nhịp thời điểm</h2>
+              <p>{view.timingSummary}</p>
+            </section>
+          ) : (
+            <div data-testid="timing-omitted" hidden />
+          )}
+
+          <section className="mc-actions" data-testid="action-plan">
+            <h2>Kế hoạch hành động</h2>
+            <div className="mc-action-grid">
+              {view.actions.map((action) => (
                 <article
-                  key={group.id}
-                  className="bte-card mc-comparison-card"
-                  data-testid={group.id}
+                  key={action.key}
+                  className="bte-card mc-action"
+                  data-priority={action.priority || undefined}
+                  data-testid="action-card"
                 >
-                  <h3>{group.title}</h3>
-                  <ul>
-                    {group.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
+                  <h3>{action.title}</h3>
+                  <p>
+                    <strong>Việc nên làm.</strong> {action.what}
+                  </p>
+                  {action.objective ? (
+                    <p>
+                      <strong>Mục tiêu.</strong> {action.objective}
+                    </p>
+                  ) : null}
+                  {action.priorityLabel ? (
+                    <p data-testid="action-priority">
+                      <strong>Mức ưu tiên.</strong> {action.priorityLabel}
+                    </p>
+                  ) : null}
+                  {action.when ? (
+                    <p>
+                      <strong>Khi nào áp dụng.</strong> {action.when}
+                    </p>
+                  ) : null}
+                  {action.outcome ? (
+                    <p>
+                      <strong>Kết quả mong đợi.</strong> {action.outcome}
+                    </p>
+                  ) : null}
                 </article>
               ))}
             </div>
           </section>
-        ) : null}
 
-        <section className="mc-domains" data-testid="domain-analysis">
-          <h2>Phân tích chi tiết theo miền</h2>
-          <div className="mc-domain-grid">
-            {view.domains.map((domain) => (
-              <DomainCard key={domain.domain} domain={domain} />
+          <section className="bte-card mc-confidence" data-testid="confidence-limitations">
+            <h2>Độ tin cậy và giới hạn</h2>
+            <p data-testid="confidence-label">{view.confidenceLabel}</p>
+            <p>{view.confidenceBody}</p>
+            {view.limitations.length ? (
+              <ul data-testid="limitation-list">
+                {view.limitations.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            ) : null}
+            {notes.map((note) => (
+              <p key={note} className="mc-limitation" data-testid="warning-note">
+                {note}
+              </p>
             ))}
-          </div>
-          {view.unavailableNote ? (
-            <p className="mc-limitation" data-testid="unavailable-domains">
-              {view.unavailableNote}
-            </p>
-          ) : null}
-        </section>
+          </section>
+
+          <section className="bte-card" data-testid="appendix">
+            <h2>Phụ lục phương pháp</h2>
+            <p>{view.appendix}</p>
+          </section>
+        </details>
       </details>
 
-      {view.timingSummary ? (
-        <section className="bte-card" data-testid="timing-section">
-          <h2>Nhịp thời điểm</h2>
-          <p>{view.timingSummary}</p>
-        </section>
-      ) : (
-        <div data-testid="timing-omitted" hidden />
-      )}
-
-      <section className="mc-actions" data-testid="action-plan">
-        <h2>Kế hoạch hành động</h2>
-        <div className="mc-action-grid">
-          {view.actions.map((action) => (
-            <article
-              key={action.key}
-              className="bte-card mc-action"
-              data-priority={action.priority || undefined}
-              data-testid="action-card"
-            >
-              <h3>{action.title}</h3>
-              <p>
-                <strong>Việc nên làm.</strong> {action.what}
-              </p>
-              {action.objective ? (
-                <p>
-                  <strong>Mục tiêu.</strong> {action.objective}
-                </p>
-              ) : null}
-              {action.priorityLabel ? (
-                <p data-testid="action-priority">
-                  <strong>Mức ưu tiên.</strong> {action.priorityLabel}
-                </p>
-              ) : null}
-              {action.when ? (
-                <p>
-                  <strong>Khi nào áp dụng.</strong> {action.when}
-                </p>
-              ) : null}
-              {action.outcome ? (
-                <p>
-                  <strong>Kết quả mong đợi.</strong> {action.outcome}
-                </p>
-              ) : null}
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="bte-card mc-confidence" data-testid="confidence-limitations">
-        <h2>Độ tin cậy và giới hạn</h2>
-        <p data-testid="confidence-label">{view.confidenceLabel}</p>
-        <p>{view.confidenceBody}</p>
-        {view.limitations.length ? (
-          <ul data-testid="limitation-list">
-            {view.limitations.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        ) : null}
-        {notes.map((note) => (
-          <p key={note} className="mc-limitation" data-testid="warning-note">
-            {note}
+      <section className="bte-card mc-opinion" data-testid="conclusion">
+        <h2>Kết luận cuối</h2>
+        <p data-testid="conclusion-opinion">
+          <strong>Nhận định chung.</strong> {view.finalOpinion.overall}
+        </p>
+        {view.finalOpinion.strongestStrength ? (
+          <p data-testid="conclusion-strength">
+            <strong>Điểm mạnh nhất.</strong> {view.finalOpinion.strongestStrength}
           </p>
-        ))}
-      </section>
-
-      <section className="bte-card" data-testid="conclusion">
-        <h2>Kết luận</h2>
-        <p>{view.conclusion}</p>
-      </section>
-
-      <section className="bte-card" data-testid="appendix">
-        <h2>Phụ lục phương pháp</h2>
-        <p>{view.appendix}</p>
+        ) : null}
+        {view.finalOpinion.mainAttention ? (
+          <p data-testid="conclusion-attention">
+            <strong>Điều cần lưu ý.</strong> {view.finalOpinion.mainAttention}
+          </p>
+        ) : null}
+        {view.finalOpinion.recommendation ? (
+          <p data-testid="conclusion-recommendation">
+            <strong>Khuyến nghị.</strong> {view.finalOpinion.recommendation}
+          </p>
+        ) : null}
       </section>
 
       <details className="bte-card mc-expert" data-testid="expert-mode">
@@ -312,10 +349,17 @@ function customerText(view: MarriageViewModel): string {
     ]),
     ...view.strengths,
     ...view.risks,
-    ...view.comparisonGroups.flatMap((group) => group.items),
+    ...(view.mutualSupport
+      ? [...view.mutualSupport.contributions.map((item) => item.body), view.mutualSupport.overall]
+      : []),
+    view.cungPhi?.relation || "",
+    view.cungPhi?.meaning || "",
     ...view.domains.map((item) => item.summary),
     ...view.actions.map((item) => item.what),
-    view.conclusion,
+    view.finalOpinion.overall,
+    view.finalOpinion.strongestStrength,
+    view.finalOpinion.mainAttention,
+    view.finalOpinion.recommendation,
     view.appendix,
   ].join(" ");
 }

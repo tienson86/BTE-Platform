@@ -3,7 +3,7 @@
   const STATE_LABEL = {
     supportive: "Tương hợp tốt",
     balanced: "Cân bằng",
-    mixed: "Hỗn hợp",
+    mixed: "Vừa có điểm thuận, vừa có điểm cần điều chỉnh",
     pressured: "Có nhiều điểm cần lưu ý",
     critical: "Cần thận trọng",
     insufficient: "Chưa đủ dữ liệu",
@@ -123,33 +123,72 @@
     const confidence = section(report, "confidence_limitations");
     const conclusion = section(report, "conclusion");
     const appendix = section(report, "appendix");
-    const comparisonSpecs = [
-      ["comparison_a_to_b", "A bổ trợ B"],
-      ["comparison_b_to_a", "B bổ trợ A"],
-      ["comparison_harmony", "Điểm hòa hợp"],
-      ["comparison_conflict", "Điểm xung"],
-      ["comparison_rescue", "Yếu tố cứu giải"],
-    ];
-    const comparisonHtml = comparisonSpecs
-      .map(function (spec) {
-        const sec = section(report, spec[0]);
-        const items = bodies(sec, "highlight");
-        if (!items.length) return "";
+    const mutual = section(report, "comparison_a_to_b");
+    const cung = section(report, "cung_phi");
+    function blockOf(sec, blockId) {
+      if (!sec || !sec.blocks) return "";
+      const found = sec.blocks.find(function (item) {
+        return item.block_id === blockId;
+      });
+      return (found && (found.body || found.title)) || "";
+    }
+    const mutualParts = (mutual && mutual.blocks ? mutual.blocks : [])
+      .filter(function (item) {
+        return item.visibility !== "expert";
+      })
+      .map(function (item) {
+        if (item.kind === "highlight") {
+          return (
+            "<div><h3>" +
+            escapeHtml(item.title || "") +
+            "</h3><p>" +
+            escapeHtml(item.body || "") +
+            "</p></div>"
+          );
+        }
+        if (item.kind === "summary") {
+          return "<p><strong>Nhận định chung.</strong> " + escapeHtml(item.body || "") + "</p>";
+        }
+        return "";
+      })
+      .join("");
+    const mutualHtml = mutualParts
+      ? '<section class="bte-card mc-mutual" data-testid="mutual-support"><h2>' +
+        escapeHtml((mutual && mutual.title) || "Bổ trợ lẫn nhau") +
+        "</h2>" +
+        mutualParts +
+        "</section>"
+      : "";
+    const cungPeople = (cung && cung.blocks ? cung.blocks : [])
+      .filter(function (item) {
+        return item.kind === "reference";
+      })
+      .map(function (item) {
         return (
-          '<article class="bte-card mc-comparison-card" data-testid="' +
-          spec[0] +
-          '"><h3>' +
-          spec[1] +
-          "</h3><ul>" +
-          items
-            .map(function (item) {
-              return "<li>" + escapeHtml(item) + "</li>";
-            })
-            .join("") +
-          "</ul></article>"
+          "<p><strong>" +
+          escapeHtml(item.title || "") +
+          "</strong><span> — Cung: " +
+          escapeHtml(item.body || "") +
+          "</span></p>"
         );
       })
       .join("");
+    const cungHtml = cung
+      ? '<section class="bte-card mc-cung" data-testid="cung-phi"><h2>' +
+        escapeHtml(cung.title || "Đánh giá Cung Phi") +
+        "</h2>" +
+        cungPeople +
+        (blockOf(cung, "cung-relation")
+          ? "<p><strong>Quan hệ.</strong> " + escapeHtml(blockOf(cung, "cung-relation")) + "</p>"
+          : "") +
+        (blockOf(cung, "cung-meaning")
+          ? "<p><strong>Ý nghĩa.</strong> " + escapeHtml(blockOf(cung, "cung-meaning")) + "</p>"
+          : "") +
+        (blockOf(cung, "cung-limit")
+          ? '<p class="muted">' + escapeHtml(blockOf(cung, "cung-limit")) + "</p>"
+          : "") +
+        "</section>"
+      : "";
     const state = consultation.overall_state;
     const domainCards = {};
     (domains && domains.blocks ? domains.blocks : []).forEach(function (block) {
@@ -185,7 +224,7 @@
       .join("");
     const warningHtml = (warnings || [])
       .map(function (item) {
-        return '<p class="mc-limitation" data-testid="warning-note">' + escapeHtml(item.description || item.code) + "</p>";
+        return '<p class="mc-limitation" data-testid="warning-note">' + escapeHtml(item.description || "") + "</p>";
       })
       .join("");
     const unavailable = (warnings || []).some(function (item) {
@@ -278,7 +317,7 @@
       escapeHtml(consultation.headline || (hero && hero.summary) || "") +
       "</h2>" +
       '<p data-testid="hero-state">Nền tảng hiện ở trạng thái: ' +
-      escapeHtml(STATE_LABEL[state] || state || "") +
+      escapeHtml(STATE_LABEL[state] || "") +
       "</p>" +
       '<p data-testid="hero-summary">' +
       escapeHtml(bodies(hero, "summary")[0] || bodies(hero, "decision_state")[0] || "") +
@@ -300,43 +339,58 @@
         })
         .join("") +
       "</ul></section>" +
-      '<section class="bte-card" data-testid="key-risks"><h2>Điểm xung đột cần lưu ý</h2><ul>' +
+      '<section class="bte-card" data-testid="key-risks"><h2>Điểm cần lưu ý</h2><ul>' +
       bodies(risks, "highlight")
         .map(function (item) {
           return "<li>" + escapeHtml(item) + "</li>";
         })
         .join("") +
       "</ul></section>" +
-      (comparisonHtml
-        ? '<section class="mc-comparison" data-testid="comparison-board"><h2>So sánh hai chiều</h2><div class="mc-comparison-grid">' +
-          comparisonHtml +
-          "</div></section>"
-        : "") +
+      mutualHtml +
+      cungHtml +
+      '<details class="mc-technical" data-testid="technical-details"><summary>Chi tiết bổ sung</summary>' +
       '<section class="mc-domains" data-testid="domain-analysis"><h2>Phân tích chi tiết theo miền</h2><div class="mc-domain-grid">' +
       domainHtml +
       "</div>" +
       (unavailable
-        ? '<p class="mc-limitation" data-testid="unavailable-domains">Một số miền chưa đủ dữ liệu cấu trúc để luận riêng.</p>'
+        ? '<p class="mc-limitation" data-testid="unavailable-domains">Một số phần chưa đủ dữ liệu để luận riêng.</p>'
         : "") +
-      "</section></details>" +
+      "</section>" +
       timingHtml +
       '<section class="mc-actions" data-testid="action-plan"><h2>Kế hoạch hành động</h2><div class="mc-action-grid">' +
       actionHtml +
       "</div></section>" +
       '<section class="bte-card mc-confidence" data-testid="confidence-limitations"><h2>Độ tin cậy và giới hạn</h2>' +
       '<p data-testid="confidence-label">' +
-      escapeHtml(CONFIDENCE[(consultation.confidence && consultation.confidence.level) || ""] || "") +
+      escapeHtml(CONFIDENCE[(consultation.confidence && consultation.confidence.level) || ""] || "Mang tính tham khảo") +
       "</p><p>" +
       escapeHtml(bodies(confidence).join(" ")) +
       "</p>" +
       warningHtml +
       "</section>" +
-      '<section class="bte-card" data-testid="conclusion"><h2>Kết luận</h2><p>' +
-      escapeHtml(bodies(conclusion)[0] || "") +
-      "</p></section>" +
       '<section class="bte-card" data-testid="appendix"><h2>Phụ lục phương pháp</h2><p>' +
       escapeHtml(((appendix && appendix.blocks) || []).filter(function (item) { return item.visibility !== "expert"; }).map(function (item) { return item.body; }).join(" ")) +
-      "</p></section>" +
+      "</p></section></details></details>" +
+      '<section class="bte-card mc-opinion" data-testid="conclusion"><h2>Kết luận cuối</h2>' +
+      '<p data-testid="conclusion-opinion"><strong>Nhận định chung.</strong> ' +
+      escapeHtml(blockOf(conclusion, "conclusion-opinion") || bodies(conclusion)[0] || "") +
+      "</p>" +
+      (blockOf(conclusion, "conclusion-strength")
+        ? '<p data-testid="conclusion-strength"><strong>Điểm mạnh nhất.</strong> ' +
+          escapeHtml(blockOf(conclusion, "conclusion-strength")) +
+          "</p>"
+        : "") +
+      (blockOf(conclusion, "conclusion-attention")
+        ? '<p data-testid="conclusion-attention"><strong>Điều cần lưu ý.</strong> ' +
+          escapeHtml(blockOf(conclusion, "conclusion-attention")) +
+          "</p>"
+        : "") +
+      (blockOf(conclusion, "conclusion-recommendation")
+        ? '<p data-testid="conclusion-recommendation"><strong>Khuyến nghị.</strong> ' +
+          escapeHtml(blockOf(conclusion, "conclusion-recommendation")) +
+          "</p>"
+        : "") +
+      "</section>" +
       '<details class="bte-card mc-expert" data-testid="expert-mode"><summary>Xem chế độ chuyên gia</summary>' +
       '<p class="muted">Chế độ chuyên gia ẩn theo mặc định.</p></details>' +
       '<span data-testid="score-grade-guard" hidden>' +
@@ -363,7 +417,7 @@
       '<div class="ds-page mc-page" data-screen="marriage-consulting" data-layout="customer-dashboard">' +
       '<header class="mc-intro"><p class="muted" data-testid="consulting-family">Tư vấn → Tư vấn hôn nhân</p>' +
       '<h1 data-testid="marriage-title">Tư vấn hôn nhân</h1>' +
-      "<p class=\"muted\">Phân tích cấu trúc tương hợp của hai người. Kết quả giúp hiểu nền tảng và việc nên làm, không phải lời phán tuyệt đối.</p></header>" +
+      "<p class=\"muted\">Hai người sẽ nhận bản tư vấn hôn nhân: nên tiến tới thế nào, điểm mạnh nhất, và điều cần lưu ý nhất.</p></header>" +
       '<form class="mc-form" data-testid="marriage-form" novalidate>' +
       '<div class="mc-people" data-testid="people-layout">' +
       personFields("a", "Người A") +

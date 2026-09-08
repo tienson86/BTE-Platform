@@ -123,10 +123,30 @@ export type ActionCardVm = {
   outcome: string;
 };
 
-export type ComparisonGroupVm = {
-  id: string;
+export type MutualContributionVm = {
   title: string;
-  items: string[];
+  body: string;
+};
+
+export type MutualSupportVm = {
+  title: string;
+  contributions: MutualContributionVm[];
+  overall: string;
+};
+
+export type CungPhiVm = {
+  title: string;
+  people: { label: string; cung: string }[];
+  relation: string;
+  meaning: string;
+  disclaimer: string;
+};
+
+export type FinalOpinionVm = {
+  overall: string;
+  strongestStrength: string;
+  mainAttention: string;
+  recommendation: string;
 };
 
 export type AssessmentCardVm = {
@@ -160,7 +180,8 @@ export type MarriageViewModel = {
   assessmentCards: AssessmentCardVm[];
   strengths: string[];
   risks: string[];
-  comparisonGroups: ComparisonGroupVm[];
+  mutualSupport: MutualSupportVm | null;
+  cungPhi: CungPhiVm | null;
   domains: DomainCardVm[];
   unavailableNote: string | null;
   timingSummary: string | null;
@@ -168,6 +189,7 @@ export type MarriageViewModel = {
   limitations: string[];
   confidenceBody: string;
   conclusion: string;
+  finalOpinion: FinalOpinionVm;
   appendix: string;
   warnings: MarriageWarning[];
   expertTrace: string | null;

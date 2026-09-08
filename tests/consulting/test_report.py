@@ -24,6 +24,7 @@ def test_report_story_order() -> None:
         "comparison_harmony",
         "comparison_conflict",
         "comparison_rescue",
+        "cung_phi",
         "timing",
         "domain_analysis",
         "action_plan",

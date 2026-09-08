@@ -6,6 +6,14 @@ from consulting.marriage.models.narrative import MarriageNarrativeResult, Marria
 from consulting.marriage.models.report import MarriageReportModel, ReportBlock, ReportMetadata, ReportSection
 from consulting.marriage.narrative.catalog import action_entry, domain_title, overall_entry
 from consulting.marriage.narrative.input import NarrativeInput, RecommendationNarrativeInput
+from consulting.marriage.models.enums import CanonicalGender
+from consulting.marriage.report.customer_copy import (
+    customer_confidence,
+    customer_limitations,
+    customerize,
+)
+from consulting.marriage.report.cung_phi import palace_relation, relation_meaning
+from consulting.marriage.report.final_opinion import compose_final_opinion
 from consulting.marriage.narrative.versions import NARRATIVE_VERSION
 from consulting.marriage.policy.versions import DECISION_ENGINE_VERSION, DECISION_MATHEMATICS_VERSION
 from consulting.marriage.recommendation.versions import RECOMMENDATION_CATALOG_VERSION
@@ -28,14 +36,17 @@ def compose_report(
         _executive_summary(payload, narrative),
         _hero(payload, narrative),
         _highlight_section("strengths", "Điểm hòa hợp nổi bật", "strength", narrative),
-        _highlight_section("risks", "Điểm xung đột cần lưu ý", "risk", narrative),
+        _highlight_section("risks", "Điểm cần lưu ý", "risk", narrative),
     ]
-    sections.extend(_comparison_report_sections(narrative))
+    sections.extend(_comparison_report_sections(payload, narrative))
+    cung = _cung_phi_section(payload)
+    if cung is not None:
+        sections.append(cung)
     if "timing" in by_id:
         sections.append(_from_narrative("timing", "Nhịp thời điểm", by_id["timing"], "timeline"))
     sections.append(_domains(payload, by_id.get("domains")))
     sections.append(_actions(payload, by_id.get("actions")))
-    sections.append(_from_narrative("confidence_limitations", "Độ tin cậy và giới hạn", by_id["confidence"], "confidence"))
+    sections.append(_confidence_report(payload, by_id["confidence"]))
     sections.append(_conclusion(payload, narrative))
     sections.append(_appendix(payload, narrative))
     ordered = [item for item in sections if item is not None]
@@ -251,8 +262,8 @@ def _hero(payload: NarrativeInput, narrative: MarriageNarrativeResult) -> Report
         ReportBlock(
             block_id="hero-state",
             kind="decision_state",
-            title=overall.headline,
-            body=overall.observation,
+            title=customerize(overall.headline),
+            body=customerize(overall.observation),
             semantic_key=overall.key,
             state=payload.overall_state.value,
             source_finding_ids=list(payload.headline_finding_ids),
@@ -260,20 +271,20 @@ def _hero(payload: NarrativeInput, narrative: MarriageNarrativeResult) -> Report
         ReportBlock(
             block_id="hero-headline",
             kind="headline",
-            title=overall.headline,
+            title=customerize(overall.headline),
             semantic_key=overall.key,
             state=payload.overall_state.value,
         ),
         ReportBlock(
             block_id="hero-conclusion",
             kind="summary",
-            body=overall.observation,
+            body=customerize(overall.observation),
             semantic_key=overall.key,
         ),
         ReportBlock(
             block_id="hero-confidence",
             kind="confidence",
-            body=f"Mức tin cậy: {payload.confidence_level.value}",
+            body=f"Mức tin cậy: {customer_confidence(payload.confidence_level.value)}",
             semantic_key=f"marriage.confidence.{payload.confidence_level.value}",
         ),
     ]
@@ -283,7 +294,7 @@ def _hero(payload: NarrativeInput, narrative: MarriageNarrativeResult) -> Report
                 block_id=f"hero-{item.highlight_id}",
                 kind="highlight",
                 title="Điểm hòa hợp",
-                body=item.text,
+                body=customerize(item.text),
                 semantic_key=item.catalog_key,
                 source_finding_ids=list(item.source_finding_ids),
             )
@@ -293,8 +304,8 @@ def _hero(payload: NarrativeInput, narrative: MarriageNarrativeResult) -> Report
             ReportBlock(
                 block_id=f"hero-{item.highlight_id}",
                 kind="highlight",
-                title="Điểm xung",
-                body=item.text,
+                title="Điểm cần lưu ý",
+                body=customerize(item.text),
                 semantic_key=item.catalog_key,
                 source_finding_ids=list(item.source_finding_ids),
             )
@@ -302,7 +313,7 @@ def _hero(payload: NarrativeInput, narrative: MarriageNarrativeResult) -> Report
     return ReportSection(
         section_id="compatibility_hero",
         title="Tương hợp tổng thể",
-        summary=overall.headline,
+        summary=customerize(overall.headline),
         blocks=blocks,
     )
 
@@ -334,8 +345,8 @@ def _highlight_section(
             ReportBlock(
                 block_id=item.highlight_id,
                 kind="highlight",
-                title=item.text,
-                body=item.text,
+                title=customerize(item.text),
+                body=customerize(item.text),
                 semantic_key=item.catalog_key,
                 source_finding_ids=list(item.source_finding_ids),
             )
@@ -344,37 +355,145 @@ def _highlight_section(
     return ReportSection(section_id=section_id, title=title, blocks=blocks)
 
 
-def _comparison_report_sections(narrative: MarriageNarrativeResult) -> list[ReportSection]:
-    """Group comparison facts into visible cards. Skip empty groups."""
+def _comparison_report_sections(
+    payload: NarrativeInput,
+    narrative: MarriageNarrativeResult,
+) -> list[ReportSection]:
+    """One mutual-support section. Do not emit mirrored A/B paragraphs."""
     source = next((item for item in narrative.sections if item.section_id == "comparison"), None)
-    specs = (
-        ("comparison_a_to_b", "A bổ trợ B", "a_to_b"),
-        ("comparison_b_to_a", "B bổ trợ A", "b_to_a"),
-        ("comparison_harmony", "Điểm hòa hợp", "harmony"),
-        ("comparison_conflict", "Điểm xung", "conflict"),
-        ("comparison_rescue", "Yếu tố cứu giải", "rescue"),
-    )
-    sections: list[ReportSection] = []
     if source is None:
-        return sections
-    for section_id, title, stage in specs:
-        blocks = [
+        return []
+    a_items = [item for item in source.blocks if item.stage == "a_to_b"]
+    b_items = [item for item in source.blocks if item.stage == "b_to_a"]
+    if not a_items and not b_items:
+        return []
+    seen: set[str] = set()
+    blocks: list[ReportBlock] = []
+    a_text = _unique_lines(a_items, seen)
+    b_text = _unique_lines(b_items, seen)
+    if a_text:
+        blocks.append(
             ReportBlock(
-                block_id=item.block_id,
+                block_id="mutual-a",
                 kind="highlight",
-                title=title,
-                body=item.text,
-                semantic_key=item.catalog_key,
-                domain=item.domain,
-                source_finding_ids=list(item.source_finding_ids),
+                title=f"{payload.person_a_label} bổ sung",
+                body=a_text,
+                semantic_key="marriage.comparison.mutual.a",
             )
-            for item in source.blocks
-            if item.stage == stage
-        ]
-        if not blocks:
+        )
+    if b_text:
+        blocks.append(
+            ReportBlock(
+                block_id="mutual-b",
+                kind="highlight",
+                title=f"{payload.person_b_label} bổ sung",
+                body=b_text,
+                semantic_key="marriage.comparison.mutual.b",
+            )
+        )
+    overall = _mutual_overall(payload)
+    if overall:
+        blocks.append(
+            ReportBlock(
+                block_id="mutual-overall",
+                kind="summary",
+                title="Nhận định chung",
+                body=overall,
+                semantic_key="marriage.comparison.mutual.overall",
+            )
+        )
+    if not blocks:
+        return []
+    return [
+        ReportSection(
+            section_id="comparison_a_to_b",
+            title="Bổ trợ lẫn nhau",
+            blocks=blocks,
+        )
+    ]
+
+
+def _unique_lines(blocks: list[object], seen: set[str]) -> str:
+    """Join unique customer sentences. Skip mirrored duplicates."""
+    lines: list[str] = []
+    for item in blocks:
+        text = customerize(str(getattr(item, "text", "") or ""))
+        if not text or text in seen:
             continue
-        sections.append(ReportSection(section_id=section_id, title=title, blocks=blocks))
-    return sections
+        seen.add(text)
+        lines.append(text.rstrip("."))
+        if len(lines) >= 2:
+            break
+    return ". ".join(lines) + ("." if lines else "")
+
+
+def _mutual_overall(payload: NarrativeInput) -> str:
+    """One overall support sentence from Language Pack or comparison keys."""
+    q2 = next((item for item in payload.language_cards if item.question_id == "Q2"), None)
+    if q2 and q2.headline:
+        return customerize(q2.headline)
+    if payload.overall_comparison and payload.overall_comparison.q2_text:
+        return customerize(payload.overall_comparison.q2_text)
+    return ""
+
+
+def _cung_phi_section(payload: NarrativeInput) -> ReportSection | None:
+    """Secondary Cung Phi evidence. Never overrides Assessment."""
+    cung_a = payload.person_a_cung_phi
+    cung_b = payload.person_b_cung_phi
+    if not cung_a and not cung_b:
+        return None
+    relation = palace_relation(cung_a or "", cung_b or "") if cung_a and cung_b else None
+    blocks = [
+        ReportBlock(
+            block_id="cung-a",
+            kind="reference",
+            title=_cung_label(payload.person_a_gender, payload.person_a_label),
+            body=cung_a or "Chưa có Cung Phi.",
+            semantic_key="marriage.cung_phi.person_a",
+        ),
+        ReportBlock(
+            block_id="cung-b",
+            kind="reference",
+            title=_cung_label(payload.person_b_gender, payload.person_b_label),
+            body=cung_b or "Chưa có Cung Phi.",
+            semantic_key="marriage.cung_phi.person_b",
+        ),
+    ]
+    if relation:
+        blocks.append(
+            ReportBlock(
+                block_id="cung-relation",
+                kind="summary",
+                title="Quan hệ",
+                body=relation,
+                semantic_key="marriage.cung_phi.relation",
+            )
+        )
+        blocks.append(
+            ReportBlock(
+                block_id="cung-meaning",
+                kind="paragraph",
+                title="Ý nghĩa",
+                body=relation_meaning(relation),
+                semantic_key="marriage.cung_phi.meaning",
+            )
+        )
+    blocks.append(
+        ReportBlock(
+            block_id="cung-limit",
+            kind="limitations",
+            body="Cung Phi là bằng chứng phụ. Đánh giá hôn nhân vẫn lấy sáu câu hỏi ở trên làm chính.",
+            semantic_key="marriage.cung_phi.secondary",
+        )
+    )
+    return ReportSection(section_id="cung_phi", title="Đánh giá Cung Phi", blocks=blocks)
+
+
+def _cung_label(gender: CanonicalGender, name: str) -> str:
+    """Nam/Nữ label plus display name."""
+    tag = GENDER_LABEL.get(gender, name)
+    return f"{tag} · {name}"
 
 
 def _domains(
@@ -393,7 +512,7 @@ def _domains(
                     block_id=item.block_id,
                     kind=kind,
                     title=domain_title(item.domain) if item.domain else None,
-                    body=item.text,
+                    body=customerize(item.text),
                     semantic_key=item.catalog_key,
                     domain=item.domain,
                     source_finding_ids=list(item.source_finding_ids),
@@ -456,15 +575,15 @@ def _actions(
                 priority = PRIORITY_LABEL.get(recs[0].action_priority)
             if recs and recs[0].urgency:
                 urgency = URGENCY_LABEL.get(recs[0].urgency)
-            what = item.text
-            why = catalog.reason if catalog is not None else ""
-            outcome = catalog.impact if catalog is not None else ""
+            what = customerize(item.text)
+            why = customerize(catalog.reason) if catalog is not None else ""
+            outcome = customerize(catalog.impact) if catalog is not None else ""
             body = f"{what} {why} Khi nào: {when}. {outcome}".strip()
             if priority:
                 body = f"{priority}. {body}"
             if urgency:
                 body = f"{body} Mức thời điểm: {urgency}."
-            title = catalog.headline if catalog is not None else item.catalog_key
+            title = customerize(catalog.headline) if catalog is not None else "Việc nên làm"
             blocks.append(
                 ReportBlock(
                     block_id=item.block_id,
@@ -500,7 +619,7 @@ def _from_narrative(
         ReportBlock(
             block_id=item.block_id,
             kind=kind,
-            body=item.text,
+            body=customerize(item.text),
             semantic_key=item.catalog_key,
             domain=item.domain,
             source_finding_ids=list(item.source_finding_ids),
@@ -511,34 +630,84 @@ def _from_narrative(
     return ReportSection(section_id=section_id, title=title, blocks=blocks)
 
 
+def _confidence_report(
+    payload: NarrativeInput,
+    section: MarriageNarrativeSection,
+) -> ReportSection:
+    """Customer confidence and data limits. Never expose internal codes."""
+    blocks = [
+        ReportBlock(
+            block_id=item.block_id,
+            kind="confidence",
+            body=customerize(item.text),
+            semantic_key=item.catalog_key,
+            domain=item.domain,
+            source_finding_ids=list(item.source_finding_ids),
+            source_recommendation_ids=list(item.source_recommendation_ids),
+        )
+        for item in section.blocks
+    ]
+    existing = " ".join(block.body or "" for block in blocks)
+    extra_codes = [code for code in payload.limitations if code not in {"birth_time_unknown"}]
+    for index, text in enumerate(customer_limitations(extra_codes)):
+        if text in existing:
+            continue
+        blocks.append(
+            ReportBlock(
+                block_id=f"limit-customer-{index}",
+                kind="limitations",
+                body=text,
+                semantic_key="marriage.limit.customer",
+            )
+        )
+    return ReportSection(
+        section_id="confidence_limitations",
+        title="Độ tin cậy và giới hạn",
+        blocks=blocks,
+    )
+
+
 def _conclusion(
     payload: NarrativeInput,
     narrative: MarriageNarrativeResult,
 ) -> ReportSection:
-    """Close the consultation journey without a new decision."""
-    overall = overall_entry(payload.overall_state.value)
-    questions = payload.overall_comparison
-    if questions is not None:
-        body = (
-            f"{overall.headline}. {questions.q1_text} {questions.q2_text} "
-            f"{questions.q6_text} {questions.q7_text}"
-        )
-    else:
-        body = f"{overall.headline}. {overall.action_bridge}"
+    """Final consulting opinion. Uses Language Pack and existing Recommendations."""
+    _ = narrative
+    opinion = compose_final_opinion(payload)
     return ReportSection(
         section_id="conclusion",
-        title="Kết luận",
-        summary=overall.headline,
+        title="Kết luận cuối",
+        summary=opinion["overall_opinion"],
         blocks=[
             ReportBlock(
-                block_id="conclusion-main",
-                kind="paragraph",
-                title=overall.headline,
-                body=body,
-                semantic_key=overall.key,
-                state=payload.overall_state.value,
+                block_id="conclusion-opinion",
+                kind="summary",
+                title="Nhận định chung",
+                body=opinion["overall_opinion"],
+                semantic_key="marriage.conclusion.opinion",
                 source_finding_ids=list(payload.headline_finding_ids),
-            )
+            ),
+            ReportBlock(
+                block_id="conclusion-strength",
+                kind="highlight",
+                title="Điểm mạnh nhất",
+                body=opinion["strongest_strength"],
+                semantic_key="marriage.conclusion.strength",
+            ),
+            ReportBlock(
+                block_id="conclusion-attention",
+                kind="highlight",
+                title="Điều cần lưu ý",
+                body=opinion["main_attention"],
+                semantic_key="marriage.conclusion.attention",
+            ),
+            ReportBlock(
+                block_id="conclusion-recommendation",
+                kind="recommendation",
+                title="Khuyến nghị",
+                body=opinion["final_recommendation"],
+                semantic_key="marriage.conclusion.recommendation",
+            ),
         ],
     )
 
@@ -553,8 +722,7 @@ def _appendix(
         kind="methodology",
         title="Cách đọc hồ sơ",
         body=(
-            "Báo cáo này truyền đạt kết luận cấu trúc đã được chốt ở tầng quyết định "
-            "và kế hoạch hành động đã được kết từ khuyến nghị. "
+            "Báo cáo này truyền đạt kết luận đã được chốt và việc nên làm đã được kết từ khuyến nghị. "
             "Không dùng điểm số tương hợp vì mô hình điểm hiện chưa khả dụng."
         ),
         semantic_key="marriage.appendix.method",

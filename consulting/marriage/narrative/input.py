@@ -141,6 +141,8 @@ class NarrativeInput:
     overall_comparison: OverallComparisonNarrative | None
     assessment_cards: list[MarriageAssessmentCard]
     language_cards: list[LanguageCardWording]
+    person_a_cung_phi: str | None = None
+    person_b_cung_phi: str | None = None
 
 
 def narrative_input_from_decision(
@@ -217,6 +219,8 @@ def narrative_input_from_decision(
         overall_comparison=_overall_comparison(result, comparison_facts, person_a_label, person_b_label),
         assessment_cards=_assessment_cards(result),
         language_cards=render_marriage_language_cards(result, include_technical=True),
+        person_a_cung_phi=_cung_phi(result, "a"),
+        person_b_cung_phi=_cung_phi(result, "b"),
     )
 
 
@@ -345,6 +349,15 @@ def _assessment_cards(result: MarriageDecisionResult) -> list[MarriageAssessment
     if result.assessment is None:
         result.assessment = project_marriage_assessment(result)
     return list(result.assessment.cards)
+
+
+def _cung_phi(result: MarriageDecisionResult, side: str) -> str | None:
+    """Copy Canonical Cung Phi. Presentation only. Does not recalculate."""
+    snapshot = result.canonical_a if side == "a" else result.canonical_b
+    if snapshot.feng_shui is None:
+        return None
+    cung = (snapshot.feng_shui.cung_phi or "").strip()
+    return cung or None
 
 
 def _iter_domains(result: MarriageDecisionResult) -> tuple[object, ...]:

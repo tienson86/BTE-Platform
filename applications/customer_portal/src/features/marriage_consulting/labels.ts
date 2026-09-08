@@ -12,7 +12,7 @@ export const HERO_EYEBROW = "Tương hợp hôn nhân";
 export const OVERALL_STATE_LABEL: Record<string, string> = {
   supportive: "Tương hợp tốt",
   balanced: "Cân bằng",
-  mixed: "Hỗn hợp",
+  mixed: "Vừa có điểm thuận, vừa có điểm cần điều chỉnh",
   pressured: "Có nhiều điểm cần lưu ý",
   critical: "Cần thận trọng",
   insufficient: "Chưa đủ dữ liệu",
@@ -21,7 +21,7 @@ export const OVERALL_STATE_LABEL: Record<string, string> = {
 export const OVERALL_STATE_HEADLINE: Record<string, string> = {
   supportive: "Tương hợp tốt",
   balanced: "Nền tảng tương đối cân bằng",
-  mixed: "Có điểm thuận và điểm cần điều chỉnh",
+  mixed: "Hai người vừa có điểm hợp, vừa có điểm cần điều chỉnh",
   pressured: "Có nhiều điểm cần lưu ý",
   critical: "Cần thận trọng với các điểm then chốt",
   insufficient: "Chưa đủ dữ liệu để kết luận tổng thể",
@@ -77,8 +77,22 @@ export const FIELD_ERROR = {
 export const WARNING_NOTE: Record<string, string> = {
   BIRTH_TIME_UNKNOWN:
     "Chưa có giờ sinh. Đây là giới hạn dữ liệu, không phải nhận định về hôn nhân.",
-  DOMAIN_UNAVAILABLE: "Một số miền chưa đủ dữ liệu cấu trúc để luận riêng.",
+  DOMAIN_UNAVAILABLE: "Một số phần chưa đủ dữ liệu để luận riêng.",
   TIMING_UNAVAILABLE: "Phần nhịp thời điểm chưa đủ dữ liệu nên không hiển thị.",
+  TIMEZONE_UNSPECIFIED:
+    "Múi giờ chưa được ghi nhận. Đây là giới hạn dữ liệu, không phải nhận định về hôn nhân.",
+};
+
+export const LIMITATION_NOTE: Record<string, string> = {
+  birth_time_unknown:
+    "Chưa có giờ sinh của một người. Đây là giới hạn dữ liệu, không phải nhận định về hôn nhân.",
+  timezone_unspecified:
+    "Múi giờ chưa được ghi nhận. Đây là giới hạn dữ liệu, không phải nhận định về hôn nhân.",
+  birth_place_unknown:
+    "Nơi sinh chưa được ghi nhận. Đây là giới hạn dữ liệu, không phải nhận định về hôn nhân.",
+  children_unsupported: "Hiện chưa đủ dữ liệu để kết luận về việc nuôi dạy con chung.",
+  insufficient_comparison_evidence:
+    "Một số phần so sánh chưa đủ dữ liệu nên được giữ ở mức tham khảo.",
 };
 
 export const FORBIDDEN_SCORE_PATTERN = /(?:\d+\s*\/\s*100|\d+\s*%|Grade\s*[A-E]|--\s*\/\s*100)/i;

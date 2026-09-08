@@ -125,8 +125,8 @@ export function MarriageConsultingPage(): ReactNode {
         </p>
         <h1 data-testid="marriage-title">{PRODUCT_TITLE}</h1>
         <p className="muted">
-          Phân tích cấu trúc tương hợp của hai người. Kết quả giúp hiểu nền tảng và việc nên làm,
-          không phải lời phán tuyệt đối.
+          Hai người sẽ nhận bản tư vấn hôn nhân: nên tiến tới thế nào, điểm mạnh nhất,
+          và điều cần lưu ý nhất.
         </p>
       </header>
 

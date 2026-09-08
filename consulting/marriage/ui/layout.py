@@ -21,6 +21,7 @@ CUSTOMER_JOURNEY = (
     "comparison_harmony",
     "comparison_conflict",
     "comparison_rescue",
+    "cung_phi",
     "domain_analysis",
     "timing",
     "action_plan",

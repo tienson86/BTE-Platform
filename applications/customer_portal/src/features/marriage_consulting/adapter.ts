@@ -8,6 +8,7 @@ import {
   DOMAIN_TITLE,
   FORBIDDEN_ID_PATTERN,
   HERO_EYEBROW,
+  LIMITATION_NOTE,
   OPTIONAL_DOMAINS,
   OVERALL_STATE_HEADLINE,
   OVERALL_STATE_LABEL,
@@ -17,8 +18,9 @@ import {
 import type {
   ActionCardVm,
   AssessmentCardVm,
-  ComparisonGroupVm,
+  CungPhiVm,
   DomainCardVm,
+  FinalOpinionVm,
   MarriageConsultationDto,
   MarriageEnvelope,
   MarriagePublicError,
@@ -27,6 +29,7 @@ import type {
   MarriageReportSection,
   MarriageViewModel,
   MarriageWarning,
+  MutualSupportVm,
 } from "./types";
 
 const HERO_LABEL_MAX = 120;
@@ -54,13 +57,15 @@ export function adaptMarriageView(
   const executive = section(report, "executive_summary");
   const strengthsSec = section(report, "strengths");
   const risksSec = section(report, "risks");
-  const comparisonGroups = comparisonGroupsFrom(report);
+  const comparisonSec = section(report, "comparison_a_to_b");
   const domainsSec = section(report, "domain_analysis");
   const timingSec = section(report, "timing");
   const actionsSec = section(report, "action_plan");
   const confidenceSec = section(report, "confidence_limitations");
   const conclusionSec = section(report, "conclusion");
   const appendixSec = section(report, "appendix");
+  const cungSec = section(report, "cung_phi");
+  const finalOpinion = finalOpinionFrom(conclusionSec);
   const state = consultation.overall_state;
   const heroHighlights = (hero?.blocks || []).filter((item) => item.kind === "highlight");
   const heroStrengths = heroHighlights
@@ -84,22 +89,24 @@ export function adaptMarriageView(
       (state ? OVERALL_STATE_HEADLINE[state] : "") ||
       "",
     heroSummary: firstText(hero, "summary") || firstText(hero, "decision_state") || "",
-    heroStateLabel: state ? `Nền tảng hiện ở trạng thái: ${OVERALL_STATE_LABEL[state] || state}` : "",
+    heroStateLabel: state ? `Nền tảng hiện ở trạng thái: ${OVERALL_STATE_LABEL[state] || "cần đọc kèm đánh giá chi tiết"}` : "",
     heroStrengths,
     heroRisks,
-    confidenceLabel: CONFIDENCE_LABEL[consultation.confidence.level] || consultation.confidence.level,
+    confidenceLabel: CONFIDENCE_LABEL[consultation.confidence.level] || "Mang tính tham khảo",
     executiveSummary: executive?.blocks.find((item) => item.kind === "answer")?.body || executive?.blocks[0]?.body || executive?.summary || "",
     assessmentCards: assessmentCardsFrom(consultation, executive),
     strengths: highlightBodies(strengthsSec),
     risks: highlightBodies(risksSec),
-    comparisonGroups,
+    mutualSupport: mutualSupportFrom(comparisonSec),
+    cungPhi: cungPhiFrom(cungSec),
     domains: groupDomains(domainsSec),
     unavailableNote: unavailableNote(warnings, domainsSec),
     timingSummary: timingBody(timingSec),
     actions: actionCards(actionsSec),
-    limitations: consultation.limitations || [],
+    limitations: customerLimitations(consultation.limitations || [], confidenceSec),
     confidenceBody: joinBodies(confidenceSec),
-    conclusion: conclusionSec?.blocks[0]?.body || conclusionSec?.summary || "",
+    conclusion: finalOpinion.overall,
+    finalOpinion,
     appendix: customerAppendix(appendixSec),
     warnings,
     expertTrace: expertTrace ? stringifyExpert(expertTrace) : null,
@@ -181,22 +188,89 @@ function cardsFromExecutive(executive: MarriageReportSection | undefined): Asses
   return cards;
 }
 
-function comparisonGroupsFrom(report: MarriageReportDto): ComparisonGroupVm[] {
-  const specs = [
-    { id: "comparison_a_to_b", title: "A bổ trợ B" },
-    { id: "comparison_b_to_a", title: "B bổ trợ A" },
-    { id: "comparison_harmony", title: "Điểm hòa hợp" },
-    { id: "comparison_conflict", title: "Điểm xung" },
-    { id: "comparison_rescue", title: "Yếu tố cứu giải" },
-  ];
-  const groups: ComparisonGroupVm[] = [];
-  for (const spec of specs) {
-    const sec = section(report, spec.id);
-    const items = highlightBodies(sec);
-    if (!items.length) continue;
-    groups.push({ id: spec.id, title: spec.title, items });
+function mutualSupportFrom(sec: MarriageReportSection | undefined): MutualSupportVm | null {
+  if (!sec) return null;
+  const contributions = sec.blocks
+    .filter((item) => item.kind === "highlight" && (item.body || item.title))
+    .map((item) => ({
+      title: item.title || "",
+      body: item.body || "",
+    }))
+    .filter((item) => item.body && !FORBIDDEN_ID_PATTERN.test(item.body));
+  const overall =
+    sec.blocks.find((item) => item.kind === "summary" && item.block_id === "mutual-overall")?.body ||
+    sec.blocks.find((item) => item.kind === "summary")?.body ||
+    "";
+  if (!contributions.length && !overall) return null;
+  return {
+    title: sec.title || "Bổ trợ lẫn nhau",
+    contributions,
+    overall,
+  };
+}
+
+function cungPhiFrom(sec: MarriageReportSection | undefined): CungPhiVm | null {
+  if (!sec) return null;
+  const people = sec.blocks
+    .filter((item) => item.kind === "reference")
+    .map((item) => ({
+      label: item.title || "",
+      cung: item.body || "",
+    }))
+    .filter((item) => item.cung);
+  const relation = sec.blocks.find((item) => item.block_id === "cung-relation")?.body || "";
+  const meaning = sec.blocks.find((item) => item.block_id === "cung-meaning")?.body || "";
+  const disclaimer = sec.blocks.find((item) => item.block_id === "cung-limit")?.body || "";
+  if (!people.length && !relation) return null;
+  return {
+    title: sec.title || "Đánh giá Cung Phi",
+    people,
+    relation,
+    meaning,
+    disclaimer,
+  };
+}
+
+function finalOpinionFrom(sec: MarriageReportSection | undefined): FinalOpinionVm {
+  const overall =
+    blockBody(sec, "conclusion-opinion") || sec?.summary || sec?.blocks[0]?.body || "";
+  return {
+    overall,
+    strongestStrength: blockBody(sec, "conclusion-strength"),
+    mainAttention: blockBody(sec, "conclusion-attention"),
+    recommendation: blockBody(sec, "conclusion-recommendation"),
+  };
+}
+
+function blockBody(sec: MarriageReportSection | undefined, blockId: string): string {
+  if (!sec) return "";
+  const block = sec.blocks.find((item) => item.block_id === blockId);
+  return block?.body || "";
+}
+
+function customerLimitations(codes: string[], confidenceSec: MarriageReportSection | undefined): string[] {
+  const seen = new Set<string>();
+  const items: string[] = [];
+  for (const code of codes) {
+    const mapped = LIMITATION_NOTE[code];
+    if (mapped) {
+      if (seen.has(mapped)) continue;
+      seen.add(mapped);
+      items.push(mapped);
+      continue;
+    }
+    if (!code || /^[a-z0-9_]+$/i.test(code)) continue;
+    if (seen.has(code)) continue;
+    seen.add(code);
+    items.push(code);
   }
-  return groups;
+  for (const block of confidenceSec?.blocks || []) {
+    if (block.kind !== "limitations" || !block.body) continue;
+    if (seen.has(block.body)) continue;
+    seen.add(block.body);
+    items.push(block.body);
+  }
+  return items;
 }
 
 function highlightBodies(sec: MarriageReportSection | undefined): string[] {
@@ -248,7 +322,7 @@ function unavailableNote(
       (item) => item.domain && OPTIONAL_DOMAINS.includes(item.domain as never) && item.visibility !== "expert",
     );
     if (!hasOptionalCard) {
-      return "Một số miền (tương tác, gia đình, con cái) chưa đủ dữ liệu cấu trúc nên không luận riêng.";
+      return "Một số phần (tương tác, gia đình, con cái) chưa đủ dữ liệu nên không luận riêng.";
     }
     return null;
   }

@@ -19,6 +19,7 @@ CUSTOMER_STORY_ORDER: Final[tuple[str, ...]] = (
     "comparison_harmony",
     "comparison_conflict",
     "comparison_rescue",
+    "cung_phi",
     "timing",
     "domain_analysis",
     "action_plan",

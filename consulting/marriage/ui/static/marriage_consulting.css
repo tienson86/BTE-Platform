@@ -104,6 +104,11 @@
   font-size: var(--text-sm);
 }
 
+.mc-hero[hidden],
+.mc-result [hidden] {
+  display: none !important;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -173,9 +178,28 @@
   gap: var(--space-4);
 }
 
-.mc-details > summary {
+.mc-details > summary,
+.mc-technical > summary {
   cursor: pointer;
   font-weight: 600;
+}
+
+.mc-technical {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.mc-mutual h3,
+.mc-opinion strong,
+.mc-cung strong {
+  font-weight: 650;
+}
+
+.mc-opinion p,
+.mc-cung p,
+.mc-mutual p {
+  margin: var(--space-2) 0 0;
 }
 
 @media (max-width: 1024px) {
