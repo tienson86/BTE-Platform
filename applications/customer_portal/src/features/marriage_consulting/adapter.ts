@@ -388,8 +388,8 @@ function joinBodies(sec: MarriageReportSection | undefined): string {
 
 function customerAppendix(sec: MarriageReportSection | undefined): string {
   if (!sec) return "";
-  const customer = sec.blocks.find((item) => item.visibility !== "expert");
-  return customer?.body || "";
+  const method = sec.blocks.find((item) => item.block_id === "appendix-method");
+  return method?.body || sec.blocks.find((item) => item.body)?.body || "";
 }
 
 function coupleFallback(consultation: MarriageConsultationDto): string {

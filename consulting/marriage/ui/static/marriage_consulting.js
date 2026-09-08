@@ -112,7 +112,7 @@
       .replace(/>/g, "&gt;");
   }
 
-  function renderResult(consultation, report, warnings) {
+  function renderResult(consultation, report, warnings, expert) {
     const hero = section(report, "compatibility_hero");
     const exec = section(report, "executive_summary");
     const strengths = section(report, "strengths");
@@ -207,7 +207,7 @@
           escapeHtml(first.title || key) +
           "</h3><p>" +
           escapeHtml(first.body || "") +
-          "</p></article>"
+          '</p><button type="button" class="secondary">Chi tiết</button></article>'
         );
       })
       .join("");
@@ -268,16 +268,9 @@
                 limits +
                 "</ul></div>"
               : "";
-            const technical = card.technical_explanation
-              ? '<details class="mc-assessment-card__technical" data-testid="assessment-technical-' +
-                escapeHtml(card.question_id) +
-                '"><summary>Giải thích kỹ thuật</summary><p>' +
-                escapeHtml(card.technical_explanation) +
-                "</p></details>"
-              : "";
             const details =
               meaning || facts || guidance || limits
-                ? '<details class="mc-assessment-card__more"><summary>Chi tiết</summary>' +
+                ? '<details class="mc-assessment-card__more"><summary>Cơ sở đánh giá</summary>' +
                   meaning +
                   factsBlock +
                   guidance +
@@ -293,7 +286,6 @@
               escapeHtml(card.verdict || card.headline || card.answer) +
               "</p>" +
               details +
-              technical +
               "</article>"
             );
           })
@@ -348,29 +340,7 @@
       "</ul></section>" +
       mutualHtml +
       cungHtml +
-      '<details class="mc-technical" data-testid="technical-details"><summary>Chi tiết bổ sung</summary>' +
-      '<section class="mc-domains" data-testid="domain-analysis"><h2>Phân tích chi tiết theo miền</h2><div class="mc-domain-grid">' +
-      domainHtml +
-      "</div>" +
-      (unavailable
-        ? '<p class="mc-limitation" data-testid="unavailable-domains">Một số phần chưa đủ dữ liệu để luận riêng.</p>'
-        : "") +
-      "</section>" +
-      timingHtml +
-      '<section class="mc-actions" data-testid="action-plan"><h2>Kế hoạch hành động</h2><div class="mc-action-grid">' +
-      actionHtml +
-      "</div></section>" +
-      '<section class="bte-card mc-confidence" data-testid="confidence-limitations"><h2>Độ tin cậy và giới hạn</h2>' +
-      '<p data-testid="confidence-label">' +
-      escapeHtml(CONFIDENCE[(consultation.confidence && consultation.confidence.level) || ""] || "Mang tính tham khảo") +
-      "</p><p>" +
-      escapeHtml(bodies(confidence).join(" ")) +
-      "</p>" +
-      warningHtml +
-      "</section>" +
-      '<section class="bte-card" data-testid="appendix"><h2>Phụ lục phương pháp</h2><p>' +
-      escapeHtml(((appendix && appendix.blocks) || []).filter(function (item) { return item.visibility !== "expert"; }).map(function (item) { return item.body; }).join(" ")) +
-      "</p></section></details></details>" +
+      "</details>" +
       '<section class="bte-card mc-opinion" data-testid="conclusion"><h2>Kết luận cuối</h2>' +
       '<p data-testid="conclusion-opinion"><strong>Nhận định chung.</strong> ' +
       escapeHtml(blockOf(conclusion, "conclusion-opinion") || bodies(conclusion)[0] || "") +
@@ -391,8 +361,55 @@
           "</p>"
         : "") +
       "</section>" +
-      '<details class="bte-card mc-expert" data-testid="expert-mode"><summary>Xem chế độ chuyên gia</summary>' +
-      '<p class="muted">Chế độ chuyên gia ẩn theo mặc định.</p></details>' +
+      '<details class="bte-card mc-expert" data-testid="expert-mode"' +
+      (expert ? " open" : "") +
+      '><summary><button type="button" class="secondary" data-testid="expert-toggle">' +
+      (expert ? "Ẩn chế độ chuyên gia" : "Xem chế độ chuyên gia") +
+      "</button></summary>" +
+      (expert
+        ? '<div class="mc-expert-body">' +
+          cards
+            .map(function (card) {
+              if (!card.technical_explanation) return "";
+              return (
+                '<details class="mc-assessment-card__technical" data-testid="assessment-technical-' +
+                escapeHtml(card.question_id) +
+                '"><summary>Giải thích kỹ thuật</summary><p>' +
+                escapeHtml(card.technical_explanation) +
+                "</p></details>"
+              );
+            })
+            .join("") +
+          '<section class="mc-domains" data-testid="domain-analysis"><h2>Phân tích chi tiết theo miền</h2><div class="mc-domain-grid">' +
+          domainHtml +
+          "</div>" +
+          (unavailable
+            ? '<p class="mc-limitation" data-testid="unavailable-domains">Một số phần chưa đủ dữ liệu để luận riêng.</p>'
+            : "") +
+          "</section>" +
+          timingHtml +
+          '<section class="mc-actions" data-testid="action-plan"><h2>Kế hoạch hành động</h2><div class="mc-action-grid">' +
+          actionHtml +
+          "</div></section>" +
+          '<section class="bte-card mc-confidence" data-testid="confidence-limitations"><h2>Độ tin cậy và giới hạn</h2>' +
+          '<p data-testid="confidence-label">' +
+          escapeHtml(CONFIDENCE[(consultation.confidence && consultation.confidence.level) || ""] || "Mang tính tham khảo") +
+          "</p><p>" +
+          escapeHtml(bodies(confidence).join(" ")) +
+          "</p>" +
+          warningHtml +
+          "</section>" +
+          '<section class="bte-card" data-testid="appendix"><h2>Phụ lục phương pháp</h2><p>' +
+          escapeHtml(
+            ((appendix && appendix.blocks) || [])
+              .map(function (item) {
+                return item.body;
+              })
+              .join(" "),
+          ) +
+          "</p></section></div>"
+        : '<p class="muted">Chế độ chuyên gia ẩn theo mặc định.</p>') +
+      "</details>" +
       '<span data-testid="score-grade-guard" hidden>' +
       String(consultation.score) +
       "|" +
@@ -428,6 +445,22 @@
 
     const form = root.querySelector("[data-testid='marriage-form']");
     const status = document.getElementById("mcStatus");
+    const session = { consultationId: null, expert: false };
+
+    function paint(consultation, report, warnings, expert) {
+      status.innerHTML = renderResult(consultation, report, warnings, expert);
+      const toggle = status.querySelector("[data-testid='expert-toggle']");
+      if (!toggle || !session.consultationId) return;
+      toggle.addEventListener("click", async function (event) {
+        event.preventDefault();
+        session.expert = !session.expert;
+        const suffix = session.expert ? "?expert=true" : "";
+        const consultEnv = await request("GET", API + "/" + session.consultationId + suffix);
+        const reportEnv = await request("GET", API + "/" + session.consultationId + "/report" + suffix);
+        paint(consultEnv.data || consultation, reportEnv.data || report, [].concat(consultEnv.warnings || [], reportEnv.warnings || []), session.expert);
+      });
+    }
+
     form.addEventListener("submit", async function (event) {
       event.preventDefault();
       const personA = personBody("a");
@@ -448,8 +481,10 @@
       form.hidden = true;
       const empty = root.querySelector("[data-testid='empty-state']");
       if (empty) empty.hidden = true;
+      session.consultationId = created.data.consultation_id;
+      session.expert = false;
       const reportEnv = await request("GET", API + "/" + created.data.consultation_id + "/report");
-      status.innerHTML = renderResult(created.data, reportEnv.data, [].concat(created.warnings || [], reportEnv.warnings || []));
+      paint(created.data, reportEnv.data, [].concat(created.warnings || [], reportEnv.warnings || []), false);
     });
   }
 

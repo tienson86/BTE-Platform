@@ -11,7 +11,6 @@ type ResultViewProps = {
 };
 
 export function ResultView({ view, expertMode, onToggleExpert }: ResultViewProps): ReactNode {
-  const notes = warningNotes(view.warnings);
   return (
     <div className="mc-result" data-testid="marriage-result">
       <section className="bte-card mc-identity" data-testid="couple-identity">
@@ -126,94 +125,6 @@ export function ResultView({ view, expertMode, onToggleExpert }: ResultViewProps
             {view.cungPhi.disclaimer ? <p className="muted">{view.cungPhi.disclaimer}</p> : null}
           </section>
         ) : null}
-
-        <details className="mc-technical" data-testid="technical-details">
-          <summary>Chi tiết bổ sung</summary>
-          <section className="mc-domains" data-testid="domain-analysis">
-            <h2>Phân tích chi tiết theo miền</h2>
-            <div className="mc-domain-grid">
-              {view.domains.map((domain) => (
-                <DomainCard key={domain.domain} domain={domain} />
-              ))}
-            </div>
-            {view.unavailableNote ? (
-              <p className="mc-limitation" data-testid="unavailable-domains">
-                {view.unavailableNote}
-              </p>
-            ) : null}
-          </section>
-
-          {view.timingSummary ? (
-            <section className="bte-card" data-testid="timing-section">
-              <h2>Nhịp thời điểm</h2>
-              <p>{view.timingSummary}</p>
-            </section>
-          ) : (
-            <div data-testid="timing-omitted" hidden />
-          )}
-
-          <section className="mc-actions" data-testid="action-plan">
-            <h2>Kế hoạch hành động</h2>
-            <div className="mc-action-grid">
-              {view.actions.map((action) => (
-                <article
-                  key={action.key}
-                  className="bte-card mc-action"
-                  data-priority={action.priority || undefined}
-                  data-testid="action-card"
-                >
-                  <h3>{action.title}</h3>
-                  <p>
-                    <strong>Việc nên làm.</strong> {action.what}
-                  </p>
-                  {action.objective ? (
-                    <p>
-                      <strong>Mục tiêu.</strong> {action.objective}
-                    </p>
-                  ) : null}
-                  {action.priorityLabel ? (
-                    <p data-testid="action-priority">
-                      <strong>Mức ưu tiên.</strong> {action.priorityLabel}
-                    </p>
-                  ) : null}
-                  {action.when ? (
-                    <p>
-                      <strong>Khi nào áp dụng.</strong> {action.when}
-                    </p>
-                  ) : null}
-                  {action.outcome ? (
-                    <p>
-                      <strong>Kết quả mong đợi.</strong> {action.outcome}
-                    </p>
-                  ) : null}
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="bte-card mc-confidence" data-testid="confidence-limitations">
-            <h2>Độ tin cậy và giới hạn</h2>
-            <p data-testid="confidence-label">{view.confidenceLabel}</p>
-            <p>{view.confidenceBody}</p>
-            {view.limitations.length ? (
-              <ul data-testid="limitation-list">
-                {view.limitations.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            ) : null}
-            {notes.map((note) => (
-              <p key={note} className="mc-limitation" data-testid="warning-note">
-                {note}
-              </p>
-            ))}
-          </section>
-
-          <section className="bte-card" data-testid="appendix">
-            <h2>Phụ lục phương pháp</h2>
-            <p>{view.appendix}</p>
-          </section>
-        </details>
       </details>
 
       <section className="bte-card mc-opinion" data-testid="conclusion">
@@ -238,17 +149,13 @@ export function ResultView({ view, expertMode, onToggleExpert }: ResultViewProps
         ) : null}
       </section>
 
-      <details className="bte-card mc-expert" data-testid="expert-mode">
+      <details className="bte-card mc-expert" data-testid="expert-mode" open={expertMode}>
         <summary>
-          <button type="button" className="secondary" onClick={onToggleExpert}>
+          <button type="button" className="secondary" data-testid="expert-toggle" onClick={onToggleExpert}>
             {expertMode ? "Ẩn chế độ chuyên gia" : "Xem chế độ chuyên gia"}
           </button>
         </summary>
-        {expertMode && view.expertTrace ? (
-          <pre data-testid="expert-trace">{view.expertTrace}</pre>
-        ) : (
-          <p className="muted">Chế độ chuyên gia ẩn theo mặc định.</p>
-        )}
+        {expertMode ? <ExpertPanel view={view} /> : <p className="muted">Chế độ chuyên gia ẩn theo mặc định.</p>}
       </details>
 
       <span data-testid="score-grade-guard" hidden>
@@ -262,7 +169,7 @@ export function ResultView({ view, expertMode, onToggleExpert }: ResultViewProps
 }
 
 function AssessmentCard({ card }: { card: AssessmentCardVm }): ReactNode {
-  const hasDetails =
+  const hasBasis =
     Boolean(card.meaning) ||
     card.supportingFacts.length > 0 ||
     Boolean(card.quickGuidance) ||
@@ -271,9 +178,9 @@ function AssessmentCard({ card }: { card: AssessmentCardVm }): ReactNode {
     <article className="bte-card mc-assessment-card" data-testid={`assessment-card-${card.questionId}`}>
       <p className="mc-assessment-card__question">{card.question}</p>
       <p className="mc-assessment-card__verdict">{card.answer}</p>
-      {hasDetails ? (
+      {hasBasis ? (
         <details className="mc-assessment-card__more">
-          <summary>Chi tiết</summary>
+          <summary>Cơ sở đánh giá</summary>
           {card.meaning ? (
             <p className="mc-assessment-card__meaning">
               <span className="mc-assessment-card__label">Ý nghĩa</span>
@@ -305,13 +212,117 @@ function AssessmentCard({ card }: { card: AssessmentCardVm }): ReactNode {
           ) : null}
         </details>
       ) : null}
-      {card.technicalExplanation ? (
-        <details className="mc-assessment-card__technical" data-testid={`assessment-technical-${card.questionId}`}>
-          <summary>Giải thích kỹ thuật</summary>
-          <p>{card.technicalExplanation}</p>
-        </details>
-      ) : null}
     </article>
+  );
+}
+
+function ExpertPanel({ view }: { view: MarriageViewModel }): ReactNode {
+  const notes = warningNotes(view.warnings);
+  const technicalCards = view.assessmentCards.filter((card) => card.technicalExplanation);
+  return (
+    <div className="mc-expert-body">
+      {technicalCards.length ? (
+        <section className="mc-expert-technical">
+          {technicalCards.map((card) => (
+            <details
+              key={card.questionId}
+              className="mc-assessment-card__technical"
+              data-testid={`assessment-technical-${card.questionId}`}
+            >
+              <summary>Giải thích kỹ thuật</summary>
+              <p>{card.technicalExplanation}</p>
+            </details>
+          ))}
+        </section>
+      ) : null}
+
+      <section className="mc-domains" data-testid="domain-analysis">
+        <h2>Phân tích chi tiết theo miền</h2>
+        <div className="mc-domain-grid">
+          {view.domains.map((domain) => (
+            <DomainCard key={domain.domain} domain={domain} />
+          ))}
+        </div>
+        {view.unavailableNote ? (
+          <p className="mc-limitation" data-testid="unavailable-domains">
+            {view.unavailableNote}
+          </p>
+        ) : null}
+      </section>
+
+      {view.timingSummary ? (
+        <section className="bte-card" data-testid="timing-section">
+          <h2>Nhịp thời điểm</h2>
+          <p>{view.timingSummary}</p>
+        </section>
+      ) : (
+        <div data-testid="timing-omitted" hidden />
+      )}
+
+      <section className="mc-actions" data-testid="action-plan">
+        <h2>Kế hoạch hành động</h2>
+        <div className="mc-action-grid">
+          {view.actions.map((action) => (
+            <article
+              key={action.key}
+              className="bte-card mc-action"
+              data-priority={action.priority || undefined}
+              data-testid="action-card"
+            >
+              <h3>{action.title}</h3>
+              <p>
+                <strong>Việc nên làm.</strong> {action.what}
+              </p>
+              {action.objective ? (
+                <p>
+                  <strong>Mục tiêu.</strong> {action.objective}
+                </p>
+              ) : null}
+              {action.priorityLabel ? (
+                <p data-testid="action-priority">
+                  <strong>Mức ưu tiên.</strong> {action.priorityLabel}
+                </p>
+              ) : null}
+              {action.when ? (
+                <p>
+                  <strong>Khi nào áp dụng.</strong> {action.when}
+                </p>
+              ) : null}
+              {action.outcome ? (
+                <p>
+                  <strong>Kết quả mong đợi.</strong> {action.outcome}
+                </p>
+              ) : null}
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="bte-card mc-confidence" data-testid="confidence-limitations">
+        <h2>Độ tin cậy và giới hạn</h2>
+        <p data-testid="confidence-label">{view.confidenceLabel}</p>
+        <p>{view.confidenceBody}</p>
+        {view.limitations.length ? (
+          <ul data-testid="limitation-list">
+            {view.limitations.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        ) : null}
+        {notes.map((note) => (
+          <p key={note} className="mc-limitation" data-testid="warning-note">
+            {note}
+          </p>
+        ))}
+      </section>
+
+      <section className="bte-card" data-testid="appendix">
+        <h2>Phụ lục phương pháp</h2>
+        <p>{view.appendix}</p>
+      </section>
+
+      {view.expertTrace ? <pre data-testid="expert-trace">{view.expertTrace}</pre> : null}
+    </div>
   );
 }
 
@@ -323,7 +334,7 @@ function DomainCard({ domain }: { domain: DomainCardVm }): ReactNode {
       {domain.stateLabel ? <p className="mc-domain__state">{domain.stateLabel}</p> : null}
       <p>{domain.summary}</p>
       <button type="button" className="secondary" onClick={() => setOpen((value) => !value)}>
-        {open ? "Thu gọn" : "Xem chi tiết"}
+        {open ? "Thu gọn" : "Chi tiết"}
       </button>
       {open ? (
         <div className="mc-domain__details" data-testid="domain-details">
@@ -354,12 +365,9 @@ function customerText(view: MarriageViewModel): string {
       : []),
     view.cungPhi?.relation || "",
     view.cungPhi?.meaning || "",
-    ...view.domains.map((item) => item.summary),
-    ...view.actions.map((item) => item.what),
     view.finalOpinion.overall,
     view.finalOpinion.strongestStrength,
     view.finalOpinion.mainAttention,
     view.finalOpinion.recommendation,
-    view.appendix,
   ].join(" ");
 }

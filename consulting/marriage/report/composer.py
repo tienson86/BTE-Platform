@@ -664,6 +664,7 @@ def _confidence_report(
         section_id="confidence_limitations",
         title="Độ tin cậy và giới hạn",
         blocks=blocks,
+        visibility="expert",
     )
 
 
@@ -726,7 +727,7 @@ def _appendix(
             "Không dùng điểm số tương hợp vì mô hình điểm hiện chưa khả dụng."
         ),
         semantic_key="marriage.appendix.method",
-        visibility="customer",
+        visibility="expert",
     )
     expert = ReportBlock(
         block_id="appendix-trace",
@@ -752,7 +753,7 @@ def _appendix(
         section_id="appendix",
         title="Phụ lục phương pháp",
         blocks=[customer, expert],
-        visibility="customer",
+        visibility="expert",
     )
 
 

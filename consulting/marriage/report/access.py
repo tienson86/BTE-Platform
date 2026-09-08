@@ -4,6 +4,13 @@ from __future__ import annotations
 
 from consulting.marriage.models.report import MarriageReportModel, ReportBlock, ReportSection
 
+CUSTOMER_OMITTED_SECTION_IDS = frozenset(
+    {
+        "confidence_limitations",
+        "appendix",
+    }
+)
+
 
 def customer_sections(model: MarriageReportModel) -> list[ReportSection]:
     """Return sections and blocks visible in Customer Mode."""
@@ -41,9 +48,11 @@ def expert_visible_text(model: MarriageReportModel) -> str:
 
 
 def _filter_sections(model: MarriageReportModel, mode: str) -> list[ReportSection]:
-    """Filter blocks by visibility. Expert mode includes customer blocks."""
+    """Filter sections and blocks by visibility. Expert mode includes customer blocks."""
     sections: list[ReportSection] = []
     for section in model.sections:
+        if mode == "customer" and _expert_only_section(section):
+            continue
         blocks = [item for item in section.blocks if _visible(item, mode)]
         if not blocks:
             continue
@@ -57,6 +66,11 @@ def _filter_sections(model: MarriageReportModel, mode: str) -> list[ReportSectio
             )
         )
     return sections
+
+
+def _expert_only_section(section: ReportSection) -> bool:
+    """Technical, confidence, and methodology sections belong in Expert Mode."""
+    return section.visibility == "expert" or section.section_id in CUSTOMER_OMITTED_SECTION_IDS
 
 
 def _visible(block: ReportBlock, mode: str) -> bool:
