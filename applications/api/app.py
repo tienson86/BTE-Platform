@@ -68,6 +68,7 @@ def create_app() -> FastAPI:
         {"name": "Admin", "description": "Administration & operations (WP13)"},
         {"name": "License", "description": "Licensing & product editions (WP14)"},
         {"name": "engines", "description": "Engine orchestration endpoints"},
+        {"name": "number-energy", "description": "Bát Cực Linh Số / Năng lượng số V1"},
         {"name": "pack07-dev", "description": "Development-only Pack 07 diagnostics"},
     ]
     register_middleware(app)

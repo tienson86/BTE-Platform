@@ -8,7 +8,7 @@ from engines.number_energy.catalog import (
     PURPOSE_FOCUS_VI,
 )
 from engines.number_energy.constants import (
-    CHALLENGING_CUSTOMER_LABEL,
+    CLASSIFICATION_CUSTOMER_LABELS,
     COMPATIBILITY_NOTE,
     CONTROL_RELATIONS,
     ENERGY_DISPLAY_NAMES,
@@ -52,7 +52,6 @@ def compose_narrative(
         approved_patterns=approved_patterns,
     )
     strengths, watchouts = _strengths_and_watchouts(occurrences)
-    health_needed = bool(occurrences)
     narrative = CustomerNarrative(
         language="vi",
         system_name=SYSTEM_NAME,
@@ -64,7 +63,7 @@ def compose_narrative(
         purpose_focus=PURPOSE_FOCUS_VI.get(
             purpose_context, PURPOSE_FOCUS_VI["generic_number"]
         ),
-        health_disclaimer=HEALTH_DISCLAIMER if health_needed else None,
+        health_disclaimer=HEALTH_DISCLAIMER,
         compatibility_note=COMPATIBILITY_NOTE,
         unknown_notice=unknown_notice,
     )
@@ -147,10 +146,8 @@ def _paragraphs(
             why += " Số 0 là âm trường, che hoặc giảm biểu hiện chứ không xóa hẳn."
         elif item.via_modifier == 5:
             why += " Số 5 là dương trường, kích hoạt hoặc khuếch đại năng lượng gốc."
-        class_label = (
-            CHALLENGING_CUSTOMER_LABEL
-            if item.classification == "challenging"
-            else item.classification
+        class_label = CLASSIFICATION_CUSTOMER_LABELS.get(
+            item.classification, item.classification
         )
         why += f" Đây là {class_label}."
         why += f" {catalog['customer_summary']}"

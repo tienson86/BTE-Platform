@@ -56,6 +56,12 @@ from engines.detailed_interpretation_engine.engine import (
     DetailedInterpretationEngine,
 )
 
+# ==========================================================
+# Number Energy (Bát Cực Linh Số / Năng lượng số)
+# ==========================================================
+
+from engines.number_energy.engine import NumberEnergyEngine
+
 
 def register_all_engines() -> None:
     """
@@ -114,6 +120,13 @@ def register_all_engines() -> None:
             DetailedInterpretationEngine,
             "Detailed Interpretation Engine",
             "Pack 07 canonical runtime contract (foundation models only).",
+        ),
+
+        (
+            "number_energy",
+            NumberEnergyEngine,
+            "Number Energy Engine",
+            "Phân tích Bát Cực Linh Số / Năng lượng số (V1).",
         ),
 
     ]

@@ -9,6 +9,7 @@ from applications.api.auth.store import InMemoryUserStore, seed_dev_store
 from applications.api.config import APISettings, settings
 from applications.api.services.auth_service import AuthService
 from applications.api.services.orchestrator import OrchestratorService
+from applications.api.services.number_energy_service import NumberEnergyAPIService
 from applications.api.services.user_service import UserService
 from applications.case_management.repository import CaseRepository
 from applications.case_management.service import CaseService
@@ -47,6 +48,12 @@ def get_user_service() -> UserService:
 def get_orchestrator() -> OrchestratorService:
     """Return shared orchestrator (engine facades only)."""
     return OrchestratorService()
+
+
+@lru_cache(maxsize=1)
+def get_number_energy_api_service() -> NumberEnergyAPIService:
+    """Return shared Number Energy API adapter (V1 engine only)."""
+    return NumberEnergyAPIService()
 
 
 @lru_cache(maxsize=1)

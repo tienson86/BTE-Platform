@@ -1,0 +1,119 @@
+/* Number Energy V1 — portal tokens only. No score colors. */
+
+.ne-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4) var(--space-8);
+  min-width: 0;
+}
+
+.ne-intro h1 {
+  margin: var(--space-2) 0;
+}
+
+.ne-form .toolbar {
+  margin-top: var(--space-3);
+  justify-content: stretch;
+}
+
+.ne-form .toolbar button {
+  width: 100%;
+  min-height: 2.75rem;
+}
+
+.ne-result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  min-width: 0;
+}
+
+.ne-state {
+  font-family: var(--font-family-mono);
+  font-size: var(--text-sm);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.ne-occurrence-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.ne-occurrence__name {
+  margin: 0 0 var(--space-2);
+  font-weight: 600;
+}
+
+.ne-kv {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  gap: var(--space-2) var(--space-3);
+  margin: 0;
+}
+
+.ne-kv dt {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.ne-kv dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.ne-disclaimer {
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.ne-error {
+  border-color: var(--line);
+}
+
+.ne-error p {
+  margin-top: 0;
+}
+
+.ne-page :focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.ne-result h3 {
+  margin: var(--space-4) 0 var(--space-2);
+  font-size: var(--text-sm);
+}
+
+@media (max-width: 1024px) {
+  .ne-page {
+    max-width: 42rem;
+    padding: var(--space-5) var(--space-4);
+  }
+}
+
+@media (max-width: 768px) {
+  .ne-page {
+    max-width: 100%;
+    padding: var(--space-4);
+  }
+
+  .ne-kv {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ne-form .toolbar button,
+  .ne-error button {
+    width: 100%;
+    min-height: 2.75rem;
+  }
+}

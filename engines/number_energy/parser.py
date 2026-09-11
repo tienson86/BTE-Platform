@@ -2,7 +2,11 @@
 
 from __future__ import annotations
 
-from engines.number_energy.constants import DIGIT_PROFILES
+from engines.number_energy.constants import (
+    DIGIT_PROFILES,
+    MAX_INPUT_DIGITS,
+    is_ascii_digit_string,
+)
 from engines.number_energy.exceptions import NumberEnergyValidationError
 from engines.number_energy.types import ClassifiedDigit, ParsedNumber
 
@@ -19,9 +23,13 @@ def parse_number_string(number: str) -> ParsedNumber:
     raw = number.strip()
     if not raw:
         raise NumberEnergyValidationError("number input must not be empty")
-    if not raw.isdigit():
+    if not is_ascii_digit_string(raw):
         raise NumberEnergyValidationError(
             "number input must contain digits 0-9 only"
+        )
+    if len(raw) > MAX_INPUT_DIGITS:
+        raise NumberEnergyValidationError(
+            f"number input must not exceed {MAX_INPUT_DIGITS} digits"
         )
 
     raw_digits = tuple(int(ch) for ch in raw)

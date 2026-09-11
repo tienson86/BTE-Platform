@@ -155,6 +155,23 @@ def test_narrative_uses_system_name_and_both_sides() -> None:
     ).lower()
     for phrase in FORBIDDEN_CUSTOMER_PHRASES:
         assert phrase.lower() not in blob
+    assert "đây là supportive" not in blob
+    assert "đây là challenging" not in blob
+    assert "trường khí hỗ trợ" in " ".join(narrative.paragraphs).lower()
+
+
+def test_unknown_sequence_still_has_health_disclaimer() -> None:
+    result = _analyze("1003")
+    assert result.narrative.health_disclaimer
+    assert "không phải chẩn đoán y khoa" in result.narrative.health_disclaimer
+    assert result.narrative.unknown_notice
+
+
+def test_challenging_copy_uses_control_framing() -> None:
+    result = _analyze("108")
+    blob = " ".join(result.narrative.paragraphs).lower()
+    assert "trường khí cần kiểm soát" in blob
+    assert "đây là challenging" not in blob
 
 
 def test_invalid_purpose_context_is_rejected() -> None:

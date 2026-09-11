@@ -50,4 +50,12 @@ CUSTOMER_NAV_ITEMS: tuple[NavItem, ...] = (
 HOME_PATH = "/good-date"
 MARRIAGE_CONSULTING_PATH = "/marriage-consulting"
 MARRIAGE_API_PROXY_PREFIX = "api/v1/consulting/marriage"
+NUMBER_ENERGY_API_PROXY_PREFIX = "api/v1/number-energy"
+NUMBER_ENERGY_PATH = "/number-energy"
+NUMBER_ENERGY_ITEM = NavItem(
+    "number-energy",
+    "nav.number_energy",
+    NUMBER_ENERGY_PATH,
+    "number_energy.html",
+)
 

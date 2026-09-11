@@ -25,6 +25,8 @@ from applications.customer_portal.pages import (
     MARRIAGE_API_PROXY_PREFIX,
     MARRIAGE_CONSULTING_PATH,
     NAV_ITEMS,
+    NUMBER_ENERGY_API_PROXY_PREFIX,
+    NUMBER_ENERGY_PATH,
 )
 from applications.customer_portal.templates_util import render_desktop_page, render_page
 
@@ -139,6 +141,11 @@ def create_app() -> FastAPI:
         """TV-01 Marriage Consulting customer page."""
         return page("marriage-consulting", "marriage_consulting.html")
 
+    @app.get(NUMBER_ENERGY_PATH, response_class=HTMLResponse)
+    def number_energy_page() -> HTMLResponse:
+        """Number Energy V1 — Bát Cực Linh Số / Năng lượng số."""
+        return page("number-energy", "number_energy.html")
+
     @app.api_route(
         "/backend/{path:path}",
         methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
@@ -156,6 +163,9 @@ def create_app() -> FastAPI:
         body = await request.body()
         marriage_route = path == MARRIAGE_API_PROXY_PREFIX or path.startswith(
             f"{MARRIAGE_API_PROXY_PREFIX}/"
+        )
+        number_energy_route = path == NUMBER_ENERGY_API_PROXY_PREFIX or path.startswith(
+            f"{NUMBER_ENERGY_API_PROXY_PREFIX}/"
         )
         try:
             async with httpx.AsyncClient(
@@ -185,6 +195,17 @@ def create_app() -> FastAPI:
                             }
                         ],
                         "version_bundle": {"api_version": "v1"},
+                    },
+                )
+            if number_energy_route:
+                return JSONResponse(
+                    status_code=503,
+                    content={
+                        "success": False,
+                        "message": "Không thể hoàn tất phân tích lúc này.",
+                        "code": "upstream_unavailable",
+                        "data": None,
+                        "request_id": None,
                     },
                 )
             raise
@@ -220,6 +241,7 @@ def create_app() -> FastAPI:
                 "/choose-date",
                 "/result-workspace",
                 MARRIAGE_CONSULTING_PATH,
+                NUMBER_ENERGY_PATH,
             ],
             "marriage_api_base_url": settings.marriage_api_base_url,
         }

@@ -30,6 +30,37 @@ COMPATIBILITY_NOTE: Final[str] = (
     "Cung Phi hoặc Bát Tự."
 )
 CHALLENGING_CUSTOMER_LABEL: Final[str] = "trường khí cần kiểm soát"
+CLASSIFICATION_CUSTOMER_LABELS: Final[dict[str, str]] = {
+    "supportive": "trường khí hỗ trợ",
+    "supportive_stabilizing": "trường khí ổn định",
+    "challenging": CHALLENGING_CUSTOMER_LABEL,
+}
+PATTERN_CUSTOMER_LABELS: Final[dict[str, str]] = {
+    APPROVED_SUPPORTIVE_CHAIN_ID: (
+        "Chuỗi hỗ trợ đã khóa: Sinh Khí → Thiên Y → Diên Niên"
+    ),
+}
+UNDEFINED_REASON_CUSTOMER_VI: Final[dict[str, str]] = {
+    UNKNOWN_REASON_NOT_FROZEN: (
+        "Đoạn này chưa được khóa trong quy tắc tương tác V1."
+    ),
+    CONSECUTIVE_MODIFIER_REASON: (
+        "Các số 0 hoặc 5 đứng liền nhau chưa được khóa trong V1, "
+        "nên không suy diễn thêm quy tắc."
+    ),
+    UNUSED_MODIFIER_REASON: (
+        "Số 0 hoặc 5 ở mép dãy chưa tạo cửa sổ A-M-B đã khóa trong V1."
+    ),
+}
+
+# Operational input bound for phone / plate / ID / account strings. Not a V2 rule.
+MAX_INPUT_DIGITS: Final[int] = 128
+
+
+def is_ascii_digit_string(value: str) -> bool:
+    """Return True if ``value`` is a non-empty ASCII ``0-9`` string."""
+    return bool(value) and value.isascii() and value.isdigit()
+
 
 ORDINARY_GUA_DIGITS: Final[frozenset[int]] = frozenset({1, 2, 3, 4, 6, 7, 8, 9})
 MODIFIER_DIGITS: Final[frozenset[int]] = frozenset({0, 5})
