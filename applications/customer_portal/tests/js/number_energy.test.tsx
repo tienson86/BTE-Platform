@@ -101,7 +101,7 @@ describe("Number Energy SB01 shell", () => {
     const fetchMock = vi.fn();
     vi.stubGlobal("fetch", fetchMock);
     render(<NumberEnergyPage />);
-    expect(screen.getByTestId("number-energy-page").getAttribute("data-static-phase")).toBe("sb14.1");
+    expect(screen.getByTestId("number-energy-page").getAttribute("data-static-phase")).toBe("sb15");
     expect(screen.getByTestId("number-energy-title").textContent).toBe("Tư vấn năng lượng số");
     expect(screen.getByTestId("page-title-area")).toBeTruthy();
     expect(screen.getByTestId("input-section").getAttribute("data-section")).toBe("NE-INPUT");
@@ -928,7 +928,7 @@ describe("Number Energy SB13 responsive polish", () => {
     render(<NumberEnergyPage />);
     submitGoldenPhone();
     expect(fetchMock).not.toHaveBeenCalled();
-    expect(screen.getByTestId("number-energy-page").getAttribute("data-static-phase")).toBe("sb14.1");
+    expect(screen.getByTestId("number-energy-page").getAttribute("data-static-phase")).toBe("sb15");
     expect(screen.getByTestId("analysis-submit").textContent).toBe("PHÂN TÍCH SỐ ĐIỆN THOẠI");
     expect(screen.getByTestId("hero-identity").textContent).toBe("0328 278 786");
     expect(screen.getByTestId("hero-score").textContent).toBe("82 / 100");
@@ -943,7 +943,8 @@ describe("Number Energy SB13 responsive polish", () => {
   it("locks page overflow except the approved Pair Map scroll and stacks mobile sections", () => {
     const css = cssSource();
     expect(css).toMatch(/\.ne-page\s*\{[^}]*overflow-x:\s*clip/s);
-    expect(css).toMatch(/\.ne-pair-strip\s*\{[^}]*overflow-x:\s*auto/s);
+    expect(css).toMatch(/\.ne-pair-strip-scroller\s*\{[^}]*overflow-x:\s*auto/s);
+    expect(css).not.toMatch(/\.ne-pair-strip\s*\{[^}]*overflow-x:\s*auto/s);
     expect(css).toMatch(/\.ne-pair-card\s*\{[^}]*min-width:\s*8\.25rem/s);
     expect(css).toMatch(
       /@media \(max-width: 1024px\)[\s\S]*\.ne-wealth-stages\s*\{[\s\S]*flex-direction:\s*column/,
@@ -1021,5 +1022,161 @@ describe("Number Energy SB14 accessibility", () => {
     expect(sourceOf("NumberEnergyPage.tsx")).not.toContain("expert=true");
     expect(sourceOf("sections/ExpertDetails.tsx")).not.toContain("tabIndex={0}");
     expect(sourceOf("InputSection.tsx")).not.toContain("analyzeNumberEnergy");
+  });
+});
+
+describe("Number Energy SB15 golden visual review", () => {
+  const GOLDEN_PAIR_ORDER = ["32", "28", "82", "27", "78", "87", "78", "86"];
+  const GOLDEN_TRIPLE_ORDER = ["328", "282", "827", "278", "787", "878", "786"];
+  const GOLDEN_ENERGY_COUNTS = [
+    ["Sinh Khí", "2"],
+    ["Thiên Y", "2"],
+    ["Diên Niên", "3"],
+    ["Phục Vị", "0"],
+    ["Họa Hại", "1"],
+    ["Ngũ Quỷ", "0"],
+    ["Lục Sát", "0"],
+    ["Tuyệt Mệnh", "0"],
+  ] as const;
+  const REQUIRED_DOMAINS = [
+    "Tài vận",
+    "Công việc & sự nghiệp",
+    "Tình cảm & quan hệ",
+    "Tính cách & năng lực",
+    "Cân bằng trường khí",
+  ];
+  const REVIEW_FORBIDDEN = [
+    "fixture_id",
+    "presentation_fixture",
+    "verified_by_runtime",
+    "knowledge_version",
+    "knowledge version",
+    "DIEN_NIEN",
+    "THIEN_Y",
+    "HOA_HAI",
+    "82%",
+    "TODO",
+    "N/A",
+    "loading...",
+    "bảo hành",
+    "đảm bảo giàu",
+    "cam kết thành công",
+  ];
+
+  function cssSource(): string {
+    const here = dirname(fileURLToPath(import.meta.url));
+    return readFileSync(resolve(here, "../../static/css/number_energy.css"), "utf8");
+  }
+
+  it("keeps the input as a static Golden sample preview and blocks other numbers", () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+    render(<NumberEnergyPage />);
+    expect(screen.getByTestId("number-energy-page").getAttribute("data-static-phase")).toBe("sb15");
+    expect(screen.getByTestId("static-sample-note").textContent).toBe(
+      "Bản dựng tĩnh đang xem trước số mẫu 0328278786.",
+    );
+    expect(screen.getByTestId("analysis-submit").textContent).toBe("PHÂN TÍCH SỐ ĐIỆN THOẠI");
+    fireEvent.change(screen.getByTestId("number-input"), { target: { value: "0868271327" } });
+    fireEvent.submit(screen.getByTestId("input-form-region"));
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(screen.getByTestId("input-error").textContent).toBe(
+      "Bản dựng tĩnh hiện chỉ hỗ trợ số mẫu 0328278786.",
+    );
+    expect((screen.getByTestId("result-section") as HTMLElement).hidden).toBe(true);
+  });
+
+  it("reviews Golden Result P-S00…P-S10 after 0328278786 and keeps P-S11 hidden", () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+    render(<NumberEnergyPage />);
+    submitGoldenPhone();
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect((screen.getByTestId("result-section") as HTMLElement).hidden).toBe(false);
+
+    expect(screen.getByTestId("hero-identity").textContent).toBe("0328 278 786");
+    expect(screen.getByTestId("hero-score").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("hero-grade").textContent).toBe("TỐT");
+    expect(screen.getByTestId("hero-primary-energy").textContent).toBe("Diên Niên");
+    expect(screen.getByTestId("hero-terminal-energy").textContent).toBe("Thiên Y");
+
+    const pairDigits = Array.from(screen.getByTestId("pair-strip").querySelectorAll("[data-testid^='pair-digits-']")).map(
+      (node) => node.textContent,
+    );
+    expect(pairDigits).toEqual(GOLDEN_PAIR_ORDER);
+    expect(pairDigits.filter((digits) => digits === "78")).toHaveLength(2);
+
+    expect(screen.getByTestId("qs-favorable-value").textContent).toBe("7 cặp");
+    expect(screen.getByTestId("qs-challenging-value").textContent).toBe("1 cặp");
+    expect(screen.getByTestId("qs-primary-value").textContent).toBe("Diên Niên");
+    expect(screen.getByTestId("qs-terminal-value").textContent).toBe("Thiên Y");
+    expect(screen.getByTestId("quick-structure").textContent).toContain("chưa phải điểm số");
+
+    expect(screen.getByTestId("wealth-flow").textContent).toContain("Có Tài không");
+    expect(screen.getByTestId("wf-headline-0").textContent).toBe("Có Thiên Y");
+    expect(screen.getByTestId("wf-headline-1").textContent).toBe("Quý nhân & cơ hội");
+    expect(screen.getByTestId("wf-headline-2").textContent).toBe("Sự nghiệp & lập nghiệp");
+    expect(screen.getByTestId("wf-headline-3").textContent).toBe("Thiên Y");
+    expect(screen.getByTestId("wealth-stages").querySelectorAll("[data-testid^='wf-stage-']")).toHaveLength(4);
+
+    const tripleDigits = Array.from(
+      screen.getByTestId("triple-list").querySelectorAll("[data-testid^='triple-digits-']"),
+    ).map((node) => node.textContent);
+    expect(tripleDigits).toEqual(GOLDEN_TRIPLE_ORDER);
+
+    GOLDEN_ENERGY_COUNTS.forEach(([label, count], index) => {
+      expect(screen.getByTestId(`dist-name-${index}`).textContent).toBe(label);
+      expect(screen.getByTestId(`dist-count-${index}`).textContent).toBe(count);
+    });
+
+    REQUIRED_DOMAINS.forEach((title, index) => {
+      expect(screen.getByTestId(`domain-title-${index}`).textContent).toBe(title);
+    });
+    expect(screen.getByTestId("domain-list").querySelectorAll("[data-testid^='domain-card-']")).toHaveLength(5);
+    expect(screen.getByTestId("domain-list").textContent).not.toContain("Giao tiếp");
+
+    expect(screen.getByTestId("strength-list").querySelectorAll("[data-testid^='strength-card-']")).toHaveLength(4);
+    expect(screen.getByTestId("caution-list").querySelectorAll("[data-testid^='caution-card-']")).toHaveLength(2);
+    expect(screen.getByTestId("caution-title-0").textContent).toBe("Cần chú ý cách sử dụng lời nói");
+    expect(screen.getByTestId("caution-title-1").textContent).toBe("Không nên chỉ nhìn số lượng Cát tinh");
+
+    expect(screen.getByTestId("score-total").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("score-dimension-list").querySelectorAll("[data-testid^='score-row-']")).toHaveLength(5);
+    expect(screen.getByTestId("score-reason-list").querySelectorAll("[data-testid^='score-reason-card-']")).toHaveLength(4);
+    expect(screen.getByTestId("score-breakdown").textContent).not.toContain("%");
+
+    expect(screen.getByTestId("recommendation-state").textContent).toBe("PHÙ HỢP ĐỂ TIẾP TỤC SỬ DỤNG");
+    expect(screen.getByTestId("final-assessment").textContent).not.toMatch(/bảo hành|đảm bảo|guarantee/i);
+    expect(screen.getByTestId("basis-helper").textContent).toContain("không chỉ dựa trên số lượng Cát và Hung");
+
+    const expert = screen.getByTestId("expert-details");
+    expect(expert.getAttribute("data-section")).toBe("P-S11");
+    expect(expert.hasAttribute("hidden")).toBe(true);
+    expect(expert.getAttribute("aria-hidden")).toBe("true");
+
+    const page = screen.getByTestId("number-energy-page").textContent || "";
+    for (const token of REVIEW_FORBIDDEN) {
+      expect(page.toLowerCase()).not.toContain(token.toLowerCase());
+    }
+  });
+
+  it("locks visual polish: one Pair Map scroller, readable identity, no stuck CTA, no heavy red caution", () => {
+    const css = cssSource();
+    expect(css).toMatch(/\.ne-pair-strip-scroller\s*\{[^}]*overflow-x:\s*auto/s);
+    expect(css).toMatch(/\.ne-pair-strip\s*\{[^}]*overflow-x:\s*visible/s);
+    expect(css).toMatch(/\.ne-pair-strip\s*\{[^}]*width:\s*max-content/s);
+    expect(css).toMatch(/\.ne-hero__identity\s*\{[^}]*overflow-x:\s*auto/s);
+    expect(css).toMatch(/\.ne-hero__identity\s*\{[^}]*max-width:\s*100%/s);
+    expect(css).toMatch(/\.ne-form-actions\s*\{[^}]*position:\s*static/s);
+    expect(css).not.toMatch(/\.ne-form-actions\s*\{[^}]*position:\s*(sticky|fixed)/s);
+    expect(css).toMatch(/\.ne-findings-column--caution\s*\{[^}]*border-left:\s*1px solid var\(--line\)/s);
+    expect(css).not.toMatch(/\.ne-findings-column--caution\s*\{[^}]*--danger/s);
+    expect(css).not.toMatch(/\.ne-pair-card\[data-pair-tone="caution"\]\s*\{[^}]*--danger/s);
+    expect(css).toMatch(/@media \(max-width: 768px\)[\s\S]*\.ne-form-actions button\s*\{[\s\S]*width:\s*100%/);
+    expect(css).toContain(".ne-static-sample-note");
+    expect(sourceOf("NumberEnergyPage.tsx")).not.toContain("analyzeNumberEnergy");
+    expect(sourceOf("InputSection.tsx")).not.toContain("from \"./api\"");
+    expect(sourceOf("ResultSection.tsx")).not.toContain("from \"./api\"");
+    expect(sourceOf("sections/ExpertDetails.tsx")).not.toContain("expert=true");
   });
 });

@@ -35,7 +35,7 @@ export function NumberEnergyPage(): ReactNode {
       className="ds-page ne-page"
       data-screen="number-energy"
       data-testid="number-energy-page"
-      data-static-phase="sb14.1"
+      data-static-phase="sb15"
     >
       <header className="ne-intro" data-testid="page-title-area">
         <p className="muted">Bát Cực Linh Số</p>

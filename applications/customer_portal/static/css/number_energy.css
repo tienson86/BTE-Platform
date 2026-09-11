@@ -150,7 +150,8 @@
 }
 
 .ne-field-help,
-.ne-field-error {
+.ne-field-error,
+.ne-static-sample-note {
   max-width: 36rem;
   margin: var(--space-2) 0 0;
   font-size: var(--text-sm);
@@ -160,9 +161,18 @@
   color: var(--danger);
 }
 
+.ne-static-sample-note {
+  padding: var(--space-2) var(--space-3);
+  border-left: 3px solid var(--primary);
+  background: var(--primary-soft);
+  color: var(--ink);
+  line-height: 1.45;
+}
+
 .ne-form-actions {
   display: flex;
   justify-content: flex-start;
+  position: static;
 }
 
 .ne-form-actions button {
@@ -202,7 +212,9 @@
   line-height: 1.2;
   font-variant-numeric: tabular-nums;
   color: var(--ink);
+  max-width: 100%;
   white-space: nowrap;
+  overflow-x: auto;
 }
 
 .ne-hero__metrics {
@@ -255,6 +267,7 @@
   min-width: 0;
   overflow-x: auto;
   overscroll-behavior-x: contain;
+  padding-bottom: var(--space-2);
 }
 
 .ne-pair-strip {
@@ -262,14 +275,13 @@
   flex-direction: row;
   align-items: stretch;
   gap: var(--space-2);
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
+  width: max-content;
+  max-width: none;
+  min-width: min-content;
   margin: var(--space-4) 0 0;
-  padding: 0 0 var(--space-2);
+  padding: 0;
   list-style: none;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
+  overflow-x: visible;
 }
 
 .ne-pair-item {

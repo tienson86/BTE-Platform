@@ -113,13 +113,17 @@ export function InputSection({
             inputMode={analysisType === "phone_number" ? "numeric" : "text"}
             spellCheck={false}
           />
-          <p className="muted ne-field-help" id={helpId} data-testid="static-sample-note">
-            {option.help}
-            {analysisType === "phone_number"
-              ? " Với số điện thoại, hệ thống còn phân tích Tài vận, nguồn Tài, dòng Tài và hậu vận của dãy số."
-              : null}{" "}
-            {STATIC_GOLDEN_SAMPLE_NOTE}
-          </p>
+          <div id={helpId}>
+            <p className="muted ne-field-help">
+              {option.help}
+              {analysisType === "phone_number"
+                ? " Với số điện thoại, hệ thống còn phân tích Tài vận, nguồn Tài, dòng Tài và hậu vận của dãy số."
+                : null}
+            </p>
+            <p className="ne-static-sample-note" data-testid="static-sample-note">
+              {STATIC_GOLDEN_SAMPLE_NOTE}
+            </p>
+          </div>
           {errorMessage ? (
             <p className="ne-field-error" id={errorId} data-testid="input-error" role="alert">
               {errorMessage}
