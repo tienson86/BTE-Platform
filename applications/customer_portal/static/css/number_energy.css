@@ -1,14 +1,19 @@
 /* Number Energy SB02 form — portal tokens only. No score colors. No RAG indicators. */
 
+html:has([data-screen="number-energy"]) {
+  overflow-x: hidden;
+}
+
 .ne-page {
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
+  width: 100%;
   max-width: 75rem;
   margin: 0 auto;
   padding: var(--space-6) var(--space-4) var(--space-8);
   min-width: 0;
-  overflow-x: clip;
+  overflow-x: hidden;
   overflow-wrap: break-word;
 }
 
@@ -40,6 +45,11 @@
   flex-direction: column;
   gap: var(--space-5);
   min-width: 0;
+  max-width: 100%;
+}
+
+.ne-result[hidden] {
+  display: none;
 }
 
 .ne-shell-section h2 {
@@ -261,12 +271,17 @@
   margin: 0 0 var(--space-2);
 }
 
+.ne-energy-map {
+  overflow-x: hidden;
+}
+
 .ne-pair-strip-scroller {
-  width: 100%;
+  width: 0;
+  min-width: 100%;
   max-width: 100%;
-  min-width: 0;
   overflow-x: auto;
   overscroll-behavior-x: contain;
+  contain: paint;
   padding-bottom: var(--space-2);
 }
 

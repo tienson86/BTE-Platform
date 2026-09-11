@@ -5,7 +5,7 @@ from __future__ import annotations
 from fastapi.testclient import TestClient
 
 from applications.customer_portal.app import _proxy_upstream_url, create_app
-from applications.customer_portal.config import settings
+from applications.customer_portal.config import PORTAL_ROOT, settings
 from applications.customer_portal.pages import (
     CUSTOMER_NAV_ITEMS,
     NUMBER_ENERGY_API_PROXY_PREFIX,
@@ -49,3 +49,12 @@ def test_analyze_page_links_to_number_energy() -> None:
     assert 'data-testid="number-energy-entry"' in html
     assert 'href="/number-energy"' in html
     assert "Năng lượng số (Bát Cực Linh Số)" in html
+
+
+def test_number_energy_static_bundle_is_frozen() -> None:
+    """Lock the static Golden UI bundle: freeze marker present, no analyze fetch."""
+    bundle = (PORTAL_ROOT / "static" / "dist" / "numberEnergy.js").read_text(encoding="utf-8")
+    assert "NUMBER_ENERGY_STATIC_UI_V1" in bundle
+    assert "fetch(" not in bundle
+    assert "/number-energy/analyze" not in bundle
+    assert "analyzeNumberEnergy" not in bundle

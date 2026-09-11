@@ -9,6 +9,9 @@ import {
   type GoldenPreviewState,
 } from "./formModel";
 
+export const NUMBER_ENERGY_STATIC_PHASE = "sb16";
+export const NUMBER_ENERGY_STATIC_UI_V1 = "NUMBER_ENERGY_STATIC_UI_V1";
+
 export function NumberEnergyPage(): ReactNode {
   const [analysisType, setAnalysisType] = useState<AnalysisType>(GOLDEN_PREVIEW_TYPE);
   const [inputValue, setInputValue] = useState(GOLDEN_PREVIEW_INPUT);
@@ -35,7 +38,8 @@ export function NumberEnergyPage(): ReactNode {
       className="ds-page ne-page"
       data-screen="number-energy"
       data-testid="number-energy-page"
-      data-static-phase="sb15"
+      data-static-phase={NUMBER_ENERGY_STATIC_PHASE}
+      data-static-freeze={NUMBER_ENERGY_STATIC_UI_V1}
     >
       <header className="ne-intro" data-testid="page-title-area">
         <p className="muted">Bát Cực Linh Số</p>

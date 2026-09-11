@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { NumberEnergyPage } from "../../src/features/number_energy/NumberEnergyPage";
+import { NumberEnergyPage, NUMBER_ENERGY_STATIC_UI_V1 } from "../../src/features/number_energy/NumberEnergyPage";
 import { APP_NAV_ITEMS } from "../../src/layouts/Navigation";
 
 afterEach(() => {
@@ -101,7 +101,7 @@ describe("Number Energy SB01 shell", () => {
     const fetchMock = vi.fn();
     vi.stubGlobal("fetch", fetchMock);
     render(<NumberEnergyPage />);
-    expect(screen.getByTestId("number-energy-page").getAttribute("data-static-phase")).toBe("sb15");
+    expect(screen.getByTestId("number-energy-page").getAttribute("data-static-phase")).toBe("sb16");
     expect(screen.getByTestId("number-energy-title").textContent).toBe("Tư vấn năng lượng số");
     expect(screen.getByTestId("page-title-area")).toBeTruthy();
     expect(screen.getByTestId("input-section").getAttribute("data-section")).toBe("NE-INPUT");
@@ -928,7 +928,7 @@ describe("Number Energy SB13 responsive polish", () => {
     render(<NumberEnergyPage />);
     submitGoldenPhone();
     expect(fetchMock).not.toHaveBeenCalled();
-    expect(screen.getByTestId("number-energy-page").getAttribute("data-static-phase")).toBe("sb15");
+    expect(screen.getByTestId("number-energy-page").getAttribute("data-static-phase")).toBe("sb16");
     expect(screen.getByTestId("analysis-submit").textContent).toBe("PHÂN TÍCH SỐ ĐIỆN THOẠI");
     expect(screen.getByTestId("hero-identity").textContent).toBe("0328 278 786");
     expect(screen.getByTestId("hero-score").textContent).toBe("82 / 100");
@@ -942,7 +942,7 @@ describe("Number Energy SB13 responsive polish", () => {
 
   it("locks page overflow except the approved Pair Map scroll and stacks mobile sections", () => {
     const css = cssSource();
-    expect(css).toMatch(/\.ne-page\s*\{[^}]*overflow-x:\s*clip/s);
+    expect(css).toMatch(/\.ne-page\s*\{[^}]*overflow-x:\s*hidden/s);
     expect(css).toMatch(/\.ne-pair-strip-scroller\s*\{[^}]*overflow-x:\s*auto/s);
     expect(css).not.toMatch(/\.ne-pair-strip\s*\{[^}]*overflow-x:\s*auto/s);
     expect(css).toMatch(/\.ne-pair-card\s*\{[^}]*min-width:\s*8\.25rem/s);
@@ -1072,7 +1072,7 @@ describe("Number Energy SB15 golden visual review", () => {
     const fetchMock = vi.fn();
     vi.stubGlobal("fetch", fetchMock);
     render(<NumberEnergyPage />);
-    expect(screen.getByTestId("number-energy-page").getAttribute("data-static-phase")).toBe("sb15");
+    expect(screen.getByTestId("number-energy-page").getAttribute("data-static-phase")).toBe("sb16");
     expect(screen.getByTestId("static-sample-note").textContent).toBe(
       "Bản dựng tĩnh đang xem trước số mẫu 0328278786.",
     );
@@ -1163,6 +1163,8 @@ describe("Number Energy SB15 golden visual review", () => {
   it("locks visual polish: one Pair Map scroller, readable identity, no stuck CTA, no heavy red caution", () => {
     const css = cssSource();
     expect(css).toMatch(/\.ne-pair-strip-scroller\s*\{[^}]*overflow-x:\s*auto/s);
+    expect(css).toMatch(/\.ne-pair-strip-scroller\s*\{[^}]*width:\s*0/s);
+    expect(css).toMatch(/\.ne-result\[hidden\]\s*\{[^}]*display:\s*none/s);
     expect(css).toMatch(/\.ne-pair-strip\s*\{[^}]*overflow-x:\s*visible/s);
     expect(css).toMatch(/\.ne-pair-strip\s*\{[^}]*width:\s*max-content/s);
     expect(css).toMatch(/\.ne-hero__identity\s*\{[^}]*overflow-x:\s*auto/s);
@@ -1173,10 +1175,99 @@ describe("Number Energy SB15 golden visual review", () => {
     expect(css).not.toMatch(/\.ne-findings-column--caution\s*\{[^}]*--danger/s);
     expect(css).not.toMatch(/\.ne-pair-card\[data-pair-tone="caution"\]\s*\{[^}]*--danger/s);
     expect(css).toMatch(/@media \(max-width: 768px\)[\s\S]*\.ne-form-actions button\s*\{[\s\S]*width:\s*100%/);
-    expect(css).toContain(".ne-static-sample-note");
+    expect(css).toContain('html:has([data-screen="number-energy"])');
+    expect(css).toContain("contain: paint");
     expect(sourceOf("NumberEnergyPage.tsx")).not.toContain("analyzeNumberEnergy");
     expect(sourceOf("InputSection.tsx")).not.toContain("from \"./api\"");
     expect(sourceOf("ResultSection.tsx")).not.toContain("from \"./api\"");
     expect(sourceOf("sections/ExpertDetails.tsx")).not.toContain("expert=true");
+  });
+});
+
+describe("Number Energy SB16 static freeze", () => {
+  const FREEZE_FORBIDDEN = [
+    "fixture_id",
+    "presentation_fixture",
+    "verified_by_runtime",
+    "knowledge_version",
+    "DIEN_NIEN",
+    "THIEN_Y",
+    "82%",
+  ];
+
+  function bundleSource(): string {
+    const here = dirname(fileURLToPath(import.meta.url));
+    return readFileSync(resolve(here, "../../static/dist/numberEnergy.js"), "utf8");
+  }
+
+  function entrySource(): string {
+    const here = dirname(fileURLToPath(import.meta.url));
+    return readFileSync(resolve(here, "../../src/entries/numberEnergyApp.tsx"), "utf8");
+  }
+
+  it("marks the page as NUMBER_ENERGY_STATIC_UI_V1 at sb16", () => {
+    render(<NumberEnergyPage />);
+    const page = screen.getByTestId("number-energy-page");
+    expect(page.getAttribute("data-static-phase")).toBe("sb16");
+    expect(page.getAttribute("data-static-freeze")).toBe(NUMBER_ENERGY_STATIC_UI_V1);
+    expect(NUMBER_ENERGY_STATIC_UI_V1).toBe("NUMBER_ENERGY_STATIC_UI_V1");
+  });
+
+  it("keeps Golden Result hidden until the sample number is submitted", () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+    render(<NumberEnergyPage />);
+    expect((screen.getByTestId("result-section") as HTMLElement).hidden).toBe(true);
+    expect(screen.getByTestId("result-section").getAttribute("data-preview-state")).toBe("idle");
+    fireEvent.change(screen.getByTestId("number-input"), { target: { value: "0868271327" } });
+    fireEvent.submit(screen.getByTestId("input-form-region"));
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect((screen.getByTestId("result-section") as HTMLElement).hidden).toBe(true);
+    expect(screen.getByTestId("input-error").textContent).toBe(
+      "Bản dựng tĩnh hiện chỉ hỗ trợ số mẫu 0328278786.",
+    );
+  });
+
+  it("reveals frozen P-S00…P-S10 for 0328278786 and keeps P-S11 hidden", () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+    render(<NumberEnergyPage />);
+    submitGoldenPhone();
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect((screen.getByTestId("result-section") as HTMLElement).hidden).toBe(false);
+    for (const [sectionId, testId] of RESULT_SECTIONS) {
+      expect(screen.getByTestId(testId).getAttribute("data-section")).toBe(sectionId);
+    }
+    expect(screen.getByTestId("hero-identity").textContent).toBe("0328 278 786");
+    expect(screen.getByTestId("hero-score").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("pair-strip").querySelectorAll("[data-testid^='pair-card-']")).toHaveLength(8);
+    expect(screen.getByTestId("wealth-stages").querySelectorAll("[data-testid^='wf-stage-']")).toHaveLength(4);
+    expect(screen.getByTestId("triple-list").querySelectorAll("[data-testid^='triple-card-']")).toHaveLength(7);
+    expect(screen.getByTestId("domain-list").querySelectorAll("[data-testid^='domain-card-']")).toHaveLength(5);
+    expect(screen.getByTestId("score-total").textContent).toBe("82 / 100");
+    const expert = screen.getByTestId("expert-details");
+    expect(expert.hasAttribute("hidden")).toBe(true);
+    expect(expert.getAttribute("aria-hidden")).toBe("true");
+    const page = screen.getByTestId("number-energy-page").textContent || "";
+    for (const token of FREEZE_FORBIDDEN) {
+      expect(page).not.toContain(token);
+    }
+  });
+
+  it("does not wire runtime/API/analyze or an Expert Mode adapter", () => {
+    const cssHere = dirname(fileURLToPath(import.meta.url));
+    const css = readFileSync(resolve(cssHere, "../../static/css/number_energy.css"), "utf8");
+    expect(css).toMatch(/\.ne-result\[hidden\]\s*\{[^}]*display:\s*none/s);
+    expect(entrySource()).not.toContain("analyzeNumberEnergy");
+    expect(entrySource()).not.toContain("from \"../features/number_energy/api\"");
+    expect(entrySource()).not.toContain("ResultView");
+    expect(sourceOf("NumberEnergyPage.tsx")).not.toContain("expert=true");
+    expect(sourceOf("NumberEnergyPage.tsx")).not.toContain("URLSearchParams");
+    expect(sourceOf("ResultSection.tsx")).not.toContain("from \"./api\"");
+    const bundle = bundleSource();
+    expect(bundle).toContain("NUMBER_ENERGY_STATIC_UI_V1");
+    expect(bundle).not.toContain("fetch(");
+    expect(bundle).not.toContain("/number-energy/analyze");
+    expect(bundle).not.toContain("analyzeNumberEnergy");
   });
 });
