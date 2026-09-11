@@ -18,14 +18,16 @@ function PairCard({ pair, index }: { pair: GoldenPairCard; index: number }): Rea
       <p className="ne-pair-energy" data-testid={`pair-energy-${index}`}>
         {pair.energyLabel}
       </p>
-      <div className="ne-pair-strength" aria-label={pair.strengthLabel}>
-        {pair.strengthDots.map((filled, dotIndex) => (
-          <span
-            key={`${pair.digits}-dot-${dotIndex}`}
-            className="ne-pair-dot"
-            data-filled={filled ? "true" : "false"}
-          />
-        ))}
+      <div className="ne-pair-strength">
+        <span className="ne-pair-strength-visual" aria-hidden="true">
+          {pair.strengthDots.map((filled, dotIndex) => (
+            <span
+              key={`${pair.digits}-dot-${dotIndex}`}
+              className="ne-pair-dot"
+              data-filled={filled ? "true" : "false"}
+            />
+          ))}
+        </span>
         <span className="ne-pair-strength-label" data-testid={`pair-strength-${index}`}>
           {pair.strengthLabel}
         </span>
@@ -42,19 +44,31 @@ export function EnergyMap(): ReactNode {
   return (
     <section className="bte-card ne-energy-map" data-section="P-S01" data-testid="energy-map">
       <h2>Cấu trúc dãy số</h2>
-      <p className="muted">Các cặp số được đọc liên tiếp theo thứ tự xuất hiện trong dãy.</p>
-      <ol className="ne-pair-strip" data-testid="pair-strip">
-        {GOLDEN_PHONE_PAIRS.map((pair, index) => (
-          <li key={`pair-${index}-${pair.digits}`} className="ne-pair-item">
-            {index > 0 ? (
-              <span className="ne-pair-connector" aria-hidden="true">
-                →
-              </span>
-            ) : null}
-            <PairCard pair={pair} index={index} />
-          </li>
-        ))}
-      </ol>
+      <p className="muted" id="pair-strip-hint">
+        Các cặp số được đọc liên tiếp theo thứ tự xuất hiện trong dãy.
+      </p>
+      <div
+        className="ne-pair-strip-scroller"
+        tabIndex={0}
+        role="region"
+        aria-label="Các cặp năng lượng theo thứ tự. Cuộn ngang để xem hết trên màn hình hẹp."
+        aria-describedby="pair-strip-hint"
+        data-testid="pair-strip-scroller"
+      >
+        <ol className="ne-pair-strip" data-testid="pair-strip">
+          {GOLDEN_PHONE_PAIRS.map((pair, index) => (
+            <li key={`pair-${index}-${pair.digits}`} className="ne-pair-item">
+              {index > 0 ? (
+                <span className="ne-pair-connector" aria-hidden="true">
+                  →
+                </span>
+              ) : null}
+              {index > 0 ? <span className="ne-sr-only">tiếp đến</span> : null}
+              <PairCard pair={pair} index={index} />
+            </li>
+          ))}
+        </ol>
+      </div>
     </section>
   );
 }

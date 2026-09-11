@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 import { InputSection } from "./InputSection";
 import { ResultSection } from "./ResultSection";
@@ -19,14 +19,23 @@ export function NumberEnergyPage(): ReactNode {
     setAnalysisType(nextType);
     setInputValue("");
     setErrorMessage("");
+    setGoldenPreview(null);
   }
+
+  useEffect(() => {
+    if (!goldenPreview) {
+      return;
+    }
+    const heading = document.querySelector<HTMLElement>("[data-testid='result-hero'] h2");
+    heading?.focus();
+  }, [goldenPreview]);
 
   return (
     <div
       className="ds-page ne-page"
       data-screen="number-energy"
       data-testid="number-energy-page"
-      data-static-phase="sb04"
+      data-static-phase="sb14.1"
     >
       <header className="ne-intro" data-testid="page-title-area">
         <p className="muted">Bát Cực Linh Số</p>
@@ -35,6 +44,9 @@ export function NumberEnergyPage(): ReactNode {
           Phân tích cấu trúc trường khí của số điện thoại hoặc biển số xe theo Bát Cực Linh Số.
         </p>
       </header>
+      <p className="ne-sr-only" aria-live="polite" data-testid="form-status">
+        {goldenPreview ? "Đã hiện kết quả minh họa." : ""}
+      </p>
       <InputSection
         analysisType={analysisType}
         inputValue={inputValue}

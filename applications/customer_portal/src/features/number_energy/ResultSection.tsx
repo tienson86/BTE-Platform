@@ -5,6 +5,7 @@ import { BasisOfAssessment } from "./sections/BasisOfAssessment";
 import { DomainInsights } from "./sections/DomainInsights";
 import { EnergyDistribution } from "./sections/EnergyDistribution";
 import { EnergyMap } from "./sections/EnergyMap";
+import { ExpertDetails } from "./sections/ExpertDetails";
 import { FinalAssessment } from "./sections/FinalAssessment";
 import { QuickStructure } from "./sections/QuickStructure";
 import { ResultHero } from "./sections/ResultHero";
@@ -42,6 +43,7 @@ export function ResultSection({ goldenPreview = null }: ResultSectionProps): Rea
         <FinalAssessment />
       </div>
       <BasisOfAssessment />
+      <ExpertDetails />
     </div>
   );
 }

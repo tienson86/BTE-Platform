@@ -7,7 +7,9 @@ export function ResultHero(): ReactNode {
 
   return (
     <section className="bte-card ne-hero" data-section="P-S00" data-testid="result-hero">
-      <h2 className="ne-hero__eyebrow">{hero.eyebrow}</h2>
+      <h2 className="ne-hero__eyebrow" tabIndex={-1}>
+        {hero.eyebrow}
+      </h2>
       <p className="ne-hero__type" data-testid="hero-analysis-type">
         {hero.analysisTypeLabel}
       </p>
