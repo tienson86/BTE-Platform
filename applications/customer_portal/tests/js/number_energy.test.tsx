@@ -1,16 +1,10 @@
-import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { NumberEnergyPage } from "../../src/features/number_energy/NumberEnergyPage";
-import {
-  FORBIDDEN_PHRASES,
-  PRODUCT_TITLE,
-  VALIDATION_FALLBACK,
-} from "../../src/features/number_energy/labels";
-import { PURPOSE_CONTEXTS } from "../../src/features/number_energy/types";
 import { APP_NAV_ITEMS } from "../../src/layouts/Navigation";
 
 afterEach(() => {
@@ -18,255 +12,22 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-const sample103 = {
-  success: true,
-  message: "Number Energy OK",
-  data: {
-    occurrences: [
-      {
-        occurrence_id: "mod-000",
-        source_span: [0, 2],
-        source_digits: "103",
-        pair_digits: "13",
-        energy_id: "tian_yi",
-        display_name: "Thiên Y",
-        strength_rank: 1,
-        classification: "supportive",
-        classification_label: "trường khí hỗ trợ",
-        state: "HIDDEN",
-        via_modifier: 0,
-        notes: "underlying pair hidden or attenuated by 0",
-      },
-    ],
-    sequence_state: "HIDDEN",
-    patterns: [],
-    narrative: {
-      language: "vi",
-      system_name: "Bát Cực Linh Số",
-      system_short_name: "Năng lượng số",
-      summary:
-        "Theo hệ thống Bát Cực Linh Số (Năng lượng số). Dãy này có nền Thiên Y, thiên về tài khí/phúc khí/tình cảm ổn định, nhưng biểu hiện không lộ mạnh vì bị âm trường che.",
-      strengths: ["Thiên Y: tài khí/phúc khí"],
-      watchouts: ["Thiên Y: quá thiện lương"],
-      purpose_focus: "Với số điện thoại, theo hệ thống này nên đọc thiên về giao tiếp.",
-      compatibility_note:
-        "Không kết luận tương hợp cuối cùng với chủ số khi chưa có dữ liệu Cung Phi hoặc Bát Tự.",
-      health_disclaimer:
-        "Phần này chỉ mang ý nghĩa tham khảo theo hệ thống Năng lượng số, không phải chẩn đoán y khoa.",
-    },
-    warnings: [],
-    metadata: {
-      engine: "number_energy",
-      engine_version: "1.0.0",
-      knowledge_version: "1.0",
-      system_name: "Bát Cực Linh Số",
-      system_short_name: "Năng lượng số",
-      purpose_context: "phone_number",
-      pattern_labels: [],
-      analyzed_input: "103",
-    },
-    reading: {
-      layout: "phone",
-      display_number: "103",
-      analyzed_number: "103",
-      interior_zero_note:
-        "Số 0 chỉ nên xuất hiện ở đầu số điện thoại. Khi xuất hiện trong thân số, năng lượng dễ bị che hoặc đứt mạch.",
-      pairs: [
-        {
-          pair_digits: "13",
-          display_name: "Thiên Y",
-          expression: "Bị che bởi số 0",
-          force_label: "lực rất mạnh",
-          force_level: 4,
-        },
-      ],
-      groups: [
-        {
-          display_name: "Thiên Y",
-          pairs: ["13"],
-          meaning: "Thiên Y thiên về tài vận, tình duyên và phúc khí.",
-          watchout: "quá thiện lương",
-        },
-      ],
-      triplets: [],
-      dominant: { display_name: "Thiên Y", pairs: ["13"] },
-      ending: { pair_digits: "13", display_name: "Thiên Y", note: "Năng lượng kết là cát tinh, hướng kết dãy thuận." },
-      supportive_group_count: 1,
-      challenging_group_count: 0,
-      summary:
-        "Số 0 chỉ nên xuất hiện ở đầu số điện thoại. Khi xuất hiện trong thân số, năng lượng dễ bị che hoặc đứt mạch. Phần thân số nghiêng mạnh về Thiên Y, nên thiên về tài khí.",
-      notices: [],
-      purpose_note:
-        "Không phải sim nào nhiều cát tinh cũng phù hợp với mọi người. Cần xét mục đích sử dụng và căn mệnh ở lớp phân tích sau.",
-    },
-  },
-};
+const RESULT_SECTIONS = [
+  ["P-S00", "result-hero"],
+  ["P-S01", "energy-map"],
+  ["P-S02", "quick-structure"],
+  ["P-S03", "wealth-flow"],
+  ["P-S04", "triple-story"],
+  ["P-S05", "energy-distribution"],
+  ["P-S06", "domain-insights"],
+  ["P-S07", "strengths-cautions"],
+  ["P-S08", "score-breakdown"],
+  ["P-S09", "final-assessment"],
+  ["P-S10", "basis-of-assessment"],
+] as const;
 
-const sample1003 = {
-  success: true,
-  message: "Number Energy OK",
-  data: {
-    occurrences: [],
-    sequence_state: "UNKNOWN_OR_NOT_DEFINED",
-    patterns: [],
-    narrative: {
-      language: "vi",
-      summary: "Chưa đủ dữ liệu V1 để luận phần này",
-      unknown_notice: "Chưa đủ dữ liệu V1 để luận phần này",
-      health_disclaimer:
-        "Phần này chỉ mang ý nghĩa tham khảo theo hệ thống Năng lượng số, không phải chẩn đoán y khoa.",
-      compatibility_note:
-        "Không kết luận tương hợp cuối cùng với chủ số khi chưa có dữ liệu Cung Phi hoặc Bát Tự.",
-    },
-    warnings: [
-      {
-        code: "UNKNOWN_OR_NOT_DEFINED",
-        reason: "consecutive modifiers are not frozen in V1",
-        customer_reason:
-          "Các số 0 hoặc 5 đứng liền nhau chưa được khóa trong V1, nên không suy diễn thêm quy tắc.",
-        source_digits: "00",
-        source_span: [1, 2],
-      },
-    ],
-    metadata: {
-      engine: "number_energy",
-      engine_version: "1.0.0",
-      knowledge_version: "1.0",
-      system_name: "Bát Cực Linh Số",
-      system_short_name: "Năng lượng số",
-      purpose_context: "generic_number",
-    },
-    reading: {
-      layout: "generic",
-      display_number: "1003",
-      analyzed_number: "1003",
-      pairs: [],
-      groups: [],
-      triplets: [],
-      dominant: null,
-      ending: { pair_digits: null, display_name: null, note: "Chưa đủ dữ liệu V1 để kết luận năng lượng kết." },
-      summary: "Chưa đủ dữ liệu V1 để luận phần này",
-      notices: ["Chưa đủ dữ liệu V1 để luận phần này"],
-      incomplete: true,
-    },
-  },
-};
-
-const sample108 = {
-  success: true,
-  message: "Number Energy OK",
-  data: {
-    occurrences: [
-      {
-        occurrence_id: "mod-000",
-        source_span: [0, 2],
-        source_digits: "108",
-        pair_digits: "18",
-        energy_id: "wu_gui",
-        display_name: "Ngũ Quỷ",
-        strength_rank: 1,
-        classification: "challenging",
-        classification_label: "trường khí cần kiểm soát",
-        state: "HIDDEN",
-        via_modifier: 0,
-        notes: "expert only",
-      },
-    ],
-    sequence_state: "HIDDEN",
-    patterns: [],
-    narrative: {
-      summary: "Dãy này có nền Ngũ Quỷ bị che bởi âm trường.",
-      health_disclaimer:
-        "Phần này chỉ mang ý nghĩa tham khảo theo hệ thống Năng lượng số, không phải chẩn đoán y khoa.",
-    },
-    warnings: [],
-    metadata: {
-      engine: "number_energy",
-      knowledge_version: "1.0",
-      purpose_context: "generic_number",
-    },
-    reading: {
-      layout: "generic",
-      pairs: [{ pair_digits: "18", display_name: "Ngũ Quỷ", expression: "Bị che bởi số 0", force_label: "lực rất mạnh", force_level: 4 }],
-      groups: [{ display_name: "Ngũ Quỷ", pairs: ["18"], meaning: "Ngũ Quỷ là trường biến động mạnh.", watchout: "bất ổn" }],
-      dominant: { display_name: "Ngũ Quỷ", pairs: ["18"] },
-      ending: { pair_digits: "18", display_name: "Ngũ Quỷ" },
-      summary: "Dãy này có nền Ngũ Quỷ bị che bởi âm trường.",
-      challenging_group_count: 1,
-      supportive_group_count: 0,
-    },
-  },
-};
-
-const sample0328278786 = {
-  success: true,
-  message: "Number Energy OK",
-  data: {
-    occurrences: [],
-    sequence_state: "NORMAL",
-    patterns: [],
-    narrative: {
-      health_disclaimer:
-        "Phần này chỉ mang ý nghĩa tham khảo theo hệ thống Năng lượng số, không phải chẩn đoán y khoa.",
-    },
-    warnings: [],
-    metadata: { knowledge_version: "1.0", purpose_context: "phone_number", analyzed_input: "328278786" },
-    reading: {
-      layout: "phone",
-      display_number: "0328278786",
-      analyzed_number: "328278786",
-      leading_zero: true,
-      leading_zero_note: "Sim này có đầu số 0 hợp lệ.",
-      pairs: [
-        { pair_digits: "32", display_name: "Họa Hại", force_label: "lực nhẹ", force_level: 1 },
-        { pair_digits: "28", display_name: "Sinh Khí", force_label: "lực nhẹ", force_level: 1 },
-        { pair_digits: "82", display_name: "Sinh Khí", force_label: "lực nhẹ", force_level: 1 },
-        { pair_digits: "27", display_name: "Thiên Y", force_label: "lực nhẹ", force_level: 1 },
-        { pair_digits: "78", display_name: "Diên Niên", force_label: "lực mạnh", force_level: 3 },
-        { pair_digits: "87", display_name: "Diên Niên", force_label: "lực mạnh", force_level: 3 },
-        { pair_digits: "78", display_name: "Diên Niên", force_label: "lực mạnh", force_level: 3 },
-        { pair_digits: "86", display_name: "Thiên Y", force_label: "lực mạnh", force_level: 3 },
-      ],
-      groups: [
-        { display_name: "Diên Niên", pairs: ["78", "87", "78"], meaning: "Diên Niên là trường của sự nghiệp và sự ổn định.", watchout: "cứng, cố chấp" },
-        { display_name: "Sinh Khí", pairs: ["28", "82"], meaning: "Sinh Khí thiên về quý nhân.", watchout: "thiếu quyết đoán" },
-        { display_name: "Thiên Y", pairs: ["27", "86"], meaning: "Thiên Y thiên về tài vận.", watchout: "quá thiện lương" },
-        { display_name: "Họa Hại", pairs: ["32"], meaning: "Họa Hại là trường của ngôn ngữ.", watchout: "nóng lời" },
-      ],
-      triplets: [
-        { digits: "328", left_name: "Họa Hại", right_name: "Sinh Khí" },
-        { digits: "282", left_name: "Sinh Khí", right_name: "Sinh Khí" },
-        { digits: "827", left_name: "Sinh Khí", right_name: "Thiên Y" },
-        { digits: "278", left_name: "Thiên Y", right_name: "Diên Niên" },
-        { digits: "787", left_name: "Diên Niên", right_name: "Diên Niên" },
-        { digits: "878", left_name: "Diên Niên", right_name: "Diên Niên" },
-        { digits: "786", left_name: "Diên Niên", right_name: "Thiên Y" },
-      ],
-      dominant: { display_name: "Diên Niên", pairs: ["78", "87", "78"] },
-      ending: {
-        pair_digits: "86",
-        display_name: "Thiên Y",
-        note: "Năng lượng kết là cát tinh, hướng kết dãy thuận.",
-      },
-      supportive_group_count: 3,
-      challenging_group_count: 1,
-      supportive_balance_note: "Cấu trúc cát tinh khá cân bằng.",
-      lifted: true,
-      lifted_note:
-        "Hung tinh được cát tinh phía sau nâng đỡ, nên ảnh hưởng bất lợi có cơ hội được kéo về hướng tốt hơn.",
-      force_notes: ["Cát tinh có hỗ trợ nhưng chưa đủ lực áp chế hoàn toàn."],
-      summary:
-        "Sim này có đầu số 0 hợp lệ. Phần thân số nghiêng mạnh về Diên Niên, đi cùng Sinh Khí và Thiên Y, nên thiên về ổn định, trách nhiệm, quý nhân và tài khí. Điểm cần lưu ý là Họa Hại xuất hiện ở đầu phần thân số; tuy nhiên phía sau có Sinh Khí nâng đỡ nên ảnh hưởng được làm mềm hơn.",
-      notices: [],
-      purpose_note:
-        "Không phải sim nào nhiều cát tinh cũng phù hợp với mọi người. Cần xét mục đích sử dụng và căn mệnh ở lớp phân tích sau.",
-    },
-  },
-};
-
-const FORBIDDEN_UI_TOKENS = [
+const FORBIDDEN_SHELL_TOKENS = [
   "UNKNOWN_OR_NOT_DEFINED",
-  "NORMAL",
   "HIDDEN",
   "AMPLIFIED",
   "REPEATED",
@@ -275,182 +36,258 @@ const FORBIDDEN_UI_TOKENS = [
   "classification",
   "source_digits",
   "occurrence_id",
+  "NEUTRALIZED",
+  "INVALID_INPUT",
+  "parse_error",
+  "normalization_failed",
 ];
 
-function visibleResultText(): string {
-  return screen.getByTestId("number-energy-result").textContent || "";
+const SOURCE_FILES = [
+  "NumberEnergyPage.tsx",
+  "InputSection.tsx",
+  "ResultSection.tsx",
+  "formModel.ts",
+  "goldenHero.ts",
+  "goldenPairs.ts",
+  "sections/ResultHero.tsx",
+  "sections/EnergyMap.tsx",
+] as const;
+
+const HERO_FORBIDDEN_TOKENS = [
+  "DIEN_NIEN",
+  "THIEN_Y",
+  "SINH_KHI",
+  "fixture_id",
+  "verified_by_runtime",
+  "score_verified_by_runtime",
+  "knowledge_version",
+  "analysis_body",
+  "328278786",
+  "82%",
+  "NE-PHONE-GOLDEN-0001",
+];
+
+function submitGoldenPhone(): void {
+  fireEvent.submit(screen.getByTestId("input-form-region"));
 }
 
-function mockFetch(payload: unknown, status = 200): void {
-  vi.stubGlobal(
-    "fetch",
-    vi.fn(() =>
-      Promise.resolve({
-        ok: status >= 200 && status < 300,
-        status,
-        text: () => Promise.resolve(JSON.stringify(payload)),
-      }),
-    ),
-  );
+function sourceOf(fileName: (typeof SOURCE_FILES)[number]): string {
+  const here = dirname(fileURLToPath(import.meta.url));
+  return readFileSync(resolve(here, `../../src/features/number_energy/${fileName}`), "utf8");
 }
 
-async function submitNumber(value: string, context?: string): Promise<void> {
-  fireEvent.change(screen.getByLabelText("Dãy số"), { target: { value } });
-  if (context) {
-    fireEvent.change(screen.getByLabelText("Ngữ cảnh sử dụng"), { target: { value: context } });
-  }
-  fireEvent.submit(screen.getByTestId("number-energy-form"));
-}
-
-describe("Number Energy V1 UI", () => {
-  it("renders the form, empty state, and purpose contexts", () => {
+describe("Number Energy SB01 shell", () => {
+  it("renders page shell and input region without fetching", () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
     render(<NumberEnergyPage />);
-    expect(screen.getByTestId("number-energy-title").textContent).toBe(PRODUCT_TITLE);
-    expect(screen.getByTestId("number-energy-form")).toBeTruthy();
-    expect(screen.getByTestId("empty-state")).toBeTruthy();
-    const select = screen.getByLabelText("Ngữ cảnh sử dụng") as HTMLSelectElement;
-    expect(Array.from(select.options).map((item) => item.value)).toEqual([...PURPOSE_CONTEXTS]);
+    expect(screen.getByTestId("number-energy-page").getAttribute("data-static-phase")).toBe("sb04");
+    expect(screen.getByTestId("number-energy-title").textContent).toBe("Tư vấn năng lượng số");
+    expect(screen.getByTestId("page-title-area")).toBeTruthy();
+    expect(screen.getByTestId("input-section").getAttribute("data-section")).toBe("NE-INPUT");
+    expect(screen.getByTestId("input-form-region")).toBeTruthy();
+    expect(screen.getByTestId("result-section")).toBeTruthy();
     expect(APP_NAV_ITEMS).toHaveLength(4);
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 
-  it("rejects empty input without calling the API", () => {
-    mockFetch(sample103);
+  it("keeps canonical result section order and semantic ids", () => {
     render(<NumberEnergyPage />);
-    fireEvent.submit(screen.getByTestId("number-energy-form"));
-    expect(screen.getByTestId("error-state").textContent).toContain("Vui lòng nhập dãy số");
-    expect(vi.mocked(fetch).mock.calls).toHaveLength(0);
-  });
-
-  it("rejects overlong digit strings without calling the API", () => {
-    mockFetch(sample103);
-    render(<NumberEnergyPage />);
-    fireEvent.change(screen.getByLabelText("Dãy số"), { target: { value: "1".repeat(129) } });
-    fireEvent.submit(screen.getByTestId("number-energy-form"));
-    expect(screen.getByTestId("error-state").textContent).toContain("vượt quá độ dài");
-    expect(vi.mocked(fetch).mock.calls).toHaveLength(0);
-  });
-
-  it("shows loading while the request is in flight", async () => {
-    vi.stubGlobal(
-      "fetch",
-      vi.fn(() => new Promise<Response>(() => undefined)),
+    const result = screen.getByTestId("result-section");
+    const ids = Array.from(result.querySelectorAll("[data-section]")).map((node) =>
+      node.getAttribute("data-section"),
     );
-    render(<NumberEnergyPage />);
-    await submitNumber("103");
-    expect(await screen.findByTestId("loading-state")).toBeTruthy();
-    expect(screen.getByTestId("submit-number-energy")).toHaveProperty("disabled", true);
-  });
-
-  it("posts digits and purpose_context then shows pair chips, not engine tokens", async () => {
-    mockFetch(sample103);
-    render(<NumberEnergyPage />);
-    await submitNumber("103", "phone_number");
-    await waitFor(() => expect(screen.getByTestId("number-energy-result")).toBeTruthy());
-    const post = vi.mocked(fetch).mock.calls[0];
-    expect(String(post?.[0])).toContain("/backend/api/v1/number-energy/analyze");
-    const body = JSON.parse(String(post?.[1]?.body));
-    expect(body).toEqual({ number: "103", purpose_context: "phone_number" });
-    expect(screen.getByTestId("pair-chip").textContent).toContain("13");
-    expect(screen.getByTestId("pair-chip").textContent).toContain("Thiên Y");
-    expect(screen.getByTestId("interior-zero-note").textContent).toContain("Số 0 chỉ nên xuất hiện ở đầu");
-    expect(screen.getByTestId("narrative-summary").textContent).toContain("Thiên Y");
-    expect(screen.getByTestId("health-disclaimer").textContent).toContain("không phải chẩn đoán y khoa");
-    expect(screen.getByTestId("knowledge-version").textContent).toBe("1.0");
-    const visible = visibleResultText();
-    for (const token of FORBIDDEN_UI_TOKENS) {
-      expect(visible).not.toContain(token);
+    expect(ids).toEqual(RESULT_SECTIONS.map(([sectionId]) => sectionId));
+    for (const [sectionId, testId] of RESULT_SECTIONS) {
+      expect(screen.getByTestId(testId).getAttribute("data-section")).toBe(sectionId);
     }
   });
 
-  it("renders unknown as Vietnamese incomplete copy, not raw tokens", async () => {
-    mockFetch(sample1003);
+  it("does not show technical engine tokens in the shell", () => {
     render(<NumberEnergyPage />);
-    await submitNumber("1003");
-    await waitFor(() => expect(screen.getByTestId("number-energy-result")).toBeTruthy());
-    expect(visibleResultText()).toContain("Chưa đủ dữ liệu V1");
-    expect(visibleResultText()).not.toContain("UNKNOWN_OR_NOT_DEFINED");
-    expect(screen.getByTestId("health-disclaimer").textContent).toContain("không phải chẩn đoán y khoa");
-  });
-
-  it("shows hung tinh by name without English classification", async () => {
-    mockFetch(sample108);
-    render(<NumberEnergyPage />);
-    await submitNumber("108");
-    await waitFor(() => expect(screen.getByTestId("number-energy-result")).toBeTruthy());
-    expect(screen.getByTestId("pair-chip").textContent).toContain("Ngũ Quỷ");
-    expect(visibleResultText()).not.toContain("challenging");
-    expect(visibleResultText()).not.toContain("expert only");
-  });
-
-  it("renders phone reading for 0328278786", async () => {
-    mockFetch(sample0328278786);
-    render(<NumberEnergyPage />);
-    await submitNumber("0328278786", "phone_number");
-    await waitFor(() => expect(screen.getByTestId("number-energy-result")).toBeTruthy());
-    expect(screen.getByTestId("analyzed-number").textContent).toBe("328278786");
-    expect(screen.getByTestId("dominant-energy").textContent).toContain("Diên Niên");
-    expect(screen.getByTestId("ending-pair").textContent).toContain("86");
-    expect(screen.getByTestId("ending-pair").textContent).toContain("Thiên Y");
-    expect(screen.getByTestId("lifted-note").textContent).toContain("nâng đỡ");
-    expect(visibleResultText()).not.toContain("NEUTRALIZED");
-    expect(visibleResultText()).not.toContain("UNKNOWN_OR_NOT_DEFINED");
-    const chips = screen.getAllByTestId("pair-chip").map((node) => node.textContent);
-    expect(chips[0]).toContain("32");
-    expect(chips[0]).toContain("Họa Hại");
-    expect(chips[chips.length - 1]).toContain("86");
-    expect(chips[chips.length - 1]).toContain("Thiên Y");
-  });
-
-  it("shows a Vietnamese message on API 422", async () => {
-    mockFetch({ success: false, message: "number input must contain digits 0-9 only" }, 422);
-    render(<NumberEnergyPage />);
-    await submitNumber("103");
-    const alert = await screen.findByTestId("error-state");
-    expect(alert.textContent).toContain(VALIDATION_FALLBACK);
-    expect(alert.textContent).not.toContain("digits 0-9");
-  });
-
-  it("shows a customer-safe message on HTTP 500", async () => {
-    mockFetch({ success: false, message: "Number energy analysis failed: boom" }, 500);
-    render(<NumberEnergyPage />);
-    await submitNumber("103");
-    const alert = await screen.findByTestId("error-state");
-    expect(alert.textContent).toContain("Không thể hoàn tất phân tích lúc này");
-    expect(alert.textContent).not.toContain("boom");
-    expect(screen.getByTestId("retry-analysis")).toBeTruthy();
-  });
-
-  it("shows a customer-safe message on server failure", async () => {
-    vi.stubGlobal(
-      "fetch",
-      vi.fn(() => Promise.reject(new TypeError("Failed to fetch"))),
-    );
-    render(<NumberEnergyPage />);
-    await submitNumber("103");
-    const alert = await screen.findByTestId("error-state");
-    expect(alert.textContent).toContain("Không thể hoàn tất phân tích lúc này");
-    expect(screen.getByTestId("retry-analysis")).toBeTruthy();
-  });
-
-  it("does not invent medical diagnosis copy", async () => {
-    mockFetch(sample103);
-    render(<NumberEnergyPage />);
-    await submitNumber("103");
-    await waitFor(() => expect(screen.getByTestId("number-energy-result")).toBeTruthy());
-    const blob = document.body.textContent?.toLowerCase() || "";
-    for (const phrase of FORBIDDEN_PHRASES) {
-      expect(blob).not.toContain(phrase);
+    const blob = screen.getByTestId("number-energy-page").textContent || "";
+    for (const token of FORBIDDEN_SHELL_TOKENS) {
+      expect(blob).not.toContain(token);
     }
-    expect(blob).not.toContain("%");
   });
 
-  it("uses token-based layout without traffic-light colors", () => {
+  it("uses portal tokens and a consulting page width", () => {
     const here = dirname(fileURLToPath(import.meta.url));
     const css = readFileSync(resolve(here, "../../static/css/number_energy.css"), "utf8");
+    expect(css).toContain("max-width: 75rem");
     expect(css).toContain("var(--space-6)");
-    expect(css).toContain("@media (max-width: 1024px)");
-    expect(css).toContain("@media (max-width: 768px)");
+    expect(css).toContain("grid-template-columns: minmax(0, 5fr) minmax(0, 7fr)");
+    expect(css).toContain("overflow-x: auto");
     expect(css).not.toContain("#ff0000");
     expect(css).not.toContain("traffic");
+  });
+});
+
+describe("Number Energy SB02 input form", () => {
+  it("defaults to Golden phone preview values and contextual CTA", () => {
+    render(<NumberEnergyPage />);
+    expect(screen.getByTestId("analysis-type-phone_number").getAttribute("data-selected")).toBe("true");
+    expect((screen.getByTestId("number-input") as HTMLInputElement).value).toBe("0328278786");
+    expect(screen.getByTestId("analysis-submit").textContent).toBe("PHÂN TÍCH SỐ ĐIỆN THOẠI");
+    expect((screen.getByTestId("analysis-submit") as HTMLButtonElement).disabled).toBe(false);
+    expect(screen.getByTestId("result-section").getAttribute("data-preview-state")).toBe("idle");
+    expect((screen.getByTestId("result-section") as HTMLElement).hidden).toBe(true);
+  });
+
+  it("offers three analysis types and updates CTA plus field when the type changes", () => {
+    render(<NumberEnergyPage />);
+    fireEvent.click(screen.getByTestId("analysis-type-car_plate"));
+    expect(screen.getByTestId("analysis-type-car_plate").getAttribute("data-selected")).toBe("true");
+    expect((screen.getByTestId("number-input") as HTMLInputElement).value).toBe("");
+    expect(screen.getByTestId("analysis-submit").textContent).toBe("PHÂN TÍCH BIỂN SỐ Ô TÔ");
+    expect(screen.getByPlaceholderText("Ví dụ: 30A-123.45")).toBeTruthy();
+    expect((screen.getByTestId("analysis-submit") as HTMLButtonElement).disabled).toBe(true);
+
+    fireEvent.click(screen.getByTestId("analysis-type-motorcycle_plate"));
+    expect(screen.getByTestId("analysis-submit").textContent).toBe("PHÂN TÍCH BIỂN SỐ XE MÁY");
+    expect(screen.getByPlaceholderText("Ví dụ: 29X1-123.45")).toBeTruthy();
+  });
+
+  it("disables the CTA when the number field is empty", () => {
+    render(<NumberEnergyPage />);
+    fireEvent.change(screen.getByTestId("number-input"), { target: { value: "" } });
+    expect((screen.getByTestId("analysis-submit") as HTMLButtonElement).disabled).toBe(true);
+  });
+
+  it("reveals Golden preview state on submit without calling fetch", () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+    render(<NumberEnergyPage />);
+    submitGoldenPhone();
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(screen.getByTestId("result-section").getAttribute("data-preview-state")).toBe("golden");
+    expect((screen.getByTestId("result-section") as HTMLElement).hidden).toBe(false);
+    expect(screen.getByTestId("hero-identity").textContent).toBe("0328 278 786");
+  });
+
+  it("shows a customer-friendly phone format error and does not reveal the result", () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+    render(<NumberEnergyPage />);
+    fireEvent.change(screen.getByTestId("number-input"), { target: { value: "abcd" } });
+    fireEvent.submit(screen.getByTestId("input-form-region"));
+    expect(screen.getByTestId("input-error").textContent).toContain("Số điện thoại chưa đúng định dạng");
+    expect(screen.getByTestId("result-section").getAttribute("data-preview-state")).toBe("idle");
+    expect(fetchMock).not.toHaveBeenCalled();
+    const blob = screen.getByTestId("number-energy-page").textContent || "";
+    expect(blob).not.toContain("INVALID_INPUT");
+    expect(blob).not.toContain("parse_error");
+  });
+
+  it("does not import live API or the previous runtime result view", () => {
+    for (const fileName of SOURCE_FILES) {
+      const source = sourceOf(fileName);
+      expect(source).not.toContain("analyzeNumberEnergy");
+      expect(source).not.toContain("from \"./api\"");
+      expect(source).not.toContain("from './api'");
+      expect(source).not.toContain("ResultView");
+    }
+  });
+});
+
+describe("Number Energy SB03 result hero", () => {
+  it("shows Golden identity, score, grade, energies, and summary after submit without fetching", () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+    render(<NumberEnergyPage />);
+    submitGoldenPhone();
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(screen.getByTestId("result-hero").getAttribute("data-section")).toBe("P-S00");
+    expect(screen.getByTestId("hero-analysis-type").textContent).toBe("Số điện thoại");
+    expect(screen.getByTestId("hero-identity").textContent).toBe("0328 278 786");
+    expect(screen.getByTestId("hero-score").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("hero-grade").textContent).toBe("TỐT");
+    expect(screen.getByTestId("hero-primary-energy").textContent).toBe("Diên Niên");
+    expect(screen.getByTestId("hero-terminal-energy").textContent).toBe("Thiên Y");
+    expect(screen.getByTestId("hero-summary").textContent).toBe(
+      "Công việc và năng lực nghề nghiệp là trục nổi bật; phần cuối dãy quy về Thiên Y.",
+    );
+  });
+
+  it("does not expose technical fixture or runtime fields in the hero", () => {
+    render(<NumberEnergyPage />);
+    submitGoldenPhone();
+    const hero = screen.getByTestId("result-hero").textContent || "";
+    for (const token of HERO_FORBIDDEN_TOKENS) {
+      expect(hero).not.toContain(token);
+    }
+    for (const token of FORBIDDEN_SHELL_TOKENS) {
+      expect(hero).not.toContain(token);
+    }
+  });
+});
+
+describe("Number Energy SB04 pair energy map", () => {
+  const EXPECTED_PAIRS = [
+    ["32", "Họa Hại", "Hung", "Nhẹ"],
+    ["28", "Sinh Khí", "Cát", "Nhẹ"],
+    ["82", "Sinh Khí", "Cát", "Nhẹ"],
+    ["27", "Thiên Y", "Cát", "Nhẹ"],
+    ["78", "Diên Niên", "Cát", "Mạnh"],
+    ["87", "Diên Niên", "Cát", "Mạnh"],
+    ["78", "Diên Niên", "Cát", "Mạnh"],
+    ["86", "Thiên Y", "Cát", "Mạnh"],
+  ] as const;
+
+  const PAIR_FORBIDDEN_TOKENS = [
+    "HOA_HAI",
+    "DIEN_NIEN",
+    "THIEN_Y",
+    "SINH_KHI",
+    "strength_rank",
+    "classification",
+    "T4",
+    "T2",
+    "T1",
+  ];
+
+  it("renders eight Golden pairs in exact order without fetching", () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+    render(<NumberEnergyPage />);
+    submitGoldenPhone();
+    expect(fetchMock).not.toHaveBeenCalled();
+    const cards = screen.getByTestId("pair-strip").querySelectorAll("[data-testid^='pair-card-']");
+    expect(cards).toHaveLength(8);
+    const digits = Array.from(cards).map((card) => card.getAttribute("data-pair-digits"));
+    expect(digits).toEqual(EXPECTED_PAIRS.map(([pairDigits]) => pairDigits));
+    expect(digits.filter((value) => value === "78")).toHaveLength(2);
+    EXPECTED_PAIRS.forEach((expected, index) => {
+      const [pairDigits, energy, category, strength] = expected;
+      expect(screen.getByTestId(`pair-digits-${index}`).textContent).toBe(pairDigits);
+      expect(screen.getByTestId(`pair-energy-${index}`).textContent).toBe(energy);
+      expect(screen.getByTestId(`pair-category-${index}`).textContent).toBe(category);
+      expect(screen.getByTestId(`pair-strength-${index}`).textContent).toBe(strength);
+    });
+  });
+
+  it("keeps the first Hung pair light and the last Thiên Y pair strong", () => {
+    render(<NumberEnergyPage />);
+    submitGoldenPhone();
+    expect(screen.getByTestId("pair-card-0").getAttribute("data-pair-digits")).toBe("32");
+    expect(screen.getByTestId("pair-energy-0").textContent).toBe("Họa Hại");
+    expect(screen.getByTestId("pair-category-0").textContent).toBe("Hung");
+    expect(screen.getByTestId("pair-strength-0").textContent).toBe("Nhẹ");
+    expect(screen.getByTestId("pair-card-7").getAttribute("data-pair-digits")).toBe("86");
+    expect(screen.getByTestId("pair-energy-7").textContent).toBe("Thiên Y");
+    expect(screen.getByTestId("pair-category-7").textContent).toBe("Cát");
+    expect(screen.getByTestId("pair-strength-7").textContent).toBe("Mạnh");
+  });
+
+  it("does not expose technical pair metadata", () => {
+    render(<NumberEnergyPage />);
+    submitGoldenPhone();
+    const map = screen.getByTestId("energy-map").textContent || "";
+    for (const token of PAIR_FORBIDDEN_TOKENS) {
+      expect(map).not.toContain(token);
+    }
+    for (const token of FORBIDDEN_SHELL_TOKENS) {
+      expect(map).not.toContain(token);
+    }
   });
 });
