@@ -61,3 +61,4 @@ class NumberEnergyDataOut(BaseModel):
     narrative: dict[str, Any]
     warnings: list[dict[str, Any]]
     metadata: dict[str, Any]
+    reading: dict[str, Any] = Field(default_factory=dict)

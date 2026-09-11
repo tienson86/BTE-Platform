@@ -85,7 +85,10 @@ def to_api_payload(result: NumberEnergyResult) -> dict[str, Any]:
                 PATTERN_CUSTOMER_LABELS.get(item, item)
                 for item in result.approved_patterns
             ],
+            "analyzed_input": result.analyzed_input or result.input_raw,
+            "leading_phone_zero": result.leading_phone_zero,
         },
+        "reading": result.reading or {},
     }
 
 

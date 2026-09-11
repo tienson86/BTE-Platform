@@ -1,71 +1,64 @@
 import type { ReactNode } from "react";
 
 import {
+  DOMINANT_HEADING,
+  ENDING_HEADING,
+  ENDING_PAIR_LABEL,
+  GROUPS_HEADING,
   NO_OCCURRENCES,
-  NO_PATTERNS,
-  PURPOSE_LABELS,
-  STRENGTHS_HEADING,
-  WATCHOUTS_HEADING,
+  PAIRS_HEADING,
+  SUMMARY_HEADING,
+  TECHNICAL_HEADING,
+  TRIPLETS_HEADING,
 } from "./labels";
-import type { NumberEnergyData, PurposeContext } from "./types";
+import type { NumberEnergyData } from "./types";
+import type { NumberEnergyPairChip, NumberEnergyReading } from "./readingTypes";
 
-function purposeLabel(value: string | undefined): string {
-  if (value && value in PURPOSE_LABELS) {
-    return PURPOSE_LABELS[value as PurposeContext];
-  }
-  return value || "—";
+function ForceMeter({ level, label }: { level: number; label: string }): ReactNode {
+  const filled = Math.min(4, Math.max(0, level));
+  return (
+    <span className="ne-force" title={label} aria-label={label}>
+      {[1, 2, 3, 4].map((slot) => (
+        <span key={slot} className={slot <= filled ? "is-on" : undefined} />
+      ))}
+    </span>
+  );
 }
 
-function textOrDash(value: string | null | undefined): string {
-  const trimmed = value?.trim();
-  return trimmed ? trimmed : "—";
+function PairChip({ item }: { item: NumberEnergyPairChip }): ReactNode {
+  return (
+    <li className="ne-chip" data-testid="pair-chip">
+      <span className="ne-chip__pair">{item.pair_digits}</span>
+      <span className="ne-chip__name">{item.display_name}</span>
+      {item.force_label ? (
+        <ForceMeter level={item.force_level || 0} label={item.force_label} />
+      ) : null}
+      {item.expression ? <span className="muted ne-chip__note">{item.expression}</span> : null}
+    </li>
+  );
 }
 
 export function NumberEnergyResultView({ data }: { data: NumberEnergyData }): ReactNode {
+  const reading: NumberEnergyReading = data.reading || {};
   const narrative = data.narrative || {};
   const metadata = data.metadata || {};
-  const occurrences = data.occurrences || [];
-  const patterns = data.patterns || [];
-  const patternLabels = metadata.pattern_labels || [];
-  const warnings = data.warnings || [];
-  const strengths = narrative.strengths || [];
-  const watchouts = narrative.watchouts || [];
+  const pairs = reading.pairs || [];
+  const groups = reading.groups || [];
+  const triplets = reading.triplets || [];
+  const notices = reading.notices || [];
+  const forceNotes = reading.force_notes || [];
+  const summary = reading.summary || narrative.summary || "";
+  const ending = reading.ending;
+  const dominant = reading.dominant;
+
   return (
     <div className="ne-result" data-testid="number-energy-result">
-      <section className="bte-card" data-testid="sequence-state-card">
-        <h2>Trạng thái chuỗi</h2>
-        <p className="ne-state" data-testid="sequence-state">
-          {textOrDash(data.sequence_state)}
-        </p>
-        {narrative.unknown_notice ? (
-          <p className="muted" data-testid="unknown-notice">
-            {narrative.unknown_notice}
-          </p>
-        ) : null}
-      </section>
-
-      <section className="bte-card" data-testid="occurrences-card">
-        <h2>Trường khí phát hiện</h2>
-        {occurrences.length ? (
-          <ul className="ne-occurrence-list">
-            {occurrences.map((item) => (
-              <li key={item.occurrence_id} className="ne-occurrence" data-testid="occurrence-item">
-                <p className="ne-occurrence__name">{item.display_name}</p>
-                <dl className="ne-kv">
-                  <dt>Cặp số</dt>
-                  <dd>{item.pair_digits}</dd>
-                  <dt>Nguồn</dt>
-                  <dd>{item.source_digits}</dd>
-                  <dt>Trạng thái</dt>
-                  <dd>{item.state}</dd>
-                  <dt>Hạng biểu hiện</dt>
-                  <dd>{item.strength_rank ?? "—"}</dd>
-                  <dt>Phân loại</dt>
-                  <dd data-testid="classification-label">
-                    {item.classification_label || item.classification}
-                  </dd>
-                </dl>
-              </li>
+      <section className="bte-card" data-testid="pairs-card">
+        <h2>{PAIRS_HEADING}</h2>
+        {pairs.length ? (
+          <ul className="ne-chip-row">
+            {pairs.map((item, index) => (
+              <PairChip key={`${item.pair_digits}-${index}`} item={item} />
             ))}
           </ul>
         ) : (
@@ -73,88 +66,144 @@ export function NumberEnergyResultView({ data }: { data: NumberEnergyData }): Re
         )}
       </section>
 
-      <section className="bte-card" data-testid="patterns-card">
-        <h2>Mẫu đặc biệt</h2>
-        {patterns.length ? (
-          <ul data-testid="patterns-list">
-            {patterns.map((item, index) => (
-              <li key={item}>{patternLabels[index] || item}</li>
-            ))}
-          </ul>
-        ) : (
-          <p className="muted">{NO_PATTERNS}</p>
-        )}
+      <section className="bte-card" data-testid="sim-summary">
+        <h2>{SUMMARY_HEADING}</h2>
+        {reading.leading_zero_note ? (
+          <p className="muted" data-testid="leading-zero-note">
+            {reading.leading_zero_note}
+          </p>
+        ) : null}
+        {reading.interior_zero_note ? (
+          <p data-testid="interior-zero-note">{reading.interior_zero_note}</p>
+        ) : null}
+        <p data-testid="narrative-summary">{summary || "—"}</p>
+        {reading.supportive_balance_note ? (
+          <p data-testid="supportive-balance">{reading.supportive_balance_note}</p>
+        ) : null}
+        {reading.consecutive_challenging_note ? (
+          <p data-testid="consecutive-challenging">{reading.consecutive_challenging_note}</p>
+        ) : null}
+        {reading.lifted_note ? (
+          <p data-testid="lifted-note">{reading.lifted_note}</p>
+        ) : null}
+        {forceNotes.map((item) => (
+          <p key={item} data-testid="force-note">
+            {item}
+          </p>
+        ))}
+        <dl className="ne-kv">
+          <dt>Sim đang luận</dt>
+          <dd data-testid="display-number">{reading.display_number || metadata.input_raw || "—"}</dd>
+          <dt>Nhóm cát tinh</dt>
+          <dd data-testid="supportive-count">{reading.supportive_group_count ?? "—"}</dd>
+          <dt>Nhóm cần lưu ý</dt>
+          <dd data-testid="challenging-count">{reading.challenging_group_count ?? "—"}</dd>
+        </dl>
       </section>
 
-      <section className="bte-card" data-testid="narrative-card">
-        <h2>Luận giải</h2>
-        <p data-testid="narrative-summary">{textOrDash(narrative.summary)}</p>
-        {narrative.purpose_focus ? (
-          <p className="muted" data-testid="purpose-focus">
-            {narrative.purpose_focus}
-          </p>
-        ) : null}
-        {strengths.length ? (
-          <div data-testid="narrative-strengths">
-            <h3>{STRENGTHS_HEADING}</h3>
-            <ul>
-              {strengths.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
-        {watchouts.length ? (
-          <div data-testid="narrative-watchouts">
-            <h3>{WATCHOUTS_HEADING}</h3>
-            <ul>
-              {watchouts.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
-        {narrative.compatibility_note ? (
-          <p className="muted" data-testid="compatibility-note">
-            {narrative.compatibility_note}
-          </p>
-        ) : null}
-        {narrative.health_disclaimer ? (
-          <p className="ne-disclaimer" data-testid="health-disclaimer">
-            {narrative.health_disclaimer}
-          </p>
-        ) : null}
-      </section>
+      {groups.length ? (
+        <section className="bte-card" data-testid="energy-groups">
+          <h2>{GROUPS_HEADING}</h2>
+          {groups.map((group) => (
+            <article key={group.display_name} className="ne-group" data-testid="energy-group">
+              <h3>
+                {group.display_name}:{" "}
+                {group.pairs.map((pair, index) => (
+                  <span key={`${pair}-${index}`} className="ne-inline-pair">
+                    {pair}
+                  </span>
+                ))}
+              </h3>
+              {group.meaning ? <p>{group.meaning}</p> : null}
+              {group.watchout ? (
+                <p className="muted">
+                  Điểm cần lưu ý: {group.watchout}
+                </p>
+              ) : null}
+            </article>
+          ))}
+        </section>
+      ) : null}
 
-      {warnings.length ? (
-        <section className="bte-card" data-testid="warnings-card">
-          <h2>Cảnh báo V1</h2>
-          <ul>
-            {warnings.map((item) => (
-              <li key={`${item.source_digits}-${item.reason}`}>
-                {item.code}: {item.customer_reason || item.reason}
-                {item.source_digits ? ` (${item.source_digits})` : ""}
+      {triplets.length ? (
+        <section className="bte-card" data-testid="triplets-card">
+          <h2>{TRIPLETS_HEADING}</h2>
+          <ul className="ne-triplet-list">
+            {triplets.map((item) => (
+              <li key={item.digits} data-testid="triplet-item">
+                {item.digits} = {item.left_name} + {item.right_name}
               </li>
             ))}
           </ul>
         </section>
       ) : null}
 
-      <section className="bte-card ne-meta" data-testid="metadata-card">
-        <h2>Phiên bản</h2>
-        <dl className="ne-kv">
-          <dt>Hệ thống</dt>
-          <dd>{textOrDash(metadata.system_name || narrative.system_name)}</dd>
-          <dt>Tên hiển thị</dt>
-          <dd>{textOrDash(metadata.system_short_name || narrative.system_short_name)}</dd>
-          <dt>Knowledge</dt>
-          <dd data-testid="knowledge-version">{textOrDash(metadata.knowledge_version)}</dd>
-          <dt>Engine</dt>
-          <dd>{textOrDash(metadata.engine_version)}</dd>
-          <dt>Ngữ cảnh</dt>
-          <dd>{purposeLabel(metadata.purpose_context)}</dd>
-        </dl>
+      <section className="bte-card" data-testid="dominant-energy">
+        <h2>{DOMINANT_HEADING}</h2>
+        {dominant ? (
+          <p>
+            {dominant.display_name}
+            {dominant.pairs?.length ? ` — ${dominant.pairs.join(", ")}` : ""}
+          </p>
+        ) : (
+          <p className="muted">Chưa đủ dữ liệu V1 để luận phần này</p>
+        )}
       </section>
+
+      <section className="bte-card" data-testid="ending-energy">
+        <h2>{ENDING_HEADING}</h2>
+        {ending?.pair_digits && ending.display_name ? (
+          <p data-testid="ending-pair">
+            {ENDING_PAIR_LABEL}: {ending.pair_digits} — {ending.display_name}
+          </p>
+        ) : (
+          <p data-testid="ending-pair">Chưa đủ dữ liệu V1 để kết luận năng lượng kết.</p>
+        )}
+        {ending?.note ? <p className="muted">{ending.note}</p> : null}
+      </section>
+
+      {notices
+        .filter(
+          (item) =>
+            item !== reading.leading_zero_note &&
+            item !== reading.interior_zero_note &&
+            item !== reading.consecutive_challenging_note &&
+            item !== reading.lifted_note &&
+            !(forceNotes.includes(item)),
+        )
+        .map((item) => (
+          <p key={item} className="muted" data-testid="reading-notice">
+            {item}
+          </p>
+        ))}
+
+      {reading.purpose_note ? (
+        <p className="muted" data-testid="purpose-note">
+          {reading.purpose_note}
+        </p>
+      ) : null}
+      {reading.cccd_note ? (
+        <p className="muted" data-testid="cccd-note">
+          {reading.cccd_note}
+        </p>
+      ) : null}
+      {narrative.health_disclaimer ? (
+        <p className="ne-disclaimer" data-testid="health-disclaimer">
+          {narrative.health_disclaimer}
+        </p>
+      ) : null}
+
+      <details className="bte-card ne-tech" data-testid="technical-details">
+        <summary>{TECHNICAL_HEADING}</summary>
+        <dl className="ne-kv">
+          <dt>Dãy nhập</dt>
+          <dd>{reading.display_number || "—"}</dd>
+          <dt>Phần luận</dt>
+          <dd data-testid="analyzed-number">{reading.analyzed_number || "—"}</dd>
+          <dt>Phiên bản knowledge</dt>
+          <dd data-testid="knowledge-version">{metadata.knowledge_version || "—"}</dd>
+        </dl>
+      </details>
     </div>
   );
 }

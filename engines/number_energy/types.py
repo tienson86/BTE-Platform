@@ -159,6 +159,9 @@ class NumberEnergyResult:
     narrative: CustomerNarrative
     expert_notes: tuple[str, ...]
     knowledge_version: str = "1.0"
+    analyzed_input: str = ""
+    leading_phone_zero: bool = False
+    reading: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize for API / presentation layers."""
@@ -178,4 +181,7 @@ class NumberEnergyResult:
             "knowledge_version": self.knowledge_version,
             "system_name": "Bát Cực Linh Số",
             "system_short_name": "Năng lượng số",
+            "analyzed_input": self.analyzed_input or self.input_raw,
+            "leading_phone_zero": self.leading_phone_zero,
+            "reading": self.reading,
         }

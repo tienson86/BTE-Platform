@@ -8,6 +8,8 @@ from engines.number_energy.modifier_engine import generate_modifier_pairs
 from engines.number_energy.narrative_engine import collect_expert_notes, compose_narrative
 from engines.number_energy.pair_engine import generate_adjacent_pairs
 from engines.number_energy.parser import parse_number_string
+from engines.number_energy.phone_input import split_phone_input
+from engines.number_energy.reading import build_reading
 from engines.number_energy.types import (
     NumberEnergyResult,
     PurposeContext,
@@ -27,7 +29,18 @@ class NumberEnergyService:
         """Analyze a digit string using only frozen V1 number-energy rules."""
         context = self._validate_purpose(purpose_context)
         try:
-            parsed = parse_number_string(number)
+            parsed_input = parse_number_string(number)
+            analyzed_raw = parsed_input.input_raw
+            leading_zero = False
+            if context == PurposeContext.PHONE_NUMBER.value:
+                analyzed_raw, leading_zero = split_phone_input(parsed_input.input_raw)
+                if not analyzed_raw:
+                    raise NumberEnergyValidationError("number input must not be empty")
+            parsed = (
+                parse_number_string(analyzed_raw)
+                if analyzed_raw != parsed_input.input_raw
+                else parsed_input
+            )
             adjacent, undefined_adjacent = generate_adjacent_pairs(parsed)
             bridged, undefined_bridged = generate_modifier_pairs(parsed)
             undefined = _merge_undefined(undefined_adjacent, undefined_bridged)
@@ -40,15 +53,15 @@ class NumberEnergyService:
                 sequence_states,
             ) = apply_interactions(parsed, adjacent, bridged, undefined)
             narrative = compose_narrative(
-                input_raw=parsed.input_raw,
+                input_raw=parsed_input.input_raw,
                 occurrences=occurrences,
                 undefined=undefined,
                 summary=summary,
                 purpose_context=context,
                 approved_patterns=approved,
             )
-            return NumberEnergyResult(
-                input_raw=parsed.input_raw,
+            result = NumberEnergyResult(
+                input_raw=parsed_input.input_raw,
                 raw_digits=parsed.raw_digits,
                 classified_digits=parsed.classified_digits,
                 occurrences=occurrences,
@@ -60,7 +73,11 @@ class NumberEnergyService:
                 summary=summary,
                 narrative=narrative,
                 expert_notes=collect_expert_notes(occurrences),
+                analyzed_input=parsed.input_raw,
+                leading_phone_zero=leading_zero,
             )
+            result.reading = build_reading(result)
+            return result
         except NumberEnergyEngineError:
             raise
         except Exception as exc:

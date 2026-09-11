@@ -94,6 +94,78 @@
   font-size: var(--text-sm);
 }
 
+.ne-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ne-chip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 5.5rem;
+  padding: var(--space-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm, 0.5rem);
+}
+
+.ne-chip__pair {
+  font-family: var(--font-family-mono);
+  font-weight: 600;
+}
+
+.ne-chip__name {
+  font-size: var(--text-sm);
+}
+
+.ne-chip__note {
+  font-size: var(--text-sm);
+}
+
+.ne-force {
+  display: flex;
+  gap: 0.15rem;
+  width: 3.5rem;
+  margin-top: var(--space-1);
+}
+
+.ne-force span {
+  flex: 1;
+  height: 0.35rem;
+  background: var(--line);
+}
+
+.ne-force span.is-on {
+  background: var(--primary);
+}
+
+.ne-group {
+  margin-top: var(--space-4);
+}
+
+.ne-inline-pair {
+  display: inline-block;
+  margin-right: var(--space-2);
+  font-family: var(--font-family-mono);
+}
+
+.ne-triplet-list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.ne-tech {
+  margin-top: 0;
+}
+
+.ne-tech summary {
+  cursor: pointer;
+}
+
 @media (max-width: 1024px) {
   .ne-page {
     max-width: 42rem;

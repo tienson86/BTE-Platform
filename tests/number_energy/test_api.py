@@ -45,6 +45,7 @@ def test_api_103_tian_yi_hidden() -> None:
         "narrative",
         "warnings",
         "metadata",
+        "reading",
     }
     item = data["occurrences"][0]
     assert item["energy_id"] == "tian_yi"
@@ -129,7 +130,38 @@ def test_api_1003_unknown_or_not_defined() -> None:
     assert data["warnings"][0]["code"] == "UNKNOWN_OR_NOT_DEFINED"
     assert "chưa được khóa" in data["warnings"][0]["customer_reason"]
     assert data["narrative"]["unknown_notice"]
+    assert "UNKNOWN_OR_NOT_DEFINED" not in data["narrative"]["unknown_notice"]
     assert "không phải chẩn đoán y khoa" in data["narrative"]["health_disclaimer"]
+    assert "UNKNOWN_OR_NOT_DEFINED" not in data["reading"]["summary"]
+
+
+def test_api_phone_0328278786_strips_leading_zero() -> None:
+    data = _analyze("0328278786", "phone_number").json()["data"]
+    assert data["sequence_state"] != "UNKNOWN_OR_NOT_DEFINED"
+    assert data["metadata"]["analyzed_input"] == "328278786"
+    reading = data["reading"]
+    assert reading["layout"] == "phone"
+    assert [item["pair_digits"] for item in reading["pairs"]] == [
+        "32",
+        "28",
+        "82",
+        "27",
+        "78",
+        "87",
+        "78",
+        "86",
+    ]
+    assert reading["ending"]["pair_digits"] == "86"
+    assert reading["ending"]["display_name"] == "Thiên Y"
+    assert reading["dominant"]["display_name"] == "Diên Niên"
+    assert reading["lifted"] is True
+    assert "NEUTRALIZED" not in str(reading)
+
+
+def test_api_phone_interior_zero_warning() -> None:
+    data = _analyze("103", "phone_number").json()["data"]
+    assert "Số 0 chỉ nên xuất hiện ở đầu" in (data["reading"]["interior_zero_note"] or "")
+    assert data["occurrences"][0]["display_name"] == "Thiên Y"
 
 
 @pytest.mark.parametrize(

@@ -14,8 +14,10 @@ from engines.number_energy.constants import (
     ENERGY_DISPLAY_NAMES,
     FORBIDDEN_CUSTOMER_PHRASES,
     HEALTH_DISCLAIMER,
+    INCOMPLETE_CUSTOMER_NOTICE,
     SYSTEM_NAME,
     SYSTEM_SHORT_NAME,
+    UNDEFINED_REASON_CUSTOMER_VI,
 )
 from engines.number_energy.exceptions import NumberEnergyEngineError
 from engines.number_energy.types import (
@@ -104,8 +106,7 @@ def _summary_text(
     if undefined and not occurrences:
         return (
             f"Theo hệ thống {SYSTEM_NAME} ({SYSTEM_SHORT_NAME}), "
-            "một phần hoặc toàn bộ dãy số này chưa được định nghĩa trong V1. "
-            "Engine trả về trạng thái UNKNOWN_OR_NOT_DEFINED, không suy diễn thêm quy tắc."
+            f"{INCOMPLETE_CUSTOMER_NOTICE} Không suy diễn thêm quy tắc."
         )
     names = _unique_names(occurrences)
     text = (
@@ -117,10 +118,7 @@ def _summary_text(
             " Chuỗi đi theo trật tự đã khóa Sinh Khí -> Thiên Y -> Diên Niên."
         )
     if undefined:
-        text += (
-            " Một số đoạn chưa được khóa trong V1 nên được đánh dấu "
-            "UNKNOWN_OR_NOT_DEFINED."
-        )
+        text += f" {INCOMPLETE_CUSTOMER_NOTICE}"
     return text
 
 
@@ -238,16 +236,14 @@ def _strengths_and_watchouts(
 
 
 def _unknown_notice(undefined: tuple[UndefinedSegment, ...]) -> str | None:
-    """Explain undefined spans without inventing a rule."""
+    """Explain undefined spans without inventing a rule or leaking tokens."""
     if not undefined:
         return None
     reasons = "; ".join(
-        f"{item.source_digits} ({item.reason})" for item in undefined
+        UNDEFINED_REASON_CUSTOMER_VI.get(item.reason, INCOMPLETE_CUSTOMER_NOTICE)
+        for item in undefined
     )
-    return (
-        "Trạng thái UNKNOWN_OR_NOT_DEFINED: "
-        f"{reasons}."
-    )
+    return f"{INCOMPLETE_CUSTOMER_NOTICE} {reasons}."
 
 
 def _unique_names(occurrences: tuple[EnergyOccurrence, ...]) -> str:

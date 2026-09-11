@@ -1,3 +1,5 @@
+import type { NumberEnergyReading } from "./readingTypes";
+
 export const PURPOSE_CONTEXTS = [
   "generic_number",
   "phone_number",
@@ -59,6 +61,8 @@ export type NumberEnergyMetadata = {
   sequence_states?: string[];
   summary?: Record<string, unknown>;
   pattern_labels?: string[];
+  analyzed_input?: string;
+  leading_phone_zero?: boolean;
 };
 
 export type NumberEnergyData = {
@@ -68,6 +72,7 @@ export type NumberEnergyData = {
   narrative: NumberEnergyNarrative;
   warnings: NumberEnergyWarning[];
   metadata: NumberEnergyMetadata;
+  reading?: NumberEnergyReading;
 };
 
 export type NumberEnergyEnvelope = {

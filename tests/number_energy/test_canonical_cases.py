@@ -126,7 +126,8 @@ def test_undefined_consecutive_modifiers(number: str) -> None:
     assert all(
         item.state == "UNKNOWN_OR_NOT_DEFINED" for item in result.undefined_segments
     )
-    assert "UNKNOWN_OR_NOT_DEFINED" in (result.narrative.unknown_notice or "")
+    assert "Chưa đủ dữ liệu V1" in (result.narrative.unknown_notice or "")
+    assert "UNKNOWN_OR_NOT_DEFINED" not in (result.narrative.unknown_notice or "")
 
 
 def test_unlisted_chain_extension_is_not_approved() -> None:

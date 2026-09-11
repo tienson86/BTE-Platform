@@ -18,7 +18,15 @@ export const SERVER_FALLBACK = "Không thể hoàn tất phân tích lúc này."
 export const NO_OCCURRENCES = "Không có trường khí Du Niên được khóa cho dãy này trong V1.";
 export const NO_PATTERNS = "Không có mẫu đặc biệt được khóa cho dãy này.";
 export const STRENGTHS_HEADING = "Mặt hỗ trợ";
-export const WATCHOUTS_HEADING = "Mặt cần kiểm soát";
+export const WATCHOUTS_HEADING = "Điểm cần lưu ý";
+export const PAIRS_HEADING = "Các cặp số tạo năng lượng";
+export const SUMMARY_HEADING = "Tóm tắt sim";
+export const GROUPS_HEADING = "Năng lượng trong dãy";
+export const TRIPLETS_HEADING = "Các bộ 3 số";
+export const DOMINANT_HEADING = "Năng lượng chủ đạo";
+export const ENDING_HEADING = "Năng lượng kết";
+export const TECHNICAL_HEADING = "Dữ liệu kỹ thuật";
+export const ENDING_PAIR_LABEL = "Bộ số cuối";
 
 /** Keep in sync with engines.number_energy.constants.MAX_INPUT_DIGITS. */
 export const MAX_NUMBER_DIGITS = 128;

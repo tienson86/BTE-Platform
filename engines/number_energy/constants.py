@@ -114,6 +114,86 @@ ENERGY_CLASSIFICATION: Final[dict[str, str]] = {
     "liu_sha": "challenging",
     "jue_ming": "challenging",
 }
+SUPPORTIVE_ENERGY_IDS: Final[frozenset[str]] = frozenset(
+    {
+        "sheng_qi",
+        "tian_yi",
+        "yan_nian",
+        "fu_wei",
+    }
+)
+CHALLENGING_ENERGY_IDS: Final[frozenset[str]] = frozenset(
+    {
+        "huo_hai",
+        "wu_gui",
+        "liu_sha",
+        "jue_ming",
+    }
+)
+FORCE_LABELS: Final[dict[int, str]] = {
+    1: "lực rất mạnh",
+    2: "lực mạnh",
+    3: "lực vừa",
+    4: "lực nhẹ",
+}
+STATE_CUSTOMER_LABELS: Final[dict[str, str]] = {
+    "HIDDEN": "Bị che bởi số 0",
+    "AMPLIFIED": "Được kích hoạt",
+    "REPEATED": "Lặp lại",
+    "CONTROLLED": "Được cát tinh nâng đỡ",
+    "NORMAL": "",
+    "NEUTRALIZED": "Được cát tinh nâng đỡ",
+    "UNKNOWN_OR_NOT_DEFINED": "Chưa đủ dữ liệu V1 để luận phần này",
+}
+PHONE_LEADING_ZERO_NOTE: Final[str] = "Sim này có đầu số 0 hợp lệ."
+PHONE_INTERIOR_ZERO_NOTE: Final[str] = (
+    "Số 0 chỉ nên xuất hiện ở đầu số điện thoại. "
+    "Khi xuất hiện trong thân số, năng lượng dễ bị che hoặc đứt mạch."
+)
+PHONE_SUPPORTIVE_BALANCED: Final[str] = "Cấu trúc cát tinh khá cân bằng."
+PHONE_SUPPORTIVE_FEW: Final[str] = "Cần thêm trường hỗ trợ để dãy số vững hơn."
+PHONE_SUPPORTIVE_SKEWED: Final[str] = (
+    "Cát tinh có lực nhưng cần xem có bị lệch về một nhóm năng lượng hay không."
+)
+PHONE_CONSECUTIVE_CHALLENGING: Final[str] = (
+    "Dãy số có nhiều trường khí cần kiểm soát đứng liền nhau, "
+    "dễ tạo cảm giác bất ổn nếu không có cát tinh đủ lực cân bằng."
+)
+PHONE_CONSECUTIVE_CHALLENGING_SOFT: Final[str] = (
+    "Có chuỗi trường khí cần kiểm soát, nhưng dãy vẫn có cát tinh "
+    "đủ lực để cân bằng một phần."
+)
+PHONE_LIFTED_NOTE: Final[str] = (
+    "Hung tinh được cát tinh phía sau nâng đỡ, nên ảnh hưởng bất lợi "
+    "có cơ hội được kéo về hướng tốt hơn."
+)
+PHONE_FORCE_WINS: Final[str] = "Cát tinh đủ lực áp chế/chuyển hóa phần bất lợi."
+PHONE_FORCE_SHORT: Final[str] = (
+    "Cát tinh có hỗ trợ nhưng chưa đủ lực áp chế hoàn toàn."
+)
+PHONE_ENDING_SUPPORTIVE: Final[str] = "Năng lượng kết là cát tinh, hướng kết dãy thuận."
+PHONE_ENDING_CHALLENGING: Final[str] = (
+    "Năng lượng kết là trường khí cần kiểm soát, nên xem lại bộ số cuối."
+)
+PHONE_ENDING_UNKNOWN: Final[str] = (
+    "Chưa đủ dữ liệu V1 để kết luận năng lượng kết."
+)
+PHONE_PURPOSE_NOTE: Final[str] = (
+    "Không phải sim nào nhiều cát tinh cũng phù hợp với mọi người. "
+    "Cần xét mục đích sử dụng và căn mệnh ở lớp phân tích sau."
+)
+PHONE_CCCD_NOTE: Final[str] = (
+    "Lớp hóa giải theo CCCD chưa chạy trong phiên bản này. "
+    "Khi có dữ liệu định danh, sẽ xét năng lượng kết và khí lực sim "
+    "so với từ trường CCCD."
+)
+INCOMPLETE_CUSTOMER_NOTICE: Final[str] = "Chưa đủ dữ liệu V1 để luận phần này."
+SUPPORTIVE_THEME_SHORT: Final[dict[str, str]] = {
+    "sheng_qi": "quý nhân",
+    "tian_yi": "tài khí",
+    "yan_nian": "ổn định, trách nhiệm",
+    "fu_wei": "duy trì",
+}
 
 # Rank 1 is strongest expression; do not convert to numeric scores in V1.
 ENERGY_PAIR_RANKS: Final[dict[str, dict[int, tuple[str, str]]]] = {
