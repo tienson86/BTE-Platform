@@ -9,6 +9,16 @@ from engines.number_energy.narrative_engine import collect_expert_notes, compose
 from engines.number_energy.pair_engine import generate_adjacent_pairs
 from engines.number_energy.parser import parse_number_string
 from engines.number_energy.phone_input import split_phone_input
+from engines.number_energy.presentation_assessment import build_phone_assessment
+from engines.number_energy.presentation_findings import build_phone_findings
+from engines.number_energy.presentation_pairs import (
+    build_energy_distribution,
+    build_pair_occurrences,
+    build_pair_summary,
+)
+from engines.number_energy.presentation_score import build_phone_score
+from engines.number_energy.presentation_triples import build_chain, build_triple_occurrences
+from engines.number_energy.presentation_wealth import build_phone_wealth
 from engines.number_energy.reading import build_reading
 from engines.number_energy.types import (
     NumberEnergyResult,
@@ -75,7 +85,53 @@ class NumberEnergyService:
                 expert_notes=collect_expert_notes(occurrences),
                 analyzed_input=parsed.input_raw,
                 leading_phone_zero=leading_zero,
+                pair_occurrences=build_pair_occurrences(occurrences),
+                pair_summary=build_pair_summary(occurrences),
+                energy_distribution=build_energy_distribution(occurrences),
             )
+            triples = build_triple_occurrences(occurrences)
+            result.triple_occurrences = triples
+            result.chain = build_chain(occurrences, triples)
+            (
+                result.wealth_nodes,
+                result.wealth_flow,
+                result.later_outcome,
+                result.wealth_story,
+            ) = build_phone_wealth(context, occurrences, triples, result.chain)
+            (
+                result.domain_insights,
+                result.strengths,
+                result.cautions,
+                result.evidence,
+            ) = build_phone_findings(
+                context,
+                result.pair_occurrences,
+                result.pair_summary,
+                result.energy_distribution,
+                triples,
+                result.chain,
+                result.wealth_flow,
+                result.later_outcome,
+            )
+            result.assessment, result.recommendation = build_phone_assessment(
+                context,
+                result.pair_summary,
+                result.chain,
+                result.wealth_story,
+                result.strengths,
+            )
+            result.score = build_phone_score(
+                context,
+                result.pair_occurrences,
+                result.pair_summary,
+                result.energy_distribution,
+                triples,
+                result.wealth_nodes,
+                result.wealth_flow,
+                result.later_outcome,
+                occurrences,
+            )
+            result.verified_by_runtime = result.score is not None
             result.reading = build_reading(result)
             return result
         except NumberEnergyEngineError:

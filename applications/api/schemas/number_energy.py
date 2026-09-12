@@ -62,3 +62,21 @@ class NumberEnergyDataOut(BaseModel):
     warnings: list[dict[str, Any]]
     metadata: dict[str, Any]
     reading: dict[str, Any] = Field(default_factory=dict)
+    pair_occurrences: list[dict[str, Any]] = Field(default_factory=list)
+    pair_summary: dict[str, Any] | None = None
+    energy_distribution: list[dict[str, Any]] = Field(default_factory=list)
+    triple_occurrences: list[dict[str, Any]] = Field(default_factory=list)
+    chain: dict[str, Any] | None = None
+    wealth_nodes: list[dict[str, Any]] = Field(default_factory=list)
+    wealth_flow: dict[str, Any] | None = None
+    later_outcome: dict[str, Any] | None = None
+    wealth_story: dict[str, Any] | None = None
+    domain_insights: list[dict[str, Any]] = Field(default_factory=list)
+    strengths: list[dict[str, Any]] = Field(default_factory=list)
+    cautions: list[dict[str, Any]] = Field(default_factory=list)
+    evidence: list[dict[str, Any]] = Field(default_factory=list)
+    assessment: dict[str, Any] | None = None
+    recommendation: dict[str, Any] | None = None
+    score: dict[str, Any] | None = None
+    grade: str | None = None
+    verified_by_runtime: bool = False

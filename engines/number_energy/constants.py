@@ -103,6 +103,21 @@ ENERGY_DISPLAY_NAMES: Final[dict[str, str]] = {
     "liu_sha": "Lục Sát",
     "jue_ming": "Tuyệt Mệnh",
 }
+ENERGY_INTERACTION_CODES: Final[dict[str, str]] = {
+    "sheng_qi": "SK",
+    "tian_yi": "TY",
+    "yan_nian": "DN",
+    "fu_wei": "PV",
+    "liu_sha": "LS",
+    "huo_hai": "HH",
+    "wu_gui": "NQ",
+    "jue_ming": "TM",
+}
+TRIPLE_PRIORITY_FEATURED: Final[str] = "FEATURED"
+TRIPLE_PRIORITY_STANDARD: Final[str] = "STANDARD"
+TRIPLE_PRIORITY_COMPACT: Final[str] = "COMPACT"
+TRIPLE_STATUS_DEFINED: Final[str] = "DEFINED"
+TRIPLE_STATUS_UNDEFINED: Final[str] = "UNDEFINED"
 
 ENERGY_CLASSIFICATION: Final[dict[str, str]] = {
     "sheng_qi": "supportive",
@@ -130,6 +145,30 @@ CHALLENGING_ENERGY_IDS: Final[frozenset[str]] = frozenset(
         "jue_ming",
     }
 )
+# Canonical catalog order for P-S05 (Golden §19). Includes zero-count rows.
+ENERGY_DISTRIBUTION_ORDER: Final[tuple[str, ...]] = tuple(ENERGY_DISPLAY_NAMES)
+CUSTOMER_CATEGORY_CAT: Final[str] = "CAT"
+CUSTOMER_CATEGORY_HUNG: Final[str] = "HUNG"
+CUSTOMER_CATEGORY_LABELS: Final[dict[str, str]] = {
+    CUSTOMER_CATEGORY_CAT: "Cát",
+    CUSTOMER_CATEGORY_HUNG: "Hung",
+}
+CUSTOMER_STRENGTH_LIGHT: Final[str] = "Nhẹ"
+CUSTOMER_STRENGTH_STRONG: Final[str] = "Mạnh"
+STRENGTH_SLOT_COUNT: Final[int] = 4
+# Knowledge 03 tiers T1–T2 → Mạnh; T3–T4 → Nhẹ. Rank 1 is strongest.
+RANK_TO_STRENGTH_LABEL: Final[dict[int, str]] = {
+    1: CUSTOMER_STRENGTH_STRONG,
+    2: CUSTOMER_STRENGTH_STRONG,
+    3: CUSTOMER_STRENGTH_LIGHT,
+    4: CUSTOMER_STRENGTH_LIGHT,
+}
+RANK_TO_STRENGTH_SLOTS: Final[dict[int, int]] = {
+    1: 4,
+    2: 3,
+    3: 2,
+    4: 1,
+}
 FORCE_LABELS: Final[dict[int, str]] = {
     1: "lực rất mạnh",
     2: "lực mạnh",
@@ -361,6 +400,12 @@ FORBIDDEN_CUSTOMER_PHRASES: Final[tuple[str, ...]] = (
     "chắc chắn gây bệnh",
     "chắc chắn phá sản",
     "chắc chắn ly hôn",
+    "chắc chắn phát tài",
+    "chắc chắn giữ được tiền",
+    "về già chắc chắn",
+    "đổi số ngay",
+    "mua số ngay",
+    "mua sim",
     "0 triệt tiêu hoàn toàn nên không còn tác động",
     "5 biến thành quái số bình thường",
 )

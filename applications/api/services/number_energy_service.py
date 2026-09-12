@@ -89,6 +89,40 @@ def to_api_payload(result: NumberEnergyResult) -> dict[str, Any]:
             "leading_phone_zero": result.leading_phone_zero,
         },
         "reading": result.reading or {},
+        "pair_occurrences": [item.to_dict() for item in result.pair_occurrences],
+        "pair_summary": (
+            result.pair_summary.to_dict() if result.pair_summary is not None else None
+        ),
+        "energy_distribution": [item.to_dict() for item in result.energy_distribution],
+        "triple_occurrences": [item.to_dict() for item in result.triple_occurrences],
+        "chain": result.chain.to_dict() if result.chain is not None else None,
+        "wealth_nodes": [item.to_dict() for item in result.wealth_nodes],
+        "wealth_flow": (
+            result.wealth_flow.to_dict() if result.wealth_flow is not None else None
+        ),
+        "later_outcome": (
+            result.later_outcome.to_dict()
+            if result.later_outcome is not None
+            else None
+        ),
+        "wealth_story": (
+            result.wealth_story.to_dict() if result.wealth_story is not None else None
+        ),
+        "domain_insights": [item.to_dict() for item in result.domain_insights],
+        "strengths": [item.to_dict() for item in result.strengths],
+        "cautions": [item.to_dict() for item in result.cautions],
+        "evidence": [item.to_dict() for item in result.evidence],
+        "assessment": (
+            result.assessment.to_dict() if result.assessment is not None else None
+        ),
+        "recommendation": (
+            result.recommendation.to_dict()
+            if result.recommendation is not None
+            else None
+        ),
+        "score": result.score.to_dict() if result.score is not None else None,
+        "grade": result.score.grade if result.score is not None else None,
+        "verified_by_runtime": result.verified_by_runtime,
     }
 
 
