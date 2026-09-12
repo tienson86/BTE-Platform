@@ -2691,6 +2691,174 @@ describe("Number Energy RB15 explicit runtime bind P-S00", () => {
   });
 });
 
+describe("Number Energy RB16 runtime visual review", () => {
+  const REVIEW_DIR = resolve(
+    dirname(fileURLToPath(import.meta.url)),
+    "../../screenshots/number_energy/rb16",
+  );
+  const REQUIRED_SHOTS = [
+    "01_static_input_desktop.png",
+    "02_static_result_desktop.png",
+    "03_runtime_input_desktop.png",
+    "04_runtime_result_top_desktop.png",
+    "05_runtime_result_full_desktop.png",
+    "06_runtime_error_desktop.png",
+    "07_static_input_mobile.png",
+    "08_static_result_mobile.png",
+    "09_runtime_input_mobile.png",
+    "10_runtime_result_top_mobile.png",
+    "11_runtime_result_full_mobile.png",
+    "12_runtime_error_mobile.png",
+  ] as const;
+  const RUNTIME_SLOT_TESTIDS = RESULT_SECTIONS.filter(([sectionId]) => sectionId !== "P-S11");
+  const VISUAL_FORBIDDEN = [
+    "verified_by_runtime",
+    "fixture_id",
+    "presentation_fixture",
+    "energy_id",
+    "source_span",
+    "DIEN_NIEN",
+    "THIEN_Y",
+    "CAT",
+    "HUNG",
+    "score_axis",
+    "copy_key",
+    "evidence_id",
+  ];
+
+  function stubAnalyze(data: Record<string, unknown>, status = 200): ReturnType<typeof vi.fn> {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: status >= 200 && status < 300,
+      status,
+      text: async () => JSON.stringify({ success: status < 300, data }),
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    return fetchMock;
+  }
+
+  function reviewReport(): Record<string, unknown> {
+    return JSON.parse(readFileSync(resolve(REVIEW_DIR, "review.json"), "utf8")) as Record<string, unknown>;
+  }
+
+  it("keeps public default page static, frozen, and fetch-free", () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+    render(<NumberEnergyPage />);
+    expect(screen.getByTestId("number-energy-page").getAttribute("data-runtime-mode")).toBe("off");
+    expect(screen.getByTestId("number-energy-page").getAttribute("data-static-freeze")).toBe(
+      NUMBER_ENERGY_STATIC_UI_V1,
+    );
+    expect((screen.getByTestId("result-section") as HTMLElement).hidden).toBe(true);
+    submitGoldenPhone();
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(screen.getByTestId("result-section").getAttribute("data-preview-state")).toBe("golden");
+    for (const [, testId] of RUNTIME_SLOT_TESTIDS) {
+      expect(screen.getByTestId(testId).getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    }
+    expect(screen.getByTestId("expert-details").hasAttribute("hidden")).toBe(true);
+  });
+
+  it("keeps result hidden until runtime success and binds P-S00…P-S10 as RUNTIME", async () => {
+    const fetchMock = stubAnalyze(goldenAnalyzeData());
+    render(<NumberEnergyPage runtimeMode />);
+    expect(screen.getByTestId("number-energy-page").getAttribute("data-runtime-mode")).toBe("on");
+    expect((screen.getByTestId("result-section") as HTMLElement).hidden).toBe(true);
+    expect(fetchMock).not.toHaveBeenCalled();
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("result-section").getAttribute("data-preview-state")).toBe("runtime");
+    });
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    for (const [, testId] of RUNTIME_SLOT_TESTIDS) {
+      expect(screen.getByTestId(testId).getAttribute("data-slot-source")).toBe("RUNTIME");
+    }
+    expect(screen.getByTestId("hero-identity").textContent).toBe("0328 278 786");
+    expect(screen.getByTestId("hero-score").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("hero-grade").textContent).toBe("TỐT");
+    expect(screen.getByTestId("hero-primary-energy").textContent).toBe("Diên Niên");
+    expect(screen.getByTestId("hero-terminal-energy").textContent).toBe("Thiên Y");
+    const tripleDigits = Array.from(
+      screen.getByTestId("triple-list").querySelectorAll("[data-testid^='triple-digits-']"),
+    ).map((node) => node.textContent);
+    expect(tripleDigits).toEqual(["328", "282", "827", "278", "787", "878", "786"]);
+    expect(screen.getByTestId("score-breakdown").textContent).not.toContain("%");
+    expect(screen.getByTestId("expert-details").hasAttribute("hidden")).toBe(true);
+    const page = screen.getByTestId("number-energy-page").textContent || "";
+    for (const token of VISUAL_FORBIDDEN) {
+      expect(page).not.toContain(token);
+    }
+  });
+
+  it("keeps the public entry, nav, and template off runtime and Expert Mode", () => {
+    const here = dirname(fileURLToPath(import.meta.url));
+    const entry = readFileSync(resolve(here, "../../src/entries/numberEnergyApp.tsx"), "utf8");
+    const template = readFileSync(resolve(here, "../../templates/number_energy.html"), "utf8");
+    const nav = readFileSync(resolve(here, "../../src/layouts/Navigation/navItems.ts"), "utf8");
+    const harness = readFileSync(
+      resolve(here, "../../src/entries/numberEnergyRuntimeScreenshotApp.tsx"),
+      "utf8",
+    );
+    expect(entry).not.toContain("runtimeMode");
+    expect(template).not.toContain("runtimeMode");
+    expect(nav).not.toContain("/number-energy");
+    expect(APP_NAV_ITEMS).toHaveLength(4);
+    expect(APP_NAV_ITEMS.map((item) => item.id)).toEqual([
+      "home",
+      "choose-date",
+      "analyze",
+      "marriage-consulting",
+    ]);
+    expect(harness).toContain("runtimeMode");
+    expect(sourceOf("sections/ExpertDetails.tsx")).toContain("hidden");
+    const css = readFileSync(resolve(here, "../../static/css/number_energy.css"), "utf8");
+    expect(css).toMatch(/\.ne-result\[hidden\]\s*\{[^}]*display:\s*none/s);
+    expect(css).toMatch(/\.ne-pair-strip-scroller\s*\{[^}]*overflow-x:\s*auto/s);
+    expect(css).toMatch(/\.ne-form-actions\s*\{[^}]*position:\s*static/s);
+    expect(css).toMatch(/\.ne-wealth-connector--mobile\s*\{[^}]*display:\s*none/s);
+    expect(css).toMatch(/@media \(max-width: 768px\)[\s\S]*\.ne-wealth-connector--desktop\s*\{[\s\S]*display:\s*none/);
+  });
+
+  it("stores RB16 screenshots and Playwright review gates", () => {
+    for (const name of REQUIRED_SHOTS) {
+      expect(readFileSync(resolve(REVIEW_DIR, name)).byteLength).toBeGreaterThan(1000);
+    }
+    const review = reviewReport();
+    expect(review.stage).toBe("RB16");
+    expect(review.staticAnalyzeCalls).toEqual([]);
+    expect((review.runtimeAnalyzeBeforeSubmit as unknown[]).length).toBe(0);
+    expect((review.runtimeAnalyzeCalls as unknown[]).length).toBeGreaterThanOrEqual(1);
+    expect(review.leaks).toEqual([]);
+    const staticDesktop = review.staticDesktop as Record<string, unknown>;
+    const runtimeDesktop = review.runtimeDesktop as Record<string, unknown>;
+    const runtimeError = review.runtimeError as Record<string, unknown>;
+    const runtimeFallback = review.runtimeFallback as Record<string, unknown>;
+    expect(staticDesktop.runtimeMode).toBe("off");
+    expect(staticDesktop.freeze).toBe(NUMBER_ENERGY_STATIC_UI_V1);
+    expect(staticDesktop.resultHiddenBeforeSubmit).toBe(true);
+    expect(runtimeDesktop.runtimeMode).toBe("on");
+    expect(runtimeDesktop.resultHiddenBeforeSubmit).toBe(true);
+    const staticSlots = staticDesktop.slotSources as Record<string, string>;
+    const runtimeSlots = runtimeDesktop.slotSources as Record<string, unknown>;
+    for (const [sectionId] of RUNTIME_SLOT_TESTIDS) {
+      expect(staticSlots[sectionId]).toBe("GOLDEN_FIXTURE");
+      expect(runtimeSlots[sectionId]).toBe("RUNTIME");
+    }
+    expect((runtimeSlots["P-S11"] as { hidden: boolean }).hidden).toBe(true);
+    expect((staticDesktop.overflow as { documentOverflowPx: number }).documentOverflowPx).toBeLessThanOrEqual(0);
+    expect((runtimeDesktop.overflow as { documentOverflowPx: number }).documentOverflowPx).toBeLessThanOrEqual(0);
+    expect((runtimeDesktop.overflow as { pageScrollLeft: number }).pageScrollLeft).toBe(0);
+    expect(runtimeDesktop.triples).toBe(7);
+    expect(runtimeDesktop.triple787).toBe("787");
+    expect(runtimeDesktop.triple878).toBe("878");
+    expect(runtimeDesktop.scoreHasPercent).toBe(false);
+    expect(runtimeError.resultHidden).toBe(true);
+    expect(runtimeError.message).toBe("Không thể hoàn tất phân tích lúc này.");
+    const fallbackSlots = runtimeFallback.slotSources as Record<string, string>;
+    expect(fallbackSlots["P-S00"]).toBe("GOLDEN_FIXTURE");
+    expect(fallbackSlots["P-S01"]).toBe("RUNTIME");
+  });
+});
+
 function goldenAnalyzeData(): Record<string, unknown> {
   return {
     purpose_context: "phone_number",
