@@ -1,12 +1,22 @@
 import type { ReactNode } from "react";
 
 import { GOLDEN_QUICK_STRUCTURE } from "../goldenQuickStructure";
+import type { PresentationQuickStructure, SlotRenderSource } from "../presentationContract";
 
-export function QuickStructure(): ReactNode {
-  const structure = GOLDEN_QUICK_STRUCTURE;
-
+export function QuickStructure({
+  structure = GOLDEN_QUICK_STRUCTURE,
+  slotSource = "GOLDEN_FIXTURE",
+}: {
+  structure?: PresentationQuickStructure;
+  slotSource?: SlotRenderSource;
+}): ReactNode {
   return (
-    <section className="bte-card ne-quick-structure" data-section="P-S02" data-testid="quick-structure">
+    <section
+      className="bte-card ne-quick-structure"
+      data-section="P-S02"
+      data-testid="quick-structure"
+      data-slot-source={slotSource}
+    >
       <h2>Cấu trúc nhanh</h2>
       <p className="muted">Nhìn nhanh cát tinh, hung tinh, chủ đạo và năng lượng kết — chưa phải điểm số.</p>
       <div className="ne-quick-grid">

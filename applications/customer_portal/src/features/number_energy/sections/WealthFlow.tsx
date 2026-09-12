@@ -4,8 +4,14 @@ import {
   GOLDEN_WEALTH_STAGES,
   GOLDEN_WEALTH_STORY,
   GOLDEN_WEALTH_SYNTHESIS,
-  type GoldenWealthStage,
 } from "../goldenWealthFlow";
+import type { PresentationWealthFlow, PresentationWealthStage, SlotRenderSource } from "../presentationContract";
+
+const GOLDEN_WEALTH_FLOW: PresentationWealthFlow = {
+  stages: GOLDEN_WEALTH_STAGES,
+  story: GOLDEN_WEALTH_STORY,
+  synthesis: GOLDEN_WEALTH_SYNTHESIS,
+};
 
 function FlowConnector(): ReactNode {
   return (
@@ -20,7 +26,7 @@ function WealthStageCard({
   stage,
   index,
 }: {
-  stage: GoldenWealthStage;
+  stage: PresentationWealthStage;
   index: number;
 }): ReactNode {
   return (
@@ -45,13 +51,24 @@ function WealthStageCard({
   );
 }
 
-export function WealthFlow(): ReactNode {
+export function WealthFlow({
+  flow = GOLDEN_WEALTH_FLOW,
+  slotSource = "GOLDEN_FIXTURE",
+}: {
+  flow?: PresentationWealthFlow;
+  slotSource?: SlotRenderSource;
+}): ReactNode {
   return (
-    <section className="bte-card ne-wealth-flow" data-section="P-S03" data-testid="wealth-flow">
+    <section
+      className="bte-card ne-wealth-flow"
+      data-section="P-S03"
+      data-testid="wealth-flow"
+      data-slot-source={slotSource}
+    >
       <h2>Dòng tài vận</h2>
       <p className="muted">Có Tài không · Tài từ đâu · Tài đi đâu · Hậu vận</p>
       <ol className="ne-wealth-stages" data-testid="wealth-stages">
-        {GOLDEN_WEALTH_STAGES.map((stage, index) => (
+        {flow.stages.map((stage, index) => (
           <li key={stage.id} className="ne-wealth-item">
             {index > 0 ? <span className="ne-sr-only">tiếp đến</span> : null}
             {index > 0 ? <FlowConnector /> : null}
@@ -62,7 +79,7 @@ export function WealthFlow(): ReactNode {
       <div className="ne-wealth-story" data-testid="wealth-story">
         <h3 className="ne-wealth-story-title">Câu chuyện tài vận</h3>
         <ol className="ne-wealth-story-flow">
-          {GOLDEN_WEALTH_STORY.map((node, index) => (
+          {flow.story.map((node, index) => (
             <li key={`${node}-${index}`} className="ne-wealth-story-item">
               {index > 0 ? <span className="ne-sr-only">tiếp đến</span> : null}
               {index > 0 ? (
@@ -77,7 +94,7 @@ export function WealthFlow(): ReactNode {
           ))}
         </ol>
         <p className="ne-wealth-synthesis" data-testid="wf-synthesis">
-          {GOLDEN_WEALTH_SYNTHESIS}
+          {flow.synthesis}
         </p>
       </div>
     </section>

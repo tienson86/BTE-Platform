@@ -4,15 +4,34 @@ import {
   ENERGY_COUNT_SCALE,
   ENERGY_ROLE_LABEL,
   GOLDEN_ENERGY_DISTRIBUTION,
+  type EnergyRole,
 } from "../goldenDistribution";
+import type { SlotRenderSource } from "../presentationContract";
 
-export function EnergyDistribution(): ReactNode {
+type DistributionRow = {
+  label: string;
+  count: number;
+  role: EnergyRole;
+};
+
+export function EnergyDistribution({
+  rows = GOLDEN_ENERGY_DISTRIBUTION,
+  slotSource = "GOLDEN_FIXTURE",
+}: {
+  rows?: readonly DistributionRow[];
+  slotSource?: SlotRenderSource;
+}): ReactNode {
   return (
-    <section className="bte-card ne-distribution" data-section="P-S05" data-testid="energy-distribution">
+    <section
+      className="bte-card ne-distribution"
+      data-section="P-S05"
+      data-testid="energy-distribution"
+      data-slot-source={slotSource}
+    >
       <h2>Cấu trúc trường khí</h2>
       <p className="muted">Tám trường khí xuất hiện trong dãy và mức độ lặp lại. Số lần xuất hiện không phải điểm số.</p>
       <ol className="ne-dist-list" data-testid="energy-distribution-list">
-        {GOLDEN_ENERGY_DISTRIBUTION.map((energy, index) => {
+        {rows.map((energy, index) => {
           const roleLabel = ENERGY_ROLE_LABEL[energy.role];
           return (
             <li

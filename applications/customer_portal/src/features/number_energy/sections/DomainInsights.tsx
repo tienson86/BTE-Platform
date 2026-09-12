@@ -1,15 +1,27 @@
 import type { ReactNode } from "react";
 
 import { GOLDEN_DOMAIN_INSIGHTS } from "../goldenDomains";
+import type { PresentationDomainCard, SlotRenderSource } from "../presentationContract";
 
-export function DomainInsights(): ReactNode {
+export function DomainInsights({
+  domains = GOLDEN_DOMAIN_INSIGHTS,
+  slotSource = "GOLDEN_FIXTURE",
+}: {
+  domains?: readonly PresentationDomainCard[];
+  slotSource?: SlotRenderSource;
+}): ReactNode {
   return (
-    <section className="bte-card ne-domains" data-section="P-S06" data-testid="domain-insights">
+    <section
+      className="bte-card ne-domains"
+      data-section="P-S06"
+      data-testid="domain-insights"
+      data-slot-source={slotSource}
+    >
       <h2>Ảnh hưởng theo lĩnh vực</h2>
       <p className="muted">Tài vận, công việc, quan hệ và các lĩnh vực đời sống liên quan.</p>
       <ol className="ne-domain-list" data-testid="domain-list">
-        {GOLDEN_DOMAIN_INSIGHTS.map((domain, index) => (
-          <li key={domain.title} className="ne-domain-card" data-testid={`domain-card-${index}`}>
+        {domains.map((domain, index) => (
+          <li key={`${domain.title}-${index}`} className="ne-domain-card" data-testid={`domain-card-${index}`}>
             <h3 className="ne-domain-title" data-testid={`domain-title-${index}`}>
               {domain.title}
             </h3>

@@ -8,21 +8,42 @@ import {
   GOLDEN_RECOMMENDATION_SUPPORTING,
   GOLDEN_RECOMMENDATION_TITLE,
 } from "../goldenAssessment";
+import type { PresentationAssessment, SlotRenderSource } from "../presentationContract";
 
-export function FinalAssessment(): ReactNode {
+const GOLDEN_ASSESSMENT: PresentationAssessment = {
+  title: GOLDEN_ASSESSMENT_TITLE,
+  story: GOLDEN_ASSESSMENT_STORY,
+  flow: GOLDEN_ASSESSMENT_FLOW,
+  recommendationTitle: GOLDEN_RECOMMENDATION_TITLE,
+  recommendationState: GOLDEN_RECOMMENDATION_STATE,
+  recommendationSupporting: GOLDEN_RECOMMENDATION_SUPPORTING,
+};
+
+export function FinalAssessment({
+  assessment = GOLDEN_ASSESSMENT,
+  slotSource = "GOLDEN_FIXTURE",
+}: {
+  assessment?: PresentationAssessment;
+  slotSource?: SlotRenderSource;
+}): ReactNode {
   return (
-    <section className="bte-card ne-assess" data-section="P-S09" data-testid="final-assessment">
+    <section
+      className="bte-card ne-assess"
+      data-section="P-S09"
+      data-testid="final-assessment"
+      data-slot-source={slotSource}
+    >
       <div data-testid="assessment-block">
-        <h2 data-testid="assessment-title">{GOLDEN_ASSESSMENT_TITLE}</h2>
+        <h2 data-testid="assessment-title">{assessment.title}</h2>
         <div data-testid="assessment-story">
-          {GOLDEN_ASSESSMENT_STORY.map((paragraph) => (
-            <p key={paragraph} className="ne-assess-story">
+          {assessment.story.map((paragraph, index) => (
+            <p key={`${paragraph}-${index}`} className="ne-assess-story">
               {paragraph}
             </p>
           ))}
         </div>
         <ol className="ne-assess-flow" data-testid="assessment-flow">
-          {GOLDEN_ASSESSMENT_FLOW.map((node, index) => (
+          {assessment.flow.map((node, index) => (
             <li key={`${node}-${index}`} className="ne-assess-flow-item">
               {index > 0 ? (
                 <span className="ne-assess-flow-arrow" aria-hidden="true">
@@ -38,13 +59,13 @@ export function FinalAssessment(): ReactNode {
       </div>
       <div className="ne-assess-recommend" data-testid="recommendation-block">
         <h3 className="ne-assess-recommend-title" data-testid="recommendation-title">
-          {GOLDEN_RECOMMENDATION_TITLE}
+          {assessment.recommendationTitle}
         </h3>
         <p className="ne-assess-recommend-state" data-testid="recommendation-state">
-          {GOLDEN_RECOMMENDATION_STATE}
+          {assessment.recommendationState}
         </p>
         <p className="muted ne-assess-recommend-copy" data-testid="recommendation-supporting">
-          {GOLDEN_RECOMMENDATION_SUPPORTING}
+          {assessment.recommendationSupporting}
         </p>
       </div>
     </section>

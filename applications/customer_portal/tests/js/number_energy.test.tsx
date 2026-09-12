@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
@@ -252,6 +252,7 @@ describe("Number Energy SB03 result hero", () => {
     submitGoldenPhone();
     expect(fetchMock).not.toHaveBeenCalled();
     expect(screen.getByTestId("result-hero").getAttribute("data-section")).toBe("P-S00");
+    expect(screen.getByTestId("result-hero").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
     expect(screen.getByTestId("hero-analysis-type").textContent).toBe("Số điện thoại");
     expect(screen.getByTestId("hero-identity").textContent).toBe("0328 278 786");
     expect(screen.getByTestId("hero-score").textContent).toBe("82 / 100");
@@ -457,6 +458,7 @@ describe("Number Energy SB07 triple story", () => {
     submitGoldenPhone();
     expect(fetchMock).not.toHaveBeenCalled();
     expect(screen.getByTestId("triple-story").getAttribute("data-section")).toBe("P-S04");
+    expect(screen.getByTestId("triple-story").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
     const cards = screen.getByTestId("triple-list").querySelectorAll("[data-testid^='triple-card-']");
     expect(cards).toHaveLength(7);
     const digits = Array.from(cards).map((card) => card.getAttribute("data-triple-digits"));
@@ -570,6 +572,7 @@ describe("Number Energy SB08-B domain insights", () => {
     submitGoldenPhone();
     expect(fetchMock).not.toHaveBeenCalled();
     expect(screen.getByTestId("domain-insights").getAttribute("data-section")).toBe("P-S06");
+    expect(screen.getByTestId("domain-insights").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
     const cards = screen.getByTestId("domain-list").querySelectorAll("[data-testid^='domain-card-']");
     expect(cards).toHaveLength(5);
     const conclusions = EXPECTED_DOMAINS.map(([, conclusion]) => conclusion);
@@ -654,6 +657,7 @@ describe("Number Energy SB09 strengths and cautions", () => {
     submitGoldenPhone();
     expect(fetchMock).not.toHaveBeenCalled();
     expect(screen.getByTestId("strengths-cautions").getAttribute("data-section")).toBe("P-S07");
+    expect(screen.getByTestId("strengths-cautions").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
     expect(screen.getByTestId("strengths-column").textContent).toContain("Điểm mạnh");
     expect(screen.getByTestId("cautions-column").textContent).toContain("Điểm cần lưu ý");
     expect(screen.getByTestId("strength-list").querySelectorAll("[data-testid^='strength-card-']")).toHaveLength(4);
@@ -737,6 +741,7 @@ describe("Number Energy SB10 score breakdown", () => {
     submitGoldenPhone();
     expect(fetchMock).not.toHaveBeenCalled();
     expect(screen.getByTestId("score-breakdown").getAttribute("data-section")).toBe("P-S08");
+    expect(screen.getByTestId("score-breakdown").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
     expect(screen.getByTestId("score-total").textContent).toBe("82 / 100");
     expect(screen.getByTestId("score-grade").textContent).toBe("TỐT");
     expect(screen.getByTestId("score-static-note").textContent).toContain("điểm minh họa của bản dựng tĩnh");
@@ -796,6 +801,7 @@ describe("Number Energy SB11 final assessment", () => {
     submitGoldenPhone();
     expect(fetchMock).not.toHaveBeenCalled();
     expect(screen.getByTestId("final-assessment").getAttribute("data-section")).toBe("P-S09");
+    expect(screen.getByTestId("final-assessment").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
     expect(screen.getByTestId("assessment-title").textContent).toBe("Đánh giá tổng thể");
     expect(screen.getByTestId("assessment-story").textContent).toContain(
       "Dãy số nổi bật ở Diên Niên, đi cùng Sinh Khí và Thiên Y.",
@@ -866,6 +872,7 @@ describe("Number Energy SB12 basis and expert seam", () => {
     submitGoldenPhone();
     expect(fetchMock).not.toHaveBeenCalled();
     expect(screen.getByTestId("basis-of-assessment").getAttribute("data-section")).toBe("P-S10");
+    expect(screen.getByTestId("basis-of-assessment").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
     expect(screen.getByTestId("basis-helper").textContent).toContain("không chỉ dựa trên số lượng Cát và Hung");
     EXPECTED_PRINCIPLES.forEach((principle, index) => {
       expect(screen.getByTestId(`basis-principle-${index}`).textContent).toBe(principle);
@@ -1261,13 +1268,1749 @@ describe("Number Energy SB16 static freeze", () => {
     expect(entrySource()).not.toContain("analyzeNumberEnergy");
     expect(entrySource()).not.toContain("from \"../features/number_energy/api\"");
     expect(entrySource()).not.toContain("ResultView");
+    expect(entrySource()).not.toContain("runtimeMode");
     expect(sourceOf("NumberEnergyPage.tsx")).not.toContain("expert=true");
     expect(sourceOf("NumberEnergyPage.tsx")).not.toContain("URLSearchParams");
+    expect(sourceOf("NumberEnergyPage.tsx")).not.toContain("searchParams");
     expect(sourceOf("ResultSection.tsx")).not.toContain("from \"./api\"");
     const bundle = bundleSource();
     expect(bundle).toContain("NUMBER_ENERGY_STATIC_UI_V1");
-    expect(bundle).not.toContain("fetch(");
-    expect(bundle).not.toContain("/number-energy/analyze");
-    expect(bundle).not.toContain("analyzeNumberEnergy");
   });
 });
+
+describe("Number Energy RB09 explicit runtime bind P-S01/P-S02/P-S05", () => {
+  const BIND_FORBIDDEN = [
+    "CAT",
+    "HUNG",
+    "DIEN_NIEN",
+    "strength_rank",
+    "energy_id",
+    "source_span",
+    "verified_by_runtime",
+  ];
+
+  function stubAnalyze(data: Record<string, unknown>, status = 200): ReturnType<typeof vi.fn> {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: status >= 200 && status < 300,
+      status,
+      text: async () => JSON.stringify({ success: status < 300, data }),
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    return fetchMock;
+  }
+
+  it("keeps default page static and does not fetch", () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+    render(<NumberEnergyPage />);
+    expect(screen.getByTestId("number-energy-page").getAttribute("data-runtime-mode")).toBe("off");
+    expect(screen.getByTestId("number-energy-page").getAttribute("data-static-freeze")).toBe(
+      NUMBER_ENERGY_STATIC_UI_V1,
+    );
+    expect((screen.getByTestId("result-section") as HTMLElement).hidden).toBe(true);
+    submitGoldenPhone();
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(screen.getByTestId("result-section").getAttribute("data-preview-state")).toBe("golden");
+    expect(screen.getByTestId("result-hero").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    expect(screen.getByTestId("energy-map").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    expect(screen.getByTestId("wealth-flow").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    expect(screen.getByTestId("triple-story").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    expect(screen.getByTestId("domain-insights").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    expect(screen.getByTestId("strengths-cautions").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    expect(screen.getByTestId("score-breakdown").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    expect(screen.getByTestId("final-assessment").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    expect(screen.getByTestId("basis-of-assessment").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+  });
+
+  it("calls runtime once in explicit runtime mode and binds only P-S01/P-S02/P-S05", async () => {
+    const fetchMock = stubAnalyze(goldenAnalyzeData());
+    render(<NumberEnergyPage runtimeMode />);
+    expect(fetchMock).not.toHaveBeenCalled();
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("result-section").getAttribute("data-preview-state")).toBe("runtime");
+    });
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    const [, init] = fetchMock.mock.calls[0] as [string, { method?: string; body?: string }];
+    expect(init.method).toBe("POST");
+    expect(JSON.parse(init.body ?? "{}")).toEqual({
+      number: "0328278786",
+      purpose_context: "phone_number",
+    });
+    const pairDigits = Array.from(
+      screen.getByTestId("pair-strip").querySelectorAll("[data-testid^='pair-digits-']"),
+    ).map((node) => node.textContent);
+    expect(pairDigits).toEqual(["32", "28", "82", "27", "78", "87", "78", "86"]);
+    expect(pairDigits.filter((item) => item === "78")).toHaveLength(2);
+    expect(screen.getByTestId("energy-map").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("qs-favorable-value").textContent).toBe("7 cặp");
+    expect(screen.getByTestId("qs-challenging-value").textContent).toBe("1 cặp");
+    expect(screen.getByTestId("qs-primary-value").textContent).toBe("Diên Niên");
+    expect(screen.getByTestId("qs-terminal-value").textContent).toBe("Thiên Y");
+    expect(screen.getByTestId("quick-structure").getAttribute("data-slot-source")).toBe("RUNTIME");
+    const distCounts = Array.from(
+      screen.getByTestId("energy-distribution-list").querySelectorAll("[data-testid^='dist-count-']"),
+    ).map((node) => node.textContent);
+    expect(distCounts).toEqual(["2", "2", "3", "0", "1", "0", "0", "0"]);
+    expect(screen.getByTestId("energy-distribution").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("hero-identity").textContent).toBe("0328 278 786");
+    expect(screen.getByTestId("hero-score").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("score-total").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("wealth-stages").querySelectorAll("[data-testid^='wf-stage-']")).toHaveLength(4);
+    expect(screen.getByTestId("triple-list").querySelectorAll("[data-testid^='triple-card-']")).toHaveLength(7);
+    expect(screen.getByTestId("expert-details").hasAttribute("hidden")).toBe(true);
+    const page = screen.getByTestId("number-energy-page").textContent || "";
+    for (const token of BIND_FORBIDDEN) {
+      expect(page).not.toContain(token);
+    }
+  });
+
+  it("binds P-S00 Hero from view.hero when runtime score differs", async () => {
+    stubAnalyze({
+      ...goldenAnalyzeData(),
+      score: {
+        total: 11,
+        max: 100,
+        display: "11 / 100",
+        grade: "YẾU",
+        verified_by_runtime: true,
+        breakdown: [
+          { label: "Cấu trúc năng lượng", earned: 1, max: 25 },
+          { label: "Dòng tài vận", earned: 2, max: 25 },
+          { label: "Công việc & trợ lực", earned: 3, max: 20 },
+          { label: "Ổn định & rủi ro", earned: 2, max: 15 },
+          { label: "Năng lượng kết", earned: 3, max: 15 },
+        ],
+        reasons: [
+          { title: "Runtime score", summary: "Should not bind P-S08 in RB09." },
+          { title: "Runtime score", summary: "Should not bind P-S08 in RB09." },
+          { title: "Runtime score", summary: "Should not bind P-S08 in RB09." },
+          { title: "Runtime score", summary: "Should not bind P-S08 in RB09." },
+        ],
+      },
+      grade: "YẾU",
+      verified_by_runtime: true,
+    });
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("energy-map").getAttribute("data-slot-source")).toBe("RUNTIME");
+    });
+    expect(screen.getByTestId("hero-score").textContent).toBe("11 / 100");
+    expect(screen.getByTestId("hero-grade").textContent).toBe("YẾU");
+    expect(screen.getByTestId("score-total").textContent).toBe("11 / 100");
+    expect(screen.getByTestId("score-grade").textContent).toBe("YẾU");
+  });
+
+  it("falls back to Golden for a missing runtime pair slot", async () => {
+    const data = goldenAnalyzeData();
+    delete data.pair_occurrences;
+    stubAnalyze(data);
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("result-section").getAttribute("data-preview-state")).toBe("runtime");
+    });
+    expect(screen.getByTestId("energy-map").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    const pairDigits = Array.from(
+      screen.getByTestId("pair-strip").querySelectorAll("[data-testid^='pair-digits-']"),
+    ).map((node) => node.textContent);
+    expect(pairDigits).toEqual(["32", "28", "82", "27", "78", "87", "78", "86"]);
+    expect(screen.getByTestId("quick-structure").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("energy-distribution").getAttribute("data-slot-source")).toBe("RUNTIME");
+  });
+
+  it("shows a safe runtime error and does not reveal a partial result", async () => {
+    stubAnalyze({ detail: "Traceback (most recent call last): energy_id" }, 500);
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("input-error").textContent).toBe("Không thể hoàn tất phân tích lúc này.");
+    });
+    expect((screen.getByTestId("result-section") as HTMLElement).hidden).toBe(true);
+    const page = screen.getByTestId("number-energy-page").textContent || "";
+    expect(page).not.toContain("Traceback");
+    expect(page).not.toContain("energy_id");
+    expect(page).not.toContain("HTTP_ERROR");
+  });
+});
+
+describe("Number Energy RB10 explicit runtime bind P-S03", () => {
+  const WEALTH_FORBIDDEN = [
+    "wealth_node",
+    "PRIMARY_WEALTH",
+    "energy_id",
+    "source_span",
+    "verified_by_runtime",
+    "DIEN_NIEN",
+    "CAT",
+    "HUNG",
+  ];
+
+  function stubAnalyze(data: Record<string, unknown>, status = 200): ReturnType<typeof vi.fn> {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: status >= 200 && status < 300,
+      status,
+      text: async () => JSON.stringify({ success: status < 300, data }),
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    return fetchMock;
+  }
+
+  it("binds P-S03 from runtime view and keeps RB09 slots bound", async () => {
+    const fetchMock = stubAnalyze(goldenAnalyzeData());
+    render(<NumberEnergyPage runtimeMode />);
+    expect(fetchMock).not.toHaveBeenCalled();
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("wealth-flow").getAttribute("data-slot-source")).toBe("RUNTIME");
+    });
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(screen.getByTestId("wf-label-0").textContent).toBe("Tài vận");
+    expect(screen.getByTestId("wf-headline-0").textContent).toBe("Có Thiên Y");
+    expect(screen.getByTestId("wf-evidence-0").textContent).toBe("27 · 86");
+    expect(screen.queryByTestId("wf-interaction-0")).toBeNull();
+    expect(screen.getByTestId("wf-label-1").textContent).toBe("Tài từ đâu?");
+    expect(screen.getByTestId("wf-headline-1").textContent).toBe("Quý nhân & cơ hội");
+    expect(screen.getByTestId("wf-evidence-1").textContent).toBe("827");
+    expect(screen.getByTestId("wf-interaction-1").textContent).toBe("Sinh Khí → Thiên Y");
+    expect(screen.getByTestId("wf-label-2").textContent).toBe("Tài đi đâu?");
+    expect(screen.getByTestId("wf-headline-2").textContent).toBe("Sự nghiệp & lập nghiệp");
+    expect(screen.getByTestId("wf-evidence-2").textContent).toBe("278");
+    expect(screen.getByTestId("wf-interaction-2").textContent).toBe("Thiên Y → Diên Niên");
+    expect(screen.getByTestId("wf-label-3").textContent).toBe("Hậu vận");
+    expect(screen.getByTestId("wf-headline-3").textContent).toBe("Thiên Y");
+    expect(screen.getByTestId("wf-evidence-3").textContent).toBe("786");
+    expect(screen.getByTestId("wf-interaction-3").textContent).toBe("Diên Niên → Thiên Y");
+    expect(screen.getByTestId("wf-story-0").textContent).toBe("Quý nhân & cơ hội");
+    expect(screen.getByTestId("wf-story-1").textContent).toBe("Tài");
+    expect(screen.getByTestId("wf-story-2").textContent).toBe("Sự nghiệp");
+    expect(screen.getByTestId("wf-story-3").textContent).toBe("Tài");
+    expect(screen.getByTestId("energy-map").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("quick-structure").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("energy-distribution").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("hero-score").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("triple-list").querySelectorAll("[data-testid^='triple-card-']")).toHaveLength(7);
+    expect(screen.getByTestId("score-total").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("expert-details").hasAttribute("hidden")).toBe(true);
+    const section = screen.getByTestId("wealth-flow").textContent || "";
+    expect(section).not.toContain("chắc chắn");
+    expect(section).not.toContain("phát tài");
+    const page = screen.getByTestId("number-energy-page").textContent || "";
+    for (const token of WEALTH_FORBIDDEN) {
+      expect(page).not.toContain(token);
+    }
+  });
+
+  it("binds P-S00 Hero from view.hero when runtime score differs", async () => {
+    stubAnalyze({
+      ...goldenAnalyzeData(),
+      score: {
+        total: 11,
+        max: 100,
+        display: "11 / 100",
+        grade: "YẾU",
+        verified_by_runtime: true,
+        breakdown: [
+          { label: "Cấu trúc năng lượng", earned: 1, max: 25 },
+          { label: "Dòng tài vận", earned: 2, max: 25 },
+          { label: "Công việc & trợ lực", earned: 3, max: 20 },
+          { label: "Ổn định & rủi ro", earned: 2, max: 15 },
+          { label: "Năng lượng kết", earned: 3, max: 15 },
+        ],
+        reasons: [
+          { title: "Runtime score", summary: "Should not bind P-S08." },
+          { title: "Runtime score", summary: "Should not bind P-S08." },
+          { title: "Runtime score", summary: "Should not bind P-S08." },
+          { title: "Runtime score", summary: "Should not bind P-S08." },
+        ],
+      },
+      grade: "YẾU",
+      verified_by_runtime: true,
+    });
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("wealth-flow").getAttribute("data-slot-source")).toBe("RUNTIME");
+    });
+    expect(screen.getByTestId("hero-score").textContent).toBe("11 / 100");
+    expect(screen.getByTestId("hero-grade").textContent).toBe("YẾU");
+    expect(screen.getByTestId("score-total").textContent).toBe("11 / 100");
+    expect(screen.getByTestId("score-grade").textContent).toBe("YẾU");
+    expect(screen.getByTestId("wf-headline-0").textContent).toBe("Có Thiên Y");
+  });
+
+  it.each([
+    [
+      "missing",
+      (data: Record<string, unknown>) => {
+        delete data.wealth_flow;
+        delete data.wealth_story;
+      },
+    ],
+    [
+      "null",
+      (data: Record<string, unknown>) => {
+        data.wealth_flow = null;
+        data.wealth_story = null;
+      },
+    ],
+    [
+      "incomplete",
+      (data: Record<string, unknown>) => {
+        data.wealth_flow = {
+          stages: [
+            {
+              id: "WF-01",
+              label: "Tài vận",
+              headline: "Runtime incomplete wealth",
+              evidence: "99",
+              interaction: "",
+              narrative: "Should fall back because only one stage is present.",
+            },
+          ],
+        };
+        data.wealth_story = { nodes: ["Runtime"], display: "Runtime", synthesis: "Runtime gap." };
+      },
+    ],
+  ])("falls back to Golden P-S03 when wealth_flow is %s", async (_label, mutate) => {
+    const data = goldenAnalyzeData();
+    mutate(data);
+    stubAnalyze(data);
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("result-section").getAttribute("data-preview-state")).toBe("runtime");
+    });
+    expect(screen.getByTestId("wealth-flow").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    expect(screen.getByTestId("wf-label-0").textContent).toBe("Tài vận");
+    expect(screen.getByTestId("wf-headline-0").textContent).toBe("Có Thiên Y");
+    expect(screen.getByTestId("wf-evidence-0").textContent).toBe("27 · 86");
+    expect(screen.getByTestId("wealth-flow").textContent).not.toContain("Runtime incomplete wealth");
+    expect(screen.getByTestId("energy-map").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("quick-structure").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("energy-distribution").getAttribute("data-slot-source")).toBe("RUNTIME");
+  });
+});
+
+describe("Number Energy RB11 explicit runtime bind P-S04", () => {
+  const TRIPLE_FORBIDDEN = [
+    "HH_TO_SK",
+    "FEATURED",
+    "STANDARD",
+    "COMPACT",
+    "energy_id",
+    "source_span",
+    "interpretation_status",
+    "DIEN_NIEN",
+    "CAT",
+    "HUNG",
+    "verified_by_runtime",
+  ];
+
+  const EXPECTED_TRIPLES = [
+    ["328", "Khẩu tài tốt", "Họa Hại", "Sinh Khí", "standard"],
+    ["282", "Quý nhân và cơ hội được tăng cường", "Sinh Khí", "Sinh Khí", "standard"],
+    ["827", "Quý nhân mang đến Tài vận", "Sinh Khí", "Thiên Y", "featured"],
+    ["278", "Tài đi vào sự nghiệp", "Thiên Y", "Diên Niên", "featured"],
+    ["787", "Năng lực nghề nghiệp được tăng cường", "Diên Niên", "Diên Niên", "compact"],
+    ["878", "Năng lực nghề nghiệp được tăng cường", "Diên Niên", "Diên Niên", "compact"],
+    ["786", "Năng lực nghề nghiệp tạo Tài", "Diên Niên", "Thiên Y", "featured"],
+  ] as const;
+
+  function stubAnalyze(data: Record<string, unknown>, status = 200): ReturnType<typeof vi.fn> {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: status >= 200 && status < 300,
+      status,
+      text: async () => JSON.stringify({ success: status < 300, data }),
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    return fetchMock;
+  }
+
+  it("binds P-S04 from runtime view and keeps RB09/RB10 slots bound", async () => {
+    const fetchMock = stubAnalyze(goldenAnalyzeData());
+    render(<NumberEnergyPage runtimeMode />);
+    expect(fetchMock).not.toHaveBeenCalled();
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("triple-story").getAttribute("data-slot-source")).toBe("RUNTIME");
+    });
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    const cards = screen.getByTestId("triple-list").querySelectorAll("[data-testid^='triple-card-']");
+    expect(cards).toHaveLength(7);
+    const digits = Array.from(cards).map((card) => card.getAttribute("data-triple-digits"));
+    expect(digits).toEqual(["328", "282", "827", "278", "787", "878", "786"]);
+    expect(digits.filter((value) => value === "787" || value === "878")).toEqual(["787", "878"]);
+    EXPECTED_TRIPLES.forEach((expected, index) => {
+      const [tripleDigits, title, source, target, priority] = expected;
+      expect(screen.getByTestId(`triple-digits-${index}`).textContent).toBe(tripleDigits);
+      expect(screen.getByTestId(`triple-title-${index}`).textContent).toBe(title);
+      expect(screen.getByTestId(`triple-source-${index}`).textContent).toBe(source);
+      expect(screen.getByTestId(`triple-target-${index}`).textContent).toBe(target);
+      expect(screen.getByTestId(`triple-card-${index}`).getAttribute("data-priority")).toBe(priority);
+    });
+    expect(screen.getByTestId("triple-card-2").getAttribute("data-priority")).toBe("featured");
+    expect(screen.getByTestId("triple-card-3").getAttribute("data-priority")).toBe("featured");
+    expect(screen.getByTestId("triple-card-6").getAttribute("data-priority")).toBe("featured");
+    expect(screen.getByTestId("triple-card-0").getAttribute("data-priority")).toBe("standard");
+    expect(screen.getByTestId("triple-card-1").getAttribute("data-priority")).toBe("standard");
+    expect(screen.getByTestId("triple-card-4").getAttribute("data-priority")).toBe("compact");
+    expect(screen.getByTestId("triple-card-5").getAttribute("data-priority")).toBe("compact");
+    expect(screen.getByTestId("energy-map").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("quick-structure").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("wealth-flow").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("energy-distribution").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("hero-score").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("score-total").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("expert-details").hasAttribute("hidden")).toBe(true);
+    const page = screen.getByTestId("number-energy-page").textContent || "";
+    for (const token of TRIPLE_FORBIDDEN) {
+      expect(page).not.toContain(token);
+    }
+  });
+
+  it("preserves runtime triple order and does not merge 787 with 878", async () => {
+    const data = goldenAnalyzeData();
+    const rows = data.triple_occurrences as Record<string, unknown>[];
+    data.triple_occurrences = [rows[6], rows[5], rows[4], rows[3], rows[2], rows[1], rows[0]];
+    stubAnalyze(data);
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("triple-story").getAttribute("data-slot-source")).toBe("RUNTIME");
+    });
+    const digits = Array.from(
+      screen.getByTestId("triple-list").querySelectorAll("[data-testid^='triple-card-']"),
+    ).map((card) => card.getAttribute("data-triple-digits"));
+    expect(digits).toEqual(["786", "878", "787", "278", "827", "282", "328"]);
+    expect(screen.getByTestId("triple-card-1").getAttribute("data-triple-digits")).toBe("878");
+    expect(screen.getByTestId("triple-card-2").getAttribute("data-triple-digits")).toBe("787");
+    expect(screen.getByTestId("triple-title-1").textContent).toBe("Năng lực nghề nghiệp được tăng cường");
+    expect(screen.getByTestId("triple-title-2").textContent).toBe("Năng lực nghề nghiệp được tăng cường");
+  });
+
+  it("binds P-S00 Hero from view.hero when runtime triples and score differ", async () => {
+    stubAnalyze({
+      ...goldenAnalyzeData(),
+      triple_occurrences: [
+        tripleRow(
+          "999",
+          "Họa Hại",
+          "Sinh Khí",
+          "Runtime triple binds P-S04",
+          "Runtime triple copy should bind Triple Story.",
+          ["Tài vận"],
+          "FEATURED",
+        ),
+      ],
+      score: {
+        total: 11,
+        max: 100,
+        display: "11 / 100",
+        grade: "YẾU",
+        verified_by_runtime: true,
+        breakdown: [
+          { label: "Cấu trúc năng lượng", earned: 1, max: 25 },
+          { label: "Dòng tài vận", earned: 2, max: 25 },
+          { label: "Công việc & trợ lực", earned: 3, max: 20 },
+          { label: "Ổn định & rủi ro", earned: 2, max: 15 },
+          { label: "Năng lượng kết", earned: 3, max: 15 },
+        ],
+        reasons: [
+          { title: "Runtime score", summary: "Should not bind P-S08." },
+          { title: "Runtime score", summary: "Should not bind P-S08." },
+          { title: "Runtime score", summary: "Should not bind P-S08." },
+          { title: "Runtime score", summary: "Should not bind P-S08." },
+        ],
+      },
+      grade: "YẾU",
+      verified_by_runtime: true,
+    });
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("triple-story").getAttribute("data-slot-source")).toBe("RUNTIME");
+    });
+    expect(screen.getByTestId("triple-digits-0").textContent).toBe("999");
+    expect(screen.getByTestId("triple-title-0").textContent).toBe("Runtime triple binds P-S04");
+    expect(screen.getByTestId("triple-list").querySelectorAll("[data-testid^='triple-card-']")).toHaveLength(1);
+    expect(screen.getByTestId("hero-score").textContent).toBe("11 / 100");
+    expect(screen.getByTestId("hero-grade").textContent).toBe("YẾU");
+    expect(screen.getByTestId("score-total").textContent).toBe("11 / 100");
+  });
+
+  it.each([
+    [
+      "missing",
+      (data: Record<string, unknown>) => {
+        delete data.triple_occurrences;
+      },
+    ],
+    [
+      "null",
+      (data: Record<string, unknown>) => {
+        data.triple_occurrences = null;
+      },
+    ],
+    [
+      "empty",
+      (data: Record<string, unknown>) => {
+        data.triple_occurrences = [];
+      },
+    ],
+    [
+      "incomplete",
+      (data: Record<string, unknown>) => {
+        data.triple_occurrences = [
+          {
+            digits: "999",
+            left_energy_label: "Họa Hại",
+            right_energy_label: "Sinh Khí",
+            customer_title: "",
+            customer_summary: "",
+            domains: ["Tài vận"],
+            priority: "FEATURED",
+            interpretation_status: "DEFINED",
+          },
+        ];
+      },
+    ],
+  ])("falls back to Golden P-S04 when triples are %s", async (_label, mutate) => {
+    const data = goldenAnalyzeData();
+    mutate(data);
+    stubAnalyze(data);
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("result-section").getAttribute("data-preview-state")).toBe("runtime");
+    });
+    expect(screen.getByTestId("triple-story").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    expect(screen.getByTestId("triple-digits-0").textContent).toBe("328");
+    expect(screen.getByTestId("triple-title-0").textContent).toBe("Khẩu tài tốt");
+    expect(screen.getByTestId("triple-list").querySelectorAll("[data-testid^='triple-card-']")).toHaveLength(7);
+    expect(screen.getByTestId("triple-list").textContent).not.toContain("Runtime triple binds P-S04");
+    expect(screen.getByTestId("energy-map").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("wealth-flow").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("quick-structure").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("energy-distribution").getAttribute("data-slot-source")).toBe("RUNTIME");
+  });
+
+  it("omits UNDEFINED triple narrative instead of composing from left/right", async () => {
+    const data = goldenAnalyzeData();
+    data.triple_occurrences = [
+      {
+        digits: "999",
+        left_energy_label: "Họa Hại",
+        right_energy_label: "Họa Hại",
+        interpretation_status: "UNDEFINED",
+        priority: "STANDARD",
+        domains: [],
+      },
+    ];
+    stubAnalyze(data);
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("triple-story").getAttribute("data-slot-source")).toBe("RUNTIME");
+    });
+    expect(screen.getByTestId("triple-digits-0").textContent).toBe("999");
+    expect(screen.getByTestId("triple-source-0").textContent).toBe("Họa Hại");
+    expect(screen.getByTestId("triple-target-0").textContent).toBe("Họa Hại");
+    expect(screen.queryByTestId("triple-title-0")).toBeNull();
+    const section = screen.getByTestId("triple-story").textContent || "";
+    expect(section).not.toContain("interpretation_status");
+    expect(section).not.toContain("UNDEFINED");
+    expect(section).not.toContain("HH_TO_SK");
+  });
+});
+
+describe("Number Energy RB12 explicit runtime bind P-S06/P-S07", () => {
+  const DOMAIN_FINDING_FORBIDDEN = [
+    "domain_key",
+    "copy_key",
+    "finding_key",
+    "evidence_id",
+    "energy_id",
+    "source_span",
+    "verified_by_runtime",
+    "DIEN_NIEN",
+    "CAT",
+    "HUNG",
+  ];
+
+  const EXPECTED_DOMAINS = [
+    ["Tài vận", "Có đường Tài tương đối rõ"],
+    ["Công việc & sự nghiệp", "Đây là một trong những điểm mạnh nhất của dãy"],
+    ["Tình cảm & quan hệ", "Quan hệ xã hội có yếu tố hỗ trợ"],
+    ["Tính cách & năng lực", "Trách nhiệm và năng lực làm việc khá rõ"],
+    ["Cân bằng trường khí", "Cát tinh giữ vai trò chủ đạo"],
+  ] as const;
+
+  const EXPECTED_STRENGTHS = [
+    "Quý nhân có thể mở đường cho Tài",
+    "Năng lực nghề nghiệp nổi bật",
+    "Công việc có khả năng tạo thành quả",
+    "Khẩu tài có thể phát huy tích cực",
+  ] as const;
+
+  const EXPECTED_CAUTIONS = [
+    "Cần chú ý cách sử dụng lời nói",
+    "Không nên chỉ nhìn số lượng Cát tinh",
+  ] as const;
+
+  function stubAnalyze(data: Record<string, unknown>, status = 200): ReturnType<typeof vi.fn> {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: status >= 200 && status < 300,
+      status,
+      text: async () => JSON.stringify({ success: status < 300, data }),
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    return fetchMock;
+  }
+
+  it("binds P-S06/P-S07 from runtime view and keeps RB09-RB11 slots bound", async () => {
+    const fetchMock = stubAnalyze(goldenAnalyzeData());
+    render(<NumberEnergyPage runtimeMode />);
+    expect(fetchMock).not.toHaveBeenCalled();
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("domain-insights").getAttribute("data-slot-source")).toBe("RUNTIME");
+    });
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(screen.getByTestId("strengths-cautions").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("domain-list").querySelectorAll("[data-testid^='domain-card-']")).toHaveLength(5);
+    EXPECTED_DOMAINS.forEach(([title, conclusion], index) => {
+      expect(screen.getByTestId(`domain-title-${index}`).textContent).toBe(title);
+      expect(screen.getByTestId(`domain-conclusion-${index}`).textContent).toBe(conclusion);
+    });
+    expect(screen.queryByText("Giao tiếp & nhân duyên")).toBeNull();
+    expect(screen.queryByTestId("domain-card-5")).toBeNull();
+    EXPECTED_STRENGTHS.forEach((title, index) => {
+      expect(screen.getByTestId(`strength-title-${index}`).textContent).toBe(title);
+    });
+    EXPECTED_CAUTIONS.forEach((title, index) => {
+      expect(screen.getByTestId(`caution-title-${index}`).textContent).toBe(title);
+    });
+    expect(screen.getByTestId("energy-map").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("quick-structure").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("wealth-flow").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("triple-story").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("energy-distribution").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("hero-score").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("score-total").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("expert-details").hasAttribute("hidden")).toBe(true);
+    const domains = screen.getByTestId("domain-insights").textContent || "";
+    const findings = screen.getByTestId("strengths-cautions").textContent || "";
+    expect(domains).not.toContain("chắc chắn");
+    expect(domains).not.toContain("rất giàu");
+    expect(domains).not.toContain("chẩn đoán");
+    expect(findings).not.toContain("chắc chắn");
+    expect(findings).not.toContain("chẩn đoán");
+    const page = screen.getByTestId("number-energy-page").textContent || "";
+    for (const token of DOMAIN_FINDING_FORBIDDEN) {
+      expect(page).not.toContain(token);
+    }
+  });
+
+  it("binds P-S00 Hero from view.hero when runtime domains and findings differ", async () => {
+    stubAnalyze({
+      ...goldenAnalyzeData(),
+      domain_insights: [0, 1, 2, 3, 4].map((index) => ({
+        domain: `Runtime domain ${index} binds P-S06`,
+        conclusion: "Runtime domain conclusion",
+        narrative: "Runtime domain narrative",
+      })),
+      strengths: [{ title: "Runtime strength binds P-S07", summary: "Runtime strength copy." }],
+      cautions: [{ title: "Runtime caution binds P-S07", summary: "Runtime caution copy." }],
+      score: {
+        total: 11,
+        max: 100,
+        display: "11 / 100",
+        grade: "YẾU",
+        verified_by_runtime: true,
+        breakdown: [
+          { label: "Cấu trúc năng lượng", earned: 1, max: 25 },
+          { label: "Dòng tài vận", earned: 2, max: 25 },
+          { label: "Công việc & trợ lực", earned: 3, max: 20 },
+          { label: "Ổn định & rủi ro", earned: 2, max: 15 },
+          { label: "Năng lượng kết", earned: 3, max: 15 },
+        ],
+        reasons: [
+          { title: "Runtime score", summary: "Should not bind P-S08." },
+          { title: "Runtime score", summary: "Should not bind P-S08." },
+          { title: "Runtime score", summary: "Should not bind P-S08." },
+          { title: "Runtime score", summary: "Should not bind P-S08." },
+        ],
+      },
+      grade: "YẾU",
+      verified_by_runtime: true,
+    });
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("domain-insights").getAttribute("data-slot-source")).toBe("RUNTIME");
+    });
+    expect(screen.getByTestId("domain-title-0").textContent).toBe("Runtime domain 0 binds P-S06");
+    expect(screen.getByTestId("strength-title-0").textContent).toBe("Runtime strength binds P-S07");
+    expect(screen.getByTestId("caution-title-0").textContent).toBe("Runtime caution binds P-S07");
+    expect(screen.getByTestId("hero-score").textContent).toBe("11 / 100");
+    expect(screen.getByTestId("score-total").textContent).toBe("11 / 100");
+  });
+
+  it.each([
+    [
+      "missing",
+      (data: Record<string, unknown>) => {
+        delete data.domain_insights;
+      },
+    ],
+    [
+      "null",
+      (data: Record<string, unknown>) => {
+        data.domain_insights = null;
+      },
+    ],
+    [
+      "empty",
+      (data: Record<string, unknown>) => {
+        data.domain_insights = [];
+      },
+    ],
+    [
+      "incomplete",
+      (data: Record<string, unknown>) => {
+        data.domain_insights = [
+          {
+            domain: "Runtime incomplete domain",
+            conclusion: "Should fall back because only one domain is present.",
+            narrative: "Incomplete domain payload.",
+          },
+        ];
+      },
+    ],
+  ])("falls back to Golden P-S06 when domains are %s", async (_label, mutate) => {
+    const data = goldenAnalyzeData();
+    mutate(data);
+    stubAnalyze(data);
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("result-section").getAttribute("data-preview-state")).toBe("runtime");
+    });
+    expect(screen.getByTestId("domain-insights").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    expect(screen.getByTestId("domain-title-0").textContent).toBe("Tài vận");
+    expect(screen.getByTestId("domain-conclusion-0").textContent).toBe("Có đường Tài tương đối rõ");
+    expect(screen.getByTestId("domain-list").querySelectorAll("[data-testid^='domain-card-']")).toHaveLength(5);
+    expect(screen.getByTestId("domain-insights").textContent).not.toContain("Runtime incomplete domain");
+    expect(screen.getByTestId("strengths-cautions").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("energy-map").getAttribute("data-slot-source")).toBe("RUNTIME");
+  });
+
+  it.each([
+    [
+      "missing",
+      (data: Record<string, unknown>) => {
+        delete data.strengths;
+        delete data.cautions;
+      },
+    ],
+    [
+      "null",
+      (data: Record<string, unknown>) => {
+        data.strengths = null;
+        data.cautions = null;
+      },
+    ],
+    [
+      "empty",
+      (data: Record<string, unknown>) => {
+        data.strengths = [];
+        data.cautions = [];
+      },
+    ],
+    [
+      "incomplete",
+      (data: Record<string, unknown>) => {
+        data.strengths = [{ title: "", summary: "Runtime incomplete strength." }];
+        data.cautions = [{ title: "Runtime incomplete caution", summary: "Should fall back." }];
+      },
+    ],
+  ])("falls back to Golden P-S07 when strengths/cautions are %s", async (_label, mutate) => {
+    const data = goldenAnalyzeData();
+    mutate(data);
+    stubAnalyze(data);
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("result-section").getAttribute("data-preview-state")).toBe("runtime");
+    });
+    expect(screen.getByTestId("strengths-cautions").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    expect(screen.getByTestId("strength-title-0").textContent).toBe("Quý nhân có thể mở đường cho Tài");
+    expect(screen.getByTestId("caution-title-0").textContent).toBe("Cần chú ý cách sử dụng lời nói");
+    expect(screen.getByTestId("strengths-cautions").textContent).not.toContain("Runtime incomplete caution");
+    expect(screen.getByTestId("domain-insights").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("triple-story").getAttribute("data-slot-source")).toBe("RUNTIME");
+  });
+
+  it("does not add an optional sixth communication domain", async () => {
+    const data = goldenAnalyzeData();
+    const rows = [...((data.domain_insights as Record<string, unknown>[]) ?? [])];
+    rows.push({
+      domain: "Giao tiếp & nhân duyên",
+      conclusion: "Optional domain must not appear.",
+      narrative: "Runtime must not bind a sixth communication domain.",
+    });
+    data.domain_insights = rows;
+    stubAnalyze(data);
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("result-section").getAttribute("data-preview-state")).toBe("runtime");
+    });
+    expect(screen.getByTestId("domain-insights").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    expect(screen.getByTestId("domain-list").querySelectorAll("[data-testid^='domain-card-']")).toHaveLength(5);
+    expect(screen.queryByText("Giao tiếp & nhân duyên")).toBeNull();
+    expect(screen.getByTestId("domain-title-0").textContent).toBe("Tài vận");
+  });
+});
+
+describe("Number Energy RB13 explicit runtime bind P-S08", () => {
+  const SCORE_FORBIDDEN = [
+    "verified_by_runtime",
+    "score_axis",
+    "axis_key",
+    "energy_id",
+    "source_span",
+    "DIEN_NIEN",
+    "CAT",
+    "HUNG",
+  ];
+
+  const EXPECTED_DIMENSIONS = [
+    ["Cấu trúc năng lượng", "21 / 25"],
+    ["Dòng tài vận", "22 / 25"],
+    ["Công việc & trợ lực", "17 / 20"],
+    ["Ổn định & rủi ro", "10 / 15"],
+    ["Năng lượng kết", "12 / 15"],
+  ] as const;
+
+  const EXPECTED_REASONS = [
+    "Cấu trúc Cát giữ vai trò chủ đạo",
+    "Dòng Tài có nguồn rõ",
+    "Công việc là trục mạnh",
+    "Họa Hại cần được sử dụng đúng cách",
+  ] as const;
+
+  function stubAnalyze(data: Record<string, unknown>, status = 200): ReturnType<typeof vi.fn> {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: status >= 200 && status < 300,
+      status,
+      text: async () => JSON.stringify({ success: status < 300, data }),
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    return fetchMock;
+  }
+
+  it("binds P-S08 from runtime view and keeps RB09-RB12 slots bound", async () => {
+    const fetchMock = stubAnalyze(goldenAnalyzeData());
+    render(<NumberEnergyPage runtimeMode />);
+    expect(fetchMock).not.toHaveBeenCalled();
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("score-breakdown").getAttribute("data-slot-source")).toBe("RUNTIME");
+    });
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(screen.getByTestId("score-total").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("score-grade").textContent).toBe("TỐT");
+    expect(screen.queryByTestId("score-static-note")).toBeNull();
+    EXPECTED_DIMENSIONS.forEach(([label, points], index) => {
+      expect(screen.getByTestId(`score-dim-label-${index}`).textContent).toBe(label);
+      expect(screen.getByTestId(`score-dim-points-${index}`).textContent).toBe(points);
+    });
+    EXPECTED_REASONS.forEach((title, index) => {
+      expect(screen.getByTestId(`score-reason-title-${index}`).textContent).toBe(title);
+    });
+    expect(screen.getByTestId("energy-map").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("quick-structure").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("wealth-flow").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("triple-story").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("energy-distribution").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("domain-insights").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("strengths-cautions").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("hero-score").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("hero-grade").textContent).toBe("TỐT");
+    expect(screen.getByTestId("expert-details").hasAttribute("hidden")).toBe(true);
+    const section = screen.getByTestId("score-breakdown").textContent || "";
+    expect(section).not.toContain("82%");
+    expect(section).not.toContain("%");
+    expect(section).not.toContain("chắc chắn");
+    expect(section).not.toContain("chẩn đoán");
+    const page = screen.getByTestId("number-energy-page").textContent || "";
+    for (const token of SCORE_FORBIDDEN) {
+      expect(page).not.toContain(token);
+    }
+  });
+
+  it("binds P-S00 Hero from view.hero when runtime score differs", async () => {
+    stubAnalyze({
+      ...goldenAnalyzeData(),
+      score: {
+        total: 11,
+        max: 100,
+        display: "11 / 100",
+        grade: "YẾU",
+        verified_by_runtime: true,
+        breakdown: [
+          { label: "Cấu trúc năng lượng", earned: 1, max: 25 },
+          { label: "Dòng tài vận", earned: 2, max: 25 },
+          { label: "Công việc & trợ lực", earned: 3, max: 20 },
+          { label: "Ổn định & rủi ro", earned: 2, max: 15 },
+          { label: "Năng lượng kết", earned: 3, max: 15 },
+        ],
+        reasons: [
+          { title: "Runtime score binds P-S08", summary: "Runtime score copy." },
+          { title: "Runtime score binds P-S08", summary: "Runtime score copy." },
+          { title: "Runtime score binds P-S08", summary: "Runtime score copy." },
+          { title: "Runtime score binds P-S08", summary: "Runtime score copy." },
+        ],
+      },
+      grade: "YẾU",
+      verified_by_runtime: true,
+    });
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("score-breakdown").getAttribute("data-slot-source")).toBe("RUNTIME");
+    });
+    expect(screen.getByTestId("score-total").textContent).toBe("11 / 100");
+    expect(screen.getByTestId("score-grade").textContent).toBe("YẾU");
+    expect(screen.getByTestId("score-reason-title-0").textContent).toBe("Runtime score binds P-S08");
+    expect(screen.getByTestId("hero-score").textContent).toBe("11 / 100");
+    expect(screen.getByTestId("hero-grade").textContent).toBe("YẾU");
+  });
+
+  it.each([
+    [
+      "missing",
+      (data: Record<string, unknown>) => {
+        delete data.score;
+      },
+    ],
+    [
+      "null",
+      (data: Record<string, unknown>) => {
+        data.score = null;
+      },
+    ],
+    [
+      "incomplete",
+      (data: Record<string, unknown>) => {
+        data.score = {
+          total: 11,
+          max: 100,
+          display: "11 / 100",
+          grade: "YẾU",
+          verified_by_runtime: true,
+          breakdown: [{ label: "Cấu trúc năng lượng", earned: 1, max: 25 }],
+          reasons: [{ title: "Runtime incomplete score", summary: "Should fall back." }],
+        };
+      },
+    ],
+    [
+      "unverified",
+      (data: Record<string, unknown>) => {
+        data.verified_by_runtime = false;
+        data.score = {
+          ...(data.score as Record<string, unknown>),
+          display: "11 / 100",
+          grade: "YẾU",
+          verified_by_runtime: false,
+        };
+      },
+    ],
+  ])("falls back to Golden P-S08 when score is %s", async (_label, mutate) => {
+    const data = goldenAnalyzeData();
+    mutate(data);
+    stubAnalyze(data);
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("result-section").getAttribute("data-preview-state")).toBe("runtime");
+    });
+    expect(screen.getByTestId("score-breakdown").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    expect(screen.getByTestId("score-total").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("score-grade").textContent).toBe("TỐT");
+    expect(screen.getByTestId("score-static-note").textContent).toContain("điểm minh họa của bản dựng tĩnh");
+    expect(screen.getByTestId("score-breakdown").textContent).not.toContain("Runtime incomplete score");
+    expect(screen.getByTestId("score-breakdown").textContent).not.toContain("11 / 100");
+    expect(screen.getByTestId("hero-score").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("domain-insights").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("triple-story").getAttribute("data-slot-source")).toBe("RUNTIME");
+  });
+});
+
+describe("Number Energy RB14 explicit runtime bind P-S09/P-S10", () => {
+  const ASSESS_BASIS_FORBIDDEN = [
+    "verified_by_runtime",
+    "fixture_id",
+    "presentation_fixture",
+    "evidence_id",
+    "copy_key",
+    "energy_id",
+    "source_span",
+    "DIEN_NIEN",
+    "CAT",
+    "HUNG",
+  ];
+
+  function stubAnalyze(data: Record<string, unknown>, status = 200): ReturnType<typeof vi.fn> {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: status >= 200 && status < 300,
+      status,
+      text: async () => JSON.stringify({ success: status < 300, data }),
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    return fetchMock;
+  }
+
+  it("binds P-S09 and P-S10 from runtime view and keeps RB09-RB13 slots bound", async () => {
+    const fetchMock = stubAnalyze(goldenAnalyzeData());
+    render(<NumberEnergyPage runtimeMode />);
+    expect(fetchMock).not.toHaveBeenCalled();
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("final-assessment").getAttribute("data-slot-source")).toBe("RUNTIME");
+    });
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(screen.getByTestId("basis-of-assessment").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("assessment-title").textContent).toBe("Đánh giá tổng thể");
+    expect(screen.getByTestId("assessment-story").textContent).toContain(
+      "Dãy số nổi bật ở Diên Niên, đi cùng Sinh Khí và Thiên Y.",
+    );
+    expect(screen.getByTestId("assessment-story").textContent).toContain(
+      "Quý nhân và cơ hội có khả năng dẫn tới Tài, trong khi năng lực nghề nghiệp tiếp tục đóng vai trò tạo thành quả ở phần cuối dãy.",
+    );
+    expect(screen.getByTestId("assessment-flow-0").textContent).toBe("QUÝ NHÂN");
+    expect(screen.getByTestId("assessment-flow-1").textContent).toBe("TÀI");
+    expect(screen.getByTestId("assessment-flow-2").textContent).toBe("SỰ NGHIỆP");
+    expect(screen.getByTestId("assessment-flow-3").textContent).toBe("TÀI");
+    expect(screen.getByTestId("recommendation-state").textContent).toBe("PHÙ HỢP ĐỂ TIẾP TỤC SỬ DỤNG");
+    expect(screen.getByTestId("recommendation-supporting").textContent).toBe(
+      "Dãy có nhiều yếu tố hỗ trợ, đặc biệt ở công việc, quý nhân và đường tạo Tài.",
+    );
+    expect(screen.getByTestId("basis-helper").textContent).toContain("không chỉ dựa trên số lượng Cát và Hung");
+    expect(screen.getByTestId("basis-principle-0").textContent).toContain("8 cặp");
+    expect(screen.getByTestId("basis-principle-1").textContent).toContain("bộ ba nổi bật");
+    expect(screen.getByTestId("basis-principle-2").textContent).toContain("dòng Tài vận");
+    expect(screen.getByTestId("basis-principle-3").textContent).toContain("năng lượng kết");
+    expect(screen.queryByTestId("basis-principle-4")).toBeNull();
+    expect(screen.getByTestId("basis-item-0-0").textContent).toBe("32 · Họa Hại");
+    expect(screen.getByTestId("basis-item-0-1").textContent).toBe("28 / 82 · Sinh Khí");
+    expect(screen.getByTestId("basis-item-0-2").textContent).toBe("27 / 86 · Thiên Y");
+    expect(screen.getByTestId("basis-item-0-3").textContent).toBe("78 / 87 / 78 · Diên Niên");
+    expect(screen.getByTestId("basis-item-1-0").textContent).toBe("827 · Sinh Khí → Thiên Y");
+    expect(screen.getByTestId("basis-item-1-1").textContent).toBe("278 · Thiên Y → Diên Niên");
+    expect(screen.getByTestId("basis-item-1-2").textContent).toBe("786 · Diên Niên → Thiên Y");
+    expect(screen.getByTestId("basis-item-2-0").textContent).toBe("82 / 100 · TỐT");
+    expect(screen.getByTestId("energy-map").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("quick-structure").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("wealth-flow").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("triple-story").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("energy-distribution").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("domain-insights").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("strengths-cautions").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("score-breakdown").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("hero-score").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("hero-grade").textContent).toBe("TỐT");
+    expect(screen.getByTestId("expert-details").hasAttribute("hidden")).toBe(true);
+    const assess = screen.getByTestId("final-assessment").textContent || "";
+    const basis = screen.getByTestId("basis-of-assessment").textContent || "";
+    expect(assess).not.toContain("chắc chắn");
+    expect(assess).not.toContain("chẩn đoán");
+    expect(assess).not.toContain("đổi số ngay");
+    expect(assess).not.toContain("mua sim");
+    expect(basis).not.toContain("chẩn đoán");
+    const page = screen.getByTestId("number-energy-page").textContent || "";
+    for (const token of ASSESS_BASIS_FORBIDDEN) {
+      expect(page).not.toContain(token);
+    }
+    expect(sourceOf("sections/FinalAssessment.tsx")).not.toContain("goldenScore");
+    expect(sourceOf("sections/FinalAssessment.tsx")).not.toContain("view.score");
+    expect(sourceOf("sections/BasisOfAssessment.tsx")).not.toContain("goldenPairs");
+    expect(sourceOf("sections/BasisOfAssessment.tsx")).not.toContain("goldenTriples");
+  });
+
+  it("binds P-S00 Hero from view.hero when runtime assessment and basis differ", async () => {
+    stubAnalyze({
+      ...goldenAnalyzeData(),
+      assessment: {
+        title: "Runtime assessment binds P-S09",
+        summary: "Runtime assessment copy.",
+        story_nodes: ["A", "B"],
+      },
+      recommendation: { label: "RUNTIME STATE", summary: "Runtime recommendation copy." },
+      evidence: [{ group: "Runtime evidence binds P-S10", items: ["runtime evidence item"] }],
+      score: {
+        total: 11,
+        max: 100,
+        display: "11 / 100",
+        grade: "YẾU",
+        verified_by_runtime: true,
+        breakdown: [
+          { label: "Cấu trúc năng lượng", earned: 1, max: 25 },
+          { label: "Dòng tài vận", earned: 2, max: 25 },
+          { label: "Công việc & trợ lực", earned: 3, max: 20 },
+          { label: "Ổn định & rủi ro", earned: 2, max: 15 },
+          { label: "Năng lượng kết", earned: 3, max: 15 },
+        ],
+        reasons: [
+          { title: "Runtime score", summary: "Runtime score copy." },
+          { title: "Runtime score", summary: "Runtime score copy." },
+          { title: "Runtime score", summary: "Runtime score copy." },
+          { title: "Runtime score", summary: "Runtime score copy." },
+        ],
+      },
+      grade: "YẾU",
+      verified_by_runtime: true,
+    });
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("final-assessment").getAttribute("data-slot-source")).toBe("RUNTIME");
+    });
+    expect(screen.getByTestId("assessment-title").textContent).toBe("Runtime assessment binds P-S09");
+    expect(screen.getByTestId("recommendation-state").textContent).toBe("RUNTIME STATE");
+    expect(screen.getByTestId("basis-group-0").textContent).toBe("Runtime evidence binds P-S10");
+    expect(screen.getByTestId("hero-score").textContent).toBe("11 / 100");
+    expect(screen.getByTestId("hero-grade").textContent).toBe("YẾU");
+    expect(screen.getByTestId("score-total").textContent).toBe("11 / 100");
+    expect(screen.getByTestId("expert-details").hasAttribute("hidden")).toBe(true);
+  });
+
+  it.each([
+    [
+      "missing",
+      (data: Record<string, unknown>) => {
+        delete data.assessment;
+        delete data.recommendation;
+      },
+    ],
+    [
+      "null",
+      (data: Record<string, unknown>) => {
+        data.assessment = null;
+        data.recommendation = null;
+      },
+    ],
+    [
+      "incomplete assessment",
+      (data: Record<string, unknown>) => {
+        data.assessment = { title: "Runtime incomplete assessment" };
+      },
+    ],
+    [
+      "incomplete recommendation",
+      (data: Record<string, unknown>) => {
+        data.recommendation = { label: "" };
+      },
+    ],
+  ])("falls back to Golden P-S09 when assessment/recommendation is %s", async (_label, mutate) => {
+    const data = goldenAnalyzeData();
+    mutate(data);
+    stubAnalyze(data);
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("result-section").getAttribute("data-preview-state")).toBe("runtime");
+    });
+    expect(screen.getByTestId("final-assessment").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    expect(screen.getByTestId("assessment-title").textContent).toBe("Đánh giá tổng thể");
+    expect(screen.getByTestId("recommendation-state").textContent).toBe("PHÙ HỢP ĐỂ TIẾP TỤC SỬ DỤNG");
+    expect(screen.getByTestId("final-assessment").textContent).not.toContain("Runtime incomplete assessment");
+    expect(screen.getByTestId("score-breakdown").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("hero-score").textContent).toBe("82 / 100");
+  });
+
+  it.each([
+    [
+      "missing",
+      (data: Record<string, unknown>) => {
+        delete data.evidence;
+      },
+    ],
+    [
+      "null",
+      (data: Record<string, unknown>) => {
+        data.evidence = null;
+      },
+    ],
+    [
+      "empty",
+      (data: Record<string, unknown>) => {
+        data.evidence = [];
+      },
+    ],
+    [
+      "incomplete",
+      (data: Record<string, unknown>) => {
+        data.evidence = [{ group: "Runtime incomplete evidence", items: [{ evidence_id: "E-01" }] }];
+      },
+    ],
+  ])("falls back to Golden P-S10 when basis/evidence is %s", async (_label, mutate) => {
+    const data = goldenAnalyzeData();
+    mutate(data);
+    stubAnalyze(data);
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("result-section").getAttribute("data-preview-state")).toBe("runtime");
+    });
+    expect(screen.getByTestId("basis-of-assessment").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    expect(screen.getByTestId("basis-item-0-0").textContent).toBe("32 · Họa Hại");
+    expect(screen.getByTestId("basis-of-assessment").textContent).not.toContain("Runtime incomplete evidence");
+    expect(screen.getByTestId("basis-of-assessment").textContent).not.toContain("evidence_id");
+    expect(screen.getByTestId("final-assessment").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("hero-score").textContent).toBe("82 / 100");
+  });
+});
+
+describe("Number Energy RB15 explicit runtime bind P-S00", () => {
+  const RUNTIME_SLOTS = RESULT_SECTIONS.filter(([sectionId]) => sectionId !== "P-S11");
+  const HERO_RUNTIME_FORBIDDEN = [
+    "verified_by_runtime",
+    "fixture_id",
+    "presentation_fixture",
+    "energy_id",
+    "source_span",
+    "DIEN_NIEN",
+    "THIEN_Y",
+    "CAT",
+    "HUNG",
+  ];
+  const HERO_SALES_HEALTH = [
+    "bảo hành",
+    "đảm bảo giàu",
+    "cam kết thành công",
+    "guarantee",
+    "chẩn đoán",
+    "chữa bệnh",
+    "phát tài",
+    "đổi số ngay",
+    "mua sim",
+  ];
+
+  function stubAnalyze(data: Record<string, unknown>, status = 200): ReturnType<typeof vi.fn> {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: status >= 200 && status < 300,
+      status,
+      text: async () => JSON.stringify({ success: status < 300, data }),
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    return fetchMock;
+  }
+
+  it("keeps default page static and does not fetch", () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+    render(<NumberEnergyPage />);
+    expect(screen.getByTestId("number-energy-page").getAttribute("data-runtime-mode")).toBe("off");
+    expect(screen.getByTestId("number-energy-page").getAttribute("data-static-freeze")).toBe(
+      NUMBER_ENERGY_STATIC_UI_V1,
+    );
+    expect(NUMBER_ENERGY_STATIC_UI_V1).toBe("NUMBER_ENERGY_STATIC_UI_V1");
+    expect((screen.getByTestId("result-section") as HTMLElement).hidden).toBe(true);
+    submitGoldenPhone();
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(screen.getByTestId("result-section").getAttribute("data-preview-state")).toBe("golden");
+    expect(screen.getByTestId("result-hero").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    expect(screen.getByTestId("hero-identity").textContent).toBe("0328 278 786");
+    expect(screen.getByTestId("hero-score").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("expert-details").hasAttribute("hidden")).toBe(true);
+  });
+
+  it("binds P-S00 Hero from runtime view.hero", async () => {
+    const fetchMock = stubAnalyze(goldenAnalyzeData());
+    render(<NumberEnergyPage runtimeMode />);
+    expect(fetchMock).not.toHaveBeenCalled();
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("result-hero").getAttribute("data-slot-source")).toBe("RUNTIME");
+    });
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(screen.getByTestId("hero-identity").textContent).toBe("0328 278 786");
+    expect(screen.getByTestId("hero-score").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("hero-grade").textContent).toBe("TỐT");
+    expect(screen.getByTestId("hero-primary-energy").textContent).toBe("Diên Niên");
+    expect(screen.getByTestId("hero-terminal-energy").textContent).toBe("Thiên Y");
+    expect(screen.getByTestId("hero-summary").textContent).toBe(
+      "Công việc và năng lực nghề nghiệp là trục nổi bật; phần cuối dãy quy về Thiên Y.",
+    );
+    expect(screen.getByTestId("hero-primary-keywords").textContent).toBe(
+      "Công việc · năng lực · trách nhiệm",
+    );
+    expect(screen.getByTestId("hero-terminal-keywords").textContent).toBe(
+      "Tài vận · tài nguyên · thành quả",
+    );
+    expect(screen.getByTestId("expert-details").hasAttribute("hidden")).toBe(true);
+    const hero = screen.getByTestId("result-hero").textContent || "";
+    const page = screen.getByTestId("number-energy-page").textContent || "";
+    for (const token of HERO_RUNTIME_FORBIDDEN) {
+      expect(hero).not.toContain(token);
+      expect(page).not.toContain(token);
+    }
+    for (const token of HERO_SALES_HEALTH) {
+      expect(page.toLowerCase()).not.toContain(token.toLowerCase());
+    }
+  });
+
+  it("binds complete Golden runtime payload to P-S00…P-S10 and keeps P-S11 hidden", async () => {
+    stubAnalyze(goldenAnalyzeData());
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("result-hero").getAttribute("data-slot-source")).toBe("RUNTIME");
+    });
+    for (const [, testId] of RUNTIME_SLOTS) {
+      expect(screen.getByTestId(testId).getAttribute("data-slot-source")).toBe("RUNTIME");
+    }
+    const expert = screen.getByTestId("expert-details");
+    expect(expert.hasAttribute("hidden")).toBe(true);
+    expect(expert.getAttribute("aria-hidden")).toBe("true");
+    expect(expert.getAttribute("data-slot-source")).not.toBe("RUNTIME");
+  });
+
+  it.each([
+    [
+      "missing original input",
+      (data: Record<string, unknown>) => {
+        delete data.metadata;
+        delete data.input_raw;
+        delete data.identity;
+      },
+    ],
+    [
+      "incomplete hero summary",
+      (data: Record<string, unknown>) => {
+        const chain = data.chain;
+        if (chain && typeof chain === "object") {
+          (chain as { dominant_flow_summary: string }).dominant_flow_summary = "";
+        }
+      },
+    ],
+  ])("falls back to Golden P-S00 when hero is %s and keeps other complete slots runtime", async (
+    _label,
+    mutate,
+  ) => {
+    const data = goldenAnalyzeData();
+    mutate(data);
+    stubAnalyze(data);
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("result-section").getAttribute("data-preview-state")).toBe("runtime");
+    });
+    expect(screen.getByTestId("result-hero").getAttribute("data-slot-source")).toBe("GOLDEN_FIXTURE");
+    expect(screen.getByTestId("hero-identity").textContent).toBe("0328 278 786");
+    expect(screen.getByTestId("hero-score").textContent).toBe("82 / 100");
+    expect(screen.getByTestId("hero-grade").textContent).toBe("TỐT");
+    expect(screen.getByTestId("hero-summary").textContent).toBe(
+      "Công việc và năng lực nghề nghiệp là trục nổi bật; phần cuối dãy quy về Thiên Y.",
+    );
+    expect(screen.getByTestId("energy-map").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("quick-structure").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("wealth-flow").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("triple-story").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("energy-distribution").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("domain-insights").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("strengths-cautions").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("score-breakdown").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("final-assessment").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("basis-of-assessment").getAttribute("data-slot-source")).toBe("RUNTIME");
+    expect(screen.getByTestId("expert-details").hasAttribute("hidden")).toBe(true);
+  });
+
+  it("shows a safe runtime error and does not reveal a partial result", async () => {
+    stubAnalyze({ detail: "Traceback (most recent call last): energy_id" }, 500);
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("input-error").textContent).toBe("Không thể hoàn tất phân tích lúc này.");
+    });
+    expect((screen.getByTestId("result-section") as HTMLElement).hidden).toBe(true);
+    const page = screen.getByTestId("number-energy-page").textContent || "";
+    expect(page).not.toContain("Traceback");
+    expect(page).not.toContain("energy_id");
+    expect(page).not.toContain("HTTP_ERROR");
+    expect(page).not.toContain("verified_by_runtime");
+  });
+
+  it("uses view.hero for a mismatched runtime score and does not recalculate in React", async () => {
+    stubAnalyze({
+      ...goldenAnalyzeData(),
+      score: {
+        total: 11,
+        max: 100,
+        display: "11 / 100",
+        grade: "YẾU",
+        verified_by_runtime: true,
+        breakdown: [
+          { label: "Cấu trúc năng lượng", earned: 1, max: 25 },
+          { label: "Dòng tài vận", earned: 2, max: 25 },
+          { label: "Công việc & trợ lực", earned: 3, max: 20 },
+          { label: "Ổn định & rủi ro", earned: 2, max: 15 },
+          { label: "Năng lượng kết", earned: 3, max: 15 },
+        ],
+        reasons: [
+          { title: "Runtime score binds hero via view", summary: "Adapter maps verified score into view.hero." },
+          { title: "Runtime score binds hero via view", summary: "Adapter maps verified score into view.hero." },
+          { title: "Runtime score binds hero via view", summary: "Adapter maps verified score into view.hero." },
+          { title: "Runtime score binds hero via view", summary: "Adapter maps verified score into view.hero." },
+        ],
+      },
+      grade: "YẾU",
+      verified_by_runtime: true,
+    });
+    render(<NumberEnergyPage runtimeMode />);
+    submitGoldenPhone();
+    await waitFor(() => {
+      expect(screen.getByTestId("result-hero").getAttribute("data-slot-source")).toBe("RUNTIME");
+    });
+    expect(screen.getByTestId("hero-score").textContent).toBe("11 / 100");
+    expect(screen.getByTestId("hero-grade").textContent).toBe("YẾU");
+    expect(screen.getByTestId("score-total").textContent).toBe("11 / 100");
+    const heroSource = sourceOf("sections/ResultHero.tsx");
+    expect(heroSource).not.toContain("goldenScore");
+    expect(heroSource).not.toContain("view.score");
+    expect(heroSource).not.toContain("totalDisplay");
+    expect(heroSource).toContain("hero.scoreDisplay");
+    const resultSource = sourceOf("ResultSection.tsx");
+    expect(resultSource).toContain("runtimeView?.hero");
+    expect(resultSource).not.toContain("runtimeView?.score.totalDisplay");
+    expect(resultSource).not.toMatch(/hero\.scoreDisplay\s*=/);
+  });
+});
+
+function goldenAnalyzeData(): Record<string, unknown> {
+  return {
+    purpose_context: "phone_number",
+    metadata: { input_raw: "0328278786", purpose_context: "phone_number" },
+    pair_occurrences: [
+      pairRow("32", "Họa Hại", "HUNG", "Hung", "Nhẹ", [true, false, false, false]),
+      pairRow("28", "Sinh Khí", "CAT", "Cát", "Nhẹ", [true, false, false, false]),
+      pairRow("82", "Sinh Khí", "CAT", "Cát", "Nhẹ", [true, false, false, false]),
+      pairRow("27", "Thiên Y", "CAT", "Cát", "Nhẹ", [true, false, false, false]),
+      pairRow("78", "Diên Niên", "CAT", "Cát", "Mạnh", [true, true, true, false]),
+      pairRow("87", "Diên Niên", "CAT", "Cát", "Mạnh", [true, true, true, false]),
+      pairRow("78", "Diên Niên", "CAT", "Cát", "Mạnh", [true, true, true, false]),
+      pairRow("86", "Thiên Y", "CAT", "Cát", "Mạnh", [true, true, true, false]),
+    ],
+    pair_summary: {
+      pair_count: 8,
+      supportive_pair_count: 7,
+      challenging_pair_count: 1,
+    },
+    energy_distribution: [
+      { energy_label: "Sinh Khí", count: 2 },
+      { energy_label: "Thiên Y", count: 2 },
+      { energy_label: "Diên Niên", count: 3 },
+      { energy_label: "Phục Vị", count: 0 },
+      { energy_label: "Họa Hại", count: 1 },
+      { energy_label: "Ngũ Quỷ", count: 0 },
+      { energy_label: "Lục Sát", count: 0 },
+      { energy_label: "Tuyệt Mệnh", count: 0 },
+    ],
+    chain: {
+      primary_energy_label: "Diên Niên",
+      secondary_energy_labels: ["Sinh Khí", "Thiên Y"],
+      terminal_energy_label: "Thiên Y",
+      terminal_pair_digits: "86",
+      dominant_flow_summary:
+        "Công việc và năng lực nghề nghiệp là trục nổi bật; phần cuối dãy quy về Thiên Y.",
+    },
+    wealth_flow: {
+      stages: [
+        {
+          id: "WF-01",
+          label: "Tài vận",
+          headline: "Có Thiên Y",
+          evidence: "27 · 86",
+          interaction: "",
+          narrative: "Dãy xuất hiện hai điểm Thiên Y, vì vậy trục tài vận được hình thành rõ.",
+        },
+        {
+          id: "WF-02",
+          label: "Tài từ đâu?",
+          headline: "Quý nhân & cơ hội",
+          evidence: "827",
+          interaction: "Sinh Khí → Thiên Y",
+          narrative: "Quý nhân, quan hệ hoặc cơ hội có khả năng dẫn tới tài vận.",
+        },
+        {
+          id: "WF-03",
+          label: "Tài đi đâu?",
+          headline: "Sự nghiệp & lập nghiệp",
+          evidence: "278",
+          interaction: "Thiên Y → Diên Niên",
+          narrative: "Nguồn lực có xu hướng được đưa vào công việc, kinh doanh hoặc phát triển sự nghiệp.",
+        },
+        {
+          id: "WF-04",
+          label: "Hậu vận",
+          headline: "Thiên Y",
+          evidence: "786",
+          interaction: "Diên Niên → Thiên Y",
+          narrative:
+            "Phần cuối dãy quy về Thiên Y. Diên Niên đứng trước cho thấy năng lực và công việc tiếp tục là nguồn dẫn tới tài vận.",
+        },
+      ],
+    },
+    wealth_story: {
+      nodes: ["Quý nhân & cơ hội", "Tài", "Sự nghiệp", "Tài"],
+      display: "Quý nhân & cơ hội → Tài → Sự nghiệp → Tài",
+      synthesis:
+        "Dòng tài vận của dãy đi theo hướng: quý nhân và cơ hội mở đường, nguồn lực được đưa vào sự nghiệp, và phần cuối lại quy về khả năng tạo Tài từ chính năng lực nghề nghiệp.",
+    },
+    triple_occurrences: [
+      tripleRow(
+        "328",
+        "Họa Hại",
+        "Sinh Khí",
+        "Khẩu tài tốt",
+        "Khả năng giao tiếp và diễn đạt là điểm mạnh của tổ hợp này. Lời nói có giá trị và dễ được người khác lắng nghe, tiếp nhận.",
+        ["Giao tiếp", "Công việc"],
+        "STANDARD",
+      ),
+      tripleRow(
+        "282",
+        "Sinh Khí",
+        "Sinh Khí",
+        "Quý nhân và cơ hội được tăng cường",
+        "Sinh Khí được tiếp nối, làm nổi bật khả năng gặp người hỗ trợ, cơ hội và những mối quan hệ thuận lợi.",
+        ["Quý nhân", "Cơ hội"],
+        "STANDARD",
+      ),
+      tripleRow(
+        "827",
+        "Sinh Khí",
+        "Thiên Y",
+        "Quý nhân mang đến Tài vận",
+        "Quý nhân, quan hệ hoặc cơ hội có khả năng dẫn tới tài vận.",
+        ["Tài vận", "Quý nhân"],
+        "FEATURED",
+      ),
+      tripleRow(
+        "278",
+        "Thiên Y",
+        "Diên Niên",
+        "Tài đi vào sự nghiệp",
+        "Nguồn lực có xu hướng được đưa vào công việc, kinh doanh hoặc phát triển sự nghiệp.",
+        ["Tài vận", "Công việc"],
+        "FEATURED",
+      ),
+      tripleRow(
+        "787",
+        "Diên Niên",
+        "Diên Niên",
+        "Năng lực nghề nghiệp được tăng cường",
+        "Diên Niên được tiếp nối, làm nổi bật năng lực làm việc, trách nhiệm và khả năng tổ chức.",
+        ["Công việc", "Năng lực"],
+        "COMPACT",
+      ),
+      tripleRow(
+        "878",
+        "Diên Niên",
+        "Diên Niên",
+        "Năng lực nghề nghiệp được tăng cường",
+        "Diên Niên tiếp tục xuất hiện, cho thấy công việc và năng lực nghề nghiệp là chủ đề được duy trì rõ trong dãy.",
+        ["Công việc", "Năng lực"],
+        "COMPACT",
+      ),
+      tripleRow(
+        "786",
+        "Diên Niên",
+        "Thiên Y",
+        "Năng lực nghề nghiệp tạo Tài",
+        "Tài vận chủ yếu đến từ năng lực làm việc, chuyên môn và sự nghiệp.",
+        ["Tài vận", "Công việc"],
+        "FEATURED",
+      ),
+    ],
+    domain_insights: [
+      domainRow(
+        "Tài vận",
+        "Có đường Tài tương đối rõ",
+        "Dãy có hai trường Thiên Y. Điểm Thiên Y đầu được Sinh Khí dẫn vào, cho thấy quý nhân, quan hệ và cơ hội có thể hỗ trợ việc hình thành tài vận. Phần cuối Diên Niên → Thiên Y nhấn mạnh khả năng tạo Tài thông qua chuyên môn, năng lực làm việc và sự nghiệp.",
+        "Tài vận vẫn cần được nhìn trong toàn bộ cách sử dụng dãy số, không nên hiểu Thiên Y như một cam kết tài chính.",
+      ),
+      domainRow(
+        "Công việc & sự nghiệp",
+        "Đây là một trong những điểm mạnh nhất của dãy",
+        "Diên Niên xuất hiện ba lần liên tiếp ở phần sau của thân số, cho thấy công việc, trách nhiệm và năng lực nghề nghiệp là chủ đề nổi bật. Tổ hợp Thiên Y → Diên Niên cho thấy nguồn lực có xu hướng được đưa vào công việc hoặc lập nghiệp.",
+        "",
+      ),
+      domainRow(
+        "Tình cảm & quan hệ",
+        "Quan hệ xã hội có yếu tố hỗ trợ",
+        "Sinh Khí xuất hiện hai lần và được tiếp nối ở đoạn đầu, làm nổi bật yếu tố nhân duyên, quý nhân và khả năng nhận được hỗ trợ. Tuy nhiên, dãy này không lấy trường tình cảm làm trục nổi bật nhất; trọng tâm vẫn nghiêng nhiều hơn về công việc và tài vận.",
+        "",
+      ),
+      domainRow(
+        "Tính cách & năng lực",
+        "Trách nhiệm và năng lực làm việc khá rõ",
+        "Diên Niên giữ vai trò chủ đạo, vì vậy dãy thiên về tính trách nhiệm, khả năng làm việc, tổ chức và xu hướng muốn tạo kết quả rõ ràng. Sinh Khí phía trước giúp cấu trúc bớt khô cứng, tăng yếu tố kết nối và hỗ trợ.",
+        "",
+      ),
+      domainRow(
+        "Cân bằng trường khí",
+        "Cát tinh giữ vai trò chủ đạo",
+        "Toàn thân số có Sinh Khí, Thiên Y và Diên Niên chiếm ưu thế. Họa Hại chỉ xuất hiện ở đầu thân số và ngay sau đó đi vào tổ hợp Họa Hại → Sinh Khí. Cấu trúc tổng thể không nên được đọc theo cách đơn giản là “có một Hung tinh”.",
+        "",
+      ),
+    ],
+    strengths: [
+      findingRow(
+        "Quý nhân có thể mở đường cho Tài",
+        "Quan hệ, người hỗ trợ hoặc những cơ hội thuận lợi có thể trở thành một trong những con đường hình thành Tài.",
+      ),
+      findingRow(
+        "Năng lực nghề nghiệp nổi bật",
+        "Diên Niên được lặp lại liên tiếp, làm công việc, trách nhiệm và năng lực nghề nghiệp trở thành chủ đề mạnh của dãy.",
+      ),
+      findingRow(
+        "Công việc có khả năng tạo thành quả",
+        "Phần cuối dãy tiếp tục đưa năng lực nghề nghiệp về Thiên Y, làm rõ hơn con đường tạo Tài bằng chuyên môn và công việc.",
+      ),
+      findingRow(
+        "Khẩu tài có thể phát huy tích cực",
+        "Khả năng nói và diễn đạt có giá trị khi được sử dụng đúng cách, đặc biệt trong giao tiếp và công việc với con người.",
+      ),
+    ],
+    cautions: [
+      findingRow(
+        "Cần chú ý cách sử dụng lời nói",
+        "Họa Hại xuất hiện ở đầu thân số, vì vậy lời nói và cách phản ứng vẫn là một điểm cần tiết chế. Khi dùng tốt, bộ 328 lại phát huy thành khẩu tài.",
+      ),
+      findingRow(
+        "Không nên chỉ nhìn số lượng Cát tinh",
+        "Dãy có nhiều Cát tinh, nhưng giá trị thực tế vẫn nằm ở cách các trường khí nối tiếp và vận động với nhau.",
+      ),
+    ],
+    evidence: [
+      {
+        title: "Cặp năng lượng",
+        items: [
+          { ref: "32", label: "Họa Hại" },
+          { ref: "28 / 82", label: "Sinh Khí" },
+          { ref: "27 / 86", label: "Thiên Y" },
+          { ref: "78 / 87 / 78", label: "Diên Niên" },
+        ],
+      },
+      {
+        title: "Bộ ba nổi bật",
+        items: [
+          { ref: "827", label: "Sinh Khí → Thiên Y" },
+          { ref: "278", label: "Thiên Y → Diên Niên" },
+          { ref: "786", label: "Diên Niên → Thiên Y" },
+        ],
+      },
+      {
+        title: "Điểm đánh giá",
+        items: [{ ref: "82 / 100", label: "TỐT" }],
+      },
+    ],
+    assessment: {
+      title: "Đánh giá tổng thể",
+      summary:
+        "Dãy số nổi bật ở Diên Niên, đi cùng Sinh Khí và Thiên Y. Quý nhân và cơ hội có khả năng dẫn tới Tài, trong khi năng lực nghề nghiệp tiếp tục đóng vai trò tạo thành quả ở phần cuối dãy.",
+      story_line: "QUÝ NHÂN → TÀI → SỰ NGHIỆP → TÀI",
+      story_nodes: ["QUÝ NHÂN", "TÀI", "SỰ NGHIỆP", "TÀI"],
+    },
+    recommendation: {
+      state: "PHÙ HỢP ĐỂ TIẾP TỤC SỬ DỤNG",
+      label: "PHÙ HỢP ĐỂ TIẾP TỤC SỬ DỤNG",
+      summary: "Dãy có nhiều yếu tố hỗ trợ, đặc biệt ở công việc, quý nhân và đường tạo Tài.",
+      copy_key: "CONTINUE",
+    },
+    score: {
+      total: 82,
+      max: 100,
+      display: "82 / 100",
+      grade: "TỐT",
+      verified_by_runtime: true,
+      breakdown: [
+        { label: "Cấu trúc năng lượng", earned: 21, max: 25 },
+        { label: "Dòng tài vận", earned: 22, max: 25 },
+        { label: "Công việc & trợ lực", earned: 17, max: 20 },
+        { label: "Ổn định & rủi ro", earned: 10, max: 15 },
+        { label: "Năng lượng kết", earned: 12, max: 15 },
+      ],
+      reasons: [
+        {
+          title: "Cấu trúc Cát giữ vai trò chủ đạo",
+          summary: "Sinh Khí, Thiên Y và Diên Niên chiếm phần lớn thân số.",
+        },
+        {
+          title: "Dòng Tài có nguồn rõ",
+          summary: "Sinh Khí → Thiên Y cho thấy quý nhân và cơ hội có khả năng dẫn tới Tài.",
+        },
+        {
+          title: "Công việc là trục mạnh",
+          summary: "Diên Niên xuất hiện liên tiếp và tiếp tục dẫn tới Thiên Y ở phần cuối dãy.",
+        },
+        {
+          title: "Họa Hại cần được sử dụng đúng cách",
+          summary:
+            "Họa Hại xuất hiện ở đầu thân số, nhưng tổ hợp tiếp theo là Họa Hại → Sinh Khí, giúp khả năng giao tiếp có hướng phát huy tích cực.",
+        },
+      ],
+    },
+    grade: "TỐT",
+    verified_by_runtime: true,
+  };
+}
+
+function pairRow(
+  pair_digits: string,
+  display_name: string,
+  category: string,
+  category_label: string,
+  strength_label: string,
+  strength_visual: boolean[],
+): Record<string, unknown> {
+  return { pair_digits, display_name, category, category_label, strength_label, strength_visual };
+}
+
+function tripleRow(
+  digits: string,
+  left_energy_label: string,
+  right_energy_label: string,
+  customer_title: string,
+  customer_summary: string,
+  domains: string[],
+  priority: string,
+): Record<string, unknown> {
+  return {
+    digits,
+    left_energy_label,
+    right_energy_label,
+    customer_title,
+    customer_summary,
+    domains,
+    priority,
+    interpretation_status: "DEFINED",
+  };
+}
+
+function domainRow(
+  domain: string,
+  conclusion: string,
+  narrative: string,
+  caution: string,
+): Record<string, unknown> {
+  return { domain, conclusion, narrative, caution };
+}
+
+function findingRow(title: string, summary: string): Record<string, unknown> {
+  return { title, summary };
+}

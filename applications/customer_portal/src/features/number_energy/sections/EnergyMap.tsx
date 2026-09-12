@@ -1,8 +1,9 @@
 import type { ReactNode } from "react";
 
-import { GOLDEN_PHONE_PAIRS, type GoldenPairCard } from "../goldenPairs";
+import { GOLDEN_PHONE_PAIRS } from "../goldenPairs";
+import type { PresentationPairCard, SlotRenderSource } from "../presentationContract";
 
-function PairCard({ pair, index }: { pair: GoldenPairCard; index: number }): ReactNode {
+function PairCard({ pair, index }: { pair: PresentationPairCard; index: number }): ReactNode {
   const tone = pair.categoryLabel === "Hung" ? "caution" : "support";
 
   return (
@@ -40,9 +41,20 @@ function PairCard({ pair, index }: { pair: GoldenPairCard; index: number }): Rea
   );
 }
 
-export function EnergyMap(): ReactNode {
+export function EnergyMap({
+  pairs = GOLDEN_PHONE_PAIRS,
+  slotSource = "GOLDEN_FIXTURE",
+}: {
+  pairs?: readonly PresentationPairCard[];
+  slotSource?: SlotRenderSource;
+}): ReactNode {
   return (
-    <section className="bte-card ne-energy-map" data-section="P-S01" data-testid="energy-map">
+    <section
+      className="bte-card ne-energy-map"
+      data-section="P-S01"
+      data-testid="energy-map"
+      data-slot-source={slotSource}
+    >
       <h2>Cấu trúc dãy số</h2>
       <p className="muted" id="pair-strip-hint">
         Các cặp số được đọc liên tiếp theo thứ tự xuất hiện trong dãy.
@@ -56,7 +68,7 @@ export function EnergyMap(): ReactNode {
         data-testid="pair-strip-scroller"
       >
         <ol className="ne-pair-strip" data-testid="pair-strip">
-          {GOLDEN_PHONE_PAIRS.map((pair, index) => (
+          {pairs.map((pair, index) => (
             <li key={`pair-${index}-${pair.digits}`} className="ne-pair-item">
               {index > 0 ? (
                 <span className="ne-pair-connector" aria-hidden="true">

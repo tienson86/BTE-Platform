@@ -126,10 +126,14 @@ export type RuntimeGapId =
   | "G20"
   | "G21";
 
+export const RUNTIME_GAP_STATUS = "RUNTIME_GAP" as const;
+
+export type RuntimeGapStatus = typeof RUNTIME_GAP_STATUS | FieldStatus;
+
 export type RuntimeGap = {
   id: RuntimeGapId;
   slot: PresentationSlotId;
-  status: FieldStatus;
+  status: RuntimeGapStatus;
   message: string;
 };
 
@@ -288,6 +292,45 @@ export type NumberEnergyAdapterInput = {
   legacy?: LegacySafeAnalyzeSlice | null;
 };
 
+/**
+ * Live analyze `data` object from RB05-A/B/C/D/F/E.
+ * Adapter may also receive `{ data: payload }` envelopes.
+ */
+export type NumberEnergyRuntimePayload = {
+  locale?: AdapterLocale;
+  mode?: CustomerMode;
+  purpose_context?: string | null;
+  identity?: AdapterIdentityInput | null;
+  metadata?: {
+    input_raw?: string | null;
+    purpose_context?: string | null;
+  } | null;
+  input_raw?: string | null;
+  reading?: { display_number?: string | null } | null;
+  pair_occurrences?: readonly unknown[] | null;
+  pair_summary?: unknown;
+  energy_distribution?: unknown;
+  triple_occurrences?: readonly unknown[] | null;
+  chain?: unknown;
+  wealth_flow?: unknown;
+  wealth_story?: unknown;
+  later_outcome?: unknown;
+  domain_insights?: readonly unknown[] | null;
+  strengths?: readonly unknown[] | null;
+  cautions?: readonly unknown[] | null;
+  evidence?: unknown;
+  assessment?: unknown;
+  recommendation?: unknown;
+  score?: unknown;
+  grade?: string | null;
+  verified_by_runtime?: boolean | null;
+  data?: NumberEnergyRuntimePayload | null;
+};
+
+export type NumberEnergyAdapterSource =
+  | NumberEnergyAdapterInput
+  | NumberEnergyRuntimePayload;
+
 export type PresentationHero = {
   eyebrow: string;
   analysisTypeLabel: string;
@@ -436,9 +479,9 @@ export type NumberEnergyAdapterResult = {
   gaps: readonly RuntimeGap[];
 };
 
-/** Type-only adapter. No implementation in RB04. */
+/** Maps runtime/API payload to the frozen Customer view. Implemented in RB06. */
 export type NumberEnergyPresentationAdapter = (
-  input: NumberEnergyAdapterInput,
+  input: NumberEnergyAdapterSource,
 ) => NumberEnergyAdapterResult;
 
 export const SLOT_ENGINE_REQUIREMENT: Record<PresentationSlotId, FieldStatus> = {
