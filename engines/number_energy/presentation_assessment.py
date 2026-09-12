@@ -19,12 +19,12 @@ from engines.number_energy.assessment_catalog import (
     KEEP_SUMMARY,
     STORY_NODE_MAP,
 )
+from engines.number_energy.constants import CUSTOMER_PRESENTATION_CONTEXTS
 from engines.number_energy.types import (
     AssessmentView,
     FindingView,
     NumberEnergyChainView,
     PairSummaryView,
-    PurposeContext,
     RecommendationView,
     WealthStoryView,
 )
@@ -38,7 +38,7 @@ def build_phone_assessment(
     strengths: tuple[FindingView, ...],
 ) -> tuple[AssessmentView | None, RecommendationView | None]:
     """Compose assessment/recommendation from RB05-A/B/C/D objects only."""
-    if purpose_context != PurposeContext.PHONE_NUMBER.value:
+    if purpose_context not in CUSTOMER_PRESENTATION_CONTEXTS:
         return None, None
     if _is_golden(pair_summary, chain, wealth_story, strengths):
         return _golden_assessment(), _golden_recommendation()

@@ -2,14 +2,19 @@
 
 from __future__ import annotations
 
+import re
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from engines.number_energy.constants import (
     MAX_INPUT_DIGITS,
     is_ascii_digit_string,
 )
+
+ALPHANUMERIC_CONTEXTS = {"car_plate", "motorbike_plate", "id_number"}
+PLATE_SEPARATORS_RE = re.compile(r"[.\s-]+")
+PLATE_BODY_RE = re.compile(r"^[0-9A-Za-z]+$")
 
 NumberEnergyPurposeContext = Literal[
     "phone_number",
@@ -23,7 +28,7 @@ NumberEnergyPurposeContext = Literal[
 
 
 class NumberEnergyRequest(BaseModel):
-    """Analyze a digit string with a frozen V1 purpose context."""
+    """Analyze a number or vehicle plate with a frozen V1 purpose context."""
 
     number: str = Field(
         ...,
@@ -38,16 +43,34 @@ class NumberEnergyRequest(BaseModel):
 
     @field_validator("number")
     @classmethod
-    def digits_only(cls, value: str) -> str:
-        """Reject non-ASCII-digit input at the API boundary (repo 422 convention)."""
+    def normalize_raw(cls, value: str) -> str:
+        """Trim raw input before purpose-specific validation."""
         raw = value.strip()
-        if not is_ascii_digit_string(raw):
-            raise ValueError("number input must contain digits 0-9 only")
+        if not raw:
+            raise ValueError("number input must not be empty")
         if len(raw) > MAX_INPUT_DIGITS:
             raise ValueError(
                 f"number input must not exceed {MAX_INPUT_DIGITS} digits"
             )
         return raw
+
+    @model_validator(mode="after")
+    def validate_number_for_purpose(self) -> "NumberEnergyRequest":
+        """Allow A-Z vehicle plates/passports; keep other contexts digit-only."""
+        if self.purpose_context in ALPHANUMERIC_CONTEXTS:
+            compact = PLATE_SEPARATORS_RE.sub("", self.number)
+            if (
+                not compact
+                or not compact.isascii()
+                or PLATE_BODY_RE.fullmatch(compact) is None
+            ):
+                raise ValueError(
+                    "input must contain ASCII letters A-Z, digits 0-9, and separators only"
+                )
+            return self
+        if not is_ascii_digit_string(self.number):
+            raise ValueError("number input must contain digits 0-9 only")
+        return self
 
 
 class NumberEnergyDataOut(BaseModel):

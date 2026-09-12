@@ -93,21 +93,23 @@ export function ScoreBreakdown({
           <ScoreDimensionRow key={`${dimension.label}-${index}`} dimension={dimension} index={index} />
         ))}
       </ol>
-      <div className="ne-score-reasons" data-testid="score-reasons">
-        <h3 className="ne-score-reasons-title">Vì sao dãy số đạt mức này?</h3>
-        <ol className="ne-score-reason-list" data-testid="score-reason-list">
-          {score.reasons.map((reason, index) => (
-            <li key={`${reason.title}-${index}`} className="ne-score-reason" data-testid={`score-reason-card-${index}`}>
-              <h4 className="ne-score-reason-title" data-testid={`score-reason-title-${index}`}>
-                {reason.title}
-              </h4>
-              <p className="ne-score-reason-copy" data-testid={`score-reason-copy-${index}`}>
-                {reason.copy}
-              </p>
-            </li>
-          ))}
-        </ol>
-      </div>
+      {score.reasons.length > 0 ? (
+        <div className="ne-score-reasons" data-testid="score-reasons">
+          <h3 className="ne-score-reasons-title">Vì sao dãy số đạt mức này?</h3>
+          <ol className="ne-score-reason-list" data-testid="score-reason-list">
+            {score.reasons.map((reason, index) => (
+              <li key={`${reason.title}-${index}`} className="ne-score-reason" data-testid={`score-reason-card-${index}`}>
+                <h4 className="ne-score-reason-title" data-testid={`score-reason-title-${index}`}>
+                  {reason.title}
+                </h4>
+                <p className="ne-score-reason-copy" data-testid={`score-reason-copy-${index}`}>
+                  {reason.copy}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      ) : null}
     </section>
   );
 }

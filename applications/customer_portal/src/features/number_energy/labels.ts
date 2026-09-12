@@ -34,9 +34,9 @@ export const MAX_NUMBER_DIGITS = 128;
 export const PURPOSE_LABELS: Record<PurposeContext, string> = {
   generic_number: "Dãy số thông thường",
   phone_number: "Số điện thoại",
-  car_plate: "Biển số xe hơi",
-  motorbike_plate: "Biển số xe máy",
-  id_number: "Số định danh",
+  car_plate: "Biển số Ô tô/Xe máy",
+  motorbike_plate: "Biển số Ô tô/Xe máy",
+  id_number: "Số CCCD/Hộ chiếu",
   bank_account: "Số tài khoản",
   house_number: "Số nhà",
 };

@@ -73,10 +73,12 @@ def test_golden_phone_recommendation_label_and_summary() -> None:
     _assert_safe(payload)
 
 
-def test_non_phone_does_not_emit_phone_recommendation() -> None:
+def test_vehicle_plate_uses_customer_assessment_and_recommendation() -> None:
     result = _phone(purpose_context="car_plate")
-    assert result.assessment is None
-    assert result.recommendation is None
+    assert result.assessment is not None
+    assert result.recommendation is not None
+    _assert_safe(result.assessment.to_dict())
+    _assert_safe(result.recommendation.to_dict())
 
 
 def test_phone_without_golden_pattern_is_not_golden_recommendation() -> None:

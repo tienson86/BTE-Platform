@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections import OrderedDict
 
+from engines.number_energy.constants import CUSTOMER_PRESENTATION_CONTEXTS
 from engines.number_energy.findings_catalog import (
     ALLOWED_EVIDENCE_SOURCES,
     BALANCE_CAT_LEAD,
@@ -59,7 +60,6 @@ from engines.number_energy.types import (
     LaterOutcomeView,
     NumberEnergyChainView,
     PairSummaryView,
-    PurposeContext,
     WealthFlowView,
 )
 
@@ -81,8 +81,8 @@ def build_phone_findings(
     tuple[FindingView, ...],
     tuple[EvidenceGroupView, ...],
 ]:
-    """Emit five domains, strengths/cautions, and evidence for phone numbers only."""
-    if purpose_context != PurposeContext.PHONE_NUMBER.value:
+    """Emit five domains, strengths/cautions, and evidence for customer-facing numbers."""
+    if purpose_context not in CUSTOMER_PRESENTATION_CONTEXTS:
         return (), (), (), ()
     signals = _signals(energy_distribution, pair_summary, triples, chain)
     domains = _domains(signals, triples, chain, wealth_flow, later_outcome)

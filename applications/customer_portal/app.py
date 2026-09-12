@@ -5,8 +5,8 @@ Standalone UI for end users. Proxies REST to Applications API.
 No business logic / repository / database.
 
 Run:
-  uvicorn applications.api.app:app --port 8000
-  uvicorn applications.customer_portal.app:app --port 8081
+  uvicorn applications.api.app:app --port 8001
+  python -m applications.customer_portal
 """
 
 from __future__ import annotations

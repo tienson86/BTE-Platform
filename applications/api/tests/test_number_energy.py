@@ -172,3 +172,33 @@ def test_number_energy_golden_phone_score() -> None:
         "Họa Hại cần được sử dụng đúng cách",
     ]
     assert data["recommendation"]["label"] == "PHÙ HỢP ĐỂ TIẾP TỤC SỬ DỤNG"
+
+
+def test_number_energy_vehicle_plate_letters_are_supported() -> None:
+    client = TestClient(create_app())
+    response = client.post(
+        "/api/v1/number-energy/analyze",
+        json={"number": "30F-058.11", "purpose_context": "car_plate"},
+    )
+    assert response.status_code == 200
+    data = response.json()["data"]
+    assert data["metadata"]["input_raw"] == "30F-058.11"
+    assert data["metadata"]["analyzed_input"] == "30605811"
+    assert data["pair_occurrences"]
+    assert data["score"] is not None
+    assert data["verified_by_runtime"] is True
+
+
+def test_number_energy_id_number_passport_letters_are_supported() -> None:
+    client = TestClient(create_app())
+    response = client.post(
+        "/api/v1/number-energy/analyze",
+        json={"number": "B1234567", "purpose_context": "id_number"},
+    )
+    assert response.status_code == 200
+    data = response.json()["data"]
+    assert data["metadata"]["input_raw"] == "B1234567"
+    assert data["metadata"]["analyzed_input"] == "21234567"
+    assert data["metadata"]["purpose_context"] == "id_number"
+    assert data["score"] is not None
+    assert data["verified_by_runtime"] is True

@@ -2,14 +2,16 @@
 
 from __future__ import annotations
 
-from engines.number_energy.constants import ENERGY_INTERACTION_CODES
+from engines.number_energy.constants import (
+    CUSTOMER_PRESENTATION_CONTEXTS,
+    ENERGY_INTERACTION_CODES,
+)
 from engines.number_energy.types import (
     CustomerTripleOccurrence,
     CustomerWealthNode,
     EnergyOccurrence,
     LaterOutcomeView,
     NumberEnergyChainView,
-    PurposeContext,
     WealthFlowView,
     WealthStageView,
     WealthStoryView,
@@ -56,8 +58,8 @@ def build_phone_wealth(
     LaterOutcomeView | None,
     WealthStoryView | None,
 ]:
-    """Resolve Thiên Y wealth nodes and four customer stages for phone numbers."""
-    if purpose_context != PurposeContext.PHONE_NUMBER.value:
+    """Resolve Thiên Y wealth nodes and four customer stages for customer-facing numbers."""
+    if purpose_context not in CUSTOMER_PRESENTATION_CONTEXTS:
         return (), None, None, None
     links = _directed_links(occurrences, triples)
     tian_yi = tuple(

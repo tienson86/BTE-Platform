@@ -54,7 +54,7 @@ export function InputSection({
     <section className="bte-card ne-shell-section ne-form-card" data-section="NE-INPUT" data-testid="input-section">
       <h2 id="number-energy-input-heading">Nhập số cần phân tích</h2>
       <p className="muted">
-        Phân tích cấu trúc trường khí của số điện thoại hoặc biển số xe theo Bát Cực Linh Số.
+        Phân tích cấu trúc trường khí của số điện thoại, biển số xe hoặc số định danh theo Bát Cực Linh Số.
       </p>
       <form
         className="ne-form"

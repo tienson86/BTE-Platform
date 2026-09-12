@@ -115,12 +115,12 @@ def test_golden_phone_evidence_refs_are_customer_safe() -> None:
     assert "86" in str(evidence)
 
 
-def test_non_phone_does_not_emit_phone_domains() -> None:
+def test_vehicle_plate_uses_customer_domains() -> None:
     result = _phone(purpose_context="car_plate")
-    assert result.domain_insights == ()
-    assert result.strengths == ()
-    assert result.cautions == ()
-    assert result.evidence == ()
+    assert len(result.domain_insights) == 5
+    assert result.strengths
+    assert result.cautions
+    assert result.evidence
 
 
 def test_phone_without_golden_pattern_still_has_five_domains() -> None:

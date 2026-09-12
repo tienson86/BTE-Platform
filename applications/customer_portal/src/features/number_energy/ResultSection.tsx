@@ -267,7 +267,7 @@ function presentScore(value: PresentationScore | null | undefined): Presentation
   if (!value) {
     return null;
   }
-  if (!value.totalDisplay || !value.grade || value.breakdown.length === 0 || value.reasons.length === 0) {
+  if (!value.totalDisplay || !value.grade || value.breakdown.length === 0) {
     return null;
   }
   return value;

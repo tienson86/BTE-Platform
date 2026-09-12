@@ -339,6 +339,104 @@ describe("Number Energy RB06 presentation adapter", () => {
     expect(result.gaps.some((item) => item.id === "G20")).toBe(true);
   });
 
+  it("keeps non-Golden runtime data when optional score, wealth, and recommendation copy are sparse", () => {
+    const payload = goldenRuntimePayload();
+    payload.input_raw = "0983836969";
+    payload.metadata = { input_raw: "0983836969", purpose_context: "phone_number" };
+    payload.pair_occurrences = [
+      pair("98", "Họa Hại", "HUNG", "Hung", "Mạnh", [true, true, true, false]),
+      pair("83", "Lục Sát", "HUNG", "Hung", "Nhẹ", [true, false, false, false]),
+      pair("38", "Lục Sát", "HUNG", "Hung", "Nhẹ", [true, false, false, false]),
+      pair("83", "Lục Sát", "HUNG", "Hung", "Nhẹ", [true, false, false, false]),
+      pair("36", "Ngũ Quỷ", "HUNG", "Hung", "Nhẹ", [true, false, false, false]),
+      pair("69", "Tuyệt Mệnh", "HUNG", "Hung", "Mạnh", [true, true, true, false]),
+      pair("96", "Tuyệt Mệnh", "HUNG", "Hung", "Mạnh", [true, true, true, false]),
+      pair("69", "Tuyệt Mệnh", "HUNG", "Hung", "Mạnh", [true, true, true, false]),
+    ];
+    payload.pair_summary = {
+      pair_count: 8,
+      supportive_pair_count: 0,
+      challenging_pair_count: 8,
+      primary_energy_label: "Lục Sát",
+      terminal_energy_label: "Tuyệt Mệnh",
+      terminal_pair_digits: "69",
+    };
+    payload.chain = {
+      primary_energy_label: "Lục Sát",
+      secondary_energy_labels: [],
+      terminal_energy_label: "Tuyệt Mệnh",
+      terminal_pair_digits: "69",
+      terminal_triple_digits: "969",
+      terminal_interaction_label: "Tuyệt Mệnh → Tuyệt Mệnh",
+      dominant_flow_summary: "Lục Sát chủ đạo, kết Tuyệt Mệnh",
+    };
+    payload.wealth_flow = {
+      stages: [
+        {
+          id: "WF-01",
+          label: "TÀI VẬN",
+          headline: "Không có Thiên Y trực tiếp",
+          evidence: "",
+          interaction: "",
+          narrative: "",
+        },
+        { id: "WF-02", label: "TÀI TỪ ĐÂU?", headline: "", evidence: "", interaction: "", narrative: "" },
+        { id: "WF-03", label: "TÀI ĐI ĐÂU?", headline: "", evidence: "", interaction: "", narrative: "" },
+        {
+          id: "WF-04",
+          label: "HẬU VẬN",
+          headline: "Tuyệt Mệnh",
+          evidence: "969",
+          interaction: "Tuyệt Mệnh → Tuyệt Mệnh",
+          narrative: "",
+        },
+      ],
+    };
+    payload.wealth_story = null;
+    payload.assessment = {
+      title: "Đánh giá tổng thể",
+      summary: "Dãy số nổi bật ở Lục Sát, đi cùng Tuyệt Mệnh.",
+      story_line: "",
+      story_nodes: [],
+    };
+    payload.recommendation = {
+      state: null,
+      label: null,
+      summary: "Điểm cần ưu tiên không phải là tìm một dãy toàn Cát, mà là tạo cấu trúc cân bằng hơn.",
+    };
+    payload.score = {
+      total: 16,
+      max: 100,
+      display: "16 / 100",
+      grade: "NHIỀU ĐIỂM CẦN LƯU Ý",
+      verified_by_runtime: true,
+      breakdown: [
+        { label: "Cấu trúc năng lượng", earned: 2, max: 25 },
+        { label: "Dòng tài vận", earned: 0, max: 25 },
+        { label: "Công việc & trợ lực", earned: 0, max: 20 },
+        { label: "Ổn định & rủi ro", earned: 2, max: 15 },
+        { label: "Năng lượng kết", earned: 12, max: 15 },
+      ],
+      reasons: [],
+    };
+    payload.grade = "NHIỀU ĐIỂM CẦN LƯU Ý";
+
+    const result = adaptNumberEnergyPresentation(payload);
+
+    expect(result.slotSource["P-S00"]).toBe("RUNTIME");
+    expect(result.slotSource["P-S03"]).toBe("RUNTIME");
+    expect(result.slotSource["P-S08"]).toBe("RUNTIME");
+    expect(result.slotSource["P-S09"]).toBe("RUNTIME");
+    expect(result.view.hero.displayValue).toBe("0983 836 969");
+    expect(result.view.hero.scoreDisplay).toBe("16 / 100");
+    expect(result.view.hero.primaryEnergy).toBe("Lục Sát");
+    expect(result.view.hero.terminalEnergy).toBe("Tuyệt Mệnh");
+    expect(result.view.wealth_flow.stages[1].headline).toBe("");
+    expect(result.view.score.reasons).toEqual([]);
+    expect(result.view.assessment.recommendationState).toBe("CẦN CÂN BẰNG THÊM");
+    expect(JSON.stringify(result.view)).not.toContain("0328 278 786");
+  });
+
   it("does not expose forbidden technical tokens in the Customer view", () => {
     const result = adaptNumberEnergyPresentation(goldenRuntimePayload());
     const blob = JSON.stringify(result.view);
@@ -351,11 +449,20 @@ describe("Number Energy RB06 presentation adapter", () => {
     expect(JSON.stringify(result)).not.toContain("verified_by_runtime");
   });
 
-  it("maps motorbike_plate to the motorcycle customer label", () => {
+  it("maps motorbike_plate to the joined vehicle plate customer label", () => {
     const payload = goldenRuntimePayload();
     payload.purpose_context = "motorbike_plate";
     const result = adaptNumberEnergyPresentation(payload);
-    expect(result.view.hero.analysisTypeLabel).toBe("Biển số xe máy");
+    expect(result.view.hero.analysisTypeLabel).toBe("Biển số Ô tô/Xe máy");
+  });
+
+  it("maps id_number to the CCCD/passport customer label", () => {
+    const payload = goldenRuntimePayload();
+    payload.purpose_context = "id_number";
+    payload.metadata = { input_raw: "B1234567", purpose_context: "id_number" };
+    const result = adaptNumberEnergyPresentation(payload);
+    expect(result.view.hero.analysisTypeLabel).toBe("Số CCCD/Hộ chiếu");
+    expect(result.view.hero.displayValue).toBe("B1234567");
   });
 
   it("unwraps an API envelope without changing Golden mapping", () => {

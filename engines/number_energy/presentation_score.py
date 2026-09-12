@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from engines.number_energy.constants import (
+    CUSTOMER_PRESENTATION_CONTEXTS,
     CUSTOMER_CATEGORY_CAT,
     CUSTOMER_CATEGORY_HUNG,
     CUSTOMER_STRENGTH_STRONG,
@@ -48,7 +49,6 @@ from engines.number_energy.types import (
     LaterOutcomeView,
     PairSummaryView,
     PhoneScoreView,
-    PurposeContext,
     ScoreBreakdownRow,
     ScoreReasonView,
     WealthFlowView,
@@ -80,8 +80,8 @@ def build_phone_score(
     later_outcome: LaterOutcomeView | None,
     occurrences: tuple[EnergyOccurrence, ...],
 ) -> PhoneScoreView | None:
-    """Score phone numbers only, after chain/wealth/findings already exist."""
-    if purpose_context != PurposeContext.PHONE_NUMBER.value:
+    """Score customer-facing numbers after chain/wealth/findings already exist."""
+    if purpose_context not in CUSTOMER_PRESENTATION_CONTEXTS:
         return None
     counts = {row.energy_label: row.count for row in energy_distribution}
     interactions = {item.interaction_label for item in triples}

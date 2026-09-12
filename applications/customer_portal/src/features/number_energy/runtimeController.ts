@@ -65,6 +65,8 @@ const SAFE_INPUT_MESSAGE = "Dữ liệu phân tích chưa hợp lệ.";
 const SAFE_CONTEXT_MESSAGE = "Ngữ cảnh sử dụng chưa hợp lệ.";
 const SAFE_ADAPTER_MESSAGE = "Không thể hoàn tất phân tích lúc này.";
 const INPUT_SEPARATORS = /[.\s-]/g;
+const VEHICLE_CONTEXTS = new Set(["car_plate", "motorcycle_plate", "motorbike_plate"]);
+const IDENTITY_CONTEXTS = new Set(["id_number"]);
 
 /**
  * Create a standalone runtime controller. No fetch until submit().
@@ -178,6 +180,35 @@ function normalizeRuntimeSubmit(
   const compact = input.input.trim().replace(INPUT_SEPARATORS, "");
   if (!compact) {
     return { ok: false, error: { code: "INVALID_INPUT", message: SAFE_INPUT_MESSAGE } };
+  }
+  if (purpose === "phone_number" && !/^[0-9]+$/.test(compact)) {
+    return { ok: false, error: { code: "INVALID_INPUT", message: SAFE_INPUT_MESSAGE } };
+  }
+  if (VEHICLE_CONTEXTS.has(purpose)) {
+    if (!/^[0-9A-Za-z]+$/.test(compact)) {
+      return { ok: false, error: { code: "INVALID_INPUT", message: SAFE_INPUT_MESSAGE } };
+    }
+    return {
+      ok: true,
+      value: {
+        purpose_context: purpose,
+        input: input.input.trim(),
+        apiUrl: input.apiUrl,
+      },
+    };
+  }
+  if (IDENTITY_CONTEXTS.has(purpose)) {
+    if (!/^[0-9A-Za-z]+$/.test(compact)) {
+      return { ok: false, error: { code: "INVALID_INPUT", message: SAFE_INPUT_MESSAGE } };
+    }
+    return {
+      ok: true,
+      value: {
+        purpose_context: purpose,
+        input: input.input.trim(),
+        apiUrl: input.apiUrl,
+      },
+    };
   }
   if (!/^[0-9]+$/.test(compact)) {
     return { ok: false, error: { code: "INVALID_INPUT", message: SAFE_INPUT_MESSAGE } };

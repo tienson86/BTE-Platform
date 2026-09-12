@@ -51,6 +51,11 @@ def test_number_energy_proxy_targets_applications_api() -> None:
     assert "consulting/marriage" not in url
 
 
+def test_number_energy_default_live_ports_use_runtime_stack() -> None:
+    assert settings.port == 8083
+    assert settings.api_base_url == "http://127.0.0.1:8001"
+
+
 def test_number_energy_is_visible_in_primary_nav() -> None:
     html = _client().get("/good-date").text
     assert len(CUSTOMER_NAV_ITEMS) == 5

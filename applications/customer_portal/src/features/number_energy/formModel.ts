@@ -1,4 +1,4 @@
-export const ANALYSIS_TYPES = ["phone_number", "car_plate", "motorcycle_plate"] as const;
+export const ANALYSIS_TYPES = ["phone_number", "car_plate", "id_number"] as const;
 
 export type AnalysisType = (typeof ANALYSIS_TYPES)[number];
 
@@ -34,23 +34,23 @@ export const ANALYSIS_TYPE_COPY: Record<AnalysisType, AnalysisTypeOption> = {
   },
   car_plate: {
     value: "car_plate",
-    label: "Biển số ô tô",
+    label: "Biển số Ô tô/Xe máy",
     support: "Xem cấu trúc Cát – Hung, tính ổn định, công việc, tài vận và năng lượng kết.",
-    fieldLabel: "Biển số ô tô",
-    placeholder: "Ví dụ: 30A-123.45",
-    help: "Nhập đầy đủ biển số như trên đăng ký hoặc biển xe.",
-    cta: "PHÂN TÍCH BIỂN SỐ Ô TÔ",
-    emptyMessage: "Vui lòng nhập biển số ô tô.",
+    fieldLabel: "Biển số Ô tô/Xe máy",
+    placeholder: "Ví dụ: 30F-058.11 hoặc 30A1-05811",
+    help: "Có thể nhập liền hoặc giữ dấu phân cách như trên đăng ký/biển xe.",
+    cta: "PHÂN TÍCH BIỂN SỐ",
+    emptyMessage: "Vui lòng nhập biển số xe.",
   },
-  motorcycle_plate: {
-    value: "motorcycle_plate",
-    label: "Biển số xe máy",
-    support: "Phân tích cấu trúc trường khí, mức cân bằng và năng lượng phần cuối biển số.",
-    fieldLabel: "Biển số xe máy",
-    placeholder: "Ví dụ: 29X1-123.45",
-    help: "Nhập đầy đủ biển số xe cần phân tích.",
-    cta: "PHÂN TÍCH BIỂN SỐ XE MÁY",
-    emptyMessage: "Vui lòng nhập biển số xe máy.",
+  id_number: {
+    value: "id_number",
+    label: "Số CCCD/Hộ chiếu",
+    support: "Phân tích cấu trúc trường khí của số định danh cá nhân hoặc số hộ chiếu.",
+    fieldLabel: "Số CCCD/Hộ chiếu",
+    placeholder: "Ví dụ: 001234567890 hoặc B1234567",
+    help: "Nhập số căn cước công dân hoặc số hộ chiếu cần phân tích.",
+    cta: "PHÂN TÍCH CCCD/HỘ CHIẾU",
+    emptyMessage: "Vui lòng nhập số CCCD hoặc hộ chiếu.",
   },
 };
 
@@ -60,16 +60,19 @@ export const PHONE_FORMAT_ERROR =
   "Số điện thoại chưa đúng định dạng. Vui lòng kiểm tra và nhập lại.";
 export const VEHICLE_FORMAT_ERROR =
   "Biển số chưa đúng định dạng. Vui lòng kiểm tra và nhập lại đầy đủ.";
+export const ID_DOCUMENT_FORMAT_ERROR =
+  "Số CCCD/Hộ chiếu chưa đúng định dạng. Vui lòng kiểm tra và nhập lại.";
 export const MISSING_TYPE_ERROR = "Vui lòng chọn loại số cần phân tích.";
 export const STATIC_GOLDEN_SAMPLE_ERROR = "Bản dựng tĩnh hiện chỉ hỗ trợ số mẫu 0328278786.";
 export const STATIC_GOLDEN_SAMPLE_NOTE = "Bản dựng tĩnh đang xem trước số mẫu 0328278786.";
-export const VEHICLE_NOT_LIVE_ERROR = "Phân tích biển số chưa được hỗ trợ lúc này.";
 
 type ValidateCustomerInputOptions = {
   runtimeMode?: boolean;
 };
 
 const PHONE_SEPARATORS = /[.\s-]/g;
+const VEHICLE_SEPARATORS = /[.\s-]/g;
+const ID_DOCUMENT_SEPARATORS = /[.\s-]/g;
 
 export function compactPhoneInput(raw: string): string {
   return raw.trim().replace(PHONE_SEPARATORS, "");
@@ -110,11 +113,22 @@ export function validateCustomerInput(
     }
     return null;
   }
-  if (runtimeMode) {
-    return VEHICLE_NOT_LIVE_ERROR;
+  if (type === "car_plate") {
+    const compactPlate = trimmed.replace(VEHICLE_SEPARATORS, "");
+    if (!/^[0-9A-Za-z]+$/.test(compactPlate)) {
+      return VEHICLE_FORMAT_ERROR;
+    }
+    if (runtimeMode) {
+      return null;
+    }
+    return STATIC_GOLDEN_SAMPLE_ERROR;
   }
-  if (!/[0-9A-Za-z]/.test(trimmed)) {
-    return VEHICLE_FORMAT_ERROR;
+  const compactIdentity = trimmed.replace(ID_DOCUMENT_SEPARATORS, "");
+  if (!/^[0-9A-Za-z]+$/.test(compactIdentity)) {
+    return ID_DOCUMENT_FORMAT_ERROR;
+  }
+  if (runtimeMode) {
+    return null;
   }
   return STATIC_GOLDEN_SAMPLE_ERROR;
 }

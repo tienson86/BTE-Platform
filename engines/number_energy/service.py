@@ -9,6 +9,7 @@ from engines.number_energy.narrative_engine import collect_expert_notes, compose
 from engines.number_energy.pair_engine import generate_adjacent_pairs
 from engines.number_energy.parser import parse_number_string
 from engines.number_energy.phone_input import split_phone_input
+from engines.number_energy.plate_input import normalize_plate_input
 from engines.number_energy.presentation_assessment import build_phone_assessment
 from engines.number_energy.presentation_findings import build_phone_findings
 from engines.number_energy.presentation_pairs import (
@@ -39,18 +40,13 @@ class NumberEnergyService:
         """Analyze a digit string using only frozen V1 number-energy rules."""
         context = self._validate_purpose(purpose_context)
         try:
-            parsed_input = parse_number_string(number)
-            analyzed_raw = parsed_input.input_raw
             leading_zero = False
+            input_raw, analyzed_raw = self._prepare_input(number, context)
             if context == PurposeContext.PHONE_NUMBER.value:
-                analyzed_raw, leading_zero = split_phone_input(parsed_input.input_raw)
+                analyzed_raw, leading_zero = split_phone_input(analyzed_raw)
                 if not analyzed_raw:
                     raise NumberEnergyValidationError("number input must not be empty")
-            parsed = (
-                parse_number_string(analyzed_raw)
-                if analyzed_raw != parsed_input.input_raw
-                else parsed_input
-            )
+            parsed = parse_number_string(analyzed_raw)
             adjacent, undefined_adjacent = generate_adjacent_pairs(parsed)
             bridged, undefined_bridged = generate_modifier_pairs(parsed)
             undefined = _merge_undefined(undefined_adjacent, undefined_bridged)
@@ -63,7 +59,7 @@ class NumberEnergyService:
                 sequence_states,
             ) = apply_interactions(parsed, adjacent, bridged, undefined)
             narrative = compose_narrative(
-                input_raw=parsed_input.input_raw,
+                input_raw=input_raw,
                 occurrences=occurrences,
                 undefined=undefined,
                 summary=summary,
@@ -71,7 +67,7 @@ class NumberEnergyService:
                 approved_patterns=approved,
             )
             result = NumberEnergyResult(
-                input_raw=parsed_input.input_raw,
+                input_raw=input_raw,
                 raw_digits=parsed.raw_digits,
                 classified_digits=parsed.classified_digits,
                 occurrences=occurrences,
@@ -149,6 +145,20 @@ class NumberEnergyService:
                 f"purpose_context is not frozen in V1: {purpose_context}"
             )
         return purpose_context
+
+    def _prepare_input(self, number: str, context: str) -> tuple[str, str]:
+        """Return the customer input and the digit string analyzed by the engine."""
+        if not isinstance(number, str):
+            raise NumberEnergyValidationError("number input must be a string")
+        input_raw = number.strip()
+        if context in {
+            PurposeContext.CAR_PLATE.value,
+            PurposeContext.MOTORBIKE_PLATE.value,
+            PurposeContext.ID_NUMBER.value,
+        }:
+            return input_raw, normalize_plate_input(input_raw)
+        parsed = parse_number_string(input_raw)
+        return parsed.input_raw, parsed.input_raw
 
 
 def _merge_undefined(

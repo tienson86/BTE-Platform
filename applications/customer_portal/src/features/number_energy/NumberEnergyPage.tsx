@@ -44,10 +44,6 @@ export function NumberEnergyPage({ runtimeMode = false }: NumberEnergyPageProps 
       runtime.reset();
       return;
     }
-    if (preview.analysisType !== "phone_number") {
-      runtime.reset();
-      return;
-    }
     setErrorMessage("");
     void runtime.submit({
       purpose_context: preview.analysisType,
@@ -101,7 +97,7 @@ export function NumberEnergyPage({ runtimeMode = false }: NumberEnergyPageProps 
         <p className="muted">Bát Cực Linh Số</p>
         <h1 data-testid="number-energy-title">Tư vấn năng lượng số</h1>
         <p className="muted">
-          Phân tích cấu trúc trường khí của số điện thoại hoặc biển số xe theo Bát Cực Linh Số.
+          Phân tích cấu trúc trường khí của số điện thoại, biển số xe hoặc số định danh theo Bát Cực Linh Số.
         </p>
       </header>
       <p className="ne-sr-only" aria-live="polite" data-testid="form-status">

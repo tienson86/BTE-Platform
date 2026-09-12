@@ -51,6 +51,7 @@ export const PURPOSE_CONTEXT_VALUES = [
   "car_plate",
   "motorcycle_plate",
   "motorbike_plate",
+  "id_number",
 ] as const;
 
 export type PurposeContextValue = (typeof PURPOSE_CONTEXT_VALUES)[number];
@@ -61,13 +62,15 @@ export const PURPOSE_CONTEXT_ALIASES = {
   motorcycle_plate: "motorcycle_plate",
   phone_number: "phone_number",
   car_plate: "car_plate",
+  id_number: "id_number",
 } as const;
 
 export const PURPOSE_CONTEXT_CUSTOMER_LABEL = {
   phone_number: "Số điện thoại",
-  car_plate: "Biển số ô tô",
-  motorcycle_plate: "Biển số xe máy",
-  motorbike_plate: "Biển số xe máy",
+  car_plate: "Biển số Ô tô/Xe máy",
+  motorcycle_plate: "Biển số Ô tô/Xe máy",
+  motorbike_plate: "Biển số Ô tô/Xe máy",
+  id_number: "Số CCCD/Hộ chiếu",
 } as const;
 
 export const GOLDEN_PHONE_DISPLAY_EXAMPLE = {

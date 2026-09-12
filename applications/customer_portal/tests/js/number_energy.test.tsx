@@ -166,13 +166,13 @@ describe("Number Energy SB02 input form", () => {
     fireEvent.click(screen.getByTestId("analysis-type-car_plate"));
     expect(screen.getByTestId("analysis-type-car_plate").getAttribute("data-selected")).toBe("true");
     expect((screen.getByTestId("number-input") as HTMLInputElement).value).toBe("");
-    expect(screen.getByTestId("analysis-submit").textContent).toBe("PHÂN TÍCH BIỂN SỐ Ô TÔ");
-    expect(screen.getByPlaceholderText("Ví dụ: 30A-123.45")).toBeTruthy();
+    expect(screen.getByTestId("analysis-submit").textContent).toBe("PHÂN TÍCH BIỂN SỐ");
+    expect(screen.getByPlaceholderText("Ví dụ: 30F-058.11 hoặc 30A1-05811")).toBeTruthy();
     expect((screen.getByTestId("analysis-submit") as HTMLButtonElement).disabled).toBe(true);
 
-    fireEvent.click(screen.getByTestId("analysis-type-motorcycle_plate"));
-    expect(screen.getByTestId("analysis-submit").textContent).toBe("PHÂN TÍCH BIỂN SỐ XE MÁY");
-    expect(screen.getByPlaceholderText("Ví dụ: 29X1-123.45")).toBeTruthy();
+    fireEvent.click(screen.getByTestId("analysis-type-id_number"));
+    expect(screen.getByTestId("analysis-submit").textContent).toBe("PHÂN TÍCH CCCD/HỘ CHIẾU");
+    expect(screen.getByPlaceholderText("Ví dụ: 001234567890 hoặc B1234567")).toBeTruthy();
   });
 
   it("disables the CTA when the number field is empty", () => {
@@ -989,8 +989,8 @@ describe("Number Energy SB14 accessibility", () => {
     expect(screen.getByRole("heading", { level: 1, name: "Tư vấn năng lượng số" })).toBeTruthy();
     expect(screen.getByRole("heading", { level: 2, name: "Nhập số cần phân tích" })).toBeTruthy();
     expect(screen.getByRole("radio", { name: "Số điện thoại" })).toBeTruthy();
-    expect(screen.getByRole("radio", { name: "Biển số ô tô" })).toBeTruthy();
-    expect(screen.getByRole("radio", { name: "Biển số xe máy" })).toBeTruthy();
+    expect(screen.getByRole("radio", { name: "Biển số Ô tô/Xe máy" })).toBeTruthy();
+    expect(screen.getByRole("radio", { name: "Số CCCD/Hộ chiếu" })).toBeTruthy();
     const numberInput = screen.getByRole("textbox", { name: /Số điện thoại/ });
     expect(numberInput.getAttribute("aria-required")).toBe("true");
     expect(numberInput.getAttribute("aria-invalid")).toBe("false");
@@ -2976,25 +2976,59 @@ describe("Number Energy RB18 public runtime enable and menu", () => {
     expect(body).toContain("0868271327");
   });
 
-  it("keeps vehicle types off live API with a customer-safe message", () => {
-    const fetchMock = vi.fn();
-    vi.stubGlobal("fetch", fetchMock);
+  it("submits joined car and motorcycle plates to the live API in runtime mode", async () => {
+    const carData = {
+      ...goldenAnalyzeData(),
+      purpose_context: "car_plate",
+      metadata: { input_raw: "30A-123.45", purpose_context: "car_plate" },
+    };
+    const fetchMock = stubAnalyze(carData);
     render(<NumberEnergyPage runtimeMode />);
     fireEvent.click(screen.getByTestId("analysis-type-car_plate"));
     fireEvent.change(screen.getByTestId("number-input"), { target: { value: "30A-123.45" } });
     fireEvent.submit(screen.getByTestId("input-form-region"));
-    expect(fetchMock).not.toHaveBeenCalled();
-    expect(screen.getByTestId("input-error").textContent).toBe(
-      "Phân tích biển số chưa được hỗ trợ lúc này.",
-    );
-    expect((screen.getByTestId("result-section") as HTMLElement).hidden).toBe(true);
-    fireEvent.click(screen.getByTestId("analysis-type-motorcycle_plate"));
-    fireEvent.change(screen.getByTestId("number-input"), { target: { value: "29X1-123.45" } });
+    await waitFor(() => {
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+    });
+    expect(JSON.parse(String((fetchMock.mock.calls[0]?.[1] as { body?: string } | undefined)?.body ?? "{}"))).toEqual({
+      number: "30A-123.45",
+      purpose_context: "car_plate",
+    });
+    expect(screen.getByTestId("hero-identity").textContent).toBe("30A-123.45");
+    expect(screen.getAllByText("Biển số Ô tô/Xe máy").length).toBeGreaterThan(0);
+
+    fetchMock.mockClear();
+    fireEvent.change(screen.getByTestId("number-input"), { target: { value: "30AM-05811" } });
     fireEvent.submit(screen.getByTestId("input-form-region"));
-    expect(fetchMock).not.toHaveBeenCalled();
-    expect(screen.getByTestId("input-error").textContent).toBe(
-      "Phân tích biển số chưa được hỗ trợ lúc này.",
-    );
+    await waitFor(() => {
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+    });
+    expect(JSON.parse(String((fetchMock.mock.calls[0]?.[1] as { body?: string } | undefined)?.body ?? "{}"))).toEqual({
+      number: "30AM-05811",
+      purpose_context: "car_plate",
+    });
+  });
+
+  it("submits CCCD and passport numbers as identity documents", async () => {
+    const idData = {
+      ...goldenAnalyzeData(),
+      purpose_context: "id_number",
+      metadata: { input_raw: "B1234567", purpose_context: "id_number" },
+    };
+    const fetchMock = stubAnalyze(idData);
+    render(<NumberEnergyPage runtimeMode />);
+    fireEvent.click(screen.getByTestId("analysis-type-id_number"));
+    fireEvent.change(screen.getByTestId("number-input"), { target: { value: "B1234567" } });
+    fireEvent.submit(screen.getByTestId("input-form-region"));
+    await waitFor(() => {
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+    });
+    expect(JSON.parse(String((fetchMock.mock.calls[0]?.[1] as { body?: string } | undefined)?.body ?? "{}"))).toEqual({
+      number: "B1234567",
+      purpose_context: "id_number",
+    });
+    expect(screen.getByTestId("hero-identity").textContent).toBe("B1234567");
+    expect(screen.getAllByText("Số CCCD/Hộ chiếu").length).toBeGreaterThan(0);
   });
 
   it("renders P-S00…P-S10 as RUNTIME and keeps P-S11 hidden", async () => {

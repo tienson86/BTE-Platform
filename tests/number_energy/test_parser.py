@@ -7,6 +7,7 @@ import pytest
 from engines.number_energy.constants import MAX_INPUT_DIGITS
 from engines.number_energy.exceptions import NumberEnergyValidationError
 from engines.number_energy.parser import parse_number_string
+from engines.number_energy.plate_input import normalize_plate_input
 
 
 def test_parse_keeps_raw_digit_order() -> None:
@@ -41,3 +42,20 @@ def test_accepts_ascii_digits_with_surrounding_space() -> None:
     parsed = parse_number_string(" 103 ")
     assert parsed.input_raw == "103"
     assert parsed.raw_digits == (1, 0, 3)
+
+
+def test_normalize_plate_letters_to_english_alphabet_positions() -> None:
+    assert normalize_plate_input("30A-123.45") == "30112345"
+    assert normalize_plate_input("30F-058.11") == "30605811"
+    assert normalize_plate_input("30F05811") == "30605811"
+    assert normalize_plate_input("30F-05811") == "30605811"
+    assert normalize_plate_input("30A1-05811") == "301105811"
+    assert normalize_plate_input("30AM-05811") == "3011305811"
+    assert normalize_plate_input("29X1-123.45") == "2924112345"
+    assert normalize_plate_input("A B C Z") == "12326"
+
+
+@pytest.mark.parametrize("raw", ["30Á-123", "30@123", "１２A"])
+def test_reject_invalid_plate_characters(raw: str) -> None:
+    with pytest.raises(NumberEnergyValidationError):
+        normalize_plate_input(raw)

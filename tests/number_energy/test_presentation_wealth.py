@@ -126,12 +126,13 @@ def test_golden_phone_wealth_nodes_roles_and_safety() -> None:
         assert item["interpretation_status"] == "DEFINED"
 
 
-def test_non_phone_does_not_emit_phone_wealth_flow() -> None:
+def test_vehicle_plate_uses_customer_wealth_flow() -> None:
     result = _phone(purpose_context="car_plate")
-    assert result.wealth_nodes == ()
-    assert result.wealth_flow is None
-    assert result.later_outcome is None
-    assert result.wealth_story is None
+    assert result.wealth_nodes
+    assert result.wealth_flow is not None
+    assert len(result.wealth_flow.stages) == 4
+    assert result.later_outcome is not None
+    assert result.wealth_story is not None
 
 
 def test_phone_without_source_still_has_four_stages() -> None:

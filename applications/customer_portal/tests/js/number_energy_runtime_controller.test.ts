@@ -120,6 +120,44 @@ describe("Number Energy RB08 runtime controller", () => {
     expect(state.error).toBeNull();
   });
 
+  it("preserves vehicle plate letters and separators for the API client", async () => {
+    const analyze = vi.fn().mockResolvedValue({
+      ok: true,
+      data: runtimeData({
+        purpose_context: "car_plate",
+        metadata: { input_raw: "30A-123.45", purpose_context: "car_plate" },
+      }),
+    });
+    const controller = createNumberEnergyRuntimeController({ analyze });
+    await controller.submit({
+      purpose_context: "car_plate",
+      input: "30A-123.45",
+    });
+    expect(analyze).toHaveBeenCalledWith({
+      purpose_context: "car_plate",
+      input: "30A-123.45",
+    });
+  });
+
+  it("preserves passport letters for the API client", async () => {
+    const analyze = vi.fn().mockResolvedValue({
+      ok: true,
+      data: runtimeData({
+        purpose_context: "id_number",
+        metadata: { input_raw: "B1234567", purpose_context: "id_number" },
+      }),
+    });
+    const controller = createNumberEnergyRuntimeController({ analyze });
+    await controller.submit({
+      purpose_context: "id_number",
+      input: "B1234567",
+    });
+    expect(analyze).toHaveBeenCalledWith({
+      purpose_context: "id_number",
+      input: "B1234567",
+    });
+  });
+
   it("exposes a safe error state on API failure without a partial view", async () => {
     const analyze = vi.fn().mockResolvedValue({
       ok: false,

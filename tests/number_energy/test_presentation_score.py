@@ -62,10 +62,10 @@ def test_golden_score_does_not_change_recommendation() -> None:
     assert result.assessment.story_line == "QUÝ NHÂN → TÀI → SỰ NGHIỆP → TÀI"
 
 
-def test_non_phone_does_not_receive_phone_score() -> None:
+def test_vehicle_plate_receives_customer_score() -> None:
     result = _phone(purpose_context="car_plate")
-    assert result.score is None
-    assert result.verified_by_runtime is False
+    assert result.score is not None
+    assert result.verified_by_runtime is True
     generic = _phone("103", purpose_context="generic_number")
     assert generic.score is None
     assert generic.verified_by_runtime is False

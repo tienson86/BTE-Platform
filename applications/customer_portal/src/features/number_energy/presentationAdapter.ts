@@ -225,7 +225,7 @@ function mapHero(data: SourceRecord): SlotOutcome<PresentationHero> {
     value: {
       eyebrow: HERO_EYEBROW,
       analysisTypeLabel: purposeLabel,
-      displayValue: groupDisplayValue(original),
+      displayValue: groupDisplayValue(original, purposeLabel),
       scoreDisplay: score.display,
       grade: score.grade,
       primaryLabel: HERO_PRIMARY_LABEL,
@@ -336,16 +336,16 @@ function mapWealthStage(value: unknown): PresentationWealthStage | null {
   const id = asString(value.id);
   const headline = asString(value.headline) ?? asString(value.headline_key);
   const narrative = asString(value.narrative) ?? asString(value.narrative_key);
-  if (!id || !isWealthStageId(id) || !headline || narrative === null) {
+  if (!id || !isWealthStageId(id)) {
     return null;
   }
   return {
     id,
     label: asString(value.label) ?? asString(value.label_key) ?? "",
-    headline,
+    headline: headline ?? "",
     evidence: asString(value.evidence) ?? "",
     interaction: asString(value.interaction) ?? asString(value.interaction_key) ?? "",
-    narrative,
+    narrative: narrative ?? "",
   };
 }
 
@@ -531,7 +531,7 @@ function mapAssessment(data: SourceRecord): SlotOutcome<PresentationAssessment> 
     (recommendation ? asString(recommendation.label) : null) ??
     (recommendation ? asString(recommendation.state) : null);
   const supporting = recommendation ? asString(recommendation.summary) : null;
-  if (!assessment || !recommendation || !title || !summary || !state || supporting === null) {
+  if (!assessment || !recommendation || !title || !summary || supporting === null) {
     return { value: cloneAssessment(), source: "GOLDEN_FIXTURE", gaps };
   }
   return {
@@ -540,7 +540,7 @@ function mapAssessment(data: SourceRecord): SlotOutcome<PresentationAssessment> 
       story: splitStory(summary),
       flow: readAssessmentFlow(assessment),
       recommendationTitle: GOLDEN_RECOMMENDATION_TITLE,
-      recommendationState: state,
+      recommendationState: state ?? "CẦN CÂN BẰNG THÊM",
       recommendationSupporting: supporting,
     },
     source: "RUNTIME",
@@ -733,10 +733,10 @@ function readVerifiedScore(data: SourceRecord): ScoreView | null {
   const grade = asString(score.grade) ?? asString(data.grade);
   const breakdown = readScoreBreakdown(score);
   const reasons = readScoreReasons(score);
-  if (!display || !grade || !breakdown || !reasons) {
+  if (!display || !grade || !breakdown) {
     return null;
   }
-  return { display, grade, breakdown, reasons };
+  return { display, grade, breakdown, reasons: reasons ?? [] };
 }
 
 function readScoreBreakdown(score: SourceRecord): PresentationScore["breakdown"] | null {
@@ -931,7 +931,10 @@ function formatDomains(value: unknown): string {
   return rows ? rows.join(" · ") : "";
 }
 
-function groupDisplayValue(original: string): string {
+function groupDisplayValue(original: string, purposeLabel: string): string {
+  if (purposeLabel !== PURPOSE_CONTEXT_CUSTOMER_LABEL.phone_number) {
+    return original;
+  }
   const digits = original.replace(/\D/g, "");
   if (digits.length === 10) {
     return `${digits.slice(0, 4)} ${digits.slice(4, 7)} ${digits.slice(7)}`;

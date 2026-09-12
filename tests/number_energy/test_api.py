@@ -207,6 +207,61 @@ def test_api_strips_surrounding_space() -> None:
     assert response.json()["data"]["metadata"]["input_raw"] == "103"
 
 
+def test_api_vehicle_plate_maps_letters_to_digits_and_runs_full_customer_view() -> None:
+    data = _analyze("30A-123.45", "car_plate").json()["data"]
+    assert data["metadata"]["input_raw"] == "30A-123.45"
+    assert data["metadata"]["analyzed_input"] == "30112345"
+    assert data["metadata"]["purpose_context"] == "car_plate"
+    assert data["pair_occurrences"]
+    assert data["triple_occurrences"]
+    assert data["wealth_flow"]["stages"]
+    assert data["domain_insights"]
+    assert data["assessment"]["title"] == "Đánh giá tổng thể"
+    assert data["score"] is not None
+    assert data["grade"] is not None
+    assert data["verified_by_runtime"] is True
+
+
+def test_api_motorbike_plate_maps_z_to_26() -> None:
+    data = _analyze("59Z1-123.45", "motorbike_plate").json()["data"]
+    assert data["metadata"]["input_raw"] == "59Z1-123.45"
+    assert data["metadata"]["analyzed_input"] == "5926112345"
+    assert data["metadata"]["purpose_context"] == "motorbike_plate"
+    assert data["score"] is not None
+
+
+@pytest.mark.parametrize(
+    ("raw", "normalized"),
+    [
+        ("30F-058.11", "30605811"),
+        ("30F05811", "30605811"),
+        ("30F-05811", "30605811"),
+        ("30A1-05811", "301105811"),
+        ("30AM-05811", "3011305811"),
+    ],
+)
+def test_api_joined_vehicle_plate_accepts_common_formats(raw: str, normalized: str) -> None:
+    data = _analyze(raw, "car_plate").json()["data"]
+    assert data["metadata"]["input_raw"] == raw
+    assert data["metadata"]["analyzed_input"] == normalized
+    assert data["metadata"]["purpose_context"] == "car_plate"
+    assert data["score"] is not None
+    assert data["verified_by_runtime"] is True
+
+
+def test_api_id_number_accepts_cccd_and_passport_letters() -> None:
+    cccd = _analyze("001234567890", "id_number").json()["data"]
+    assert cccd["metadata"]["input_raw"] == "001234567890"
+    assert cccd["metadata"]["analyzed_input"] == "001234567890"
+    assert cccd["metadata"]["purpose_context"] == "id_number"
+    assert cccd["score"] is not None
+    passport = _analyze("B1234567", "id_number").json()["data"]
+    assert passport["metadata"]["input_raw"] == "B1234567"
+    assert passport["metadata"]["analyzed_input"] == "21234567"
+    assert passport["metadata"]["purpose_context"] == "id_number"
+    assert passport["score"] is not None
+
+
 def test_api_narrative_is_not_medical_diagnosis() -> None:
     data = _analyze("1414", purpose_context="phone_number").json()["data"]
     blob = _payload_text(data)
@@ -509,9 +564,13 @@ def test_api_rb05_e_golden_phone_score_and_verified() -> None:
         assert forbidden.isdisjoint(item.keys())
 
 
-def test_api_non_phone_does_not_reuse_phone_score() -> None:
+def test_api_non_customer_context_does_not_reuse_phone_score() -> None:
     data = _analyze("0328278786", "car_plate").json()["data"]
-    assert data["score"] is None
-    assert data["grade"] is None
-    assert data["verified_by_runtime"] is False
+    assert data["score"] is not None
+    assert data["grade"] is not None
+    assert data["verified_by_runtime"] is True
 
+    generic = _analyze("0328278786", "generic_number").json()["data"]
+    assert generic["score"] is None
+    assert generic["grade"] is None
+    assert generic["verified_by_runtime"] is False

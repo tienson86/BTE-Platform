@@ -16,7 +16,7 @@ class PortalSettings(BaseModel):
     api_base_url: str = Field(
         default_factory=lambda: os.getenv(
             "BTE_API_BASE_URL",
-            "http://127.0.0.1:8000",
+            "http://127.0.0.1:8001",
         )
     )
     marriage_api_base_url: str = Field(
@@ -28,7 +28,7 @@ class PortalSettings(BaseModel):
     narrative_provider: str = Field(default_factory=lambda: _narrative_provider())
     pack05_legacy: bool = Field(default_factory=lambda: _pack05_legacy())
     host: str = "127.0.0.1"
-    port: int = 8081
+    port: int = 8083
     title: str = "BTE Portal"
 
 

@@ -396,6 +396,10 @@ PURPOSE_FOCUS: Final[dict[str, str]] = {
     "generic_number": "only intrinsic number-energy unless owner/context supplied",
 }
 
+CUSTOMER_PRESENTATION_CONTEXTS: Final[frozenset[str]] = frozenset(
+    {"phone_number", "car_plate", "motorbike_plate", "id_number"}
+)
+
 FORBIDDEN_CUSTOMER_PHRASES: Final[tuple[str, ...]] = (
     "chắc chắn gây bệnh",
     "chắc chắn phá sản",
