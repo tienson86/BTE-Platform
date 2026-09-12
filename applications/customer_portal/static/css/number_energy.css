@@ -240,8 +240,12 @@ html:has([data-screen="number-energy"]) {
   padding: var(--space-4);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: var(--panel);
+  background: linear-gradient(180deg, #ffffff 0%, #fffafa 100%);
   min-width: 0;
+}
+
+.ne-hero__metric .ui-metric-value {
+  color: var(--ne-red);
 }
 
 .ne-hero__score,
@@ -257,11 +261,12 @@ html:has([data-screen="number-energy"]) {
 .ne-hero__grade {
   font-size: var(--text-lg);
   font-weight: 700;
-  color: var(--ink);
+  color: var(--ne-green);
 }
 
 .ne-hero__hint {
   font-size: var(--text-sm);
+  color: var(--ne-green);
 }
 
 .ne-hero__summary {
@@ -269,6 +274,7 @@ html:has([data-screen="number-energy"]) {
   max-width: 42rem;
   font-size: var(--text-md);
   line-height: 1.55;
+  color: var(--ne-green);
 }
 
 .ne-energy-map h2 {
@@ -484,7 +490,7 @@ html:has([data-screen="number-energy"]) {
   padding: var(--space-4);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: var(--panel);
+  background: linear-gradient(180deg, #ffffff 0%, #f7fff9 100%);
 }
 
 .ne-wealth-step,
@@ -510,7 +516,7 @@ html:has([data-screen="number-energy"]) {
 .ne-wealth-headline {
   font-size: var(--text-md);
   font-weight: 700;
-  color: var(--ink);
+  color: var(--ne-red);
 }
 
 .ne-wealth-evidence {
@@ -518,16 +524,19 @@ html:has([data-screen="number-energy"]) {
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.04em;
+  color: var(--ne-red);
 }
 
 .ne-wealth-interaction {
   font-size: var(--text-sm);
   font-weight: 650;
+  color: var(--ne-red);
 }
 
 .ne-wealth-narrative {
   font-size: var(--text-sm);
   line-height: 1.45;
+  color: var(--ne-green);
 }
 
 .ne-wealth-story {
@@ -571,6 +580,7 @@ html:has([data-screen="number-energy"]) {
   font-weight: 700;
   letter-spacing: 0.02em;
   text-transform: uppercase;
+  color: var(--ne-red);
 }
 
 .ne-wealth-synthesis {
@@ -578,6 +588,7 @@ html:has([data-screen="number-energy"]) {
   max-width: 46rem;
   font-size: var(--text-md);
   line-height: 1.55;
+  color: var(--ne-green);
 }
 
 .ne-triple-story h2 {
@@ -605,7 +616,7 @@ html:has([data-screen="number-energy"]) {
   padding: var(--space-4);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: var(--panel);
+  background: linear-gradient(180deg, #ffffff 0%, #fffafa 100%);
   min-width: 0;
 }
 
@@ -646,6 +657,7 @@ html:has([data-screen="number-energy"]) {
   gap: var(--space-2);
   font-size: var(--text-sm);
   font-weight: 650;
+  color: var(--ne-green);
 }
 
 .ne-triple-arrow {
@@ -655,6 +667,7 @@ html:has([data-screen="number-energy"]) {
 .ne-triple-title {
   font-size: var(--text-md);
   font-weight: 700;
+  color: var(--ne-red);
 }
 
 .ne-triple-item[data-priority="featured"] .ne-triple-title {
@@ -666,10 +679,12 @@ html:has([data-screen="number-energy"]) {
   font-size: var(--text-md);
   line-height: 1.55;
   overflow-wrap: break-word;
+  color: var(--ne-green);
 }
 
 .ne-triple-domains {
   font-size: var(--text-sm);
+  color: var(--ne-green);
 }
 
 .ne-distribution h2 {
@@ -792,7 +807,7 @@ html:has([data-screen="number-energy"]) {
   margin-top: var(--space-1);
   font-size: var(--text-md);
   font-weight: 700;
-  color: var(--ink);
+  color: var(--ne-red);
 }
 
 .ne-domain-narrative,
@@ -800,6 +815,14 @@ html:has([data-screen="number-energy"]) {
   margin-top: var(--space-2);
   font-size: var(--text-sm);
   line-height: 1.5;
+}
+
+.ne-domain-narrative {
+  color: var(--ne-green);
+}
+
+.ne-domain-caution {
+  color: var(--ne-black);
 }
 
 .ne-findings h2 {
@@ -845,18 +868,24 @@ html:has([data-screen="number-energy"]) {
 .ne-finding-title {
   font-size: var(--text-md);
   font-weight: 700;
-  color: var(--ink);
+  color: var(--ne-red);
 }
 
 .ne-finding-copy {
   margin-top: var(--space-2);
   font-size: var(--text-sm);
   line-height: 1.5;
+  color: var(--ne-green);
 }
 
 .ne-findings-column--caution {
   padding-left: var(--space-4);
   border-left: 1px solid var(--line);
+}
+
+.ne-findings-column--caution .ne-finding-title,
+.ne-findings-column--caution .ne-finding-copy {
+  color: var(--ne-black);
 }
 
 .ne-score h2 {
@@ -885,7 +914,7 @@ html:has([data-screen="number-energy"]) {
   font-size: var(--text-md);
   font-weight: 700;
   letter-spacing: 0.04em;
-  color: var(--ink);
+  color: var(--ne-green);
 }
 
 .ne-score-note {
@@ -918,12 +947,14 @@ html:has([data-screen="number-energy"]) {
 .ne-score-dim-label {
   font-weight: 650;
   min-width: 0;
+  color: var(--ne-green);
 }
 
 .ne-score-dim-points {
   font-variant-numeric: tabular-nums;
   font-weight: 700;
   white-space: nowrap;
+  color: var(--ne-red);
 }
 
 .ne-score-bar {
@@ -942,7 +973,7 @@ html:has([data-screen="number-energy"]) {
 }
 
 .ne-score-bar-fill {
-  background: var(--ink);
+  background: var(--ne-green);
 }
 
 .ne-score-reasons {
@@ -975,12 +1006,14 @@ html:has([data-screen="number-energy"]) {
 .ne-score-reason-title {
   font-size: var(--text-sm);
   font-weight: 700;
+  color: var(--ne-red);
 }
 
 .ne-score-reason-copy {
   margin-top: var(--space-1);
   font-size: var(--text-sm);
   line-height: 1.5;
+  color: var(--ne-green);
 }
 
 .ne-assess h2 {
@@ -991,6 +1024,7 @@ html:has([data-screen="number-energy"]) {
   margin: 0 0 var(--space-3);
   font-size: var(--text-sm);
   line-height: 1.55;
+  color: var(--ne-green);
 }
 
 .ne-assess-flow {
@@ -1018,6 +1052,7 @@ html:has([data-screen="number-energy"]) {
   font-size: var(--text-sm);
   font-weight: 700;
   letter-spacing: 0.04em;
+  color: var(--ne-red);
 }
 
 .ne-assess-recommend {
@@ -1044,13 +1079,14 @@ html:has([data-screen="number-energy"]) {
   font-size: var(--text-md);
   font-weight: 700;
   letter-spacing: 0.02em;
-  color: var(--ink);
+  color: var(--ne-red);
 }
 
 .ne-assess-recommend-copy {
   margin-top: var(--space-2);
   font-size: var(--text-sm);
   line-height: 1.5;
+  color: var(--ne-green);
 }
 
 .ne-basis h2 {
@@ -1061,6 +1097,7 @@ html:has([data-screen="number-energy"]) {
   margin: 0;
   font-size: var(--text-sm);
   line-height: 1.5;
+  color: var(--ne-green);
 }
 
 .ne-basis-principles,
@@ -1074,6 +1111,7 @@ html:has([data-screen="number-energy"]) {
   margin: 0 0 var(--space-2);
   font-size: var(--text-sm);
   line-height: 1.5;
+  color: var(--ne-green);
 }
 
 .ne-basis-highlights {
@@ -1101,6 +1139,11 @@ html:has([data-screen="number-energy"]) {
   color: var(--muted);
 }
 
+.ne-basis-highlight dd {
+  font-weight: 700;
+  color: var(--ne-red);
+}
+
 .ne-basis-evidence {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1114,7 +1157,7 @@ html:has([data-screen="number-energy"]) {
   font-weight: 650;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--ne-red);
 }
 
 .ne-expert[hidden] {
