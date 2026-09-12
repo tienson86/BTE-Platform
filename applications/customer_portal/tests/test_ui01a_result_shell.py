@@ -13,7 +13,13 @@ from applications.customer_portal.i18n import load_catalog, t
 from applications.customer_portal.pages import CUSTOMER_NAV_ITEMS
 
 _FORBIDDEN_NAV_LABELS = ("Kết quả", "Báo cáo", "Lịch sử")
-_PRODUCT_LABELS = ("Trang chủ", "Chọn ngày tốt", "Xem lá số", "Tư vấn hôn nhân")
+_PRODUCT_LABELS = (
+    "Trang chủ",
+    "Chọn ngày tốt",
+    "Xem lá số",
+    "Tư vấn năng lượng số",
+    "Tư vấn hôn nhân",
+)
 _ORIGINAL_THREE_LABELS = ("Trang chủ", "Chọn ngày tốt", "Xem lá số")
 
 
@@ -40,8 +46,8 @@ def _main_html(html: str) -> str:
     return match.group(1) if match else html
 
 
-def test_a1_result_primary_nav_has_four_product_items() -> None:
-    """TV1-B07A: /result uses the same four-item live chrome; original three stay first."""
+def test_a1_result_primary_nav_has_five_product_items() -> None:
+    """RB18: /result uses the same five-item live chrome; original three stay first."""
     nav = _primary_nav(_client().get("/result").text)
     labels = _nav_labels(nav)
     assert labels[:3] == list(_ORIGINAL_THREE_LABELS)
@@ -133,17 +139,21 @@ def test_a8_single_customer_header_source() -> None:
     assert "<PortalHeader" not in portal_page
     assert "cd-header__nav" not in chrome
     assert 'label: "Xem lá số"' in nav_items
+    assert 'label: "Tư vấn năng lượng số"' in nav_items
+    assert 'href: "/number-energy"' in nav_items
     assert 'label: "Tư vấn hôn nhân"' in nav_items
     assert 'href: "/marriage-consulting"' in nav_items
     assert [item.path for item in CUSTOMER_NAV_ITEMS] == [
         "/good-date",
         "/choose-date",
         "/analyze",
+        "/number-energy",
         "/marriage-consulting",
     ]
     assert [item.key for item in CUSTOMER_NAV_ITEMS] == [
         "home",
         "choose-date",
         "analyze",
+        "number-energy",
         "marriage-consulting",
     ]

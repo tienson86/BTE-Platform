@@ -14,7 +14,7 @@ function mount(): void {
   }
   createRoot(host).render(
     <StrictMode>
-      <NumberEnergyPage />
+      <NumberEnergyPage runtimeMode />
     </StrictMode>,
   );
 }

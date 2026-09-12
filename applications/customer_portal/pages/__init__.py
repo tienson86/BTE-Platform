@@ -33,12 +33,18 @@ DATE_SELECTION_NAV: tuple[NavItem, ...] = (
 DATE_SELECTION_MENU_LABEL = "nav.date_selection"
 
 # Customer Portal primary product navigation (Commercial Dashboard 00_NAVIGATION).
-# TV1-B07A: Tư vấn hôn nhân is the approved fourth visible header item.
-# Existing three destinations are unchanged. Routes stay registered in NAV_ITEMS.
+# TV1-B07A: Tư vấn hôn nhân remains the last visible header item.
+# RB18: Tư vấn năng lượng số is visible after Xem lá số.
 CUSTOMER_NAV_ITEMS: tuple[NavItem, ...] = (
     NavItem("home", "nav.dashboard", "/good-date", "good_date.html"),
     NavItem("choose-date", "nav.choose_date", "/choose-date", "choose_date.html"),
     NavItem("analyze", "nav.view_chart", "/analyze", "analyze.html"),
+    NavItem(
+        "number-energy",
+        "nav.number_energy",
+        "/number-energy",
+        "number_energy.html",
+    ),
     NavItem(
         "marriage-consulting",
         "nav.marriage_consulting",

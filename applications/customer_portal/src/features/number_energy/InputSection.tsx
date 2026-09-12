@@ -13,6 +13,7 @@ type InputSectionProps = {
   analysisType: AnalysisType;
   inputValue: string;
   errorMessage: string;
+  runtimeMode?: boolean;
   onAnalysisTypeChange: (type: AnalysisType) => void;
   onInputChange: (value: string) => void;
   onRevealGoldenPreview: (preview: GoldenPreviewState | null) => void;
@@ -23,6 +24,7 @@ export function InputSection({
   analysisType,
   inputValue,
   errorMessage,
+  runtimeMode = false,
   onAnalysisTypeChange,
   onInputChange,
   onRevealGoldenPreview,
@@ -35,7 +37,7 @@ export function InputSection({
 
   function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
-    const nextError = validateCustomerInput(analysisType, inputValue);
+    const nextError = validateCustomerInput(analysisType, inputValue, { runtimeMode });
     if (nextError) {
       onRevealGoldenPreview(null);
       onErrorMessageChange(nextError);
@@ -120,9 +122,11 @@ export function InputSection({
                 ? " Với số điện thoại, hệ thống còn phân tích Tài vận, nguồn Tài, dòng Tài và hậu vận của dãy số."
                 : null}
             </p>
-            <p className="ne-static-sample-note" data-testid="static-sample-note">
-              {STATIC_GOLDEN_SAMPLE_NOTE}
-            </p>
+            {!runtimeMode ? (
+              <p className="ne-static-sample-note" data-testid="static-sample-note">
+                {STATIC_GOLDEN_SAMPLE_NOTE}
+              </p>
+            ) : null}
           </div>
           {errorMessage ? (
             <p className="ne-field-error" id={errorId} data-testid="input-error" role="alert">

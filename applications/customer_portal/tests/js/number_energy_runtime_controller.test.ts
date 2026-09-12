@@ -256,6 +256,6 @@ describe("Number Energy RB08 runtime controller", () => {
     expect(featureSource("InputSection.tsx")).not.toContain("useNumberEnergyRuntime");
     expect(entrySource()).not.toContain("runtimeController");
     expect(entrySource()).not.toContain("useNumberEnergyRuntime");
-    expect(entrySource()).not.toContain("runtimeMode");
+    expect(entrySource()).toContain("runtimeMode");
   });
 });

@@ -255,6 +255,13 @@ describe("TV1-B07 Marriage Consulting UI", () => {
     expect(screen.getByTestId("executive-summary").textContent).toContain("điểm hỗ trợ");
     expect(screen.getByTestId("key-strengths").textContent).toContain("Ngũ hành");
     expect(screen.getByTestId("key-risks").textContent).toContain("Can Chi");
+    expect(screen.getByTestId("expert-mode")).toBeTruthy();
+    expect(screen.queryByTestId("domain-card")).toBeNull();
+    expect(screen.queryByTestId("domain-analysis")).toBeNull();
+    expect(screen.queryByTestId("action-plan")).toBeNull();
+
+    fireEvent.click(screen.getByTestId("expert-toggle"));
+    await waitFor(() => expect(screen.getByTestId("domain-analysis")).toBeTruthy());
     expect(screen.getAllByTestId("domain-card").map((item) => item.getAttribute("data-domain"))).toEqual([
       "five_elements",
       "stem_branch",
@@ -339,14 +346,19 @@ describe("TV1-B07 Marriage Consulting UI", () => {
     expect(screen.getByTestId("submit-marriage").tagName).toBe("BUTTON");
   });
 
-  it("27 existing three destinations stay; TV1-B07A adds the fourth primary item", () => {
+  it("27 existing three destinations stay; Marriage remains the last primary item", () => {
     expect(APP_NAV_ITEMS.slice(0, 3).map((item) => item.href)).toEqual([
       "/good-date",
       "/choose-date",
       "/analyze",
     ]);
-    expect(APP_NAV_ITEMS).toHaveLength(4);
+    expect(APP_NAV_ITEMS).toHaveLength(5);
     expect(APP_NAV_ITEMS[3]).toEqual({
+      id: "number-energy",
+      label: "Tư vấn năng lượng số",
+      href: "/number-energy",
+    });
+    expect(APP_NAV_ITEMS[4]).toEqual({
       id: "marriage-consulting",
       label: "Tư vấn hôn nhân",
       href: "/marriage-consulting",

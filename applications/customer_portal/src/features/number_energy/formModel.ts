@@ -63,6 +63,11 @@ export const VEHICLE_FORMAT_ERROR =
 export const MISSING_TYPE_ERROR = "Vui lòng chọn loại số cần phân tích.";
 export const STATIC_GOLDEN_SAMPLE_ERROR = "Bản dựng tĩnh hiện chỉ hỗ trợ số mẫu 0328278786.";
 export const STATIC_GOLDEN_SAMPLE_NOTE = "Bản dựng tĩnh đang xem trước số mẫu 0328278786.";
+export const VEHICLE_NOT_LIVE_ERROR = "Phân tích biển số chưa được hỗ trợ lúc này.";
+
+type ValidateCustomerInputOptions = {
+  runtimeMode?: boolean;
+};
 
 const PHONE_SEPARATORS = /[.\s-]/g;
 
@@ -82,7 +87,11 @@ export function isAnalysisType(value: string): value is AnalysisType {
   return (ANALYSIS_TYPES as readonly string[]).includes(value);
 }
 
-export function validateCustomerInput(type: AnalysisType | "", raw: string): string | null {
+export function validateCustomerInput(
+  type: AnalysisType | "",
+  raw: string,
+  options: ValidateCustomerInputOptions = {},
+): string | null {
   if (!isAnalysisType(type)) {
     return MISSING_TYPE_ERROR;
   }
@@ -90,15 +99,19 @@ export function validateCustomerInput(type: AnalysisType | "", raw: string): str
   if (!trimmed) {
     return ANALYSIS_TYPE_COPY[type].emptyMessage;
   }
+  const runtimeMode = options.runtimeMode === true;
   if (type === "phone_number") {
     const compact = compactPhoneInput(trimmed);
     if (!/^\d+$/.test(compact) || !compact.startsWith("0") || compact.length < 9 || compact.length > 11) {
       return PHONE_FORMAT_ERROR;
     }
-    if (!isGoldenPhonePreviewInput(type, trimmed)) {
+    if (!runtimeMode && !isGoldenPhonePreviewInput(type, trimmed)) {
       return STATIC_GOLDEN_SAMPLE_ERROR;
     }
     return null;
+  }
+  if (runtimeMode) {
+    return VEHICLE_NOT_LIVE_ERROR;
   }
   if (!/[0-9A-Za-z]/.test(trimmed)) {
     return VEHICLE_FORMAT_ERROR;

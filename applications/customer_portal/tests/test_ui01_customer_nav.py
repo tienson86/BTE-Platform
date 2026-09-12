@@ -35,18 +35,25 @@ def _nav_labels(nav_html: str) -> list[str]:
     return re.findall(r">([^<]+)</a>", nav_html)
 
 
-def test_n1_customer_navigation_has_four_product_items() -> None:
-    """TV1-B07A: four visible primary items; original three destinations unchanged."""
+def test_n1_customer_navigation_has_five_product_items() -> None:
+    """RB18: five visible primary items; original three destinations stay first; Marriage last."""
     html = _client().get("/good-date").text
     labels = _nav_labels(_primary_nav(html))
-    assert labels == ["Trang chủ", "Chọn ngày tốt", "Xem lá số", "Tư vấn hôn nhân"]
-    assert len(CUSTOMER_NAV_ITEMS) == 4
+    assert labels == [
+        "Trang chủ",
+        "Chọn ngày tốt",
+        "Xem lá số",
+        "Tư vấn năng lượng số",
+        "Tư vấn hôn nhân",
+    ]
+    assert len(CUSTOMER_NAV_ITEMS) == 5
     assert [item.path for item in CUSTOMER_NAV_ITEMS[:3]] == [
         "/good-date",
         "/choose-date",
         "/analyze",
     ]
-    assert CUSTOMER_NAV_ITEMS[3].path == "/marriage-consulting"
+    assert CUSTOMER_NAV_ITEMS[3].path == "/number-energy"
+    assert CUSTOMER_NAV_ITEMS[4].path == "/marriage-consulting"
 
 
 def test_n2_reports_not_in_customer_navigation() -> None:
@@ -102,8 +109,8 @@ def test_n7_xem_la_so_opens_input_screen() -> None:
     assert "Luận giải" not in nav
 
 
-def test_n11_marriage_consulting_is_fourth_primary_item() -> None:
-    """TV1-B07A: Tư vấn hôn nhân is a visible primary item with active state."""
+def test_n11_marriage_consulting_is_last_primary_item() -> None:
+    """TV1-B07A + RB18: Tư vấn hôn nhân remains the last visible primary item."""
     client = _client()
     home_nav = _primary_nav(client.get("/good-date").text)
     assert re.search(r'href="/marriage-consulting"[^>]*>Tư vấn hôn nhân<', home_nav)
@@ -118,6 +125,28 @@ def test_n11_marriage_consulting_is_fourth_primary_item() -> None:
     )
     assert 'id="marriage-consulting-root"' in response.text
     assert "{{HEADER}}" not in response.text
+
+
+def test_n12_number_energy_is_visible_and_active() -> None:
+    """RB18: Tư vấn năng lượng số is a visible primary item with active state."""
+    client = _client()
+    home_nav = _primary_nav(client.get("/good-date").text)
+    assert re.search(r'href="/number-energy"[^>]*>Tư vấn năng lượng số<', home_nav)
+    response = client.get("/number-energy")
+    assert response.status_code == 200
+    nav = _primary_nav(response.text)
+    assert 'data-nav-id="number-energy"' in nav
+    assert 'aria-current="page"' in nav
+    assert re.search(
+        r'class="nav-link active"[^>]*href="/number-energy"[^>]*>Tư vấn năng lượng số<',
+        nav,
+    )
+    assert 'id="number-energy-root"' in response.text
+    result_nav = _primary_nav(client.get("/result").text)
+    assert 'data-nav-id="analyze"' in result_nav
+    assert 'data-nav-id="number-energy"' in result_nav
+    assert re.search(r'class="nav-link active"[^>]*href="/analyze"', result_nav)
+    assert not re.search(r'class="nav-link active"[^>]*href="/number-energy"', result_nav)
 
 
 def test_n8_result_route_still_works() -> None:
@@ -146,6 +175,12 @@ def test_n10_legacy_welcome_is_not_production_landing() -> None:
     dashboard = client.get("/dashboard")
     assert dashboard.status_code == 200
     nav = _primary_nav(dashboard.text)
-    assert _nav_labels(nav) == ["Trang chủ", "Chọn ngày tốt", "Xem lá số", "Tư vấn hôn nhân"]
+    assert _nav_labels(nav) == [
+        "Trang chủ",
+        "Chọn ngày tốt",
+        "Xem lá số",
+        "Tư vấn năng lượng số",
+        "Tư vấn hôn nhân",
+    ]
     for label in _FORBIDDEN_NAV_LABELS:
         assert label not in nav

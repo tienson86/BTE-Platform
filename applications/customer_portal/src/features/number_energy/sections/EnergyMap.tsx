@@ -61,9 +61,8 @@ export function EnergyMap({
       </p>
       <div
         className="ne-pair-strip-scroller"
-        tabIndex={0}
         role="region"
-        aria-label="Các cặp năng lượng theo thứ tự. Cuộn ngang để xem hết trên màn hình hẹp."
+        aria-label="Các cặp năng lượng theo thứ tự xuất hiện trong dãy."
         aria-describedby="pair-strip-hint"
         data-testid="pair-strip-scroller"
       >

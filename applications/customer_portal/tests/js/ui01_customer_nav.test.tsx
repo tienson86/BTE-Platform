@@ -7,12 +7,25 @@ afterEach(() => {
   cleanup();
 });
 
-const PRODUCT_LABELS = ["Trang chủ", "Chọn ngày tốt", "Xem lá số", "Tư vấn hôn nhân"] as const;
+const PRODUCT_LABELS = [
+  "Trang chủ",
+  "Chọn ngày tốt",
+  "Xem lá số",
+  "Tư vấn năng lượng số",
+  "Tư vấn hôn nhân",
+] as const;
 const ORIGINAL_THREE_HREFS = ["/good-date", "/choose-date", "/analyze"] as const;
+const PRODUCT_HREFS = [
+  "/good-date",
+  "/choose-date",
+  "/analyze",
+  "/number-energy",
+  "/marriage-consulting",
+] as const;
 const FORBIDDEN_LABELS = ["Báo cáo", "Lịch sử", "Tài khoản", "Hướng dẫn", "Luận giải", "Kết quả"] as const;
 
 describe("UI-01 customer primary navigation", () => {
-  it("N1 exposes four product items (TV1-B07A)", () => {
+  it("N1 exposes five product items (RB18)", () => {
     expect(APP_NAV_ITEMS.map((item) => item.label)).toEqual([...PRODUCT_LABELS]);
     render(<PrimaryNav activeId="home" />);
     const nav = screen.getByRole("navigation", { name: "Điều hướng chính" });
@@ -32,6 +45,7 @@ describe("UI-01 customer primary navigation", () => {
     expect(resolveActiveNavId("/good-date")).toBe("home");
     expect(resolveActiveNavId("/choose-date")).toBe("choose-date");
     expect(resolveActiveNavId("/analyze")).toBe("analyze");
+    expect(resolveActiveNavId("/number-energy")).toBe("number-energy");
     expect(resolveActiveNavId("/marriage-consulting")).toBe("marriage-consulting");
   });
 
@@ -55,6 +69,23 @@ describe("UI-01 customer primary navigation", () => {
     expect(screen.getByText("Trang chủ").getAttribute("aria-current")).toBeNull();
     expect(screen.getByText("Chọn ngày tốt").getAttribute("aria-current")).toBeNull();
     expect(screen.getByText("Xem lá số").getAttribute("aria-current")).toBeNull();
+    expect(screen.getByText("Tư vấn năng lượng số").getAttribute("aria-current")).toBeNull();
+  });
+
+  it("RB18 marks Tư vấn năng lượng số active only on /number-energy", () => {
+    expect(APP_NAV_ITEMS[3]).toEqual({
+      id: "number-energy",
+      label: "Tư vấn năng lượng số",
+      href: "/number-energy",
+    });
+    expect(resolveActiveNavId("/number-energy")).toBe("number-energy");
+    expect(resolveActiveNavId("/result")).toBe("analyze");
+    expect(resolveActiveNavId("/interpretation")).toBe("analyze");
+    render(<PrimaryNav activeId="number-energy" />);
+    expect(screen.getByText("Tư vấn năng lượng số").getAttribute("href")).toBe("/number-energy");
+    expect(screen.getByText("Tư vấn năng lượng số").getAttribute("aria-current")).toBe("page");
+    expect(screen.getByText("Xem lá số").getAttribute("aria-current")).toBeNull();
+    expect(screen.getByText("Tư vấn hôn nhân").getAttribute("aria-current")).toBeNull();
   });
 });
 
@@ -74,13 +105,9 @@ describe("UI-01A result shell contract", () => {
   });
 
   it("A8 does not add a competing customer nav list", () => {
-    expect(APP_NAV_ITEMS).toHaveLength(4);
+    expect(APP_NAV_ITEMS).toHaveLength(5);
     expect(APP_NAV_ITEMS.slice(0, 3).map((item) => item.href)).toEqual([...ORIGINAL_THREE_HREFS]);
-    expect(APP_NAV_ITEMS.map((item) => item.href)).toEqual([
-      "/good-date",
-      "/choose-date",
-      "/analyze",
-      "/marriage-consulting",
-    ]);
+    expect(APP_NAV_ITEMS.map((item) => item.href)).toEqual([...PRODUCT_HREFS]);
+    expect(APP_NAV_ITEMS[4]?.id).toBe("marriage-consulting");
   });
 });

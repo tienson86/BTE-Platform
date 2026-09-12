@@ -5,6 +5,9 @@ html:has([data-screen="number-energy"]) {
 }
 
 .ne-page {
+  --ne-red: #c81e1e;
+  --ne-green: #15803d;
+  --ne-black: #111827;
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
@@ -221,7 +224,7 @@ html:has([data-screen="number-energy"]) {
   letter-spacing: 0.06em;
   line-height: 1.2;
   font-variant-numeric: tabular-nums;
-  color: var(--ink);
+  color: var(--ne-red);
   max-width: 100%;
   white-space: nowrap;
   overflow-x: auto;
@@ -248,6 +251,7 @@ html:has([data-screen="number-energy"]) {
 
 .ne-hero__score {
   font-size: var(--text-xl);
+  color: var(--ne-red);
 }
 
 .ne-hero__grade {
@@ -276,35 +280,34 @@ html:has([data-screen="number-energy"]) {
 }
 
 .ne-pair-strip-scroller {
-  width: 0;
+  width: 100%;
   min-width: 100%;
   max-width: 100%;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
+  overflow: visible;
+  overscroll-behavior-x: auto;
   contain: paint;
-  padding-bottom: var(--space-2);
 }
 
 .ne-pair-strip {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(6.75rem, 1fr));
   align-items: stretch;
-  gap: var(--space-2);
-  width: max-content;
-  max-width: none;
-  min-width: min-content;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   margin: var(--space-4) 0 0;
   padding: 0;
   list-style: none;
-  overflow-x: visible;
+  overflow: visible;
 }
 
 .ne-pair-item {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: var(--space-2);
-  flex: 0 0 auto;
+  gap: 0.35rem;
+  width: 100%;
   min-width: 0;
 }
 
@@ -318,17 +321,18 @@ html:has([data-screen="number-energy"]) {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
-  width: 8.25rem;
-  min-width: 8.25rem;
-  padding: var(--space-3);
+  width: 100%;
+  min-width: 0;
+  min-height: 10rem;
+  padding: var(--space-3) var(--space-2);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: var(--panel);
+  background: linear-gradient(180deg, #ffffff 0%, #fff7f7 100%);
   text-align: center;
 }
 
 .ne-pair-card[data-pair-tone="caution"] {
-  background: var(--warning-soft);
+  background: linear-gradient(180deg, #ffffff 0%, var(--warning-soft) 100%);
 }
 
 .ne-pair-digits {
@@ -337,7 +341,7 @@ html:has([data-screen="number-energy"]) {
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.04em;
-  color: var(--ink);
+  color: var(--ne-red);
 }
 
 .ne-pair-energy,
@@ -350,6 +354,7 @@ html:has([data-screen="number-energy"]) {
 .ne-pair-energy {
   font-size: var(--text-sm);
   font-weight: 650;
+  color: var(--ne-red);
 }
 
 .ne-pair-strength {
@@ -385,7 +390,12 @@ html:has([data-screen="number-energy"]) {
   font-weight: 650;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--ne-green);
+}
+
+.ne-pair-card[data-pair-tone="caution"] .ne-pair-strength-label,
+.ne-pair-card[data-pair-tone="caution"] .ne-pair-category {
+  color: var(--ne-black);
 }
 
 .ne-pair-keywords {
@@ -408,8 +418,20 @@ html:has([data-screen="number-energy"]) {
   padding: var(--space-4);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: var(--panel);
+  background: linear-gradient(180deg, #ffffff 0%, #fffafa 100%);
   min-width: 0;
+}
+
+.ne-quick-card .ui-metric-value {
+  color: var(--ne-red);
+}
+
+.ne-quick-card[data-testid="qs-favorable"] .ui-metric-value {
+  color: var(--ne-green);
+}
+
+.ne-quick-card[data-testid="qs-challenging"] .ui-metric-value {
+  color: var(--ne-black);
 }
 
 .ne-quick-summary {
@@ -610,7 +632,7 @@ html:has([data-screen="number-energy"]) {
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.06em;
   line-height: 1.2;
-  color: var(--ink);
+  color: var(--ne-red);
 }
 
 .ne-triple-item[data-priority="compact"] .ne-triple-digits {
@@ -680,6 +702,7 @@ html:has([data-screen="number-energy"]) {
 
 .ne-dist-name {
   font-weight: 650;
+  color: var(--ne-red);
 }
 
 .ne-dist-bar {
@@ -696,14 +719,15 @@ html:has([data-screen="number-energy"]) {
 }
 
 .ne-dist-tick[data-filled="true"] {
-  background: var(--ink);
-  border-color: var(--ink);
+  background: var(--ne-red);
+  border-color: var(--ne-red);
 }
 
 .ne-dist-count {
   font-variant-numeric: tabular-nums;
   font-weight: 700;
   text-align: right;
+  color: var(--ne-red);
 }
 
 .ne-dist-role {
@@ -713,6 +737,16 @@ html:has([data-screen="number-energy"]) {
   text-transform: uppercase;
   color: var(--muted);
   white-space: nowrap;
+}
+
+.ne-dist-row[data-energy-role="primary"] .ne-dist-role,
+.ne-dist-row[data-energy-role="secondary"] .ne-dist-role {
+  color: var(--ne-green);
+}
+
+.ne-dist-row[data-energy-role="none"] .ne-dist-role,
+.ne-dist-role--empty {
+  color: var(--ne-black);
 }
 
 .ne-dist-note {
@@ -843,7 +877,7 @@ html:has([data-screen="number-energy"]) {
   font-size: var(--text-xl);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  color: var(--ink);
+  color: var(--ne-red);
 }
 
 .ne-score-grade {

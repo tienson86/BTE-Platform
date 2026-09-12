@@ -26,9 +26,10 @@ def test_marriage_consulting_route_loads() -> None:
 
 
 def test_primary_nav_includes_approved_fourth_item() -> None:
-    """TV1-B07A: Tư vấn hôn nhân is the fourth live primary nav item."""
+    """TV1-B07A + RB18: Tư vấn hôn nhân remains the last live primary nav item."""
     html = _client().get("/good-date").text
-    assert len(CUSTOMER_NAV_ITEMS) == 4
+    assert len(CUSTOMER_NAV_ITEMS) == 5
+    assert CUSTOMER_NAV_ITEMS[-1].path == "/marriage-consulting"
     assert html.count('data-customer-nav="primary"') == 1
     nav_start = html.index('data-customer-nav="primary"')
     nav_html = html[nav_start : html.index("</nav>", nav_start)]

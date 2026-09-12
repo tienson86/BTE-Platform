@@ -14,7 +14,7 @@ export const NUMBER_ENERGY_STATIC_PHASE = "sb16";
 export const NUMBER_ENERGY_STATIC_UI_V1 = "NUMBER_ENERGY_STATIC_UI_V1";
 
 export type NumberEnergyPageProps = {
-  /** Explicit harness flag. Default public `/number-energy` stays static. */
+  /** Explicit flag. Public `/number-energy` mounts this as true; component default stays false. */
   runtimeMode?: boolean;
 };
 
@@ -41,6 +41,10 @@ export function NumberEnergyPage({ runtimeMode = false }: NumberEnergyPageProps 
       return;
     }
     if (!preview) {
+      runtime.reset();
+      return;
+    }
+    if (preview.analysisType !== "phone_number") {
       runtime.reset();
       return;
     }
@@ -107,6 +111,7 @@ export function NumberEnergyPage({ runtimeMode = false }: NumberEnergyPageProps 
         analysisType={analysisType}
         inputValue={inputValue}
         errorMessage={errorMessage}
+        runtimeMode={runtimeMode}
         onAnalysisTypeChange={handleAnalysisTypeChange}
         onInputChange={(value) => {
           setInputValue(value);

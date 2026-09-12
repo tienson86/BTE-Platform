@@ -35,23 +35,32 @@ def _nav_labels(nav_html: str) -> list[str]:
 
 
 def test_fourth_primary_item_exists_on_live_shell_routes() -> None:
-    """Tư vấn hôn nhân is visible in the live portal primary nav on all product routes."""
+    """Tư vấn hôn nhân remains visible last in the live portal primary nav."""
     client = _client()
-    for path in ("/good-date", "/choose-date", "/analyze", MARRIAGE_CONSULTING_PATH):
+    for path in ("/good-date", "/choose-date", "/analyze", "/number-energy", MARRIAGE_CONSULTING_PATH):
         nav = _primary_nav(client.get(path).text)
         labels = _nav_labels(nav)
-        assert labels == ["Trang chủ", "Chọn ngày tốt", "Xem lá số", "Tư vấn hôn nhân"]
+        assert labels == [
+            "Trang chủ",
+            "Chọn ngày tốt",
+            "Xem lá số",
+            "Tư vấn năng lượng số",
+            "Tư vấn hôn nhân",
+        ]
         assert re.search(r'href="/marriage-consulting"[^>]*>Tư vấn hôn nhân<', nav)
+        assert re.search(r'href="/number-energy"[^>]*>Tư vấn năng lượng số<', nav)
 
 
 def test_existing_three_destinations_unchanged() -> None:
     """TV1-B07A does not change the original three primary items."""
-    assert len(CUSTOMER_NAV_ITEMS) == 4
+    assert len(CUSTOMER_NAV_ITEMS) == 5
     for index, (key, path, _label) in enumerate(_ORIGINAL_THREE):
         assert CUSTOMER_NAV_ITEMS[index].key == key
         assert CUSTOMER_NAV_ITEMS[index].path == path
-    assert CUSTOMER_NAV_ITEMS[3].key == "marriage-consulting"
-    assert CUSTOMER_NAV_ITEMS[3].path == MARRIAGE_CONSULTING_PATH
+    assert CUSTOMER_NAV_ITEMS[3].key == "number-energy"
+    assert CUSTOMER_NAV_ITEMS[3].path == "/number-energy"
+    assert CUSTOMER_NAV_ITEMS[4].key == "marriage-consulting"
+    assert CUSTOMER_NAV_ITEMS[4].path == MARRIAGE_CONSULTING_PATH
 
 
 def test_marriage_route_renders_and_is_active() -> None:

@@ -16,11 +16,12 @@ export type AppNavItem = {
   readonly children?: readonly AppNavChild[];
 };
 
-/** Customer Portal primary destinations (Commercial Dashboard 00_NAVIGATION + TV1-B07A). */
+/** Customer Portal primary destinations (Commercial Dashboard 00_NAVIGATION + TV1-B07A + RB18). */
 export const APP_NAV_ITEMS: readonly AppNavItem[] = [
   { id: "home", label: "Trang chủ", href: "/good-date" },
   { id: "choose-date", label: "Chọn ngày tốt", href: "/choose-date" },
   { id: "analyze", label: "Xem lá số", href: "/analyze" },
+  { id: "number-energy", label: "Tư vấn năng lượng số", href: "/number-energy" },
   { id: "marriage-consulting", label: "Tư vấn hôn nhân", href: "/marriage-consulting" },
 ];
 
@@ -61,6 +62,9 @@ export function resolveActiveNavId(pathname: string): string | undefined {
   }
   if (normalized === "/choose-date") {
     return "choose-date";
+  }
+  if (normalized === "/number-energy") {
+    return "number-energy";
   }
   if (normalized === "/marriage-consulting") {
     return "marriage-consulting";
