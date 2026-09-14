@@ -350,20 +350,6 @@ function pickStr(obj: Record<string, unknown> | undefined, keys: string[]): stri
   return "";
 }
 
-function pickList(obj: Record<string, unknown> | undefined, keys: string[]): string[] {
-  if (!obj) return [];
-  for (const key of keys) {
-    const v = obj[key];
-    if (Array.isArray(v)) {
-      return v.map((x) => asString(x).trim()).filter(Boolean);
-    }
-    if (typeof v === "string" && v.trim()) {
-      return v.split(/[,;/|]+/).map((s) => s.trim()).filter(Boolean);
-    }
-  }
-  return [];
-}
-
 function mapPillarGlyph(
   dto: PillarDto | undefined,
   title: string,

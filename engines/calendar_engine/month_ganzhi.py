@@ -1,15 +1,15 @@
-"""Canonical Four Pillars month Ganzhi: 12 Tiết + Ngũ Hổ Độn.
+"""Canonical Four Pillars month Ganzhi helpers.
 
 Standard
-    BTE-MONTH-PILLAR-SOLAR-TERM-V1.0
-
-Supersedes
     BTE-MONTH-PILLAR-LUNAR-V1.0
 
-Month branch comes from solar-term nguyệt lệnh (Lập Xuân = Dần, … Lập Thu = Thân).
+Supersedes
+    BTE-MONTH-PILLAR-SOLAR-TERM-V1.0
+
+Month branch comes from the lunar month number (1 = Dần … 12 = Sửu).
 Month stem comes from the year-pillar stem via Ngũ Hổ Độn.
 
-Does not use lunar month number. Does not compute day or hour Ganzhi.
+Solar terms remain available as interpretive context, not pillar identity.
 """
 
 from __future__ import annotations
@@ -19,9 +19,10 @@ from functools import lru_cache
 from pathlib import Path
 
 from engines.calendar_engine.algorithms.ganzhi import GanzhiAlgorithm
+from engines.calendar_engine.lunar.converter import solar_to_lunar
 from engines.calendar_engine.solar_terms.engine import SolarTermEngine, SolarTermMonth
 
-MONTH_PILLAR_STANDARD = "BTE-MONTH-PILLAR-SOLAR-TERM-V1.0"
+MONTH_PILLAR_STANDARD = "BTE-MONTH-PILLAR-LUNAR-V1.0"
 
 STEMS: tuple[str, ...] = tuple(GanzhiAlgorithm.STEM)
 BRANCHES_DAN_FIRST: tuple[str, ...] = (
@@ -94,10 +95,10 @@ def month_pillar(
 ) -> tuple[str, str]:
     """Return ``(stem, branch)`` for the Four Pillars month at a Gregorian date."""
     engine = terms or SolarTermEngine()
-    info = engine.get_bazi_month(year, month, day)
+    lunar = solar_to_lunar(day, month, year)
     year_stem = GanzhiAlgorithm.year(bazi_year_number(year, month, day, engine))["can"]
-    stem = month_stem_for(year_stem, info.month_index)
-    return stem, info.branch
+    stem = month_stem_for(year_stem, int(lunar.month))
+    return stem, BRANCHES_DAN_FIRST[int(lunar.month) - 1]
 
 
 def month_ganzhi_label(

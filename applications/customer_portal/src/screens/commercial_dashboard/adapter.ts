@@ -100,6 +100,28 @@ function solarTermName(calendar: Record<string, unknown>): string {
   return text(term);
 }
 
+function lunarMonthCanChi(calendar: Record<string, unknown>): string {
+  const lunar = asRecord(calendar.lunar);
+  const lunarCanChi = asRecord(calendar.lunar_can_chi);
+  return firstText(calendar.lunar_month_can_chi, lunar.month_can_chi, lunarCanChi.month);
+}
+
+function baziMonthCanChi(calendar: Record<string, unknown>, month: IdentityPillarView): string {
+  const baziCanChi = asRecord(calendar.bazi_can_chi);
+  return firstText(month.canChi, baziCanChi.month);
+}
+
+function buildPillarCalendarNote(calendar: Record<string, unknown>, month: IdentityPillarView): string {
+  const lunarMonth = lunarMonthCanChi(calendar);
+  const baziMonth = baziMonthCanChi(calendar, month);
+  if (!lunarMonth || !baziMonth || lunarMonth === baziMonth) return "";
+  const lunarDate = firstText(calendar.lunar_date);
+  const term = solarTermName(calendar);
+  const lunarText = lunarDate ? `Âm lịch ${lunarDate}` : "Tháng âm lịch";
+  const termText = term ? ` Tiết khí ${term} chỉ dùng làm bối cảnh luận giải.` : "";
+  return `${lunarText} thuộc tháng ${lunarMonth}; trụ tháng Bát Tự đang hiển thị là ${baziMonth}.${termText}`;
+}
+
 function formatAnalyzedAt(raw: string): string {
   if (!raw) return "";
   const parsed = new Date(raw);
@@ -178,6 +200,7 @@ export function adaptIdentityHeader(
       birthPlace: firstText(person.birth_place, customer?.birth_place, request?.birth_place),
     },
     pillars: { year, month, day, hour },
+    pillarCalendarNote: buildPillarCalendarNote(calendar, month),
     dayMaster: {
       stem: firstText(bazi?.day_master, day.stem),
       element: firstText(bazi?.day_master_element),

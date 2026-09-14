@@ -2,7 +2,7 @@
 
 Pillars follow BTE G1-10B rules:
 - Year Can Chi is looked up from the Tam Nguyên 60 Hoa Giáp table of the Gregorian year
-- Month Can Chi uses that Year stem (Ngũ Hổ Độn) plus 12-Tiết month branch
+- Month Can Chi uses the lunar month branch, with Ngũ Hổ Độn from the Year stem
 - Day uses astronomical Julian Day Number + sexagenary cycle (Hạ Nguyên)
 - Hour follows Ngũ Thử Độn from Day Stem (Hạ Nguyên)
 """
@@ -77,9 +77,6 @@ class BaziChart:
 
 class BaziEngine:
     """Build a chart from calendar-like input or Gregorian date components."""
-
-    def __init__(self) -> None:
-        self._solar_terms = SolarTermEngine()
 
     def build(
         self,
@@ -169,7 +166,7 @@ class BaziEngine:
 
     def _bazi_year(self, year: int, month: int, day: int) -> int:
         """Năm Bát Tự: đổi năm tại Lập Xuân."""
-        if self._solar_terms.is_after_li_chun(year, month, day):
+        if SolarTermEngine().is_after_li_chun(year, month, day):
             return year
         return year - 1
 

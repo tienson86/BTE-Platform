@@ -58,6 +58,7 @@ export type IdentityHeaderView = {
     readonly day: IdentityPillarView;
     readonly hour: IdentityPillarView;
   };
+  readonly pillarCalendarNote: string;
   readonly dayMaster: IdentityDayMasterView;
   readonly foundation: IdentityFoundationView;
   readonly status: IdentityStatusView;
@@ -622,4 +623,17 @@ export type LifeConsultingView = {
   readonly title: string;
   readonly available: boolean;
   readonly domains: readonly LifeDomainView[];
+};
+
+export type BaziReportDocumentChapterView = {
+  readonly id: string;
+  readonly title: string;
+  readonly paragraphs: readonly string[];
+  readonly bullets: readonly string[];
+};
+
+export type BaziReportDocumentView = {
+  readonly title: string;
+  readonly subtitle: string;
+  readonly chapters: readonly BaziReportDocumentChapterView[];
 };

@@ -215,7 +215,7 @@ export function buildFullReportViewModel(
   return {
     analysisId: sanitizeAnalysisId(options.analysisId, data, input),
     customerName: text(data.customer?.full_name || input.full_name),
-    gender: customerGenderDisplay(data.customer, input.gender),
+    gender: customerGenderDisplay(data.customer, text(input.gender)),
     birthPlace: text(data.customer?.birth_place || input.birth_place),
     timezone: text(data.customer?.timezone || input.timezone, "Asia/Ho_Chi_Minh"),
     solarDate: solarFromInput(calendar.solar_date, input),
@@ -230,7 +230,7 @@ export function buildFullReportViewModel(
       return score == null ? "" : formatCanonicalStrengthScore(score);
     })(),
     strengthEvidence: strengthCustomerSummary(data) || stripInternalRuleIds(canonicalStrengthEvidence(data)),
-    pattern: text(pattern.cach_cuc || pattern.pattern),
+    pattern: text(pattern.cach_cuc) || text(pattern.pattern),
     patternEvidence: patternCustomerEvidence(data),
     usefulGod: canonicalUsefulDisplay(useful),
     usefulGodReason: canonicalUsefulShortReason(useful),
@@ -403,11 +403,6 @@ function text(value: unknown, fallback = ""): string {
   return next || fallback;
 }
 
-function listText(value: unknown): string {
-  if (!Array.isArray(value)) return "";
-  return value.map((item) => String(item).trim()).filter(Boolean).join(", ");
-}
-
 function solarFromInput(solar: unknown, input: Record<string, unknown>): string {
   if (text(solar)) return text(solar);
   const year = input.year;
@@ -540,11 +535,6 @@ function godsSupport(model: FullReportViewModel): string {
     </div>
     ${reason}
   </div>`;
-}
-
-function bulletList(items: readonly string[], empty: string): string {
-  if (!items.length) return `<p class="bte-full-empty">${esc(empty)}</p>`;
-  return `<ul>${items.map((item) => `<li>${esc(item)}</li>`).join("")}</ul>`;
 }
 
 function shenShaBlock(items: readonly ShenShaEntryView[]): string {

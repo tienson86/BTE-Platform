@@ -8,6 +8,7 @@ import type { IdentityHeaderView } from "./types";
 
 type FourPillarsProps = {
   readonly pillars: IdentityHeaderView["pillars"];
+  readonly calendarNote?: string;
 };
 
 function toTuTruPillar(pillar: IdentityHeaderView["pillars"]["year"]) {
@@ -21,7 +22,7 @@ function toTuTruPillar(pillar: IdentityHeaderView["pillars"]["year"]) {
 /**
  * Tứ Trụ summary: Trụ / Can Chi / Nạp âm / Cung Phi. Not the Bát Tự detail table.
  */
-export function FourPillars({ pillars }: FourPillarsProps): ReactNode {
+export function FourPillars({ pillars, calendarNote = "" }: FourPillarsProps): ReactNode {
   return (
     <div className="bte-id__pillars" data-region="pillars">
       <TuTruPanel
@@ -31,6 +32,11 @@ export function FourPillars({ pillars }: FourPillarsProps): ReactNode {
         day={toTuTruPillar(pillars.day)}
         hour={toTuTruPillar(pillars.hour)}
       />
+      {calendarNote ? (
+        <p className="bte-id__calendar-note" data-pillar-calendar-note="true">
+          {calendarNote}
+        </p>
+      ) : null}
     </div>
   );
 }

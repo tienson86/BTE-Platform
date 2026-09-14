@@ -87,6 +87,51 @@ def test_analyze_end_to_end() -> None:
     for key in data["pipeline"]:
         assert key in data
     assert data.get("stage") == "analyze"
+    assert "bazi" in data
+    assert "pattern" in data
+    assert "result_meta" in data
+
+    bazi_result = data["bazi_analysis_result"]
+    assert bazi_result["contract"] == "bazi_analysis_result.v1"
+    assert bazi_result["analysis_id"] == "wp9-test-analyze"
+    assert bazi_result["technical_data"]["day_master"]["stem"]
+    assert bazi_result["presentation_data"]["hero"]["title"] == "Kết quả luận giải Bát Tự"
+    assert bazi_result["quality"]["customer_safe"] is True
+    assert set(bazi_result["customer_narrative"]["technical_explanations"]) == {
+        "day_master",
+        "strength",
+        "structure",
+        "useful_god",
+        "five_elements",
+        "ten_gods",
+        "shen_sha",
+    }
+    assert set(bazi_result["module_exports"]) == {
+        "marriage_seed",
+        "career_seed",
+        "partnership_seed",
+        "feng_shui_seed",
+        "child_planning_seed",
+    }
+    assert [chapter["id"] for chapter in bazi_result["customer_narrative"]["report_chapters"]] == [
+        "overview",
+        "four_pillars",
+        "day_master",
+        "five_elements",
+        "strength_structure_useful_god",
+        "ten_gods",
+        "shen_sha",
+        "life_domains",
+        "luck_cycles",
+        "recommendations",
+    ]
+    report_document = bazi_result["customer_narrative"]["report_document"]
+    assert report_document["format"] == "markdown"
+    assert report_document["chapter_count"] == 10
+    assert "# Bản luận giải lá số Bát Tự" in report_document["markdown"]
+    assert "missing_module_exports" in bazi_result["quality"]
+    assert bazi_result["quality"]["has_complete_report_chapters"] is True
+    assert bazi_result["quality"]["has_report_document"] is True
 
 
 def test_report_stops_before_narrative() -> None:

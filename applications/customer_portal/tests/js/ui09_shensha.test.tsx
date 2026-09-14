@@ -10,7 +10,6 @@ import { cleanup, fireEvent, render } from "@testing-library/react";
 import { resolveResultBoot } from "../../src/entries/resultBoot";
 import {
   SHENSHA_TITLE,
-  SHENSHA_VISUAL_FIXTURE,
   CommercialDashboardPage,
   adaptShenShaCard,
 } from "../../src/screens/commercial_dashboard";

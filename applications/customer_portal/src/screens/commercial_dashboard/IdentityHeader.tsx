@@ -23,7 +23,7 @@ export function IdentityHeader({ model }: IdentityHeaderProps): ReactNode {
       data-card-type="status"
     >
       <IdentityPerson person={model.person} />
-      <FourPillars pillars={model.pillars} />
+      <FourPillars pillars={model.pillars} calendarNote={model.pillarCalendarNote} />
       <IdentityFoundation foundation={model.foundation} />
       <IdentityStatus status={model.status} />
     </header>

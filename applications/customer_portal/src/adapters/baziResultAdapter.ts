@@ -402,7 +402,6 @@ function mapShenSha(data: AnalysisDataDto): readonly BaZiShenShaItem[] {
 }
 
 function mapSpiritGods(data: AnalysisDataDto): readonly BaZiSpiritGod[] {
-  const pattern = data.pattern as Record<string, unknown> | undefined;
   const useful = canonicalUsefulGodPayload(data);
   const dung = canonicalUsefulDisplay(useful);
   const hy = canonicalFavorableDisplay(useful);

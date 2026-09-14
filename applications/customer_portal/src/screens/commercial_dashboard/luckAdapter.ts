@@ -158,8 +158,8 @@ function copyActivation(raw: LuckActivationDto | null | undefined): LuckActivati
     const title = customerLabel(text(item.title));
     if (!id || !title) continue;
     const conditions = (item.conditions ?? [])
-      .map((row) => customerSentence(row))
-      .filter((row): row is string => Boolean(row));
+      .map((row: unknown) => customerSentence(row))
+      .filter((row: string): row is string => Boolean(row));
     items.push({
       id,
       title,
@@ -225,8 +225,8 @@ function copyAnnual(raw: LuckAnnualDto | null | undefined): LuckAnnualView | nul
     const title = customerLabel(text(item.title));
     if (!id || !title) continue;
     const conditions = (item.conditions ?? [])
-      .map((row) => customerSentence(row))
-      .filter((row): row is string => Boolean(row));
+      .map((row: unknown) => customerSentence(row))
+      .filter((row: string): row is string => Boolean(row));
     items.push({
       id,
       title,

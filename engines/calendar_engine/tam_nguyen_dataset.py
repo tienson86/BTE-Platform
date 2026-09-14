@@ -12,11 +12,9 @@ from functools import lru_cache
 from pathlib import Path
 
 from engines.calendar_engine.exceptions import CalendarValidationError
-from engines.calendar_engine.month_ganzhi import (
-    bazi_year_number,
-    month_stem_for,
-    solar_term_month,
-)
+from engines.calendar_engine.lunar.converter import solar_to_lunar
+from engines.calendar_engine.month_ganzhi import bazi_year_number
+from engines.calendar_engine.month_pillar import lunar_month_ganzhi
 from engines.calendar_engine.solar_terms.engine import SolarTermEngine
 from engines.calendar_engine.tam_nguyen import (
     HA_NGUYEN,
@@ -184,19 +182,19 @@ def resolve_month_pillar(
     day: int,
     tam_nguyen: str | None = None,
 ) -> ResolvedGanzhiPillar:
-    """Month Can Chi using the Year stem from the Tam Nguyên dataset.
+    """Month Can Chi using the lunar calendar month.
 
-    Month branch is nguyệt lệnh (12 Tiết). Month stem is Ngũ Hổ Độn from
-    the dataset Year stem — not GanzhiAlgorithm.year.
+    BTE treats the lunar month Can Chi as the core Month Pillar. Solar term
+    remains an interpretive context field, not the pillar identity.
     """
     year_pillar = resolve_year_pillar(year, tam_nguyen, month=month, day=day)
-    info = solar_term_month(year, month, day)
-    stem = month_stem_for(year_pillar.heavenly_stem, info.month_index)
-    ganzhi = f"{stem} {info.branch}"
+    lunar = solar_to_lunar(day, month, year)
+    ganzhi = lunar_month_ganzhi(year_pillar.heavenly_stem, lunar.month)
+    stem, branch = ganzhi.split(maxsplit=1)
     yuan = year_pillar.source_nguyen
     return ResolvedGanzhiPillar(
         heavenly_stem=stem,
-        earthly_branch=info.branch,
+        earthly_branch=branch,
         ganzhi=ganzhi,
         nap_am=nap_am_for_ganzhi(ganzhi),
         source_nguyen=yuan,

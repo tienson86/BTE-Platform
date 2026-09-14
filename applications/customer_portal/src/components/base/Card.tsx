@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { cx } from "../../utils";
 import { BaseSurface, type BaseSurfaceProps } from "./BaseSurface";
 
-export type CardProps = BaseSurfaceProps & {
+export type CardProps = Omit<BaseSurfaceProps, "title"> & {
   title?: ReactNode;
   footer?: ReactNode;
 };

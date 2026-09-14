@@ -423,6 +423,13 @@
   display: none;
 }
 
+.bte-id__calendar-note {
+  margin: var(--space-2) 0 0;
+  color: var(--cdash-muted);
+  font-size: var(--font-size-metadata);
+  line-height: var(--line-height-body);
+}
+
 /* Canonical 12-column body */
 .bte-cdash__grid {
   display: grid;
@@ -3258,6 +3265,104 @@
 
   .bte-life__grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Bát Tự report document — full customer narrative, separate from technical cards. */
+.bte-report-doc {
+  order: 4;
+  width: 100%;
+  margin-top: var(--space-5);
+  padding: var(--space-6);
+  background: var(--surface-report-paper);
+  border: 1px solid var(--cdash-border);
+  border-radius: var(--cdash-radius);
+  box-shadow: var(--cdash-shadow);
+}
+
+.bte-report-doc__header {
+  max-width: 920px;
+  margin: 0 0 var(--space-5);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--cdash-border);
+}
+
+.bte-report-doc__eyebrow {
+  margin: 0 0 var(--space-2);
+  color: var(--cdash-muted);
+  font-size: var(--font-size-metadata);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-metadata);
+  text-transform: uppercase;
+}
+
+.bte-report-doc__title {
+  margin: 0;
+  color: var(--cdash-text);
+  font-family: var(--font-family-display);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-heading);
+}
+
+.bte-report-doc__subtitle {
+  margin: var(--space-2) 0 0;
+  color: var(--cdash-muted);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+.bte-report-doc__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+  max-width: 980px;
+}
+
+.bte-report-doc__chapter {
+  min-width: 0;
+  padding-top: var(--space-1);
+}
+
+.bte-report-doc__chapter + .bte-report-doc__chapter {
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--cdash-border);
+}
+
+.bte-report-doc__chapter-title {
+  margin: 0 0 var(--space-3);
+  color: var(--cdash-text);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-subsection);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-heading);
+}
+
+.bte-report-doc__paragraph {
+  margin: 0 0 var(--space-3);
+  color: var(--cdash-text);
+  font-size: var(--font-size-body);
+  line-height: 1.72;
+}
+
+.bte-report-doc__bullets {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 0;
+  padding-left: 1.1rem;
+  color: var(--cdash-text);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+@media (max-width: 767px) {
+  .bte-report-doc {
+    margin-top: var(--space-4);
+    padding: var(--space-4);
+  }
+
+  .bte-report-doc__title {
+    font-size: 1.25rem;
   }
 }
 

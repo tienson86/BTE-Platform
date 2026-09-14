@@ -149,3 +149,33 @@ def test_api_analyze_matches_engine_for_critical_case() -> None:
     assert calendar["bazi_can_chi"]["day"] == "Canh Ngọ"
     assert calendar["bazi_can_chi"]["hour"] == "Mậu Dần"
     assert bazi["hour_pillar"]["ten_god"] == "Thiên Ấn"
+
+
+def test_bazi_month_uses_lunar_month_not_solar_term_label() -> None:
+    client = TestClient(create_app())
+    response = client.post(
+        "/api/v1/analyze",
+        json={
+            "year": 1981,
+            "month": 8,
+            "day": 29,
+            "hour": 4,
+            "minute": 30,
+            "gender": "male",
+            "timezone": "Asia/Ho_Chi_Minh",
+        },
+    )
+    assert response.status_code == 200
+    data = response.json()["data"]
+    calendar = data["calendar"]
+    bazi = data["bazi"]
+
+    assert calendar["lunar_date"] == "01/08/1981"
+    assert calendar["lunar_month_can_chi"] == "Đinh Dậu"
+    assert calendar["month_can_chi"] == "Đinh Dậu"
+    assert calendar["solar_term"]["name"] == "Xử Thử"
+    assert calendar["bazi_can_chi"]["month"] == "Đinh Dậu"
+    assert _pillar_pair(bazi, "month_pillar") == ("Đinh", "Dậu")
+    chapters = data["bazi_analysis_result"]["customer_narrative"]["report_chapters"]
+    four_pillars = next(item for item in chapters if item["id"] == "four_pillars")
+    assert four_pillars["paragraphs"][0].startswith("Trụ Năm")

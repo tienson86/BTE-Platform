@@ -8,6 +8,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from applications.api.dependencies import get_orchestrator
 from applications.api.routes._helpers import attach_presentation_metadata, run_birth_stage
 from applications.api.schemas.common import APIResponse, BirthRequest, DiscussionRequest
+from applications.api.services.bazi_analysis_contract import build_bazi_analysis_result
 from applications.api.services.knowledge_expert_service import KnowledgeExpertService
 from applications.api.services.orchestrator import OrchestratorService
 from applications.api.routes import date_selection as date_selection_router
@@ -142,6 +143,7 @@ def analyze_endpoint(
     orchestrator: OrchestratorService = Depends(get_orchestrator),
 ) -> APIResponse:
     """Primary end-to-end analysis endpoint."""
+    request_id = getattr(request.state, "request_id", None)
     data = orchestrator.analyze(
         year=body.year,
         month=body.month,
@@ -154,10 +156,16 @@ def analyze_endpoint(
     payload = attach_presentation_metadata(data, body)
     payload = stamp_customer_result_identity(
         payload,
-        getattr(request.state, "request_id", None),
+        request_id,
     )
     # Additive Knowledge Expert status — does not alter pipeline/narrative.
     payload["knowledge_expert"] = KnowledgePipeline.portal_status()
+    payload["bazi_analysis_result"] = build_bazi_analysis_result(
+        payload,
+        input_payload=body.model_dump(),
+        analysis_id=payload.get("analysis_id"),
+        request_id=request_id,
+    )
     logger.info(
         "api.analyze response pattern_keys=%s interpretation_keys=%s section_count=%s",
         sorted((payload.get("pattern") or {}).keys()),
@@ -168,7 +176,7 @@ def analyze_endpoint(
         success=True,
         message="Analyze OK",
         data=payload,
-        request_id=getattr(request.state, "request_id", None),
+        request_id=request_id,
     )
 
 

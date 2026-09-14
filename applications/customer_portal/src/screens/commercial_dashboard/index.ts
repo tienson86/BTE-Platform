@@ -2,6 +2,7 @@ export { CommercialDashboardPage } from "./CommercialDashboardPage";
 export type { CommercialDashboardPageProps } from "./CommercialDashboardPage";
 export { IdentityHeader } from "./IdentityHeader";
 export { LifeConsultingSection } from "./LifeConsultingSection";
+export { ReportDocumentSection } from "./ReportDocumentSection";
 export { DashboardGrid } from "./DashboardGrid";
 export { OverviewCard } from "./OverviewCard";
 export { BaziCard } from "./BaziCard";
@@ -38,6 +39,7 @@ export { adaptPack07Narrative } from "./narrativeComposerAdapter";
 export { attachInterpretationDomains, attachOverviewDomains, adaptDomainInterpretation } from "./domainAdapter";
 export { adaptActionPlanCard, adaptOptimizationPlan } from "./actionPlanAdapter";
 export { adaptLifeConsulting } from "./lifeConsultingAdapter";
+export { adaptBaziReportDocument } from "./reportDocumentAdapter";
 export { lifeDomainProfileFor, LIFE_DOMAIN_PROFILES } from "./lifeConsultingAssets";
 export { OVERVIEW_VISUAL_FIXTURE } from "./overviewFixture";
 export { BAZI_VISUAL_FIXTURE } from "./baziFixture";
@@ -78,6 +80,8 @@ export type {
   ActionPlanView,
   LifeConsultingView,
   LifeDomainView,
+  BaziReportDocumentView,
+  BaziReportDocumentChapterView,
 } from "./types";
 export { VISUAL_HIERARCHY, visualCardDom } from "./visualHierarchy";
 export type { VisualLevel, VisualCardType } from "./visualHierarchy";

@@ -35,6 +35,8 @@ import { RESULT_PAGE_TITLE } from "./cards";
 import { DashboardGrid } from "./DashboardGrid";
 import { IdentityHeader } from "./IdentityHeader";
 import { MobileActionBar } from "./mobile/MobileActionBar";
+import { adaptBaziReportDocument } from "./reportDocumentAdapter";
+import { ReportDocumentSection } from "./ReportDocumentSection";
 import "./commercial-dashboard.css";
 import "./mobile/mobileExperience.css";
 import "./motion/motionExperience.css";
@@ -210,6 +212,10 @@ export function CommercialDashboardPage({
         : adaptOptimizationPlan(analysis)
           ?? (narrative?.actionPlan?.available ? narrative.actionPlan : null)
           ?? consultingPlan;
+  const reportDocument =
+    layoutMode === "visual" || layoutMode === "skeleton" || previewFallback
+      ? null
+      : adaptBaziReportDocument(analysis);
   return (
     <div
       className="bte-cdash"
@@ -240,6 +246,7 @@ export function CommercialDashboardPage({
         actionPlan={actionPlan}
         lifeConsulting={lifeConsulting}
       />
+      {reportDocument ? <ReportDocumentSection model={reportDocument} /> : null}
       <MobileActionBar />
     </div>
   );

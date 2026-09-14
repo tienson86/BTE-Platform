@@ -93,6 +93,50 @@ const CASE_0001 = {
       action_plan: { top_priority: { title: "Priority live", description: "Do this" } },
     },
   },
+  bazi_analysis_result: {
+    customer_narrative: {
+      report_document: {
+        title: "Bản luận giải lá số Bát Tự",
+        subtitle: "Nguyễn Tiến Sơn",
+        markdown: "## Tổng quan lá số\nNền mệnh có sức bật.",
+      },
+      report_chapters: [
+        {
+          id: "overview",
+          title: "Tổng quan lá số",
+          paragraphs: ["Nền mệnh có sức bật, cần dùng đúng nhịp để chuyển áp lực thành thành tựu."],
+        },
+        {
+          id: "life_domains",
+          title: "Các phương diện đời sống",
+          paragraphs: ["Sự nghiệp, tài lộc và quan hệ được đọc từ cùng một nền dữ liệu lá số."],
+          bullets: ["Ưu tiên việc quan trọng trước khi mở rộng thêm hướng mới."],
+        },
+      ],
+    },
+  },
+} as AnalysisDataDto;
+
+const CASE_1981_MONTH_BOUNDARY = {
+  analysis_id: "ana-pruntime01-1981",
+  calendar: {
+    calendar_rule_version: "G1-10C",
+    solar_date: "29/08/1981",
+    lunar_date: "01/08/1981",
+    solar_term: { name: "Xử Thử" },
+    lunar_month_can_chi: "Đinh Dậu",
+    month_can_chi: "Đinh Dậu",
+    bazi_can_chi: { month: "Đinh Dậu" },
+    ganzhi_routing: {
+      month: { ganzhi: "Đinh Dậu", cung_phi: "Cấn" },
+    },
+  },
+  identity: {
+    person: { full_name: "Đoàn Quang Hưng", gender: "male", solar_birth: "29/08/1981", lunar_birth: "01/08/1981" },
+  },
+  bazi: {
+    month_pillar: { stem: "Đinh", branch: "Dậu", can_chi: "Đinh Dậu", cung_phi: "Cấn" },
+  },
 } as AnalysisDataDto;
 
 const STORE_RECORD = {
@@ -339,5 +383,28 @@ describe("P-RUNTIME-01 live /result integration", () => {
     expect(CSS).toMatch(/data-card="overview"] \{ order: 30; \}/);
     expect(CSS).toMatch(/\.bte-cdash__grid > \.bte-life[\s\S]*order:\s*40/);
     expect(CSS).toMatch(/data-card="ten-gods"] \{ order: 50; \}/);
+  });
+
+  it("LIVE-17 report document renders from bazi_analysis_result", () => {
+    expect(PAGE).toContain("adaptBaziReportDocument(analysis)");
+    const { container } = render(
+      <CommercialDashboardPage analysis={CASE_0001} resultSource="current" layoutMode="live" />,
+    );
+    const section = container.querySelector("[data-report-document='bazi-v1']");
+    expect(section).toBeTruthy();
+    expect(section?.textContent).toContain("Bản luận giải lá số Bát Tự");
+    expect(section?.textContent).toContain("Tổng quan lá số");
+    expect(section?.textContent).toContain("Nền mệnh có sức bật");
+    expect(section?.textContent).toContain("Các phương diện đời sống");
+    expect(section?.getAttribute("data-card")).toBeNull();
+    expect(section?.textContent).not.toMatch(LEAK);
+  });
+
+  it("LIVE-18 keeps 1981 month pillar on the lunar month", () => {
+    const { container } = render(
+      <CommercialDashboardPage analysis={CASE_1981_MONTH_BOUNDARY} resultSource="current" layoutMode="live" />,
+    );
+    expect(container.querySelector('[data-region="pillars"]')?.textContent).toContain("ĐINH DẬU");
+    expect(container.querySelector("[data-pillar-calendar-note='true']")).toBeNull();
   });
 });
