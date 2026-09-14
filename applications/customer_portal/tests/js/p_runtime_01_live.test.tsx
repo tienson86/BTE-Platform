@@ -128,14 +128,20 @@ const CASE_1981_MONTH_BOUNDARY = {
     month_can_chi: "Đinh Dậu",
     bazi_can_chi: { month: "Đinh Dậu" },
     ganzhi_routing: {
-      month: { ganzhi: "Đinh Dậu", cung_phi: "Cấn" },
+      month: { ganzhi: "Đinh Dậu", source_nguyen: "Trung Nguyên", cung_phi: "Đoài" },
     },
   },
   identity: {
     person: { full_name: "Đoàn Quang Hưng", gender: "male", solar_birth: "29/08/1981", lunar_birth: "01/08/1981" },
   },
   bazi: {
-    month_pillar: { stem: "Đinh", branch: "Dậu", can_chi: "Đinh Dậu", cung_phi: "Cấn" },
+    month_pillar: {
+      stem: "Đinh",
+      branch: "Dậu",
+      can_chi: "Đinh Dậu",
+      source_nguyen: "Trung Nguyên",
+      cung_phi: "Đoài",
+    },
   },
 } as AnalysisDataDto;
 

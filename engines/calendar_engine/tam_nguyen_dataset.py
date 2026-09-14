@@ -17,7 +17,6 @@ from engines.calendar_engine.month_ganzhi import bazi_year_number
 from engines.calendar_engine.month_pillar import lunar_month_ganzhi
 from engines.calendar_engine.solar_terms.engine import SolarTermEngine
 from engines.calendar_engine.tam_nguyen import (
-    HA_NGUYEN,
     tam_nguyen_for_year,
     yuan_start_year,
 )
@@ -201,11 +200,11 @@ def resolve_month_pillar(
     )
 
 
-def resolve_day_source_nguyen() -> str:
-    """Day Can Chi stays on Hạ Nguyên."""
-    return HA_NGUYEN
+def resolve_day_source_nguyen(year: int) -> str:
+    """Day Cung Phi source follows the birth year's Tam Nguyên."""
+    return tam_nguyen_for_year(year)
 
 
-def resolve_hour_source_nguyen() -> str:
-    """Hour Can Chi stays on Hạ Nguyên."""
-    return HA_NGUYEN
+def resolve_hour_source_nguyen(year: int) -> str:
+    """Hour Cung Phi source follows the birth year's Tam Nguyên."""
+    return tam_nguyen_for_year(year)

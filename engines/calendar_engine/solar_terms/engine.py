@@ -16,7 +16,11 @@ class SolarTerm:
 
 @dataclass(slots=True)
 class SolarTermMonth:
-    """Nguyệt lệnh (tháng Bát Tự) suy từ tiết khí."""
+    """Nguyệt lệnh/khí hậu suy từ tiết khí.
+
+    BTE uses this as interpretive context. Core Month Pillar identity is
+    resolved from the lunar month.
+    """
 
     month_index: int
     branch: str
@@ -147,7 +151,8 @@ class SolarTermEngine:
         """
         Solar-term nguyệt lệnh (12 Tiết) at a Gregorian date.
 
-        This is the Four Pillars month branch (BTE-MONTH-PILLAR-SOLAR-TERM-V1.0).
+        This is the seasonal month branch for interpretation context, not the
+        core BTE Month Pillar.
         Month stem is applied separately via Ngũ Hổ Độn.
         """
         target = (year, month, day)

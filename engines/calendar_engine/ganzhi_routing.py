@@ -1,7 +1,8 @@
 """Canonical Ganzhi source routing for Year / Month / Day / Hour.
 
 Year and Month Can Chi (stem + branch) come from the Tam Nguyên dataset.
-Day and Hour Can Chi stay on Hạ Nguyên (JDN / Ngũ Thử Độn).
+Day and Hour Can Chi come from JDN / Ngũ Thử Độn, then their Cung Phi is
+looked up in the birth year's Tam Nguyên table.
 """
 
 from __future__ import annotations
@@ -12,7 +13,7 @@ from typing import Any
 from engines.calendar_engine.algorithms.ganzhi import GanzhiAlgorithm
 from engines.calendar_engine.cung_phi import cung_for_ganzhi
 from engines.calendar_engine.julian.julian import JulianDay
-from engines.calendar_engine.tam_nguyen import HA_NGUYEN, calculate_tam_nguyen
+from engines.calendar_engine.tam_nguyen import calculate_tam_nguyen
 from engines.calendar_engine.tam_nguyen_dataset import (
     CALENDAR_RULE_VERSION,
     resolve_month_pillar,
@@ -64,10 +65,13 @@ def nguyen_code(tam_nguyen: str) -> str:
 
 
 def source_nguyen_for_pillar(pillar: str, tam_nguyen: str) -> str:
-    """Year/Month follow the birth/selected year; Day/Hour stay Hạ Nguyên."""
-    if pillar in {PILLAR_YEAR, PILLAR_MONTH}:
-        return tam_nguyen
-    return HA_NGUYEN
+    """All pillar Cung Phi lookups follow the birth/selected year's Nguyên."""
+    return tam_nguyen
+
+
+def birth_source_nguyen(year: int) -> str:
+    """Tam Nguyên used to choose the 60 Hoa Giáp Cung Phi table."""
+    return calculate_tam_nguyen(year).tam_nguyen
 
 
 def _route(
@@ -124,10 +128,15 @@ def resolve_month_ganzhi(year: int, month: int, day: int) -> GanzhiRoute:
 
 
 def resolve_day_ganzhi(year: int, month: int, day: int) -> GanzhiRoute:
-    """Day Can Chi from noon JDN; Cung from Hạ Nguyên."""
+    """Day Can Chi from noon JDN; Cung from the birth year's Tam Nguyên."""
     jdn = JulianDay.day_number(year, month, day)
     gz = GanzhiAlgorithm.day(jdn)
-    return _route(PILLAR_DAY, f"{gz['can']} {gz['chi']}", HA_NGUYEN, year)
+    return _route(
+        PILLAR_DAY,
+        f"{gz['can']} {gz['chi']}",
+        birth_source_nguyen(year),
+        year,
+    )
 
 
 def hour_ganzhi_from_day_stem(day_stem: str, hour: int) -> str:
@@ -143,11 +152,11 @@ def hour_ganzhi_from_day_stem(day_stem: str, hour: int) -> str:
 
 
 def resolve_hour_ganzhi(year: int, month: int, day: int, hour: int = 0) -> GanzhiRoute:
-    """Hour Can Chi from day stem + clock hour; Cung from Hạ Nguyên."""
+    """Hour Can Chi from day stem + clock hour; Cung from birth-year Tam Nguyên."""
     day_route = resolve_day_ganzhi(year, month, day)
     day_stem = day_route.ganzhi.split()[0]
     label = hour_ganzhi_from_day_stem(day_stem, hour)
-    return _route(PILLAR_HOUR, label, HA_NGUYEN, year)
+    return _route(PILLAR_HOUR, label, birth_source_nguyen(year), year)
 
 
 def routing_table(
@@ -162,6 +171,7 @@ def routing_table(
     hour_ganzhi: str | None = None,
 ) -> dict[str, GanzhiRoute]:
     """Canonical four-pillar routing. Year/Month Can Chi come from the dataset."""
+    source_nguyen = birth_source_nguyen(year)
     year_route = resolve_year_ganzhi(year)
     month_route = resolve_month_ganzhi(year, month, day)
     if year_ganzhi:
@@ -191,8 +201,18 @@ def routing_table(
     return {
         PILLAR_YEAR: year_route,
         PILLAR_MONTH: month_route,
-        PILLAR_DAY: _route(PILLAR_DAY, day_label, HA_NGUYEN, year),
-        PILLAR_HOUR: _route(PILLAR_HOUR, hour_label, HA_NGUYEN, year),
+        PILLAR_DAY: _route(
+            PILLAR_DAY,
+            day_label,
+            source_nguyen_for_pillar(PILLAR_DAY, source_nguyen),
+            year,
+        ),
+        PILLAR_HOUR: _route(
+            PILLAR_HOUR,
+            hour_label,
+            source_nguyen_for_pillar(PILLAR_HOUR, source_nguyen),
+            year,
+        ),
     }
 
 

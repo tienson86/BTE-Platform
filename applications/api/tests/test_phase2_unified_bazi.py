@@ -148,6 +148,8 @@ def test_api_analyze_matches_engine_for_critical_case() -> None:
     assert calendar["bazi_can_chi"]["month"] == "Tân Sửu"
     assert calendar["bazi_can_chi"]["day"] == "Canh Ngọ"
     assert calendar["bazi_can_chi"]["hour"] == "Mậu Dần"
+    assert calendar["ganzhi_routing"]["day"]["source_nguyen"] == "Hạ Nguyên"
+    assert calendar["ganzhi_routing"]["hour"]["source_nguyen"] == "Hạ Nguyên"
     assert bazi["hour_pillar"]["ten_god"] == "Thiên Ấn"
 
 
@@ -175,7 +177,17 @@ def test_bazi_month_uses_lunar_month_not_solar_term_label() -> None:
     assert calendar["month_can_chi"] == "Đinh Dậu"
     assert calendar["solar_term"]["name"] == "Xử Thử"
     assert calendar["bazi_can_chi"]["month"] == "Đinh Dậu"
+    assert calendar["ganzhi_routing"]["day"]["ganzhi"] == "Kỷ Mão"
+    assert calendar["ganzhi_routing"]["day"]["source_nguyen"] == "Trung Nguyên"
+    assert calendar["ganzhi_routing"]["day"]["cung_phi"] == "Đoài"
+    assert calendar["ganzhi_routing"]["hour"]["ganzhi"] == "Bính Dần"
+    assert calendar["ganzhi_routing"]["hour"]["source_nguyen"] == "Trung Nguyên"
+    assert calendar["ganzhi_routing"]["hour"]["cung_phi"] == "Khôn"
     assert _pillar_pair(bazi, "month_pillar") == ("Đinh", "Dậu")
+    assert bazi["day_pillar"]["cung_phi"] == "Đoài"
+    assert bazi["day_pillar"]["source_nguyen"] == "Trung Nguyên"
+    assert bazi["hour_pillar"]["cung_phi"] == "Khôn"
+    assert bazi["hour_pillar"]["source_nguyen"] == "Trung Nguyên"
     chapters = data["bazi_analysis_result"]["customer_narrative"]["report_chapters"]
     four_pillars = next(item for item in chapters if item["id"] == "four_pillars")
     assert four_pillars["paragraphs"][0].startswith("Trụ Năm")
