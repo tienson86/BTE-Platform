@@ -258,6 +258,9 @@ def test_core_life_domains_use_ten_god_reasoning() -> None:
     assert "Tín hiệu Tài tinh đang thấy" in wealth_text
     assert "Luận Tài tinh: Chính Tài" in wealth_text
     assert "Luận nguồn sinh tài" in wealth_text
+    assert "Kim nổi bật là tín hiệu tốt cho khả năng quản trị tiền" in wealth_text
+    assert "Cung Phi Khôn" in wealth_text
+    assert "Tây Tứ Trạch" in wealth_text
     assert "Nhóm tín hiệu nghề nghiệp nổi bật" in career_text
     assert "Luận nghề theo Thập thần: Chính Quan" in career_text
     assert "môi trường có chuẩn mực" in career_text
