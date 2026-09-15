@@ -2,7 +2,7 @@
  * Bind BaZi Card from canonical analysis. Copy published fields only.
  */
 
-import type { AnalysisDataDto, BaziDto, IdentityPillarDto, PillarDto } from "../../models";
+import type { AnalysisDataDto, BaziDto, IdentityPillarDto, PillarDto, ShenShaMatchDto } from "../../models";
 import {
   asTenGodsPayload,
   hiddenEntries,
@@ -19,6 +19,26 @@ const PILLAR_LABELS: Record<BaziPillarKey, string> = {
   hour: "Giờ trụ",
 };
 const TECHNICAL_TOKEN = /^[a-z][a-z0-9_]*$/;
+const TAM_HOP_GROUPS = [
+  ["Thân", "Tý", "Thìn"],
+  ["Dần", "Ngọ", "Tuất"],
+  ["Hợi", "Mão", "Mùi"],
+  ["Tỵ", "Dậu", "Sửu"],
+] as const;
+const BRANCH_META: Record<string, { readonly element: string; readonly yinYang: string }> = {
+  Tý: { element: "Thủy", yinYang: "Dương" },
+  Sửu: { element: "Thổ", yinYang: "Âm" },
+  Dần: { element: "Mộc", yinYang: "Dương" },
+  Mão: { element: "Mộc", yinYang: "Âm" },
+  Thìn: { element: "Thổ", yinYang: "Dương" },
+  Tỵ: { element: "Hỏa", yinYang: "Âm" },
+  Ngọ: { element: "Hỏa", yinYang: "Dương" },
+  Mùi: { element: "Thổ", yinYang: "Âm" },
+  Thân: { element: "Kim", yinYang: "Dương" },
+  Dậu: { element: "Kim", yinYang: "Âm" },
+  Tuất: { element: "Thổ", yinYang: "Dương" },
+  Hợi: { element: "Thủy", yinYang: "Âm" },
+};
 
 function text(value: unknown): string {
   if (value == null) return "";
@@ -67,15 +87,54 @@ function bindHiddenStems(
   if (stems.length) {
     return stems.map((stem) => {
       const match = published.find((item) => text(item.hidden_stem || item.stem) === stem);
-      return { stem, tenGod: customerLabel(text(match?.ten_god)) };
+      return { stem, element: customerLabel(text(match?.element)), tenGod: customerLabel(text(match?.ten_god)) };
     });
   }
   return published
     .map((item) => ({
       stem: firstText(item.hidden_stem, item.stem),
+      element: customerLabel(text(item.element)),
       tenGod: customerLabel(text(item.ten_god)),
     }))
     .filter((item) => item.stem);
+}
+
+function pillarKey(value: unknown): BaziPillarKey | "" {
+  const key = text(value).toLowerCase();
+  if (key === "year" || key === "năm" || key === "nam") return "year";
+  if (key === "month" || key === "tháng" || key === "thang") return "month";
+  if (key === "day" || key === "ngày" || key === "ngay") return "day";
+  if (key === "hour" || key === "giờ" || key === "gio") return "hour";
+  return "";
+}
+
+function bindShenShaByPillar(matches: readonly ShenShaMatchDto[] | undefined): Record<BaziPillarKey, string[]> {
+  const grouped: Record<BaziPillarKey, string[]> = { year: [], month: [], day: [], hour: [] };
+  for (const match of matches ?? []) {
+    const name = firstText(match.canonical_name, match.name);
+    if (!name) continue;
+    const keys = new Set<BaziPillarKey>();
+    const direct = pillarKey(match.pillar);
+    if (direct) keys.add(direct);
+    for (const occurrence of match.occurrences ?? []) {
+      const key = pillarKey(occurrence.pillar);
+      if (key) keys.add(key);
+    }
+    if (!keys.size) continue;
+    for (const key of keys) {
+      if (!grouped[key].includes(name)) grouped[key].push(name);
+    }
+  }
+  return grouped;
+}
+
+function bindTamHopByPillar(pillars: readonly { readonly key: BaziPillarKey; readonly branch: string }[]): Record<BaziPillarKey, string> {
+  const grouped: Record<BaziPillarKey, string> = { year: "", month: "", day: "", hour: "" };
+  for (const pillar of pillars) {
+    const group = TAM_HOP_GROUPS.find((item) => (item as readonly string[]).includes(pillar.branch));
+    grouped[pillar.key] = group ? group.join(" - ") : "";
+  }
+  return grouped;
 }
 
 function bindPillar(
@@ -84,11 +143,15 @@ function bindPillar(
   pillar: PillarDto | undefined,
   tenGods: ReturnType<typeof asTenGodsPayload>,
   dayMaster: { readonly stem: string; readonly element: string; readonly yinYang: string },
+  shenSha: readonly string[],
+  tamHop: string,
 ): BaziPillarView {
   const identity = asRecord(identityRaw);
   const extra = asRecord(pillar);
   const visible = visibleEntryForPillar(tenGods, key);
   const stem = firstText(pillar?.stem, identity.stem);
+  const branch = firstText(pillar?.branch, identity.branch);
+  const branchMeta = BRANCH_META[branch];
   const isDay = key === "day";
   return {
     key,
@@ -106,12 +169,17 @@ function bindPillar(
       asRecord(visible).yin_yang,
       isDay ? dayMaster.yinYang : "",
     ),
-    branch: firstText(pillar?.branch, identity.branch),
-    branchElement: firstText(extra.branch_element),
+    branch,
+    branchElement: firstText(
+      extra.branch_element,
+      branchMeta ? `${branchMeta.element} · ${branchMeta.yinYang}` : "",
+    ),
     napAm: firstText(pillar?.nap_am, identity.nayin_element),
     tenGod: firstText(pillar?.ten_god, visible?.ten_god),
     hiddenStems: bindHiddenStems(key, pillar, tenGods),
     truongSinh: firstText(pillar?.truong_sinh, extra.twelve_stage),
+    tamHop,
+    shenSha,
     isDayMaster: isDay,
   };
 }
@@ -130,6 +198,12 @@ export function adaptBaziCard(data: AnalysisDataDto | null | undefined): BaziStr
     element: firstText(bazi?.day_master_element),
     yinYang: firstText(bazi?.day_master_yin_yang),
   };
+  const basePillars = PILLAR_KEYS.map((key) => {
+    const pillar = pillarOf(bazi, key);
+    return { key, branch: firstText(pillar?.branch, asRecord(four[key]).branch) };
+  });
+  const tamHopByPillar = bindTamHopByPillar(basePillars);
+  const shenShaByPillar = bindShenShaByPillar(bazi?.shensha_matches);
   const pillars = PILLAR_KEYS.map((key) =>
     bindPillar(
       key,
@@ -137,6 +211,8 @@ export function adaptBaziCard(data: AnalysisDataDto | null | undefined): BaziStr
       pillarOf(bazi, key),
       tenGods,
       dayMaster,
+      shenShaByPillar[key],
+      tamHopByPillar[key],
     ),
   );
   const available = pillars.some((pillar) => pillar.stem || pillar.branch);

@@ -49,6 +49,7 @@ def _sample_payload() -> dict:
             "solar_minute": 30,
             "timezone_name": "Asia/Ho_Chi_Minh",
             "cung_phi": "Khôn",
+            "hanh_cung": "Thổ",
             "nhom_trach": "Tây Tứ Trạch",
         },
         "bazi": {
@@ -78,6 +79,8 @@ def _sample_payload() -> dict:
         "useful_god": {
             "useful_display": "Hỏa",
             "useful_stem": "Đinh",
+            "useful_ten_god": "Chính Quan",
+            "unfavorable_display": "Kim · Canh · Tỷ Kiên / Kim · Tân · Kiếp Tài",
             "customer_reason": {
                 "reason_archetype": "INTERNAL",
                 "balancing_action": "ôn ấm",
@@ -189,6 +192,41 @@ def test_bazi_analysis_contract_shape_and_core_layers() -> None:
     assert result["customer_narrative"]["life_domains"]["marriage"]["recommendations"]
     assert result["customer_narrative"]["luck_cycles"]["status"] == "draft"
     assert result["customer_narrative"]["luck_cycles"]["cycles"][0]["summary"] == "Giáp Thìn kích hoạt Mộc / Thổ"
+    four_pillar_paragraphs = " ".join(result["customer_narrative"]["report_chapters"][1]["paragraphs"])
+    day_master_paragraphs = " ".join(result["customer_narrative"]["report_chapters"][2]["paragraphs"])
+    five_element_paragraphs = " ".join(result["customer_narrative"]["report_chapters"][3]["paragraphs"])
+    strength_paragraphs = " ".join(result["customer_narrative"]["report_chapters"][4]["paragraphs"])
+    ten_gods_paragraphs = " ".join(result["customer_narrative"]["report_chapters"][5]["paragraphs"])
+    shen_sha_paragraphs = " ".join(result["customer_narrative"]["report_chapters"][6]["paragraphs"])
+    bone_weight_paragraphs = " ".join(result["customer_narrative"]["report_chapters"][7]["paragraphs"])
+    palace_paragraphs = " ".join(result["customer_narrative"]["report_chapters"][8]["paragraphs"])
+    luck_paragraphs = " ".join(result["customer_narrative"]["report_chapters"][10]["paragraphs"])
+    synthesis_paragraphs = " ".join(result["customer_narrative"]["report_chapters"][11]["paragraphs"])
+    assert "tàng can/thập thần ẩn Thương Quan" in four_pillar_paragraphs
+    assert "Quan hệ Địa chi" in four_pillar_paragraphs
+    assert "bán hợp Dần-Ngọ" in four_pillar_paragraphs
+    assert "Đọc tổng hợp Tứ trụ" in four_pillar_paragraphs
+    assert "Bốn trụ phải được đọc như một chuỗi đời sống" in four_pillar_paragraphs
+    assert "là điểm lấy làm trung tâm" in day_master_paragraphs
+    assert "Kim sinh Thủy" in day_master_paragraphs
+    assert "chịu Hỏa khắc" in day_master_paragraphs
+    assert "Bảng Ngũ hành là bản đồ khí" in five_element_paragraphs
+    assert "không cứ thiếu hành nào thì bổ hành đó" in five_element_paragraphs
+    assert "Trục cân bằng của Nhật chủ" in strength_paragraphs
+    assert "Dùng Hỏa là tăng ánh sáng" in strength_paragraphs
+    assert "Kỵ thần/nhóm cần tiết chế là Kim" in strength_paragraphs
+    assert "Thực/Thương là đường tạo sản phẩm" in ten_gods_paragraphs
+    assert "Quý nhân/phúc tinh" in shen_sha_paragraphs
+    assert "Cân xương ghi nhận 4 lượng 7 chỉ" in bone_weight_paragraphs
+    assert "Cân xương nên được đặt sau Tứ trụ" in bone_weight_paragraphs
+    assert "Cung Phi/Mệnh quái của lá số là Khôn" in palace_paragraphs
+    assert "Tây, Tây Bắc, Tây Nam, Đông Bắc" in palace_paragraphs
+    assert "cầu nối sang module Tư vấn phong thủy" in palace_paragraphs
+    assert "Trục nên dùng khi đọc vận" in luck_paragraphs
+    assert "Mộc mở về học hỏi" in luck_paragraphs
+    assert "Tổng kết lại, lá số nên được đọc theo một trục chính" in synthesis_paragraphs
+    assert "Điểm thuận của lá số" in synthesis_paragraphs
+    assert "Thứ tự tư vấn nên đi từ nền đến ứng dụng" in synthesis_paragraphs
     assert [item["id"] for item in result["customer_narrative"]["report_chapters"]] == [
         "overview",
         "four_pillars",
@@ -197,21 +235,29 @@ def test_bazi_analysis_contract_shape_and_core_layers() -> None:
         "strength_structure_useful_god",
         "ten_gods",
         "shen_sha",
+        "bone_weight",
+        "palace_feng_shui",
         "life_domains",
         "luck_cycles",
+        "synthesis",
         "recommendations",
     ]
-    assert result["customer_narrative"]["report_chapters"][7]["paragraphs"]
+    assert result["customer_narrative"]["report_chapters"][9]["paragraphs"]
     report_document = result["customer_narrative"]["report_document"]
     assert report_document["title"] == "Bản luận giải lá số Bát Tự"
-    assert report_document["chapter_count"] == 10
+    assert report_document["chapter_count"] == 13
     assert "# Bản luận giải lá số Bát Tự" in report_document["markdown"]
     assert "## 9 mục đời sống" in report_document["markdown"]
+    assert "## Cân xương đoán mệnh" in report_document["markdown"]
+    assert "## Cung Phi và phương vị" in report_document["markdown"]
     assert "## Đại vận" in report_document["markdown"]
+    assert "## Kết luận tổng hợp" in report_document["markdown"]
     markdown = report_document["markdown"]
     assert "Dữ liệu dùng để luận" in markdown
     assert "Ý nghĩa luận giải" in markdown
     assert "Luận theo 4 tầng" in markdown
+    assert "Từ bản nền này, các module sau nên dùng đúng điểm neo dữ liệu" in markdown
+    assert "mọi kết luận đều quay lại trục Dụng thần" in markdown
     assert result["module_exports"]["marriage_seed"]["status"] == "draft"
     assert result["module_exports"]["marriage_seed"]["usable_fields"]["day_master"]["stem"] == "Canh"
     assert result["module_exports"]["career_seed"]["usable_fields"]["structure"] == "Chính Ấn cách"
@@ -254,6 +300,11 @@ def test_core_life_domains_use_ten_god_reasoning() -> None:
     wealth_text = " ".join(domains["wealth"]["paragraphs"])
     career_text = " ".join(domains["career"]["paragraphs"])
     marriage_text = " ".join(domains["marriage"]["paragraphs"])
+    partnership_text = " ".join(domains["siblings"]["paragraphs"])
+    children_text = " ".join(domains["children"]["paragraphs"])
+    parents_text = " ".join(domains["parents"]["paragraphs"])
+    ancestry_text = " ".join(domains["ancestry"]["paragraphs"])
+    property_text = " ".join(domains["property"]["paragraphs"])
 
     assert "Tín hiệu Tài tinh đang thấy" in wealth_text
     assert "Luận Tài tinh: Chính Tài" in wealth_text
@@ -267,6 +318,19 @@ def test_core_life_domains_use_ten_god_reasoning() -> None:
     assert "Sao phối ngẫu cần quan sát: Chính Tài, Thiên Tài" in marriage_text
     assert "Luận sao phối ngẫu: Chính Tài" in marriage_text
     assert "với nam mệnh" in marriage_text
+    assert "nền cho tư vấn hợp tác" in partnership_text
+    assert "Luận hợp tác: Kiếp Tài" in partnership_text
+    assert "hợp đồng, pháp lý, phân quyền" in partnership_text
+    assert "Sao tử tức cần quan sát: Chính Quan, Thất Sát" in children_text
+    assert "Luận con cái/hậu vận: Thiên Ấn" in children_text
+    assert "Đại vận/Lưu niên" in children_text
+    assert "Luận nền bố mẹ: Kiếp Tài" in parents_text
+    assert "môi trường trưởng thành" in parents_text
+    assert "Luận gốc phúc: Thiên Tài" in ancestry_text
+    assert "Tín hiệu Thần sát liên quan" in ancestry_text
+    assert "Nhóm trạch: Tây Tứ Trạch" in property_text
+    assert "Dụng thần/ngũ hành cần nâng là Hỏa" in property_text
+    assert "Tây, Tây Bắc, Tây Nam, Đông Bắc" in property_text
 
 
 def test_customer_facing_layers_do_not_leak_technical_tokens() -> None:

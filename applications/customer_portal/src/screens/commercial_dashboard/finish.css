@@ -16,9 +16,164 @@
   border-radius: var(--bte-radius-12);
 }
 
+.bte-cdash[data-finish="v2"] .bte-id {
+  border-radius: 6px;
+}
+
+.bte-cdash[data-finish="v2"] .bte-id__tu-tru .bte-tu-tru__title {
+  margin-bottom: var(--space-2);
+  color: #dc2626;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.bte-cdash[data-finish="v2"] .bte-id__tu-tru .bte-tu-tru__table {
+  border-collapse: collapse;
+  border: 1px solid #111827;
+  font-size: 0.8125rem;
+}
+
+.bte-cdash[data-finish="v2"] .bte-id__tu-tru .bte-tu-tru__table th,
+.bte-cdash[data-finish="v2"] .bte-id__tu-tru .bte-tu-tru__table td {
+  padding: 5px 8px;
+  border: 1px solid #111827;
+  background: transparent;
+}
+
+.bte-cdash[data-finish="v2"] .bte-id__tu-tru .bte-tu-tru__can-chi {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.bte-cdash[data-finish="v2"] .bte-cdash__card.bte-bazi {
+  grid-column: 1 / -1 !important;
+  padding: var(--space-5);
+  border-radius: 6px;
+  background: var(--surface-report-paper);
+}
+
+.bte-cdash[data-finish="v2"] .bte-cdash__grid > [data-card]:not([data-card="bazi"]),
+.bte-cdash[data-finish="v2"] .bte-cdash__grid > [data-life-consulting] {
+  display: none !important;
+}
+
+.bte-cdash[data-finish="v2"] .bte-bazi .bte-cdash__card-title {
+  margin-bottom: var(--space-3);
+  color: var(--cdash-muted);
+  font-family: var(--font-family-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.bte-cdash[data-finish="v2"] .bte-bazi[data-viz="structure"] .bte-bazi__table,
+.bte-cdash[data-finish="v2"] .bte-bazi__table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+  border: 1.5px solid #111827;
+  font-size: 0.875rem;
+}
+
+.bte-cdash[data-finish="v2"] .bte-bazi[data-viz="structure"] .bte-bazi__table th,
+.bte-cdash[data-finish="v2"] .bte-bazi[data-viz="structure"] .bte-bazi__table td,
+.bte-cdash[data-finish="v2"] .bte-bazi__table th,
+.bte-cdash[data-finish="v2"] .bte-bazi__table td {
+  padding: 12px 10px;
+  border: 1px solid #111827;
+  vertical-align: middle;
+}
+
+.bte-cdash[data-finish="v2"] .bte-bazi[data-viz="structure"] .bte-bazi__table tbody tr + tr td {
+  padding-top: 12px;
+}
+
+.bte-cdash[data-finish="v2"] .bte-bazi[data-viz="structure"] .bte-bazi__table tbody tr + tr td::before {
+  content: none;
+}
+
+.bte-cdash[data-finish="v2"] .bte-bazi__table th[scope="row"] {
+  width: 6.75rem;
+  color: var(--cdash-muted);
+  font-size: 0.8125rem;
+  text-align: left;
+}
+
+.bte-cdash[data-finish="v2"] .bte-bazi__table thead th[data-pillar] {
+  color: #111827;
+  font-size: 0.9375rem;
+  text-decoration: underline;
+}
+
+.bte-cdash[data-finish="v2"] .bte-bazi__table [data-day-master="true"] {
+  background: color-mix(in srgb, var(--cdash-accent-soft) 58%, #ffffff);
+}
+
+.bte-cdash[data-finish="v2"] .bte-bazi[data-viz="structure"] [data-bazi-row="stem"] .bte-bazi__value,
+.bte-cdash[data-finish="v2"] .bte-bazi[data-viz="structure"] [data-bazi-row="branch"] .bte-bazi__value,
+.bte-cdash[data-finish="v2"] .bte-bazi__value {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.bte-cdash[data-finish="v2"] .bte-bazi__meta {
+  color: var(--cdash-muted);
+  font-size: 0.8125rem;
+}
+
+.bte-cdash[data-finish="v2"] .bte-bazi__meta[data-element="wood"] {
+  color: #15803d;
+}
+
+.bte-cdash[data-finish="v2"] .bte-bazi__meta[data-element="fire"] {
+  color: #dc2626;
+}
+
+.bte-cdash[data-finish="v2"] .bte-bazi__meta[data-element="earth"] {
+  color: #b45309;
+}
+
+.bte-cdash[data-finish="v2"] .bte-bazi__meta[data-element="metal"] {
+  color: #64748b;
+}
+
+.bte-cdash[data-finish="v2"] .bte-bazi__meta[data-element="water"] {
+  color: #0284c7;
+}
+
+.bte-cdash[data-finish="v2"] .bte-bazi__hidden,
+.bte-cdash[data-finish="v2"] .bte-bazi__lines {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  white-space: normal;
+}
+
+.bte-cdash[data-finish="v2"] .bte-bazi__hidden li,
+.bte-cdash[data-finish="v2"] .bte-bazi__lines li {
+  display: grid;
+  gap: 2px;
+}
+
+.bte-cdash[data-finish="v2"] .bte-bazi__table [data-bazi-field="tam-hop"],
+.bte-cdash[data-finish="v2"] .bte-bazi__table [data-bazi-field="shen-sha"] {
+  font-weight: 700;
+}
+
 @media (max-width: 767px) {
   .bte-cdash[data-finish="v2"] {
     overflow-x: clip;
+  }
+
+  .bte-cdash[data-finish="v2"] .bte-bazi[data-viz="structure"] .bte-bazi__table,
+  .bte-cdash[data-finish="v2"] .bte-bazi__table {
+    table-layout: auto;
+    min-width: 42rem;
   }
 }
 

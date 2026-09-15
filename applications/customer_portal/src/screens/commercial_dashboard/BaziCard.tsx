@@ -14,12 +14,26 @@ type BaziCardProps = {
   readonly model: BaziStructureView;
 };
 
+function elementToken(value: string): string {
+  if (value.includes("Mộc")) return "wood";
+  if (value.includes("Hỏa")) return "fire";
+  if (value.includes("Thổ")) return "earth";
+  if (value.includes("Kim")) return "metal";
+  if (value.includes("Thủy")) return "water";
+  return "";
+}
+
 function cellMeta(primary: string, secondary: string): ReactNode {
   if (!primary) return null;
+  const token = elementToken(secondary);
   return (
     <>
       <span className="bte-bazi__value">{primary}</span>
-      {secondary ? <span className="bte-bazi__meta">{secondary}</span> : null}
+      {secondary ? (
+        <span className="bte-bazi__meta" data-element={token || undefined}>
+          {secondary}
+        </span>
+      ) : null}
     </>
   );
 }
@@ -30,7 +44,10 @@ function HiddenCell({ items }: { readonly items: BaziPillarView["hiddenStems"] }
     <ul className="bte-bazi__hidden">
       {items.map((item) => (
         <li key={item.stem}>
-          <span>{item.stem}</span>
+          <span>
+            {item.stem}
+            {item.element ? ` (${item.element})` : ""}
+          </span>
           {item.tenGod ? <span className="bte-bazi__meta">{item.tenGod}</span> : null}
         </li>
       ))}
@@ -38,8 +55,15 @@ function HiddenCell({ items }: { readonly items: BaziPillarView["hiddenStems"] }
   );
 }
 
-function hasRow(pillars: readonly BaziPillarView[], read: (pillar: BaziPillarView) => boolean): boolean {
-  return pillars.some(read);
+function LinesCell({ items }: { readonly items: readonly string[] }): ReactNode {
+  if (!items.length) return "—";
+  return (
+    <ul className="bte-bazi__lines">
+      {items.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  );
 }
 
 /**
@@ -47,10 +71,6 @@ function hasRow(pillars: readonly BaziPillarView[], read: (pillar: BaziPillarVie
  */
 export function BaziCard({ card, model }: BaziCardProps): ReactNode {
   const pillars = model.pillars;
-  const showNapAm = hasRow(pillars, (pillar) => Boolean(pillar.napAm));
-  const showTenGod = hasRow(pillars, (pillar) => Boolean(pillar.tenGod));
-  const showHidden = hasRow(pillars, (pillar) => pillar.hiddenStems.length > 0);
-  const showStage = hasRow(pillars, (pillar) => Boolean(pillar.truongSinh));
   const mobile = useMobileOpen();
 
   return (
@@ -122,46 +142,54 @@ export function BaziCard({ card, model }: BaziCardProps): ReactNode {
                   </td>
                 ))}
               </tr>
-              {showNapAm ? (
-                <tr data-bazi-row="nap-am">
-                  <th scope="row">Nạp Âm</th>
-                  {pillars.map((pillar) => (
-                    <td key={`nap-${pillar.key}`} data-pillar={pillar.key} data-bazi-field="nap-am">
-                      {pillar.napAm}
-                    </td>
-                  ))}
-                </tr>
-              ) : null}
-              {showHidden ? (
-                <tr data-bazi-row="hidden">
-                  <th scope="row">Tàng Can</th>
-                  {pillars.map((pillar) => (
-                    <td key={`hidden-${pillar.key}`} data-pillar={pillar.key} data-bazi-field="hidden">
-                      <HiddenCell items={pillar.hiddenStems} />
-                    </td>
-                  ))}
-                </tr>
-              ) : null}
-              {showTenGod ? (
-                <tr data-bazi-row="ten-god">
-                  <th scope="row">Thập Thần</th>
-                  {pillars.map((pillar) => (
-                    <td key={`god-${pillar.key}`} data-pillar={pillar.key} data-bazi-field="ten-god">
-                      {pillar.tenGod}
-                    </td>
-                  ))}
-                </tr>
-              ) : null}
-              {showStage ? (
-                <tr data-bazi-row="stage">
-                  <th scope="row">Trường Sinh</th>
-                  {pillars.map((pillar) => (
-                    <td key={`stage-${pillar.key}`} data-pillar={pillar.key} data-bazi-field="stage">
-                      {pillar.truongSinh}
-                    </td>
-                  ))}
-                </tr>
-              ) : null}
+              <tr data-bazi-row="nap-am">
+                <th scope="row">Nạp Âm</th>
+                {pillars.map((pillar) => (
+                  <td key={`nap-${pillar.key}`} data-pillar={pillar.key} data-bazi-field="nap-am">
+                    {pillar.napAm || "—"}
+                  </td>
+                ))}
+              </tr>
+              <tr data-bazi-row="hidden">
+                <th scope="row">Tàng Can</th>
+                {pillars.map((pillar) => (
+                  <td key={`hidden-${pillar.key}`} data-pillar={pillar.key} data-bazi-field="hidden">
+                    {pillar.hiddenStems.length ? <HiddenCell items={pillar.hiddenStems} /> : "—"}
+                  </td>
+                ))}
+              </tr>
+              <tr data-bazi-row="ten-god">
+                <th scope="row">Thập Thần</th>
+                {pillars.map((pillar) => (
+                  <td key={`god-${pillar.key}`} data-pillar={pillar.key} data-bazi-field="ten-god">
+                    {pillar.tenGod || "—"}
+                  </td>
+                ))}
+              </tr>
+              <tr data-bazi-row="stage">
+                <th scope="row">Trường Sinh</th>
+                {pillars.map((pillar) => (
+                  <td key={`stage-${pillar.key}`} data-pillar={pillar.key} data-bazi-field="stage">
+                    {pillar.truongSinh || "—"}
+                  </td>
+                ))}
+              </tr>
+              <tr data-bazi-row="tam-hop">
+                <th scope="row">Tam Hợp</th>
+                {pillars.map((pillar) => (
+                  <td key={`tam-hop-${pillar.key}`} data-pillar={pillar.key} data-bazi-field="tam-hop">
+                    {pillar.tamHop || "—"}
+                  </td>
+                ))}
+              </tr>
+              <tr data-bazi-row="shen-sha">
+                <th scope="row">Thần Sát</th>
+                {pillars.map((pillar) => (
+                  <td key={`shen-sha-${pillar.key}`} data-pillar={pillar.key} data-bazi-field="shen-sha">
+                    <LinesCell items={pillar.shenSha} />
+                  </td>
+                ))}
+              </tr>
             </tbody>
           </table>
         </div>

@@ -234,7 +234,6 @@ export function CommercialDashboardPage({
     >
       <ResultPageHeader />
       <IdentityHeader model={model} />
-      {reportDocument ? <ReportDocumentSection model={reportDocument} /> : null}
       <DashboardGrid
         overview={overview}
         bazi={bazi}
@@ -247,6 +246,7 @@ export function CommercialDashboardPage({
         actionPlan={actionPlan}
         lifeConsulting={lifeConsulting}
       />
+      {reportDocument ? <ReportDocumentSection model={reportDocument} /> : null}
       <MobileActionBar />
     </div>
   );

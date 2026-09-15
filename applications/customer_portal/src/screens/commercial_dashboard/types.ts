@@ -159,6 +159,7 @@ export type BaziPillarKey = "year" | "month" | "day" | "hour";
 
 export type BaziHiddenStemView = {
   readonly stem: string;
+  readonly element: string;
   readonly tenGod: string;
 };
 
@@ -174,6 +175,8 @@ export type BaziPillarView = {
   readonly tenGod: string;
   readonly hiddenStems: readonly BaziHiddenStemView[];
   readonly truongSinh: string;
+  readonly tamHop: string;
+  readonly shenSha: readonly string[];
   readonly isDayMaster: boolean;
 };
 

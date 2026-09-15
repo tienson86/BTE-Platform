@@ -4,17 +4,6 @@
 
 import type { ReactNode } from "react";
 import { BaziCard } from "./BaziCard";
-import { DASHBOARD_CARDS } from "./cards";
-import { FiveElementsCard } from "./FiveElementsCard";
-import { ActionPlanCard } from "./ActionPlanCard";
-import { InterpretationCard } from "./InterpretationCard";
-import { LuckCard } from "./LuckCard";
-import { OverviewCard } from "./OverviewCard";
-import { PatternCard } from "./PatternCard";
-import { ShenShaCard } from "./ShenShaCard";
-import { SkeletonCard } from "./SkeletonCard";
-import { TenGodsCard } from "./TenGodsCard";
-import { LifeConsultingSection } from "./LifeConsultingSection";
 import type {
   ActionPlanView,
   BaziStructureView,
@@ -45,57 +34,12 @@ type DashboardGridProps = {
  * Frozen card geometry in semantic source order.
  */
 export function DashboardGrid({
-  overview = null,
   bazi = null,
-  fiveElements = null,
-  tenGods = null,
-  pattern = null,
-  shenSha = null,
-  luck = null,
-  interpretation = null,
-  actionPlan = null,
-  lifeConsulting = null,
 }: DashboardGridProps): ReactNode {
+  const baziCard = { id: "bazi" as const, title: "BÁT TỰ", span: 12 as const };
   return (
     <section className="bte-cdash__grid" data-dashboard-body="canonical-grid">
-      {DASHBOARD_CARDS.map((card) => {
-        if (card.id === "overview" && overview) {
-          return (
-            <OverviewCard
-              key={card.id}
-              card={card}
-              model={overview}
-              priorityTitle={actionPlan?.priority?.title ?? ""}
-            />
-          );
-        }
-        if (card.id === "bazi" && bazi) {
-          return <BaziCard key={card.id} card={card} model={bazi} />;
-        }
-        if (card.id === "five-elements" && fiveElements) {
-          return <FiveElementsCard key={card.id} card={card} model={fiveElements} />;
-        }
-        if (card.id === "ten-gods" && tenGods) {
-          return <TenGodsCard key={card.id} card={card} model={tenGods} />;
-        }
-        if (card.id === "pattern" && pattern) {
-          return <PatternCard key={card.id} card={card} model={pattern} />;
-        }
-        if (card.id === "shensha" && shenSha) {
-          return <ShenShaCard key={card.id} card={card} model={shenSha} />;
-        }
-        if (card.id === "luck" && luck) {
-          return <LuckCard key={card.id} card={card} model={luck} />;
-        }
-        if (card.id === "interpretation" && interpretation) {
-          return <InterpretationCard key={card.id} card={card} model={interpretation} />;
-        }
-        if (card.id === "action-plan" && actionPlan) {
-          return <ActionPlanCard key={card.id} card={card} model={actionPlan} />;
-        }
-        return <SkeletonCard key={card.id} card={card} />;
-      })}
-      {lifeConsulting ? <LifeConsultingSection model={lifeConsulting} /> : null}
+      {bazi ? <BaziCard card={baziCard} model={bazi} /> : null}
     </section>
   );
 }
