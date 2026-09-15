@@ -226,6 +226,17 @@ MARRIAGE_TEN_GOD_READINGS = {
     "Thất Sát": "với nữ mệnh, Thất Sát làm tình cảm có sức hút mạnh nhưng cũng dễ đi cùng áp lực, yêu cầu ranh giới và sự chín chắn",
 }
 
+PARTNERSHIP_TEN_GOD_READINGS = {
+    "Tỷ Kiên": "Tỷ Kiên là người ngang vai, cùng chí hướng hoặc cùng năng lực; hợp để đồng hành khi mục tiêu rõ, nhưng dễ va cái tôi nếu quyền quyết định không minh bạch.",
+    "Kiếp Tài": "Kiếp Tài là tín hiệu chia sẻ hoặc tranh nguồn lực; trong hợp tác làm ăn cần đặc biệt rõ vốn, lợi nhuận, quyền ký, trách nhiệm và đường lui.",
+    "Chính Tài": "Chính Tài giúp hợp tác đi vào tiền thật, tài sản thật, kế hoạch thật; phù hợp quan hệ có sổ sách, cam kết và dòng tiền rõ.",
+    "Thiên Tài": "Thiên Tài mở cơ hội qua quan hệ, thị trường, môi giới, đầu tư hoặc kinh doanh linh hoạt; hợp tác kiểu này cần kiểm soát rủi ro và kỳ vọng lợi nhuận.",
+    "Chính Quan": "Chính Quan giúp hợp tác có hợp đồng, vai trò, chuẩn mực và kỷ luật vận hành; phù hợp mô hình cần pháp lý hoặc quy trình rõ.",
+    "Thất Sát": "Thất Sát đưa vào áp lực cạnh tranh, tốc độ và rủi ro; hợp tác được khi có người kiểm soát rủi ro tốt, nhưng không nên mơ hồ về quyền lực.",
+    "Chính Ấn": "Chính Ấn giúp hợp tác dựa trên uy tín, kiến thức, bằng cấp, hệ thống hoặc người bảo trợ; phù hợp làm dài hạn và cần niềm tin nền.",
+    "Thiên Ấn": "Thiên Ấn hợp cộng sự có chuyên môn sâu, tư duy khác biệt hoặc năng lực nghiên cứu; cần thống nhất cách giao tiếp để tránh mỗi người đi một hướng.",
+}
+
 LIFE_DOMAIN_TITLES = {
     "health": "Sức khỏe",
     "wealth": "Mệnh/Tài vận",
@@ -1393,13 +1404,7 @@ def _life_domain_detail_paragraphs(
             )
         )
     elif key == "siblings":
-        peer_signals = _ten_god_signal_labels(ten_layers, ("Tỷ Kiên", "Kiếp Tài"))
-        paragraphs.append(
-            _fallback_join(
-                f"Tín hiệu đồng hành/cạnh tranh: {', '.join(peer_signals)}." if peer_signals else "Chưa thấy tín hiệu đồng hành nổi bật trong dữ liệu hiện có.",
-                "Nếu Tỷ Kiên/Kiếp Tài mạnh, quan hệ anh em và cộng sự thường cần rõ ràng về ranh giới, vai trò và cách chia nguồn lực.",
-            )
-        )
+        paragraphs.extend(_partnership_domain_paragraphs(ten_layers, useful_line))
     elif key == "ancestry":
         year_layer = _pillar_layer(ten_layers, "year")
         paragraphs.append(
@@ -1505,6 +1510,7 @@ def _wealth_domain_paragraphs(
         paragraphs.append(
             "Có Tài tinh nhưng thiếu tín hiệu sinh tài rõ thì người này vẫn có ý thức về tiền và trách nhiệm vật chất, nhưng cần xây hệ thống tạo giá trị đều hơn để tiền không chỉ đến theo cơ hội rời rạc."
         )
+    paragraphs.extend(_wealth_business_environment_paragraphs(payload))
     if strength_label:
         paragraphs.append(_wealth_strength_guidance(strength_label))
     if useful_line:
@@ -1513,6 +1519,45 @@ def _wealth_domain_paragraphs(
             + " Trong tài vận, Dụng thần là bộ lọc để biết nên mở rộng theo kiểu nào: cơ hội nào làm lá số cân bằng hơn thì nên ưu tiên, cơ hội nào kích hoạt điểm kỵ thì dù hấp dẫn cũng cần đi chậm."
         )
     return _unique_texts(paragraphs)
+
+
+def _wealth_business_environment_paragraphs(payload: Mapping[str, Any]) -> list[str]:
+    five_elements = _mapping(payload.get("five_elements"))
+    counts = _mapping(five_elements.get("counts"))
+    dominant = _element_label_list(five_elements.get("dominant")) or _element_extremes(counts, strongest=True)
+    metal_count = _element_count(counts, "Kim")
+    water_count = _element_count(counts, "Thủy")
+    fire_count = _element_count(counts, "Hỏa")
+    calendar = _mapping(payload.get("calendar"))
+    cung_phi = _first_text(calendar.get("cung_phi"), calendar.get("menh_quai"))
+    house_group = _first_text(calendar.get("nhom_trach"), calendar.get("house_group"))
+    paragraphs: list[str] = []
+
+    if metal_count >= 3 or "Kim" in dominant:
+        paragraphs.append(
+            "Xét riêng về kinh doanh và tài vận, Kim nổi bật là tín hiệu tốt cho khả năng quản trị tiền, tài sản, quy trình, luật lệ, định giá và kiểm soát rủi ro. Người có Kim mạnh thường hợp các việc cần sự sắc bén, kỷ luật, tính toán rõ và biết biến nguồn lực thành tài sản; tuy vậy Kim quá căng thì dễ cứng, khô hoặc quá thận trọng, nên vẫn cần dòng lưu thông và cơ hội phù hợp để tiền không bị đứng."
+        )
+    if metal_count >= 3 and water_count >= 2:
+        paragraphs.append(
+            "Kim có Thủy đi kèm thì tài khí dễ có dòng chảy hơn: năng lực quản trị, định giá và hệ thống của Kim được Thủy làm mềm bằng giao tiếp, thị trường, luân chuyển thông tin và khả năng xoay dòng tiền. Đây là thế kinh doanh nên chú trọng kênh phân phối, dữ liệu khách hàng và nhịp thu chi linh hoạt."
+        )
+    elif metal_count >= 3 and water_count <= 1:
+        paragraphs.append(
+            "Kim mạnh nhưng Thủy yếu thì tiền/tài sản dễ nghiêng về tích lũy, kiểm soát và phòng thủ hơn là dòng chảy. Khi làm kinh doanh cần đặc biệt chú ý thanh khoản, kênh bán, giao tiếp thị trường và cách làm cho sản phẩm/dịch vụ lưu thông đều, tránh giữ nguồn lực quá chặt."
+        )
+    if metal_count >= 3 and fire_count >= 3:
+        paragraphs.append(
+            "Kim gặp Hỏa đủ lực tạo thành thế vừa có tài sản/quy trình vừa có áp lực cạnh tranh, thương hiệu, tốc độ và mục tiêu doanh số. Đây có thể là lực tốt cho kinh doanh nếu có kỷ luật vận hành; ngược lại dễ thành căng thẳng, quyết định nóng hoặc xung đột giữa kiểm soát và mở rộng."
+        )
+    if cung_phi or house_group:
+        paragraphs.append(
+            _fallback_join(
+                f"Cung Phi {cung_phi}" if cung_phi else "",
+                f"thuộc {house_group}" if house_group else "",
+                "là dữ liệu nên dùng khi nối phần tài vận sang phong thủy kinh doanh. Đông/Tây Tứ Trạch không thay thế Tài tinh hay Đại vận, nhưng giúp chọn hướng nhà, hướng bàn làm việc, cửa hàng, kho bãi hoặc môi trường giao dịch sao cho không gian hỗ trợ khí mệnh và cách kiếm tiền của người đó.",
+            )
+        )
+    return paragraphs
 
 
 def _career_domain_paragraphs(
@@ -1598,6 +1643,41 @@ def _marriage_domain_paragraphs(
         paragraphs.append(
             useful_line
             + " Trong hôn nhân, Dụng thần giúp xác định kiểu quan hệ làm mình cân bằng hơn: người, thời điểm và cách sống chung nên nâng được khí tốt thay vì liên tục kích hoạt điểm kỵ."
+        )
+    return _unique_texts([paragraph for paragraph in paragraphs if paragraph])
+
+
+def _partnership_domain_paragraphs(ten_layers: Mapping[str, Any], useful_line: str) -> list[str]:
+    peer_signals = _ten_god_signal_labels(ten_layers, ("Tỷ Kiên", "Kiếp Tài"))
+    business_signals = _ten_god_signal_labels(
+        ten_layers,
+        ("Chính Tài", "Thiên Tài", "Chính Quan", "Thất Sát", "Chính Ấn", "Thiên Ấn"),
+    )
+    paragraphs: list[str] = [
+        _fallback_join(
+            f"Tín hiệu đồng hành/cạnh tranh: {', '.join(peer_signals)}." if peer_signals else "Chưa thấy Tỷ Kiên/Kiếp Tài lộ rõ; phần hợp tác nên đọc thêm qua Tài tinh, Quan/Sát, Ấn và Đại vận.",
+            f"Tín hiệu hợp tác làm ăn liên quan: {', '.join(business_signals)}." if business_signals else "",
+            "Mục này là nền cho tư vấn hợp tác: không chỉ xem có người hỗ trợ hay không, mà còn xem hợp tác dễ sinh tiền, sinh áp lực, sinh tranh chấp hay sinh uy tín ở điểm nào.",
+        )
+    ]
+    paragraphs.extend(_ten_god_reading_paragraphs("Luận hợp tác", peer_signals, PARTNERSHIP_TEN_GOD_READINGS))
+    paragraphs.extend(_ten_god_reading_paragraphs("Luận hợp tác", business_signals, PARTNERSHIP_TEN_GOD_READINGS))
+    if _has_any(peer_signals, ("Kiếp Tài",)) and _has_any(business_signals, ("Chính Tài", "Thiên Tài")):
+        paragraphs.append(
+            "Kiếp Tài gặp Tài tinh là cấu trúc rất cần minh bạch tiền bạc: có cơ hội cùng kiếm tiền, nhưng cũng dễ phát sinh tranh phần, ứng trước, chia lợi nhuận hoặc mâu thuẫn vì quyền kiểm soát dòng tiền."
+        )
+    if _has_any(business_signals, ("Chính Quan", "Thất Sát")):
+        paragraphs.append(
+            "Khi Quan/Sát xuất hiện trong hợp tác, hợp đồng, pháp lý, phân quyền và tiêu chuẩn vận hành phải đặt trước cảm tính. Càng làm việc lớn càng cần giấy tờ rõ, trách nhiệm rõ và cơ chế xử lý rủi ro rõ."
+        )
+    if _has_any(business_signals, ("Chính Ấn", "Thiên Ấn")):
+        paragraphs.append(
+            "Ấn tinh trong hợp tác cho thấy niềm tin, tri thức, uy tín hoặc người nâng đỡ là tài sản quan trọng. Nên chọn cộng sự có nền chuyên môn và đạo đức làm việc ổn, vì đây là kiểu hợp tác thắng bằng độ bền hơn là đánh nhanh."
+        )
+    if useful_line:
+        paragraphs.append(
+            useful_line
+            + " Khi xét cộng sự, người phù hợp là người giúp trục Dụng thần được mạnh lên; người liên tục kích hoạt điểm kỵ thì dù có lợi trước mắt cũng nên thận trọng."
         )
     return _unique_texts([paragraph for paragraph in paragraphs if paragraph])
 
