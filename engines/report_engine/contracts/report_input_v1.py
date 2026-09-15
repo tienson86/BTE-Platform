@@ -423,6 +423,7 @@ class ReportInputV1:
     interpretation: ReportInterpretationV1 = field(default_factory=ReportInterpretationV1)
     diagnostics: ReportDiagnosticsV1 = field(default_factory=ReportDiagnosticsV1)
     commercial_consulting: dict[str, Any] | None = None
+    modern_report: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
         """Deterministic JSON-serializable mapping."""
@@ -443,6 +444,8 @@ class ReportInputV1:
         }
         if self.commercial_consulting is not None:
             payload["commercial_consulting"] = _normalize_value(self.commercial_consulting)
+        if self.modern_report is not None:
+            payload["modern_report"] = _normalize_value(self.modern_report)
         return _normalize_mapping(payload)
 
 

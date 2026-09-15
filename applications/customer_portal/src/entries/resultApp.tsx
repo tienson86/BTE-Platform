@@ -107,6 +107,7 @@ function mount(): void {
           layoutMode={boot.layoutMode}
           previewFallback={boot.previewFallback}
           narrativeProvider={resolveNarrativeProvider(search)}
+          exportPayload={boot.exportPayload}
         />
       ) : (
         <PortalPage

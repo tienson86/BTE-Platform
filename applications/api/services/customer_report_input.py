@@ -95,6 +95,7 @@ def build_customer_report_input(
         luck_cycles=_luck(payload, diagnostics),
         interpretation=_interpretation(payload, diagnostics),
         diagnostics=diagnostics,
+        modern_report=_modern_report(payload, birth_input=birth),
     )
 
 
@@ -492,6 +493,56 @@ def _interpretation(
         recommendations=recs,
         warnings=[warning.content] if warning and warning.content else [],
     )
+
+
+def _modern_report(
+    data: Mapping[str, Any],
+    *,
+    birth_input: Mapping[str, Any] | None = None,
+) -> dict[str, Any] | None:
+    contract = _map(data.get("bazi_analysis_result"))
+    if not contract:
+        try:
+            from applications.api.services.bazi_analysis_contract import build_bazi_analysis_result
+
+            contract = build_bazi_analysis_result(
+                dict(data),
+                input_payload=dict(birth_input or {}),
+                analysis_id=_text(data.get("analysis_id") or data.get("request_id") or data.get("case_id")),
+                request_id=_text(data.get("request_id")),
+            )
+        except Exception:
+            contract = {}
+    narrative = _map(contract.get("customer_narrative"))
+    chapters_raw = narrative.get("report_chapters")
+    if not isinstance(chapters_raw, list):
+        return None
+    chapters: list[dict[str, Any]] = []
+    for index, item in enumerate(chapters_raw):
+        chapter = _map(item)
+        title = _text(chapter.get("title"))
+        paragraphs = [_text(value) for value in chapter.get("paragraphs", []) if _text(value)] if isinstance(chapter.get("paragraphs"), list) else []
+        bullets = [_text(value) for value in chapter.get("bullets", []) if _text(value)] if isinstance(chapter.get("bullets"), list) else []
+        if not title or (not paragraphs and not bullets):
+            continue
+        chapters.append(
+            {
+                "id": _text(chapter.get("id")) or f"chapter-{index + 1}",
+                "title": title,
+                "paragraphs": paragraphs,
+                "bullets": bullets,
+            }
+        )
+    if not chapters:
+        return None
+    report_document = _map(narrative.get("report_document"))
+    return {
+        "title": _text(report_document.get("title")) or "Bản luận giải lá số Bát Tự",
+        "subtitle": _text(report_document.get("subtitle")),
+        "chapters": chapters,
+        "five_elements": _map(data.get("five_elements")),
+        "luck": _map(data.get("luck")),
+    }
 
 
 def _map(value: Any) -> dict[str, Any]:

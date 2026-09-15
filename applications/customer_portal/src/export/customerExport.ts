@@ -54,7 +54,7 @@ export async function downloadOfficialExport(
     throw new ApiError(block, { kind: "validation", status: 409, code: "export_contract_mismatch" });
   }
   const path = format === "pdf" ? API_ENDPOINTS.exportPdf : API_ENDPOINTS.exportDocx;
-  const fallbackFilename = format === "pdf" ? "BTE_BaoCao_V1.pdf" : "BTE_BaoCao_V1.docx";
+  const fallbackFilename = format === "pdf" ? "BTE_LuanGiaiBatTu_V1.pdf" : "BTE_LuanGiaiBatTu_V1.docx";
   const result = await getApiClient().requestBlob(
     path,
     {

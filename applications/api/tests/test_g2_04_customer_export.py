@@ -141,7 +141,7 @@ def test_dung_presentation_retains_analysis_id_and_hk_r1h() -> None:
     assert "không phải mức vượng suy" in html
     assert "1.00" in html
     filename = build_customer_export_filename(report_input, "pdf")
-    assert filename.startswith("BTE_BaoCao_")
+    assert filename.startswith("BTE_LuanGiaiBatTu_")
     assert "NgoDacDung" in filename or "Dung" in filename
     assert filename.endswith(".pdf")
     assert "g2-04-dung.pdf" != filename

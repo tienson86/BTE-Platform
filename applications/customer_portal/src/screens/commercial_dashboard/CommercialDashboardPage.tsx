@@ -2,8 +2,15 @@
  * Commercial Dashboard page header + Identity + Life Consulting + canonical grid.
  */
 
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import type { CanonicalDesktopViewModel } from "../../adapters";
+import {
+  customerExportBlockMessage,
+  customerExportErrorMessage,
+  customerExportReady,
+  downloadOfficialExport,
+  type CustomerExportPayload,
+} from "../../export/customerExport";
 import type { AnalysisDataDto, AnalyzeChartRequest } from "../../models";
 import { resolveNarrativeProvider } from "../../resultState/narrativeProvider";
 import { selectNarrativePresentation } from "../../resultState/narrativePresentationSelection";
@@ -59,6 +66,7 @@ export type CommercialDashboardPageProps = {
   readonly layoutMode?: "live" | "skeleton" | "visual";
   readonly previewFallback?: boolean;
   readonly narrativeProvider?: string;
+  readonly exportPayload?: CustomerExportPayload | null;
 };
 
 function ResultPageHeader(): ReactNode {
@@ -90,6 +98,74 @@ function gateAction(resultSource: CommercialDashboardPageProps["resultSource"], 
   return undefined;
 }
 
+function ResultArchiveActions({
+  payload,
+  resultSource,
+}: {
+  readonly payload?: CustomerExportPayload | null;
+  readonly resultSource: CommercialDashboardPageProps["resultSource"];
+}): ReactNode {
+  const [busy, setBusy] = useState<"pdf" | "docx" | null>(null);
+  const [notice, setNotice] = useState("");
+  const ready = customerExportReady(payload);
+  const block = customerExportBlockMessage(payload);
+  const savedLabel = resultSource === "history" ? "Đang xem hồ sơ đã lưu" : "Hồ sơ đã tự động lưu";
+
+  async function onDownload(format: "pdf" | "docx"): Promise<void> {
+    if (!payload) {
+      setNotice(block);
+      return;
+    }
+    setBusy(format);
+    setNotice("");
+    try {
+      await downloadOfficialExport(payload, format);
+    } catch (error) {
+      setNotice(customerExportErrorMessage(error));
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  return (
+    <section className="bte-cdash__archive" aria-label="Lưu và xuất hồ sơ lá số">
+      <div className="bte-cdash__archive-copy">
+        <span className="bte-cdash__archive-status">{savedLabel}</span>
+        <p>Quản lý lại lá số trong lịch sử, hoặc xuất bản luận giải thành tệp để gửi khách hàng.</p>
+      </div>
+      <div className="bte-cdash__archive-actions">
+        <a className="bte-cdash__archive-btn" href="/history">
+          Hồ sơ đã lưu
+        </a>
+        <button type="button" className="bte-cdash__archive-btn" onClick={() => window.print()}>
+          In nhanh
+        </button>
+        <button
+          type="button"
+          className="bte-cdash__archive-btn bte-cdash__archive-btn--primary"
+          disabled={!ready || busy !== null}
+          onClick={() => void onDownload("pdf")}
+        >
+          {busy === "pdf" ? "Đang tạo PDF..." : "Tải PDF"}
+        </button>
+        <button
+          type="button"
+          className="bte-cdash__archive-btn bte-cdash__archive-btn--primary"
+          disabled={!ready || busy !== null}
+          onClick={() => void onDownload("docx")}
+        >
+          {busy === "docx" ? "Đang tạo DOCX..." : "Tải DOCX"}
+        </button>
+      </div>
+      {notice || (!ready && block) ? (
+        <p className="bte-cdash__archive-notice" role="status">
+          {notice || block}
+        </p>
+      ) : null}
+    </section>
+  );
+}
+
 /**
  * Canonical `/result` body for Commercial Dashboard (UI-03 geometry, UI-14 visual hierarchy).
  */
@@ -103,6 +179,7 @@ export function CommercialDashboardPage({
   layoutMode = "live",
   previewFallback = false,
   narrativeProvider: _narrativeProvider,
+  exportPayload = null,
 }: CommercialDashboardPageProps): ReactNode {
   const harness = layoutMode === "skeleton" || layoutMode === "visual" || previewFallback;
   const requestedProvider = resolveNarrativeProvider();
@@ -233,6 +310,7 @@ export function CommercialDashboardPage({
       data-layout={layoutMode === "skeleton" || previewFallback ? "skeleton" : layoutMode}
     >
       <ResultPageHeader />
+      <ResultArchiveActions payload={exportPayload} resultSource={resultSource} />
       <IdentityHeader model={model} />
       <DashboardGrid
         overview={overview}

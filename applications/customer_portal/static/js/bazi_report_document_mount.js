@@ -359,6 +359,137 @@
     return node;
   }
 
+  function exportFilename(response, fallback) {
+    const header = response.headers.get("content-disposition") || "";
+    const utf = header.match(/filename\*=UTF-8''([^;]+)/i);
+    if (utf && utf[1]) {
+      try {
+        return decodeURIComponent(utf[1]);
+      } catch (_) {
+        return utf[1];
+      }
+    }
+    const ascii = header.match(/filename="([^"]+)"/i);
+    return ascii && ascii[1] ? ascii[1] : fallback;
+  }
+
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    link.rel = "noopener";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    global.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  async function downloadExport(record, format, statusNode, buttons) {
+    if (!record || !record.data) {
+      if (statusNode) statusNode.textContent = "Chưa có dữ liệu lá số để xuất file.";
+      return;
+    }
+    const analysisId = text(record.analysis_id || record.id || record.data.analysis_id || record.data.request_id || record.data.case_id);
+    if (!analysisId) {
+      if (statusNode) statusNode.textContent = "Hồ sơ thiếu mã phân tích nên chưa thể xuất file.";
+      return;
+    }
+    buttons.forEach((button) => {
+      button.disabled = true;
+    });
+    const active = buttons.find((button) => button.getAttribute("data-export-format") === format);
+    const oldLabel = active ? active.textContent : "";
+    if (active) active.textContent = format === "pdf" ? "Đang tạo PDF..." : "Đang tạo DOCX...";
+    if (statusNode) statusNode.textContent = "";
+    try {
+      const response = await fetch(`/backend/api/v1/export/${format}`, {
+        method: "POST",
+        headers: {
+          Accept: format === "pdf" ? "application/pdf, application/json" : "application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          analysis_id: analysisId,
+          source: record.source === "history" ? "history" : "current",
+          data: record.data,
+          input: record.input || {},
+        }),
+      });
+      if (!response.ok) {
+        let message = "Không tạo được file xuất. Vui lòng thử lại.";
+        try {
+          const payload = await response.json();
+          message = payload.message || payload.detail || message;
+        } catch (_) {
+          /* ignore */
+        }
+        throw new Error(message);
+      }
+      const blob = await response.blob();
+      downloadBlob(blob, exportFilename(response, format === "pdf" ? "BTE_BaoCao_V1.pdf" : "BTE_BaoCao_V1.docx"));
+    } catch (error) {
+      if (statusNode) statusNode.textContent = (error && error.message) || "Không tạo được file xuất. Vui lòng thử lại.";
+    } finally {
+      if (active) active.textContent = oldLabel;
+      buttons.forEach((button) => {
+        button.disabled = false;
+      });
+    }
+  }
+
+  function renderArchiveActions(record) {
+    const section = document.createElement("section");
+    section.className = "bte-cdash__archive";
+    section.setAttribute("data-bazi-archive-actions", "true");
+    section.setAttribute("aria-label", "Lưu và xuất hồ sơ lá số");
+    const copy = document.createElement("div");
+    copy.className = "bte-cdash__archive-copy";
+    appendText(copy, "span", "bte-cdash__archive-status", record && record.source === "history" ? "Đang xem hồ sơ đã lưu" : "Hồ sơ đã tự động lưu");
+    appendText(copy, "p", "", "Quản lý lại lá số trong lịch sử, hoặc xuất bản luận giải thành tệp để gửi khách hàng.");
+    section.appendChild(copy);
+
+    const actions = document.createElement("div");
+    actions.className = "bte-cdash__archive-actions";
+    const history = document.createElement("a");
+    history.className = "bte-cdash__archive-btn";
+    history.href = "/history";
+    history.textContent = "Hồ sơ đã lưu";
+    actions.appendChild(history);
+    const print = document.createElement("button");
+    print.type = "button";
+    print.className = "bte-cdash__archive-btn";
+    print.textContent = "In nhanh";
+    print.addEventListener("click", () => global.print());
+    actions.appendChild(print);
+    ["pdf", "docx"].forEach((format) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "bte-cdash__archive-btn bte-cdash__archive-btn--primary";
+      button.setAttribute("data-export-format", format);
+      button.textContent = format === "pdf" ? "Tải PDF" : "Tải DOCX";
+      actions.appendChild(button);
+    });
+    section.appendChild(actions);
+    const status = document.createElement("p");
+    status.className = "bte-cdash__archive-notice";
+    status.setAttribute("role", "status");
+    section.appendChild(status);
+    const exportButtons = Array.from(actions.querySelectorAll("[data-export-format]"));
+    exportButtons.forEach((button) => {
+      button.addEventListener("click", () => downloadExport(record, button.getAttribute("data-export-format"), status, exportButtons));
+    });
+    return section;
+  }
+
+  function placeArchiveActions(root, record) {
+    if (!root) return;
+    root.querySelectorAll("[data-bazi-archive-actions]").forEach((node) => node.remove());
+    const header = root.querySelector("[data-page-header='result']") || root.firstElementChild;
+    if (!header) return;
+    header.insertAdjacentElement("afterend", renderArchiveActions(record));
+  }
+
   function renderFiveElementsVisual(model) {
     if (!model || !model.items || !model.items.length) return null;
     const visual = document.createElement("aside");
@@ -459,9 +590,101 @@
     return visual;
   }
 
+  const DOMAIN_TITLE_RULES = [
+    [/thanh khoản|dòng tiền|tiền\/tài sản|tiền và tài sản/i, "Dòng tiền và thanh khoản"],
+    [/quản trị tiền|quản trị tài sản|kiểm soát rủi ro|nguồn lực thành tài sản/i, "Quản trị tài sản"],
+    [/kim gặp hỏa|áp lực cạnh tranh|doanh số|mục tiêu doanh số/i, "Áp lực cạnh tranh"],
+    [/cung phi|đông tứ trạch|tây tứ trạch|hướng nhà|hướng bàn|phong thủy|không gian/i, "Phong thủy ứng dụng"],
+    [/kinh doanh|tài vận|tài sản|nguồn tiền|giữ tài/i, "Tài vận và kinh doanh"],
+    [/sức khỏe|hô hấp|phổi|xoang|xương khớp|giấc ngủ|tiêu hóa|tỳ vị|thận/i, "Sức khỏe"],
+    [/nghề nghiệp|công việc|sự nghiệp|nghề|chuyên môn/i, "Nghề nghiệp"],
+    [/hôn nhân|phối ngẫu|tình cảm|quan hệ gần|vợ|chồng/i, "Hôn nhân và quan hệ"],
+    [/hợp tác|đối tác|cộng sự|làm ăn chung|phân vai/i, "Hợp tác làm ăn"],
+    [/con cái|tử tức|hậu vận|trụ giờ|dự án dài hạn/i, "Con cái và hậu vận"],
+    [/bố mẹ|cha mẹ|gia đình|gia đạo|trụ tháng/i, "Gia đạo và nền nâng đỡ"],
+    [/anh em|bạn bè|đồng hành|cạnh tranh ngang vai/i, "Quan hệ đồng hành"],
+    [/tổ tiên|gia tộc|phúc khí|trụ năm/i, "Gốc gia tộc"],
+    [/học hỏi|mở rộng|kỹ năng|kế hoạch dài hơi/i, "Học tập và phát triển"],
+    [/đại vận|vận hiện tại|nhịp vận|giai đoạn/i, "Nhịp vận"],
+  ];
+
+  const DOMAIN_GROUPS = [
+    { id: "career", title: "Nghề nghiệp", cardTitle: "Luận nghề nghiệp", pattern: /nghề nghiệp|công việc|sự nghiệp|nghề|chuyên môn|học hỏi|mở rộng|kỹ năng|kế hoạch dài hơi/i },
+    { id: "wealth", title: "Tài vận và kinh doanh", cardTitle: "Luận tài vận", pattern: /tài vận|kinh doanh|dòng tiền|thanh khoản|quản trị tài sản|quản trị tiền|doanh số|cạnh tranh|tài sản|nguồn tiền|giữ tài/i },
+    { id: "marriage", title: "Hôn nhân và quan hệ", cardTitle: "Luận hôn nhân", pattern: /hôn nhân|phối ngẫu|tình cảm|quan hệ gần|vợ|chồng|hồng loan|duyên|cảm xúc/i },
+    { id: "children", title: "Con cái và hậu vận", cardTitle: "Luận con cái\/hậu vận", pattern: /con cái|tử tức|hậu vận|trụ giờ|dự án dài hạn|sinh con/i },
+    { id: "health", title: "Sức khỏe", cardTitle: "Luận sức khỏe", pattern: /sức khỏe|hô hấp|phổi|xoang|xương khớp|giấc ngủ|tiêu hóa|tỳ vị|thận|tim mạch|gan mật|căng thẳng/i },
+    { id: "family", title: "Gia đạo và nền gốc", cardTitle: "Luận gia đạo", pattern: /bố mẹ|cha mẹ|gia đình|gia đạo|trụ tháng|anh em|bạn bè|đồng hành|tổ tiên|gia tộc|phúc khí|trụ năm|gốc phúc/i },
+    { id: "property", title: "Điền trạch và phong thủy", cardTitle: "Luận điền trạch", pattern: /điền trạch|cung phi|mệnh quái|đông tứ trạch|tây tứ trạch|nhóm trạch|hướng nhà|hướng bàn|phong thủy|không gian|nhà đất|ánh sáng|màu sắc|vật liệu|độ thoáng|bếp|cửa|bàn làm việc|dụng thần|ngũ hành|hành nổi bật|hành còn yếu|hành còn thiếu/i },
+    { id: "luck", title: "Đại vận và thời điểm", cardTitle: "Luận vận", pattern: /đại vận|vận hiện tại|nhịp vận|giai đoạn|lưu niên/i },
+  ];
+
+  function inferDomainTitle(paragraph, index) {
+    const value = text(paragraph).toLocaleLowerCase("vi-VN");
+    const matched = DOMAIN_TITLE_RULES.find((item) => item[0].test(value));
+    return matched ? matched[1] : `Góc nhìn ${index + 1}`;
+  }
+
+  function inferDomainGroup(title, body) {
+    const value = `${title} ${body}`;
+    return DOMAIN_GROUPS.find((group) => group.pattern.test(value)) || DOMAIN_GROUPS[0];
+  }
+
+  function splitDomainParagraph(paragraph, paragraphIndex) {
+    const value = text(paragraph);
+    const index = value.indexOf(":");
+    const title = index <= 0 ? inferDomainTitle(value, paragraphIndex) : value.slice(0, index).trim();
+    const body = index <= 0 ? value : value.slice(index + 1).trim();
+    return { title, body, group: inferDomainGroup(title, body) };
+  }
+
+  function groupDomainItems(items) {
+    return DOMAIN_GROUPS
+      .map((group) => ({ group, items: items.filter((item) => item.group.id === group.id) }))
+      .filter((entry) => entry.items.length);
+  }
+
+  function renderLifeDomainsVisual(chapter) {
+    const items = arrayOf(chapter.paragraphs)
+      .map((paragraph, index) => splitDomainParagraph(paragraph, index))
+      .filter((item) => item.body);
+    const groups = groupDomainItems(items);
+    if (!items.length) return null;
+    const visual = document.createElement("aside");
+    visual.className = "bte-report-doc__visual bte-report-doc__visual--domains";
+    visual.setAttribute("aria-label", "Các mục đời sống");
+    const head = document.createElement("header");
+    head.className = "bte-report-doc__visual-head";
+    const titleBox = document.createElement("div");
+    appendText(titleBox, "p", "bte-report-doc__visual-kicker", "Ứng dụng đời sống");
+    appendText(titleBox, "h4", "bte-report-doc__visual-title", "Các mảng cần đọc từ lá số gốc");
+    head.appendChild(titleBox);
+    visual.appendChild(head);
+    groups.forEach((entry) => {
+      const section = document.createElement("section");
+      section.className = "bte-report-doc__domain-group";
+      appendText(section, "h5", "bte-report-doc__domain-group-title", entry.group.title);
+      const grid = document.createElement("div");
+      grid.className = "bte-report-doc__domain-grid";
+      entry.items.forEach((item, index) => {
+        const card = document.createElement("article");
+        card.className = "bte-report-doc__domain-card";
+        appendText(card, "span", "bte-report-doc__domain-index", String(index + 1).padStart(2, "0"));
+        appendText(card, "h6", "", `${entry.group.cardTitle} ${index + 1}`);
+        appendText(card, "p", "bte-report-doc__domain-topic", item.title);
+        appendText(card, "p", "", item.body);
+        grid.appendChild(card);
+      });
+      section.appendChild(grid);
+      visual.appendChild(section);
+    });
+    return visual;
+  }
+
   function renderChapterVisual(chapter, model) {
     if (chapter.id === "five_elements") return renderFiveElementsVisual(model.fiveElements);
     if (chapter.id === "luck_cycles") return renderLuckVisual(model.luck);
+    if (chapter.id === "life_domains") return renderLifeDomainsVisual(chapter);
     return null;
   }
 
@@ -522,12 +745,15 @@
       appendText(chapterHead, "h3", "bte-report-doc__chapter-title", chapter.title);
       chapterNode.appendChild(chapterHead);
       const lead = chapter.paragraphs[0];
-      if (lead) appendText(chapterNode, "p", "bte-report-doc__lead", lead);
+      const visualConsumesParagraphs = chapter.id === "life_domains";
+      if (!visualConsumesParagraphs && lead) appendText(chapterNode, "p", "bte-report-doc__lead", lead);
       const visual = renderChapterVisual(chapter, model);
       if (visual) chapterNode.appendChild(visual);
-      chapter.paragraphs.slice(1).forEach((paragraph) => {
-        appendText(chapterNode, "p", "bte-report-doc__paragraph", paragraph);
-      });
+      if (!visualConsumesParagraphs) {
+        chapter.paragraphs.slice(1).forEach((paragraph) => {
+          appendText(chapterNode, "p", "bte-report-doc__paragraph", paragraph);
+        });
+      }
       if (chapter.bullets.length) {
         const list = document.createElement("ul");
         list.className = "bte-report-doc__bullets";
@@ -663,6 +889,9 @@
       .bte-cdash[data-finish="v2"] .bte-cdash__page-header {
         order: 1 !important;
       }
+      .bte-cdash[data-finish="v2"] .bte-cdash__archive {
+        order: 2 !important;
+      }
       .bte-cdash[data-finish="v2"] .bte-id {
         order: 2 !important;
       }
@@ -759,6 +988,74 @@
       .bte-cdash[data-finish="v2"] .bte-bazi__table [data-bazi-field="tam-hop"],
       .bte-cdash[data-finish="v2"] .bte-bazi__table [data-bazi-field="shen-sha"] {
         font-weight: 700;
+      }
+      .bte-cdash__archive {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: var(--space-4, 18px);
+        margin: 0 0 var(--space-4, 18px);
+        padding: var(--space-3, 12px) var(--space-4, 18px);
+        border: 1px solid var(--cdash-border, #dfe3ea);
+        border-radius: 8px;
+        background: #f7fafc;
+      }
+      .bte-cdash__archive-copy {
+        min-width: 0;
+      }
+      .bte-cdash__archive-status {
+        display: inline-flex;
+        align-items: center;
+        min-height: 1.5rem;
+        padding: 2px 9px;
+        border-radius: 999px;
+        background: #eaf8f2;
+        color: #047857;
+        font-size: var(--font-size-caption, 0.875rem);
+        font-weight: 700;
+      }
+      .bte-cdash__archive-copy p,
+      .bte-cdash__archive-notice {
+        margin: var(--space-1, 4px) 0 0;
+        color: var(--cdash-muted, #5f6b7a);
+        font-size: var(--font-size-caption, 0.875rem);
+        line-height: 1.45;
+      }
+      .bte-cdash__archive-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: var(--space-2, 8px);
+      }
+      .bte-cdash__archive-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.25rem;
+        padding: 6px 12px;
+        border: 1px solid var(--cdash-border, #dfe3ea);
+        border-radius: 8px;
+        background: #ffffff;
+        color: var(--cdash-text, #111827);
+        font: inherit;
+        font-size: var(--font-size-caption, 0.875rem);
+        font-weight: 700;
+        line-height: 1.2;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .bte-cdash__archive-btn--primary {
+        border-color: #2563eb;
+        background: #2563eb;
+        color: #ffffff;
+      }
+      .bte-cdash__archive-btn:disabled {
+        cursor: not-allowed;
+        opacity: 0.55;
+      }
+      .bte-cdash__archive-notice {
+        grid-column: 1 / -1;
+        color: #b45309;
       }
       .bte-report-doc {
         width: 100%;
@@ -1093,6 +1390,61 @@
         font-weight: 800;
         text-align: center;
       }
+      .bte-report-doc__domain-group {
+        display: grid;
+        gap: var(--space-3, 12px);
+      }
+      .bte-report-doc__domain-group + .bte-report-doc__domain-group {
+        margin-top: var(--space-4, 18px);
+        padding-top: var(--space-4, 18px);
+        border-top: 1px solid rgba(15, 159, 117, 0.24);
+      }
+      .bte-report-doc__domain-group-title {
+        margin: 0;
+        color: #0f9f75;
+        font-family: var(--font-family-display, inherit);
+        font-size: 1rem;
+        font-weight: 800;
+      }
+      .bte-report-doc__domain-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-3, 12px);
+      }
+      .bte-report-doc__domain-card {
+        display: grid;
+        gap: var(--space-2, 8px);
+        padding: var(--space-3, 12px);
+        border: 1px solid var(--cdash-border, #dfe3ea);
+        border-radius: 8px;
+        background: #ffffff;
+      }
+      .bte-report-doc__domain-index {
+        color: #0f9f75;
+        font-family: var(--font-family-display, inherit);
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+      }
+      .bte-report-doc__domain-card h6,
+      .bte-report-doc__domain-card p {
+        margin: 0;
+      }
+      .bte-report-doc__domain-card h6 {
+        color: var(--cdash-text, #111827);
+        font-size: 1rem;
+        font-weight: 800;
+      }
+      .bte-report-doc__domain-topic {
+        color: #0f9f75;
+        font-size: var(--font-size-caption, 0.875rem);
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+      .bte-report-doc__domain-card p {
+        color: var(--cdash-text, #111827);
+        font-size: var(--font-size-caption, 0.875rem);
+        line-height: 1.55;
+      }
       @media (max-width: 767px) {
         .bte-report-doc {
           margin-top: var(--space-4, 18px);
@@ -1119,8 +1471,19 @@
         .bte-report-doc__lead {
           font-size: 0.9375rem;
         }
+        .bte-cdash__archive {
+          grid-template-columns: 1fr;
+          align-items: stretch;
+        }
+        .bte-cdash__archive-actions {
+          justify-content: stretch;
+        }
+        .bte-cdash__archive-btn {
+          flex: 1 1 9rem;
+        }
         .bte-report-doc__element-chart,
-        .bte-report-doc__luck-list {
+        .bte-report-doc__luck-list,
+        .bte-report-doc__domain-grid {
           grid-template-columns: 1fr;
         }
         .bte-report-doc__element-chart {
@@ -1156,6 +1519,7 @@
     const record = loadDisplayRecord();
     const data = record && record.data;
     if (data) patchBaziTable(data);
+    placeArchiveActions(root, record);
     const model = adaptReport(data);
     if (!model) return;
 
