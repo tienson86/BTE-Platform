@@ -3,18 +3,129 @@
  */
 
 import type { ReactNode } from "react";
-import type { BaziReportDocumentChapterView, BaziReportDocumentView } from "./types";
+import type {
+  BaziReportDocumentChapterView,
+  BaziReportDocumentView,
+  BaziReportFiveElementsView,
+  BaziReportLuckCycleView,
+  BaziReportLuckView,
+} from "./types";
 
 type ReportDocumentSectionProps = {
   readonly model: BaziReportDocumentView;
 };
 
+function ReportFiveElementsVisual({ model }: { readonly model: BaziReportFiveElementsView }): ReactNode {
+  return (
+    <aside className="bte-report-doc__visual bte-report-doc__visual--elements" aria-label="Biểu đồ Ngũ hành">
+      <header className="bte-report-doc__visual-head">
+        <p className="bte-report-doc__visual-kicker">Biểu đồ Ngũ hành</p>
+        <h4 className="bte-report-doc__visual-title">Phân bố khí trong lá số</h4>
+      </header>
+      <div className="bte-report-doc__element-chart">
+        {model.items.map((item) => {
+          const height = `${Math.max(8, Math.round((item.count / model.maxCount) * 100))}%`;
+          return (
+            <div key={item.key} className="bte-report-doc__element" data-element={item.key}>
+              <span className="bte-report-doc__element-label">{item.label}</span>
+              <span className="bte-report-doc__element-track" aria-hidden="true">
+                <span className="bte-report-doc__element-bar" style={{ height }} />
+              </span>
+              <span className="bte-report-doc__element-count">{item.count}</span>
+            </div>
+          );
+        })}
+      </div>
+      <div className="bte-report-doc__insight-row">
+        {model.dominantLabel ? (
+          <span className="bte-report-doc__insight-chip">Nổi bật: {model.dominantLabel}</span>
+        ) : null}
+        {model.weakLabel ? (
+          <span className="bte-report-doc__insight-chip">Cần bồi: {model.weakLabel}</span>
+        ) : null}
+      </div>
+      {model.methodNote ? <p className="bte-report-doc__visual-note">{model.methodNote}</p> : null}
+    </aside>
+  );
+}
+
+function cycleElementHits(cycle: BaziReportLuckCycleView, elements: readonly string[]): string {
+  const hits = elements.filter((element) => cycle.elements.includes(element));
+  return hits.join(", ");
+}
+
+function ReportLuckVisual({ model }: { readonly model: BaziReportLuckView }): ReactNode {
+  return (
+    <aside className="bte-report-doc__visual bte-report-doc__visual--luck" aria-label="Timeline Đại vận">
+      <header className="bte-report-doc__visual-head">
+        <p className="bte-report-doc__visual-kicker">Timeline Đại vận</p>
+        <h4 className="bte-report-doc__visual-title">Nhịp vận theo từng giai đoạn</h4>
+      </header>
+      <div className="bte-report-doc__luck-summary">
+        {model.direction ? <span>Chiều vận: {model.direction}</span> : null}
+        {model.startAge ? <span>Khởi vận: {model.startAge} tuổi</span> : null}
+        {model.currentLabel ? <span>Hiện tại: {model.currentLabel}</span> : null}
+      </div>
+      <ol className="bte-report-doc__luck-list">
+        {model.cycles.map((cycle, index) => {
+          const usefulHits = cycleElementHits(cycle, model.usefulElements);
+          const cautionHits = cycleElementHits(cycle, model.unfavorableElements);
+          return (
+            <li
+              key={`${cycle.ganZhi}-${cycle.ageRange}-${index}`}
+              className="bte-report-doc__luck-cycle"
+              data-current={cycle.isCurrent ? "true" : undefined}
+            >
+              <div className="bte-report-doc__luck-top">
+                <span className="bte-report-doc__luck-index">{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <strong>{cycle.ganZhi}</strong>
+                  <span>{[cycle.ageRange, cycle.yearRange].filter(Boolean).join(" · ")}</span>
+                </div>
+              </div>
+              {cycle.elements ? <p className="bte-report-doc__luck-elements">{cycle.elements}</p> : null}
+              <div className="bte-report-doc__luck-points">
+                <p>
+                  <span>+</span>
+                  {usefulHits ? `Chạm trục nên dùng: ${usefulHits}.` : "Có thể mở việc khi mục tiêu và nhịp hành động rõ."}
+                </p>
+                <p>
+                  <span>-</span>
+                  {cautionHits ? `Cần tiết chế: ${cautionHits}.` : "Cần đọc cùng mệnh cục gốc trước quyết định lớn."}
+                </p>
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+    </aside>
+  );
+}
+
+function ReportChapterVisual({
+  chapter,
+  model,
+}: {
+  readonly chapter: BaziReportDocumentChapterView;
+  readonly model: BaziReportDocumentView;
+}): ReactNode {
+  if (chapter.id === "five_elements" && model.fiveElements) {
+    return <ReportFiveElementsVisual model={model.fiveElements} />;
+  }
+  if (chapter.id === "luck_cycles" && model.luck) {
+    return <ReportLuckVisual model={model.luck} />;
+  }
+  return null;
+}
+
 function ReportChapter({
   chapter,
   index,
+  model,
 }: {
   readonly chapter: BaziReportDocumentChapterView;
   readonly index: number;
+  readonly model: BaziReportDocumentView;
 }): ReactNode {
   const chapterNumber = String(index + 1).padStart(2, "0");
   const [leadParagraph, ...bodyParagraphs] = chapter.paragraphs;
@@ -36,6 +147,7 @@ function ReportChapter({
           {leadParagraph}
         </p>
       ) : null}
+      <ReportChapterVisual chapter={chapter} model={model} />
       {bodyParagraphs.map((paragraph, paragraphIndex) => (
         <p key={`${chapter.id}-p-${paragraphIndex + 1}`} className="bte-report-doc__paragraph">
           {paragraph}
@@ -83,7 +195,7 @@ export function ReportDocumentSection({ model }: ReportDocumentSectionProps): Re
         </nav>
         <div className="bte-report-doc__body">
           {model.chapters.map((chapter, index) => (
-            <ReportChapter key={chapter.id} chapter={chapter} index={index} />
+            <ReportChapter key={chapter.id} chapter={chapter} index={index} model={model} />
           ))}
         </div>
       </div>

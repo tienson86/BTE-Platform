@@ -17,7 +17,9 @@
   }
 
   function text(value) {
-    return typeof value === "string" ? value.trim() : "";
+    if (typeof value === "string") return value.trim();
+    if (typeof value === "number" && Number.isFinite(value)) return String(value);
+    return "";
   }
 
   function textList(value) {
@@ -48,6 +50,21 @@
 
   function arrayOf(value) {
     return Array.isArray(value) ? value : [];
+  }
+
+  function numberValue(value) {
+    if (typeof value === "number" && Number.isFinite(value)) return value;
+    if (typeof value === "string" && value.trim() !== "" && Number.isFinite(Number(value))) {
+      return Number(value);
+    }
+    return null;
+  }
+
+  function numericCount(value) {
+    const direct = numberValue(value);
+    if (direct != null) return direct;
+    if (isRecord(value)) return numberValue(value.count);
+    return null;
   }
 
   function pillarKey(value) {
@@ -245,6 +262,91 @@
       title: text(reportDocument.title) || "Bản luận giải lá số Bát Tự",
       subtitle: text(reportDocument.subtitle),
       chapters: resolvedChapters,
+      fiveElements: adaptReportFiveElements(data),
+      luck: adaptReportLuck(data),
+    };
+  }
+
+  function adaptReportFiveElements(data) {
+    const facts = isRecord(data && data.five_elements) ? data.five_elements : {};
+    const counts = isRecord(facts.counts) ? facts.counts : {};
+    const source = [
+      { key: "wood", label: "Mộc" },
+      { key: "fire", label: "Hỏa" },
+      { key: "earth", label: "Thổ" },
+      { key: "metal", label: "Kim" },
+      { key: "water", label: "Thủy" },
+    ];
+    const items = source
+      .map((item) => {
+        const count = numericCount(counts[item.key]) ?? numericCount(facts[item.key]);
+        return count == null ? null : { ...item, count };
+      })
+      .filter(Boolean);
+    if (!items.length) return null;
+    const maxCount = Math.max(1, ...items.map((item) => item.count));
+    const minCount = Math.min(...items.map((item) => item.count));
+    return {
+      items,
+      maxCount,
+      dominantLabel: items.filter((item) => item.count === maxCount).map((item) => item.label).join(", "),
+      weakLabel: items.filter((item) => item.count === minCount).map((item) => item.label).join(", "),
+      methodNote: text(facts.method_note),
+    };
+  }
+
+  function rangeText(start, end, suffix) {
+    const from = numberValue(start);
+    const to = numberValue(end);
+    if (from == null || to == null) return "";
+    return `${from}-${to}${suffix || ""}`;
+  }
+
+  function cycleKey(cycle) {
+    if (!isRecord(cycle)) return "";
+    return [text(cycle.gan_zhi), text(cycle.age_start), text(cycle.year_start)].join("|");
+  }
+
+  function luckAxis(data) {
+    const contract = isRecord(data && data.bazi_analysis_result) ? data.bazi_analysis_result : {};
+    const narrative = isRecord(contract.customer_narrative) ? contract.customer_narrative : {};
+    const luckCycles = isRecord(narrative.luck_cycles) ? narrative.luck_cycles : {};
+    const axis = isRecord(luckCycles.balance_axis) ? luckCycles.balance_axis : {};
+    return {
+      usefulElements: textList(axis.useful_elements),
+      unfavorableElements: textList(axis.unfavorable_elements),
+    };
+  }
+
+  function adaptReportLuck(data) {
+    const luck = isRecord(data && data.luck) ? data.luck : {};
+    const cyclesSource = arrayOf(luck.cycles).filter(isRecord);
+    const current = isRecord(luck.current_cycle) ? luck.current_cycle : null;
+    const currentKey = cycleKey(current);
+    const currentGanZhi = text(current && current.gan_zhi);
+    const cycles = cyclesSource
+      .map((cycle) => {
+        const ganZhi = text(cycle.gan_zhi);
+        if (!ganZhi) return null;
+        const elements = [text(cycle.stem_element), text(cycle.branch_element)].filter(Boolean).join(" / ");
+        return {
+          ganZhi,
+          ageRange: rangeText(cycle.age_start, cycle.age_end, " tuổi"),
+          yearRange: rangeText(cycle.year_start, cycle.year_end, ""),
+          elements,
+          isCurrent: cycleKey(cycle) === currentKey || Boolean(currentGanZhi && ganZhi === currentGanZhi),
+        };
+      })
+      .filter(Boolean);
+    if (!cycles.length && !current) return null;
+    const axis = luckAxis(data);
+    return {
+      direction: text(luck.direction_label) || text(luck.direction),
+      startAge: text(luck.start_age),
+      currentLabel: currentGanZhi,
+      usefulElements: axis.usefulElements,
+      unfavorableElements: axis.unfavorableElements,
+      cycles,
     };
   }
 
@@ -255,6 +357,112 @@
     node.textContent = value;
     parent.appendChild(node);
     return node;
+  }
+
+  function renderFiveElementsVisual(model) {
+    if (!model || !model.items || !model.items.length) return null;
+    const visual = document.createElement("aside");
+    visual.className = "bte-report-doc__visual bte-report-doc__visual--elements";
+    visual.setAttribute("aria-label", "Biểu đồ Ngũ hành");
+    const head = document.createElement("header");
+    head.className = "bte-report-doc__visual-head";
+    const titleBox = document.createElement("div");
+    appendText(titleBox, "p", "bte-report-doc__visual-kicker", "Biểu đồ Ngũ hành");
+    appendText(titleBox, "h4", "bte-report-doc__visual-title", "Phân bố khí trong lá số");
+    head.appendChild(titleBox);
+    visual.appendChild(head);
+
+    const chart = document.createElement("div");
+    chart.className = "bte-report-doc__element-chart";
+    model.items.forEach((item) => {
+      const column = document.createElement("div");
+      column.className = "bte-report-doc__element";
+      column.setAttribute("data-element", item.key);
+      appendText(column, "span", "bte-report-doc__element-label", item.label);
+      const track = document.createElement("span");
+      track.className = "bte-report-doc__element-track";
+      track.setAttribute("aria-hidden", "true");
+      const bar = document.createElement("span");
+      bar.className = "bte-report-doc__element-bar";
+      bar.style.height = `${Math.max(8, Math.round((item.count / model.maxCount) * 100))}%`;
+      track.appendChild(bar);
+      column.appendChild(track);
+      appendText(column, "span", "bte-report-doc__element-count", String(item.count));
+      chart.appendChild(column);
+    });
+    visual.appendChild(chart);
+
+    const row = document.createElement("div");
+    row.className = "bte-report-doc__insight-row";
+    if (model.dominantLabel) appendText(row, "span", "bte-report-doc__insight-chip", `Nổi bật: ${model.dominantLabel}`);
+    if (model.weakLabel) appendText(row, "span", "bte-report-doc__insight-chip", `Cần bồi: ${model.weakLabel}`);
+    if (row.childNodes.length) visual.appendChild(row);
+    if (model.methodNote) appendText(visual, "p", "bte-report-doc__visual-note", model.methodNote);
+    return visual;
+  }
+
+  function cycleElementHits(cycle, elements) {
+    return arrayOf(elements).filter((element) => cycle.elements && cycle.elements.includes(element)).join(", ");
+  }
+
+  function renderLuckVisual(model) {
+    if (!model || !model.cycles || !model.cycles.length) return null;
+    const visual = document.createElement("aside");
+    visual.className = "bte-report-doc__visual bte-report-doc__visual--luck";
+    visual.setAttribute("aria-label", "Timeline Đại vận");
+    const head = document.createElement("header");
+    head.className = "bte-report-doc__visual-head";
+    const titleBox = document.createElement("div");
+    appendText(titleBox, "p", "bte-report-doc__visual-kicker", "Timeline Đại vận");
+    appendText(titleBox, "h4", "bte-report-doc__visual-title", "Nhịp vận theo từng giai đoạn");
+    head.appendChild(titleBox);
+    visual.appendChild(head);
+
+    const summary = document.createElement("div");
+    summary.className = "bte-report-doc__luck-summary";
+    if (model.direction) appendText(summary, "span", "", `Chiều vận: ${model.direction}`);
+    if (model.startAge) appendText(summary, "span", "", `Khởi vận: ${model.startAge} tuổi`);
+    if (model.currentLabel) appendText(summary, "span", "", `Hiện tại: ${model.currentLabel}`);
+    if (summary.childNodes.length) visual.appendChild(summary);
+
+    const list = document.createElement("ol");
+    list.className = "bte-report-doc__luck-list";
+    model.cycles.forEach((cycle, index) => {
+      const item = document.createElement("li");
+      item.className = "bte-report-doc__luck-cycle";
+      if (cycle.isCurrent) item.setAttribute("data-current", "true");
+      const top = document.createElement("div");
+      top.className = "bte-report-doc__luck-top";
+      appendText(top, "span", "bte-report-doc__luck-index", String(index + 1).padStart(2, "0"));
+      const info = document.createElement("div");
+      appendText(info, "strong", "", cycle.ganZhi);
+      appendText(info, "span", "", [cycle.ageRange, cycle.yearRange].filter(Boolean).join(" · "));
+      top.appendChild(info);
+      item.appendChild(top);
+      if (cycle.elements) appendText(item, "p", "bte-report-doc__luck-elements", cycle.elements);
+      const points = document.createElement("div");
+      points.className = "bte-report-doc__luck-points";
+      const usefulHits = cycleElementHits(cycle, model.usefulElements);
+      const cautionHits = cycleElementHits(cycle, model.unfavorableElements);
+      const plus = document.createElement("p");
+      appendText(plus, "span", "", "+");
+      appendText(plus, "span", "", usefulHits ? `Chạm trục nên dùng: ${usefulHits}.` : "Có thể mở việc khi mục tiêu và nhịp hành động rõ.");
+      points.appendChild(plus);
+      const minus = document.createElement("p");
+      appendText(minus, "span", "", "-");
+      appendText(minus, "span", "", cautionHits ? `Cần tiết chế: ${cautionHits}.` : "Cần đọc cùng mệnh cục gốc trước quyết định lớn.");
+      points.appendChild(minus);
+      item.appendChild(points);
+      list.appendChild(item);
+    });
+    visual.appendChild(list);
+    return visual;
+  }
+
+  function renderChapterVisual(chapter, model) {
+    if (chapter.id === "five_elements") return renderFiveElementsVisual(model.fiveElements);
+    if (chapter.id === "luck_cycles") return renderLuckVisual(model.luck);
+    return null;
   }
 
   function renderReport(model, signature) {
@@ -315,6 +523,8 @@
       chapterNode.appendChild(chapterHead);
       const lead = chapter.paragraphs[0];
       if (lead) appendText(chapterNode, "p", "bte-report-doc__lead", lead);
+      const visual = renderChapterVisual(chapter, model);
+      if (visual) chapterNode.appendChild(visual);
       chapter.paragraphs.slice(1).forEach((paragraph) => {
         appendText(chapterNode, "p", "bte-report-doc__paragraph", paragraph);
       });
@@ -712,6 +922,177 @@
         font-size: var(--font-size-body, 1rem);
         line-height: var(--line-height-body, 1.55);
       }
+      .bte-report-doc__visual {
+        margin: var(--space-4, 18px) 0;
+        padding: var(--space-4, 18px);
+        border: 1px solid var(--cdash-border, #dfe3ea);
+        border-radius: 8px;
+        background: #fff7d6;
+      }
+      .bte-report-doc__visual-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: var(--space-2, 8px);
+        margin-bottom: var(--space-3, 12px);
+      }
+      .bte-report-doc__visual-kicker {
+        margin: 0;
+        color: var(--cdash-muted, #5f6b7a);
+        font-size: var(--font-size-metadata, 0.78rem);
+        font-weight: 700;
+        letter-spacing: var(--letter-spacing-metadata, 0.12em);
+        text-transform: uppercase;
+      }
+      .bte-report-doc__visual-title {
+        margin: 0;
+        color: var(--cdash-text, #111827);
+        font-family: var(--font-family-display, inherit);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+      .bte-report-doc__element-chart {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        align-items: end;
+        gap: var(--space-3, 12px);
+        min-height: 13rem;
+        padding: var(--space-2, 8px) 0;
+      }
+      .bte-report-doc__element {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: var(--space-2, 8px);
+        min-width: 0;
+        height: 100%;
+        text-align: center;
+      }
+      .bte-report-doc__element-label,
+      .bte-report-doc__element-count {
+        color: #7f1d1d;
+        font-weight: 700;
+      }
+      .bte-report-doc__element-track {
+        display: flex;
+        align-items: end;
+        justify-content: center;
+        min-height: 8.5rem;
+      }
+      .bte-report-doc__element-bar {
+        width: min(68%, 3.75rem);
+        min-height: 0.5rem;
+        border-radius: 4px 4px 0 0;
+        background: var(--element-color, #64748b);
+      }
+      .bte-report-doc__element[data-element="wood"] {
+        --element-color: #4f8f5f;
+      }
+      .bte-report-doc__element[data-element="fire"] {
+        --element-color: #cf573f;
+      }
+      .bte-report-doc__element[data-element="earth"] {
+        --element-color: #bd9b4f;
+      }
+      .bte-report-doc__element[data-element="metal"] {
+        --element-color: #92a0aa;
+      }
+      .bte-report-doc__element[data-element="water"] {
+        --element-color: #437b9e;
+      }
+      .bte-report-doc__insight-row,
+      .bte-report-doc__luck-summary {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2, 8px);
+        margin-top: var(--space-3, 12px);
+      }
+      .bte-report-doc__insight-chip,
+      .bte-report-doc__luck-summary span {
+        display: inline-flex;
+        align-items: center;
+        min-height: 1.75rem;
+        padding: 4px 10px;
+        border: 1px solid var(--cdash-border, #dfe3ea);
+        border-radius: 999px;
+        background: #ffffff;
+        color: var(--cdash-text, #111827);
+        font-size: var(--font-size-caption, 0.875rem);
+        font-weight: 700;
+      }
+      .bte-report-doc__visual-note {
+        margin: var(--space-3, 12px) 0 0;
+        color: var(--cdash-muted, #5f6b7a);
+        font-size: var(--font-size-caption, 0.875rem);
+        line-height: 1.5;
+      }
+      .bte-report-doc__luck-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-3, 12px);
+        margin: var(--space-4, 18px) 0 0;
+        padding: 0;
+        list-style: none;
+      }
+      .bte-report-doc__luck-cycle {
+        display: grid;
+        gap: var(--space-2, 8px);
+        padding: var(--space-3, 12px);
+        border: 1px solid var(--cdash-border, #dfe3ea);
+        border-radius: 8px;
+        background: #ffffff;
+      }
+      .bte-report-doc__luck-cycle[data-current="true"] {
+        border-color: #0f9f75;
+        background: #eaf8f2;
+      }
+      .bte-report-doc__luck-top {
+        display: grid;
+        grid-template-columns: 2rem minmax(0, 1fr);
+        gap: var(--space-2, 8px);
+        align-items: start;
+      }
+      .bte-report-doc__luck-index {
+        color: #0f9f75;
+        font-family: var(--font-family-display, inherit);
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+      }
+      .bte-report-doc__luck-top strong,
+      .bte-report-doc__luck-top span {
+        display: block;
+      }
+      .bte-report-doc__luck-top strong {
+        color: var(--cdash-text, #111827);
+        font-size: 1rem;
+      }
+      .bte-report-doc__luck-top span,
+      .bte-report-doc__luck-elements {
+        color: var(--cdash-muted, #5f6b7a);
+        font-size: var(--font-size-caption, 0.875rem);
+      }
+      .bte-report-doc__luck-elements {
+        margin: 0;
+        font-weight: 700;
+      }
+      .bte-report-doc__luck-points {
+        display: grid;
+        gap: 6px;
+      }
+      .bte-report-doc__luck-points p {
+        display: grid;
+        grid-template-columns: 1.25rem minmax(0, 1fr);
+        gap: 6px;
+        margin: 0;
+        color: var(--cdash-text, #111827);
+        font-size: var(--font-size-caption, 0.875rem);
+        line-height: 1.45;
+      }
+      .bte-report-doc__luck-points span:first-child {
+        color: #0f9f75;
+        font-weight: 800;
+        text-align: center;
+      }
       @media (max-width: 767px) {
         .bte-report-doc {
           margin-top: var(--space-4, 18px);
@@ -737,6 +1118,28 @@
         .bte-report-doc__paragraph,
         .bte-report-doc__lead {
           font-size: 0.9375rem;
+        }
+        .bte-report-doc__element-chart,
+        .bte-report-doc__luck-list {
+          grid-template-columns: 1fr;
+        }
+        .bte-report-doc__element-chart {
+          min-height: 0;
+        }
+        .bte-report-doc__element {
+          grid-template-columns: 3rem minmax(0, 1fr) 2rem;
+          grid-template-rows: auto;
+          align-items: center;
+          text-align: left;
+        }
+        .bte-report-doc__element-track {
+          align-items: center;
+          justify-content: start;
+          min-height: 0.75rem;
+        }
+        .bte-report-doc__element-bar {
+          width: 100%;
+          height: 0.75rem !important;
         }
       }
     `;

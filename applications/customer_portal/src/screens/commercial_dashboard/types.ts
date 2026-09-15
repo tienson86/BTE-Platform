@@ -635,8 +635,41 @@ export type BaziReportDocumentChapterView = {
   readonly bullets: readonly string[];
 };
 
+export type BaziReportElementChartItemView = {
+  readonly key: FiveElementKey;
+  readonly label: string;
+  readonly count: number;
+};
+
+export type BaziReportFiveElementsView = {
+  readonly items: readonly BaziReportElementChartItemView[];
+  readonly maxCount: number;
+  readonly dominantLabel: string;
+  readonly weakLabel: string;
+  readonly methodNote: string;
+};
+
+export type BaziReportLuckCycleView = {
+  readonly ganZhi: string;
+  readonly ageRange: string;
+  readonly yearRange: string;
+  readonly elements: string;
+  readonly isCurrent: boolean;
+};
+
+export type BaziReportLuckView = {
+  readonly direction: string;
+  readonly startAge: string;
+  readonly currentLabel: string;
+  readonly usefulElements: readonly string[];
+  readonly unfavorableElements: readonly string[];
+  readonly cycles: readonly BaziReportLuckCycleView[];
+};
+
 export type BaziReportDocumentView = {
   readonly title: string;
   readonly subtitle: string;
   readonly chapters: readonly BaziReportDocumentChapterView[];
+  readonly fiveElements: BaziReportFiveElementsView | null;
+  readonly luck: BaziReportLuckView | null;
 };
