@@ -9,7 +9,7 @@ from __future__ import annotations
 import json
 from copy import deepcopy
 from datetime import datetime, timezone
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
 CONTRACT_VERSION = "bazi_analysis_result.v1"
 
@@ -87,6 +87,143 @@ PILLAR_LIFE_HINTS = {
     "month": "Cha mẹ, nghề nghiệp, nhịp vận hành chính của mệnh.",
     "day": "Bản thân, phối ngẫu, cách đi vào quan hệ gần.",
     "hour": "Con cái, hậu vận, dự án dài hạn.",
+}
+
+ELEMENT_LABELS = {
+    "wood": "Mộc",
+    "fire": "Hỏa",
+    "earth": "Thổ",
+    "metal": "Kim",
+    "water": "Thủy",
+}
+
+HEAVENLY_STEM_ELEMENTS = {
+    "Giáp": "Mộc",
+    "Ất": "Mộc",
+    "Bính": "Hỏa",
+    "Đinh": "Hỏa",
+    "Mậu": "Thổ",
+    "Kỷ": "Thổ",
+    "Canh": "Kim",
+    "Tân": "Kim",
+    "Nhâm": "Thủy",
+    "Quý": "Thủy",
+}
+
+STRENGTH_LABELS = {
+    "weak": "Thân nhược",
+    "balanced": "Thân trung hòa",
+    "strong": "Thân vượng",
+    "too_weak": "Thân quá nhược",
+    "too_strong": "Thân quá vượng",
+}
+
+STRENGTH_PUBLIC_GUIDANCE = {
+    "Thân vượng": "Nhật chủ có lực tự thân khá rõ, vì vậy khi luận nên ưu tiên cách tiết chế, điều hòa và đưa năng lượng vào việc có khuôn khổ.",
+    "Thân quá vượng": "Nhật chủ quá nhiều lực cùng phe, dễ mạnh ở ý chí nhưng cũng dễ cứng; trọng tâm luận giải là mở dòng tiết, dùng kỷ luật và môi trường phù hợp để giảm cực đoan.",
+    "Thân trung hòa": "Nhật chủ có nền lực vừa phải, không nên đọc theo hướng thiếu hay thừa tuyệt đối; trọng tâm là giữ nhịp cân bằng và chọn đúng điểm kích hoạt.",
+    "Thân nhược": "Nhật chủ cần thêm điểm tựa và nguồn sinh trợ; khi luận nên ưu tiên nền tảng, người hỗ trợ, môi trường ổn định và cách đi từng bước.",
+    "Thân quá nhược": "Nhật chủ thiếu lực nâng đỡ rõ, nên tránh gánh việc quá sức; trọng tâm là bồi nền, giảm áp lực và chọn đường đi có người, có hệ thống hỗ trợ.",
+}
+
+TEN_GOD_PUBLIC_MEANINGS = {
+    "Nhật Chủ": "lõi bản thân, khí chất gốc và cách người này tự đứng trong đời sống",
+    "Nhật chủ": "lõi bản thân, khí chất gốc và cách người này tự đứng trong đời sống",
+    "Tỷ Kiên": "tính tự chủ, sức cạnh tranh ngang vai và nhu cầu giữ lập trường riêng",
+    "Kiếp Tài": "sự chia sẻ hoặc tranh đoạt nguồn lực, bạn đồng hành, đối thủ và áp lực phân vai",
+    "Thực Thần": "khả năng tạo sản phẩm, nuôi dưỡng thành quả, hưởng thụ lành mạnh và độ bền sáng tạo",
+    "Thương Quan": "khả năng biểu đạt, phá khuôn, phản biện và nhu cầu được làm theo cách riêng",
+    "Chính Tài": "nguồn tiền ổn định, năng lực quản lý tài sản, trách nhiệm vật chất và kết quả cụ thể",
+    "Thiên Tài": "cơ hội linh hoạt, tài lộc ngoài khuôn cố định, quan hệ xã hội và khả năng xoay chuyển nguồn lực",
+    "Chính Quan": "kỷ luật, danh phận, trách nhiệm, luật lệ và con đường phát triển qua chuẩn mực rõ ràng",
+    "Thất Sát": "áp lực cạnh tranh, thử thách mạnh, quyền lực, rủi ro và khả năng bứt phá khi có kiểm soát",
+    "Chính Ấn": "nền học hỏi, bảo hộ, uy tín, bằng cấp, người nâng đỡ và khả năng đi đường dài bằng nền tảng",
+    "Thiên Ấn": "trực giác, tư duy khác biệt, khả năng nghiên cứu sâu và cách tiếp cận không theo lối thông thường",
+}
+
+DOMAIN_LOGIC_LEADS = {
+    "health": "Dữ liệu dùng để luận sức khỏe là Ngũ hành, khí hậu lá số, thế Thân và các xung khắc nổi bật nếu có.",
+    "wealth": "Dữ liệu dùng để luận tài vận là Mệnh cục, Dụng thần, các sao Tài/Thực Thương và nhịp Đại vận.",
+    "career": "Dữ liệu dùng để luận nghề nghiệp là trụ tháng, Mệnh cục, Quan/Sát/Ấn/Thực Thương và thế mạnh yếu của Nhật chủ.",
+    "marriage": "Dữ liệu dùng để luận hôn nhân là trụ ngày, quan hệ với Nhật chủ, Dụng thần/Kỵ thần và các tín hiệu đào hoa/phu thê.",
+    "children": "Dữ liệu dùng để luận con cái là trụ giờ, Thập thần ở trụ giờ, hậu vận và các vận kích hoạt phần này.",
+    "parents": "Dữ liệu dùng để luận bố mẹ là trụ tháng, khí chủ đạo của tháng sinh và các Thập thần liên quan đến nền nâng đỡ.",
+    "siblings": "Dữ liệu dùng để luận anh em là các sao đồng hành, cạnh tranh và cách chia sẻ nguồn lực trong lá số.",
+    "ancestry": "Dữ liệu dùng để luận tổ tiên là trụ năm, phúc khí ban đầu và tín hiệu hỗ trợ hoặc áp lực từ nền gia tộc.",
+    "property": "Dữ liệu dùng để luận điền trạch là Cung Phi, nhóm trạch, Ngũ hành và Dụng thần để nối sang phong thủy ứng dụng.",
+}
+
+ELEMENT_HEALTH_AREAS = {
+    "Mộc": "gan mật, gân cơ, mắt và khả năng điều tiết căng thẳng",
+    "Hỏa": "tim mạch, huyết áp, thần kinh, giấc ngủ và độ hưng phấn tinh thần",
+    "Thổ": "tỳ vị, tiêu hóa, chuyển hóa, cơ bắp và khả năng hấp thu",
+    "Kim": "hô hấp, da, đại tràng và sức đề kháng bề mặt",
+    "Thủy": "thận, tiết niệu, xương khớp, tai và sức bền nền",
+}
+
+ELEMENT_HEALTH_EXCESS = {
+    "Mộc": "Mộc nổi bật thường làm khí vươn lên mạnh; khi mất cân bằng dễ biểu hiện thành căng gân cơ, nóng trong do uất, hoặc khó thả lỏng đầu óc.",
+    "Hỏa": "Hỏa nổi bật làm tinh thần nhanh, phản ứng mạnh; khi quá đà cần giữ nhịp ngủ, huyết áp, tim mạch và trạng thái hồi hộp/nóng vội.",
+    "Thổ": "Thổ nổi bật cho thấy tỳ vị và hệ tiêu hóa là điểm cần giữ; khi Thổ bí hoặc nặng dễ sinh cảm giác trì trệ, đầy nặng, tích lũy và khó chuyển hóa.",
+    "Kim": "Kim nổi bật liên quan hô hấp, da và đại tràng; khi Kim căng dễ biểu hiện thành khô, cứng, nhạy với không khí lạnh/khô hoặc khó thả lỏng cơ thể.",
+    "Thủy": "Thủy nổi bật làm khí lạnh, sâu và hướng vào bên trong; khi quá mạnh cần chú ý lạnh ẩm, thận khí, xương khớp và sức bền tinh thần.",
+}
+
+ELEMENT_HEALTH_WEAK = {
+    "Mộc": "Mộc yếu thì khả năng sơ tiết và độ mềm của gân cơ cần được bồi dưỡng; nên tránh để stress dồn nén quá lâu.",
+    "Hỏa": "Hỏa yếu thì dương khí, sự ấm áp và nhịp hưng phấn tinh thần cần được nâng đỡ; nên giữ vận động đều và tránh lạnh kéo dài.",
+    "Thổ": "Thổ yếu thì tiêu hóa, hấp thu và nhịp ăn ngủ cần được ổn định trước; tránh ăn uống thất thường hoặc làm việc quá sức sau bữa ăn.",
+    "Kim": "Kim yếu thì hô hấp, da và khả năng tạo ranh giới cơ thể cần được chăm; nên chú ý môi trường sống sạch, thoáng và nhịp thở.",
+    "Thủy": "Thủy yếu thì thận khí, xương khớp, giấc ngủ sâu và sức bền nền cần được giữ; tránh thức khuya, hao sức kéo dài hoặc dùng quá nhiều kích thích.",
+}
+
+ELEMENT_GENERATES = {
+    "Mộc": "Hỏa",
+    "Hỏa": "Thổ",
+    "Thổ": "Kim",
+    "Kim": "Thủy",
+    "Thủy": "Mộc",
+}
+
+ELEMENT_CONTROLS = {
+    "Mộc": "Thổ",
+    "Thổ": "Thủy",
+    "Thủy": "Hỏa",
+    "Hỏa": "Kim",
+    "Kim": "Mộc",
+}
+
+CLIMATE_HEALTH_GUIDANCE = {
+    "Hàn": "Khí Hàn làm bài toán sức khỏe nghiêng về giữ ấm, tránh lạnh ẩm và duy trì vận động để khí huyết lưu thông.",
+    "Hàn thấp": "Khí Hàn thấp làm cơ thể dễ nặng, chậm và giữ ẩm; nên ưu tiên ấm, khô, vận động nhẹ đều và nếp ăn dễ tiêu.",
+    "Ôn": "Khí Ôn tương đối dễ điều hòa, nhưng vẫn cần giữ nhịp ngủ nghỉ đều để không đẩy Hỏa hoặc Thổ lên quá mức.",
+    "Táo": "Khí Táo cần chú ý phần khô: da, hô hấp, đại tràng và nhuận dưỡng cơ thể.",
+    "Nhiệt": "Khí Nhiệt cần tiết chế nóng vội, rượu bia, thức khuya và các yếu tố làm tim mạch/thần kinh căng quá mức.",
+}
+
+WEALTH_TEN_GOD_READINGS = {
+    "Chính Tài": "Chính Tài thiên về nguồn tiền ổn định, thu nhập có kế hoạch, khả năng giữ tài sản và trách nhiệm vật chất rõ.",
+    "Thiên Tài": "Thiên Tài thiên về cơ hội linh hoạt, kinh doanh, quan hệ thị trường và khả năng xoay chuyển nguồn lực ngoài khuôn cố định.",
+    "Thực Thần": "Thực Thần là năng lực tạo sản phẩm bền, nuôi nguồn thu bằng tay nghề, dịch vụ, chất lượng và uy tín lâu dài.",
+    "Thương Quan": "Thương Quan giúp tiền đến qua biểu đạt, truyền thông, sáng tạo, bán ý tưởng hoặc cách làm khác biệt, nhưng cần kỷ luật để tránh phá khuôn quá mức.",
+}
+
+CAREER_TEN_GOD_READINGS = {
+    "Chính Quan": "Chính Quan hợp môi trường có chuẩn mực, chức danh, quy trình, luật lệ hoặc vai trò quản trị trách nhiệm.",
+    "Thất Sát": "Thất Sát hợp môi trường cạnh tranh, áp lực, xử lý rủi ro, mục tiêu cao và những việc cần bản lĩnh quyết đoán.",
+    "Chính Ấn": "Chính Ấn hợp con đường học thuật, bằng cấp, chuyên môn, bảo trợ, hệ thống lớn và công việc cần uy tín nền tảng.",
+    "Thiên Ấn": "Thiên Ấn hợp nghiên cứu sâu, tư duy khác biệt, tư vấn, huyền học/kỹ thuật chuyên biệt hoặc công việc cần trực giác phân tích.",
+    "Thực Thần": "Thực Thần hợp tạo sản phẩm, vận hành dịch vụ, đào tạo, chăm sóc khách hàng và xây chất lượng bền.",
+    "Thương Quan": "Thương Quan hợp truyền thông, sáng tạo, phản biện, cải tiến, bán hàng bằng nội dung hoặc những việc cần tiếng nói riêng.",
+    "Chính Tài": "Chính Tài đưa nghề nghiệp về quản trị tiền, tài sản, vận hành, thương mại ổn định và kết quả đo được.",
+    "Thiên Tài": "Thiên Tài đưa nghề nghiệp về kinh doanh linh hoạt, thị trường, môi giới, đầu tư hoặc kết nối nguồn lực.",
+}
+
+MARRIAGE_TEN_GOD_READINGS = {
+    "Chính Tài": "với nam mệnh, Chính Tài là tín hiệu phối ngẫu thiên về ổn định, trách nhiệm và nếp sống thực tế",
+    "Thiên Tài": "với nam mệnh, Thiên Tài làm duyên tình linh hoạt hơn, dễ đến qua giao tiếp, xã hội hoặc môi trường nhiều cơ hội",
+    "Chính Quan": "với nữ mệnh, Chính Quan là tín hiệu phối ngẫu thiên về chính danh, trách nhiệm, chuẩn mực và cam kết rõ ràng",
+    "Thất Sát": "với nữ mệnh, Thất Sát làm tình cảm có sức hút mạnh nhưng cũng dễ đi cùng áp lực, yêu cầu ranh giới và sự chín chắn",
 }
 
 LIFE_DOMAIN_TITLES = {
@@ -295,8 +432,8 @@ def build_presentation_data(payload: Mapping[str, Any]) -> dict[str, Any]:
         "pillar_table": _build_pillar_table(bazi),
         "five_element_chart": {
             "counts": deepcopy(five_elements.get("counts")),
-            "dominant": deepcopy(five_elements.get("dominant")),
-            "missing": deepcopy(five_elements.get("missing")),
+            "dominant": _element_label_list(five_elements.get("dominant")),
+            "missing": _element_label_list(five_elements.get("missing")),
             "unit_total": five_elements.get("unit_total"),
             "method_note": _text(five_elements.get("method_note")),
         },
@@ -461,8 +598,8 @@ def build_module_exports(payload: Mapping[str, Any]) -> dict[str, Any]:
                 "cung_phi": _first_text(calendar.get("cung_phi"), calendar.get("menh_quai")),
                 "house_group": _first_text(calendar.get("nhom_trach"), calendar.get("house_group")),
                 "five_elements": {
-                    "dominant": deepcopy(five_elements.get("dominant")),
-                    "missing": deepcopy(five_elements.get("missing")),
+                    "dominant": _element_label_list(five_elements.get("dominant")),
+                    "missing": _element_label_list(five_elements.get("missing")),
                 },
                 "useful_god": _useful_god_identity(useful_god),
             },
@@ -767,11 +904,7 @@ def build_report_chapters(payload: Mapping[str, Any], narrative: Mapping[str, An
         _chapter(
             "strength_structure_useful_god",
             "Thân vượng, Mệnh cục và Dụng thần",
-            [
-                _section_summary(technical, "strength"),
-                _section_summary(technical, "structure"),
-                _section_summary(technical, "useful_god"),
-            ],
+            _strength_structure_useful_god_paragraphs(payload, technical),
             ["strength", "pattern", "useful_god"],
         ),
         _chapter("ten_gods", "Thập thần", [_section_summary(technical, "ten_gods")], ["ten_gods.four_layer"]),
@@ -804,13 +937,13 @@ def build_technical_explanation_sections(
         ),
         "strength": _technical_section(
             "Thân vượng/nhược",
-            _first_text(strength.get("customer_summary"), strength.get("evidence_compact"), strength.get("strength_level")),
+            _strength_summary(strength, pattern),
             ["strength"],
             existing.get("strength"),
         ),
         "structure": _technical_section(
             "Mệnh cục",
-            _first_text(pattern.get("customer_summary"), pattern.get("cach_cuc"), pattern.get("pattern")),
+            _structure_summary(pattern),
             ["pattern"],
             existing.get("structure"),
         ),
@@ -934,6 +1067,22 @@ def _render_report_markdown(
     return "\n".join(lines).strip()
 
 
+def _strength_structure_useful_god_paragraphs(payload: Mapping[str, Any], technical: Mapping[str, Any]) -> list[str]:
+    pattern = _mapping(payload.get("pattern"))
+    useful = _mapping(payload.get("useful_god"))
+    strength_line = _section_summary(technical, "strength")
+    structure_line = _section_summary(technical, "structure")
+    useful_line = _section_summary(technical, "useful_god")
+    paragraphs = _non_empty([strength_line, structure_line, useful_line])
+    useful_display = _first_text(useful.get("useful_display"), useful.get("useful_stem"), useful.get("useful_element"))
+    structure = _first_text(pattern.get("cach_cuc"), pattern.get("pattern"))
+    if structure and useful_display:
+        paragraphs.append(
+            f"Có thể hiểu ngắn gọn: Mệnh cục {structure} cho biết cách lá số tổ chức nguồn lực, còn {useful_display} là trục nên dùng để điều tiết và mở đường. Khi tư vấn thực tế, mọi lựa chọn lớn nên được soi lại theo câu hỏi: việc này có làm mạnh thêm Dụng thần hay đang kích hoạt Kỵ thần?"
+        )
+    return _unique_texts(paragraphs)
+
+
 def _overview_paragraphs(payload: Mapping[str, Any], narrative: Mapping[str, Any]) -> list[str]:
     overview = _mapping(narrative.get("overview"))
     headline = _first_text(overview.get("headline"), overview.get("summary"), overview.get("title"))
@@ -941,16 +1090,25 @@ def _overview_paragraphs(payload: Mapping[str, Any], narrative: Mapping[str, Any
     strength = _mapping(payload.get("strength"))
     pattern = _mapping(payload.get("pattern"))
     useful = _mapping(payload.get("useful_god"))
-    tags = _non_empty(
-        [
-            _day_master_summary(bazi).rstrip("."),
-            _first_text(strength.get("strength_level"), pattern.get("than_vuong_nhuoc")),
-            _first_text(pattern.get("cach_cuc"), pattern.get("pattern")),
-            _first_text(useful.get("useful_display"), useful.get("useful_stem"), useful.get("useful_element")),
-        ]
+    day_master = _day_master_summary(bazi).rstrip(".")
+    strength_label = _strength_label(_first_text(strength.get("strength_level"), pattern.get("than_vuong_nhuoc")))
+    structure = _first_text(pattern.get("cach_cuc"), pattern.get("pattern"))
+    useful_display = _first_text(useful.get("useful_display"), useful.get("useful_stem"), useful.get("useful_element"))
+    summary = _fallback_join(
+        "Tổng thể lá số được đọc theo trục Nhật chủ - Thân - Mệnh cục - Dụng thần.",
+        f"Nền chính là {day_master}." if day_master else "",
+        f"Thế thân: {strength_label}." if strength_label else "",
+        f"Mệnh cục: {structure}." if structure else "",
+        f"Trục điều tiết: {useful_display}." if useful_display else "",
     )
-    summary = "Tổng thể lá số được đọc trên nền " + "; ".join(tags) + "." if tags else ""
-    return _non_empty([headline, summary])
+    method_note = (
+        "Phần luận giải bên dưới không tách rời dữ liệu kỹ thuật: Tứ trụ cho biết gốc mệnh, Ngũ hành cho biết độ lệch khí, "
+        "Thập thần cho biết vai trò đời sống, Thần sát bổ sung tín hiệu, còn Đại vận cho biết thời điểm nào các điểm đó được kích hoạt mạnh hơn."
+    )
+    module_note = (
+        "Đây là bản nền để về sau đọc sâu hôn nhân, nghề nghiệp, hợp tác, phong thủy và sinh con; vì vậy mỗi kết luận đều cần giữ được cả dữ liệu gốc lẫn lời luận dễ hiểu cho khách hàng."
+    )
+    return _non_empty([headline, summary, method_note, module_note])
 
 
 def _four_pillars_paragraphs(payload: Mapping[str, Any]) -> list[str]:
@@ -961,18 +1119,25 @@ def _four_pillars_paragraphs(payload: Mapping[str, Any]) -> list[str]:
         can_chi = _pillar_can_chi(pillar)
         if not can_chi:
             continue
-        parts = [f"Trụ {label}: {can_chi}"]
         ten_god = _text(pillar.get("ten_god"))
         nap_am = _text(pillar.get("nap_am"))
         truong_sinh = _text(pillar.get("truong_sinh"))
-        if ten_god:
-            parts.append(f"thập thần {ten_god}")
-        if nap_am:
-            parts.append(f"nạp âm {nap_am}")
-        if truong_sinh:
-            parts.append(f"vòng trường sinh {truong_sinh}")
-        parts.append(PILLAR_LIFE_HINTS[key].rstrip("."))
-        paragraphs.append("; ".join(parts) + ".")
+        data_parts = _non_empty(
+            [
+                f"Can chi {can_chi}",
+                f"thập thần {ten_god}" if ten_god else "",
+                f"nạp âm {nap_am}" if nap_am else "",
+                f"vòng trường sinh {truong_sinh}" if truong_sinh else "",
+            ]
+        )
+        meaning = _ten_god_meaning(ten_god)
+        life_hint = PILLAR_LIFE_HINTS[key].rstrip(".")
+        paragraphs.append(
+            f"Trụ {label}: "
+            + "; ".join(data_parts)
+            + f". Tầng này chủ về {life_hint.lower()}."
+            + (f" Vì hiện {ten_god}, trọng tâm luận là {meaning}." if ten_god and meaning else "")
+        )
     return paragraphs
 
 
@@ -1044,20 +1209,31 @@ def _luck_cycle_paragraphs(luck_cycles: Mapping[str, Any]) -> list[str]:
     start_age = luck_cycles.get("start_age")
     if direction or start_age is not None:
         paragraphs.append(
-            "Đại vận được đọc theo "
+            "Đại vận là phần xem nhịp thời gian của lá số: mệnh cục gốc cho biết người này có khí chất gì, còn Đại vận cho biết giai đoạn nào khí chất đó thuận, bị ép, hay cần đổi cách đi. "
+            + "Lá số này đi theo "
             + _first_text(direction, "chiều vận đã tính")
             + (f", khởi vận khoảng {start_age} tuổi." if start_age is not None else ".")
         )
     current = _mapping(luck_cycles.get("current_cycle"))
     current_summary = _text(current.get("summary"))
     if current_summary:
-        paragraphs.append("Vận hiện tại: " + current_summary + ".")
+        current_age = _age_range(current)
+        current_years = _year_range(current)
+        context = _fallback_join(current_age, current_years)
+        paragraphs.append(
+            "Vận hiện tại "
+            + (f"({context}) " if context else "")
+            + current_summary
+            + ". Khi đọc vận này cần so lại với Dụng thần và Kỵ thần: vận hợp trục điều tiết thì dễ mở việc, vận kích hoạt điểm kỵ thì cần đi chậm và giữ kỷ luật hơn."
+        )
     cycles = [item for item in _list(luck_cycles.get("cycles")) if isinstance(item, Mapping)]
     for item in cycles[:6]:
         age = _age_range(item)
+        years = _year_range(item)
         summary = _text(item.get("summary"))
         if summary:
-            paragraphs.append((age + ": " if age else "") + summary + ".")
+            prefix = " · ".join(part for part in (age, years) if part)
+            paragraphs.append((prefix + ": " if prefix else "") + summary + ".")
     return paragraphs
 
 
@@ -1073,9 +1249,27 @@ def _recommendation_paragraphs(recommendations: list[Any], payload: Mapping[str,
     if paragraphs:
         return paragraphs
     useful = _mapping(payload.get("useful_god"))
+    pattern = _mapping(payload.get("pattern"))
+    strength = _mapping(payload.get("strength"))
     useful_line = _useful_god_summary(useful)
+    strength_label = _strength_label(_first_text(strength.get("strength_level"), pattern.get("than_vuong_nhuoc")))
     if useful_line:
-        paragraphs.append("Ưu tiên hành động nên xoay quanh trục Dụng thần/Hỷ thần: " + useful_line)
+        paragraphs.append(
+            "Hướng hành động đầu tiên là bám vào Dụng thần, vì đó là trục giúp lá số bớt lệch và dễ vận hành đúng nhịp hơn. "
+            + useful_line
+        )
+    structure = _first_text(pattern.get("cach_cuc"), pattern.get("pattern"))
+    if structure:
+        paragraphs.append(
+            f"Với nền {structure}, nên chọn môi trường có quy tắc rõ, đầu ra đo được và có khả năng tích lũy lâu dài. Khi có cơ hội lớn, vẫn cần so lại với thế {strength_label or 'thân'} để biết nên tiến nhanh hay đi từng bước."
+        )
+    luck = _mapping(payload.get("luck"))
+    current = _mapping(luck.get("current_cycle"))
+    current_ganzhi = _first_text(current.get("gan_zhi"), current.get("ganzhi"))
+    if current_ganzhi:
+        paragraphs.append(
+            f"Đại vận hiện tại {current_ganzhi} là bối cảnh triển khai, không nên tách rời khỏi mệnh cục gốc. Việc quan trọng nên chọn lúc vận hỗ trợ trục Dụng thần, còn khi vận kích hoạt Kỵ thần thì ưu tiên phòng thủ, giữ tiền, giữ sức và giữ quan hệ."
+        )
     return paragraphs
 
 
@@ -1162,77 +1356,66 @@ def _life_domain_detail_paragraphs(
     calendar = _mapping(payload.get("calendar"))
     ten_layers = build_ten_gods_four_layer_view(payload)
     shen_groups = build_shen_sha_grouped_view(payload)
-    paragraphs = _non_empty([summary])
+    paragraphs: list[str] = []
+    strength_label = _strength_label(_first_text(strength.get("strength_level"), pattern.get("than_vuong_nhuoc")))
+    structure = _first_text(pattern.get("cach_cuc"), pattern.get("pattern"))
+    useful_line = _useful_god_summary(useful)
+    logic_lead = DOMAIN_LOGIC_LEADS.get(key, "")
+    if logic_lead:
+        paragraphs.append(logic_lead)
+    if summary and not _is_low_value_domain_summary(summary):
+        paragraphs.append(summary)
 
     if key == "health":
-        paragraphs.append(
-            _fallback_join(
-                "Khi đọc sức khỏe, trọng tâm là sự điều hòa khí chất hơn là dự đoán bệnh tật.",
-                _five_elements_summary(five_elements),
-                _first_text(_mapping(payload.get("temperature")).get("climate_state_label"), _mapping(payload.get("temperature")).get("temperature_level")),
-            )
-        )
+        paragraphs.extend(_health_domain_paragraphs(payload, five_elements, strength_label))
     elif key == "wealth":
-        paragraphs.append(
-            _fallback_join(
-                "Tài vận của lá số nên được xét cùng Dụng thần và khả năng giữ nhịp ổn định qua từng đại vận.",
-                _useful_god_summary(useful),
-            )
-        )
+        paragraphs.extend(_wealth_domain_paragraphs(payload, ten_layers, structure, strength_label, useful_line))
     elif key == "career":
-        paragraphs.append(
-            _fallback_join(
-                "Nghề nghiệp được đọc từ Mệnh cục, mức thân vượng/nhược và cách Nhật chủ sử dụng nguồn lực.",
-                _first_text(pattern.get("cach_cuc"), pattern.get("pattern")),
-                _first_text(strength.get("strength_level"), pattern.get("than_vuong_nhuoc")),
-            )
-        )
+        paragraphs.extend(_career_domain_paragraphs(payload, ten_layers, structure, strength_label, useful_line))
     elif key == "marriage":
-        paragraphs.append(
-            _fallback_join(
-                "Hôn nhân lấy trụ ngày và các tín hiệu nhân duyên làm điểm đọc chính.",
-                _pillar_brief("Trụ ngày", _mapping(bazi.get("day_pillar"))),
-                _group_brief(_mapping(_mapping(shen_groups.get("groups")).get("relationship"))),
-            )
-        )
+        paragraphs.extend(_marriage_domain_paragraphs(payload, ten_layers, shen_groups, strength_label, useful_line))
     elif key == "children":
+        hour_layer = _pillar_layer(ten_layers, "hour")
         paragraphs.append(
             _fallback_join(
-                "Con cái và hậu vận đi nhiều qua trụ giờ, đồng thời cần xem vận nào kích hoạt mạnh phần này.",
                 _pillar_brief("Trụ giờ", _mapping(bazi.get("hour_pillar"))),
-                _layer_brief(_pillar_layer(ten_layers, "hour")),
+                _layer_brief(hour_layer),
+                "Vì trụ giờ quản con cái, hậu vận và dự án dài hạn, mục này cần đọc cùng Đại vận để biết khi nào phần con cái/hậu vận được kích hoạt mạnh.",
             )
         )
     elif key == "parents":
+        month_layer = _pillar_layer(ten_layers, "month")
         paragraphs.append(
             _fallback_join(
-                "Bố mẹ và nền nâng đỡ ban đầu thường đọc ở trụ tháng.",
                 _pillar_brief("Trụ tháng", _mapping(bazi.get("month_pillar"))),
-                _layer_brief(_pillar_layer(ten_layers, "month")),
+                _layer_brief(month_layer),
+                "Do trụ tháng đại diện môi trường trưởng thành và nền nâng đỡ, quan hệ với bố mẹ nên được đọc như một phần của gốc hình thành nghề nghiệp, kỷ luật và cách nhận hỗ trợ.",
             )
         )
     elif key == "siblings":
+        peer_signals = _ten_god_signal_labels(ten_layers, ("Tỷ Kiên", "Kiếp Tài"))
         paragraphs.append(
             _fallback_join(
-                "Anh em và người đồng hành gần được đọc qua các tín hiệu cùng vai/vai trò trong trụ tháng.",
-                _layer_brief(_pillar_layer(ten_layers, "month")),
+                f"Tín hiệu đồng hành/cạnh tranh: {', '.join(peer_signals)}." if peer_signals else "Chưa thấy tín hiệu đồng hành nổi bật trong dữ liệu hiện có.",
+                "Nếu Tỷ Kiên/Kiếp Tài mạnh, quan hệ anh em và cộng sự thường cần rõ ràng về ranh giới, vai trò và cách chia nguồn lực.",
             )
         )
     elif key == "ancestry":
+        year_layer = _pillar_layer(ten_layers, "year")
         paragraphs.append(
             _fallback_join(
-                "Tổ tiên và gốc phúc là tầng nền của lá số, thường nhìn từ trụ năm.",
                 _pillar_brief("Trụ năm", _mapping(bazi.get("year_pillar"))),
-                _layer_brief(_pillar_layer(ten_layers, "year")),
+                _layer_brief(year_layer),
+                "Vì trụ năm là tầng xa nhất, phần tổ tiên/gốc phúc nên đọc như khí nền và môi trường sớm, không nên biến thành phán đoán tuyệt đối về gia tộc.",
             )
         )
     elif key == "property":
         paragraphs.append(
             _fallback_join(
-                "Điền trạch cần đọc cùng Cung Phi, nhóm trạch và hành bổ trợ.",
-                _first_text(calendar.get("cung_phi"), calendar.get("menh_quai")),
-                _first_text(calendar.get("nhom_trach"), calendar.get("house_group")),
-                _useful_god_summary(useful),
+                f"Cung Phi/Mệnh quái: {_first_text(calendar.get('cung_phi'), calendar.get('menh_quai'))}." if _first_text(calendar.get("cung_phi"), calendar.get("menh_quai")) else "",
+                f"Nhóm trạch: {_first_text(calendar.get('nhom_trach'), calendar.get('house_group'))}." if _first_text(calendar.get("nhom_trach"), calendar.get("house_group")) else "",
+                useful_line,
+                "Vì vậy điền trạch không chỉ là hướng nhà, mà là cách chọn không gian giúp trục Dụng thần được nâng lên và điểm kỵ được tiết chế trong sinh hoạt hằng ngày.",
             )
         )
 
@@ -1240,6 +1423,365 @@ def _life_domain_detail_paragraphs(
     if advice:
         paragraphs.append(advice)
     return _unique_texts(paragraphs)
+
+
+def _health_domain_paragraphs(
+    payload: Mapping[str, Any],
+    five_elements: Mapping[str, Any],
+    strength_label: str,
+) -> list[str]:
+    temperature = _mapping(payload.get("temperature"))
+    climate = _first_text(temperature.get("climate_state_label"), temperature.get("temperature_level"))
+    counts = _mapping(five_elements.get("counts"))
+    dominant = _element_label_list(five_elements.get("dominant")) or _element_extremes(counts, strongest=True)
+    weak = _element_label_list(five_elements.get("missing")) or _element_extremes(counts, strongest=False)
+    distribution = _element_distribution(counts)
+    paragraphs: list[str] = []
+    if distribution:
+        paragraphs.append(
+            "Bảng Ngũ hành cho thấy "
+            + distribution
+            + ". Khi luận sức khỏe, đây là bản đồ khí chất: hành nào nổi bật thì vùng cơ thể/tập tính của hành đó dễ thành điểm cần giữ; hành nào yếu thì cần được bồi nền đều đặn."
+        )
+    if dominant:
+        dominant_notes = [_element_health_note(element, excess=True) for element in dominant]
+        paragraphs.append(
+            "Hành nổi bật: "
+            + ", ".join(dominant)
+            + ". "
+            + " ".join(note for note in dominant_notes if note)
+        )
+    if weak:
+        weak_notes = [_element_health_note(element, excess=False) for element in weak]
+        paragraphs.append(
+            "Hành còn thiếu hoặc yếu: "
+            + ", ".join(weak)
+            + ". "
+            + " ".join(note for note in weak_notes if note)
+        )
+    paragraphs.extend(_health_relation_paragraphs(payload, counts, dominant, weak))
+    climate_note = CLIMATE_HEALTH_GUIDANCE.get(climate, "")
+    if climate_note or strength_label:
+        paragraphs.append(
+            _fallback_join(
+                climate_note,
+                f"Thế {strength_label} cho biết cách dùng sức cũng quan trọng: không chỉ xem cơ quan nào yếu, mà còn xem người này nên tiêu hao, hồi phục và giữ nhịp sinh hoạt ra sao." if strength_label else "",
+            )
+        )
+    paragraphs.append(
+        "Kết luận sức khỏe nên dùng như định hướng phòng ngừa: giữ nhịp ngủ, ăn, vận động và môi trường sống hợp khí; nếu có triệu chứng cụ thể thì vẫn cần kiểm tra y khoa, không dùng lá số thay cho chẩn đoán."
+    )
+    return _unique_texts(paragraphs)
+
+
+def _wealth_domain_paragraphs(
+    payload: Mapping[str, Any],
+    ten_layers: Mapping[str, Any],
+    structure: str,
+    strength_label: str,
+    useful_line: str,
+) -> list[str]:
+    paragraphs: list[str] = []
+    wealth_signals = _ten_god_signal_labels(ten_layers, ("Chính Tài", "Thiên Tài"))
+    output_signals = _ten_god_signal_labels(ten_layers, ("Thực Thần", "Thương Quan"))
+    paragraphs.append(
+        _fallback_join(
+            f"Mệnh cục {structure} cho biết cách lá số tổ chức nguồn lực và tạo kết quả." if structure else "",
+            f"Tín hiệu Tài tinh đang thấy: {', '.join(wealth_signals)}." if wealth_signals else "Chưa thấy Tài tinh lộ rõ trong 4 tầng đang xét; điều này không có nghĩa là không có tiền, mà cho thấy tài vận cần đọc qua năng lực tạo giá trị, nghề nghiệp và Đại vận kích hoạt.",
+            f"Tín hiệu sinh tài qua sản phẩm/kỹ năng: {', '.join(output_signals)}." if output_signals else "",
+        )
+    )
+    paragraphs.extend(_ten_god_reading_paragraphs("Luận Tài tinh", wealth_signals, WEALTH_TEN_GOD_READINGS))
+    paragraphs.extend(_ten_god_reading_paragraphs("Luận nguồn sinh tài", output_signals, WEALTH_TEN_GOD_READINGS))
+    if output_signals and wealth_signals:
+        paragraphs.append(
+            "Khi Thực/Thương đi cùng Tài tinh, mạch kiếm tiền sáng hơn: trước hết phải có năng lực tạo sản phẩm, dịch vụ hoặc giá trị cụ thể, sau đó mới chuyển hóa thành dòng tiền. Đây là kiểu tài vận cần làm thật, tích lũy uy tín và đo bằng kết quả, không nên chỉ trông vào may mắn."
+        )
+    elif output_signals and not wealth_signals:
+        paragraphs.append(
+            "Có Thực/Thương mà Tài tinh chưa lộ rõ thì trọng tâm không phải săn cơ hội tiền ngay, mà là làm mạnh sản phẩm, tay nghề, nội dung, năng lực phục vụ. Khi Đại vận hoặc lưu niên kích Tài, phần đã tích lũy này mới dễ đổi thành tiền."
+        )
+    elif wealth_signals and not output_signals:
+        paragraphs.append(
+            "Có Tài tinh nhưng thiếu tín hiệu sinh tài rõ thì người này vẫn có ý thức về tiền và trách nhiệm vật chất, nhưng cần xây hệ thống tạo giá trị đều hơn để tiền không chỉ đến theo cơ hội rời rạc."
+        )
+    if strength_label:
+        paragraphs.append(_wealth_strength_guidance(strength_label))
+    if useful_line:
+        paragraphs.append(
+            useful_line
+            + " Trong tài vận, Dụng thần là bộ lọc để biết nên mở rộng theo kiểu nào: cơ hội nào làm lá số cân bằng hơn thì nên ưu tiên, cơ hội nào kích hoạt điểm kỵ thì dù hấp dẫn cũng cần đi chậm."
+        )
+    return _unique_texts(paragraphs)
+
+
+def _career_domain_paragraphs(
+    payload: Mapping[str, Any],
+    ten_layers: Mapping[str, Any],
+    structure: str,
+    strength_label: str,
+    useful_line: str,
+) -> list[str]:
+    bazi = _mapping(payload.get("bazi"))
+    month_layer = _pillar_layer(ten_layers, "month")
+    career_signals = _ten_god_signal_labels(
+        ten_layers,
+        ("Chính Quan", "Thất Sát", "Chính Ấn", "Thiên Ấn", "Thực Thần", "Thương Quan", "Chính Tài", "Thiên Tài"),
+    )
+    paragraphs: list[str] = [
+        _fallback_join(
+            _pillar_brief("Trụ tháng", _mapping(bazi.get("month_pillar"))),
+            _layer_brief(month_layer),
+            f"Mệnh cục {structure} là khung tổ chức nghề nghiệp của lá số." if structure else "",
+            f"Nhóm tín hiệu nghề nghiệp nổi bật: {', '.join(career_signals)}." if career_signals else "",
+        )
+    ]
+    paragraphs.extend(_ten_god_reading_paragraphs("Luận nghề theo Thập thần", career_signals, CAREER_TEN_GOD_READINGS))
+    if _has_any(career_signals, ("Chính Quan", "Thất Sát")) and _has_any(career_signals, ("Chính Ấn", "Thiên Ấn")):
+        paragraphs.append(
+            "Quan/Sát đi cùng Ấn là thế nghề cần trách nhiệm nhưng cũng cần nền chuyên môn. Người có mạch này thường thuyết phục hơn khi làm trong vai trò có chuẩn mực, kiến thức, uy tín hoặc quyền hạn được trao rõ, thay vì chỉ dựa vào cảm hứng nhất thời."
+        )
+    elif _has_any(career_signals, ("Thực Thần", "Thương Quan")) and _has_any(career_signals, ("Chính Tài", "Thiên Tài")):
+        paragraphs.append(
+            "Thực/Thương đi cùng Tài khiến nghề nghiệp nên gắn với sản phẩm, dịch vụ, kinh doanh hoặc khả năng biến ý tưởng thành doanh thu. Điểm cần giữ là kỷ luật vận hành, vì sáng tạo mạnh mà thiếu khuôn thì dễ phân tán."
+        )
+    if strength_label:
+        paragraphs.append(_career_strength_guidance(strength_label))
+    if useful_line:
+        paragraphs.append(
+            useful_line
+            + " Khi chọn nghề hoặc vai trò, nên ưu tiên môi trường làm mạnh trục Dụng thần, vì đó là nơi năng lực tự nhiên được dùng mà không làm mệnh cục mất cân bằng quá mức."
+        )
+    return _unique_texts([paragraph for paragraph in paragraphs if paragraph])
+
+
+def _marriage_domain_paragraphs(
+    payload: Mapping[str, Any],
+    ten_layers: Mapping[str, Any],
+    shen_groups: Mapping[str, Any],
+    strength_label: str,
+    useful_line: str,
+) -> list[str]:
+    bazi = _mapping(payload.get("bazi"))
+    day_layer = _pillar_layer(ten_layers, "day")
+    spouse_labels = _spouse_star_labels(payload)
+    spouse_signals = _ten_god_signal_labels(ten_layers, tuple(spouse_labels))
+    relationship_group = _mapping(_mapping(shen_groups.get("groups")).get("relationship"))
+    paragraphs: list[str] = [
+        _fallback_join(
+            _pillar_brief("Trụ ngày", _mapping(bazi.get("day_pillar"))),
+            _layer_brief(day_layer),
+            "Vì trụ ngày là cung bản thân và phối ngẫu, phần hôn nhân phải đọc từ cách người này đi vào quan hệ gần, rồi mới xét thêm sao phối ngẫu, đào hoa, Dụng thần và Kỵ thần.",
+        )
+    ]
+    if spouse_labels:
+        paragraphs.append(
+            "Sao phối ngẫu cần quan sát: "
+            + ", ".join(spouse_labels)
+            + ". "
+            + (
+                "Các tín hiệu này đang hiện trong dữ liệu: " + ", ".join(spouse_signals) + "."
+                if spouse_signals
+                else "Trong dữ liệu hiện tại chưa thấy sao phối ngẫu lộ rõ, nên hôn nhân cần đọc thêm qua trụ ngày, vận hạn và các tín hiệu duyên/thần sát thay vì kết luận vội."
+            )
+        )
+        paragraphs.extend(_ten_god_reading_paragraphs("Luận sao phối ngẫu", spouse_signals, MARRIAGE_TEN_GOD_READINGS))
+    relationship_brief = _group_brief(relationship_group)
+    if relationship_brief:
+        paragraphs.append(
+            relationship_brief
+            + " Những tín hiệu này không tự quyết định tốt xấu, mà cho biết quan hệ dễ được kích hoạt qua sức hút, duyên gặp gỡ hoặc bài học về ranh giới cảm xúc."
+        )
+    if strength_label:
+        paragraphs.append(_marriage_strength_guidance(strength_label))
+    if useful_line:
+        paragraphs.append(
+            useful_line
+            + " Trong hôn nhân, Dụng thần giúp xác định kiểu quan hệ làm mình cân bằng hơn: người, thời điểm và cách sống chung nên nâng được khí tốt thay vì liên tục kích hoạt điểm kỵ."
+        )
+    return _unique_texts([paragraph for paragraph in paragraphs if paragraph])
+
+
+def _ten_god_reading_paragraphs(prefix: str, signals: Sequence[str], readings: Mapping[str, str]) -> list[str]:
+    paragraphs: list[str] = []
+    for signal in signals:
+        reading = readings.get(signal)
+        if reading:
+            paragraphs.append(f"{prefix}: {signal}. {reading}")
+    return paragraphs
+
+
+def _wealth_strength_guidance(strength_label: str) -> str:
+    if strength_label in {"Thân vượng", "Thân quá vượng"}:
+        return (
+            f"Với thế {strength_label}, tài vận nên đi qua năng lực chủ động, sản phẩm rõ và kỷ luật giữ tiền. "
+            "Người này có thể gánh cơ hội lớn hơn khi có hệ thống kiểm soát, nhưng nếu mở rộng bằng cảm xúc thì dễ tán tài hoặc ôm quá nhiều việc."
+        )
+    if strength_label in {"Thân nhược", "Thân quá nhược"}:
+        return (
+            f"Với thế {strength_label}, tài vận cần đi từng bước và mượn nền hệ thống, chuyên môn hoặc người hỗ trợ. "
+            "Không nên dùng đòn bẩy quá sớm, vì cơ hội tiền lớn nhưng lực thân chưa đủ dễ biến thành áp lực."
+        )
+    return (
+        f"Với thế {strength_label}, tài vận hợp cách cân bằng: vừa tạo giá trị đều, vừa giữ biên an toàn dòng tiền, "
+        "không quá co cụm nhưng cũng không mở rộng khi dữ liệu vận chưa ủng hộ."
+    )
+
+
+def _career_strength_guidance(strength_label: str) -> str:
+    if strength_label in {"Thân vượng", "Thân quá vượng"}:
+        return (
+            f"Với thế {strength_label}, nghề nghiệp cần có sân để dùng lực: vai trò tự chủ, điều phối, chịu trách nhiệm hoặc dẫn dắt sẽ dễ phát huy. "
+            "Điểm cần tiết chế là sự cứng, ôm việc và phản ứng quá mạnh khi bị bó khuôn."
+        )
+    if strength_label in {"Thân nhược", "Thân quá nhược"}:
+        return (
+            f"Với thế {strength_label}, nghề nghiệp nên chọn nơi có quy trình, người nâng đỡ và lộ trình học rõ. "
+            "Khi nền lực chưa đủ, việc nhảy vào môi trường quá cạnh tranh hoặc áp lực cao dễ làm mất nhịp phát triển."
+        )
+    return (
+        f"Với thế {strength_label}, nghề nghiệp hợp nhịp vừa phải: có tự chủ nhưng vẫn có khuôn, có thử thách nhưng không để áp lực lấn át sức bền."
+    )
+
+
+def _marriage_strength_guidance(strength_label: str) -> str:
+    if strength_label in {"Thân vượng", "Thân quá vượng"}:
+        return (
+            f"Với thế {strength_label}, trong quan hệ gần người này thường có lập trường mạnh và nhu cầu tự quyết cao. "
+            "Hôn nhân bền hơn khi hai bên có ranh giới rõ, biết nhường nhịp và không biến cái tôi thành cuộc hơn thua."
+        )
+    if strength_label in {"Thân nhược", "Thân quá nhược"}:
+        return (
+            f"Với thế {strength_label}, hôn nhân cần cảm giác an toàn, sự nâng đỡ và nhịp sống ổn định. "
+            "Người này không nên bước vào quan hệ chỉ vì áp lực bên ngoài, vì dễ tự mất tiếng nói khi nền lực chưa vững."
+        )
+    return (
+        f"Với thế {strength_label}, quan hệ cần sự cân bằng giữa độc lập và nương tựa. "
+        "Điểm tốt là dễ thương lượng nếu cả hai giữ được nhịp giao tiếp đều và không dồn cảm xúc quá lâu."
+    )
+
+
+def _spouse_star_labels(payload: Mapping[str, Any]) -> list[str]:
+    customer = _mapping(payload.get("customer"))
+    identity = _mapping(payload.get("identity"))
+    person = _mapping(identity.get("person"))
+    gender = _first_text(customer.get("gender"), person.get("gender"), customer.get("gender_label"), person.get("gender_label")).lower()
+    if gender in {"male", "nam", "m"}:
+        return ["Chính Tài", "Thiên Tài"]
+    if gender in {"female", "nữ", "nu", "f"}:
+        return ["Chính Quan", "Thất Sát"]
+    return []
+
+
+def _has_any(values: Sequence[str], expected: Sequence[str]) -> bool:
+    value_set = set(values)
+    return any(item in value_set for item in expected)
+
+
+def _element_health_note(element: str, *, excess: bool) -> str:
+    element = _element_label(element)
+    area = ELEMENT_HEALTH_AREAS.get(element, "")
+    note = (ELEMENT_HEALTH_EXCESS if excess else ELEMENT_HEALTH_WEAK).get(element, "")
+    if area and note:
+        return f"Theo hệ quy chiếu truyền thống, {element} liên quan {area}. {note}"
+    return note
+
+
+def _health_relation_paragraphs(
+    payload: Mapping[str, Any],
+    counts: Mapping[str, Any],
+    dominant: Sequence[str],
+    weak: Sequence[str],
+) -> list[str]:
+    paragraphs: list[str] = []
+    count_values = {_element_label(label): _element_count(counts, label) for label in ELEMENT_HEALTH_AREAS}
+    dominant_set = {_element_label(element) for element in dominant}
+    weak_set = {_element_label(element) for element in weak}
+
+    for source, target in ELEMENT_GENERATES.items():
+        source_score = count_values.get(source, 0.0)
+        target_score = count_values.get(target, 0.0)
+        if source in dominant_set and target_score >= 3:
+            if source == "Thổ" and target == "Kim":
+                paragraphs.append(
+                    "Luận theo quan hệ sinh: Thổ vượng sinh Kim, nên khí Kim không chỉ được tính riêng ở bảng Ngũ hành mà còn được Thổ đẩy thêm. Vì Kim liên hệ hô hấp, phổi, mũi xoang, da và đại tràng, người có thế này nên chủ động giữ môi trường sống sạch, đủ ẩm, tránh lạnh/khô kéo dài; các biểu hiện như viêm xoang, dị ứng hoặc nhạy đường hô hấp cần được xem là điểm phòng ngừa sớm."
+                )
+            else:
+                target_area = ELEMENT_HEALTH_AREAS.get(target, "")
+                paragraphs.append(
+                    f"Luận theo quan hệ sinh: {source} vượng sinh {target}, làm vùng {target} được kích hoạt thêm. Theo hệ quy chiếu truyền thống, {target} liên quan {target_area}; vì vậy khi {source} quá nổi, phần {target} cũng cần được điều hòa chứ không chỉ nhìn số lượng riêng của {target}."
+                )
+
+    for source, target in ELEMENT_CONTROLS.items():
+        source_score = count_values.get(source, 0.0)
+        target_score = count_values.get(target, 0.0)
+        if source_score >= 3 and target_score > 0:
+            if source == "Hỏa" and target == "Kim":
+                paragraphs.append(
+                    "Luận theo quan hệ khắc: Hỏa khắc Kim. Khi Hỏa đủ lực ép vào Kim, vùng Kim dễ bị căng, khô hoặc phản ứng mạnh hơn; vì vậy cần lưu ý nhịp thở, phổi, mũi xoang, da, đại tràng và cả trạng thái căng thẳng do áp lực công việc. Nếu Thủy cũng yếu, phần xương khớp, giấc ngủ sâu và sức bền nền càng cần được giữ bằng nghỉ ngơi đúng giờ, vận động đều và giảm hao sức kéo dài."
+                )
+            elif source == "Thổ" and target == "Thủy" and ("Thủy" in weak_set or count_values.get("Thủy", 0.0) <= 1):
+                paragraphs.append(
+                    "Luận theo quan hệ khắc: Thổ mạnh khắc Thủy. Khi Thủy đã yếu, dấu hiệu này làm phần thận khí, tiết niệu, xương khớp, giấc ngủ sâu và sức bền nền càng cần được bồi dưỡng đều, tránh để công việc hoặc sinh hoạt thất thường rút cạn nền hồi phục."
+                )
+
+    pressure_signals = _health_pressure_signals(payload)
+    if pressure_signals:
+        paragraphs.append(
+            "Về mặt tinh thần - công việc, lá số có tín hiệu "
+            + ", ".join(pressure_signals)
+            + ". Đây là nhóm sao/hành dễ tạo trách nhiệm, khuôn phép hoặc sức ép phải gánh việc; khi đi cùng Hỏa-Kim căng, sức khỏe nên được quản trị bằng cách giảm dồn deadline, giữ lịch ngủ ổn định và có nhịp xả áp đều."
+        )
+
+    return paragraphs
+
+
+def _health_pressure_signals(payload: Mapping[str, Any]) -> list[str]:
+    signals: list[str] = []
+    ten_layers = build_ten_gods_four_layer_view(payload)
+    ten_god_signals = _ten_god_signal_labels(ten_layers, ("Chính Quan", "Thất Sát"))
+    if ten_god_signals:
+        signals.extend(ten_god_signals)
+    useful_god = _mapping(payload.get("useful_god"))
+    useful_display = _text(useful_god.get("useful_display"))
+    useful_stem = _text(useful_god.get("useful_stem"))
+    if "Hỏa" in {useful_display, _stem_element_label(useful_stem)}:
+        signals.append("Hỏa được kích hoạt")
+    return _unique_texts(signals)
+
+
+def _element_count(counts: Mapping[str, Any], label: str) -> float:
+    normalized = _element_label(label)
+    for key, element_label in ELEMENT_LABELS.items():
+        if element_label != normalized:
+            continue
+        try:
+            return float(counts.get(key, 0) or 0)
+        except (TypeError, ValueError):
+            return 0.0
+    try:
+        return float(counts.get(normalized, 0) or 0)
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def _stem_element_label(stem: str) -> str:
+    return HEAVENLY_STEM_ELEMENTS.get(_text(stem), "")
+
+
+def _element_extremes(counts: Mapping[str, Any], *, strongest: bool) -> list[str]:
+    values: list[tuple[str, float]] = []
+    for key in ("wood", "fire", "earth", "metal", "water"):
+        try:
+            values.append((ELEMENT_LABELS[key], float(counts.get(key))))
+        except (TypeError, ValueError):
+            continue
+    if not values:
+        return []
+    target = max(score for _, score in values) if strongest else min(score for _, score in values)
+    if target <= 0 and strongest:
+        return []
+    return [label for label, score in values if score == target]
 
 
 def _fallback_join(*parts: str) -> str:
@@ -1259,15 +1801,38 @@ def _pillar_brief(label: str, pillar: Mapping[str, Any]) -> str:
 def _layer_brief(layer: Mapping[str, Any]) -> str:
     god = _text(layer.get("primary_ten_god"))
     hint = _text(layer.get("life_hint"))
-    return _fallback_join(f"Thập thần chính: {god}." if god else "", hint)
+    meaning = _ten_god_meaning(god)
+    return _fallback_join(
+        f"Thập thần chính: {god}." if god else "",
+        f"Ý nghĩa luận giải: {meaning}." if meaning else "",
+        hint,
+    )
+
+
+def _ten_god_meaning(god: str) -> str:
+    return TEN_GOD_PUBLIC_MEANINGS.get(_text(god), "")
 
 
 def _group_brief(group: Mapping[str, Any]) -> str:
     items = [item for item in _list(group.get("items")) if isinstance(item, Mapping)]
-    names = [_text(item.get("name")) for item in items if _text(item.get("name"))]
+    names = _unique_texts([item.get("name") for item in items if _text(item.get("name"))])
     if not names:
         return ""
     return "Tín hiệu Thần sát liên quan: " + ", ".join(names) + "."
+
+
+def _is_low_value_domain_summary(summary: str) -> bool:
+    text = _text(summary)
+    low_value_fragments = (
+        "nên đọc từ",
+        "nên đọc cùng",
+        "lấy trụ",
+        "đọc nhiều ở trụ",
+        "đọc qua",
+        "đọc cùng Cung Phi",
+        "nên đặt trên",
+    )
+    return any(fragment in text for fragment in low_value_fragments)
 
 
 def _age_range(item: Mapping[str, Any]) -> str:
@@ -1419,39 +1984,161 @@ def _useful_god_summary(useful_god: Mapping[str, Any]) -> str:
         return ""
     parts = [f"Dụng thần trọng tâm: {display}."]
     favorable = _text(useful_god.get("favorable_display"))
-    if favorable:
+    canonical_favorable = _text(useful_god.get("canonical_favorable_display"))
+    if favorable and not favorable.startswith("Chưa đủ căn cứ"):
         parts.append(f"Hỷ thần/bổ trợ: {favorable}.")
+    elif canonical_favorable and canonical_favorable != display:
+        parts.append(f"Nhóm bổ trợ có thể đi cùng: {canonical_favorable}.")
     unfavorable = _text(useful_god.get("unfavorable_display"))
     if unfavorable:
         parts.append(f"Kỵ thần cần tiết chế: {unfavorable}.")
-    reason = _first_text(useful_god.get("customer_reason"), useful_god.get("short_reason"))
+    reason = _useful_god_reason(useful_god, display)
     if reason:
         parts.append(reason)
     return " ".join(parts)
 
 
 def _five_elements_summary(five_elements: Mapping[str, Any]) -> str:
-    dominant = _text_list(five_elements.get("dominant"))
-    missing = _text_list(five_elements.get("missing"))
+    dominant = _element_label_list(five_elements.get("dominant"))
+    missing = _element_label_list(five_elements.get("missing"))
+    counts = _mapping(five_elements.get("counts"))
+    distribution = _element_distribution(counts)
     parts: list[str] = []
+    if distribution:
+        parts.append("Phân bố Ngũ hành: " + distribution + ".")
     if dominant:
         parts.append("Hành nổi bật: " + ", ".join(dominant) + ".")
     if missing:
         parts.append("Hành còn thiếu hoặc yếu: " + ", ".join(missing) + ".")
+    if dominant or missing:
+        parts.append("Phần này cho biết khí nào dễ lộ ra trong tính cách, sức bền và cách xử lý việc, nhưng vẫn phải đọc cùng mùa sinh, Thân vượng/nhược và Dụng thần.")
     return " ".join(parts)
+
+
+def _strength_summary(strength: Mapping[str, Any], pattern: Mapping[str, Any]) -> str:
+    label = _strength_label(_first_text(strength.get("strength_level"), pattern.get("than_vuong_nhuoc")))
+    reasoning = _first_text(strength.get("reasoning"), pattern.get("than_vuong_nhuoc"))
+    guidance = STRENGTH_PUBLIC_GUIDANCE.get(label, "")
+    parts = _non_empty(
+        [
+            f"Thế thân được đánh giá là {label}." if label else "",
+            "Căn cứ được tổng hợp từ mùa sinh, căn khí, lực sinh trợ, lực tiết khí và lực khắc chế trong toàn bộ Tứ trụ." if label else "",
+            f"Lý do chính: {reasoning}." if reasoning and reasoning != label else "",
+            guidance,
+        ]
+    )
+    return " ".join(parts)
+
+
+def _structure_summary(pattern: Mapping[str, Any]) -> str:
+    structure = _first_text(pattern.get("cach_cuc"), pattern.get("pattern"))
+    if not structure:
+        return ""
+    month_branch = _text(pattern.get("month_branch"))
+    main_qi = _text(pattern.get("month_main_qi"))
+    main_god = _text(pattern.get("month_main_qi_ten_god"))
+    grade = _text(pattern.get("structural_grade"))
+    purity = _text(pattern.get("structural_purity"))
+    force = _text(pattern.get("structural_strength"))
+    integrity = _text(pattern.get("structural_integrity"))
+    basis = _fallback_join(
+        f"nguyệt lệnh {month_branch}" if month_branch else "",
+        f"khí chính {main_qi}" if main_qi else "",
+        f"ứng với {main_god}" if main_god else "",
+    )
+    quality = _fallback_join(
+        f"độ thuần {purity}" if purity else "",
+        f"lực cách {force}" if force else "",
+        f"mức toàn vẹn {integrity}" if integrity else "",
+        f"hạng {grade}" if grade else "",
+    )
+    parts = [f"Mệnh cục nghiêng về {structure}."]
+    if basis:
+        parts.append(f"Căn cứ chính nằm ở {basis}; đây là lý do phần Mệnh cục không chỉ lấy tên gọi mà phải đối chiếu từ trụ tháng và khí chủ đạo.")
+    if quality:
+        parts.append(f"Chất lượng cấu trúc: {quality}.")
+    return " ".join(parts)
+
+
+def _useful_god_reason(useful_god: Mapping[str, Any], display: str) -> str:
+    customer_reason = _mapping(useful_god.get("customer_reason"))
+    action = _text(customer_reason.get("balancing_action"))
+    target = _text(customer_reason.get("target_element"))
+    source = _text(customer_reason.get("source_element"))
+    role = _text(customer_reason.get("candidate_ten_god"))
+    if action and target:
+        bridge = _fallback_join(
+            f"Nhật chủ thuộc hành {source}" if source else "",
+            f"nên cần {action} về hành {target}" if target else "",
+            f"thông qua vai trò {role}" if role else "",
+        )
+        return f"{bridge if bridge else 'Lá số cần điều tiết khí mệnh'}, vì vậy {display} được dùng làm trục điều tiết chính. Đây là câu trả lời cho phần 'dựa vào đâu': Dụng thần được chọn để xử lý điểm lệch của toàn cục, không phải chỉ vì một hành đang thiếu hay đang nhiều trên bảng Ngũ hành."
+    public_reason = _public_reason_text(useful_god)
+    if public_reason:
+        return public_reason
+    return "Dụng thần nên được hiểu là hướng điều tiết giúp lá số vận hành thuận hơn; khi ứng dụng vào nghề nghiệp, tài vận, hôn nhân hay phong thủy, cần ưu tiên các lựa chọn làm mạnh thêm trục này."
+
+
+def _public_reason_text(useful_god: Mapping[str, Any]) -> str:
+    reason = _first_text(useful_god.get("reasoning"), useful_god.get("short_reason"))
+    blocked_fragments = ("V1.0", "rule", "Rule", "candidate", "matched")
+    if any(fragment in reason for fragment in blocked_fragments):
+        return ""
+    return reason
+
+
+def _strength_label(value: Any) -> str:
+    text = _text(value)
+    return STRENGTH_LABELS.get(text, text)
+
+
+def _element_distribution(counts: Mapping[str, Any]) -> str:
+    labels: list[str] = []
+    for key in ("wood", "fire", "earth", "metal", "water"):
+        value = counts.get(key)
+        if value is None:
+            continue
+        labels.append(f"{ELEMENT_LABELS[key]} {value}")
+    return ", ".join(labels)
+
+
+def _year_range(item: Mapping[str, Any]) -> str:
+    start = item.get("year_start")
+    end = item.get("year_end")
+    if start is not None and end is not None:
+        return f"{start}-{end}"
+    if start is not None:
+        return f"từ {start}"
+    return ""
+
+
+def _element_label(value: Any) -> str:
+    text = _text(value)
+    return ELEMENT_LABELS.get(text, text)
+
+
+def _element_label_list(value: Any) -> list[str]:
+    return _unique_texts([_element_label(item) for item in _text_list(value)])
 
 
 def _ten_gods_summary(four_layer: Mapping[str, Any]) -> str:
     layers = [item for item in _list(four_layer.get("layers")) if isinstance(item, Mapping)]
     labels = []
+    meanings = []
     for item in layers:
         label = _first_text(item.get("label"), item.get("pillar"))
         god = _text(item.get("primary_ten_god"))
         if label and god:
             labels.append(f"{label}: {god}")
+            meaning = _ten_god_meaning(god)
+            if meaning:
+                meanings.append(f"{label} hiện {god}, chủ về {meaning}")
     if not labels:
         return ""
-    return "Thập thần theo 4 trụ: " + "; ".join(labels) + "."
+    summary = "Thập thần theo 4 trụ: " + "; ".join(labels) + "."
+    if meanings:
+        summary += " Luận theo 4 tầng: " + "; ".join(meanings) + "."
+    return summary
 
 
 def _shen_sha_summary(grouped: Mapping[str, Any]) -> str:
@@ -1596,6 +2283,8 @@ def _first_mapping(*values: Any) -> dict[str, Any]:
 
 
 def _text(value: Any) -> str:
+    if isinstance(value, Mapping | list | tuple):
+        return ""
     return str(value).strip() if value is not None else ""
 
 

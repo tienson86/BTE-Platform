@@ -403,6 +403,8 @@ describe("P-RUNTIME-01 live /result integration", () => {
     expect(section?.textContent).toContain("Nền mệnh có sức bật");
     expect(section?.textContent).toContain("Các phương diện đời sống");
     expect(section?.getAttribute("data-card")).toBeNull();
+    const grid = container.querySelector(".bte-cdash__grid");
+    expect(section && grid ? section.compareDocumentPosition(grid) & Node.DOCUMENT_POSITION_FOLLOWING : 0).toBeTruthy();
     expect(section?.textContent).not.toMatch(LEAK);
   });
 
