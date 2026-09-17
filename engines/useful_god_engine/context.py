@@ -40,6 +40,8 @@ class UsefulGodContext:
 
     ten_gods_list: list[str] = field(default_factory=list)
     officer_provenance: list[dict[str, Any]] = field(default_factory=list)
+    dominant_combination_element: str | None = None
+    self_element_full_combination: bool = False
 
     # Trace/debug slots
     metadata: dict[str, Any] = field(default_factory=dict)

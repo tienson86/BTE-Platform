@@ -21,7 +21,7 @@ def _analyze(**kwargs):
     return OrchestratorService().analyze(**kwargs)
 
 
-def test_dung_reason_is_tiet_chain_without_rule_id() -> None:
+def test_dung_reason_is_fire_control_chain_without_rule_id() -> None:
     payload = _analyze(
         year=1985,
         month=9,
@@ -32,23 +32,22 @@ def test_dung_reason_is_tiet_chain_without_rule_id() -> None:
         timezone="Asia/Bangkok",
     )
     useful = payload["useful_god"]
-    assert useful["useful_display"] == "Thủy · Nhâm · Thực Thần"
-    assert useful["reason_archetype"] == ARCHETYPE_TIET
+    assert useful["useful_display"] == "Hỏa · Đinh · Chính Quan"
+    assert useful["reason_archetype"] == ARCHETYPE_CHE
     reason = useful["short_reason"]
     assert "str_004" not in reason
     assert "Canh" in reason
     assert "thân vượng" in reason
-    assert "Tiết" in reason
-    assert "Kim sinh Thủy" in reason
-    assert "Nhâm" in reason
-    assert "Thực Thần" in reason
+    assert "Chế" in reason
+    assert "Hỏa khắc Kim" in reason
+    assert "Đinh" in reason
+    assert "Chính Quan" in reason
     assert "mô hình cân bằng V1.0" in reason
-    assert useful["favorable_gods"] == ["Thực Thần", "Thương Quan"]
-    assert useful["favorable_display"] == INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
-    assert useful["hy_role_status"] == HY_ROLE_STATIC_SAME_ELEMENT
-    assert "Nhâm" not in useful["favorable_display"]
-    assert "Quý" not in useful["favorable_display"]
-    assert useful["unfavorable_display"].startswith("Kim · Canh · Tỷ Kiên")
+    assert useful["favorable_gods"] == ["Đinh", "Bính", "Giáp", "Ất", "Nhâm", "Quý"]
+    assert useful["hy_role_status"] == HY_ROLE_SUPPORTED_INDEPENDENT
+    assert "Mộc" in useful["favorable_display"]
+    assert "Thủy" in useful["favorable_display"]
+    assert useful["unfavorable_display"].startswith("Thổ · Mậu · Thiên Ấn")
     assert useful["climate_display"].startswith("Hỏa")
 
 

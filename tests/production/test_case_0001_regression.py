@@ -61,6 +61,22 @@ def test_case_0001_pattern_and_useful_god_present(case_0001_generic_result) -> N
     assert analysis["useful_god"]
 
 
+def test_case_0001_useful_god_matches_cold_strong_metal_baseline() -> None:
+    """Cold strong Metal keeps Fire as Dụng, Wood/Fire as Hỷ, Earth/Metal as Kỵ."""
+    from applications.production.engine_runner import ProductionEngineRunner
+
+    useful = ProductionEngineRunner().run(CASE_0001_REQUEST).analysis.useful_god
+    assert useful.winning_rule_id == "str_cold_ox_metal"
+    assert useful.useful_display == "Hỏa · Đinh · Chính Quan"
+    assert useful.favorable_display == (
+        "Hỏa · Bính · Thất Sát / Mộc · Giáp · Thiên Tài / Mộc · Ất · Chính Tài"
+    )
+    assert useful.unfavorable_display == (
+        "Thổ · Mậu · Thiên Ấn / Thổ · Kỷ · Chính Ấn / "
+        "Kim · Canh · Tỷ Kiên / Kim · Tân · Kiếp Tài"
+    )
+
+
 def test_case_0001_ten_gods_present(case_0001_generic_result) -> None:
     """Ten Gods engine produces output for CASE-0001."""
     ten_gods = case_0001_generic_result.diagnostics["engine_analysis"]["ten_gods"]

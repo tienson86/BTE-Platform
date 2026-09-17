@@ -18,42 +18,39 @@ HUYNH = {
 }
 
 
-def test_huynh_strength_remains_balanced_downstream() -> None:
-    """B. balanced / 0.64 remains after Score compose (G1-02R Frozen)."""
+def test_huynh_full_fire_trine_remains_strong_downstream() -> None:
+    """Dần-Ngọ-Tuất Fire formation must remain visible after composition."""
     payload = OrchestratorService().analyze(**HUYNH)
     strength = payload["strength"]
-    assert strength["strength_level"] == "balanced"
-    assert abs(float(strength["strength_score"]) - 0.64) < 0.01
-    assert strength.get("reasoning") == "Trung hòa"
-    assert payload["pattern"]["than_vuong_nhuoc"] == STRENGTH_LEVEL_LABELS["balanced"]
+    assert strength["strength_level"] == "strong"
+    assert abs(float(strength["strength_score"]) - 0.82) < 0.01
+    assert strength.get("reasoning") == "Thân vượng"
+    assert strength["combination_score"] == 0.18
+    assert payload["pattern"]["than_vuong_nhuoc"] == STRENGTH_LEVEL_LABELS["strong"]
 
     published = _published_then_scored()
-    assert published["strength"]["level"] == "balanced"
-    assert abs(float(published["strength"]["score"]) - 0.64) < 0.01
+    assert published["strength"]["level"] == "strong"
+    assert abs(float(published["strength"]["score"]) - 0.82) < 0.01
 
 
 def test_huynh_hy_than_exposed_downstream() -> None:
     """G. Customer Hỷ reaches pattern; internal favorable set stays published."""
-    from engines.useful_god_engine.presentation import (
-        INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY,
-    )
-
     payload = OrchestratorService().analyze(**HUYNH)
-    expected = ["Chính Tài", "Thực Thần"]
+    expected = ["Nhâm", "Canh", "Tân", "Mậu", "Kỷ"]
     assert payload["useful_god"]["favorable_gods"] == expected
-    assert payload["pattern"]["hy_than"] == INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
+    assert payload["pattern"]["hy_than"] == "Canh, Tân, Mậu, Kỷ"
     narrative = _narrative_text(payload["narrative_result"])
     interpretation = _section_text(payload["interpretation"], "useful_god")
     assert "Không có Dụng thần" not in interpretation
     assert "Không có Dụng thần" not in narrative
-    assert "Chính Tài" in interpretation
+    assert "Nhâm" in interpretation
 
 
 def test_huynh_ky_than_exposed_downstream() -> None:
     """H. Kỵ thần reaches pattern and useful-god view."""
     payload = OrchestratorService().analyze(**HUYNH)
-    assert payload["useful_god"]["unfavorable_gods"] == ["Kiếp Tài"]
-    assert payload["pattern"]["ky_than"] == "Kiếp Tài"
+    assert payload["useful_god"]["unfavorable_gods"] == ["Bính", "Đinh", "Giáp", "Ất"]
+    assert payload["pattern"]["ky_than"] == "Bính, Đinh, Giáp, Ất"
     assert payload["pattern"]["ky_than"] not in {"", "--"}
 
 
@@ -64,13 +61,14 @@ def test_huynh_pattern_remains_chinh_tai() -> None:
     assert payload["pattern"]["cach_cuc"] == "Chính Tài"
 
 
-def test_huynh_useful_god_ranking_unchanged() -> None:
-    """Useful God ranking remains str_005 / Chính Tài (UG-R2 Frozen)."""
+def test_huynh_useful_god_follows_formed_fire_structure() -> None:
+    """A formed Fire structure uses Water before Wealth/Output fallbacks."""
     payload = OrchestratorService().analyze(**HUYNH)
     useful = payload["useful_god"]
-    assert useful["useful_god"] == "Chính Tài"
-    assert useful["winning_rule_id"] == "str_005"
-    assert abs(float(useful["confidence"]) - 0.72) < 0.01
+    assert useful["useful_god"] == "Nhâm"
+    assert useful["useful_element"] == "Thủy"
+    assert useful["winning_rule_id"] == "str_full_fire"
+    assert abs(float(useful["confidence"]) - 0.96) < 0.01
 
 
 def test_huynh_production_trace_p0_invariants() -> None:
@@ -88,16 +86,49 @@ def test_huynh_production_trace_p0_invariants() -> None:
         )
     )
     analysis = output.analysis
-    assert analysis.strength.strength_level == "balanced"
-    assert abs(float(analysis.strength.strength_score) - 0.64) < 0.01
-    assert analysis.pattern.than_vuong_nhuoc == "Trung hòa"
+    assert analysis.strength.strength_level == "strong"
+    assert abs(float(analysis.strength.strength_score) - 0.82) < 0.01
+    assert analysis.pattern.than_vuong_nhuoc == "Thân vượng"
     assert analysis.pattern.cach_cuc == "Chính Tài"
-    assert analysis.useful_god.useful_god == "Chính Tài"
-    assert analysis.useful_god.favorable_gods == ["Chính Tài", "Thực Thần"]
-    assert analysis.useful_god.unfavorable_gods == ["Kiếp Tài"]
-    assert analysis.pattern.dung_than == "Chính Tài"
-    assert analysis.pattern.hy_than == "Chưa đủ căn cứ xác định Hỷ thần bổ trợ riêng"
-    assert analysis.pattern.ky_than == "Kiếp Tài"
+    assert analysis.useful_god.useful_god == "Nhâm"
+    assert analysis.useful_god.favorable_gods == ["Nhâm", "Canh", "Tân", "Mậu", "Kỷ"]
+    assert analysis.useful_god.unfavorable_gods == ["Bính", "Đinh", "Giáp", "Ất"]
+    assert analysis.pattern.dung_than == "Nhâm"
+    assert analysis.pattern.hy_than == "Canh, Tân, Mậu, Kỷ"
+    assert analysis.pattern.ky_than == "Bính, Đinh, Giáp, Ất"
+
+
+def test_three_strong_control_cases_use_chart_specific_balance_paths() -> None:
+    """Strong charts must not all collapse to the generic Output fallback."""
+    cases = [
+        (
+            ProductionRequest(1987, 9, 7, 2, 0, "female", full_name="Phạm Thị Huyền"),
+            "str_strong_earth_killing",
+            "Mộc · Ất · Thất Sát",
+            "Thủy · Nhâm · Chính Tài / Thủy · Quý · Thiên Tài",
+        ),
+        (
+            ProductionRequest(1987, 6, 29, 6, 0, "male", full_name="Lương Văn Mạnh"),
+            "str_hot_strong_earth",
+            "Thủy · Nhâm · Chính Tài",
+            "Kim · Canh · Thương Quan / Kim · Tân · Thực Thần",
+        ),
+        (
+            ProductionRequest(1985, 9, 18, 8, 0, "male", full_name="Ngô Đắc Dũng"),
+            "str_peak_rooster_metal",
+            "Hỏa · Đinh · Chính Quan",
+            (
+                "Hỏa · Bính · Thất Sát / Mộc · Giáp · Thiên Tài / "
+                "Mộc · Ất · Chính Tài / Thủy · Nhâm · Thực Thần / "
+                "Thủy · Quý · Thương Quan"
+            ),
+        ),
+    ]
+    for request, rule_id, useful_display, favorable_display in cases:
+        useful = ProductionEngineRunner().run(request).analysis.useful_god
+        assert useful.winning_rule_id == rule_id
+        assert useful.useful_display == useful_display
+        assert useful.favorable_display == favorable_display
 
 
 def _published_then_scored() -> dict:
@@ -114,11 +145,17 @@ def _published_then_scored() -> dict:
     calendar = CalendarEngine().build(1966, 9, 24, 4, 15)
     chart = BaziEngine().build(calendar, gender="male")
     pattern_context = build_pattern_context(chart, calendar=calendar)
-    strength = orch.strength_engine.calculate(
-        build_strength_context(chart, calendar=calendar)
-    )
+    strength_context = build_strength_context(chart, calendar=calendar)
+    strength = orch.strength_engine.calculate(strength_context)
     pattern_context.strength_level = strength.strength_level
     pattern_context.strength_score = strength.strength_score
+    pattern_context.extra.update(
+        {
+            "branch_combinations": list(strength_context.branch_combinations),
+            "dominant_combination_element": strength_context.dominant_combination_element,
+            "self_element_full_combination": strength_context.self_element_full_combination,
+        }
+    )
     temperature = orch.temperature_engine.calculate(
         build_temperature_context(
             chart,

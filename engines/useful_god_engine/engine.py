@@ -49,7 +49,7 @@ class UsefulGodEngine:
         public_climate = [self._public_candidate(item) for item in climate_candidates]
         matched_rules = [str(item.get("rule_id")) for item in candidates if item.get("rule_id")]
 
-        climate_fields = self._climate_fields(climate)
+        climate_fields = self._reconcile_climate_fields(context, overall, climate)
         trace = {
             "context": self._context_snapshot(context),
             "matched_rules": matched_rules,
@@ -131,6 +131,33 @@ class UsefulGodEngine:
             ),
         }
 
+    @classmethod
+    def _reconcile_climate_fields(
+        cls,
+        context,
+        overall: dict | None,
+        climate: dict | None,
+    ) -> dict:
+        """Keep Điều hậu subordinate to a formed same-element structure."""
+        fields = cls._climate_fields(climate)
+        if not overall or not bool(
+            getattr(context, "self_element_full_combination", False)
+        ):
+            return fields
+        if not str(overall.get("rule_id") or "").startswith("str_full_"):
+            return fields
+
+        useful = str(overall.get("useful_god") or "").strip()
+        return {
+            "climate_candidate": useful,
+            "climate_rule_id": str(overall.get("rule_id") or ""),
+            "climate_rule_group": "structural_reconciliation",
+            "climate_reason": (
+                "Điều hậu phục tùng cân bằng toàn cục: tổ hợp cùng hành Nhật chủ "
+                "đã thành thế và thân vượng, không tăng thêm hành trợ thân."
+            ),
+        }
+
     @staticmethod
     def _parse_json_list(value) -> list[str]:
         import json
@@ -201,6 +228,8 @@ class UsefulGodEngine:
             "main_pattern",
             "ug_override_eligible",
             "officer_elements",
+            "dominant_combination_element",
+            "self_element_full_combination",
         ]
         snapshot = {key: getattr(context, key, None) for key in keys}
         snapshot["officer_provenance"] = list(

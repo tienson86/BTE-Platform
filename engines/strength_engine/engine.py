@@ -104,6 +104,9 @@ class StrengthEngine:
             "drain_count",
             "season",
             "strength_score",
+            "branch_combinations",
+            "dominant_combination_element",
+            "self_element_full_combination",
         ]
         return {k: getattr(context, k, None) for k in keys}
 

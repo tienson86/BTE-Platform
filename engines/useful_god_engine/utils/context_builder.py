@@ -61,6 +61,7 @@ def build_useful_god_context(pattern_context: Any, pattern_result: Any = None) -
         "suppressed_special_ug_override": bool(detected_special)
         and not override.ug_override_eligible,
     }
+    extra = dict(getattr(pattern_context, "extra", {}) or {})
     return UsefulGodContext(
         day_master=getattr(pattern_context, "day_master", None),
         day_master_element=getattr(pattern_context, "day_master_element", None),
@@ -85,6 +86,10 @@ def build_useful_god_context(pattern_context: Any, pattern_result: Any = None) -
         main_pattern=main_pattern,
         ug_override_eligible=override.ug_override_eligible,
         officer_provenance=officer_provenance,
+        dominant_combination_element=extra.get("dominant_combination_element"),
+        self_element_full_combination=bool(
+            extra.get("self_element_full_combination", False)
+        ),
         metadata=metadata,
         source_pattern_context=pattern_context,
     )

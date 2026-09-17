@@ -69,6 +69,15 @@ def classify_hy_role(
     hy_el, _, hy_tg = role_identity(hy_role)
     if not dung_tg or not hy_tg:
         return HY_ROLE_UNKNOWN
+    independently_supported_rules = (
+        "str_full_",
+        "str_cold_ox_metal",
+        "str_hot_strong_earth",
+        "str_strong_earth_killing",
+        "str_peak_rooster_metal",
+    )
+    if str(winning_rule_id).startswith(independently_supported_rules):
+        return HY_ROLE_SUPPORTED_INDEPENDENT
     archetype = archetype_for_rule(winning_rule_id)
     if archetype == ARCHETYPE_SINH_TRO and hy_tg in _PEER_SUPPORT:
         return HY_ROLE_SUPPORTED_INDEPENDENT

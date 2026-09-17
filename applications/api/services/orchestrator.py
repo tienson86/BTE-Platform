@@ -45,6 +45,9 @@ from engines.temperature_engine.engine import TemperatureEngine
 from engines.temperature_engine.utils.context_builder import build_temperature_context
 from engines.useful_god_engine.engine import UsefulGodEngine
 from engines.useful_god_engine.utils.context_builder import build_useful_god_context
+from engines.useful_god_engine.reconciliation import (
+    reconcile_temperature_recommendations,
+)
 from engines.report_engine.engine import ReportEngine
 from engines.score_engine.engine import ScoreEngine
 from engines.ten_gods_engine.engine import TenGodsEngine
@@ -804,6 +807,13 @@ class OrchestratorService:
         strength_result = self.strength_engine.calculate(strength_context)
         pattern_context.strength_level = strength_result.strength_level
         pattern_context.strength_score = strength_result.strength_score
+        pattern_context.extra.update(
+            {
+                "branch_combinations": list(strength_context.branch_combinations),
+                "dominant_combination_element": strength_context.dominant_combination_element,
+                "self_element_full_combination": strength_context.self_element_full_combination,
+            }
+        )
         analysis.strength = build_strength_view(strength_result)
 
         # ----- Stage 3.6: Temperature (before Pattern; feeds PatternContext) -----
@@ -824,6 +834,8 @@ class OrchestratorService:
         pattern_result = self.pattern_engine.calculate(pattern_context)
         useful_god_context = build_useful_god_context(pattern_context, pattern_result)
         useful_god_result = self.useful_god_engine.calculate(useful_god_context)
+        reconcile_temperature_recommendations(useful_god_result, temperature_result)
+        analysis.temperature = build_temperature_view(temperature_result)
         analysis.useful_god = build_useful_god_view(useful_god_result)
         analysis.meta.pattern_source = pattern_source_fingerprint()
         completed.append("pattern")

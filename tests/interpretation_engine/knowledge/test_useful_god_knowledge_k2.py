@@ -155,9 +155,8 @@ def test_g_selected_separate_from_hy_ky(huynh_explanation) -> None:
 def test_h_hy_and_ky_roles_preserved(huynh_explanation) -> None:
     """H. Hỷ and Kỵ roles are preserved."""
     bundle = build_useful_god_knowledge_bundle(huynh_explanation)
-    assert "Chính Tài" in bundle.favorable_keys
-    assert "Thực Thần" in bundle.favorable_keys
-    assert "Kiếp Tài" in bundle.unfavorable_keys
+    assert {"Canh", "Tân", "Mậu", "Kỷ"} <= set(bundle.favorable_keys)
+    assert {"Bính", "Đinh", "Giáp", "Ất"} == set(bundle.unfavorable_keys)
     assert set(bundle.favorable_keys).isdisjoint(bundle.unfavorable_keys)
 
 
@@ -202,18 +201,15 @@ def test_j_role_conflict_detected(
 
 
 def test_k_huynh_retrieves_required_entities(huynh_explanation) -> None:
-    """K. Lương Ngọc Huỳnh retrieves Chính Tài selected (UG-R2 Frozen)."""
+    """K. Lương Ngọc Huỳnh retrieves Water as the structural regulator."""
     bundle = build_useful_god_knowledge_bundle(huynh_explanation)
-    assert bundle.selected_key == "Chính Tài"
+    assert bundle.selected_key == "Nhâm"
     assert bundle.selected_entity is not None
-    assert bundle.selected_entity.key == "Chính Tài"
-    assert set(bundle.favorable_keys) == {"Chính Tài", "Thực Thần"}
-    assert set(bundle.unfavorable_keys) == {"Kiếp Tài"}
-    assert {entity.key for entity in bundle.favorable_entities} == {
-        "Chính Tài",
-        "Thực Thần",
-    }
-    assert {entity.key for entity in bundle.unfavorable_entities} == {"Kiếp Tài"}
+    assert bundle.selected_entity.key == "Nhâm"
+    assert set(bundle.favorable_keys) == {"Nhâm", "Canh", "Tân", "Mậu", "Kỷ"}
+    assert set(bundle.unfavorable_keys) == {"Bính", "Đinh", "Giáp", "Ất"}
+    assert {entity.key for entity in bundle.favorable_entities} == set(bundle.favorable_keys)
+    assert {entity.key for entity in bundle.unfavorable_entities} == set(bundle.unfavorable_keys)
     selected_concept_ids = {item.id for item in bundle.selected_concepts}
     assert selected_concept_ids
     assert bundle.status == DataAvailability.AVAILABLE

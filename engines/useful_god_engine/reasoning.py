@@ -26,6 +26,10 @@ _RULE_ARCHETYPE: dict[str, str] = {
     "str_003": ARCHETYPE_CHE,
     "str_004": ARCHETYPE_TIET,
     "str_005": ARCHETYPE_BALANCED_WEALTH,
+    "str_cold_ox_metal": ARCHETYPE_CHE,
+    "str_hot_strong_earth": ARCHETYPE_BALANCED_WEALTH,
+    "str_strong_earth_killing": ARCHETYPE_CHE,
+    "str_peak_rooster_metal": ARCHETYPE_CHE,
     "spc_001": ARCHETYPE_FOLLOW,
     "spc_002": ARCHETYPE_FOLLOW,
     "spc_003": ARCHETYPE_FOLLOW,
@@ -38,6 +42,10 @@ _RULE_NEED: dict[str, str] = {
     "str_003": "chế ước",
     "str_004": "tiết bớt khí",
     "str_005": "lưu thông",
+    "str_cold_ox_metal": "ôn luyện và chế ước",
+    "str_hot_strong_earth": "nhuận hạ và hao thân",
+    "str_strong_earth_killing": "chế ước",
+    "str_peak_rooster_metal": "luyện Kim và chế ước",
     "spc_001": "đi theo Tài",
     "spc_002": "đi theo Quan",
     "spc_003": "đi theo Sát",
@@ -50,6 +58,10 @@ _RULE_PROBLEM: dict[str, str] = {
     "str_003": "Nhật chủ vượng, có Chính Quan để chế",
     "str_004": "Nhật chủ vượng, đường thường dùng Tiết",
     "str_005": "Nhật chủ trung hòa, V1.0 ưu tiên lưu thông qua Chính Tài",
+    "str_cold_ox_metal": "Kim vượng sinh tháng Sửu lạnh, cần Hỏa ôn luyện; Mộc trợ sinh Hỏa",
+    "str_hot_strong_earth": "Thổ vượng gặp khí nóng, cần Thủy nhuận hạ; Kim tiết Thổ và sinh Thủy",
+    "str_strong_earth_killing": "Thổ vượng có Thất Sát Mộc hữu dụng để chế thân; Thủy trợ Mộc có điều kiện",
+    "str_peak_rooster_metal": "Kim vượng đắc lệnh tháng Dậu, cần Hỏa luyện Kim; Mộc và Thủy dùng có điều kiện",
     "spc_001": "Cách Tòng Tài đã công bố",
     "spc_002": "Cách Tòng Quan đã công bố",
     "spc_003": "Cách Tòng Sát đã công bố",
@@ -62,6 +74,10 @@ _RULE_CANDIDATE_ROLE: dict[str, str] = {
     "str_003": "Chính Quan",
     "str_004": "Thực Thần",
     "str_005": "Chính Tài",
+    "str_cold_ox_metal": "Chính Quan",
+    "str_hot_strong_earth": "Chính Tài",
+    "str_strong_earth_killing": "Thất Sát",
+    "str_peak_rooster_metal": "Chính Quan",
     "spc_001": "Chính Tài",
     "spc_002": "Chính Quan",
     "spc_003": "Thất Sát",
@@ -191,8 +207,9 @@ def build_customer_reason(result: Any) -> UsefulGodCustomerReason:
             f"{relation} → {stem_map} → chọn {display} làm Dụng."
         )
     elif archetype == ARCHETYPE_CHE:
+        controlling_role = _RULE_CANDIDATE_ROLE.get(rule_id, ten_god) or ten_god
         short = (
-            f"Nhật chủ {dm_label} {strength_vi} → có Chính Quan đủ điều kiện Chế → "
+            f"Nhật chủ {dm_label} {strength_vi} → có {controlling_role} đủ điều kiện Chế → "
             f"áp dụng nguyên tắc Chế theo mô hình cân bằng V1.0 → "
             f"{relation} → {stem_map} → chọn {display} làm Dụng."
         )

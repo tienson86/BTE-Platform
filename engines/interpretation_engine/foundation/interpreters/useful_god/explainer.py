@@ -282,7 +282,7 @@ def _customer_hy_tokens(facts: UsefulGodInterpretationFacts) -> list[str]:
         facts.day_master,
         facts.selected,
         list(facts.favorable_gods),
-        winning_rule_id=str(facts.rule_ids[0] if facts.rule_ids else ""),
+        winning_rule_id=_winning_rule_id(facts),
     )
 
 
@@ -292,8 +292,17 @@ def _customer_hy_phrase(facts: UsefulGodInterpretationFacts) -> str:
         facts.day_master,
         facts.selected,
         list(facts.favorable_gods),
-        winning_rule_id=str(facts.rule_ids[0] if facts.rule_ids else ""),
+        winning_rule_id=_winning_rule_id(facts),
     ) or INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
+
+
+def _winning_rule_id(facts: UsefulGodInterpretationFacts) -> str:
+    winner = _resolve_winner(facts)
+    return str(winner.rule_id if winner is not None else "")
+
+
+def _structural_reconciliation_active(facts: UsefulGodInterpretationFacts) -> bool:
+    return _winning_rule_id(facts).startswith("str_full_")
 
 
 def _build_evidence_items(
@@ -748,7 +757,7 @@ def _build_applications(
     hy = _customer_hy_tokens(facts)
     ky = facts.unfavorable_gods
     strong = facts.strength_level == "strong"
-    cool = facts.temperature_level in {"cool", "cold"}
+    cool = facts.temperature_level in {"cool", "cold"} and not _structural_reconciliation_active(facts)
     base_refs = tuple(
         eid
         for eid in (
@@ -843,7 +852,7 @@ def _build_advice(
     selected = facts.selected
     hy = _customer_hy_tokens(facts)
     ky = facts.unfavorable_gods
-    cool = facts.temperature_level in {"cool", "cold"}
+    cool = facts.temperature_level in {"cool", "cold"} and not _structural_reconciliation_active(facts)
     refs = tuple(
         eid for eid in (_evidence_id("decision", "reason"),) if eid in evidence_ids
     )
@@ -988,7 +997,7 @@ def _build_warnings(
                 mitigation="Nhận diện môi trường trước cam kết",
             )
         )
-    if facts.temperature_level in {"cool", "cold"}:
+    if facts.temperature_level in {"cool", "cold"} and not _structural_reconciliation_active(facts):
         warnings.append(
             WarningItem(
                 condition="Cool/cold temperature period",

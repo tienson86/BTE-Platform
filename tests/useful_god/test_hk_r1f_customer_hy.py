@@ -59,7 +59,7 @@ def test_empty_remainder_does_not_reinsert_dung() -> None:
     assert customer_favorable_display(dung, [dung]) == EMPTY_CUSTOMER_FAVORABLE_DISPLAY
 
 
-def test_dung_customer_hy_omits_exact_dung_keeps_same_element() -> None:
+def test_dung_customer_hy_follows_peak_metal_rule() -> None:
     chart = _dung_chart()
     context = build_pattern_context(chart)
     context.strength_level = "strong"
@@ -68,14 +68,13 @@ def test_dung_customer_hy_omits_exact_dung_keeps_same_element() -> None:
     engine = UsefulGodEngine().calculate(build_useful_god_context(context, pattern))
     view = build_useful_god_view(engine)
 
-    assert engine.useful_display == "Thủy · Nhâm · Thực Thần"
-    assert engine.favorable_gods == ["Thực Thần", "Thương Quan"]
-    assert engine.favorable_display.startswith("Thủy · Nhâm · Thực Thần")
+    assert engine.useful_display == "Hỏa · Đinh · Chính Quan"
+    assert engine.favorable_gods == ["Đinh", "Bính", "Giáp", "Ất", "Nhâm", "Quý"]
+    assert engine.favorable_display.startswith("Hỏa · Đinh · Chính Quan")
     assert view.favorable_gods == engine.favorable_gods
     assert view.canonical_favorable_display == engine.favorable_display
-    assert view.favorable_display == INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
-    assert "Nhâm" not in view.favorable_display
-    assert "Quý" not in view.favorable_display
+    assert "Mộc · Ất · Chính Tài" in view.favorable_display
+    assert "Thủy · Quý · Thương Quan" in view.favorable_display
     assert view.unfavorable_display == engine.unfavorable_display
     assert view.useful_display == engine.useful_display
     assert view.winning_rule_id == engine.winning_rule_id
@@ -95,7 +94,7 @@ def test_api_tuyen_customer_hy_is_canh_thuc_than() -> None:
     assert "Chính Quan" not in useful["favorable_display"]
 
 
-def test_api_dung_customer_hy_is_quy_thuong_quan() -> None:
+def test_api_dung_customer_hy_supports_fire_wood_and_conditional_water() -> None:
     payload = OrchestratorService().analyze(
         year=1985,
         month=9,
@@ -106,8 +105,9 @@ def test_api_dung_customer_hy_is_quy_thuong_quan() -> None:
         timezone="Asia/Bangkok",
     )
     useful = payload["useful_god"]
-    assert useful["useful_display"] == "Thủy · Nhâm · Thực Thần"
-    assert useful["favorable_gods"] == ["Thực Thần", "Thương Quan"]
-    assert useful["favorable_display"] == INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
-    assert useful["unfavorable_display"].startswith("Kim · Canh · Tỷ Kiên")
-    assert payload["pattern"]["hy_than"] == INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
+    assert useful["useful_display"] == "Hỏa · Đinh · Chính Quan"
+    assert useful["favorable_gods"] == ["Đinh", "Bính", "Giáp", "Ất", "Nhâm", "Quý"]
+    assert "Mộc · Giáp · Thiên Tài" in useful["favorable_display"]
+    assert "Thủy · Nhâm · Thực Thần" in useful["favorable_display"]
+    assert useful["unfavorable_display"].startswith("Thổ · Mậu · Thiên Ấn")
+    assert payload["pattern"]["hy_than"]

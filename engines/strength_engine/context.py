@@ -48,6 +48,10 @@ class StrengthContext:
     drain_count: int = 0
     output_branch_count: int = 0
 
+    branch_combinations: list[dict[str, Any]] = field(default_factory=list)
+    dominant_combination_element: str | None = None
+    self_element_full_combination: bool = False
+
     # Populated during scoring pass
     season_score: float = 0.0
     root_score: float = 0.0

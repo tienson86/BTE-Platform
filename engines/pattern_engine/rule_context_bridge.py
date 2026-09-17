@@ -167,6 +167,16 @@ def merge_upstream_into_rule_context(
             context.get("hidden_stems") or {},
             context.get("ten_gods") or {},
         )
+        source = useful_god if isinstance(useful_god, dict) else {
+            "winning_rule_id": getattr(useful_god, "winning_rule_id", ""),
+            "winning_rule_group": getattr(useful_god, "winning_rule_group", ""),
+        }
+        context["useful_god"]["winning_rule_id"] = str(
+            source.get("winning_rule_id") or ""
+        )
+        context["useful_god"]["winning_rule_group"] = str(
+            source.get("winning_rule_group") or ""
+        )
         _refresh_useful_god_facts(context)
 
     return context

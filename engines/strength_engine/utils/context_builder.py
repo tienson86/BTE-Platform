@@ -59,6 +59,17 @@ _ELEMENT_CONTROLS: dict[str, str] = {
     "Mộc": "Thổ", "Hỏa": "Kim", "Thổ": "Thủy", "Kim": "Mộc", "Thủy": "Hỏa",
 }
 
+_FULL_BRANCH_GROUPS: tuple[tuple[str, frozenset[str], str], ...] = (
+    ("tam_hop", frozenset({"Thân", "Tý", "Thìn"}), "Thủy"),
+    ("tam_hop", frozenset({"Hợi", "Mão", "Mùi"}), "Mộc"),
+    ("tam_hop", frozenset({"Dần", "Ngọ", "Tuất"}), "Hỏa"),
+    ("tam_hop", frozenset({"Tỵ", "Dậu", "Sửu"}), "Kim"),
+    ("tam_hoi", frozenset({"Dần", "Mão", "Thìn"}), "Mộc"),
+    ("tam_hoi", frozenset({"Tỵ", "Ngọ", "Mùi"}), "Hỏa"),
+    ("tam_hoi", frozenset({"Thân", "Dậu", "Tuất"}), "Kim"),
+    ("tam_hoi", frozenset({"Hợi", "Tý", "Sửu"}), "Thủy"),
+)
+
 _OFFICER_GODS = frozenset({"Chính Quan", "Thất Sát"})
 _WEALTH_GODS = frozenset({"Chính Tài", "Thiên Tài"})
 _RESOURCE_GODS = frozenset({"Chính Ấn", "Thiên Ấn"})
@@ -172,6 +183,18 @@ def build_strength_context(bazi_chart: Any, *, calendar: Any = None) -> Strength
     element_distribution = dict(Counter(_stem_to_element(s) for s in all_stems if _stem_to_element(s)))
 
     drain_count = len(output_elements) + len(wealth_elements) + output_branch_count
+    branches = (year_branch, month_branch, day_branch, hour_branch)
+    visible_elements = {
+        _stem_to_element(stem) for stem in all_stems[:4] if _stem_to_element(stem)
+    }
+    branch_combinations = _detect_full_branch_combinations(
+        branches, month_branch, visible_elements
+    )
+    dominant_combination = max(
+        branch_combinations,
+        key=lambda item: (bool(item["transformed"]), item["kind"] == "tam_hoi"),
+        default=None,
+    )
 
     return StrengthContext(
         day_master=day_master or None,
@@ -204,9 +227,45 @@ def build_strength_context(bazi_chart: Any, *, calendar: Any = None) -> Strength
         output_count=len(output_elements),
         drain_count=drain_count,
         output_branch_count=output_branch_count,
+        branch_combinations=branch_combinations,
+        dominant_combination_element=(
+            str(dominant_combination["element"]) if dominant_combination else None
+        ),
+        self_element_full_combination=bool(
+            dominant_combination
+            and dominant_combination["element"] == day_master_element
+        ),
         metadata={"builder": "strength_context_builder_v2"},
         source_bazi=bazi_chart,
     )
+
+
+def _detect_full_branch_combinations(
+    branches: tuple[str, ...],
+    month_branch: str,
+    visible_elements: set[str | None],
+) -> list[dict[str, Any]]:
+    """Detect complete tam hợp/tam hội and whether the target qi can take effect."""
+    present = {branch for branch in branches if branch}
+    found: list[dict[str, Any]] = []
+    for kind, members, element in _FULL_BRANCH_GROUPS:
+        if not members.issubset(present):
+            continue
+        transformed = element in visible_elements or month_branch in members
+        found.append(
+            {
+                "kind": kind,
+                "branches": sorted(members),
+                "element": element,
+                "transformed": transformed,
+                "reason": (
+                    "đủ bộ và hành cục thấu/lâm nguyệt lệnh"
+                    if transformed
+                    else "đủ bộ nhưng chưa đủ dấu hiệu hóa khí"
+                ),
+            }
+        )
+    return found
 
 
 def _stem_to_element(stem: str) -> str | None:
