@@ -681,10 +681,115 @@
     return visual;
   }
 
+
+  const STRUCTURED_CHAPTER_IDS = new Set([
+    "four_pillars",
+    "day_master",
+    "strength_structure_useful_god",
+    "ten_gods",
+    "shen_sha",
+    "bone_weight",
+    "palace_feng_shui",
+    "synthesis",
+    "recommendations",
+  ]);
+
+  const STRUCTURED_CHAPTER_META = {
+    four_pillars: { kicker: "Khung tứ trụ", title: "Bốn trụ và vai trò từng cung", cardTitle: "Luận trụ" },
+    day_master: { kicker: "Nhật chủ", title: "Khí chất cốt lõi của mệnh", cardTitle: "Luận Nhật chủ" },
+    strength_structure_useful_god: { kicker: "Trục cân bằng", title: "Thân vượng, Mệnh cục và Dụng thần", cardTitle: "Luận trục" },
+    ten_gods: { kicker: "Thập thần", title: "Vai trò đời sống qua từng tín hiệu", cardTitle: "Luận Thập thần" },
+    shen_sha: { kicker: "Thần sát", title: "Tín hiệu bổ sung cần quan sát", cardTitle: "Luận Thần sát" },
+    bone_weight: { kicker: "Cân xương", title: "Nền lượng và nhịp tích lũy", cardTitle: "Luận Cân xương" },
+    palace_feng_shui: { kicker: "Cung Phi", title: "Nhóm trạch và phong thủy ứng dụng", cardTitle: "Luận Cung Phi" },
+    synthesis: { kicker: "Tổng hợp", title: "Điểm mạnh, rủi ro và trọng tâm hành động", cardTitle: "Kết luận" },
+    recommendations: { kicker: "Khuyến nghị", title: "Việc nên ưu tiên sau khi đọc lá số", cardTitle: "Khuyến nghị" },
+  };
+
+  const STRUCTURED_PREFIX_RULES = [
+    [/^Trụ\s+Năm/i, "Trụ năm"],
+    [/^Trụ\s+Tháng/i, "Trụ tháng"],
+    [/^Trụ\s+Ngày/i, "Trụ ngày"],
+    [/^Trụ\s+Giờ/i, "Trụ giờ"],
+    [/^Nhật\s+chủ/i, "Nhật chủ"],
+    [/^Thân\s+vượng|^Thân\s+nhược|^Thân\s+trung/i, "Thế thân"],
+    [/^Mệnh\s+cục/i, "Mệnh cục"],
+    [/^Dụng\s+thần/i, "Dụng thần"],
+    [/^Hỷ\s+thần/i, "Hỷ thần"],
+    [/^Kỵ\s+thần/i, "Kỵ thần"],
+    [/^Cung\s+Phi|^Mệnh\s+quái/i, "Cung Phi/Mệnh quái"],
+    [/^Đông\s+Tứ|^Tây\s+Tứ|^Nhóm\s+trạch/i, "Nhóm trạch"],
+    [/^Điền\s+trạch/i, "Điền trạch"],
+    [/^Phong\s+thủy/i, "Phong thủy ứng dụng"],
+    [/^Tóm\s+tắt/i, "Tóm tắt"],
+    [/^Điểm\s+mạnh/i, "Điểm mạnh"],
+    [/^Rủi\s+ro/i, "Rủi ro"],
+    [/^Hướng\s+đi/i, "Hướng đi"],
+  ];
+
+  function usesStructuredVisual(chapter) {
+    return Boolean(chapter && STRUCTURED_CHAPTER_IDS.has(chapter.id));
+  }
+
+  function splitStructuredParagraph(chapterId, paragraph, paragraphIndex) {
+    const value = text(paragraph);
+    const meta = STRUCTURED_CHAPTER_META[chapterId] || { cardTitle: "Luận điểm" };
+    const prefix = STRUCTURED_PREFIX_RULES.find((item) => item[0].test(value));
+    const colonIndex = value.indexOf(":");
+    if (prefix) {
+      return {
+        title: prefix[1],
+        body: colonIndex > 0 ? value.slice(colonIndex + 1).trim() : value,
+      };
+    }
+    if (colonIndex > 0 && colonIndex < 62) {
+      return {
+        title: value.slice(0, colonIndex).trim(),
+        body: value.slice(colonIndex + 1).trim(),
+      };
+    }
+    return { title: `${meta.cardTitle} ${paragraphIndex + 1}`, body: value };
+  }
+
+  function renderStructuredChapterVisual(chapter) {
+    const meta = STRUCTURED_CHAPTER_META[chapter.id] || {
+      kicker: "Luận giải",
+      title: "Các ý chính cần đọc",
+      cardTitle: "Luận điểm",
+    };
+    const items = arrayOf(chapter.paragraphs)
+      .map((paragraph, index) => splitStructuredParagraph(chapter.id, paragraph, index))
+      .filter((item) => item.body);
+    if (!items.length) return null;
+    const visual = document.createElement("aside");
+    visual.className = "bte-report-doc__visual bte-report-doc__visual--structured";
+    visual.setAttribute("aria-label", meta.title);
+    const head = document.createElement("header");
+    head.className = "bte-report-doc__visual-head";
+    const titleBox = document.createElement("div");
+    appendText(titleBox, "p", "bte-report-doc__visual-kicker", meta.kicker);
+    appendText(titleBox, "h4", "bte-report-doc__visual-title", meta.title);
+    head.appendChild(titleBox);
+    visual.appendChild(head);
+    const grid = document.createElement("div");
+    grid.className = "bte-report-doc__structured-grid";
+    grid.setAttribute("data-structured-chapter", chapter.id);
+    items.forEach((item, index) => {
+      const card = document.createElement("article");
+      card.className = "bte-report-doc__structured-card";
+      appendText(card, "span", "bte-report-doc__structured-index", String(index + 1).padStart(2, "0"));
+      appendText(card, "h6", "", item.title);
+      appendText(card, "p", "", item.body);
+      grid.appendChild(card);
+    });
+    visual.appendChild(grid);
+    return visual;
+  }
   function renderChapterVisual(chapter, model) {
     if (chapter.id === "five_elements") return renderFiveElementsVisual(model.fiveElements);
     if (chapter.id === "luck_cycles") return renderLuckVisual(model.luck);
     if (chapter.id === "life_domains") return renderLifeDomainsVisual(chapter);
+    if (usesStructuredVisual(chapter)) return renderStructuredChapterVisual(chapter);
     return null;
   }
 
@@ -745,7 +850,7 @@
       appendText(chapterHead, "h3", "bte-report-doc__chapter-title", chapter.title);
       chapterNode.appendChild(chapterHead);
       const lead = chapter.paragraphs[0];
-      const visualConsumesParagraphs = chapter.id === "life_domains";
+      const visualConsumesParagraphs = chapter.id === "life_domains" || usesStructuredVisual(chapter);
       if (!visualConsumesParagraphs && lead) appendText(chapterNode, "p", "bte-report-doc__lead", lead);
       const visual = renderChapterVisual(chapter, model);
       if (visual) chapterNode.appendChild(visual);
@@ -1444,6 +1549,43 @@
         color: var(--cdash-text, #111827);
         font-size: var(--font-size-caption, 0.875rem);
         line-height: 1.55;
+      }      .bte-report-doc__structured-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-3, 12px);
+      }
+      .bte-report-doc__structured-grid[data-structured-chapter="synthesis"],
+      .bte-report-doc__structured-grid[data-structured-chapter="recommendations"] {
+        grid-template-columns: 1fr;
+      }
+      .bte-report-doc__structured-card {
+        display: grid;
+        gap: var(--space-2, 8px);
+        min-width: 0;
+        padding: var(--space-3, 12px);
+        border: 1px solid var(--cdash-border, #dfe3ea);
+        border-radius: 8px;
+        background: #ffffff;
+      }
+      .bte-report-doc__structured-index {
+        color: #0f9f75;
+        font-family: var(--font-family-display, inherit);
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+      }
+      .bte-report-doc__structured-card h6,
+      .bte-report-doc__structured-card p {
+        margin: 0;
+      }
+      .bte-report-doc__structured-card h6 {
+        color: var(--cdash-text, #111827);
+        font-size: 1rem;
+        font-weight: 800;
+      }
+      .bte-report-doc__structured-card p {
+        color: var(--cdash-text, #111827);
+        font-size: var(--font-size-caption, 0.875rem);
+        line-height: 1.58;
       }
       @media (max-width: 767px) {
         .bte-report-doc {
@@ -1483,7 +1625,8 @@
         }
         .bte-report-doc__element-chart,
         .bte-report-doc__luck-list,
-        .bte-report-doc__domain-grid {
+        .bte-report-doc__domain-grid,
+        .bte-report-doc__structured-grid {
           grid-template-columns: 1fr;
         }
         .bte-report-doc__element-chart {

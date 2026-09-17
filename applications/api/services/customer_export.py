@@ -235,6 +235,55 @@ _DOMAIN_GROUP_RULES: tuple[tuple[str, str, str, tuple[str, ...]], ...] = (
     ),
 )
 
+_STRUCTURED_CHAPTER_IDS = {
+    "four_pillars",
+    "day_master",
+    "strength_structure_useful_god",
+    "ten_gods",
+    "shen_sha",
+    "bone_weight",
+    "palace_feng_shui",
+    "synthesis",
+    "recommendations",
+}
+
+_STRUCTURED_CHAPTER_META = {
+    "four_pillars": ("Khung tứ trụ", "Bốn trụ và vai trò từng cung", "Luận trụ"),
+    "day_master": ("Nhật chủ", "Khí chất cốt lõi của mệnh", "Luận Nhật chủ"),
+    "strength_structure_useful_god": ("Trục cân bằng", "Thân vượng, Mệnh cục và Dụng thần", "Luận trục"),
+    "ten_gods": ("Thập thần", "Vai trò đời sống qua từng tín hiệu", "Luận Thập thần"),
+    "shen_sha": ("Thần sát", "Tín hiệu bổ sung cần quan sát", "Luận Thần sát"),
+    "bone_weight": ("Cân xương", "Nền lượng và nhịp tích lũy", "Luận Cân xương"),
+    "palace_feng_shui": ("Cung Phi", "Nhóm trạch và phong thủy ứng dụng", "Luận Cung Phi"),
+    "synthesis": ("Tổng hợp", "Điểm mạnh, rủi ro và trọng tâm hành động", "Kết luận"),
+    "recommendations": ("Khuyến nghị", "Việc nên ưu tiên sau khi đọc lá số", "Khuyến nghị"),
+}
+
+_STRUCTURED_PREFIX_RULES: tuple[tuple[str, str], ...] = (
+    ("Trụ Năm", "Trụ năm"),
+    ("Trụ Tháng", "Trụ tháng"),
+    ("Trụ Ngày", "Trụ ngày"),
+    ("Trụ Giờ", "Trụ giờ"),
+    ("Nhật chủ", "Nhật chủ"),
+    ("Thân vượng", "Thế thân"),
+    ("Thân nhược", "Thế thân"),
+    ("Thân trung", "Thế thân"),
+    ("Mệnh cục", "Mệnh cục"),
+    ("Dụng thần", "Dụng thần"),
+    ("Hỷ thần", "Hỷ thần"),
+    ("Kỵ thần", "Kỵ thần"),
+    ("Cung Phi", "Cung Phi/Mệnh quái"),
+    ("Mệnh quái", "Cung Phi/Mệnh quái"),
+    ("Đông Tứ", "Nhóm trạch"),
+    ("Tây Tứ", "Nhóm trạch"),
+    ("Nhóm trạch", "Nhóm trạch"),
+    ("Điền trạch", "Điền trạch"),
+    ("Phong thủy", "Phong thủy ứng dụng"),
+    ("Tóm tắt", "Tóm tắt"),
+    ("Điểm mạnh", "Điểm mạnh"),
+    ("Rủi ro", "Rủi ro"),
+    ("Hướng đi", "Hướng đi"),
+)
 
 def _has_modern_report(report_input: ReportInputV1) -> bool:
     modern = report_input.modern_report
@@ -389,15 +438,16 @@ def _chapter_html(chapter: Mapping[str, Any], report_input: ReportInputV1) -> st
     content: list[str] = [f"<h2>{escape(title)}</h2>"]
     if chapter_id == "five_elements":
         content.append(_five_elements_chart_html(report_input))
-    if chapter_id == "life_domains":
+    elif chapter_id == "life_domains":
         content.append(_life_domains_html(paragraphs))
+    elif _uses_structured_chapter(chapter_id):
+        content.append(_structured_chapter_html(chapter_id, paragraphs))
     else:
         content.extend(f"<p>{escape(paragraph)}</p>" for paragraph in paragraphs)
     if bullets:
         items = "".join(f"<li>{escape(item)}</li>" for item in bullets)
         content.append(f"<ul>{items}</ul>")
     return f'<section class="chapter" id="{escape(chapter_id)}">{"".join(content)}</section>'
-
 
 def _five_elements_chart_html(report_input: ReportInputV1) -> str:
     values = _five_element_values(report_input)
@@ -439,6 +489,58 @@ def _life_domains_html(paragraphs: list[str]) -> str:
         )
     return '<aside class="domains">' + "".join(sections) + "</aside>"
 
+def _uses_structured_chapter(chapter_id: str) -> bool:
+    return chapter_id in _STRUCTURED_CHAPTER_IDS
+
+
+def _split_structured_paragraph(chapter_id: str, paragraph: str, index: int) -> tuple[str, str]:
+    value = paragraph.strip()
+    _kicker, _title, card_title = _STRUCTURED_CHAPTER_META.get(chapter_id, ("Luận giải", "Các ý chính cần đọc", "Luận điểm"))
+    lowered = value.lower()
+    colon = value.find(":")
+    for prefix, title in _STRUCTURED_PREFIX_RULES:
+        if lowered.startswith(prefix.lower()):
+            body = value[colon + 1 :].strip() if colon > 0 else value
+            return title, body
+    if 0 < colon < 62:
+        return value[:colon].strip(), value[colon + 1 :].strip()
+    return f"{card_title} {index + 1}", value
+
+
+def _structured_chapter_html(chapter_id: str, paragraphs: list[str]) -> str:
+    kicker, title, _card_title = _STRUCTURED_CHAPTER_META.get(chapter_id, ("Luận giải", "Các ý chính cần đọc", "Luận điểm"))
+    cards: list[str] = []
+    for index, paragraph in enumerate(paragraphs):
+        card_title, body = _split_structured_paragraph(chapter_id, paragraph, index)
+        if not body:
+            continue
+        cards.append(
+            '<article class="structured-card">'
+            f'<span>{index + 1:02d}</span>'
+            f"<h3>{escape(card_title)}</h3>"
+            f"<p>{escape(body)}</p>"
+            "</article>"
+        )
+    if not cards:
+        return ""
+    return (
+        '<aside class="visual structured">'
+        f'<p class="visual-kicker">{escape(kicker)}</p>'
+        f"<h3>{escape(title)}</h3>"
+        f'<div class="structured-grid" data-structured-chapter="{escape(chapter_id)}">{"".join(cards)}</div>'
+        "</aside>"
+    )
+
+
+def _docx_structured_chapter(document: Document, chapter_id: str, paragraphs: list[str]) -> None:
+    kicker, title, _card_title = _STRUCTURED_CHAPTER_META.get(chapter_id, ("Luận giải", "Các ý chính cần đọc", "Luận điểm"))
+    document.add_paragraph(f"{kicker}: {title}")
+    for index, paragraph in enumerate(paragraphs):
+        card_title, body = _split_structured_paragraph(chapter_id, paragraph, index)
+        if not body:
+            continue
+        document.add_heading(f"{index + 1:02d}. {card_title}", level=3)
+        document.add_paragraph(body)
 
 def _render_modern_report_docx(report_input: ReportInputV1, output_path: Path) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -463,8 +565,10 @@ def _render_modern_report_docx(report_input: ReportInputV1, output_path: Path) -
         paragraphs = [str(item).strip() for item in chapter.get("paragraphs", []) if str(item).strip()] if isinstance(chapter.get("paragraphs"), list) else []
         if chapter_id == "five_elements":
             _docx_five_elements_table(document, report_input)
-        if chapter_id == "life_domains":
+        elif chapter_id == "life_domains":
             _docx_life_domains(document, paragraphs)
+        elif _uses_structured_chapter(chapter_id):
+            _docx_structured_chapter(document, chapter_id, paragraphs)
         else:
             for paragraph in paragraphs:
                 document.add_paragraph(paragraph)
@@ -632,6 +736,13 @@ p { margin: 0 0 10px; }
 .domain-card { break-inside: avoid; border: 1px solid #dfe3ea; border-radius: 8px; background: #ffffff; padding: 12px; }
 .domain-card span { color: #0f9f75; font-weight: 800; }
 .domain-card small { display: block; color: #0f9f75; font-weight: 800; margin: -2px 0 6px; }
+.visual-kicker { color: #5f6b7a; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 4px; }
+.structured-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.structured-grid[data-structured-chapter="synthesis"], .structured-grid[data-structured-chapter="recommendations"] { grid-template-columns: 1fr; }
+.structured-card { break-inside: avoid; border: 1px solid #dfe3ea; border-radius: 8px; background: #ffffff; padding: 12px; }
+.structured-card span { color: #0f9f75; font-weight: 800; }
+.structured-card h3 { margin: 2px 0 6px; font-size: 14px; }
+.structured-card p { margin: 0; }
 ul { margin: 0 0 10px; padding-left: 18px; }
 .footer { border-top: 1px solid #dfe3ea; color: #64748b; font-size: 11px; margin-top: 26px; padding-top: 10px; }
 """

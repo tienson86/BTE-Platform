@@ -203,6 +203,119 @@ function ReportLifeDomainsVisual({
   );
 }
 
+const STRUCTURED_CHAPTER_IDS = new Set([
+  "four_pillars",
+  "day_master",
+  "strength_structure_useful_god",
+  "ten_gods",
+  "shen_sha",
+  "bone_weight",
+  "palace_feng_shui",
+  "synthesis",
+  "recommendations",
+]);
+
+const STRUCTURED_CHAPTER_META: Record<string, { readonly kicker: string; readonly title: string; readonly cardTitle: string }> = {
+  four_pillars: { kicker: "Khung tứ trụ", title: "Bốn trụ và vai trò từng cung", cardTitle: "Luận trụ" },
+  day_master: { kicker: "Nhật chủ", title: "Khí chất cốt lõi của mệnh", cardTitle: "Luận Nhật chủ" },
+  strength_structure_useful_god: { kicker: "Trục cân bằng", title: "Thân vượng, Mệnh cục và Dụng thần", cardTitle: "Luận trục" },
+  ten_gods: { kicker: "Thập thần", title: "Vai trò đời sống qua từng tín hiệu", cardTitle: "Luận Thập thần" },
+  shen_sha: { kicker: "Thần sát", title: "Tín hiệu bổ sung cần quan sát", cardTitle: "Luận Thần sát" },
+  bone_weight: { kicker: "Cân xương", title: "Nền lượng và nhịp tích lũy", cardTitle: "Luận Cân xương" },
+  palace_feng_shui: { kicker: "Cung Phi", title: "Nhóm trạch và phong thủy ứng dụng", cardTitle: "Luận Cung Phi" },
+  synthesis: { kicker: "Tổng hợp", title: "Điểm mạnh, rủi ro và trọng tâm hành động", cardTitle: "Kết luận" },
+  recommendations: { kicker: "Khuyến nghị", title: "Việc nên ưu tiên sau khi đọc lá số", cardTitle: "Khuyến nghị" },
+};
+
+const STRUCTURED_PREFIX_RULES: ReadonlyArray<readonly [RegExp, string]> = [
+  [/^Trụ\s+Năm/i, "Trụ năm"],
+  [/^Trụ\s+Tháng/i, "Trụ tháng"],
+  [/^Trụ\s+Ngày/i, "Trụ ngày"],
+  [/^Trụ\s+Giờ/i, "Trụ giờ"],
+  [/^Nhật\s+chủ/i, "Nhật chủ"],
+  [/^Thân\s+vượng|^Thân\s+nhược|^Thân\s+trung/i, "Thế thân"],
+  [/^Mệnh\s+cục/i, "Mệnh cục"],
+  [/^Dụng\s+thần/i, "Dụng thần"],
+  [/^Hỷ\s+thần/i, "Hỷ thần"],
+  [/^Kỵ\s+thần/i, "Kỵ thần"],
+  [/^Cung\s+Phi|^Mệnh\s+quái/i, "Cung Phi/Mệnh quái"],
+  [/^Đông\s+Tứ|^Tây\s+Tứ|^Nhóm\s+trạch/i, "Nhóm trạch"],
+  [/^Điền\s+trạch/i, "Điền trạch"],
+  [/^Phong\s+thủy/i, "Phong thủy ứng dụng"],
+  [/^Tóm\s+tắt/i, "Tóm tắt"],
+  [/^Điểm\s+mạnh/i, "Điểm mạnh"],
+  [/^Rủi\s+ro/i, "Rủi ro"],
+  [/^Hướng\s+đi/i, "Hướng đi"],
+];
+
+type StructuredItem = {
+  readonly title: string;
+  readonly body: string;
+};
+
+function shouldUseStructuredVisual(chapterId: string): boolean {
+  return STRUCTURED_CHAPTER_IDS.has(chapterId);
+}
+
+function splitStructuredParagraph(chapterId: string, paragraph: string, index: number): StructuredItem {
+  const value = paragraph.trim();
+  const meta = STRUCTURED_CHAPTER_META[chapterId] ?? {
+    kicker: "Luận giải",
+    title: "Các ý chính cần đọc",
+    cardTitle: "Luận điểm",
+  };
+  const prefix = STRUCTURED_PREFIX_RULES.find(([pattern]) => pattern.test(value));
+  const colonIndex = value.indexOf(":");
+  if (prefix) {
+    const body = colonIndex > 0 ? value.slice(colonIndex + 1).trim() : value;
+    return { title: prefix[1], body };
+  }
+  if (colonIndex > 0 && colonIndex < 62) {
+    return {
+      title: value.slice(0, colonIndex).trim(),
+      body: value.slice(colonIndex + 1).trim(),
+    };
+  }
+  return {
+    title: `${meta.cardTitle} ${index + 1}`,
+    body: value,
+  };
+}
+
+function ReportStructuredChapterVisual({
+  chapter,
+}: {
+  readonly chapter: BaziReportDocumentChapterView;
+}): ReactNode {
+  const meta = STRUCTURED_CHAPTER_META[chapter.id] ?? {
+    kicker: "Luận giải",
+    title: "Các ý chính cần đọc",
+    cardTitle: "Luận điểm",
+  };
+  const items = chapter.paragraphs
+    .map((paragraph, index) => splitStructuredParagraph(chapter.id, paragraph, index))
+    .filter((item) => item.body);
+  if (!items.length) return null;
+  return (
+    <aside className="bte-report-doc__visual bte-report-doc__visual--structured" aria-label={meta.title}>
+      <header className="bte-report-doc__visual-head">
+        <div>
+          <p className="bte-report-doc__visual-kicker">{meta.kicker}</p>
+          <h4 className="bte-report-doc__visual-title">{meta.title}</h4>
+        </div>
+      </header>
+      <div className="bte-report-doc__structured-grid" data-structured-chapter={chapter.id}>
+        {items.map((item, index) => (
+          <article key={`${chapter.id}-${index}`} className="bte-report-doc__structured-card">
+            <span className="bte-report-doc__structured-index">{String(index + 1).padStart(2, "0")}</span>
+            <h6>{item.title}</h6>
+            <p>{item.body}</p>
+          </article>
+        ))}
+      </div>
+    </aside>
+  );
+}
 function ReportChapterVisual({
   chapter,
   model,
@@ -219,6 +332,9 @@ function ReportChapterVisual({
   if (chapter.id === "life_domains") {
     return <ReportLifeDomainsVisual paragraphs={chapter.paragraphs} />;
   }
+  if (shouldUseStructuredVisual(chapter.id)) {
+    return <ReportStructuredChapterVisual chapter={chapter} />;
+  }
   return null;
 }
 
@@ -233,7 +349,7 @@ function ReportChapter({
 }): ReactNode {
   const chapterNumber = String(index + 1).padStart(2, "0");
   const [leadParagraph, ...bodyParagraphs] = chapter.paragraphs;
-  const visualConsumesParagraphs = chapter.id === "life_domains";
+  const visualConsumesParagraphs = chapter.id === "life_domains" || shouldUseStructuredVisual(chapter.id);
 
   return (
     <section
