@@ -6,6 +6,10 @@ echo ========================================
 echo  BTE Platform — starting all services
 echo ========================================
 
+echo Reloading BTE services to apply the latest rules...
+call "%~dp0stop_all.bat"
+timeout /t 2 /nobreak >nul
+
 if not exist "..\..\logs" mkdir "..\..\logs"
 if not exist "..\..\reports" mkdir "..\..\reports"
 if not exist "..\..\applications\data" mkdir "..\..\applications\data"

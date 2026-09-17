@@ -562,10 +562,25 @@ def start_all(*, open_browser: bool = True) -> int:
     env = load_environment()
     services = load_services()
     print("-" * 40, flush=True)
+
+    print("STEP 5.6: stop existing services before reload", flush=True)
+    for spec in services:
+        if not probe_health(spec).running:
+            continue
+        outcome = stop_service(spec)
+        print(f"  -> {outcome}", flush=True)
+        if probe_health(spec).running:
+            print(
+                f"STEP STOP: {spec.label} is still running on port {spec.port}; "
+                "the old code was not replaced.",
+                flush=True,
+            )
+            return 1
+
     print("Starting services...", flush=True)
 
     for spec in services:
-        print(f"STEP 5.6: start {spec.key}", flush=True)
+        print(f"STEP 5.7: start {spec.key}", flush=True)
         print(f"  -> {spec.label} ({spec.base_url})", flush=True)
         try:
             _start_service(spec, env)
@@ -575,7 +590,7 @@ def start_all(*, open_browser: bool = True) -> int:
             print(f"STEP STOP: service start failed at {spec.key}", flush=True)
             return 1
 
-    print("STEP 5.7: wait_healthy", flush=True)
+    print("STEP 5.8: wait_healthy", flush=True)
     print("Waiting for health...", flush=True)
     failed = False
     for spec in services:
@@ -593,7 +608,7 @@ def start_all(*, open_browser: bool = True) -> int:
         return 1
 
     if open_browser:
-        print("STEP 5.8: open_browser", flush=True)
+        print("STEP 5.9: open_browser", flush=True)
         try:
             from launcher.open_browser import open_portal
 

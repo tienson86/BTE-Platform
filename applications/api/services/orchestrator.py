@@ -450,6 +450,14 @@ class OrchestratorService:
             payload.get("identity") if isinstance(payload.get("identity"), dict) else None,
             calendar_payload.get("ganzhi_routing") if isinstance(calendar_payload, dict) else None,
         )
+        identity_payload = payload.get("identity")
+        if isinstance(identity_payload, dict):
+            four = identity_payload.get("four_pillars")
+            year_identity = four.get("year") if isinstance(four, dict) else None
+            personal_cung = str(calendar_payload.get("cung_phi") or "").strip()
+            if isinstance(year_identity, dict) and personal_cung:
+                year_identity["cung_phi"] = personal_cung
+                year_identity["cung_phi_basis"] = "personal_birth_year_gender"
         consulting = publish_commercial_consulting(
             payload,
             identity=payload.get("identity") if isinstance(payload.get("identity"), dict) else None,
@@ -780,6 +788,13 @@ class OrchestratorService:
         completed.append("bazi")
         bazi_payload = analysis.bazi_dict()
         stamp_bazi_source_nguyen(bazi_payload, calendar.ganzhi_routing)
+        year_pillar = bazi_payload.get("year_pillar")
+        if isinstance(year_pillar, dict) and calendar.cung_phi:
+            routed_cung = str(year_pillar.get("cung_phi") or "").strip()
+            if routed_cung:
+                year_pillar["ganzhi_cung_phi"] = routed_cung
+            year_pillar["cung_phi"] = calendar.cung_phi
+            year_pillar["cung_phi_basis"] = "personal_birth_year_gender"
         payload["bazi"] = bazi_payload
         payload["bazi_source"] = analysis.meta.bazi_source
         self._attach_can_xuong(payload, calendar, bazi_chart)
@@ -790,7 +805,11 @@ class OrchestratorService:
         # ----- Stage 3: Feng Shui (optional soft-fail) -----
         feng_view: dict[str, Any] | None
         try:
-            feng = self.feng_shui_engine.calculate(year=int(year), gender=gender)
+            # Keep Feng Shui identity aligned with the canonical lunar birth year.
+            feng = self.feng_shui_engine.calculate(
+                year=int(calendar.lunar_year),
+                gender=gender,
+            )
             feng_view = feng.to_dict()
             payload["feng_shui"] = feng_view
         except FengShuiEngineError:

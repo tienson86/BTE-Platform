@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import Any
 
 from .algorithms.ganzhi import GanzhiAlgorithm
-from .cung_phi import element_label_for_cung, personal_cung_phi_from_year_ganzhi
+from .cung_phi import calculate_cung_phi, element_label_for_cung
 from .ganzhi_routing import hour_ganzhi_from_day_stem, routing_payload
 from .julian.julian import JulianDay
 from .lunar.converter import solar_to_lunar
@@ -207,12 +207,9 @@ class CalendarEngine:
         )
         year_route = routing.get("year") if isinstance(routing, dict) else None
         year_route = year_route if isinstance(year_route, dict) else {}
-        cung = personal_cung_phi_from_year_ganzhi(
-            year_ganzhi=str(year_route.get("ganzhi") or year_resolved.ganzhi),
-            tam_nguyen=str(year_route.get("source_nguyen") or cycle.tam_nguyen),
-            reference_year=year,
-            gender=gender,
-        )
+        # Personal Cung Phi follows the lunar birth year. A birth before Lunar
+        # New Year therefore still belongs to the preceding year.
+        cung = calculate_cung_phi(year=parts.year, gender=gender) if gender else None
         hanh = None if cung is None else element_label_for_cung(cung.cung_phi)
         return CalendarResult(
             solar=solar,

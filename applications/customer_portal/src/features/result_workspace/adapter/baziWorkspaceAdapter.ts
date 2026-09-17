@@ -141,12 +141,12 @@ function bindIdentityPillar(raw: unknown, baziPillar: unknown): TuTruSlotPillar 
     branch: text(cell.branch) || text(extra.branch),
     canChi: text(cell.can_chi) || text(extra.ganzhi) || text(extra.can_chi),
     napAm: text(cell.nayin_element),
-    cungPhi: text(extra.cung_phi) || text(cell.cung_phi),
+    cungPhi: text(cell.cung_phi) || text(extra.cung_phi),
   };
 }
 
 function bindFourPillars(data: AnalysisDataDto): BaziWorkspaceViewModel["fourPillars"] {
-  /** Published BaZi Cung Phi first, then identity.four_pillars. No frontend lookup. */
+  /** Canonical display identity first; BaZi routing remains the diagnostic fallback. */
   const four = asRecord(identityOf(data).four_pillars);
   const bazi = asRecord(data.bazi);
   return {

@@ -3,6 +3,7 @@
 from applications.production.engine_runner import ProductionEngineRunner
 from applications.production.fixtures.case_0002_readiness import CASE_0002_REQUEST
 from applications.production.models import ProductionRequest
+from applications.api.services.orchestrator import OrchestratorService
 
 
 HUNG_REQUEST = ProductionRequest(
@@ -103,6 +104,20 @@ HUONG_MAI_REQUEST = ProductionRequest(
     export_pdf=False,
 )
 
+NGOC_REQUEST = ProductionRequest(
+    case_id="NGOC-REGRESSION",
+    year=1987,
+    month=9,
+    day=25,
+    hour=3,
+    minute=31,
+    gender="female",
+    timezone="Asia/Ho_Chi_Minh",
+    full_name="Quach Thi Ngoc",
+    birth_place="Phu Tho, Viet Nam",
+    export_pdf=False,
+)
+
 
 def test_hot_balanced_wood_output_uses_water_before_wealth_fallback() -> None:
     analysis = ProductionEngineRunner().run(CASE_0002_REQUEST).analysis
@@ -155,7 +170,7 @@ def test_cold_balanced_metal_sat_resource_uses_fire_before_wealth_fallback() -> 
     )
 
 
-def test_uncovered_balanced_chart_is_not_forced_into_wealth_fallback() -> None:
+def test_uncovered_balanced_chart_uses_controlled_climate_fallback() -> None:
     request = ProductionRequest(
         case_id="BALANCED-SAFETY-GATE",
         year=1984,
@@ -172,9 +187,12 @@ def test_uncovered_balanced_chart_is_not_forced_into_wealth_fallback() -> None:
     analysis = ProductionEngineRunner().run(request).analysis
 
     assert analysis.strength.strength_level == "balanced"
-    assert analysis.useful_god.success is False
-    assert analysis.useful_god.overall_incomplete is True
-    assert analysis.useful_god.winning_rule_id == ""
+    assert analysis.useful_god.success is True
+    assert analysis.useful_god.overall_incomplete is False
+    assert analysis.useful_god.winning_rule_id in {
+        "str_balanced_cold_cool_climate_fallback",
+        "str_balanced_warm_hot_climate_fallback",
+    }
     assert "str_005" not in analysis.useful_god.matched_rules
 
 
@@ -263,3 +281,66 @@ def test_hot_snake_month_balanced_water_has_specific_useful_god() -> None:
         "Thủy · Quý · Tỷ Kiên / Kim · Canh · Chính Ấn / "
         "Kim · Tân · Thiên Ấn"
     )
+
+
+def test_cool_rooster_month_balanced_fire_wealth_uses_wood_then_fire() -> None:
+    result = ProductionEngineRunner().run(NGOC_REQUEST)
+    analysis = result.analysis
+
+    assert analysis.strength.strength_level == "balanced"
+    assert analysis.bazi.day_master_element == "Hỏa"
+    assert analysis.bazi.month_pillar.branch == "Dậu"
+    assert analysis.temperature.temperature_level == "cool"
+    assert analysis.pattern.pattern == "thien_tai"
+    assert analysis.useful_god.winning_rule_id == (
+        "str_balanced_cool_rooster_fire_wealth"
+    )
+    assert analysis.useful_god.overall_incomplete is False
+    assert analysis.useful_god.useful_display == "Mộc · Giáp · Chính Ấn"
+    assert analysis.useful_god.favorable_display == (
+        "Mộc · Ất · Thiên Ấn / Hỏa · Bính · Kiếp Tài / "
+        "Hỏa · Đinh · Tỷ Kiên"
+    )
+    assert analysis.useful_god.unfavorable_display == (
+        "Kim · Canh · Chính Tài / Kim · Tân · Thiên Tài / "
+        "Thủy · Nhâm · Chính Quan / Thủy · Quý · Thất Sát / "
+        "Thổ · Mậu · Thương Quan / Thổ · Kỷ · Thực Thần"
+    )
+
+
+def test_1987_female_year_row_publishes_personal_khon_cung_phi() -> None:
+    payload = OrchestratorService().analyze(
+        year=1987,
+        month=9,
+        day=25,
+        hour=3,
+        minute=31,
+        gender="female",
+        timezone="Asia/Ho_Chi_Minh",
+    )
+    year = payload["bazi"]["year_pillar"]
+
+    assert payload["calendar"]["cung_phi"] == "Khôn"
+    assert year["cung_phi"] == "Khôn"
+    assert year["ganzhi_cung_phi"] == "Tốn"
+    assert year["cung_phi_basis"] == "personal_birth_year_gender"
+    assert payload["identity"]["four_pillars"]["year"]["cung_phi"] == "Khôn"
+
+
+def test_pre_tet_1987_male_publishes_lunar_1986_khon_everywhere() -> None:
+    payload = OrchestratorService().analyze(
+        year=1987,
+        month=1,
+        day=21,
+        hour=4,
+        minute=31,
+        gender="male",
+        timezone="Asia/Ho_Chi_Minh",
+    )
+    year = payload["bazi"]["year_pillar"]
+
+    assert payload["calendar"]["lunar_year"] == 1986
+    assert payload["calendar"]["cung_phi"] == "Khôn"
+    assert year["cung_phi"] == "Khôn"
+    assert year["ganzhi_cung_phi"] == "Khôn"
+    assert payload["identity"]["four_pillars"]["year"]["cung_phi"] == "Khôn"

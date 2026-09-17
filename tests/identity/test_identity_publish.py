@@ -165,6 +165,15 @@ def test_four_pillars_publish_stem_branch_can_chi_nayin_cung_phi() -> None:
         assert set(PILLAR_FIELDS).issubset(cell)
 
 
+def test_year_row_publishes_personal_cung_phi_for_1987_female() -> None:
+    calendar = CalendarEngine().build(1987, 9, 25, 3, 31, gender="female")
+    chart = BaziEngine().build(1987, 9, 25, 3, 31, gender="female")
+    identity = build_canonical_identity(bazi=chart, calendar=calendar).to_dict()
+
+    assert calendar.cung_phi == "Khôn"
+    assert identity["four_pillars"]["year"]["cung_phi"] == "Khôn"
+
+
 def test_person_publishes_existing_canonical_values() -> None:
     calendar = CalendarEngine().build(2026, 8, 28, 12, 0)
     person = person_identity_from_sources(

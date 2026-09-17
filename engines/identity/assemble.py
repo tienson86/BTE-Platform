@@ -275,6 +275,11 @@ def build_canonical_identity(
         if bazi is not None
         else None
     )
+    # The compact Tứ Trụ table presents the person's Cung Phi in the Year row.
+    # The per-Ganzhi palace remains available in bazi/calendar routing diagnostics.
+    personal_cung_phi = _text(cal.get("cung_phi") or cal.get("menh_quai"))
+    if four is not None and personal_cung_phi:
+        four.year.cung_phi = personal_cung_phi
     return CanonicalIdentity(
         person=person_identity_from_sources(
             person=person,

@@ -1,4 +1,4 @@
-"""CP-BUG-002: personal Cung Phi follows Tam Nguyên year routing, not birth-year digits."""
+"""CP-BUG-002: personal Cung Phi follows lunar birth year + gender only."""
 
 from __future__ import annotations
 
@@ -11,21 +11,22 @@ from engines.calendar_engine.cung_phi import (
 )
 from engines.calendar_engine.engine import CalendarEngine
 from engines.date_selection.service import DateSelectionService
+from engines.feng_shui_engine import FengShuiEngine
 
 
-def test_1987_male_personal_cung_is_khon_not_ton() -> None:
+def test_pre_tet_1987_male_uses_lunar_1986_khon() -> None:
     calendar = CalendarEngine().build(1987, 1, 21, 4, 30, gender="male")
     routing = calendar.ganzhi_routing or {}
     year_route = routing.get("year") or {}
-    birth_year_digits = calculate_cung_phi(year=1987, gender="male")
+    lunar_year_result = calculate_cung_phi(year=1986, gender="male")
+    assert calendar.lunar_year == 1986
     assert year_route["cung_phi"] == "Khôn"
     assert calendar.cung_phi == "Khôn"
     assert calendar.menh_quai == "Khôn"
     assert calendar.hanh_cung == "Thổ"
     assert calendar.nhom_trach == "Tây Tứ Trạch"
     assert calendar.house_group == "Tây Tứ Trạch"
-    assert birth_year_digits.cung_phi == "Tốn"
-    assert calendar.cung_phi != birth_year_digits.cung_phi
+    assert calendar.cung_phi == lunar_year_result.cung_phi
     assert calendar.cung_phi == year_route["cung_phi"]
 
 
@@ -76,3 +77,23 @@ def test_good_date_person_matches_calendar_personal_cung() -> None:
     assert person.trach.cung == calendar.cung_phi == "Khôn"
     assert person.trach.element_label == "Thổ"
     assert person.trach.trach_group_label == "Tây Tứ Trạch"
+
+
+def test_personal_cung_phi_is_consistent_for_both_genders_across_cycle() -> None:
+    calendar_engine = CalendarEngine()
+    feng_shui_engine = FengShuiEngine()
+    for year in range(1924, 2104):
+        for gender in ("male", "female"):
+            calendar = calendar_engine.build(year, 6, 15, 12, 0, gender=gender)
+            expected = calculate_cung_phi(year=calendar.lunar_year, gender=gender)
+            feng = feng_shui_engine.calculate(
+                year=calendar.lunar_year,
+                gender=gender,
+            )
+
+            assert calendar.cung_phi == expected.cung_phi
+            assert calendar.menh_quai == expected.menh_quai
+            assert calendar.house_group == expected.house_group
+            assert calendar.gua_number == expected.gua_number
+            assert feng.gua_name == expected.cung_phi
+            assert feng.gua_number == expected.gua_number

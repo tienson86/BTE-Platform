@@ -197,7 +197,7 @@ def test_weak_chart_selects_resource_or_fallback() -> None:
     assert without_resource.useful_ten_god == "Thiên Ấn"
 
 
-def test_hot_climate_does_not_use_score_axis() -> None:
+def test_hot_balanced_chart_uses_controlled_climate_fallback() -> None:
     result = _calculate(
         UsefulGodContext(
             day_master="Canh",
@@ -207,12 +207,12 @@ def test_hot_climate_does_not_use_score_axis() -> None:
             element_distribution={"Mộc": 2, "Hỏa": 2, "Thổ": 2, "Kim": 2, "Thủy": 2},
         )
     )
-    assert result.success is False
-    assert result.overall_incomplete is True
-    assert result.winning_rule_id == ""
-    assert result.useful_stem == ""
-    assert result.useful_element == ""
-    assert result.useful_ten_god == ""
+    assert result.success is True
+    assert result.overall_incomplete is False
+    assert result.winning_rule_id == "str_balanced_warm_hot_climate_fallback"
+    assert result.useful_stem == "Nhâm"
+    assert result.useful_element == "Thủy"
+    assert result.useful_ten_god == "Thực Thần"
     assert result.climate_rule_id == "sea_002"
     assert result.climate_candidate == "Nhâm"
 
