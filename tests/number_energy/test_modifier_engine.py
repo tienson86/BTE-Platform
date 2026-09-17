@@ -40,6 +40,15 @@ def test_108_hidden_wu_gui() -> None:
     assert item.state == "HIDDEN"
 
 
+def test_601_keeps_source_digits_for_liu_sha() -> None:
+    parsed = parse_number_string("601")
+    occurrences, _undefined = generate_modifier_pairs(parsed)
+    item = occurrences[0]
+    assert item.energy_id == "liu_sha"
+    assert item.pair_digits == "61"
+    assert item.source_digits == "601"
+
+
 def test_consecutive_modifiers_are_undefined() -> None:
     parsed = parse_number_string("1003")
     occurrences, undefined = generate_modifier_pairs(parsed)

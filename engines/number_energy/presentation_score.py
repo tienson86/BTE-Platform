@@ -321,6 +321,11 @@ def _negative_chain(
 
 def _modifier_stability(occurrences: tuple[EnergyOccurrence, ...]) -> int:
     """D2 0–4 from modifier effects already computed by the modifier engine."""
+    if any(
+        item.via_modifier == 0 and item.display_name in CHALLENGING_LABELS
+        for item in occurrences
+    ):
+        return 0
     if any(item.state == "AMPLIFIED" and item.display_name in CHALLENGING_LABELS for item in occurrences):
         return 1
     if any(item.state == "HIDDEN" and item.display_name in SUPPORTIVE_LABELS for item in occurrences):

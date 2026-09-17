@@ -75,6 +75,25 @@ def test_golden_phone_pair_summary_counts_pairs_not_groups() -> None:
     assert payload["terminal_pair_digits"] == "86"
 
 
+def test_zero_modifier_keeps_three_digits_and_explains_heavier_hung_energy() -> None:
+    liu_sha = NumberEnergyEngine().analyze(
+        "601", purpose_context="id_number"
+    ).pair_occurrences[0].to_dict()
+    wu_gui = NumberEnergyEngine().analyze(
+        "108", purpose_context="id_number"
+    ).pair_occurrences[0].to_dict()
+
+    assert liu_sha["pair_digits"] == "601"
+    assert liu_sha["display_name"] == "Lục Sát"
+    assert "u buồn" in liu_sha["modifier_note"]
+    assert "cảm xúc tiêu cực" in liu_sha["modifier_note"]
+
+    assert wu_gui["pair_digits"] == "108"
+    assert wu_gui["display_name"] == "Ngũ Quỷ"
+    assert "suy nghĩ nhiều" in wu_gui["modifier_note"]
+    assert "hướng tiêu cực" in wu_gui["modifier_note"]
+
+
 def test_golden_phone_distribution_has_eight_rows_and_zeros() -> None:
     rows = [item.to_dict() for item in _phone().energy_distribution]
     assert len(rows) == 8

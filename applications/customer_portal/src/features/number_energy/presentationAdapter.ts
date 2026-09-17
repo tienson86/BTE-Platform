@@ -263,6 +263,7 @@ function mapPairRow(value: unknown): PresentationPairCard | null {
   const categoryLabel = readCategory(value);
   const strengthLabel = readStrength(value);
   const strengthDots = readDots(value, strengthLabel);
+  const modifierNote = asString(value.modifier_note) ?? "";
   if (!digits || !energyLabel || !categoryLabel || !strengthLabel || !strengthDots) {
     return null;
   }
@@ -272,7 +273,7 @@ function mapPairRow(value: unknown): PresentationPairCard | null {
     categoryLabel,
     strengthLabel,
     strengthDots,
-    keywords: "",
+    keywords: modifierNote,
   };
 }
 

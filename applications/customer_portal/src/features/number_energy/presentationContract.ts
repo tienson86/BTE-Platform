@@ -179,6 +179,7 @@ export type CanonicalPairOccurrence = {
   strength_level?: number | null;
   position_zone?: string | null;
   distance_to_tail?: number | null;
+  modifier_note?: string | null;
 };
 
 export type PairSummary = {

@@ -81,14 +81,38 @@ def _customer_pair(index: int, item: EnergyOccurrence) -> CustomerPairOccurrence
     label = RANK_TO_STRENGTH_LABEL.get(rank, CUSTOMER_STRENGTH_LIGHT)
     return CustomerPairOccurrence(
         index=index,
-        pair_digits=item.pair_digits,
+        # A modifier is part of the observed structure.  Keep 601/108 visible
+        # while the engine still resolves their underlying 61/18 energy.
+        pair_digits=(
+            item.source_digits if item.via_modifier is not None else item.pair_digits
+        ),
         display_name=item.display_name,
         category=category,
         category_label=CUSTOMER_CATEGORY_LABELS[category],
         strength_label=label,
         strength_slots=slots,
         strength_visual=_strength_visual(slots),
+        modifier_note=_modifier_note(item),
     )
+
+
+def _modifier_note(item: EnergyOccurrence) -> str | None:
+    """Customer meaning for a 0/5 modifier without leaking engine states."""
+    if item.via_modifier != 0:
+        return None
+    if item.energy_id == "liu_sha":
+        return (
+            "Số 0 ở giữa làm trường khí Lục Sát nặng hơn, dễ tăng cảm giác "
+            "u buồn và cảm xúc tiêu cực."
+        )
+    if item.energy_id == "wu_gui":
+        return (
+            "Số 0 ở giữa làm trường khí Ngũ Quỷ nặng hơn, dễ suy nghĩ nhiều "
+            "và nghiêng theo hướng tiêu cực."
+        )
+    if item.energy_id in CHALLENGING_ENERGY_IDS:
+        return "Số 0 ở giữa làm trường khí Hung này nặng nề hơn."
+    return "Số 0 ở giữa làm trường khí Cát bị che và giảm độ thông suốt."
 
 
 def _strength_visual(slots: int) -> tuple[bool, bool, bool, bool]:

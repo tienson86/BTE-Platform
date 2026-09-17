@@ -154,6 +154,7 @@ class CustomerPairOccurrence:
     strength_label: str
     strength_slots: int
     strength_visual: tuple[bool, bool, bool, bool]
+    modifier_note: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         """Serialize without technical rank, state, or energy_id."""
@@ -166,6 +167,7 @@ class CustomerPairOccurrence:
             "strength_label": self.strength_label,
             "strength_slots": self.strength_slots,
             "strength_visual": list(self.strength_visual),
+            "modifier_note": self.modifier_note,
         }
 
 
