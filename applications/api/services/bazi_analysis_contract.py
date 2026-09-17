@@ -161,15 +161,15 @@ TEN_GOD_PUBLIC_MEANINGS = {
 }
 
 DOMAIN_LOGIC_LEADS = {
-    "health": "Dữ liệu dùng để luận sức khỏe là Ngũ hành, khí hậu lá số, thế Thân và các xung khắc nổi bật nếu có.",
-    "wealth": "Dữ liệu dùng để luận tài vận là Mệnh cục, Dụng thần, các sao Tài/Thực Thương và nhịp Đại vận.",
-    "career": "Dữ liệu dùng để luận nghề nghiệp là trụ tháng, Mệnh cục, Quan/Sát/Ấn/Thực Thương và thế mạnh yếu của Nhật chủ.",
-    "marriage": "Dữ liệu dùng để luận hôn nhân là trụ ngày, quan hệ với Nhật chủ, Dụng thần/Kỵ thần và các tín hiệu đào hoa/phu thê.",
-    "children": "Dữ liệu dùng để luận con cái là trụ giờ, Thập thần ở trụ giờ, hậu vận và các vận kích hoạt phần này.",
-    "parents": "Dữ liệu dùng để luận bố mẹ là trụ tháng, khí chủ đạo của tháng sinh và các Thập thần liên quan đến nền nâng đỡ.",
-    "siblings": "Dữ liệu dùng để luận anh em là các sao đồng hành, cạnh tranh và cách chia sẻ nguồn lực trong lá số.",
-    "ancestry": "Dữ liệu dùng để luận tổ tiên là trụ năm, phúc khí ban đầu và tín hiệu hỗ trợ hoặc áp lực từ nền gia tộc.",
-    "property": "Dữ liệu dùng để luận điền trạch là Cung Phi, nhóm trạch, Ngũ hành và Dụng thần để nối sang phong thủy ứng dụng.",
+    "health": "Sức khỏe của lá số được nhìn như một trạng thái cân bằng: Ngũ hành cho thấy nơi dễ quá tải hoặc suy yếu, khí hậu cho biết cơ thể hợp ấm hay mát, còn thế Thân phản ánh cách chủ mệnh tiêu hao và hồi phục năng lượng.",
+    "wealth": "Tài vận không chỉ nằm ở việc có Tài tinh hay không. Mệnh cục cho biết cách tổ chức nguồn lực, Thực Thần và Thương Quan cho thấy năng lực tạo giá trị, còn Đại vận quyết định thời điểm dòng tiền dễ mở hay cần giữ.",
+    "career": "Con đường nghề nghiệp hình thành từ trụ tháng và Mệnh cục: một bên phản ánh môi trường làm việc phù hợp, một bên cho thấy vai trò mà chủ mệnh dễ phát huy. Quan, Sát, Ấn và Thực Thương giúp làm rõ nên đi bằng chuyên môn, quản trị hay năng lực tạo sản phẩm.",
+    "marriage": "Hôn nhân được đọc từ trụ ngày, nơi bản thân và cung phối ngẫu cùng hiện diện. Dụng thần cho biết kiểu quan hệ giúp hai người cân bằng, còn sao phối ngẫu và duyên tinh cho thấy cách cơ hội tình cảm thường tìm đến.",
+    "children": "Trụ giờ mở câu chuyện về con cái, hậu vận và những thành quả được để lại về sau. Thập thần tại đây mô tả cách nuôi dưỡng, còn Đại vận và Lưu niên giúp nhận ra giai đoạn nào nền gia đình thuận hơn cho kế hoạch dài hạn.",
+    "parents": "Trụ tháng lưu dấu khá rõ ảnh hưởng của cha mẹ và môi trường trưởng thành. Qua đó có thể thấy chủ mệnh đã nhận được kiểu nâng đỡ nào, chịu kỳ vọng gì và mang theo bài học gia đình ra sao khi bước vào đời.",
+    "siblings": "Quan hệ anh em và người đồng hành được soi qua các sao ngang vai, cạnh tranh và chia sẻ nguồn lực. Điểm quan trọng không phải nhiều hay ít người hỗ trợ, mà là cách phân vai, giữ ranh giới và cùng nhau đi đến kết quả.",
+    "ancestry": "Trụ năm là lớp nền xa nhất, phản ánh khí chất gia tộc, môi trường ban đầu và những giá trị được truyền lại. Phần này giúp chủ mệnh hiểu mình đến từ đâu, nhưng không biến nguồn gốc thành một định mệnh cố định.",
+    "property": "Điền trạch là câu chuyện về một nơi chốn đủ sức nâng đỡ đời sống lâu dài. Cung Phi và nhóm trạch gợi phương vị, Ngũ hành và Dụng thần cho biết không gian nên được tổ chức thế nào để vừa hợp khí vừa thuận công năng.",
 }
 
 ELEMENT_HEALTH_AREAS = {
@@ -239,10 +239,10 @@ CAREER_TEN_GOD_READINGS = {
 }
 
 MARRIAGE_TEN_GOD_READINGS = {
-    "Chính Tài": "với nam mệnh, Chính Tài là tín hiệu phối ngẫu thiên về ổn định, trách nhiệm và nếp sống thực tế",
-    "Thiên Tài": "với nam mệnh, Thiên Tài làm duyên tình linh hoạt hơn, dễ đến qua giao tiếp, xã hội hoặc môi trường nhiều cơ hội",
-    "Chính Quan": "với nữ mệnh, Chính Quan là tín hiệu phối ngẫu thiên về chính danh, trách nhiệm, chuẩn mực và cam kết rõ ràng",
-    "Thất Sát": "với nữ mệnh, Thất Sát làm tình cảm có sức hút mạnh nhưng cũng dễ đi cùng áp lực, yêu cầu ranh giới và sự chín chắn",
+    "Chính Tài": "với nam mệnh, Chính Tài thường đưa duyên hôn nhân về sự ổn định, trách nhiệm và khả năng cùng nhau vun vén đời sống thực tế. Người phù hợp không nhất thiết quá lãng mạn, nhưng biết giữ lời, coi trọng gia đình và có thể đồng hành trong những kế hoạch dài hạn",
+    "Thiên Tài": "với nam mệnh, Thiên Tài làm duyên gặp gỡ linh hoạt hơn, thường mở qua giao tiếp, công việc, quan hệ xã hội hoặc môi trường có nhiều cơ hội. Sức hút đến khá tự nhiên, nhưng muốn đi đường dài thì cảm xúc cần được chuyển thành cam kết và một nhịp sống chung rõ ràng",
+    "Chính Quan": "với nữ mệnh, Chính Quan thường hướng hình ảnh người bạn đời về sự chính danh, trách nhiệm, chuẩn mực và thái độ nghiêm túc với cam kết. Quan hệ dễ bền khi hai người tôn trọng vai trò của nhau, cùng thống nhất nguyên tắc sống mà không biến khuôn phép thành sự kiểm soát",
+    "Thất Sát": "với nữ mệnh, Thất Sát làm tình cảm có sức hút mạnh, dễ gặp người quyết đoán hoặc mối quan hệ tạo nhiều chuyển động. Mặt tích cực là cùng nhau trưởng thành nhanh; mặt cần lưu ý là áp lực và cảm xúc mạnh phải được đặt trong ranh giới rõ để tình yêu không trở thành cuộc giằng co quyền lực",
 }
 
 PARTNERSHIP_TEN_GOD_READINGS = {
@@ -257,12 +257,12 @@ PARTNERSHIP_TEN_GOD_READINGS = {
 }
 
 CHILDREN_TEN_GOD_READINGS = {
-    "Thực Thần": "Thực Thần ở phần con cái cho thấy xu hướng nuôi dưỡng, chăm sóc, tạo sản phẩm và để lại thành quả theo cách mềm, bền.",
-    "Thương Quan": "Thương Quan làm phần con cái/hậu vận có tính tự do, biểu đạt mạnh và khác biệt; cần tôn trọng cá tính nhưng vẫn giữ khuôn nếp.",
-    "Chính Quan": "Chính Quan trong tín hiệu con cái/hậu vận thiên về kỷ luật, chuẩn mực, trách nhiệm và mong muốn con đường rõ ràng.",
-    "Thất Sát": "Thất Sát làm phần con cái/hậu vận có áp lực, tính cạnh tranh hoặc thử thách mạnh; cần dạy bằng nguyên tắc rõ hơn là áp đặt cảm xúc.",
-    "Chính Ấn": "Chính Ấn ở trụ giờ nghiêng về hậu vận có nền học hỏi, bảo hộ, người nâng đỡ hoặc con cái coi trọng học hành/nề nếp.",
-    "Thiên Ấn": "Thiên Ấn ở trụ giờ cho thấy hậu vận, con cái hoặc dự án dài hạn mang màu nghiên cứu, khác biệt, trực giác và chiều sâu riêng.",
+    "Thực Thần": "Thực Thần ở phần con cái cho thấy bản năng nuôi dưỡng khá tự nhiên: dễ quan tâm đến sự đủ đầy, sức khỏe và môi trường để con phát triển. Hậu vận cũng thuận hơn khi chủ mệnh biết bồi đắp từng bước, để thành quả lớn lên bằng sự đều đặn thay vì thúc ép kết quả sớm.",
+    "Thương Quan": "Thương Quan làm phần con cái và hậu vận mang màu tự do, biểu đạt mạnh và không thích khuôn mẫu cứng. Con trẻ hoặc những dự án để đời có thể bộc lộ cá tính riêng rất sớm; cách đồng hành phù hợp là tôn trọng khác biệt nhưng vẫn thống nhất giới hạn, trách nhiệm và nề nếp căn bản.",
+    "Chính Quan": "Chính Quan trong tín hiệu con cái/hậu vận cho thấy sự coi trọng kỷ luật, trách nhiệm và một con đường phát triển rõ ràng. Đây là nền tốt để dạy con biết tự quản, nhưng kỳ vọng nên vừa sức để nguyên tắc trở thành điểm tựa chứ không biến thành áp lực phải luôn hoàn hảo.",
+    "Thất Sát": "Thất Sát khiến phần con cái/hậu vận có nhiều động lực cạnh tranh hoặc những giai đoạn thử thách buộc cả gia đình trưởng thành. Khi được dẫn bằng nguyên tắc bình tĩnh, khí này tạo bản lĩnh; nếu phản ứng bằng nóng giận hay áp đặt, nó lại dễ làm khoảng cách giữa cha mẹ và con cái lớn hơn.",
+    "Chính Ấn": "Chính Ấn ở trụ giờ gợi một hậu vận đặt nặng học hỏi, sự bảo hộ và nền nếp. Con cái thường cần được nâng đỡ bằng tri thức và sự tin cậy; về lâu dài, chủ mệnh cũng dễ nhận lại niềm vui từ việc truyền kinh nghiệm, xây nền giáo dục hoặc để lại giá trị có tính kế thừa.",
+    "Thiên Ấn": "Thiên Ấn ở trụ giờ cho thấy con cái, hậu vận hoặc dự án dài hạn có chiều sâu riêng, thiên về nghiên cứu, trực giác và lối đi khác số đông. Điều quan trọng là tạo không gian để năng lực đặc biệt ấy phát triển, đồng thời giữ kết nối thực tế để sự khác biệt không trở thành khép kín.",
 }
 
 PARENTS_TEN_GOD_READINGS = {
@@ -313,12 +313,12 @@ _DOMAIN_RECOMMENDATIONS = {
     "health": "Ưu tiên nếp sống điều độ, ngủ nghỉ ổn định và quan sát các thời điểm ngũ hành mất cân bằng rõ.",
     "wealth": "Tài vận nên đi cùng kỷ luật dòng tiền, tránh quyết định lớn khi cảm xúc hoặc áp lực vận hạn đang chi phối.",
     "career": "Nghề nghiệp nên chọn môi trường giúp điểm mạnh của Mệnh cục được dùng đúng chỗ, đồng thời có khuôn khổ để tránh phân tán.",
-    "marriage": "Quan hệ thân mật cần được đọc chậm, ưu tiên cách giao tiếp ổn định và khả năng cùng xây nhịp sống thực tế.",
-    "children": "Việc sinh con hoặc nuôi dạy con nên xét thêm vận hạn từng giai đoạn, không chỉ nhìn một tín hiệu riêng lẻ trong lá số gốc.",
+    "marriage": "Hôn nhân bền khi hai người không chỉ có cảm xúc, mà còn cùng xây được cách trò chuyện, phân chia trách nhiệm và một nhịp sống khiến cả hai đều cảm thấy được tôn trọng.",
+    "children": "Kế hoạch sinh con và nuôi dạy con nên được chuẩn bị trên cả ba nền sức khỏe, tài chính và nhịp sống gia đình; thời điểm thuận cần xét thêm Đại vận, Lưu niên thay vì chỉ dựa vào một tín hiệu đơn lẻ.",
     "parents": "Quan hệ với cha mẹ nên được nhìn như nền nâng đỡ và bài học gốc, tránh diễn giải một chiều thành tốt hoặc xấu tuyệt đối.",
     "siblings": "Quan hệ anh em/bạn đồng hành nên chú trọng ranh giới, vai trò và cách chia sẻ nguồn lực.",
     "ancestry": "Phần tổ tiên/gốc phúc nên được dùng như nền văn hóa gia đình để hiểu mình, không nên quy hết thành định mệnh.",
-    "property": "Điền trạch/phong thủy nên ưu tiên sự ổn định, sạch thoáng và các yếu tố bổ trợ đúng Dụng thần thay vì chạy theo mẹo rời rạc.",
+    "property": "Điền trạch tốt là nơi giúp người ở phục hồi, làm việc hiệu quả và giữ được nhịp sống lâu dài; hướng, bố cục và ngũ hành nên cùng phục vụ mục tiêu ấy thay vì chạy theo từng mẹo phong thủy rời rạc.",
 }
 
 _DOMAIN_SOURCE_REFS = {
@@ -1168,38 +1168,38 @@ def _strength_structure_useful_god_paragraphs(payload: Mapping[str, Any], techni
     if day_element or distribution:
         paragraphs.append(
             _fallback_join(
-                f"Muốn hiểu vì sao kết luận {strength_label or 'thế thân'} thì phải đặt Nhật chủ {day_element} vào toàn bộ bảng khí." if day_element else "",
-                f"Phân bố hiện tại: {distribution}." if distribution else "",
+                f"Nhật chủ {day_element} đang đứng trong thế {strength_label or 'cân bằng riêng của lá số'}; sức của Nhật chủ chỉ hiện rõ khi đặt cạnh toàn bộ dòng khí xung quanh." if day_element else "",
+                f"Bức tranh hiện có {distribution}." if distribution else "",
                 _day_master_balance_axis(day_element),
-                "Thân vượng/nhược không được đọc bằng cảm giác mạnh yếu bên ngoài, mà đọc từ lực sinh trợ cho Nhật chủ, lực Nhật chủ tiết ra, lực bị khắc chế và khí mùa/trụ tháng đang nâng bên nào.",
+                "Vì vậy, vượng hay nhược không đồng nghĩa với mạnh hay yếu trong tính cách; đó là cách nguồn lực bên trong được nâng đỡ, tiêu hao hoặc chịu áp lực trong hoàn cảnh thực tế.",
             )
         )
     if structure:
         paragraphs.append(
             _fallback_join(
-                f"Mệnh cục {structure} là cách gọi phần khí chủ đạo tổ chức toàn lá số.",
-                "Trụ tháng và nguyệt lệnh là điểm cần ưu tiên vì đây là môi trường trưởng thành, nhịp nghề nghiệp và mùa khí chính.",
-                "Khi mệnh cục đã xác định, các mục nghề nghiệp, tài vận, hôn nhân hay hợp tác không nên luận rời rạc, mà phải hỏi vai trò nào trong Thập thần đang dẫn dắt cách người này tạo giá trị và chịu áp lực.",
+                f"Mệnh cục {structure} giống như lối vận hành quen thuộc của lá số: cách chủ mệnh tiếp nhận hoàn cảnh, tạo giá trị và xử lý áp lực.",
+                "Trụ tháng và nguyệt lệnh giữ vai trò lớn vì chúng phản ánh mùa khí, môi trường trưởng thành và nhịp nghề nghiệp đã định hình con người từ sớm.",
+                "Từ nền này, nghề nghiệp, tài vận, hôn nhân và hợp tác mới được nối thành một câu chuyện thống nhất thay vì những nhận định rời nhau.",
             )
         )
     if useful_elements:
         paragraphs.append(
-            "Dụng thần của lá số nên được hiểu như phương thuốc cân bằng khí: "
+            "Dụng thần có thể hình dung như phần khí giúp toàn cục trở nên dễ vận hành hơn. Với lá số này, điểm cân bằng nằm ở "
             + ", ".join(useful_elements)
             + ". "
             + " ".join(_useful_element_application(element) for element in useful_elements if _useful_element_application(element))
         )
     if unfavorable:
         paragraphs.append(
-            "Kỵ thần/nhóm cần tiết chế là "
+            "Phần khí cần tiết chế là "
             + ", ".join(unfavorable)
             + ". "
             + " ".join(_unfavorable_element_caution(element) for element in unfavorable if _unfavorable_element_caution(element))
-            + " Khi vận, nghề, quan hệ hoặc không gian sống liên tục kích nhóm này, người luận cần ưu tiên chiến lược giảm hao tổn thay vì chỉ nói tốt/xấu."
+            + " Nếu công việc, quan hệ hoặc môi trường sống liên tục làm phần này mạnh thêm, chủ mệnh dễ hao sức hoặc phản ứng cực đoan; lúc đó điều cần thiết là giảm tải và lấy lại độ cân bằng, không phải lo sợ một nhãn tốt hay xấu."
         )
     if structure and useful_display:
         paragraphs.append(
-            f"Có thể hiểu ngắn gọn: Mệnh cục {structure} cho biết cách lá số tổ chức nguồn lực, còn {useful_display} là trục nên dùng để điều tiết và mở đường. Khi tư vấn thực tế, mọi lựa chọn lớn nên được soi lại theo câu hỏi: việc này có làm mạnh thêm Dụng thần hay đang kích hoạt Kỵ thần?"
+            f"Nói ngắn gọn, Mệnh cục {structure} là cách chủ mệnh vận hành nguồn lực, còn {useful_display} là hướng giúp nguồn lực ấy đi đúng đường. Trước một lựa chọn lớn, câu hỏi hữu ích nhất là: quyết định này làm mình sáng rõ và cân bằng hơn, hay đang khuếch đại đúng điểm vốn dễ mất kiểm soát?"
         )
     return _unique_texts(paragraphs)
 
@@ -1221,7 +1221,7 @@ def _day_master_chapter_paragraphs(payload: Mapping[str, Any], technical: Mappin
                 f"Nhật chủ {stem}" if stem else "Nhật chủ",
                 f"thuộc hành {element}" if element else "",
                 f"tính {yin_yang}" if yin_yang else "",
-                "là điểm lấy làm trung tâm khi đọc toàn bộ lá số. Các trụ, Thập thần, Ngũ hành và Đại vận đều được quy về câu hỏi: điều gì đang nâng, tiết, khắc hoặc làm lệch Nhật chủ này?",
+                "là hình ảnh trung tâm của lá số, phản ánh cách một người cảm nhận bản thân và sử dụng năng lượng của mình. Các trụ còn lại cho biết nguồn lực nào đang nâng đỡ, nơi nào làm họ tiêu hao và hoàn cảnh nào buộc họ phải trưởng thành.",
             )
         )
     if element in ELEMENT_GENERATES:
@@ -1241,16 +1241,16 @@ def _day_master_chapter_paragraphs(payload: Mapping[str, Any], technical: Mappin
                     if part
                 )
                 + ".",
-                "nên khi luận tính cách hay quyết định lớn, cần xem người này đang dùng lực để tạo ra thành quả, kiểm soát hoàn cảnh hay đang bị môi trường ép ngược lại.",
+                "Dòng sinh cho thấy cách năng lực được chuyển thành thành quả; dòng khắc nói về khả năng kiểm soát và áp lực. Khi ba chiều này cân nhau, chủ mệnh dễ quyết đoán mà không cứng, linh hoạt mà không mất phương hướng.",
             )
         )
     if strength_label:
         paragraphs.append(
-            f"Thế {strength_label} cho biết Nhật chủ dùng lực ra sao. Thân vượng thì cần tiết chế và đưa lực vào việc có khuôn; thân nhược thì cần thêm điểm tựa, chuyên môn, người hỗ trợ và môi trường ổn định."
+            f"Ở thế {strength_label}, bài toán không nằm ở việc cố trở nên mạnh hơn, mà ở cách dùng lực cho đúng. Người có nền vượng cần một khuôn đủ tốt để sức mạnh thành kết quả; người có nền nhược lại phát triển bền hơn khi có chuyên môn, người đồng hành và môi trường đáng tin làm điểm tựa."
         )
     if useful_elements:
         paragraphs.append(
-            "Vì vậy Dụng thần không phải là một nhãn trang trí, mà là hướng giúp Nhật chủ vận hành thuận hơn. Với lá số này, trục nên ưu tiên là "
+            "Dụng thần vì thế không phải một nhãn phong thủy, mà là lời chỉ dẫn về cách sống và lựa chọn môi trường. Lá số này thuận hơn khi ưu tiên "
             + ", ".join(useful_elements)
             + "."
         )
@@ -1313,9 +1313,9 @@ def _five_elements_chapter_paragraphs(payload: Mapping[str, Any], technical: Map
     paragraphs = _non_empty([_section_summary(technical, "five_elements")])
     if distribution:
         paragraphs.append(
-            "Bảng Ngũ hành là bản đồ khí của lá số: "
+            "Ngũ hành tạo nên nhịp chuyển động bên trong lá số. Phân bố hiện tại là "
             + distribution
-            + ". Hành nhiều cho biết khí dễ lộ, hành yếu cho biết nơi cần bồi; nhưng kết luận cuối vẫn phải đọc cùng mùa sinh, thế Thân, Mệnh cục và Dụng thần."
+            + ". Hành nổi bật thường trở thành phản xạ tự nhiên, còn hành yếu là nơi con người dễ thiếu độ linh hoạt hoặc sức bền. Tuy nhiên, ý nghĩa cuối cùng vẫn phụ thuộc vào mùa sinh, thế Thân và vai trò điều tiết của Dụng thần."
         )
     if dominant:
         paragraphs.append(_element_group_meaning("Hành nổi bật", dominant, excess=True))
@@ -1324,9 +1324,9 @@ def _five_elements_chapter_paragraphs(payload: Mapping[str, Any], technical: Map
     paragraphs.extend(_five_element_relation_paragraphs(counts, dominant, weak))
     if useful_elements:
         paragraphs.append(
-            "Điểm quan trọng là không cứ thiếu hành nào thì bổ hành đó một cách máy móc. Lá số cần ưu tiên "
+            "Không nên thấy thiếu hành nào rồi bổ hành ấy một cách máy móc. Điều lá số thực sự cần ưu tiên là "
             + ", ".join(useful_elements)
-            + " vì đây là trục điều tiết đã được chọn từ toàn cục, không chỉ từ bảng số lượng Ngũ hành."
+            + ", bởi đây là phần giúp toàn cục chuyển động hài hòa hơn, chứ không đơn thuần là bù vào một con số đang thấp."
         )
     return _unique_texts([paragraph for paragraph in paragraphs if paragraph])
 
@@ -1389,9 +1389,9 @@ def _ten_gods_chapter_paragraphs(payload: Mapping[str, Any], technical: Mapping[
         if god:
             paragraphs.append(
                 _fallback_join(
-                    f"Trụ {label} {can_chi} hiện {god}." if can_chi else f"Trụ {label} hiện {god}.",
-                    f"Tầng này chủ về {life_hint.lower()}." if life_hint else "",
-                    f"Ý nghĩa luận giải là {meaning}." if meaning else "",
+                    f"Ở trụ {label} {can_chi}, khí {god} hiện khá rõ." if can_chi else f"Ở trụ {label}, khí {god} hiện khá rõ.",
+                    f"Vị trí này gắn với {life_hint.lower()}." if life_hint else "",
+                    f"Trong đời sống, nó thường biểu hiện qua {meaning}." if meaning else "",
                 )
             )
     paragraphs.extend(_ten_god_pattern_synthesis(ten_layers))
@@ -1407,23 +1407,23 @@ def _ten_god_pattern_synthesis(ten_layers: Mapping[str, Any]) -> list[str]:
     peers = _ten_god_signal_labels(ten_layers, ("Tỷ Kiên", "Kiếp Tài"))
     if officer:
         paragraphs.append(
-            "Quan/Sát hiện trong lá số cho thấy bài học về trách nhiệm, áp lực, chuẩn mực và năng lực chịu việc. Khi nhóm này mạnh, người luận không nên chỉ hỏi 'có chức quyền không', mà phải xem người này có hệ thống, kỷ luật và sức bền để dùng áp lực thành thành tựu hay không."
+            "Quan/Sát đưa trách nhiệm, chuẩn mực và áp lực thành một chủ đề lớn. Khi được nâng bằng chuyên môn và kỷ luật, áp lực trở thành động lực để có vị trí; khi thiếu nền, cùng nguồn lực ấy lại dễ biến thành căng thẳng và cảm giác luôn phải chứng minh mình."
         )
     if resource:
         paragraphs.append(
-            "Ấn tinh hiện diện là nền học hỏi, uy tín, người nâng đỡ và khả năng đi đường dài bằng chuyên môn. Khi Ấn đi cùng Quan/Sát, đường nghề thường cần tri thức, bằng cấp, giấy tờ, quy chuẩn hoặc một hệ thống đáng tin."
+            "Ấn tinh tạo nền học hỏi, uy tín và khả năng nhận sự nâng đỡ đúng lúc. Khi đi cùng Quan/Sát, con đường phát triển thường bền hơn nếu dựa trên chuyên môn, bằng cấp, quy chuẩn hoặc một hệ thống đủ tin cậy thay vì chỉ dùng ý chí cá nhân."
         )
     if output:
         paragraphs.append(
-            "Thực/Thương là đường tạo sản phẩm, biểu đạt và đưa năng lực ra ngoài. Đây là tín hiệu quan trọng để đọc tài vận, nghề nghiệp và con cái: có tạo được giá trị cụ thể thì các phần sau mới có đất phát triển."
+            "Thực Thần và Thương Quan là con đường đưa năng lực bên trong thành sản phẩm, lời nói và giá trị người khác có thể cảm nhận. Khi dòng này thông, tài vận và nghề nghiệp có đầu ra; khi bị nghẽn, nhiều ý tưởng vẫn có thể nằm lại ở tiềm năng."
         )
     if wealth:
         paragraphs.append(
-            "Tài tinh là bài toán tiền, tài sản, trách nhiệm vật chất và quan hệ với nguồn lực. Khi đọc Tài tinh cần phân biệt khả năng kiếm tiền, giữ tiền và dùng tiền; ba việc này không phải lúc nào cũng mạnh như nhau."
+            "Tài tinh phản ánh quan hệ với tiền bạc, tài sản và trách nhiệm vật chất. Có người giỏi tạo tiền nhưng khó giữ, có người tích lũy tốt nhưng chậm mở cơ hội; vì vậy kiếm tiền, giữ tiền và dùng tiền cần được nhìn như ba năng lực khác nhau."
         )
     if peers:
         paragraphs.append(
-            "Tỷ/Kiếp là tín hiệu tự thân, bạn đồng hành, cạnh tranh và cách chia nguồn lực. Đây là dữ liệu quan trọng cho hợp tác làm ăn: càng có Tỷ/Kiếp càng cần ranh giới, vai trò và quyền lợi rõ."
+            "Tỷ Kiên và Kiếp Tài làm nổi bật tính tự chủ, quan hệ ngang vai và bài học chia sẻ nguồn lực. Chủ mệnh có thể thu hút người cùng chí hướng, nhưng hợp tác chỉ bền khi vai trò, quyền quyết định và lợi ích được nói rõ ngay từ đầu."
         )
     return paragraphs
 
@@ -1433,11 +1433,11 @@ def _shen_sha_chapter_paragraphs(payload: Mapping[str, Any], technical: Mapping[
     paragraphs = _non_empty([_section_summary(technical, "shen_sha")])
     groups = _mapping(grouped.get("groups"))
     group_guidance = {
-        "noble_support": "Quý nhân/phúc tinh không thay người đó làm việc, nhưng cho thấy lá số có cửa được nâng đỡ, hóa giải hoặc gặp người mở đường khi biết sống đúng khí và đúng thời.",
-        "relationship": "Đào hoa/nhân duyên là tín hiệu về sức hút, cơ hội gặp gỡ và bài học quan hệ; cần đọc cùng trụ ngày để tránh biến thành phán đoán tình cảm đơn giản.",
-        "authority": "Quyền tinh/tài danh hỗ trợ danh tiếng, học hành, chức vị hoặc khả năng được nhìn nhận; muốn dùng tốt vẫn phải có năng lực thật và kỷ luật vận hành.",
-        "caution": "Nhóm cảnh báo/gia đạo là điểm cần phòng ngừa: ranh giới, an toàn, sức khỏe, cảm xúc và cách xử lý xung đột nên được chuẩn bị trước.",
-        "later_life": "Hậu vận/dịch chuyển cho thấy sự thay đổi, đi xa, chuyển môi trường hoặc chiều sâu tinh thần; nên đọc cùng Đại vận để biết lúc nào tín hiệu này mạnh.",
+        "noble_support": "Quý nhân không làm thay phần việc của chủ mệnh, nhưng thường mở ra một người chỉ đường, một cơ hội hóa giải hoặc một lối đi xuất hiện đúng lúc. Sự trợ lực này rõ nhất khi bản thân đã chuẩn bị đủ năng lực để đón nhận.",
+        "relationship": "Duyên tinh làm tăng sức hút và cơ hội gặp gỡ, đồng thời đem đến bài học về cảm xúc và ranh giới. Muốn hiểu duyên có đi được đường dài hay không vẫn phải trở về trụ ngày và cách hai người xây đời sống chung.",
+        "authority": "Quyền tinh và tài danh mở khả năng được nhìn nhận qua học hành, uy tín hoặc vị trí. Danh chỉ bền khi đi cùng năng lực thật, nên càng có tín hiệu này càng cần giữ kỷ luật và chất lượng công việc.",
+        "caution": "Nhóm cảnh báo nhắc chủ mệnh chuẩn bị trước cho những điểm dễ va chạm về an toàn, sức khỏe, gia đạo hoặc cảm xúc. Biết trước không phải để lo sợ, mà để có ranh giới và phương án xử lý bình tĩnh hơn.",
+        "later_life": "Nhóm hậu vận và dịch chuyển gợi những lần đổi môi trường, đi xa hoặc thay đổi chiều sâu tinh thần. Đại vận sẽ cho biết khi nào nhu cầu chuyển mình ấy trở nên rõ và nên được biến thành hành động.",
     }
     for key, guidance in group_guidance.items():
         group = _mapping(groups.get(key))
@@ -1448,9 +1448,9 @@ def _shen_sha_chapter_paragraphs(payload: Mapping[str, Any], technical: Mapping[
         title = _first_text(group.get("title"), key)
         paragraphs.append(f"{title}: {', '.join(names)}. {guidance}")
     if len(paragraphs) == 1:
-        paragraphs.append("Thần sát trong lá số hiện chưa đủ mạnh để tách riêng thành kết luận lớn; nên dùng như tín hiệu phụ trợ sau khi đã đọc Tứ trụ, Ngũ hành, Mệnh cục và Đại vận.")
+        paragraphs.append("Thần sát trong lá số này không tạo thành một chủ đề đủ mạnh để dẫn dắt toàn bộ câu chuyện. Đây là tín hiệu nền, chỉ phát huy ý nghĩa khi đặt cạnh Tứ trụ, Ngũ hành, Mệnh cục và đúng thời điểm Đại vận.")
     else:
-        paragraphs.append("Cách dùng Thần sát đúng là làm tín hiệu bổ trợ: có sao tốt thì biết điểm nào dễ được trợ lực, có sao cảnh báo thì biết điểm nào cần phòng ngừa; không lấy một sao riêng lẻ để kết luận toàn bộ lá số.")
+        paragraphs.append("Thần sát nên được xem như những dấu nhấn nhỏ: sao thuận chỉ nơi dễ nhận trợ lực, sao cảnh báo nhắc nơi cần chuẩn bị. Không một sao đơn lẻ nào đủ quyền quyết định toàn bộ vận mệnh của một người.")
     return _unique_texts(paragraphs)
 
 
@@ -1465,7 +1465,7 @@ def _bone_weight_paragraphs(payload: Mapping[str, Any]) -> list[str]:
             _fallback_join(
                 f"Cân xương ghi nhận {weight}." if weight else "",
                 f"Xếp loại {classification}." if classification else "",
-                "Phần này cho cảm giác tổng quan về nền phúc khí và mức dễ/khó khi đi đường đời, nhưng chỉ nên dùng như lớp tham khảo bổ trợ.",
+                "Chỉ số này gợi nhịp tích lũy của cuộc đời: có người thuận nền sớm, có người phải gây dựng từng bước rồi mới vững. Đây là lớp tham khảo bổ trợ, không phải chiếc khuôn đóng cứng số phận.",
             )
         )
     if summary:
@@ -1474,7 +1474,7 @@ def _bone_weight_paragraphs(payload: Mapping[str, Any]) -> list[str]:
         paragraphs.append(_bone_weight_guidance(classification))
     if paragraphs:
         paragraphs.append(
-            "Khi luận cho khách, Cân xương nên được đặt sau Tứ trụ, Mệnh cục, Dụng thần và Đại vận. Nếu Cân xương tốt mà Dụng thần chưa được dùng đúng, vẫn cần kỷ luật và chọn thời; nếu Cân xương không cao nhưng mệnh cục có đường điều tiết rõ, vẫn có thể cải thiện bằng cách đi đúng vận, đúng nghề, đúng môi trường."
+            "Giá trị của Cân xương nằm ở việc bổ sung sắc thái cho toàn cục. Nền thuận vẫn cần kỷ luật mới thành thành quả; nền phải gây dựng nhiều hơn vẫn có thể chuyển biến rõ khi chủ mệnh chọn đúng nghề, đúng môi trường và biết tận dụng những chặng vận nâng mình."
         )
     return _unique_texts(paragraphs)
 
@@ -1510,7 +1510,7 @@ def _palace_feng_shui_paragraphs(payload: Mapping[str, Any]) -> list[str]:
             f"Cung Phi/Mệnh quái của lá số là {cung_phi}." if cung_phi else "",
             f"Hành cung: {palace_element}." if palace_element else "",
             f"Nhóm trạch: {house_group}." if house_group else "",
-            "Cung Phi là lớp dữ liệu ứng dụng cho không gian sống, nơi làm việc, bàn thờ, bếp, cửa, bàn làm việc và bố cục kinh doanh; nó không thay thế Tứ trụ, nhưng giúp biến kết luận của lá số thành lựa chọn môi trường cụ thể hơn.",
+            "Cung Phi đưa phần luận từ con người sang không gian: nơi ở, nơi làm việc, bếp, cửa và cách tổ chức mặt bằng. Nó không thay thế Tứ trụ, nhưng giúp những kết luận về khí mệnh trở thành lựa chọn có thể áp dụng trong đời sống hằng ngày.",
         )
     )
     if directions:
@@ -1522,7 +1522,7 @@ def _palace_feng_shui_paragraphs(payload: Mapping[str, Any]) -> list[str]:
             _fallback_join(
                 f"Trục Dụng thần nên nâng trong không gian: {', '.join(useful_elements)}." if useful_elements else "",
                 f"Nhóm Kỵ thần cần tiết chế khi bố trí: {', '.join(unfavorable)}." if unfavorable else "",
-                "Vì vậy phong thủy ứng dụng không nên chỉ hỏi một hướng tốt/xấu, mà phải hỏi hướng, vật liệu, ánh sáng, màu sắc, độ thoáng và nhịp sử dụng có làm lá số cân bằng hơn hay không.",
+                "Phong thủy phù hợp vì thế không nằm ở một hướng tốt hay xấu duy nhất. Hướng, ánh sáng, vật liệu, màu sắc, độ thoáng và thói quen sử dụng cần cùng tạo ra một không gian khiến người ở khỏe hơn, sáng hơn và làm việc ổn định hơn.",
             )
         )
     if palace_element:
@@ -1542,7 +1542,7 @@ def _palace_feng_shui_paragraphs(payload: Mapping[str, Any]) -> list[str]:
             )
         )
     paragraphs.append(
-        "Chương này là cầu nối sang module Tư vấn phong thủy: bản Xem lá số chỉ xác định trục khí và phương vị nền; khi tư vấn nhà đất cụ thể vẫn cần đo hiện trạng, hướng cửa, bếp, phòng ngủ, bàn làm việc, dòng di chuyển và mục tiêu của gia chủ."
+        "Những phương vị trên là nền tham khảo cho bước tư vấn phong thủy sâu hơn. Với một ngôi nhà cụ thể, vẫn cần nhìn hiện trạng cửa, bếp, phòng ngủ, bàn làm việc, dòng di chuyển và mục tiêu của gia chủ để phương án vừa hợp khí vừa thực sự sống được."
     )
     return _unique_texts([paragraph for paragraph in paragraphs if paragraph])
 
@@ -1559,18 +1559,17 @@ def _overview_paragraphs(payload: Mapping[str, Any], narrative: Mapping[str, Any
     structure = _first_text(pattern.get("cach_cuc"), pattern.get("pattern"))
     useful_display = _first_text(useful.get("useful_display"), useful.get("useful_stem"), useful.get("useful_element"))
     summary = _fallback_join(
-        "Tổng thể lá số được đọc theo trục Nhật chủ - Thân - Mệnh cục - Dụng thần.",
-        f"Nền chính là {day_master}." if day_master else "",
-        f"Thế thân: {strength_label}." if strength_label else "",
-        f"Mệnh cục: {structure}." if structure else "",
-        f"Trục điều tiết: {useful_display}." if useful_display else "",
+        "Bức tranh chính của lá số bắt đầu từ Nhật chủ, được định hình bởi thế Thân và Mệnh cục, rồi tìm điểm cân bằng qua Dụng thần.",
+        f"Cốt khí là {day_master}." if day_master else "",
+        f"Nguồn lực đang ở thế {strength_label}." if strength_label else "",
+        f"Lối vận hành nổi bật mang Mệnh cục {structure}." if structure else "",
+        f"Điểm mở để điều hòa toàn cục là {useful_display}." if useful_display else "",
     )
     method_note = (
-        "Phần luận giải bên dưới không tách rời dữ liệu kỹ thuật: Tứ trụ cho biết gốc mệnh, Ngũ hành cho biết độ lệch khí, "
-        "Thập thần cho biết vai trò đời sống, Thần sát bổ sung tín hiệu, còn Đại vận cho biết thời điểm nào các điểm đó được kích hoạt mạnh hơn."
+        "Bốn trụ kể câu chuyện từ gốc gia đình đến hậu vận; Ngũ hành cho thấy dòng khí mạnh yếu; Thập thần chuyển dòng khí ấy thành vai trò đời sống; còn Đại vận đặt tất cả vào từng chặng thời gian cụ thể."
     )
     module_note = (
-        "Đây là bản nền để về sau đọc sâu hôn nhân, nghề nghiệp, hợp tác, phong thủy và sinh con; vì vậy mỗi kết luận đều cần giữ được cả dữ liệu gốc lẫn lời luận dễ hiểu cho khách hàng."
+        "Từ nền này, các phần nghề nghiệp, tài vận, hôn nhân, hợp tác, phong thủy và sinh con được nối với nhau. Mỗi kết luận vì thế không đứng riêng lẻ, mà cùng phản ánh một con người trong nhiều hoàn cảnh khác nhau."
     )
     return _non_empty([headline, summary, method_note, module_note])
 
@@ -1603,8 +1602,8 @@ def _four_pillars_paragraphs(payload: Mapping[str, Any]) -> list[str]:
         paragraphs.append(
             f"Trụ {label}: "
             + "; ".join(data_parts)
-            + f". Tầng này chủ về {life_hint.lower()}."
-            + (f" Vì hiện {ten_god}, trọng tâm luận là {meaning}." if ten_god and meaning else "")
+            + f". Trong đời sống, vị trí này gắn với {life_hint.lower()}."
+            + (f" Sự hiện diện của {ten_god} thường biểu lộ qua {meaning}." if ten_god and meaning else "")
             + _pillar_extra_guidance(key, ten_god, hidden_gods)
         )
     paragraphs.extend(_branch_relationship_paragraphs(payload))
@@ -1718,7 +1717,7 @@ def _four_pillar_synthesis(payload: Mapping[str, Any], ten_layers: Mapping[str, 
             f"trụ giờ {hour}" + (f" với {hour_god}" if hour_god else "") + " là hậu vận, con cái và thành quả dài hạn" if hour else "",
         ]
     )
-    return "Đọc tổng hợp Tứ trụ: " + "; ".join(parts) + ". Bốn trụ phải được đọc như một chuỗi đời sống, không tách từng trụ thành tốt/xấu riêng lẻ."
+    return "Khi nối bốn trụ thành một hành trình, " + "; ".join(parts) + ". Mỗi trụ giữ một vai trò, nhưng chỉ khi đặt cạnh nhau mới thấy được cách quá khứ, hiện tại và hậu vận ảnh hưởng qua lại."
 
 
 def _month_calendar_note(payload: Mapping[str, Any]) -> str:
@@ -1764,7 +1763,10 @@ def _life_domain_paragraphs(life_domains: Mapping[str, Any]) -> list[str]:
         title = _first_text(section.get("title"), LIFE_DOMAIN_TITLES[key])
         detailed = _text_list(section.get("paragraphs"))
         if detailed:
-            paragraphs.extend(f"{title}: {item}" if index == 0 else item for index, item in enumerate(detailed))
+            paragraphs.extend(
+                f"{title} - {_life_domain_subtitle(item, index)}: {item}"
+                for index, item in enumerate(detailed)
+            )
             continue
         summary = _text(section.get("summary"))
         if summary:
@@ -1781,7 +1783,7 @@ def _luck_cycle_paragraphs(luck_cycles: Mapping[str, Any]) -> list[str]:
     unfavorable_elements = _text_list(axis.get("unfavorable_elements"))
     if direction or start_age is not None:
         paragraphs.append(
-            "Đại vận là phần xem nhịp thời gian của lá số: mệnh cục gốc cho biết người này có khí chất gì, còn Đại vận cho biết giai đoạn nào khí chất đó thuận, bị ép, hay cần đổi cách đi. "
+            "Mệnh cục giống như nền năng lực và khí chất đi theo một người, còn Đại vận cho biết nền ấy gặp thời tiết nào trong từng chặng đời. Có giai đoạn sở trường được nâng đỡ nên làm việc thuận tay hơn; cũng có giai đoạn buộc phải đổi cách đi, thu hẹp để tích lực hoặc trưởng thành qua áp lực. "
             + "Lá số này đi theo "
             + _first_text(direction, "chiều vận đã tính")
             + (f", khởi vận khoảng {start_age} tuổi." if start_age is not None else ".")
@@ -1791,7 +1793,7 @@ def _luck_cycle_paragraphs(luck_cycles: Mapping[str, Any]) -> list[str]:
             _fallback_join(
                 f"Trục nên dùng khi đọc vận: {', '.join(useful_elements)}." if useful_elements else "",
                 f"Nhóm cần tiết chế khi vào vận: {', '.join(unfavorable_elements)}." if unfavorable_elements else "",
-                "Một vận tốt không chỉ là can chi đẹp, mà là vận đó có giúp Dụng thần được dùng đúng cách và có làm điểm kỵ bùng lên quá mức hay không.",
+                "Bởi vậy, một Đại vận thuận không đơn giản là can chi nghe đẹp, mà là giai đoạn giúp Dụng thần có đất phát huy, đồng thời không đẩy điểm mất cân bằng của lá số lên quá mức.",
             )
         )
     current = _mapping(luck_cycles.get("current_cycle"))
@@ -1820,6 +1822,32 @@ def _luck_cycle_paragraphs(luck_cycles: Mapping[str, Any]) -> list[str]:
     return paragraphs
 
 
+def _life_domain_subtitle(paragraph: str, index: int) -> str:
+    text = _text(paragraph)
+    lowered = text.lower()
+    explicit = text.split(":", 1)[0].strip() if ":" in text else ""
+    if explicit and len(explicit) <= 48:
+        return explicit
+    if lowered.startswith("trục điều tiết của lá số"):
+        return "Dụng thần ứng dụng"
+    rules = (
+        (("đại vận", "lưu niên", "thời điểm"), "Thời điểm và vận khí"),
+        (("cung phi", "mệnh quái", "nhóm trạch", "hướng "), "Phương vị và không gian"),
+        (("ngũ hành", "hành nổi bật", "hành còn yếu", "hành còn thiếu"), "Cân bằng Ngũ hành"),
+        (("tài tinh", "dòng tiền", "thanh khoản", "tài vận"), "Tài khí và dòng tiền"),
+        (("trụ tháng", "nghề nghiệp", "chuyên môn"), "Nền nghề nghiệp"),
+        (("trụ ngày", "phối ngẫu", "hôn nhân"), "Nền hôn nhân"),
+        (("trụ giờ", "tử tức", "con cái", "hậu vận"), "Nền con cái và hậu vận"),
+        (("trụ năm", "gia tộc", "gốc phúc"), "Nền gia tộc"),
+        (("thập thần", "chính quan", "thất sát", "ấn tinh", "thực thần", "thương quan"), "Tín hiệu Thập thần"),
+        (("điểm cần", "nên ", "ưu tiên", "không nên"), "Định hướng ứng dụng"),
+    )
+    for keywords, subtitle in rules:
+        if any(keyword in lowered for keyword in keywords):
+            return subtitle
+    return "Luận điểm chính" if index == 0 else f"Góc nhìn bổ sung {index}"
+
+
 def _luck_cycle_guidance(
     cycle: Mapping[str, Any],
     useful_elements: Sequence[str],
@@ -1836,31 +1864,31 @@ def _luck_cycle_guidance(
     action = _luck_element_action(elements)
     if useful_hits and unfavorable_hits:
         return (
-            f"Vận này vừa chạm trục nên dùng ({', '.join(useful_hits)}) vừa kích nhóm cần tiết chế ({', '.join(unfavorable_hits)}), nên có thể mở việc nhưng phải đi bằng kế hoạch, kiểm soát rủi ro và kỷ luật nhịp sống. "
+            f"Đây là chặng vận có cả cơ hội lẫn phép thử: {', '.join(useful_hits)} nâng phần nên dùng, trong khi {', '.join(unfavorable_hits)} đồng thời làm điểm cần tiết chế rõ hơn. Chủ mệnh vẫn có thể mở việc và tiến lên, nhưng thành quả bền hay không phụ thuộc vào kế hoạch, khả năng kiểm soát rủi ro và việc giữ nhịp sống không bị cuốn theo tham vọng ngắn hạn. "
             + action
         )
     if useful_hits:
         return (
-            f"Vận này chạm trục nên dùng ({', '.join(useful_hits)}), vì vậy dễ dùng đúng lực hơn nếu chủ động chọn việc, người và môi trường hợp khí. "
+            f"Vận này đưa {', '.join(useful_hits)} vào đúng trục cần dùng, nên chủ mệnh thường cảm thấy năng lực có nơi để phát huy và quyết định dễ đi vào kết quả hơn. Cơ hội sẽ rõ nhất khi chủ động chọn đúng công việc, cộng sự và môi trường, thay vì chỉ chờ vận may tự đến. "
             + action
         )
     if unfavorable_hits:
         return (
-            f"Vận này kích nhóm cần tiết chế ({', '.join(unfavorable_hits)}), vì vậy nên đi chậm, tránh quyết định nóng và không mở rộng quá sức. "
+            f"Vận này làm {', '.join(unfavorable_hits)} nổi lên, nên những thói quen vốn dễ gây mất cân bằng cũng bộc lộ rõ hơn. Đây không hẳn là giai đoạn xấu, nhưng phù hợp với việc củng cố nền tảng, chọn lọc cơ hội và giữ dư địa an toàn hơn là quyết định nóng hoặc mở rộng quá sức. "
             + action
         )
     if elements:
-        return "Vận này kích hoạt " + ", ".join(elements) + "; nên đọc cùng Dụng thần, Thân vượng/nhược và các mục đời sống ở trên trước khi chọn việc lớn. " + action
-    return "Khi đọc vận này cần so lại với Dụng thần và Kỵ thần: vận hợp trục điều tiết thì dễ mở việc, vận kích hoạt điểm kỵ thì cần đi chậm và giữ kỷ luật hơn."
+        return "Khí nổi lên trong giai đoạn này là " + ", ".join(elements) + ". Tác động thuận hay nghịch còn tùy nó nâng Dụng thần hay làm điểm kỵ mạnh thêm, vì vậy các quyết định lớn cần đối chiếu với sức của Nhật chủ và lĩnh vực đời sống đang được kích hoạt. " + action
+    return "Giai đoạn này cần được đặt cạnh Dụng thần và Kỵ thần mới thấy rõ ý nghĩa: khi trục điều tiết được nâng, chủ mệnh có thể mở việc; khi điểm mất cân bằng bị kích mạnh, ưu tiên nên là giữ nền, đi có bước và bảo toàn sức bền."
 
 
 def _luck_element_action(elements: Sequence[str]) -> str:
     notes = {
-        "Mộc": "Mộc mở về học hỏi, mở rộng, quan hệ phát triển và kế hoạch dài hơi.",
-        "Hỏa": "Hỏa mở về thương hiệu, tốc độ, sự hiện diện, danh tiếng và quyết định nhanh.",
-        "Thổ": "Thổ mở về nền tảng, tài sản, đất đai, tổ chức, tích lũy và trách nhiệm.",
-        "Kim": "Kim mở về tài chính, kỷ luật, luật lệ, quy trình, định giá và kiểm soát rủi ro.",
-        "Thủy": "Thủy mở về dòng tiền, giao tiếp, thông tin, thị trường, di chuyển và hồi phục.",
+        "Mộc": "Khí Mộc mở nhu cầu học hỏi, phát triển quan hệ và xây kế hoạch dài hơi; phù hợp gieo nền cho điều có thể lớn dần theo thời gian.",
+        "Hỏa": "Khí Hỏa làm nổi bật thương hiệu, tốc độ, sự hiện diện và danh tiếng; cơ hội đi cùng yêu cầu quyết đoán nhưng cần tránh nóng vội.",
+        "Thổ": "Khí Thổ kéo trọng tâm về nền tảng, tài sản, đất đai, tổ chức và trách nhiệm; thành quả đến từ tích lũy chắc hơn là đổi hướng liên tục.",
+        "Kim": "Khí Kim nhấn mạnh tài chính, kỷ luật, luật lệ, quy trình và định giá; đây là lúc năng lực sàng lọc và kiểm soát rủi ro trở nên quan trọng.",
+        "Thủy": "Khí Thủy mở dòng tiền, giao tiếp, thông tin, thị trường và sự dịch chuyển; độ linh hoạt sẽ quyết định cơ hội có thực sự lưu thông hay không.",
     }
     return " ".join(notes[element] for element in elements if element in notes)
 
@@ -1881,20 +1909,20 @@ def _recommendation_paragraphs(recommendations: list[Any], payload: Mapping[str,
     strength_label = _strength_label(_first_text(strength.get("strength_level"), pattern.get("than_vuong_nhuoc")))
     if useful_line:
         paragraphs.append(
-            "Hướng hành động đầu tiên là bám vào Dụng thần, vì đó là trục giúp lá số bớt lệch và dễ vận hành đúng nhịp hơn. "
+            "Ưu tiên đầu tiên là đưa Dụng thần vào những lựa chọn có thể thực hiện mỗi ngày, bởi đây là hướng giúp chủ mệnh bớt hao lực và phát huy sở trường một cách tự nhiên hơn. "
             + useful_line
         )
     structure = _first_text(pattern.get("cach_cuc"), pattern.get("pattern"))
     if structure:
         paragraphs.append(
-            f"Với nền {structure}, nên chọn môi trường có quy tắc rõ, đầu ra đo được và có khả năng tích lũy lâu dài. Khi có cơ hội lớn, vẫn cần so lại với thế {strength_label or 'thân'} để biết nên tiến nhanh hay đi từng bước."
+            f"Với nền {structure}, chủ mệnh phát triển tốt trong môi trường có nguyên tắc rõ, đầu ra đo được và thành quả có thể tích lũy. Trước một cơ hội lớn, thế {strength_label or 'thân'} sẽ cho biết nên tăng tốc hay dành thêm thời gian củng cố nền lực."
         )
     luck = _mapping(payload.get("luck"))
     current = _mapping(luck.get("current_cycle"))
     current_ganzhi = _first_text(current.get("gan_zhi"), current.get("ganzhi"))
     if current_ganzhi:
         paragraphs.append(
-            f"Đại vận hiện tại {current_ganzhi} là bối cảnh triển khai, không nên tách rời khỏi mệnh cục gốc. Việc quan trọng nên chọn lúc vận hỗ trợ trục Dụng thần, còn khi vận kích hoạt Kỵ thần thì ưu tiên phòng thủ, giữ tiền, giữ sức và giữ quan hệ."
+            f"Đại vận {current_ganzhi} là bối cảnh chủ mệnh đang thực sự sống trong đó. Khi vận nâng Dụng thần, có thể chủ động mở việc; khi điểm kỵ nổi lên, sự khôn ngoan nằm ở việc giữ tiền, giữ sức và giữ những quan hệ quan trọng thay vì cố thắng bằng tốc độ."
         )
     paragraphs.append(_module_bridge_recommendation(payload))
     return _unique_texts([paragraph for paragraph in paragraphs if paragraph])
@@ -1924,7 +1952,7 @@ def _module_bridge_recommendation(payload: Mapping[str, Any]) -> str:
     )
     if not anchors:
         return ""
-    return "Từ bản nền này, các module sau nên dùng đúng điểm neo dữ liệu: " + "; ".join(anchors) + "; để lời tư vấn không rời khỏi lá số gốc."
+    return "Những bước tư vấn chuyên sâu về sau đều có điểm tựa rõ trong lá số: " + "; ".join(anchors) + ". Nhờ vậy, mỗi lời khuyên vẫn mang tính riêng của chủ mệnh thay vì trở thành một công thức chung cho mọi người."
 
 
 def _synthesis_paragraphs(payload: Mapping[str, Any], narrative: Mapping[str, Any]) -> list[str]:
@@ -1949,38 +1977,38 @@ def _synthesis_paragraphs(payload: Mapping[str, Any], narrative: Mapping[str, An
 
     paragraphs = [
         _fallback_join(
-            "Tổng kết lại, lá số nên được đọc theo một trục chính:",
+            "Nhìn lại toàn cục, đường dây xuyên suốt của lá số là",
             day_master + "," if day_master else "",
             f"thế {strength_label}," if strength_label else "",
             f"Mệnh cục {structure}," if structure else "",
             f"và Dụng thần {', '.join(useful_elements)}." if useful_elements else "",
-            "Đây là trục giữ cho toàn bộ phần luận không bị tản mạn.",
+            "Khi giữ đúng đường dây này, các mặt tưởng như riêng biệt của đời sống sẽ trở về cùng một logic.",
         )
     ]
 
     favorable_signals = _synthesis_favorable_signals(ten_layers, shen_groups, dominant)
     if favorable_signals:
         paragraphs.append(
-            "Điểm thuận của lá số nằm ở "
+            "Lợi thế đáng quý của lá số nằm ở "
             + "; ".join(favorable_signals)
-            + ". Những điểm này nên được dùng như lợi thế để chọn nghề, cách kiếm tiền, người đồng hành và môi trường sống."
+            + ". Đây là phần nên được chủ động đưa vào nghề nghiệp, cách tạo thu nhập, lựa chọn người đồng hành và môi trường sống để tiềm năng trở thành kết quả nhìn thấy được."
         )
 
     caution_signals = _synthesis_caution_signals(ten_layers, weak, useful)
     if caution_signals:
         paragraphs.append(
-            "Điểm cần giữ là "
+            "Mặt cần được chăm sóc và tiết chế là "
             + "; ".join(caution_signals)
-            + ". Đây là phần cần quản trị bằng nhịp sống, kỷ luật tài chính, ranh giới quan hệ và cách chọn thời điểm."
+            + ". Khi có nếp sống đều, kỷ luật tài chính, ranh giới quan hệ rõ và biết chọn thời điểm, những điểm này trở thành bài học trưởng thành thay vì lực cản kéo dài."
         )
 
     if current_ganzhi:
         paragraphs.append(
-            f"Đại vận hiện tại {current_ganzhi} là bối cảnh triển khai: không nên xem vận như một câu tốt/xấu độc lập, mà phải hỏi vận này đang giúp Dụng thần mở ra hay đang kích điểm kỵ cần tiết chế."
+            f"Trong Đại vận {current_ganzhi}, điều quan trọng không phải gắn nhãn tốt hay xấu, mà là nhận ra phần năng lực nào đang được mở và thói quen nào dễ bị đẩy quá xa. Chủ động theo phần thuận và giữ giới hạn ở phần kỵ sẽ tạo khác biệt lớn cho cùng một chặng vận."
         )
 
     paragraphs.append(
-        "Thứ tự tư vấn nên đi từ nền đến ứng dụng: trước hết ổn định sức khỏe và nhịp sống, sau đó chọn nghề/tài vận đúng Mệnh cục, tiếp theo mới đọc sâu hôn nhân, hợp tác, phong thủy và sinh con. Làm theo thứ tự này giúp lời luận vừa có chiều sâu vừa tránh phán đoán rời rạc."
+        "Con đường cải thiện nên bắt đầu từ nền sức khỏe và nhịp sống, rồi mới mở sang nghề nghiệp, tài vận, hôn nhân, hợp tác, phong thủy và con cái. Khi nền bên trong ổn, các lựa chọn bên ngoài thường sáng rõ hơn và ít phải trả giá vì quyết định trong lúc mất cân bằng."
     )
     return _unique_texts([paragraph for paragraph in paragraphs if paragraph])
 
@@ -2117,11 +2145,11 @@ def _life_domain_detail_paragraphs(
     paragraphs: list[str] = []
     strength_label = _strength_label(_first_text(strength.get("strength_level"), pattern.get("than_vuong_nhuoc")))
     structure = _first_text(pattern.get("cach_cuc"), pattern.get("pattern"))
-    useful_line = _useful_god_summary(useful)
+    useful_line = _useful_god_domain_lead(useful)
     logic_lead = DOMAIN_LOGIC_LEADS.get(key, "")
     if logic_lead:
         paragraphs.append(logic_lead)
-    if summary and not _is_low_value_domain_summary(summary):
+    if summary and not _is_low_value_domain_summary(summary) and "Dụng thần trọng tâm:" not in summary:
         paragraphs.append(summary)
 
     if key == "health":
@@ -2335,7 +2363,7 @@ def _marriage_domain_paragraphs(
         _fallback_join(
             _pillar_brief("Trụ ngày", _mapping(bazi.get("day_pillar"))),
             _layer_brief(day_layer),
-            "Vì trụ ngày là cung bản thân và phối ngẫu, phần hôn nhân phải đọc từ cách người này đi vào quan hệ gần, rồi mới xét thêm sao phối ngẫu, đào hoa, Dụng thần và Kỵ thần.",
+            "Trụ ngày vừa phản ánh bản thân vừa là cung phối ngẫu, nên đây là nơi nhìn rõ cách chủ mệnh bước vào một quan hệ gần: cần điều gì để tin tưởng, thường phản ứng ra sao khi có bất đồng và có xu hướng giữ hay nhường phần chủ động. Sao phối ngẫu, duyên tinh và Dụng thần sẽ bổ sung cho nền này, chứ không tách rời để phán tốt xấu riêng lẻ.",
         )
     ]
     if spouse_labels:
@@ -2344,7 +2372,7 @@ def _marriage_domain_paragraphs(
             + ", ".join(spouse_labels)
             + ". "
             + (
-                "Các tín hiệu này đang hiện trong dữ liệu: " + ", ".join(spouse_signals) + "."
+                "Trong lá số, các tín hiệu đang hiện rõ là " + ", ".join(spouse_signals) + "; vì vậy duyên tình không chỉ nằm ở cảm xúc ban đầu mà còn bộc lộ qua cách hai người cùng gánh trách nhiệm và tổ chức đời sống chung."
                 if spouse_signals
                 else "Trong dữ liệu hiện tại chưa thấy sao phối ngẫu lộ rõ, nên hôn nhân cần đọc thêm qua trụ ngày, vận hạn và các tín hiệu duyên/thần sát thay vì kết luận vội."
             )
@@ -2354,14 +2382,14 @@ def _marriage_domain_paragraphs(
     if relationship_brief:
         paragraphs.append(
             relationship_brief
-            + " Những tín hiệu này không tự quyết định tốt xấu, mà cho biết quan hệ dễ được kích hoạt qua sức hút, duyên gặp gỡ hoặc bài học về ranh giới cảm xúc."
+            + " Đây là dấu hiệu cho thấy duyên gặp gỡ và sức hút có thể đến khá tự nhiên. Tuy vậy, duyên tinh chỉ mở cánh cửa; chất lượng hôn nhân vẫn được quyết định bởi sự rõ ràng trong cam kết, khả năng giữ ranh giới và cách hai người xử lý những lúc cảm xúc lên cao."
         )
     if strength_label:
         paragraphs.append(_marriage_strength_guidance(strength_label))
     if useful_line:
         paragraphs.append(
             useful_line
-            + " Trong hôn nhân, Dụng thần giúp xác định kiểu quan hệ làm mình cân bằng hơn: người, thời điểm và cách sống chung nên nâng được khí tốt thay vì liên tục kích hoạt điểm kỵ."
+            + " Khi đưa vào hôn nhân, đây là chìa khóa để nhận ra kiểu người và kiểu sống chung giúp chủ mệnh trở nên cân bằng hơn. Một mối quan hệ phù hợp không chỉ tạo cảm giác bị thu hút, mà còn giúp hai bên bình tĩnh hơn, phát huy mặt tốt và ít phải sống trong trạng thái phòng thủ kéo dài."
         )
     return _unique_texts([paragraph for paragraph in paragraphs if paragraph])
 
@@ -2416,7 +2444,7 @@ def _children_domain_paragraphs(
         _fallback_join(
             _pillar_brief("Trụ giờ", _mapping(bazi.get("hour_pillar"))),
             _layer_brief(hour_layer),
-            "Trụ giờ là cung con cái, hậu vận và các dự án dài hạn; vì vậy mục này không chỉ nói chuyện sinh con, mà còn nói cách người này để lại thành quả về sau.",
+            "Trụ giờ chủ về con cái, hậu vận và những thành quả được bồi đắp trong thời gian dài. Vì vậy, phần này vừa cho thấy cách chủ mệnh nuôi dưỡng thế hệ sau, vừa phản ánh điều họ muốn để lại: một gia đình có nền nếp, một giá trị nghề nghiệp hay một công trình đủ sức đi xa hơn chính mình.",
         )
     ]
     if child_labels:
@@ -2425,7 +2453,7 @@ def _children_domain_paragraphs(
             + ", ".join(child_labels)
             + ". "
             + (
-                "Các tín hiệu này đang hiện trong dữ liệu: " + ", ".join(child_signals) + "."
+                "Trong lá số, các tín hiệu đang hiện rõ là " + ", ".join(child_signals) + ". Chúng mô tả khí chất của mối quan hệ cha mẹ - con cái và cách thành quả hậu vận hình thành, không dùng để kết luận máy móc về số lượng hay giới tính con."
                 if child_signals
                 else "Trong dữ liệu hiện tại chưa thấy sao tử tức lộ rõ, nên cần đọc kỹ trụ giờ và Đại vận thay vì kết luận vội."
             )
@@ -2434,13 +2462,13 @@ def _children_domain_paragraphs(
     luck_note = _luck_activation_note(payload)
     if luck_note:
         paragraphs.append(
-            "Khi xét thời điểm sinh con hoặc kế hoạch con cái, cần soi thêm Đại vận/Lưu niên. "
+            "Lá số gốc cho biết nền, còn thời điểm sinh con cần soi thêm Đại vận và Lưu niên. "
             + luck_note
         )
     if useful_line:
         paragraphs.append(
             useful_line
-            + " Với kế hoạch sinh con, nên ưu tiên giai đoạn và môi trường sống làm trục Dụng thần ổn hơn, vì con cái là phần cần nền khí dài hạn chứ không chỉ chọn một ngày đẹp đơn lẻ."
+            + " Với kế hoạch sinh con, nên ưu tiên giai đoạn mà sức khỏe, tài chính và đời sống gia đình cùng có độ ổn định, đồng thời môi trường sống nâng được trục Dụng thần. Một ngày đẹp chỉ hỗ trợ điểm khởi đầu; nền khí bền của cha mẹ mới là điều nuôi dưỡng hành trình lâu dài."
         )
     return _unique_texts([paragraph for paragraph in paragraphs if paragraph])
 
@@ -2533,23 +2561,23 @@ def _property_domain_paragraphs(payload: Mapping[str, Any], useful_line: str) ->
         _fallback_join(
             f"Cung Phi/Mệnh quái: {cung_phi}." if cung_phi else "",
             f"Nhóm trạch: {house_group}." if house_group else "",
-            "Điền trạch/phong thủy không chỉ là chọn hướng, mà là chọn không gian sống và làm việc giúp khí tốt được dùng đều mỗi ngày.",
+            "Điền trạch không chỉ nói về việc có nhà đất hay chọn một hướng đẹp. Quan trọng hơn, đó là khả năng tạo ra nơi ở và nơi làm việc giúp chủ mệnh hồi phục, tập trung, giữ tài sản và duy trì được nhịp sống ổn định qua nhiều năm.",
         )
     ]
     directions = _house_group_directions(house_group)
     if directions:
         paragraphs.append(
-            f"Với {house_group}, nhóm hướng nên ưu tiên tham khảo là {directions}. Khi ứng dụng thực tế vẫn cần đối chiếu hiện trạng nhà, cửa, bếp, bàn làm việc và mục tiêu sử dụng, không lấy một hướng đơn lẻ thay cho toàn bộ phong thủy."
+            f"Với {house_group}, các hướng {directions} là nhóm nên ưu tiên khi có đủ điều kiện lựa chọn. Tuy nhiên, hướng tốt chỉ phát huy khi đi cùng mặt bằng hợp lý, cửa đón khí thông thoáng, bếp và nơi nghỉ không xung đột, còn bàn làm việc phù hợp với mục tiêu sử dụng. Vì vậy không nên vì theo một hướng mà bỏ qua công năng và chất lượng sống thực tế."
         )
     if useful_element and useful_element in ELEMENT_SPACE_GUIDANCE:
         paragraphs.append(
-            f"Dụng thần/ngũ hành cần nâng là {useful_element}. {ELEMENT_SPACE_GUIDANCE[useful_element]}"
+            f"Ngũ hành cần nâng trong không gian là {useful_element}. {ELEMENT_SPACE_GUIDANCE[useful_element]} Khi được bổ trợ vừa đủ, ngôi nhà không chỉ đẹp về hình thức mà còn giúp chủ mệnh dễ trở về trạng thái cân bằng và dùng đúng sở trường của mình."
         )
     if dominant:
         paragraphs.append(
             "Hành nổi bật trong lá số là "
             + ", ".join(dominant)
-            + ". Khi bố trí nhà đất hoặc nơi làm việc, hành nổi bật không cần kích quá đà; nên dùng để hiểu khí sẵn có rồi tiết chế cho hài hòa."
+            + ". Đây là khí đã có sẵn khá nhiều, nên bố trí nhà cửa không cần tiếp tục nhấn quá mạnh. Cách tốt hơn là giữ ưu điểm của hành này làm nền, sau đó dùng ánh sáng, vật liệu, màu sắc và độ thông thoáng để tiết chế, tránh khiến không gian làm tính khí vốn có trở nên cực đoan hơn."
         )
     if weak:
         weak_notes = [ELEMENT_SPACE_GUIDANCE[element] for element in weak if element in ELEMENT_SPACE_GUIDANCE]
@@ -2557,13 +2585,13 @@ def _property_domain_paragraphs(payload: Mapping[str, Any], useful_line: str) ->
             paragraphs.append(
                 "Hành còn yếu/thiếu là "
                 + ", ".join(weak)
-                + ". Không gian nên bồi phần này một cách vừa phải: "
+                + ". Phần yếu không đồng nghĩa cứ thêm thật nhiều là tốt; nên bồi có chủ đích, bắt đầu từ công năng và cảm nhận sống: "
                 + " ".join(weak_notes)
             )
     if useful_line:
         paragraphs.append(
             useful_line
-            + " Vì vậy phong thủy ứng dụng nên phục vụ Dụng thần và nhịp sống thực tế, không chạy theo mẹo rời rạc."
+            + " Vì vậy, phong thủy phù hợp nhất là phong thủy có thể sống cùng mỗi ngày: hỗ trợ Dụng thần, thuận công năng, vừa khả năng tài chính và tạo cảm giác an định lâu dài."
         )
     return _unique_texts([paragraph for paragraph in paragraphs if paragraph])
 
@@ -2853,9 +2881,9 @@ def _layer_brief(layer: Mapping[str, Any]) -> str:
     hint = _text(layer.get("life_hint"))
     meaning = _ten_god_meaning(god)
     return _fallback_join(
-        f"Thập thần chính: {god}." if god else "",
-        f"Ý nghĩa luận giải: {meaning}." if meaning else "",
-        hint,
+        f"Khí chính tại vị trí này là {god}." if god else "",
+        f"Trong đời sống, khí này thường biểu hiện qua {meaning}." if meaning else "",
+        f"Phạm vi ảnh hưởng gắn với {hint.rstrip('.').lower()}." if hint else "",
     )
 
 
@@ -3047,6 +3075,15 @@ def _useful_god_summary(useful_god: Mapping[str, Any]) -> str:
     if reason:
         parts.append(reason)
     return " ".join(parts)
+
+
+def _useful_god_domain_lead(useful_god: Mapping[str, Any]) -> str:
+    display = _first_text(
+        useful_god.get("useful_display"),
+        useful_god.get("useful_stem"),
+        useful_god.get("useful_element"),
+    )
+    return f"Trục điều tiết của lá số là {display}." if display else ""
 
 
 def _five_elements_summary(five_elements: Mapping[str, Any]) -> str:

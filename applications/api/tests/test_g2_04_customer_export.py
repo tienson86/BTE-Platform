@@ -17,6 +17,7 @@ from applications.api.services.customer_contract import (
     HISTORY_MISMATCH_MESSAGE,
 )
 from applications.api.services.customer_export import (
+    _group_domain_paragraphs,
     build_customer_export_filename,
     export_customer_file,
     prepare_customer_report_input,
@@ -54,6 +55,29 @@ TUYEN = {
 HY_NEUTRAL = INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
 DUNG_DISPLAY = "Thủy · Nhâm · Thực Thần"
 TUYEN_DISPLAY = "Mộc · Ất · Chính Quan"
+
+
+def test_legacy_life_domain_cards_keep_section_boundaries_and_compact_useful_god() -> None:
+    legacy = [
+        "Quan vận/Nghề nghiệp: Nền nghề nghiệp.",
+        "Dụng thần trọng tâm: Hỏa · Đinh · Chính Quan. Đây là phần giải thích dài. Khi chọn nghề hoặc vai trò, nên ưu tiên môi trường phù hợp.",
+        "Nhân duyên/Hôn nhân: Nền hôn nhân.",
+        "Dụng thần trọng tâm 2: Hỏa · Đinh · Chính Quan. Đây là phần giải thích dài. Khi đưa vào hôn nhân, đây là chìa khóa cân bằng.",
+        "Điền trạch: Nền nhà ở.",
+        "Dụng thần trọng tâm 3: Hỏa · Đinh · Chính Quan. Đây là phần giải thích dài. Vì vậy, phong thủy phù hợp nhất là phong thủy sống được.",
+    ]
+
+    groups = _group_domain_paragraphs(legacy)
+    grouped = {group_id: items for group_id, _title, _card_title, items in groups}
+
+    assert [group_id for group_id, _title, _card_title, _items in groups] == ["career", "marriage", "property"]
+    assert grouped["career"][1] == (
+        "Dụng thần ứng dụng",
+        "Trục điều tiết của lá số là Hỏa. Khi chọn nghề hoặc vai trò, nên ưu tiên môi trường phù hợp.",
+    )
+    assert grouped["marriage"][1][0] == "Dụng thần ứng dụng"
+    assert grouped["property"][1][0] == "Dụng thần ứng dụng"
+    assert all("Đây là phần giải thích dài" not in body for items in grouped.values() for _title, body in items)
 
 
 def _analyze(spec: dict[str, object], analysis_id: str) -> dict:

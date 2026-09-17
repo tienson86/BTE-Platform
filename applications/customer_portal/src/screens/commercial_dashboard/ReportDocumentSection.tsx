@@ -121,14 +121,15 @@ const DOMAIN_TITLE_RULES: ReadonlyArray<readonly [RegExp, string]> = [
 ];
 
 const DOMAIN_GROUPS = [
-  { id: "career", title: "Nghề nghiệp", cardTitle: "Luận nghề nghiệp", pattern: /nghề nghiệp|công việc|sự nghiệp|nghề|chuyên môn|học hỏi|mở rộng|kỹ năng|kế hoạch dài hơi/i },
-  { id: "wealth", title: "Tài vận và kinh doanh", cardTitle: "Luận tài vận", pattern: /tài vận|kinh doanh|dòng tiền|thanh khoản|quản trị tài sản|quản trị tiền|doanh số|cạnh tranh|tài sản|nguồn tiền|giữ tài/i },
-  { id: "marriage", title: "Hôn nhân và quan hệ", cardTitle: "Luận hôn nhân", pattern: /hôn nhân|phối ngẫu|tình cảm|quan hệ gần|vợ|chồng|hồng loan|duyên|cảm xúc/i },
-  { id: "children", title: "Con cái và hậu vận", cardTitle: "Luận con cái/hậu vận", pattern: /con cái|tử tức|hậu vận|trụ giờ|dự án dài hạn|sinh con/i },
-  { id: "health", title: "Sức khỏe", cardTitle: "Luận sức khỏe", pattern: /sức khỏe|hô hấp|phổi|xoang|xương khớp|giấc ngủ|tiêu hóa|tỳ vị|thận|tim mạch|gan mật|căng thẳng/i },
-  { id: "family", title: "Gia đạo và nền gốc", cardTitle: "Luận gia đạo", pattern: /bố mẹ|cha mẹ|gia đình|gia đạo|trụ tháng|anh em|bạn bè|đồng hành|tổ tiên|gia tộc|phúc khí|trụ năm|gốc phúc/i },
-  { id: "property", title: "Điền trạch và phong thủy", cardTitle: "Luận điền trạch", pattern: /điền trạch|cung phi|mệnh quái|đông tứ trạch|tây tứ trạch|nhóm trạch|hướng nhà|hướng bàn|phong thủy|không gian|nhà đất|ánh sáng|màu sắc|vật liệu|độ thoáng|bếp|cửa|bàn làm việc|dụng thần|ngũ hành|hành nổi bật|hành còn yếu|hành còn thiếu/i },
-  { id: "luck", title: "Đại vận và thời điểm", cardTitle: "Luận vận", pattern: /đại vận|vận hiện tại|nhịp vận|giai đoạn|lưu niên/i },
+  { id: "health", title: "Sức khỏe", cardTitle: "Luận sức khỏe", pattern: /sức khỏe/i },
+  { id: "wealth", title: "Tài vận và kinh doanh", cardTitle: "Luận tài vận", pattern: /mệnh\/tài vận|tài vận/i },
+  { id: "career", title: "Nghề nghiệp", cardTitle: "Luận nghề nghiệp", pattern: /quan vận\/nghề nghiệp|nghề nghiệp/i },
+  { id: "marriage", title: "Hôn nhân và quan hệ", cardTitle: "Luận hôn nhân", pattern: /nhân duyên\/hôn nhân|hôn nhân/i },
+  { id: "children", title: "Con cái và hậu vận", cardTitle: "Luận con cái/hậu vận", pattern: /con cái/i },
+  { id: "parents", title: "Bố mẹ", cardTitle: "Luận về bố mẹ", pattern: /bố mẹ/i },
+  { id: "siblings", title: "Anh em và người đồng hành", cardTitle: "Luận quan hệ đồng hành", pattern: /anh em/i },
+  { id: "ancestry", title: "Tổ tiên và gốc phúc", cardTitle: "Luận gốc gia tộc", pattern: /tổ tiên/i },
+  { id: "property", title: "Điền trạch và phong thủy", cardTitle: "Luận điền trạch", pattern: /điền trạch/i },
 ] as const;
 
 type DomainGroup = (typeof DOMAIN_GROUPS)[number];
@@ -145,27 +146,57 @@ function inferDomainTitle(paragraph: string, index: number): string {
 }
 
 function inferDomainGroup(title: string, body: string): DomainGroup {
-  const value = `${title} ${body}`;
-  return DOMAIN_GROUPS.find((group) => group.pattern.test(value)) ?? DOMAIN_GROUPS[0];
+  const titleMatch = DOMAIN_GROUPS.find((group) => group.pattern.test(title));
+  return titleMatch ?? DOMAIN_GROUPS.find((group) => group.pattern.test(body)) ?? DOMAIN_GROUPS[0];
 }
 
-function splitDomainParagraph(paragraph: string, index: number): DomainItem {
+function compactLegacyUsefulGod(title: string, body: string): { readonly title: string; readonly body: string } {
+  if (!/^Dụng thần trọng tâm(?:\s+\d+)?$/i.test(title)) return { title, body };
+  const markers = ["Trong tài vận", "Khi chọn nghề", "Khi đưa vào hôn nhân", "Với kế hoạch sinh con", "Khi hòa giải", "Khi xét cộng sự", "Vì vậy, phong thủy"];
+  const marker = markers.map((value) => ({ value, index: body.indexOf(value) })).find((item) => item.index >= 0);
+  if (!marker) return { title: "Dụng thần ứng dụng", body };
+  const element = body.split("·", 1)[0].trim().split(/[.;]/, 1)[0].trim();
+  const lead = element ? `Trục điều tiết của lá số là ${element}. ` : "";
+  return { title: "Dụng thần ứng dụng", body: lead + body.slice(marker.index) };
+}
+
+function splitDomainParagraph(paragraph: string, index: number, activeGroup?: DomainGroup): DomainItem {
   const colonIndex = paragraph.indexOf(":");
   const title = colonIndex <= 0 ? inferDomainTitle(paragraph, index) : paragraph.slice(0, colonIndex).trim();
-  const body = colonIndex <= 0 ? paragraph : paragraph.slice(colonIndex + 1).trim();
-  return { title, body, group: inferDomainGroup(title, body) };
+  const rawBody = colonIndex <= 0 ? paragraph : paragraph.slice(colonIndex + 1).trim();
+  const compact = compactLegacyUsefulGod(title, rawBody);
+  const explicitGroup = colonIndex > 0 ? DOMAIN_GROUPS.find((group) => group.pattern.test(title)) : undefined;
+  return { title: compact.title, body: compact.body, group: explicitGroup ?? activeGroup ?? inferDomainGroup(title, rawBody) };
+}
+
+function parseDomainItems(paragraphs: readonly string[]): readonly DomainItem[] {
+  const items: DomainItem[] = [];
+  let activeGroup: DomainGroup | undefined;
+  paragraphs.forEach((paragraph, index) => {
+    const item = splitDomainParagraph(paragraph, index, activeGroup);
+    activeGroup = item.group;
+    if (item.body) items.push(item);
+  });
+  return items;
 }
 
 function groupDomainItems(items: readonly DomainItem[]): ReadonlyArray<{
   readonly group: DomainGroup;
   readonly items: readonly DomainItem[];
+  readonly startIndex: number;
 }> {
+  let startIndex = 0;
   return DOMAIN_GROUPS
     .map((group) => ({
       group,
       items: items.filter((item) => item.group.id === group.id),
     }))
-    .filter((entry) => entry.items.length);
+    .filter((entry) => entry.items.length)
+    .map((entry) => {
+      const numbered = { ...entry, startIndex };
+      startIndex += entry.items.length;
+      return numbered;
+    });
 }
 
 function ReportLifeDomainsVisual({
@@ -173,9 +204,7 @@ function ReportLifeDomainsVisual({
 }: {
   readonly paragraphs: readonly string[];
 }): ReactNode {
-  const items = paragraphs
-    .map((paragraph, index) => splitDomainParagraph(paragraph, index))
-    .filter((item) => item.body);
+  const items = parseDomainItems(paragraphs);
   const groups = groupDomainItems(items);
   if (!items.length) return null;
   return (
@@ -188,14 +217,18 @@ function ReportLifeDomainsVisual({
         <section key={entry.group.id} className="bte-report-doc__domain-group">
           <h5 className="bte-report-doc__domain-group-title">{entry.group.title}</h5>
           <div className="bte-report-doc__domain-grid">
-            {entry.items.map((item, index) => (
-              <article key={`${entry.group.id}-${index}`} className="bte-report-doc__domain-card">
-                <span className="bte-report-doc__domain-index">{String(index + 1).padStart(2, "0")}</span>
-                <h6>{`${entry.group.cardTitle} ${index + 1}`}</h6>
-                <p className="bte-report-doc__domain-topic">{item.title}</p>
-                <p>{item.body}</p>
-              </article>
-            ))}
+            {entry.items.map((item, index) => {
+              const duplicateIndex = entry.items.slice(0, index).filter((candidate) => candidate.title === item.title).length + 1;
+              const duplicateCount = entry.items.filter((candidate) => candidate.title === item.title).length;
+              const displayTitle = duplicateCount > 1 && duplicateIndex > 1 ? `${item.title} ${duplicateIndex}` : item.title;
+              return (
+                <article key={`${entry.group.id}-${index}`} className="bte-report-doc__domain-card">
+                  <span className="bte-report-doc__domain-index">{String(entry.startIndex + index + 1).padStart(2, "0")}</span>
+                  <h6>{displayTitle}</h6>
+                  <p>{item.body}</p>
+                </article>
+              );
+            })}
           </div>
         </section>
       ))}

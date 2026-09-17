@@ -186,52 +186,58 @@ _DOMAIN_TITLE_RULES: tuple[tuple[tuple[str, ...], str], ...] = (
 
 _DOMAIN_GROUP_RULES: tuple[tuple[str, str, str, tuple[str, ...]], ...] = (
     (
-        "career",
-        "Nghề nghiệp",
-        "Luận nghề nghiệp",
-        ("nghề nghiệp", "công việc", "sự nghiệp", "nghề", "chuyên môn", "học hỏi", "mở rộng", "kỹ năng", "kế hoạch dài hơi"),
+        "health",
+        "Sức khỏe",
+        "Luận sức khỏe",
+        ("sức khỏe",),
     ),
     (
         "wealth",
         "Tài vận và kinh doanh",
         "Luận tài vận",
-        ("tài vận", "kinh doanh", "dòng tiền", "thanh khoản", "quản trị tài sản", "quản trị tiền", "doanh số", "cạnh tranh", "tài sản", "nguồn tiền", "giữ tài"),
+        ("mệnh/tài vận", "tài vận"),
+    ),
+    (
+        "career",
+        "Nghề nghiệp",
+        "Luận nghề nghiệp",
+        ("quan vận/nghề nghiệp", "nghề nghiệp"),
     ),
     (
         "marriage",
         "Hôn nhân và quan hệ",
         "Luận hôn nhân",
-        ("hôn nhân", "phối ngẫu", "tình cảm", "quan hệ gần", "vợ", "chồng", "hồng loan", "duyên", "cảm xúc"),
+        ("nhân duyên/hôn nhân", "hôn nhân"),
     ),
     (
         "children",
         "Con cái và hậu vận",
         "Luận con cái/hậu vận",
-        ("con cái", "tử tức", "hậu vận", "trụ giờ", "dự án dài hạn", "sinh con"),
+        ("con cái",),
     ),
     (
-        "health",
-        "Sức khỏe",
-        "Luận sức khỏe",
-        ("sức khỏe", "hô hấp", "phổi", "xoang", "xương khớp", "giấc ngủ", "tiêu hóa", "tỳ vị", "thận", "tim mạch", "gan mật", "căng thẳng"),
+        "parents",
+        "Bố mẹ",
+        "Luận về bố mẹ",
+        ("bố mẹ",),
     ),
     (
-        "family",
-        "Gia đạo và nền gốc",
-        "Luận gia đạo",
-        ("bố mẹ", "cha mẹ", "gia đình", "gia đạo", "trụ tháng", "anh em", "bạn bè", "đồng hành", "tổ tiên", "gia tộc", "phúc khí", "trụ năm", "gốc phúc"),
+        "siblings",
+        "Anh em và người đồng hành",
+        "Luận quan hệ đồng hành",
+        ("anh em",),
+    ),
+    (
+        "ancestry",
+        "Tổ tiên và gốc phúc",
+        "Luận gốc gia tộc",
+        ("tổ tiên",),
     ),
     (
         "property",
         "Điền trạch và phong thủy",
         "Luận điền trạch",
-        ("điền trạch", "cung phi", "mệnh quái", "đông tứ trạch", "tây tứ trạch", "nhóm trạch", "hướng nhà", "hướng bàn", "phong thủy", "không gian", "nhà đất", "ánh sáng", "màu sắc", "vật liệu", "độ thoáng", "bếp", "cửa", "bàn làm việc", "dụng thần", "ngũ hành", "hành nổi bật", "hành còn yếu", "hành còn thiếu"),
-    ),
-    (
-        "luck",
-        "Đại vận và thời điểm",
-        "Luận vận",
-        ("đại vận", "vận hiện tại", "nhịp vận", "giai đoạn", "lưu niên"),
+        ("điền trạch",),
     ),
 )
 
@@ -470,14 +476,17 @@ def _five_elements_chart_html(report_input: ReportInputV1) -> str:
 def _life_domains_html(paragraphs: list[str]) -> str:
     groups = _group_domain_paragraphs(paragraphs)
     sections: list[str] = []
-    for _group_id, group_title, card_title, items in groups:
+    global_index = 0
+    for _group_id, group_title, _card_title, items in groups:
         cards: list[str] = []
-        for index, (title, body) in enumerate(items):
+        used_titles: dict[str, int] = {}
+        for title, body in items:
+            global_index += 1
+            display_title = _unique_domain_title(title, used_titles)
             cards.append(
                 '<article class="domain-card">'
-                f'<span>{index + 1:02d}</span>'
-                f"<h3>{escape(card_title)} {index + 1}</h3>"
-                f"<small>{escape(title)}</small>"
+                f'<span>{global_index:02d}</span>'
+                f"<h3>{escape(display_title)}</h3>"
                 f"<p>{escape(body)}</p>"
                 "</article>"
             )
@@ -614,10 +623,14 @@ def _docx_five_elements_table(document: Document, report_input: ReportInputV1) -
 
 
 def _docx_life_domains(document: Document, paragraphs: list[str]) -> None:
-    for _group_id, group_title, card_title, items in _group_domain_paragraphs(paragraphs):
+    global_index = 0
+    for _group_id, group_title, _card_title, items in _group_domain_paragraphs(paragraphs):
         document.add_heading(group_title, level=2)
-        for index, (title, body) in enumerate(items):
-            document.add_heading(f"{card_title} {index + 1}: {title}", level=3)
+        used_titles: dict[str, int] = {}
+        for title, body in items:
+            global_index += 1
+            display_title = _unique_domain_title(title, used_titles)
+            document.add_heading(f"{global_index:02d}. {display_title}", level=3)
             document.add_paragraph(body)
 
 
@@ -658,10 +671,14 @@ def _split_domain_paragraph(paragraph: str, index: int) -> tuple[str, str]:
 
 def _group_domain_paragraphs(paragraphs: list[str]) -> list[tuple[str, str, str, list[tuple[str, str]]]]:
     items: list[tuple[str, str, str]] = []
+    active_group = ""
     for index, paragraph in enumerate(paragraphs):
         title, body = _split_domain_paragraph(paragraph, index)
         if body:
-            items.append((_infer_domain_group(title, body), title, body))
+            compact_title, compact_body = _compact_legacy_useful_god(title, body)
+            explicit_group = _infer_domain_group_from_title(title) if ":" in paragraph else ""
+            active_group = explicit_group or active_group or _infer_domain_group(title, body)
+            items.append((active_group, compact_title, compact_body))
     groups: list[tuple[str, str, str, list[tuple[str, str]]]] = []
     for group_id, group_title, card_title, _keywords in _DOMAIN_GROUP_RULES:
         group_items = [(title, body) for item_group_id, title, body in items if item_group_id == group_id]
@@ -670,8 +687,41 @@ def _group_domain_paragraphs(paragraphs: list[str]) -> list[tuple[str, str, str,
     return groups
 
 
+def _infer_domain_group_from_title(title: str) -> str:
+    lowered = title.lower()
+    for group_id, _group_title, _card_title, keywords in _DOMAIN_GROUP_RULES:
+        if any(keyword in lowered for keyword in keywords):
+            return group_id
+    return ""
+
+
+def _compact_legacy_useful_god(title: str, body: str) -> tuple[str, str]:
+    normalized = title.lower().strip()
+    if not normalized.startswith("dụng thần trọng tâm"):
+        return title, body
+    markers = (
+        "Trong tài vận",
+        "Khi chọn nghề",
+        "Khi đưa vào hôn nhân",
+        "Với kế hoạch sinh con",
+        "Khi hòa giải",
+        "Khi xét cộng sự",
+        "Vì vậy, phong thủy",
+    )
+    marker_index = next((body.find(marker) for marker in markers if body.find(marker) >= 0), -1)
+    if marker_index < 0:
+        return "Dụng thần ứng dụng", body
+    element = body.split("·", 1)[0].strip().split(".", 1)[0].split(";", 1)[0].strip()
+    lead = f"Trục điều tiết của lá số là {element}. " if element else ""
+    return "Dụng thần ứng dụng", lead + body[marker_index:]
+
+
 def _infer_domain_group(title: str, body: str) -> str:
-    lowered = f"{title} {body}".lower()
+    lowered_title = title.lower()
+    for group_id, _group_title, _card_title, keywords in _DOMAIN_GROUP_RULES:
+        if any(keyword in lowered_title for keyword in keywords):
+            return group_id
+    lowered = body.lower()
     for group_id, _group_title, _card_title, keywords in _DOMAIN_GROUP_RULES:
         if any(keyword in lowered for keyword in keywords):
             return group_id
