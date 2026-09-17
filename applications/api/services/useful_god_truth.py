@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import hashlib
+from pathlib import Path
+
 from applications.api.models.analysis_result import UsefulGodView
 from engines.useful_god_engine.presentation import (
     KY_SCOPE_NOTE,
@@ -12,10 +15,17 @@ from engines.useful_god_engine.presentation import (
 
 
 def useful_god_source_fingerprint() -> dict[str, str]:
+    rule_dir = Path(__file__).resolve().parents[3] / "database" / "13_useful_god"
+    digest = hashlib.sha256()
+    for path in sorted(rule_dir.glob("*.csv")):
+        digest.update(path.name.encode("utf-8"))
+        digest.update(path.read_bytes())
     return {
         "layer": "applications.api.services.useful_god_truth",
         "contract": "analysis_result.UsefulGodView@1.5",
         "owner": "api_ssot",
+        "rule_pack": "database/13_useful_god",
+        "rule_pack_sha256": digest.hexdigest(),
     }
 
 

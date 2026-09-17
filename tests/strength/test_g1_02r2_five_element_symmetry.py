@@ -112,8 +112,8 @@ def test_fire_resource_support_path() -> None:
     assert "sup_002" in result.matched_rules
 
 
-def test_live_cases_unchanged_by_symmetry_coverage() -> None:
-    """Symmetry tests must not imply a retune of the three frozen charts."""
+def test_live_cases_include_published_full_combination_strength() -> None:
+    """Frozen charts include the later full-branch-combination contract."""
     from engines.bazi_engine.engine import BaziEngine
     from engines.calendar_engine.engine import CalendarEngine
 
@@ -129,9 +129,11 @@ def test_live_cases_unchanged_by_symmetry_coverage() -> None:
     assert son_r.raw_total == 37.0
     assert abs(son_r.strength_score - 0.87) < 0.001
     assert son_r.strength_level == "strong"
-    assert huynh_r.raw_total == 14.0
-    assert abs(huynh_r.strength_score - 0.64) < 0.001
-    assert huynh_r.strength_level == "balanced"
+    assert huynh_r.raw_total == 32.0
+    assert abs(huynh_r.strength_score - 0.82) < 0.001
+    assert huynh_r.strength_level == "strong"
+    assert huynh_r.combination_score == 0.18
+    assert "auto_full_combination_1" in huynh_r.matched_rules
     assert dung_r.raw_total == -26.0
     assert abs(dung_r.strength_score - 0.24) < 0.001
     assert dung_r.strength_level == "weak"

@@ -31,3 +31,31 @@ def test_analyzer_runs_all_stages() -> None:
     data = analyzer.analyze(ctx, groups)
     assert "balance_summary" in data
     assert len(data["strength_candidates"]) == 1
+
+
+def test_all_rule_groups_honor_enabled_false() -> None:
+    pc = PatternContext(
+        day_master="Giáp",
+        day_master_element="Mộc",
+        month_branch="Sửu",
+        month_branch_element="Thổ",
+        month_branch_ten_god="Chính Tài",
+        strength_level="weak",
+        season="winter",
+        season_phase="late_winter",
+        temperature_type="cold",
+        element_distribution={"Mộc": 3, "Thổ": 1},
+    )
+    ctx = build_useful_god_context(pc)
+    disabled = {
+        "rule_id": "disabled",
+        "conditions": "[]",
+        "status": "active",
+        "enabled": False,
+    }
+    groups = {
+        name: [dict(disabled)]
+        for name in ("strength", "season", "temperature", "flow", "special")
+    }
+    data = UsefulGodAnalyzer(UsefulGodMatcher()).analyze(ctx, groups)
+    assert data["candidate_list"] == []

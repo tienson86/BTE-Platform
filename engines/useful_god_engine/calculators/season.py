@@ -4,11 +4,13 @@ from __future__ import annotations
 
 from typing import Any
 
+from ..rule_state import is_rule_active
+
 
 def run_season_stage(context: Any, rules: list[dict[str, Any]], matcher: Any) -> list[dict[str, Any]]:
     matches: list[dict[str, Any]] = []
     for rule in rules:
-        if str(rule.get("status") or "active") != "active":
+        if not is_rule_active(rule):
             continue
         if matcher.match(context, rule):
             item = dict(rule)

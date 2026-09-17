@@ -93,7 +93,7 @@ def test_truong_reason_is_sinh_tro() -> None:
     assert "Thiên Ấn" not in useful["favorable_display"]
 
 
-def test_balanced_wealth_reason_is_honest() -> None:
+def test_cold_balanced_metal_sat_resource_uses_fire_reason() -> None:
     payload = _analyze(
         year=1996,
         month=11,
@@ -104,8 +104,12 @@ def test_balanced_wealth_reason_is_honest() -> None:
         timezone="Asia/Bangkok",
     )
     useful = payload["useful_god"]
-    assert useful["winning_rule_id"] == "str_005"
-    assert useful["reason_archetype"] == ARCHETYPE_BALANCED_WEALTH
-    assert "không đối chiếu sâu toàn cục" in useful["short_reason"]
-    assert useful["favorable_gods"] == ["Chính Tài", "Thực Thần"]
-    assert useful["favorable_display"] == INSUFFICIENT_CUSTOMER_FAVORABLE_DISPLAY
+    assert useful["winning_rule_id"] == "str_balanced_cold_metal_sat_resource"
+    assert useful["reason_archetype"] == ARCHETYPE_CHE
+    assert "không đối chiếu sâu toàn cục" not in useful["short_reason"]
+    assert useful["useful_display"] == "Hỏa · Bính · Thất Sát"
+    assert useful["favorable_gods"] == ["Bính", "Mậu", "Kỷ", "Canh", "Tân"]
+    assert useful["favorable_display"] == (
+        "Thổ · Mậu · Thiên Ấn / Thổ · Kỷ · Chính Ấn / "
+        "Kim · Canh · Tỷ Kiên / Kim · Tân · Kiếp Tài"
+    )

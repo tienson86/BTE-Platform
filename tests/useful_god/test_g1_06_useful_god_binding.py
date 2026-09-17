@@ -207,10 +207,12 @@ def test_hot_climate_does_not_use_score_axis() -> None:
             element_distribution={"Mộc": 2, "Hỏa": 2, "Thổ": 2, "Kim": 2, "Thủy": 2},
         )
     )
-    assert result.winning_rule_id == "str_005"
-    assert result.useful_stem == "Ất"
-    assert result.useful_element == "Mộc"
-    assert result.useful_ten_god == "Chính Tài"
+    assert result.success is False
+    assert result.overall_incomplete is True
+    assert result.winning_rule_id == ""
+    assert result.useful_stem == ""
+    assert result.useful_element == ""
+    assert result.useful_ten_god == ""
     assert result.climate_rule_id == "sea_002"
     assert result.climate_candidate == "Nhâm"
 

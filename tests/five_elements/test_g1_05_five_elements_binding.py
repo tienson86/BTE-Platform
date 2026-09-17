@@ -1,4 +1,4 @@
-"""G1-05 canonical Five Elements structural distribution (19-count)."""
+"""G1-05 canonical Five Elements structural distribution."""
 
 from __future__ import annotations
 
@@ -131,7 +131,7 @@ def test_wuxing_score_does_not_override_counts() -> None:
     assert payload["score"]["grade"] not in str(payload["five_elements"]["counts"])
 
 
-def test_analytical_15_tally_is_not_customer_distribution() -> None:
+def test_structural_chart_and_weighted_analysis_keep_explicit_semantics() -> None:
     calendar, chart = _case_0001_chart()
     pattern_ctx = build_pattern_context(chart, calendar=calendar)
     strength_ctx = build_strength_context(chart, calendar=calendar)
@@ -143,8 +143,42 @@ def test_analytical_15_tally_is_not_customer_distribution() -> None:
     assert customer == 19
     assert pattern_total == 15
     assert useful_total == 15
-    assert strength_total != customer
+    assert strength_total == 15
     assert customer != pattern_total
+
+
+def test_nguyen_tien_khang_chart_and_useful_god_share_the_same_distribution() -> None:
+    payload = OrchestratorService().analyze(
+        year=2015, month=8, day=14, hour=7, minute=22, gender="male"
+    )
+    assert payload["five_elements"]["counts"] == {
+        "wood": 5,
+        "fire": 2,
+        "earth": 7,
+        "metal": 3,
+        "water": 3,
+    }
+    assert payload["five_elements"]["unit_total"] == 20
+    assert payload["useful_god"]["useful_display"] == "Hỏa · Đinh · Chính Tài"
+
+
+def test_pham_thai_ha_structural_chart_and_useful_god_are_both_locked() -> None:
+    payload = OrchestratorService().analyze(
+        year=1996, month=11, day=21, hour=17, minute=0, gender="male"
+    )
+    assert payload["five_elements"]["counts"] == {
+        "wood": 1,
+        "fire": 2,
+        "earth": 4,
+        "metal": 3,
+        "water": 5,
+    }
+    assert payload["five_elements"]["unit_total"] == 15
+    assert payload["useful_god"]["useful_display"] == "Hỏa · Bính · Thiên Tài"
+    assert payload["useful_god"]["favorable_display"] == (
+        "Hỏa · Đinh · Chính Tài / Mộc · Giáp · Thực Thần / "
+        "Mộc · Ất · Thương Quan"
+    )
 
 
 def test_strength_pattern_temperature_ten_gods_useful_god_unchanged() -> None:
@@ -158,7 +192,8 @@ def test_strength_pattern_temperature_ten_gods_useful_god_unchanged() -> None:
     assert payload["pattern"]["pattern"] == "chinh_an"
     assert payload["temperature"]["climate_state"] == "cold"
     assert payload["temperature"]["balancing_need"] == "warming"
-    assert payload["useful_god"]["useful_god"] == "Chính Quan"
+    assert payload["useful_god"]["useful_god"] == "Đinh"
+    assert payload["useful_god"]["useful_ten_god"] == "Chính Quan"
     assert payload["useful_god"]["useful_display"] == "Hỏa · Đinh · Chính Quan"
     assert payload["useful_god"]["climate_display"] == "Hỏa · Bính · Thất Sát"
     ten_gods = payload.get("ten_gods") or {}

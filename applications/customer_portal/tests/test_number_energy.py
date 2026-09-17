@@ -53,7 +53,7 @@ def test_number_energy_proxy_targets_applications_api() -> None:
 
 def test_number_energy_default_live_ports_use_runtime_stack() -> None:
     assert settings.port == 8083
-    assert settings.api_base_url == "http://127.0.0.1:8001"
+    assert settings.api_base_url == "http://127.0.0.1:8000"
 
 
 def test_number_energy_is_visible_in_primary_nav() -> None:

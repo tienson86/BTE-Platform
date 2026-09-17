@@ -7,7 +7,13 @@ from typing import Any
 
 
 class PriorityResolver:
-    """Resolve winner candidate using group-priority + candidate score."""
+    """Resolve winner by semantic tier, then evidence strength.
+
+    Qualified special rules and narrowly-scoped structural rules outrank
+    generic rules. Remaining candidates retain the documented group order;
+    Flow is evidence and must not silently override an established structural
+    result.
+    """
 
     def __init__(self, priority_rules: list[dict[str, Any]]):
         self._map: dict[str, int] = {}
@@ -26,12 +32,19 @@ class PriorityResolver:
         if not candidates:
             return None
 
-        def key_fn(item: dict[str, Any]) -> tuple[int, float, int]:
+        def key_fn(item: dict[str, Any]) -> tuple[int, int, float, int]:
             group = str(item.get("rule_group") or "")
             group_priority = int(self._map.get(group, 0))
+            specificity = len(self._parse_conditions(item.get("conditions")))
             score = float(item.get("score") or 0.0)
             rule_priority = int(item.get("priority") or 0)
-            return (group_priority, score, rule_priority)
+            if group == "special":
+                semantic_tier = 4
+            elif group == "strength" and specificity >= 3:
+                semantic_tier = 3
+            else:
+                semantic_tier = 1
+            return (semantic_tier, group_priority, score, rule_priority + specificity)
 
         return max(candidates, key=key_fn)
 

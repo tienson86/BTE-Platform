@@ -16,7 +16,7 @@ class PortalSettings(BaseModel):
     api_base_url: str = Field(
         default_factory=lambda: os.getenv(
             "BTE_API_BASE_URL",
-            "http://127.0.0.1:8001",
+            "http://127.0.0.1:8000",
         )
     )
     marriage_api_base_url: str = Field(

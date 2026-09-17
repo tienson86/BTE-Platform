@@ -75,6 +75,14 @@ def classify_hy_role(
         "str_hot_strong_earth",
         "str_strong_earth_killing",
         "str_peak_rooster_metal",
+        "str_balanced_hot_wood_output",
+        "str_balanced_rooster_earth_output",
+        "str_balanced_cold_metal_sat_resource",
+        "str_cool_monkey_strong_water",
+        "str_cool_monkey_strong_metal",
+        "str_cold_pig_strong_water",
+        "str_warm_tiger_strong_fire",
+        "str_balanced_hot_snake_water",
     )
     if str(winning_rule_id).startswith(independently_supported_rules):
         return HY_ROLE_SUPPORTED_INDEPENDENT
