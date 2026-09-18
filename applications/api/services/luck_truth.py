@@ -146,6 +146,25 @@ def _annual_identity(raw: Any) -> dict[str, Any] | None:
     metadata = data.get("metadata") if isinstance(data.get("metadata"), Mapping) else {}
     stem_el = str(data.get("stem_element") or data.get("element") or stem_element(stem))
     branch_el = str(data.get("branch_element") or branch_element(branch))
+    nearby_years: list[dict[str, Any]] = []
+    for item in metadata.get("nearby_years") or []:
+        if not isinstance(item, Mapping):
+            continue
+        nearby_years.append(
+            {
+                "year": item.get("year"),
+                "gan_zhi": str(item.get("ganzhi") or "").strip(),
+                "stem": str(item.get("heavenly_stem") or "").strip(),
+                "branch": str(item.get("earthly_branch") or "").strip(),
+                "stem_element": str(item.get("element") or "").strip(),
+                "branch_element": str(
+                    item.get("branch_element")
+                    or branch_element(str(item.get("earthly_branch") or ""))
+                ).strip(),
+                "ten_god": str(item.get("ten_god") or "").strip(),
+                "hidden_stems": list(item.get("hidden_stems") or []),
+            }
+        )
     return {
         "year": data.get("year") or metadata.get("bazi_year"),
         "civil_year": metadata.get("civil_year") or data.get("civil_year") or data.get("year"),
@@ -157,4 +176,5 @@ def _annual_identity(raw: Any) -> dict[str, Any] | None:
         "ten_god": str(data.get("ten_god") or "").strip(),
         "source": "engines.luck_engine.providers.liunian.DefaultLiunianProvider",
         "relations": list(data.get("relations") or metadata.get("relations") or []),
+        "nearby_years": nearby_years,
     }

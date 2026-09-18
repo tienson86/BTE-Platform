@@ -5,6 +5,7 @@ from applications.production.fixtures.case_0002_readiness import CASE_0002_REQUE
 from applications.production.models import ProductionRequest
 from applications.api.services.orchestrator import OrchestratorService
 from applications.api.services.bazi_analysis_contract import _useful_element_labels
+from applications.api.services.bazi_analysis_contract import build_bazi_analysis_result
 
 
 HUNG_REQUEST = ProductionRequest(
@@ -371,3 +372,33 @@ def test_thu_phuong_does_not_promote_water_candidate_to_favorable_axis() -> None
         "Kim · Canh · Tỷ Kiên / Kim · Tân · Kiếp Tài"
     )
     assert _useful_element_labels(useful) == ["Hỏa", "Mộc"]
+
+
+def test_1997_thu_phuong_report_has_decisive_five_year_roadmap() -> None:
+    payload = OrchestratorService().analyze(
+        year=1997,
+        month=7,
+        day=1,
+        hour=14,
+        minute=30,
+        gender="female",
+        timezone="Asia/Ho_Chi_Minh",
+    )
+    contract = build_bazi_analysis_result(payload)
+    chapter = next(
+        item
+        for item in contract["customer_narrative"]["report_chapters"]
+        if item["id"] == "luck_cycles"
+    )
+    text = " ".join(chapter["paragraphs"])
+
+    assert chapter["title"] == "Đại vận và lộ trình 5 năm"
+    assert "2026 - Bính Ngọ" in text
+    assert "2027 - Đinh Mùi" in text
+    assert "Mùi-Sửu xung" in text
+    assert "2028 - Mậu Thân" in text
+    assert "2029 - Kỷ Dậu" in text
+    assert "bắt đầu Đại vận Canh Tuất" in text
+    assert "2030 - Canh Tuất" in text
+    assert "Nên làm:" in text
+    assert "Không nên:" in text

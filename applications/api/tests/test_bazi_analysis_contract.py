@@ -321,9 +321,11 @@ def test_core_life_domains_use_ten_god_reasoning() -> None:
     assert "Nhóm tín hiệu nghề nghiệp nổi bật" in career_text
     assert "Luận nghề theo Thập thần: Chính Quan" in career_text
     assert "môi trường có chuẩn mực" in career_text
-    assert "Sao phối ngẫu cần quan sát: Chính Tài, Thiên Tài" in marriage_text
+    assert "Thê tinh được đọc qua Chính Tài, Thiên Tài" in marriage_text
+    assert "Chính Tài lộ tại trụ ngày" in marriage_text
     assert "Luận sao phối ngẫu: Chính Tài" in marriage_text
     assert "với nam mệnh" in marriage_text
+    assert "Kết luận thực tế:" in marriage_text
     assert "nền cho tư vấn hợp tác" in partnership_text
     assert "Luận hợp tác: Kiếp Tài" in partnership_text
     assert "hợp đồng, pháp lý, phân quyền" in partnership_text
@@ -337,6 +339,35 @@ def test_core_life_domains_use_ten_god_reasoning() -> None:
     assert "Nhóm trạch: Tây Tứ Trạch" in property_text
     assert "Ngũ hành cần nâng trong không gian là Hỏa" in property_text
     assert "Tây, Tây Bắc, Tây Nam, Đông Bắc" in property_text
+
+
+def test_marriage_narrative_reasons_from_spouse_star_position_and_palace() -> None:
+    payload = _sample_payload()
+    payload["customer"].update({"gender": "female", "gender_label": "Nữ"})
+    payload["identity"]["person"].update({"gender": "female", "gender_label": "Nữ"})
+    payload["bazi"]["day_pillar"] = {"can_chi": "Giáp Thìn", "ten_god": "Nhật chủ"}
+    payload["bazi"]["hour_pillar"] = {"can_chi": "Tân Mùi", "ten_god": "Chính Quan"}
+    payload["ten_gods"] = {
+        "visible": [{"pillar": "hour", "stem": "Tân", "ten_god": "Chính Quan"}],
+        "hidden": [
+            {"pillar": "day", "hidden_stem": "Mậu", "ten_god": "Thiên Tài"},
+            {"pillar": "day", "hidden_stem": "Ất", "ten_god": "Kiếp Tài"},
+            {"pillar": "day", "hidden_stem": "Quý", "ten_god": "Chính Ấn"},
+        ],
+    }
+
+    result = build_bazi_analysis_result(payload)
+    marriage_text = " ".join(result["customer_narrative"]["life_domains"]["marriage"]["paragraphs"])
+
+    assert "Phu tinh được đọc qua Chính Quan, Thất Sát" in marriage_text
+    assert "Chính Quan lộ tại trụ giờ" in marriage_text
+    assert "duyên chính thức thường rõ hơn khi chủ mệnh đã trưởng thành" in marriage_text
+    assert "Cung phối ngẫu nằm tại nhật chi Thìn" in marriage_text
+    assert "Thiên Tài, Kiếp Tài, Chính Ấn" in marriage_text
+    assert "Phu/Thê tinh không nằm trực tiếp trong cung phối ngẫu" in marriage_text
+    assert "Cấu trúc nghiêng về Chính Quan hơn Thất Sát" in marriage_text
+    assert "Kết luận thực tế:" in marriage_text
+    assert "chưa đủ căn cứ để khẳng định nghề nghiệp" not in marriage_text
 
 
 def test_customer_facing_layers_do_not_leak_technical_tokens() -> None:

@@ -988,7 +988,12 @@ def build_report_chapters(payload: Mapping[str, Any], narrative: Mapping[str, An
         _chapter("bone_weight", "Cân xương đoán mệnh", _bone_weight_paragraphs(payload), ["can_xuong"]),
         _chapter("palace_feng_shui", "Cung Phi và phương vị", _palace_feng_shui_paragraphs(payload), ["calendar.cung_phi", "calendar.nhom_trach", "five_elements", "useful_god"]),
         _chapter("life_domains", "9 mục đời sống", _life_domain_paragraphs(life_domains), ["customer_narrative.life_domains"]),
-        _chapter("luck_cycles", "Đại vận", _luck_cycle_paragraphs(luck_cycles), ["luck.current_cycle", "luck.cycles"]),
+        _chapter(
+            "luck_cycles",
+            "Đại vận và lộ trình 5 năm",
+            _luck_cycle_paragraphs(luck_cycles) + _annual_roadmap_paragraphs(payload),
+            ["luck.current_cycle", "luck.cycles", "luck.annual_identity", "bazi", "useful_god"],
+        ),
         _chapter("synthesis", "Kết luận tổng hợp", _synthesis_paragraphs(payload, narrative), ["bazi", "five_elements", "ten_gods", "shen_sha", "luck", "useful_god"]),
         _chapter("recommendations", "Khuyến nghị", _recommendation_paragraphs(recommendations, payload), ["recommendations", "useful_god", "optimization"]),
     ]
@@ -1893,6 +1898,164 @@ def _luck_element_action(elements: Sequence[str]) -> str:
     return " ".join(notes[element] for element in elements if element in notes)
 
 
+_ANNUAL_TEN_GOD_GUIDANCE: dict[str, tuple[str, str, str]] = {
+    "Thực Thần": (
+        "biến năng lực thành sản phẩm và doanh thu",
+        "chuẩn hóa một sản phẩm/dịch vụ chủ lực, đo phản hồi khách hàng rồi mới mở rộng",
+        "làm nhiều, chi nhiều hoặc mở quá nhiều hướng cùng lúc",
+    ),
+    "Thương Quan": (
+        "tái cấu trúc cách làm và tạo khác biệt",
+        "thử nhỏ, đo kết quả, bỏ phần không hiệu quả và giữ mô hình thắng",
+        "phá bỏ hệ thống cũ khi phương án mới chưa được kiểm chứng",
+    ),
+    "Thiên Tài": (
+        "mở cơ hội thị trường và nguồn thu linh hoạt",
+        "mở thêm kênh bán hoặc dự án có giới hạn vốn và tiêu chí dừng rõ",
+        "dùng đòn bẩy cao hoặc chạy theo cơ hội chưa kiểm chứng",
+    ),
+    "Chính Tài": (
+        "ổn định doanh thu và tích lũy tài sản",
+        "siết biên lợi nhuận, dòng tiền và chuyển thu nhập thành phần tích lũy đều",
+        "đánh đổi nền thu nhập ổn định để lấy tăng trưởng nóng",
+    ),
+    "Thất Sát": (
+        "nhận trách nhiệm lớn hơn trong môi trường cạnh tranh",
+        "chọn một mục tiêu khó nhưng có quyền hạn, nguồn lực và tiêu chuẩn thành công rõ",
+        "ôm áp lực hoặc cam kết vượt quá năng lực thực thi",
+    ),
+    "Chính Quan": (
+        "củng cố vị trí, uy tín và tính chính danh",
+        "hoàn thiện quy trình, hợp đồng, chức danh hoặc chuẩn nghề nghiệp",
+        "đi đường tắt làm suy giảm uy tín dài hạn",
+    ),
+    "Thiên Ấn": (
+        "đổi góc nhìn và nâng chiều sâu chuyên môn",
+        "học một năng lực mới có thể áp dụng trực tiếp vào công việc",
+        "học lan man nhưng không chuyển thành đầu ra",
+    ),
+    "Chính Ấn": (
+        "xây nền chuyên môn và hệ thống bảo chứng",
+        "chuẩn hóa kiến thức, chứng chỉ, quy trình hoặc đội ngũ hỗ trợ",
+        "chờ đủ hoàn hảo mới bắt đầu hành động",
+    ),
+    "Tỷ Kiên": (
+        "tăng quyền tự chủ và năng lực tự quyết",
+        "xác lập một mảng mình chịu trách nhiệm cuối cùng và đo được kết quả",
+        "cố tự làm mọi việc hoặc từ chối hỗ trợ cần thiết",
+    ),
+    "Kiếp Tài": (
+        "mở mạng lưới, đội nhóm và cạnh tranh ngang vai",
+        "quy định rõ vai trò, quyền quyết định, tỷ lệ lợi ích và điều kiện rút lui",
+        "hợp tác bằng niềm tin miệng hoặc chia nguồn lực không có ranh giới",
+    ),
+}
+
+_BRANCH_CLASHES = {
+    frozenset(pair)
+    for pair in (("Tý", "Ngọ"), ("Sửu", "Mùi"), ("Dần", "Thân"), ("Mão", "Dậu"), ("Thìn", "Tuất"), ("Tỵ", "Hợi"))
+}
+_BRANCH_COMBINES = {
+    frozenset(pair)
+    for pair in (("Tý", "Sửu"), ("Dần", "Hợi"), ("Mão", "Tuất"), ("Thìn", "Dậu"), ("Tỵ", "Thân"), ("Ngọ", "Mùi"))
+}
+
+
+def _annual_branch_evidence(branch: str, natal_branches: Sequence[str]) -> str:
+    clashes = [item for item in natal_branches if frozenset((branch, item)) in _BRANCH_CLASHES]
+    combines = [item for item in natal_branches if frozenset((branch, item)) in _BRANCH_COMBINES]
+    repeats = [item for item in natal_branches if item == branch]
+    notes: list[str] = []
+    if clashes:
+        notes.append(f"{branch}-{clashes[0]} xung, báo hiệu nhu cầu thay đổi hoặc tái cấu trúc rõ hơn")
+    if combines:
+        notes.append(f"{branch}-{combines[0]} hợp, thuận cho việc nối nguồn lực và hình thành liên kết")
+    if repeats:
+        notes.append(f"chi {branch} lặp lại nguyên cục, làm chủ đề sẵn có nổi bật hơn")
+    return "; ".join(notes)
+
+
+def _cycle_for_year(cycles: Sequence[Any], year: int) -> Mapping[str, Any]:
+    for raw in cycles:
+        item = _mapping(raw)
+        start = _integer(item.get("year_start"))
+        end = _integer(item.get("year_end"))
+        if start is not None and end is not None and start <= year <= end:
+            return item
+    return {}
+
+
+def _integer(value: Any) -> int | None:
+    try:
+        return int(value) if value is not None and str(value).strip() else None
+    except (TypeError, ValueError):
+        return None
+
+
+def _annual_roadmap_paragraphs(payload: Mapping[str, Any]) -> list[str]:
+    """Build decisive near-term guidance from published Lưu niên identities."""
+    luck = _mapping(payload.get("luck"))
+    annual = _mapping(luck.get("annual_identity"))
+    nearby = [_mapping(item) for item in _list(annual.get("nearby_years"))]
+    current_year = _integer(annual.get("civil_year")) or _integer(annual.get("year"))
+    if current_year is None:
+        return []
+    selected = sorted(
+        (item for item in nearby if current_year <= (_integer(item.get("year")) or 0) <= current_year + 4),
+        key=lambda item: _integer(item.get("year")) or 0,
+    )
+    if not selected:
+        return []
+
+    bazi = _mapping(payload.get("bazi"))
+    natal_branches = _non_empty(
+        [_text(_mapping(bazi.get(f"{pillar}_pillar")).get("branch")) for pillar in ("year", "month", "day", "hour")]
+    )
+    cycles = _list(luck.get("cycles"))
+    useful = _mapping(payload.get("useful_god"))
+    useful_elements = set(_useful_element_labels(useful))
+    unfavorable_elements = set(_unfavorable_element_labels(useful))
+    paragraphs = [
+        "Năm năm tới nên được đọc như một lộ trình hành động, không phải bảng dự báo may rủi. Mỗi năm dưới đây nêu rõ tín hiệu được kích hoạt, việc nên ưu tiên và giới hạn cần giữ."
+    ]
+    previous_cycle = ""
+    for item in selected:
+        year = _integer(item.get("year")) or current_year
+        ganzhi = _first_text(item.get("gan_zhi"), item.get("ganzhi"))
+        ten_god = _text(item.get("ten_god"))
+        branch = _text(item.get("branch"))
+        stem_element = _element_label(item.get("stem_element"))
+        focus, do_this, avoid = _ANNUAL_TEN_GOD_GUIDANCE.get(
+            ten_god,
+            ("củng cố nền lực và chọn việc có kết quả đo được", "giữ một mục tiêu chính và theo dõi kết quả theo quý", "mở rộng chỉ vì cảm giác thuận lợi"),
+        )
+        evidence = [f"thiên can hiện {ten_god}" if ten_god else ""]
+        branch_note = _annual_branch_evidence(branch, natal_branches)
+        if branch_note:
+            evidence.append(branch_note)
+        cycle = _cycle_for_year(cycles, year)
+        cycle_ganzhi = _first_text(cycle.get("gan_zhi"), cycle.get("ganzhi"))
+        if cycle_ganzhi and cycle_ganzhi != previous_cycle:
+            start = _integer(cycle.get("year_start"))
+            evidence.append(
+                f"bắt đầu Đại vận {cycle_ganzhi}" if start == year else f"đang trong Đại vận {cycle_ganzhi}"
+            )
+        previous_cycle = cycle_ganzhi or previous_cycle
+        balance_note = ""
+        if stem_element in unfavorable_elements:
+            balance_note = f" Hành {stem_element} đồng thời chạm nhóm cần tiết chế, nên thành quả phụ thuộc vào khả năng giữ giới hạn."
+        elif stem_element in useful_elements:
+            balance_note = f" Hành {stem_element} đi cùng trục nên dùng, có thể chủ động hơn khi nền thực thi đã sẵn sàng."
+        title = f"{year} - {ganzhi}: trọng tâm là {focus}." if ganzhi else f"{year}: trọng tâm là {focus}."
+        paragraphs.append(
+            title
+            + (" Căn cứ: " + "; ".join(part for part in evidence if part) + "." if any(evidence) else "")
+            + balance_note
+            + f" Nên làm: {do_this}. Không nên: {avoid}."
+        )
+    return paragraphs
+
+
 def _recommendation_paragraphs(recommendations: list[Any], payload: Mapping[str, Any]) -> list[str]:
     paragraphs: list[str] = []
     for item in recommendations:
@@ -2359,24 +2522,10 @@ def _marriage_domain_paragraphs(
     spouse_labels = _spouse_star_labels(payload)
     spouse_signals = _ten_god_signal_labels(ten_layers, tuple(spouse_labels))
     relationship_group = _mapping(_mapping(shen_groups.get("groups")).get("relationship"))
-    paragraphs: list[str] = [
-        _fallback_join(
-            _pillar_brief("Trụ ngày", _mapping(bazi.get("day_pillar"))),
-            _layer_brief(day_layer),
-            "Trụ ngày vừa phản ánh bản thân vừa là cung phối ngẫu, nên đây là nơi nhìn rõ cách chủ mệnh bước vào một quan hệ gần: cần điều gì để tin tưởng, thường phản ứng ra sao khi có bất đồng và có xu hướng giữ hay nhường phần chủ động. Sao phối ngẫu, duyên tinh và Dụng thần sẽ bổ sung cho nền này, chứ không tách rời để phán tốt xấu riêng lẻ.",
-        )
-    ]
+    paragraphs: list[str] = []
+    paragraphs.extend(_spouse_star_reasoning(payload, ten_layers, spouse_labels))
+    paragraphs.extend(_spouse_palace_reasoning(bazi, day_layer, spouse_labels))
     if spouse_labels:
-        paragraphs.append(
-            "Sao phối ngẫu cần quan sát: "
-            + ", ".join(spouse_labels)
-            + ". "
-            + (
-                "Trong lá số, các tín hiệu đang hiện rõ là " + ", ".join(spouse_signals) + "; vì vậy duyên tình không chỉ nằm ở cảm xúc ban đầu mà còn bộc lộ qua cách hai người cùng gánh trách nhiệm và tổ chức đời sống chung."
-                if spouse_signals
-                else "Trong dữ liệu hiện tại chưa thấy sao phối ngẫu lộ rõ, nên hôn nhân cần đọc thêm qua trụ ngày, vận hạn và các tín hiệu duyên/thần sát thay vì kết luận vội."
-            )
-        )
         paragraphs.extend(_ten_god_reading_paragraphs("Luận sao phối ngẫu", spouse_signals, MARRIAGE_TEN_GOD_READINGS))
     relationship_brief = _group_brief(relationship_group)
     if relationship_brief:
@@ -2389,9 +2538,127 @@ def _marriage_domain_paragraphs(
     if useful_line:
         paragraphs.append(
             useful_line
-            + " Khi đưa vào hôn nhân, đây là chìa khóa để nhận ra kiểu người và kiểu sống chung giúp chủ mệnh trở nên cân bằng hơn. Một mối quan hệ phù hợp không chỉ tạo cảm giác bị thu hút, mà còn giúp hai bên bình tĩnh hơn, phát huy mặt tốt và ít phải sống trong trạng thái phòng thủ kéo dài."
+            + " Trong hôn nhân, Dụng thần không thay thế Phu/Thê tinh và cung phối ngẫu; nó được dùng như bộ lọc để phân biệt người chỉ tạo sức hút với người thực sự giúp đời sống chung ổn định hơn."
         )
+    conclusion = _spouse_conclusion(payload, ten_layers, spouse_labels)
+    if conclusion:
+        paragraphs.append(conclusion)
     return _unique_texts([paragraph for paragraph in paragraphs if paragraph])
+
+
+_PILLAR_MARRIAGE_CONTEXT = {
+    "year": "ở trụ năm, duyên thường mở qua môi trường xã hội rộng, nền gia đình hoặc các mối quan hệ từ giai đoạn sớm",
+    "month": "ở trụ tháng, hình tượng phối ngẫu dễ gắn với công việc, môi trường nghề nghiệp và nhịp sống trưởng thành",
+    "day": "ngay tại trụ ngày, chủ đề bạn đời đi sát đời sống riêng và thường được cảm nhận trực tiếp hơn",
+    "hour": "ở trụ giờ, duyên chính thức thường rõ hơn khi chủ mệnh đã trưởng thành về nghề nghiệp, tài chính và cách tổ chức cuộc sống",
+}
+
+
+def _spouse_occurrences(ten_layers: Mapping[str, Any], labels: Sequence[str]) -> list[dict[str, str]]:
+    occurrences: list[dict[str, str]] = []
+    for layer in _list(ten_layers.get("layers")):
+        if not isinstance(layer, Mapping):
+            continue
+        pillar = _text(layer.get("pillar"))
+        primary = _text(layer.get("primary_ten_god"))
+        if primary in labels and primary != "Nhật chủ":
+            occurrences.append({"god": primary, "pillar": pillar, "visibility": "lộ"})
+        for field, visibility in (("visible", "lộ"), ("hidden", "ẩn")):
+            for item in _list(layer.get(field)):
+                if not isinstance(item, Mapping):
+                    continue
+                god = _text(item.get("ten_god"))
+                if god in labels:
+                    occurrences.append({"god": god, "pillar": pillar, "visibility": visibility})
+    unique: list[dict[str, str]] = []
+    seen: set[tuple[str, str, str]] = set()
+    for item in occurrences:
+        key = (item["god"], item["pillar"], item["visibility"])
+        if key not in seen:
+            seen.add(key)
+            unique.append(item)
+    return unique
+
+
+def _spouse_star_reasoning(
+    payload: Mapping[str, Any],
+    ten_layers: Mapping[str, Any],
+    spouse_labels: Sequence[str],
+) -> list[str]:
+    if not spouse_labels:
+        return []
+    gender = _first_text(
+        _mapping(payload.get("customer")).get("gender_label"),
+        _mapping(payload.get("customer")).get("gender"),
+    ).lower()
+    role = "Phu tinh" if gender in {"female", "nữ", "nu", "f"} else "Thê tinh"
+    occurrences = _spouse_occurrences(ten_layers, spouse_labels)
+    visible = [item for item in occurrences if item["visibility"] == "lộ"]
+    hidden = [item for item in occurrences if item["visibility"] == "ẩn"]
+    paragraphs = [f"{role} được đọc qua {', '.join(spouse_labels)}. Đây là trục dùng để nhận diện hình tượng người bạn đời và cách duyên hôn nhân đi vào đời sống, không phải căn cứ để chốt một nghề hay một con người cụ thể."]
+    if visible:
+        details = ", ".join(
+            f"{item['god']} lộ tại trụ {PILLAR_LABELS.get(item['pillar'], item['pillar']).lower()}"
+            for item in visible
+        )
+        paragraphs.append(f"Điểm nổi bật là {details}. Vì sao này hiện ra ở thiên can, phẩm chất của người phối ngẫu và thái độ đối với cam kết thường biểu hiện khá rõ, thay vì chỉ tồn tại như một nhu cầu kín bên trong.")
+        contexts = _unique_texts(_PILLAR_MARRIAGE_CONTEXT.get(item["pillar"], "") for item in visible)
+        if contexts:
+            paragraphs.append("Xét vị trí, " + "; ".join(contexts) + ".")
+    elif hidden:
+        details = ", ".join(f"{item['god']} ẩn tại trụ {PILLAR_LABELS.get(item['pillar'], item['pillar']).lower()}" for item in hidden)
+        paragraphs.append(f"Trong nguyên cục, {details}. Phối ngẫu tinh có mặt nhưng chưa lộ rõ, nên duyên thường cần đúng môi trường hoặc đúng vận mới thành hình rõ; không nên diễn giải thành không có duyên hôn nhân.")
+    else:
+        paragraphs.append("Nguyên cục chưa thấy Phu/Thê tinh lộ hoặc tàng rõ trong dữ liệu đang xét. Điều này không đồng nghĩa không kết hôn; kết luận cần dựa nhiều hơn vào cung phối ngẫu và vận kích hoạt, thay vì dựng một chân dung quá cụ thể.")
+    gods = {item["god"] for item in occurrences}
+    if "Chính Quan" in gods and "Thất Sát" not in gods:
+        paragraphs.append("Cấu trúc nghiêng về Chính Quan hơn Thất Sát: người phù hợp để đi đường dài thường chững chạc, có nghề nghiệp và nguyên tắc rõ, coi trọng trách nhiệm và danh dự. Sức hút ban đầu có thể không quá ồn ào, nhưng giá trị nằm ở khả năng làm cho cuộc sống chung có trật tự và ổn định hơn.")
+    elif "Thất Sát" in gods and "Chính Quan" not in gods:
+        paragraphs.append("Cấu trúc nghiêng về Thất Sát: dễ bị thu hút bởi người quyết đoán, mạnh và có khả năng xử lý áp lực. Mặt cần kiểm chứng trước hôn nhân là cách người đó dùng quyền lực và quản trị cảm xúc, bởi bản lĩnh là điểm mạnh nhưng kiểm soát quá mức sẽ trở thành áp lực lâu dài.")
+    elif "Chính Quan" in gods and "Thất Sát" in gods:
+        paragraphs.append("Chính Quan và Thất Sát cùng xuất hiện, nên tiêu chuẩn tình cảm có hai lớp: vừa cần sự ổn định, chính danh, vừa dễ bị hấp dẫn bởi người mạnh và nhiều chuyển động. Điều cần phân biệt là người tạo cảm xúc mạnh chưa chắc là người có cấu trúc phù hợp để sống lâu dài.")
+    return paragraphs
+
+
+def _spouse_palace_reasoning(
+    bazi: Mapping[str, Any],
+    day_layer: Mapping[str, Any],
+    spouse_labels: Sequence[str],
+) -> list[str]:
+    day_pillar = _mapping(bazi.get("day_pillar"))
+    can_chi = _pillar_can_chi(day_pillar)
+    branch = _pillar_branch(day_pillar)
+    hidden = [item for item in _list(day_layer.get("hidden")) if isinstance(item, Mapping)]
+    hidden_gods = _unique_texts(_text(item.get("ten_god")) for item in hidden)
+    hidden_stems = _unique_texts(_text(item.get("stem")) for item in hidden)
+    paragraphs = [f"Cung phối ngẫu nằm tại nhật chi {branch or can_chi}. Đây là tầng mô tả đời sống bên trong của hôn nhân: hai người phải cùng xử lý điều gì sau khi sức hút ban đầu đã qua."]
+    if hidden_gods:
+        stem_text = f" ({', '.join(hidden_stems)})" if hidden_stems else ""
+        paragraphs.append(f"Cung này chứa {', '.join(hidden_gods)}{stem_text}. Vì vậy, đời sống hôn nhân cần được đọc qua chính những chủ đề này, thay vì chỉ lấy một sao phối ngẫu rồi kết luận toàn bộ quan hệ.")
+        if not any(god in spouse_labels for god in hidden_gods):
+            paragraphs.append("Phu/Thê tinh không nằm trực tiếp trong cung phối ngẫu. Điều này thường cho thấy hôn nhân không tự nhiên trở thành trung tâm duy nhất của tuổi trẻ; người phù hợp còn phải cùng chủ mệnh giải được các bài toán thực tế của đời sống chung như công việc, tiền bạc, gia đình hoặc sự nâng đỡ tinh thần.")
+    return paragraphs
+
+
+def _spouse_conclusion(
+    payload: Mapping[str, Any],
+    ten_layers: Mapping[str, Any],
+    spouse_labels: Sequence[str],
+) -> str:
+    occurrences = _spouse_occurrences(ten_layers, spouse_labels)
+    gods = {item["god"] for item in occurrences}
+    if "Chính Quan" in gods:
+        portrait = "điềm tĩnh, có nghề nghiệp rõ, giữ lời, có kỷ luật tài chính và tôn trọng cam kết"
+        warning = "sống tùy hứng, nóng nảy, thiếu trách nhiệm hoặc dùng nguyên tắc để kiểm soát người khác"
+    elif "Thất Sát" in gods:
+        portrait = "quyết đoán, có năng lực gánh việc, chịu áp lực tốt nhưng biết tôn trọng ranh giới"
+        warning = "mạnh nhưng độc đoán, đẩy rủi ro và áp lực sang người bạn đời"
+    elif set(spouse_labels) & gods:
+        portrait = "có khả năng cùng xây đời sống thực tế và minh bạch trách nhiệm"
+        warning = "hấp dẫn lúc đầu nhưng thiếu ổn định và không rõ cam kết"
+    else:
+        return "Kết luận hiện tại nên dừng ở tiêu chí chọn người và cách vận hành quan hệ; chưa đủ căn cứ để khẳng định nghề nghiệp, ngoại hình, tuổi hay số lần đổ vỡ của người phối ngẫu."
+    return f"Kết luận thực tế: người phù hợp hơn là người {portrait}. Kiểu người cần thận trọng là người {warning}. Đây là tiêu chí có giá trị hơn việc chỉ chọn tuổi hợp hoặc chọn một người mang đúng hành của Dụng thần."
 
 
 def _partnership_domain_paragraphs(ten_layers: Mapping[str, Any], useful_line: str) -> list[str]:
