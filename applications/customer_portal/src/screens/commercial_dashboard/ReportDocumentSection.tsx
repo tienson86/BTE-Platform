@@ -217,18 +217,20 @@ function ReportLifeDomainsVisual({
         <section key={entry.group.id} className="bte-report-doc__domain-group">
           <h5 className="bte-report-doc__domain-group-title">{entry.group.title}</h5>
           <div className="bte-report-doc__domain-grid">
-            {entry.items.map((item, index) => {
-              const duplicateIndex = entry.items.slice(0, index).filter((candidate) => candidate.title === item.title).length + 1;
-              const duplicateCount = entry.items.filter((candidate) => candidate.title === item.title).length;
-              const displayTitle = duplicateCount > 1 && duplicateIndex > 1 ? `${item.title} ${duplicateIndex}` : item.title;
-              return (
-                <article key={`${entry.group.id}-${index}`} className="bte-report-doc__domain-card">
-                  <span className="bte-report-doc__domain-index">{String(entry.startIndex + index + 1).padStart(2, "0")}</span>
-                  <h6>{displayTitle}</h6>
-                  <p>{item.body}</p>
-                </article>
-              );
-            })}
+            <article className="bte-report-doc__domain-article">
+              {entry.items.map((item, index) => {
+                const duplicateIndex = entry.items.slice(0, index).filter((candidate) => candidate.title === item.title).length + 1;
+                const duplicateCount = entry.items.filter((candidate) => candidate.title === item.title).length;
+                const shortTitle = item.title.includes(" - ") ? item.title.split(" - ").slice(1).join(" - ") : item.title;
+                const displayTitle = duplicateCount > 1 && duplicateIndex > 1 ? `${shortTitle} ${duplicateIndex}` : shortTitle;
+                return (
+                  <section key={`${entry.group.id}-${index}`} className="bte-report-doc__domain-point">
+                    <h6>{displayTitle}</h6>
+                    <p>{item.body}</p>
+                  </section>
+                );
+              })}
+            </article>
           </div>
         </section>
       ))}

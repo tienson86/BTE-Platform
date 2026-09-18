@@ -694,17 +694,20 @@
       appendText(section, "h5", "bte-report-doc__domain-group-title", entry.group.title);
       const grid = document.createElement("div");
       grid.className = "bte-report-doc__domain-grid";
+      const article = document.createElement("article");
+      article.className = "bte-report-doc__domain-article";
       entry.items.forEach((item, index) => {
         const duplicateIndex = entry.items.slice(0, index).filter((candidate) => candidate.title === item.title).length + 1;
         const duplicateCount = entry.items.filter((candidate) => candidate.title === item.title).length;
-        const displayTitle = duplicateCount > 1 && duplicateIndex > 1 ? `${item.title} ${duplicateIndex}` : item.title;
-        const card = document.createElement("article");
-        card.className = "bte-report-doc__domain-card";
-        appendText(card, "span", "bte-report-doc__domain-index", String(entry.startIndex + index + 1).padStart(2, "0"));
-        appendText(card, "h6", "", displayTitle);
-        appendText(card, "p", "", item.body);
-        grid.appendChild(card);
+        const shortTitle = item.title.includes(" - ") ? item.title.split(" - ").slice(1).join(" - ") : item.title;
+        const displayTitle = duplicateCount > 1 && duplicateIndex > 1 ? `${shortTitle} ${duplicateIndex}` : shortTitle;
+        const block = document.createElement("section");
+        block.className = "bte-report-doc__domain-point";
+        appendText(block, "h6", "", displayTitle);
+        appendText(block, "p", "", item.body);
+        article.appendChild(block);
       });
+      grid.appendChild(article);
       section.appendChild(grid);
       visual.appendChild(section);
     });
@@ -1543,8 +1546,34 @@
       }
       .bte-report-doc__domain-grid {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: minmax(0, 1fr);
         gap: var(--space-3, 12px);
+      }
+      .bte-report-doc__domain-article {
+        display: grid;
+        gap: var(--space-4, 18px);
+      }
+      .bte-report-doc__domain-point {
+        display: grid;
+        gap: var(--space-2, 8px);
+      }
+      .bte-report-doc__domain-point + .bte-report-doc__domain-point {
+        padding-top: var(--space-3, 12px);
+        border-top: 1px solid rgba(15, 159, 117, 0.16);
+      }
+      .bte-report-doc__domain-point h6,
+      .bte-report-doc__domain-point p {
+        margin: 0;
+      }
+      .bte-report-doc__domain-point h6 {
+        color: var(--cdash-text, #111827);
+        font-size: 1rem;
+        font-weight: 800;
+      }
+      .bte-report-doc__domain-point p {
+        color: var(--cdash-text, #111827);
+        font-size: 0.95rem;
+        line-height: 1.68;
       }
       .bte-report-doc__domain-card {
         display: grid;

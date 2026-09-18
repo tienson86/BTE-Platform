@@ -3775,8 +3775,40 @@
 
 .bte-report-doc__domain-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-3);
+}
+
+.bte-report-doc__domain-article {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.bte-report-doc__domain-point {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.bte-report-doc__domain-point + .bte-report-doc__domain-point {
+  padding-top: var(--space-3);
+  border-top: 1px solid rgba(15, 159, 117, 0.16);
+}
+
+.bte-report-doc__domain-point h6,
+.bte-report-doc__domain-point p {
+  margin: 0;
+}
+
+.bte-report-doc__domain-point h6 {
+  color: var(--cdash-text);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.bte-report-doc__domain-point p {
+  color: var(--cdash-text);
+  font-size: 0.95rem;
+  line-height: 1.68;
 }
 
 .bte-report-doc__domain-card {

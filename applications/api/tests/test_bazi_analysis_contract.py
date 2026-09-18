@@ -323,8 +323,8 @@ def test_core_life_domains_use_ten_god_reasoning() -> None:
     assert "môi trường có chuẩn mực" in career_text
     assert "Thê tinh được đọc qua Chính Tài, Thiên Tài" in marriage_text
     assert "Chính Tài lộ tại trụ ngày" in marriage_text
-    assert "Luận sao phối ngẫu: Chính Tài" in marriage_text
-    assert "với nam mệnh" in marriage_text
+    assert "người vợ biết vun vén, giữ lời" in marriage_text
+    assert "Với nam mệnh" in marriage_text
     assert "Kết luận thực tế:" in marriage_text
     assert "nền cho tư vấn hợp tác" in partnership_text
     assert "Luận hợp tác: Kiếp Tài" in partnership_text
@@ -361,13 +361,13 @@ def test_marriage_narrative_reasons_from_spouse_star_position_and_palace() -> No
 
     assert "Phu tinh được đọc qua Chính Quan, Thất Sát" in marriage_text
     assert "Chính Quan lộ tại trụ giờ" in marriage_text
-    assert "duyên chính thức thường rõ hơn khi chủ mệnh đã trưởng thành" in marriage_text
-    assert "Cung phối ngẫu nằm tại nhật chi Thìn" in marriage_text
+    assert "Duyên chính thức thường rõ hơn khi chủ mệnh đã trưởng thành" in marriage_text
+    assert "Cung phối ngẫu đặt tại Thìn" in marriage_text
     assert "Thiên Tài, Kiếp Tài, Chính Ấn" in marriage_text
-    assert "Phu/Thê tinh không nằm trực tiếp trong cung phối ngẫu" in marriage_text
-    assert "Cấu trúc nghiêng về Chính Quan hơn Thất Sát" in marriage_text
+    assert "Phu/Thê tinh không nằm trực tiếp trong cung này" in marriage_text
+    assert "hình tượng phù hợp là một người chồng chững chạc" in marriage_text
     assert "Kết luận thực tế:" in marriage_text
-    assert "chưa đủ căn cứ để khẳng định nghề nghiệp" not in marriage_text
+    assert "không đủ độ phân giải để chốt chính xác nghề nghiệp" in marriage_text
 
 
 def test_customer_facing_layers_do_not_leak_technical_tokens() -> None:

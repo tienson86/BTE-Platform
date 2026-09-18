@@ -11,6 +11,9 @@ from copy import deepcopy
 from datetime import datetime, timezone
 from typing import Any, Mapping, Sequence
 
+from applications.api.services.marriage_editorial import run_marriage_editorial
+from applications.api.services.life_domain_editorial import run_life_domain_editorial
+
 CONTRACT_VERSION = "bazi_analysis_result.v1"
 
 CUSTOMER_SAFE_BLOCKED_KEYS = {
@@ -2285,6 +2288,24 @@ def _enrich_life_domain_section(
     paragraphs = _life_domain_detail_paragraphs(key, payload, summary)
     if paragraphs:
         section["paragraphs"] = paragraphs
+    if key == "marriage":
+        editorial = run_marriage_editorial(payload)
+        section["editorial_trace"] = {
+            "status": editorial["status"],
+            "provider": editorial["provider"],
+            "evidence": editorial["evidence"],
+            "reasoning": editorial["reasoning"],
+            "validation": editorial["validation"],
+        }
+    elif key in {"career", "wealth", "health"}:
+        editorial = run_life_domain_editorial(payload)
+        section["editorial_trace"] = {
+            "status": editorial["status"],
+            "provider": editorial["provider"],
+            "evidence": editorial["evidence"],
+            "reasoning": editorial["reasoning"],
+            "validation": editorial["validation"],
+        }
     recommendation = _DOMAIN_RECOMMENDATIONS.get(key, "")
     if recommendation:
         section["recommendations"] = [recommendation]
@@ -2310,19 +2331,27 @@ def _life_domain_detail_paragraphs(
     structure = _first_text(pattern.get("cach_cuc"), pattern.get("pattern"))
     useful_line = _useful_god_domain_lead(useful)
     logic_lead = DOMAIN_LOGIC_LEADS.get(key, "")
-    if logic_lead:
+    if logic_lead and key != "marriage":
         paragraphs.append(logic_lead)
     if summary and not _is_low_value_domain_summary(summary) and "Dụng thần trọng tâm:" not in summary:
         paragraphs.append(summary)
 
-    if key == "health":
-        paragraphs.extend(_health_domain_paragraphs(payload, five_elements, strength_label))
-    elif key == "wealth":
-        paragraphs.extend(_wealth_domain_paragraphs(payload, ten_layers, structure, strength_label, useful_line))
-    elif key == "career":
-        paragraphs.extend(_career_domain_paragraphs(payload, ten_layers, structure, strength_label, useful_line))
+    if key in {"health", "wealth", "career"}:
+        editorial = run_life_domain_editorial(payload)
+        if editorial["status"] == "ready":
+            paragraphs.extend(editorial["sections"].get(key, []))
+        if key == "health":
+            paragraphs.extend(_health_domain_paragraphs(payload, five_elements, strength_label))
+        elif key == "wealth":
+            paragraphs.extend(_wealth_domain_paragraphs(payload, ten_layers, structure, strength_label, useful_line))
+        else:
+            paragraphs.extend(_career_domain_paragraphs(payload, ten_layers, structure, strength_label, useful_line))
     elif key == "marriage":
-        paragraphs.extend(_marriage_domain_paragraphs(payload, ten_layers, shen_groups, strength_label, useful_line))
+        editorial = run_marriage_editorial(payload)
+        if editorial["status"] == "ready":
+            paragraphs.extend(editorial["paragraphs"])
+        else:
+            paragraphs.extend(_marriage_domain_paragraphs(payload, ten_layers, shen_groups, strength_label, useful_line))
     elif key == "children":
         paragraphs.extend(_children_domain_paragraphs(payload, ten_layers, useful_line))
     elif key == "parents":
@@ -2335,7 +2364,7 @@ def _life_domain_detail_paragraphs(
         paragraphs.extend(_property_domain_paragraphs(payload, useful_line))
 
     advice = _DOMAIN_RECOMMENDATIONS.get(key, "")
-    if advice:
+    if advice and key != "marriage":
         paragraphs.append(advice)
     return _unique_texts(paragraphs)
 
@@ -2868,7 +2897,8 @@ def _ten_god_reading_paragraphs(prefix: str, signals: Sequence[str], readings: M
     for signal in signals:
         reading = readings.get(signal)
         if reading:
-            paragraphs.append(f"{prefix}: {signal}. {reading}")
+            polished = reading[:1].upper() + reading[1:] if reading else reading
+            paragraphs.append(f"{prefix}: {signal}. {polished}")
     return paragraphs
 
 
