@@ -5,6 +5,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { NumberEnergyPage, NUMBER_ENERGY_STATIC_UI_V1 } from "../../src/features/number_energy/NumberEnergyPage";
+import { TripleStory } from "../../src/features/number_energy/sections/TripleStory";
 import { APP_NAV_ITEMS, RESULT_TOC_ITEMS } from "../../src/layouts/Navigation";
 
 afterEach(() => {
@@ -95,6 +96,20 @@ function sourceOf(fileName: (typeof SOURCE_FILES)[number]): string {
   const here = dirname(fileURLToPath(import.meta.url));
   return readFileSync(resolve(here, `../../src/features/number_energy/${fileName}`), "utf8");
 }
+
+describe("Number Energy runtime empty triples", () => {
+  it("shows an honest empty state instead of Golden sample triples", () => {
+    render(<TripleStory triples={[]} slotSource="RUNTIME" />);
+
+    expect(screen.getByTestId("triple-empty-state").textContent).toContain(
+      "chưa tạo đủ hai trường khí liên tiếp",
+    );
+    expect(screen.queryByText("328")).toBeNull();
+    expect(screen.getByTestId("triple-story").getAttribute("data-slot-source")).toBe(
+      "RUNTIME",
+    );
+  });
+});
 
 describe("Number Energy SB01 shell", () => {
   it("renders page shell and input region without fetching", () => {

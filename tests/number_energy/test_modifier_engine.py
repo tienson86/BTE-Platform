@@ -49,6 +49,50 @@ def test_601_keeps_source_digits_for_liu_sha() -> None:
     assert item.source_digits == "601"
 
 
+def test_120_is_one_post_modified_jue_ming_occurrence() -> None:
+    parsed = parse_number_string("120")
+    occurrences, undefined = generate_modifier_pairs(parsed)
+    assert undefined == ()
+    assert len(occurrences) == 1
+    item = occurrences[0]
+    assert item.source_digits == "120"
+    assert item.pair_digits == "12"
+    assert item.energy_id == "jue_ming"
+    assert item.state == "HIDDEN"
+    assert item.via_modifier == 0
+
+
+def test_125_is_one_post_amplified_jue_ming_occurrence() -> None:
+    parsed = parse_number_string("125")
+    occurrences, undefined = generate_modifier_pairs(parsed)
+    assert undefined == ()
+    assert len(occurrences) == 1
+    assert occurrences[0].source_digits == "125"
+    assert occurrences[0].state == "AMPLIFIED"
+
+
+def test_1205_preserves_supported_zero_five_tail_chain() -> None:
+    parsed = parse_number_string("1205")
+    occurrences, undefined = generate_modifier_pairs(parsed)
+    assert undefined == ()
+    assert len(occurrences) == 1
+    assert occurrences[0].source_digits == "1205"
+    assert occurrences[0].pair_digits == "12"
+    assert occurrences[0].via_modifier == 0
+
+
+def test_6058_preserves_supported_interposed_zero_five_chain() -> None:
+    parsed = parse_number_string("6058")
+    occurrences, undefined = generate_modifier_pairs(parsed)
+
+    assert undefined == ()
+    assert len(occurrences) == 1
+    assert occurrences[0].source_digits == "6058"
+    assert occurrences[0].pair_digits == "68"
+    assert occurrences[0].energy_id == "tian_yi"
+    assert occurrences[0].via_modifier == 0
+
+
 def test_consecutive_modifiers_are_undefined() -> None:
     parsed = parse_number_string("1003")
     occurrences, undefined = generate_modifier_pairs(parsed)

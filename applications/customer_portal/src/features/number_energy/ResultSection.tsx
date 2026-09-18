@@ -111,7 +111,7 @@ export function ResultSection({
   const triples = boundSlot(
     "P-S04",
     slotSource,
-    nonempty(runtimeView?.triples),
+    runtimeView?.triples,
     GOLDEN_PHONE_TRIPLES,
   );
   const distribution = boundSlot(
@@ -162,7 +162,7 @@ export function ResultSection({
       <TripleStory
         triples={triples}
         slotSource={
-          slotSource?.["P-S04"] === "RUNTIME" && nonempty(runtimeView?.triples)
+          slotSource?.["P-S04"] === "RUNTIME" && runtimeView?.triples != null
             ? "RUNTIME"
             : "GOLDEN_FIXTURE"
         }

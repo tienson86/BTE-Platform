@@ -580,7 +580,7 @@ class NumberEnergyResult:
     summary: SequenceSummary
     narrative: CustomerNarrative
     expert_notes: tuple[str, ...]
-    knowledge_version: str = "1.0"
+    knowledge_version: str = "1.1"
     analyzed_input: str = ""
     leading_phone_zero: bool = False
     reading: dict[str, Any] | None = None

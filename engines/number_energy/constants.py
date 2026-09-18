@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from typing import Final
 
-KNOWLEDGE_VERSION: Final[str] = "1.0"
+KNOWLEDGE_VERSION: Final[str] = "1.1"
 SYSTEM_NAME: Final[str] = "Bát Cực Linh Số"
 SYSTEM_SHORT_NAME: Final[str] = "Năng lượng số"
 UNKNOWN_REASON_NOT_FROZEN: Final[str] = (

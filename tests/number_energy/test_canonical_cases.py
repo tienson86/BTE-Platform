@@ -118,7 +118,7 @@ def test_216_jue_ming_and_liu_sha_without_control() -> None:
     assert "CONTROLLED" not in result.sequence_states
 
 
-@pytest.mark.parametrize("number", ["1003", "1553", "1053", "1503", "505", "000", "555"])
+@pytest.mark.parametrize("number", ["1003", "1553", "1503", "505", "000", "555"])
 def test_undefined_consecutive_modifiers(number: str) -> None:
     result = _analyze(number)
     assert result.sequence_state == "UNKNOWN_OR_NOT_DEFINED"

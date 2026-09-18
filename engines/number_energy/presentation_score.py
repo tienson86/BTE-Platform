@@ -22,6 +22,7 @@ from engines.number_energy.findings_catalog import (
     LABEL_TIAN_YI,
     LABEL_YAN_NIAN,
 )
+from engines.number_energy.modifier_catalog import is_zero_modified_challenging
 from engines.number_energy.score_catalog import (
     DIM_CAREER_LABEL,
     DIM_CAREER_MAX,
@@ -322,8 +323,7 @@ def _negative_chain(
 def _modifier_stability(occurrences: tuple[EnergyOccurrence, ...]) -> int:
     """D2 0–4 from modifier effects already computed by the modifier engine."""
     if any(
-        item.via_modifier == 0 and item.display_name in CHALLENGING_LABELS
-        for item in occurrences
+        is_zero_modified_challenging(item) for item in occurrences
     ):
         return 0
     if any(item.state == "AMPLIFIED" and item.display_name in CHALLENGING_LABELS for item in occurrences):

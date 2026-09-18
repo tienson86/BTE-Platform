@@ -10,6 +10,7 @@ from engines.number_energy.constants import (
     PAIR_LOOKUP,
     TRIGRAM_VECTORS,
     UNKNOWN_REASON_NOT_FROZEN,
+    is_modifier,
     is_ordinary_gua,
 )
 from engines.number_energy.types import (
@@ -68,6 +69,9 @@ def generate_adjacent_pairs(
         left = digits[start]
         right = digits[start + 1]
         if not (is_ordinary_gua(left) and is_ordinary_gua(right)):
+            continue
+        # AB0/AB5 is one modified occurrence, not AB plus a stray modifier.
+        if start + 2 < len(digits) and is_modifier(digits[start + 2]):
             continue
         resolved = resolve_pair(left, right)
         source_digits = f"{left}{right}"

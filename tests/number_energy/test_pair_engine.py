@@ -39,6 +39,13 @@ def test_modifiers_are_not_ordinary_pairs() -> None:
     assert undefined == ()
 
 
+def test_adjacent_pair_is_not_duplicated_when_followed_by_modifier() -> None:
+    parsed = parse_number_string("120")
+    occurrences, undefined = generate_adjacent_pairs(parsed)
+    assert occurrences == ()
+    assert undefined == ()
+
+
 def test_adjacent_pairs_for_141319() -> None:
     parsed = parse_number_string("141319")
     occurrences, undefined = generate_adjacent_pairs(parsed)

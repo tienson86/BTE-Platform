@@ -320,6 +320,69 @@ def test_api_rb05_a_golden_phone_pair_structure() -> None:
     assert rows[4] == {"energy_label": "Họa Hại", "count": 1}
 
 
+def test_api_preserves_zero_five_modifier_position_and_customer_meaning() -> None:
+    interposed_zero = _analyze("102", "id_number").json()["data"]
+    post_zero = _analyze("120", "id_number").json()["data"]
+    interposed_five = _analyze("153", "id_number").json()["data"]
+    post_five = _analyze("135", "id_number").json()["data"]
+    post_zero_five = _analyze("1205", "id_number").json()["data"]
+
+    assert interposed_zero["pair_occurrences"][0]["pair_digits"] == "102"
+    assert "đầu tư bị mắc kẹt" in interposed_zero["pair_occurrences"][0][
+        "modifier_note"
+    ]
+    assert post_zero["pair_occurrences"][0]["pair_digits"] == "120"
+    assert interposed_five["pair_occurrences"][0]["pair_digits"] == "153"
+    assert "đòi hỏi nhiều công sức" in interposed_five["pair_occurrences"][0][
+        "modifier_note"
+    ]
+    assert post_five["pair_occurrences"][0]["pair_digits"] == "135"
+    assert post_zero_five["pair_occurrences"][0]["pair_digits"] == "1205"
+    assert post_zero_five["metadata"]["knowledge_version"] == "1.1"
+
+
+@pytest.mark.parametrize(
+    ("number", "purpose_context", "expected_digits"),
+    [
+        ("0102123456", "phone_number", "102"),
+        ("30A-102", "car_plate", "102"),
+        ("30A1-102", "motorbike_plate", "102"),
+        ("00102", "id_number", "102"),
+        ("B102", "id_number", "102"),
+    ],
+)
+def test_api_exposes_modifier_digits_and_customer_note_for_every_input_type(
+    number: str,
+    purpose_context: str,
+    expected_digits: str,
+) -> None:
+    data = _analyze(number, purpose_context).json()["data"]
+    item = next(
+        pair
+        for pair in data["pair_occurrences"]
+        if pair["pair_digits"] == expected_digits
+    )
+
+    assert item["pair_digits"] == expected_digits
+    assert "đầu tư bị mắc kẹt" in item["modifier_note"]
+
+
+def test_vehicle_plate_keeps_a05b_as_one_visible_energy_pair() -> None:
+    data = _analyze("30F05811", "car_plate").json()["data"]
+
+    assert data["metadata"]["analyzed_input"] == "30605811"
+    assert [item["pair_digits"] for item in data["pair_occurrences"]] == [
+        "306",
+        "6058",
+        "81",
+        "11",
+    ]
+    middle = data["pair_occurrences"][1]
+    assert middle["display_name"] == "Thiên Y"
+    assert "tài nguyên ban đầu dễ bị ẩn" in middle["modifier_note"]
+    assert "được làm lộ và tăng cường" in middle["modifier_note"]
+
+
 def test_api_rb05_b_golden_phone_triples_and_chain() -> None:
     data = _analyze("0328278786", "phone_number").json()["data"]
     triples = data["triple_occurrences"]

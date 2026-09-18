@@ -62,6 +62,11 @@ export function TripleStory({
           </li>
         ))}
       </ol>
+      {triples.length === 0 ? (
+        <p className="muted" data-testid="triple-empty-state">
+          Dãy hiện chưa tạo đủ hai trường khí liên tiếp để luận thành bộ ba.
+        </p>
+      ) : null}
     </section>
   );
 }

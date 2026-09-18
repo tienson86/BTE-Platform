@@ -10,7 +10,7 @@
 **Method:** Bát Cực Linh Số  
 **Document:** Zero / Five Modifier Standard  
 **Knowledge Status:** CANONICAL  
-**Version:** 1.0  
+**Version:** 1.1  
 **Authority Level:** CORE KNOWLEDGE  
 **Parent Standard:** `00_NUMBER_ENERGY_MASTER.md`
 
@@ -1575,6 +1575,99 @@ MUST NOT conclude:
 ```text
 WU_GUI removed
 ```
+
+---
+
+## 44.1 DOMAIN RULES — ZERO INTERPOSED
+
+Các quy tắc từ mục 44.1 đến 44.5 áp dụng đồng nhất cho mọi đầu vào khách hàng
+được hỗ trợ: số điện thoại, biển số ô tô/xe máy, số căn cước công dân và số hộ
+chiếu. Sau bước chuẩn hóa chữ cái thành số, chuỗi trường khí vẫn phải giữ nguyên
+vị trí số 0/5 (`A0B`, `A5B`, `AB0`, `AB5`, `AB05`) khi hiển thị; không được
+rút về cặp `AB` trên giao diện khách hàng.
+
+Cụm `A05B` cũng là một trường khí hoàn chỉnh: `0` làm năng lượng ẩn, hao hoặc
+bị rút bớt trước; `5` tiếp theo làm phần năng lượng đó lộ ra, tăng cường và kéo
+dài. Giao diện phải giữ nguyên bốn chữ số `A05B`. Ví dụ biển `30F05811` được
+chuẩn hóa thành `30605811` và tách thành `306 → 6058 → 81 → 11`; `6058` là
+Thiên Y gốc `68` chịu tác động liên tiếp của `0` và `5`.
+
+Canonical customer tendencies for `A0B`:
+
+- Tuyệt Mệnh: đầu tư/nguồn lực dễ bị mắc kẹt, khó đạt kết quả mong muốn.
+- Họa Hại: có khả năng khẩu ngôn nhưng khó diễn đạt trọn ý; vấn đề cần lưu ý
+  có xu hướng ẩn và khó nhận biết sớm.
+- Lục Sát: cảm xúc dễ nặng nề, u buồn và giữ phần tiêu cực ở bên trong.
+- Ngũ Quỷ: suy nghĩ nhiều, khó giải tỏa và dễ nghiêng theo hướng tiêu cực.
+- Thiên Y: tài nguyên dễ bị khóa, mua tài sản có thể phát sinh nợ, cho mượn
+  khó thu hồi hoặc đầu tư chậm quay vòng.
+- Sinh Khí: quý nhân/cơ hội ở trạng thái ẩn, khó nhận ra trợ lực và dễ gặp
+  lực cản.
+- Diên Niên: công việc/sự nghiệp dễ đình trệ, năng lực khó phát huy liên tục.
+
+Riêng Thiên Y `13/31` có 0 kẹp giữa: tình cảm có xu hướng kín; Customer Mode
+chỉ được khuyên làm rõ ranh giới để tránh quan hệ thứ ba, không kết luận ngoại
+tình như một sự thật.
+
+## 44.2 DOMAIN RULES — ZERO POST / TERMINAL
+
+`AB0` nghĩa là trường `AB` đã hình thành rồi bị 0 rút bớt khả năng biểu hiện.
+Khi nằm ở phần cuối dãy, kết quả và thành quả khó tích tụ trọn vẹn dù quá trình
+có thể rất bận rộn.
+
+Examples locked by expert review:
+
+- Tuyệt Mệnh: `120 210 690 960 480 840 370 730`.
+- Họa Hại: `170 710 890 980 460 640 230 320`.
+
+Với Tuyệt Mệnh, nhấn mạnh rủi ro hụt kết quả đầu tư và thiếu phương án thu hồi.
+Với Họa Hại, nhấn mạnh lời nói hoặc vấn đề cần lưu ý khó biểu hiện rõ ra ngoài.
+
+`AB05` vẫn mang `TAIL_ZERO`: số 5 không xóa tác dụng rút bớt của số 0 ở cuối.
+
+## 44.3 DOMAIN RULES — FIVE INTERPOSED
+
+Canonical customer tendencies for `A5B`:
+
+- Tuyệt Mệnh: xu hướng đầu tư nổi bật vào một lĩnh vực cụ thể.
+- Họa Hại: lời nói, hao tổn và vấn đề cần lưu ý biểu hiện rõ, có thể phát sinh
+  liên tiếp.
+- Lục Sát: cảm xúc và quan hệ biểu hiện rõ, mạnh và kéo dài hơn.
+- Ngũ Quỷ: tư duy và biến động được kích hoạt rõ, mạnh và kéo dài hơn.
+- Thiên Y: có tài phú nhưng quá trình kiếm tiền đòi hỏi nhiều công sức.
+- Sinh Khí: quý nhân nổi bật, dễ nhận biết ai đang mang lại trợ lực.
+- Diên Niên: nỗ lực và thực lực được nhìn thấy nhưng khả năng phát huy vẫn có
+  giới hạn.
+
+Riêng Thiên Y `13/31` có 5 kẹp giữa: tình cảm dễ lộ ra; cần minh bạch để hạn chế
+thị phi, không kết luận định mệnh.
+
+## 44.4 DOMAIN RULES — FIVE POST / TERMINAL
+
+`AB5` làm trường đã hình thành biểu hiện rõ và kéo dài:
+
+- Tuyệt Mệnh: đầu tư tăng/kéo dài; quản lý kém có thể làm phân tán nguồn lực.
+- Họa Hại: hao tổn và vấn đề cần lưu ý ngày càng rõ, mạnh và kéo dài.
+- Lục Sát/Ngũ Quỷ: cảm xúc, suy nghĩ và biến động ngày càng rõ và kéo dài.
+- Thiên Y: tài phú/nguồn lực có xu hướng ngày càng tăng.
+- Sinh Khí: quý nhân/cơ hội có xu hướng ngày càng nhiều.
+- Diên Niên: năng lực/chuyên môn có xu hướng ngày càng mạnh.
+
+## 44.5 DISPLAY AND SAFETY
+
+Customer presentation MUST preserve the modifier digits:
+
+```text
+601 != display 61
+108 != display 18
+120 != display 12
+125 != display 12
+1205 != display 12
+```
+
+Underlying pair vẫn dùng để xác định tám trường khí; source digits dùng để hiển
+thị và luận vị trí modifier. Các ý sức khỏe, đầu tư và tình cảm phải dùng ngôn
+ngữ xu hướng/rủi ro, không dùng như chẩn đoán hoặc cam kết chắc chắn.
 
 ---
 
