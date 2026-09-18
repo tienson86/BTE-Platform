@@ -4,6 +4,7 @@ from applications.production.engine_runner import ProductionEngineRunner
 from applications.production.fixtures.case_0002_readiness import CASE_0002_REQUEST
 from applications.production.models import ProductionRequest
 from applications.api.services.orchestrator import OrchestratorService
+from applications.api.services.bazi_analysis_contract import _useful_element_labels
 
 
 HUNG_REQUEST = ProductionRequest(
@@ -344,3 +345,29 @@ def test_pre_tet_1987_male_publishes_lunar_1986_khon_everywhere() -> None:
     assert year["cung_phi"] == "Khôn"
     assert year["ganzhi_cung_phi"] == "Khôn"
     assert payload["identity"]["four_pillars"]["year"]["cung_phi"] == "Khôn"
+
+
+def test_thu_phuong_does_not_promote_water_candidate_to_favorable_axis() -> None:
+    payload = OrchestratorService().analyze(
+        year=1993,
+        month=3,
+        day=30,
+        hour=12,
+        minute=30,
+        gender="female",
+        timezone="Asia/Ho_Chi_Minh",
+    )
+    useful = payload["useful_god"]
+
+    assert payload["strength"]["strength_level"] == "strong"
+    assert useful["useful_display"] == "Hỏa · Đinh · Chính Quan"
+    assert useful["winning_rule_id"] == "str_warm_dragon_strong_metal"
+    assert useful["favorable_display"] == (
+        "Mộc · Giáp · Thiên Tài / Mộc · Ất · Chính Tài"
+    )
+    assert useful["climate_display"] == "Thủy · Nhâm · Thực Thần"
+    assert useful["unfavorable_display"] == (
+        "Thổ · Mậu · Thiên Ấn / Thổ · Kỷ · Chính Ấn / "
+        "Kim · Canh · Tỷ Kiên / Kim · Tân · Kiếp Tài"
+    )
+    assert _useful_element_labels(useful) == ["Hỏa", "Mộc"]

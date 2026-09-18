@@ -2810,12 +2810,19 @@ def _extract_element_label(value: Any) -> str:
 
 
 def _useful_element_labels(useful_god: Mapping[str, Any]) -> list[str]:
+    """Return only customer-published Dụng/Hỷ elements.
+
+    ``canonical_favorable_display`` is an internal candidate trace. It may
+    contain a lower-ranked balancing or climate candidate even when the Hỷ
+    thần gate deliberately publishes no separate Hỷ thần. Mixing that field
+    into customer prose incorrectly promotes those candidates to the same
+    level as the selected Dụng thần.
+    """
     labels: list[str] = []
     labels.append(_extract_element_label(useful_god.get("useful_display")))
     labels.append(_extract_element_label(useful_god.get("useful_element")))
     labels.append(_stem_element_label(_text(useful_god.get("useful_stem"))))
     labels.extend(_element_labels_from_text(useful_god.get("favorable_display")))
-    labels.extend(_element_labels_from_text(useful_god.get("canonical_favorable_display")))
     return _unique_texts(labels)
 
 

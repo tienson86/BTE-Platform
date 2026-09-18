@@ -80,6 +80,7 @@ def classify_hy_role(
         "str_balanced_cold_metal_sat_resource",
         "str_cool_monkey_strong_water",
         "str_cool_monkey_strong_metal",
+        "str_warm_dragon_strong_metal",
         "str_cold_pig_strong_water",
         "str_warm_tiger_strong_fire",
         "str_balanced_hot_snake_water",
