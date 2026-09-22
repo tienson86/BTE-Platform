@@ -13,6 +13,7 @@ from typing import Any, Mapping, Sequence
 
 from applications.api.services.marriage_editorial import run_marriage_editorial
 from applications.api.services.life_domain_editorial import run_life_domain_editorial
+from applications.api.services.family_property_editorial import run_family_property_editorial
 
 CONTRACT_VERSION = "bazi_analysis_result.v1"
 
@@ -2306,6 +2307,15 @@ def _enrich_life_domain_section(
             "reasoning": editorial["reasoning"],
             "validation": editorial["validation"],
         }
+    elif key in {"parents", "children", "property"}:
+        editorial = run_family_property_editorial(payload)
+        section["editorial_trace"] = {
+            "status": editorial["status"],
+            "provider": editorial["provider"],
+            "evidence": editorial["evidence"],
+            "reasoning": editorial["reasoning"],
+            "validation": editorial["validation"],
+        }
     recommendation = _DOMAIN_RECOMMENDATIONS.get(key, "")
     if recommendation:
         section["recommendations"] = [recommendation]
@@ -2353,14 +2363,23 @@ def _life_domain_detail_paragraphs(
         else:
             paragraphs.extend(_marriage_domain_paragraphs(payload, ten_layers, shen_groups, strength_label, useful_line))
     elif key == "children":
+        editorial = run_family_property_editorial(payload)
+        if editorial["status"] == "ready":
+            paragraphs.extend(editorial["sections"].get(key, []))
         paragraphs.extend(_children_domain_paragraphs(payload, ten_layers, useful_line))
     elif key == "parents":
+        editorial = run_family_property_editorial(payload)
+        if editorial["status"] == "ready":
+            paragraphs.extend(editorial["sections"].get(key, []))
         paragraphs.extend(_parents_domain_paragraphs(payload, ten_layers, useful_line))
     elif key == "siblings":
         paragraphs.extend(_partnership_domain_paragraphs(ten_layers, useful_line))
     elif key == "ancestry":
         paragraphs.extend(_ancestry_domain_paragraphs(payload, ten_layers, shen_groups))
     elif key == "property":
+        editorial = run_family_property_editorial(payload)
+        if editorial["status"] == "ready":
+            paragraphs.extend(editorial["sections"].get(key, []))
         paragraphs.extend(_property_domain_paragraphs(payload, useful_line))
 
     advice = _DOMAIN_RECOMMENDATIONS.get(key, "")
