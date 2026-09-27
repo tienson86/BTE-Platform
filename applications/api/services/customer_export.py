@@ -404,7 +404,7 @@ def _render_modern_report_html(report_input: ReportInputV1) -> str:
         f'<p class="subtitle">{escape(subtitle)}</p>',
         f'<p class="badge">{len(chapters)} chương luận giải</p>',
         "</header>",
-        _technical_snapshot_html(report_input),
+        _opening_chart_html(report_input),
     ]
     for chapter in chapters:
         body.append(_chapter_html(chapter, report_input))
@@ -423,6 +423,108 @@ def _render_modern_report_html(report_input: ReportInputV1) -> str:
 </head>
 <body>{"".join(body)}</body>
 </html>"""
+
+
+_STEM_ELEMENTS = {
+    "Giáp": "Mộc", "Ất": "Mộc", "Bính": "Hỏa", "Đinh": "Hỏa",
+    "Mậu": "Thổ", "Kỷ": "Thổ", "Canh": "Kim", "Tân": "Kim",
+    "Nhâm": "Thủy", "Quý": "Thủy",
+}
+_BRANCH_ELEMENTS = {
+    "Dần": "Mộc", "Mão": "Mộc", "Tỵ": "Hỏa", "Ngọ": "Hỏa",
+    "Thìn": "Thổ", "Tuất": "Thổ", "Sửu": "Thổ", "Mùi": "Thổ",
+    "Thân": "Kim", "Dậu": "Kim", "Hợi": "Thủy", "Tý": "Thủy",
+}
+
+
+def _opening_chart_html(report_input: ReportInputV1) -> str:
+    """Present the same Tứ Trụ and Bát Tự fields as the customer Result dashboard."""
+    opening = dict((report_input.modern_report or {}).get("opening") or {})
+    published = dict(opening.get("pillars") or {})
+    pillars = [dict(published.get(key) or {}) for key in ("year", "month", "day", "hour")]
+    names = ("Năm trụ", "Tháng trụ", "Ngày trụ", "Giờ trụ")
+    header = "".join(f"<th>{name}{'<small>NHẬT CHỦ</small>' if index == 2 else ''}</th>"
+                     for index, name in enumerate(names))
+
+    def row(label: str, values: list[str], *, prominent: bool = False) -> str:
+        cells = "".join(
+            f'<td class="{("day-column " if index == 2 else "") + ("prominent" if prominent else "")}">{value or "—"}</td>'
+            for index, value in enumerate(values)
+        )
+        return f"<tr><th scope='row'>{label}</th>{cells}</tr>"
+
+    def value(pillar: Mapping[str, Any], key: str) -> str:
+        return escape(str(pillar.get(key) or ""))
+
+    def detail_cell(primary: str, secondary: str) -> str:
+        return f"<b>{escape(primary)}</b><small>{escape(secondary)}</small>"
+
+    summary_rows = "".join(
+        '<tr>' + f'<th scope="row">{label}</th>' + ''.join(
+            f'<td>{value(pillar, field)}</td>' for field, pillar in (("can_chi", pillar),
+                                                                     ("nap_am_element", pillar),
+                                                                     ("cung_phi", pillar))
+        ) + '</tr>' for label, pillar in zip(("Năm", "Tháng", "Ngày", "Giờ"), pillars)
+    )
+    hidden = []
+    for pillar in pillars:
+        items = []
+        for item in pillar.get("hidden_stems") or []:
+            if not isinstance(item, Mapping):
+                continue
+            items.append(detail_cell(str(item.get("stem") or ""),
+                                     " · ".join(str(item.get(key) or "") for key in ("element", "ten_god") if item.get(key))))
+        hidden.append("<br>".join(items))
+    detail = "".join((
+        row("Thiên Can", [detail_cell(str(p.get("stem") or ""),
+             " · ".join(part for part in (_STEM_ELEMENTS.get(str(p.get("stem") or ""), ""),
+                                    "Dương" if str(p.get("stem") or "") in ("Giáp", "Bính", "Mậu", "Canh", "Nhâm") else "Âm") if part))
+             for p in pillars]),
+        row("Địa Chi", [detail_cell(str(p.get("branch") or ""),
+             " · ".join(part for part in (_BRANCH_ELEMENTS.get(str(p.get("branch") or ""), ""),
+                                    "Dương" if str(p.get("branch") or "") in ("Tý", "Dần", "Thìn", "Ngọ", "Thân", "Tuất") else "Âm") if part))
+             for p in pillars]),
+        row("Nạp Âm", [value(p, "nap_am") for p in pillars]),
+        row("Tàng Can", hidden),
+        row("Thập Thần", [value(p, "ten_god") for p in pillars]),
+        row("Trường Sinh", [value(p, "truong_sinh") for p in pillars]),
+        row("Tam Hợp", [value(p, "tam_hop") for p in pillars]),
+        row("Thần Sát", ["<br>".join(escape(str(star)) for star in p.get("shen_sha") or []) for p in pillars]),
+    ))
+    person = dict(opening.get("person") or {})
+    identity = " · ".join(escape(str(person.get(key))) for key in
+                          ("full_name", "solar_birth", "lunar_birth", "birth_time", "birth_place") if person.get(key))
+    bone = dict(opening.get("bone_weight") or {})
+    technical = dict(opening.get("technical") or {})
+    labels = (("Tam Nguyên", "tam_nguyen"), ("Cửu Vận", "cuu_van"),
+              ("Cung Phi", "cung_phi"), ("Mệnh Quái", "menh_quai"),
+              ("Hành Cung", "hanh_cung"), ("Nhóm Trạch", "nhom_trach"),
+              ("Tiết khí", "solar_term"))
+    tech_rows = "".join(f'<dt>{escape(label)}</dt><dd>{escape(str(technical[key]))}</dd>'
+                        for label, key in labels if technical.get(key))
+    chart = _five_elements_chart_html(report_input)
+    return (
+        '<section class="opening-page opening-first">'
+        f'<p class="opening-identity">{identity}</p>'
+        '<h2>Tứ Trụ</h2>'
+        '<table class="opening-table opening-summary-table"><thead><tr><th>Trụ</th><th>Can Chi</th>'
+        f'<th>Nạp âm</th><th>Cung Phi</th></tr></thead><tbody>{summary_rows}</tbody></table>'
+        '<div class="opening-facts">'
+        '<div><h3>Cân Xương đoán mệnh</h3>'
+        f'<strong>{escape(str(bone.get("display_weight") or bone.get("weight") or "—"))}</strong>'
+        f'<p>{escape(str(bone.get("classification") or ""))}</p>'
+        f'<p>{escape(str(bone.get("summary") or ""))}</p></div>'
+        f'<div><h3>Thông tin kỹ thuật</h3><dl class="opening-tech">{tech_rows}</dl></div>'
+        '</div>'
+        '</section>'
+        '<section class="opening-page opening-second">'
+        '<h2>Bát Tự</h2>'
+        f'<table class="opening-table opening-detail-table"><thead><tr><th scope="col">Thành phần</th>{header}</tr></thead><tbody>{detail}</tbody></table>'
+        '<h2>Phân bổ Ngũ hành</h2>'
+        f'{chart}'
+        '<p class="opening-note">Tính theo Thiên Can · bản hành Địa Chi · Tàng Can.</p>'
+        '</section>'
+    )
 
 
 def _technical_snapshot_html(report_input: ReportInputV1) -> str:
@@ -507,6 +609,23 @@ def _split_structured_paragraph(chapter_id: str, paragraph: str, index: int) -> 
     _kicker, _title, card_title = _STRUCTURED_CHAPTER_META.get(chapter_id, ("Luận giải", "Các ý chính cần đọc", "Luận điểm"))
     lowered = value.lower()
     colon = value.find(":")
+    if chapter_id == "strength_structure_useful_god":
+        for prefix, title in (
+            ("Hỏa chế Kim", "Hỏa rèn Kim"),
+            ("Trong nhịp sống", "Trong đời sống và công việc"),
+            ("Nếu lịch trình", "Giữ nhịp, tránh quá sức"),
+            ("Trong phần Hỷ thần", "Hỷ thần cùng hành"),
+            ("Hỷ thần", "Hỷ thần hỗ trợ"),
+            ("Với Kỵ thần", "Điều cần tiết chế"),
+        ):
+            if value.startswith(prefix):
+                return title, value
+    if chapter_id == "day_master" and value.startswith("Xét toàn cục"):
+        return "Thế Thân", value
+    if chapter_id == "day_master" and value.startswith("Nhật Chủ là Thiên Can"):
+        return "Nhật Chủ", value
+    if chapter_id == "shen_sha" and value.startswith("Thiên Đức và Nguyệt Đức cùng hiện"):
+        return "Hai Đức ở trụ ngày", value
     for prefix, title in _STRUCTURED_PREFIX_RULES:
         if lowered.startswith(prefix.lower()):
             body = value[colon + 1 :].strip() if colon > 0 else value
@@ -765,6 +884,41 @@ body { margin: 0; background: #ffffff; color: #111827; font-family: Arial, "Sego
 h1 { font-size: 28px; margin: 0 0 8px; }
 .subtitle { color: #334155; margin: 0 0 8px; }
 .badge { display: inline-block; border: 1px solid #dfe3ea; border-radius: 999px; margin: 0; padding: 3px 10px; font-weight: 700; color: #334155; background: #f7fafc; }
+.opening-page { break-inside: avoid; }
+.opening-first { break-after: page; }
+.opening-second { break-after: page; }
+.opening-identity { color: #475569; margin-bottom: 14px; }
+.opening-table { width: 100%; border-collapse: collapse; table-layout: fixed; margin: 8px 0 22px; font-size: 12px; line-height: 1.4; }
+.opening-table th, .opening-table td { border: 1px solid #cbd5e1; padding: 10px 7px; text-align: center; vertical-align: middle; overflow-wrap: anywhere; }
+.opening-table thead th { background: #eff6f3; color: #123b35; }
+.opening-table thead th:first-child, .opening-table tbody th { width: 17%; }
+.opening-table tbody th { text-align: left; background: #f8fafc; }
+.opening-table .day-column { background: #e9f6f0; }
+.opening-table .prominent { font-weight: 800; font-size: 15px; }
+.opening-table small { display: block; font-size: 10px; color: #64748b; }
+.opening-summary-table th, .opening-summary-table td { padding: 8px; }
+.opening-summary-table tbody td:nth-child(2) { font-weight: 800; font-size: 14px; }
+.opening-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.opening-facts > div { border: 1px solid #dce7e4; border-radius: 8px; padding: 14px; }
+.opening-facts strong { display: block; font-size: 20px; }
+.opening-facts p { margin: 5px 0; }
+.opening-tech { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 8px; margin: 0; font-size: 11px; }
+.opening-tech dt { font-weight: 700; color: #475569; }
+.opening-tech dd { margin: 0; }
+.opening-detail-table { font-size: 10px; line-height: 1.3; margin-bottom: 10px; }
+.opening-detail-table th, .opening-detail-table td { padding: 5px 4px; }
+.opening-detail-table small { font-size: 9px; }
+.opening-second .visual { margin: 5px 0; padding: 9px; }
+.opening-second .element-chart { min-height: 105px; }
+.opening-second .element { min-height: 100px; }
+.opening-second .track { min-height: 65px; }
+.opening-second .track span { width: 30px; }
+.opening-second h2 { margin-bottom: 6px; }
+.opening-summary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.opening-summary > div { border: 1px solid #dce7e4; border-radius: 8px; background: #f7fbf9; padding: 9px 11px; }
+.opening-summary span { display: block; color: #64748b; font-size: 11px; }
+.opening-summary strong { display: block; line-height: 1.4; }
+.opening-note { color: #475569; font-size: 11px; }
 .snapshot, .chapter { break-inside: avoid; margin: 0 0 20px; }
 .chapter { border-top: 1px solid #dfe3ea; padding-top: 16px; }
 h2 { font-size: 19px; margin: 0 0 10px; color: #111827; }
