@@ -542,6 +542,86 @@ def _modern_report(
         "chapters": chapters,
         "five_elements": _map(data.get("five_elements")),
         "luck": _map(data.get("luck")),
+        "opening": _opening_truth(data, birth_input or {}),
+    }
+
+
+def _opening_truth(data: Mapping[str, Any], birth: Mapping[str, Any]) -> dict[str, Any]:
+    """Carry the same published fields used by the customer Result dashboard."""
+    identity = _map(data.get("identity"))
+    calendar = _map(data.get("calendar"))
+    bazi = _map(data.get("bazi"))
+    four = _map(identity.get("four_pillars"))
+    routing = _map(calendar.get("ganzhi_routing"))
+    ten_gods = _map(data.get("ten_gods"))
+    hidden = ten_gods.get("hidden")
+    hidden_entries = hidden if isinstance(hidden, list) else []
+    matches = bazi.get("shensha_matches")
+    shensha_matches = matches if isinstance(matches, list) else []
+    groups = (("Thân", "Tý", "Thìn"), ("Dần", "Ngọ", "Tuất"),
+              ("Hợi", "Mão", "Mùi"), ("Tỵ", "Dậu", "Sửu"))
+    pillars: dict[str, dict[str, Any]] = {}
+    for key in ("year", "month", "day", "hour"):
+        published = _map(bazi.get(f"{key}_pillar"))
+        identity_pillar = _map(four.get(key))
+        route = _map(routing.get(key))
+        branch = _text(published.get("branch") or identity_pillar.get("branch"))
+        stems = published.get("hidden_stems")
+        hidden_stems = stems if isinstance(stems, list) else []
+        hidden_details = []
+        for stem in hidden_stems:
+            detail = next((item for item in hidden_entries
+                           if isinstance(item, Mapping) and item.get("pillar") == key
+                           and (item.get("hidden_stem") or item.get("stem")) == stem), {})
+            hidden_details.append({"stem": _text(stem), "element": _text(detail.get("element")),
+                                   "ten_god": _text(detail.get("ten_god"))})
+        stars = []
+        for match in shensha_matches:
+            if not isinstance(match, Mapping):
+                continue
+            occurrence_keys = {str(match.get("pillar") or "")}
+            occurrence_keys.update(str(item.get("pillar") or "") for item in match.get("occurrences", [])
+                                   if isinstance(item, Mapping))
+            name = _text(match.get("canonical_name") or match.get("name"))
+            if key in occurrence_keys and name and name not in stars:
+                stars.append(name)
+        group = next((" - ".join(item) for item in groups if branch in item), "")
+        pillars[key] = {
+            "stem": _text(published.get("stem") or identity_pillar.get("stem")),
+            "branch": branch,
+            "can_chi": _text(published.get("ganzhi") or identity_pillar.get("can_chi")),
+            "nap_am": _text(published.get("nap_am")),
+            "nap_am_element": _text(identity_pillar.get("nayin_element")),
+            "cung_phi": _text(published.get("cung_phi") or route.get("cung_phi")),
+            "ten_god": _text(published.get("ten_god")),
+            "truong_sinh": _text(published.get("truong_sinh")),
+            "hidden_stems": hidden_details,
+            "tam_hop": group,
+            "shen_sha": stars,
+        }
+    person = _map(identity.get("person"))
+    weight = _map(data.get("can_xuong")) or _map(identity.get("bone_weight"))
+    solar_term = calendar.get("solar_term")
+    return {
+        "person": {
+            "full_name": _text(person.get("full_name") or birth.get("full_name") or birth.get("name")),
+            "gender": _text(person.get("gender") or birth.get("gender")),
+            "solar_birth": _text(person.get("solar_birth") or calendar.get("solar_date")),
+            "lunar_birth": _text(person.get("lunar_birth") or calendar.get("lunar_date")),
+            "birth_time": _text(person.get("birth_time") or birth.get("birth_time")),
+            "birth_place": _text(person.get("birth_place") or birth.get("birth_place")),
+        },
+        "pillars": pillars,
+        "bone_weight": weight,
+        "technical": {
+            "tam_nguyen": _text(calendar.get("tam_nguyen")),
+            "cuu_van": _text(calendar.get("cuu_van")),
+            "cung_phi": _text(calendar.get("cung_phi")),
+            "menh_quai": _text(calendar.get("menh_quai")),
+            "hanh_cung": _text(calendar.get("hanh_cung")),
+            "nhom_trach": _text(calendar.get("nhom_trach")),
+            "solar_term": _text(_map(solar_term).get("name") if isinstance(solar_term, Mapping) else solar_term),
+        },
     }
 
 
