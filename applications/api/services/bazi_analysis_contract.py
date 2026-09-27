@@ -10,10 +10,19 @@ import json
 from copy import deepcopy
 from datetime import datetime, timezone
 from typing import Any, Mapping, Sequence
+from zoneinfo import ZoneInfo
+
+from engines.calendar_engine.tam_nguyen import calculate_tam_nguyen
 
 from applications.api.services.marriage_editorial import run_marriage_editorial
 from applications.api.services.life_domain_editorial import run_life_domain_editorial
 from applications.api.services.family_property_editorial import run_family_property_editorial
+from applications.api.services.ten_gods_editorial import ten_gods_editorial_paragraphs
+from applications.api.services.core_reading_editorial import (
+    day_master_paragraphs,
+    pattern_useful_paragraphs,
+    shen_sha_paragraphs,
+)
 
 CONTRACT_VERSION = "bazi_analysis_result.v1"
 
@@ -67,8 +76,6 @@ MODULE_EXPORT_KEYS = (
 )
 
 REPORT_CHAPTER_KEYS = (
-    "overview",
-    "four_pillars",
     "day_master",
     "five_elements",
     "strength_structure_useful_god",
@@ -977,8 +984,6 @@ def build_report_chapters(payload: Mapping[str, Any], narrative: Mapping[str, An
     luck_cycles = _mapping(narrative.get("luck_cycles"))
     recommendations = _list(narrative.get("recommendations"))
     return [
-        _chapter("overview", "Tổng quan lá số", _overview_paragraphs(payload, narrative), ["overview", "bazi", "pattern", "useful_god"]),
-        _chapter("four_pillars", "Tứ trụ", _four_pillars_paragraphs(payload), ["bazi.year_pillar", "bazi.month_pillar", "bazi.day_pillar", "bazi.hour_pillar"]),
         _chapter("day_master", "Nhật chủ", _day_master_chapter_paragraphs(payload, technical), ["bazi.day_master"]),
         _chapter("five_elements", "Ngũ hành", _five_elements_chapter_paragraphs(payload, technical), ["five_elements"]),
         _chapter(
@@ -1156,6 +1161,9 @@ def _render_report_markdown(
 
 
 def _strength_structure_useful_god_paragraphs(payload: Mapping[str, Any], technical: Mapping[str, Any]) -> list[str]:
+    editorial = pattern_useful_paragraphs(payload)
+    if editorial:
+        return editorial
     bazi = _mapping(payload.get("bazi"))
     five_elements = _mapping(payload.get("five_elements"))
     pattern = _mapping(payload.get("pattern"))
@@ -1214,6 +1222,9 @@ def _strength_structure_useful_god_paragraphs(payload: Mapping[str, Any], techni
 
 
 def _day_master_chapter_paragraphs(payload: Mapping[str, Any], technical: Mapping[str, Any]) -> list[str]:
+    editorial = day_master_paragraphs(payload)
+    if editorial:
+        return editorial
     bazi = _mapping(payload.get("bazi"))
     strength = _mapping(payload.get("strength"))
     pattern = _mapping(payload.get("pattern"))
@@ -1386,6 +1397,9 @@ def _five_element_relation_paragraphs(
 
 def _ten_gods_chapter_paragraphs(payload: Mapping[str, Any], technical: Mapping[str, Any]) -> list[str]:
     ten_layers = build_ten_gods_four_layer_view(payload)
+    editorial = ten_gods_editorial_paragraphs(ten_layers)
+    if editorial:
+        return editorial
     paragraphs = _non_empty([_section_summary(technical, "ten_gods")])
     for layer in _list(ten_layers.get("layers")):
         if not isinstance(layer, Mapping):
@@ -1438,6 +1452,9 @@ def _ten_god_pattern_synthesis(ten_layers: Mapping[str, Any]) -> list[str]:
 
 
 def _shen_sha_chapter_paragraphs(payload: Mapping[str, Any], technical: Mapping[str, Any]) -> list[str]:
+    editorial = shen_sha_paragraphs(payload)
+    if editorial:
+        return editorial
     grouped = build_shen_sha_grouped_view(payload)
     paragraphs = _non_empty([_section_summary(technical, "shen_sha")])
     groups = _mapping(grouped.get("groups"))
@@ -1467,25 +1484,27 @@ def _bone_weight_paragraphs(payload: Mapping[str, Any]) -> list[str]:
     can_xuong = _mapping(payload.get("can_xuong"))
     weight = _first_text(can_xuong.get("display_weight"), can_xuong.get("weight"), can_xuong.get("weight_label"))
     classification = _first_text(can_xuong.get("classification"), can_xuong.get("grade"), can_xuong.get("category"))
-    summary = _first_text(can_xuong.get("summary"), can_xuong.get("interpretation"), can_xuong.get("description"))
-    paragraphs: list[str] = []
-    if weight or classification:
-        paragraphs.append(
-            _fallback_join(
-                f"Cân xương ghi nhận {weight}." if weight else "",
-                f"Xếp loại {classification}." if classification else "",
-                "Chỉ số này gợi nhịp tích lũy của cuộc đời: có người thuận nền sớm, có người phải gây dựng từng bước rồi mới vững. Đây là lớp tham khảo bổ trợ, không phải chiếc khuôn đóng cứng số phận.",
-            )
-        )
-    if summary:
-        paragraphs.append(summary)
-    if classification:
-        paragraphs.append(_bone_weight_guidance(classification))
-    if paragraphs:
-        paragraphs.append(
-            "Giá trị của Cân xương nằm ở việc bổ sung sắc thái cho toàn cục. Nền thuận vẫn cần kỷ luật mới thành thành quả; nền phải gây dựng nhiều hơn vẫn có thể chuyển biến rõ khi chủ mệnh chọn đúng nghề, đúng môi trường và biết tận dụng những chặng vận nâng mình."
-        )
-    return _unique_texts(paragraphs)
+    if not (weight or classification):
+        return []
+    opening = _fallback_join(
+        f"Theo phép Cân Xương, lá số của bạn có trọng lượng {weight}" if weight else "Theo phép Cân Xương, lá số của bạn",
+        f"và được xếp vào {classification}." if classification else ".",
+    )
+    if "Hạ" in classification:
+        rhythm = "Tên gọi Hạ cách gợi một chặng đầu cần tự gây dựng nhiều hơn. Bạn có thể bắt đầu bằng việc học thật chắc một nghề, giữ quỹ dự phòng và chọn công việc cho phép năng lực tích lũy qua từng năm. Kết quả ở trung vận, hậu vận có thể rõ hơn khi nền ấy đủ dày; muốn nói chặng nào thuận hơn vẫn cần đối chiếu Đại vận, không thể chỉ nhìn vào cân lượng."
+    elif "Thượng" in classification:
+        rhythm = "Thượng cách gợi một nền thuận cho việc gây dựng thành quả. Bạn vẫn cần chọn đúng việc, giữ kỷ luật với tiền bạc và các mối quan hệ; nền thuận là cơ hội để phát triển, không phải lời hứa mọi chặng đời đều dễ dàng."
+    elif "Trung" in classification:
+        rhythm = "Trung cách gợi lối đi tích lũy: kỹ năng, tài chính và quan hệ đáng tin cậy được xây từng bước. Khi phải chọn giữa một thành quả nhanh và một nền vững, bạn nên xem Đại vận cùng hoàn cảnh thực tế trước khi quyết định."
+    else:
+        rhythm = "Cân lượng này giúp bạn nhìn lại nhịp gây dựng cuộc sống; thời điểm thuận khó cần được đọc thêm từ Đại vận và lựa chọn thực tế, thay vì kết luận chỉ từ một con số."
+    paragraphs = [opening, rhythm]
+    strength = _mapping(payload.get("strength"))
+    strength_label = _first_text(strength.get("strength_level"))
+    if "Hạ" in classification and strength_label and any(s in strength_label.lower() for s in ("vượng", "strong")):
+        paragraphs.append("Hạ cách ở phép Cân Xương không có nghĩa Nhật Chủ yếu: lá số này đồng thời có Thân vượng. Bạn có sức để theo đuổi việc khó; điều đáng chăm là cách dùng sức ấy có phương pháp, biết giữ nhịp nghỉ ngơi và biến chuyên môn thành giá trị người khác sử dụng được.")
+    paragraphs.append("Hãy xem Cân Xương như một góc nhìn bổ sung về nhịp tích lũy. Sức mạnh của Nhật Chủ, Mệnh cục và từng Đại vận vẫn cần được đọc riêng trước khi đưa ra quyết định lớn.")
+    return paragraphs
 
 
 def _bone_weight_guidance(classification: str) -> str:
@@ -1501,59 +1520,53 @@ def _bone_weight_guidance(classification: str) -> str:
 
 def _palace_feng_shui_paragraphs(payload: Mapping[str, Any]) -> list[str]:
     calendar = _mapping(payload.get("calendar"))
-    five_elements = _mapping(payload.get("five_elements"))
     useful = _mapping(payload.get("useful_god"))
-    counts = _mapping(five_elements.get("counts"))
     cung_phi = _first_text(calendar.get("cung_phi"), calendar.get("menh_quai"), calendar.get("gua_name"))
     house_group = _first_text(calendar.get("nhom_trach"), calendar.get("house_group"))
     palace_element = _first_text(calendar.get("hanh_cung"), calendar.get("cung_phi_element"), calendar.get("gua_element"))
     directions = _house_group_directions(house_group)
+    paragraphs: list[str] = []
+    if cung_phi or house_group:
+        paragraphs.append(_fallback_join(
+            f"Cung Phi của bạn là {cung_phi}," if cung_phi else "Cung Phi của bạn",
+            f"thuộc hành {palace_element}," if palace_element else "",
+            f"nằm trong nhóm {house_group}." if house_group else ".",
+            "Đây là lớp thông tin để cân nhắc cách sử dụng không gian sống và làm việc; nó không tự quyết định tính cách hay thay thế kết luận của Tứ trụ."
+        ))
+    if directions:
+        paragraphs.append(f"Với {house_group}, bạn có thể tham khảo các phương vị {directions} khi tính chuyện bố trí cửa, chỗ ngồi hoặc nơi nghỉ. Đây là nhóm hướng để khảo sát, chưa phải bốn lời bảo đảm tốt cho mọi căn nhà. Hướng đo thực tế, ánh sáng, độ thoáng và cách đi lại trong nhà mới cho biết phương án nào có thể dùng được.")
+    birth_year = _mapping(payload.get("birth_input")).get("year") or _mapping(payload.get("input")).get("year")
+    if not birth_year:
+        birth_year = _mapping(calendar.get("solar_date")).get("year") or calendar.get("solar_year")
+    natal_nguyen = _first_text(calendar.get("tam_nguyen"))
+    natal_van = calendar.get("cuu_van")
+    try:
+        year = int(birth_year)
+        natal = calculate_tam_nguyen(year)
+        natal_nguyen, natal_van = natal.tam_nguyen, natal.cuu_van
+    except (TypeError, ValueError):
+        year = None
+    report_date = _first_text(_mapping(payload.get("result_meta")).get("created_at"))
+    try:
+        current_year = datetime.fromisoformat(report_date.replace("Z", "+00:00")).astimezone(ZoneInfo("Asia/Bangkok")).year if report_date else datetime.now(ZoneInfo("Asia/Bangkok")).year
+    except ValueError:
+        current_year = datetime.now(ZoneInfo("Asia/Bangkok")).year
+    current = calculate_tam_nguyen(current_year)
+    if natal_nguyen and natal_van:
+        birth_context = f"Năm sinh {year} thuộc {natal_nguyen}, Vận {natal_van}; " if year else f"Lá số thuộc {natal_nguyen}, Vận {natal_van}; "
+        paragraphs.append(f"{birth_context}năm {current_year} đang thuộc {current.tam_nguyen}, Vận {current.cuu_van} ({current.period_start_year}–{current.period_end_year}). Vận của thời điểm hiện tại là bối cảnh để xem ngôi nhà và nơi làm việc, không làm Cung Phi {cung_phi or 'của bạn'} đổi theo từng vận.")
+    else:
+        paragraphs.append(f"Năm {current_year} thuộc {current.tam_nguyen}, Vận {current.cuu_van} ({current.period_start_year}–{current.period_end_year}). Thời vận này giúp đặt câu hỏi về căn nhà đang sử dụng; riêng Cung Phi của bạn không đổi chỉ vì sang vận mới.")
     useful_elements = _useful_element_labels(useful)
     unfavorable = _unfavorable_element_labels(useful)
-    dominant = _element_label_list(five_elements.get("dominant")) or _element_extremes(counts, strongest=True)
-    weak = _element_label_list(five_elements.get("missing")) or _element_extremes(counts, strongest=False)
-    paragraphs: list[str] = []
-
-    paragraphs.append(
-        _fallback_join(
-            f"Cung Phi/Mệnh quái của lá số là {cung_phi}." if cung_phi else "",
-            f"Hành cung: {palace_element}." if palace_element else "",
-            f"Nhóm trạch: {house_group}." if house_group else "",
-            "Cung Phi đưa phần luận từ con người sang không gian: nơi ở, nơi làm việc, bếp, cửa và cách tổ chức mặt bằng. Nó không thay thế Tứ trụ, nhưng giúp những kết luận về khí mệnh trở thành lựa chọn có thể áp dụng trong đời sống hằng ngày.",
-        )
-    )
-    if directions:
-        paragraphs.append(
-            f"Với {house_group}, nhóm phương vị nên ưu tiên tham khảo là {directions}. Khi tư vấn thực tế cần đọc theo mục tiêu sử dụng: nhà ở cần ổn định sức khỏe và gia đạo, văn phòng cần nâng hiệu suất và quan hệ, cửa hàng/kho bãi cần hỗ trợ dòng khách, dòng tiền và khả năng kiểm soát rủi ro."
-        )
     if useful_elements or unfavorable:
-        paragraphs.append(
-            _fallback_join(
-                f"Trục Dụng thần nên nâng trong không gian: {', '.join(useful_elements)}." if useful_elements else "",
-                f"Nhóm Kỵ thần cần tiết chế khi bố trí: {', '.join(unfavorable)}." if unfavorable else "",
-                "Phong thủy phù hợp vì thế không nằm ở một hướng tốt hay xấu duy nhất. Hướng, ánh sáng, vật liệu, màu sắc, độ thoáng và thói quen sử dụng cần cùng tạo ra một không gian khiến người ở khỏe hơn, sáng hơn và làm việc ổn định hơn.",
-            )
-        )
-    if palace_element:
-        paragraphs.append(
-            _fallback_join(
-                f"Hành cung {palace_element} cho biết khí không gian hợp mệnh quái nghiêng về {palace_element}.",
-                ELEMENT_SPACE_GUIDANCE.get(_element_label(palace_element), ""),
-                "Nếu hành cung trùng với hành đang quá vượng trong lá số thì không nên kích thêm quá mạnh; nếu hành cung nâng được Dụng thần thì có thể dùng làm điểm tựa khi chọn nơi ở và nơi làm việc.",
-            )
-        )
-    if dominant or weak:
-        paragraphs.append(
-            _fallback_join(
-                f"Ngũ hành nổi bật của lá số: {', '.join(dominant)}." if dominant else "",
-                f"Ngũ hành yếu/thiếu: {', '.join(weak)}." if weak else "",
-                "Khi bố trí không gian, hành nổi bật là khí sẵn có cần tiết chế đúng mức, còn hành yếu/thiếu chỉ nên bồi vừa phải và bền, không dùng đồ vật hay màu sắc cực đoan để ép mệnh.",
-            )
-        )
-    paragraphs.append(
-        "Những phương vị trên là nền tham khảo cho bước tư vấn phong thủy sâu hơn. Với một ngôi nhà cụ thể, vẫn cần nhìn hiện trạng cửa, bếp, phòng ngủ, bàn làm việc, dòng di chuyển và mục tiêu của gia chủ để phương án vừa hợp khí vừa thực sự sống được."
-    )
-    return _unique_texts([paragraph for paragraph in paragraphs if paragraph])
+        paragraphs.append(_fallback_join(
+            f"Trong Tứ trụ, hướng Dụng thần cần nâng là {', '.join(useful_elements)};" if useful_elements else "",
+            f"nhóm cần tiết chế là {', '.join(unfavorable)}." if unfavorable else "",
+            "Bạn có thể bắt đầu bằng một nơi làm việc sáng, thoáng, có nhịp sử dụng rõ ràng và vật liệu vừa phải. Hành của Cung Phi không phải chỉ dẫn để tăng vô hạn cùng một ngũ hành; hãy đối chiếu với Dụng thần trước khi chọn màu sắc hay thay đổi bố cục."
+        ))
+    paragraphs.append("Khi xem một căn nhà cụ thể trong Tam Nguyên Cửu Vận, cần biết năm xây dựng hoặc thời điểm vào ở, hướng đo thực tế và mặt bằng. Có đủ dữ liệu ấy mới nên bàn sâu vị trí cửa, bếp, phòng ngủ hay bàn làm việc; bạn chưa cần đổi nhà hoặc xoay mọi thứ chỉ từ Cung Phi và năm vận.")
+    return _unique_texts(paragraphs)
 
 
 def _overview_paragraphs(payload: Mapping[str, Any], narrative: Mapping[str, Any]) -> list[str]:
