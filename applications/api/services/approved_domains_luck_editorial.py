@@ -216,11 +216,11 @@ _HEALTH_ELEMENT_NOTES = {
 _HEALTH_ELEMENT_KEYS = {"Mộc": "wood", "Hỏa": "fire", "Thổ": "earth", "Kim": "metal", "Thủy": "water"}
 _HEALTH_CONTROLS = {"fire": "metal", "wood": "earth", "earth": "water", "water": "fire", "metal": "wood"}
 _HEALTH_PAIR_NOTES = {
-    ("fire", "metal"): "hỏi xem những đợt công việc căng kéo có đi cùng khô họng, ho hoặc khó chịu hô hấp không",
-    ("wood", "earth"): "hỏi xem căng thẳng có đi cùng đầy bụng, ăn kém hoặc thay đổi đại tiện không",
-    ("earth", "water"): "hỏi xem có cảm giác nặng người, phù hoặc thay đổi tiểu tiện không",
-    ("water", "fire"): "hỏi về giấc ngủ, cảm giác hồi hộp hoặc lo âu nếu có",
-    ("metal", "wood"): "hỏi về đau đầu, chóng mặt, căng cơ hoặc mắt khó chịu nếu có",
+    ("fire", "metal"): "để ý liệu những đợt công việc căng kéo có đi cùng khô họng, ho hoặc khó chịu hô hấp",
+    ("wood", "earth"): "để ý liệu căng thẳng có đi cùng đầy bụng, ăn kém hoặc thay đổi đại tiện",
+    ("earth", "water"): "để ý liệu có cảm giác nặng người, phù hoặc thay đổi tiểu tiện",
+    ("water", "fire"): "để ý giấc ngủ, cảm giác hồi hộp hoặc lo âu khi nhịp sinh hoạt thay đổi",
+    ("metal", "wood"): "để ý đau đầu, chóng mặt, căng cơ hoặc mắt khó chịu khi công việc dồn dập",
 }
 
 
@@ -237,8 +237,7 @@ def _health_prose(payload: Mapping[str, Any], day_master: str) -> list[str]:
     overview = (
         f"Nhật Chủ {day_master} " + ("ở thế Thân vượng" if strong else "cần được đặt trong thế vượng nhược của toàn cục")
         + (f", sinh vào tháng {season}" if season else "")
-        + ". Bảng ngũ hành đếm các vị trí xuất hiện; nhiều lần xuất hiện không tự gọi là vượng, "
-        "vì còn phải xét mùa sinh, gốc khí và vị trí Can Chi."
+        + ". Các hành cần được đọc cùng mùa sinh và vị trí Can Chi để thấy nhịp vận hành của toàn lá số."
     )
     paragraphs = ["Cách đọc sức khỏe: " + overview]
     if present:
@@ -258,8 +257,7 @@ def _health_prose(payload: Mapping[str, Any], day_master: str) -> list[str]:
             role = " của Nhật Chủ" if key == day_element else ""
             paragraphs.append(
                 f"{name} và hướng theo dõi: {name}{role} {prominence} ({present[key]:g} vị trí). "
-                f"Theo tương ứng của Đông y, {name} gắn với {organs}; có thể hỏi về {signs}. "
-                "Đây là hướng hỏi, không xác nhận cơ quan đó đang mắc bệnh."
+                f"Trong cách nhìn của Đông y, {name} gắn với {organs}; bạn nên để ý {signs}."
             )
     else:
         paragraphs.append("Dữ liệu ngũ hành: Chưa có bảng phân bố để chọn hành nổi bật; "
@@ -280,20 +278,19 @@ def _health_prose(payload: Mapping[str, Any], day_master: str) -> list[str]:
             useful_stem = _text(useful.get("useful_stem"))
             paragraphs.append(
                 f"Quan hệ {a_name} khắc {b_name}: {useful_stem or a_name} {a_name} là hướng Dụng thần "
-                f"đã chọn để điều tiết Nhật Chủ {b_name}; khắc ở đây không tự mang nghĩa gây bệnh. "
-                f"Theo Đông y có thể {note}; chỉ xét tiếp khi bạn thực sự có biểu hiện."
+                f"đã chọn để điều tiết Nhật Chủ {b_name}. Trong nhịp sống, bạn có thể {note}."
             )
         else:
             paragraphs.append(
                 f"Quan hệ {a_name} khắc {b_name}: Bảng đếm cho thấy {a_name} nhiều và {b_name} ít; "
-                "đây chỉ là một gợi ý để xem lại quan hệ sinh khắc trong toàn cục, chưa đủ kết luận quá khắc. "
-                f"Theo Đông y có thể {note}; không tự xác nhận một bệnh."
+                "mối quan hệ này cần được đọc cùng mùa sinh và các Can Chi khác. "
+                f"Trong đời sống, bạn có thể {note}."
             )
     paragraphs.extend([
         "Chăm sóc hằng ngày: Giữ giờ ngủ và giờ làm tương đối đều, nghỉ giữa những việc đòi hỏi tập trung, "
         "ăn uống và vận động phù hợp; quan sát khả năng hồi phục sau giai đoạn bận rộn.",
-        "Điều cần kiểm chứng: Nếu triệu chứng kéo dài hoặc nặng lên, hãy thăm khám và đối chiếu với tiền sử, "
-        "số đo và xét nghiệm phù hợp. Bát Tự không xác định bệnh phổi, tim, gan, thận hay huyết áp."
+        "Khi cần kiểm tra sức khỏe: Nếu một biểu hiện kéo dài hoặc nặng lên, hãy thăm khám để xác định nguyên nhân "
+        "và chọn cách chăm sóc phù hợp."
     ])
     return paragraphs
 

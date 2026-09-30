@@ -25,7 +25,8 @@ def test_approved_son_prose_is_grounded_in_pillars_and_all_published_cycles():
     assert "Canh ở thế Thân vượng, sinh vào tháng Sửu" in health
     assert "Kim của Nhật Chủ" in health and "Thổ" in health and "Thủy xuất hiện ít nhất" in health
     assert "Quan hệ Hỏa khắc Kim: Đinh Hỏa là hướng Dụng thần" in health
-    assert "không tự mang nghĩa gây bệnh" in health
+    assert "những đợt công việc căng kéo" in health
+    assert "Đây là hướng hỏi, không xác nhận cơ quan đó đang mắc bệnh" not in health
     wealth = " ".join(sections["wealth"]["paragraphs"])
     assert "Tiền đến từ đâu?" in wealth and "Giáp tàng ở trụ năm" in wealth
     assert "Giáp tàng ở trụ giờ" in wealth and "Không thấy Chính Tài" in wealth
@@ -107,7 +108,7 @@ def test_health_other_chart_uses_its_day_element_and_useful_relation():
     assert "Quan hệ Thủy khắc Hỏa: Nhâm Thủy" in health
     assert "Quan hệ Hỏa khắc Kim: Đinh Hỏa" not in health
     assert "Thủy xuất hiện ít nhất" in health
-    assert "không xác định bệnh" in health
+    assert "Khi cần kiểm tra sức khỏe" in health
 
 
 def test_health_without_element_counts_does_not_invent_a_disease():
