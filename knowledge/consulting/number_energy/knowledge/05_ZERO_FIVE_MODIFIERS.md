@@ -1592,6 +1592,14 @@ dài. Giao diện phải giữ nguyên bốn chữ số `A05B`. Ví dụ biển 
 chuẩn hóa thành `30605811` và tách thành `306 → 6058 → 81 → 11`; `6058` là
 Thiên Y gốc `68` chịu tác động liên tiếp của `0` và `5`.
 
+Nhiều số 0 liên tiếp giữa hai số thường (`A00...B`) vẫn là một trường khí hoàn
+chỉnh và phải giữ nguyên toàn bộ chuỗi khi hiển thị. Mỗi số 0 bổ sung làm tính
+ẩn, hao, rút bớt hoặc đình trệ được nhấn mạnh hơn. Nếu `B` lặp ngay sau đó
+(`A00...BB`), hệ thống hiển thị thêm toàn cụm này như trường `AB` được Phục Vị
+kéo dài. Ví dụ `030174006697` phải có thứ tự `301 → 17 → 74 → 4006 → 40066 →
+69 → 97`; `4006` là Họa Hại `46` bị hai số 0 che ẩn, còn `40066` là Họa Hại
+đó tiếp tục kéo dài bởi số 6 lặp lại.
+
 Canonical customer tendencies for `A0B`:
 
 - Tuyệt Mệnh: đầu tư/nguồn lực dễ bị mắc kẹt, khó đạt kết quả mong muốn.

@@ -6,6 +6,8 @@ from engines.number_energy.constants import CHALLENGING_ENERGY_IDS
 from engines.number_energy.types import EnergyOccurrence
 
 POSITION_INTERPOSED = "INTERPOSED"
+POSITION_INTERPOSED_MULTI_ZERO = "INTERPOSED_MULTI_ZERO"
+POSITION_INTERPOSED_MULTI_ZERO_EXTENDED = "INTERPOSED_MULTI_ZERO_EXTENDED"
 POSITION_INTERPOSED_ZERO_FIVE = "INTERPOSED_ZERO_FIVE"
 POSITION_POST = "POST"
 POSITION_POST_ZERO_FIVE = "POST_ZERO_FIVE"
@@ -16,6 +18,16 @@ def customer_modifier_note(item: EnergyOccurrence) -> str | None:
     position = modifier_position(item)
     if position is None:
         return None
+    if position in {
+        POSITION_INTERPOSED_MULTI_ZERO,
+        POSITION_INTERPOSED_MULTI_ZERO_EXTENDED,
+    }:
+        return _interposed_multi_zero_note(
+            item.energy_id,
+            item.pair_digits,
+            item.source_digits,
+            extended=position == POSITION_INTERPOSED_MULTI_ZERO_EXTENDED,
+        )
     if position == POSITION_INTERPOSED_ZERO_FIVE:
         return _interposed_zero_five_note(item.energy_id, item.pair_digits)
     if position == POSITION_POST_ZERO_FIVE:
@@ -38,6 +50,14 @@ def modifier_position(item: EnergyOccurrence) -> str | None:
         return POSITION_POST_ZERO_FIVE
     if len(source) == 4 and source[0] + source[3] == pair and source[1:3] == "05":
         return POSITION_INTERPOSED_ZERO_FIVE
+    if len(source) >= 4 and source[0] + source[-1] == pair:
+        middle = source[1:-1]
+        if middle and set(middle) == {"0"}:
+            return POSITION_INTERPOSED_MULTI_ZERO
+    if len(source) >= 5 and source[0] + source[-1] == pair and source[-2] == source[-1]:
+        middle = source[1:-2]
+        if middle and set(middle) == {"0"}:
+            return POSITION_INTERPOSED_MULTI_ZERO_EXTENDED
     if len(source) == 3 and source[0] + source[2] == pair:
         return POSITION_INTERPOSED
     if source.startswith(pair) and len(source) > len(pair):
@@ -127,6 +147,48 @@ def _interposed_zero_five_note(energy_id: str, pair: str) -> str:
             "biểu hiện rõ; cần minh bạch để hạn chế thị phi."
         )
     return note
+
+
+def _interposed_multi_zero_note(
+    energy_id: str,
+    pair: str,
+    source: str,
+    *,
+    extended: bool,
+) -> str:
+    zero_count = source[1:-2].count("0") if extended else source[1:-1].count("0")
+    if energy_id == "huo_hai":
+        note = (
+            f"Có {zero_count} số 0 kẹp giữa Họa Hại nên xu hướng hao tài bị "
+            "ẩn sâu và khó nhìn rõ nguyên nhân; khả năng khẩu ngôn vẫn có "
+            "nhưng việc diễn đạt dễ thiếu trọn ý, khiến người nghe khó tiếp nhận "
+            "đúng điều muốn nói."
+        )
+    else:
+        base = _zero_note(energy_id, pair, POSITION_INTERPOSED)
+        note = (
+            f"Có {zero_count} số 0 kẹp giữa nên tác động ẩn, hao hoặc đình trệ "
+            f"được nhấn mạnh hơn. {base}"
+        )
+    if extended:
+        note += (
+            f" Số {pair[-1]} lặp lại ngay sau đó tạo Phục Vị, làm trường "
+            f"{_energy_name(energy_id)} này tiếp tục kéo dài."
+        )
+    return note
+
+
+def _energy_name(energy_id: str) -> str:
+    return {
+        "jue_ming": "Tuyệt Mệnh",
+        "huo_hai": "Họa Hại",
+        "liu_sha": "Lục Sát",
+        "wu_gui": "Ngũ Quỷ",
+        "tian_yi": "Thiên Y",
+        "sheng_qi": "Sinh Khí",
+        "yan_nian": "Diên Niên",
+        "fu_wei": "Phục Vị",
+    }[energy_id]
 
 
 def _post_zero_note(energy_id: str) -> str:

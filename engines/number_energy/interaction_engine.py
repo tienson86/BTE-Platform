@@ -46,6 +46,7 @@ def apply_interactions(
     Returns occurrences, undefined segments, summary, approved patterns,
     primary sequence state, and all sequence states.
     """
+    adjacent = _drop_extended_modifier_tail_pairs(adjacent, bridged)
     merged = _sort_occurrences((*adjacent, *bridged))
     energy_counts = Counter(item.energy_id for item in merged)
     present = {item.energy_id for item in merged}
@@ -97,6 +98,19 @@ def _sort_occurrences(
             key=lambda item: (item.source_span[0], item.source_span[1], item.occurrence_id),
         )
     )
+
+
+def _drop_extended_modifier_tail_pairs(
+    adjacent: tuple[EnergyOccurrence, ...],
+    bridged: tuple[EnergyOccurrence, ...],
+) -> tuple[EnergyOccurrence, ...]:
+    """Avoid rendering BB separately when A00BB already carries its meaning."""
+    covered = {
+        (item.source_span[1] - 1, item.source_span[1])
+        for item in bridged
+        if item.occurrence_id.startswith("extend-zero-")
+    }
+    return tuple(item for item in adjacent if item.source_span not in covered)
 
 
 def _resolve_occurrence_state(

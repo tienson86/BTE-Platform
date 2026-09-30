@@ -70,9 +70,15 @@ def generate_adjacent_pairs(
         right = digits[start + 1]
         if not (is_ordinary_gua(left) and is_ordinary_gua(right)):
             continue
-        # AB0/AB5 is one modified occurrence, not AB plus a stray modifier.
+        # A terminal AB0/AB5 is one modified occurrence. When the modifier run
+        # leads to another ordinary digit, keep AB: the modifier belongs to the
+        # next bridge (for example 74 + 4006 in 74006).
         if start + 2 < len(digits) and is_modifier(digits[start + 2]):
-            continue
+            cursor = start + 2
+            while cursor < len(digits) and is_modifier(digits[cursor]):
+                cursor += 1
+            if cursor >= len(digits):
+                continue
         resolved = resolve_pair(left, right)
         source_digits = f"{left}{right}"
         span = (start, start + 1)

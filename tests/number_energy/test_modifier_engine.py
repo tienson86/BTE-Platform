@@ -93,8 +93,18 @@ def test_6058_preserves_supported_interposed_zero_five_chain() -> None:
     assert occurrences[0].via_modifier == 0
 
 
+def test_40066_emits_multi_zero_pair_and_prolonged_pair() -> None:
+    parsed = parse_number_string("40066")
+    occurrences, undefined = generate_modifier_pairs(parsed)
+
+    assert undefined == ()
+    assert [item.source_digits for item in occurrences] == ["4006", "40066"]
+    assert all(item.pair_digits == "46" for item in occurrences)
+    assert all(item.energy_id == "huo_hai" for item in occurrences)
+
+
 def test_consecutive_modifiers_are_undefined() -> None:
-    parsed = parse_number_string("1003")
+    parsed = parse_number_string("1553")
     occurrences, undefined = generate_modifier_pairs(parsed)
     assert occurrences == ()
     assert undefined

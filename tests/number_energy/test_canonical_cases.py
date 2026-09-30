@@ -118,7 +118,7 @@ def test_216_jue_ming_and_liu_sha_without_control() -> None:
     assert "CONTROLLED" not in result.sequence_states
 
 
-@pytest.mark.parametrize("number", ["1003", "1553", "1503", "505", "000", "555"])
+@pytest.mark.parametrize("number", ["1553", "1503", "505", "000", "555"])
 def test_undefined_consecutive_modifiers(number: str) -> None:
     result = _analyze(number)
     assert result.sequence_state == "UNKNOWN_OR_NOT_DEFINED"
@@ -162,7 +162,7 @@ def test_narrative_uses_system_name_and_both_sides() -> None:
 
 
 def test_unknown_sequence_still_has_health_disclaimer() -> None:
-    result = _analyze("1003")
+    result = _analyze("1553")
     assert result.narrative.health_disclaimer
     assert "không phải chẩn đoán y khoa" in result.narrative.health_disclaimer
     assert result.narrative.unknown_notice

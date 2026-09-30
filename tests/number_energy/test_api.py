@@ -142,16 +142,14 @@ def test_api_216_without_control() -> None:
     assert data["metadata"]["summary"]["controlled_energy_ids"] == []
 
 
-def test_api_1003_unknown_or_not_defined() -> None:
+def test_api_1003_is_hidden_tian_yi_with_two_zeroes() -> None:
     data = _analyze("1003").json()["data"]
-    assert data["sequence_state"] == "UNKNOWN_OR_NOT_DEFINED"
-    assert data["warnings"]
-    assert data["warnings"][0]["code"] == "UNKNOWN_OR_NOT_DEFINED"
-    assert "chưa được khóa" in data["warnings"][0]["customer_reason"]
-    assert data["narrative"]["unknown_notice"]
-    assert "UNKNOWN_OR_NOT_DEFINED" not in data["narrative"]["unknown_notice"]
-    assert "không phải chẩn đoán y khoa" in data["narrative"]["health_disclaimer"]
-    assert "UNKNOWN_OR_NOT_DEFINED" not in data["reading"]["summary"]
+    assert data["sequence_state"] == "HIDDEN"
+    assert data["warnings"] == []
+    item = data["pair_occurrences"][0]
+    assert item["pair_digits"] == "1003"
+    assert item["display_name"] == "Thiên Y"
+    assert "2 số 0" in item["modifier_note"]
 
 
 def test_api_phone_0328278786_strips_leading_zero() -> None:
@@ -381,6 +379,34 @@ def test_vehicle_plate_keeps_a05b_as_one_visible_energy_pair() -> None:
     assert middle["display_name"] == "Thiên Y"
     assert "tài nguyên ban đầu dễ bị ẩn" in middle["modifier_note"]
     assert "được làm lộ và tăng cường" in middle["modifier_note"]
+
+
+def test_id_number_keeps_multi_zero_huo_hai_and_prior_liu_sha_pair() -> None:
+    data = _analyze("030174006697", "id_number").json()["data"]
+    pairs = data["pair_occurrences"]
+
+    assert [item["pair_digits"] for item in pairs] == [
+        "301",
+        "17",
+        "74",
+        "4006",
+        "40066",
+        "69",
+        "97",
+    ]
+    assert [item["display_name"] for item in pairs] == [
+        "Thiên Y",
+        "Họa Hại",
+        "Lục Sát",
+        "Họa Hại",
+        "Họa Hại",
+        "Tuyệt Mệnh",
+        "Ngũ Quỷ",
+    ]
+    assert data["pair_summary"]["primary_energy_label"] == "Họa Hại"
+    assert "hao tài bị ẩn sâu" in pairs[3]["modifier_note"]
+    assert "khả năng khẩu ngôn" in pairs[3]["modifier_note"]
+    assert "Họa Hại này tiếp tục kéo dài" in pairs[4]["modifier_note"]
 
 
 def test_api_rb05_b_golden_phone_triples_and_chain() -> None:

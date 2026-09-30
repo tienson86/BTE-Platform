@@ -27,7 +27,7 @@ echo Started:
 echo   API      http://127.0.0.1:8000/docs
 echo   Admin    http://127.0.0.1:8080
 echo   Marriage http://127.0.0.1:8082/healthz
-echo   Portal   http://127.0.0.1:8081
+echo   Portal   http://127.0.0.1:8083
 echo.
 echo Logs: logs\api.log , logs\admin.log , logs\marriage_api.log , logs\portal.log
 echo Use stop_all.bat to stop uvicorn processes.

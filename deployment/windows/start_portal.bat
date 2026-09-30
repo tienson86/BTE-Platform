@@ -5,7 +5,7 @@ cd /d "%~dp0..\..\.."
 if not exist "logs" mkdir logs
 
 set HOST=127.0.0.1
-set PORT=8081
+set DEFAULT_PORT=8083
 set BTE_API_BASE_URL=http://127.0.0.1:8000
 set BTE_LOG_LEVEL=INFO
 
@@ -14,6 +14,7 @@ if exist "deployment\env\development.env" (
     if not "%%A"=="" set "%%A=%%B"
   )
 )
+set PORT=%DEFAULT_PORT%
 if defined PORTAL_PORT set PORT=%PORTAL_PORT%
 
 echo Starting BTE Customer Portal on %HOST%:%PORT% ...

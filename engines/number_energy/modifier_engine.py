@@ -33,6 +33,66 @@ def generate_modifier_pairs(
     used_modifiers: set[int] = set()
     occ_index = 0
 
+    # A-00...-B keeps the whole zero bridge. If B repeats immediately after
+    # the bridge, publish a second occurrence showing that the resolved energy
+    # is prolonged by Phục Vị (A-00...-B-B).
+    for start in range(len(digits) - 3):
+        left = digits[start]
+        if not is_ordinary_gua(left) or digits[start + 1] != 0:
+            continue
+        right_index = start + 1
+        while right_index < len(digits) and digits[right_index] == 0:
+            right_index += 1
+        zero_count = right_index - start - 1
+        if zero_count < 2 or right_index >= len(digits):
+            continue
+        right = digits[right_index]
+        if not is_ordinary_gua(right):
+            continue
+        resolved = resolve_pair(left, right)
+        if resolved is None:
+            continue
+        energy_id, rank = resolved
+        source_digits = "".join(str(value) for value in digits[start : right_index + 1])
+        occurrences.append(
+            EnergyOccurrence(
+                occurrence_id=f"multi-zero-{occ_index:03d}",
+                source_span=(start, right_index),
+                source_digits=source_digits,
+                pair_digits=f"{left}{right}",
+                energy_id=energy_id,
+                display_name=ENERGY_DISPLAY_NAMES[energy_id],
+                strength_rank=rank,
+                classification=ENERGY_CLASSIFICATION[energy_id],
+                state=EnergyState.HIDDEN.value,
+                via_modifier=0,
+                notes=f"underlying pair hidden or attenuated by {zero_count} zeros",
+            )
+        )
+        occ_index += 1
+        used_modifiers.update(range(start + 1, right_index))
+
+        if right_index + 1 < len(digits) and digits[right_index + 1] == right:
+            occurrences.append(
+                EnergyOccurrence(
+                    occurrence_id=f"extend-zero-{occ_index:03d}",
+                    source_span=(start, right_index + 1),
+                    source_digits=f"{source_digits}{right}",
+                    pair_digits=f"{left}{right}",
+                    energy_id=energy_id,
+                    display_name=ENERGY_DISPLAY_NAMES[energy_id],
+                    strength_rank=rank,
+                    classification=ENERGY_CLASSIFICATION[energy_id],
+                    state=EnergyState.HIDDEN.value,
+                    via_modifier=0,
+                    notes=(
+                        f"underlying pair hidden or attenuated by {zero_count} zeros; "
+                        "resolved energy prolonged by repeated terminal digit"
+                    ),
+                )
+            )
+            occ_index += 1
+
     # A-0-5-B is one customer-visible chain. Resolve it before three-digit
     # windows so both modifier positions stay attached to the underlying pair.
     for start in range(len(digits) - 3):

@@ -80,6 +80,18 @@ def test_interposed_zero_five_keeps_all_digits_and_combined_meaning() -> None:
     assert "được làm lộ và tăng cường" in (item.modifier_note or "")
 
 
+def test_multiple_zeros_strengthen_hidden_huo_hai_and_repetition_prolongs_it() -> None:
+    result = NumberEnergyEngine().analyze("40066", purpose_context="id_number")
+    base, extended = result.pair_occurrences
+
+    assert base.pair_digits == "4006"
+    assert "2 số 0" in (base.modifier_note or "")
+    assert "hao tài bị ẩn sâu" in (base.modifier_note or "")
+    assert "khả năng khẩu ngôn" in (base.modifier_note or "")
+    assert extended.pair_digits == "40066"
+    assert "Họa Hại này tiếp tục kéo dài" in (extended.modifier_note or "")
+
+
 @pytest.mark.parametrize(
     ("purpose_context", "number", "expected_digits", "phrase"),
     [
