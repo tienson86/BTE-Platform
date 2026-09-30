@@ -253,6 +253,25 @@ không có:
 
 Shen Sha chỉ tạo modifier.
 
+## 9.1. Cung Phi bốn trụ
+
+Cung Phi được đối chiếu theo từng cặp cùng vị trí:
+
+- bản mệnh cá nhân;
+- trụ năm với trụ năm;
+- trụ tháng với trụ tháng;
+- trụ ngày với trụ ngày;
+- trụ giờ với trụ giờ khi cả hai bên có giờ sinh.
+
+Mỗi cặp tra bảng Du Niên 8×8 chuẩn để nhận một trong tám quan hệ:
+
+- Sinh Khí, Thiên Y, Diên Niên, Phục Vị;
+- Tuyệt Mệnh, Ngũ Quỷ, Lục Sát, Họa Hại.
+
+Các cặp khả dụng được lấy trung bình, sau đó mới kết hợp với nhóm Đông/Tây Tứ Trạch. Tổng ảnh hưởng Cung Phi vẫn nằm trong giới hạn Secondary ±3; không cộng dồn năm hàng như năm domain độc lập.
+
+Thiếu giờ sinh thì hàng trụ giờ là `Unavailable`, không tạo điểm phạt.
+
 ---
 
 # 10. Modifier
@@ -704,6 +723,19 @@ Evidence
 ↓
 
 Canonical Data
+
+Customer View có thêm Compatibility Matrix gồm:
+
+- dữ liệu Người Nữ;
+- dữ liệu Người Nam;
+- quan hệ được tra hoặc suy ra;
+- trạng thái Hỗ trợ / Hai chiều / Áp lực / Tham khảo;
+- căn cứ của từng hàng;
+- độ tin cậy dữ liệu.
+
+Ma trận gồm bốn nhóm: Ngũ Hành và Dụng/Hỷ thần, Cung Phi hai lá số, Nhật Chủ và cấu trúc Bát Tự, Đời sống sau kết hôn. Nhóm cuối trình bày giao tiếp, gia đình, tài chính, phối hợp nuôi dạy con và nhịp thời vận. Miền nào chưa có bằng chứng chuyên biệt phải ghi `Unavailable`, không được suy đoán hoặc tạo điểm phạt.
+
+Compatibility Matrix là lớp giải thích của mô hình Bát Tự truyền thống, không được mô tả như bằng chứng khoa học dự đoán hạnh phúc.
 
 ---
 

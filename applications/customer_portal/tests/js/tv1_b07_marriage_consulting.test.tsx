@@ -313,6 +313,65 @@ describe("TV1-B07 Marriage Consulting UI", () => {
     expect(screen.getByTestId("domain-scores").textContent).not.toContain("Con cái");
   });
 
+  it("renders the auditable comparison matrix and switches sections", () => {
+    const matrixConsultation: MarriageConsultationDto = {
+      ...consultation,
+      compatibility_matrix: {
+        version: "marriage.compatibility_matrix.v1@1.0.0",
+        sections: [
+          {
+            key: "useful_god",
+            title: "Ngũ Hành và Dụng/Hỷ thần",
+            description: "Đối chiếu nhu cầu và phần người kia có.",
+            rows: [
+              {
+                key: "a_to_b",
+                label: "Người Nữ bổ trợ Người Nam",
+                value_a: "Có: Hỏa 4",
+                value_b: "Dụng: Hỏa; Hỷ: Mộc",
+                relationship: "Bổ đúng nhu cầu: Hỏa.",
+                status: "supportive",
+                confidence: 0.82,
+                basis: "Đối chiếu phân bố Ngũ Hành.",
+                score_effect: null,
+                available: true,
+              },
+            ],
+          },
+          {
+            key: "cung_phi",
+            title: "Cung Phi hai lá số",
+            description: "Ghép từng cặp cung theo cùng trụ.",
+            rows: [
+              {
+                key: "month",
+                label: "Cung Phi trụ tháng",
+                value_a: "Càn",
+                value_b: "Đoài",
+                relationship: "Sinh Khí: Quan hệ hỗ trợ.",
+                status: "supportive",
+                confidence: 0.82,
+                basis: "Tra ma trận Du Niên 8×8.",
+                score_effect: 2,
+                available: true,
+              },
+            ],
+          },
+        ],
+      },
+    };
+    const view = adaptMarriageView(matrixConsultation, report, []);
+
+    render(<ResultView view={view} expertMode={false} onToggleExpert={() => undefined} />);
+
+    expect(screen.getByTestId("compatibility-matrix").textContent).toContain("Bổ đúng nhu cầu: Hỏa");
+    fireEvent.click(screen.getByRole("tab", { name: "Cung Phi hai lá số" }));
+    expect(screen.getByTestId("matrix-section-cung_phi").textContent).toContain("Càn");
+    expect(screen.getByTestId("matrix-section-cung_phi").textContent).toContain("Đoài");
+    expect(screen.getByTestId("matrix-section-cung_phi").textContent).toContain("Sinh Khí");
+    expect(screen.getByTestId("matrix-section-cung_phi").textContent).toContain("Ảnh hưởng kỹ thuật: +2");
+  });
+
   it("21 customer mode hides technical ids", () => {
     const view = adaptMarriageView(consultation, report, warnings);
     expect(FORBIDDEN_ID_PATTERN.test(JSON.stringify({ ...view, expertTrace: null }))).toBe(false);

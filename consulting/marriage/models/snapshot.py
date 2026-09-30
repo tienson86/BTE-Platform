@@ -28,6 +28,7 @@ class PillarValue:
     ten_god: str | None = None
     growth_stage: str | None = None
     na_yin: str | None = None
+    cung_phi: str | None = None
 
 
 @dataclass(slots=True)

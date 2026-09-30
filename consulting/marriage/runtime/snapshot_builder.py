@@ -58,7 +58,12 @@ def build_marriage_snapshot(
             payload=payload,
             hour_known=hour_known,
         ),
-        pillars=_pillars(bazi, hour_known=hour_known),
+        pillars=_pillars(
+            bazi,
+            calendar=payload.get("calendar"),
+            identity=payload.get("identity"),
+            hour_known=hour_known,
+        ),
         day_master=_day_master(bazi),
         five_elements=_five_elements(payload.get("five_elements")),
         strength=_strength(payload.get("strength")),
@@ -147,17 +152,39 @@ def _source_token(value: Any) -> str | None:
     return text or None
 
 
-def _pillars(bazi: Mapping[str, Any], *, hour_known: bool) -> PillarSnapshot:
+def _pillars(
+    bazi: Mapping[str, Any],
+    *,
+    calendar: Any,
+    identity: Any,
+    hour_known: bool,
+) -> PillarSnapshot:
     """Copy four pillars. Hour is omitted when birth time was unknown."""
+    calendar_payload = calendar if isinstance(calendar, Mapping) else {}
+    routing = calendar_payload.get("ganzhi_routing")
+    routing = routing if isinstance(routing, Mapping) else {}
+    identity_payload = identity if isinstance(identity, Mapping) else {}
+    identity_pillars = identity_payload.get("four_pillars")
+    identity_pillars = identity_pillars if isinstance(identity_pillars, Mapping) else {}
     return PillarSnapshot(
-        year=_pillar(bazi, "year_pillar"),
-        month=_pillar(bazi, "month_pillar"),
-        day=_pillar(bazi, "day_pillar"),
-        hour=_pillar(bazi, "hour_pillar") if hour_known else None,
+        year=_pillar(bazi, "year_pillar", "year", routing, identity_pillars),
+        month=_pillar(bazi, "month_pillar", "month", routing, identity_pillars),
+        day=_pillar(bazi, "day_pillar", "day", routing, identity_pillars),
+        hour=(
+            _pillar(bazi, "hour_pillar", "hour", routing, identity_pillars)
+            if hour_known
+            else None
+        ),
     )
 
 
-def _pillar(bazi: Mapping[str, Any], key: str) -> PillarValue:
+def _pillar(
+    bazi: Mapping[str, Any],
+    key: str,
+    slot: str,
+    routing: Mapping[str, Any],
+    identity_pillars: Mapping[str, Any],
+) -> PillarValue:
     """Copy one Canonical pillar."""
     raw = bazi.get(key)
     if not isinstance(raw, Mapping):
@@ -168,6 +195,10 @@ def _pillar(bazi: Mapping[str, Any], key: str) -> PillarValue:
         raise MarriageCanonicalContractError(f"canonical_pillar_incomplete:{key}")
     hidden = raw.get("hidden_stems")
     hidden_stems = [str(item) for item in hidden] if isinstance(hidden, list) else None
+    route = routing.get(slot)
+    route = route if isinstance(route, Mapping) else {}
+    identity = identity_pillars.get(slot)
+    identity = identity if isinstance(identity, Mapping) else {}
     return PillarValue(
         stem=stem,
         branch=branch,
@@ -176,6 +207,12 @@ def _pillar(bazi: Mapping[str, Any], key: str) -> PillarValue:
         ten_god=str(raw.get("ten_god") or "") or None,
         growth_stage=str(raw.get("truong_sinh") or "") or None,
         na_yin=str(raw.get("nap_am") or "") or None,
+        cung_phi=str(
+            raw.get("cung_phi")
+            or route.get("cung_phi")
+            or identity.get("cung_phi")
+            or ""
+        ) or None,
     )
 
 

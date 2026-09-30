@@ -73,7 +73,33 @@ export type MarriageConsultationDto = {
   headline: string | null;
   action_themes?: string[];
   assessment_cards?: AssessmentCardDto[];
+  compatibility_matrix?: MarriageCompatibilityMatrixDto;
   expert?: Record<string, unknown>;
+};
+
+export type MarriageMatrixRowDto = {
+  key: string;
+  label: string;
+  value_a: string;
+  value_b: string;
+  relationship: string;
+  status: string;
+  confidence: number;
+  basis: string;
+  score_effect: number | null;
+  available: boolean;
+};
+
+export type MarriageMatrixSectionDto = {
+  key: string;
+  title: string;
+  description: string;
+  rows: MarriageMatrixRowDto[];
+};
+
+export type MarriageCompatibilityMatrixDto = {
+  version: string;
+  sections: MarriageMatrixSectionDto[];
 };
 
 export type MarriageDomainScoreDto = {
@@ -176,6 +202,26 @@ export type AssessmentCardVm = {
   technicalExplanation: string;
 };
 
+export type MarriageMatrixRowVm = {
+  key: string;
+  label: string;
+  personA: string;
+  personB: string;
+  relationship: string;
+  status: string;
+  confidence: number;
+  basis: string;
+  scoreEffect: number | null;
+  available: boolean;
+};
+
+export type MarriageMatrixSectionVm = {
+  key: string;
+  title: string;
+  description: string;
+  rows: MarriageMatrixRowVm[];
+};
+
 export type MarriageViewModel = {
   consultationId: string;
   overallState: string | null;
@@ -194,6 +240,7 @@ export type MarriageViewModel = {
   confidenceLabel: string;
   executiveSummary: string;
   assessmentCards: AssessmentCardVm[];
+  compatibilityMatrix: MarriageMatrixSectionVm[];
   strengths: string[];
   risks: string[];
   mutualSupport: MutualSupportVm | null;

@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections.abc import Iterable
 
 from consulting.canon.du_nien import lookup
+from consulting.marriage.decision.matrix import project_compatibility_matrix
 from consulting.marriage.models.decision import MarriageDomainDecision
 from consulting.marriage.models.enums import (
     DomainDecisionState,
@@ -89,6 +90,7 @@ _CUNG_PHI_RELATION_MODIFIER = {
 
 def project_marriage_score(result: MarriageDecisionResult) -> MarriageScoreAudit | None:
     """Project Decision meaning onto 0-100 without changing factual evidence."""
+    result.compatibility_matrix = project_compatibility_matrix(result)
     overlay = {item.evidence_id: item for item in result.resolved_evidence}
     decisions = _domain_decisions(result)
     audits: list[MarriageDomainScoreAudit] = []
@@ -307,16 +309,34 @@ def _secondary_modifier(
     if feng_a is None or feng_b is None or not feng_a.cung_phi or not feng_b.cung_phi:
         return 0.0, []
     items: list[MarriageScoreAdjustment] = []
-    relation = lookup(feng_a.cung_phi, feng_b.cung_phi)
-    if relation is not None:
-        relation_value = _CUNG_PHI_RELATION_MODIFIER.get(relation.relationship_id, 0.0)
-        items.append(
+    pairs: list[tuple[str, str, str]] = [("personal", feng_a.cung_phi, feng_b.cung_phi)]
+    for slot in ("year", "month", "day", "hour"):
+        pillar_a = getattr(result.canonical_a.pillars, slot)
+        pillar_b = getattr(result.canonical_b.pillars, slot)
+        if pillar_a is not None and pillar_b is not None and pillar_a.cung_phi and pillar_b.cung_phi:
+            pairs.append((slot, pillar_a.cung_phi, pillar_b.cung_phi))
+    relation_items: list[MarriageScoreAdjustment] = []
+    for slot, cung_a, cung_b in pairs:
+        relation = lookup(cung_a, cung_b)
+        if relation is None:
+            continue
+        relation_items.append(
             MarriageScoreAdjustment(
-                key=f"cung_phi_{relation.relationship_id}",
-                value=relation_value,
-                detail=relation.relationship_label,
+                key=f"cung_phi_{slot}_{relation.relationship_id}" if slot != "personal" else f"cung_phi_{relation.relationship_id}",
+                value=_CUNG_PHI_RELATION_MODIFIER.get(relation.relationship_id, 0.0),
+                detail=f"{slot}: {cung_a}–{cung_b} = {relation.relationship_label}",
             )
         )
+    relation_count = len(relation_items)
+    normalized_relation_items = [
+        MarriageScoreAdjustment(
+            key=item.key,
+            value=round(item.value / relation_count, 3),
+            detail=f"{item.detail}; averaged across {relation_count} available Cung Phi rows",
+        )
+        for item in relation_items
+    ] if relation_count else []
+    items.extend(normalized_relation_items)
     group_a = _normalize_group(feng_a.group)
     group_b = _normalize_group(feng_b.group)
     if group_a and group_b:
@@ -328,7 +348,20 @@ def _secondary_modifier(
                 detail=f"{feng_a.group} / {feng_b.group}",
             )
         )
-    value = max(-3.0, min(3.0, sum(item.value for item in items)))
+    relation_average = sum(item.value for item in normalized_relation_items)
+    group_value = sum(
+        item.value for item in items if item.key in {"cung_phi_same_group", "cung_phi_cross_group"}
+    )
+    raw_value = relation_average + group_value
+    value = max(-3.0, min(3.0, raw_value))
+    if value != raw_value:
+        items.append(
+            MarriageScoreAdjustment(
+                key="cung_phi_secondary_cap",
+                value=round(value - raw_value, 3),
+                detail="secondary Cung Phi modifier bounded to +/-3",
+            )
+        )
     return value, items
 
 

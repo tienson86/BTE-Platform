@@ -52,6 +52,11 @@ from consulting.marriage.models.narrative import (
     MarriageNarrativeResult,
     MarriageNarrativeSection,
 )
+from consulting.marriage.models.matrix import (
+    MarriageCompatibilityMatrix,
+    MarriageMatrixRow,
+    MarriageMatrixSection,
+)
 from consulting.marriage.models.recommendation import MarriageRecommendation
 from consulting.marriage.models.report import (
     MarriageReportModel,
@@ -112,6 +117,7 @@ __all__ = [
     "LuckSnapshot",
     "MarriageCanonicalSnapshot",
     "MarriageConfidenceResult",
+    "MarriageCompatibilityMatrix",
     "MarriageDecisionResult",
     "MarriageDomain",
     "MarriageDomainDecision",
@@ -121,6 +127,8 @@ __all__ = [
     "MarriageEvidenceType",
     "MarriageFinding",
     "MarriageLuckWindow",
+    "MarriageMatrixRow",
+    "MarriageMatrixSection",
     "MarriageNarrativeBlock",
     "MarriageNarrativeHighlight",
     "MarriageNarrativeResult",

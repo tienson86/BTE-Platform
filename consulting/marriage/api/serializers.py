@@ -131,6 +131,8 @@ def serialize_consultation(stored: MarriageStoredResult, *, expert: bool) -> dic
     }
     if result.score_audit is not None:
         payload["domain_scores"] = _public_domain_scores(result)
+    if result.compatibility_matrix is not None:
+        payload["compatibility_matrix"] = _public_compatibility_matrix(result)
     if expert:
         payload["expert"] = _expert_trace(stored)
     return payload
@@ -462,6 +464,39 @@ def _public_domain_scores(result: MarriageDecisionResult) -> list[dict[str, obje
         }
         for item in audit.domain_scores
     ]
+
+
+def _public_compatibility_matrix(result: MarriageDecisionResult) -> dict[str, object] | None:
+    """Serialize auditable comparison rows without internal evidence ids."""
+    matrix = result.compatibility_matrix
+    if matrix is None:
+        return None
+    return {
+        "version": matrix.version,
+        "sections": [
+            {
+                "key": section.key,
+                "title": section.title,
+                "description": section.description,
+                "rows": [
+                    {
+                        "key": row.key,
+                        "label": row.label,
+                        "value_a": row.value_a,
+                        "value_b": row.value_b,
+                        "relationship": row.relationship,
+                        "status": row.status,
+                        "confidence": row.confidence,
+                        "basis": row.basis,
+                        "score_effect": row.score_effect,
+                        "available": row.available,
+                    }
+                    for row in section.rows
+                ],
+            }
+            for section in matrix.sections
+        ],
+    }
 
 
 def _expert_score_audit(result: MarriageDecisionResult) -> dict[str, object] | None:

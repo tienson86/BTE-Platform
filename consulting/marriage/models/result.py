@@ -10,6 +10,7 @@ from consulting.marriage.models.confidence import MarriageConfidenceResult
 from consulting.marriage.models.decision import MarriageDomainResults, MarriageOverallDecision
 from consulting.marriage.models.evidence import MarriageEvidence, ResolvedMarriageEvidence
 from consulting.marriage.models.finding import MarriageFinding
+from consulting.marriage.models.matrix import MarriageCompatibilityMatrix
 from consulting.marriage.models.person import MarriagePersonReference
 from consulting.marriage.models.recommendation import MarriageRecommendation
 from consulting.marriage.models.score import MarriageScoreAudit
@@ -41,3 +42,4 @@ class MarriageDecisionResult:
     comparison: MarriageComparisonResult | None = None
     assessment: MarriageAssessmentResult | None = None
     score_audit: MarriageScoreAudit | None = None
+    compatibility_matrix: MarriageCompatibilityMatrix | None = None
