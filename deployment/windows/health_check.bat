@@ -2,7 +2,7 @@
 setlocal
 set API_URL=http://127.0.0.1:8000/api/v1/health
 set ADMIN_URL=http://127.0.0.1:8080/healthz
-set PORTAL_URL=http://127.0.0.1:8081/healthz
+set PORTAL_URL=http://127.0.0.1:8686/healthz
 
 echo Checking BTE health endpoints...
 echo.

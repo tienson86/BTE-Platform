@@ -171,6 +171,10 @@ def build_strength_context(bazi_chart: Any, *, calendar: Any = None) -> Strength
         day_master_element,
         (year_branch, month_branch, day_branch, hour_branch),
     )
+    wealth_branch_count = _count_wealth_branches(
+        day_master_element,
+        (year_branch, month_branch, day_branch, hour_branch),
+    )
     drain_type = _detect_drain_type(output_elements, wealth_elements, output_branch_count)
 
     all_stems: list[str] = []
@@ -227,6 +231,7 @@ def build_strength_context(bazi_chart: Any, *, calendar: Any = None) -> Strength
         output_count=len(output_elements),
         drain_count=drain_count,
         output_branch_count=output_branch_count,
+        wealth_branch_count=wealth_branch_count,
         branch_combinations=branch_combinations,
         dominant_combination_element=(
             str(dominant_combination["element"]) if dominant_combination else None
@@ -368,6 +373,14 @@ def _count_output_branches(day_el: str, branches: tuple[str, ...]) -> int:
     if not day_el or not produced:
         return 0
     return sum(1 for branch in branches if branch and _branch_element(branch) == produced)
+
+
+def _count_wealth_branches(day_el: str, branches: tuple[str, ...]) -> int:
+    """Count pillars whose branch bản khí is controlled by the Day Master."""
+    controlled = _ELEMENT_CONTROLS.get(day_el)
+    if not day_el or not controlled:
+        return 0
+    return sum(1 for branch in branches if branch and _branch_element(branch) == controlled)
 
 
 def _detect_drain_type(

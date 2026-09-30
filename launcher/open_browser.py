@@ -5,7 +5,7 @@ from __future__ import annotations
 import webbrowser
 
 
-DEFAULT_PORTAL_URL = "http://localhost:8081"
+DEFAULT_PORTAL_URL = "http://localhost:8686"
 
 
 def open_portal(url: str = DEFAULT_PORTAL_URL) -> None:

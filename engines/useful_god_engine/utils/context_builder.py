@@ -62,6 +62,11 @@ def build_useful_god_context(pattern_context: Any, pattern_result: Any = None) -
         and not override.ug_override_eligible,
     }
     extra = dict(getattr(pattern_context, "extra", {}) or {})
+    element_distribution = dict(getattr(pattern_context, "element_distribution", {}) or {})
+    missing_elements = [
+        element for element in ("Mộc", "Hỏa", "Thổ", "Kim", "Thủy")
+        if int(element_distribution.get(element) or 0) == 0
+    ]
     return UsefulGodContext(
         day_master=getattr(pattern_context, "day_master", None),
         day_master_element=getattr(pattern_context, "day_master_element", None),
@@ -73,7 +78,8 @@ def build_useful_god_context(pattern_context: Any, pattern_result: Any = None) -
         season=getattr(pattern_context, "season", None),
         season_phase=getattr(pattern_context, "season_phase", None),
         temperature_type=getattr(pattern_context, "temperature_type", None),
-        element_distribution=dict(getattr(pattern_context, "element_distribution", {}) or {}),
+        element_distribution=element_distribution,
+        missing_elements=missing_elements,
         support_elements=list(getattr(pattern_context, "support_elements", []) or []),
         resource_elements=list(getattr(pattern_context, "resource_elements", []) or []),
         wealth_elements=list(getattr(pattern_context, "wealth_elements", []) or []),

@@ -120,6 +120,20 @@ NGOC_REQUEST = ProductionRequest(
     export_pdf=False,
 )
 
+PHUONG_1994_REQUEST = ProductionRequest(
+    case_id="PHUONG-1994-DRY-DOG-REGRESSION",
+    year=1994,
+    month=10,
+    day=15,
+    hour=14,
+    minute=5,
+    gender="female",
+    timezone="Asia/Ho_Chi_Minh",
+    full_name="Pham Thanh Phuong",
+    birth_place="Ha Noi, Viet Nam",
+    export_pdf=False,
+)
+
 
 def test_hot_balanced_wood_output_uses_water_before_wealth_fallback() -> None:
     analysis = ProductionEngineRunner().run(CASE_0002_REQUEST).analysis
@@ -308,6 +322,26 @@ def test_cool_rooster_month_balanced_fire_wealth_uses_wood_then_fire() -> None:
         "Thủy · Nhâm · Chính Quan / Thủy · Quý · Thất Sát / "
         "Thổ · Mậu · Thương Quan / Thổ · Kỷ · Thực Thần"
     )
+
+
+def test_dry_dog_month_wood_wealth_missing_water_uses_water_not_fire() -> None:
+    analysis = ProductionEngineRunner().run(PHUONG_1994_REQUEST).analysis
+
+    assert analysis.bazi.day_master == "Giáp"
+    assert analysis.bazi.month_pillar.branch == "Tuất"
+    assert analysis.pattern.pattern == "thien_tai"
+    assert analysis.strength.drain_score == -0.16
+    assert analysis.useful_god.winning_rule_id == (
+        "str_balanced_dry_dog_wood_wealth_missing_water"
+    )
+    assert analysis.useful_god.useful_display == "Thủy · Nhâm · Thiên Ấn"
+    assert analysis.useful_god.climate_display == "Thủy · Nhâm · Thiên Ấn"
+    assert "không dùng Hỏa" in analysis.useful_god.climate_reason
+    assert analysis.useful_god.favorable_display == (
+        "Thủy · Quý · Chính Ấn / Mộc · Giáp · Tỷ Kiên / Mộc · Ất · Kiếp Tài"
+    )
+    assert "Hỏa" in analysis.useful_god.unfavorable_display
+    assert "Thổ" in analysis.useful_god.unfavorable_display
 
 
 def test_1987_female_year_row_publishes_personal_khon_cung_phi() -> None:

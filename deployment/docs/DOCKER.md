@@ -24,7 +24,7 @@ docker compose -f deployment/docker/docker-compose.yml up --build -d
 |-----------|-----------|--------|
 | `bte-api` | 8000 | `/api/v1/health` |
 | `bte-web-admin` | 8080 | `/healthz` |
-| `bte-customer-portal` | 8081 | `/healthz` |
+| `bte-customer-portal` | 8686 | `/healthz` |
 
 UI containers call the API via Docker network URL:
 
@@ -57,7 +57,7 @@ Template: `deployment/env/.env.example`
 ```bash
 curl -fsS http://127.0.0.1:8000/api/v1/health
 curl -fsS http://127.0.0.1:8080/healthz
-curl -fsS http://127.0.0.1:8081/healthz
+curl -fsS http://127.0.0.1:8686/healthz
 ```
 
 Or:

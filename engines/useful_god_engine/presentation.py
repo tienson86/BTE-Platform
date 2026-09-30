@@ -85,6 +85,7 @@ def classify_hy_role(
         "str_warm_tiger_strong_fire",
         "str_balanced_hot_snake_water",
         "str_balanced_cool_rooster_fire_wealth",
+        "str_balanced_dry_dog_wood_wealth_missing_water",
         "str_balanced_cold_cool_climate_fallback",
         "str_balanced_warm_hot_climate_fallback",
     )

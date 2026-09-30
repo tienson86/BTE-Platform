@@ -28,7 +28,7 @@ class PortalSettings(BaseModel):
     narrative_provider: str = Field(default_factory=lambda: _narrative_provider())
     pack05_legacy: bool = Field(default_factory=lambda: _pack05_legacy())
     host: str = "127.0.0.1"
-    port: int = 8083
+    port: int = 8686
     title: str = "BTE Portal"
 
 

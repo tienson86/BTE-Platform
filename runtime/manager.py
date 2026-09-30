@@ -35,7 +35,7 @@ LOG_DIR = RUNTIME_DIR / "logs"
 RUN_DIR = RUNTIME_DIR / "run"
 SERVICES_CONFIG = ROOT / "configs" / "services.json"
 VERSION_FILE = ROOT / "VERSION"
-PORTAL_URL = "http://localhost:8081"
+PORTAL_URL = "http://localhost:8686"
 
 # Backward-compatible alias: historical name listed import modules;
 # canonical source of truth is REQUIRED_DISTRIBUTIONS (pip names).

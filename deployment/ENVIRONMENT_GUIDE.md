@@ -25,7 +25,7 @@ Templates: `deployment/docker/.env.example`, `deployment/docker/.env.production.
 | `BTE_JWT_SECRET` | dev placeholder | **required secret** | JWT signing |
 | `HOST` | `0.0.0.0` | `0.0.0.0` | Bind inside container |
 | `API_PORT` | `8000` | `8000` | API listen |
-| `PORTAL_PORT` | `8081` | `8081` | Portal listen |
+| `PORTAL_PORT` | `8686` | `8686` | Portal listen |
 | `NGINX_HTTP_PORT` | `80` | `80` | Ingress HTTP |
 | `NGINX_HTTPS_PORT` | `443` | `443` | Ingress HTTPS |
 | `TLS_CERT_PATH` | `./certs/fullchain.pem` | secret mount | Certificate (not in image) |

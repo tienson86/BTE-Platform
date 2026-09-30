@@ -5,7 +5,7 @@ cd /d "%~dp0..\..\.."
 if not exist "logs" mkdir logs
 
 set HOST=127.0.0.1
-set DEFAULT_PORT=8083
+set DEFAULT_PORT=8686
 set BTE_API_BASE_URL=http://127.0.0.1:8000
 set BTE_LOG_LEVEL=INFO
 

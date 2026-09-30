@@ -140,11 +140,24 @@ class UsefulGodEngine:
     ) -> dict:
         """Keep Điều hậu subordinate to a formed same-element structure."""
         fields = cls._climate_fields(climate)
+        rule_id = str(overall.get("rule_id") or "") if overall else ""
+        if rule_id == "str_balanced_dry_dog_wood_wealth_missing_water":
+            useful = str(overall.get("useful_god") or "").strip()
+            return {
+                "climate_candidate": useful,
+                "climate_rule_id": rule_id,
+                "climate_rule_group": "structural_reconciliation",
+                "climate_reason": (
+                    "Điều hậu phục tùng toàn cục: Mộc tháng Tuất gặp Tài Thổ khô "
+                    "và thiếu hẳn Thủy, nên ưu tiên Thủy nhuận sinh; không dùng Hỏa "
+                    "chỉ vì nhãn mùa thu khí mát."
+                ),
+            }
         if not overall or not bool(
             getattr(context, "self_element_full_combination", False)
         ):
             return fields
-        if not str(overall.get("rule_id") or "").startswith("str_full_"):
+        if not rule_id.startswith("str_full_"):
             return fields
 
         useful = str(overall.get("useful_god") or "").strip()
@@ -223,6 +236,7 @@ class UsefulGodEngine:
             "season_phase",
             "temperature_type",
             "strength_level",
+            "missing_elements",
             "follow_pattern",
             "special_pattern",
             "main_pattern",

@@ -24,7 +24,7 @@ URLs:
 
 - API http://127.0.0.1:8000/docs
 - Admin http://127.0.0.1:8080
-- Portal http://127.0.0.1:8081
+- Portal http://127.0.0.1:8686
 
 ## Start individually (foreground)
 

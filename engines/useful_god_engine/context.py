@@ -25,6 +25,7 @@ class UsefulGodContext:
     temperature_type: str | None = None
 
     element_distribution: dict[str, int] = field(default_factory=dict)
+    missing_elements: list[str] = field(default_factory=list)
 
     support_elements: list[str] = field(default_factory=list)
     resource_elements: list[str] = field(default_factory=list)

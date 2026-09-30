@@ -2,12 +2,14 @@
 setlocal
 echo Stopping BTE uvicorn processes...
 
-REM Stop uvicorn workers started for BTE applications
-for /f "tokens=2 delims=," %%P in ('tasklist /FI "IMAGENAME eq python.exe" /FO CSV /NH 2^>nul') do (
-  wmic process where "ProcessId=%%~P" get CommandLine 2>nul | findstr /I "uvicorn applications.api.app applications.web_admin.app applications.customer_portal.app consulting.marriage.api.http" >nul
-  if not errorlevel 1 (
-    echo Killing PID %%~P
-    taskkill /PID %%~P /F >nul 2>&1
+REM These ports are reserved for the local BTE stack. Stopping by listening port
+REM avoids deprecated WMIC and does not require access to process command lines.
+for %%R in (8000 8080 8081 8082 8686) do (
+  for /f "tokens=5" %%P in ('netstat -ano ^| findstr /R /C:":%%R .*LISTENING" 2^>nul') do (
+    if not "%%P"=="0" (
+      echo Killing PID %%P on port %%R
+      taskkill /PID %%P /F >nul 2>&1
+    )
   )
 )
 

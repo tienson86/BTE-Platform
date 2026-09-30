@@ -20,7 +20,7 @@ cp deployment/docker/.env.example deployment/docker/.env
 docker compose -f deployment/docker/docker-compose.dev.yml --env-file deployment/docker/.env up --build
 ```
 
-Portal: `http://127.0.0.1:8081` · API: `http://127.0.0.1:8000`
+Portal: `http://127.0.0.1:8686` · API: `http://127.0.0.1:8000`
 
 ---
 

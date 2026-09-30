@@ -11,7 +11,10 @@ def reconcile_temperature_recommendations(
 ) -> None:
     """Prevent seasonal warming advice from contradicting a formed structure."""
     rule_id = str(getattr(useful_god_result, "winning_rule_id", "") or "")
-    if not rule_id.startswith("str_full_"):
+    reconciled_rules = {
+        "str_balanced_dry_dog_wood_wealth_missing_water",
+    }
+    if not rule_id.startswith("str_full_") and rule_id not in reconciled_rules:
         return
     reason = str(getattr(useful_god_result, "climate_reason", "") or "").strip()
     temperature_result.recommendations = [reason] if reason else []

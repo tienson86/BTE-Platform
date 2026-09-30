@@ -47,6 +47,7 @@ class StrengthContext:
     output_count: int = 0
     drain_count: int = 0
     output_branch_count: int = 0
+    wealth_branch_count: int = 0
 
     branch_combinations: list[dict[str, Any]] = field(default_factory=list)
     dominant_combination_element: str | None = None

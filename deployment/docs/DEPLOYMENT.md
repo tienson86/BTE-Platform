@@ -9,7 +9,7 @@ It does **not** change engines, knowledge, or application business code.
 |---------|--------|--------------|--------|
 | API | `applications.api.app:app` | 8000 | `GET /api/v1/health` |
 | Web Admin | `applications.web_admin.app:app` | 8080 | `GET /healthz` |
-| Customer Portal | `applications.customer_portal.app:app` | 8081 | `GET /healthz` |
+| Customer Portal | `applications.customer_portal.app:app` | 8686 | `GET /healthz` |
 
 ## Environment variables
 

@@ -4,7 +4,7 @@
 curl -fsS http://127.0.0.1:8000/health
 curl -fsS http://127.0.0.1:8000/version
 curl -fsS http://127.0.0.1:8000/api/v1/health
-curl -fsS http://127.0.0.1:8081/healthz
+curl -fsS http://127.0.0.1:8686/healthz
 # via nginx (beta/prod)
 curl -fsS http://127.0.0.1/health
 curl -fsS http://127.0.0.1/live
