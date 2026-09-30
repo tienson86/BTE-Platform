@@ -206,6 +206,97 @@ _CAREER_USEFUL_STYLES = {
     "Thủy": "mở kênh khảo sát, lắng nghe phản hồi và chuyển thông tin thành quyết định có căn cứ",
 }
 
+_HEALTH_ELEMENT_NOTES = {
+    "metal": ("Kim", "Phế – Đại trường, mũi và da", "mũi họng, nhịp thở, ho hoặc tình trạng khô nếu thực tế xuất hiện"),
+    "fire": ("Hỏa", "Tâm – Tiểu trường", "giấc ngủ, cảm giác hồi hộp và nhịp hoạt động nếu thực tế xuất hiện"),
+    "wood": ("Mộc", "Can – Đởm", "mắt, gân cơ và cảm giác căng thẳng nếu thực tế xuất hiện"),
+    "water": ("Thủy", "Thận – Bàng quang", "thay đổi tiểu tiện hoặc cảm giác giữ nước nếu thực tế xuất hiện"),
+    "earth": ("Thổ", "Tỳ – Vị", "ăn uống, đầy bụng và nhịp tiêu hóa nếu thực tế xuất hiện"),
+}
+_HEALTH_ELEMENT_KEYS = {"Mộc": "wood", "Hỏa": "fire", "Thổ": "earth", "Kim": "metal", "Thủy": "water"}
+_HEALTH_CONTROLS = {"fire": "metal", "wood": "earth", "earth": "water", "water": "fire", "metal": "wood"}
+_HEALTH_PAIR_NOTES = {
+    ("fire", "metal"): "hỏi xem những đợt công việc căng kéo có đi cùng khô họng, ho hoặc khó chịu hô hấp không",
+    ("wood", "earth"): "hỏi xem căng thẳng có đi cùng đầy bụng, ăn kém hoặc thay đổi đại tiện không",
+    ("earth", "water"): "hỏi xem có cảm giác nặng người, phù hoặc thay đổi tiểu tiện không",
+    ("water", "fire"): "hỏi về giấc ngủ, cảm giác hồi hộp hoặc lo âu nếu có",
+    ("metal", "wood"): "hỏi về đau đầu, chóng mặt, căng cơ hoặc mắt khó chịu nếu có",
+}
+
+
+def _health_prose(payload: Mapping[str, Any], day_master: str) -> list[str]:
+    bazi, strength = _map(payload.get("bazi")), _map(payload.get("strength"))
+    counts = _map(_map(payload.get("five_elements")).get("counts"))
+    useful = _map(payload.get("useful_god"))
+    month = _pill(payload, "month")
+    season = _text(month.get("branch"))
+    day_element = _HEALTH_ELEMENT_KEYS.get(_text(bazi.get("day_master_element")))
+    present = {key: float(value) for key, value in counts.items()
+               if key in _HEALTH_ELEMENT_NOTES and isinstance(value, (int, float)) and value >= 0}
+    strong = _text(strength.get("strength_level")) in ("strong", "very_strong")
+    overview = (
+        f"Nhật Chủ {day_master} " + ("ở thế Thân vượng" if strong else "cần được đặt trong thế vượng nhược của toàn cục")
+        + (f", sinh vào tháng {season}" if season else "")
+        + ". Bảng ngũ hành đếm các vị trí xuất hiện; nhiều lần xuất hiện không tự gọi là vượng, "
+        "vì còn phải xét mùa sinh, gốc khí và vị trí Can Chi."
+    )
+    paragraphs = ["Cách đọc sức khỏe: " + overview]
+    if present:
+        ranked = sorted(present, key=lambda key: (-present[key], key))
+        selected = [day_element] if day_element in present else []
+        selected.extend(key for key in ranked[:2] if key not in selected)
+        low = min(present, key=lambda key: (present[key], key))
+        if low not in selected:
+            selected.append(low)
+        for key in selected:
+            name, organs, signs = _HEALTH_ELEMENT_NOTES[key]
+            prominence = (
+                "xuất hiện ít nhất trong bảng đếm" if key == low and present[key] < max(present.values()) else
+                "nằm trong nhóm xuất hiện nhiều trong bảng đếm" if key in ranked[:2] else
+                "cần được đọc theo sức của Nhật Chủ, không chỉ theo số lần xuất hiện"
+            )
+            role = " của Nhật Chủ" if key == day_element else ""
+            paragraphs.append(
+                f"{name} và hướng theo dõi: {name}{role} {prominence} ({present[key]:g} vị trí). "
+                f"Theo tương ứng của Đông y, {name} gắn với {organs}; có thể hỏi về {signs}. "
+                "Đây là hướng hỏi, không xác nhận cơ quan đó đang mắc bệnh."
+            )
+    else:
+        paragraphs.append("Dữ liệu ngũ hành: Chưa có bảng phân bố để chọn hành nổi bật; "
+                          "không suy tên bệnh hoặc mức vượng từ riêng Nhật Chủ.")
+    useful_key = _HEALTH_ELEMENT_KEYS.get(_text(useful.get("useful_element")))
+    pair = None
+    if useful_key and day_element and _HEALTH_CONTROLS.get(useful_key) == day_element:
+        pair = useful_key, day_element
+    elif len(present) == 5:
+        candidates = [(a, b) for a, b in _HEALTH_CONTROLS.items()
+                      if present[a] == max(present.values()) and present[b] == min(present.values())]
+        pair = candidates[0] if candidates else None
+    if pair:
+        a, b = pair
+        a_name, b_name = _HEALTH_ELEMENT_NOTES[a][0], _HEALTH_ELEMENT_NOTES[b][0]
+        note = _HEALTH_PAIR_NOTES[pair]
+        if a == useful_key and b == day_element:
+            useful_stem = _text(useful.get("useful_stem"))
+            paragraphs.append(
+                f"Quan hệ {a_name} khắc {b_name}: {useful_stem or a_name} {a_name} là hướng Dụng thần "
+                f"đã chọn để điều tiết Nhật Chủ {b_name}; khắc ở đây không tự mang nghĩa gây bệnh. "
+                f"Theo Đông y có thể {note}; chỉ xét tiếp khi bạn thực sự có biểu hiện."
+            )
+        else:
+            paragraphs.append(
+                f"Quan hệ {a_name} khắc {b_name}: Bảng đếm cho thấy {a_name} nhiều và {b_name} ít; "
+                "đây chỉ là một gợi ý để xem lại quan hệ sinh khắc trong toàn cục, chưa đủ kết luận quá khắc. "
+                f"Theo Đông y có thể {note}; không tự xác nhận một bệnh."
+            )
+    paragraphs.extend([
+        "Chăm sóc hằng ngày: Giữ giờ ngủ và giờ làm tương đối đều, nghỉ giữa những việc đòi hỏi tập trung, "
+        "ăn uống và vận động phù hợp; quan sát khả năng hồi phục sau giai đoạn bận rộn.",
+        "Điều cần kiểm chứng: Nếu triệu chứng kéo dài hoặc nặng lên, hãy thăm khám và đối chiếu với tiền sử, "
+        "số đo và xét nghiệm phù hợp. Bát Tự không xác định bệnh phổi, tim, gan, thận hay huyết áp."
+    ])
+    return paragraphs
+
 
 def life_domain_prose(key: str, payload: Mapping[str, Any]) -> list[str]:
     """Return prose only when a natal Day Master and relevant evidence exist."""
@@ -225,21 +316,7 @@ def life_domain_prose(key: str, payload: Mapping[str, Any]) -> list[str]:
     pattern_name = _text(pattern.get("cach_cuc"))
 
     if key == "health":
-        hour_resource = _text(hour.get("stem")) if _text(hour.get("ten_god")) in ("Thiên Ấn", "Chính Ấn") else ""
-        return [
-            "Nhịp dùng sức: " + (
-                f"Nhật Chủ {day_master} ở thế Thân vượng cho bạn nền để nhận việc khó. "
-                + (f"{hour.get('ten_god')} {hour_resource} còn hiện ở trụ giờ: " if hour_resource else "Ấn tinh còn hiện trong lá số: ")
-                + "đầu óc có thể tiếp tục giải việc sau giờ làm; "
-                "điều nên theo dõi là nhịp nghỉ và khả năng tập trung, không phải suy đoán bệnh từ ngũ hành."
-                if strong and _has(payload, "Chính Ấn", "Thiên Ấn") else
-                f"Nhật Chủ {day_master} cần được đặt cạnh sức gánh thực tế của bạn. "
-                "Lá số gợi câu hỏi về cách làm việc và hồi phục, không chẩn đoán một bệnh cụ thể."),
-            "Giữ sức: Đặt giờ bắt đầu và kết thúc cho việc phải suy nghĩ sâu; bảo vệ giấc ngủ, bữa ăn và thời gian vận động. "
-            "Nếu lịch hẹn dồn quá dày, hãy giảm số đầu việc hoặc giao lại phần có quy trình rõ thay vì dùng sức khỏe bù cho khâu tổ chức.",
-            "Điều cần kiểm chứng: Phân bố ngũ hành là thống kê cấu trúc, không phải bản đồ cơ quan. "
-            "Nếu có triệu chứng kéo dài, hãy thăm khám và dựa vào dữ liệu sức khỏe thực tế."
-        ]
+        return _health_prose(payload, day_master)
 
     if key == "wealth":
         return _wealth_prose(payload)

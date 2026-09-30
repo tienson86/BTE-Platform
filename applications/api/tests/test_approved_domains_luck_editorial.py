@@ -20,7 +20,12 @@ def _analyze(**changes):
 def test_approved_son_prose_is_grounded_in_pillars_and_all_published_cycles():
     payload = _analyze()
     sections = build_life_domain_sections(payload)
-    assert all(len(sections[key]["paragraphs"]) == (8 if key == "wealth" else 6 if key == "career" else 3) for key in LIFE_DOMAIN_KEYS)
+    assert all(len(sections[key]["paragraphs"]) == (8 if key in ("wealth", "health") else 6 if key == "career" else 3) for key in LIFE_DOMAIN_KEYS)
+    health = " ".join(sections["health"]["paragraphs"])
+    assert "Canh ở thế Thân vượng, sinh vào tháng Sửu" in health
+    assert "Kim của Nhật Chủ" in health and "Thổ" in health and "Thủy xuất hiện ít nhất" in health
+    assert "Quan hệ Hỏa khắc Kim: Đinh Hỏa là hướng Dụng thần" in health
+    assert "không tự mang nghĩa gây bệnh" in health
     wealth = " ".join(sections["wealth"]["paragraphs"])
     assert "Tiền đến từ đâu?" in wealth and "Giáp tàng ở trụ năm" in wealth
     assert "Giáp tàng ở trụ giờ" in wealth and "Không thấy Chính Tài" in wealth
@@ -91,8 +96,24 @@ def test_pdf_html_and_word_use_the_same_approved_chapter_text(tmp_path):
     word = " ".join(paragraph.text for paragraph in Document(path).paragraphs)
     for fragment in ("Thất Sát ở trụ năm", "Vận đang đi qua Ất Tỵ",
                      "Trục mệnh", "Chọn nhịp trong vận Ất Tỵ", "Vị trí có thể phát huy",
-                     "Nhóm nghề nên khảo sát", "Tiền đến từ đâu?", "Giáp tàng ở trụ năm"):
+                     "Nhóm nghề nên khảo sát", "Tiền đến từ đâu?", "Giáp tàng ở trụ năm",
+                     "Quan hệ Hỏa khắc Kim", "Thủy xuất hiện ít nhất"):
         assert fragment in html and fragment in word
+
+
+def test_health_other_chart_uses_its_day_element_and_useful_relation():
+    huynh = _analyze(year=1966, month=9, day=24, hour=4, minute=15)
+    health = " ".join(life_domain_prose("health", huynh))
+    assert "Quan hệ Thủy khắc Hỏa: Nhâm Thủy" in health
+    assert "Quan hệ Hỏa khắc Kim: Đinh Hỏa" not in health
+    assert "Thủy xuất hiện ít nhất" in health
+    assert "không xác định bệnh" in health
+
+
+def test_health_without_element_counts_does_not_invent_a_disease():
+    health = " ".join(life_domain_prose("health", {"bazi": {"day_master": "Canh"}}))
+    assert "Chưa có bảng phân bố" in health
+    assert "Quan hệ Hỏa khắc Kim" not in health
 
 
 def test_money_sources_change_with_natal_finance_and_do_not_inherit_son_claims():
