@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from "react";
 
 import { warningNotes } from "./adapter";
-import { FORBIDDEN_ID_PATTERN, FORBIDDEN_SCORE_PATTERN } from "./labels";
+import { FORBIDDEN_ID_PATTERN } from "./labels";
 import type { AssessmentCardVm, DomainCardVm, MarriageViewModel } from "./types";
 
 type ResultViewProps = {
@@ -19,6 +19,40 @@ export function ResultView({ view, expertMode, onToggleExpert }: ResultViewProps
           {view.personAName} và {view.personBName}
         </p>
       </section>
+
+      {view.score !== null ? (
+        <section className="bte-card mc-score" data-testid="compatibility-score">
+          <div className="mc-score__summary">
+            <div>
+              <p className="mc-score__label">Điểm tương hợp cấu trúc</p>
+              <p className="mc-score__value" data-testid="overall-score">
+                {view.score}<span>/100</span>
+              </p>
+            </div>
+            <div className="mc-score__grade" data-testid="overall-grade">
+              <span>Xếp loại</span>
+              <strong>{view.grade || "-"}</strong>
+            </div>
+          </div>
+          <p className="muted">
+            Điểm phản ánh mức bổ trợ giữa hai cấu trúc Bát Tự, không phải xác suất hạnh phúc hay quyết định nên cưới.
+          </p>
+          {view.scoreDomains.length ? (
+            <div className="mc-score__domains" data-testid="domain-scores">
+              {view.scoreDomains.map((item) => (
+                <div className="mc-score__domain" key={item.domain}>
+                  <div>
+                    <span>{item.title}</span>
+                    <small>Trọng số {item.weight}%</small>
+                  </div>
+                  <progress max="100" value={item.score} aria-label={`${item.title}: ${item.score} trên 100`} />
+                  <strong>{item.score}</strong>
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </section>
+      ) : null}
 
       {view.assessmentCards.length ? (
         <section className="mc-assessment" data-testid="marriage-assessment">
@@ -159,9 +193,7 @@ export function ResultView({ view, expertMode, onToggleExpert }: ResultViewProps
       </details>
 
       <span data-testid="score-grade-guard" hidden>
-        {String(view.score)}|{String(view.grade)}|{FORBIDDEN_SCORE_PATTERN.test(JSON.stringify(view))
-          ? "score-leak"
-          : "ok"}
+        {String(view.score)}|{String(view.grade)}
         {FORBIDDEN_ID_PATTERN.test(customerText(view)) ? "id-leak" : "id-ok"}
       </span>
     </div>

@@ -11,7 +11,7 @@ import {
 } from "./labels";
 import { PersonPanel } from "./PersonPanel";
 import { ResultView } from "./ResultView";
-import { EMPTY_PERSON, toConsultationBody, validatePerson } from "./request";
+import { DEFAULT_PERSON_A, DEFAULT_PERSON_B, toConsultationBody, validatePerson } from "./request";
 import type { PersonFormValue } from "./types";
 import type { PersonFieldErrors } from "./request";
 import type { MarriageViewModel } from "./types";
@@ -19,8 +19,8 @@ import type { MarriageViewModel } from "./types";
 type PageStatus = "idle" | "loading" | "success" | "error";
 
 export function MarriageConsultingPage(): ReactNode {
-  const [personA, setPersonA] = useState<PersonFormValue>(EMPTY_PERSON);
-  const [personB, setPersonB] = useState<PersonFormValue>(EMPTY_PERSON);
+  const [personA, setPersonA] = useState<PersonFormValue>(DEFAULT_PERSON_A);
+  const [personB, setPersonB] = useState<PersonFormValue>(DEFAULT_PERSON_B);
   const [errorsA, setErrorsA] = useState<PersonFieldErrors>({});
   const [errorsB, setErrorsB] = useState<PersonFieldErrors>({});
   const [status, setStatus] = useState<PageStatus>("idle");

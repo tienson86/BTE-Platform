@@ -20,3 +20,4 @@ class ResolvedMarriageOptions:
     audience: str | None = None
     reading_level: str | None = None
     expert_mode: bool | None = None
+    include_score: bool | None = None

@@ -6,8 +6,9 @@ import { fileURLToPath } from "node:url";
 
 import { MarriageConsultingPage } from "../../src/features/marriage_consulting/MarriageConsultingPage";
 import { adaptMarriageView } from "../../src/features/marriage_consulting/adapter";
+import { ResultView } from "../../src/features/marriage_consulting/ResultView";
 import { FORBIDDEN_ID_PATTERN, FORBIDDEN_SCORE_PATTERN, PRODUCT_TITLE } from "../../src/features/marriage_consulting/labels";
-import { EMPTY_PERSON, toConsultationBody, validatePerson } from "../../src/features/marriage_consulting/request";
+import { DEFAULT_PERSON_A, DEFAULT_PERSON_B, EMPTY_PERSON, toConsultationBody, validatePerson } from "../../src/features/marriage_consulting/request";
 import { APP_NAV_ITEMS } from "../../src/layouts/Navigation";
 import type { MarriageConsultationDto, MarriageReportDto, MarriageWarning } from "../../src/features/marriage_consulting/types";
 
@@ -154,7 +155,7 @@ function mockApi(options?: { fail?: boolean; retryable?: boolean }) {
       }
       if (init?.method === "POST") {
         const body = JSON.parse(String(init.body || "{}")) as { person_a?: { gender?: string; birth_date?: string } };
-        expect(body.person_a?.gender).toBe("male");
+        expect(body.person_a?.gender).toBe("female");
         expect(body.person_a?.birth_date).toBe("1987-01-21");
         return jsonResponse(envelope(consultation), 201);
       }
@@ -175,12 +176,10 @@ function jsonResponse(payload: unknown, status = 200): Response {
 
 function fillValidForm(): void {
   fireEvent.change(screen.getByLabelText("Họ tên", { selector: "#person-a-full-name" }), { target: { value: "An" } });
-  fireEvent.click(screen.getAllByLabelText("Nam")[0]!);
   fireEvent.change(screen.getByLabelText("Ngày sinh dương lịch", { selector: "#person-a-birth-date" }), {
     target: { value: "21011987" },
   });
   fireEvent.change(screen.getByLabelText("Họ tên", { selector: "#person-b-full-name" }), { target: { value: "Binh" } });
-  fireEvent.click(screen.getAllByLabelText("Nữ")[1]!);
   fireEvent.change(screen.getByLabelText("Ngày sinh dương lịch", { selector: "#person-b-birth-date" }), {
     target: { value: "15051990" },
   });
@@ -193,22 +192,26 @@ describe("TV1-B07 Marriage Consulting UI", () => {
     expect(screen.getByTestId("consulting-family").textContent).toContain("Tư vấn");
   });
 
-  it("2-5 person forms have no default gender and allow missing birth time", () => {
+  it("2-5 person forms use fixed genders and allow unknown branch-hour birth time", () => {
     render(<MarriageConsultingPage />);
-    const aRadios = screen.getByTestId("person-a-gender").querySelectorAll("input");
-    const bRadios = screen.getByTestId("person-b-gender").querySelectorAll("input");
-    expect(Array.from(aRadios).every((item) => !(item as HTMLInputElement).checked)).toBe(true);
-    expect(Array.from(bRadios).every((item) => !(item as HTMLInputElement).checked)).toBe(true);
-    expect((screen.getAllByLabelText("Giờ sinh")[0] as HTMLInputElement).value).toBe("");
-    expect((screen.getAllByLabelText("Giờ sinh")[1] as HTMLInputElement).value).toBe("");
+    expect(screen.getByRole("heading", { name: "Người Nữ (Phụ nữ)" })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Người Nam (Đàn ông)" })).toBeTruthy();
+    expect(screen.queryByText("Giới tính")).toBeNull();
+    expect(DEFAULT_PERSON_A.gender).toBe("female");
+    expect(DEFAULT_PERSON_B.gender).toBe("male");
+    expect((screen.getAllByLabelText("Giờ sinh")[0] as HTMLSelectElement).value).toBe("");
+    expect((screen.getAllByLabelText("Giờ sinh")[1] as HTMLSelectElement).value).toBe("");
+    fireEvent.change(screen.getAllByLabelText("Giờ sinh")[0]!, { target: { value: "06:00" } });
+    expect((screen.getAllByLabelText("Giờ sinh")[0] as HTMLSelectElement).value).toBe("06:00");
+    expect(screen.getAllByText("Giờ Mão (05:00-06:59)")).toHaveLength(2);
     expect(validatePerson({ ...EMPTY_PERSON, gender: "male", birth_date: "21/01/1987" })).toEqual({});
   });
 
-  it("6 validation errors for missing gender and date", () => {
+  it("6 validation errors for missing date", () => {
     render(<MarriageConsultingPage />);
     fireEvent.submit(screen.getByTestId("marriage-form"));
     expect(screen.getByTestId("error-state").textContent).toContain("Thiếu thông tin bắt buộc");
-    expect(screen.getByTestId("person-a-gender-error").hidden).toBe(false);
+    expect(screen.getByTestId("person-a-panel").textContent).toContain("Vui lòng nhập ngày sinh dương lịch");
   });
 
   it("7 API request contract posts person_a and person_b", async () => {
@@ -221,12 +224,13 @@ describe("TV1-B07 Marriage Consulting UI", () => {
     const post = fetchMock.mock.calls.find((call) => String(call[1]?.method) === "POST");
     expect(post).toBeTruthy();
     const body = JSON.parse(String(post?.[1]?.body));
-    expect(body.person_a.gender).toBe("male");
-    expect(body.person_b.gender).toBe("female");
+    expect(body.person_a.gender).toBe("female");
+    expect(body.person_b.gender).toBe("male");
     expect(body.person_a.birth_time).toBeUndefined();
+    expect(body.options.include_score).toBe(true);
     expect(toConsultationBody(
-      { full_name: "An", gender: "male", birth_date: "21/01/1987", birth_time: "", birth_place: "" },
-      { full_name: "Binh", gender: "female", birth_date: "15/05/1990", birth_time: "", birth_place: "" },
+      { full_name: "An", gender: "female", birth_date: "21/01/1987", birth_time: "", birth_place: "" },
+      { full_name: "Binh", gender: "male", birth_date: "15/05/1990", birth_time: "", birth_place: "" },
     )?.person_a.birth_date).toBe("1987-01-21");
   });
 
@@ -285,6 +289,28 @@ describe("TV1-B07 Marriage Consulting UI", () => {
     expect(view.score).toBeNull();
     expect(view.grade).toBeNull();
     expect(FORBIDDEN_SCORE_PATTERN.test(JSON.stringify(view))).toBe(false);
+  });
+
+  it("renders an explainable structural score when the API provides one", () => {
+    const scoredConsultation: MarriageConsultationDto = {
+      ...consultation,
+      score: 72.4,
+      grade: "B",
+      domain_scores: [
+        { domain: "five_elements", score: 78, weight: 20, available: true },
+        { domain: "stem_branch", score: 66, weight: 18, available: true },
+        { domain: "children", score: null, weight: 4, available: false },
+      ],
+    };
+    const scoredReport: MarriageReportDto = { ...report, score: 72.4, grade: "B" };
+    const view = adaptMarriageView(scoredConsultation, scoredReport, []);
+
+    render(<ResultView view={view} expertMode={false} onToggleExpert={() => undefined} />);
+
+    expect(screen.getByTestId("overall-score").textContent).toContain("72.4/100");
+    expect(screen.getByTestId("overall-grade").textContent).toContain("B");
+    expect(screen.getByTestId("domain-scores").textContent).toContain("Ngũ hành");
+    expect(screen.getByTestId("domain-scores").textContent).not.toContain("Con cái");
   });
 
   it("21 customer mode hides technical ids", () => {

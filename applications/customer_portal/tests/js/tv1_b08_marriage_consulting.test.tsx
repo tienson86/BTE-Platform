@@ -156,14 +156,12 @@ describe("TV1-B08 Marriage Consulting UI golden presentation", () => {
     fireEvent.change(screen.getByLabelText("Họ tên", { selector: "#person-a-full-name" }), {
       target: { value: "Nguyễn Thị Ánh" },
     });
-    fireEvent.click(screen.getAllByLabelText("Nữ")[0]!);
     fireEvent.change(screen.getByLabelText("Ngày sinh dương lịch", { selector: "#person-a-birth-date" }), {
       target: { value: "21011987" },
     });
     fireEvent.change(screen.getByLabelText("Họ tên", { selector: "#person-b-full-name" }), {
       target: { value: "Trần Văn Bình" },
     });
-    fireEvent.click(screen.getAllByLabelText("Nam")[1]!);
     fireEvent.change(screen.getByLabelText("Ngày sinh dương lịch", { selector: "#person-b-birth-date" }), {
       target: { value: "15051990" },
     });
@@ -172,11 +170,12 @@ describe("TV1-B08 Marriage Consulting UI golden presentation", () => {
     expect(screen.getByTestId("couple-names").textContent).toContain("Nguyễn");
     expect(screen.queryByText(/\/100/)).toBeNull();
     expect(screen.queryByText(/Grade/)).toBeNull();
+    fireEvent.click(screen.getByTestId("expert-toggle"));
+    await waitFor(() => expect(screen.getByTestId("action-plan")).toBeTruthy());
     expect(screen.getByTestId("action-plan")).toBeTruthy();
     expect(screen.getAllByTestId("warning-note").length).toBeGreaterThan(0);
     expect(screen.getByTestId("domain-analysis").querySelector('[data-domain="family"]')).toBeNull();
     expect(screen.getByTestId("expert-mode")).toBeTruthy();
-    fireEvent.click(screen.getByTestId("expert-mode").querySelector("summary")!);
     expect(screen.queryByText(/82%/)).toBeNull();
   });
 });

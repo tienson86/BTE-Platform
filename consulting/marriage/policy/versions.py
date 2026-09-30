@@ -12,6 +12,7 @@ EVIDENCE_MODEL_VERSION: Final[str] = "common.evidence_model.v1"
 EVIDENCE_CATALOG_VERSION: Final[str] = "marriage.evidence.catalog.v1@1.0.0"
 FINDING_MODEL_VERSION: Final[str] = "common.finding_model.v1"
 SCORE_MODEL_VERSION: Final[str] = "unavailable"
+ACTIVE_SCORE_MODEL_VERSION: Final[str] = "marriage.score.v1@1.0.0"
 
 
 def policy_version_token() -> str:

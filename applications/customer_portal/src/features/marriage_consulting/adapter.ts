@@ -12,6 +12,8 @@ import {
   OPTIONAL_DOMAINS,
   OVERALL_STATE_HEADLINE,
   OVERALL_STATE_LABEL,
+  PERSON_A_LABEL,
+  PERSON_B_LABEL,
   PRIORITY_LABEL,
   WARNING_NOTE,
 } from "./labels";
@@ -79,9 +81,17 @@ export function adaptMarriageView(
     overallState: state,
     score: consultation.score ?? report.score ?? null,
     grade: consultation.grade ?? report.grade ?? null,
+    scoreDomains: (consultation.domain_scores || [])
+      .filter((item) => item.available && item.score !== null)
+      .map((item) => ({
+        domain: item.domain,
+        title: DOMAIN_TITLE[item.domain] || item.domain,
+        score: item.score as number,
+        weight: item.weight,
+      })),
     identityTitle: identity?.summary || identity?.blocks[0]?.body || coupleFallback(consultation),
-    personAName: consultation.person_a.display_name || "Người A",
-    personBName: consultation.person_b.display_name || "Người B",
+    personAName: consultation.person_a.display_name || PERSON_A_LABEL,
+    personBName: consultation.person_b.display_name || PERSON_B_LABEL,
     heroEyebrow: HERO_EYEBROW,
     heroHeadline:
       firstText(hero, "headline") ||
@@ -393,8 +403,8 @@ function customerAppendix(sec: MarriageReportSection | undefined): string {
 }
 
 function coupleFallback(consultation: MarriageConsultationDto): string {
-  const a = consultation.person_a.display_name || "Người A";
-  const b = consultation.person_b.display_name || "Người B";
+  const a = consultation.person_a.display_name || PERSON_A_LABEL;
+  const b = consultation.person_b.display_name || PERSON_B_LABEL;
   return `${a} và ${b}`;
 }
 

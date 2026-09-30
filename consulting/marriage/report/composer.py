@@ -718,13 +718,20 @@ def _appendix(
     narrative: MarriageNarrativeResult,
 ) -> ReportSection:
     """Methodology reference. Customer text has no internal IDs."""
+    if payload.score_model_version in {None, "unavailable"}:
+        score_method = "Không dùng điểm số tương hợp vì mô hình điểm hiện chưa khả dụng."
+    else:
+        score_method = (
+            "Điểm tương hợp cấu trúc được tổng hợp từ các miền luận giải khả dụng; "
+            "đây không phải xác suất hạnh phúc hay quyết định nên cưới."
+        )
     customer = ReportBlock(
         block_id="appendix-method",
         kind="methodology",
         title="Cách đọc hồ sơ",
         body=(
             "Báo cáo này truyền đạt kết luận đã được chốt và việc nên làm đã được kết từ khuyến nghị. "
-            "Không dùng điểm số tương hợp vì mô hình điểm hiện chưa khả dụng."
+            f"{score_method}"
         ),
         semantic_key="marriage.appendix.method",
         visibility="expert",

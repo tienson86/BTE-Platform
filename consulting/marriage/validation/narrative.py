@@ -34,7 +34,7 @@ _SCORE = re.compile(r"\b\d{1,3}\s*/\s*100\b")
 
 
 class MarriageNarrativeValidation(MarriageRecommendationValidation):
-    """Validate narrative source-trace, wording, and no-score contracts."""
+    """Validate narrative source-trace, wording, and score isolation."""
 
     def validate_narrative(
         self,
@@ -53,11 +53,8 @@ class MarriageNarrativeValidation(MarriageRecommendationValidation):
                 raise MarriageNarrativeError(f"orphan_section:{section.section_id}")
             for block in section.blocks:
                 _validate_block(block, finding_ids, rec_ids)
-        if decision.overall.score is not None or decision.overall.grade is not None:
-            raise MarriageNarrativeError("score_must_remain_unavailable")
-        if decision.versions.score_model_version not in {None, "unavailable"}:
-            if decision.overall.score is not None:
-                raise MarriageNarrativeError("score_fabricated")
+        if decision.overall.score is not None and decision.score_audit is None:
+            raise MarriageNarrativeError("score_audit_missing")
 
 
 class MarriageReportValidation(MarriageNarrativeValidation):

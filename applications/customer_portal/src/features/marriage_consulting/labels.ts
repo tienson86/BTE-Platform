@@ -4,8 +4,8 @@
 
 export const PRODUCT_TITLE = "Tư vấn hôn nhân";
 export const FAMILY_LABEL = "Tư vấn";
-export const PERSON_A_LABEL = "Người A";
-export const PERSON_B_LABEL = "Người B";
+export const PERSON_A_LABEL = "Người Nữ (Phụ nữ)";
+export const PERSON_B_LABEL = "Người Nam (Đàn ông)";
 export const SUBMIT_LABEL = "Phân tích hôn nhân";
 export const HERO_EYEBROW = "Tương hợp hôn nhân";
 

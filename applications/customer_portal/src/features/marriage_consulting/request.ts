@@ -15,6 +15,16 @@ export const EMPTY_PERSON: PersonFormValue = {
   birth_place: "",
 };
 
+export const DEFAULT_PERSON_A: PersonFormValue = {
+  ...EMPTY_PERSON,
+  gender: "female",
+};
+
+export const DEFAULT_PERSON_B: PersonFormValue = {
+  ...EMPTY_PERSON,
+  gender: "male",
+};
+
 export type PersonFieldErrors = Partial<Record<keyof PersonFormValue, string>>;
 
 export function maskBirthDate(raw: string): string {
@@ -71,6 +81,7 @@ export function toConsultationBody(
       language: "vi",
       audience: expertMode ? "expert" : "customer",
       expert_mode: expertMode,
+      include_score: true,
     },
   };
 }

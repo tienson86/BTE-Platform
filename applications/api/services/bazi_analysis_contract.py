@@ -16,12 +16,19 @@ from engines.calendar_engine.tam_nguyen import calculate_tam_nguyen
 
 from applications.api.services.marriage_editorial import run_marriage_editorial
 from applications.api.services.life_domain_editorial import run_life_domain_editorial
+from applications.api.services.approved_domains_luck_editorial import (
+    life_domain_prose, luck_cycle_prose, synthesis_prose, recommendation_prose,
+)
 from applications.api.services.family_property_editorial import run_family_property_editorial
 from applications.api.services.ten_gods_editorial import ten_gods_editorial_paragraphs
 from applications.api.services.core_reading_editorial import (
     day_master_paragraphs,
     pattern_useful_paragraphs,
     shen_sha_paragraphs,
+)
+from applications.api.services.wealth_reasoning import (
+    build_wealth_reasoning,
+    customer_wealth_paragraphs,
 )
 
 CONTRACT_VERSION = "bazi_analysis_result.v1"
@@ -462,6 +469,7 @@ def build_technical_data(payload: Mapping[str, Any]) -> dict[str, Any]:
         "temperature": _copy_mapping(payload.get("temperature")),
         "useful_god": _copy_mapping(payload.get("useful_god")),
         "ten_gods": ten_gods,
+        "wealth_reasoning": build_wealth_reasoning(payload),
         "shen_sha": {
             "shen_sha": deepcopy(bazi.get("shen_sha")),
             "shensha": deepcopy(bazi.get("shensha")),
@@ -1000,11 +1008,11 @@ def build_report_chapters(payload: Mapping[str, Any], narrative: Mapping[str, An
         _chapter(
             "luck_cycles",
             "Đại vận và lộ trình 5 năm",
-            _luck_cycle_paragraphs(luck_cycles) + _annual_roadmap_paragraphs(payload),
+            (luck_cycle_prose(payload, luck_cycles) or _luck_cycle_paragraphs(luck_cycles)) + _annual_roadmap_paragraphs(payload),
             ["luck.current_cycle", "luck.cycles", "luck.annual_identity", "bazi", "useful_god"],
         ),
-        _chapter("synthesis", "Kết luận tổng hợp", _synthesis_paragraphs(payload, narrative), ["bazi", "five_elements", "ten_gods", "shen_sha", "luck", "useful_god"]),
-        _chapter("recommendations", "Khuyến nghị", _recommendation_paragraphs(recommendations, payload), ["recommendations", "useful_god", "optimization"]),
+        _chapter("synthesis", "Kết luận tổng hợp", synthesis_prose(payload) or _synthesis_paragraphs(payload, narrative), ["bazi", "five_elements", "ten_gods", "shen_sha", "luck", "useful_god"]),
+        _chapter("recommendations", "Khuyến nghị", recommendation_prose(payload) or _recommendation_paragraphs(recommendations, payload), ["recommendations", "useful_god", "optimization"]),
     ]
 
 
@@ -1786,7 +1794,8 @@ def _life_domain_paragraphs(life_domains: Mapping[str, Any]) -> list[str]:
         detailed = _text_list(section.get("paragraphs"))
         if detailed:
             paragraphs.extend(
-                f"{title} - {_life_domain_subtitle(item, index)}: {item}"
+                f"{title} - {_life_domain_subtitle(item, index)}: "
+                + (item.split(":", 1)[1].strip() if item.startswith(_life_domain_subtitle(item, index) + ":") else item)
                 for index, item in enumerate(detailed)
             )
             continue
@@ -2341,6 +2350,13 @@ def _life_domain_detail_paragraphs(
     payload: Mapping[str, Any],
     summary: str,
 ) -> list[str]:
+    if key == "wealth":
+        wealth_paragraphs = customer_wealth_paragraphs(payload)
+        if wealth_paragraphs:
+            return wealth_paragraphs
+    approved = life_domain_prose(key, payload)
+    if approved:
+        return approved
     bazi = _mapping(payload.get("bazi"))
     useful = _mapping(payload.get("useful_god"))
     pattern = _mapping(payload.get("pattern"))

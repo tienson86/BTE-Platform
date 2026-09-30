@@ -438,24 +438,43 @@
     }
   }
 
+  function savedProfileLabel(record) {
+    return record && record.source === "history" ? "Đang xem hồ sơ đã lưu" : "Hồ sơ đã tự động lưu";
+  }
+
+  function placeSavedProfileLink(header, record) {
+    if (!header) return;
+    let actions = header.querySelector(".bte-cdash__page-actions");
+    if (!actions) {
+      actions = document.createElement("div");
+      actions.className = "bte-cdash__page-actions";
+      Array.from(header.querySelectorAll(":scope > .bte-cdash__quiet-link")).forEach((link) => actions.appendChild(link));
+      header.appendChild(actions);
+    }
+    let saved = actions.querySelector("[data-bazi-saved-profile-link]");
+    if (!saved) {
+      saved = document.createElement("a");
+      saved.className = "bte-cdash__quiet-link bte-cdash__quiet-link--saved";
+      saved.setAttribute("data-bazi-saved-profile-link", "true");
+      saved.href = "/history";
+      actions.insertBefore(saved, actions.firstChild);
+    }
+    const label = savedProfileLabel(record);
+    if (saved.textContent !== label) saved.textContent = label;
+  }
+
   function renderArchiveActions(record) {
     const section = document.createElement("section");
     section.className = "bte-cdash__archive";
     section.setAttribute("data-bazi-archive-actions", "true");
-    section.setAttribute("aria-label", "Lưu và xuất hồ sơ lá số");
+    section.setAttribute("aria-label", "Xuất hồ sơ lá số");
     const copy = document.createElement("div");
     copy.className = "bte-cdash__archive-copy";
-    appendText(copy, "span", "bte-cdash__archive-status", record && record.source === "history" ? "Đang xem hồ sơ đã lưu" : "Hồ sơ đã tự động lưu");
     appendText(copy, "p", "", "Quản lý lại lá số trong lịch sử, hoặc xuất bản luận giải thành tệp để gửi khách hàng.");
     section.appendChild(copy);
 
     const actions = document.createElement("div");
     actions.className = "bte-cdash__archive-actions";
-    const history = document.createElement("a");
-    history.className = "bte-cdash__archive-btn";
-    history.href = "/history";
-    history.textContent = "Hồ sơ đã lưu";
-    actions.appendChild(history);
     const print = document.createElement("button");
     print.type = "button";
     print.className = "bte-cdash__archive-btn";
@@ -487,6 +506,8 @@
     root.querySelectorAll("[data-bazi-archive-actions]").forEach((node) => node.remove());
     const header = root.querySelector("[data-page-header='result']") || root.firstElementChild;
     if (!header) return;
+    placeSavedProfileLink(header, record);
+    if (root.querySelector(".bte-cdash__archive")) return;
     header.insertAdjacentElement("afterend", renderArchiveActions(record));
   }
 
@@ -529,64 +550,6 @@
     if (model.weakLabel) appendText(row, "span", "bte-report-doc__insight-chip", `Cần bồi: ${model.weakLabel}`);
     if (row.childNodes.length) visual.appendChild(row);
     if (model.methodNote) appendText(visual, "p", "bte-report-doc__visual-note", model.methodNote);
-    return visual;
-  }
-
-  function cycleElementHits(cycle, elements) {
-    return arrayOf(elements).filter((element) => cycle.elements && cycle.elements.includes(element)).join(", ");
-  }
-
-  function renderLuckVisual(model) {
-    if (!model || !model.cycles || !model.cycles.length) return null;
-    const visual = document.createElement("aside");
-    visual.className = "bte-report-doc__visual bte-report-doc__visual--luck";
-    visual.setAttribute("aria-label", "Timeline Đại vận");
-    const head = document.createElement("header");
-    head.className = "bte-report-doc__visual-head";
-    const titleBox = document.createElement("div");
-    appendText(titleBox, "p", "bte-report-doc__visual-kicker", "Timeline Đại vận");
-    appendText(titleBox, "h4", "bte-report-doc__visual-title", "Nhịp vận theo từng giai đoạn");
-    head.appendChild(titleBox);
-    visual.appendChild(head);
-
-    const summary = document.createElement("div");
-    summary.className = "bte-report-doc__luck-summary";
-    if (model.direction) appendText(summary, "span", "", `Chiều vận: ${model.direction}`);
-    if (model.startAge) appendText(summary, "span", "", `Khởi vận: ${model.startAge} tuổi`);
-    if (model.currentLabel) appendText(summary, "span", "", `Hiện tại: ${model.currentLabel}`);
-    if (summary.childNodes.length) visual.appendChild(summary);
-
-    const list = document.createElement("ol");
-    list.className = "bte-report-doc__luck-list";
-    model.cycles.forEach((cycle, index) => {
-      const item = document.createElement("li");
-      item.className = "bte-report-doc__luck-cycle";
-      if (cycle.isCurrent) item.setAttribute("data-current", "true");
-      const top = document.createElement("div");
-      top.className = "bte-report-doc__luck-top";
-      appendText(top, "span", "bte-report-doc__luck-index", String(index + 1).padStart(2, "0"));
-      const info = document.createElement("div");
-      appendText(info, "strong", "", cycle.ganZhi);
-      appendText(info, "span", "", [cycle.ageRange, cycle.yearRange].filter(Boolean).join(" · "));
-      top.appendChild(info);
-      item.appendChild(top);
-      if (cycle.elements) appendText(item, "p", "bte-report-doc__luck-elements", cycle.elements);
-      const points = document.createElement("div");
-      points.className = "bte-report-doc__luck-points";
-      const usefulHits = cycleElementHits(cycle, model.usefulElements);
-      const cautionHits = cycleElementHits(cycle, model.unfavorableElements);
-      const plus = document.createElement("p");
-      appendText(plus, "span", "", "+");
-      appendText(plus, "span", "", usefulHits ? `Chạm trục nên dùng: ${usefulHits}.` : "Có thể mở việc khi mục tiêu và nhịp hành động rõ.");
-      points.appendChild(plus);
-      const minus = document.createElement("p");
-      appendText(minus, "span", "", "-");
-      appendText(minus, "span", "", cautionHits ? `Cần tiết chế: ${cautionHits}.` : "Cần đọc cùng mệnh cục gốc trước quyết định lớn.");
-      points.appendChild(minus);
-      item.appendChild(points);
-      list.appendChild(item);
-    });
-    visual.appendChild(list);
     return visual;
   }
 
@@ -723,6 +686,7 @@
     "shen_sha",
     "bone_weight",
     "palace_feng_shui",
+    "luck_cycles",
     "synthesis",
     "recommendations",
   ]);
@@ -735,6 +699,7 @@
     shen_sha: { kicker: "Thần sát", title: "Tín hiệu bổ sung cần quan sát", cardTitle: "Luận Thần sát" },
     bone_weight: { kicker: "Cân xương", title: "Nền lượng và nhịp tích lũy", cardTitle: "Luận Cân xương" },
     palace_feng_shui: { kicker: "Cung Phi", title: "Nhóm trạch và phong thủy ứng dụng", cardTitle: "Luận Cung Phi" },
+    luck_cycles: { kicker: "Đại vận", title: "Nhịp từng chặng và cách ứng dụng", cardTitle: "Luận Đại vận" },
     synthesis: { kicker: "Tổng hợp", title: "Điểm mạnh, rủi ro và trọng tâm hành động", cardTitle: "Kết luận" },
     recommendations: { kicker: "Khuyến nghị", title: "Việc nên ưu tiên sau khi đọc lá số", cardTitle: "Khuyến nghị" },
   };
@@ -769,6 +734,9 @@
     const meta = STRUCTURED_CHAPTER_META[chapterId] || { cardTitle: "Luận điểm" };
     const prefix = STRUCTURED_PREFIX_RULES.find((item) => item[0].test(value));
     const colonIndex = value.indexOf(":");
+    if (chapterId === "luck_cycles" && value.startsWith("Năm năm tới")) {
+      return { title: "Lộ trình 5 năm", body: value };
+    }
     if (prefix) {
       return {
         title: prefix[1],
@@ -820,7 +788,6 @@
   }
   function renderChapterVisual(chapter, model) {
     if (chapter.id === "five_elements") return renderFiveElementsVisual(model.fiveElements);
-    if (chapter.id === "luck_cycles") return renderLuckVisual(model.luck);
     if (chapter.id === "life_domains") return renderLifeDomainsVisual(chapter);
     if (usesStructuredVisual(chapter)) return renderStructuredChapterVisual(chapter);
     return null;
@@ -1026,6 +993,26 @@
       }
       .bte-cdash[data-finish="v2"] .bte-cdash__page-header {
         order: 1 !important;
+      }
+      .bte-cdash__page-actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: var(--space-3, 12px);
+      }
+      .bte-cdash__quiet-link--saved {
+        min-height: 2.25rem;
+        padding: 6px 12px;
+        border: 1px solid #a7e3cd;
+        border-radius: 8px;
+        background: #eaf8f2;
+        color: #047857;
+        font-weight: 700;
+      }
+      .bte-cdash__quiet-link--saved:hover {
+        border-color: #6ec9a8;
+        background: #dcf4ea;
+        color: #065f46;
       }
       .bte-cdash[data-finish="v2"] .bte-cdash__archive {
         order: 2 !important;
@@ -1647,6 +1634,11 @@
         line-height: 1.58;
       }
       @media (max-width: 767px) {
+        .bte-cdash__page-actions {
+          width: 100%;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+        }
         .bte-report-doc {
           margin-top: var(--space-4, 18px);
           padding: var(--space-4, 18px);

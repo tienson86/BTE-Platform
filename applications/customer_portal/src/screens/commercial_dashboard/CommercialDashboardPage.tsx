@@ -69,13 +69,32 @@ export type CommercialDashboardPageProps = {
   readonly exportPayload?: CustomerExportPayload | null;
 };
 
-function ResultPageHeader(): ReactNode {
+function savedProfileLabel(resultSource: CommercialDashboardPageProps["resultSource"]): string {
+  return resultSource === "history" ? "Đang xem hồ sơ đã lưu" : "Hồ sơ đã tự động lưu";
+}
+
+function ResultPageHeader({
+  resultSource,
+}: {
+  readonly resultSource?: CommercialDashboardPageProps["resultSource"];
+}): ReactNode {
   return (
     <div className="bte-cdash__page-header" data-page-header="result">
       <h1 className="bte-cdash__title">{RESULT_PAGE_TITLE}</h1>
-      <a className="bte-cdash__quiet-link" href="/analyze">
-        Phân tích lá số khác
-      </a>
+      <div className="bte-cdash__page-actions">
+        {resultSource ? (
+          <a
+            className="bte-cdash__quiet-link bte-cdash__quiet-link--saved"
+            data-bazi-saved-profile-link="true"
+            href="/history"
+          >
+            {savedProfileLabel(resultSource)}
+          </a>
+        ) : null}
+        <a className="bte-cdash__quiet-link" href="/analyze">
+          Phân tích lá số khác
+        </a>
+      </div>
     </div>
   );
 }
@@ -100,16 +119,13 @@ function gateAction(resultSource: CommercialDashboardPageProps["resultSource"], 
 
 function ResultArchiveActions({
   payload,
-  resultSource,
 }: {
   readonly payload?: CustomerExportPayload | null;
-  readonly resultSource: CommercialDashboardPageProps["resultSource"];
 }): ReactNode {
   const [busy, setBusy] = useState<"pdf" | "docx" | null>(null);
   const [notice, setNotice] = useState("");
   const ready = customerExportReady(payload);
   const block = customerExportBlockMessage(payload);
-  const savedLabel = resultSource === "history" ? "Đang xem hồ sơ đã lưu" : "Hồ sơ đã tự động lưu";
 
   async function onDownload(format: "pdf" | "docx"): Promise<void> {
     if (!payload) {
@@ -128,15 +144,11 @@ function ResultArchiveActions({
   }
 
   return (
-    <section className="bte-cdash__archive" aria-label="Lưu và xuất hồ sơ lá số">
+    <section className="bte-cdash__archive" aria-label="Xuất hồ sơ lá số">
       <div className="bte-cdash__archive-copy">
-        <span className="bte-cdash__archive-status">{savedLabel}</span>
         <p>Quản lý lại lá số trong lịch sử, hoặc xuất bản luận giải thành tệp để gửi khách hàng.</p>
       </div>
       <div className="bte-cdash__archive-actions">
-        <a className="bte-cdash__archive-btn" href="/history">
-          Hồ sơ đã lưu
-        </a>
         <button type="button" className="bte-cdash__archive-btn" onClick={() => window.print()}>
           In nhanh
         </button>
@@ -309,8 +321,8 @@ export function CommercialDashboardPage({
       data-presentation-version={narrative?.presentationVersion ?? ""}
       data-layout={layoutMode === "skeleton" || previewFallback ? "skeleton" : layoutMode}
     >
-      <ResultPageHeader />
-      <ResultArchiveActions payload={exportPayload} resultSource={resultSource} />
+      <ResultPageHeader resultSource={resultSource} />
+      <ResultArchiveActions payload={exportPayload} />
       <IdentityHeader model={model} />
       <DashboardGrid
         overview={overview}

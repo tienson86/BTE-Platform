@@ -71,6 +71,7 @@ def _normalize_options(
         audience=_trim(options.audience),
         reading_level=_trim(options.reading_level),
         expert_mode=options.expert_mode,
+        include_score=options.include_score,
     )
 
 

@@ -26,6 +26,7 @@ export type CreateConsultationBody = {
     language?: string;
     audience?: string;
     expert_mode?: boolean;
+    include_score?: boolean;
   };
 };
 

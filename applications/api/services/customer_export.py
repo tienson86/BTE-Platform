@@ -10,6 +10,8 @@ from pathlib import Path
 from typing import Any, Literal, Mapping
 
 from docx import Document
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
 
 from applications.api.exceptions import CustomerExportError
@@ -249,6 +251,7 @@ _STRUCTURED_CHAPTER_IDS = {
     "shen_sha",
     "bone_weight",
     "palace_feng_shui",
+    "luck_cycles",
     "synthesis",
     "recommendations",
 }
@@ -261,6 +264,7 @@ _STRUCTURED_CHAPTER_META = {
     "shen_sha": ("Thần sát", "Tín hiệu bổ sung cần quan sát", "Luận Thần sát"),
     "bone_weight": ("Cân xương", "Nền lượng và nhịp tích lũy", "Luận Cân xương"),
     "palace_feng_shui": ("Cung Phi", "Nhóm trạch và phong thủy ứng dụng", "Luận Cung Phi"),
+    "luck_cycles": ("Đại vận", "Nhịp từng chặng và cách ứng dụng", "Luận Đại vận"),
     "synthesis": ("Tổng hợp", "Điểm mạnh, rủi ro và trọng tâm hành động", "Kết luận"),
     "recommendations": ("Khuyến nghị", "Việc nên ưu tiên sau khi đọc lá số", "Khuyến nghị"),
 }
@@ -584,7 +588,7 @@ def _life_domains_html(paragraphs: list[str]) -> str:
         used_titles: dict[str, int] = {}
         for title, body in items:
             global_index += 1
-            display_title = _unique_domain_title(title, used_titles)
+            display_title = _unique_domain_title(title.split(" - ", 1)[-1], used_titles)
             cards.append(
                 '<article class="domain-card">'
                 f'<span>{global_index:02d}</span>'
@@ -626,6 +630,10 @@ def _split_structured_paragraph(chapter_id: str, paragraph: str, index: int) -> 
         return "Nhật Chủ", value
     if chapter_id == "shen_sha" and value.startswith("Thiên Đức và Nguyệt Đức cùng hiện"):
         return "Hai Đức ở trụ ngày", value
+    if chapter_id == "luck_cycles" and value.startswith("Năm năm tới"):
+        return "Lộ trình 5 năm", value
+    if chapter_id == "strength_structure_useful_god" and value.startswith("Mệnh cục ") and colon > 0:
+        return value[:colon].strip(), value[colon + 1 :].strip()
     for prefix, title in _STRUCTURED_PREFIX_RULES:
         if lowered.startswith(prefix.lower()):
             body = value[colon + 1 :].strip() if colon > 0 else value
@@ -683,10 +691,24 @@ def _render_modern_report_docx(report_input: ReportInputV1, output_path: Path) -
     normal = document.styles["Normal"]
     normal.font.name = "Arial"
     normal.font.size = Pt(10.5)
+    for style_name, size, color in (
+        ("Title", 24, "18243A"), ("Heading 1", 16, "18243A"),
+        ("Heading 2", 12, "344B69"), ("Heading 3", 10.5, "18243A"),
+    ):
+        style = document.styles[style_name]
+        style.font.name = "Arial"
+        style.font.size = Pt(size)
+        style.font.color.rgb = RGBColor.from_string(color)
+        if style_name == "Title":
+            style.font.underline = False
+            ppr = style._element.pPr
+            if ppr is not None:
+                for border in ppr.findall(qn("w:pBdr")):
+                    ppr.remove(border)
     document.add_heading(_modern_title(report_input), level=0)
     document.add_paragraph(_modern_subtitle(report_input))
     document.add_paragraph(f"Mã phân tích: {report_input.metadata.case_id}")
-    _docx_key_value_table(document, _technical_snapshot_rows(report_input))
+    _docx_opening_chart(document, report_input)
     for chapter in _modern_chapters(report_input):
         chapter_id = str(chapter.get("id") or "")
         document.add_heading(str(chapter.get("title") or ""), level=1)
@@ -712,6 +734,93 @@ def _render_modern_report_docx(report_input: ReportInputV1, output_path: Path) -
         )
     )
     document.save(str(output_path))
+
+
+def _docx_shade(cell: Any, fill: str) -> None:
+    shading = OxmlElement("w:shd")
+    shading.set(qn("w:fill"), fill)
+    cell._tc.get_or_add_tcPr().append(shading)
+
+
+def _docx_opening_table(document: Document, headings: list[str], rows: list[tuple[str, list[str]]]) -> None:
+    table = document.add_table(rows=1, cols=len(headings))
+    table.style = "Table Grid"
+    table.autofit = False
+    for index, label in enumerate(headings):
+        cell = table.rows[0].cells[index]
+        cell.text = label
+        _docx_shade(cell, "FFF3CC")
+        for run in cell.paragraphs[0].runs:
+            run.bold = True
+            run.font.size = Pt(9)
+    for row_label, values in rows:
+        cells = table.add_row().cells
+        for index, value in enumerate([row_label, *values]):
+            cells[index].text = value or "—"
+            for paragraph in cells[index].paragraphs:
+                paragraph.paragraph_format.space_after = Pt(0)
+                for run in paragraph.runs:
+                    run.font.size = Pt(8.2)
+        _docx_shade(cells[0], "F5F6FA")
+        if len(cells) == 5:
+            _docx_shade(cells[3], "FFF7DE")
+
+
+def _docx_opening_chart(document: Document, report_input: ReportInputV1) -> None:
+    """Editable Word equivalent of the PDF's two published opening pages."""
+    opening = dict((report_input.modern_report or {}).get("opening") or {})
+    published = dict(opening.get("pillars") or {})
+    if not published:
+        _docx_key_value_table(document, _technical_snapshot_rows(report_input))
+        return
+    pillars = [dict(published.get(key) or {}) for key in ("year", "month", "day", "hour")]
+    person = dict(opening.get("person") or {})
+    bone = dict(opening.get("bone_weight") or {})
+    technical = dict(opening.get("technical") or {})
+    identity = " · ".join(str(person.get(key)) for key in
+        ("full_name", "solar_birth", "lunar_birth", "birth_time", "birth_place") if person.get(key))
+    document.add_paragraph(identity)
+    document.add_heading("Tứ Trụ", level=1)
+    _docx_opening_table(document, ["Trụ", "Can Chi", "Nạp âm", "Cung Phi"], [
+        (label, [str(pillar.get(field) or "") for field in ("can_chi", "nap_am_element", "cung_phi")])
+        for label, pillar in zip(("Năm", "Tháng", "Ngày", "Giờ"), pillars)
+    ])
+    document.add_heading("Cân Xương đoán mệnh", level=2)
+    document.add_paragraph(" · ".join(str(bone.get(key)) for key in
+        ("display_weight", "classification", "summary") if bone.get(key)))
+    document.add_heading("Thông tin kỹ thuật", level=2)
+    _docx_key_value_table(document, [
+        (label, str(technical[key])) for label, key in (
+            ("Tam Nguyên", "tam_nguyen"), ("Cửu Vận", "cuu_van"),
+            ("Cung Phi", "cung_phi"), ("Mệnh Quái", "menh_quai"),
+            ("Hành Cung", "hanh_cung"), ("Nhóm Trạch", "nhom_trach"),
+            ("Tiết khí", "solar_term")) if technical.get(key)
+    ])
+    document.add_page_break()
+    document.add_heading("Bát Tự", level=1)
+    yang_stems = {"Giáp", "Bính", "Mậu", "Canh", "Nhâm"}
+    yang_branches = {"Tý", "Dần", "Thìn", "Ngọ", "Thân", "Tuất"}
+    def details(pillar: Mapping[str, Any], key: str, elements: Mapping[str, str], yang: set[str]) -> str:
+        name = str(pillar.get(key) or "")
+        return f"{name}\n{elements.get(name, '')} · {'Dương' if name in yang else 'Âm'}" if name else ""
+    def hidden(pillar: Mapping[str, Any]) -> str:
+        return "\n".join(" · ".join(str(item.get(key)) for key in ("stem", "element", "ten_god") if item.get(key))
+            for item in pillar.get("hidden_stems") or [] if isinstance(item, Mapping))
+    rows = [
+        ("Thiên Can", [details(p, "stem", _STEM_ELEMENTS, yang_stems) for p in pillars]),
+        ("Địa Chi", [details(p, "branch", _BRANCH_ELEMENTS, yang_branches) for p in pillars]),
+        ("Nạp Âm", [str(p.get("nap_am") or "") for p in pillars]),
+        ("Tàng Can", [hidden(p) for p in pillars]),
+        ("Thập Thần", [str(p.get("ten_god") or "") for p in pillars]),
+        ("Trường Sinh", [str(p.get("truong_sinh") or "") for p in pillars]),
+        ("Tam Hợp", [str(p.get("tam_hop") or "") for p in pillars]),
+        ("Thần Sát", ["\n".join(str(item) for item in p.get("shen_sha") or []) for p in pillars]),
+    ]
+    _docx_opening_table(document, ["Thành phần", "Năm trụ", "Tháng trụ", "Ngày trụ\nNHẬT CHỦ", "Giờ trụ"], rows)
+    document.add_heading("Phân bổ Ngũ hành", level=2)
+    _docx_five_elements_table(document, report_input)
+    document.add_paragraph("Tính theo Thiên Can · bản hành Địa Chi · Tàng Can.")
+    document.add_page_break()
 
 
 def _docx_key_value_table(document: Document, rows: list[tuple[str, str]]) -> None:
@@ -748,7 +857,7 @@ def _docx_life_domains(document: Document, paragraphs: list[str]) -> None:
         used_titles: dict[str, int] = {}
         for title, body in items:
             global_index += 1
-            display_title = _unique_domain_title(title, used_titles)
+            display_title = _unique_domain_title(title.split(" - ", 1)[-1], used_titles)
             document.add_heading(f"{global_index:02d}. {display_title}", level=3)
             document.add_paragraph(body)
 

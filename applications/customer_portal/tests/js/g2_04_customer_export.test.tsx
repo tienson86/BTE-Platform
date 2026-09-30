@@ -5,6 +5,7 @@
 import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { PortalPage } from "../../src/screens/canonical_desktop";
+import { CommercialDashboardPage } from "../../src/screens/commercial_dashboard";
 import { resolveResultBoot } from "../../src/entries/resultBoot";
 import {
   OFFICIAL_DOCX_LABEL,
@@ -74,6 +75,23 @@ function tuyenData(id: string): AnalysisDataDto {
 }
 
 describe("G2-04 customer export", () => {
+  it("places one saved-profile link beside the reanalyze action", () => {
+    render(
+      <CommercialDashboardPage
+        analysis={dungData("dung-current")}
+        resultSource="current"
+        layoutMode="live"
+      />,
+    );
+
+    const savedProfileLinks = screen.getAllByRole("link", { name: "Hồ sơ đã tự động lưu" });
+    expect(savedProfileLinks).toHaveLength(1);
+    expect(savedProfileLinks[0].getAttribute("href")).toBe("/history");
+    expect(savedProfileLinks[0].closest(".bte-cdash__page-actions")).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Phân tích lá số khác" })).toBeTruthy();
+    expect(screen.queryByRole("link", { name: "Hồ sơ đã lưu" })).toBeNull();
+  });
+
   it("labels official PDF, DOCX, Print view, and Full Report separately", () => {
     const stored = record("dung-current", dungData("dung-current"), "Ngô Đắc Dũng");
     const boot = resolveResultBoot(stored, "");

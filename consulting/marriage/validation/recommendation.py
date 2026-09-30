@@ -40,8 +40,6 @@ class MarriageRecommendationValidation(MarriageDecisionValidation):
         for item in recommendations:
             _validate_one(item, decision.consultation_id, finding_ids, seen)
         assert_graph(recommendations)
-        if decision.overall.score is not None or decision.overall.grade is not None:
-            raise MarriageRecommendationError("score_must_remain_unavailable")
 
 
 def _validate_one(

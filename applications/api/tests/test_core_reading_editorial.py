@@ -7,6 +7,11 @@ from applications.api.services.core_reading_editorial import (
     shen_sha_paragraphs,
 )
 from applications.api.services.orchestrator import OrchestratorService
+from applications.api.services.customer_export import _split_structured_paragraph
+from applications.api.services.customer_export import _render_modern_report_html, _render_modern_report_docx
+from applications.api.services.customer_report_input import build_customer_report_input
+from applications.api.services.result_identity import stamp_customer_result_identity
+from docx import Document
 
 
 def test_catalog_covers_five_elements_strength_levels_and_patterns() -> None:
@@ -40,3 +45,43 @@ def test_missing_useful_god_does_not_invent_an_element_or_star() -> None:
     assert len(day_master_paragraphs(payload)) == 2
     assert pattern_useful_paragraphs(payload) == []
     assert shen_sha_paragraphs(payload) == []
+
+
+def test_huynh_pattern_name_and_month_basis_survive_pdf_and_docx_cards() -> None:
+    payload = OrchestratorService().analyze(
+        year=1966, month=9, day=24, hour=4, minute=15,
+        gender="male", timezone="Asia/Bangkok",
+    )
+    paragraphs = pattern_useful_paragraphs(payload)
+    assert payload["pattern"]["cach_cuc"] == "Chính Tài"
+    assert "nguyệt lệnh Dậu" in paragraphs[0]
+    assert "khí chính Tân" in paragraphs[0]
+    assert "Nhật Chủ Bính" in paragraphs[0]
+    assert "không tự khẳng định bạn giàu có" in paragraphs[0]
+    assert "Canh Thiên Tài hiện ở trụ giờ" in paragraphs[1]
+    title, body = _split_structured_paragraph("strength_structure_useful_god", paragraphs[0], 0)
+    assert title == "Mệnh cục Chính Tài"
+    assert "nguyệt lệnh Dậu" in body
+
+
+def test_huynh_pattern_name_is_visible_in_both_exports(tmp_path) -> None:
+    birth = {
+        "full_name": "Lương Ngọc Huỳnh", "birth_place": "Hà Nội",
+        "year": 1966, "month": 9, "day": 24, "hour": 4, "minute": 15,
+        "gender": "male", "timezone": "Asia/Bangkok",
+    }
+    payload = OrchestratorService().analyze(**{
+        key: birth[key] for key in ("year", "month", "day", "hour", "minute", "gender", "timezone")
+    })
+    payload = stamp_customer_result_identity(payload, "huynh-pattern-1966")
+    report = build_customer_report_input(
+        analysis_id="huynh-pattern-1966", data=payload, birth_input=birth,
+    )
+    html = _render_modern_report_html(report)
+    assert "<h3>Mệnh cục Chính Tài</h3>" in html
+    assert "nguyệt lệnh Dậu" in html
+    target = tmp_path / "huynh.docx"
+    _render_modern_report_docx(report, target)
+    word_text = "\n".join(paragraph.text for paragraph in Document(target).paragraphs)
+    assert "Mệnh cục Chính Tài" in word_text
+    assert "nguyệt lệnh Dậu" in word_text

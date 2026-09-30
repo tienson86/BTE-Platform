@@ -109,6 +109,7 @@ def _parse_options(payload: Mapping[str, Any] | None) -> MarriageConsultationOpt
         audience=_optional_str(payload.get("audience")),
         reading_level=_optional_str(payload.get("reading_level")),
         expert_mode=_optional_bool(payload.get("expert_mode")),
+        include_score=_optional_bool(payload.get("include_score")),
     )
 
 
@@ -149,6 +150,7 @@ def _options_fingerprint(options: MarriageConsultationOptions | None) -> str:
             str(options.audience or ""),
             str(options.reading_level or ""),
             str(options.expert_mode),
+            str(options.include_score),
             window,
         ]
     )

@@ -12,6 +12,7 @@ from consulting.marriage.models.evidence import MarriageEvidence, ResolvedMarria
 from consulting.marriage.models.finding import MarriageFinding
 from consulting.marriage.models.person import MarriagePersonReference
 from consulting.marriage.models.recommendation import MarriageRecommendation
+from consulting.marriage.models.score import MarriageScoreAudit
 from consulting.marriage.models.snapshot import MarriageCanonicalSnapshot
 from consulting.marriage.models.timing import MarriageTimingResult
 from consulting.marriage.models.versioning import MarriageVersionBundle
@@ -39,3 +40,4 @@ class MarriageDecisionResult:
     limitations: list[str] = field(default_factory=list)
     comparison: MarriageComparisonResult | None = None
     assessment: MarriageAssessmentResult | None = None
+    score_audit: MarriageScoreAudit | None = None

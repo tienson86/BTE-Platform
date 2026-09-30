@@ -30,7 +30,7 @@ from consulting.marriage.presentation.labels import (
 
 
 class SemanticMarriagePresentationAdapter(MarriagePresentationAdapter):
-    """TV1-B07 customer presentation mapping. Score and grade stay unavailable."""
+    """TV1-B07 customer presentation mapping from Decision fields."""
 
     def adapt(self, decision: MarriageDecisionResult) -> MarriagePresentationResult:
         """Build a presentation result from factual Decision fields only."""
@@ -48,8 +48,16 @@ class SemanticMarriagePresentationAdapter(MarriagePresentationAdapter):
                 person_b_gender_display=GENDER_DISPLAY.get(decision.person_b.gender),
             ),
             hero=MarriageHeroView(
-                score_display=SEMANTIC_UNAVAILABLE,
-                grade_display=SEMANTIC_UNAVAILABLE,
+                score_display=(
+                    f"{overall.score:g}/100"
+                    if overall.score is not None
+                    else SEMANTIC_UNAVAILABLE
+                ),
+                grade_display=(
+                    overall.grade.value
+                    if overall.grade is not None
+                    else SEMANTIC_UNAVAILABLE
+                ),
                 title=headline,
                 summary=f"Nền tảng hiện ở trạng thái: {state_label}" if state_label else headline,
                 top_strengths=[item.title for item in strengths[:3]],
@@ -126,8 +134,8 @@ def _published_domains(decision: MarriageDecisionResult) -> list[MarriageDomainV
                 domain=item.domain.value,
                 title=DOMAIN_TITLE.get(item.domain, item.domain.value),
                 summary=state or "",
-                score_display=None,
-                grade_display=None,
+                score_display=f"{item.score:g}/100" if item.score is not None else None,
+                grade_display=item.grade.value if item.grade is not None else None,
                 available=True,
             )
         )

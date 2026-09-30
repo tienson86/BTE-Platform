@@ -84,7 +84,43 @@ def pattern_useful_paragraphs(payload: Mapping[str, Any]) -> list[str]:
     result: list[str] = []
     pattern_copy = _catalog()["pattern"].get(label)
     if pattern_copy:
-        result.append(f"Mệnh cục {label}: {pattern_copy}")
+        month_branch = str(pattern.get("month_branch") or "").strip()
+        main_qi = str(pattern.get("month_main_qi") or "").strip()
+        main_role = str(pattern.get("month_main_qi_ten_god") or "").strip()
+        day_master = str(bazi.get("day_master") or pattern.get("day_master") or "").strip()
+        basis = (
+            f"Lá số được xếp vào Mệnh cục {label} vì nguyệt lệnh {month_branch} "
+            f"có khí chính {main_qi}; xét từ Nhật Chủ {day_master}, "
+            f"{main_qi} mang vai trò {main_role}. "
+            if month_branch and main_qi and main_role and day_master and main_role == label
+            else f"Lá số được xếp vào Mệnh cục {label} khi xét cấu trúc của toàn cục. "
+        )
+        meaning = (
+            "Ở đây, Chính Tài nói về cách quản lý nguồn lực, làm việc có đầu ra và "
+            "giữ chữ tín với phần mình nhận; nó không tự khẳng định bạn giàu có. "
+            if label == "Chính Tài" else "Tên mệnh cục cho biết cách nguồn lực trong lá số thường vận hành. "
+        )
+        result.append(f"Mệnh cục {label}: {basis}{meaning}{pattern_copy}")
+        if label == "Chính Tài" and month_branch and main_qi and pattern.get("penetration_exact") is False:
+            related = pattern.get("penetration_related")
+            related = related if isinstance(related, list) else []
+            related_text = ""
+            for entry in related:
+                if not isinstance(entry, Mapping):
+                    continue
+                stem = str(entry.get("stem") or "").strip()
+                role = str(entry.get("ten_god") or "").strip()
+                position = str(entry.get("pillar_label") or "").strip()
+                if stem and role and position:
+                    related_text = f"; {stem} {role} hiện ở trụ {position.lower()}"
+                    break
+            result.append(
+                f"Cách này lấy gốc ở khí của tháng {month_branch}, nhưng {main_qi} "
+                f"{label} chưa lộ trực tiếp trên các Thiên Can{related_text}. "
+                "Vì vậy, khi đọc về tiền bạc và công việc, hãy nhìn cả khả năng "
+                "biến nguồn lực thành kết quả ổn định; không suy từ tên cách cục "
+                "thành một lời bảo đảm về tài vận."
+            )
     if element not in _ELEMENTS or not display:
         return result
     result.append(f"Dụng thần {display}. {_catalog()['useful'][element]}")

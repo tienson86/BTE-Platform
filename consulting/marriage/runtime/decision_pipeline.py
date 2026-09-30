@@ -10,6 +10,7 @@ from consulting.marriage.assessment.projector import project_marriage_assessment
 from consulting.marriage.decision.comparison import build_marriage_comparison
 from consulting.marriage.decision.context import MarriageDecisionContext
 from consulting.marriage.decision.resolver import MarriageDecisionResolverV1, build_confidence
+from consulting.marriage.decision.score import project_marriage_score
 from consulting.marriage.exceptions import MarriageInternalError
 from consulting.marriage.evidence.extractor import CanonicalEvidenceBuilder
 from consulting.marriage.evidence.resolver import MarriageEvidenceResolver
@@ -22,8 +23,8 @@ from consulting.marriage.models.versioning import MarriageVersionBundle
 from consulting.marriage.policy.context import MarriagePolicyContext
 from consulting.marriage.policy.provider import MarriagePolicyV1Provider
 from consulting.marriage.policy.versions import (
+    ACTIVE_SCORE_MODEL_VERSION,
     EVIDENCE_CATALOG_VERSION,
-    SCORE_MODEL_VERSION,
     policy_version_token,
 )
 from consulting.marriage.runtime.lifecycle import RuntimeLifecycleState
@@ -38,6 +39,7 @@ B03_PIPELINE_STAGES: tuple[str, ...] = (
     "domain_decision",
     "cross_domain_resolver",
     "overall_decision",
+    "score_projection",
     "decision_validation",
 )
 
@@ -153,11 +155,21 @@ class MarriageDecisionOrchestrator(MarriageRuntimeOrchestrator):
             limitations=list(policy_context.limitations),
         )
         result.comparison = _build_comparison(result)
-        result.assessment = project_marriage_assessment(result)
         self._run_stage(
             consultation_id,
             session,
             B03_PIPELINE_STAGES[5],
+            lambda: (
+                project_marriage_score(result)
+                if policy_context.options.include_score is True
+                else None
+            ),
+        )
+        result.assessment = project_marriage_assessment(result)
+        self._run_stage(
+            consultation_id,
+            session,
+            B03_PIPELINE_STAGES[6],
             lambda: self._decision_validation.validate_decision(result),
         )
         session.context.domain_results = domains
@@ -174,7 +186,12 @@ class MarriageDecisionOrchestrator(MarriageRuntimeOrchestrator):
         session.context.versions = MarriageVersionBundle(
             module_version=MODULE_VERSION,
             decision_profile_version=policy_version_token(),
-            score_model_version=SCORE_MODEL_VERSION,
+            score_model_version=(
+                ACTIVE_SCORE_MODEL_VERSION
+                if session.context.request.options
+                and session.context.request.options.include_score is True
+                else "unavailable"
+            ),
             rule_catalog_version=EVIDENCE_CATALOG_VERSION,
             canonical_versions=snapshot_a.person.canonical_version,
             narrative_version=UNBOUND_VERSION,

@@ -67,12 +67,20 @@ export type MarriageConsultationDto = {
   overall_state: string | null;
   score: number | null;
   grade: string | null;
+  domain_scores?: MarriageDomainScoreDto[];
   confidence: { level: string; overall: number };
   limitations: string[];
   headline: string | null;
   action_themes?: string[];
   assessment_cards?: AssessmentCardDto[];
   expert?: Record<string, unknown>;
+};
+
+export type MarriageDomainScoreDto = {
+  domain: string;
+  score: number | null;
+  weight: number;
+  available: boolean;
 };
 
 export type MarriageReportBlock = {
@@ -110,6 +118,13 @@ export type DomainCardVm = {
   summary: string;
   explanation: string;
   relatedActionKeys: string[];
+};
+
+export type ScoreDomainVm = {
+  domain: string;
+  title: string;
+  score: number;
+  weight: number;
 };
 
 export type ActionCardVm = {
@@ -166,6 +181,7 @@ export type MarriageViewModel = {
   overallState: string | null;
   score: number | null;
   grade: string | null;
+  scoreDomains: ScoreDomainVm[];
   identityTitle: string;
   personAName: string;
   personBName: string;

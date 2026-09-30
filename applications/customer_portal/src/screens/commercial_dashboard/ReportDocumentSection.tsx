@@ -7,8 +7,6 @@ import type {
   BaziReportDocumentChapterView,
   BaziReportDocumentView,
   BaziReportFiveElementsView,
-  BaziReportLuckCycleView,
-  BaziReportLuckView,
 } from "./types";
 
 type ReportDocumentSectionProps = {
@@ -45,59 +43,6 @@ function ReportFiveElementsVisual({ model }: { readonly model: BaziReportFiveEle
         ) : null}
       </div>
       {model.methodNote ? <p className="bte-report-doc__visual-note">{model.methodNote}</p> : null}
-    </aside>
-  );
-}
-
-function cycleElementHits(cycle: BaziReportLuckCycleView, elements: readonly string[]): string {
-  const hits = elements.filter((element) => cycle.elements.includes(element));
-  return hits.join(", ");
-}
-
-function ReportLuckVisual({ model }: { readonly model: BaziReportLuckView }): ReactNode {
-  return (
-    <aside className="bte-report-doc__visual bte-report-doc__visual--luck" aria-label="Timeline Đại vận">
-      <header className="bte-report-doc__visual-head">
-        <p className="bte-report-doc__visual-kicker">Timeline Đại vận</p>
-        <h4 className="bte-report-doc__visual-title">Nhịp vận theo từng giai đoạn</h4>
-      </header>
-      <div className="bte-report-doc__luck-summary">
-        {model.direction ? <span>Chiều vận: {model.direction}</span> : null}
-        {model.startAge ? <span>Khởi vận: {model.startAge} tuổi</span> : null}
-        {model.currentLabel ? <span>Hiện tại: {model.currentLabel}</span> : null}
-      </div>
-      <ol className="bte-report-doc__luck-list">
-        {model.cycles.map((cycle, index) => {
-          const usefulHits = cycleElementHits(cycle, model.usefulElements);
-          const cautionHits = cycleElementHits(cycle, model.unfavorableElements);
-          return (
-            <li
-              key={`${cycle.ganZhi}-${cycle.ageRange}-${index}`}
-              className="bte-report-doc__luck-cycle"
-              data-current={cycle.isCurrent ? "true" : undefined}
-            >
-              <div className="bte-report-doc__luck-top">
-                <span className="bte-report-doc__luck-index">{String(index + 1).padStart(2, "0")}</span>
-                <div>
-                  <strong>{cycle.ganZhi}</strong>
-                  <span>{[cycle.ageRange, cycle.yearRange].filter(Boolean).join(" · ")}</span>
-                </div>
-              </div>
-              {cycle.elements ? <p className="bte-report-doc__luck-elements">{cycle.elements}</p> : null}
-              <div className="bte-report-doc__luck-points">
-                <p>
-                  <span>+</span>
-                  {usefulHits ? `Chạm trục nên dùng: ${usefulHits}.` : "Có thể mở việc khi mục tiêu và nhịp hành động rõ."}
-                </p>
-                <p>
-                  <span>-</span>
-                  {cautionHits ? `Cần tiết chế: ${cautionHits}.` : "Cần đọc cùng mệnh cục gốc trước quyết định lớn."}
-                </p>
-              </div>
-            </li>
-          );
-        })}
-      </ol>
     </aside>
   );
 }
@@ -246,6 +191,7 @@ const STRUCTURED_CHAPTER_IDS = new Set([
   "shen_sha",
   "bone_weight",
   "palace_feng_shui",
+  "luck_cycles",
   "synthesis",
   "recommendations",
 ]);
@@ -258,6 +204,7 @@ const STRUCTURED_CHAPTER_META: Record<string, { readonly kicker: string; readonl
   shen_sha: { kicker: "Thần sát", title: "Tín hiệu bổ sung cần quan sát", cardTitle: "Luận Thần sát" },
   bone_weight: { kicker: "Cân xương", title: "Nền lượng và nhịp tích lũy", cardTitle: "Luận Cân xương" },
   palace_feng_shui: { kicker: "Cung Phi", title: "Nhóm trạch và phong thủy ứng dụng", cardTitle: "Luận Cung Phi" },
+  luck_cycles: { kicker: "Đại vận", title: "Nhịp từng chặng và cách ứng dụng", cardTitle: "Luận Đại vận" },
   synthesis: { kicker: "Tổng hợp", title: "Điểm mạnh, rủi ro và trọng tâm hành động", cardTitle: "Kết luận" },
   recommendations: { kicker: "Khuyến nghị", title: "Việc nên ưu tiên sau khi đọc lá số", cardTitle: "Khuyến nghị" },
 };
@@ -301,6 +248,9 @@ function splitStructuredParagraph(chapterId: string, paragraph: string, index: n
   };
   const prefix = STRUCTURED_PREFIX_RULES.find(([pattern]) => pattern.test(value));
   const colonIndex = value.indexOf(":");
+  if (chapterId === "luck_cycles" && value.startsWith("Năm năm tới")) {
+    return { title: "Lộ trình 5 năm", body: value };
+  }
   if (prefix) {
     const body = colonIndex > 0 ? value.slice(colonIndex + 1).trim() : value;
     return { title: prefix[1], body };
@@ -360,9 +310,6 @@ function ReportChapterVisual({
 }): ReactNode {
   if (chapter.id === "five_elements" && model.fiveElements) {
     return <ReportFiveElementsVisual model={model.fiveElements} />;
-  }
-  if (chapter.id === "luck_cycles" && model.luck) {
-    return <ReportLuckVisual model={model.luck} />;
   }
   if (chapter.id === "life_domains") {
     return <ReportLifeDomainsVisual paragraphs={chapter.paragraphs} />;

@@ -312,12 +312,13 @@ def test_core_life_domains_use_ten_god_reasoning() -> None:
     ancestry_text = " ".join(domains["ancestry"]["paragraphs"])
     property_text = " ".join(domains["property"]["paragraphs"])
 
-    assert "Tín hiệu Tài tinh đang thấy" in wealth_text
-    assert "Luận Tài tinh: Chính Tài" in wealth_text
-    assert "Luận nguồn sinh tài" in wealth_text
-    assert "Kim nổi bật là tín hiệu tốt cho khả năng quản trị tiền" in wealth_text
-    assert "Cung Phi Khôn" in wealth_text
-    assert "Tây Tứ Trạch" in wealth_text
+    assert "Tiền đến từ đâu?" in wealth_text
+    assert "Kiếm tiền bằng cách nào?" in wealth_text
+    assert "Điểm rò tiền" in wealth_text
+    assert "Khả năng giữ tiền" in wealth_text
+    assert "Con đường tích sản" in wealth_text
+    assert "Tài xuất hiện chỉ mở chủ đề tiền bạc" in wealth_text
+    assert "không dựa vào nghề hiện tại" in wealth_text
     assert "Nhóm tín hiệu nghề nghiệp nổi bật" in career_text
     assert "Luận nghề theo Thập thần: Chính Quan" in career_text
     assert "môi trường có chuẩn mực" in career_text

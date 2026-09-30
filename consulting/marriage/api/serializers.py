@@ -117,8 +117,8 @@ def serialize_consultation(stored: MarriageStoredResult, *, expert: bool) -> dic
         "person_a": _person_summary(result, "a"),
         "person_b": _person_summary(result, "b"),
         "overall_state": overall.state.value if overall.state else None,
-        "score": None,
-        "grade": None,
+        "score": overall.score,
+        "grade": overall.grade.value if overall.grade else None,
         "confidence": {
             "level": result.confidence.level.value,
             "overall": result.confidence.overall,
@@ -129,6 +129,8 @@ def serialize_consultation(stored: MarriageStoredResult, *, expert: bool) -> dic
         "action_themes": _action_themes(result),
         "assessment_cards": serialize_assessment_cards(result, expert=expert),
     }
+    if result.score_audit is not None:
+        payload["domain_scores"] = _public_domain_scores(result)
     if expert:
         payload["expert"] = _expert_trace(stored)
     return payload
@@ -138,7 +140,7 @@ def serialize_summary(stored: MarriageStoredResult) -> dict[str, object]:
     """Lightweight summary. No Evidence/Finding graph."""
     result = stored.result
     report = stored.report_model
-    return {
+    payload: dict[str, object] = {
         "consultation_id": result.consultation_id,
         "overall_state": result.overall.state.value if result.overall.state else None,
         "headline": _headline(stored.narrative),
@@ -152,9 +154,12 @@ def serialize_summary(stored: MarriageStoredResult) -> dict[str, object]:
             "overall": result.confidence.overall,
         },
         "limitations": list(result.limitations),
-        "score": None,
-        "grade": None,
+        "score": result.overall.score,
+        "grade": result.overall.grade.value if result.overall.grade else None,
     }
+    if result.score_audit is not None:
+        payload["domain_scores"] = _public_domain_scores(result)
+    return payload
 
 
 def summary_dto(stored: MarriageStoredResult) -> MarriageConsultationSummary:
@@ -166,8 +171,8 @@ def summary_dto(stored: MarriageStoredResult) -> MarriageConsultationSummary:
         consultation_id=stored.result.consultation_id,
         person_a_analysis_id=stored.result.person_a.analysis_id,
         person_b_analysis_id=stored.result.person_b.analysis_id,
-        score=None,
-        grade=None,
+        score=stored.result.overall.score,
+        grade=stored.result.overall.grade,
         confidence=stored.result.confidence.overall,
         overall_state=str(data["overall_state"]) if data["overall_state"] else None,
         headline=str(data["headline"]) if data["headline"] else None,
@@ -186,15 +191,15 @@ def serialize_report(stored: MarriageStoredResult, *, expert: bool) -> dict[str,
     if model is None:
         return {
             "consultation_id": stored.result.consultation_id,
-            "score": None,
-            "grade": None,
+            "score": stored.result.overall.score,
+            "grade": stored.result.overall.grade.value if stored.result.overall.grade else None,
             "sections": [],
         }
     sections = expert_sections(model) if expert else customer_sections(model)
     return {
         "consultation_id": stored.result.consultation_id,
-        "score": None,
-        "grade": None,
+        "score": stored.result.overall.score,
+        "grade": stored.result.overall.grade.value if stored.result.overall.grade else None,
         "metadata": {
             "consultation_id": model.metadata.consultation_id,
             "language": model.metadata.language,
@@ -214,8 +219,8 @@ def serialize_history_row(row: MarriageHistoryRecord) -> dict[str, object]:
         "consultation_id": row.consultation_id,
         "created_at": row.created_at,
         "overall_state": row.overall_state,
-        "score": None,
-        "grade": None,
+        "score": row.score,
+        "grade": row.grade.value if row.grade else None,
         "status": row.status,
         "display_identity": row.display_label,
         "person_a_correlation_id": row.person_a_analysis_id,
@@ -423,6 +428,7 @@ def _expert_trace(stored: MarriageStoredResult) -> dict[str, object]:
         "methodology": {
             "narrative_version": stored.narrative.version if stored.narrative else None,
             "report_profile_version": report_profile_token(),
+            "score_audit": _expert_score_audit(result),
         },
     }
 
@@ -440,6 +446,64 @@ def _iter_domains(result: MarriageDecisionResult) -> tuple[MarriageDomainDecisio
         domains.children,
         domains.luck,
     )
+
+
+def _public_domain_scores(result: MarriageDecisionResult) -> list[dict[str, object]]:
+    """Customer-safe domain score rows. Internal modifiers stay expert-only."""
+    audit = result.score_audit
+    if audit is None:
+        return []
+    return [
+        {
+            "domain": item.domain.value,
+            "score": item.score,
+            "weight": item.configured_weight,
+            "available": item.score is not None,
+        }
+        for item in audit.domain_scores
+    ]
+
+
+def _expert_score_audit(result: MarriageDecisionResult) -> dict[str, object] | None:
+    """Controlled numeric trace for expert mode."""
+    audit = result.score_audit
+    if audit is None:
+        return None
+    return {
+        "model_version": audit.model_version,
+        "structural_score": audit.structural_score,
+        "core_score": audit.core_score,
+        "overall_score": audit.overall_score,
+        "grade": audit.grade.value,
+        "cross_domain_modifier": audit.cross_domain_modifier,
+        "timing_modifier": audit.timing_modifier,
+        "secondary_modifier": audit.secondary_modifier,
+        "structural_floor": audit.structural_floor,
+        "structural_ceiling": audit.structural_ceiling,
+        "domains": [
+            {
+                "domain": item.domain.value,
+                "configured_weight": item.configured_weight,
+                "effective_weight": item.effective_weight,
+                "score": item.score,
+                "contribution": item.contribution,
+                "positive_mass": item.positive_mass,
+                "negative_mass": item.negative_mass,
+                "mixed_mass": item.mixed_mass,
+                "adjustments": [
+                    {"key": adjustment.key, "value": adjustment.value, "detail": adjustment.detail}
+                    for adjustment in item.adjustments
+                ],
+                "evidence_ids": list(item.evidence_ids),
+                "unavailable_reason": item.unavailable_reason,
+            }
+            for item in audit.domain_scores
+        ],
+        "modifiers": [
+            {"key": item.key, "value": item.value, "detail": item.detail}
+            for item in audit.modifier_audit
+        ],
+    }
 
 
 def _domain_published(domain: MarriageDomainDecision) -> bool:

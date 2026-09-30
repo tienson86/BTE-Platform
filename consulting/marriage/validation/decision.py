@@ -55,8 +55,17 @@ class MarriageDecisionValidation(MarriageRuntimeValidation):
             _reject_prose(finding.technical_summary)
         if result.recommendations:
             raise MarriageDecisionError("recommendation_not_allowed")
-        if result.overall.score is not None or result.overall.grade is not None:
-            raise MarriageDecisionError("score_projection_must_remain_unavailable")
+        if result.overall.score is None:
+            if result.overall.grade is not None or result.score_audit is not None:
+                raise MarriageDecisionError("score_projection_incomplete")
+        else:
+            if not 0.0 <= result.overall.score <= 100.0:
+                raise MarriageDecisionError("score_out_of_range")
+            if result.overall.grade is None or result.score_audit is None:
+                raise MarriageDecisionError("score_projection_incomplete")
+            for score in result.overall.domain_scores.values():
+                if not 0.0 <= score <= 100.0:
+                    raise MarriageDecisionError("domain_score_out_of_range")
         if result.overall.state is None:
             raise MarriageDecisionError("overall_state_missing")
         if result.overall.state is DomainDecisionState.INSUFFICIENT:
