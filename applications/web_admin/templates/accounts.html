@@ -1,0 +1,29 @@
+<div class="panel">
+  <div class="toolbar">
+    <button type="button" id="btnCreate">Tạo tài khoản</button>
+    <button type="button" class="secondary" id="btnReload">Tải lại</button>
+  </div>
+  <div style="overflow:auto">
+    <table>
+      <thead><tr><th>Username</th><th>Tên hiển thị</th><th>Trạng thái</th><th>Giới hạn</th><th>Đã dùng</th><th>Còn lại</th><th>Thao tác</th></tr></thead>
+      <tbody id="accountRows"></tbody>
+    </table>
+  </div>
+</div>
+<div class="modal-backdrop" id="accountModal">
+  <div class="modal">
+    <h2 id="modalTitle">Tài khoản</h2>
+    <form id="accountForm" class="form-grid">
+      <input type="hidden" id="editingUsername" />
+      <label>Username<input id="username" required minlength="3" /></label>
+      <label>Tên hiển thị<input id="displayName" /></label>
+      <label>Mật khẩu<input id="password" type="password" minlength="8" /></label>
+      <label>Giới hạn lá số<input id="analysisLimit" type="number" min="0" value="50" required /></label>
+      <label id="usedLabel" style="display:none">Đã dùng<input id="analysesUsed" type="number" min="0" value="0" /></label>
+      <label id="activeLabel" style="display:none"><input id="isActive" type="checkbox" checked /> Được phép sử dụng</label>
+      <div class="full toolbar"><button type="submit">Lưu</button><button type="button" class="secondary" id="modalClose">Hủy</button></div>
+    </form>
+  </div>
+</div>
+<script src="/static/js/accounts.js"></script>
+<script>document.getElementById("pageTitle").textContent = "Quản lý tài khoản";</script>

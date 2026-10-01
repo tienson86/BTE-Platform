@@ -62,6 +62,10 @@ def create_app() -> FastAPI:
         """Dashboard page."""
         return page("dashboard", "dashboard.html")
 
+    @app.get("/accounts", response_class=HTMLResponse)
+    def accounts_page() -> HTMLResponse:
+        return page("accounts", "accounts.html")
+
     @app.get("/customers", response_class=HTMLResponse)
     def customers_page() -> HTMLResponse:
         """Customers page."""

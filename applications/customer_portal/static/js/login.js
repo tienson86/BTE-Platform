@@ -26,7 +26,9 @@
         user: data.user && data.user.username ? data.user.username : "",
         role: (data.user && data.user.role) || "",
       });
-      setTimeout(() => (window.location.href = "/good-date"), 400);
+      const next = new URLSearchParams(window.location.search || "").get("next");
+      const destination = next && next.charAt(0) === "/" && !next.startsWith("//") ? next : "/good-date";
+      setTimeout(() => (window.location.href = destination), 400);
     } catch (err) {
       BtePortal.showFlash(flash, err.message, "error");
     }

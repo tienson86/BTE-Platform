@@ -168,18 +168,85 @@
   margin-bottom: var(--space-6);
 }
 .page-hero h1 { margin-bottom: var(--space-2); }
-.history-list .list-item {
+.history-summary {
   display: flex;
   justify-content: space-between;
-  gap: var(--space-3);
   align-items: center;
-  margin-bottom: var(--space-3);
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+.history-record-number {
+  width: 4.5rem;
+  font-weight: 750;
+  color: var(--primary);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.history-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+.history-table {
+  width: 100%;
+  min-width: 1160px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.history-table th,
+.history-table td {
+  padding: 0.7rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: middle;
+  font-size: var(--text-sm);
+}
+.history-table th {
+  background: var(--surface-subtle, var(--bg));
+  color: var(--muted);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.history-table tbody tr:last-child td { border-bottom: 0; }
+.history-table tbody tr:hover { background: var(--surface-subtle, var(--bg)); }
+.history-table th:nth-child(1) { width: 5%; text-align: center; }
+.history-table th:nth-child(2) { width: 14%; }
+.history-table th:nth-child(3) { width: 15%; }
+.history-table th:nth-child(4) { width: 13%; }
+.history-table th:nth-child(5) { width: 7%; }
+.history-table th:nth-child(6) { width: 23%; }
+.history-table th:nth-child(7) { width: 23%; }
+.history-name,
+.history-run-time,
+.history-birth-date,
+.history-birth-time { white-space: nowrap; }
+.history-analysis-id {
+  color: var(--muted);
+  font-size: var(--text-xs);
+  overflow-wrap: anywhere;
 }
 .history-actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
+  gap: 0.4rem;
   align-items: center;
+  white-space: nowrap;
+}
+.history-actions .btn,
+.history-actions button { min-height: 2.25rem; padding: 0.4rem 0.65rem; font-size: var(--text-xs); }
+.history-actions .history-delete {
+  color: #b42318;
+  border-color: #f0b4ae;
+}
+.history-actions .history-delete:hover {
+  background: #fff1f0;
+  border-color: #d92d20;
+}
+@media (max-width: 767px) {
+  .history-summary { align-items: flex-start; flex-direction: column; }
 }
 .bte-expert-fallback {
   margin-top: var(--space-5);

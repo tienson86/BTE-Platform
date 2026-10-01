@@ -5,6 +5,7 @@
 
   const list = document.getElementById("historyList");
   const flash = document.getElementById("globalFlash");
+  const summary = document.getElementById("historySummary");
 
   function esc(value) {
     return String(value)
@@ -19,18 +20,15 @@
     return String(value).padStart(2, "0");
   }
 
-  function birthLabel(input) {
-    if (!input || typeof input !== "object") return "";
-    const date = [input.year, input.month, input.day]
-      .filter(function (part) {
-        return part != null && part !== "";
-      })
-      .join("-");
-    if (!date) return "";
-    const hour = input.hour;
-    const minute = input.minute;
-    if (hour == null || hour === "") return date;
-    return date + " " + pad(Number(hour) || 0) + ":" + pad(Number(minute) || 0);
+  function birthDateLabel(input) {
+    if (!input || typeof input !== "object") return "—";
+    if (input.day == null || input.month == null || input.year == null) return "—";
+    return pad(input.day) + "/" + pad(input.month) + "/" + String(input.year);
+  }
+
+  function birthTimeLabel(input) {
+    if (!input || typeof input !== "object" || input.hour == null || input.hour === "") return "—";
+    return pad(Number(input.hour) || 0) + ":" + pad(Number(input.minute) || 0);
   }
 
   function formatWhen(iso) {
@@ -65,38 +63,46 @@
   function render() {
     const items = BtePortal.getHistory();
     if (!items.length) {
+      if (summary) summary.innerHTML = "";
       list.innerHTML = window.BteUI
         ? BteUI.emptyState(t("history.empty"), t("common.new_analyze"))
         : '<p class="muted">' + t("history.empty") + "</p>";
       return;
     }
-    list.innerHTML = items
+    const archiveNumbers = items
+      .map(function (item) { return Number(item.archive_number) || 0; })
+      .filter(Boolean);
+    const latestNumber = archiveNumbers.length ? Math.max.apply(null, archiveNumbers) : items.length;
+    if (summary) {
+      summary.innerHTML =
+        '<div><strong>' + esc(items.length) + '</strong><span> hồ sơ đã lưu</span></div>' +
+        '<div class="muted">Số lưu trữ: 001 - ' + esc(String(latestNumber).padStart(3, "0")) + '</div>';
+    }
+    const rows = items
       .map(function (item, idx) {
         const input = item.input || {};
         const name = input.full_name || t("history.unnamed");
-        const birth = birthLabel(input);
         const when = formatWhen(item.created_at || item.saved_at);
         const analysisId = item.analysis_id || item.id || "";
         const legacy = versionNote(item);
         const corrupt = !item.data || typeof item.data !== "object";
+        const archiveCode = item.archive_code || String(item.archive_number || items.length - idx).padStart(3, "0");
         return (
-          '<div class="list-item bte-card" data-history-idx="' +
+          '<tr data-history-idx="' +
           idx +
           '"' +
           (analysisId ? ' data-analysis-id="' + esc(analysisId) + '"' : "") +
           ">" +
-          "<div>" +
-          "<strong>" +
-          esc(name) +
-          "</strong>" +
-          (birth ? '<div class="muted">' + esc(birth) + "</div>" : "") +
-          '<div class="muted">' +
-          esc(when) +
-          (analysisId ? " · " + esc(analysisId) : "") +
+          '<td class="history-record-number">' + esc(archiveCode) + "</td>" +
+          '<td class="history-run-time">' + esc(when || "—") + "</td>" +
+          '<td class="history-name"><strong>' + esc(name) + "</strong>" +
           (legacy ? " · " + esc(legacy) : "") +
           (corrupt ? " · " + esc(t("history.corrupt_badge")) : "") +
-          "</div></div>" +
-          '<div class="history-actions">' +
+          "</td>" +
+          '<td class="history-birth-date">' + esc(birthDateLabel(input)) + "</td>" +
+          '<td class="history-birth-time">' + esc(birthTimeLabel(input)) + "</td>" +
+          '<td class="history-analysis-id">' + esc(analysisId || "—") + "</td>" +
+          '<td class="history-actions">' +
           '<button type="button" class="secondary" data-open-idx="' +
           idx +
           '">' +
@@ -107,10 +113,18 @@
           '">' +
           t("history.reanalyze") +
           "</a>" +
-          "</div></div>"
+          '<button type="button" class="secondary history-delete" data-delete-idx="' +
+          idx +
+          '">Xóa</button>' +
+          "</td></tr>"
         );
       })
       .join("");
+    list.innerHTML =
+      '<div class="history-table-wrap"><table class="history-table">' +
+      '<thead><tr><th>STT</th><th>Thời gian</th><th>Họ và tên</th>' +
+      '<th>Ngày tháng năm sinh</th><th>Giờ sinh</th><th>Mã phân tích</th><th>Thao tác</th></tr></thead>' +
+      "<tbody>" + rows + "</tbody></table></div>";
 
     list.querySelectorAll("button[data-open-idx]").forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -124,6 +138,21 @@
         });
         window.location.href =
           "/result?from=history&id=" + encodeURIComponent(String(analysisId));
+      });
+    });
+
+    list.querySelectorAll("button[data-delete-idx]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const item = items[Number(btn.getAttribute("data-delete-idx"))];
+        const analysisId = item && (item.analysis_id || item.id);
+        if (!analysisId) return;
+        const archiveCode = item.archive_code || String(item.archive_number || "").padStart(3, "0");
+        if (!window.confirm("Bạn có chắc muốn xóa hồ sơ " + archiveCode + "? Thao tác này không thể hoàn tác.")) {
+          return;
+        }
+        if (!BtePortal.ResultStore.deleteHistory(analysisId)) return;
+        BtePortal.showFlash(flash, "Đã xóa hồ sơ " + archiveCode + ".", "success");
+        render();
       });
     });
   }

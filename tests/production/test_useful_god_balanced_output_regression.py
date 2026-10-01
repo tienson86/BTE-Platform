@@ -134,6 +134,20 @@ PHUONG_1994_REQUEST = ProductionRequest(
     export_pdf=False,
 )
 
+THIEN_TAM_REQUEST = ProductionRequest(
+    case_id="THIEN-TAM-ROOSTER-METAL-REGRESSION",
+    year=1976,
+    month=10,
+    day=5,
+    hour=4,
+    minute=30,
+    gender="female",
+    timezone="Asia/Ho_Chi_Minh",
+    full_name="Vu Thi Thien Tam",
+    birth_place="Phu Tho, Viet Nam",
+    export_pdf=False,
+)
+
 
 def test_hot_balanced_wood_output_uses_water_before_wealth_fallback() -> None:
     analysis = ProductionEngineRunner().run(CASE_0002_REQUEST).analysis
@@ -151,6 +165,21 @@ def test_hot_balanced_wood_output_uses_water_before_wealth_fallback() -> None:
         "Hỏa · Bính · Thực Thần / Hỏa · Đinh · Thương Quan / "
         "Thổ · Mậu · Thiên Tài / Thổ · Kỷ · Chính Tài"
     )
+
+
+def test_rooster_month_strong_metal_uses_fire_despite_visible_fire_count() -> None:
+    """Raw occurrence count must not overrule seasonal strength and Day Master."""
+    analysis = ProductionEngineRunner().run(THIEN_TAM_REQUEST).analysis
+
+    assert analysis.bazi.day_master == "Canh"
+    assert analysis.bazi.month_pillar.branch == "Dậu"
+    assert analysis.strength.strength_level == "strong"
+    assert analysis.strength.strength_score == 0.89
+    assert analysis.useful_god.winning_rule_id == "str_peak_rooster_metal"
+    assert analysis.useful_god.useful_display == "Hỏa · Đinh · Chính Quan"
+    assert "Hỏa" not in analysis.useful_god.unfavorable_display
+    assert "Kim" in analysis.useful_god.unfavorable_display
+    assert "Thổ" in analysis.useful_god.unfavorable_display
 
 
 def test_rooster_month_balanced_earth_output_uses_fire_before_wealth_fallback() -> None:

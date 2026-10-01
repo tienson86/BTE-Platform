@@ -413,6 +413,54 @@ function testNarrativeProviderLayersStayIndependent() {
   );
 }
 
+function testSequentialArchiveNumbersAndUnlimitedHistory() {
+  const ctx = newStore();
+  const store = ctx.store;
+  for (let index = 1; index <= 35; index += 1) {
+    const item = result("ARCHIVE-" + index);
+    item.analysis_id = "archive-" + index;
+    item.data.analysis_id = item.analysis_id;
+    item.data.result_meta = { created_at: new Date(Date.UTC(2026, 0, index)).toISOString() };
+    store.save(item);
+  }
+  const rows = store.loadHistory();
+  check("archive.keeps_more_than_30", rows.length === 35, String(rows.length));
+  check("archive.newest_is_035", rows[0].archive_code === "035", JSON.stringify(rows[0]));
+  check("archive.oldest_is_001", rows[34].archive_code === "001", JSON.stringify(rows[34]));
+  check("archive.no_history_limit", store.HISTORY_LIMIT === null, String(store.HISTORY_LIMIT));
+}
+
+function testDeleteOneArchiveWithoutRenumbering() {
+  const ctx = newStore();
+  const store = ctx.store;
+  ["delete-1", "delete-2", "delete-3"].forEach(function (analysisId) {
+    const item = result(analysisId);
+    item.analysis_id = analysisId;
+    item.data.analysis_id = analysisId;
+    store.save(item);
+  });
+  check("archive.delete_existing", store.deleteHistory("delete-2") === true, "delete failed");
+  let rows = store.loadHistory();
+  check(
+    "archive.delete_only_selected",
+    rows.length === 2 && rows[0].analysis_id === "delete-3" && rows[1].analysis_id === "delete-1",
+    JSON.stringify(rows),
+  );
+  check(
+    "archive.delete_keeps_original_numbers",
+    rows[0].archive_code === "003" && rows[1].archive_code === "001",
+    JSON.stringify(rows),
+  );
+  check("archive.delete_missing_is_false", store.deleteHistory("missing") === false, "unexpected delete");
+
+  const next = result("delete-4");
+  next.analysis_id = "delete-4";
+  next.data.analysis_id = "delete-4";
+  store.save(next);
+  rows = store.loadHistory();
+  check("archive.next_number_stays_monotonic", rows[0].archive_code === "004", JSON.stringify(rows[0]));
+}
+
 testKeysAreSeparate();
 testFullFlowKeepsLastResult();
 testSelectForViewNeverWritesLastKey();
@@ -423,6 +471,8 @@ testCurrentResultPrecedence();
 testG205HistorySnapshotPolicy();
 testNarrativeV2ShadowIndependent();
 testNarrativeProviderLayersStayIndependent();
+testSequentialArchiveNumbersAndUnlimitedHistory();
+testDeleteOneArchiveWithoutRenumbering();
 
 let failed = 0;
 results.forEach(function (row) {

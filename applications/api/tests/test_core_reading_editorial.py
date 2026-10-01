@@ -7,6 +7,7 @@ from applications.api.services.core_reading_editorial import (
     shen_sha_paragraphs,
 )
 from applications.api.services.orchestrator import OrchestratorService
+from applications.api.services.bazi_analysis_contract import build_bazi_analysis_result
 from applications.api.services.customer_export import _split_structured_paragraph
 from applications.api.services.customer_export import _render_modern_report_html, _render_modern_report_docx
 from applications.api.services.customer_report_input import build_customer_report_input
@@ -45,6 +46,32 @@ def test_missing_useful_god_does_not_invent_an_element_or_star() -> None:
     assert len(day_master_paragraphs(payload)) == 2
     assert pattern_useful_paragraphs(payload) == []
     assert shen_sha_paragraphs(payload) == []
+
+
+def test_strength_chapter_always_leads_with_actual_body_strength() -> None:
+    raw = OrchestratorService().analyze(
+        year=1973, month=8, day=19, hour=18, minute=31,
+        gender="male", timezone="Asia/Bangkok",
+    )
+    result = build_bazi_analysis_result(raw)
+    chapter = next(
+        item
+        for item in result["customer_narrative"]["report_chapters"]
+        if item["id"] == "strength_structure_useful_god"
+    )
+
+    assert chapter["title"] == "Thân vượng/nhược, Mệnh cục và Dụng thần"
+    assert chapter["paragraphs"][0].startswith("Thế thân được đánh giá là Thân nhược.")
+    assert "Tù khí theo tháng -10" in chapter["paragraphs"][0]
+    assert any(item.startswith("Mệnh cục Chính Tài:") for item in chapter["paragraphs"])
+    assert any(item.startswith("Dụng thần Mộc · Ất · Thiên Ấn.") for item in chapter["paragraphs"])
+
+    title, body = _split_structured_paragraph(
+        "strength_structure_useful_god", chapter["paragraphs"][0], 0,
+    )
+    assert title == "Thế thân"
+    assert body.startswith("Thế thân được đánh giá là Thân nhược.")
+    assert "Các dấu hiệu trực tiếp:" in body
 
 
 def test_huynh_pattern_name_and_month_basis_survive_pdf_and_docx_cards() -> None:

@@ -1,6 +1,10 @@
 @echo off
 setlocal
-cd /d "%~dp0..\..\.."
+cd /d "%~dp0..\.."
+if not exist "applications\customer_portal\app.py" (
+  echo ERROR: BTE Portal source was not found in %CD%.
+  exit /b 1
+)
 
 if not exist "logs" mkdir logs
 

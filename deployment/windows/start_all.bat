@@ -25,10 +25,10 @@ start "BTE Customer Portal" cmd /k "%~dp0start_portal.bat"
 echo.
 echo Started:
 echo   API      http://127.0.0.1:8000/docs
-echo   Admin    http://127.0.0.1:8080
+echo   Admin    http://127.0.0.1:8688
 echo   Marriage http://127.0.0.1:8082/healthz
 echo   Portal   http://127.0.0.1:8686
 echo.
-echo Logs: logs\api.log , logs\admin.log , logs\marriage_api.log , logs\portal.log
+echo Logs: logs\api.log , logs\admin_8688.log , logs\marriage_api.log , logs\portal.log
 echo Use stop_all.bat to stop uvicorn processes.
 endlocal

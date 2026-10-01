@@ -112,6 +112,42 @@ def test_weak_with_wealth_dominance_may_become_tong_tai() -> None:
     assert result.cach_cuc == "Tòng Tài"
 
 
+def test_weak_chart_with_competing_wealth_officer_and_output_is_not_tong_tai() -> None:
+    """Absolute wealth count must not override several rival opposing forces."""
+    ctx = _wealth_context(
+        "weak",
+        gods=(
+            ["Chính Tài"] * 4
+            + ["Chính Quan"] * 3
+            + ["Thực Thần"] * 3
+            + ["Chính Ấn"]
+        ),
+    )
+    assert FollowPatternCalculator().detect(ctx) is None
+    result = PatternEngine().calculate(ctx)
+    assert result.pattern != "tong_tai"
+    assert result.follow_type is None
+    assert result.ug_override_eligible is False
+
+
+def test_dinh_ngoc_lam_does_not_use_metal_through_false_tong_tai() -> None:
+    payload = OrchestratorService().analyze(
+        year=1973,
+        month=8,
+        day=19,
+        hour=18,
+        minute=31,
+        gender="male",
+    )
+    assert payload["strength"]["strength_level"] == "weak"
+    assert payload["pattern"]["pattern"] == "chinh_tai"
+    assert payload["pattern"].get("follow_type") is None
+    assert payload["pattern"]["ug_override_eligible"] is False
+    assert payload["useful_god"]["winning_rule_id"] == "str_002"
+    assert payload["useful_god"]["useful_display"] == "Mộc · Ất · Thiên Ấn"
+    assert "Kim" in payload["useful_god"]["unfavorable_display"]
+
+
 def test_other_weak_follow_families_require_weak_strength() -> None:
     detector = FollowPatternCalculator()
     for token, month_god, gods in _WEAK_FOLLOW_FAMILIES:

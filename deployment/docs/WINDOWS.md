@@ -22,7 +22,7 @@ deployment\windows\start_all.bat
 This opens **three separate console windows**:
 
 1. BTE API → http://127.0.0.1:8000/docs  
-2. BTE Web Admin → http://127.0.0.1:8080  
+2. BTE Web Admin → http://127.0.0.1:8688  
 3. BTE Customer Portal → http://127.0.0.1:8686  
 
 ## Start individually

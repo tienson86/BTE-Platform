@@ -199,7 +199,7 @@ const STRUCTURED_CHAPTER_IDS = new Set([
 const STRUCTURED_CHAPTER_META: Record<string, { readonly kicker: string; readonly title: string; readonly cardTitle: string }> = {
   four_pillars: { kicker: "Khung tứ trụ", title: "Bốn trụ và vai trò từng cung", cardTitle: "Luận trụ" },
   day_master: { kicker: "Nhật chủ", title: "Khí chất cốt lõi của mệnh", cardTitle: "Luận Nhật chủ" },
-  strength_structure_useful_god: { kicker: "Trục cân bằng", title: "Thân vượng, Mệnh cục và Dụng thần", cardTitle: "Luận trục" },
+  strength_structure_useful_god: { kicker: "Trục cân bằng", title: "Thân vượng/nhược, Mệnh cục và Dụng thần", cardTitle: "Luận trục" },
   ten_gods: { kicker: "Thập thần", title: "Vai trò đời sống qua từng tín hiệu", cardTitle: "Luận Thập thần" },
   shen_sha: { kicker: "Thần sát", title: "Tín hiệu bổ sung cần quan sát", cardTitle: "Luận Thần sát" },
   bone_weight: { kicker: "Cân xương", title: "Nền lượng và nhịp tích lũy", cardTitle: "Luận Cân xương" },
@@ -216,6 +216,7 @@ const STRUCTURED_PREFIX_RULES: ReadonlyArray<readonly [RegExp, string]> = [
   [/^Trụ\s+Giờ/i, "Trụ giờ"],
   [/^Nhật\s+chủ/i, "Nhật chủ"],
   [/^Thân\s+vượng|^Thân\s+nhược|^Thân\s+trung/i, "Thế thân"],
+  [/^Thế\s+thân/i, "Thế thân"],
   [/^Mệnh\s+cục/i, "Mệnh cục"],
   [/^Dụng\s+thần/i, "Dụng thần"],
   [/^Hỷ\s+thần/i, "Hỷ thần"],
@@ -252,7 +253,7 @@ function splitStructuredParagraph(chapterId: string, paragraph: string, index: n
     return { title: "Lộ trình 5 năm", body: value };
   }
   if (prefix) {
-    const body = colonIndex > 0 ? value.slice(colonIndex + 1).trim() : value;
+    const body = colonIndex > 0 && colonIndex < 62 ? value.slice(colonIndex + 1).trim() : value;
     return { title: prefix[1], body };
   }
   if (colonIndex > 0 && colonIndex < 62) {

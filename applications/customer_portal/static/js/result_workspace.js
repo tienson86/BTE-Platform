@@ -12,7 +12,7 @@
     hour: { canChi: "Ất Tỵ", napAm: "Hỏa", cungPhi: "Khôn" },
   };
   var OVERVIEW = [
-    { id: "strength", label: "Thân vượng", value: "Thân vượng" },
+    { id: "strength", label: "Thế Thân", value: "Kết quả theo lá số" },
     { id: "useful-god", label: "Dụng thần", value: "Tỷ Kiên" },
     { id: "favorable-god", label: "Hỷ thần", value: "Thực Thần" },
     { id: "avoid-god", label: "Kỵ thần", value: "Thất Sát" },

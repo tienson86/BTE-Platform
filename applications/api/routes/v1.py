@@ -6,11 +6,13 @@ import logging
 from fastapi import APIRouter, Depends, HTTPException, Request
 
 from applications.api.dependencies import get_orchestrator
+from applications.api.auth.dependencies import OptionalUser, get_auth_service
 from applications.api.routes._helpers import attach_presentation_metadata, run_birth_stage
 from applications.api.schemas.common import APIResponse, BirthRequest, DiscussionRequest
 from applications.api.services.bazi_analysis_contract import build_bazi_analysis_result
 from applications.api.services.knowledge_expert_service import KnowledgeExpertService
 from applications.api.services.orchestrator import OrchestratorService
+from applications.api.services.auth_service import AuthService
 from applications.api.routes import date_selection as date_selection_router
 from applications.api.routes import number_energy as number_energy_router
 from applications.api.routes import pack07_dev as pack07_dev_router
@@ -141,9 +143,16 @@ def analyze_endpoint(
     request: Request,
     body: BirthRequest,
     orchestrator: OrchestratorService = Depends(get_orchestrator),
+    user: OptionalUser = None,
+    auth_service: AuthService = Depends(get_auth_service),
 ) -> APIResponse:
     """Primary end-to-end analysis endpoint."""
     request_id = getattr(request.state, "request_id", None)
+    if user is not None and not auth_service.store.can_create_analysis(user.user_id):
+        raise HTTPException(
+            status_code=429,
+            detail="Tài khoản đã sử dụng hết số lượt tạo lá số được cấp.",
+        )
     data = orchestrator.analyze(
         year=body.year,
         month=body.month,
@@ -166,6 +175,11 @@ def analyze_endpoint(
         analysis_id=payload.get("analysis_id"),
         request_id=request_id,
     )
+    if user is not None and not auth_service.store.consume_analysis(user.user_id):
+        raise HTTPException(
+            status_code=429,
+            detail="Tài khoản đã sử dụng hết số lượt tạo lá số được cấp.",
+        )
     logger.info(
         "api.analyze response pattern_keys=%s interpretation_keys=%s section_count=%s",
         sorted((payload.get("pattern") or {}).keys()),

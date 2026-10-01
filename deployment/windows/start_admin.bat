@@ -1,11 +1,15 @@
 @echo off
 setlocal
-cd /d "%~dp0..\..\.."
+cd /d "%~dp0..\.."
+if not exist "applications\web_admin\app.py" (
+  echo ERROR: BTE Admin source was not found in %CD%.
+  exit /b 1
+)
 
 if not exist "logs" mkdir logs
 
 set HOST=127.0.0.1
-set PORT=8080
+set PORT=8688
 set BTE_API_BASE_URL=http://127.0.0.1:8000
 set BTE_LOG_LEVEL=INFO
 
@@ -18,8 +22,8 @@ if defined ADMIN_PORT set PORT=%ADMIN_PORT%
 
 echo Starting BTE Web Admin on %HOST%:%PORT% ...
 if exist ".venv\Scripts\python.exe" (
-  ".venv\Scripts\python.exe" -m uvicorn applications.web_admin.app:app --host %HOST% --port %PORT% >> "logs\admin.log" 2>&1
+  ".venv\Scripts\python.exe" -m uvicorn applications.web_admin.app:app --host %HOST% --port %PORT% >> "logs\admin_8688.log" 2>&1
 ) else (
-  python -m uvicorn applications.web_admin.app:app --host %HOST% --port %PORT% >> "logs\admin.log" 2>&1
+  python -m uvicorn applications.web_admin.app:app --host %HOST% --port %PORT% >> "logs\admin_8688.log" 2>&1
 )
 endlocal

@@ -5,7 +5,7 @@ from __future__ import annotations
 from functools import lru_cache
 from pathlib import Path
 
-from applications.api.auth.store import InMemoryUserStore, seed_dev_store
+from applications.api.auth.store import InMemoryUserStore, load_persistent_store
 from applications.api.config import APISettings, settings
 from applications.api.services.auth_service import AuthService
 from applications.api.services.orchestrator import OrchestratorService
@@ -28,8 +28,8 @@ def get_settings() -> APISettings:
 
 @lru_cache(maxsize=1)
 def get_user_store() -> InMemoryUserStore:
-    """Return seeded in-memory user store (WP10)."""
-    return seed_dev_store()
+    """Return the durable server-side account store."""
+    return load_persistent_store(Path(get_settings().data_dir) / "users.json")
 
 
 @lru_cache(maxsize=1)

@@ -257,31 +257,22 @@ describe("TV1-B07 Marriage Consulting UI", () => {
     expect(screen.queryByText(/Grade/)).toBeNull();
     expect(screen.getByTestId("hero-headline").textContent).toContain("điều chỉnh");
     expect(screen.getByTestId("executive-summary").textContent).toContain("điểm hỗ trợ");
-    expect(screen.getByTestId("key-strengths").textContent).toContain("Ngũ hành");
-    expect(screen.getByTestId("key-risks").textContent).toContain("Can Chi");
-    expect(screen.getByTestId("expert-mode")).toBeTruthy();
+    expect(screen.queryByTestId("detailed-analysis")).toBeNull();
+    expect(screen.queryByTestId("key-strengths")).toBeNull();
+    expect(screen.queryByTestId("key-risks")).toBeNull();
+    expect(screen.queryByTestId("expert-mode")).toBeNull();
+    expect(screen.queryByText("Xem chế độ chuyên gia")).toBeNull();
+    expect(screen.queryByText("Giải thích kỹ thuật")).toBeNull();
+    expect(screen.queryByText("Phụ lục phương pháp")).toBeNull();
     expect(screen.queryByTestId("domain-card")).toBeNull();
     expect(screen.queryByTestId("domain-analysis")).toBeNull();
     expect(screen.queryByTestId("action-plan")).toBeNull();
-
-    fireEvent.click(screen.getByTestId("expert-toggle"));
-    await waitFor(() => expect(screen.getByTestId("domain-analysis")).toBeTruthy());
-    expect(screen.getAllByTestId("domain-card").map((item) => item.getAttribute("data-domain"))).toEqual([
-      "five_elements",
-      "stem_branch",
-      "ten_gods",
-      "finance",
-    ]);
-    expect(screen.getByTestId("domain-analysis").querySelector('[data-domain="interaction"]')).toBeNull();
-    expect(screen.getByTestId("domain-analysis").querySelector('[data-domain="family"]')).toBeNull();
-    expect(screen.getByTestId("domain-analysis").querySelector('[data-domain="children"]')).toBeNull();
-    expect(screen.getByTestId("unavailable-domains")).toBeTruthy();
-    expect(screen.getByTestId("action-plan").textContent).toContain("Việc nên làm");
-    expect(screen.getByTestId("action-priority").textContent).toContain("Ưu tiên cao");
-    expect(screen.getByTestId("timing-omitted")).toBeTruthy();
-    expect(screen.queryByTestId("timing-section")).toBeNull();
-    expect(screen.getByTestId("confidence-label").textContent).toBe("Độ tin cậy cao");
-    expect(screen.getAllByTestId("warning-note").length).toBeGreaterThan(0);
+    expect(screen.getByTestId("relationship-guidance").textContent).toContain("Giữ nhịp hỗ trợ đã có");
+    expect(screen.getByTestId("relationship-guidance").textContent).toContain("Giữ nhịp trao đổi đều");
+    expect(screen.getByTestId("relationship-guidance").textContent).toContain("Giúp hai người dễ phối hợp hơn");
+    expect(screen.getByTestId("guidance-scope")).toBeTruthy();
+    expect(screen.queryByText("Ưu tiên cao")).toBeNull();
+    expect(screen.queryByText(/decision_trace/)).toBeNull();
   });
 
   it("10-12 adapter never invents score or grade", () => {
@@ -305,7 +296,7 @@ describe("TV1-B07 Marriage Consulting UI", () => {
     const scoredReport: MarriageReportDto = { ...report, score: 72.4, grade: "B" };
     const view = adaptMarriageView(scoredConsultation, scoredReport, []);
 
-    render(<ResultView view={view} expertMode={false} onToggleExpert={() => undefined} />);
+    render(<ResultView view={view} />);
 
     expect(screen.getByTestId("overall-score").textContent).toContain("72.4/100");
     expect(screen.getByTestId("overall-grade").textContent).toContain("B");
@@ -362,7 +353,7 @@ describe("TV1-B07 Marriage Consulting UI", () => {
     };
     const view = adaptMarriageView(matrixConsultation, report, []);
 
-    render(<ResultView view={view} expertMode={false} onToggleExpert={() => undefined} />);
+    render(<ResultView view={view} />);
 
     expect(screen.getByTestId("compatibility-matrix").textContent).toContain("Bổ đúng nhu cầu: Hỏa");
     fireEvent.click(screen.getByRole("tab", { name: "Cung Phi hai lá số" }));
@@ -374,16 +365,19 @@ describe("TV1-B07 Marriage Consulting UI", () => {
 
   it("21 customer mode hides technical ids", () => {
     const view = adaptMarriageView(consultation, report, warnings);
-    expect(FORBIDDEN_ID_PATTERN.test(JSON.stringify({ ...view, expertTrace: null }))).toBe(false);
+    expect(FORBIDDEN_ID_PATTERN.test(JSON.stringify(view))).toBe(false);
   });
 
-  it("22 expert mode seam exists and is collapsed by default", async () => {
+  it("22 customer receives one unified report without an expert seam", async () => {
     mockApi();
     render(<MarriageConsultingPage />);
     fillValidForm();
     fireEvent.submit(screen.getByTestId("marriage-form"));
-    await waitFor(() => expect(screen.getByTestId("expert-mode")).toBeTruthy());
+    await waitFor(() => expect(screen.getByTestId("marriage-result")).toBeTruthy());
+    expect(screen.queryByTestId("expert-mode")).toBeNull();
     expect(screen.queryByTestId("expert-trace")).toBeNull();
+    expect(screen.getByTestId("relationship-guidance")).toBeTruthy();
+    expect(vi.mocked(fetch).mock.calls.some(([input]) => String(input).includes("expert=true"))).toBe(false);
   });
 
   it("24 error rendering is customer-safe and retryable", async () => {

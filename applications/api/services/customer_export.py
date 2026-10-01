@@ -259,7 +259,7 @@ _STRUCTURED_CHAPTER_IDS = {
 _STRUCTURED_CHAPTER_META = {
     "four_pillars": ("Khung tứ trụ", "Bốn trụ và vai trò từng cung", "Luận trụ"),
     "day_master": ("Nhật chủ", "Khí chất cốt lõi của mệnh", "Luận Nhật chủ"),
-    "strength_structure_useful_god": ("Trục cân bằng", "Thân vượng, Mệnh cục và Dụng thần", "Luận trục"),
+    "strength_structure_useful_god": ("Trục cân bằng", "Thân vượng/nhược, Mệnh cục và Dụng thần", "Luận trục"),
     "ten_gods": ("Thập thần", "Vai trò đời sống qua từng tín hiệu", "Luận Thập thần"),
     "shen_sha": ("Thần sát", "Tín hiệu bổ sung cần quan sát", "Luận Thần sát"),
     "bone_weight": ("Cân xương", "Nền lượng và nhịp tích lũy", "Luận Cân xương"),
@@ -278,6 +278,7 @@ _STRUCTURED_PREFIX_RULES: tuple[tuple[str, str], ...] = (
     ("Thân vượng", "Thế thân"),
     ("Thân nhược", "Thế thân"),
     ("Thân trung", "Thế thân"),
+    ("Thế thân", "Thế thân"),
     ("Mệnh cục", "Mệnh cục"),
     ("Dụng thần", "Dụng thần"),
     ("Hỷ thần", "Hỷ thần"),
@@ -636,7 +637,7 @@ def _split_structured_paragraph(chapter_id: str, paragraph: str, index: int) -> 
         return value[:colon].strip(), value[colon + 1 :].strip()
     for prefix, title in _STRUCTURED_PREFIX_RULES:
         if lowered.startswith(prefix.lower()):
-            body = value[colon + 1 :].strip() if colon > 0 else value
+            body = value[colon + 1 :].strip() if 0 < colon < 62 else value
             return title, body
     if 0 < colon < 62:
         return value[:colon].strip(), value[colon + 1 :].strip()

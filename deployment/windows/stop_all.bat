@@ -4,7 +4,7 @@ echo Stopping BTE uvicorn processes...
 
 REM These ports are reserved for the local BTE stack. Stopping by listening port
 REM avoids deprecated WMIC and does not require access to process command lines.
-for %%R in (8000 8080 8081 8082 8686) do (
+for %%R in (8000 8080 8081 8082 8686 8688) do (
   for /f "tokens=5" %%P in ('netstat -ano ^| findstr /R /C:":%%R .*LISTENING" 2^>nul') do (
     if not "%%P"=="0" (
       echo Killing PID %%P on port %%R

@@ -1,6 +1,10 @@
 @echo off
 setlocal
-cd /d "%~dp0..\..\.."
+cd /d "%~dp0..\.."
+if not exist "applications\api\app.py" (
+  echo ERROR: BTE API source was not found in %CD%.
+  exit /b 1
+)
 
 if not exist "logs" mkdir logs
 if not exist "reports" mkdir reports

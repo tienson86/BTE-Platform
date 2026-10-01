@@ -1,11 +1,15 @@
 @echo off
 setlocal
-cd /d "%~dp0..\..\.."
+cd /d "%~dp0..\.."
+if not exist "consulting\marriage\api\http.py" (
+  echo ERROR: BTE Marriage API source was not found in %CD%.
+  exit /b 1
+)
 
 if not exist "logs" mkdir logs
 
 set HOST=127.0.0.1
-set PORT=8082
+set DEFAULT_PORT=8082
 set BTE_LOG_LEVEL=INFO
 
 if exist "deployment\env\development.env" (
@@ -13,6 +17,7 @@ if exist "deployment\env\development.env" (
     if not "%%A"=="" set "%%A=%%B"
   )
 )
+set PORT=%DEFAULT_PORT%
 if defined BTE_MARRIAGE_PORT set PORT=%BTE_MARRIAGE_PORT%
 
 echo Starting BTE Marriage Public API on %HOST%:%PORT% ...

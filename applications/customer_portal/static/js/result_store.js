@@ -20,7 +20,8 @@
   // Pre-refactor keys — read-only, so existing browser sessions keep their data.
   const LEGACY_LAST_KEY = "bte_portal_last_result";
   const LEGACY_HISTORY_KEY = "bte_portal_history";
-  const HISTORY_LIMIT = 30;
+  // Customer requirement: retain the complete local archive, not only recent runs.
+  const HISTORY_LIMIT = null;
   let synthesizedIdSeq = 0;
 
   function sessionStore() {
@@ -266,6 +267,59 @@
     return global.BteI18n ? global.BteI18n.t("api.analyze_result") : "Analyze result";
   }
 
+  function archiveNumber(value) {
+    const parsed = Number(value);
+    return Number.isInteger(parsed) && parsed > 0 ? parsed : 0;
+  }
+
+  function archiveCode(value) {
+    return String(archiveNumber(value)).padStart(3, "0");
+  }
+
+  function timestampOf(row) {
+    const raw = row && (row.created_at || row.saved_at);
+    const parsed = raw ? Date.parse(raw) : NaN;
+    return Number.isFinite(parsed) ? parsed : 0;
+  }
+
+  function migrateArchiveNumbers(list) {
+    if (!Array.isArray(list) || !list.length) return { list: [], changed: false };
+    let changed = false;
+    let maxNumber = list.reduce(function (max, row) {
+      return Math.max(max, archiveNumber(row && row.archive_number));
+    }, 0);
+    const missing = list
+      .map(function (row, index) {
+        return { row: row, index: index, timestamp: timestampOf(row) };
+      })
+      .filter(function (item) {
+        return !archiveNumber(item.row && item.row.archive_number);
+      })
+      .sort(function (left, right) {
+        return left.timestamp - right.timestamp || right.index - left.index;
+      });
+    missing.forEach(function (item) {
+      maxNumber += 1;
+      item.row.archive_number = maxNumber;
+      item.row.archive_code = archiveCode(maxNumber);
+      changed = true;
+    });
+    list.forEach(function (row) {
+      const code = archiveCode(row.archive_number);
+      if (row.archive_code !== code) {
+        row.archive_code = code;
+        changed = true;
+      }
+    });
+    return { list: list, changed: changed };
+  }
+
+  function nextArchiveNumber(list) {
+    return (list || []).reduce(function (max, row) {
+      return Math.max(max, archiveNumber(row && row.archive_number));
+    }, 0) + 1;
+  }
+
   function historyRow(entry, forcedId) {
     const analysisId = forcedId || makeAnalysisId(entry);
     const meta = (entry.data && entry.data.result_meta) || {};
@@ -377,8 +431,12 @@
         }
       }
     }
+    if (!archiveNumber(row.archive_number)) {
+      row.archive_number = nextArchiveNumber(list);
+      row.archive_code = archiveCode(row.archive_number);
+    }
     list.unshift(row);
-    const raw = encode(list.slice(0, HISTORY_LIMIT));
+    const raw = encode(list);
     if (raw === null) return false;
     return writeRaw(HISTORY_KEY, raw, false);
   }
@@ -390,7 +448,39 @@
    */
   function loadHistory() {
     const list = readValue([HISTORY_KEY, LEGACY_HISTORY_KEY]);
-    return Array.isArray(list) ? list : [];
+    if (!Array.isArray(list)) return [];
+    const migrated = migrateArchiveNumbers(list);
+    if (migrated.changed) {
+      const raw = encode(migrated.list);
+      if (raw !== null) writeRaw(HISTORY_KEY, raw, false);
+    }
+    return migrated.list;
+  }
+
+  /**
+   * Delete one archived analysis without renumbering the remaining records.
+   *
+   * @param {string} analysisId
+   * @returns {boolean} true when a matching record was removed.
+   */
+  function deleteHistory(analysisId) {
+    const wanted = String(analysisId || "").trim();
+    if (!wanted) return false;
+    const list = loadHistory();
+    const kept = list.filter(function (row) {
+      return rowAnalysisId(row) !== wanted;
+    });
+    if (kept.length === list.length) return false;
+    const raw = encode(kept);
+    if (raw === null || !writeRaw(HISTORY_KEY, raw, false)) return false;
+
+    const currentId = String(readCurrentAnalysisId() || "").trim();
+    if (currentId === wanted) {
+      removeRaw([LAST_KEY, LEGACY_LAST_KEY, CURRENT_ID_KEY]);
+    }
+    const selectedId = readValue([VIEW_ID_KEY]);
+    if (String(selectedId || "").trim() === wanted) clearView();
+    return true;
   }
 
   /** Remove the history list from every storage backend. */
@@ -485,6 +575,7 @@
     VIEW_KEY: VIEW_KEY,
     CURRENT_ID_KEY: CURRENT_ID_KEY,
     HISTORY_LIMIT: HISTORY_LIMIT,
+    archiveCode: archiveCode,
     CALENDAR_RULE_VERSION: CALENDAR_RULE_VERSION,
     save: save,
     load: load,
@@ -495,6 +586,7 @@
     clear: clear,
     saveHistory: saveHistory,
     loadHistory: loadHistory,
+    deleteHistory: deleteHistory,
     clearHistory: clearHistory,
     selectForView: selectForView,
     loadForView: loadForView,

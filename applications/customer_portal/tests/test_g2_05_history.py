@@ -12,6 +12,7 @@ from applications.customer_portal.config import PORTAL_ROOT
 
 FLOW_HARNESS = Path(__file__).parent / "js" / "result_store_flow.js"
 STORE_JS = PORTAL_ROOT / "static" / "js" / "result_store.js"
+HISTORY_JS = PORTAL_ROOT / "static" / "js" / "history.js"
 
 
 def test_result_store_keeps_history_as_snapshot() -> None:
@@ -19,6 +20,24 @@ def test_result_store_keeps_history_as_snapshot() -> None:
     assert "Explicit History never falls back to current" in source
     assert "findHistoryById" in source
     assert "HISTORY_LIMIT" in source
+
+
+def test_history_uses_compact_single_row_table() -> None:
+    source = HISTORY_JS.read_text(encoding="utf-8")
+    for heading in (
+        "STT",
+        "Thời gian",
+        "Họ và tên",
+        "Ngày tháng năm sinh",
+        "Giờ sinh",
+        "Mã phân tích",
+        "Thao tác",
+    ):
+        assert heading in source
+    assert '<table class="history-table">' in source
+    assert '<tr data-history-idx="' in source
+    assert 'data-delete-idx="' in source
+    assert "ResultStore.deleteHistory" in source
 
 
 def test_g2_05_history_store_flow() -> None:

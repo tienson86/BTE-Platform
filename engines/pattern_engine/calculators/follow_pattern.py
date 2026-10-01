@@ -98,14 +98,17 @@ class FollowPatternCalculator:
             "output": counts["output"],
             "resource": counts["resource"],
         }
-        dominant = max(opposing, key=opposing.get)
-        if opposing[dominant] <= 0:
+        ranked = sorted(opposing.items(), key=lambda item: item[1], reverse=True)
+        dominant, dominant_count = ranked[0]
+        runner_up_count = ranked[1][1]
+        if dominant_count <= 0:
             return None
-        # Require clear dominance (≥ half of non-support, or absolute ≥ 2)
+        # Tòng cách requires one genuinely dominant opposing force. An absolute
+        # count alone is not enough when several rival families are also strong.
         non_support = total - support
-        if opposing[dominant] < 2 and (
-            non_support == 0 or opposing[dominant] / non_support < 0.5
-        ):
+        if non_support <= 0 or dominant_count / non_support < 0.5:
+            return None
+        if dominant_count == runner_up_count:
             return None
         token = FOLLOW_BY_CATEGORY.get(dominant)
         if not follow_token_eligible(token, strength_level):

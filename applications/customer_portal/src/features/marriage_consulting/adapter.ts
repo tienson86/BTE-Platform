@@ -358,7 +358,7 @@ function unavailableNote(
 
 function timingBody(sec: MarriageReportSection | undefined): string | null {
   if (!sec) return null;
-  const text = joinBodies(sec).trim();
+  const text = polishGuidanceText(joinBodies(sec));
   return text ? text : null;
 }
 
@@ -373,16 +373,73 @@ function parseAction(block: MarriageReportBlock, index: number): ActionCardVm {
   const body = block.body || "";
   const whenMatch = body.match(/Khi nào:\s*([^.]+)/);
   const priorityKey = detectPriority(body);
+  const rawTitle = block.title || "Việc nên làm";
+  const title = friendlyGuidanceTitle(rawTitle);
+  const objective = removeRepeatedTitle(polishGuidanceText(extractObjective(body)), rawTitle);
   return {
     key: block.block_id || `action-${index}`,
-    title: block.title || "Việc nên làm",
-    what: block.title || body,
-    objective: extractObjective(body),
+    title,
+    what: title,
+    objective,
     priorityLabel: priorityKey ? PRIORITY_LABEL[priorityKey] : "",
     priority: priorityKey || "",
     when: whenMatch?.[1]?.trim() || "",
-    outcome: extractOutcome(body),
+    outcome: polishGuidanceText(extractOutcome(body)),
   };
+}
+
+function polishGuidanceText(text: string): string {
+  const sentences = text.match(/[^.!?]+[.!?]?/g) || [];
+  const cleaned = sentences
+    .map((sentence) => sentence.trim())
+    .filter(Boolean)
+    .filter((sentence) => {
+      const normalized = sentence.toLocaleLowerCase("vi");
+      return !(
+        normalized.startsWith("nguồn là") ||
+        normalized.startsWith("điểm này có thể được giảm") ||
+        normalized.startsWith("đây là điểm cần lưu ý về nhịp thời điểm") ||
+        normalized.startsWith("không đặt ngày cưới") ||
+        normalized.startsWith("mức thời điểm") ||
+        normalized === "giai đoạn cần lưu ý nhịp."
+      );
+    })
+    .map((sentence) => {
+      const disclaimer = sentence.toLocaleLowerCase("vi").indexOf(", không phải");
+      if (disclaimer < 0) return sentence;
+      return `${sentence.slice(0, disclaimer).replace(/[.!?]+$/, "")}.`;
+    });
+  return cleaned
+    .join(" ")
+    .replace(/Giai đoạn tương đối thuận\. Nhịp thời điểm đang nghiêng về hỗ trợ hơn áp lực\./gi, "Đây là giai đoạn tương đối thuận để hai người trao đổi và thống nhất những việc quan trọng.")
+    .replace(/giảm xung đột tiền bạc/gi, "hạn chế bất đồng về tiền bạc")
+    .replace(/giữ nhịp ổn/gi, "giúp hai người phối hợp ổn định")
+    .replace(/giảm ma sát thực tế/gi, "giảm những tranh luận không cần thiết")
+    .replace(/nền tảng hỗ trợ dễ được bảo toàn/gi, "những điểm hòa hợp sẽ được duy trì")
+    .replace(/Mục tiêu là giữ ổn định\./gi, "Qua đó, hai người giữ được sự ổn định khi cùng giải quyết vấn đề.")
+    .replace(/Nhịp thời điểm chỉ giúp chọn lúc trao đổi, không đổi nền tảng\./gi, "Chọn đúng lúc sẽ giúp cuộc trò chuyện dễ đi đến đồng thuận hơn.")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function friendlyGuidanceTitle(title: string): string {
+  const replacements: Record<string, string> = {
+    "Đặt quy ước tiền bạc chung": "Thống nhất nguyên tắc tài chính",
+    "Giảm ma sát khi áp lực tăng": "Giữ bình tĩnh khi áp lực tăng",
+    "Củng cố điểm đang hỗ trợ": "Nuôi dưỡng những điều đang hòa hợp",
+    "Theo dõi nhịp thời điểm": "Chọn thời điểm phù hợp để trao đổi",
+    "Chốt lại vai trò và ranh giới": "Thống nhất vai trò và giới hạn",
+  };
+  return replacements[title.trim()] || title;
+}
+
+function removeRepeatedTitle(text: string, title: string): string {
+  const normalizedText = text.trim();
+  const normalizedTitle = title.trim().replace(/[.!?]+$/, "");
+  if (!normalizedTitle || !normalizedText.toLocaleLowerCase("vi").startsWith(normalizedTitle.toLocaleLowerCase("vi"))) {
+    return normalizedText;
+  }
+  return normalizedText.slice(normalizedTitle.length).replace(/^[\s.!?:;-]+/, "").trim();
 }
 
 function detectPriority(body: string): string {

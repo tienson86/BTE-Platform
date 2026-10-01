@@ -996,7 +996,7 @@ def build_report_chapters(payload: Mapping[str, Any], narrative: Mapping[str, An
         _chapter("five_elements", "Ngũ hành", _five_elements_chapter_paragraphs(payload, technical), ["five_elements"]),
         _chapter(
             "strength_structure_useful_god",
-            "Thân vượng, Mệnh cục và Dụng thần",
+            "Thân vượng/nhược, Mệnh cục và Dụng thần",
             _strength_structure_useful_god_paragraphs(payload, technical),
             ["strength", "pattern", "useful_god"],
         ),
@@ -1171,7 +1171,8 @@ def _render_report_markdown(
 def _strength_structure_useful_god_paragraphs(payload: Mapping[str, Any], technical: Mapping[str, Any]) -> list[str]:
     editorial = pattern_useful_paragraphs(payload)
     if editorial:
-        return editorial
+        strength_line = _section_summary(technical, "strength")
+        return _unique_texts(_non_empty([strength_line, *editorial]))
     bazi = _mapping(payload.get("bazi"))
     five_elements = _mapping(payload.get("five_elements"))
     pattern = _mapping(payload.get("pattern"))
@@ -3458,12 +3459,14 @@ def _five_elements_summary(five_elements: Mapping[str, Any]) -> str:
 def _strength_summary(strength: Mapping[str, Any], pattern: Mapping[str, Any]) -> str:
     label = _strength_label(_first_text(strength.get("strength_level"), pattern.get("than_vuong_nhuoc")))
     reasoning = _first_text(strength.get("reasoning"), pattern.get("than_vuong_nhuoc"))
+    evidence = _text(strength.get("evidence_compact"))
     guidance = STRENGTH_PUBLIC_GUIDANCE.get(label, "")
     parts = _non_empty(
         [
             f"Thế thân được đánh giá là {label}." if label else "",
             "Căn cứ được tổng hợp từ mùa sinh, căn khí, lực sinh trợ, lực tiết khí và lực khắc chế trong toàn bộ Tứ trụ." if label else "",
             f"Lý do chính: {reasoning}." if reasoning and reasoning != label else "",
+            f"Các dấu hiệu trực tiếp: {evidence}." if evidence else "",
             guidance,
         ]
     )

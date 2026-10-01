@@ -25,7 +25,7 @@ def test_windows_startup_summary_reports_primary_port_8686() -> None:
 
 def test_windows_stop_script_does_not_depend_on_process_inventory_tools() -> None:
     source = (WINDOWS_DEPLOYMENT / "stop_all.bat").read_text(encoding="utf-8")
-    assert "for %%R in (8000 8080 8081 8082 8686)" in source
+    assert "for %%R in (8000 8080 8081 8082 8686 8688)" in source
     assert "netstat -ano" in source
     assert "Get-CimInstance" not in source
     assert "wmic process" not in source.lower()

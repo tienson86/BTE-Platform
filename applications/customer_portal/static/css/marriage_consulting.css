@@ -22,9 +22,7 @@
 
 .mc-person,
 .mc-hero,
-.mc-identity,
-.mc-actions .mc-action,
-.mc-domain {
+.mc-identity {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
@@ -308,8 +306,6 @@
   color: var(--muted);
 }
 
-.mc-domain-grid,
-.mc-action-grid,
 .mc-comparison-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -329,17 +325,38 @@
   min-height: 4rem;
 }
 
-.mc-expert pre {
-  overflow: auto;
-  max-height: 24rem;
-  font-size: var(--text-sm);
-}
-
-.mc-expert-body {
+.mc-guidance {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-  margin-top: var(--space-4);
+  gap: var(--space-3);
+}
+
+.mc-guidance__intro,
+.mc-guidance__timing p,
+.mc-guidance__list p,
+.mc-guidance__scope {
+  margin: 0;
+}
+
+.mc-guidance__timing {
+  padding: var(--space-3) 0;
+  border-top: var(--border-width, 1px) solid var(--border-divider, #e2e5eb);
+  border-bottom: var(--border-width, 1px) solid var(--border-divider, #e2e5eb);
+}
+
+.mc-guidance__list {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.mc-guidance__list li {
+  padding-left: var(--space-2);
+}
+
+.mc-guidance__list h3 {
+  margin: 0 0 var(--space-2);
 }
 
 .mc-page :focus-visible {
@@ -447,8 +464,6 @@
 }
 
 @media (max-width: 1024px) {
-  .mc-domain-grid,
-  .mc-action-grid,
   .mc-comparison-grid,
   .mc-assessment-grid {
     grid-template-columns: minmax(0, 1fr);
@@ -458,8 +473,6 @@
 @media (max-width: 768px) {
   .mc-people,
   .mc-birth-row,
-  .mc-domain-grid,
-  .mc-action-grid,
   .mc-comparison-grid,
   .mc-assessment-grid {
     grid-template-columns: minmax(0, 1fr);

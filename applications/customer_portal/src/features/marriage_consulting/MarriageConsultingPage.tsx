@@ -27,15 +27,13 @@ export function MarriageConsultingPage(): ReactNode {
   const [errorMessage, setErrorMessage] = useState("");
   const [retryable, setRetryable] = useState(false);
   const [view, setView] = useState<MarriageViewModel | null>(null);
-  const [expertMode, setExpertMode] = useState(false);
-  const [consultationId, setConsultationId] = useState<string | null>(null);
   const [lastBody, setLastBody] = useState<ReturnType<typeof toConsultationBody>>(null);
 
   const layout = useMemo(() => "customer-dashboard", []);
 
-  async function loadResult(id: string, expert: boolean): Promise<void> {
+  async function loadResult(id: string): Promise<void> {
     try {
-      const reportEnvelope = await getReport(id, expert);
+      const reportEnvelope = await getReport(id);
       const report = reportEnvelope.data;
       if (!report) {
         setStatus("error");
@@ -43,7 +41,7 @@ export function MarriageConsultingPage(): ReactNode {
         setRetryable(true);
         return;
       }
-      const consultationEnvelope = await getConsultation(id, expert);
+      const consultationEnvelope = await getConsultation(id);
       const consultation = consultationEnvelope.data;
       if (!consultation) {
         setStatus("error");
@@ -51,14 +49,11 @@ export function MarriageConsultingPage(): ReactNode {
         setRetryable(true);
         return;
       }
-      setView(
-        adaptMarriageView(
-          consultation,
-          report,
-          [...(consultationEnvelope.warnings || []), ...(reportEnvelope.warnings || [])],
-          expert ? (consultation.expert as Record<string, unknown> | undefined) || null : null,
-        ),
-      );
+      setView(adaptMarriageView(
+        consultation,
+        report,
+        [...(consultationEnvelope.warnings || []), ...(reportEnvelope.warnings || [])],
+      ));
       setStatus("success");
     } catch {
       setStatus("error");
@@ -67,13 +62,13 @@ export function MarriageConsultingPage(): ReactNode {
     }
   }
 
-  async function run(body = lastBody, expert = expertMode): Promise<void> {
+  async function run(body = lastBody): Promise<void> {
     if (!body) return;
     setStatus("loading");
     setErrorMessage("");
     setRetryable(false);
     try {
-      const created = await createConsultation(body, expert);
+      const created = await createConsultation(body);
       const createErrors = envelopeErrors(created);
       if (!created.data || created.status !== "SUCCESS") {
         const err = createErrors[0];
@@ -82,8 +77,7 @@ export function MarriageConsultingPage(): ReactNode {
         setRetryable(Boolean(err?.retryable));
         return;
       }
-      setConsultationId(created.data.consultation_id);
-      await loadResult(created.data.consultation_id, expert);
+      await loadResult(created.data.consultation_id);
     } catch {
       setStatus("error");
       setErrorMessage(customerErrorMessage(undefined));
@@ -105,16 +99,7 @@ export function MarriageConsultingPage(): ReactNode {
     }
     const body = toConsultationBody(personA, personB, false);
     setLastBody(body);
-    void run(body, false);
-  }
-
-  function toggleExpert(): void {
-    const next = !expertMode;
-    setExpertMode(next);
-    if (consultationId) {
-      setStatus("loading");
-      void loadResult(consultationId, next);
-    }
+    void run(body);
   }
 
   return (
@@ -169,9 +154,7 @@ export function MarriageConsultingPage(): ReactNode {
         </div>
       ) : null}
 
-      {view && status !== "loading" ? (
-        <ResultView view={view} expertMode={expertMode} onToggleExpert={toggleExpert} />
-      ) : null}
+      {view && status !== "loading" ? <ResultView view={view} /> : null}
     </div>
   );
 }

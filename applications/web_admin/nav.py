@@ -17,6 +17,7 @@ class NavItem:
 
 NAV_ITEMS: tuple[NavItem, ...] = (
     NavItem("dashboard", "Dashboard", "/", "dashboard.html"),
+    NavItem("accounts", "Quản lý tài khoản", "/accounts", "accounts.html"),
     NavItem("customers", "Customers", "/customers", "customers.html"),
     NavItem("cases", "Cases", "/cases", "cases.html"),
     NavItem("reports", "Reports", "/reports", "reports.html"),
