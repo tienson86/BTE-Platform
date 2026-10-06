@@ -17,7 +17,7 @@ from typing import Mapping
 
 import httpx
 from fastapi import FastAPI, Request, Response
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 from applications.web_admin.config import WEB_ADMIN_ROOT, settings
@@ -65,6 +65,11 @@ def create_app() -> FastAPI:
     @app.get("/accounts", response_class=HTMLResponse)
     def accounts_page() -> HTMLResponse:
         return page("accounts", "accounts.html")
+
+    @app.get("/account", include_in_schema=False)
+    def account_page_alias() -> RedirectResponse:
+        """Accept the common singular spelling and open account management."""
+        return RedirectResponse(url="/accounts", status_code=307)
 
     @app.get("/customers", response_class=HTMLResponse)
     def customers_page() -> HTMLResponse:

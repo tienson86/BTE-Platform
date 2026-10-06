@@ -5,7 +5,8 @@ from __future__ import annotations
 from typing import Any
 
 from fastapi import APIRouter, Body, Header, Query, Request, Response
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
+from starlette.background import BackgroundTask
 
 from consulting.marriage.api.parse import parse_consultation_request
 from consulting.marriage.api.serializers import (
@@ -29,6 +30,10 @@ from consulting.marriage.exceptions import (
 )
 from consulting.marriage.models.enums import MarriageRuntimeStatus
 from consulting.marriage.runtime.container import MarriageContainer
+from consulting.marriage.repository.json_file import JsonMarriageRepository
+from consulting.marriage.report.export import cleanup_marriage_export, export_marriage_file
+from consulting.business.api import build_business_archive_router
+from consulting.childbirth.api import build_childbirth_router
 
 
 def create_marriage_api_app(container: MarriageContainer | None = None):
@@ -37,7 +42,9 @@ def create_marriage_api_app(container: MarriageContainer | None = None):
 
     from consulting.marriage.runtime.api_wiring import wire_marriage_api_runtime
 
-    bound = container or wire_marriage_api_runtime()
+    bound = container or wire_marriage_api_runtime(
+        repository=JsonMarriageRepository.from_environment()
+    )
     app = FastAPI(title="TV-01 Marriage Consulting API", version=API_VERSION)
 
     @app.get("/healthz")
@@ -50,6 +57,7 @@ def create_marriage_api_app(container: MarriageContainer | None = None):
         }
 
     app.include_router(build_marriage_router(bound), prefix="/api/v1")
+    app.include_router(build_childbirth_router(), prefix="/api/v1")
     return app
 
 
@@ -59,6 +67,7 @@ def build_marriage_router(container: MarriageContainer) -> APIRouter:
     if not isinstance(api, MarriageConsultationApi):
         raise TypeError("marriage_api_not_bound")
     router = APIRouter(prefix="/consulting/marriage", tags=["consulting-marriage"])
+    router.include_router(build_business_archive_router(api))
 
     @router.post("")
     def create_consultation(
@@ -187,7 +196,52 @@ def build_marriage_router(container: MarriageContainer) -> APIRouter:
             )
         )
 
+    @router.get("/{consultation_id}/export/pdf")
+    def export_pdf(consultation_id: str) -> Response:
+        """Download the stored customer report as PDF without recomputation."""
+        return _export_response(api, consultation_id, "pdf")
+
+    @router.get("/{consultation_id}/export/docx")
+    def export_docx(consultation_id: str) -> Response:
+        """Download the stored customer report as editable DOCX."""
+        return _export_response(api, consultation_id, "docx")
+
     return router
+
+
+def _export_response(
+    api: MarriageConsultationApi,
+    consultation_id: str,
+    fmt: str,
+) -> Response:
+    try:
+        stored = api.get_stored(consultation_id)
+        artifact = export_marriage_file(stored, fmt)  # type: ignore[arg-type]
+    except MarriageNotFoundError as exc:
+        return _error_response(exc, consultation_id=consultation_id)
+    except Exception:
+        return JSONResponse(
+            status_code=500,
+            content=serialize_envelope(
+                status=MarriageRuntimeStatus.FAILED,
+                data=None,
+                errors=[
+                    serialize_error(
+                        code="INTERNAL_ERROR",
+                        stage="export",
+                        consultation_id=consultation_id,
+                    )
+                ],
+                versions={"api_version": API_VERSION},
+            ),
+        )
+    return FileResponse(
+        path=str(artifact.path),
+        media_type=artifact.media_type,
+        filename=artifact.filename,
+        background=BackgroundTask(cleanup_marriage_export, artifact.path),
+        headers={"X-BTE-Consultation-Id": consultation_id, "X-Content-Type-Options": "nosniff"},
+    )
 
 
 def _expert_requested(request: Request, stored_flag: bool | None) -> bool:

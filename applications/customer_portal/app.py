@@ -20,6 +20,9 @@ from fastapi.staticfiles import StaticFiles
 
 from applications.customer_portal.config import PORTAL_ROOT, settings
 from applications.customer_portal.pages import (
+    BUSINESS_CONSULTING_PATH,
+    CHILDBIRTH_API_PROXY_PREFIX,
+    CHILDBIRTH_CONSULTING_PATH,
     HOME_PATH,
     LOGIN_ITEM,
     MARRIAGE_API_PROXY_PREFIX,
@@ -46,7 +49,12 @@ HOP_BY_HOP = {
 
 def _proxy_upstream_url(path: str) -> str:
     """HTTP-only composition: marriage Public API is a separate origin."""
-    if path == MARRIAGE_API_PROXY_PREFIX or path.startswith(f"{MARRIAGE_API_PROXY_PREFIX}/"):
+    if (
+        path == MARRIAGE_API_PROXY_PREFIX
+        or path.startswith(f"{MARRIAGE_API_PROXY_PREFIX}/")
+        or path == CHILDBIRTH_API_PROXY_PREFIX
+        or path.startswith(f"{CHILDBIRTH_API_PROXY_PREFIX}/")
+    ):
         return f"{settings.marriage_api_base_url.rstrip('/')}/{path}"
     return f"{settings.api_base_url.rstrip('/')}/{path}"
 
@@ -141,6 +149,16 @@ def create_app() -> FastAPI:
         """TV-01 Marriage Consulting customer page."""
         return page("marriage-consulting", "marriage_consulting.html")
 
+    @app.get(BUSINESS_CONSULTING_PATH, response_class=HTMLResponse)
+    def business_consulting_page() -> HTMLResponse:
+        """Business partnership and career consulting customer page."""
+        return page("business-consulting", "business_consulting.html")
+
+    @app.get(CHILDBIRTH_CONSULTING_PATH, response_class=HTMLResponse)
+    def childbirth_consulting_page() -> HTMLResponse:
+        """Childbirth planning consulting customer page."""
+        return page("childbirth-consulting", "childbirth_consulting.html")
+
     @app.get(NUMBER_ENERGY_PATH, response_class=HTMLResponse)
     def number_energy_page() -> HTMLResponse:
         """Number Energy V1 — Bát Cực Linh Số / Năng lượng số."""
@@ -164,6 +182,9 @@ def create_app() -> FastAPI:
         marriage_route = path == MARRIAGE_API_PROXY_PREFIX or path.startswith(
             f"{MARRIAGE_API_PROXY_PREFIX}/"
         )
+        childbirth_route = path == CHILDBIRTH_API_PROXY_PREFIX or path.startswith(
+            f"{CHILDBIRTH_API_PROXY_PREFIX}/"
+        )
         number_energy_route = path == NUMBER_ENERGY_API_PROXY_PREFIX or path.startswith(
             f"{NUMBER_ENERGY_API_PROXY_PREFIX}/"
         )
@@ -178,7 +199,7 @@ def create_app() -> FastAPI:
                     content=body,
                 )
         except httpx.RequestError:
-            if marriage_route:
+            if marriage_route or childbirth_route:
                 return JSONResponse(
                     status_code=503,
                     content={
@@ -241,6 +262,8 @@ def create_app() -> FastAPI:
                 "/choose-date",
                 "/result-workspace",
                 MARRIAGE_CONSULTING_PATH,
+                BUSINESS_CONSULTING_PATH,
+                CHILDBIRTH_CONSULTING_PATH,
                 NUMBER_ENERGY_PATH,
             ],
             "marriage_api_base_url": settings.marriage_api_base_url,

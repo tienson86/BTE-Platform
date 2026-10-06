@@ -16,6 +16,8 @@ _PRODUCT_LABELS = (
     "Xem lá số",
     "Tư vấn năng lượng số",
     "Tư vấn hôn nhân",
+    "Tư vấn hợp tác",
+    "Tư vấn sinh con",
 )
 _ORIGINAL_THREE_LABELS = ("Trang chủ", "Chọn ngày tốt", "Xem lá số")
 _CANONICAL_FIELDS = ("full_name", "gender", "birth_date", "birth_time", "birth_place")
@@ -130,7 +132,7 @@ def test_v9_successful_analysis_still_routes_to_result() -> None:
 
 
 def test_v10_customer_nav_keeps_original_items() -> None:
-    """RB18: five primary items; /analyze and /result stay on Xem lá số, not Number Energy."""
+    """/analyze and /result stay on Xem lá số, not Number Energy."""
     client = _client()
     nav = _primary_nav(client.get("/analyze").text)
     labels = _nav_labels(nav)
@@ -138,6 +140,8 @@ def test_v10_customer_nav_keeps_original_items() -> None:
     assert labels == list(_PRODUCT_LABELS)
     assert labels[3] == "Tư vấn năng lượng số"
     assert labels[4] == "Tư vấn hôn nhân"
+    assert labels[5] == "Tư vấn hợp tác"
+    assert labels[6] == "Tư vấn sinh con"
     for label in ("Kết quả", "Báo cáo", "Lịch sử", "Hướng dẫn"):
         assert label not in nav
     assert 'data-nav-id="analyze"' in nav

@@ -22,8 +22,8 @@ if defined ADMIN_PORT set PORT=%ADMIN_PORT%
 
 echo Starting BTE Web Admin on %HOST%:%PORT% ...
 if exist ".venv\Scripts\python.exe" (
-  ".venv\Scripts\python.exe" -m uvicorn applications.web_admin.app:app --host %HOST% --port %PORT% >> "logs\admin_8688.log" 2>&1
+  ".venv\Scripts\python.exe" -m uvicorn applications.web_admin.app:app --host %HOST% --port %PORT%
 ) else (
-  python -m uvicorn applications.web_admin.app:app --host %HOST% --port %PORT% >> "logs\admin_8688.log" 2>&1
+  python -m uvicorn applications.web_admin.app:app --host %HOST% --port %PORT%
 )
 endlocal

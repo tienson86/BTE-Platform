@@ -27,7 +27,7 @@ UNFAVORABLE_IDS = frozenset({"tuyet_menh", "ngu_quy", "luc_sat", "hoa_hai"})
 
 @dataclass(frozen=True, slots=True)
 class DuNienRelation:
-    """One ordered Cung Phi pair from the canonical matrix."""
+    """One Cung Phi pair from the canonical symmetric matrix."""
 
     source_palace: str
     target_palace: str
@@ -87,11 +87,15 @@ def load_matrix() -> dict[tuple[str, str], DuNienRelation]:
             raise DuNienCanonError(f"row_relationship_set_invalid:{source}")
     if len(entries) != 64:
         raise DuNienCanonError(f"expected_64_pairs:{len(entries)}")
+    for source in PALACES:
+        for target in PALACES:
+            if entries[(source, target)].relationship_id != entries[(target, source)].relationship_id:
+                raise DuNienCanonError(f"asymmetric_relationship:{source}:{target}")
     return entries
 
 
 def lookup(source_palace: str, target_palace: str) -> DuNienRelation | None:
-    """Return the canonical relation of an ordered palace pair."""
+    """Return the canonical relation of a palace pair."""
     key = (_normalize_palace(source_palace), _normalize_palace(target_palace))
     if not key[0] or not key[1]:
         return None

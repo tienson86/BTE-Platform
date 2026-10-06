@@ -13,6 +13,8 @@ const PRODUCT_LABELS = [
   "Xem lá số",
   "Tư vấn năng lượng số",
   "Tư vấn hôn nhân",
+  "Tư vấn hợp tác",
+  "Tư vấn sinh con",
 ] as const;
 const ORIGINAL_THREE_HREFS = ["/good-date", "/choose-date", "/analyze"] as const;
 const PRODUCT_HREFS = [
@@ -21,11 +23,13 @@ const PRODUCT_HREFS = [
   "/analyze",
   "/number-energy",
   "/marriage-consulting",
+  "/business-consulting",
+  "/childbirth-consulting",
 ] as const;
 const FORBIDDEN_LABELS = ["Báo cáo", "Lịch sử", "Tài khoản", "Hướng dẫn", "Luận giải", "Kết quả"] as const;
 
 describe("UI-01 customer primary navigation", () => {
-  it("N1 exposes five product items (RB18)", () => {
+  it("N1 exposes customer product items", () => {
     expect(APP_NAV_ITEMS.map((item) => item.label)).toEqual([...PRODUCT_LABELS]);
     render(<PrimaryNav activeId="home" />);
     const nav = screen.getByRole("navigation", { name: "Điều hướng chính" });
@@ -47,6 +51,22 @@ describe("UI-01 customer primary navigation", () => {
     expect(resolveActiveNavId("/analyze")).toBe("analyze");
     expect(resolveActiveNavId("/number-energy")).toBe("number-energy");
     expect(resolveActiveNavId("/marriage-consulting")).toBe("marriage-consulting");
+    expect(resolveActiveNavId("/business-consulting")).toBe("business-consulting");
+    expect(resolveActiveNavId("/childbirth-consulting")).toBe("childbirth-consulting");
+  });
+
+  it("BUS1 marks Tư vấn hợp tác active on /business-consulting", () => {
+    render(<PrimaryNav activeId="business-consulting" />);
+    expect(screen.getByText("Tư vấn hợp tác").getAttribute("href")).toBe("/business-consulting");
+    expect(screen.getByText("Tư vấn hợp tác").getAttribute("aria-current")).toBe("page");
+    expect(screen.getByText("Tư vấn hôn nhân").getAttribute("aria-current")).toBeNull();
+  });
+
+  it("CB1 marks Tư vấn sinh con active on /childbirth-consulting", () => {
+    render(<PrimaryNav activeId="childbirth-consulting" />);
+    expect(screen.getByText("Tư vấn sinh con").getAttribute("href")).toBe("/childbirth-consulting");
+    expect(screen.getByText("Tư vấn sinh con").getAttribute("aria-current")).toBe("page");
+    expect(screen.getByText("Tư vấn hợp tác").getAttribute("aria-current")).toBeNull();
   });
 
   it("N8–N9 keep result on the Xem lá số journey without a Kết quả menu", () => {
@@ -105,9 +125,11 @@ describe("UI-01A result shell contract", () => {
   });
 
   it("A8 does not add a competing customer nav list", () => {
-    expect(APP_NAV_ITEMS).toHaveLength(5);
+    expect(APP_NAV_ITEMS).toHaveLength(7);
     expect(APP_NAV_ITEMS.slice(0, 3).map((item) => item.href)).toEqual([...ORIGINAL_THREE_HREFS]);
     expect(APP_NAV_ITEMS.map((item) => item.href)).toEqual([...PRODUCT_HREFS]);
     expect(APP_NAV_ITEMS[4]?.id).toBe("marriage-consulting");
+    expect(APP_NAV_ITEMS[5]?.id).toBe("business-consulting");
+    expect(APP_NAV_ITEMS[6]?.id).toBe("childbirth-consulting");
   });
 });

@@ -23,6 +23,8 @@ export const APP_NAV_ITEMS: readonly AppNavItem[] = [
   { id: "analyze", label: "Xem lá số", href: "/analyze" },
   { id: "number-energy", label: "Tư vấn năng lượng số", href: "/number-energy" },
   { id: "marriage-consulting", label: "Tư vấn hôn nhân", href: "/marriage-consulting" },
+  { id: "business-consulting", label: "Tư vấn hợp tác", href: "/business-consulting" },
+  { id: "childbirth-consulting", label: "Tư vấn sinh con", href: "/childbirth-consulting" },
 ];
 
 export type TocNavItem = {
@@ -68,6 +70,12 @@ export function resolveActiveNavId(pathname: string): string | undefined {
   }
   if (normalized === "/marriage-consulting") {
     return "marriage-consulting";
+  }
+  if (normalized === "/business-consulting") {
+    return "business-consulting";
+  }
+  if (normalized === "/childbirth-consulting") {
+    return "childbirth-consulting";
   }
   if (
     normalized === "/analyze" ||

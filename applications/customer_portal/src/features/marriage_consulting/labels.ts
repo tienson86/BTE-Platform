@@ -50,6 +50,7 @@ export const DOMAIN_TITLE: Record<string, string> = {
   family: "Gia đình",
   children: "Con cái",
   luck: "Nhịp thời điểm",
+  cung_phi: "Cung Phi",
   overall: "Tổng thể",
 };
 

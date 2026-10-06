@@ -10,7 +10,7 @@ import { ResultView } from "../../src/features/marriage_consulting/ResultView";
 import { FORBIDDEN_ID_PATTERN, FORBIDDEN_SCORE_PATTERN, PRODUCT_TITLE } from "../../src/features/marriage_consulting/labels";
 import { DEFAULT_PERSON_A, DEFAULT_PERSON_B, EMPTY_PERSON, toConsultationBody, validatePerson } from "../../src/features/marriage_consulting/request";
 import { APP_NAV_ITEMS } from "../../src/layouts/Navigation";
-import type { MarriageConsultationDto, MarriageReportDto, MarriageWarning } from "../../src/features/marriage_consulting/types";
+import type { MarriageConsultationDto, MarriageHistoryItemDto, MarriageReportDto, MarriageWarning } from "../../src/features/marriage_consulting/types";
 
 afterEach(() => {
   cleanup();
@@ -129,7 +129,7 @@ function envelope<T>(data: T, extraWarnings: MarriageWarning[] = warnings) {
   return { status: "SUCCESS", data, warnings: extraWarnings, errors: [] };
 }
 
-function mockApi(options?: { fail?: boolean; retryable?: boolean }) {
+function mockApi(options?: { fail?: boolean; retryable?: boolean; history?: MarriageHistoryItemDto[] }) {
   vi.stubGlobal(
     "fetch",
     vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
@@ -152,6 +152,9 @@ function mockApi(options?: { fail?: boolean; retryable?: boolean }) {
           },
           500,
         );
+      }
+      if (url.includes("/history")) {
+        return jsonResponse(envelope({ items: options?.history || [], next_cursor: null }, []));
       }
       if (init?.method === "POST") {
         const body = JSON.parse(String(init.body || "{}")) as { person_a?: { gender?: string; birth_date?: string } };
@@ -290,6 +293,7 @@ describe("TV1-B07 Marriage Consulting UI", () => {
       domain_scores: [
         { domain: "five_elements", score: 78, weight: 20, available: true },
         { domain: "stem_branch", score: 66, weight: 18, available: true },
+        { domain: "cung_phi", score: 83.3, weight: 3, weight_label: "Điều chỉnh +2 điểm; giới hạn ±3", available: true },
         { domain: "children", score: null, weight: 4, available: false },
       ],
     };
@@ -301,6 +305,8 @@ describe("TV1-B07 Marriage Consulting UI", () => {
     expect(screen.getByTestId("overall-score").textContent).toContain("72.4/100");
     expect(screen.getByTestId("overall-grade").textContent).toContain("B");
     expect(screen.getByTestId("domain-scores").textContent).toContain("Ngũ hành");
+    expect(screen.getByTestId("domain-scores").textContent).toContain("Cung Phi");
+    expect(screen.getByTestId("domain-scores").textContent).toContain("Điều chỉnh +2 điểm; giới hạn ±3");
     expect(screen.getByTestId("domain-scores").textContent).not.toContain("Con cái");
   });
 
@@ -380,6 +386,31 @@ describe("TV1-B07 Marriage Consulting UI", () => {
     expect(vi.mocked(fetch).mock.calls.some(([input]) => String(input).includes("expert=true"))).toBe(false);
   });
 
+  it("shows PDF/DOCX exports and retained marriage profiles", async () => {
+    mockApi({
+      history: [
+        {
+          consultation_id: consultation.consultation_id,
+          created_at: "2026-10-02T10:00:00Z",
+          overall_state: "mixed",
+          score: 72.4,
+          grade: "B",
+          status: "SUCCESS",
+          display_identity: "An / Binh",
+        },
+      ],
+    });
+    render(<MarriageConsultingPage />);
+    expect(await screen.findByTestId("marriage-history")).toBeTruthy();
+    await waitFor(() => expect(screen.getByText("An / Binh")).toBeTruthy());
+    fillValidForm();
+    fireEvent.submit(screen.getByTestId("marriage-form"));
+    await waitFor(() => expect(screen.getByTestId("marriage-result-toolbar")).toBeTruthy());
+    expect(screen.getByRole("button", { name: "Xuất PDF" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Xuất DOCX" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Tư vấn cặp mới" })).toBeTruthy();
+  });
+
   it("24 error rendering is customer-safe and retryable", async () => {
     mockApi({ fail: true, retryable: true });
     render(<MarriageConsultingPage />);
@@ -425,13 +456,13 @@ describe("TV1-B07 Marriage Consulting UI", () => {
     expect(screen.getByTestId("submit-marriage").tagName).toBe("BUTTON");
   });
 
-  it("27 existing three destinations stay; Marriage remains the last primary item", () => {
+  it("27 existing three destinations stay; Marriage and Business remain primary items", () => {
     expect(APP_NAV_ITEMS.slice(0, 3).map((item) => item.href)).toEqual([
       "/good-date",
       "/choose-date",
       "/analyze",
     ]);
-    expect(APP_NAV_ITEMS).toHaveLength(5);
+    expect(APP_NAV_ITEMS).toHaveLength(7);
     expect(APP_NAV_ITEMS[3]).toEqual({
       id: "number-energy",
       label: "Tư vấn năng lượng số",
@@ -441,6 +472,16 @@ describe("TV1-B07 Marriage Consulting UI", () => {
       id: "marriage-consulting",
       label: "Tư vấn hôn nhân",
       href: "/marriage-consulting",
+    });
+    expect(APP_NAV_ITEMS[5]).toEqual({
+      id: "business-consulting",
+      label: "Tư vấn hợp tác",
+      href: "/business-consulting",
+    });
+    expect(APP_NAV_ITEMS[6]).toEqual({
+      id: "childbirth-consulting",
+      label: "Tư vấn sinh con",
+      href: "/childbirth-consulting",
     });
   });
 });

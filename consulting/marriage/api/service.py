@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from dataclasses import replace
 
 from consulting.marriage.api.contract import MarriageApiContract
 from consulting.marriage.api.parse import request_fingerprint
@@ -14,7 +15,7 @@ from consulting.marriage.dto.response import MarriageConsultationSummary, Marria
 from consulting.marriage.exceptions import MarriageConflictError, MarriageNotFoundError, MarriageValidationError
 from consulting.marriage.models.enums import MarriageRuntimeStatus
 from consulting.marriage.models.result import MarriageDecisionResult
-from consulting.marriage.repository.memory import InMemoryMarriageRepository
+from consulting.marriage.repository.contract import MarriageRepository
 from consulting.marriage.runtime.narrative_pipeline import MarriageReportOrchestrator
 from consulting.marriage.validation.runtime import MarriageRuntimeValidation
 
@@ -28,7 +29,7 @@ class MarriageConsultationApi(MarriageApiContract):
         self,
         *,
         orchestrator: MarriageReportOrchestrator,
-        repository: InMemoryMarriageRepository,
+        repository: MarriageRepository,
         validation: MarriageRuntimeValidation,
     ) -> None:
         self._orchestrator = orchestrator
@@ -108,6 +109,37 @@ class MarriageConsultationApi(MarriageApiContract):
             grade=grade,
         )
 
+    def get_business_stored(self, consultation_id: str) -> MarriageStoredResult:
+        from consulting.business.presentation import business_context
+
+        stored = self._require(consultation_id)
+        if business_context(stored) is None:
+            raise MarriageNotFoundError("consultation_not_found")
+        return stored
+
+    def save_business_profile(self, consultation_id: str) -> MarriageStoredResult:
+        from consulting.business.presentation import resolve_business_profile
+
+        stored = self.get_business_stored(consultation_id)
+        if stored.business_profile is not None and stored.business_profile.business_score is not None:
+            return stored
+        saved = replace(stored, business_profile=resolve_business_profile(stored))
+        self._repository.save(saved)
+        return saved
+
+    def list_business_history_page(self, *, cursor: str | None, limit: int) -> tuple[list[MarriageStoredResult], str | None]:
+        from consulting.business.presentation import business_context
+
+        if limit < 1 or limit > HISTORY_MAX_LIMIT:
+            raise MarriageValidationError("history_limit_invalid")
+        records = [self._require(row.consultation_id) for row in self._repository.list_history()]
+        records = [stored for stored in records if stored.business_profile is not None and business_context(stored) is not None]
+        records.sort(key=lambda stored: stored.business_profile.saved_at, reverse=True)
+        start = next((index + 1 for index, stored in enumerate(records) if stored.history.consultation_id == cursor), 0) if cursor else 0
+        page = records[start:start + limit]
+        next_cursor = page[-1].history.consultation_id if page and start + limit < len(records) else None
+        return page, next_cursor
+
     def _require(self, consultation_id: str) -> MarriageStoredResult:
         """Load a stored consultation or fail closed."""
         stored = self._repository.get(consultation_id)
@@ -168,6 +200,6 @@ def _runtime_from_stored(stored: MarriageStoredResult) -> MarriageRuntimeRespons
 
 def _display_label(name_a: str | None, name_b: str | None) -> str:
     """Customer history identity from presentation-safe names."""
-    left = name_a.strip() if name_a and name_a.strip() else "Người A"
-    right = name_b.strip() if name_b and name_b.strip() else "Người B"
+    left = name_a.strip() if name_a and name_a.strip() else "Người Nữ"
+    right = name_b.strip() if name_b and name_b.strip() else "Người Nam"
     return f"{left} / {right}"

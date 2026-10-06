@@ -451,19 +451,35 @@ def _iter_domains(result: MarriageDecisionResult) -> tuple[MarriageDomainDecisio
 
 
 def _public_domain_scores(result: MarriageDecisionResult) -> list[dict[str, object]]:
-    """Customer-safe domain score rows. Internal modifiers stay expert-only."""
+    """Customer-safe score rows, including the bounded Cung Phi supplement."""
     audit = result.score_audit
     if audit is None:
         return []
-    return [
+    rows = [
         {
             "domain": item.domain.value,
             "score": item.score,
             "weight": item.configured_weight,
+            "weight_label": f"Trọng số {item.configured_weight:g}%",
             "available": item.score is not None,
         }
         for item in audit.domain_scores
     ]
+    cung_phi_adjustments = [
+        item for item in audit.modifier_audit if item.key.startswith("cung_phi_")
+    ]
+    if cung_phi_adjustments:
+        modifier = audit.secondary_modifier
+        rows.append(
+            {
+                "domain": "cung_phi",
+                "score": round(max(0.0, min(100.0, 50.0 + modifier * (50.0 / 3.0))), 1),
+                "weight": 3.0,
+                "weight_label": f"Điều chỉnh {modifier:+g} điểm; giới hạn ±3",
+                "available": True,
+            }
+        )
+    return rows
 
 
 def _public_compatibility_matrix(result: MarriageDecisionResult) -> dict[str, object] | None:

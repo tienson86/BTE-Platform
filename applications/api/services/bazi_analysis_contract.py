@@ -1792,7 +1792,8 @@ def _life_domain_paragraphs(life_domains: Mapping[str, Any]) -> list[str]:
     for key in LIFE_DOMAIN_KEYS:
         section = _mapping(life_domains.get(key))
         title = _first_text(section.get("title"), LIFE_DOMAIN_TITLES[key])
-        detailed = _text_list(section.get("paragraphs"))
+        detailed = [item for item in _text_list(section.get("paragraphs"))
+                    if not _is_internal_life_domain_placeholder(item)]
         if detailed:
             paragraphs.extend(
                 f"{title} - {_life_domain_subtitle(item, index)}: "
@@ -1804,6 +1805,12 @@ def _life_domain_paragraphs(life_domains: Mapping[str, Any]) -> list[str]:
         if summary:
             paragraphs.append(f"{title}: {summary}")
     return paragraphs
+
+
+def _is_internal_life_domain_placeholder(value: str) -> bool:
+    """Exclude unfinished timing metadata from customer chapters."""
+    normalized = value.casefold()
+    return ("modifier" in normalized and "natal" in normalized) or "sự thật natal" in normalized
 
 
 def _luck_cycle_paragraphs(luck_cycles: Mapping[str, Any]) -> list[str]:
@@ -2309,7 +2316,8 @@ def _enrich_life_domain_section(
     payload: Mapping[str, Any],
 ) -> None:
     summary = _text(section.get("summary"))
-    paragraphs = _life_domain_detail_paragraphs(key, payload, summary)
+    paragraphs = [item for item in _life_domain_detail_paragraphs(key, payload, summary)
+                  if not _is_internal_life_domain_placeholder(item)]
     if paragraphs:
         section["paragraphs"] = paragraphs
     if key == "marriage":

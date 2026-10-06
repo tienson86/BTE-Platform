@@ -102,6 +102,10 @@ def test_api_opt_in_returns_and_persists_explainable_score() -> None:
     assert 0.0 <= data["score"] <= 100.0
     assert data["grade"] in {"A", "B", "C", "D", "E"}
     assert data["domain_scores"]
+    cung_phi = next(item for item in data["domain_scores"] if item["domain"] == "cung_phi")
+    assert 0.0 <= cung_phi["score"] <= 100.0
+    assert cung_phi["weight"] == 3.0
+    assert "giới hạn ±3" in cung_phi["weight_label"]
     assert data["versions"]["score_model_version"] == ACTIVE_SCORE_MODEL_VERSION
     consultation_id = data["consultation_id"]
     history = client.get("/api/v1/consulting/marriage/history").json()["data"]["items"]

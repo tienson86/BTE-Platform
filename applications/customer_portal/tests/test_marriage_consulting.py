@@ -9,7 +9,11 @@ import httpx
 from fastapi.testclient import TestClient
 
 from applications.customer_portal.app import create_app
-from applications.customer_portal.pages import CUSTOMER_NAV_ITEMS, MARRIAGE_CONSULTING_PATH
+from applications.customer_portal.pages import (
+    CHILDBIRTH_CONSULTING_PATH,
+    CUSTOMER_NAV_ITEMS,
+    MARRIAGE_CONSULTING_PATH,
+)
 
 
 def _client() -> TestClient:
@@ -26,10 +30,12 @@ def test_marriage_consulting_route_loads() -> None:
 
 
 def test_primary_nav_includes_approved_fourth_item() -> None:
-    """TV1-B07A + RB18: Tư vấn hôn nhân remains the last live primary nav item."""
+    """TV1-B07A + RB18: Tư vấn hôn nhân remains a live primary nav item."""
     html = _client().get("/good-date").text
-    assert len(CUSTOMER_NAV_ITEMS) == 5
-    assert CUSTOMER_NAV_ITEMS[-1].path == "/marriage-consulting"
+    assert len(CUSTOMER_NAV_ITEMS) == 7
+    assert CUSTOMER_NAV_ITEMS[4].path == "/marriage-consulting"
+    assert CUSTOMER_NAV_ITEMS[5].path == "/business-consulting"
+    assert CUSTOMER_NAV_ITEMS[-1].path == CHILDBIRTH_CONSULTING_PATH
     assert html.count('data-customer-nav="primary"') == 1
     nav_start = html.index('data-customer-nav="primary"')
     nav_html = html[nav_start : html.index("</nav>", nav_start)]
@@ -37,6 +43,8 @@ def test_primary_nav_includes_approved_fourth_item() -> None:
     assert "Chọn ngày tốt" in nav_html
     assert "Xem lá số" in nav_html
     assert "Tư vấn hôn nhân" in nav_html
+    assert "Tư vấn hợp tác" in nav_html
+    assert "Tư vấn sinh con" in nav_html
     assert 'href="/marriage-consulting"' in nav_html
     assert 'data-nav-family="consulting"' not in html
 
@@ -62,6 +70,9 @@ def test_existing_customer_routes_still_render() -> None:
     assert client.get("/choose-date").status_code == 200
     assert client.get("/analyze").status_code == 200
     assert client.get("/result").status_code == 200
+    response = client.get(CHILDBIRTH_CONSULTING_PATH)
+    assert response.status_code == 200
+    assert 'data-testid="childbirth-page"' in response.text
 
 
 def test_marriage_proxy_does_not_import_consulting() -> None:

@@ -19,6 +19,8 @@ _PRODUCT_LABELS = (
     "Xem lá số",
     "Tư vấn năng lượng số",
     "Tư vấn hôn nhân",
+    "Tư vấn hợp tác",
+    "Tư vấn sinh con",
 )
 _ORIGINAL_THREE_LABELS = ("Trang chủ", "Chọn ngày tốt", "Xem lá số")
 
@@ -46,8 +48,8 @@ def _main_html(html: str) -> str:
     return match.group(1) if match else html
 
 
-def test_a1_result_primary_nav_has_five_product_items() -> None:
-    """RB18: /result uses the same five-item live chrome; original three stay first."""
+def test_a1_result_primary_nav_has_six_product_items() -> None:
+    """/result uses the same live chrome; original three stay first."""
     nav = _primary_nav(_client().get("/result").text)
     labels = _nav_labels(nav)
     assert labels[:3] == list(_ORIGINAL_THREE_LABELS)
@@ -143,12 +145,18 @@ def test_a8_single_customer_header_source() -> None:
     assert 'href: "/number-energy"' in nav_items
     assert 'label: "Tư vấn hôn nhân"' in nav_items
     assert 'href: "/marriage-consulting"' in nav_items
+    assert 'label: "Tư vấn hợp tác"' in nav_items
+    assert 'href: "/business-consulting"' in nav_items
+    assert 'label: "Tư vấn sinh con"' in nav_items
+    assert 'href: "/childbirth-consulting"' in nav_items
     assert [item.path for item in CUSTOMER_NAV_ITEMS] == [
         "/good-date",
         "/choose-date",
         "/analyze",
         "/number-energy",
         "/marriage-consulting",
+        "/business-consulting",
+        "/childbirth-consulting",
     ]
     assert [item.key for item in CUSTOMER_NAV_ITEMS] == [
         "home",
@@ -156,4 +164,6 @@ def test_a8_single_customer_header_source() -> None:
         "analyze",
         "number-energy",
         "marriage-consulting",
+        "business-consulting",
+        "childbirth-consulting",
     ]

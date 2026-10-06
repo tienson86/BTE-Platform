@@ -1,7 +1,14 @@
-import { useMemo, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
 
 import { adaptMarriageView, customerErrorMessage, envelopeErrors } from "./adapter";
-import { createConsultation, getConsultation, getReport } from "./api";
+import {
+  createConsultation,
+  downloadMarriageExport,
+  getConsultation,
+  getMarriageHistory,
+  getReport,
+} from "./api";
+import { MarriageHistoryPanel } from "./HistoryPanel";
 import {
   FAMILY_LABEL,
   PERSON_A_LABEL,
@@ -12,7 +19,7 @@ import {
 import { PersonPanel } from "./PersonPanel";
 import { ResultView } from "./ResultView";
 import { DEFAULT_PERSON_A, DEFAULT_PERSON_B, toConsultationBody, validatePerson } from "./request";
-import type { PersonFormValue } from "./types";
+import type { MarriageHistoryItemDto, PersonFormValue } from "./types";
 import type { PersonFieldErrors } from "./request";
 import type { MarriageViewModel } from "./types";
 
@@ -28,8 +35,31 @@ export function MarriageConsultingPage(): ReactNode {
   const [retryable, setRetryable] = useState(false);
   const [view, setView] = useState<MarriageViewModel | null>(null);
   const [lastBody, setLastBody] = useState<ReturnType<typeof toConsultationBody>>(null);
+  const [activeConsultationId, setActiveConsultationId] = useState<string | null>(null);
+  const [history, setHistory] = useState<MarriageHistoryItemDto[]>([]);
+  const [historyLoading, setHistoryLoading] = useState(true);
+  const [historyError, setHistoryError] = useState("");
+  const [exporting, setExporting] = useState<"pdf" | "docx" | null>(null);
+  const [exportError, setExportError] = useState("");
 
   const layout = useMemo(() => "customer-dashboard", []);
+
+  useEffect(() => {
+    void refreshHistory();
+  }, []);
+
+  async function refreshHistory(): Promise<void> {
+    setHistoryLoading(true);
+    setHistoryError("");
+    const envelope = await getMarriageHistory();
+    if (!envelope.data) {
+      setHistoryError("Chưa tải được danh sách hồ sơ. Vui lòng thử lại sau.");
+      setHistoryLoading(false);
+      return;
+    }
+    setHistory(envelope.data.items);
+    setHistoryLoading(false);
+  }
 
   async function loadResult(id: string): Promise<void> {
     try {
@@ -54,6 +84,7 @@ export function MarriageConsultingPage(): ReactNode {
         report,
         [...(consultationEnvelope.warnings || []), ...(reportEnvelope.warnings || [])],
       ));
+      setActiveConsultationId(id);
       setStatus("success");
     } catch {
       setStatus("error");
@@ -78,11 +109,38 @@ export function MarriageConsultingPage(): ReactNode {
         return;
       }
       await loadResult(created.data.consultation_id);
+      await refreshHistory();
     } catch {
       setStatus("error");
       setErrorMessage(customerErrorMessage(undefined));
       setRetryable(true);
     }
+  }
+
+  async function onExport(format: "pdf" | "docx"): Promise<void> {
+    if (!activeConsultationId || exporting) return;
+    setExporting(format);
+    setExportError("");
+    try {
+      await downloadMarriageExport(activeConsultationId, format);
+    } catch (error) {
+      setExportError(error instanceof Error ? error.message : "Không tạo được tệp xuất. Vui lòng thử lại.");
+    } finally {
+      setExporting(null);
+    }
+  }
+
+  function startNewConsultation(): void {
+    setPersonA(DEFAULT_PERSON_A);
+    setPersonB(DEFAULT_PERSON_B);
+    setErrorsA({});
+    setErrorsB({});
+    setView(null);
+    setActiveConsultationId(null);
+    setLastBody(null);
+    setErrorMessage("");
+    setExportError("");
+    setStatus("idle");
   }
 
   function onSubmit(event: FormEvent<HTMLFormElement>): void {
@@ -154,7 +212,46 @@ export function MarriageConsultingPage(): ReactNode {
         </div>
       ) : null}
 
-      {view && status !== "loading" ? <ResultView view={view} /> : null}
+      {view && status !== "loading" ? (
+        <>
+          <div className="mc-result-toolbar" data-testid="marriage-result-toolbar">
+            <button type="button" className="secondary" onClick={startNewConsultation}>
+              Tư vấn cặp mới
+            </button>
+            <div className="mc-result-toolbar__exports" aria-label="Xuất bản luận giải">
+              <button
+                type="button"
+                className="secondary"
+                disabled={Boolean(exporting)}
+                onClick={() => void onExport("pdf")}
+              >
+                {exporting === "pdf" ? "Đang tạo PDF..." : "Xuất PDF"}
+              </button>
+              <button
+                type="button"
+                className="secondary"
+                disabled={Boolean(exporting)}
+                onClick={() => void onExport("docx")}
+              >
+                {exporting === "docx" ? "Đang tạo DOCX..." : "Xuất DOCX"}
+              </button>
+            </div>
+          </div>
+          {exportError ? <p className="mc-export-error" role="alert">{exportError}</p> : null}
+          <ResultView view={view} />
+        </>
+      ) : null}
+
+      <MarriageHistoryPanel
+        items={history}
+        loading={historyLoading}
+        error={historyError}
+        activeId={activeConsultationId}
+        onOpen={(id) => {
+          setStatus("loading");
+          void loadResult(id);
+        }}
+      />
     </div>
   );
 }

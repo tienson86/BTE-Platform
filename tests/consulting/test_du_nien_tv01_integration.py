@@ -67,7 +67,9 @@ def test_tv01_other_pairs_follow_canonical_matrix() -> None:
         ("Khôn", "Cấn", "Sinh Khí"),
         ("Khảm", "Khôn", "Tuyệt Mệnh"),
         ("Khảm", "Tốn", "Sinh Khí"),
-        ("Khôn", "Chấn", "Ngũ Quỷ"),
+        ("Khôn", "Chấn", "Họa Hại"),
+        ("Khôn", "Càn", "Diên Niên"),
+        ("Ly", "Khảm", "Diên Niên"),
     )
     for source, target, label in cases:
         assert palace_relation(source, target) == lookup(source, target).relationship_label

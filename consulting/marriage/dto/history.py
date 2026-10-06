@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from consulting.business.models import BusinessProfile
 
 from consulting.marriage.dto.presentation import MarriagePresentationResult
 from consulting.marriage.dto.request import MarriageConsultationRequest
@@ -46,3 +47,4 @@ class MarriageStoredResult:
     status: MarriageRuntimeStatus = MarriageRuntimeStatus.SUCCESS
     idempotency_key: str | None = None
     request_fingerprint: str | None = None
+    business_profile: BusinessProfile | None = None

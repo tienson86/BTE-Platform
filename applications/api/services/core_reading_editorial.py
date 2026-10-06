@@ -83,6 +83,24 @@ def pattern_useful_paragraphs(payload: Mapping[str, Any]) -> list[str]:
     display = str(useful.get("useful_display") or "")
     result: list[str] = []
     pattern_copy = _catalog()["pattern"].get(label)
+    if label and not pattern_copy:
+        special = label.split(":", 1)[-1].strip()
+        if "Giá Vượng" in special:
+            meaning = (
+                "Giá Vượng là tên cấu trúc đặc biệt mà phần phân tích đang ghi nhận, "
+                "cần phân biệt với một cách cục thông thường lấy tên Thập thần của nguyệt lệnh. "
+                "Điểm cần xem là khí nổi trội được nâng đỡ bởi những Can Chi nào, "
+                "có thành thế nhất quán hay còn lực khác làm thay đổi hướng vận hành. "
+                "Trong đời sống, bạn nên đặt nguồn lực vào công việc có đầu ra rõ, "
+                "đồng thời dùng Dụng thần để giữ nhịp và tránh mở rộng quá sức."
+            )
+        else:
+            meaning = (
+                "Tên cấu trúc này mô tả cách các nguồn lực kết hợp trong toàn lá số. "
+                "Khi đọc cần đặt cạnh nguyệt lệnh, thế Thân và Dụng thần để hiểu "
+                "nguồn lực nào đang nâng đỡ bạn và phần nào cần điều tiết."
+            )
+        result.append(f"Mệnh cục {special}: {meaning}")
     if pattern_copy:
         month_branch = str(pattern.get("month_branch") or "").strip()
         main_qi = str(pattern.get("month_main_qi") or "").strip()

@@ -122,13 +122,15 @@ describe("Number Energy SB01 shell", () => {
     expect(screen.getByTestId("input-section").getAttribute("data-section")).toBe("NE-INPUT");
     expect(screen.getByTestId("input-form-region")).toBeTruthy();
     expect(screen.getByTestId("result-section")).toBeTruthy();
-    expect(APP_NAV_ITEMS).toHaveLength(5);
+    expect(APP_NAV_ITEMS).toHaveLength(7);
     expect(APP_NAV_ITEMS.map((item) => item.href)).toEqual([
       "/good-date",
       "/choose-date",
       "/analyze",
       "/number-energy",
       "/marriage-consulting",
+      "/business-consulting",
+      "/childbirth-consulting",
     ]);
     expect(fetchMock).not.toHaveBeenCalled();
   });
@@ -3105,6 +3107,8 @@ describe("Number Energy RB18 public runtime enable and menu", () => {
       "Xem lá số",
       "Tư vấn năng lượng số",
       "Tư vấn hôn nhân",
+      "Tư vấn hợp tác",
+      "Tư vấn sinh con",
     ]);
     expect(APP_NAV_ITEMS.map((item) => item.href)).toEqual([
       "/good-date",
@@ -3112,8 +3116,12 @@ describe("Number Energy RB18 public runtime enable and menu", () => {
       "/analyze",
       "/number-energy",
       "/marriage-consulting",
+      "/business-consulting",
+      "/childbirth-consulting",
     ]);
     expect(APP_NAV_ITEMS[4]?.id).toBe("marriage-consulting");
+    expect(APP_NAV_ITEMS[5]?.id).toBe("business-consulting");
+    expect(APP_NAV_ITEMS[6]?.id).toBe("childbirth-consulting");
     expect(RESULT_TOC_ITEMS.some((item) => item.href.includes("number-energy"))).toBe(false);
     expect(RESULT_TOC_ITEMS.map((item) => item.label)).not.toContain("Tư vấn năng lượng số");
   });
@@ -3172,6 +3180,8 @@ describe("Number Energy RB19 public runtime visual freeze", () => {
     "Xem lá số",
     "Tư vấn năng lượng số",
     "Tư vấn hôn nhân",
+    "Tư vấn hợp tác",
+    "Tư vấn sinh con",
   ] as const;
 
   function reviewReport(): Record<string, unknown> {
@@ -3191,7 +3201,7 @@ describe("Number Energy RB19 public runtime visual freeze", () => {
     );
   });
 
-  it("keeps the five-item menu and Result TOC free of Number Energy", () => {
+  it("keeps the product menu and Result TOC free of Number Energy", () => {
     expect(APP_NAV_ITEMS.map((item) => item.label)).toEqual([...NAV_LABELS]);
     expect(APP_NAV_ITEMS[3]).toEqual({
       id: "number-energy",
@@ -3199,6 +3209,8 @@ describe("Number Energy RB19 public runtime visual freeze", () => {
       href: "/number-energy",
     });
     expect(APP_NAV_ITEMS[4]?.id).toBe("marriage-consulting");
+    expect(APP_NAV_ITEMS[5]?.id).toBe("business-consulting");
+    expect(APP_NAV_ITEMS[6]?.id).toBe("childbirth-consulting");
     expect(RESULT_TOC_ITEMS.some((item) => item.href.includes("number-energy"))).toBe(false);
     expect(RESULT_TOC_ITEMS.map((item) => item.label)).not.toContain("Tư vấn năng lượng số");
   });

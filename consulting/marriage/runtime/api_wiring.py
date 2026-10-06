@@ -15,6 +15,7 @@ from consulting.marriage.policy.provider import MarriagePolicyV1Provider
 from consulting.marriage.presentation.placeholder import PlaceholderMarriagePresentationAdapter
 from consulting.marriage.recommendation.builder import CanonicalRecommendationProvider
 from consulting.marriage.report.profile import MarriageReportProfileV1
+from consulting.marriage.repository.contract import MarriageRepository
 from consulting.marriage.repository.memory import InMemoryMarriageRepository
 from consulting.marriage.runtime.container import MarriageContainer
 from consulting.marriage.runtime.narrative_pipeline import MarriageReportOrchestrator
@@ -27,9 +28,9 @@ logger = logging.getLogger(__name__)
 def wire_marriage_api_runtime(
     *,
     canonical_adapter: CanonicalOrchestratorAdapter | None = None,
-    repository: InMemoryMarriageRepository | None = None,
+    repository: MarriageRepository | None = None,
 ) -> MarriageContainer:
-    """Bind TV1-B06 API and in-memory repository. UI stays unimplemented."""
+    """Bind TV1-B06 API with an injected repository implementation."""
     validation = MarriageReportValidation()
     adapter = canonical_adapter or CanonicalOrchestratorAdapter()
     policy_provider = MarriagePolicyV1Provider()

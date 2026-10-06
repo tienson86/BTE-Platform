@@ -106,6 +106,7 @@ export type MarriageDomainScoreDto = {
   domain: string;
   score: number | null;
   weight: number;
+  weight_label?: string;
   available: boolean;
 };
 
@@ -137,6 +138,21 @@ export type MarriageReportDto = {
   sections: MarriageReportSection[];
 };
 
+export type MarriageHistoryItemDto = {
+  consultation_id: string;
+  created_at: string;
+  overall_state: string | null;
+  score: number | null;
+  grade: string | null;
+  status: string | null;
+  display_identity: string | null;
+};
+
+export type MarriageHistoryPageDto = {
+  items: MarriageHistoryItemDto[];
+  next_cursor: string | null;
+};
+
 export type DomainCardVm = {
   domain: string;
   title: string;
@@ -151,6 +167,7 @@ export type ScoreDomainVm = {
   title: string;
   score: number;
   weight: number;
+  weightLabel: string;
 };
 
 export type ActionCardVm = {

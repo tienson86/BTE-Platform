@@ -25,3 +25,19 @@ class PlaceholderMarriageRepository(MarriageRepository):
     def list_history(self) -> list[MarriageHistoryRecord]:
         """Refuse history listing. Persistence belongs to a later build phase."""
         raise NotImplementedError("TV1-B01: repository list_history is not implemented")
+
+    def get_by_idempotency_key(self, key: str) -> MarriageStoredResult | None:
+        """Refuse idempotency lookup in the frozen placeholder."""
+        raise NotImplementedError("TV1-B01: repository idempotency lookup is not implemented")
+
+    def list_history_page(
+        self,
+        *,
+        cursor: str | None,
+        limit: int,
+        status: str | None = None,
+        language: str | None = None,
+        grade: str | None = None,
+    ) -> tuple[list[MarriageHistoryRecord], str | None]:
+        """Refuse paged history listing in the frozen placeholder."""
+        raise NotImplementedError("TV1-B01: repository history paging is not implemented")

@@ -5,6 +5,7 @@
 import type {
   MarriageConsultationDto,
   MarriageEnvelope,
+  MarriageHistoryPageDto,
   MarriageReportDto,
 } from "./types";
 
@@ -60,6 +61,43 @@ export async function getReport(
 ): Promise<MarriageEnvelope<MarriageReportDto>> {
   const suffix = expert ? "?expert=true" : "";
   return request("GET", `${marriageApiBase()}/${consultationId}/report${suffix}`);
+}
+
+export async function getMarriageHistory(
+  limit = 100,
+): Promise<MarriageEnvelope<MarriageHistoryPageDto>> {
+  return request("GET", `${marriageApiBase()}/history?limit=${limit}`);
+}
+
+export async function downloadMarriageExport(
+  consultationId: string,
+  format: "pdf" | "docx",
+): Promise<void> {
+  const response = await fetch(
+    resolvedUrl(`${marriageApiBase()}/${encodeURIComponent(consultationId)}/export/${format}`),
+    { headers: { Accept: format === "pdf" ? "application/pdf" : "application/vnd.openxmlformats-officedocument.wordprocessingml.document" } },
+  );
+  if (!response.ok) throw new Error("Không tạo được tệp xuất. Vui lòng thử lại.");
+  const blob = await response.blob();
+  const fallback = format === "pdf" ? "BTE_TuVanHonNhan.pdf" : "BTE_TuVanHonNhan.docx";
+  const filename = downloadFilename(response.headers.get("Content-Disposition")) || fallback;
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  link.rel = "noopener";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function downloadFilename(disposition: string | null): string | null {
+  if (!disposition) return null;
+  const utf8 = disposition.match(/filename\*=UTF-8''([^;]+)/i);
+  if (utf8?.[1]) return decodeURIComponent(utf8[1].replace(/^"|"$/g, ""));
+  const plain = disposition.match(/filename="?([^";]+)"?/i);
+  return plain?.[1] || null;
 }
 
 function resolvedUrl(url: string): string {

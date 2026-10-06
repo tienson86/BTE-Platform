@@ -1,0 +1,69 @@
+.bc-context {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.bc-page .mc-result-toolbar button,
+.bc-page .mc-history__item button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.bc-page .mc-result-toolbar__exports { flex-wrap: wrap; }
+.bc-page .mc-history__item { grid-template-columns: minmax(0, 1fr) auto; }
+.bc-page .mc-history__item h3, .bc-page .mc-history__item p { overflow-wrap: anywhere; }
+
+.bc-score { border-block: 1px solid var(--border-divider, #e2e5eb); padding-block: var(--space-5, 24px); }
+.bc-score__heading { display: grid; grid-template-columns: minmax(160px, 0.3fr) minmax(0, 1fr); gap: var(--space-5, 24px); }
+.bc-score h2, .bc-score h3 { font-size: 20px; line-height: 1.4; margin-top: 0; }
+.bc-score__value { font-size: 36px; font-weight: 700; line-height: 1.2; margin-block: 12px; overflow-wrap: anywhere; }
+.bc-score__value span { font-size: 18px; font-weight: 400; color: var(--text-secondary, #667085); }
+.bc-score__meter { width: 100%; max-width: 220px; height: 12px; }
+.bc-score__details summary { cursor: pointer; font-weight: 600; padding-block: 12px; }
+.bc-score__table-scroll { max-width: 100%; overflow-x: auto; }
+.bc-score table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.bc-score th, .bc-score td { text-align: left; padding: 10px; border-bottom: 1px solid var(--border-divider, #e2e5eb); }
+.bc-score caption { text-align: left; padding-block: 12px; font-weight: 600; }
+.bc-score p { overflow-wrap: anywhere; }
+
+.bc-context label,
+.bc-person-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: start;
+}
+
+.bc-context label {
+  grid-template-columns: minmax(14rem, 0.42fr) minmax(0, 1fr);
+}
+
+.bc-context span,
+.bc-context select {
+  min-width: 0;
+}
+
+.bc-context select,
+.bc-page .mc-person select {
+  width: 100%;
+  min-width: 0;
+  min-height: 2.75rem;
+  border: var(--border-width, 1px) solid var(--border-divider, #e2e5eb);
+  border-radius: var(--radius-md);
+  background: var(--surface-report-paper, #ffffff);
+  color: var(--text-primary, #111827);
+  padding: 0 var(--space-3);
+}
+
+@media (max-width: 768px) {
+  .bc-score__heading { grid-template-columns: minmax(0, 1fr); }
+  .bc-page .mc-result-toolbar__exports,
+  .bc-page .mc-history__item { grid-template-columns: minmax(0, 1fr); }
+  .bc-context label,
+  .bc-person-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

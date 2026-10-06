@@ -18,6 +18,8 @@ _PRODUCT_LABELS = (
     "Xem lá số",
     "Tư vấn năng lượng số",
     "Tư vấn hôn nhân",
+    "Tư vấn hợp tác",
+    "Tư vấn sinh con",
 )
 
 
@@ -58,18 +60,20 @@ def test_number_energy_default_live_ports_use_runtime_stack() -> None:
 
 def test_number_energy_is_visible_in_primary_nav() -> None:
     html = _client().get("/good-date").text
-    assert len(CUSTOMER_NAV_ITEMS) == 5
+    assert len(CUSTOMER_NAV_ITEMS) == 7
     assert [item.path for item in CUSTOMER_NAV_ITEMS] == [
         "/good-date",
         "/choose-date",
         "/analyze",
         "/number-energy",
         "/marriage-consulting",
+        "/business-consulting",
+        "/childbirth-consulting",
     ]
     nav_html = _primary_nav(html)
     assert "Tư vấn năng lượng số" in nav_html
     assert 'href="/number-energy"' in nav_html
-    assert CUSTOMER_NAV_ITEMS[-1].path == "/marriage-consulting"
+    assert CUSTOMER_NAV_ITEMS[4].path == "/marriage-consulting"
 
 
 def test_analyze_page_links_to_number_energy() -> None:
@@ -82,7 +86,14 @@ def test_analyze_page_links_to_number_energy() -> None:
 
 def test_existing_product_routes_still_load() -> None:
     client = _client()
-    for path in ("/good-date", "/choose-date", "/analyze", "/marriage-consulting"):
+    for path in (
+        "/good-date",
+        "/choose-date",
+        "/analyze",
+        "/marriage-consulting",
+        "/business-consulting",
+        "/childbirth-consulting",
+    ):
         assert client.get(path).status_code == 200
 
 

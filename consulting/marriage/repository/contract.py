@@ -26,3 +26,19 @@ class MarriageRepository(ABC):
     @abstractmethod
     def list_history(self) -> list[MarriageHistoryRecord]:
         """Return compact history rows."""
+
+    @abstractmethod
+    def get_by_idempotency_key(self, key: str) -> MarriageStoredResult | None:
+        """Return the consultation bound to an idempotency key, if any."""
+
+    @abstractmethod
+    def list_history_page(
+        self,
+        *,
+        cursor: str | None,
+        limit: int,
+        status: str | None = None,
+        language: str | None = None,
+        grade: str | None = None,
+    ) -> tuple[list[MarriageHistoryRecord], str | None]:
+        """Return a filtered, newest-first history page."""

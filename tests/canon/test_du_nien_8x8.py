@@ -25,7 +25,7 @@ REPRESENTATIVE = (
     ("Khảm", "Ly", "dien_nien", "Diên Niên"),
     ("Khảm", "Khảm", "phuc_vi", "Phục Vị"),
     ("Khôn", "Khảm", "tuyet_menh", "Tuyệt Mệnh"),
-    ("Khôn", "Chấn", "ngu_quy", "Ngũ Quỷ"),
+    ("Khảm", "Cấn", "ngu_quy", "Ngũ Quỷ"),
     ("Khảm", "Càn", "luc_sat", "Lục Sát"),
     ("Khảm", "Đoài", "hoa_hai", "Họa Hại"),
 )
@@ -75,19 +75,24 @@ def test_each_source_row_contains_all_eight_relationships() -> None:
         assert ids == set(RELATIONSHIP_IDS)
 
 
-def test_matrix_is_directional() -> None:
-    """Approved contract is ordered-pair lookup. A,B is not assumed equal to B,A."""
-    forward = lookup("Khảm", "Ly")
-    reverse = lookup("Ly", "Khảm")
-    assert forward is not None and reverse is not None
-    assert (forward.source_palace, forward.target_palace) == ("Khảm", "Ly")
-    assert (reverse.source_palace, reverse.target_palace) == ("Ly", "Khảm")
-    assert forward.relationship_id != reverse.relationship_id
-    same = lookup("Khôn", "Khảm")
-    mirrored = lookup("Khảm", "Khôn")
-    assert same is not None and mirrored is not None
-    assert same.relationship_label == "Tuyệt Mệnh"
-    assert mirrored.relationship_label == "Tuyệt Mệnh"
+def test_matrix_is_symmetric_for_couple_comparison() -> None:
+    """Hỗ biến uses the same Du Niên relation in both palace orders."""
+    for source in PALACES:
+        for target in PALACES:
+            forward = lookup(source, target)
+            reverse = lookup(target, source)
+            assert forward is not None and reverse is not None
+            assert forward.relationship_id == reverse.relationship_id
+
+
+def test_reported_regression_pairs_are_dien_nien() -> None:
+    """PTL–NTS regressions: Khôn–Càn and Ly–Khảm are both Diên Niên."""
+    for source, target in (("Khôn", "Càn"), ("Ly", "Khảm")):
+        relation = lookup(source, target)
+        assert relation is not None
+        assert relation.relationship_id == "dien_nien"
+        assert relation.relationship_label == "Diên Niên"
+        assert relation.category == "favorable"
 
 
 def test_representative_relationship_types() -> None:

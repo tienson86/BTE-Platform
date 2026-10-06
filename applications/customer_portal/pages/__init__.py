@@ -33,8 +33,8 @@ DATE_SELECTION_NAV: tuple[NavItem, ...] = (
 DATE_SELECTION_MENU_LABEL = "nav.date_selection"
 
 # Customer Portal primary product navigation (Commercial Dashboard 00_NAVIGATION).
-# TV1-B07A: Tư vấn hôn nhân remains the last visible header item.
 # RB18: Tư vấn năng lượng số is visible after Xem lá số.
+# Tư vấn sinh con is the final visible header item.
 CUSTOMER_NAV_ITEMS: tuple[NavItem, ...] = (
     NavItem("home", "nav.dashboard", "/good-date", "good_date.html"),
     NavItem("choose-date", "nav.choose_date", "/choose-date", "choose_date.html"),
@@ -51,11 +51,26 @@ CUSTOMER_NAV_ITEMS: tuple[NavItem, ...] = (
         "/marriage-consulting",
         "marriage_consulting.html",
     ),
+    NavItem(
+        "business-consulting",
+        "nav.business_consulting",
+        "/business-consulting",
+        "business_consulting.html",
+    ),
+    NavItem(
+        "childbirth-consulting",
+        "nav.childbirth_consulting",
+        "/childbirth-consulting",
+        "childbirth_consulting.html",
+    ),
 )
 
 HOME_PATH = "/good-date"
 MARRIAGE_CONSULTING_PATH = "/marriage-consulting"
+BUSINESS_CONSULTING_PATH = "/business-consulting"
+CHILDBIRTH_CONSULTING_PATH = "/childbirth-consulting"
 MARRIAGE_API_PROXY_PREFIX = "api/v1/consulting/marriage"
+CHILDBIRTH_API_PROXY_PREFIX = "api/v1/consulting/childbirth"
 NUMBER_ENERGY_API_PROXY_PREFIX = "api/v1/number-energy"
 NUMBER_ENERGY_PATH = "/number-energy"
 NUMBER_ENERGY_ITEM = NavItem(

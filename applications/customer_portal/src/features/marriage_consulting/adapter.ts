@@ -88,6 +88,7 @@ export function adaptMarriageView(
         title: DOMAIN_TITLE[item.domain] || item.domain,
         score: item.score as number,
         weight: item.weight,
+        weightLabel: item.weight_label || `Trọng số ${item.weight}%`,
       })),
     identityTitle: identity?.summary || identity?.blocks[0]?.body || coupleFallback(consultation),
     personAName: consultation.person_a.display_name || PERSON_A_LABEL,
