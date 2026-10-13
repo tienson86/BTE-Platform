@@ -186,8 +186,10 @@ def resolve_month_pillar(
     BTE treats the lunar month Can Chi as the core Month Pillar. Solar term
     remains an interpretive context field, not the pillar identity.
     """
-    year_pillar = resolve_year_pillar(year, tam_nguyen, month=month, day=day)
     lunar = solar_to_lunar(day, month, year)
+    # Lunar month identity uses the lunar year's stem, including the gap
+    # between Tet and Lap Xuan; the BaZi year pillar remains independent.
+    year_pillar = resolve_year_pillar(lunar.year, tam_nguyen)
     ganzhi = lunar_month_ganzhi(year_pillar.heavenly_stem, lunar.month)
     stem, branch = ganzhi.split(maxsplit=1)
     yuan = year_pillar.source_nguyen

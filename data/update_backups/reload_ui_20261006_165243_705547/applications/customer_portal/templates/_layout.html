@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="{{LANG}}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{DOC_TITLE}}</title>
+  <link rel="stylesheet" href="/static/css/portal.css" />
+  <script>
+    window.__BTE_I18N__ = {{I18N_JSON}};
+    window.__BTE_I18N_LOCALE__ = "{{I18N_LOCALE}}";
+  </script>
+  <script src="/static/js/i18n.js"></script>
+  <script src="/static/js/result_store.js?v=G1-12"></script>
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/auth_gate.js"></script>
+  <script src="/static/js/ui/components.js"></script>
+  <script src="/static/js/ui/module_registry.js"></script>
+  <script src="/static/js/ui/shell.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    {{HEADER}}
+    <div class="app-main">
+      <div id="globalFlash" class="flash" role="status"></div>
+      <main id="mainContent">
+        {{CONTENT}}
+      </main>
+    </div>
+  </div>
+  <script>if (window.BteI18n) BteI18n.apply(document);</script>
+</body>
+</html>

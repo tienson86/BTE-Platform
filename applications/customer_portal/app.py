@@ -134,6 +134,10 @@ def create_app() -> FastAPI:
         """UI-16 executive report HTML preview. Does not replace /reports PDF."""
         return HTMLResponse(render_desktop_page("result_desktop.html", active="result"))
 
+    @app.get("/tinh-van-han", response_class=HTMLResponse)
+    def van_han_page() -> HTMLResponse:
+        return page("van-han", "van_han.html")
+
     @app.get("/history", response_class=HTMLResponse)
     def history_page() -> HTMLResponse:
         """History page."""
@@ -190,7 +194,7 @@ def create_app() -> FastAPI:
         )
         try:
             async with httpx.AsyncClient(
-                timeout=httpx.Timeout(120.0, connect=5.0, write=30.0, pool=5.0)
+                timeout=httpx.Timeout(300.0 if path.startswith('api/v1/van-han/') and '/export/' in path else 120.0, connect=5.0, write=30.0, pool=5.0)
             ) as client:
                 upstream = await client.request(
                     request.method,
@@ -198,7 +202,10 @@ def create_app() -> FastAPI:
                     headers=headers,
                     content=body,
                 )
-        except httpx.RequestError:
+        except httpx.RequestError as error:
+            if path.startswith('api/v1/van-han/') and '/export/' in path:
+                message=('Tạo tài liệu vượt thời gian chờ. Hãy thử khoảng năm ngắn hơn.' if isinstance(error,httpx.TimeoutException) else 'Chưa kết nối được dịch vụ tạo tài liệu. Hãy kiểm tra BTE đang chạy.')
+                return JSONResponse(status_code=503,content={'detail':message})
             if marriage_route or childbirth_route:
                 return JSONResponse(
                     status_code=503,

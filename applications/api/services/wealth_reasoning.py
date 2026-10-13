@@ -7,6 +7,9 @@ Star presence into a favorable conclusion.
 
 from __future__ import annotations
 
+from engines.bazi_engine.ten_god import ten_god_name
+from engines.calendar_engine.algorithms.ganzhi import GanzhiAlgorithm
+
 from typing import Any, Mapping, Sequence
 
 
@@ -133,6 +136,7 @@ def analyze_wealth_modifier(
         natal_occurrences=occurrences,
         natal_pillars=pillars,
         wealth_element=_text(base.get("wealth_element")),
+        day_master=_text(bazi.get("day_master")),
     )
 
 
@@ -296,7 +300,7 @@ def _wealth_flow(payload: Mapping[str, Any], occurrences: Sequence[Mapping[str, 
     return {
         "state": "wealth_generates_officer" if active else "not_complete",
         "canonical_flow": "Thực/Thương → Tài → Quan/Sát → Ấn → Thân",
-        "observed_flow": "Giáp → Bính → Mậu → Canh" if any(item.get("stem_sequence") == ["Giáp", "Bính", "Mậu"] for item in by_branch_pillar) else "",
+        "observed_flow": "Tài → Quan/Sát → Ấn → " + _text(_mapping(payload.get("bazi")).get("day_master")) if active else "",
         "items": by_branch_pillar,
         "evidence_chain": _flatten(item.get("evidence_chain") for item in by_branch_pillar),
         "confidence": 0.91 if active else 0.74,
@@ -365,6 +369,7 @@ def _wealth_storage(
             opened_by.append(branch)
     return {
         "wealth_storage_branch": storage_branch,
+        "wealth_element": wealth_element,
         "natal_storage_present": bool(natal_storage),
         "modifier_storage_present": present_by_modifier,
         "storage_has_wealth": storage_has_wealth,
@@ -380,11 +385,11 @@ def _wealth_storage(
 def _money_sources(occurrences: Sequence[Mapping[str, Any]], flow: Mapping[str, Any]) -> list[dict[str, Any]]:
     sources: list[dict[str, Any]] = []
     if any(item.get("type") == "indirect_wealth" and item.get("pillar") == "year" for item in occurrences):
-        sources.append({"id": "market_network_clients", "label": "thị trường, mạng lưới, khách hàng và cơ hội từ bên ngoài", "evidence_chain": ["Thiên Tài tàng ở trụ năm"], "confidence": 0.88})
+        sources.append({"id": "market_network_clients", "label": "thị trường, mạng lưới, khách hàng và cơ hội từ bên ngoài", "evidence_chain": ["Thiên Tài hiện diện ở trụ năm; xét lộ/tàng theo dữ liệu nguồn"], "confidence": 0.88})
     if flow.get("state") == "wealth_generates_officer":
         sources.append({"id": "expertise_reputation_trust", "label": "chuyên môn, uy tín, niềm tin và khách hàng giới thiệu", "evidence_chain": flow.get("evidence_chain", []), "confidence": 0.86})
     if any(item.get("type") == "indirect_wealth" and item.get("pillar") == "hour" for item in occurrences):
-        sources.append({"id": "long_term_projects_assets", "label": "dự án dài hạn, sản phẩm/hệ thống do mình sở hữu và tài sản về hậu vận", "evidence_chain": ["Thiên Tài tàng ở trụ giờ"], "confidence": 0.84})
+        sources.append({"id": "long_term_projects_assets", "label": "dự án dài hạn, sản phẩm/hệ thống do mình sở hữu và tài sản về hậu vận", "evidence_chain": ["Thiên Tài hiện diện ở trụ giờ; xét lộ/tàng theo dữ liệu nguồn"], "confidence": 0.84})
     return sources
 
 
@@ -422,21 +427,20 @@ def _timing(
     pillars: Sequence[Mapping[str, Any]],
     wealth_element: str,
 ) -> dict[str, Any]:
-    specs = [
-        ("2023-2033", "Ất Tỵ", "dayun"),
-        ("2025", "Ất Tỵ", "annual"),
-        ("2028", "Mậu Thân", "annual"),
-        ("2030", "Canh Tuất", "annual"),
-        ("2031", "Tân Hợi", "annual"),
-        ("2034", "Giáp Dần", "annual"),
-        ("2035", "Ất Mão", "annual"),
-        ("2040", "Canh Thân", "annual"),
-        ("2043", "Quý Hợi", "annual"),
-        ("2043-2053", "Đinh Mùi", "dayun"),
-        ("2044", "Giáp Tý", "annual"),
-        ("2045", "Ất Sửu", "annual"),
-        ("2046", "Bính Dần", "annual"),
-    ]
+    specs = []
+    for cycle in _list(_mapping(payload.get("luck")).get("cycles")):
+        cycle = _mapping(cycle)
+        gz = _first_text(cycle.get("gan_zhi"), cycle.get("ganzhi"))
+        if gz:
+            start, end = cycle.get("year_start"), cycle.get("year_end")
+            label = f"{start}–{end}" if start is not None and end is not None else gz
+            specs.append((label, gz, "dayun"))
+    # Annual entries are computed, never copied from a sample person's chart.
+    years = _list(_mapping(payload.get("wealth_review")).get("years"))
+    for year in years:
+        if isinstance(year, int) and 1900 <= year <= 2100:
+            gz = GanzhiAlgorithm.year(year)
+            specs.append((str(year), f"{gz['can']} {gz['chi']}", "annual"))
     items = [
         _modifier_reading(
             kind=kind,
@@ -447,6 +451,7 @@ def _timing(
             natal_occurrences=occurrences,
             natal_pillars=pillars,
             wealth_element=wealth_element,
+            day_master=_text(_mapping(payload.get("bazi")).get("day_master")),
         )
         for label, gan_zhi, kind in specs
     ]
@@ -463,6 +468,7 @@ def _modifier_reading(
     natal_occurrences: Sequence[Mapping[str, Any]],
     natal_pillars: Sequence[Mapping[str, Any]],
     wealth_element: str,
+    day_master: str,
 ) -> dict[str, Any]:
     effects: list[str] = []
     evidence: list[str] = []
@@ -470,36 +476,35 @@ def _modifier_reading(
     if wealth_type:
         effects.append("direct_wealth_exposed" if wealth_type == "direct_wealth" else "indirect_wealth_exposed")
         evidence.append(f"{stem} = {'Chính Tài' if wealth_type == 'direct_wealth' else 'Thiên Tài'} lộ ở {label}")
-    if stem == "Tân":
-        effects.append("wealth_contested_by_peer")
-        evidence.append("Tân = Kiếp Tài đối với Canh")
-    if stem == "Canh":
-        effects.append("peer_competition")
-        evidence.append("Canh = Tỷ Kiên đối với Canh")
-    if stem == "Ất":
+    god = ten_god_name(day_master, stem)
+    if god in {"Kiếp Tài", "Tỷ Kiên"}:
+        effects.append("wealth_contested_by_peer" if god == "Kiếp Tài" else "peer_competition")
+        evidence.append(f"{stem} = {god} đối với {day_master}")
+    stem_pairs = {frozenset(p) for p in (("Giáp", "Kỷ"), ("Ất", "Canh"), ("Bính", "Tân"), ("Đinh", "Nhâm"), ("Mậu", "Quý"))}
+    if frozenset((stem, day_master)) in stem_pairs:
         effects.append("stem_combine_with_day_master")
-        evidence.append("Ất-Canh hợp: Tài đến hợp Thân, không đồng nghĩa đắc Tài")
+        evidence.append(f"{stem}-{day_master} hợp can; chưa mặc định hợp hóa hoặc đắc Tài")
     root_branches = [_text(item.get("branch")) for item in natal_occurrences if item.get("rooted")]
     clash_count = sum(1 for natal in root_branches if frozenset((branch, natal)) in CLASHES)
     combine_count = sum(1 for natal in root_branches if frozenset((branch, natal)) in SIX_COMBINES)
     harm_count = sum(1 for natal in root_branches if frozenset((branch, natal)) in HARMS or frozenset((branch, natal)) == frozenset(("Dần", "Tỵ")))
     if clash_count:
         effects.extend(["wealth_roots_moving", "restructuring_volatility"])
-        evidence.append(f"{branch} xung {root_branches[0]} x{clash_count}: gốc Tài động, thiên về tái cấu trúc/biến động trước khi kết luận hao hay được")
+        evidence.append(f"{branch} xung {', '.join(n for n in root_branches if frozenset((branch, n)) in CLASHES)}: gốc Tài động, thiên về tái cấu trúc/biến động trước khi kết luận hao hay được")
     if combine_count:
         effects.append("wealth_roots_combined")
-        evidence.append(f"{branch} hợp Dần x{combine_count}: Tài khí được nối/kích hoạt")
+        evidence.append(f"{branch} hợp {', '.join(n for n in root_branches if frozenset((branch, n)) in SIX_COMBINES)}: Tài khí được nối/kích hoạt")
     if harm_count:
         effects.append("wealth_roots_punished_or_harmed")
-        evidence.append(f"{branch} tác động hình/hại lên Dần x{harm_count}: gốc Tài bị kích động")
+        evidence.append(f"{branch} tác động hình/hại lên {', '.join(n for n in root_branches if frozenset((branch, n)) in HARMS)}: gốc Tài bị kích động")
     natal_branches = [_text(item.get("branch")) for item in natal_pillars if _text(item.get("branch"))]
-    if branch == "Tuất" and {"Dần", "Ngọ"}.issubset(set(natal_branches)):
+    if wealth_element == "Mộc" and branch == "Tuất" and {"Dần", "Ngọ"}.issubset(set(natal_branches)):
         effects.append("three_harmony_fire_candidate")
         evidence.append("Dần-Ngọ nguyên cục gặp Tuất: đủ Dần-Ngọ-Tuất, Tài khí có xu hướng dẫn về Hỏa/Quan Sát")
-    if branch == "Dần":
+    if branch in root_branches:
         effects.append("wealth_root_repeated")
-        evidence.append("Dần lặp lại gốc Giáp Thiên Tài")
-    if branch == "Mão" and wealth_element == "Mộc":
+        evidence.append(f"{branch} lặp lại chi chứa gốc Tài trong nguyên cục")
+    if branch == "Mão" and wealth_element == "Mộc" and ten_god_name(day_master, "Ất") == "Chính Tài":
         effects.append("strong_direct_wealth_branch_activation")
         evidence.append("Mão thuộc Mộc, tăng khí Tài; Ất/Mão thiên về Chính Tài")
     storage = _wealth_storage(wealth_element, wealth_stems, natal_pillars, modifier={"branch": branch})
@@ -508,7 +513,7 @@ def _modifier_reading(
         evidence.extend(storage.get("evidence_chain") or [])
         if storage.get("storage_opened"):
             effects.append("storage_opened_candidate")
-            evidence.append("Mùi bị Sửu nguyên cục xung: có candidate mở khố, vẫn không luận thô là giàu")
+            evidence.append(f"{storage.get('wealth_storage_branch')} bị {', '.join(storage.get('opened_by') or [])} nguyên cục xung: có dấu hiệu mở khố, chưa kết luận đắc Tài")
     intensity = "strong_activation" if any(effect in effects for effect in ("indirect_wealth_exposed", "direct_wealth_exposed", "strong_direct_wealth_branch_activation", "wealth_root_repeated")) else "modifier"
     if clash_count:
         intensity = "moving_restructuring"
@@ -532,7 +537,7 @@ def _modifier_sentence(label: str, stem: str, branch: str, effects: Sequence[str
     if "wealth_roots_moving" in effects:
         return f"{label} {stem} {branch}: gốc Tài bị động, dễ có đổi nguồn thu, khách hàng, thị trường, tài sản hoặc mô hình; không tự động luận mất tiền."
     if "stem_combine_with_day_master" in effects and "wealth_roots_punished_or_harmed" in effects:
-        return f"{label} {stem} {branch}: Tài lộ và hợp Thân, đồng thời chi tác động gốc Tài; mức kích hoạt cao nhưng không đồng nghĩa đắc Tài."
+        return f"{label} {stem} {branch}: can hợp Nhật Chủ, đồng thời chi tác động gốc Tài; mức kích hoạt cao nhưng không đồng nghĩa đắc Tài."
     if "three_harmony_fire_candidate" in effects:
         return f"{label} {stem} {branch}: Tài khí có xu hướng chuyển mạnh sang sự nghiệp/danh vị; cần xem khả năng giữ tiền riêng."
     if "wealth_roots_combined" in effects and "wealth_contested_by_peer" in effects:
@@ -541,7 +546,7 @@ def _modifier_sentence(label: str, stem: str, branch: str, effects: Sequence[str
         return f"{label} {stem} {branch}: xuất hiện Tài khố; cần phân biệt có khố, khố có Tài, Tài nhập khố và khố được mở."
     if "indirect_wealth_exposed" in effects or "direct_wealth_exposed" in effects:
         return f"{label} {stem} {branch}: Tài lộ/kích hoạt mạnh, là cơ hội cần kiểm bằng sức Thân, Tỷ/Kiếp và khả năng giữ tiền."
-    return f"{label} {stem} {branch}: là modifier của nền nguyên cục, không thay thế sự thật natal."
+    return f"{label} {stem} {branch}: cần đọc cùng nền nguyên cục, Dụng–Hỷ–Kỵ và sức của Nhật Chủ."
 
 
 def _states(
@@ -643,13 +648,13 @@ def _customer_paragraphs(
             if outcome.get("wealth_retention") == "challenged" else "Có thể giữ tiền tốt hơn khi duy trì kỷ luật dòng tiền và không để cơ hội ngắn hạn phá kế hoạch dài hạn."
         ),
         "Con đường tích sản: " + (
-            f"Mộc Tài mộ tại {storage.get('wealth_storage_branch')}; nguyên cục không sẵn Tài khố này, nên tích sản thiên về quá trình chuyển cơ hội thành hệ thống, dự án dài hạn và tài sản hóa về sau. Khi vận có {storage.get('wealth_storage_branch')}, vẫn phải xét khố có Tài, Tài nhập khố và khố có được mở hay không; không dùng quy tắc thô 'có khố là giàu'."
+            f"Tài thuộc {storage.get('wealth_element')} mộ tại {storage.get('wealth_storage_branch')}; nguyên cục không sẵn Tài khố này, nên tích sản thiên về quá trình chuyển cơ hội thành hệ thống, dự án dài hạn và tài sản hóa về sau. Khi vận có {storage.get('wealth_storage_branch')}, vẫn phải xét khố có Tài, Tài nhập khố và khố có được mở hay không; không dùng quy tắc thô 'có khố là giàu'."
             if not storage.get("natal_storage_present") else "Nguyên cục có dấu hiệu Tài khố, nhưng vẫn cần xét khố có Tài, có nhập khố và có được mở hay không."
         ),
     ]
     timing_lines = [_text(item.get("reading")) for item in _list(timing.get("items")) if _text(item.get("reading"))]
     if timing_lines:
-        paragraphs.append("Timing: " + " ".join(timing_lines[:8]))
+        paragraphs.append("Các Đại vận cần đối chiếu: " + " ".join(timing_lines[:8]))
     return paragraphs
 
 

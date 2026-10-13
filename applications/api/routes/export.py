@@ -7,11 +7,13 @@ from pathlib import Path
 from typing import Any, Literal
 from urllib.parse import quote
 
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, HTTPException
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 from starlette.background import BackgroundTask
 
+from applications.api.routes.analysis_archive import archive_owner
+from applications.api.services.analysis_archive import get_snapshot
 from applications.api.exceptions import CustomerExportError
 from applications.api.services.customer_contract import RENDERER_FAILURE_MESSAGE
 from applications.api.services.customer_export import (
@@ -31,8 +33,25 @@ class CustomerExportRequest(BaseModel):
 
     analysis_id: str = Field(..., min_length=1)
     source: Literal["current", "history"] = "current"
-    data: dict[str, Any]
+    data: dict[str, Any] = Field(default_factory=dict)
     input: dict[str, Any] | None = None
+    admin_owner: str | None = None
+
+
+def _owned_export_body(request: Request, body: CustomerExportRequest) -> CustomerExportRequest:
+    owner = archive_owner(request)
+    if body.admin_owner:
+        from applications.api.routes.admin_archive import require_admin
+        require_admin(request)
+        owner = body.admin_owner
+    row = get_snapshot(owner, body.analysis_id)
+    if row is None:
+        raise HTTPException(404, "Không tìm thấy hồ sơ trong tài khoản của bạn")
+    data = row.get("data")
+    if not isinstance(data, dict) or not data:
+        raise HTTPException(409, "Hồ sơ lưu thiếu nội dung, chưa thể xuất tài liệu")
+    # Client-supplied data/input are not authoritative. Always render stored data.
+    return body.model_copy(update={"data": data, "input": row.get("input") or {}})
 
 
 def _content_disposition(filename: str) -> str:
@@ -93,12 +112,12 @@ def _export_response(
 @router.post("/export/pdf")
 def export_official_pdf(request: Request, body: CustomerExportRequest) -> FileResponse:
     """Official customer PDF — Report V1 Playwright, selected analysis only."""
-    del request
-    return _export_response(body, "pdf", MEDIA_TYPE_PDF)
+    owned = _owned_export_body(request, body)
+    return _export_response(owned, "pdf", MEDIA_TYPE_PDF)
 
 
 @router.post("/export/docx")
 def export_official_docx(request: Request, body: CustomerExportRequest) -> FileResponse:
     """Official customer DOCX — existing python-docx renderer, selected analysis only."""
-    del request
-    return _export_response(body, "docx", MEDIA_TYPE_DOCX)
+    owned = _owned_export_body(request, body)
+    return _export_response(owned, "docx", MEDIA_TYPE_DOCX)

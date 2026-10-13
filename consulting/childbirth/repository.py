@@ -11,12 +11,16 @@ from typing import Any
 from uuid import uuid4
 
 from pydantic import BaseModel
+from consulting.archive_access import creator_fields, can_read
 
 
 class ChildbirthProfile(BaseModel):
     consultation_id: str
     created_at: str
     saved_at: str | None = None
+    owner_user_id: str | None = None
+    creator_username: str | None = None
+    creator_display_name: str | None = None
     input: dict[str, Any]
     result: dict[str, Any]
 
@@ -38,6 +42,8 @@ class JsonChildbirthRepository:
         profile = ChildbirthProfile(
             consultation_id=f"CB-{uuid4().hex}",
             created_at=datetime.now(timezone.utc).isoformat(),
+            **creator_fields(),
+            saved_at=datetime.now(timezone.utc).isoformat(),
             input=inputs,
             result=result,
         )
@@ -62,7 +68,7 @@ class JsonChildbirthRepository:
     def history(self) -> list[ChildbirthProfile]:
         profiles = [self.get(path.stem) for path in self.directory.glob("CB-*.json")]
         return sorted(
-            (profile for profile in profiles if profile.saved_at),
+            (profile for profile in profiles if can_read(profile)),
             key=lambda profile: (profile.saved_at, profile.consultation_id), reverse=True,
         )
 

@@ -1,0 +1,41 @@
+<div class="panel">
+  <h1>Tính vận hạn</h1>
+  <p>Đối chiếu năm và tháng âm lịch theo cung phi, Can Chi và Dụng–Hỷ–Kỵ thần của lá số.</p>
+  <p class="muted">Bản đầu tiên xét cung phi, Dụng–Hỷ–Kỵ thần và hợp/xung. Các cơ chế hình, hại, phá và hợp hóa cần đọc thêm trong bản luận lá số đầy đủ.</p>
+  <form id="vhForm">
+    <div class="vh-source-picker">
+      <label for="vhSourceSearch">Lá số nguồn — tìm theo họ tên</label>
+      <div class="vh-source-input"><input id="vhSourceSearch" role="combobox" aria-controls="vhSourceOptions" aria-expanded="false" aria-autocomplete="list" autocomplete="off" maxlength="120" placeholder="Gõ họ tên, có dấu hoặc không dấu"><button id="vhSourceToggle" type="button" aria-label="Mở danh sách lá số">⌄</button></div>
+      <div id="vhSourcePopup" class="vh-source-popup" hidden>
+        <div id="vhSourceOptions" role="listbox" aria-label="Kết quả tìm lá số"></div>
+        <p id="vhSourceCount" role="status"></p><button type="button" id="vhSourceMore" hidden>Xem thêm</button>
+      </div>
+      <p id="vhSourceChosen" class="muted" aria-live="polite">Chưa chọn lá số.</p>
+    </div>
+    <details><summary>Nhập thông tin để lập lá số mới</summary>
+      <p>Lập lá số mới bằng tài khoản đang đăng nhập, sau đó dùng kết quả để tính vận hạn.</p>
+      <div class="toolbar">
+        <label>Họ và tên <input id="vhName"></label>
+        <label>Giới tính <select id="vhGender"><option value="male">Nam</option><option value="female">Nữ</option></select></label>
+        <label>Ngày sinh dương lịch <input id="vhBirth" type="date"></label>
+        <label>Giờ sinh <input id="vhTime" type="time"></label>
+        <label>Nơi sinh <input id="vhPlace"></label>
+        <button type="button" id="vhCreate">Lập lá số nguồn</button>
+      </div>
+    </details>
+    <div class="toolbar">
+      <label>Từ năm âm lịch <input id="vhStart" type="number" min="1900" max="2100" required></label>
+      <label>Đến năm âm lịch <input id="vhEnd" type="number" min="1900" max="2100" required></label>
+      <button type="submit" id="vhCalculate">Tính và lưu vận hạn</button>
+    </div>
+  </form>
+  <p id="vhState" role="status"></p>
+  <div id="vhResult"></div>
+  <h2>Hồ sơ vận hạn đã lưu</h2>
+  <div id="vhHistory"></div>
+</div>
+<script src="/static/js/van_han.js?v=BTE-eadc665c637683c6"></script>
+
+<style>
+.vh-source-picker{position:relative;margin-bottom:16px}.vh-source-input{display:flex;gap:6px}.vh-source-input input{flex:1;min-width:0}.vh-source-popup{position:absolute;left:0;right:0;top:76px;z-index:30;background:var(--panel,#fff);color:var(--ink,#172337);border:1px solid #ccd5df;border-radius:10px;box-shadow:0 12px 30px #0002;padding:8px;max-height:360px;overflow:auto}.vh-source-popup[hidden]{display:none}.vh-source-option{display:block;width:100%;text-align:left;padding:12px;border:0;border-bottom:1px solid #e2e8ef;background:transparent;color:inherit;border-radius:4px}.vh-source-option small{display:block;font-weight:normal;margin-top:4px}.vh-source-option:hover,.vh-source-option[aria-selected="true"]{background:#e8f0ff;color:#152b50}.vh-source-popup p{padding:4px 8px;margin:6px 0}#vhSourceChosen{overflow-wrap:anywhere}
+</style>

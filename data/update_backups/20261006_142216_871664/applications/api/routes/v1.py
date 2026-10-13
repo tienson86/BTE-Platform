@@ -1,0 +1,255 @@
+"""Per-engine and analyze API routes."""
+
+from __future__ import annotations
+
+import logging
+from fastapi import APIRouter, Depends, HTTPException, Request
+
+from applications.api.dependencies import get_orchestrator
+from applications.api.auth.dependencies import OptionalUser, get_auth_service
+from applications.api.routes._helpers import attach_presentation_metadata, run_birth_stage
+from applications.api.schemas.common import APIResponse, BirthRequest, DiscussionRequest
+from applications.api.services.bazi_analysis_contract import build_bazi_analysis_result
+from applications.api.services.knowledge_expert_service import KnowledgeExpertService
+from applications.api.services.orchestrator import OrchestratorService
+from applications.api.services.auth_service import AuthService
+from applications.api.routes import date_selection as date_selection_router
+from applications.api.routes import number_energy as number_energy_router
+from applications.api.routes import pack07_dev as pack07_dev_router
+from applications.api.services.result_identity import stamp_customer_result_identity
+from engines.knowledge_engine import KnowledgePipeline
+from applications.api.routes.analysis_archive import router as archive_router, archive_owner
+from applications.api.services.analysis_archive import save_snapshot
+
+router = APIRouter(tags=["engines"])
+router.include_router(archive_router)
+router.include_router(date_selection_router.router)
+router.include_router(number_energy_router.router)
+router.include_router(pack07_dev_router.router)
+logger = logging.getLogger(__name__)
+
+
+@router.post("/calendar", response_model=APIResponse)
+def calendar_endpoint(
+    request: Request,
+    body: BirthRequest,
+    orchestrator: OrchestratorService = Depends(get_orchestrator),
+) -> APIResponse:
+    """Run CalendarEngine only."""
+    return run_birth_stage(
+        request=request,
+        body=body,
+        orchestrator=orchestrator,
+        stage="calendar",
+        message="Calendar OK",
+    )
+
+
+@router.post("/bazi", response_model=APIResponse)
+def bazi_endpoint(
+    request: Request,
+    body: BirthRequest,
+    orchestrator: OrchestratorService = Depends(get_orchestrator),
+) -> APIResponse:
+    """Run Calendar → Bazi."""
+    return run_birth_stage(
+        request=request,
+        body=body,
+        orchestrator=orchestrator,
+        stage="bazi",
+        message="Bazi OK",
+    )
+
+
+@router.post("/pattern", response_model=APIResponse)
+def pattern_endpoint(
+    request: Request,
+    body: BirthRequest,
+    orchestrator: OrchestratorService = Depends(get_orchestrator),
+) -> APIResponse:
+    """Run Calendar → Bazi → Pattern."""
+    return run_birth_stage(
+        request=request,
+        body=body,
+        orchestrator=orchestrator,
+        stage="pattern",
+        message="Pattern OK",
+    )
+
+
+@router.post("/score", response_model=APIResponse)
+def score_endpoint(
+    request: Request,
+    body: BirthRequest,
+    orchestrator: OrchestratorService = Depends(get_orchestrator),
+) -> APIResponse:
+    """Run through ScoreEngine."""
+    return run_birth_stage(
+        request=request,
+        body=body,
+        orchestrator=orchestrator,
+        stage="score",
+        message="Score OK",
+    )
+
+
+@router.post("/interpretation", response_model=APIResponse)
+def interpretation_endpoint(
+    request: Request,
+    body: BirthRequest,
+    orchestrator: OrchestratorService = Depends(get_orchestrator),
+) -> APIResponse:
+    """Run through InterpretationEngine."""
+    return run_birth_stage(
+        request=request,
+        body=body,
+        orchestrator=orchestrator,
+        stage="interpretation",
+        message="Interpretation OK",
+    )
+
+
+@router.post("/report", response_model=APIResponse)
+def report_endpoint(
+    request: Request,
+    body: BirthRequest,
+    orchestrator: OrchestratorService = Depends(get_orchestrator),
+) -> APIResponse:
+    """Run through ReportEngine."""
+    return run_birth_stage(
+        request=request,
+        body=body,
+        orchestrator=orchestrator,
+        stage="report",
+        message="Report OK",
+    )
+
+
+@router.post("/narrative", response_model=APIResponse)
+def narrative_endpoint(
+    request: Request,
+    body: BirthRequest,
+    orchestrator: OrchestratorService = Depends(get_orchestrator),
+) -> APIResponse:
+    """Run full pipeline through NarrativeEngine."""
+    return run_birth_stage(
+        request=request,
+        body=body,
+        orchestrator=orchestrator,
+        stage="narrative",
+        message="Narrative OK",
+    )
+
+
+@router.post("/analyze", response_model=APIResponse)
+def analyze_endpoint(
+    request: Request,
+    body: BirthRequest,
+    orchestrator: OrchestratorService = Depends(get_orchestrator),
+    user: OptionalUser = None,
+    auth_service: AuthService = Depends(get_auth_service),
+) -> APIResponse:
+    """Primary end-to-end analysis endpoint."""
+    request_id = getattr(request.state, "request_id", None)
+    if user is not None and not auth_service.store.can_create_analysis(user.user_id):
+        raise HTTPException(
+            status_code=429,
+            detail="Tài khoản đã sử dụng hết số lượt tạo lá số được cấp.",
+        )
+    data = orchestrator.analyze(
+        year=body.year,
+        month=body.month,
+        day=body.day,
+        hour=body.hour,
+        minute=body.minute,
+        gender=body.gender,
+        timezone=body.timezone,
+    )
+    payload = attach_presentation_metadata(data, body)
+    payload = stamp_customer_result_identity(
+        payload,
+        request_id,
+    )
+    # Additive Knowledge Expert status — does not alter pipeline/narrative.
+    payload["knowledge_expert"] = KnowledgePipeline.portal_status()
+    payload["bazi_analysis_result"] = build_bazi_analysis_result(
+        payload,
+        input_payload=body.model_dump(),
+        analysis_id=payload.get("analysis_id"),
+        request_id=request_id,
+    )
+    if user is not None and not auth_service.store.consume_analysis(user.user_id):
+        raise HTTPException(
+            status_code=429,
+            detail="Tài khoản đã sử dụng hết số lượt tạo lá số được cấp.",
+        )
+    payload["archive_saved"] = True
+    save_snapshot(archive_owner(request), {
+        "analysis_id": payload.get("analysis_id") or request_id,
+        "input": body.model_dump(), "data": payload,
+        "saved_at": (payload.get("result_meta") or {}).get("created_at"),
+        "customer_contract": (payload.get("result_meta") or {}).get("customer_contract"),
+        "summary": (payload.get("interpretation") or {}).get("summary"),
+    })
+    logger.info(
+        "api.analyze response pattern_keys=%s interpretation_keys=%s section_count=%s",
+        sorted((payload.get("pattern") or {}).keys()),
+        sorted((payload.get("interpretation") or {}).keys()),
+        (payload.get("interpretation") or {}).get("section_count", 0),
+    )
+    return APIResponse(
+        success=True,
+        message="Analyze OK",
+        data=payload,
+        request_id=request_id,
+    )
+
+
+@router.post("/discussion", response_model=APIResponse)
+def discussion_endpoint(
+    request: Request,
+    body: DiscussionRequest,
+    orchestrator: OrchestratorService = Depends(get_orchestrator),
+) -> APIResponse:
+    """Knowledge Expert discussion endpoint (Evidence/Knowledge/Reasoning grounded)."""
+    questions = list(body.questions or [])
+    if body.question:
+        questions = [body.question, *questions]
+    if not questions:
+        raise HTTPException(status_code=422, detail="question or questions is required")
+
+    service = KnowledgeExpertService(orchestrator=orchestrator)
+    if len(questions) == 1:
+        data = service.discuss(
+            year=body.year,
+            month=body.month,
+            day=body.day,
+            hour=body.hour,
+            minute=body.minute,
+            gender=body.gender,
+            timezone=body.timezone,
+            question=questions[0],
+            show_citations=body.show_citations,
+        )
+        message = "Discussion OK"
+    else:
+        data = service.converse(
+            year=body.year,
+            month=body.month,
+            day=body.day,
+            hour=body.hour,
+            minute=body.minute,
+            gender=body.gender,
+            timezone=body.timezone,
+            questions=questions,
+            show_citations=body.show_citations,
+        )
+        message = "Discussion conversation OK"
+
+    payload = attach_presentation_metadata(data, body)
+    return APIResponse(
+        success=True,
+        message=message,
+        data=payload,
+        request_id=getattr(request.state, "request_id", None),
+    )

@@ -107,6 +107,46 @@
   }
 
   function boot() {
+    function showAccount(user) {
+      user = user || {};
+      document.querySelectorAll(".app-user").forEach(function (node) {
+        var label = node.querySelector(".app-user__identity");
+        if (!label) {
+          label = document.createElement("span");
+          label.className = "app-user__identity";
+          label.style.cssText = "display:flex;flex-direction:column;font-size:13px;line-height:1.4;margin-left:8px;max-width:220px";
+          node.appendChild(label);
+        }
+        label.replaceChildren();
+        var avatar = node.querySelector(".app-user__avatar");
+        if (avatar) avatar.remove();
+        if (!user.username) {
+          label.textContent = "Đăng Nhập";
+          label.style.marginLeft = "0";
+          node.href = "/login";
+          node.setAttribute("aria-label", "Đăng Nhập");
+          node.title = "Đăng Nhập";
+          return;
+        }
+        var name = document.createElement("strong");
+        name.textContent = user.display_name || user.full_name || user.username || "Chưa đăng nhập";
+        var username = document.createElement("span");
+        username.textContent = user.username ? "@" + user.username : "Đăng nhập để quản lý hồ sơ theo tài khoản";
+        label.appendChild(name); label.appendChild(username);
+        label.style.marginLeft = "0";
+        node.href = "/profile";
+        node.style.display = "flex";
+        node.setAttribute("aria-label", "Tài khoản " + name.textContent + (user.username ? " (" + user.username + ")" : ""));
+      });
+    }
+    if (global.BtePortal) {
+      showAccount(global.BtePortal.getUser && global.BtePortal.getUser());
+      if (global.BtePortal.getToken && global.BtePortal.getToken() && global.BtePortal.get) {
+        global.BtePortal.get("/api/v1/auth/me").then(function (response) {
+          showAccount(response.data || response);
+        }).catch(function () {});
+      }
+    }
     initThemeToggle();
     initNavDropdown();
     initCustomerNavToggle();

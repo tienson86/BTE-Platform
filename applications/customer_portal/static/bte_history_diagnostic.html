@@ -1,0 +1,42 @@
+<!doctype html><html lang="vi"><meta charset="utf-8"><title>Kiểm tra lưu hồ sơ BTE</title>
+<style>body{font:17px/1.6 system-ui;max-width:1000px;margin:40px auto;padding:20px;color:#173247}button,a{padding:12px;margin:8px;cursor:pointer}pre{white-space:pre-wrap;background:#eef4f8;padding:20px;border-radius:12px}h1{font-size:28px}</style>
+<h1>Kiểm tra lưu hồ sơ BTE</h1><p>Trang này đọc bộ nhớ của địa chỉ hiện tại, không sửa hoặc xóa hồ sơ. localhost và 127.0.0.1 có bộ nhớ riêng.</p>
+<button id="refresh">Kiểm tra lại</button><button id="download">Tải kết quả kiểm tra</button><a href="/history">Về hồ sơ</a><pre id="output"></pre>
+<script>
+let report;
+function inspect(){
+ const result={origin:location.origin,checked_at:new Date().toISOString(),stores:{},observations:[]};
+ for(const kind of ['localStorage','sessionStorage']){
+  const info={approx_bytes:0,keys:[],history:{},last:{}};result.stores[kind]=info;
+  try{
+   const storage=window[kind];
+   for(let i=0;i<storage.length;i++){
+    const key=storage.key(i),raw=storage.getItem(key)||'';
+    info.approx_bytes+=2*(key.length+raw.length);
+    if(!/history|last_result|last-result|analysis_id/i.test(key))continue;
+    const item={key,approx_bytes:raw.length*2};info.keys.push(item);
+    try{
+     const data=JSON.parse(raw);
+     if(Array.isArray(data)){
+      const rows=data.map(row=>({id:String(row.analysis_id||row.id||(row.data&&row.data.analysis_id)||''),saved_at:row.saved_at||row.created_at||row.timestamp||null}));
+      item.entries=rows.length;info.history[key]=rows;
+     }else if(data&&typeof data==='object'){
+      const value=data.data||data;info.last[key]={id:String(data.analysis_id||data.id||value.analysis_id||value.request_id||''),saved_at:data.saved_at||data.created_at||null};
+     }
+    }catch(error){item.parse_error=String(error.message);}
+   }
+  }catch(error){info.access_error=String(error.name)+': '+String(error.message);}
+ }
+ const local=result.stores.localStorage,session=result.stores.sessionStorage;
+ if(local.approx_bytes>4*1024*1024)result.observations.push('Bộ nhớ localStorage đang lớn hơn 4 MiB; cần kiểm tra lỗi giới hạn dung lượng khi ghi hồ sơ.');
+ const lh=local.history.bte_history||local.history.bte_portal_history||[],sh=session.history.bte_history||session.history.bte_portal_history||[];
+ if(JSON.stringify(lh)!==JSON.stringify(sh))result.observations.push('Danh sách localStorage và sessionStorage khác nhau; phiên hiện tại có thể đọc danh sách cũ.');
+ const last=local.last.bte_last_result||session.last.bte_last_result;
+ if(last&&last.id&&!lh.some(row=>row.id===last.id))result.observations.push('Kết quả cuối chưa có trong lịch sử localStorage: '+last.id);
+ result.observations.push('Chỉ dữ liệu tại '+location.origin+' được đọc. Đối chiếu trang tương tự tại địa chỉ còn lại nếu từng dùng cả localhost và 127.0.0.1.');
+ report=result;document.getElementById('output').textContent=JSON.stringify(result,null,2);
+}
+document.getElementById('refresh').onclick=inspect;
+document.getElementById('download').onclick=()=>{const url=URL.createObjectURL(new Blob([JSON.stringify(report,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='BTE_Kiem_tra_luu_ho_so.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+inspect();
+</script></html>

@@ -23,6 +23,22 @@
   // Customer requirement: retain the complete local archive, not only recent runs.
   const HISTORY_LIMIT = null;
   let synthesizedIdSeq = 0;
+  let archiveCache = null;
+
+  function archiveRequest(method, rows, analysisId) {
+    if (!global.XMLHttpRequest) throw new Error("Không kết nối được kho hồ sơ trên máy chủ.");
+    const xhr = new global.XMLHttpRequest();
+    xhr.open(method, "/backend/api/v1/analysis-archive" + (analysisId ? "/" + encodeURIComponent(analysisId) : ""), false);
+    const token = global.BtePortal && global.BtePortal.getToken && global.BtePortal.getToken();
+    if (!token) throw new Error("Bạn cần đăng nhập để lưu và xem hồ sơ theo tài khoản.");
+    xhr.setRequestHeader("Authorization", "Bearer " + token);
+    if (rows) xhr.setRequestHeader("Content-Type", "application/json");
+    try { xhr.send(rows ? JSON.stringify({rows: rows}) : null); }
+    catch (_) { throw new Error("Không kết nối được máy chủ lưu hồ sơ. Hãy kiểm tra kết nối rồi thử lại."); }
+    if (xhr.status < 200 || xhr.status >= 300) throw new Error("Máy chủ chưa hoàn tất thao tác hồ sơ (" + xhr.status + "). Không lưu tạm vào trình duyệt.");
+    const response = JSON.parse(xhr.responseText);
+    return response.data || response;
+  }
 
   function sessionStore() {
     try {
@@ -41,6 +57,7 @@
   }
 
   function writeRaw(key, raw, sessionOnly) {
+    if (![CURRENT_ID_KEY, VIEW_ID_KEY].includes(key)) throw new Error("Không được lưu nội dung lá số trên trình duyệt.");
     let wrote = false;
     const session = sessionStore();
     if (session) {
@@ -182,7 +199,7 @@
   function loadCurrent() {
     const entry = load();
     if (!entry) return null;
-    if (isIncompatibleCalendarRule(entry.data)) return null;
+    // Display the authenticated server snapshot; missing version metadata is not a missing birth input.
     return {
       input: entry.input || {},
       data: entry.data,
@@ -219,6 +236,16 @@
   function findHistoryById(expectedId) {
     const wanted = expectedId != null && String(expectedId).trim() ? String(expectedId).trim() : "";
     if (!wanted) return null;
+    const params = new URLSearchParams(global.location.search);
+    const owner = params.get("admin_owner");
+    if (owner && params.get("id") === wanted) {
+      const xhr = new global.XMLHttpRequest();
+      xhr.open("GET", "/backend/api/v1/admin-archive/bazi/" + encodeURIComponent(wanted) + "?owner=" + encodeURIComponent(owner), false);
+      xhr.setRequestHeader("Authorization", "Bearer " + global.BtePortal.getToken());
+      xhr.send(null);
+      if (xhr.status !== 200) throw new Error("Không được phép mở hồ sơ quản trị (" + xhr.status + ").");
+      return historyRecordFromRow(JSON.parse(xhr.responseText).row, wanted);
+    }
     const view = peekView();
     if (view) {
       const viewId = readValue([VIEW_ID_KEY]) || view.analysis_id || view.id || displayAnalysisId(view);
@@ -255,6 +282,7 @@
     if (fromHistory && wanted) {
       return findHistoryById(wanted);
     }
+    if (wanted) return findHistoryById(wanted);
     const current = loadCurrent();
     if (current) return current;
     return null;
@@ -351,27 +379,15 @@
    */
   function save(result) {
     const entry = normalizeResult(result);
-    if (!entry) return false;
-    const raw = encode(entry);
-    if (raw === null) return false;
-    const wrote = writeRaw(LAST_KEY, raw, false);
-    if (!wrote) return false;
-    const declaredId =
-      (result && (result.analysis_id || result.id)) ||
-      (entry.data && (entry.data.analysis_id || entry.data.request_id || entry.data.case_id)) ||
-      "";
-    const analysisId = declaredId ? String(declaredId) : makeAnalysisId(entry);
-    writeCurrentAnalysisId(analysisId);
-    // Drop pre-refactor keys so stale pillars cannot shadow the new result.
-    removeRaw([LEGACY_LAST_KEY]);
-    // A fresh analyze always wins over whatever entry was being viewed.
+    if (!entry) throw new Error("Kết quả thiếu dữ liệu hồ sơ.");
+    const id = String(result.analysis_id || result.id || entry.data.analysis_id || "");
+    if (!id) throw new Error("Kết quả thiếu mã hồ sơ.");
+    archiveCache = null;
+    if (!entry.data.archive_saved) archiveRequest("POST", [historyRow(entry, id)]);
+    const stored = loadHistory().find(function (row) { return rowAnalysisId(row) === id; });
+    if (!stored || !stored.data) throw new Error("Chưa xác nhận hồ sơ được lưu trên máy chủ. Hãy mở lịch sử trước khi chạy lại.");
+    writeCurrentAnalysisId(id);
     clearView();
-    // History is best-effort — must not undo a successful last-result write.
-    try {
-      saveHistory(entry, analysisId);
-    } catch (_) {
-      /* ignore */
-    }
     return true;
   }
 
@@ -383,7 +399,10 @@
    * @returns {{input: object, data: object}|null}
    */
   function load() {
-    return readValue([LAST_KEY, LEGACY_LAST_KEY]);
+    const currentId = readCurrentAnalysisId();
+    if (!currentId) return null;
+    const row = loadHistory().find(function (item) { return rowAnalysisId(item) === currentId; });
+    return row && row.data ? normalizeResult(row) : null;
   }
 
   /** Remove the last Analyze result from every storage backend. */
@@ -393,7 +412,10 @@
 
   /** True when a history/report entry was selected for /result. */
   function peekView() {
-    return readValue([VIEW_KEY]);
+    const id = readValue([VIEW_ID_KEY]);
+    if (!id) return null;
+    const row = loadHistory().find(function (r) { return rowAnalysisId(r) === String(id); });
+    return row || null;
   }
 
   /**
@@ -406,39 +428,13 @@
    * @returns {boolean} true when the entry was appended or already present.
    */
   function saveHistory(entry, forcedId) {
-    let row = null;
-    if (entry && typeof entry === "object" && entry.saved_at) {
-      row = entry;
-    } else {
-      const normalized = normalizeResult(entry);
-      if (normalized) row = historyRow(normalized, forcedId);
-    }
-    if (!row) return false;
-    if (forcedId && !row.analysis_id) {
-      row.analysis_id = String(forcedId);
-      row.id = String(forcedId);
-    }
-    const list = loadHistory();
-    const payloadId = String(
-      (entry && entry.data && (entry.data.analysis_id || entry.data.request_id || entry.data.case_id)) ||
-        (entry && !entry.saved_at && entry.analysis_id) ||
-        "",
-    ).trim();
-    if (payloadId) {
-      for (let i = 0; i < list.length; i += 1) {
-        if (rowAnalysisId(list[i]) === payloadId) {
-          return true;
-        }
-      }
-    }
-    if (!archiveNumber(row.archive_number)) {
-      row.archive_number = nextArchiveNumber(list);
-      row.archive_code = archiveCode(row.archive_number);
-    }
-    list.unshift(row);
-    const raw = encode(list);
-    if (raw === null) return false;
-    return writeRaw(HISTORY_KEY, raw, false);
+    const row = entry && entry.saved_at ? entry : historyRow(normalizeResult(entry), forcedId);
+    if (!row || !row.data) throw new Error("Hồ sơ thiếu dữ liệu.");
+    archiveRequest("POST", [row]);
+    archiveCache = null;
+    const id = rowAnalysisId(row);
+    if (!loadHistory().some(function (r) { return rowAnalysisId(r) === id; })) throw new Error("Chưa xác nhận lưu hồ sơ trên máy chủ.");
+    return true;
   }
 
   /**
@@ -447,14 +443,10 @@
    * @returns {Array<object>}
    */
   function loadHistory() {
-    const list = readValue([HISTORY_KEY, LEGACY_HISTORY_KEY]);
-    if (!Array.isArray(list)) return [];
-    const migrated = migrateArchiveNumbers(list);
-    if (migrated.changed) {
-      const raw = encode(migrated.list);
-      if (raw !== null) writeRaw(HISTORY_KEY, raw, false);
-    }
-    return migrated.list;
+    // No WebStorage fallback, and no cache shared across account changes.
+    const remote = archiveRequest("GET");
+    if (!Array.isArray(remote.rows)) throw new Error("Máy chủ trả danh sách hồ sơ không hợp lệ.");
+    return remote.rows;
   }
 
   /**
@@ -466,25 +458,20 @@
   function deleteHistory(analysisId) {
     const wanted = String(analysisId || "").trim();
     if (!wanted) return false;
-    const list = loadHistory();
-    const kept = list.filter(function (row) {
-      return rowAnalysisId(row) !== wanted;
-    });
-    if (kept.length === list.length) return false;
-    const raw = encode(kept);
-    if (raw === null || !writeRaw(HISTORY_KEY, raw, false)) return false;
-
-    const currentId = String(readCurrentAnalysisId() || "").trim();
-    if (currentId === wanted) {
-      removeRaw([LAST_KEY, LEGACY_LAST_KEY, CURRENT_ID_KEY]);
-    }
-    const selectedId = readValue([VIEW_ID_KEY]);
-    if (String(selectedId || "").trim() === wanted) clearView();
+    archiveRequest("DELETE", null, wanted);
+    if (loadHistory().some(function (row) { return rowAnalysisId(row) === wanted; })) throw new Error("Máy chủ chưa xác nhận xóa hồ sơ.");
+    if (String(readCurrentAnalysisId() || "") === wanted) removeRaw([CURRENT_ID_KEY]);
+    if (String(readValue([VIEW_ID_KEY]) || "") === wanted) clearView();
     return true;
   }
 
   /** Remove the history list from every storage backend. */
   function clearHistory() {
+    if (global.XMLHttpRequest) {
+      const result = archiveRequest("DELETE");
+      if (!result) throw new Error("Chưa xóa được hồ sơ trên máy chủ. Hãy kiểm tra kết nối.");
+      archiveCache = [];
+    }
     removeRaw([HISTORY_KEY, LEGACY_HISTORY_KEY]);
   }
 
@@ -496,16 +483,9 @@
    * @returns {boolean} true when the selection was stored.
    */
   function selectForView(result) {
-    const entry = normalizeResult(result);
-    if (!entry) return false;
-    const raw = encode(entry);
-    if (raw === null) return false;
-    const wrote = writeRaw(VIEW_KEY, raw, true);
-    if (wrote) {
-      const viewId = (result && (result.analysis_id || result.id)) || displayAnalysisId(entry);
-      writeRaw(VIEW_ID_KEY, encode(String(viewId)), true);
-    }
-    return wrote;
+    const id = String((result && (result.analysis_id || result.id)) || displayAnalysisId(result));
+    if (!findHistoryById(id)) throw new Error("Hồ sơ không có trong kho tài khoản hiện tại.");
+    return writeRaw(VIEW_ID_KEY, encode(id), true);
   }
 
   /**
@@ -515,7 +495,8 @@
    * @returns {{input: object, data: object}|null}
    */
   function loadForView() {
-    return readValue([VIEW_KEY]) || load();
+    const selected = peekView();
+    return selected ? normalizeResult(selected) : load();
   }
 
   /** Drop the current view selection. */
@@ -588,6 +569,27 @@
     loadHistory: loadHistory,
     deleteHistory: deleteHistory,
     clearHistory: clearHistory,
+    importLegacyHistory: function () {
+      const collected = [];
+      [sessionStore(), localStore()].forEach(function (storage) {
+        if (!storage) return;
+        [HISTORY_KEY, LEGACY_HISTORY_KEY].forEach(function (key) {
+          try { const rows = JSON.parse(storage.getItem(key) || "[]");
+            if (Array.isArray(rows)) rows.forEach(function (row) { if (row && row.data) collected.push(row); });
+          } catch (_) {}
+        });
+        [LAST_KEY, LEGACY_LAST_KEY].forEach(function (key) {
+          try { const entry = normalizeResult(JSON.parse(storage.getItem(key) || "null"));
+            if (entry) collected.push(historyRow(entry, displayAnalysisId(entry)));
+          } catch (_) {}
+        });
+      });
+      const seen = new Set();
+      const rows = collected.filter(function (row) { const id = rowAnalysisId(row); if (!id || seen.has(id)) return false; seen.add(id); return true; });
+      for (const row of rows) { if (!archiveRequest("POST", [row])) throw new Error("Nhập hồ sơ chưa hoàn tất. Hồ sơ cũ vẫn được giữ nguyên; bạn có thể chạy lại."); }
+      archiveCache = null;
+      return rows.length;
+    },
     selectForView: selectForView,
     loadForView: loadForView,
     peekView: peekView,

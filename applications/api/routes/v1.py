@@ -18,8 +18,11 @@ from applications.api.routes import number_energy as number_energy_router
 from applications.api.routes import pack07_dev as pack07_dev_router
 from applications.api.services.result_identity import stamp_customer_result_identity
 from engines.knowledge_engine import KnowledgePipeline
+from applications.api.routes.analysis_archive import router as archive_router, archive_owner
+from applications.api.services.analysis_archive import save_snapshot
 
 router = APIRouter(tags=["engines"])
+router.include_router(archive_router)
 router.include_router(date_selection_router.router)
 router.include_router(number_energy_router.router)
 router.include_router(pack07_dev_router.router)
@@ -147,6 +150,7 @@ def analyze_endpoint(
     auth_service: AuthService = Depends(get_auth_service),
 ) -> APIResponse:
     """Primary end-to-end analysis endpoint."""
+    owner = archive_owner(request)
     request_id = getattr(request.state, "request_id", None)
     if user is not None and not auth_service.store.can_create_analysis(user.user_id):
         raise HTTPException(
@@ -180,6 +184,14 @@ def analyze_endpoint(
             status_code=429,
             detail="Tài khoản đã sử dụng hết số lượt tạo lá số được cấp.",
         )
+    payload["archive_saved"] = True
+    save_snapshot(owner, {
+        "analysis_id": payload.get("analysis_id") or request_id,
+        "input": body.model_dump(), "data": payload,
+        "saved_at": (payload.get("result_meta") or {}).get("created_at"),
+        "customer_contract": (payload.get("result_meta") or {}).get("customer_contract"),
+        "summary": (payload.get("interpretation") or {}).get("summary"),
+    })
     logger.info(
         "api.analyze response pattern_keys=%s interpretation_keys=%s section_count=%s",
         sorted((payload.get("pattern") or {}).keys()),

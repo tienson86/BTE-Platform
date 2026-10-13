@@ -12,6 +12,12 @@
   if (!form || !state || !result) return;
 
   void loadHistory();
+  const archiveId = new URLSearchParams(location.search).get("archive_id");
+  if (archiveId) {
+    request(apiBase + "/" + encodeURIComponent(archiveId)).then(renderResult).catch(error => {
+      state.textContent = error.message || "Chưa mở được hồ sơ sinh con.";
+    });
+  }
 
   const currentYear = new Date().getFullYear();
   const startYear = form.querySelector("#cb-start-year");

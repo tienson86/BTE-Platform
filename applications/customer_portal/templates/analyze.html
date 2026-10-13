@@ -1,102 +1,103 @@
-<div class="ds-page analyze-page" data-screen="view-chart">
-  <header>
-    <h1 data-i18n="analyze.title">Xem lá số</h1>
-    <p class="muted" data-i18n="analyze.hint">Nhập thông tin để lập và phân tích Bát Tự</p>
-  </header>
-
-  <form id="analyzeForm" class="bte-card ds-form analyze-form" method="post" action="#" novalidate>
-    <h2 data-i18n="analyze.section_info">Thông tin</h2>
-
-    <div class="analyze-fields">
-      <label data-analyze-field="full_name">
-        <span data-i18n="analyze.full_name">Họ và tên</span>
-        <input id="full_name" name="full_name" type="text" autocomplete="name" />
-      </label>
-
-      <fieldset class="ds-gender analyze-gender" data-analyze-field="gender">
-        <legend data-i18n="analyze.gender">Giới tính</legend>
-        <div class="ds-gender__options" role="radiogroup" aria-label="Giới tính" aria-describedby="err_gender">
-          <label>
-            <input type="radio" name="gender" id="gender_male" value="male" />
-            <span data-i18n="analyze.gender_male">Nam</span>
-          </label>
-          <label>
-            <input type="radio" name="gender" id="gender_female" value="female" />
-            <span data-i18n="analyze.gender_female">Nữ</span>
-          </label>
-        </div>
-        <span class="field-error" id="err_gender" hidden></span>
-      </fieldset>
-
-      <label data-analyze-field="birth_date">
-        <span data-i18n="analyze.birth_date">Ngày sinh</span>
-        <input
-          id="birth_date"
-          name="birth_date"
-          type="text"
-          autocomplete="bday"
-          placeholder="DD/MM/YYYY"
-          maxlength="10"
-          required
-          lang="vi"
-          aria-describedby="err_birth_date"
-        />
-        <span class="field-error" id="err_birth_date" hidden></span>
-      </label>
-
-      <label data-analyze-field="birth_time">
-        <span data-i18n="analyze.birth_time">Giờ sinh</span>
-        <input
-          id="birth_time"
-          name="birth_time"
-          type="text"
-          placeholder="HH:mm"
-          maxlength="5"
-          lang="vi"
-          aria-describedby="analyzeTimeWarn"
-        />
-        <span class="analyze-time-warn muted" id="analyzeTimeWarn" hidden data-i18n="analyze.time_missing">
-          Bạn chưa nhập giờ sinh. Một số kết quả sẽ có độ chính xác thấp hơn.
-        </span>
-      </label>
-
-      <label data-analyze-field="birth_place">
-        <span data-i18n="analyze.birth_place">Nơi sinh</span>
-        <input
-          id="birth_place"
-          name="birth_place"
-          type="text"
-          autocomplete="address-level2"
-          list="analyzePlaces"
-        />
-      </label>
-    </div>
-
-    <datalist id="analyzePlaces">
-      <option value="Hà Nội"></option>
-      <option value="Bắc Ninh"></option>
-      <option value="Hải Phòng"></option>
-      <option value="TP Hồ Chí Minh"></option>
-      <option value="Đà Nẵng"></option>
-      <option value="Huế"></option>
-      <option value="Cần Thơ"></option>
-    </datalist>
-
-    <input type="hidden" id="timezone" name="timezone" value="Asia/Ho_Chi_Minh" />
-
-    <p class="analyze-note muted" data-testid="analyze-accuracy-note" data-i18n="analyze.accuracy_note">
-      Lưu ý: Giờ sinh và nơi sinh càng chính xác thì kết quả luận giải càng đáng tin cậy.
-    </p>
-
-    <div class="toolbar">
-      <button type="submit" id="btnAnalyze" data-i18n="analyze.run">Phân tích lá số</button>
-    </div>
-    <p id="analyzeStatus" class="analyze-status muted" role="status" aria-live="polite" hidden></p>
-  </form>
-
-  <p class="muted analyze-related" data-testid="number-energy-entry">
-    Cần xem dãy số điện thoại, biển số hoặc số nhà?
-    <a href="/number-energy">Năng lượng số (Bát Cực Linh Số)</a>
-  </p>
-</div>
-<script src="/static/js/analyze.js"></script>
+<div class="ds-page analyze-page" data-screen="view-chart">
+  <header>
+    <h1 data-i18n="analyze.title">Xem lá số</h1>
+    <p class="muted" data-i18n="analyze.hint">Nhập thông tin để lập và phân tích Bát Tự</p>
+      <div style="margin:16px 0 24px"><a id="btnViewSavedCharts" href="/history" class="btn secondary">Xem hồ sơ lưu trữ</a></div>
+</header>
+
+  <form id="analyzeForm" class="bte-card ds-form analyze-form" method="post" action="#" novalidate>
+    <h2 data-i18n="analyze.section_info">Thông tin</h2>
+
+    <div class="analyze-fields">
+      <label data-analyze-field="full_name">
+        <span data-i18n="analyze.full_name">Họ và tên</span>
+        <input id="full_name" name="full_name" type="text" autocomplete="name" />
+      </label>
+
+      <fieldset class="ds-gender analyze-gender" data-analyze-field="gender">
+        <legend data-i18n="analyze.gender">Giới tính</legend>
+        <div class="ds-gender__options" role="radiogroup" aria-label="Giới tính" aria-describedby="err_gender">
+          <label>
+            <input type="radio" name="gender" id="gender_male" value="male" />
+            <span data-i18n="analyze.gender_male">Nam</span>
+          </label>
+          <label>
+            <input type="radio" name="gender" id="gender_female" value="female" />
+            <span data-i18n="analyze.gender_female">Nữ</span>
+          </label>
+        </div>
+        <span class="field-error" id="err_gender" hidden></span>
+      </fieldset>
+
+      <label data-analyze-field="birth_date">
+        <span data-i18n="analyze.birth_date">Ngày sinh</span>
+        <input
+          id="birth_date"
+          name="birth_date"
+          type="text"
+          autocomplete="bday"
+          placeholder="DD/MM/YYYY"
+          maxlength="10"
+          required
+          lang="vi"
+          aria-describedby="err_birth_date"
+        />
+        <span class="field-error" id="err_birth_date" hidden></span>
+      </label>
+
+      <label data-analyze-field="birth_time">
+        <span data-i18n="analyze.birth_time">Giờ sinh</span>
+        <input
+          id="birth_time"
+          name="birth_time"
+          type="text"
+          placeholder="HH:mm"
+          maxlength="5"
+          lang="vi"
+          aria-describedby="analyzeTimeWarn"
+        />
+        <span class="analyze-time-warn muted" id="analyzeTimeWarn" hidden data-i18n="analyze.time_missing">
+          Bạn chưa nhập giờ sinh. Một số kết quả sẽ có độ chính xác thấp hơn.
+        </span>
+      </label>
+
+      <label data-analyze-field="birth_place">
+        <span data-i18n="analyze.birth_place">Nơi sinh</span>
+        <input
+          id="birth_place"
+          name="birth_place"
+          type="text"
+          autocomplete="address-level2"
+          list="analyzePlaces"
+        />
+      </label>
+    </div>
+
+    <datalist id="analyzePlaces">
+      <option value="Hà Nội"></option>
+      <option value="Bắc Ninh"></option>
+      <option value="Hải Phòng"></option>
+      <option value="TP Hồ Chí Minh"></option>
+      <option value="Đà Nẵng"></option>
+      <option value="Huế"></option>
+      <option value="Cần Thơ"></option>
+    </datalist>
+
+    <input type="hidden" id="timezone" name="timezone" value="Asia/Ho_Chi_Minh" />
+
+    <p class="analyze-note muted" data-testid="analyze-accuracy-note" data-i18n="analyze.accuracy_note">
+      Lưu ý: Giờ sinh và nơi sinh càng chính xác thì kết quả luận giải càng đáng tin cậy.
+    </p>
+
+    <div class="toolbar">
+      <button type="submit" id="btnAnalyze" data-i18n="analyze.run">Phân tích lá số</button>
+    </div>
+    <p id="analyzeStatus" class="analyze-status muted" role="status" aria-live="polite" hidden></p>
+  </form>
+
+  <p class="muted analyze-related" data-testid="number-energy-entry">
+    Cần xem dãy số điện thoại, biển số hoặc số nhà?
+    <a href="/number-energy">Năng lượng số (Bát Cực Linh Số)</a>
+  </p>
+</div>
+<script src="/static/js/analyze.js?v=BTE-2984dc5382dd3ed5"></script>

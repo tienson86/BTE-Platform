@@ -1,0 +1,591 @@
+/**
+ * BTE Portal — Result Storage Service.
+ *
+ * Single owner of analyze-result persistence. Pages must never call
+ * sessionStorage / localStorage for results directly.
+ *
+ * Keys are separated so that browsing never corrupts the analyze result:
+ *   bte_last_result  — the result produced by the last Analyze run (current).
+ *   bte_history      — append-only list of past runs.
+ *   bte_view_result  — transient History pointer. Normal /result never reads it.
+ *   loadForView()    — EXPLICIT LEGACY ONLY (`/result?legacy=1`).
+ */
+(function (global) {
+  const LAST_KEY = "bte_last_result";
+  const HISTORY_KEY = "bte_history";
+  const VIEW_KEY = "bte_view_result";
+  const CURRENT_ID_KEY = "bte_current_analysis_id";
+  const VIEW_ID_KEY = "bte_view_analysis_id";
+  const CALENDAR_RULE_VERSION = "G1-10C";
+  // Pre-refactor keys — read-only, so existing browser sessions keep their data.
+  const LEGACY_LAST_KEY = "bte_portal_last_result";
+  const LEGACY_HISTORY_KEY = "bte_portal_history";
+  // Customer requirement: retain the complete local archive, not only recent runs.
+  const HISTORY_LIMIT = null;
+  let synthesizedIdSeq = 0;
+  let archiveCache = null;
+
+  function archiveRequest(method, rows, analysisId) {
+    if (!global.XMLHttpRequest) throw new Error("Không kết nối được kho hồ sơ trên máy chủ.");
+    const xhr = new global.XMLHttpRequest();
+    xhr.open(method, "/backend/api/v1/analysis-archive" + (analysisId ? "/" + encodeURIComponent(analysisId) : ""), false);
+    const token = global.BtePortal && global.BtePortal.getToken && global.BtePortal.getToken();
+    if (!token) throw new Error("Bạn cần đăng nhập để lưu và xem hồ sơ theo tài khoản.");
+    xhr.setRequestHeader("Authorization", "Bearer " + token);
+    if (rows) xhr.setRequestHeader("Content-Type", "application/json");
+    try { xhr.send(rows ? JSON.stringify({rows: rows}) : null); }
+    catch (_) { throw new Error("Không kết nối được máy chủ lưu hồ sơ. Hãy kiểm tra kết nối rồi thử lại."); }
+    if (xhr.status < 200 || xhr.status >= 300) throw new Error("Máy chủ chưa hoàn tất thao tác hồ sơ (" + xhr.status + "). Không lưu tạm vào trình duyệt.");
+    const response = JSON.parse(xhr.responseText);
+    return response.data || response;
+  }
+
+  function sessionStore() {
+    try {
+      return global.sessionStorage || null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function localStore() {
+    try {
+      return global.localStorage || null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function writeRaw(key, raw, sessionOnly) {
+    if (![CURRENT_ID_KEY, VIEW_ID_KEY].includes(key)) throw new Error("Không được lưu nội dung lá số trên trình duyệt.");
+    let wrote = false;
+    const session = sessionStore();
+    if (session) {
+      try {
+        session.setItem(key, raw);
+        wrote = true;
+      } catch (_) {
+        /* quota */
+      }
+    }
+    if (sessionOnly) return wrote;
+    const local = localStore();
+    if (local) {
+      try {
+        local.setItem(key, raw);
+        wrote = true;
+      } catch (_) {
+        /* private mode / quota — sessionStorage is enough for same-tab Result */
+      }
+    }
+    return wrote;
+  }
+
+  function removeRaw(keys) {
+    const stores = [sessionStore(), localStore()];
+    keys.forEach(function (key) {
+      stores.forEach(function (store) {
+        if (!store) return;
+        try {
+          store.removeItem(key);
+        } catch (_) {
+          /* ignore */
+        }
+      });
+    });
+  }
+
+  function readRaw(keys) {
+    const stores = [sessionStore(), localStore()];
+    for (let i = 0; i < keys.length; i += 1) {
+      for (let j = 0; j < stores.length; j += 1) {
+        const store = stores[j];
+        if (!store) continue;
+        try {
+          const raw = store.getItem(keys[i]);
+          if (raw) return raw;
+        } catch (_) {
+          /* ignore */
+        }
+      }
+    }
+    return null;
+  }
+
+  function readValue(keys) {
+    const raw = readRaw(keys);
+    if (!raw) return null;
+    try {
+      return JSON.parse(raw);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function encode(value) {
+    try {
+      return JSON.stringify(value);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function normalizeResult(result) {
+    if (!result || typeof result !== "object") return null;
+    if (!result.data || typeof result.data !== "object") return null;
+    const data = Object.assign({}, result.data);
+    if (Object.prototype.hasOwnProperty.call(result.data, "narrative_result")) {
+      data.narrative_result = result.data.narrative_result;
+    }
+    if (Object.prototype.hasOwnProperty.call(result.data, "narrative_v2_shadow")) {
+      data.narrative_v2_shadow = result.data.narrative_v2_shadow;
+    }
+    const analysisId =
+      result.analysis_id ||
+      result.id ||
+      data.analysis_id ||
+      data.request_id;
+    if (analysisId && !data.analysis_id) {
+      data.analysis_id = String(analysisId);
+    }
+    return { input: result.input || {}, data: data };
+  }
+
+  function makeAnalysisId(entry) {
+    const fromEntry = entry && (entry.analysis_id || entry.id);
+    if (fromEntry) return String(fromEntry);
+    const data = entry && entry.data;
+    if (data && (data.analysis_id || data.request_id || data.case_id)) {
+      return String(data.analysis_id || data.request_id || data.case_id);
+    }
+    const input = (entry && entry.input) || {};
+    synthesizedIdSeq += 1;
+    return ["bte", input.year || 0, input.month || 0, input.day || 0, input.hour || 0, input.minute || 0, Date.now(), synthesizedIdSeq].join("-");
+  }
+
+  function displayAnalysisId(entry) {
+    const fromEntry = entry && (entry.analysis_id || entry.id);
+    if (fromEntry) return String(fromEntry);
+    const data = entry && entry.data;
+    if (data && (data.analysis_id || data.request_id || data.case_id)) {
+      return String(data.analysis_id || data.request_id || data.case_id);
+    }
+    const input = (entry && entry.input) || {};
+    return ["bte", input.year || 0, input.month || 0, input.day || 0, input.hour || 0, input.minute || 0].join("-");
+  }
+
+  function writeCurrentAnalysisId(id) {
+    if (!id) return;
+    writeRaw(CURRENT_ID_KEY, encode(String(id)), false);
+  }
+
+  function readCurrentAnalysisId() {
+    const value = readValue([CURRENT_ID_KEY]);
+    return typeof value === "string" && value.trim() ? value : null;
+  }
+
+  /**
+   * Last Analyze result plus the current-session analysis id.
+   * Does not change load() JSON shape used by existing store tests.
+   */
+  function isIncompatibleCalendarRule(data) {
+    const cal = data && data.calendar;
+    if (!cal || typeof cal !== "object") return true;
+    const version = cal.calendar_rule_version;
+    if (!version || version !== CALENDAR_RULE_VERSION) return true;
+    return false;
+  }
+
+  function loadCurrent() {
+    const entry = load();
+    if (!entry) return null;
+    // Display the authenticated server snapshot; missing version metadata is not a missing birth input.
+    return {
+      input: entry.input || {},
+      data: entry.data,
+      analysis_id: readCurrentAnalysisId() || displayAnalysisId(entry),
+      source: "current",
+    };
+  }
+
+  function rowAnalysisId(row) {
+    if (!row || typeof row !== "object") return "";
+    return String(displayAnalysisId(row) || "").trim();
+  }
+
+  function historyRecordFromRow(row, analysisId) {
+    if (!row || typeof row !== "object") return null;
+    const id = String(analysisId || rowAnalysisId(row) || "").trim();
+    if (!row.data || typeof row.data !== "object") {
+      return {
+        input: row.input || {},
+        data: null,
+        analysis_id: id || null,
+        source: "history",
+        corrupt: true,
+      };
+    }
+    return {
+      input: row.input || {},
+      data: row.data,
+      analysis_id: id,
+      source: "history",
+    };
+  }
+
+  function findHistoryById(expectedId) {
+    const wanted = expectedId != null && String(expectedId).trim() ? String(expectedId).trim() : "";
+    if (!wanted) return null;
+    const view = peekView();
+    if (view) {
+      const viewId = readValue([VIEW_ID_KEY]) || view.analysis_id || view.id || displayAnalysisId(view);
+      if (String(viewId) === wanted) {
+        return historyRecordFromRow(
+          {
+            input: view.input || {},
+            data: view.data,
+            analysis_id: viewId,
+          },
+          wanted,
+        );
+      }
+    }
+    const list = loadHistory();
+    for (let i = 0; i < list.length; i += 1) {
+      const row = list[i];
+      if (rowAnalysisId(row) === wanted) {
+        return historyRecordFromRow(row, wanted);
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Customer display payload.
+   *
+   * Default: fresh current analysis.
+   * History: only when fromHistory is true AND expectedId matches a stored snapshot.
+   * Explicit History never falls back to current.
+   */
+  function resolveForDisplay(fromHistory, expectedId) {
+    const wanted = expectedId != null && String(expectedId).trim() ? String(expectedId).trim() : "";
+    if (fromHistory && wanted) {
+      return findHistoryById(wanted);
+    }
+    if (wanted) return findHistoryById(wanted);
+    const current = loadCurrent();
+    if (current) return current;
+    return null;
+  }
+
+  function defaultSummary(entry) {
+    const interp = entry.data && entry.data.interpretation;
+    const summary = interp && (interp.summary || interp.interpretation_summary);
+    if (summary) return summary;
+    return global.BteI18n ? global.BteI18n.t("api.analyze_result") : "Analyze result";
+  }
+
+  function archiveNumber(value) {
+    const parsed = Number(value);
+    return Number.isInteger(parsed) && parsed > 0 ? parsed : 0;
+  }
+
+  function archiveCode(value) {
+    return String(archiveNumber(value)).padStart(3, "0");
+  }
+
+  function timestampOf(row) {
+    const raw = row && (row.created_at || row.saved_at);
+    const parsed = raw ? Date.parse(raw) : NaN;
+    return Number.isFinite(parsed) ? parsed : 0;
+  }
+
+  function migrateArchiveNumbers(list) {
+    if (!Array.isArray(list) || !list.length) return { list: [], changed: false };
+    let changed = false;
+    let maxNumber = list.reduce(function (max, row) {
+      return Math.max(max, archiveNumber(row && row.archive_number));
+    }, 0);
+    const missing = list
+      .map(function (row, index) {
+        return { row: row, index: index, timestamp: timestampOf(row) };
+      })
+      .filter(function (item) {
+        return !archiveNumber(item.row && item.row.archive_number);
+      })
+      .sort(function (left, right) {
+        return left.timestamp - right.timestamp || right.index - left.index;
+      });
+    missing.forEach(function (item) {
+      maxNumber += 1;
+      item.row.archive_number = maxNumber;
+      item.row.archive_code = archiveCode(maxNumber);
+      changed = true;
+    });
+    list.forEach(function (row) {
+      const code = archiveCode(row.archive_number);
+      if (row.archive_code !== code) {
+        row.archive_code = code;
+        changed = true;
+      }
+    });
+    return { list: list, changed: changed };
+  }
+
+  function nextArchiveNumber(list) {
+    return (list || []).reduce(function (max, row) {
+      return Math.max(max, archiveNumber(row && row.archive_number));
+    }, 0) + 1;
+  }
+
+  function historyRow(entry, forcedId) {
+    const analysisId = forcedId || makeAnalysisId(entry);
+    const meta = (entry.data && entry.data.result_meta) || {};
+    const source = (entry.data && entry.data.useful_god_source) || {};
+    const narrative = (entry.data && entry.data.narrative_result) || {};
+    const createdAt = meta.created_at || new Date().toISOString();
+    return {
+      id: analysisId,
+      analysis_id: analysisId,
+      request_id: (entry.data && entry.data.request_id) || meta.analysis_id || analysisId,
+      saved_at: createdAt,
+      created_at: createdAt,
+      customer_contract: source.contract || meta.customer_contract || null,
+      narrative_contract: narrative.contract || null,
+      gate_core_freeze: meta.gate_core_freeze || null,
+      month_pillar_standard: meta.month_pillar_standard || null,
+      release_label: meta.release_label || null,
+      input: entry.input || {},
+      summary: defaultSummary(entry),
+      data: entry.data,
+    };
+  }
+
+  /**
+   * Persist the result of an Analyze run and append it to history.
+   *
+   * @param {{input?: object, data: object}} result
+   * @returns {boolean} true when the result was stored.
+   */
+  function save(result) {
+    const entry = normalizeResult(result);
+    if (!entry) throw new Error("Kết quả thiếu dữ liệu hồ sơ.");
+    const id = String(result.analysis_id || result.id || entry.data.analysis_id || "");
+    if (!id) throw new Error("Kết quả thiếu mã hồ sơ.");
+    archiveCache = null;
+    if (!entry.data.archive_saved) archiveRequest("POST", [historyRow(entry, id)]);
+    const stored = loadHistory().find(function (row) { return rowAnalysisId(row) === id; });
+    if (!stored || !stored.data) throw new Error("Chưa xác nhận hồ sơ được lưu trên máy chủ. Hãy mở lịch sử trước khi chạy lại.");
+    writeCurrentAnalysisId(id);
+    clearView();
+    return true;
+  }
+
+  /**
+   * Read the last Analyze result.
+   *
+   * Prefers current keys. Legacy keys remain a migration bridge only.
+   *
+   * @returns {{input: object, data: object}|null}
+   */
+  function load() {
+    const currentId = readCurrentAnalysisId();
+    if (!currentId) return null;
+    const row = loadHistory().find(function (item) { return rowAnalysisId(item) === currentId; });
+    return row && row.data ? normalizeResult(row) : null;
+  }
+
+  /** Remove the last Analyze result from every storage backend. */
+  function clear() {
+    removeRaw([LAST_KEY, LEGACY_LAST_KEY]);
+  }
+
+  /** True when a history/report entry was selected for /result. */
+  function peekView() {
+    const id = readValue([VIEW_ID_KEY]);
+    if (!id) return null;
+    const row = loadHistory().find(function (r) { return rowAnalysisId(r) === String(id); });
+    return row || null;
+  }
+
+  /**
+   * Append an entry to history. Never touches the last Analyze result.
+   * Same analysis_id is not prepended again (refresh/export-safe).
+   * Existing snapshots are not mutated.
+   *
+   * @param {object} entry result shape ({input, data}) or a ready history row.
+   * @param {string} [forcedId]
+   * @returns {boolean} true when the entry was appended or already present.
+   */
+  function saveHistory(entry, forcedId) {
+    const row = entry && entry.saved_at ? entry : historyRow(normalizeResult(entry), forcedId);
+    if (!row || !row.data) throw new Error("Hồ sơ thiếu dữ liệu.");
+    archiveRequest("POST", [row]);
+    archiveCache = null;
+    const id = rowAnalysisId(row);
+    if (!loadHistory().some(function (r) { return rowAnalysisId(r) === id; })) throw new Error("Chưa xác nhận lưu hồ sơ trên máy chủ.");
+    return true;
+  }
+
+  /**
+   * Read the history list.
+   *
+   * @returns {Array<object>}
+   */
+  function loadHistory() {
+    // No WebStorage fallback, and no cache shared across account changes.
+    const remote = archiveRequest("GET");
+    if (!Array.isArray(remote.rows)) throw new Error("Máy chủ trả danh sách hồ sơ không hợp lệ.");
+    return remote.rows;
+  }
+
+  /**
+   * Delete one archived analysis without renumbering the remaining records.
+   *
+   * @param {string} analysisId
+   * @returns {boolean} true when a matching record was removed.
+   */
+  function deleteHistory(analysisId) {
+    const wanted = String(analysisId || "").trim();
+    if (!wanted) return false;
+    archiveRequest("DELETE", null, wanted);
+    if (loadHistory().some(function (row) { return rowAnalysisId(row) === wanted; })) throw new Error("Máy chủ chưa xác nhận xóa hồ sơ.");
+    if (String(readCurrentAnalysisId() || "") === wanted) removeRaw([CURRENT_ID_KEY]);
+    if (String(readValue([VIEW_ID_KEY]) || "") === wanted) clearView();
+    return true;
+  }
+
+  /** Remove the history list from every storage backend. */
+  function clearHistory() {
+    if (global.XMLHttpRequest) {
+      const result = archiveRequest("DELETE");
+      if (!result) throw new Error("Chưa xóa được hồ sơ trên máy chủ. Hãy kiểm tra kết nối.");
+      archiveCache = [];
+    }
+    removeRaw([HISTORY_KEY, LEGACY_HISTORY_KEY]);
+  }
+
+  /**
+   * Mark an existing entry (history / report) as the one to show on Result.
+   * Written to its own key so the last Analyze result stays intact.
+   *
+   * @param {{input?: object, data: object}} result
+   * @returns {boolean} true when the selection was stored.
+   */
+  function selectForView(result) {
+    const id = String((result && (result.analysis_id || result.id)) || displayAnalysisId(result));
+    if (!findHistoryById(id)) throw new Error("Hồ sơ không có trong kho tài khoản hiện tại.");
+    return writeRaw(VIEW_ID_KEY, encode(id), true);
+  }
+
+  /**
+   * EXPLICIT LEGACY ONLY (`/result?legacy=1` + result.js).
+   * Normal customer /result must use resolveForDisplay, never this path.
+   *
+   * @returns {{input: object, data: object}|null}
+   */
+  function loadForView() {
+    const selected = peekView();
+    return selected ? normalizeResult(selected) : load();
+  }
+
+  /** Drop the current view selection. */
+  function clearView() {
+    removeRaw([VIEW_KEY, VIEW_ID_KEY]);
+  }
+
+  /**
+   * Diagnostic Narrative V2 Presentation envelope. Never overwrites Pack05.
+   *
+   * @returns {object|null}
+   */
+  function loadNarrativeV2Shadow() {
+    const current = loadCurrent() || load();
+    if (!current || !current.data || typeof current.data !== "object") return null;
+    const shadow = current.data.narrative_v2_shadow;
+    if (!shadow || typeof shadow !== "object") return null;
+    return shadow;
+  }
+
+  /**
+   * Return stored Pack05 and Narrative V2 layers without choosing or mutating.
+   * Portal switch reads this; it never overwrites either layer.
+   *
+   * @returns {{pack05: object|null, narrative_v2: object|null}}
+   */
+  function selectNarrativeLayers() {
+    const current = loadCurrent() || load();
+    const data = current && current.data && typeof current.data === "object" ? current.data : null;
+    if (!data) {
+      return { pack05: null, narrative_v2: null };
+    }
+    return {
+      pack05: Object.prototype.hasOwnProperty.call(data, "narrative_result")
+        ? data.narrative_result
+        : null,
+      narrative_v2: Object.prototype.hasOwnProperty.call(data, "narrative_v2_shadow")
+        ? data.narrative_v2_shadow
+        : null,
+    };
+  }
+
+  /**
+   * Read stored Pack05 as a historical archive. Does not select it for production.
+   *
+   * @returns {object|null}
+   */
+  function loadPack05Archive() {
+    const layers = selectNarrativeLayers();
+    return layers.pack05;
+  }
+
+  global.BtePortal = global.BtePortal || {};
+  global.BtePortal.ResultStore = {
+    LAST_KEY: LAST_KEY,
+    HISTORY_KEY: HISTORY_KEY,
+    VIEW_KEY: VIEW_KEY,
+    CURRENT_ID_KEY: CURRENT_ID_KEY,
+    HISTORY_LIMIT: HISTORY_LIMIT,
+    archiveCode: archiveCode,
+    CALENDAR_RULE_VERSION: CALENDAR_RULE_VERSION,
+    save: save,
+    load: load,
+    loadCurrent: loadCurrent,
+    getCurrentAnalysisId: readCurrentAnalysisId,
+    resolveForDisplay: resolveForDisplay,
+    findHistoryById: findHistoryById,
+    clear: clear,
+    saveHistory: saveHistory,
+    loadHistory: loadHistory,
+    deleteHistory: deleteHistory,
+    clearHistory: clearHistory,
+    importLegacyHistory: function () {
+      const collected = [];
+      [sessionStore(), localStore()].forEach(function (storage) {
+        if (!storage) return;
+        [HISTORY_KEY, LEGACY_HISTORY_KEY].forEach(function (key) {
+          try { const rows = JSON.parse(storage.getItem(key) || "[]");
+            if (Array.isArray(rows)) rows.forEach(function (row) { if (row && row.data) collected.push(row); });
+          } catch (_) {}
+        });
+        [LAST_KEY, LEGACY_LAST_KEY].forEach(function (key) {
+          try { const entry = normalizeResult(JSON.parse(storage.getItem(key) || "null"));
+            if (entry) collected.push(historyRow(entry, displayAnalysisId(entry)));
+          } catch (_) {}
+        });
+      });
+      const seen = new Set();
+      const rows = collected.filter(function (row) { const id = rowAnalysisId(row); if (!id || seen.has(id)) return false; seen.add(id); return true; });
+      for (const row of rows) { if (!archiveRequest("POST", [row])) throw new Error("Nhập hồ sơ chưa hoàn tất. Hồ sơ cũ vẫn được giữ nguyên; bạn có thể chạy lại."); }
+      archiveCache = null;
+      return rows.length;
+    },
+    selectForView: selectForView,
+    loadForView: loadForView,
+    peekView: peekView,
+    clearView: clearView,
+    loadNarrativeV2Shadow: loadNarrativeV2Shadow,
+    selectNarrativeLayers: selectNarrativeLayers,
+    loadPack05Archive: loadPack05Archive,
+  };
+})(window);

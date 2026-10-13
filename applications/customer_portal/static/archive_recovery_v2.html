@@ -1,0 +1,55 @@
+<!doctype html><html lang="vi"><meta charset="utf-8"><title>Khôi phục hồ sơ BTE</title>
+<style>body{font:17px/1.6 system-ui;max-width:900px;margin:40px auto;padding:20px;color:#14354b}button,a,input{padding:12px;margin:8px;cursor:pointer}pre{white-space:pre-wrap;background:#eef4f8;padding:20px;border-radius:12px}</style>
+<h1>Khôi phục hồ sơ vào tài khoản BTE</h1>
+<p>Đăng nhập đúng tài khoản trước khi nhập. Có thể nhập từ bộ nhớ trình duyệt hoặc chọn tệp sao lưu JSON. Hồ sơ nguồn được giữ nguyên; mã trùng chỉ lưu một lần.</p>
+<p id="account">Đang kiểm tra tài khoản…</p><p id="origin"></p>
+<button id="login" onclick="location.href='/login'">Đăng Nhập</button>
+<button id="import">Nhập hồ sơ còn trong trình duyệt</button>
+<p><label>Hoặc chọn tệp sao lưu: <input id="file" type="file" accept=".json,application/json"></label><button id="importFile" disabled>Khôi phục từ tệp JSON</button></p>
+<a href="/history">Xem hồ sơ lưu trữ</a><pre id="status">Chưa nhập hồ sơ.</pre>
+<script src="/static/js/api.js"></script>
+<script>
+const status=document.getElementById('status');let selected=null;let busy=false;
+document.getElementById('origin').textContent='Địa chỉ: '+location.origin;
+async function request(method,path,body){
+ const token=BtePortal.getToken();if(!token)throw Error('Chưa đăng nhập ở địa chỉ này. Bấm Đăng Nhập rồi mở lại trang khôi phục.');
+ const headers={Authorization:'Bearer '+token,Accept:'application/json'};if(body)headers['Content-Type']='application/json';
+ const response=await fetch('/backend'+path,{method,headers,body:body?JSON.stringify(body):undefined,cache:'no-store'});
+ let result;try{result=await response.json()}catch(e){throw Error('API trả về dữ liệu không đúng định dạng (HTTP '+response.status+').')}
+ if(!response.ok)throw Error('HTTP '+response.status+': '+JSON.stringify(result.detail||result.message||result));
+ return result.data||result;
+}
+async function account(){const user=await request('GET','/api/v1/auth/me');if(!user.username||!user.user_id)throw Error('API chưa trả về tài khoản đầy đủ.');document.getElementById('account').textContent='Nhập vào: '+(user.display_name||user.username)+' (@'+user.username+')';document.getElementById('login').hidden=true;return user;}
+function gather(backup){
+ const found=new Map();
+ for(const store of Object.values(backup.stores||{})){
+  for(const key of ['bte_history','bte_portal_history']){
+   const raw=store[key];const rows=typeof raw==='string'?JSON.parse(raw):raw;
+   if(Array.isArray(rows))for(const row of rows){const id=row&&(row.analysis_id||row.id||(row.data&&row.data.analysis_id));if(id&&row.data)found.set(String(id),Object.assign({},row,{analysis_id:String(id)}));}
+  }
+  for(const key of ['bte_last_result','bte_portal_last_result']){
+   const raw=store[key];const entry=typeof raw==='string'?JSON.parse(raw):raw;if(!entry||!entry.data)continue;
+   const id=entry.analysis_id||entry.id||entry.data.analysis_id||entry.data.request_id;
+   if(id&&!found.has(String(id))){const meta=entry.data.result_meta||{};found.set(String(id),{id:String(id),analysis_id:String(id),input:entry.input||{},data:entry.data,saved_at:meta.created_at||new Date().toISOString()});}
+  }
+ }
+ return [...found.values()];
+}
+function browserBackup(){const stores={};for(const kind of ['localStorage','sessionStorage']){stores[kind]={};for(const key of ['bte_history','bte_portal_history','bte_last_result','bte_portal_last_result']){const raw=window[kind].getItem(key);if(raw)stores[kind][key]=JSON.parse(raw);}}return {stores};}
+async function restore(backup){
+ if(busy)return;busy=true;
+ try{
+  const user=await account();const rows=gather(backup);if(!rows.length)throw Error('Không tìm thấy hồ sơ trong nguồn đã chọn. Hãy chọn tệp BTE_Sao_Luu_Ho_So_localhost.json hoặc kiểm tra địa chỉ còn lại.');
+  for(let i=0;i<rows.length;i++){status.textContent='Đang nhập '+(i+1)+'/'+rows.length+' hồ sơ vào @'+user.username+'…';await request('POST','/api/v1/analysis-archive',{rows:[rows[i]]});}
+  const current=await account();if(current.user_id!==user.user_id)throw Error('Tài khoản đã thay đổi trong lúc nhập. Mở lại lịch sử với tài khoản ban đầu.');
+  const saved=await request('GET','/api/v1/analysis-archive');if(!Array.isArray(saved.rows))throw Error('API chưa trả về danh sách hồ sơ.');
+  const ids=new Set(saved.rows.map(row=>String(row.analysis_id||row.id)));const missing=rows.filter(row=>!ids.has(String(row.analysis_id)));
+  if(missing.length)throw Error('Đã gửi hồ sơ nhưng khi đọc lại còn thiếu '+missing.length+' mã. Hãy gửi ảnh thông báo này.');
+  status.textContent='THÀNH CÔNG: Đã kiểm tra đủ '+rows.length+' hồ sơ vừa nhập vào @'+user.username+'. Kho tài khoản hiện có '+saved.rows.length+' hồ sơ. Bấm Xem hồ sơ lưu trữ rồi Ctrl+F5.';
+ }catch(error){status.textContent='CHƯA HOÀN TẤT: '+error.message;}finally{busy=false;}
+}
+document.getElementById('import').onclick=()=>{try{restore(browserBackup())}catch(e){status.textContent=e.message}};
+document.getElementById('file').onchange=async event=>{try{const file=event.target.files[0];if(!file)return;selected=JSON.parse(await file.text());const n=gather(selected).length;status.textContent='Tệp '+file.name+': tìm thấy '+n+' hồ sơ có dữ liệu. Bấm Khôi phục từ tệp JSON.';document.getElementById('importFile').disabled=!n;}catch(e){selected=null;document.getElementById('importFile').disabled=true;status.textContent='Không đọc được tệp: '+e.message;}};
+document.getElementById('importFile').onclick=()=>restore(selected);
+account().catch(error=>{document.getElementById('account').textContent=error.message;});
+</script></html>

@@ -36,6 +36,8 @@ def _customer_nav_html(catalog: dict[str, Any], active: str) -> str:
             f'<a class="{cls}" href="{item.path}" data-nav-id="{item.key}"{current}>'
             f"{t(catalog, item.label)}</a>"
         )
+    cls = "nav-link active" if active == "van-han" else "nav-link"
+    links.append(f'<a class="{cls}" href="/tinh-van-han" data-nav-id="van-han">Tính vận hạn</a>')
     return "\n".join(links)
 
 

@@ -1,34 +1,17 @@
 @echo off
 setlocal
-cd /d "%~dp0"
-
-echo ========================================
-echo  BTE Platform — starting all services
-echo ========================================
-
-echo Reloading BTE services to apply the latest rules...
-call "%~dp0stop_all.bat"
-timeout /t 2 /nobreak >nul
-
-if not exist "..\..\logs" mkdir "..\..\logs"
-if not exist "..\..\reports" mkdir "..\..\reports"
-if not exist "..\..\applications\data" mkdir "..\..\applications\data"
-
-start "BTE API" cmd /k "%~dp0start_api.bat"
-timeout /t 2 /nobreak >nul
-start "BTE Web Admin" cmd /k "%~dp0start_admin.bat"
-timeout /t 1 /nobreak >nul
-start "BTE Marriage API" cmd /k "%~dp0start_marriage.bat"
-timeout /t 1 /nobreak >nul
-start "BTE Customer Portal" cmd /k "%~dp0start_portal.bat"
-
-echo.
-echo Started:
-echo   API      http://127.0.0.1:8000/docs
-echo   Admin    http://127.0.0.1:8688
-echo   Marriage http://127.0.0.1:8082/healthz
-echo   Portal   http://127.0.0.1:8686
-echo.
-echo Logs: logs\api.log , logs\admin_8688.log , logs\marriage_api.log , logs\portal.log
-echo Use stop_all.bat to stop uvicorn processes.
-endlocal
+set "PYTHONUTF8=1"
+cd /d "%~dp0..\.."
+if exist ".venv\Scripts\python.exe" (
+ ".venv\Scripts\python.exe" -X utf8 "scripts\server_runtime\bte_maintenance.py" "%CD%"
+) else (
+ python -X utf8 "scripts\server_runtime\bte_maintenance.py" "%CD%"
+)
+if errorlevel 1 (
+ echo BTE chua khoi dong thanh cong. Giu lai thong bao loi de kiem tra.
+ pause
+ exit /b 1
+)
+echo Da sao luu, nap dung ma giao dien va khoi dong lai BTE.
+echo Bao cao: logs\BTE_Cap_Nhat_Da_Kiem_Tra.json
+pause

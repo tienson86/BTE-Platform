@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from threading import RLock
+import os
+import tempfile
 import json
 from pathlib import Path
 from typing import Any
@@ -111,9 +113,27 @@ class JsonUserStore(InMemoryUserStore):
             self._load()
 
     def add_user(self, user: UserRecord) -> UserRecord:
-        saved = super().add_user(user)
-        self._after_change()
-        return saved
+        with self._lock:
+            existing = self.users_by_username.get(user.username.lower())
+            if existing is not None and existing.user_id != user.user_id:
+                raise ValueError("Username already belongs to another account")
+            for name, record in list(self.users_by_username.items()):
+                if record.user_id == user.user_id and name != user.username.lower():
+                    del self.users_by_username[name]
+            saved = super().add_user(user)
+            self._after_change()
+            return saved
+
+    def consume_analysis(self, user_id: str) -> bool:
+        with self._lock:
+            user = self.get_by_id(user_id)
+            before = user.analyses_used if user is not None else None
+            try:
+                return super().consume_analysis(user_id)
+            except Exception:
+                if user is not None:
+                    user.analyses_used = before
+                raise
 
     def _load(self) -> None:
         payload = json.loads(self.path.read_text(encoding="utf-8") or "[]")
@@ -126,14 +146,27 @@ class JsonUserStore(InMemoryUserStore):
             ))
 
     def _after_change(self) -> None:
-        rows = [{
-            "user_id": u.user_id, "username": u.username, "password_hash": u.password_hash,
-            "role": u.role.value, "is_active": u.is_active, "display_name": u.display_name,
-            "analysis_limit": u.analysis_limit, "analyses_used": u.analyses_used,
-        } for u in self.users_by_id.values()]
-        temp = self.path.with_suffix(self.path.suffix + ".tmp")
-        temp.write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
-        temp.replace(self.path)
+        # One API process; serialize account writes inside that process.
+        # Unique temp file + fsync + atomic replacement protects the previous file.
+        with self._lock:
+            rows = [{
+                "user_id": u.user_id, "username": u.username, "password_hash": u.password_hash,
+                "role": u.role.value, "is_active": u.is_active, "display_name": u.display_name,
+                "analysis_limit": u.analysis_limit, "analyses_used": u.analyses_used,
+            } for u in self.users_by_id.values()]
+            name = None
+            try:
+                with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=self.path.parent,
+                                                prefix=self.path.name+".", suffix=".tmp", delete=False) as handle:
+                    name = handle.name
+                    json.dump(rows, handle, ensure_ascii=False, indent=2)
+                    handle.flush()
+                    os.fsync(handle.fileno())
+                os.replace(name, self.path)
+                name = None
+            finally:
+                if name is not None:
+                    Path(name).unlink(missing_ok=True)
 
     def add_api_key(self, record: APIKeyRecord) -> APIKeyRecord:
         """Store an API key record."""

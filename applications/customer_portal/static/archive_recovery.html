@@ -1,0 +1,17 @@
+<!doctype html><html lang="vi"><meta charset="utf-8"><title>Nhập hồ sơ cũ BTE</title>
+<style>body{font:17px/1.6 system-ui;max-width:850px;margin:40px auto;padding:20px;color:#14354b}button,a{padding:12px;margin:8px;cursor:pointer}pre{white-space:pre-wrap;background:#eef4f8;padding:20px;border-radius:12px}</style>
+<h1>Nhập hồ sơ cũ vào kho BTE trên máy</h1>
+<p>Hồ sơ gốc trong trình duyệt vẫn được giữ nguyên. Thực hiện một lần tại localhost và một lần tại 127.0.0.1 để nhập hai kho cũ. Kho mới gắn với tài khoản đang đăng nhập; nếu chưa đăng nhập, hồ sơ vào kho khách trên máy.</p>
+<p id="account"></p><p id="origin"></p>
+<button id="backup">Tải bản sao hồ sơ trình duyệt</button><button id="import">Nhập lịch sử và kết quả cuối</button><a href="/history">Xem hồ sơ</a><pre id="status">Chưa nhập hồ sơ.</pre>
+<script src="/static/js/api.js"></script><script src="/static/js/result_store.js"></script>
+<script>
+document.getElementById('origin').textContent='Địa chỉ hiện tại: '+location.origin;
+const user=BtePortal.getUser();document.getElementById('account').textContent=user&&user.username?'Tài khoản: '+(user.display_name||user.username)+' (@'+user.username+')':'Kho khách trên máy — chưa đăng nhập';
+document.getElementById('backup').onclick=()=>{
+ const values={origin:location.origin,stores:{}};
+ for(const kind of ['localStorage','sessionStorage']){const o={};values.stores[kind]=o;for(const key of ['bte_history','bte_portal_history','bte_last_result','bte_portal_last_result']){try{const raw=window[kind].getItem(key);if(raw)o[key]=JSON.parse(raw)}catch(e){}}}
+ const url=URL.createObjectURL(new Blob([JSON.stringify(values)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='BTE_Sao_Luu_Ho_So_'+location.hostname+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+};
+document.getElementById('import').onclick=()=>{const button=document.getElementById('import');button.disabled=true;document.getElementById('status').textContent='Đang nhập hồ sơ…';setTimeout(()=>{try{const n=BtePortal.ResultStore.importLegacyHistory();document.getElementById('status').textContent='Đã nhập '+n+' hồ sơ (mã trùng được giữ một lần). Bạn có thể mở Hồ sơ để kiểm tra.';}catch(e){document.getElementById('status').textContent=e.message;}finally{button.disabled=false;}},50);};
+</script></html>

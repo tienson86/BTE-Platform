@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from consulting.archive_access import creator_fields, can_read, identity
 from dataclasses import replace
 
 from consulting.marriage.api.contract import MarriageApiContract
@@ -45,6 +46,9 @@ class MarriageConsultationApi(MarriageApiContract):
         self.last_create_was_replay = False
         self._validation.validate_request(request)
         key = request.request_meta.idempotency_key if request.request_meta else None
+        user = identity.get()
+        if not user: raise RuntimeError("Authenticated creator required")
+        if key: key = "user:" + user["user_id"] + ":" + key
         fingerprint = request_fingerprint(request)
         if key:
             existing = self._repository.get_by_idempotency_key(key)
@@ -82,7 +86,8 @@ class MarriageConsultationApi(MarriageApiContract):
 
     def list_history(self) -> list[MarriageHistoryRecord]:
         """Return stored history rows."""
-        return self._repository.list_history()
+        return [row for row in self._repository.list_history()
+                if can_read(self._repository.get(row.consultation_id))]
 
     def get_stored(self, consultation_id: str) -> MarriageStoredResult:
         """Return the full stored payload for public serialization."""
@@ -101,13 +106,14 @@ class MarriageConsultationApi(MarriageApiContract):
         size = limit if limit is not None else HISTORY_DEFAULT_LIMIT
         if size < 1 or size > HISTORY_MAX_LIMIT:
             raise MarriageValidationError("history_limit_invalid")
-        return self._repository.list_history_page(
-            cursor=cursor,
-            limit=size,
-            status=status,
-            language=language,
-            grade=grade,
-        )
+        rows = list(reversed(self.list_history()))
+        if status: rows = [r for r in rows if r.status == status]
+        if language: rows = [r for r in rows if r.language == language]
+        if grade: rows = [r for r in rows if r.grade is not None and r.grade.value == grade]
+        start = next((i+1 for i,r in enumerate(rows) if r.consultation_id == cursor), 0) if cursor else 0
+        page = rows[start:start+size]
+        return page, (page[-1].consultation_id if page and start+size<len(rows) else None)
+
 
     def get_business_stored(self, consultation_id: str) -> MarriageStoredResult:
         from consulting.business.presentation import business_context
@@ -132,7 +138,7 @@ class MarriageConsultationApi(MarriageApiContract):
 
         if limit < 1 or limit > HISTORY_MAX_LIMIT:
             raise MarriageValidationError("history_limit_invalid")
-        records = [self._require(row.consultation_id) for row in self._repository.list_history()]
+        records = [self._require(row.consultation_id) for row in self.list_history()]
         records = [stored for stored in records if stored.business_profile is not None and business_context(stored) is not None]
         records.sort(key=lambda stored: stored.business_profile.saved_at, reverse=True)
         start = next((index + 1 for index, stored in enumerate(records) if stored.history.consultation_id == cursor), 0) if cursor else 0
@@ -143,7 +149,7 @@ class MarriageConsultationApi(MarriageApiContract):
     def _require(self, consultation_id: str) -> MarriageStoredResult:
         """Load a stored consultation or fail closed."""
         stored = self._repository.get(consultation_id)
-        if stored is None:
+        if stored is None or not can_read(stored):
             raise MarriageNotFoundError("consultation_not_found")
         return stored
 
@@ -161,6 +167,7 @@ class MarriageConsultationApi(MarriageApiContract):
         result = session.context.decision_result
         label = _display_label(result.person_a.display_name, result.person_b.display_name)
         stored = MarriageStoredResult(
+            **creator_fields(),
             history=MarriageHistoryRecord(
                 consultation_id=result.consultation_id,
                 person_a_analysis_id=result.person_a.analysis_id,

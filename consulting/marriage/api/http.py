@@ -53,11 +53,16 @@ def create_marriage_api_app(container: MarriageContainer | None = None):
         return {
             "status": "ok",
             "service": "tv01-marriage-api",
+            "archive_access_version": "BTE-ADMIN-ARCHIVE-01",
             "api_version": API_VERSION,
         }
 
     app.include_router(build_marriage_router(bound), prefix="/api/v1")
-    app.include_router(build_childbirth_router(), prefix="/api/v1")
+    from consulting.archive_access import register_consulting_access
+    from consulting.childbirth.repository import JsonChildbirthRepository
+    childbirth_repository = JsonChildbirthRepository.from_environment()
+    app.include_router(build_childbirth_router(childbirth_repository), prefix="/api/v1")
+    register_consulting_access(app, bound.api_contract, childbirth_repository)
     return app
 
 

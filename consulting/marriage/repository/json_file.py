@@ -5,6 +5,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 from threading import RLock
+from uuid import uuid4
 
 from pydantic import TypeAdapter
 
@@ -55,6 +56,12 @@ class JsonMarriageRepository(InMemoryMarriageRepository):
         self.path.parent.mkdir(parents=True, exist_ok=True)
         records = [self._records[item] for item in self._order]
         payload = _RECORDS_ADAPTER.dump_json(records, indent=2)
-        temporary = self.path.with_suffix(f"{self.path.suffix}.tmp")
-        temporary.write_bytes(payload)
-        temporary.replace(self.path)
+        temporary = self.path.with_suffix(f".{uuid4().hex}.tmp")
+        try:
+            with temporary.open("wb") as stream:
+                stream.write(payload)
+                stream.flush()
+                os.fsync(stream.fileno())
+            temporary.replace(self.path)
+        finally:
+            temporary.unlink(missing_ok=True)

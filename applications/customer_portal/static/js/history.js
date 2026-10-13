@@ -1,4 +1,4 @@
-(function () {
+(async function () {
   function t(key, vars) {
     return window.BteI18n ? BteI18n.t(key, vars) : key;
   }
@@ -61,7 +61,14 @@
   }
 
   function render() {
-    const items = BtePortal.getHistory();
+    const rawItems = BtePortal.getHistory();
+    const seen = new Set();
+    const items = rawItems.filter(function (item) {
+      const id = item.analysis_id || item.id;
+      if (!id) return true;
+      if (seen.has(String(id))) return false;
+      seen.add(String(id)); return true;
+    });
     if (!items.length) {
       if (summary) summary.innerHTML = "";
       list.innerHTML = window.BteUI
@@ -69,14 +76,10 @@
         : '<p class="muted">' + t("history.empty") + "</p>";
       return;
     }
-    const archiveNumbers = items
-      .map(function (item) { return Number(item.archive_number) || 0; })
-      .filter(Boolean);
-    const latestNumber = archiveNumbers.length ? Math.max.apply(null, archiveNumbers) : items.length;
     if (summary) {
       summary.innerHTML =
         '<div><strong>' + esc(items.length) + '</strong><span> hồ sơ đã lưu</span></div>' +
-        '<div class="muted">Số lưu trữ: 001 - ' + esc(String(latestNumber).padStart(3, "0")) + '</div>';
+        '<div class="muted">Sắp xếp theo thời gian phân tích</div>';
     }
     const rows = items
       .map(function (item, idx) {
@@ -84,9 +87,9 @@
         const name = input.full_name || t("history.unnamed");
         const when = formatWhen(item.created_at || item.saved_at);
         const analysisId = item.analysis_id || item.id || "";
-        const legacy = versionNote(item);
+
         const corrupt = !item.data || typeof item.data !== "object";
-        const archiveCode = item.archive_code || String(item.archive_number || items.length - idx).padStart(3, "0");
+        const archiveCode = String(items.length - idx).padStart(3, "0");
         return (
           '<tr data-history-idx="' +
           idx +
@@ -95,11 +98,10 @@
           ">" +
           '<td class="history-record-number">' + esc(archiveCode) + "</td>" +
           '<td class="history-run-time">' + esc(when || "—") + "</td>" +
-          '<td class="history-name"><strong>' + esc(name) + "</strong>" +
-          (legacy ? " · " + esc(legacy) : "") +
+          '<td class="history-name" style="white-space:normal;overflow-wrap:anywhere;min-width:180px"><strong>' + esc(name) + "</strong>" +
           (corrupt ? " · " + esc(t("history.corrupt_badge")) : "") +
           "</td>" +
-          '<td class="history-birth-date">' + esc(birthDateLabel(input)) + "</td>" +
+          '<td class="history-birth-date" style="white-space:nowrap">' + esc(birthDateLabel(input)) + "</td>" +
           '<td class="history-birth-time">' + esc(birthTimeLabel(input)) + "</td>" +
           '<td class="history-analysis-id">' + esc(analysisId || "—") + "</td>" +
           '<td class="history-actions">' +
@@ -146,16 +148,19 @@
         const item = items[Number(btn.getAttribute("data-delete-idx"))];
         const analysisId = item && (item.analysis_id || item.id);
         if (!analysisId) return;
-        const archiveCode = item.archive_code || String(item.archive_number || "").padStart(3, "0");
+        const archiveCode = String(items.length - Number(btn.getAttribute("data-delete-idx"))).padStart(3, "0");
         if (!window.confirm("Bạn có chắc muốn xóa hồ sơ " + archiveCode + "? Thao tác này không thể hoàn tác.")) {
           return;
         }
-        if (!BtePortal.ResultStore.deleteHistory(analysisId)) return;
+        try { if (!BtePortal.ResultStore.deleteHistory(analysisId)) return; }
+        catch (error) { BtePortal.showFlash(flash, error.message, "error"); return; }
         BtePortal.showFlash(flash, "Đã xóa hồ sơ " + archiveCode + ".", "success");
         render();
       });
     });
   }
+
+  if (await window.BteAdminArchive.start()) return;
 
   document.getElementById("btnClearHist").addEventListener("click", function () {
     BtePortal.ResultStore.clearHistory();
@@ -163,5 +168,5 @@
     render();
   });
 
-  render();
+  try { render(); } catch (error) { BtePortal.showFlash(flash, error.message, "error"); }
 })();

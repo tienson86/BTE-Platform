@@ -44,14 +44,20 @@ class CanXuongEngine:
 
     def calculate_from_calendar_bazi(self, calendar: Any, bazi: Any) -> CanXuongResult:
         """Extract inputs from CalendarResult + BaziChart. Does not recompute pillars."""
-        year_ganzhi = str(getattr(calendar, "year_can_chi", "") or "").strip()
+        year_ganzhi = str(getattr(calendar, "lunar_year_can_chi", "") or "").strip()
+        if not year_ganzhi:
+            from engines.calendar_engine.algorithms.ganzhi import GanzhiAlgorithm
+            lunar_year = getattr(calendar, "lunar_year", None)
+            if lunar_year:
+                ganzhi = GanzhiAlgorithm.year(int(lunar_year))
+                year_ganzhi = f"{ganzhi['can']} {ganzhi['chi']}"
         lunar_month = int(getattr(calendar, "lunar_month", 0) or 0)
         lunar_day = int(getattr(calendar, "lunar_day", 0) or 0)
         hour_pillar = getattr(bazi, "hour_pillar", None)
         hour_branch = str(getattr(hour_pillar, "branch", "") or "").strip()
         if not year_ganzhi or not hour_branch or lunar_month < 1 or lunar_day < 1:
             raise CanXuongEngineError(
-                "Cân Xương requires year_can_chi, lunar month/day, and hour branch."
+                "Cân Xương requires lunar year Can Chi, lunar month/day, and hour branch."
             )
         return self.calculate(
             year_ganzhi=year_ganzhi,

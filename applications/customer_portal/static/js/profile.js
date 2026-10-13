@@ -23,6 +23,8 @@
     if (Array.isArray(role)) role = role.join(", ");
     view.innerHTML =
       '<div class="bte-exec-grid">' +
+      '<div class="bte-exec-kv"><span class="bte-exec-k">Tên hiển thị</span><span class="bte-exec-v">' +
+      esc(String(user.display_name || user.full_name || user.username || "--")) + '</span></div>' +
       '<div class="bte-exec-kv"><span class="bte-exec-k">' +
       esc(t("profile.username")) +
       '</span><span class="bte-exec-v">' +

@@ -1,0 +1,112 @@
+<link rel="stylesheet" href="/static/css/marriage_consulting.css?v=CHILDBIRTH01" />
+<link rel="stylesheet" href="/static/css/childbirth_consulting.css?v=CHILDBIRTH03" />
+<script>
+  window.__BTE_CHILDBIRTH_API__ = "/backend/api/v1/consulting/childbirth/analyze";
+</script>
+<main class="ds-page mc-page cb-page" data-screen="childbirth-consulting" data-testid="childbirth-page">
+  <header class="mc-intro">
+    <p class="muted">Tư vấn → Tư vấn sinh con</p>
+    <h1>Tư vấn sinh con</h1>
+    <p class="muted">Chọn các năm sinh con phù hợp cho vợ chồng mới kết hôn dựa trên lá số của bố và mẹ.</p>
+  </header>
+
+  <form class="cb-form" data-testid="childbirth-form" novalidate>
+    <section class="mc-people" aria-label="Thông tin bố mẹ">
+      <article class="bte-card mc-person">
+        <h2>Người bố</h2>
+        <label>
+          <span>Họ tên</span>
+          <input id="cb-father-name" name="father_name" type="text" autocomplete="name" />
+        </label>
+        <label>
+          <span>Ngày sinh dương lịch</span>
+          <input id="cb-father-date" name="father_birth_date" type="text" inputmode="numeric" autocomplete="bday" placeholder="DD/MM/YYYY" maxlength="10" lang="vi" aria-describedby="cb-father-date-error" required />
+          <span id="cb-father-date-error" class="field-error" hidden></span>
+        </label>
+        <label>
+          <span>Giờ sinh</span>
+          <select id="cb-father-time" name="father_birth_time" lang="vi">
+            <option value="">Không biết</option>
+            <option value="00:00">Giờ Tý (23:00-00:59)</option>
+            <option value="02:00">Giờ Sửu (01:00-02:59)</option>
+            <option value="04:00">Giờ Dần (03:00-04:59)</option>
+            <option value="06:00">Giờ Mão (05:00-06:59)</option>
+            <option value="08:00">Giờ Thìn (07:00-08:59)</option>
+            <option value="10:00">Giờ Tỵ (09:00-10:59)</option>
+            <option value="12:00">Giờ Ngọ (11:00-12:59)</option>
+            <option value="14:00">Giờ Mùi (13:00-14:59)</option>
+            <option value="16:00">Giờ Thân (15:00-16:59)</option>
+            <option value="18:00">Giờ Dậu (17:00-18:59)</option>
+            <option value="20:00">Giờ Tuất (19:00-20:59)</option>
+            <option value="22:00">Giờ Hợi (21:00-22:59)</option>
+          </select>
+        </label>
+        <label>
+          <span>Nơi sinh</span>
+          <input id="cb-father-place" name="father_birth_place" type="text" autocomplete="address-level1" />
+        </label>
+      </article>
+
+      <article class="bte-card mc-person">
+        <h2>Người mẹ</h2>
+        <label>
+          <span>Họ tên</span>
+          <input id="cb-mother-name" name="mother_name" type="text" autocomplete="name" />
+        </label>
+        <label>
+          <span>Ngày sinh dương lịch</span>
+          <input id="cb-mother-date" name="mother_birth_date" type="text" inputmode="numeric" autocomplete="bday" placeholder="DD/MM/YYYY" maxlength="10" lang="vi" aria-describedby="cb-mother-date-error" required />
+          <span id="cb-mother-date-error" class="field-error" hidden></span>
+        </label>
+        <label>
+          <span>Giờ sinh</span>
+          <select id="cb-mother-time" name="mother_birth_time" lang="vi">
+            <option value="">Không biết</option>
+            <option value="00:00">Giờ Tý (23:00-00:59)</option>
+            <option value="02:00">Giờ Sửu (01:00-02:59)</option>
+            <option value="04:00">Giờ Dần (03:00-04:59)</option>
+            <option value="06:00">Giờ Mão (05:00-06:59)</option>
+            <option value="08:00">Giờ Thìn (07:00-08:59)</option>
+            <option value="10:00">Giờ Tỵ (09:00-10:59)</option>
+            <option value="12:00">Giờ Ngọ (11:00-12:59)</option>
+            <option value="14:00">Giờ Mùi (13:00-14:59)</option>
+            <option value="16:00">Giờ Thân (15:00-16:59)</option>
+            <option value="18:00">Giờ Dậu (17:00-18:59)</option>
+            <option value="20:00">Giờ Tuất (19:00-20:59)</option>
+            <option value="22:00">Giờ Hợi (21:00-22:59)</option>
+          </select>
+        </label>
+        <label>
+          <span>Nơi sinh</span>
+          <input id="cb-mother-place" name="mother_birth_place" type="text" autocomplete="address-level1" />
+        </label>
+      </article>
+    </section>
+
+    <section class="bte-card cb-options" aria-label="Khoảng năm cần xét">
+      <label>
+        <span>Năm bắt đầu xét</span>
+        <input id="cb-start-year" name="start_year" type="number" min="2026" max="2100" />
+      </label>
+      <label>
+        <span>Số năm tiếp theo</span>
+        <input id="cb-years-ahead" name="years_ahead" type="number" min="1" max="24" value="12" />
+      </label>
+    </section>
+
+    <div class="mc-cta">
+      <button type="submit" data-testid="submit-childbirth">Xem năm sinh con phù hợp</button>
+    </div>
+  </form>
+
+  <section class="cb-state" data-testid="childbirth-state" aria-live="polite"></section>
+  <section class="cb-result" data-testid="childbirth-result" hidden></section>
+  <section class="mc-history" aria-labelledby="cb-history-title">
+    <div class="mc-history__heading">
+      <h2 id="cb-history-title">Hồ sơ sinh con đã lưu</h2>
+    </div>
+    <p class="mc-history__error" data-testid="childbirth-history-error" role="alert" hidden></p>
+    <div class="mc-history__list" data-testid="childbirth-history"></div>
+  </section>
+</main>
+<script src="/static/js/childbirth_consulting.js?v=CHILDBIRTH03" defer></script>

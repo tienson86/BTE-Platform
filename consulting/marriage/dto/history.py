@@ -48,3 +48,7 @@ class MarriageStoredResult:
     idempotency_key: str | None = None
     request_fingerprint: str | None = None
     business_profile: BusinessProfile | None = None
+
+    owner_user_id: str | None = None
+    creator_username: str | None = None
+    creator_display_name: str | None = None
