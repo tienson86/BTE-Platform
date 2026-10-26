@@ -1,0 +1,239 @@
+/* BTE Portal — App shell layout */
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(1200px 400px at 10% -10%, var(--primary-soft), transparent 60%),
+    var(--bg);
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: 0 var(--space-6);
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.app-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.app-brand span {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+
+.app-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+.app-nav a, .nav a, .nav-link {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  padding: 0.4rem 0.55rem;
+  border-radius: var(--radius);
+  white-space: nowrap;
+}
+.app-nav a:hover, .nav a:hover, .nav-link:hover {
+  background: var(--secondary-soft);
+  color: var(--ink);
+  text-decoration: none;
+}
+.app-nav a.active, .nav a.active, .nav-link.active {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.nav-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.nav-dropdown__toggle {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+.nav-dropdown__menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  min-width: 12rem;
+  padding: 0.35rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  z-index: 20;
+}
+.nav-dropdown[data-open="true"] .nav-dropdown__menu,
+.nav-dropdown:hover .nav-dropdown__menu,
+.nav-dropdown:focus-within .nav-dropdown__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.nav-dropdown__link {
+  display: block;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  padding: 0.4rem 0.7rem;
+  border-radius: var(--radius-sm);
+}
+.nav-dropdown__link:hover {
+  background: var(--secondary-soft);
+  text-decoration: none;
+}
+.nav-dropdown__link.active {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.app-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+
+.app-nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.45rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  cursor: pointer;
+}
+.app-nav-toggle__bar {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--ink);
+  border-radius: 2px;
+}
+
+.app-user {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.app-user__avatar {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.app-main {
+  width: min(var(--content-max), calc(100% - 2 * var(--space-6)));
+  margin: 0 auto;
+  padding: var(--space-8) 0 var(--space-10);
+  flex: 1;
+}
+
+/* Legacy shell aliases → new shell */
+.shell {
+  width: min(var(--content-max), calc(100% - 2 * var(--space-6)));
+  margin: 0 auto;
+  padding: var(--space-6) 0 var(--space-10);
+}
+.shell .top {
+  display: none; /* replaced by .app-header outside */
+}
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow);
+}
+.panel h1 { margin-bottom: var(--space-2); }
+.panel > .muted { margin-bottom: var(--space-5); }
+
+.stage-view {
+  min-height: 240px;
+}
+
+.result-workspace {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.result-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 980px) {
+  .app-header {
+    height: auto;
+    min-height: var(--header-h);
+    flex-wrap: wrap;
+    padding: var(--space-3) var(--space-4);
+  }
+  .app-nav-toggle {
+    display: inline-flex;
+    margin-left: auto;
+  }
+  .app-header-actions {
+    margin-left: 0;
+  }
+  .app-nav {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    order: 4;
+    padding-top: var(--space-2);
+  }
+  .app-header[data-nav-open="true"] .app-nav {
+    display: flex;
+  }
+  .app-nav a, .nav a, .nav-link {
+    width: 100%;
+  }
+  .app-main, .shell {
+    width: min(100% - 2 * var(--space-4), var(--content-max));
+  }
+}

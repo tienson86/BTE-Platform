@@ -27,6 +27,8 @@ from applications.customer_portal.pages import (
     LOGIN_ITEM,
     MARRIAGE_API_PROXY_PREFIX,
     MARRIAGE_CONSULTING_PATH,
+    NAMING_API_PROXY_PREFIX,
+    NAMING_CONSULTING_PATH,
     NAV_ITEMS,
     NUMBER_ENERGY_API_PROXY_PREFIX,
     NUMBER_ENERGY_PATH,
@@ -54,6 +56,8 @@ def _proxy_upstream_url(path: str) -> str:
         or path.startswith(f"{MARRIAGE_API_PROXY_PREFIX}/")
         or path == CHILDBIRTH_API_PROXY_PREFIX
         or path.startswith(f"{CHILDBIRTH_API_PROXY_PREFIX}/")
+        or path == NAMING_API_PROXY_PREFIX
+        or path.startswith(f"{NAMING_API_PROXY_PREFIX}/")
     ):
         return f"{settings.marriage_api_base_url.rstrip('/')}/{path}"
     return f"{settings.api_base_url.rstrip('/')}/{path}"
@@ -168,6 +172,10 @@ def create_app() -> FastAPI:
         """Number Energy V1 — Bát Cực Linh Số / Năng lượng số."""
         return page("number-energy", "number_energy.html")
 
+    @app.get(NAMING_CONSULTING_PATH, response_class=HTMLResponse)
+    def naming_consulting_page() -> HTMLResponse:
+        return page("naming-consulting", "naming_consulting.html")
+
     @app.api_route(
         "/backend/{path:path}",
         methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
@@ -189,6 +197,9 @@ def create_app() -> FastAPI:
         childbirth_route = path == CHILDBIRTH_API_PROXY_PREFIX or path.startswith(
             f"{CHILDBIRTH_API_PROXY_PREFIX}/"
         )
+        naming_route = path == NAMING_API_PROXY_PREFIX or path.startswith(
+            f"{NAMING_API_PROXY_PREFIX}/"
+        )
         number_energy_route = path == NUMBER_ENERGY_API_PROXY_PREFIX or path.startswith(
             f"{NUMBER_ENERGY_API_PROXY_PREFIX}/"
         )
@@ -206,7 +217,7 @@ def create_app() -> FastAPI:
             if path.startswith('api/v1/van-han/') and '/export/' in path:
                 message=('Tạo tài liệu vượt thời gian chờ. Hãy thử khoảng năm ngắn hơn.' if isinstance(error,httpx.TimeoutException) else 'Chưa kết nối được dịch vụ tạo tài liệu. Hãy kiểm tra BTE đang chạy.')
                 return JSONResponse(status_code=503,content={'detail':message})
-            if marriage_route or childbirth_route:
+            if marriage_route or childbirth_route or naming_route:
                 return JSONResponse(
                     status_code=503,
                     content={

@@ -1,0 +1,82 @@
+.nc-page {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.nc-page header {
+  margin-bottom: var(--space-5, 1.5rem);
+}
+
+.nc-page fieldset {
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.nc-page legend {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.nc-fields,
+.nc-names,
+.nc-signals {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.nc-fields label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.nc-fields [hidden],
+#nc-result[hidden] {
+  display: none;
+}
+
+.nc-fields input,
+.nc-fields select {
+  width: 100%;
+  min-width: 0;
+  min-height: 2.75rem;
+  background: var(--panel, #fff);
+  color: var(--ink, #172033);
+  border: 1px solid var(--line, #d8dce4);
+  border-radius: var(--radius, 0.5rem);
+  padding: 0.5rem 0.75rem;
+}
+
+.nc-page .panel {
+  margin-bottom: 1rem;
+  overflow-wrap: anywhere;
+}
+
+.nc-page .nc-fit {
+  display: inline-block;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius, 0.5rem);
+  background: var(--primary-soft, #eef2ff);
+  color: var(--primary, #374ea0);
+}
+
+.nc-page .nc-warnings {
+  border-left: 4px solid var(--primary, #374ea0);
+}
+
+.nc-page details summary {
+  cursor: pointer;
+}
+
+@media (max-width: 650px) {
+  .nc-fields,
+  .nc-names,
+  .nc-signals {
+    grid-template-columns: 1fr;
+  }
+}

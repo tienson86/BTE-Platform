@@ -1,0 +1,71 @@
+<link rel="stylesheet" href="/static/css/naming_consulting.css?v=naming-v01" />
+<section class="nc-page" data-testid="naming-page" aria-labelledby="nc-title">
+  <header>
+    <p class="muted">Tư vấn · Phiên bản V0.1</p>
+    <h1 id="nc-title">Tư vấn đặt tên phong thủy</h1>
+    <p>Chọn tên từ danh mục tuyển chọn, đối chiếu Dụng/Hỷ thần, Nạp Âm và Cung Phi theo dữ liệu BTE.</p>
+    <p class="muted">Gợi ý mang tính tham khảo văn hóa; không cam kết tên làm tăng thành công hay danh tiếng.</p>
+  </header>
+
+  <form id="naming-form" class="panel" data-testid="naming-form">
+    <fieldset id="nc-fields">
+      <legend>Thông tin người được đặt tên</legend>
+      <div class="nc-fields">
+        <label>Chế độ
+          <select id="nc-mode" name="mode">
+            <option value="child">Đặt tên trẻ em</option>
+            <option value="rename">Đổi tên / tên sử dụng mới</option>
+          </select>
+        </label>
+        <label>Giới tính dùng để tính Cung Phi
+          <select name="gender" required>
+            <option value="male">Nam</option>
+            <option value="female">Nữ</option>
+          </select>
+        </label>
+        <label>Họ và phần tên đệm muốn giữ
+          <input name="family_name" type="text" maxlength="80" placeholder="Ví dụ: Nguyễn" autocomplete="family-name" required />
+          <small class="muted">Tên gợi ý gồm 2 tiếng, được ghép sau phần này.</small>
+        </label>
+        <label id="nc-current-field" hidden>Tên hiện tại
+          <input id="nc-current-name" name="current_name" type="text" maxlength="120" autocomplete="name" disabled />
+          <small class="muted">Không đề xuất lại đúng tên hiện tại.</small>
+        </label>
+        <label>Ngày sinh dương lịch
+          <input name="birth_date" type="date" min="1900-01-01" max="2100-12-31" lang="vi" required />
+        </label>
+        <label>Giờ sinh (nếu biết)
+          <input name="birth_time" type="time" lang="vi" />
+          <small class="muted">Để trống nếu không biết; kết quả sẽ không dùng Dụng/Hỷ thần.</small>
+        </label>
+        <label>Nơi sinh (tùy chọn)
+          <input name="birth_place" type="text" maxlength="160" autocomplete="address-level1" placeholder="Ví dụ: Hà Nội, Việt Nam" />
+          <small class="muted">V0.1 chưa hiệu chỉnh giờ Mặt Trời theo tọa độ.</small>
+        </label>
+        <label>Múi giờ nơi sinh
+          <input name="timezone" type="text" value="Asia/Ho_Chi_Minh" maxlength="80" list="nc-timezones" required />
+          <datalist id="nc-timezones">
+            <option value="Asia/Ho_Chi_Minh"></option>
+            <option value="Asia/Bangkok"></option>
+            <option value="Asia/Tokyo"></option>
+            <option value="Europe/Paris"></option>
+            <option value="America/Los_Angeles"></option>
+          </datalist>
+        </label>
+        <label>Số tên gợi ý
+          <select name="count">
+            <option value="5">5 tên</option>
+            <option value="8" selected>8 tên</option>
+            <option value="10">10 tên</option>
+          </select>
+        </label>
+      </div>
+      <button type="submit" data-testid="submit-naming">Xem tên gợi ý</button>
+    </fieldset>
+  </form>
+
+  <p id="nc-state" role="status" aria-live="polite" tabindex="-1"></p>
+  <section id="nc-result" data-testid="naming-result" aria-label="Kết quả tư vấn đặt tên" hidden></section>
+  <p class="muted">V0.1 dùng danh mục 25 tên biên tập, chưa thẩm định độc lập bởi chuyên gia. Hành tên được quy ước theo ý nghĩa; chưa tính toàn bộ họ tên, âm điệu hoặc tên trùng trong gia đình. Kết quả chưa được lưu hồ sơ.</p>
+</section>
+<script src="/static/js/naming_consulting.js?v=naming-v01" defer></script>

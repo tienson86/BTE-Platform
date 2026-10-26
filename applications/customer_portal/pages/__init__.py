@@ -34,7 +34,6 @@ DATE_SELECTION_MENU_LABEL = "nav.date_selection"
 
 # Customer Portal primary product navigation (Commercial Dashboard 00_NAVIGATION).
 # RB18: Tư vấn năng lượng số is visible after Xem lá số.
-# Tư vấn sinh con is the final visible header item.
 CUSTOMER_NAV_ITEMS: tuple[NavItem, ...] = (
     NavItem("home", "nav.dashboard", "/good-date", "good_date.html"),
     NavItem("choose-date", "nav.choose_date", "/choose-date", "choose_date.html"),
@@ -63,14 +62,22 @@ CUSTOMER_NAV_ITEMS: tuple[NavItem, ...] = (
         "/childbirth-consulting",
         "childbirth_consulting.html",
     ),
+    NavItem(
+        "naming-consulting",
+        "nav.naming_consulting",
+        "/naming-consulting",
+        "naming_consulting.html",
+    ),
 )
 
 HOME_PATH = "/good-date"
 MARRIAGE_CONSULTING_PATH = "/marriage-consulting"
 BUSINESS_CONSULTING_PATH = "/business-consulting"
 CHILDBIRTH_CONSULTING_PATH = "/childbirth-consulting"
+NAMING_CONSULTING_PATH = "/naming-consulting"
 MARRIAGE_API_PROXY_PREFIX = "api/v1/consulting/marriage"
 CHILDBIRTH_API_PROXY_PREFIX = "api/v1/consulting/childbirth"
+NAMING_API_PROXY_PREFIX = "api/v1/consulting/naming"
 NUMBER_ENERGY_API_PROXY_PREFIX = "api/v1/number-energy"
 NUMBER_ENERGY_PATH = "/number-energy"
 NUMBER_ENERGY_ITEM = NavItem(

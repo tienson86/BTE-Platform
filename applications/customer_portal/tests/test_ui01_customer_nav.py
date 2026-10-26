@@ -47,8 +47,10 @@ def test_n1_customer_navigation_has_product_items() -> None:
         "Tư vấn hôn nhân",
         "Tư vấn hợp tác",
         "Tư vấn sinh con",
+        "Tư vấn đặt tên",
+        "Tính vận hạn",
     ]
-    assert len(CUSTOMER_NAV_ITEMS) == 7
+    assert len(CUSTOMER_NAV_ITEMS) == 8
     assert [item.path for item in CUSTOMER_NAV_ITEMS[:3]] == [
         "/good-date",
         "/choose-date",
@@ -219,6 +221,8 @@ def test_n10_legacy_welcome_is_not_production_landing() -> None:
         "Tư vấn hôn nhân",
         "Tư vấn hợp tác",
         "Tư vấn sinh con",
+        "Tư vấn đặt tên",
+        "Tính vận hạn",
     ]
     for label in _FORBIDDEN_NAV_LABELS:
         assert label not in nav
