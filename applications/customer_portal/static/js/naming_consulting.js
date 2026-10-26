@@ -151,6 +151,7 @@
     const names = node("div", undefined, "nc-names");
     data.recommendations.forEach(function (entry, index) {
       const card = node("article", undefined, "panel nc-name");
+      card.setAttribute("data-element", entry.element);
       card.append(
         node("h3", (index + 1) + ". " + entry.full_name),
         node("p", entry.fit_level, "nc-fit"),
