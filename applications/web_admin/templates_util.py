@@ -10,7 +10,7 @@ from applications.web_admin.nav import NAV_ITEMS
 TEMPLATES_DIR = WEB_ADMIN_ROOT / "templates"
 
 
-def render_page(template_name: str, *, active: str) -> str:
+def render_page(template_name: str, *, active: str, base_path: str = "", portal_session: bool = False) -> str:
     """
     Load an HTML template and inject the shared chrome.
 
@@ -22,11 +22,18 @@ def render_page(template_name: str, *, active: str) -> str:
     for item in NAV_ITEMS:
         cls = "nav-link active" if item.key == active else "nav-link"
         nav_html.append(
-            f'<a class="{cls}" href="{item.path}">{item.label}</a>'
+            f'<a class="{cls}" href="{base_path}{item.path}">{item.label}</a>'
         )
     html = base.replace("{{NAV}}", "\n".join(nav_html))
     html = html.replace("{{CONTENT}}", body)
     html = html.replace("{{ACTIVE}}", active)
+    html = html.replace("{{ADMIN_BASE}}", base_path)
+    html = html.replace("{{ADMIN_SESSION}}", "portal" if portal_session else "admin")
+    html = html.replace("{{PORTAL_LINK}}", '<a class="nav-link portal-return" href="/good-date">← Về BTE Portal</a>' if portal_session else "")
+    html = html.replace('src="/static/', f'src="{base_path}/static/')
+    html = html.replace('href="/static/', f'href="{base_path}/static/')
+    html = html.replace('src="/portal-static/', f'src="{base_path}/portal-static/')
+    html = html.replace('href="/portal-static/', f'href="{base_path}/portal-static/')
     for item in NAV_ITEMS:
         html = html.replace(
             f"{{{{ACTIVE_{item.key.upper()}}}}}",

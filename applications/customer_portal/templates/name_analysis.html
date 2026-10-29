@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="/static/css/naming_consulting.css?v=naming-v01" />
+<link rel="stylesheet" href="/static/css/name_analysis.css?v=rich-name-03" />
+<section class="nc-page na-page" data-testid="name-analysis-page" aria-labelledby="na-title">
+  <header>
+    <p class="muted">Xem tên của bạn · Không cần đăng nhập</p>
+    <h1 id="na-title">Phân tích tên hiện tại</h1>
+    <p>Khám phá ý nghĩa từng tiếng, lời gửi gắm trong tên ghép và âm điệu khi gọi trọn họ tên. Đối chiếu thêm Nạp Âm, Cung Phi theo năm sinh âm lịch.</p>
+  </header>
+
+  <form id="name-analysis-form" class="panel na-form" data-testid="name-analysis-form">
+    <fieldset id="na-fields">
+      <legend>Thông tin của bạn</legend>
+      <div class="nc-fields">
+        <label class="na-full">Họ và tên hiện tại
+          <input id="na-full-name" name="full_name" type="text" maxlength="120" autocomplete="name" placeholder="Ví dụ: Nguyễn Tiến Sơn" required />
+          <small class="muted">Nhập tiếng Việt có dấu để đối chiếu ý nghĩa rõ hơn.</small>
+        </label>
+        <label>Giới tính dùng để tính Cung Phi
+          <select name="gender" required>
+            <option value="">Chọn giới tính</option>
+            <option value="male">Nam</option>
+            <option value="female">Nữ</option>
+          </select>
+        </label>
+        <label>Năm sinh âm lịch
+          <input id="na-lunar-birth-year" name="lunar_birth_year" type="number" min="1900" max="2100" step="1" inputmode="numeric" placeholder="Ví dụ: 1986 (Bính Dần)" aria-describedby="na-year-help" required />
+          <small id="na-year-help" class="muted">Nhập năm âm lịch đã xác định. Nếu sinh trước Tết Nguyên đán, năm âm lịch có thể là năm trước năm dương lịch.</small>
+        </label>
+      </div>
+      <button type="submit" data-testid="submit-name-analysis">Phân tích tên</button>
+    </fieldset>
+  </form>
+
+  <p id="na-state" role="status" aria-live="polite" tabindex="-1"></p>
+  <section id="na-result" data-testid="name-analysis-result" aria-label="Kết quả phân tích tên hiện tại" hidden></section>
+  <p class="muted">Kết quả mang tính tham khảo theo ý nghĩa và năm sinh âm lịch. Phân tích Bát Tự, Dụng/Hỷ thần cần ngày và giờ sinh đầy đủ.</p>
+  <p><a href="/naming-consulting">Mở tư vấn đặt tên đầy đủ</a> nếu bạn cần gợi ý tên khác.</p>
+</section>
+<script src="/static/js/name_analysis.js?v=rich-name-03" defer></script>

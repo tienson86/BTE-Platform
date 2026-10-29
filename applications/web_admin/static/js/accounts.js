@@ -24,12 +24,16 @@
   async function load() {
     try {
       accounts = await BteAdmin.get("/api/v1/users");
-      rows.innerHTML = accounts.map(function (u) {
-        return "<tr><td><strong>" + BteAdmin.fmt(u.username) + "</strong></td><td>" + BteAdmin.fmt(u.display_name) +
-          "</td><td>" + (u.is_active ? "Đang hoạt động" : "Đã khóa") + "</td><td>" + BteAdmin.fmt(u.analysis_limit) +
-          "</td><td>" + u.analyses_used + "</td><td>" + BteAdmin.fmt(u.analyses_remaining) +
-          '</td><td><button type="button" data-edit="' + u.username + '">Sửa</button></td></tr>';
-      }).join("");
+      rows.replaceChildren();
+      accounts.forEach(function (u) {
+        const row = document.createElement("tr");
+        [u.username, u.display_name, u.is_active ? "Đang hoạt động" : "Đã khóa", u.analysis_limit, u.analyses_used, u.analyses_remaining].forEach(function (value) {
+          const cell = document.createElement("td"); cell.textContent = BteAdmin.fmt(value); row.append(cell);
+        });
+        const action = document.createElement("td"), button = document.createElement("button");
+        button.type = "button"; button.dataset.edit = u.username; button.textContent = "Sửa";
+        action.append(button); row.append(action); rows.append(row);
+      });
       rows.querySelectorAll("[data-edit]").forEach(function (button) {
         button.addEventListener("click", function () { openModal(accounts.find(function (u) { return u.username === button.dataset.edit; })); });
       });
@@ -58,5 +62,6 @@
   document.getElementById("btnCreate").addEventListener("click", function () { openModal(null); });
   document.getElementById("btnReload").addEventListener("click", load);
   document.getElementById("modalClose").addEventListener("click", function () { modal.classList.remove("show"); });
+  window.addEventListener("bte:auth", load);
   load();
 })();

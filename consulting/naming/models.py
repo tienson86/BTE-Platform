@@ -10,9 +10,20 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
+from engines.calendar_engine.lunar.converter import solar_to_lunar
+
 
 def normalize_name(value: str) -> str:
     return " ".join(unicodedata.normalize("NFC", value).split())
+
+
+def validate_name_text(value: str) -> str:
+    normalized = normalize_name(value)
+    if value and not normalized:
+        raise ValueError("Vui lòng nhập họ hoặc họ tên hợp lệ.")
+    if any(not (character.isalpha() or character in " '-’") for character in normalized):
+        raise ValueError("Họ tên chỉ gồm chữ, khoảng trắng, dấu nháy hoặc gạch nối.")
+    return normalized
 
 
 class NamingRequest(BaseModel):
@@ -31,12 +42,7 @@ class NamingRequest(BaseModel):
     @field_validator("family_name", "current_name")
     @classmethod
     def validate_name(cls, value: str) -> str:
-        normalized = normalize_name(value)
-        if value and not normalized:
-            raise ValueError("Vui lòng nhập họ hoặc họ tên hợp lệ.")
-        if any(not (character.isalpha() or character in " '-’") for character in normalized):
-            raise ValueError("Họ tên chỉ gồm chữ, khoảng trắng, dấu nháy hoặc gạch nối.")
-        return normalized
+        return validate_name_text(value)
 
     @field_validator("birth_date")
     @classmethod
@@ -73,3 +79,35 @@ class NamingRequest(BaseModel):
         if date.fromisoformat(self.birth_date) > datetime.now(ZoneInfo(self.timezone)).date():
             raise ValueError("V0.1 tư vấn cho người đã sinh; ngày sinh không được ở tương lai.")
         return self
+
+
+class CurrentNameRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+
+    full_name: str = Field(min_length=1, max_length=120)
+    gender: Literal["male", "female"]
+    lunar_birth_year: int = Field(ge=1900, le=2100, strict=True)
+
+    @model_validator(mode="before")
+    @classmethod
+    def reject_previous_solar_year_field(cls, value):
+        if isinstance(value, dict) and "birth_year" in value:
+            raise ValueError("Biểu mẫu đã đổi sang năm sinh âm lịch. Vui lòng tải lại trang và nhập năm âm lịch.")
+        return value
+
+    @field_validator("full_name")
+    @classmethod
+    def validate_full_name(cls, value: str) -> str:
+        normalized = validate_name_text(value)
+        if not any(character.isalpha() for character in normalized):
+            raise ValueError("Vui lòng nhập họ tên có chữ hợp lệ.")
+        return normalized
+
+    @field_validator("lunar_birth_year")
+    @classmethod
+    def validate_lunar_birth_year(cls, value: int) -> int:
+        today = datetime.now(ZoneInfo("Asia/Ho_Chi_Minh")).date()
+        current_lunar_year = solar_to_lunar(today.day, today.month, today.year).year
+        if value > current_lunar_year:
+            raise ValueError("Năm sinh âm lịch không được ở tương lai.")
+        return value

@@ -21,6 +21,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 from applications.web_admin.config import WEB_ADMIN_ROOT, settings
+from applications.customer_portal.config import PORTAL_ROOT
 from applications.web_admin.nav import NAV_ITEMS
 from applications.web_admin.templates_util import render_page
 
@@ -52,6 +53,7 @@ def create_app() -> FastAPI:
     assets_dir = WEB_ADMIN_ROOT / "assets"
     assets_dir.mkdir(exist_ok=True)
     app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
+    app.mount("/portal-static", StaticFiles(directory=str(PORTAL_ROOT / "static")), name="portal-static")
     app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="assets")
 
     def page(active: str, template: str) -> HTMLResponse:
@@ -70,6 +72,14 @@ def create_app() -> FastAPI:
     def account_page_alias() -> RedirectResponse:
         """Accept the common singular spelling and open account management."""
         return RedirectResponse(url="/accounts", status_code=307)
+
+    @app.get("/memberships", response_class=HTMLResponse)
+    def memberships_page() -> HTMLResponse:
+        return page("memberships", "membership.html")
+
+    @app.get("/website-settings", response_class=HTMLResponse)
+    def website_settings_page() -> HTMLResponse:
+        return page("website-settings", "membership.html")
 
     @app.get("/customers", response_class=HTMLResponse)
     def customers_page() -> HTMLResponse:

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from threading import RLock
 import os
 import tempfile
@@ -27,6 +28,21 @@ class UserRecord:
     display_name: str = ""
     analysis_limit: int | None = None
     analyses_used: int = 0
+    membership: dict[str, Any] | None = None
+
+    def has_member_access(self) -> bool:
+        """Existing accounts retain access; new members require a current approval."""
+        if not self.is_active:
+            return False
+        if self.role == Role.ADMIN or self.membership is None:
+            return True
+        if self.membership.get("status") != "active":
+            return False
+        try:
+            expires = datetime.fromisoformat(self.membership["expires_at"])
+            return expires.tzinfo is not None and expires > datetime.now(timezone.utc)
+        except (KeyError, ValueError, TypeError):
+            return False
 
     def permission_values(self) -> list[str]:
         """Resolved permission strings for this user's role."""
@@ -44,6 +60,9 @@ class UserRecord:
             "analysis_limit": self.analysis_limit,
             "analyses_used": self.analyses_used,
             "analyses_remaining": None if self.analysis_limit is None else max(0, self.analysis_limit - self.analyses_used),
+            "member_access": self.has_member_access(),
+            "membership_status": (self.membership or {}).get("status", "existing"),
+            "membership_expires_at": (self.membership or {}).get("expires_at"),
         }
 
 
@@ -143,6 +162,7 @@ class JsonUserStore(InMemoryUserStore):
                 password_hash=str(row["password_hash"]), role=Role(str(row["role"])),
                 is_active=bool(row.get("is_active", True)), display_name=str(row.get("display_name", "")),
                 analysis_limit=row.get("analysis_limit"), analyses_used=int(row.get("analyses_used", 0)),
+                membership=row.get("membership"),
             ))
 
     def _after_change(self) -> None:
@@ -153,6 +173,7 @@ class JsonUserStore(InMemoryUserStore):
                 "user_id": u.user_id, "username": u.username, "password_hash": u.password_hash,
                 "role": u.role.value, "is_active": u.is_active, "display_name": u.display_name,
                 "analysis_limit": u.analysis_limit, "analyses_used": u.analyses_used,
+                "membership": u.membership,
             } for u in self.users_by_id.values()]
             name = None
             try:

@@ -16,12 +16,14 @@ class NavItem:
 
 
 NAV_ITEMS: tuple[NavItem, ...] = (
-    NavItem("dashboard", "Dashboard", "/", "dashboard.html"),
+    NavItem("dashboard", "Tổng quan", "/", "dashboard.html"),
     NavItem("accounts", "Quản lý tài khoản", "/accounts", "accounts.html"),
-    NavItem("customers", "Customers", "/customers", "customers.html"),
-    NavItem("cases", "Cases", "/cases", "cases.html"),
-    NavItem("reports", "Reports", "/reports", "reports.html"),
-    NavItem("licenses", "Licenses", "/licenses", "licenses.html"),
-    NavItem("statistics", "Statistics", "/statistics", "statistics.html"),
-    NavItem("settings", "Settings", "/settings", "settings.html"),
+    NavItem("memberships", "Thành viên & thanh toán", "/memberships", "membership.html"),
+    NavItem("website-settings", "Cấu hình website", "/website-settings", "membership.html"),
+    NavItem("customers", "Khách hàng", "/customers", "customers.html"),
+    NavItem("cases", "Hồ sơ tư vấn", "/cases", "cases.html"),
+    NavItem("reports", "Báo cáo", "/reports", "reports.html"),
+    NavItem("licenses", "Bản quyền", "/licenses", "licenses.html"),
+    NavItem("statistics", "Thống kê", "/statistics", "statistics.html"),
+    NavItem("settings", "Thông tin hệ thống", "/settings", "settings.html"),
 )

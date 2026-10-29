@@ -9,6 +9,18 @@
 
 ## Tích hợp thực tế
 
+### Phân tích tên hiện tại cho khách
+
+Trang `/name-analysis` và menu **Phân tích tên** dùng được khi chưa đăng nhập, có liên kết từ trang chủ và trang tư vấn đặt tên. Khách nhập họ tên, giới tính và năm sinh dương lịch; trang không lưu hồ sơ hoặc yêu cầu tài khoản.
+
+API riêng: `POST /api/v1/public/naming/analyze-current`, chuyển tiếp từ Portal qua `/backend/api/v1/public/naming/analyze-current`. Chỉ endpoint phân tích công khai này được thêm; các endpoint tư vấn/hồ sơ cũ vẫn giữ xác thực.
+
+Phần đọc tên dùng lại danh mục 25 tên và bổ sung `name_words.json` để giải thích các tiếng thường gặp. Hành tên lấy từ tên ghép đã có trong danh mục, hoặc nghĩa của tiếng tên chính nếu đủ cơ sở; không suy ra hành từ họ, không bỏ dấu tiếng Việt khi tra cứu. Từ không biết hoặc đa nghĩa không có hành chắc chắn được báo rõ, không tự phân loại.
+
+Nạp Âm và Cung Phi lấy trực tiếp từ `jiazi_row_for_year` và `personal_cung_phi_from_year_ganzhi` của Calendar Engine theo năm khách nhập. Không tạo ngày/giờ sinh giả, không chạy Bát Tự, Dụng/Hỷ thần hoặc chấm điểm vận mệnh từ năm sinh đơn lẻ. Sinh vào đầu năm cần ngày/tháng để xác minh mốc năm. Các quan hệ sinh/khắc dùng chung quy tắc ngũ hành của phân hệ đặt tên hiện có.
+
+### Tư vấn đặt tên đầy đủ
+
 Portal là FastAPI với HTML/JavaScript thuần cho trang này; không cần build React hoặc thêm thư viện. Luồng:
 
 `/naming-consulting` → `POST /backend/api/v1/consulting/naming/analyze` → consulting API → `POST /api/v1/consulting/naming/analyze`.
@@ -55,3 +67,34 @@ Phủ kiểm tra danh mục, giới tính, số lượng, xếp hạng, xung đ�
 ## Giới hạn
 
 Chưa lưu lịch sử, xuất báo cáo, so sánh tên cũ/mới, tự sửa họ tên, đánh giá âm điệu, số nét, tên trùng gia đình hoặc toàn bộ họ tên. Giới tính chỉ là cách dùng thường gặp trong danh mục và đầu vào tính Cung Phi của module hiện có. Nơi sinh chưa được đổi thành tọa độ/giờ Mặt Trời. Năm/ngày gần ranh giới lịch và độ tin cậy của Dụng thần vẫn phụ thuộc module BTE hiện có. Nội dung không cam kết tên làm tăng thành công, tài lộc hay danh tiếng.
+
+## Phân tích tên hiện tại công khai — cập nhật 29/10/2026
+
+Trang `/name-analysis` cho khách nhập họ tên, giới tính và **năm sinh âm lịch đã xác định**. Không cần đăng nhập. Portal chuyển tiếp `POST /backend/api/v1/public/naming/analyze-current` tới consulting API. Không lưu thông tin khách.
+
+Hợp đồng mới dùng `lunar_birth_year` (số nguyên 1900 đến năm âm lịch hiện tại). Kết quả ghi `basis=lunar_birth_year_only`, `year_reference.calendar=vietnamese_lunar_year`. Trường cũ `birth_year` bị từ chối với hướng dẫn tải lại biểu mẫu, tránh diễn giải nhầm năm dương lịch cũ thành năm âm lịch. Năm âm lịch được đưa thẳng vào dữ liệu Can Chi/Nạp Âm và bộ tính Cung Phi theo Can Chi có sẵn; không tạo ngày sinh giả, không đổi quy tắc trụ năm Bát Tự/Lập Xuân ở các module khác.
+
+Chỉ có một năm dương lịch thì không đủ để tự xác định năm âm lịch. Bộ chuyển lịch UTC+7 có sẵn xác nhận 01–28/01/1987 thuộc năm Bính Dần 1986; 29/01/1987 là mùng 1 Tết Đinh Mão 1987. Biểu mẫu nhắc người sinh trước Tết kiểm tra đúng năm âm lịch. Bảng đối chiếu HKO cùng xác nhận mốc 29/01: https://www.hko.gov.hk/en/gts/time/calendar/pdf/files/1987e.pdf (HKO dùng lịch Hong Kong; kiểm tra ngày Việt Nam bằng converter UTC+7 của dự án).
+
+`consulting/naming/han_viet.json` phối hợp `name_library.json` cung cấp diễn giải biên tập cho 197 tiếng và 34 tên ghép, trong đó Thị Dung và Ngọc Huỳnh có bài luận riêng ba đoạn. Có thêm 38 mục họ tham khảo. Các chữ Hán là cách viết **có thể tham khảo**, không xác nhận nguyên tự của tên Quốc ngữ. Thanh, Dương, Bảo, Hồng… có nhiều cách hiểu; các tên thuần Việt được đọc theo nghĩa tiếng Việt. Thị có thêm chữ 氏 để giải thích cách dùng tên truyền thống và được phân biệt với Thi 詩. Tên chưa có dữ liệu chỉ được luận phần nhận diện được, không bịa nghĩa, số nét hay hành mới. Các diễn giải ghép là liên tưởng văn hóa do biên tập, không phải nghĩa từ điển nguyên văn hoặc dự báo tính cách/vận mệnh. Quy ước hành và danh mục gợi ý tên cũ được giữ nguyên.
+
+Nguồn đối chiếu từ vựng tiêu biểu: mục từ 進 (Tiến), 山 (Sơn), 明 (Minh), 翠 (Thúy) trên Wiktionary. Các đoạn luận là nội dung viết mới theo nghĩa ngắn của từ; chưa có thẩm định độc lập của chuyên gia Hán Nôm.
+
+- https://en.wiktionary.org/wiki/進#Vietnamese
+- https://vi.wiktionary.org/wiki/山
+- https://en.wiktionary.org/wiki/明#Vietnamese
+- https://en.wiktionary.org/wiki/翠#Vietnamese
+
+Chạy với hai dịch vụ consulting API (8082) và Customer Portal (8686) như hướng dẫn trên, rồi mở `/name-analysis`. Sau khi thay dữ liệu JSON cần khởi động lại consulting API; tải lại trang để nhận JS/CSS có phiên bản `rich-name-03`. Trang công khai không cần Main API để phân tích; các mục tư vấn riêng vẫn dùng xác thực hiện có.
+
+## Nội dung phân tích tên mở rộng V0.3
+
+`name_words.json` và `han_viet.json` giữ các mục nền, `name_library.json` bổ sung từ, các bài luận tên ghép và chữ tham khảo cho họ. Bộ nạp kiểm tra trùng mục, dữ liệu diễn giải và liên kết từ trong tên ghép. Không gọi AI hoặc tra từ bên ngoài trong lúc khách nhập tên; không gửi họ tên khách cho website tham khảo và không lưu lịch sử tra tên.
+
+Kết quả trình bày tóm tắt nghĩa, phân tách họ/tên đệm/tên chính, luận tên ghép, nghĩa các tiếng, thông tin họ ở phần mở rộng và thanh điệu theo dấu viết. Thanh bằng/trắc được xác định từ Unicode NFD (ngang/huyền là bằng, sắc/hỏi/ngã/nặng là trắc); đây là mô tả nhịp viết/đọc, không chấm điểm cát hung. Giữ riêng Dung/Dũng, Thị/Thi, Huỳnh/Huyền/Quỳnh. Chỉ hỗ trợ một số biến thể chính tả xác định như Thùy/Thuỳ, Thúy/Thuý, Thủy/Thuỷ, Hòa/Hoà; không bỏ dấu để đoán tên.
+
+Khi chưa gán được hành tên, giao diện vẫn trình bày đầy đủ phần nghĩa và dữ liệu năm sinh. Không dùng hai thẻ lỗi đối chiếu hoặc dòng “Chưa xác định hành” làm nội dung chính. API tiếp tục trả element=null và quan hệ unresolved để giữ rõ sự khác nhau giữa hiểu nghĩa tên và gán ngũ hành. Không tự gán Kim cho Huỳnh từ sắc vàng, không gán hành cho Dung từ nghĩa bao dung.
+
+Đối chiếu bố cục tham khảo trang bầu.com do chủ dự án đưa, không sao chép bài luận hoặc số liệu thứ hạng/giới tính của họ. Các đoạn luận BTE là nội dung viết mới; không đưa thống kê phổ biến khi không có bộ dữ liệu tương ứng. Nguồn từ vựng tiêu biểu: mục 容, 黃, 氏, 玉 trên Từ điển Hán Nôm; Huỳnh trên Wiktionary. Danh sách nguồn nằm trong `name_library.json`. Các nghĩa từ điển ngắn được tách với phần liên tưởng biên tập; chưa có thẩm định độc lập của chuyên gia Hán Nôm.
+
+Kiểm thử bổ sung gồm đúng hai tên báo lỗi, 20 tên thường gặp khác, phân biệt từ gần âm, vai trò họ Lương so với tiếng tên Lương, biến thể Unicode, thanh điệu, từ chưa nhận diện và hiển thị an toàn. Bộ dữ liệu hữu hạn, chưa bao quát mọi tên địa phương/tên nước ngoài; khi có chữ gốc hoặc ý người đặt tên khác, cần ưu tiên thông tin ấy.

@@ -27,7 +27,8 @@
         role: (data.user && data.user.role) || "",
       });
       const next = new URLSearchParams(window.location.search || "").get("next");
-      const destination = next && next.charAt(0) === "/" && !next.startsWith("//") ? next : "/good-date";
+      const destination = data.user && data.user.member_access === false ? "/membership"
+        : next && next.charAt(0) === "/" && !next.startsWith("//") && !next.includes("\\") ? next : "/good-date";
       setTimeout(() => (window.location.href = destination), 400);
     } catch (err) {
       BtePortal.showFlash(flash, err.message, "error");
@@ -41,5 +42,6 @@
     BtePortal.clearSession();
     status.textContent = t("login.not_signed_in");
     BtePortal.showFlash(flash, t("login.signed_out"), "success");
+    window.location.href = "/good-date";
   });
 })();

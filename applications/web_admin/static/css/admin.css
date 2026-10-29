@@ -13,6 +13,9 @@
   --radius: 12px;
   --font: "Segoe UI", "IBM Plex Sans", system-ui, sans-serif;
   --mono: "Cascadia Code", "Consolas", monospace;
+  --five-blue: #7dd3fc;
+  --five-green: #34d399;
+  --line: var(--border);
 }
 
 * { box-sizing: border-box; }
@@ -40,6 +43,7 @@ a:hover { text-decoration: underline; }
   position: sticky;
   top: 0;
   height: 100vh;
+  overflow-y: auto;
 }
 
 .brand {
@@ -73,6 +77,7 @@ a:hover { text-decoration: underline; }
 }
 
 .main {
+  min-width: 0;
   padding: 1.25rem 1.5rem 2.5rem;
 }
 
@@ -268,6 +273,16 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   display: none;
   margin-bottom: 0.75rem;
 }
+[hidden] { display: none !important; }
+.admin-login { max-width: 440px; }
+.admin-login label { display: grid; gap: 8px; margin-bottom: 16px; }
+.portal-return { border-top: 1px solid var(--border); margin-top: 16px; }
+.membership-page { max-width: none; }
+.membership-page .membership-application label { color: var(--text); }
+.membership-page .check { display: flex; flex-direction: row; align-items: flex-start; }
+.membership-page .check input { width: auto; }
+.admin-shortcuts { display: flex; flex-wrap: wrap; gap: 12px; }
+.admin-shortcuts a { padding: 12px 16px; background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; }
 
 @media (max-width: 860px) {
   .shell { grid-template-columns: 1fr; }

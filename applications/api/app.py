@@ -28,6 +28,8 @@ from applications.api.routes import customers as customers_router
 from applications.api.routes import health as health_router
 from applications.api.routes import license as license_router
 from applications.api.routes import user as user_router
+from applications.api.routes import membership as membership_router
+from applications.api.auth.membership import register_membership_access
 from applications.api.routes import export as export_router
 from applications.api.routes import v1 as v1_router
 from applications.monitoring import register_ops_middleware
@@ -74,12 +76,14 @@ def create_app() -> FastAPI:
     register_middleware(app)
     register_ops_middleware(app)
     register_exception_handlers(app)
+    register_membership_access(app)
     app.include_router(public_health_router.router)
     app.include_router(public_version_router.router)
     app.include_router(public_analysis_router.router)
     app.include_router(health_router.router)
     app.include_router(auth_router.router, prefix=settings.api_prefix)
     app.include_router(user_router.router, prefix=settings.api_prefix)
+    app.include_router(membership_router.router, prefix=settings.api_prefix)
     app.include_router(customers_router.router, prefix=settings.api_prefix)
     app.include_router(cases_router.router, prefix=settings.api_prefix)
     app.include_router(admin_router.router, prefix=settings.api_prefix)

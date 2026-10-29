@@ -14,12 +14,8 @@ from applications.customer_portal.pages import (
 
 _PRODUCT_LABELS = (
     "Trang chủ",
-    "Chọn ngày tốt",
-    "Xem lá số",
-    "Tư vấn năng lượng số",
-    "Tư vấn hôn nhân",
-    "Tư vấn hợp tác",
-    "Tư vấn sinh con",
+    "Phân tích tên",
+    "Xem Năng lượng số",
 )
 
 
@@ -35,7 +31,7 @@ def _primary_nav(html: str) -> str:
 def test_number_energy_route_loads() -> None:
     response = _client().get(NUMBER_ENERGY_PATH)
     assert response.status_code == 200
-    assert "Tư vấn năng lượng số" in response.text
+    assert "Xem Năng lượng số" in response.text
     assert 'id="number-energy-root"' in response.text
     assert "/static/dist/numberEnergy.js" in response.text
     assert "/backend/api/v1/number-energy/analyze" in response.text
@@ -54,26 +50,22 @@ def test_number_energy_proxy_targets_applications_api() -> None:
 
 
 def test_number_energy_default_live_ports_use_runtime_stack() -> None:
-    assert settings.port == 8083
+    assert settings.port == 8686
     assert settings.api_base_url == "http://127.0.0.1:8000"
 
 
 def test_number_energy_is_visible_in_primary_nav() -> None:
     html = _client().get("/good-date").text
-    assert len(CUSTOMER_NAV_ITEMS) == 7
-    assert [item.path for item in CUSTOMER_NAV_ITEMS] == [
+    assert len(CUSTOMER_NAV_ITEMS) == 10
+    assert [item.path for item in CUSTOMER_NAV_ITEMS[:3]] == [
         "/good-date",
-        "/choose-date",
-        "/analyze",
+        "/name-analysis",
         "/number-energy",
-        "/marriage-consulting",
-        "/business-consulting",
-        "/childbirth-consulting",
     ]
     nav_html = _primary_nav(html)
-    assert "Tư vấn năng lượng số" in nav_html
+    assert "Xem Năng lượng số" in nav_html
     assert 'href="/number-energy"' in nav_html
-    assert CUSTOMER_NAV_ITEMS[4].path == "/marriage-consulting"
+    assert CUSTOMER_NAV_ITEMS[5].path == "/marriage-consulting"
 
 
 def test_analyze_page_links_to_number_energy() -> None:

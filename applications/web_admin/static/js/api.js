@@ -3,8 +3,10 @@
  * No business logic; stores JWT in sessionStorage.
  */
 (function (global) {
-  const TOKEN_KEY = "bte_admin_token";
-  const USER_KEY = "bte_admin_user";
+  const portalSession = document.documentElement.dataset.adminSession === "portal";
+  const TOKEN_KEY = portalSession ? "bte_portal_token" : "bte_admin_token";
+  const USER_KEY = portalSession ? "bte_portal_user" : "bte_admin_user";
+  let verification;
 
   function getToken() {
     return sessionStorage.getItem(TOKEN_KEY) || "";
@@ -18,6 +20,8 @@
   function clearSession() {
     sessionStorage.removeItem(TOKEN_KEY);
     sessionStorage.removeItem(USER_KEY);
+    verification = Promise.reject(new Error("Vui lòng đăng nhập tài khoản quản trị."));
+    verification.catch(() => {});
   }
 
   function getUser() {
@@ -28,7 +32,7 @@
     }
   }
 
-  async function api(method, path, body, opts) {
+  async function request(method, path, body, opts) {
     const headers = Object.assign(
       { Accept: "application/json" },
       (opts && opts.headers) || {}
@@ -66,6 +70,23 @@
     return data;
   }
 
+  function verifySession() {
+    verification = (async () => {
+      if (!getToken()) throw new Error("Vui lòng đăng nhập tài khoản quản trị.");
+      const user = await request("GET", "/api/v1/auth/me");
+      if (user.role !== "ADMIN") throw new Error("Trang quản trị chỉ dành cho tài khoản ADMIN.");
+      setSession(getToken(), user);
+      return user;
+    })();
+    verification.catch(() => {});
+    return verification;
+  }
+
+  async function api(method, path, body, opts) {
+    if (!path.startsWith("/api/v1/auth/")) await verification;
+    return request(method, path, body, opts);
+  }
+
   function qs(params) {
     const u = new URLSearchParams();
     Object.entries(params || {}).forEach(([k, v]) => {
@@ -96,9 +117,13 @@
     qs,
     showFlash,
     fmt,
+    portalSession,
+    verifySession,
+    ready: () => verification,
     get: (path) => api("GET", path),
     post: (path, body) => api("POST", path, body),
     put: (path, body) => api("PUT", path, body),
     del: (path) => api("DELETE", path),
   };
+  verifySession();
 })(window);

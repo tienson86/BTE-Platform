@@ -1,0 +1,43 @@
+/* Public tools across the top, authenticated member tools below the logo. */
+body .member-sidebar[hidden], body [data-admin-only][hidden],
+body #btnNavToggle[hidden], body #siteAnnouncement[hidden] { display: none !important; }
+body .app-header { height: 76px; min-height: 76px; flex-wrap: nowrap; gap: 18px; }
+body .app-header .app-brand { flex: 0 0 218px; }
+body .app-header .app-nav { display: flex; flex-direction: row; width: auto; flex-wrap: wrap; overflow: visible; gap: 6px; padding: 0; }
+body .app-header .app-nav a { width: auto; }
+body .app-header .member-join { color: #ffe58f; border: 1px solid #e9ba58; border-radius: 10px; padding: 8px 12px; white-space: nowrap; font-size: 13px; }
+body .member-sidebar { position: fixed; top: 76px; bottom: 0; left: 0; width: 246px; padding: 26px 16px; overflow-y: auto; background: var(--panel); border-right: 1px solid var(--line); z-index: 40; }
+body .member-sidebar__title { color: var(--five-red, #ac2229); font-size: 14px; font-weight: 750; margin: 0 8px 18px; }
+body .member-nav { display: flex; flex-direction: column; gap: 7px; }
+body .member-nav .nav-link { display: block; white-space: normal; padding: 12px 14px; color: var(--ink); border: 1px solid transparent; border-radius: 10px; }
+body .member-nav .nav-link:hover { background: var(--five-wood-soft, #edf7ef); color: var(--five-green, #176b45); }
+body .member-nav .nav-link.active { background: var(--five-red, #ac2229); color: #ffe58f; border-color: #d4a847; }
+body .member-sidebar__footer { margin-top: 28px; border-top: 1px solid var(--line); padding-top: 18px; display: grid; gap: 14px; font-size: 13px; }
+body .member-sidebar__footer a { color: var(--five-blue, #12678d); padding: 0 8px; }
+body[data-member-nav="true"] .app-main { width: calc(100% - 246px); max-width: none; margin: 0 0 0 246px; padding: 28px; box-sizing: border-box; }
+body[data-member-nav="true"][data-result-ui] { padding-left: 246px; }
+body[data-member-nav="true"][data-result-ui] .app-header { margin-left: -246px; }
+body .site-announcement { margin: 0; padding: 12px 24px; text-align: center; color: var(--ink); background: var(--five-earth-soft, #fff7dc); overflow-wrap: anywhere; }
+body[data-member-nav="true"] .site-announcement { margin-left: 246px; }
+body[data-member-nav="true"][data-result-ui] .site-announcement { margin-left: 0; }
+@media (max-width: 1100px) {
+  body .app-header { gap: 12px; padding-left: 20px; padding-right: 20px; }
+  body .app-header .app-brand { flex-basis: auto; }
+  body .app-header .app-nav { gap: 0; }
+  body .app-header .member-join { font-size: 12px; padding: 7px; }
+}
+@media (max-width: 800px) {
+  body .app-header { height: auto; min-height: 76px; display: flex; flex-wrap: wrap; padding: 12px 16px; gap: 10px; }
+  body .app-header .app-brand { margin-right: auto; }
+  body .app-header-actions { margin-left: 0; }
+  body .app-header .member-join { max-width: 105px; white-space: normal; text-align: center; }
+  body .app-header .app-nav { order: 5; flex-basis: 100%; justify-content: flex-start; gap: 6px; }
+  body .app-header .app-nav a { font-size: 13px; padding: 7px 8px; }
+  body .app-header .app-nav-toggle { display: inline-flex; margin-left: 0; }
+  body .member-sidebar { display: none; position: static; width: auto; max-height: none; padding: 18px 16px; border-bottom: 1px solid var(--line); }
+  body .app-header[data-nav-open="true"] + .member-sidebar { display: block; }
+  body[data-member-nav="true"] .app-main { width: calc(100% - 32px); padding: 20px 0; margin: 0 auto; }
+  body[data-member-nav="true"][data-result-ui] { padding-left: 0; }
+  body[data-member-nav="true"][data-result-ui] .app-header { margin-left: 0; }
+  body[data-member-nav="true"] .site-announcement { margin-left: 0; }
+}

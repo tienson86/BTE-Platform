@@ -14,7 +14,7 @@ from __future__ import annotations
 from typing import Mapping
 
 import httpx
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -23,17 +23,22 @@ from applications.customer_portal.pages import (
     BUSINESS_CONSULTING_PATH,
     CHILDBIRTH_API_PROXY_PREFIX,
     CHILDBIRTH_CONSULTING_PATH,
+    CURRENT_NAME_API_PROXY_PREFIX,
     HOME_PATH,
     LOGIN_ITEM,
     MARRIAGE_API_PROXY_PREFIX,
     MARRIAGE_CONSULTING_PATH,
     NAMING_API_PROXY_PREFIX,
     NAMING_CONSULTING_PATH,
+    NAME_ANALYSIS_PATH,
     NAV_ITEMS,
     NUMBER_ENERGY_API_PROXY_PREFIX,
     NUMBER_ENERGY_PATH,
 )
 from applications.customer_portal.templates_util import render_desktop_page, render_page
+from applications.web_admin.config import WEB_ADMIN_ROOT
+from applications.web_admin.nav import NAV_ITEMS as ADMIN_NAV_ITEMS
+from applications.web_admin.templates_util import render_page as render_admin_page
 
 HOP_BY_HOP = {
     "connection",
@@ -58,6 +63,8 @@ def _proxy_upstream_url(path: str) -> str:
         or path.startswith(f"{CHILDBIRTH_API_PROXY_PREFIX}/")
         or path == NAMING_API_PROXY_PREFIX
         or path.startswith(f"{NAMING_API_PROXY_PREFIX}/")
+        or path == CURRENT_NAME_API_PROXY_PREFIX
+        or path.startswith(f"{CURRENT_NAME_API_PROXY_PREFIX}/")
     ):
         return f"{settings.marriage_api_base_url.rstrip('/')}/{path}"
     return f"{settings.api_base_url.rstrip('/')}/{path}"
@@ -75,6 +82,17 @@ def create_app() -> FastAPI:
 
     static_dir = PORTAL_ROOT / "static"
     app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
+    app.mount("/admin/static", StaticFiles(directory=str(WEB_ADMIN_ROOT / "static")), name="admin-static")
+    app.mount("/admin/portal-static", StaticFiles(directory=str(static_dir)), name="admin-portal-static")
+
+    @app.get("/admin", response_class=HTMLResponse)
+    @app.get("/admin/", response_class=HTMLResponse, include_in_schema=False)
+    @app.get("/admin/{section}", response_class=HTMLResponse)
+    def admin_page(section: str = "dashboard") -> HTMLResponse:
+        item = next((item for item in ADMIN_NAV_ITEMS if item.key == section or item.path == "/" + section), None)
+        if item is None:
+            raise HTTPException(status_code=404)
+        return HTMLResponse(render_admin_page(item.template, active=item.key, base_path="/admin", portal_session=True))
 
     def page(active: str, template: str) -> HTMLResponse:
         return HTMLResponse(render_page(template, active=active))
@@ -176,6 +194,18 @@ def create_app() -> FastAPI:
     def naming_consulting_page() -> HTMLResponse:
         return page("naming-consulting", "naming_consulting.html")
 
+    @app.get(NAME_ANALYSIS_PATH, response_class=HTMLResponse)
+    def name_analysis_page() -> HTMLResponse:
+        return page("name-analysis", "name_analysis.html")
+
+    @app.get("/membership", response_class=HTMLResponse)
+    def membership_page() -> HTMLResponse:
+        return page("membership", "membership.html")
+
+    @app.get("/admin-membership", include_in_schema=False)
+    def admin_membership_page() -> RedirectResponse:
+        return RedirectResponse("/admin/memberships", status_code=307)
+
     @app.api_route(
         "/backend/{path:path}",
         methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
@@ -200,6 +230,9 @@ def create_app() -> FastAPI:
         naming_route = path == NAMING_API_PROXY_PREFIX or path.startswith(
             f"{NAMING_API_PROXY_PREFIX}/"
         )
+        current_name_route = path == CURRENT_NAME_API_PROXY_PREFIX or path.startswith(
+            f"{CURRENT_NAME_API_PROXY_PREFIX}/"
+        )
         number_energy_route = path == NUMBER_ENERGY_API_PROXY_PREFIX or path.startswith(
             f"{NUMBER_ENERGY_API_PROXY_PREFIX}/"
         )
@@ -217,7 +250,7 @@ def create_app() -> FastAPI:
             if path.startswith('api/v1/van-han/') and '/export/' in path:
                 message=('Tạo tài liệu vượt thời gian chờ. Hãy thử khoảng năm ngắn hơn.' if isinstance(error,httpx.TimeoutException) else 'Chưa kết nối được dịch vụ tạo tài liệu. Hãy kiểm tra BTE đang chạy.')
                 return JSONResponse(status_code=503,content={'detail':message})
-            if marriage_route or childbirth_route or naming_route:
+            if marriage_route or childbirth_route or naming_route or current_name_route:
                 return JSONResponse(
                     status_code=503,
                     content={
@@ -283,6 +316,7 @@ def create_app() -> FastAPI:
                 BUSINESS_CONSULTING_PATH,
                 CHILDBIRTH_CONSULTING_PATH,
                 NUMBER_ENERGY_PATH,
+                NAME_ANALYSIS_PATH,
             ],
             "marriage_api_base_url": settings.marriage_api_base_url,
         }

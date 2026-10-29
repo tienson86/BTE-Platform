@@ -10,37 +10,52 @@
   const userLabel = document.getElementById("userLabel");
   const flash = document.getElementById("globalFlash");
 
-  function refreshAuthUI() {
-    const user = BteAdmin.getUser();
+  const workspace = document.getElementById("adminWorkspace");
+  const loginForm = document.getElementById("adminLoginForm");
+  function refreshAuthUI(user) {
     if (userLabel) {
       userLabel.textContent = user
         ? user.username + " (" + (user.role || "") + ")"
-        : "Not signed in";
+        : "Chưa đăng nhập quản trị";
     }
-    if (loginBtn) loginBtn.style.display = BteAdmin.getToken() ? "none" : "inline-flex";
-    if (logoutBtn) logoutBtn.style.display = BteAdmin.getToken() ? "inline-flex" : "none";
+    if (loginBtn) loginBtn.style.display = user ? "none" : "inline-flex";
+    if (logoutBtn) logoutBtn.style.display = user ? "inline-flex" : "none";
+    workspace.hidden = !user;
+    if (user) loginForm.hidden = true;
   }
 
+  async function showVerifiedSession() {
+    try { refreshAuthUI(await BteAdmin.ready()); }
+    catch (err) { refreshAuthUI(null); BteAdmin.showFlash(flash, err.message, "error"); }
+  }
   if (loginBtn) {
-    loginBtn.addEventListener("click", async () => {
-      const username = prompt("Username", "admin");
-      if (!username) return;
-      const password = prompt("Password", "admin123");
-      if (password === null) return;
-      try {
-        const data = await BteAdmin.post("/api/v1/auth/login", {
-          username,
-          password,
-        });
-        BteAdmin.setSession(data.access_token, data.user || { username });
-        BteAdmin.showFlash(flash, "Signed in as " + username, "success");
-        refreshAuthUI();
-        window.dispatchEvent(new Event("bte:auth"));
-      } catch (err) {
-        BteAdmin.showFlash(flash, err.message || "Login failed", "error");
-      }
+    loginBtn.addEventListener("click", () => {
+      if (BteAdmin.portalSession) {
+        window.location.assign("/login?next=" + encodeURIComponent(location.pathname));
+      } else { loginForm.hidden = false; loginForm.elements.username.focus(); }
     });
   }
+  loginForm.addEventListener("submit", async event => {
+      event.preventDefault();
+      const button = loginForm.querySelector("button"); button.disabled = true;
+      try {
+        const data = await BteAdmin.post("/api/v1/auth/login", {
+          username: loginForm.elements.username.value.trim(),
+          password: loginForm.elements.password.value,
+        });
+        BteAdmin.setSession(data.access_token, data.user);
+        await BteAdmin.verifySession();
+        loginForm.elements.password.value = "";
+        BteAdmin.showFlash(flash, "Đăng nhập quản trị thành công.", "success");
+        await showVerifiedSession();
+        window.dispatchEvent(new Event("bte:auth"));
+        window.location.reload();
+      } catch (err) {
+        refreshAuthUI(null);
+        BteAdmin.showFlash(flash, err.message || "Chưa đăng nhập được.", "error");
+      }
+      finally { button.disabled = false; }
+  });
 
   if (logoutBtn) {
     logoutBtn.addEventListener("click", async () => {
@@ -50,11 +65,13 @@
         /* ignore */
       }
       BteAdmin.clearSession();
-      refreshAuthUI();
-      BteAdmin.showFlash(flash, "Signed out", "success");
+      refreshAuthUI(null);
+      BteAdmin.showFlash(flash, "Đã đăng xuất.", "success");
       window.dispatchEvent(new Event("bte:auth"));
     });
   }
 
-  refreshAuthUI();
+  showVerifiedSession();
+  const titles = {dashboard:"Tổng quan",accounts:"Quản lý tài khoản",memberships:"Thành viên & thanh toán","website-settings":"Cấu hình website",customers:"Khách hàng",cases:"Hồ sơ tư vấn",reports:"Báo cáo",licenses:"Bản quyền",statistics:"Thống kê",settings:"Thông tin hệ thống"};
+  document.getElementById("pageTitle").textContent = titles[document.body.dataset.adminPage] || "Quản trị hệ thống";
 })();

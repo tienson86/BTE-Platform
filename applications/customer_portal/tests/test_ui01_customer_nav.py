@@ -17,13 +17,13 @@ def _client() -> TestClient:
 
 
 def _primary_nav(html: str) -> str:
-    match = re.search(
-        r'<nav[^>]*data-customer-nav="primary"[^>]*>(.*?)</nav>',
+    matches = re.findall(
+        r'<nav[^>]*data-customer-nav="(?:primary|member)"[^>]*>(.*?)</nav>',
         html,
         flags=re.S,
     )
-    assert match is not None, "customer primary navigation is missing"
-    return match.group(1)
+    assert len(matches) == 2, "public and member navigation are required"
+    return "\n".join(matches)
 
 
 def _main_html(html: str) -> str:
@@ -41,24 +41,25 @@ def test_n1_customer_navigation_has_product_items() -> None:
     labels = _nav_labels(_primary_nav(html))
     assert labels == [
         "Trang chủ",
-        "Chọn ngày tốt",
+        "Phân tích tên",
+        "Xem Năng lượng số",
         "Xem lá số",
-        "Tư vấn năng lượng số",
+        "Chọn ngày tốt",
         "Tư vấn hôn nhân",
-        "Tư vấn hợp tác",
         "Tư vấn sinh con",
         "Tư vấn đặt tên",
+        "Tư vấn hợp tác",
         "Tính vận hạn",
     ]
-    assert len(CUSTOMER_NAV_ITEMS) == 8
+    assert len(CUSTOMER_NAV_ITEMS) == 10
     assert [item.path for item in CUSTOMER_NAV_ITEMS[:3]] == [
         "/good-date",
-        "/choose-date",
-        "/analyze",
+        "/name-analysis",
+        "/number-energy",
     ]
-    assert CUSTOMER_NAV_ITEMS[3].path == "/number-energy"
-    assert CUSTOMER_NAV_ITEMS[4].path == "/marriage-consulting"
-    assert CUSTOMER_NAV_ITEMS[5].path == "/business-consulting"
+    assert CUSTOMER_NAV_ITEMS[3].path == "/analyze"
+    assert CUSTOMER_NAV_ITEMS[4].path == "/choose-date"
+    assert CUSTOMER_NAV_ITEMS[5].path == "/marriage-consulting"
     assert CUSTOMER_NAV_ITEMS[6].path == "/childbirth-consulting"
 
 
@@ -169,14 +170,14 @@ def test_n12_number_energy_is_visible_and_active() -> None:
     """RB18: Tư vấn năng lượng số is a visible primary item with active state."""
     client = _client()
     home_nav = _primary_nav(client.get("/good-date").text)
-    assert re.search(r'href="/number-energy"[^>]*>Tư vấn năng lượng số<', home_nav)
+    assert re.search(r'href="/number-energy"[^>]*>Xem Năng lượng số<', home_nav)
     response = client.get("/number-energy")
     assert response.status_code == 200
     nav = _primary_nav(response.text)
     assert 'data-nav-id="number-energy"' in nav
     assert 'aria-current="page"' in nav
     assert re.search(
-        r'class="nav-link active"[^>]*href="/number-energy"[^>]*>Tư vấn năng lượng số<',
+        r'class="nav-link active"[^>]*href="/number-energy"[^>]*>Xem Năng lượng số<',
         nav,
     )
     assert 'id="number-energy-root"' in response.text
@@ -215,13 +216,14 @@ def test_n10_legacy_welcome_is_not_production_landing() -> None:
     nav = _primary_nav(dashboard.text)
     assert _nav_labels(nav) == [
         "Trang chủ",
-        "Chọn ngày tốt",
+        "Phân tích tên",
+        "Xem Năng lượng số",
         "Xem lá số",
-        "Tư vấn năng lượng số",
+        "Chọn ngày tốt",
         "Tư vấn hôn nhân",
-        "Tư vấn hợp tác",
         "Tư vấn sinh con",
         "Tư vấn đặt tên",
+        "Tư vấn hợp tác",
         "Tính vận hạn",
     ]
     for label in _FORBIDDEN_NAV_LABELS:

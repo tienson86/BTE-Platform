@@ -34,7 +34,7 @@ from consulting.marriage.repository.json_file import JsonMarriageRepository
 from consulting.marriage.report.export import cleanup_marriage_export, export_marriage_file
 from consulting.business.api import build_business_archive_router
 from consulting.childbirth.api import build_childbirth_router
-from consulting.naming.api import build_naming_router
+from consulting.naming.api import build_naming_router, build_public_naming_router
 
 
 def create_marriage_api_app(container: MarriageContainer | None = None):
@@ -64,6 +64,7 @@ def create_marriage_api_app(container: MarriageContainer | None = None):
     childbirth_repository = JsonChildbirthRepository.from_environment()
     app.include_router(build_childbirth_router(childbirth_repository), prefix="/api/v1")
     app.include_router(build_naming_router(), prefix="/api/v1")
+    app.include_router(build_public_naming_router(), prefix="/api/v1")
     register_consulting_access(app, bound.api_contract, childbirth_repository)
     return app
 

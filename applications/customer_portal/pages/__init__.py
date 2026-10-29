@@ -32,29 +32,25 @@ DATE_SELECTION_NAV: tuple[NavItem, ...] = (
 )
 DATE_SELECTION_MENU_LABEL = "nav.date_selection"
 
-# Customer Portal primary product navigation (Commercial Dashboard 00_NAVIGATION).
-# RB18: Tư vấn năng lượng số is visible after Xem lá số.
-CUSTOMER_NAV_ITEMS: tuple[NavItem, ...] = (
+# Free tools are always visible; member tools live in the left sidebar.
+CUSTOMER_PUBLIC_NAV_ITEMS: tuple[NavItem, ...] = (
     NavItem("home", "nav.dashboard", "/good-date", "good_date.html"),
-    NavItem("choose-date", "nav.choose_date", "/choose-date", "choose_date.html"),
-    NavItem("analyze", "nav.view_chart", "/analyze", "analyze.html"),
+    NavItem("name-analysis", "nav.name_analysis", "/name-analysis", "name_analysis.html"),
     NavItem(
         "number-energy",
         "nav.number_energy",
         "/number-energy",
         "number_energy.html",
     ),
+)
+CUSTOMER_MEMBER_NAV_ITEMS: tuple[NavItem, ...] = (
+    NavItem("analyze", "nav.view_chart", "/analyze", "analyze.html"),
+    NavItem("choose-date", "nav.choose_date", "/choose-date", "choose_date.html"),
     NavItem(
         "marriage-consulting",
         "nav.marriage_consulting",
         "/marriage-consulting",
         "marriage_consulting.html",
-    ),
-    NavItem(
-        "business-consulting",
-        "nav.business_consulting",
-        "/business-consulting",
-        "business_consulting.html",
     ),
     NavItem(
         "childbirth-consulting",
@@ -68,16 +64,21 @@ CUSTOMER_NAV_ITEMS: tuple[NavItem, ...] = (
         "/naming-consulting",
         "naming_consulting.html",
     ),
+    NavItem("business-consulting", "nav.business_consulting", "/business-consulting", "business_consulting.html"),
+    NavItem("van-han", "nav.van_han", "/tinh-van-han", "van_han.html"),
 )
+CUSTOMER_NAV_ITEMS = CUSTOMER_PUBLIC_NAV_ITEMS + CUSTOMER_MEMBER_NAV_ITEMS
 
 HOME_PATH = "/good-date"
 MARRIAGE_CONSULTING_PATH = "/marriage-consulting"
 BUSINESS_CONSULTING_PATH = "/business-consulting"
 CHILDBIRTH_CONSULTING_PATH = "/childbirth-consulting"
 NAMING_CONSULTING_PATH = "/naming-consulting"
+NAME_ANALYSIS_PATH = "/name-analysis"
 MARRIAGE_API_PROXY_PREFIX = "api/v1/consulting/marriage"
 CHILDBIRTH_API_PROXY_PREFIX = "api/v1/consulting/childbirth"
 NAMING_API_PROXY_PREFIX = "api/v1/consulting/naming"
+CURRENT_NAME_API_PROXY_PREFIX = "api/v1/public/naming"
 NUMBER_ENERGY_API_PROXY_PREFIX = "api/v1/number-energy"
 NUMBER_ENERGY_PATH = "/number-energy"
 NUMBER_ENERGY_ITEM = NavItem(

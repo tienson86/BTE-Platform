@@ -37,6 +37,9 @@ def register_consulting_access(app, marriage_api, childbirth_repository):
             user = response.json()
             if not isinstance(user, dict) or not user.get('user_id'):
                 raise ValueError('Invalid auth response')
+            if not user.get('member_access', False):
+                return JSONResponse({'detail': 'Tài khoản chưa có quyền thành viên đang còn hiệu lực.',
+                                     'code': 'membership_required', 'membership_url': '/membership'}, status_code=403)
         except Exception:
             return JSONResponse({'detail': 'Chưa xác thực được tài khoản. Hãy thử lại.'}, status_code=503)
         token = identity.set(user)

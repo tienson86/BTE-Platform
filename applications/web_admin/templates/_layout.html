@@ -1,33 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi" data-admin-base="{{ADMIN_BASE}}" data-admin-session="{{ADMIN_SESSION}}">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BTE Web Admin</title>
-  <link rel="stylesheet" href="/static/css/admin.css" />
+  <title>BTE Admin — Quản trị hệ thống</title>
+  <link rel="stylesheet" href="/static/css/admin.css?v=admin-03" />
+  <script src="/static/js/api.js?v=admin-03"></script>
 </head>
-<body>
+<body data-admin-page="{{ACTIVE}}">
   <div class="shell">
     <aside class="sidebar" id="sidebar">
       <div class="brand">BTE Admin</div>
-      <div class="brand-sub">Applications Web Console</div>
+      <div class="brand-sub">Quản trị hệ thống BTE Platform</div>
       {{NAV}}
+      {{PORTAL_LINK}}
     </aside>
     <main class="main">
       <button class="btn secondary menu-toggle" id="menuToggle" type="button">Menu</button>
       <div id="globalFlash" class="flash"></div>
       <div class="topbar">
-        <h1 id="pageTitle">Admin</h1>
+        <h1 id="pageTitle">Quản trị hệ thống</h1>
         <div class="auth-box">
-          <span class="muted" id="userLabel">Not signed in</span>
-          <button type="button" id="loginBtn">Sign in</button>
-          <button type="button" class="secondary" id="logoutBtn" style="display:none">Sign out</button>
+          <span class="muted" id="userLabel">Đang kiểm tra đăng nhập…</span>
+          <button type="button" id="loginBtn">Đăng nhập</button>
+          <button type="button" class="secondary" id="logoutBtn" style="display:none">Đăng xuất</button>
         </div>
       </div>
-      {{CONTENT}}
+      <form id="adminLoginForm" class="panel admin-login" hidden>
+        <h2>Đăng nhập quản trị</h2>
+        <label>Tên đăng nhập<input name="username" autocomplete="username" required /></label>
+        <label>Mật khẩu<input name="password" type="password" autocomplete="current-password" required /></label>
+        <button type="submit">Đăng nhập</button>
+      </form>
+      <div id="adminWorkspace" hidden>{{CONTENT}}</div>
     </main>
   </div>
-  <script src="/static/js/api.js"></script>
-  <script src="/static/js/chrome.js"></script>
+  <script src="/static/js/chrome.js?v=admin-03"></script>
 </body>
 </html>

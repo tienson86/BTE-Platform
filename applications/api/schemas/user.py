@@ -17,6 +17,9 @@ class UserProfile(BaseModel):
     analysis_limit: int | None = Field(default=None, ge=0)
     analyses_used: int = Field(default=0, ge=0)
     analyses_remaining: int | None = Field(default=None, ge=0)
+    member_access: bool = True
+    membership_status: str = "existing"
+    membership_expires_at: str | None = None
 
 
 class UserQuotaUpdate(BaseModel):

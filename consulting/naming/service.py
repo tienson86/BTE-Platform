@@ -143,7 +143,7 @@ def recommend_names(
             reasons.append("Chưa có đối chiếu Dụng/Hỷ thần cho tên này." if not hour_known else "Hành tên chưa trùng Dụng/Hỷ thần được công bố; điều này không có nghĩa tên xấu.")
         reference_points = 0
         for label, target in (("Nạp Âm trụ năm", nap_element), ("Cung Phi", cung_element)):
-            delta, reason = _reference_relation(element, target, label)
+            delta, reason = describe_element_relation(element, target, label)
             reference_points += delta
             reasons.append(reason)
         points += reference_points
@@ -186,8 +186,9 @@ def _labels(elements: set[FiveElement]) -> list[str]:
     return [ELEMENT_LABELS[element] for element in FiveElement if element in elements]
 
 
-def _reference_relation(
+def describe_element_relation(
     element: FiveElement, target: FiveElement | None, label: str,
+    *, include_priority_note: bool = True,
 ) -> tuple[int, str]:
     if target is None:
         return 0, f"{label}: thiếu dữ liệu, không chấm tiêu chí này."
@@ -197,5 +198,7 @@ def _reference_relation(
     if GENERATES[element] == target:
         return 10, f"{label}: hành tên {source_label} sinh {target_label}."
     if GENERATES[target] == element:
+        if not include_priority_note:
+            return 2, f"{label}: {target_label} sinh hành tên {source_label}."
         return 2, f"{label}: {target_label} sinh hành tên {source_label}; đây là chiều sinh ngược, chỉ tham khảo phụ."
     return -6, f"{label}: {source_label} khắc {target_label}." if CONTROLS[element] == target else f"{label}: {target_label} khắc {source_label}."

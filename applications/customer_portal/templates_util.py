@@ -6,7 +6,7 @@ from typing import Any
 
 from applications.customer_portal.config import PORTAL_ROOT, settings
 from applications.customer_portal.i18n import DEFAULT_LOCALE, dump_catalog_json, load_catalog, t
-from applications.customer_portal.pages import CUSTOMER_NAV_ITEMS
+from applications.customer_portal.pages import CUSTOMER_PUBLIC_NAV_ITEMS, CUSTOMER_MEMBER_NAV_ITEMS
 
 TEMPLATES_DIR = PORTAL_ROOT / "templates"
 
@@ -25,10 +25,10 @@ def _is_customer_nav_active(item_key: str, active: str) -> bool:
     return item_key == active
 
 
-def _customer_nav_html(catalog: dict[str, Any], active: str) -> str:
+def _customer_nav_html(catalog: dict[str, Any], active: str, *, member: bool = False) -> str:
     """Render the live customer primary product links."""
     links: list[str] = []
-    for item in CUSTOMER_NAV_ITEMS:
+    for item in (CUSTOMER_MEMBER_NAV_ITEMS if member else CUSTOMER_PUBLIC_NAV_ITEMS):
         is_active = _is_customer_nav_active(item.key, active)
         cls = "nav-link active" if is_active else "nav-link"
         current = ' aria-current="page"' if is_active else ""
@@ -36,8 +36,6 @@ def _customer_nav_html(catalog: dict[str, Any], active: str) -> str:
             f'<a class="{cls}" href="{item.path}" data-nav-id="{item.key}"{current}>'
             f"{t(catalog, item.label)}</a>"
         )
-    cls = "nav-link active" if active == "van-han" else "nav-link"
-    links.append(f'<a class="{cls}" href="/tinh-van-han" data-nav-id="van-han">Tính vận hạn</a>')
     return "\n".join(links)
 
 
@@ -49,12 +47,13 @@ def _customer_header_html(
 ) -> str:
     """Render the single Customer Portal chrome used by HTML pages and /result."""
     nav = _customer_nav_html(catalog, active)
+    member_nav = _customer_nav_html(catalog, active, member=True)
     return (
         f'<a class="skip-link" href="{skip_href}">Skip to content</a>\n'
         '  <header class="app-header" id="appHeader">\n'
         '      <a class="app-brand" href="/good-date">BTE <span>Portal</span></a>\n'
         '      <button type="button" class="app-nav-toggle" id="btnNavToggle"'
-        ' aria-label="Mở điều hướng" aria-controls="appNav" aria-expanded="false">\n'
+        ' aria-label="Mở menu thành viên" aria-controls="memberSidebar" aria-expanded="false" hidden>\n'
         '        <span class="app-nav-toggle__bar" aria-hidden="true"></span>\n'
         '        <span class="app-nav-toggle__bar" aria-hidden="true"></span>\n'
         '        <span class="app-nav-toggle__bar" aria-hidden="true"></span>\n'
@@ -62,13 +61,24 @@ def _customer_header_html(
         f'      <nav class="app-nav nav" id="appNav" data-customer-nav="primary"'
         f' aria-label="Điều hướng chính">{nav}</nav>\n'
         '      <div class="app-header-actions">\n'
+        '        <a class="member-join" href="/membership" id="memberJoinLink">Đăng ký thành viên</a>\n'
         '        <button type="button" id="btnThemeToggle" class="secondary"'
         ' aria-pressed="false">Dark</button>\n'
         '        <a class="app-user" href="/profile" aria-label="Hồ sơ" title="Hồ sơ">\n'
         '          <span class="app-user__avatar" aria-hidden="true">U</span>\n'
         "        </a>\n"
         "      </div>\n"
-        "    </header>"
+        "    </header>\n"
+        '    <aside class="member-sidebar" id="memberSidebar" aria-label="Không gian thành viên" hidden>\n'
+        '      <p class="member-sidebar__title">Không gian thành viên</p>\n'
+        f'      <nav class="member-nav" data-customer-nav="member" aria-label="Chức năng thành viên">{member_nav}</nav>\n'
+        '      <div class="member-sidebar__footer">\n'
+        '        <a href="/history">Hồ sơ đã lưu và tải tài liệu</a>\n'
+        '        <a href="/membership">Trạng thái thành viên</a>\n'
+        '        <a href="/admin" data-admin-only hidden>Quản trị hệ thống</a>\n'
+        '      </div>\n'
+        '    </aside>\n'
+        '    <p id="siteAnnouncement" class="site-announcement" role="status" hidden></p>'
     )
 
 

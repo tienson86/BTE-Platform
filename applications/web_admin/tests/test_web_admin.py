@@ -21,6 +21,8 @@ def test_nav_covers_required_pages() -> None:
         "licenses",
         "statistics",
         "settings",
+        "memberships",
+        "website-settings",
     }
 
 
@@ -53,6 +55,20 @@ def test_healthz() -> None:
     body = response.json()
     assert body["status"] == "ok"
     assert "/customers" in body["pages"]
+
+
+def test_standalone_admin_includes_membership_and_safe_login():
+    client = TestClient(create_app())
+    page = client.get("/memberships").text
+    assert 'data-admin-session="admin"' in page
+    assert 'data-admin-view="memberships"' in page
+    assert 'id="memberApplicationsSection"' in page
+    assert client.get("/portal-static/js/admin_membership.js?v=admin-03").status_code == 200
+    assert 'data-admin-view="website-settings"' in client.get("/website-settings").text
+    assert 'type="password"' in page
+    chrome = client.get("/static/js/chrome.js").text
+    assert 'prompt(' not in chrome and 'admin123' not in chrome
+    assert page.index('src="/static/js/api.js') < page.index('id="adminWorkspace"')
 
 
 def test_proxy_forwards_to_api(monkeypatch) -> None:

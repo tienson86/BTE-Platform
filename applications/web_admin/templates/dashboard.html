@@ -1,17 +1,32 @@
+<div class="panel">
+  <h2>Quản trị BTE Platform</h2>
+  <p class="muted">Quản lý tài khoản, xác nhận thành viên và thiết lập website tại cùng một nơi.</p>
+  <nav class="admin-shortcuts" aria-label="Truy cập quản trị nhanh">
+    <a href="{{ADMIN_BASE}}/accounts">Quản lý tài khoản</a>
+    <a href="{{ADMIN_BASE}}/memberships">Thành viên &amp; thanh toán</a>
+    <a href="{{ADMIN_BASE}}/website-settings">Cấu hình website &amp; ngân hàng</a>
+    <a href="{{ADMIN_BASE}}/settings">Thông tin hệ thống</a>
+  </nav>
+</div>
+<div class="card-grid">
+  <div class="card"><div class="label">Tài khoản</div><div class="value" id="cAccounts">—</div></div>
+  <div class="card"><div class="label">Đăng ký chờ xác nhận</div><div class="value" id="cPending">—</div></div>
+  <div class="card"><div class="label">Thành viên còn hiệu lực</div><div class="value" id="cMembers">—</div></div>
+</div>
 <div class="card-grid" id="dashCards">
-  <div class="card"><div class="label">Total Customers</div><div class="value" id="cCustomers">—</div></div>
-  <div class="card"><div class="label">Total Cases</div><div class="value" id="cCases">—</div></div>
-  <div class="card"><div class="label">Active License</div><div class="value" id="cLicense">—</div></div>
-  <div class="card"><div class="label">Storage Backend</div><div class="value" id="cStorage">—</div></div>
-  <div class="card"><div class="label">API Version</div><div class="value" id="cApi">—</div></div>
-  <div class="card"><div class="label">Engine Version</div><div class="value" id="cEngine">—</div></div>
-  <div class="card"><div class="label">Request Count</div><div class="value" id="cRequests">—</div></div>
-  <div class="card"><div class="label">Avg Response (ms)</div><div class="value" id="cLatency">—</div></div>
+  <div class="card"><div class="label">Khách hàng</div><div class="value" id="cCustomers">—</div></div>
+  <div class="card"><div class="label">Hồ sơ tư vấn</div><div class="value" id="cCases">—</div></div>
+  <div class="card"><div class="label">Bản quyền hiện tại</div><div class="value" id="cLicense">—</div></div>
+  <div class="card"><div class="label">Lưu trữ dữ liệu</div><div class="value" id="cStorage">—</div></div>
+  <div class="card"><div class="label">Phiên bản dịch vụ</div><div class="value" id="cApi">—</div></div>
+  <div class="card"><div class="label">Phiên bản bộ tính</div><div class="value" id="cEngine">—</div></div>
+  <div class="card"><div class="label">Lượt xử lý</div><div class="value" id="cRequests">—</div></div>
+  <div class="card"><div class="label">Thời gian phản hồi (ms)</div><div class="value" id="cLatency">—</div></div>
 </div>
 <div class="panel">
-  <h2>Notes</h2>
-  <p class="muted">Dashboard reads admin + license REST endpoints. Sign in as <code>admin</code> for admin metrics.</p>
-  <button type="button" class="secondary" id="refreshDash">Refresh</button>
+  <h2>Cập nhật tổng quan</h2>
+  <p class="muted">Số liệu được đọc từ hệ thống theo quyền quản trị hiện tại.</p>
+  <button type="button" class="secondary" id="refreshDash">Tải lại số liệu</button>
 </div>
 <script src="/static/js/dashboard.js"></script>
 <script>document.getElementById("pageTitle").textContent = "Dashboard";</script>
