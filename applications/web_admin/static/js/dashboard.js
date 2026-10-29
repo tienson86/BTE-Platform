@@ -1,12 +1,13 @@
 async function loadDashboard() {
   const flash = document.getElementById("globalFlash");
   try {
-    const [dash, stats, lic, users, applications] = await Promise.all([
+    const [dash, stats, lic, users, applications, archive] = await Promise.all([
       BteAdmin.get("/api/v1/admin/dashboard").catch(() => null),
       BteAdmin.get("/api/v1/admin/statistics").catch(() => null),
       BteAdmin.get("/api/v1/license/status").catch(() => null),
       BteAdmin.get("/api/v1/users"),
       BteAdmin.get("/api/v1/membership/admin/applications"),
+      BteAdmin.get("/api/v1/admin-archive?limit=1"),
     ]);
 
     const d = (dash && dash.data) || {};
@@ -17,8 +18,8 @@ async function loadDashboard() {
     document.getElementById("cPending").textContent = applications.items.filter(item => item.membership.status === "pending").length;
     document.getElementById("cMembers").textContent = applications.items.filter(item => item.membership.status === "active" && item.user.member_access).length;
 
-    document.getElementById("cCustomers").textContent = BteAdmin.fmt(d.customer_count);
-    document.getElementById("cCases").textContent = BteAdmin.fmt(d.case_count);
+    document.getElementById("cCustomers").textContent = users.filter(user=>user.role==="CUSTOMER").length;
+    document.getElementById("cCases").textContent = archive.total;
     document.getElementById("cStorage").textContent = BteAdmin.fmt(d.storage_backend);
     document.getElementById("cApi").textContent = BteAdmin.fmt(d.api_version);
     document.getElementById("cEngine").textContent = BteAdmin.fmt(d.engine_version);

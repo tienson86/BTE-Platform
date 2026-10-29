@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
+
+def optional_phone(value):
+    if not value:
+        return value
+    from applications.api.schemas.activity import normalize_phone
+    return normalize_phone(value)
 
 
 class UserProfile(BaseModel):
@@ -12,6 +18,7 @@ class UserProfile(BaseModel):
     username: str
     role: str
     display_name: str
+    phone: str = ""
     is_active: bool = True
     permissions: list[str] = Field(default_factory=list)
     analysis_limit: int | None = Field(default=None, ge=0)
@@ -30,13 +37,17 @@ class UserQuotaUpdate(BaseModel):
 
 
 class AdminUserCreate(BaseModel):
+    phone: str = Field(default="", max_length=24)
+    _phone = field_validator("phone")(optional_phone)
     username: str = Field(..., min_length=3, max_length=64, pattern=r"^[A-Za-z0-9_.-]+$")
     password: str = Field(..., min_length=8, max_length=128)
     display_name: str = Field(default="", max_length=120)
-    analysis_limit: int = Field(default=50, ge=0, le=1_000_000)
+    analysis_limit: int | None = Field(default=50, ge=0, le=1_000_000)
 
 
 class AdminUserUpdate(BaseModel):
+    phone: str | None = Field(default=None, max_length=24)
+    _phone = field_validator("phone")(optional_phone)
     display_name: str | None = Field(default=None, max_length=120)
     password: str | None = Field(default=None, min_length=8, max_length=128)
     is_active: bool | None = None

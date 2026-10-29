@@ -42,6 +42,7 @@ it("places duplicate username errors beside the field and lets the customer corr
   const form = document.getElementById("memberRegisterForm") as HTMLFormElement;
   const fields = form.elements as any;
   fields.display_name.value = "Nguyễn Văn An"; fields.username.value = "existing";
+  fields.phone.value = "0912345678";
   fields.password.value = fields.password_confirmation.value = "test-password-123";
   api.post.mockRejectedValueOnce(Object.assign(new Error("Tên đăng nhập đã có người dùng rồi."), {status:409, payload:{code:"username_taken"}}));
   form.dispatchEvent(new Event("submit", {bubbles:true, cancelable:true}));

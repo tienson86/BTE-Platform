@@ -1,29 +1,18 @@
-<div class="panel">
-  <div class="toolbar">
-    <input id="filterCustomer" placeholder="Filter by customer_id" />
-    <button type="button" id="btnLoadCases">Reload</button>
-  </div>
-  <div style="overflow:auto">
-    <table>
-      <thead>
-        <tr>
-          <th>Case ID</th><th>Customer</th><th>Created</th><th>Engine</th><th></th>
-        </tr>
-      </thead>
-      <tbody id="caseRows"></tbody>
-    </table>
-  </div>
-</div>
-
-<div class="panel" id="caseDetail" style="display:none">
-  <h2>Case detail</h2>
-  <div class="toolbar">
-    <button type="button" class="secondary" id="btnExportJson">Export JSON</button>
-    <button type="button" class="secondary" id="btnExportMd">Export Markdown</button>
-    <button type="button" class="secondary" id="btnExportHtml">Export HTML</button>
-    <button type="button" class="danger" id="btnDeleteCase">Delete</button>
-  </div>
-  <div id="caseBody" class="pre"></div>
-</div>
-<script src="/static/js/cases.js"></script>
-<script>document.getElementById("pageTitle").textContent = "Cases";</script>
+<section class="panel history-page">
+  <header class="page-hero"><h1 hidden>Hồ sơ tư vấn</h1><p class="muted">Hồ sơ và liên hệ của mọi tài khoản, lưu trên máy chủ.</p></header>
+  <button id="btnClearHist" type="button" hidden>Xóa lịch sử</button>
+  <p id="historySummary" role="status">Đang đọc kho hồ sơ…</p>
+  <div id="historyList" class="table-scroll"></div>
+</section>
+<details class="panel"><summary>Ghi nhận cuộc gọi hoặc trao đổi trực tiếp với khách</summary>
+  <form id="adminContactForm" class="form-grid">
+    <label>Họ và Tên<input name="full_name" minlength="2" maxlength="120" required /></label>
+    <label>Số điện thoại<input name="phone" type="tel" maxlength="24" required /></label>
+    <label>Chủ đề<input name="subject" maxlength="120" value="Yêu cầu hỗ trợ" required /></label>
+    <label>Kênh liên hệ<select name="channel"><option value="phone">Điện thoại</option><option value="direct">Trao đổi trực tiếp</option></select></label>
+    <label class="full">Nội dung cần lưu<textarea name="message" minlength="5" maxlength="3000" required></textarea></label>
+    <div class="full"><button type="submit">Lưu liên hệ</button><p id="adminContactState" role="status"></p></div>
+  </form>
+</details>
+<script src="/portal-static/js/admin_archive.js?v=customers-04" defer></script>
+<script src="/static/js/cases.js?v=customers-04" defer></script>

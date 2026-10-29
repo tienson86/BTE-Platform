@@ -42,7 +42,7 @@ def open_plan(service):
 
 def register(client, username="newmember", **extra):
     return client.post("/api/v1/membership/register", json={
-        "username": username, "display_name": "Khách thử nghiệm", "password": "test-password-123", **extra,
+        "username": username, "display_name": "Khách thử nghiệm", "phone":"0912345678", "password": "test-password-123", **extra,
     })
 
 

@@ -29,6 +29,7 @@ class UserRecord:
     analysis_limit: int | None = None
     analyses_used: int = 0
     membership: dict[str, Any] | None = None
+    phone: str = ""
 
     def has_member_access(self) -> bool:
         """Existing accounts retain access; new members require a current approval."""
@@ -55,6 +56,7 @@ class UserRecord:
             "username": self.username,
             "role": self.role.value,
             "display_name": self.display_name or self.username,
+            "phone": self.phone,
             "is_active": self.is_active,
             "permissions": self.permission_values(),
             "analysis_limit": self.analysis_limit,
@@ -120,6 +122,19 @@ class InMemoryUserStore:
     def _after_change(self) -> None:
         """Persistence hook for durable stores."""
 
+    def refund_analysis(self, user_id: str) -> None:
+        with self._lock:
+            user = self.get_by_id(user_id)
+            if user is None or user.analyses_used <= 0:
+                return
+            before = user.analyses_used
+            try:
+                user.analyses_used -= 1
+                self._after_change()
+            except Exception:
+                user.analyses_used = before
+                raise
+
 
 class JsonUserStore(InMemoryUserStore):
     """Durable account store used until production PostgreSQL is enabled."""
@@ -163,6 +178,7 @@ class JsonUserStore(InMemoryUserStore):
                 is_active=bool(row.get("is_active", True)), display_name=str(row.get("display_name", "")),
                 analysis_limit=row.get("analysis_limit"), analyses_used=int(row.get("analyses_used", 0)),
                 membership=row.get("membership"),
+                phone=str(row.get("phone") or ""),
             ))
 
     def _after_change(self) -> None:
@@ -174,6 +190,7 @@ class JsonUserStore(InMemoryUserStore):
                 "role": u.role.value, "is_active": u.is_active, "display_name": u.display_name,
                 "analysis_limit": u.analysis_limit, "analyses_used": u.analyses_used,
                 "membership": u.membership,
+                "phone": u.phone,
             } for u in self.users_by_id.values()]
             name = None
             try:

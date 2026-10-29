@@ -274,6 +274,11 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   margin-bottom: 0.75rem;
 }
 [hidden] { display: none !important; }
+.table-scroll { overflow-x: auto; }
+.customer-dialog { width: min(920px,94vw); max-height:90vh; overflow:auto; background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:12px;padding:24px; }
+.customer-dialog::backdrop { background:rgba(0,0,0,.65); }
+.customer-dialog [role="status"] { color:var(--warn); }
+#registeredQuery { min-width: min(420px,85vw); }
 .admin-login { max-width: 440px; }
 .admin-login label { display: grid; gap: 8px; margin-bottom: 16px; }
 .portal-return { border-top: 1px solid var(--border); margin-top: 16px; }

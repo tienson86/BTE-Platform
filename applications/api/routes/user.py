@@ -33,7 +33,7 @@ def create_user(
     _admin: UserRecord = Depends(require_role(Role.ADMIN)),
     users: UserService = Depends(get_user_service),
 ) -> UserProfile:
-    return UserProfile(**users.create_user(body.username, body.password, body.display_name, body.analysis_limit).to_public_dict())
+    return UserProfile(**users.create_user(body.username, body.password, body.display_name, body.analysis_limit, body.phone).to_public_dict())
 
 
 @router.patch("/{username}", response_model=UserProfile)

@@ -59,6 +59,15 @@ def register_consulting_access(app, marriage_api, childbirth_repository):
                         stored = None
                     if stored is None or not can_read(stored):
                         return JSONResponse({'detail': 'Không tìm thấy hồ sơ trong quyền truy cập của bạn'}, status_code=404)
+            if request.method == 'POST':
+                from consulting.usage_client import feature_for, with_allowance
+                try:
+                    inputs = await request.json()
+                except Exception:
+                    inputs = {}
+                feature = feature_for(path, inputs) if isinstance(inputs, dict) else None
+                if feature:
+                    return await with_allowance(request,call_next,base,authorization,feature,inputs)
             return await call_next(request)
         finally:
             identity.reset(token)

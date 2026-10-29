@@ -1,3 +1,28 @@
+<section class="panel" aria-labelledby="registeredTitle">
+  <h2 id="registeredTitle">Khách hàng đăng ký sử dụng</h2>
+  <p class="muted">Tất cả tài khoản khách hàng, gồm đăng ký mới và các tài khoản đã được cấp trước đây.</p>
+  <div class="toolbar"><input id="registeredQuery" type="search" placeholder="Tìm họ tên, tên đăng nhập, số điện thoại" aria-label="Tìm khách hàng đăng ký" /><button id="registeredSearch" type="button">Tìm / Tải lại</button><button id="registeredCreate" type="button">Tạo khách hàng</button></div>
+  <p id="registeredState" role="status"></p>
+  <div class="table-scroll"><table><thead><tr><th>Họ và Tên</th><th>Tên đăng nhập</th><th>Số điện thoại</th><th>Thành viên</th><th>Hạn mức mỗi loại</th><th>Thao tác</th></tr></thead><tbody id="registeredRows"></tbody></table></div>
+</section>
+<dialog id="registeredDialog" class="customer-dialog">
+  <h2 id="registeredDialogTitle">Thông tin khách hàng</h2>
+  <form id="registeredCustomerForm">
+    <div class="form-grid">
+      <label>Họ và Tên<input name="display_name" maxlength="120" required /></label>
+      <label>Tên đăng nhập<input name="username" minlength="3" maxlength="64" pattern="[A-Za-z0-9_.-]+" required /></label>
+      <label>Số điện thoại<input name="phone" type="tel" maxlength="24" /></label>
+      <label>Hạn mức cho mỗi chức năng<input name="analysis_limit" type="number" min="0" max="1000000" /></label>
+      <label>Mật khẩu mới<input name="password" type="password" minlength="8" autocomplete="new-password" /></label>
+      <label><span><input name="is_active" type="checkbox" /> Tài khoản được phép đăng nhập</span></label>
+    </div>
+    <p class="muted">Cùng hạn mức cho mỗi loại, có bộ đếm riêng. Tăng hạn mức giữ nguyên các lượt đã dùng. Để trống là không giới hạn.</p>
+    <div id="registeredUsage" class="table-scroll"></div>
+    <p id="registeredDialogState" role="status"></p>
+    <div class="toolbar"><button type="submit">Lưu khách hàng</button><button id="registeredRelease" class="secondary" type="button">Giải phóng lượt chờ quá 30 phút</button><button id="registeredClose" class="secondary" type="button">Đóng</button></div>
+  </form>
+</dialog>
+<details class="panel"><summary>Danh bạ khách hàng nhập tay trước đây</summary>
 <div class="panel">
   <div class="toolbar">
     <input id="qName" placeholder="Search name" />
@@ -46,5 +71,7 @@
     </form>
   </div>
 </div>
+</details>
+<script src="/static/js/registered_customers.js?v=customers-04"></script>
 <script src="/static/js/customers.js"></script>
 <script>document.getElementById("pageTitle").textContent = "Customers";</script>

@@ -23,6 +23,7 @@
       const card = node("article"); card.className = "membership-application";
       card.append(node("h3", user.display_name + " (@" + user.username + ")"), line("Mã đăng ký nội bộ", member.reference),
         line("Nội dung chuyển khoản", item.transfer_content),
+        line("Số điện thoại", user.phone || "Chưa bổ sung"),
         line("Mức phí đã thông báo", Number(plan.amount_vnd).toLocaleString("vi-VN") + " đ"),
         line("Thời hạn", plan.validity_days + " ngày"), line("Tài khoản nhận", plan.bank_name + " · " + plan.bank_account + " · " + plan.bank_holder),
         line("Thông báo từ khách", member.payment_reported_at ? "Khách đã báo chuyển khoản" : "Chưa báo chuyển khoản"),
@@ -60,7 +61,7 @@
     const button = form.querySelector('button[type="submit"]'); saving = true; button.disabled = true;
     try {
       await api.api("PUT", "/api/v1/membership/admin/settings", payload);
-      state.textContent = "Đã lưu cấu hình. Nội dung mới áp dụng cho website và các đăng ký tiếp theo.";
+      state.textContent = "Đã lưu cấu hình. Hạn mức áp dụng riêng cho từng chức năng ở các đăng ký tiếp theo.";
     } catch (error) { state.textContent = error.message; }
     finally { saving = false; button.disabled = false; }
   });

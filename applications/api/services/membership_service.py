@@ -88,6 +88,7 @@ class MembershipService:
             record = UserRecord(
                 user_id="u-" + uuid4().hex, username=body.username,
                 display_name=body.display_name, password_hash=password_hash, role=Role.CUSTOMER,
+                phone=body.phone,
                 analysis_limit=0, membership={
                     "status": "pending", "reference": reference,
                     "registered_at": now().isoformat(), "plan": plan.model_dump(),

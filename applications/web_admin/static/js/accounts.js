@@ -24,6 +24,7 @@
   async function load() {
     try {
       accounts = await BteAdmin.get("/api/v1/users");
+      accounts = accounts.filter(user => user.role !== "CUSTOMER");
       rows.replaceChildren();
       accounts.forEach(function (u) {
         const row = document.createElement("tr");

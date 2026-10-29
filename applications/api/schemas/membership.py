@@ -1,5 +1,5 @@
 """Public registration and admin-managed membership settings."""
-from pydantic import BaseModel, ConfigDict, Field, SecretStr, model_validator
+from pydantic import BaseModel, ConfigDict, Field, SecretStr, model_validator, field_validator
 
 
 class MembershipPlan(BaseModel):
@@ -33,6 +33,13 @@ class MemberRegistration(BaseModel):
     username: str = Field(min_length=3, max_length=64, pattern=r"^[A-Za-z0-9_.-]+$")
     password: SecretStr = Field(min_length=8, max_length=128)
     display_name: str = Field(min_length=1, max_length=120)
+    phone: str = Field(min_length=8, max_length=24)
+
+    @field_validator("phone")
+    @classmethod
+    def normalize_phone(cls, value):
+        from applications.api.schemas.activity import normalize_phone
+        return normalize_phone(value)
 
 
 class PaymentReport(BaseModel):

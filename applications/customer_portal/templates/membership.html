@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/static/css/membership.css?v=admin-03" />
+<link rel="stylesheet" href="/static/css/membership.css?v=customers-04" />
 <section class="membership-page" aria-labelledby="membershipTitle">
   <header class="membership-hero">
     <p class="muted">Đồng hành cùng BTE</p>
@@ -17,7 +17,8 @@
     <h2>Đăng ký tài khoản thành viên</h2>
     <fieldset id="memberRegisterFields" disabled>
       <label>Họ và Tên<input name="display_name" maxlength="120" autocomplete="name" required /></label>
-      <label>Tên đăng nhập<input name="username" minlength="3" maxlength="64" pattern="[A-Za-z0-9_.\-]+" autocomplete="username" aria-describedby="memberUsernameHint memberUsernameError" required /><small id="memberUsernameHint">3–64 ký tự: chữ không dấu, số, dấu chấm, gạch dưới hoặc gạch ngang.</small><small id="memberUsernameError" class="member-field-error" role="alert" hidden></small></label>
+      <label>Số điện thoại<input name="phone" type="tel" autocomplete="tel" inputmode="tel" minlength="8" maxlength="24" required /><small>Dùng để quản trị viên liên hệ khi bạn cần hỗ trợ.</small></label>
+      <label class="full">Tên đăng nhập<input name="username" minlength="3" maxlength="64" pattern="[A-Za-z0-9_.\-]+" autocomplete="username" aria-describedby="memberUsernameHint memberUsernameError" required /><small id="memberUsernameHint">3–64 ký tự: chữ không dấu, số, dấu chấm, gạch dưới hoặc gạch ngang.</small><small id="memberUsernameError" class="member-field-error" role="alert" hidden></small></label>
       <label>Mật khẩu<input name="password" type="password" minlength="8" maxlength="128" autocomplete="new-password" required /></label>
       <label>Nhập lại mật khẩu<input name="password_confirmation" type="password" minlength="8" maxlength="128" autocomplete="new-password" required /></label>
       <button type="submit">Tạo tài khoản và xem hướng dẫn chuyển khoản</button>
@@ -26,6 +27,7 @@
     <p>Đã có tài khoản? <a href="/login?next=%2Fmembership">Đăng nhập để xem trạng thái</a>.</p>
   </form>
   <section id="memberAccount" hidden></section>
+  <p><a href="/contact">Liên hệ hỗ trợ / xin cấp thêm hạn mức</a></p>
   <p class="muted">Bạn có thể dùng miễn phí <a href="/good-date">xem ngày giờ tốt/xấu</a>, <a href="/name-analysis">phân tích tên</a> và <a href="/number-energy">xem năng lượng số</a> mà không cần đăng ký.</p>
 </section>
-<script src="/static/js/membership.js?v=admin-03" defer></script>
+<script src="/static/js/membership.js?v=customers-04" defer></script>

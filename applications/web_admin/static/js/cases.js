@@ -1,4 +1,17 @@
 (function () {
+  if (window.BteAdminArchive) {
+    void BteAdminArchive.start();
+    const form=document.getElementById("adminContactForm"), state=document.getElementById("adminContactState");
+    form.addEventListener("submit",async event=>{
+      event.preventDefault();if(!form.reportValidity())return;
+      const button=form.querySelector("button");button.disabled=true;
+      try{
+        const fields=form.elements,payload={};["full_name","phone","subject","message","channel"].forEach(key=>payload[key]=fields[key].value.trim());
+        const result=await BteAdmin.post("/api/v1/contacts",payload);state.textContent="Đã lưu liên hệ: "+result.id;form.reset();await BteAdminArchive.refresh();
+      }catch(error){state.textContent=error.message;}finally{button.disabled=false;}
+    });
+    return;
+  }
   const rows = document.getElementById("caseRows");
   const flash = document.getElementById("globalFlash");
   let selected = null;

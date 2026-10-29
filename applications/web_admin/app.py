@@ -117,7 +117,8 @@ def create_app() -> FastAPI:
     )
     async def backend_proxy(path: str, request: Request) -> Response:
         """Transparent proxy to Applications API (avoids CORS; no business logic)."""
-        url = f"{settings.api_base_url.rstrip('/')}/{path}"
+        base = settings.marriage_api_base_url if path.startswith("api/v1/consulting/") else settings.api_base_url
+        url = f"{base.rstrip('/')}/{path}"
         if request.url.query:
             url = f"{url}?{request.url.query}"
 

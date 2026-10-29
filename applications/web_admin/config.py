@@ -20,6 +20,7 @@ class WebAdminSettings(BaseModel):
         )
     )
     host: str = "127.0.0.1"
+    marriage_api_base_url: str = Field(default_factory=lambda: os.getenv("BTE_MARRIAGE_API_BASE_URL", "http://127.0.0.1:8082"))
     port: int = 8080
     title: str = "BTE Web Admin"
 

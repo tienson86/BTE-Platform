@@ -1,21 +1,22 @@
+<div class="panel"><h2>Giấy phép sử dụng phần mềm</h2><p>Mục này quản lý mã cấp phép BTE cho máy chủ. Đây không phải giấy chứng nhận đăng ký quyền tác giả. Việc đăng ký quyền tác giả và bảo vệ mã nguồn được thực hiện riêng.</p></div>
 <div class="card-grid">
-  <div class="card"><div class="label">Edition</div><div class="value" id="licEdition">—</div></div>
-  <div class="card"><div class="label">Status</div><div class="value" id="licStatus">—</div></div>
-  <div class="card"><div class="label">Expires</div><div class="value" id="licExpires">—</div></div>
-  <div class="card"><div class="label">Machine ID</div><div class="value" id="licMachine" style="font-size:0.85rem">—</div></div>
+  <div class="card"><div class="label">Phiên bản cấp phép</div><div class="value" id="licEdition">—</div></div>
+  <div class="card"><div class="label">Trạng thái</div><div class="value" id="licStatus">—</div></div>
+  <div class="card"><div class="label">Hết hạn</div><div class="value" id="licExpires">—</div></div>
+  <div class="card"><div class="label">Mã máy chủ</div><div class="value" id="licMachine" style="font-size:0.85rem;overflow-wrap:anywhere">—</div></div>
 </div>
 <div class="panel">
-  <h2>Enabled features</h2>
+  <h2>Chức năng được cấp phép</h2>
   <div id="licFeatures" class="toolbar"></div>
 </div>
 <div class="panel">
-  <h2>Activate license</h2>
+  <h2>Kích hoạt giấy phép sử dụng</h2>
   <div class="toolbar">
-    <input id="licenseKey" placeholder="License key" style="min-width:320px" />
-    <button type="button" id="btnActivate">Activate</button>
-    <button type="button" class="secondary" id="btnRefreshLic">Refresh</button>
+    <input id="licenseKey" placeholder="Mã cấp phép BTE" aria-label="Mã cấp phép BTE" style="max-width:100%" />
+    <button type="button" id="btnActivate">Kích hoạt</button>
+    <button type="button" class="secondary" id="btnRefreshLic">Tải lại</button>
   </div>
-  <div id="licRaw" class="pre"></div>
+  <details><summary>Thông tin cấp phép chi tiết</summary><div id="licRaw" class="pre"></div></details>
 </div>
-<script src="/static/js/licenses.js"></script>
+<script src="/static/js/licenses.js?v=customers-04"></script>
 <script>document.getElementById("pageTitle").textContent = "Licenses";</script>

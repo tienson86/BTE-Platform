@@ -1,5 +1,5 @@
 (function () {
-  var PUBLIC_PATHS = { "/": true, "/good-date": true, "/login": true, "/name-analysis": true, "/number-energy": true, "/membership": true };
+  var PUBLIC_PATHS = { "/": true, "/good-date": true, "/login": true, "/name-analysis": true, "/number-energy": true, "/membership": true, "/contact":true };
 
   function currentPath() {
     return window.location.pathname || "/";

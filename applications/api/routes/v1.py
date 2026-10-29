@@ -185,13 +185,18 @@ def analyze_endpoint(
             detail="Tài khoản đã sử dụng hết số lượt tạo lá số được cấp.",
         )
     payload["archive_saved"] = True
-    save_snapshot(owner, {
-        "analysis_id": payload.get("analysis_id") or request_id,
-        "input": body.model_dump(), "data": payload,
-        "saved_at": (payload.get("result_meta") or {}).get("created_at"),
-        "customer_contract": (payload.get("result_meta") or {}).get("customer_contract"),
-        "summary": (payload.get("interpretation") or {}).get("summary"),
-    })
+    try:
+        save_snapshot(owner, {
+            "analysis_id": payload.get("analysis_id") or request_id,
+            "input": body.model_dump(), "data": payload,
+            "saved_at": (payload.get("result_meta") or {}).get("created_at"),
+            "customer_contract": (payload.get("result_meta") or {}).get("customer_contract"),
+            "summary": (payload.get("interpretation") or {}).get("summary"),
+        })
+    except Exception:
+        if user is not None:
+            auth_service.store.refund_analysis(user.user_id)
+        raise
     logger.info(
         "api.analyze response pattern_keys=%s interpretation_keys=%s section_count=%s",
         sorted((payload.get("pattern") or {}).keys()),

@@ -28,7 +28,7 @@
     } else {
       const labels = { pending: "Chờ xác nhận thanh toán", active: user.member_access ? "Thành viên đang hoạt động" : "Thành viên đã hết hạn", rejected: "Đăng ký chưa được chấp thuận" };
       card.append(node("p", labels[membership.status] || "Đang kiểm tra trạng thái", "membership-status"));
-      card.append(row("Họ và Tên", user.display_name || user.username), row("Tên đăng nhập", user.username));
+      card.append(row("Họ và Tên", user.display_name || user.username), row("Tên đăng nhập", user.username), row("Số điện thoại", user.phone || "Chưa bổ sung"));
       if (membership.status === "pending") {
         const paidPlan = membership.plan;
         card.append(node("h3", "Thông tin chuyển khoản"), row("Ngân hàng", paidPlan.bank_name), row("Số tài khoản", paidPlan.bank_account),
@@ -77,7 +77,7 @@
     let registered = false, duplicate = false;
     try {
       const username = input.username.value.trim(), password = input.password.value;
-      await BtePortal.post("/api/v1/membership/register", {username, password, display_name: input.display_name.value.trim()});
+      await BtePortal.post("/api/v1/membership/register", {username, password, display_name: input.display_name.value.trim(), phone: input.phone.value.trim()});
       registered = true;
       input.password.value = ""; input.password_confirmation.value = "";
       const login = await BtePortal.post("/api/v1/auth/login", {username, password});
@@ -113,7 +113,7 @@
       document.getElementById("membershipTitle").textContent = plan.title;
       document.getElementById("membershipIntro").textContent = plan.description;
       document.getElementById("memberPrice").textContent = plan.amount_vnd && plan.validity_days ? money(plan.amount_vnd) + " / " + plan.validity_days + " ngày" : "Đang cập nhật biểu phí";
-      document.getElementById("memberAllowance").textContent = plan.analysis_limit ? "Gói được cấp " + plan.analysis_limit + " lượt tạo lá số; các công cụ khác theo quyền thành viên." : "Quyền xem và tải được mở sau khi xác nhận thanh toán.";
+      document.getElementById("memberAllowance").textContent = plan.analysis_limit ? "Mỗi chức năng được tối đa " + plan.analysis_limit + " lượt tạo mới, tính riêng cho lá số, chọn ngày, hôn nhân, sinh con, đặt tên, hợp tác và vận hạn. Xem lại hoặc tải hồ sơ đã lưu không tính thêm lượt." : "Quyền xem và tải được mở sau khi xác nhận thanh toán.";
       if (BtePortal.getToken()) await loadAccount();
       else { form.hidden = false; fields.disabled = !plan.ready; if (!plan.ready) state.textContent = "Đăng ký trả phí sẽ mở sau khi biểu phí được cập nhật. Bạn vẫn dùng được các mục miễn phí."; }
     } catch (error) { state.textContent = error.message || "Chưa tải được thông tin thành viên. Vui lòng thử lại."; }

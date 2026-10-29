@@ -80,11 +80,23 @@ def list_all(request: Request, kind: str='', username: str='', q: str='',
     items.extend({'kind':'van_han','id':v[1],'created_at':v[2],'customer_name':v[3] or 'Chưa đặt tên',**creator(v[0],v[4] or '',v[5] or '')} for v in records)
     others, warnings = legacy_records()
     items.extend(others)
-    counts = {key:sum(r['kind']==key for r in items) for key in ('bazi','marriage','business','childbirth','van_han')}
+    from applications.api.services.activity_service import get_activity_service
+    known = {(item['kind'],item['id'],item['owner']) for item in items}
+    for item in get_activity_service().records():
+        if (item['kind'],item['id'],item['owner']) not in known:
+            items.append(item)
+    from applications.api.dependencies import get_case_service
+    try:
+        for case in get_case_service().list():
+            items.append({'kind':'legacy_case','id':case.case_id,'created_at':case.created_at,
+                          'customer_name':case.customer_id,**creator('unknown')})
+    except Exception:
+        warnings.append('Chưa đọc được kho hồ sơ nhập thủ công trước đây.')
+    counts = {key:sum(r['kind']==key for r in items) for key in ('bazi','marriage','business','childbirth','van_han','date_selection','naming','contact','legacy_case')}
     users = sorted({r['creator_username'] for r in items})
     items = [r for r in items if (not kind or r['kind']==kind) and
              (not username or r['creator_username']==username) and
-             (not q or q.casefold() in ' '.join(str(r.get(k) or '') for k in ('customer_name','id','creator_username','creator_display_name')).casefold())]
+             (not q or q.casefold() in ' '.join(str(r.get(k) or '') for k in ('customer_name','id','creator_username','creator_display_name','phone')).casefold())]
     items.sort(key=lambda r:(r.get('created_at') or '',r['id'],r['owner']), reverse=True)
     total = len(items)
     return {'items':items[(page-1)*limit:page*limit], 'total':total, 'page':page, 'limit':limit,
@@ -93,6 +105,10 @@ def list_all(request: Request, kind: str='', username: str='', q: str='',
 @router.get('/{kind}/{identifier}')
 def get_record(kind: str, identifier: str, request: Request, owner: str=''):
     require_admin(request)
+    from applications.api.services.activity_service import get_activity_service
+    activity = get_activity_service().get(kind,identifier,owner)
+    if activity is not None and kind not in ('bazi','van_han','marriage','business','childbirth'):
+        return {'row':activity}
     if kind == 'bazi':
         if not owner:
             raise HTTPException(422, 'Thiếu tài khoản chủ hồ sơ')
@@ -110,8 +126,18 @@ def get_record(kind: str, identifier: str, request: Request, owner: str=''):
             raise HTTPException(404, 'Không tìm thấy hồ sơ')
         path = child_path()/(identifier+'.json')
         row = json.loads(path.read_text(encoding='utf-8-sig')) if path.exists() else None
+    elif kind == 'legacy_case':
+        from applications.api.dependencies import get_case_service
+        try:
+            row=get_case_service().get(identifier).to_dict()
+        except Exception:
+            row=None
     else:
         row = None
+    if row is None:
+        row = activity
+        if row is not None and kind == 'bazi':
+            row = {**row,'analysis_id':identifier,'data':(row.get('result') or {}).get('data') or row.get('result') or {}}
     if row is None:
         raise HTTPException(404, 'Không tìm thấy hồ sơ')
     return {'row':row}

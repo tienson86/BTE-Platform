@@ -23,7 +23,7 @@
     if (Array.isArray(role)) role = role.join(", ");
     view.innerHTML =
       '<div class="bte-exec-grid">' +
-      '<div class="bte-exec-kv"><span class="bte-exec-k">Tên hiển thị</span><span class="bte-exec-v">' +
+      '<div class="bte-exec-kv"><span class="bte-exec-k">Họ và Tên</span><span class="bte-exec-v">' +
       esc(String(user.display_name || user.full_name || user.username || "--")) + '</span></div>' +
       '<div class="bte-exec-kv"><span class="bte-exec-k">' +
       esc(t("profile.username")) +
@@ -34,7 +34,7 @@
       esc(t("profile.role")) +
       '</span><span class="bte-exec-v">' +
       esc(String(role)) +
-      "</span></div></div>";
+      "</span></div>" + '<div class="bte-exec-kv"><span class="bte-exec-k">Số điện thoại</span><span class="bte-exec-v">'+esc(user.phone||"Chưa bổ sung")+'</span></div></div>';
   }
 
   async function load() {
@@ -47,6 +47,8 @@
     try {
       const me = await BtePortal.get("/api/v1/auth/me");
       renderFriendly(me && me.data != null ? me.data : me);
+      const usage=await BtePortal.get("/api/v1/usage"),target=document.getElementById("profileUsage");
+      if(target){target.innerHTML='<table><thead><tr><th>Chức năng</th><th>Hạn mức</th><th>Đã dùng</th><th>Còn lại</th></tr></thead><tbody>'+usage.items.map(item=>'<tr><td>'+esc(item.label)+'</td><td>'+esc(item.limit??'Không giới hạn')+'</td><td>'+esc(item.used)+(item.pending?' · '+esc(item.pending)+' đang xử lý':'')+'</td><td>'+esc(item.remaining??'Không giới hạn')+'</td></tr>').join('')+'</tbody></table>';}
     } catch (err) {
       BtePortal.showFlash(flash, err.message || t("common.request_failed"), "error");
       view.textContent = t("profile.not_signed_in");
