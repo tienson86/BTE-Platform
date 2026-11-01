@@ -4,7 +4,19 @@ Ngày cập nhật: 01/11/2026.
 
 ## Thành viên
 
-Mở menu **Kiến thức phong thủy** hoặc `/knowledge`. Thư viện có bốn chuyên mục ban đầu: Phương pháp tính ngày giờ, Phong thủy nhà ở, Phong thủy phần mộ và Luận năng lượng số. Mỗi chuyên mục có khung bốn nhóm bài: nhập môn, phương pháp/ứng dụng, ví dụ thực hành, câu hỏi thường gặp. Chưa có bài giáo trình tự đăng sẵn.
+Mở menu **Kiến thức phong thủy** hoặc `/knowledge`. Thư viện hiển thị chín chuyên mục theo thứ tự:
+
+01. Phong thủy cơ bản
+02. Luận Bát tự cơ bản
+03. Các Nghi thức thờ cúng
+04. Phương pháp tính ngày giờ
+05. Phương pháp luận dãy số
+06. Phong thủy nhà ở
+07. Phong thủy phần mộ
+08. Các vật phẩm phong thủy
+09. Các Nghi lễ phong thủy
+
+Mỗi chuyên mục mới có khung bốn nhóm bài: nhập môn, phương pháp/ứng dụng, ví dụ thực hành, câu hỏi thường gặp. Chưa có bài giáo trình tự đăng sẵn. Bản nâng cấp từ bốn chuyên mục áp dụng một lần, giữ mã chuyên mục, nhóm bài và bài viết hiện có; tên “Luận năng lượng số” đổi thành “Phương pháp luận dãy số”. Các thay đổi Admin thực hiện sau đó không bị đặt lại khi khởi động.
 
 Nhóm bài mặc định thu gọn; bấm tên nhóm để mở. Bài đọc có trang riêng `/knowledge/lesson/{id}`, đường dẫn về chuyên mục, nút bài trước/bài tiếp theo theo thứ tự nhóm rồi thứ tự bài. Trang đầu chỉ hiển thị sáu bài mới cập nhật. Tìm kiếm có phân trang và hỗ trợ tiếng Việt không dấu, tìm trong tiêu đề, giới thiệu và nội dung.
 

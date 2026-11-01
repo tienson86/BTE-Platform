@@ -54,13 +54,17 @@ def test_every_read_requires_current_member_access(system,name,path):
 
 def test_initial_structure_is_idempotent_and_preserves_admin_edits(system):
     catalog=system.call('GET','/knowledge/catalog',name='legacy').json()
-    assert len(catalog['categories'])==4 and len(catalog['latest'])==0
+    assert [item['title'] for item in catalog['categories']]==[
+        'Phong thủy cơ bản','Luận Bát tự cơ bản','Các Nghi thức thờ cúng',
+        'Phương pháp tính ngày giờ','Phương pháp luận dãy số','Phong thủy nhà ở',
+        'Phong thủy phần mộ','Các vật phẩm phong thủy','Các Nghi lễ phong thủy']
+    assert len(catalog['latest'])==0
     assert all(len(item['groups'])==4 and item['article_count']==0 for item in catalog['categories'])
     row=catalog['categories'][0]
     changed=system.call('PATCH','/admin/knowledge/categories/'+row['id'],{'title':'Chuyên mục đã chỉnh','description':'Mô tả riêng','position':55,'expected_revision':row['revision']})
     assert changed.status_code==200
     fresh=KnowledgeService(JsonUserStore(system.store.path)).catalog(system.store.get_by_username('legacy'))
-    assert len(fresh['categories'])==4
+    assert len(fresh['categories'])==9
     assert next(item for item in fresh['categories'] if item['id']==row['id'])['title']=='Chuyên mục đã chỉnh'
 
 
@@ -74,7 +78,7 @@ def test_drafts_are_never_exposed_by_detail_lists_search_counts_or_next_links(sy
         assert system.call('GET','/knowledge/articles/'+draft['id'],name=name).status_code==404
     assert system.call('GET','/admin/knowledge/articles/'+draft['id']).json()['article']['body']==draft['body']
     catalog=system.call('GET','/knowledge/catalog',name='member').json()
-    assert catalog['categories'][0]['article_count']==1
+    assert next(item for item in catalog['categories'] if item['id']=='ngay-gio')['article_count']==1
     assert len(catalog['latest'])==1
 
 
@@ -160,3 +164,34 @@ def test_search_pagination_and_idempotent_concurrent_save_use_no_allowance(syste
     member=JsonUserStore(system.store.path).get_by_username('member')
     assert (member.analysis_limit,member.analyses_used)==(31,7)
     assert not (system.tmp/'activity.sqlite3').exists()
+
+
+def test_legacy_four_categories_upgrade_once_without_changing_groups_or_articles(system):
+    posted=article(system,group_id='nang-luong-so-1',status='published')
+    draft=article(system,group_id='ngay-gio-2',title='Draft remains private')
+    legacy_titles={'ngay-gio':'Phương pháp tính ngày giờ','nha-o':'Phong thủy nhà ở',
+                   'phan-mo':'Phong thủy phần mộ','nang-luong-so':'Luận năng lượng số'}
+    with system.service.connect() as connection:
+        for identifier in ('co-ban','bat-tu-co-ban','tho-cung','vat-pham','nghi-le'):
+            connection.execute('DELETE FROM library_groups WHERE category_id=?',(identifier,))
+            connection.execute('DELETE FROM library_categories WHERE id=?',(identifier,))
+        for index,(identifier,title) in enumerate(legacy_titles.items(),1):
+            connection.execute('UPDATE library_categories SET title=?,position=?,revision=1 WHERE id=?',(title,index*10,identifier))
+        connection.execute("UPDATE library_groups SET title='Nhóm đã biên soạn',position=5,description='Giới thiệu riêng' WHERE id='nang-luong-so-1'")
+        connection.execute("DELETE FROM library_meta WHERE key='categories_v2'")
+        before_groups={row['id']:dict(row) for row in connection.execute('SELECT * FROM library_groups')}
+        before_articles={row['id']:dict(row) for row in connection.execute('SELECT * FROM library_articles')}
+    fresh=KnowledgeService(JsonUserStore(system.store.path))
+    result=fresh.catalog(system.store.get_by_username('member'))['categories']
+    assert len(result)==9
+    assert [item['position'] for item in result]==list(range(10,100,10))
+    assert next(item for item in result if item['id']=='nang-luong-so')['title']=='Phương pháp luận dãy số'
+    with fresh.connect() as connection:
+        after_groups={row['id']:dict(row) for row in connection.execute('SELECT * FROM library_groups')}
+        after_articles={row['id']:dict(row) for row in connection.execute('SELECT * FROM library_articles')}
+        assert {identifier:after_groups[identifier] for identifier in before_groups}==before_groups
+        assert len(after_groups)==36 and after_articles==before_articles
+    assert fresh.article(system.store.get_by_username('member'),posted['id'])['article']['category_id']=='nang-luong-so'
+    assert system.call('GET','/knowledge/articles/'+draft['id'],name='member').status_code==404
+    group_id=posted['group_id']
+    assert group_id in after_groups and after_groups[group_id]['title']=='Nhóm đã biên soạn'

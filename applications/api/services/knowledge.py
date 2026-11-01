@@ -12,10 +12,15 @@ from applications.api.services.activity_service import ActivityError, ActivitySe
 
 _SCHEMA_LOCK = RLock()
 INITIAL_CATEGORIES = (
+    ("co-ban", "Phong thủy cơ bản", "Kiến thức nhập môn và các khái niệm nền tảng về phong thủy."),
+    ("bat-tu-co-ban", "Luận Bát tự cơ bản", "Tìm hiểu kiến thức nền và cách tiếp cận việc luận Bát tự."),
+    ("tho-cung", "Các Nghi thức thờ cúng", "Tìm hiểu từng chủ đề về nghi thức và thực hành thờ cúng."),
     ("ngay-gio", "Phương pháp tính ngày giờ", "Tìm hiểu từ kiến thức nền đến phương pháp tính và ví dụ thực hành."),
+    ("nang-luong-so", "Phương pháp luận dãy số", "Tìm hiểu phương pháp đọc, cách luận dãy số và các bài thực hành."),
     ("nha-o", "Phong thủy nhà ở", "Kiến thức về bố trí không gian sống và các tình huống áp dụng."),
     ("phan-mo", "Phong thủy phần mộ", "Các chủ đề về phong thủy phần mộ được tổ chức thành từng nhóm bài."),
-    ("nang-luong-so", "Luận năng lượng số", "Tìm hiểu phương pháp đọc, cách luận và bài thực hành về năng lượng số."),
+    ("vat-pham", "Các vật phẩm phong thủy", "Tìm hiểu các nhóm vật phẩm phong thủy và từng chủ đề liên quan."),
+    ("nghi-le", "Các Nghi lễ phong thủy", "Tìm hiểu các nghi lễ phong thủy theo từng nhóm kiến thức."),
 )
 INITIAL_GROUPS = ("Kiến thức nhập môn", "Phương pháp và ứng dụng", "Ví dụ thực hành", "Câu hỏi thường gặp")
 
@@ -87,10 +92,18 @@ class KnowledgeService:
             if not connection.execute("SELECT 1 FROM library_meta WHERE key='initialized'").fetchone():
                 date = now()
                 for index, (identifier, title, description) in enumerate(INITIAL_CATEGORIES, 1):
-                    connection.execute("INSERT INTO library_categories VALUES(?,?,?,?,1,?,?)", (identifier,title,description,index*10,date,date))
-                    for group_index, group_title in enumerate(INITIAL_GROUPS,1):
-                        connection.execute("INSERT INTO library_groups VALUES(?,?,?,?,?,1,?,?)", (identifier+"-"+str(group_index),identifier,group_title,"",group_index*10,date,date))
+                    self._insert_category(connection,identifier,title,description,index*10,date)
                 connection.execute("INSERT INTO library_meta VALUES('initialized','1')")
+            # Apply this requested reorganization once. Later Admin edits remain authoritative.
+            if not connection.execute("SELECT 1 FROM library_meta WHERE key='categories_v2'").fetchone():
+                date = now()
+                for index, (identifier, title, description) in enumerate(INITIAL_CATEGORIES, 1):
+                    existing = connection.execute("SELECT * FROM library_categories WHERE id=?",(identifier,)).fetchone()
+                    if existing is None:
+                        self._insert_category(connection,identifier,title,description,index*10,date)
+                    elif existing["title"] != title or existing["position"] != index*10:
+                        connection.execute("UPDATE library_categories SET title=?,position=?,revision=revision+1,updated_at=? WHERE id=?",(title,index*10,date,identifier))
+                connection.execute("INSERT INTO library_meta VALUES('categories_v2','1')")
             yield connection
             connection.commit()
         except Exception:
@@ -98,6 +111,11 @@ class KnowledgeService:
             raise
         finally:
             connection.close()
+
+    def _insert_category(self, connection, identifier, title, description, position, date):
+        connection.execute("INSERT INTO library_categories VALUES(?,?,?,?,1,?,?)",(identifier,title,description,position,date,date))
+        for index, group_title in enumerate(INITIAL_GROUPS,1):
+            connection.execute("INSERT INTO library_groups VALUES(?,?,?,?,?,1,?,?)",(identifier+"-"+str(index),identifier,group_title,"",index*10,date,date))
 
     def _row(self, connection, table, identifier):
         # Table names are internal constants; all external values are bound parameters.
