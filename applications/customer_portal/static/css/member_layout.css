@@ -1,5 +1,6 @@
 /* Public tools across the top, authenticated member tools below the logo. */
 body .member-sidebar[hidden], body [data-admin-only][hidden],
+body [data-forum-only][hidden], body [data-message-unread][hidden],
 body #btnNavToggle[hidden], body #siteAnnouncement[hidden] { display: none !important; }
 body .app-header { height: 76px; min-height: 76px; flex-wrap: nowrap; gap: 18px; }
 body .app-header .app-brand { flex: 0 0 218px; }
@@ -8,6 +9,12 @@ body .app-header .app-nav a { width: auto; }
 body .app-header .member-join { color: #ffe58f; border: 1px solid #e9ba58; border-radius: 10px; padding: 8px 12px; white-space: nowrap; font-size: 13px; }
 body .member-sidebar { position: fixed; top: 76px; bottom: 0; left: 0; width: 246px; padding: 26px 16px; overflow-y: auto; background: var(--panel); border-right: 1px solid var(--line); z-index: 40; }
 body .member-sidebar__title { color: var(--five-red, #ac2229); font-size: 14px; font-weight: 750; margin: 0 8px 18px; }
+body .member-sidebar__quick-links { display: grid; gap: 8px; margin-bottom: 20px; }
+body .member-sidebar__quick-link { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 46px; padding: 12px 14px; border: 1px solid var(--line); border-left: 4px solid var(--five-red, #ac2229); border-radius: 10px; background: var(--five-earth-soft, #fff7dc); color: var(--five-red, #ac2229); font-size: 14px; font-weight: 750; line-height: 1.5; text-decoration: none; }
+body .member-sidebar__quick-link:hover { background: var(--five-fire-soft, #fff0ed); border-color: var(--five-red, #ac2229); }
+body .member-sidebar__quick-link:focus-visible { outline: 2px solid var(--five-blue, #12678d); outline-offset: 3px; }
+body .member-sidebar__quick-link.active { background: var(--five-red-deep, #85181e); color: #ffe58f; border-color: #d4a847; }
+body .member-sidebar__quick-link [data-message-unread] { flex-shrink: 0; padding: 2px 7px; border-radius: 99px; background: #a82025; color: #fff; font-size: 11px; font-weight: 700; }
 body .member-nav { display: flex; flex-direction: column; gap: 7px; }
 body .member-nav .nav-link { display: block; white-space: normal; padding: 12px 14px; color: var(--ink); border: 1px solid transparent; border-radius: 10px; }
 body .member-nav .nav-link:hover { background: var(--five-wood-soft, #edf7ef); color: var(--five-green, #176b45); }

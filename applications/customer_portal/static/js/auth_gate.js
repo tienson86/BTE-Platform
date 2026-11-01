@@ -16,6 +16,8 @@
     if (toggle) toggle.hidden = !user;
     document.body.dataset.memberNav = user ? "true" : "false";
     document.querySelectorAll("[data-admin-only]").forEach(function (link) { link.hidden = !user || user.role !== "ADMIN"; });
+    document.querySelectorAll("[data-forum-only]").forEach(function(link){link.hidden=!user || !(user.role==="ADMIN" || user.member_access===true);});
+    if(!user)document.querySelectorAll("[data-message-unread]").forEach(function(badge){badge.hidden=true;badge.textContent="";});
     var join = document.getElementById("memberJoinLink");
     if (join) join.textContent = user ? "Thành viên" : "Đăng ký thành viên";
     document.querySelectorAll("[data-nav-id]").forEach(function (link) {
@@ -50,8 +52,11 @@
       var user = await BtePortal.get("/api/v1/auth/me");
       BtePortal.setSession(token, user);
       updateNavigation(user);
+      BtePortal.get("/api/v1/communications/summary").then(function(summary){
+        document.querySelectorAll("[data-message-unread]").forEach(function(badge){var count=Number(summary.unread_messages)||0;badge.textContent=count>99?"99+":String(count);badge.hidden=count===0;badge.setAttribute("aria-label",count+" tin nhắn chưa đọc");});
+      }).catch(function(){});
       if (path === "/admin-membership" && user.role !== "ADMIN") window.location.replace("/membership");
-      else if (user.member_access === false && !PUBLIC_PATHS[path] && path !== "/profile") window.location.replace("/membership");
+      else if (user.member_access === false && !PUBLIC_PATHS[path] && path !== "/profile" && path !== "/messages") window.location.replace("/membership");
     } catch (_) {
       BtePortal.clearSession();
       updateNavigation(null);

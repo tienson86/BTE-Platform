@@ -63,9 +63,13 @@
         const stateLabel=document.createElement('label');stateLabel.textContent='Trạng thái xử lý';
         [['open','Mới tiếp nhận'],['handling','Đang hỗ trợ'],['resolved','Đã xử lý']].forEach(([value,text])=>{const option=document.createElement('option');option.value=value;option.textContent=text;select.append(option);});
         select.value=row.status||'open';stateLabel.append(select);
-        const noteLabel=document.createElement('label');noteLabel.textContent='Ghi chú hỗ trợ';noteLabel.append(note);note.maxLength=3000;note.value=row.admin_note||'';
+        const noteLabel=document.createElement('label');noteLabel.textContent='Ghi chú nội bộ (chỉ Admin)';noteLabel.append(note);note.maxLength=3000;note.value=row.admin_note||'';
         button.type='submit';button.textContent='Lưu kết quả hỗ trợ';form.append(stateLabel,noteLabel,button,status);dialog.append(form);
         form.onsubmit=async event=>{event.preventDefault();button.disabled=true;try{await api.api('PATCH','/api/v1/admin/contacts/'+encodeURIComponent(item.id),{status:select.value,admin_note:note.value});status.textContent='Đã lưu thông tin xử lý.';}catch(error){status.textContent=error.message;}finally{button.disabled=false;}};
+        if(contact.channel==='website' && String(item.owner||'').startsWith('user:')) {
+          const reply=document.createElement('button');reply.type='button';reply.textContent='Mở tin nhắn và trả lời thành viên';dialog.append(reply);
+          reply.onclick=async()=>{reply.disabled=true;try{const response=await api.post('/api/v1/communications/contacts/'+encodeURIComponent(item.id)+'/thread',{});const prefix=window.BteAdmin?(document.documentElement.dataset.adminBase||''):'';location.href=prefix+'/messages?thread='+encodeURIComponent(response.thread.id);}catch(error){status.textContent=error.message;reply.disabled=false;}};
+        }
       } else {
         const content=document.createElement('div');renderReport(row.result||row.data||row,content,0);dialog.append(content);
         if(item.kind==='bazi' && (!window.BteAdmin || BteAdmin.portalSession)){const link=document.createElement('a');link.href='/result?from=history&id='+encodeURIComponent(item.id)+'&admin_owner='+encodeURIComponent(item.owner);link.textContent='Mở giao diện lá số đầy đủ';dialog.append(link);}

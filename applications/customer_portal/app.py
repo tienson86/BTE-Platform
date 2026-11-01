@@ -206,6 +206,19 @@ def create_app() -> FastAPI:
     def contact_page() -> HTMLResponse:
         return page("contact", "contact.html")
 
+    @app.get("/messages", response_class=HTMLResponse)
+    def messages_page() -> HTMLResponse:
+        return page("messages", "messages.html")
+
+    @app.get("/community", response_class=HTMLResponse)
+    def community_page() -> HTMLResponse:
+        return page("community", "community.html")
+
+    @app.get("/knowledge", response_class=HTMLResponse)
+    @app.get("/knowledge/lesson/{identifier}", response_class=HTMLResponse)
+    def knowledge_page() -> HTMLResponse:
+        return page("knowledge", "knowledge.html")
+
     @app.get("/admin-membership", include_in_schema=False)
     def admin_membership_page() -> RedirectResponse:
         return RedirectResponse("/admin/memberships", status_code=307)

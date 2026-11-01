@@ -48,6 +48,12 @@ def _customer_header_html(
     """Render the single Customer Portal chrome used by HTML pages and /result."""
     nav = _customer_nav_html(catalog, active)
     member_nav = _customer_nav_html(catalog, active, member=True)
+    messages_class = "member-sidebar__quick-link" + (" active" if active == "messages" else "")
+    community_class = "member-sidebar__quick-link" + (" active" if active == "community" else "")
+    messages_current = ' aria-current="page"' if active == "messages" else ""
+    community_current = ' aria-current="page"' if active == "community" else ""
+    knowledge_class = "member-sidebar__quick-link" + (" active" if active == "knowledge" else "")
+    knowledge_current = ' aria-current="page"' if active == "knowledge" else ""
     return (
         f'<a class="skip-link" href="{skip_href}">Skip to content</a>\n'
         '  <header class="app-header" id="appHeader">\n'
@@ -71,6 +77,11 @@ def _customer_header_html(
         "    </header>\n"
         '    <aside class="member-sidebar" id="memberSidebar" aria-label="Không gian thành viên" hidden>\n'
         '      <p class="member-sidebar__title">Không gian thành viên</p>\n'
+        '      <nav class="member-sidebar__quick-links" aria-label="Tiện ích thành viên">\n'
+        f'        <a class="{messages_class}"{messages_current} href="/messages">Tin nhắn với Admin <span data-message-unread hidden></span></a>\n'
+        f'        <a class="{community_class}"{community_current} href="/community" data-forum-only hidden>Trao đổi kiến thức</a>\n'
+        f'        <a class="{knowledge_class}"{knowledge_current} href="/knowledge" data-forum-only hidden>Kiến thức phong thủy</a>\n'
+        '      </nav>\n'
         f'      <nav class="member-nav" data-customer-nav="member" aria-label="Chức năng thành viên">{member_nav}</nav>\n'
         '      <div class="member-sidebar__footer">\n'
         '        <a href="/history">Hồ sơ đã lưu và tải tài liệu</a>\n'

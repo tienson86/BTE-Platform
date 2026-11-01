@@ -18,7 +18,7 @@ def test_three_public_and_seven_member_tools_have_separate_navigation(path):
     assert "Tư vấn năng lượng số" not in public
     assert re.search(r'<aside[^>]*id="memberSidebar"[^>]*\bhidden', html)
     assert html.index('class="app-brand"') < html.index('id="memberSidebar"')
-    assert 'member_layout.css?v=member-01' in html
+    assert 'member_layout.css?v=member-menu-06' in html
 
 
 def test_membership_pages_and_registration_entries_exist_without_prefilled_credentials():

@@ -18,6 +18,13 @@ def render_page(template_name: str, *, active: str, base_path: str = "", portal_
     """
     base = (TEMPLATES_DIR / "_layout.html").read_text(encoding="utf-8")
     body = (TEMPLATES_DIR / template_name).read_text(encoding="utf-8")
+    for token,shared_file in (("{{MEMBER_MESSAGES}}","messages.html"),("{{MEMBER_COMMUNITY}}","community.html"),("{{KNOWLEDGE_ADMIN}}","knowledge_admin.html")):
+        if token in body:
+            from applications.customer_portal.config import PORTAL_ROOT
+            shared=(PORTAL_ROOT/"templates"/shared_file).read_text(encoding="utf-8")
+            shared=shared.replace('data-admin-mode="false"','data-admin-mode="true"')
+            shared=shared.replace('"/static/','"/portal-static/')
+            body=body.replace(token,shared)
     nav_html = []
     for item in NAV_ITEMS:
         cls = "nav-link active" if item.key == active else "nav-link"

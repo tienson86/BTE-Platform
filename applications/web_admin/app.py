@@ -77,6 +77,18 @@ def create_app() -> FastAPI:
     def memberships_page() -> HTMLResponse:
         return page("memberships", "membership.html")
 
+    @app.get("/messages", response_class=HTMLResponse)
+    def messages_page() -> HTMLResponse:
+        return page("messages", "messages.html")
+
+    @app.get("/community", response_class=HTMLResponse)
+    def community_page() -> HTMLResponse:
+        return page("community", "community.html")
+
+    @app.get("/knowledge", response_class=HTMLResponse)
+    def knowledge_page() -> HTMLResponse:
+        return page("knowledge", "knowledge.html")
+
     @app.get("/website-settings", response_class=HTMLResponse)
     def website_settings_page() -> HTMLResponse:
         return page("website-settings", "membership.html")
