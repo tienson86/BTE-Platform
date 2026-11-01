@@ -148,6 +148,9 @@ class KnowledgeService:
             FROM library_groups g ORDER BY g.position,g.created_at,g.id""")]
         for category in categories:
             category["groups"] = [group for group in groups if group["category_id"] == category["id"]]
+        faq_ids={identifier+"-4" for identifier,_,_ in INITIAL_CATEGORIES}
+        for group in groups:
+            group["is_faq"]=group["id"] in faq_ids
         return categories
 
     def catalog(self, user, management=False):

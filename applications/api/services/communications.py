@@ -82,6 +82,9 @@ class CommunicationsService:
                         target_id TEXT NOT NULL,note TEXT NOT NULL DEFAULT '',created_at TEXT NOT NULL);
                 """)
             connection.execute("BEGIN IMMEDIATE")
+            if "category_id" not in {row["name"] for row in connection.execute("PRAGMA table_info(knowledge_topics)")}:
+                connection.execute("ALTER TABLE knowledge_topics ADD COLUMN category_id TEXT")
+            connection.execute("CREATE INDEX IF NOT EXISTS knowledge_topics_category ON knowledge_topics(category_id,status,created_at)")
             yield connection
             connection.commit()
         except Exception:
@@ -243,12 +246,20 @@ class CommunicationsService:
             deny()
         return row
 
-    def _topic_view(self, connection, row, user, detail=False):
+    def category_labels(self, user):
+        require_forum(user)
+        from applications.api.services.knowledge import KnowledgeService
+        with KnowledgeService(self.store).connect() as library:
+            return {row["id"]:row["title"] for row in library.execute("SELECT id,title FROM library_categories ORDER BY position,created_at,id")}
+
+    def _topic_view(self, connection, row, user, detail=False, category_labels=None):
         deleted=row["status"] == "deleted"
         result={key:row[key] for key in ("id","author_id","author_name","author_username","author_is_admin","status","revision","created_at","updated_at","approved_at")}
         result.update(title="Chủ đề đã được gỡ" if deleted else row["title"],
                       can_edit=not deleted and row["author_id"]==user.user_id,
                       can_moderate=not deleted and admin(user),can_delete=not deleted and admin(user))
+        result["category_id"]=row["category_id"]
+        result["category_title"]=(category_labels if category_labels is not None else self.category_labels(user)).get(row["category_id"],"Chuyên mục cũ") if row["category_id"] else ""
         result["comment_count"]=connection.execute("SELECT COUNT(*) FROM knowledge_comments WHERE topic_id=? AND deleted_at IS NULL",(row["id"],)).fetchone()[0]
         if detail:
             result["body"]="" if deleted else row["body"]
@@ -256,7 +267,7 @@ class CommunicationsService:
             result["moderation_note"]=row["moderation_note"]
         return result
 
-    def list_topics(self, user, scope="feed", page=1, limit=30):
+    def list_topics(self, user, scope="feed", page=1, limit=30, category_id=None):
         require_forum(user)
         if scope in ("pending","all") and not admin(user):
             deny("Chỉ Admin được xem hàng đợi duyệt.",403)
@@ -264,22 +275,30 @@ class CommunicationsService:
         if scope=="mine":where,args="author_id=?",(user.user_id,)
         elif scope=="pending":where="status='pending'"
         elif scope=="all":where="1=1"
+        labels=self.category_labels(user) if category_id is not None else None
+        if category_id is not None:
+            if category_id not in labels:deny("Không tìm thấy chuyên mục kiến thức.")
+            where="("+where+") AND category_id=?";args+=(category_id,)
         with self.connect() as connection:
             total=connection.execute("SELECT COUNT(*) FROM knowledge_topics WHERE "+where,args).fetchone()[0]
             rows=connection.execute("SELECT * FROM knowledge_topics WHERE "+where+" ORDER BY COALESCE(approved_at,created_at) DESC,id DESC LIMIT ? OFFSET ?",args+(limit,(page-1)*limit)).fetchall()
-            return {"items":[self._topic_view(connection,row,user) for row in rows],"total":total,"page":page,"limit":limit}
+            if labels is None and any(row["category_id"] for row in rows):labels=self.category_labels(user)
+            return {"items":[self._topic_view(connection,row,user,category_labels=labels) for row in rows],"total":total,"page":page,"limit":limit}
 
     def create_topic(self, user, body):
         require_forum(user)
+        category_id=body.category_id
+        labels=self.category_labels(user) if category_id is not None else {}
+        if category_id is not None and category_id not in labels:deny("Không tìm thấy chuyên mục kiến thức.")
         with self.connect() as connection:
             previous=connection.execute("SELECT * FROM knowledge_topics WHERE author_id=? AND client_key=?",(user.user_id,body.client_key)).fetchone()
             if previous:
-                if previous["title"]!=body.title or previous["body"]!=body.body:
+                if previous["title"]!=body.title or previous["body"]!=body.body or previous["category_id"]!=category_id:
                     deny("Mã gửi chủ đề đã được dùng cho nội dung khác.",409)
                 return self._topic_view(connection,previous,user,True)
             identifier=uuid4().hex;date=now()
-            connection.execute("INSERT INTO knowledge_topics(id,author_id,author_name,author_username,author_is_admin,title,body,client_key,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?)",
-                (identifier,user.user_id,user.display_name or user.username,user.username,int(admin(user)),body.title,body.body,body.client_key,date,date))
+            connection.execute("INSERT INTO knowledge_topics(id,author_id,author_name,author_username,author_is_admin,title,body,client_key,created_at,updated_at,category_id) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+                (identifier,user.user_id,user.display_name or user.username,user.username,int(admin(user)),body.title,body.body,body.client_key,date,date,category_id))
             self._audit(connection,user,"topic_created",identifier)
             return self._topic_view(connection,self._topic(connection,user,identifier),user,True)
 

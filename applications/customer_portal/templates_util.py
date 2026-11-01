@@ -109,6 +109,10 @@ def render_page(template_name: str, *, active: str, locale: str = DEFAULT_LOCALE
     catalog = load_catalog(locale)
     base = (TEMPLATES_DIR / "_layout.html").read_text(encoding="utf-8")
     body = (TEMPLATES_DIR / template_name).read_text(encoding="utf-8")
+    if "{{CATEGORY_COMMUNITY}}" in body:
+        shared=(TEMPLATES_DIR / "community.html").read_text(encoding="utf-8")
+        panel=shared.split("<!-- COMMUNITY_PANEL_START -->",1)[1].split("<!-- COMMUNITY_PANEL_END -->",1)[0]
+        body=body.replace("{{CATEGORY_COMMUNITY}}",panel)
     html = base.replace("{{HEADER}}", _customer_header_html(catalog, active))
     html = html.replace("{{CONTENT}}", body)
     html = html.replace("{{ACTIVE}}", active)

@@ -22,10 +22,20 @@
     breadcrumbs([{text:item.title}]);$('libraryCategoryTitle').textContent=item.title;$('libraryCategoryDescription').textContent=item.description;$('libraryCategoryCount').textContent=item.groups.length+' nhóm bài · '+item.article_count+' bài đã đăng';
     item.groups.forEach((group,index)=>{
       const details=K.node('details',undefined,'library-group'),summary=K.node('summary',(index+1)+'. '+group.title),content=K.node('div',undefined,'library-group-content');
-      summary.append(K.node('small',group.articles.length+' bài'));details.append(summary,content);
+      summary.append(K.node('small',group.is_faq?'Hỏi đáp cộng đồng':group.articles.length+' bài'));details.append(summary,content);
       if(group.description)content.append(K.node('p',group.description,'muted'));
-      if(!group.articles.length)content.append(K.node('p','Nhóm bài này đang được biên soạn.','muted'));
+      if(!group.articles.length&&!group.is_faq)content.append(K.node('p','Nhóm bài này đang được biên soạn.','muted'));
+      if(group.is_faq&&group.articles.length)content.append(K.node('h3','Bài giải đáp đã biên soạn'));
       group.articles.forEach(article=>content.append(K.articleCard(article)));$('libraryGroups').append(details);
+      if(group.is_faq){
+        details.id='libraryQuestions';let attached=false;
+        const attach=()=>{if(attached||!details.open)return;attached=true;
+          const fragment=$('libraryQuestionsTemplate').content.cloneNode(true),panel=fragment.querySelector('[data-communications="community"]');
+          content.append(fragment);window.BteCommunity.mount(panel,{categoryId:item.id,categoryTitle:item.title,topicId:params.get('question')});
+        };
+        details.addEventListener('toggle',attach);
+        if(location.hash==='#libraryQuestions'||params.get('question')){details.open=true;attach();}
+      }
     });show('libraryCategory');
   }
   async function results(query){

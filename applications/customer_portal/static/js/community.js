@@ -1,9 +1,24 @@
 (function () {
-  const root=document.querySelector('[data-communications="community"]');if(!root)return;
-  const api=window.BteAdmin||window.BtePortal,$=id=>document.getElementById(id);
+  function mount(root,options={}){
+  if(!root||root.dataset.communityMounted)return;root.dataset.communityMounted="true";
+  const api=window.BteAdmin||window.BtePortal,$=id=>root.querySelector('#'+id);
+  const embedded=Boolean(options.categoryId);
+  let categoryId=options.categoryId||new URLSearchParams(location.search).get('category')||null;
   const state=$("knowledgeState"),topicForm=$("knowledgeTopicForm"),commentForm=$("knowledgeCommentForm"),moderationForm=$("knowledgeModerationForm");
   const statuses={pending:"Chờ Admin duyệt",approved:"Đã duyệt hiển thị",rejected:"Chưa được chấp thuận",deleted:"Chủ đề đã được gỡ"};
   const scopeTitles={feed:"Chủ đề đã duyệt",mine:"Chủ đề của tôi",pending:"Chờ Admin duyệt",all:"Tất cả chủ đề"};
+  if(embedded){
+    scopeTitles.feed='Câu hỏi đã duyệt';scopeTitles.mine='Câu hỏi của tôi';scopeTitles.all='Tất cả câu hỏi';
+    root.classList.add('library-faq-community');
+    const heading=node('h2','Hỏi đáp: '+options.categoryTitle,'comm-title');root.querySelector('.comm-title').replaceWith(heading);
+    root.querySelector('.comm-hero p').textContent='Đặt câu hỏi về chuyên mục này. Câu hỏi được Admin duyệt sẽ mở cho cộng đồng cùng trả lời.';
+    $('newKnowledgeTopic').textContent='Đặt câu hỏi về chuyên mục này';
+    $('backToKnowledge').textContent='← Danh sách câu hỏi';$('editKnowledgeTopic').textContent='Sửa câu hỏi của tôi';$('removeKnowledgeTopic').textContent='Gỡ câu hỏi';
+    $('knowledgeCommentsTitle').textContent='Câu trả lời và bình luận';
+    $('knowledgeCategoryFilterLabel').hidden=true;
+    root.querySelector('[data-topic-scope="feed"]').textContent=scopeTitles.feed;
+    root.querySelector('[data-topic-scope="mine"]').textContent=scopeTitles.mine;
+  }
   let user,scope="feed",page=1,topic=null,editing=null,commentPage=1,busy=false,detailSequence=0,listSequence=0;
   const keys=new Map();
   const when=value=>value?new Date(value).toLocaleString("vi-VN"):"";
@@ -14,12 +29,13 @@
   function updateTabs(){root.querySelectorAll("[data-topic-scope]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.topicScope===scope)));$("knowledgeListTitle").textContent=scopeTitles[scope];}
   async function loadList(){
     const current=++listSequence;state.textContent="";updateTabs();
-    const data=await api.get("/api/v1/community/topics?scope="+scope+"&page="+page);
+    const data=await api.get("/api/v1/community/topics?scope="+scope+"&page="+page+(categoryId?'&category_id='+encodeURIComponent(categoryId):''));
     if(current!==listSequence)return;
-    const list=$("knowledgeTopics");list.replaceChildren();$("knowledgeTopicCount").textContent=data.total+" chủ đề";
-    if(!data.items.length)list.append(node("p",scope==="feed"?"Chưa có chủ đề đã được duyệt. Bạn có thể tạo câu hỏi để Admin xem xét.":"Chưa có chủ đề trong nhóm này."));
+    const list=$("knowledgeTopics");list.replaceChildren();$("knowledgeTopicCount").textContent=data.total+(embedded?" câu hỏi":" chủ đề");
+    if(!data.items.length)list.append(node("p",embedded?(scope==="feed"?"Chưa có câu hỏi được duyệt. Bạn có thể gửi câu hỏi để Admin xem xét.":"Chưa có câu hỏi trong nhóm này."):(scope==="feed"?"Chưa có chủ đề đã được duyệt. Bạn có thể tạo câu hỏi để Admin xem xét.":"Chưa có chủ đề trong nhóm này.")));
     data.items.forEach(item=>{
       const button=node("button",undefined,"knowledge-topic");button.type="button";button.append(node("strong",item.title));
+      if(item.category_title)button.append(node('small',item.category_title));
       button.append(node("small",item.author_name+" (@"+item.author_username+")"+(item.author_is_admin?" · Admin":"")+" · "+when(item.created_at)));
       button.append(node("small",statuses[item.status]+" · "+item.comment_count+" bình luận"));
       button.onclick=()=>{if(!busy)void open(item.id).catch(showError);};list.append(button);
@@ -60,14 +76,17 @@
     if(topic?.id!==identifier||revision!==detailSequence)return;
     const list=$("knowledgeComments");if(!append)list.replaceChildren();
     data.items.forEach(item=>list.append(renderComment(item)));
-    if(data.total===0)list.append(node("p",topic.status==="approved"?"Chưa có bình luận. Hãy mở đầu cuộc trao đổi.":"Chủ đề sẽ mở bình luận sau khi được duyệt."));
+    if(data.total===0)list.append(node("p",topic.status==="approved"?"Chưa có bình luận. Hãy mở đầu cuộc trao đổi.":embedded?"Câu hỏi sẽ mở trả lời sau khi được duyệt.":"Chủ đề sẽ mở bình luận sau khi được duyệt."));
     $("moreKnowledgeComments").hidden=commentPage*data.limit>=data.total;
   }
   async function open(identifier){
     const current=++detailSequence;state.textContent="";const data=await api.get("/api/v1/community/topics/"+encodeURIComponent(identifier));
     if(current!==detailSequence)return;
+    if(embedded&&data.topic.category_id!==options.categoryId)throw new Error('Câu hỏi không thuộc chuyên mục này.');
     topic=data.topic;$("knowledgeTopicList").hidden=true;$("knowledgeDetail").hidden=false;topicForm.hidden=true;
     $("knowledgeDetailTitle").textContent=topic.title;
+    $('knowledgeDetailCategory').replaceChildren();
+    if(topic.category_id){const link=node('a',topic.category_title);link.href='/knowledge?category='+encodeURIComponent(topic.category_id)+'&question='+encodeURIComponent(topic.id)+'#libraryQuestions';$('knowledgeDetailCategory').append(link);}
     $("knowledgeDetailMeta").textContent=topic.author_name+" (@"+topic.author_username+")"+(topic.author_is_admin?" · Admin":"")+" · "+when(topic.created_at);
     $("knowledgeDetailBody").textContent=topic.body;$("knowledgeDetailStatus").textContent=statuses[topic.status];
     $("knowledgeModerationNote").textContent=topic.moderation_note?"Ghi chú duyệt: "+topic.moderation_note:"";
@@ -78,7 +97,9 @@
   }
   function compose(item){
     editing=item;topicForm.elements.title.value=item?.title||"";topicForm.elements.body.value=item?.body||"";
-    $("knowledgeFormTitle").textContent=item?"Sửa chủ đề và gửi duyệt lại":"Tạo chủ đề";
+    topicForm.elements.category_id.value=item?.category_id||categoryId||'';
+    $('knowledgeTopicCategoryLabel').hidden=embedded||Boolean(item);topicForm.elements.category_id.disabled=embedded||Boolean(item);
+    $("knowledgeFormTitle").textContent=item?"Sửa chủ đề và gửi duyệt lại":embedded?'Đặt câu hỏi về '+options.categoryTitle:"Tạo chủ đề";
     $("knowledgeFormState").textContent="";topicForm.hidden=false;topicForm.elements.title.focus();
   }
   $("newKnowledgeTopic").onclick=()=>{if(!busy)compose(null);};
@@ -87,12 +108,13 @@
   topicForm.onsubmit=async event=>{
     event.preventDefault();if(busy||!topicForm.reportValidity())return;
     const payload={title:topicForm.elements.title.value.trim(),body:topicForm.elements.body.value.trim()};
+    if(!editing){const chosen=embedded?options.categoryId:topicForm.elements.category_id.value;if(chosen)payload.category_id=chosen;}
     if(editing)payload.expected_revision=editing.revision;else payload.client_key=key("topic",payload);
     busyUI(true);
     try{
       const response=editing?await api.api("PATCH","/api/v1/community/topics/"+encodeURIComponent(editing.id),payload):await api.post("/api/v1/community/topics",payload);
       keys.delete("topic");topicForm.hidden=true;topicForm.reset();editing=null;scope="mine";page=1;
-      await loadList();await open(response.topic.id);state.textContent="Đã gửi chủ đề. Chủ đề đang chờ Admin duyệt trước khi hiển thị chung.";
+      await loadList();await open(response.topic.id);state.textContent=embedded?"Đã gửi câu hỏi. Câu hỏi đang chờ Admin duyệt trước khi hiển thị chung.":"Đã gửi chủ đề. Chủ đề đang chờ Admin duyệt trước khi hiển thị chung.";
     }catch(error){$("knowledgeFormState").textContent=error.message;}finally{busyUI(false);}
   };
   moderationForm.onsubmit=async event=>{
@@ -118,14 +140,27 @@
   $("knowledgePrevious").onclick=()=>{if(page>1&&!busy){page--;void loadList().catch(showError);}};
   $("knowledgeNext").onclick=()=>{if(!busy){page++;void loadList().catch(showError);}};
   $("refreshKnowledge").onclick=()=>{if(!busy)void(topic?open(topic.id):loadList()).catch(showError);};
+  $('knowledgeCategoryFilter').onchange=()=>{
+    if(embedded)return;
+    if(busy){$('knowledgeCategoryFilter').value=categoryId||'';return;}
+    categoryId=$('knowledgeCategoryFilter').value||null;page=1;topic=null;detailSequence++;
+    $('knowledgeDetail').hidden=true;$('knowledgeTopicList').hidden=false;topicForm.hidden=true;void loadList().catch(showError);
+  };
   (async()=>{
     try{
       user=await api.get("/api/v1/auth/me");
       if(user.role!=="ADMIN"&&!user.member_access){state.replaceChildren(node("span","Mục này dành cho thành viên còn quyền sử dụng. "));const link=node("a","Xem trạng thái thành viên");link.href="/membership";state.append(link);return;}
+      const categories=await api.get('/api/v1/community/categories');
+      categories.items.forEach(category=>{for(const select of [$('knowledgeCategoryFilter'),topicForm.elements.category_id]){const option=node('option',category.title);option.value=category.id;select.append(option);}});
+      if(categoryId&&!categories.items.some(category=>category.id===categoryId))throw new Error('Không tìm thấy chuyên mục kiến thức.');
+      $('knowledgeCategoryFilter').value=categoryId||'';
       root.querySelectorAll("[data-moderator-only]").forEach(element=>element.hidden=user.role!=="ADMIN");
       if(user.role==="ADMIN"&&root.dataset.adminMode==="true")scope="pending";
       $("knowledgeWorkspace").hidden=false;await loadList();
-      const wanted=new URLSearchParams(location.search).get("topic");if(wanted)await open(wanted);
+      const wanted=options.topicId||(!embedded&&new URLSearchParams(location.search).get("topic"));if(wanted)await open(wanted);
     }catch(error){showError(error);}
   })();
+  }
+  window.BteCommunity={mount};
+  const root=document.querySelector('[data-communications="community"]');if(root)mount(root);
 })();

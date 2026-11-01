@@ -21,6 +21,7 @@ class TopicInput(Input):
     title: str = Field(min_length=1, max_length=180)
     body: str = Field(min_length=1, max_length=20000)
     client_key: str = Field(default_factory=lambda: uuid4().hex, min_length=16, max_length=80)
+    category_id: str | None = Field(default=None, min_length=1, max_length=100)
 
 class RevisionInput(Input):
     expected_revision: int = Field(ge=1)

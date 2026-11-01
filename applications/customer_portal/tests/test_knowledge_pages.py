@@ -14,6 +14,8 @@ def test_member_library_shell_menu_and_assets(path):
     for asset in ('css/knowledge.css','js/knowledge_common.js','js/knowledge.js'):
         assert client.get('/static/'+asset).status_code==200
     assert '{{' not in page.text
+    assert '<template id="libraryQuestionsTemplate">' in page.text
+    assert 'category-faq-09' in page.text
 
 
 def test_integrated_and_standalone_admin_share_the_same_authoring_form():

@@ -20,6 +20,8 @@ Mỗi chuyên mục mới có khung bốn nhóm bài: nhập môn, phương phá
 
 Nhóm bài mặc định thu gọn; bấm tên nhóm để mở. Bài đọc có trang riêng `/knowledge/lesson/{id}`, đường dẫn về chuyên mục, nút bài trước/bài tiếp theo theo thứ tự nhóm rồi thứ tự bài. Trang đầu chỉ hiển thị sáu bài mới cập nhật. Tìm kiếm có phân trang và hỗ trợ tiếng Việt không dấu, tìm trong tiêu đề, giới thiệu và nội dung.
 
+Trong **Câu hỏi thường gặp**, thành viên có thể gửi câu hỏi cho đúng chuyên mục đang học. Câu hỏi chờ Admin duyệt; sau khi duyệt, Admin và cộng đồng cùng bình luận trả lời ngay tại nhóm này. Câu hỏi của tôi hiển thị trạng thái riêng cho tác giả. Bài giải đáp đã biên soạn vẫn được giữ lại phía trên phần hỏi đáp. Admin lọc theo chuyên mục trong mục **Duyệt trao đổi kiến thức** để quản lý chung, không tạo hai bản dữ liệu. Xem thêm `category-questions-v01.md`.
+
 Các API đọc kiểm tra quyền thành viên trên máy chủ. Tài khoản đang chờ kích hoạt/hết hạn không đọc được; tài khoản cũ đã được cấp quyền vẫn dùng như trước. Đọc kiến thức không trừ hạn mức tư vấn.
 
 ## Quản trị

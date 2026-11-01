@@ -42,9 +42,13 @@ def mark_read(identifier:str,body:ReadInput,user:CurrentUser):
 def contact_thread(identifier:str,user:CurrentUser):
     return {"thread":get_communications_service().contact_thread(user,identifier)}
 
+@router.get("/community/categories")
+def categories(user:CurrentUser):
+    return {"items":[{"id":key,"title":title} for key,title in get_communications_service().category_labels(user).items()]}
+
 @router.get("/community/topics")
-def topics(user:CurrentUser,scope:Literal["feed","mine","pending","all"]="feed",page:int=Query(1,ge=1),limit:int=Query(30,ge=1,le=100)):
-    return get_communications_service().list_topics(user,scope,page,limit)
+def topics(user:CurrentUser,scope:Literal["feed","mine","pending","all"]="feed",page:int=Query(1,ge=1),limit:int=Query(30,ge=1,le=100),category_id:str|None=Query(None,min_length=1,max_length=100)):
+    return get_communications_service().list_topics(user,scope,page,limit,category_id)
 
 @router.post("/community/topics",status_code=201)
 def create_topic(body:TopicInput,user:CurrentUser):

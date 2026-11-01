@@ -11,6 +11,7 @@ function mount(name:string,user:any=member,overrides:any={}){
   const api={
     get:vi.fn(async(path:string)=>{
       if(path.endsWith('/auth/me'))return user;
+      if(path.endsWith('/community/categories'))return {items:[]};
       if(path.endsWith('/summary'))return {unread_messages:1};
       if(path.endsWith('/recipients'))return {items:[{id:'m1',username:'member',display_name:'Member'}]};
       if(path.includes('/communications/threads?'))return {items:[{id:'c1',subject:'<b>Private</b>',owner:{display_name:'Member',username:'member'},unread:1}],total:1,limit:30};
