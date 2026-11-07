@@ -5,7 +5,7 @@
 - Menu **Tư vấn đặt tên** dẫn tới `/naming-consulting` trong Customer Portal hiện có.
 - Hai chế độ: trẻ em và đổi tên; đổi tên bắt buộc tên hiện tại và loại đúng tên đó khỏi đề xuất.
 - Nhập họ/phần tên đệm cố định, giới tính, ngày sinh dương lịch, giờ sinh tùy chọn, nơi sinh và múi giờ IANA. Tư vấn cho người đã sinh, trong phạm vi năm 1900–2100 của Calendar Engine.
-- Trả 5–10 tên (mặc định 8), ý nghĩa, hành quy ước, mức phù hợp và giải thích từng tiêu chí.
+- Yêu cầu 5–10 tên (mặc định 8), có thể trả ít hơn nếu thiếu tên đủ điều kiện, ý nghĩa, hành quy ước, mức phù hợp và giải thích từng tiêu chí.
 
 ## Tích hợp thực tế
 
@@ -15,7 +15,7 @@ Trang `/name-analysis` và menu **Phân tích tên** dùng được khi chưa đ
 
 API riêng: `POST /api/v1/public/naming/analyze-current`, chuyển tiếp từ Portal qua `/backend/api/v1/public/naming/analyze-current`. Chỉ endpoint phân tích công khai này được thêm; các endpoint tư vấn/hồ sơ cũ vẫn giữ xác thực.
 
-Phần đọc tên dùng lại danh mục 25 tên và bổ sung `name_words.json` để giải thích các tiếng thường gặp. Hành tên lấy từ tên ghép đã có trong danh mục, hoặc nghĩa của tiếng tên chính nếu đủ cơ sở; không suy ra hành từ họ, không bỏ dấu tiếng Việt khi tra cứu. Từ không biết hoặc đa nghĩa không có hành chắc chắn được báo rõ, không tự phân loại.
+Phần đọc tên dùng lại danh mục tên gợi ý và bổ sung `name_words.json` để giải thích các tiếng thường gặp. Hành tên lấy từ tên ghép đã có trong danh mục, hoặc nghĩa của tiếng tên chính nếu đủ cơ sở; không suy ra hành từ họ, không bỏ dấu tiếng Việt khi tra cứu. Từ không biết hoặc đa nghĩa không có hành chắc chắn được báo rõ, không tự phân loại.
 
 Nạp Âm và Cung Phi lấy trực tiếp từ `jiazi_row_for_year` và `personal_cung_phi_from_year_ganzhi` của Calendar Engine theo năm khách nhập. Không tạo ngày/giờ sinh giả, không chạy Bát Tự, Dụng/Hỷ thần hoặc chấm điểm vận mệnh từ năm sinh đơn lẻ. Sinh vào đầu năm cần ngày/tháng để xác minh mốc năm. Các quan hệ sinh/khắc dùng chung quy tắc ngũ hành của phân hệ đặt tên hiện có.
 
@@ -31,15 +31,12 @@ Router mới dùng chung tiến trình `consulting.marriage.api.http:create_marr
 
 ## Quy tắc danh mục và xếp hạng
 
-`consulting/naming/catalog.json` chứa 25 tên tuyển chọn, mỗi hành 5 tên; mỗi giới tính có 15 tên đủ điều kiện. Mỗi tên có mã ổn định, giới tính thường dùng, ý nghĩa và lý do gán hành. Không sinh tên tự do từ AI. Danh mục đã được rà soát về nội dung, tính đầy đủ, trùng lặp và độ phủ cho bản V0.1; **chưa có thẩm định độc lập của chuyên gia phong thủy/ngôn ngữ**.
+`consulting/naming/catalog.json` chứa 47 tên tuyển chọn đã rà soát. Hành Hỏa có 10 mục gợi ý cho nam và 8 mục cho nữ. Mỗi tên có mã ổn định, giới tính thường dùng, ý nghĩa và căn cứ gán hành. Chữ Hán là cách đọc tham khảo. Hành tên là quy ước theo hình ảnh chủ đạo và có thể khác trường phái.
 
-Hành tên là quy ước biên tập theo hình ảnh/ý nghĩa, không phải kết luận khách quan và có thể khác trường phái. Điểm nội bộ chỉ sắp xếp các tên trong danh mục:
-
-- Trùng Dụng thần: +60; nếu không trùng Dụng nhưng trùng Hỷ thần: +30.
-- Trùng Kỵ thần: -100, ưu tiên cảnh báo ngay cả khi cùng hành được công bố trong nhóm Dụng/Hỷ.
-- Mỗi tiêu chí Nạp Âm/Cung Phi: tên sinh hành đích +10; đồng hành +6; hành đích sinh tên +2; khắc hai chiều -6. Thiếu dữ liệu: 0 và nêu rõ thiếu.
-- Không cộng đồng thời Dụng và Hỷ cho cùng một hành; đồng điểm sắp theo mã danh mục để kết quả ổn định.
-- Không quy đổi điểm thành xác suất, độ chính xác hoặc dự báo vận mệnh.
+- Xếp theo nhóm Dụng thần, Hỷ thần, rồi tên tham khảo. Hành trùng cả Dụng và Hỷ chỉ vào nhóm Dụng.
+- Loại tên trùng hành Kỵ đã công bố. Nếu Kỵ trùng Dụng hoặc Hỷ, cảnh báo xung đột và bỏ hành đó khỏi nhóm ưu tiên.
+- Trong mỗi nhóm, xếp theo điểm Nạp Âm/Cung Phi. Tên sinh hành đích +10, đồng hành +6, hành đích sinh tên +2, khắc mỗi chiều -6. Hai nguồn cùng hành chỉ tính điểm một lần, vẫn giải thích cả hai. Nguồn thiếu được 0.
+- Đồng điểm xếp theo mã danh mục. API trả số tên đủ điều kiện theo từng nhóm trước khi cắt theo yêu cầu. Điểm chỉ dùng để sắp xếp tên trong nhóm.
 
 Nếu không biết giờ sinh, adapter hiện có vẫn có giờ nội bộ để chạy. Trang mới **không dùng Dụng/Hỷ/Kỵ thần từ giờ giả định**, không hiện trụ giờ và đánh dấu gợi ý sơ bộ. Kết quả dựa trên Nạp Âm/Cung Phi và ý nghĩa; cần xác minh giờ sinh khi gần giao tiết/ngày/năm.
 
@@ -76,7 +73,7 @@ Hợp đồng mới dùng `lunar_birth_year` (số nguyên 1900 đến năm âm 
 
 Chỉ có một năm dương lịch thì không đủ để tự xác định năm âm lịch. Bộ chuyển lịch UTC+7 có sẵn xác nhận 01–28/01/1987 thuộc năm Bính Dần 1986; 29/01/1987 là mùng 1 Tết Đinh Mão 1987. Biểu mẫu nhắc người sinh trước Tết kiểm tra đúng năm âm lịch. Bảng đối chiếu HKO cùng xác nhận mốc 29/01: https://www.hko.gov.hk/en/gts/time/calendar/pdf/files/1987e.pdf (HKO dùng lịch Hong Kong; kiểm tra ngày Việt Nam bằng converter UTC+7 của dự án).
 
-`consulting/naming/han_viet.json` phối hợp `name_library.json` cung cấp diễn giải biên tập cho 197 tiếng và 34 tên ghép, trong đó Thị Dung và Ngọc Huỳnh có bài luận riêng ba đoạn. Có thêm 38 mục họ tham khảo. Các chữ Hán là cách viết **có thể tham khảo**, không xác nhận nguyên tự của tên Quốc ngữ. Thanh, Dương, Bảo, Hồng… có nhiều cách hiểu; các tên thuần Việt được đọc theo nghĩa tiếng Việt. Thị có thêm chữ 氏 để giải thích cách dùng tên truyền thống và được phân biệt với Thi 詩. Tên chưa có dữ liệu chỉ được luận phần nhận diện được, không bịa nghĩa, số nét hay hành mới. Các diễn giải ghép là liên tưởng văn hóa do biên tập, không phải nghĩa từ điển nguyên văn hoặc dự báo tính cách/vận mệnh. Quy ước hành và danh mục gợi ý tên cũ được giữ nguyên.
+`consulting/naming/han_viet.json` phối hợp `name_library.json` cung cấp diễn giải biên tập cho 197 tiếng và 34 tên ghép, trong đó Thị Dung và Ngọc Huỳnh có bài luận riêng ba đoạn. Có thêm 38 mục họ tham khảo. Các chữ Hán là cách viết **có thể tham khảo**, không xác nhận nguyên tự của tên Quốc ngữ. Thanh, Dương, Bảo, Hồng… có nhiều cách hiểu; các tên thuần Việt được đọc theo nghĩa tiếng Việt. Thị có thêm chữ 氏 để giải thích cách dùng tên truyền thống và được phân biệt với Thi 詩. Tên chưa có dữ liệu chỉ được luận phần nhận diện được, không bịa nghĩa, số nét hay hành mới. Các diễn giải ghép là liên tưởng văn hóa do biên tập, không phải nghĩa từ điển nguyên văn hoặc dự báo tính cách/vận mệnh. Đợt cập nhật phân tích tên theo năm sinh này giữ quy ước hành và danh mục gợi ý của thời điểm đó.
 
 Nguồn đối chiếu từ vựng tiêu biểu: mục từ 進 (Tiến), 山 (Sơn), 明 (Minh), 翠 (Thúy) trên Wiktionary. Các đoạn luận là nội dung viết mới theo nghĩa ngắn của từ; chưa có thẩm định độc lập của chuyên gia Hán Nôm.
 
