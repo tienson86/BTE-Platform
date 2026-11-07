@@ -61,16 +61,41 @@ def test_names_have_requested_count_gender_and_no_duplicates(gender, count):
 def test_useful_god_outranks_secondary_references_and_unfavorable_loses():
     result = recommend_names(request(count=10), snapshot())
     names = result["recommendations"]
-    assert all(entry["element"] == "Hỏa" for entry in names[:3])
-    assert all(entry["element"] == "Mộc" for entry in names[3:6])
+    assert all(entry["element"] == "Hỏa" for entry in names)
+    assert result["eligible_counts"] == {"useful": 10, "favorable": 5, "reference": 9}
     assert not any(entry["element"] == "Thổ" for entry in names)
 
 
 def test_unfavorable_wins_over_conflicting_useful_signal():
     signals = snapshot()
     signals.useful_god.unfavorable = [ElementOrStemReference(element=FiveElement.FIRE)]
-    names = recommend_names(request(count=10), signals)["recommendations"]
-    assert all(entry["element"] != "Hỏa" for entry in names)
+    result = recommend_names(request(count=10), signals)
+    assert all(entry["element"] != "Hỏa" for entry in result["recommendations"])
+    assert result["signals"]["useful_elements"] == []
+    assert any("xung đột" in warning for warning in result["warnings"])
+
+
+def test_duplicate_reference_elements_count_once_and_cannot_reverse_priority():
+    signals = snapshot()
+    signals.pillars.year = replace(signals.pillars.year, na_yin="Lư Trung Hỏa")
+    signals.feng_shui = FengShuiSnapshot(cung_phi="Ly", element=FiveElement.FIRE)
+    signals.useful_god.useful = [ElementOrStemReference(element=FiveElement.WATER)]
+    result = recommend_names(request(gender="female", count=10), signals)
+    names = result["recommendations"]
+    assert [item["priority_group"] for item in names] == ["useful"] * 5 + ["favorable"] * 5
+    assert [item["rank_points"] for item in names] == [54] * 5 + [40] * 5
+
+
+def test_returns_fewer_names_when_remaining_names_match_unfavorable_elements():
+    signals = snapshot()
+    signals.useful_god.unfavorable = [
+        ElementOrStemReference(element=element)
+        for element in FiveElement if element != FiveElement.WOOD
+    ]
+    result = recommend_names(request(count=10), signals)
+    assert len(result["recommendations"]) == 5
+    assert all(item["element"] == "Mộc" for item in result["recommendations"])
+    assert any("5 tên đủ điều kiện" in warning for warning in result["warnings"])
 
 
 def test_unknown_time_never_uses_assumed_hour_useful_gods():
@@ -121,7 +146,7 @@ def test_invalid_inputs_are_rejected(overrides):
 
 def test_catalog_covers_every_element_for_each_gender():
     catalog = load_catalog()
-    assert len(catalog["names"]) == 25
+    assert len(catalog["names"]) == 47
     for gender in ("male", "female"):
         assert {entry["element"].lower() for entry in catalog["names"] if gender in entry["genders"]} == {entry.value for entry in FiveElement}
 
