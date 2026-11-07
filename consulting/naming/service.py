@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from collections import Counter
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
@@ -103,10 +104,20 @@ def recommend_names(
     cung = snapshot.feng_shui.cung_phi if snapshot.feng_shui else None
     cung_element = cung_element or (snapshot.feng_shui.element if snapshot.feng_shui else None)
     warnings = []
+    conflicts = (useful | favorable) & unfavorable
+    if conflicts:
+        warnings.append(
+            f"BTE công bố tín hiệu xung đột ở hành {', '.join(_labels(conflicts))}. "
+            "Tạm loại các hành này khỏi gợi ý và cần xác minh lại lá số."
+        )
+    useful -= unfavorable
+    favorable -= unfavorable | useful
     if not hour_known:
         warnings.append("Chưa biết giờ sinh: chỉ gợi ý sơ bộ theo ý nghĩa, Nạp Âm và Cung Phi; không dùng Dụng/Hỷ/Kỵ thần từ giờ giả định. Gần giao tiết, giao ngày hoặc giao năm, cần xác minh thêm giờ sinh.")
     elif not useful and not favorable:
         warnings.append("Module hiện có chưa công bố hành Dụng/Hỷ thần; chỉ tham khảo Nạp Âm, Cung Phi và ý nghĩa tên.")
+        if unfavorable:
+            warnings.append("Vẫn loại các tên trùng hành Kỵ thần đã công bố.")
     if not nap_element:
         warnings.append("Chưa có hành Nạp Âm hợp lệ từ trụ năm BTE; tiêu chí này không tham gia xếp hạng.")
     if not cung or not cung_element:
@@ -115,6 +126,7 @@ def recommend_names(
     if request.birth_place:
         warnings.append("Nơi sinh được ghi nhận; V0.1 tính theo múi giờ đã chọn, chưa hiệu chỉnh giờ Mặt Trời theo tọa độ.")
     recommendations = []
+    group_counts: Counter[str] = Counter()
     for entry in catalog["names"]:
         if request.gender not in entry["genders"]:
             continue
@@ -124,28 +136,33 @@ def recommend_names(
         }:
             continue
         element = FiveElement(entry["element"].lower())
-        points = 0
-        reasons = []
         if element in unfavorable:
-            points -= 100
-            level = "Cần cân nhắc theo Kỵ thần"
-            reasons.append("Hành tên trùng hành Kỵ thần do BTE công bố; không ưu tiên theo tiêu chí Bát Tự.")
-        elif element in useful:
-            points += 60
+            continue
+
+        if element in useful:
+            group, points = "useful", 60
             level = "Ưu tiên theo Dụng thần"
-            reasons.append("Hành tên trùng hành Dụng thần do BTE công bố.")
+            reason = "Hành tên trùng hành Dụng thần do BTE công bố."
         elif element in favorable:
-            points += 30
+            group, points = "favorable", 30
             level = "Phù hợp theo Hỷ thần"
-            reasons.append("Hành tên trùng hành Hỷ thần do BTE công bố.")
+            reason = "Hành tên trùng hành Hỷ thần do BTE công bố."
         else:
+            group, points = "reference", 0
             level = "Tham khảo về ý nghĩa"
-            reasons.append("Chưa có đối chiếu Dụng/Hỷ thần cho tên này." if not hour_known else "Hành tên chưa trùng Dụng/Hỷ thần được công bố; điều này không có nghĩa tên xấu.")
-        reference_points = 0
-        for label, target in (("Nạp Âm trụ năm", nap_element), ("Cung Phi", cung_element)):
-            delta, reason = describe_element_relation(element, target, label)
-            reference_points += delta
-            reasons.append(reason)
+            reason = "Tên được xét theo ý nghĩa và các nguồn tham khảo hiện có."
+        group_counts[group] += 1
+
+        reasons = [reason]
+        nap_points, nap_reason = describe_element_relation(element, nap_element, "Nạp Âm trụ năm")
+        cung_points, cung_reason = describe_element_relation(element, cung_element, "Cung Phi")
+        reference_points = nap_points + cung_points
+        if nap_element is not None and nap_element == cung_element:
+            reference_points = nap_points
+            cung_reason += " Cùng hành với Nạp Âm trụ năm, nên hai nguồn chỉ tính điểm một lần."
+        reasons.extend((nap_reason, cung_reason))
+        if min(nap_points, cung_points) < 0 < max(nap_points, cung_points):
+            reasons.append("Hai nguồn tham khảo có cả quan hệ thuận và khắc.")
         points += reference_points
         if level == "Tham khảo về ý nghĩa" and reference_points > 0:
             level = "Tham khảo theo Nạp Âm/Cung Phi"
@@ -155,9 +172,16 @@ def recommend_names(
             "id": entry["id"], "given_name": entry["name"], "full_name": full_name,
             "element": ELEMENT_LABELS[element], "meaning": entry["meaning"],
             "element_basis": entry["basis"], "fit_level": level,
-            "rank_points": points, "reasons": reasons,
+            "rank_points": points, "reasons": reasons, "priority_group": group,
         })
-    recommendations.sort(key=lambda item: (-item["rank_points"], item["id"]))
+    priority_order = {"useful": 0, "favorable": 1, "reference": 2}
+    recommendations.sort(key=lambda item: (
+        priority_order[item["priority_group"]], -item["rank_points"], item["id"],
+    ))
+    if len(recommendations) < request.count:
+        warnings.append(
+            f"Có {len(recommendations)} tên đủ điều kiện trong danh mục cho yêu cầu {request.count} tên."
+        )
     return {
         "module_version": MODULE_VERSION,
         "mode": request.mode,
@@ -175,9 +199,15 @@ def recommend_names(
             "cung_phi": cung, "cung_phi_element": ELEMENT_LABELS.get(cung_element),
         },
         "recommendations": recommendations[:request.count],
+        "eligible_counts": {group: group_counts[group] for group in priority_order},
         "warnings": warnings,
         "catalog": {key: catalog[key] for key in ("version", "review_note", "element_convention")},
-        "method": "Ưu tiên hành trùng Dụng thần (+60), sau đó Hỷ thần (+30); hành Kỵ thần (-100). Mỗi tiêu chí Nạp Âm/Cung Phi: tên sinh cho hành đích (+10), đồng hành (+6), hành đích sinh tên (+2), khắc hai chiều (-6). Không cộng đồng thời điểm Dụng và Hỷ cho cùng hành. Điểm chỉ dùng sắp xếp trong danh mục, không phải xác suất hay dự báo vận mệnh.",
+        "method": (
+            "Xếp theo thứ tự Dụng thần, Hỷ thần, rồi tên tham khảo. Loại hành Kỵ khỏi gợi ý. "
+            "Trong từng nhóm, dùng điểm Nạp Âm trụ năm và Cung Phi: tên sinh hành đích +10, "
+            "đồng hành +6, hành đích sinh tên +2, khắc mỗi chiều -6. "
+            "Hai nguồn cùng hành chỉ tính một lần. Điểm chỉ dùng để sắp xếp trong danh mục."
+        ),
         "notice": "Tên là lựa chọn văn hóa và cá nhân. Gợi ý phong thủy chỉ để tham khảo, không cam kết làm tăng thành công, tài lộc hay danh tiếng. V0.1 chưa đánh giá toàn bộ họ tên, âm điệu, tên trùng trong gia đình hoặc thủ tục đổi tên.",
     }
 
