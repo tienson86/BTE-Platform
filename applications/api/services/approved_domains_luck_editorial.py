@@ -7,6 +7,8 @@ facts select these paragraphs; they are never copied wholesale to other charts.
 from __future__ import annotations
 
 from typing import Any, Mapping
+from .day_pillar_editorial import day_domain
+from .pillar_life_editorial import pillar_domain, pillar_synthesis, pillar_recommendations
 
 from engines.ten_gods_engine.mapper import day_master_info, map_stem_to_ten_god
 from engines.ten_gods_engine.exceptions import TenGodsValidationError
@@ -312,6 +314,13 @@ def life_domain_prose(key: str, payload: Mapping[str, Any]) -> list[str]:
     use = f"{useful_stem} {useful_element}".strip()
     pattern_name = _text(pattern.get("cach_cuc"))
 
+    revised = day_domain(key, payload)
+    pillar_copy = pillar_domain(key, payload)
+    if revised:
+        return revised + pillar_copy
+    if pillar_copy and key != "career":
+        return pillar_copy
+
     if key == "health":
         return _health_prose(payload, day_master)
 
@@ -332,7 +341,7 @@ def life_domain_prose(key: str, payload: Mapping[str, Any]) -> list[str]:
             if _has(payload, "Chính Tài", "Thiên Tài") and _has(payload, "Thực Thần", "Thương Quan") else
             "Trước khi mở rộng, hãy xem kỹ năng nào đang tạo kết quả và ai là người nhận kết quả đó."
         )
-        return [
+        return pillar_copy + [
             "Nền nghề: " + (
                 f"Mệnh cục {pattern_name} cho bạn lợi thế học sâu và hệ thống hóa tri thức. "
                 + (f"Thiên Ấn {hour_resource} ở trụ giờ nhắc đến cách tìm lời giải riêng. " if hour_resource else "")
@@ -617,6 +626,10 @@ def synthesis_prose(payload: Mapping[str, Any]) -> list[str]:
     paragraphs.append("Điểm chốt: Lá số đưa ra một cách nhìn về nguồn lực và thời điểm. "
                       "Điều có thể thay đổi bằng tay bạn là cách làm việc, giữ tiền, chăm quan hệ và giữ sức; "
                       "mỗi bước nên có tiêu chí kiểm tra được trong đời sống thực.")
+    revised = pillar_synthesis(payload)
+    if revised:
+        # Keep current-cycle context when available.
+        return revised + [line for line in paragraphs if line.startswith("Chặng hiện tại:")]
     return paragraphs
 
 
@@ -661,4 +674,4 @@ def recommendation_prose(payload: Mapping[str, Any]) -> list[str]:
                           "giá trị khách nhận được, phần tiền giữ lại, số giờ bản thân phải trực tiếp làm "
                           "và mức hồi phục sau công việc. Nếu cả bốn cùng tốt lên, bạn mới có cơ sở mở rộng; "
                           "quyết định năm cụ thể cần thêm lưu niên và hoàn cảnh thực tế.")
-    return paragraphs
+    return pillar_recommendations(payload) + paragraphs

@@ -652,9 +652,6 @@ def _customer_paragraphs(
             if not storage.get("natal_storage_present") else "Nguyên cục có dấu hiệu Tài khố, nhưng vẫn cần xét khố có Tài, có nhập khố và có được mở hay không."
         ),
     ]
-    timing_lines = [_text(item.get("reading")) for item in _list(timing.get("items")) if _text(item.get("reading"))]
-    if timing_lines:
-        paragraphs.append("Các Đại vận cần đối chiếu: " + " ".join(timing_lines[:8]))
     return paragraphs
 
 

@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="/static/css/membership.css?v=member-01" />
+<section class="membership-page" aria-labelledby="memberAdminTitle">
+  <h1 id="memberAdminTitle">Quản trị website &amp; thành viên</h1>
+  <p>Quản lý nội dung công khai, thông tin nhận tiền và xác nhận đăng ký thành viên.</p>
+  <p id="memberAdminState" role="status" aria-live="polite"></p>
+  <div id="memberAdminContent" hidden>
+    <form id="memberSettingsForm" class="panel">
+      <h2>Nội dung hiển thị trên website</h2>
+      <div class="member-admin-settings">
+        <label class="full">Tiêu đề trang thành viên<input name="title" maxlength="120" required /></label>
+        <label class="full">Giới thiệu trang thành viên<textarea name="description" maxlength="1200"></textarea></label>
+        <label class="full">Thông báo chung trên website<textarea name="public_notice" maxlength="500" placeholder="Để trống nếu không có thông báo"></textarea></label>
+      </div>
+      <h2>Biểu phí và thông tin chuyển khoản</h2>
+      <div class="member-admin-settings">
+        <label>Mức phí (VNĐ)<input name="amount_vnd" type="number" min="1000" max="1000000000" step="1" /></label>
+        <label>Thời hạn (số ngày)<input name="validity_days" type="number" min="1" max="3650" step="1" /></label>
+        <label>Số lượt tạo lá số<input name="analysis_limit" type="number" min="1" max="1000000" step="1" /><small>Để trống nếu không giới hạn lượt tạo lá số trong thời hạn thành viên.</small></label>
+        <label>Ngân hàng<input name="bank_name" maxlength="120" /></label>
+        <label>Số tài khoản<input name="bank_account" maxlength="64" inputmode="numeric" pattern="[0-9 ]*" /></label>
+        <label>Chủ tài khoản<input name="bank_holder" maxlength="120" /></label>
+        <label class="full">Hướng dẫn chuyển khoản<textarea name="payment_note" maxlength="800"></textarea></label>
+        <label class="check full"><input name="registration_enabled" type="checkbox" /> Mở đăng ký thành viên trả phí</label>
+      </div>
+      <p class="muted">Thông tin mới áp dụng cho lần đăng ký sau khi lưu. Mỗi đăng ký giữ mức phí, thời hạn và tài khoản nhận tiền đã được thông báo lúc đăng ký.</p>
+      <button type="submit">Lưu cấu hình website</button>
+    </form>
+    <section class="panel" aria-labelledby="memberApplicationTitle">
+      <h2 id="memberApplicationTitle">Đăng ký và xác nhận thanh toán</h2>
+      <div class="toolbar">
+        <label>Hiển thị<select id="memberApplicationFilter"><option value="pending">Đang chờ xác nhận</option><option value="all">Tất cả đăng ký</option></select></label>
+        <button id="memberApplicationsRefresh" type="button" class="secondary">Tải lại danh sách</button>
+      </div>
+      <div id="memberApplications"></div>
+    </section>
+  </div>
+</section>
+<script src="/static/js/admin_membership.js?v=member-transfer-02" defer></script>

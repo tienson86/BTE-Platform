@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from .day_pillar_editorial import day_personality
+
 import json
 from functools import lru_cache
 from pathlib import Path
@@ -50,24 +52,10 @@ def _map(value: Any) -> dict[str, Any]:
 
 
 def day_master_paragraphs(payload: Mapping[str, Any]) -> list[str]:
-    bazi = _map(payload.get("bazi"))
     strength = _map(payload.get("strength"))
-    stem, element = str(bazi.get("day_master") or ""), str(bazi.get("day_master_element") or "")
-    prose = _catalog()["day_master"].get(element)
-    if not stem or not prose:
+    result = day_personality(payload)
+    if not result:
         return []
-    nature = _STEM_NATURE.get(stem)
-    if nature and nature[1] == element:
-        introduction = (
-            f"Nhật Chủ là Thiên Can của trụ ngày, dùng để chỉ chính bạn trong lá số Bát Tự. "
-            f"Trong lá số này, {stem} thuộc {nature[0]} {element}. "
-            f"Chữ ‘{nature[0]}’ nói về tính âm dương của Thiên Can, còn ‘{element}’ cho biết ngũ hành của Can ấy. "
-            "Đây là điểm bắt đầu để đọc cách bạn sử dụng năng lực của mình; "
-            "mạnh hay yếu phải xét thêm mùa sinh, các trụ còn lại và toàn cục lá số. "
-        )
-    else:
-        introduction = f"Nhật Chủ {stem} thuộc {element}. "
-    result = [introduction + prose]
     label = _STRENGTH.get(str(strength.get("strength_level") or ""))
     if label:
         result.append(f"Xét toàn cục, Nhật Chủ ở thế Thân {label.lower()}. {_catalog()['strength'][label]}")

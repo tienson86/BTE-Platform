@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="/static/css/membership.css?v=customers-04" />
+<section class="membership-page">
+  <h1>Liên hệ hỗ trợ BTE</h1>
+  <p>Gửi nội dung cần hỗ trợ. Quản trị viên sẽ sử dụng số điện thoại bạn cung cấp để liên hệ.</p>
+  <form id="supportForm" class="panel">
+    <label>Họ và Tên<input name="full_name" autocomplete="name" minlength="2" maxlength="120" required /></label>
+    <label>Số điện thoại<input name="phone" type="tel" autocomplete="tel" minlength="8" maxlength="24" required /></label>
+    <label>Chủ đề<input name="subject" maxlength="120" value="Yêu cầu hỗ trợ" required /></label>
+    <label>Nội dung<textarea name="message" minlength="5" maxlength="3000" required></textarea></label>
+    <button type="submit">Gửi yêu cầu hỗ trợ</button>
+    <p id="supportState" role="status" aria-live="polite"></p>
+  </form>
+</section>
+<script src="/static/js/contact.js?v=customers-04" defer></script>

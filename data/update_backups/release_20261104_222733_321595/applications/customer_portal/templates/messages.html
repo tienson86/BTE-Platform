@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="/static/css/communications.css?v=communications-05" />
+<section class="communications-page" data-admin-mode="false" data-communications="messages">
+  <header class="comm-hero"><div><h1 class="comm-title" id="messagesTitle">Tin nhắn với Admin</h1><p>Nội dung riêng giữa thành viên và Admin, có lưu lịch sử trao đổi.</p></div><div class="comm-actions"><button type="button" id="newConversation">Trao đổi mới</button><button type="button" class="secondary" id="refreshConversations">Tải lại</button></div></header>
+  <p id="messagesState" role="status" aria-live="polite"></p>
+  <form id="newConversationForm" class="panel comm-form" hidden>
+    <h2>Tạo cuộc trao đổi</h2>
+    <label id="recipientLabel" hidden>Gửi đến thành viên<select name="recipient_user_id" id="messageRecipient"><option value="">Chọn thành viên</option></select></label>
+    <label>Chủ đề<input name="subject" maxlength="180" required /></label>
+    <label>Nội dung<textarea name="message" maxlength="5000" rows="4" required></textarea></label>
+    <div class="comm-actions"><button type="submit">Gửi tin nhắn</button><button type="button" class="secondary" id="cancelConversation">Hủy</button></div>
+    <p id="newConversationState" role="alert"></p>
+  </form>
+  <div id="messagesWorkspace" class="comm-layout" hidden>
+    <aside class="panel comm-threads" aria-label="Các cuộc trao đổi">
+      <h2>Lịch sử trao đổi</h2><p id="conversationCount" class="muted"></p><div id="conversationList"></div>
+      <div class="comm-actions comm-pagination"><button type="button" class="secondary" id="conversationsPrevious">Trang trước</button><button type="button" class="secondary" id="conversationsNext">Trang sau</button></div>
+    </aside>
+    <section class="panel comm-conversation" aria-labelledby="conversationTitle">
+      <h2 id="conversationTitle">Chọn cuộc trao đổi để đọc</h2><p id="conversationOwner" class="muted"></p>
+      <button type="button" class="secondary" id="loadEarlierMessages" hidden>Tải tin nhắn cũ hơn</button>
+      <div id="conversationMessages" class="comm-messages" aria-live="polite"></div>
+      <form id="messageReplyForm" class="comm-form" hidden><label>Trả lời<textarea name="message" rows="3" maxlength="5000" required></textarea></label><button type="submit">Gửi trả lời</button><p id="messageReplyState" role="alert"></p></form>
+    </section>
+  </div>
+</section>
+<script src="/static/js/messages.js?v=communications-05" defer></script>
