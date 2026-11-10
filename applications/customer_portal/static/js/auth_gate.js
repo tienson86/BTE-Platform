@@ -1,5 +1,5 @@
 (function () {
-  var PUBLIC_PATHS = { "/": true, "/good-date": true, "/login": true, "/name-analysis": true, "/number-energy": true, "/membership": true, "/contact":true };
+  var PUBLIC_PATHS = { "/gioi-thieu-bte": true, "/thanh-vien-bte": true, "/": true, "/good-date": true, "/login": true, "/name-analysis": true, "/number-energy": true, "/membership": true, "/contact":true };
 
   function currentPath() {
     return window.location.pathname || "/";
@@ -10,6 +10,8 @@
   }
 
   function updateNavigation(user) {
+    var logout = document.getElementById("memberLogout");
+    if (logout) logout.hidden = !user;
     var sidebar = document.getElementById("memberSidebar");
     var toggle = document.getElementById("btnNavToggle");
     if (sidebar) sidebar.hidden = !user;
@@ -22,7 +24,11 @@
     if (join) join.textContent = user ? "Thành viên" : "Đăng ký thành viên";
     document.querySelectorAll("[data-nav-id]").forEach(function (link) {
       var href = link.getAttribute("href") || "";
-      link.hidden = !user && !PUBLIC_PATHS[href];
+      var feature = {"/analyze":"bazi", "/choose-date":"date_selection", "/marriage-consulting":"marriage",
+        "/childbirth-consulting":"childbirth", "/naming-consulting":"naming",
+        "/business-consulting":"business", "/tinh-van-han":"van_han"}[href];
+      link.hidden = (!user && !PUBLIC_PATHS[href]) ||
+        !!(user && Array.isArray(user.member_features) && feature && !user.member_features.includes(feature));
     });
     var profile = document.querySelector("a.app-user");
     if (profile) {
@@ -34,6 +40,14 @@
   }
 
   async function boot() {
+    var logout = document.getElementById("memberLogout");
+    if (logout) logout.onclick = async function () {
+      logout.disabled = true;
+      try { await BtePortal.post("/api/v1/auth/logout", {}); } catch (_) {}
+      BtePortal.clearSession();
+      updateNavigation(null);
+      window.location.assign("/login");
+    };
     var path = currentPath();
     var token = window.BtePortal && BtePortal.getToken ? BtePortal.getToken() : "";
     // Verify the session before revealing the member sidebar.

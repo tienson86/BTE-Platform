@@ -132,7 +132,7 @@ def test_admin_approval_opens_access_once_and_survives_restart(system):
     assert approve(client, headers, data).status_code == 409
     reloaded = JsonUserStore(store.path).get_by_username("newmember")
     assert reloaded.has_member_access() is True
-    assert reloaded.analysis_limit is None
+    assert reloaded.analysis_limit == 2
     assert client.get("/api/v1/auth/me", headers=member_headers).json()["member_access"] is True
     assert client.post("/api/v1/analyze", headers=member_headers, json={}).status_code == 422
 
@@ -181,7 +181,7 @@ def test_bank_and_price_changes_do_not_rewrite_an_existing_order(system):
     register(client)
     service.configure(MembershipPlan(amount_vnd=200000, validity_days=30, bank_name="Other", bank_account="123456", registration_enabled=True))
     own = client.get("/api/v1/membership/me", headers=headers("newmember")).json()
-    assert own["membership"]["plan"]["amount_vnd"] == 100000
+    assert own["membership"]["plan"]["amount_vnd"] == 688888
     assert own["membership"]["plan"]["bank_account"] == "28676875"
     assert own["membership"]["plan"]["validity_days"] == 365
 

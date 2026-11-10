@@ -21,8 +21,8 @@
     }
   }
 
-  async function api(method, path, body) {
-    const headers = { Accept: "application/json" };
+  async function api(method, path, body, opts) {
+    const headers = Object.assign({ Accept: "application/json" }, opts && opts.headers);
     const token = getToken();
     if (token) headers.Authorization = "Bearer " + token;
     if (body !== undefined) headers["Content-Type"] = "application/json";

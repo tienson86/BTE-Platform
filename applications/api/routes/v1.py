@@ -152,7 +152,7 @@ def analyze_endpoint(
     """Primary end-to-end analysis endpoint."""
     owner = archive_owner(request)
     request_id = getattr(request.state, "request_id", None)
-    if user is not None and not auth_service.store.can_create_analysis(user.user_id):
+    if user is not None and not getattr(request.state, "usage_reserved", False) and not auth_service.store.can_create_analysis(user.user_id):
         raise HTTPException(
             status_code=429,
             detail="Tài khoản đã sử dụng hết số lượt tạo lá số được cấp.",
@@ -179,7 +179,7 @@ def analyze_endpoint(
         analysis_id=payload.get("analysis_id"),
         request_id=request_id,
     )
-    if user is not None and not auth_service.store.consume_analysis(user.user_id):
+    if user is not None and not auth_service.store.consume_analysis(user.user_id, reserved=getattr(request.state, "usage_reserved", False)):
         raise HTTPException(
             status_code=429,
             detail="Tài khoản đã sử dụng hết số lượt tạo lá số được cấp.",

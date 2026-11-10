@@ -43,6 +43,8 @@ def test_n1_customer_navigation_has_product_items() -> None:
         "Trang chủ",
         "Phân tích tên",
         "Xem Năng lượng số",
+        "Giới thiệu BTE",
+        "Thành viên BTE",
         "Xem lá số",
         "Chọn ngày tốt",
         "Tư vấn hôn nhân",
@@ -51,16 +53,16 @@ def test_n1_customer_navigation_has_product_items() -> None:
         "Tư vấn hợp tác",
         "Tính vận hạn",
     ]
-    assert len(CUSTOMER_NAV_ITEMS) == 10
+    assert len(CUSTOMER_NAV_ITEMS) == 12
     assert [item.path for item in CUSTOMER_NAV_ITEMS[:3]] == [
         "/good-date",
         "/name-analysis",
         "/number-energy",
     ]
-    assert CUSTOMER_NAV_ITEMS[3].path == "/analyze"
-    assert CUSTOMER_NAV_ITEMS[4].path == "/choose-date"
-    assert CUSTOMER_NAV_ITEMS[5].path == "/marriage-consulting"
-    assert CUSTOMER_NAV_ITEMS[6].path == "/childbirth-consulting"
+    assert CUSTOMER_NAV_ITEMS[5].path == "/analyze"
+    assert CUSTOMER_NAV_ITEMS[6].path == "/choose-date"
+    assert CUSTOMER_NAV_ITEMS[7].path == "/marriage-consulting"
+    assert CUSTOMER_NAV_ITEMS[8].path == "/childbirth-consulting"
 
 
 def test_n2_reports_not_in_customer_navigation() -> None:
@@ -218,6 +220,8 @@ def test_n10_legacy_welcome_is_not_production_landing() -> None:
         "Trang chủ",
         "Phân tích tên",
         "Xem Năng lượng số",
+        "Giới thiệu BTE",
+        "Thành viên BTE",
         "Xem lá số",
         "Chọn ngày tốt",
         "Tư vấn hôn nhân",

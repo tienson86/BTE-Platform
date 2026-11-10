@@ -1,6 +1,11 @@
 (function(){
   const form=document.getElementById("supportForm"),state=document.getElementById("supportState");
   if(!form)return;
+  const memberTier = new URLSearchParams(window.location.search).get("member_tier");
+  if (["1", "2", "3"].includes(memberTier)) {
+    form.elements.subject.value = "Đăng ký Phong thủy sư cấp " + memberTier;
+    form.elements.message.value = "Tôi muốn tìm hiểu và đăng ký gói Phong thủy sư cấp " + memberTier + ". Vui lòng tư vấn thời hạn, hạn mức và cách thanh toán.";
+  }
   let busy=false;
   if(BtePortal.getToken())BtePortal.get("/api/v1/auth/me").then(user=>{form.elements.full_name.value=user.display_name||"";form.elements.phone.value=user.phone||"";}).catch(()=>{});
   form.onsubmit=async event=>{

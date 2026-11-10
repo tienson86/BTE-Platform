@@ -41,6 +41,7 @@ def register_usage_access(app):
         if reservation["replay"]:
             return JSONResponse(reservation["output"],status_code=200)
         ticket = reservation["ticket"]
+        request.state.usage_reserved = True
         completed = False
         try:
             response = await call_next(request)

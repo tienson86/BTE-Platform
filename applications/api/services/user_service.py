@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from copy import deepcopy
+
 from applications.api.auth.store import InMemoryUserStore, UserRecord
 from applications.api.auth.password_hasher import hash_password
 from applications.api.auth.roles import Role
@@ -75,6 +77,12 @@ class UserService:
         if changes.get("analyses_used") is not None:
             updates["analyses_used"] = max(0, int(changes["analyses_used"]))
         with self.store._lock:
+            if "analysis_limit" in updates and (user.membership or {}).get("plan", {}).get("feature_limits") is not None:
+                membership = deepcopy(user.membership)
+                plan = membership["plan"]
+                plan["feature_limits"] = {feature: updates["analysis_limit"] for feature in plan["feature_limits"]}
+                plan["analysis_limit"] = updates["analysis_limit"]
+                updates["membership"] = membership
             before = {key:getattr(user,key) for key in updates}
             try:
                 for key,value in updates.items():setattr(user,key,value)

@@ -198,6 +198,18 @@ def create_app() -> FastAPI:
     def name_analysis_page() -> HTMLResponse:
         return page("name-analysis", "name_analysis.html")
 
+    @app.get("/gioi-thieu-bte", response_class=HTMLResponse)
+    def about_bte_page() -> HTMLResponse:
+        return page("about-bte", "about_bte.html")
+
+    @app.get("/thanh-vien-bte", response_class=HTMLResponse)
+    def bte_member_plans_page() -> HTMLResponse:
+        return page("member-plans", "member_plans.html")
+
+    @app.get("/chia-se-gioi-thieu", response_class=HTMLResponse)
+    def referral_share_page() -> HTMLResponse:
+        return page("referral-share", "referral_share.html")
+
     @app.get("/membership", response_class=HTMLResponse)
     def membership_page() -> HTMLResponse:
         return page("membership", "membership.html")

@@ -1,7 +1,9 @@
 """Manual bank-transfer membership; approval is only a server-side admin action."""
 from copy import deepcopy
+from applications.api.services.member_rewards import discounted_price, referral_code, find_referrer
 from datetime import datetime, timedelta, timezone
 import json
+import hashlib
 import os
 from pathlib import Path
 import tempfile
@@ -13,7 +15,7 @@ from applications.api.auth.password_hasher import hash_password
 from applications.api.auth.roles import Role
 from applications.api.auth.store import InMemoryUserStore, UserRecord
 from applications.api.exceptions import ApplicationsAPIError
-from applications.api.schemas.membership import MemberRegistration, MembershipPlan, MembershipReview
+from applications.api.schemas.membership import MemberRegistration, MembershipPlan, MembershipReview, MembershipOrderPlan
 
 
 def fail(message, status=409):
@@ -51,11 +53,25 @@ class MembershipService:
             return MembershipPlan()
 
     def public_plan(self):
+        from applications.api.services.activity_service import FEATURES
         plan = self.plan()
-        return {**plan.model_dump(), "ready": plan.ready, "currency": "VND", "payment_method": "bank_transfer_manual"}
+        return {**plan.model_dump(), "ready": plan.ready, "currency": "VND", "payment_method": "bank_transfer_manual", "features": FEATURES,
+                "tiers": [tier.model_dump(exclude={"referral_reward"}) for tier in plan.configured_tiers()]}
 
-    def configure(self, plan: MembershipPlan):
+    def revision(self):
+        return hashlib.sha256(self.path.read_bytes() if self.path.exists() else b"").hexdigest()
+
+    def admin_settings(self):
+        from applications.api.services.activity_service import FEATURES
         with self.lock:
+            plan = self.plan()
+            return {**plan.model_dump(), "tiers": [tier.model_dump() for tier in plan.configured_tiers()],
+                    "features": FEATURES, "revision": self.revision()}
+
+    def configure(self, plan: MembershipPlan, *, expected_revision=None):
+        with self.lock:
+            if expected_revision is not None and expected_revision != self.revision():
+                fail("Cấu hình đã được quản trị viên khác sửa. Vui lòng tải lại trước khi lưu.", 412)
             self.path.parent.mkdir(parents=True, exist_ok=True)
             temporary = None
             try:
@@ -84,6 +100,22 @@ class MembershipService:
                     "Tên đăng nhập đã có người dùng rồi. Bạn hãy chọn tên đăng nhập khác.",
                     status_code=409, code="username_taken", details={"field": "username"},
                 )
+            referrer = None
+            if body.referral_code:
+                referrer = find_referrer(self.store, body.referral_code)
+                if not referrer or not referrer.has_member_access():
+                    fail("Mã giới thiệu không hợp lệ hoặc người giới thiệu chưa có quyền thành viên.", 422)
+                if referrer.phone and referrer.phone == body.phone:
+                    fail("Không thể dùng mã giới thiệu của chính mình.", 422)
+            tier = next(item for item in plan.configured_tiers() if item.tier == body.tier)
+            if not tier.enabled:
+                fail("Cấp thành viên này đang tạm ngừng đăng ký.", 409)
+            selected = plan.model_dump(exclude={"tiers"})
+            selected.update(tier.model_dump(include={"title", "amount_vnd", "validity_days", "analysis_limit",
+                                                     "feature_limits", "enabled_features"}))
+            original_amount = selected["amount_vnd"]
+            if referrer:
+                selected["amount_vnd"] = discounted_price(original_amount)
             reference = "BTE" + uuid4().hex[:16].upper()
             record = UserRecord(
                 user_id="u-" + uuid4().hex, username=body.username,
@@ -91,7 +123,12 @@ class MembershipService:
                 phone=body.phone,
                 analysis_limit=0, membership={
                     "status": "pending", "reference": reference,
-                    "registered_at": now().isoformat(), "plan": plan.model_dump(),
+                    "registered_at": now().isoformat(), "plan": selected,
+                    "tier": body.tier, "original_amount_vnd": original_amount,
+                    "discount_percent": 20 if referrer else 0,
+                    "referrer_user_id": referrer.user_id if referrer else None,
+                    "referral_code": referral_code(referrer) if referrer else "",
+                    "referral_reward": tier.referral_reward if referrer else 0,
                     "payment_reported_at": None, "payment_note": "", "expires_at": None,
                 },
             )
@@ -153,9 +190,17 @@ class MembershipService:
             membership = deepcopy(user.membership)
             if membership.get("reference") != body.expected_reference:
                 fail("Hồ sơ đã thay đổi. Vui lòng tải lại trước khi duyệt.")
+            if body.decision == "refund":
+                if membership.get("status") != "active":
+                    fail("Chỉ ghi nhận hoàn tiền cho đăng ký đã được kích hoạt.")
+                membership.update(status="refunded", reviewed_by=admin.user_id,
+                                  review_note=body.note, refunded_at=now().isoformat(), expires_at=now().isoformat())
+                self._referral_event(membership, refund=True)
+                self._save(user, membership, 0)
+                return self.details(user, internal=True)
             if membership.get("status") != "pending":
                 fail("Hồ sơ đã được xử lý. Không cấp lại thời hạn hoặc lượt sử dụng.")
-            plan = MembershipPlan.model_validate(membership["plan"])
+            plan = MembershipOrderPlan.model_validate(membership["plan"])
             freeze_transfer_content(user, membership)
             approved = body.decision == "approve"
             membership.update({
@@ -164,8 +209,24 @@ class MembershipService:
                 "review_note": body.note,
                 "expires_at": (now() + timedelta(days=plan.validity_days)).isoformat() if approved else None,
             })
+            if approved:
+                self._referral_event(membership)
             self._save(user, membership, plan.analysis_limit if approved else 0)
             return self.details(user, internal=True)
+
+    def _referral_event(self, membership, *, refund=False):
+        owner = membership.get("referrer_user_id")
+        reward = membership.get("referral_reward", 0)
+        if not owner or not reward:
+            return
+        kind = "referral_refund" if refund else "referral"
+        membership.setdefault("referral_events", []).append({
+            "event": kind + ":" + membership["reference"], "owner": owner,
+            "delta": -reward if refund else reward, "kind": kind,
+            "created_at": now().isoformat(),
+            "description": ("Thu hồi thưởng do hoàn tiền" if refund else "Thưởng giới thiệu") +
+                           " gói cấp " + str(membership["tier"]),
+        })
 
     def applications(self):
         with self.store._lock:

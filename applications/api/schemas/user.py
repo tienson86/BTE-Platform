@@ -25,6 +25,7 @@ class UserProfile(BaseModel):
     analyses_used: int = Field(default=0, ge=0)
     analyses_remaining: int | None = Field(default=None, ge=0)
     member_access: bool = True
+    member_features: list[str] | None = None
     membership_status: str = "existing"
     membership_expires_at: str | None = None
 

@@ -6,7 +6,69 @@
   const account = document.getElementById("memberAccount");
   const usernameError = document.getElementById("memberUsernameError");
   const registerError = document.getElementById("memberRegisterError");
-  let plan, busy = false;
+  let plan, busy = false, verifiedReferral = null;
+  const query = new URLSearchParams(window.location.search);
+  const requestedTier = query.get("tier") || query.get("member_tier");
+  if (["1", "2", "3"].includes(requestedTier)) form.elements.tier.value = requestedTier;
+  const incomingRef = query.get("ref");
+  if (incomingRef) sessionStorage.setItem("bte.referral", incomingRef);
+  form.elements.referral_code.value = incomingRef || sessionStorage.getItem("bte.referral") || "";
+  function selectedPlan() {
+    return plan?.tiers?.find(item => item.tier === Number(form.elements.tier.value));
+  }
+  function rightsText(chosen) {
+    if (!chosen.feature_limits) return chosen.analysis_limit == null ? "Không giới hạn lượt." : chosen.analysis_limit + " lượt cho từng mục.";
+    return Object.entries(chosen.feature_limits).map(([feature, limit]) => {
+      const label = plan.features?.[feature] || feature;
+      if (!chosen.enabled_features.includes(feature)) return label + ": chưa mở";
+      return label + ": " + (limit === null ? "không giới hạn" : limit + " lượt");
+    }).join(" · ");
+  }
+  function populateTiers() {
+    if (!Array.isArray(plan.tiers)) return;
+    const select = form.elements.tier;
+    const selected = select.value;
+    select.replaceChildren();
+    plan.tiers.forEach(tier => {
+      const option = document.createElement("option");
+      option.value = tier.tier;
+      option.textContent = tier.title + " — " + money(tier.amount_vnd) + (tier.enabled === false ? " — tạm ngừng" : "");
+      option.disabled = tier.enabled === false; select.append(option);
+    });
+    select.value = selected;
+  }
+  function updatePrice() {
+    const chosen = selectedPlan();
+    if (!chosen) return;
+    const validRef = verifiedReferral && verifiedReferral.code === form.elements.referral_code.value.trim().toUpperCase();
+    const amount = validRef ? Math.floor((chosen.amount_vnd * 80 + 50) / 100) : chosen.amount_vnd;
+    document.getElementById("memberPrice").textContent =
+      money(amount) + ((chosen.validity_days ?? plan.validity_days) ? " / " + (chosen.validity_days ?? plan.validity_days) + " ngày" : "") +
+      (validRef ? " — đã giảm 20% từ " + money(chosen.amount_vnd) : "");
+    document.getElementById("memberAllowance").textContent =
+      chosen.title + " — " + rightsText(chosen) + " Xem lại hồ sơ đã lưu giữ nguyên số lượt.";
+  }
+  async function verifyReferral() {
+    verifiedReferral = null;
+    const code = form.elements.referral_code.value.trim().toUpperCase();
+    const target = document.getElementById("memberReferralState");
+    if (!code) { target.textContent = ""; sessionStorage.removeItem("bte.referral"); updatePrice(); return; }
+    try {
+      const result = await BtePortal.get("/api/v1/membership/referral/" + encodeURIComponent(code));
+      if (form.elements.referral_code.value.trim().toUpperCase() !== code) return;
+      verifiedReferral = result;
+      sessionStorage.setItem("bte.referral", result.code);
+      target.textContent = "Người giới thiệu: " + result.name + ". Giảm 20% cho lần mua gói đầu tiên.";
+    } catch (error) { target.textContent = error.message; }
+    updatePrice();
+  }
+  form.elements.tier.addEventListener("change", updatePrice);
+  form.elements.referral_code.addEventListener("input", () => {
+    verifiedReferral = null;
+    document.getElementById("memberReferralState").textContent = "Bấm Áp dụng mã để kiểm tra ưu đãi.";
+    updatePrice();
+  });
+  document.getElementById("memberApplyReferral").addEventListener("click", verifyReferral);
   const money = value => Number(value).toLocaleString("vi-VN") + " đ";
   const date = value => value ? new Date(value).toLocaleDateString("vi-VN") : "—";
   function node(tag, text, className) {
@@ -21,14 +83,24 @@
   function renderAccount(data) {
     account.replaceChildren(); account.hidden = false; form.hidden = true;
     const user = data.user, membership = data.membership;
+    if (membership) {
+      document.getElementById("memberPrice").textContent = money(membership.plan.amount_vnd) + " / " + membership.plan.validity_days + " ngày";
+      document.getElementById("memberAllowance").textContent = membership.plan.title + " — " + rightsText(membership.plan);
+    }
     const card = node("section", undefined, "panel");
     card.append(node("h2", "Tài khoản " + (user.display_name || user.username)));
     if (!membership) {
       card.append(node("p", "Tài khoản hiện tại giữ nguyên quyền sử dụng đã được cấp."), link("Mở xem lá số", "/analyze"), node("p"), link("Hồ sơ đã lưu và tải tài liệu", "/history"));
     } else {
-      const labels = { pending: "Chờ xác nhận thanh toán", active: user.member_access ? "Thành viên đang hoạt động" : "Thành viên đã hết hạn", rejected: "Đăng ký chưa được chấp thuận" };
+      const labels = { pending: "Chờ xác nhận thanh toán", active: user.member_access ? "Thành viên đang hoạt động" : "Thành viên đã hết hạn", rejected: "Đăng ký chưa được chấp thuận", refunded: "Đã ghi nhận hoàn tiền" };
       card.append(node("p", labels[membership.status] || "Đang kiểm tra trạng thái", "membership-status"));
       card.append(row("Họ và Tên", user.display_name || user.username), row("Tên đăng nhập", user.username), row("Số điện thoại", user.phone || "Chưa bổ sung"));
+      if (membership.tier) card.append(row("Cấp thành viên", membership.tier));
+      if (membership.discount_percent) card.append(
+        row("Giá gốc", money(membership.original_amount_vnd)),
+        row("Ưu đãi giới thiệu", membership.discount_percent + "%"),
+        row("Mã giới thiệu", membership.referral_code)
+      );
       if (membership.status === "pending") {
         const paidPlan = membership.plan;
         card.append(node("h3", "Thông tin chuyển khoản"), row("Ngân hàng", paidPlan.bank_name), row("Số tài khoản", paidPlan.bank_account),
@@ -65,9 +137,11 @@
   async function loadAccount() {
     const data = await BtePortal.get("/api/v1/membership/me");
     BtePortal.setSession(BtePortal.getToken(), data.user); renderAccount(data);
+    if (window.BteMemberRewards) await window.BteMemberRewards.render("memberRewards");
   }
   form.addEventListener("submit", async event => {
     event.preventDefault(); if (busy || !plan?.ready) return;
+    if (selectedPlan()?.enabled === false) { state.textContent = "Cấp này đang tạm ngừng đăng ký. Vui lòng chọn cấp khác."; return; }
     const input = form.elements;
     input.password_confirmation.setCustomValidity(input.password.value === input.password_confirmation.value ? "" : "Hai mật khẩu chưa giống nhau.");
     if (!form.reportValidity()) return;
@@ -77,7 +151,7 @@
     let registered = false, duplicate = false;
     try {
       const username = input.username.value.trim(), password = input.password.value;
-      await BtePortal.post("/api/v1/membership/register", {username, password, display_name: input.display_name.value.trim(), phone: input.phone.value.trim()});
+      await BtePortal.post("/api/v1/membership/register", {username, password, display_name: input.display_name.value.trim(), phone: input.phone.value.trim(), tier: Number(input.tier.value), referral_code: input.referral_code.value.trim().toUpperCase()});
       registered = true;
       input.password.value = ""; input.password_confirmation.value = "";
       const login = await BtePortal.post("/api/v1/auth/login", {username, password});
@@ -110,10 +184,11 @@
   (async function boot() {
     try {
       plan = await BtePortal.get("/api/v1/membership/plan");
-      document.getElementById("membershipTitle").textContent = plan.title;
+      document.getElementById("membershipTitle").textContent = plan.title || "Đăng ký thành viên BTE";
       document.getElementById("membershipIntro").textContent = plan.description;
-      document.getElementById("memberPrice").textContent = plan.amount_vnd && plan.validity_days ? money(plan.amount_vnd) + " / " + plan.validity_days + " ngày" : "Đang cập nhật biểu phí";
-      document.getElementById("memberAllowance").textContent = plan.analysis_limit ? "Mỗi chức năng được tối đa " + plan.analysis_limit + " lượt tạo mới, tính riêng cho lá số, chọn ngày, hôn nhân, sinh con, đặt tên, hợp tác và vận hạn. Xem lại hoặc tải hồ sơ đã lưu không tính thêm lượt." : "Quyền xem và tải được mở sau khi xác nhận thanh toán.";
+      populateTiers();
+      updatePrice();
+      if (!BtePortal.getToken() && form.elements.referral_code.value) await verifyReferral();
       if (BtePortal.getToken()) await loadAccount();
       else { form.hidden = false; fields.disabled = !plan.ready; if (!plan.ready) state.textContent = "Đăng ký trả phí sẽ mở sau khi biểu phí được cập nhật. Bạn vẫn dùng được các mục miễn phí."; }
     } catch (error) { state.textContent = error.message || "Chưa tải được thông tin thành viên. Vui lòng thử lại."; }

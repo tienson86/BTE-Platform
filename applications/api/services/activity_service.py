@@ -80,6 +80,8 @@ class ActivityService:
                 CREATE TABLE IF NOT EXISTS activity_results(owner TEXT,kind TEXT,id TEXT,created_at TEXT,customer_name TEXT,creator_username TEXT,creator_display_name TEXT,phone TEXT,snapshot TEXT,PRIMARY KEY(owner,kind,id));
                 CREATE INDEX IF NOT EXISTS usage_owner_feature ON usage_tickets(owner,feature,state);
                 """)
+            from applications.api.services.member_rewards import ensure_ledger
+            ensure_ledger(connection)
             connection.execute("BEGIN IMMEDIATE")
             yield connection
             connection.commit()
@@ -130,9 +132,16 @@ class ActivityService:
         with self.connect() as connection:
             for feature, label in FEATURES.items():
                 used, pending = self._usage(connection, user, feature)
-                limit = user.analysis_limit
+                from applications.api.services.member_rewards import extra_credits, feature_entitlement
+                base_limit, enabled = feature_entitlement(user, feature)
+                if not enabled:
+                    limit = 0
+                elif base_limit is None:
+                    limit = None
+                else:
+                    limit = base_limit + extra_credits(connection, user.user_id, feature)
                 items.append({"feature":feature,"label":label,"limit":limit,"used":used,"pending":pending,
-                              "remaining":None if limit is None else max(0,limit-used-pending)})
+                              "remaining":None if limit is None else max(0,limit-used-pending), "enabled": enabled})
         return items
 
     def reserve(self, user, feature, operation_key, inputs, legacy=False):
@@ -152,13 +161,22 @@ class ActivityService:
                 if previous["state"] == "held":
                     raise ActivityError("Yêu cầu này đang được xử lý. Vui lòng chờ rồi thử lại.")
             used, pending = self._usage(connection, user, feature)
-            if user.analysis_limit is not None and used + pending >= user.analysis_limit:
+            from applications.api.services.member_rewards import extra_credits, feature_entitlement
+            base_limit, enabled = feature_entitlement(user, feature)
+            if not enabled:
+                raise ActivityError("Chức năng này chưa được mở trong gói của bạn.", 403)
+            limit = None if base_limit is None else base_limit + extra_credits(connection, user.user_id, feature)
+            if limit is not None and used + pending >= limit:
                 raise ActivityError(f"Bạn đã hết lượt {FEATURES[feature].lower()}. Vui lòng liên hệ ADMIN để được cấp thêm hạn mức.",429,"quota_exhausted")
             ticket = previous["id"] if previous else uuid4().hex
             if previous:
                 connection.execute("UPDATE usage_tickets SET state='held',created_at=?,legacy=? WHERE id=?", (timestamp(),int(legacy),ticket))
             else:
                 connection.execute("INSERT INTO usage_tickets VALUES(?,?,?,?,?,?,'held',?,?,NULL,NULL)", (ticket,user.user_id,feature,operation_key,fingerprint,encoded,int(legacy),timestamp()))
+            connection.execute(
+                "INSERT OR REPLACE INTO linh_ticket_sources VALUES(?,?)",
+                (ticket, int(base_limit is not None and used + pending >= base_limit)),
+            )
             return {"ticket":ticket,"replay":False}
 
     def cancel(self, user, ticket):
@@ -182,6 +200,13 @@ class ActivityService:
                         "creator_username":user.username,"creator_display_name":user.display_name,"created_at":record["created_at"]}
             connection.execute("INSERT OR IGNORE INTO activity_results VALUES(?,?,?,?,?,?,?,?,?)",("user:"+user.user_id,feature,identifier,record["created_at"],customer_label(inputs),user.username,user.display_name,user.phone,json.dumps(snapshot,ensure_ascii=False)))
             connection.execute("UPDATE usage_tickets SET state='committed',legacy=?,output_json=?,status_code=? WHERE id=?",(int(bool(record["legacy"] or replay)),json.dumps(output,ensure_ascii=False),status_code,ticket))
+            source = connection.execute("SELECT redeemed FROM linh_ticket_sources WHERE ticket=?", (ticket,)).fetchone()
+            if not replay and not (source and source[0]) and user.has_member_access():
+                connection.execute(
+                    "INSERT OR IGNORE INTO linh_ledger VALUES(?,?,1,'consultation',?,?,?)",
+                    ("consultation:" + user.user_id + ":" + feature + ":" + identifier,
+                     user.user_id, "Hoàn tất " + FEATURES[feature], feature, timestamp()),
+                )
             return {"saved":True,"id":identifier}
 
     def records(self):

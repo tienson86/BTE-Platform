@@ -108,3 +108,43 @@ it("requires explicit transaction verification before the admin approval action"
   (buttons[0] as HTMLButtonElement).click();
   await vi.waitFor(() => expect(api.post).toHaveBeenCalledWith("/api/v1/membership/admin/applications/new-user/review", {decision: "approve", expected_reference: "BTEABC123", note: ""}));
 });
+
+it("selects the linked tier and displays the verified 20 percent referral discount", async () => {
+  window.history.replaceState({}, "", "/membership?tier=3&ref=BTE-TEST");
+  document.body.innerHTML = template;
+  const tiers = [
+    {tier:1,title:"Phong thủy sư cấp 1",amount_vnd:688888,analysis_limit:2},
+    {tier:2,title:"Phong thủy sư cấp 2",amount_vnd:2777777,analysis_limit:13},
+    {tier:3,title:"Phong thủy sư cấp 3",amount_vnd:13333333,analysis_limit:131},
+  ];
+  vi.stubGlobal("BtePortal", {
+    getToken: () => "",
+    get: vi.fn((path:string) => Promise.resolve(path.endsWith("/plan") ? {...plan,tiers} : {code:"BTE-TEST",name:"Người giới thiệu"})),
+  });
+  new Function(script)();
+  await vi.waitFor(() => expect(document.getElementById("memberPrice")?.textContent).toContain("10.666.666"));
+  expect((document.querySelector('[name="tier"]') as HTMLSelectElement).value).toBe("3");
+  expect(document.getElementById("memberAllowance")?.textContent).toContain("131");
+  expect(document.getElementById("memberReferralState")?.textContent).toContain("Người giới thiệu");
+  const input = document.querySelector('[name="referral_code"]') as HTMLInputElement;
+  input.value = ""; input.dispatchEvent(new Event("input", {bubbles:true}));
+  expect(document.getElementById("memberPrice")?.textContent).toContain("13.333.333");
+  sessionStorage.clear(); window.history.replaceState({}, "", "/");
+});
+
+it("sends the chosen tier and code while leaving final price determination to the server", async () => {
+  sessionStorage.clear(); window.history.replaceState({}, "", "/membership?tier=2");
+  const api = mount();
+  await vi.waitFor(() => expect((document.getElementById("memberRegisterFields") as HTMLFieldSetElement).disabled).toBe(false));
+  const form = document.getElementById("memberRegisterForm") as HTMLFormElement;
+  const fields = form.elements as any;
+  fields.display_name.value="Người mới"; fields.username.value="buyer"; fields.phone.value="0912345678";
+  fields.password.value=fields.password_confirmation.value="test-password-123";
+  fields.referral_code.value="BTE-TEST";
+  api.post.mockRejectedValueOnce(new Error("Test stops before creating an account"));
+  form.dispatchEvent(new Event("submit", {bubbles:true,cancelable:true}));
+  await vi.waitFor(() => expect(api.post).toHaveBeenCalledWith("/api/v1/membership/register", {
+    username:"buyer",password:"test-password-123",display_name:"Người mới",phone:"0912345678",tier:2,referral_code:"BTE-TEST",
+  }));
+  window.history.replaceState({}, "", "/");
+});

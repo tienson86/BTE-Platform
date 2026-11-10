@@ -43,3 +43,12 @@ it("keeps free pages open and hides member tools for a stale token", async () =>
   expect(location.pathname).toBe("/number-energy");
   expect((document.getElementById("memberSidebar") as HTMLElement).hidden).toBe(true);
 });
+
+it("hides tools excluded from the approved membership while retaining public tools", async () => {
+  mount("test-token", {user_id:"member",role:"CUSTOMER",member_access:true,member_features:["bazi","naming"]});
+  await vi.waitFor(() => expect((document.getElementById("memberSidebar") as HTMLElement).hidden).toBe(false));
+  expect((document.querySelector('a[href="/analyze"]') as HTMLElement).hidden).toBe(false);
+  expect((document.querySelector('a[href="/naming-consulting"]') as HTMLElement).hidden).toBe(false);
+  expect((document.querySelector('a[href="/marriage-consulting"]') as HTMLElement).hidden).toBe(true);
+  expect((document.querySelector('a[href="/number-energy"]') as HTMLElement).hidden).toBe(false);
+});

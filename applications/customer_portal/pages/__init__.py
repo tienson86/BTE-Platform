@@ -43,6 +43,10 @@ CUSTOMER_PUBLIC_NAV_ITEMS: tuple[NavItem, ...] = (
         "number_energy.html",
     ),
 )
+CUSTOMER_PUBLIC_NAV_ITEMS += (
+    NavItem("about-bte", "nav.about_bte", "/gioi-thieu-bte", "about_bte.html"),
+    NavItem("member-plans", "nav.member_plans", "/thanh-vien-bte", "member_plans.html"),
+)
 CUSTOMER_MEMBER_NAV_ITEMS: tuple[NavItem, ...] = (
     NavItem("analyze", "nav.view_chart", "/analyze", "analyze.html"),
     NavItem("choose-date", "nav.choose_date", "/choose-date", "choose_date.html"),

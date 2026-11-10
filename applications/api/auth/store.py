@@ -63,6 +63,7 @@ class UserRecord:
             "analyses_used": self.analyses_used,
             "analyses_remaining": None if self.analysis_limit is None else max(0, self.analysis_limit - self.analyses_used),
             "member_access": self.has_member_access(),
+            "member_features": (self.membership or {}).get("plan", {}).get("enabled_features"),
             "membership_status": (self.membership or {}).get("status", "existing"),
             "membership_expires_at": (self.membership or {}).get("expires_at"),
         }
@@ -107,13 +108,13 @@ class InMemoryUserStore:
         user = self.get_by_id(user_id)
         return bool(user) and (user.analysis_limit is None or user.analyses_used < user.analysis_limit)
 
-    def consume_analysis(self, user_id: str) -> bool:
+    def consume_analysis(self, user_id: str, *, reserved: bool = False) -> bool:
         """Atomically consume one successful analysis from the account quota."""
         with self._lock:
             user = self.get_by_id(user_id)
             if user is None or not user.is_active:
                 return False
-            if user.analysis_limit is not None and user.analyses_used >= user.analysis_limit:
+            if not reserved and user.analysis_limit is not None and user.analyses_used >= user.analysis_limit:
                 return False
             user.analyses_used += 1
             self._after_change()
@@ -158,12 +159,12 @@ class JsonUserStore(InMemoryUserStore):
             self._after_change()
             return saved
 
-    def consume_analysis(self, user_id: str) -> bool:
+    def consume_analysis(self, user_id: str, *, reserved: bool = False) -> bool:
         with self._lock:
             user = self.get_by_id(user_id)
             before = user.analyses_used if user is not None else None
             try:
-                return super().consume_analysis(user_id)
+                return super().consume_analysis(user_id, reserved=reserved)
             except Exception:
                 if user is not None:
                     user.analyses_used = before
