@@ -13,7 +13,7 @@ from applications.api.auth.dependencies import (
 from applications.api.auth.permissions import Permission
 from applications.api.auth.roles import Role
 from applications.api.auth.store import UserRecord
-from applications.api.schemas.user import AdminUserCreate, AdminUserUpdate, UserProfile, UserQuotaUpdate
+from applications.api.schemas.user import AdminUserCreate, AdminUserUpdate, UserProfile, UserQuotaUpdate, ManualMembershipGrant, AccountAction
 from applications.api.services.user_service import UserService
 
 router = APIRouter(prefix="/users", tags=["Users"])
@@ -43,7 +43,7 @@ def update_user(
     _admin: UserRecord = Depends(require_role(Role.ADMIN)),
     users: UserService = Depends(get_user_service),
 ) -> UserProfile:
-    return UserProfile(**users.update_user(username, **body.model_dump(exclude_unset=True)).to_public_dict())
+    return UserProfile(**users.update_user(username, actor=_admin, **body.model_dump(exclude_unset=True)).to_public_dict())
 
 
 @router.get("/me", response_model=UserProfile)
@@ -92,3 +92,17 @@ def update_user_quota(
         analyses_used=body.analyses_used,
     )
     return UserProfile(**user.to_public_dict())
+
+
+@router.post('/{username}/membership-grant', response_model=UserProfile)
+def grant_membership(username: str, body: ManualMembershipGrant,
+                     admin: UserRecord = Depends(require_role(Role.ADMIN)), users: UserService = Depends(get_user_service)):
+    from applications.api.services.account_admin import AccountAdminService
+    return AccountAdminService(users.store).grant(admin, username, body)
+
+
+@router.post('/{username}/account-action/{action}', response_model=UserProfile)
+def account_action(username: str, action: str, body: AccountAction,
+                   admin: UserRecord = Depends(require_role(Role.ADMIN)), users: UserService = Depends(get_user_service)):
+    from applications.api.services.account_admin import AccountAdminService
+    return AccountAdminService(users.store).action(admin, username, action, body)

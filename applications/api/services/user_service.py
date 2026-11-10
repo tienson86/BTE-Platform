@@ -49,7 +49,7 @@ class UserService:
         return self.update_user(username,analysis_limit=max(0,int(analysis_limit)),analyses_used=analyses_used)
 
     def list_users(self) -> list[UserRecord]:
-        return sorted(self.store.users_by_id.values(), key=lambda item: item.username.lower())
+        return sorted((u for u in self.store.users_by_id.values() if not u.deleted_at), key=lambda item: item.username.lower())
 
     def create_user(self, username: str, password: str, display_name: str, analysis_limit: int, phone: str = "") -> UserRecord:
         if self.store.get_by_username(username):
@@ -60,7 +60,7 @@ class UserService:
             phone=phone,
         ))
 
-    def update_user(self, username: str, **changes: object) -> UserRecord:
+    def update_user(self, username: str, *, actor=None, **changes: object) -> UserRecord:
         user = self.get_by_username(username)
         updates = {}
         if changes.get("phone") is not None:
@@ -77,6 +77,20 @@ class UserService:
         if changes.get("analyses_used") is not None:
             updates["analyses_used"] = max(0, int(changes["analyses_used"]))
         with self.store._lock:
+            if user.deleted_at:
+                raise UserServiceError("Tài khoản đã xóa. Khôi phục trước khi điều chỉnh.", status_code=409)
+            expected = changes.get("expected_revision")
+            if expected is not None and expected != user.account_revision:
+                raise UserServiceError("Tài khoản đã thay đổi. Vui lòng tải lại.", status_code=409)
+            if updates.get("is_active") is False and user.role == Role.ADMIN:
+                active_admins = [u for u in self.store.users_by_id.values() if u.role == Role.ADMIN and u.is_active and not u.deleted_at]
+                if actor is None or actor.user_id == user.user_id or len(active_admins) <= 1:
+                    raise UserServiceError("Không thể tự khóa hoặc khóa Admin cuối cùng.", status_code=409)
+            updates["account_revision"] = user.account_revision + 1
+            if actor is not None:
+                from datetime import datetime, timezone
+                updates["admin_events"] = [*user.admin_events, {"action":"edit", "actor":actor.user_id,
+                    "at":datetime.now(timezone.utc).isoformat(), "fields":[k for k in updates if k not in ("password_hash", "admin_events")]}]
             if "analysis_limit" in updates and (user.membership or {}).get("plan", {}).get("feature_limits") is not None:
                 membership = deepcopy(user.membership)
                 plan = membership["plan"]

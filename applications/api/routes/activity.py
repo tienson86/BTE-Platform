@@ -39,9 +39,9 @@ def cancel(ticket: str, user: CurrentUser):
     return {"cancelled":True}
 
 @router.get("/admin/registered-customers")
-def customers(admin=Depends(require_role(Role.ADMIN)), q: str=""):
+def customers(admin=Depends(require_role(Role.ADMIN)), q: str="", deleted: bool=False):
     service = get_activity_service()
-    users = [user for user in service.store.users_by_id.values() if user.role == Role.CUSTOMER]
+    users = [user for user in service.store.users_by_id.values() if user.role == Role.CUSTOMER and bool(user.deleted_at) == deleted]
     needle = q.strip().casefold()
     users = [user for user in users if not needle or needle in " ".join((user.username,user.display_name,user.phone)).casefold()]
     return {"items":[{**user.to_public_dict(),"usage":service.summary(user)} for user in sorted(users,key=lambda user:user.username.casefold())]}
@@ -57,7 +57,7 @@ def update_customer(username: str, body: AdminUserUpdate, admin=Depends(require_
     changes = body.model_dump(exclude_unset=True)
     # The customer directory adjusts the shared allowance without erasing past usage.
     changes.pop("analyses_used", None)
-    user = users.update_user(username, **changes)
+    user = users.update_user(username, actor=admin, **changes)
     return {**user.to_public_dict(),"usage":service.summary(user)}
 
 @router.post("/admin/registered-customers/{username}/release-pending")

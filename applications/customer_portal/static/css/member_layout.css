@@ -2,6 +2,20 @@
 body .member-sidebar[hidden], body [data-admin-only][hidden],
 body [data-forum-only][hidden], body [data-message-unread][hidden],
 body #memberLogout[hidden], body #btnNavToggle[hidden], body #siteAnnouncement[hidden] { display: none !important; }
+body #headerLinhThach[hidden], body #btnThemeToggle { display:none !important; }
+body .app-header .header-linh-thach { display:inline-flex; align-items:center; gap:6px; flex-shrink:0; min-height:54px; padding:3px 13px 3px 5px; border:1px solid #efc467; border-radius:14px; background:linear-gradient(135deg,#073e32,#17654b); color:#ffe8a1; text-decoration:none; box-shadow:0 2px 10px #3b160b35,inset 0 1px 0 #fff4; }
+body .app-header .header-linh-thach img { width:52px; height:52px; object-fit:contain; filter:drop-shadow(0 2px 3px #001f1799); }
+body .app-header .header-linh-thach__text { display:flex; flex-direction:column; align-items:flex-start; gap:1px; line-height:1.15; }
+body .app-header .header-linh-thach__text strong { color:#fff1bd; font-size:21px; font-weight:850; font-variant-numeric:tabular-nums; }
+body .app-header .header-linh-thach__text span { color:#ffe3a0; font-size:11px; font-weight:700; white-space:nowrap; }
+body .app-header .header-linh-thach:hover { border-color:#fff0ab; background:linear-gradient(135deg,#0d4c3c,#217956); }
+body .app-header .header-linh-thach:focus-visible { outline:3px solid #fff0ab; outline-offset:3px; }
+@media(max-width:600px) {
+  body .app-header .header-linh-thach { padding:2px 8px 2px 3px; gap:3px; min-height:46px; }
+  body .app-header .header-linh-thach img { width:42px; height:42px; }
+  body .app-header .header-linh-thach__text strong { font-size:17px; }
+  body .app-header .header-linh-thach__text span { font-size:10px; }
+}
 body .app-header { height: auto; min-height: 76px; flex-wrap: nowrap; gap: 18px; }
 body .app-header .app-brand { flex: 0 0 218px; }
 body .app-header .app-nav { display: flex; flex-direction: row; width: auto; flex-wrap: wrap; overflow: visible; gap: 6px; padding: 0; }

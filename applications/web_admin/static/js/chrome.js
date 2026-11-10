@@ -72,6 +72,6 @@
   }
 
   showVerifiedSession();
-  const titles = {dashboard:"Tổng quan",accounts:"Quản lý tài khoản",memberships:"Thành viên & thanh toán","website-settings":"Cấu hình website",customers:"Khách hàng",cases:"Hồ sơ tư vấn",messages:"Tin nhắn thành viên",community:"Duyệt trao đổi kiến thức",knowledge:"Kiến thức phong thủy",courses:"Quản lý khóa học",reports:"Báo cáo",licenses:"Bản quyền",statistics:"Thống kê",settings:"Thông tin hệ thống"};
+  const titles = {dashboard:"Tổng quan",accounts:"Quản lý tài khoản",memberships:"Thành viên & thanh toán","website-settings":"Cấu hình website",customers:"Danh sách thành viên",cases:"Hồ sơ tư vấn",messages:"Tin nhắn thành viên",community:"Duyệt trao đổi kiến thức",knowledge:"Kiến thức phong thủy",courses:"Quản lý khóa học",reports:"Báo cáo",licenses:"Bản quyền",statistics:"Thống kê",settings:"Thông tin hệ thống"};
   document.getElementById("pageTitle").textContent = titles[document.body.dataset.adminPage] || "Quản trị hệ thống";
 })();

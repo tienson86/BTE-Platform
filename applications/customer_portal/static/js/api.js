@@ -12,6 +12,7 @@
   function clearSession() {
     sessionStorage.removeItem(TOKEN_KEY);
     sessionStorage.removeItem(USER_KEY);
+    window.dispatchEvent(new Event("bte:session-cleared"));
   }
   function getUser() {
     try {
@@ -56,6 +57,7 @@
       err.payload = data;
       throw err;
     }
+    if (!["GET", "HEAD", "OPTIONS"].includes(method.toUpperCase())) window.dispatchEvent(new Event("bte:wallet-changed"));
     return data;
   }
 

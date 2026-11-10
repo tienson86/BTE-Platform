@@ -92,3 +92,15 @@ def redeem_reward(body: LinhThachRedeem, user: CurrentUser,
     from applications.api.services.activity_service import ActivityService
     from applications.api.services.member_rewards import redeem
     return redeem(ActivityService(service.store), user, body.feature, body.operation_key)
+
+
+@router.get("/wallet-balance")
+def wallet_balance(user: CurrentUser, service: MembershipService = Depends(get_membership_service)):
+    from fastapi.responses import JSONResponse
+    from applications.api.services.activity_service import ActivityService
+    from applications.api.services.member_rewards import balance, sync_referrals
+    activity = ActivityService(service.store)
+    sync_referrals(activity)
+    with activity.connect() as connection:
+        amount = balance(connection, user.user_id)
+    return JSONResponse({"balance": amount}, headers={"Cache-Control": "private, no-store"})

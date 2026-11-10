@@ -9,7 +9,55 @@
     return "/login?next=" + encodeURIComponent(currentPath() + (window.location.search || ""));
   }
 
+  var walletOwner = null, walletGeneration = 0, walletTimer = null, walletLoading = false, walletRefreshPending = false;
+  async function refreshHeaderWallet() {
+    var badge = document.getElementById('headerLinhThach'), count = document.getElementById('headerLinhThachBalance');
+    if (!badge || !count || !walletOwner || document.hidden) return;
+    if (walletLoading) { walletRefreshPending = true; return; }
+    var generation = walletGeneration;
+    walletLoading = true;
+    try {
+      var result = await BtePortal.get('/api/v1/membership/wallet-balance');
+      if (generation !== walletGeneration) return;
+      if (!Number.isSafeInteger(result.balance)) throw new Error('Invalid balance');
+      count.textContent = result.balance.toLocaleString('vi-VN');
+      badge.setAttribute('aria-label', 'Số dư ' + count.textContent + ' Linh Thạch. Xem và đổi Linh Thạch');
+      badge.title = 'Số dư ' + count.textContent + ' Linh Thạch — bấm để xem và đổi';
+      badge.hidden = false;
+    } catch (error) {
+      if (generation !== walletGeneration) return;
+      count.textContent = '—';
+      badge.title = 'Chưa tải được số dư Linh Thạch. Bấm để kiểm tra';
+      badge.setAttribute('aria-label', 'Chưa tải được số dư Linh Thạch');
+      if (error.status === 401 || error.status === 403) updateHeaderWallet(null);
+    } finally {
+      if (generation === walletGeneration) {
+        walletLoading = false;
+        if (walletRefreshPending) { walletRefreshPending = false; void refreshHeaderWallet(); }
+      }
+    }
+  }
+  function updateHeaderWallet(user) {
+    var badge = document.getElementById('headerLinhThach'), count = document.getElementById('headerLinhThachBalance');
+    if (!badge || !count) return;
+    var next = user ? user.user_id || user.username : null;
+    if (next === walletOwner) { badge.hidden = !user; return; }
+    walletGeneration += 1; walletOwner = next; walletLoading = false; walletRefreshPending = false;
+    if (walletTimer) clearInterval(walletTimer);
+    walletTimer = null; count.textContent = '—'; badge.hidden = !user;
+    badge.setAttribute('aria-label', 'Số dư Linh Thạch');
+    if (user) {
+      void refreshHeaderWallet();
+      walletTimer = setInterval(refreshHeaderWallet, 45000);
+    }
+  }
+  window.addEventListener('bte:wallet-changed', refreshHeaderWallet);
+  window.addEventListener('bte:session-cleared', function () { updateHeaderWallet(null); });
+  window.addEventListener('focus', refreshHeaderWallet);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) void refreshHeaderWallet(); });
+
   function updateNavigation(user) {
+    updateHeaderWallet(user);
     var logout = document.getElementById("memberLogout");
     if (logout) logout.hidden = !user;
     var sidebar = document.getElementById("memberSidebar");

@@ -8,7 +8,11 @@
       const headers = new Headers(options && options.headers || (input instanceof Request ? input.headers : undefined));
       const token = window.BtePortal.getToken();
       if (token) headers.set('Authorization', 'Bearer ' + token);
-      return nativeFetch(input, Object.assign({}, options, {headers}));
+      return nativeFetch(input, Object.assign({}, options, {headers})).then(function(response) {
+        const method = (options && options.method) || (input instanceof Request ? input.method : 'GET');
+        if (response.ok && !['GET', 'HEAD', 'OPTIONS'].includes(method.toUpperCase())) window.dispatchEvent(new Event('bte:wallet-changed'));
+        return response;
+      });
     }
     const owner = new URLSearchParams(location.search).get('admin_owner');
     if (owner && /^\/backend\/api\/v1\/export\/(pdf|docx)$/.test(url.pathname) && options && typeof options.body === 'string') {

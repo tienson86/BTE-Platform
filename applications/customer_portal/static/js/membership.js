@@ -84,7 +84,7 @@
     account.replaceChildren(); account.hidden = false; form.hidden = true;
     const user = data.user, membership = data.membership;
     if (membership) {
-      document.getElementById("memberPrice").textContent = money(membership.plan.amount_vnd) + " / " + membership.plan.validity_days + " ngày";
+      document.getElementById("memberPrice").textContent = (membership.source === "manual" ? "Được Admin cấp thủ công" : money(membership.plan.amount_vnd)) + " / " + membership.plan.validity_days + " ngày";
       document.getElementById("memberAllowance").textContent = membership.plan.title + " — " + rightsText(membership.plan);
     }
     const card = node("section", undefined, "panel");
@@ -96,6 +96,7 @@
       card.append(node("p", labels[membership.status] || "Đang kiểm tra trạng thái", "membership-status"));
       card.append(row("Họ và Tên", user.display_name || user.username), row("Tên đăng nhập", user.username), row("Số điện thoại", user.phone || "Chưa bổ sung"));
       if (membership.tier) card.append(row("Cấp thành viên", membership.tier));
+      if (membership.source === "manual") card.append(node("p", "Quyền thành viên được Admin cấp thủ công. Đây không phải xác nhận đã thanh toán."));
       if (membership.discount_percent) card.append(
         row("Giá gốc", money(membership.original_amount_vnd)),
         row("Ưu đãi giới thiệu", membership.discount_percent + "%"),

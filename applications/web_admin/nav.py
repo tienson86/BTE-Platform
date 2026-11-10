@@ -20,7 +20,7 @@ NAV_ITEMS: tuple[NavItem, ...] = (
     NavItem("accounts", "Quản lý tài khoản", "/accounts", "accounts.html"),
     NavItem("memberships", "Thành viên & thanh toán", "/memberships", "membership.html"),
     NavItem("website-settings", "Cấu hình website", "/website-settings", "membership.html"),
-    NavItem("customers", "Khách hàng", "/customers", "customers.html"),
+    NavItem("customers", "Danh sách thành viên", "/customers", "customers.html"),
     NavItem("cases", "Hồ sơ tư vấn", "/cases", "cases.html"),
     NavItem("messages", "Tin nhắn thành viên", "/messages", "messages.html"),
     NavItem("community", "Duyệt trao đổi kiến thức", "/community", "community.html"),

@@ -30,10 +30,13 @@ class UserRecord:
     analyses_used: int = 0
     membership: dict[str, Any] | None = None
     phone: str = ""
+    deleted_at: str | None = None
+    account_revision: int = 1
+    admin_events: list[dict[str, Any]] = field(default_factory=list)
 
     def has_member_access(self) -> bool:
         """Existing accounts retain access; new members require a current approval."""
-        if not self.is_active:
+        if not self.is_active or self.deleted_at:
             return False
         if self.role == Role.ADMIN or self.membership is None:
             return True
@@ -66,6 +69,10 @@ class UserRecord:
             "member_features": (self.membership or {}).get("plan", {}).get("enabled_features"),
             "membership_status": (self.membership or {}).get("status", "existing"),
             "membership_expires_at": (self.membership or {}).get("expires_at"),
+            "member_tier": (self.membership or {}).get("tier"),
+            "membership_source": (self.membership or {}).get("source"),
+            "deleted_at": self.deleted_at,
+            "account_revision": self.account_revision,
         }
 
 
@@ -180,6 +187,9 @@ class JsonUserStore(InMemoryUserStore):
                 analysis_limit=row.get("analysis_limit"), analyses_used=int(row.get("analyses_used", 0)),
                 membership=row.get("membership"),
                 phone=str(row.get("phone") or ""),
+                deleted_at=row.get("deleted_at"),
+                account_revision=int(row.get("account_revision", 1)),
+                admin_events=row.get("admin_events") or [],
             ))
 
     def _after_change(self) -> None:
@@ -192,6 +202,9 @@ class JsonUserStore(InMemoryUserStore):
                 "analysis_limit": u.analysis_limit, "analyses_used": u.analyses_used,
                 "membership": u.membership,
                 "phone": u.phone,
+                "deleted_at": u.deleted_at,
+                "account_revision": u.account_revision,
+                "admin_events": u.admin_events,
             } for u in self.users_by_id.values()]
             name = None
             try:

@@ -44,7 +44,7 @@ class AuthService:
     def login(self, username: str, password: str) -> tuple[UserRecord, TokenPair]:
         """Authenticate username/password and issue tokens."""
         user = self.store.get_by_username(username)
-        if user is None or not user.is_active:
+        if user is None or not user.is_active or user.deleted_at:
             raise AuthServiceError("Invalid username or password")
         if not verify_password(password, user.password_hash):
             raise AuthServiceError("Invalid username or password")
@@ -67,7 +67,7 @@ class AuthService:
             raise AuthServiceError("Refresh token revoked")
 
         user = self.store.get_by_id(str(payload["sub"]))
-        if user is None or not user.is_active:
+        if user is None or not user.is_active or user.deleted_at:
             raise AuthServiceError("User not found or inactive")
 
         if jti:
@@ -154,7 +154,7 @@ class AuthService:
         if self.store.is_jti_revoked(jti):
             return None
         user = self.store.get_by_id(str(payload["sub"]))
-        if user is None or not user.is_active:
+        if user is None or not user.is_active or user.deleted_at:
             return None
         return user
 
@@ -164,6 +164,6 @@ class AuthService:
         if record is None:
             return None
         user = self.store.get_by_id(record.user_id)
-        if user is None or not user.is_active:
+        if user is None or not user.is_active or user.deleted_at:
             return None
         return user

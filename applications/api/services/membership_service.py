@@ -161,12 +161,14 @@ class MembershipService:
                 "transfer_content": memo, "transfer_instructions_updated": instructions_updated}
 
     def _save(self, user, membership, analysis_limit):
-        previous, previous_limit = user.membership, user.analysis_limit
+        previous, previous_limit, revision = user.membership, user.analysis_limit, user.account_revision
         try:
             user.membership, user.analysis_limit = membership, analysis_limit
+            user.account_revision += 1
             self.store._after_change()
         except Exception:
             user.membership, user.analysis_limit = previous, previous_limit
+            user.account_revision = revision
             raise
 
     def report_payment(self, user: UserRecord, note: str):
@@ -188,6 +190,8 @@ class MembershipService:
             if not user or not user.membership:
                 fail("Không tìm thấy đăng ký thành viên.", 404)
             membership = deepcopy(user.membership)
+            if user.deleted_at or membership.get("source") == "manual":
+                fail("Quyền cấp thủ công hoặc tài khoản đã xóa không phải đơn thanh toán để duyệt.")
             if membership.get("reference") != body.expected_reference:
                 fail("Hồ sơ đã thay đổi. Vui lòng tải lại trước khi duyệt.")
             if body.decision == "refund":
@@ -230,5 +234,5 @@ class MembershipService:
 
     def applications(self):
         with self.store._lock:
-            return sorted([self.details(user, internal=True) for user in self.store.users_by_id.values() if user.membership],
-                          key=lambda item: item["membership"]["registered_at"], reverse=True)
+            return sorted([self.details(user, internal=True) for user in self.store.users_by_id.values() if user.membership and not user.deleted_at and user.membership.get("source") != "manual"],
+                          key=lambda item: item["membership"].get("registered_at", ""), reverse=True)
