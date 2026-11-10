@@ -85,6 +85,10 @@ def create_app() -> FastAPI:
     def community_page() -> HTMLResponse:
         return page("community", "community.html")
 
+    @app.get("/courses", response_class=HTMLResponse)
+    def courses_page() -> HTMLResponse:
+        return page("courses", "courses.html")
+
     @app.get("/knowledge", response_class=HTMLResponse)
     def knowledge_page() -> HTMLResponse:
         return page("knowledge", "knowledge.html")

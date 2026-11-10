@@ -34,6 +34,7 @@ from applications.api.auth.usage_access import register_usage_access
 from applications.api.routes.activity import router as activity_router, register_activity_errors
 from applications.api.routes.communications import router as communications_router
 from applications.api.routes.knowledge import router as knowledge_router
+from applications.api.routes.courses import router as courses_router
 from applications.api.routes import export as export_router
 from applications.api.routes import v1 as v1_router
 from applications.monitoring import register_ops_middleware
@@ -93,6 +94,7 @@ def create_app() -> FastAPI:
     app.include_router(activity_router, prefix=settings.api_prefix)
     app.include_router(communications_router, prefix=settings.api_prefix)
     app.include_router(knowledge_router, prefix=settings.api_prefix)
+    app.include_router(courses_router, prefix=settings.api_prefix)
     app.include_router(customers_router.router, prefix=settings.api_prefix)
     app.include_router(cases_router.router, prefix=settings.api_prefix)
     app.include_router(admin_router.router, prefix=settings.api_prefix)

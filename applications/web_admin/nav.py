@@ -24,6 +24,7 @@ NAV_ITEMS: tuple[NavItem, ...] = (
     NavItem("cases", "Hồ sơ tư vấn", "/cases", "cases.html"),
     NavItem("messages", "Tin nhắn thành viên", "/messages", "messages.html"),
     NavItem("community", "Duyệt trao đổi kiến thức", "/community", "community.html"),
+    NavItem("courses", "Quản lý khóa học", "/courses", "courses.html"),
     NavItem("knowledge", "Kiến thức phong thủy", "/knowledge", "knowledge.html"),
     NavItem("reports", "Báo cáo", "/reports", "reports.html"),
     NavItem("licenses", "Bản quyền", "/licenses", "licenses.html"),

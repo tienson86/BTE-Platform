@@ -82,6 +82,8 @@ class ActivityService:
                 """)
             from applications.api.services.member_rewards import ensure_ledger
             ensure_ledger(connection)
+            from applications.api.services.courses import ensure_course_schema
+            ensure_course_schema(connection)
             connection.execute("BEGIN IMMEDIATE")
             yield connection
             connection.commit()

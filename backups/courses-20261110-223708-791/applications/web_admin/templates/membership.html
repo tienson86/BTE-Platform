@@ -1,0 +1,41 @@
+<link rel="stylesheet" href="/portal-static/css/membership.css?v=admin-tiers-01" />
+<section class="membership-page" data-admin-view="{{ACTIVE}}">
+  <p id="memberAdminState" role="status" aria-live="polite"></p>
+  <div id="memberAdminContent" hidden>
+    <p>Cấu hình từng cấp thành viên bên dưới. Thay đổi áp dụng cho đăng ký mới; hồ sơ đã tạo giữ mức phí và quyền lợi đã chốt.</p>
+  <form id="memberSettingsForm" class="panel">
+      <h2>Nội dung hiển thị trên website</h2>
+      <div class="member-admin-settings">
+        <label class="full">Tiêu đề trang thành viên<input name="title" maxlength="120" required /></label>
+        <label class="full">Giới thiệu trang thành viên<textarea name="description" maxlength="1200"></textarea></label>
+        <label class="full">Địa chỉ BTE công khai<input name="public_base_url" type="url" maxlength="300" placeholder="https://ten-mien-bte.vn" /><small>Dùng làm địa chỉ gốc cho link giới thiệu. Để trống sẽ dùng địa chỉ đang mở.</small></label>
+        <label class="full">Thông báo chung trên website<textarea name="public_notice" maxlength="500" placeholder="Để trống nếu không có thông báo"></textarea></label>
+      </div>
+      <h2>Cấu hình ba cấp thành viên</h2>
+      <p>Để trống hạn mức nếu không giới hạn. Hạn mức 0 cho phép dùng lượt đổi bằng Linh Thạch. Bỏ chọn Mở chức năng để tắt cả lượt gói và lượt đổi ở mục đó.</p>
+      <div id="memberTierSettings" class="member-tier-settings"></div>
+      <input name="amount_vnd" type="hidden" />
+      <input name="validity_days" type="hidden" />
+      <input name="analysis_limit" type="hidden" />
+      <h2>Thông tin chuyển khoản dùng chung</h2>
+      <div class="member-admin-settings">
+        <label>Ngân hàng<input name="bank_name" maxlength="120" /></label>
+        <label>Số tài khoản<input name="bank_account" maxlength="64" inputmode="numeric" pattern="[0-9 ]*" /></label>
+        <label>Chủ tài khoản<input name="bank_holder" maxlength="120" /></label>
+        <label class="full">Hướng dẫn chuyển khoản<textarea name="payment_note" maxlength="800"></textarea></label>
+        <label class="check full"><input name="registration_enabled" type="checkbox" /> Mở đăng ký thành viên trả phí</label>
+      </div>
+      <p class="muted">Thông tin mới áp dụng cho lần đăng ký sau khi lưu. Mỗi đăng ký giữ mức phí, thời hạn và tài khoản nhận tiền đã được thông báo lúc đăng ký.</p>
+      <button type="submit">Lưu cấu hình website</button>
+    </form>
+    <section id="memberApplicationsSection" class="panel" aria-labelledby="memberApplicationTitle">
+      <h2 id="memberApplicationTitle">Đăng ký và xác nhận thanh toán</h2>
+      <div class="toolbar">
+        <label>Hiển thị<select id="memberApplicationFilter"><option value="pending">Đang chờ xác nhận</option><option value="all">Tất cả đăng ký</option></select></label>
+        <button id="memberApplicationsRefresh" type="button" class="secondary">Tải lại danh sách</button>
+      </div>
+      <div id="memberApplications"></div>
+    </section>
+  </div>
+</section>
+<script src="/portal-static/js/admin_membership.js?v=admin-tiers-01" defer></script>

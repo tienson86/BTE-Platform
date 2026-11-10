@@ -53,6 +53,8 @@ def _customer_header_html(
     messages_current = ' aria-current="page"' if active == "messages" else ""
     community_current = ' aria-current="page"' if active == "community" else ""
     knowledge_class = "member-sidebar__quick-link" + (" active" if active == "knowledge" else "")
+    courses_class = "member-sidebar__quick-link" + (" active" if active == "courses" else "")
+    courses_current = ' aria-current="page"' if active == "courses" else ""
     knowledge_current = ' aria-current="page"' if active == "knowledge" else ""
     return (
         f'<a class="skip-link" href="{skip_href}">Skip to content</a>\n'
@@ -82,6 +84,7 @@ def _customer_header_html(
         f'        <a class="{messages_class}"{messages_current} href="/messages">Tin nhắn với Admin <span data-message-unread hidden></span></a>\n'
         f'        <a class="{community_class}"{community_current} href="/community" data-forum-only hidden>Trao đổi kiến thức</a>\n'
         f'        <a class="{knowledge_class}"{knowledge_current} href="/knowledge" data-forum-only hidden>Kiến thức phong thủy</a>\n'
+        f'        <a class="{courses_class}"{courses_current} href="/khoa-hoc" data-forum-only hidden>Khóa học</a>\n'
         '      </nav>\n'
         f'      <nav class="member-nav" data-customer-nav="member" aria-label="Chức năng thành viên">{member_nav}</nav>\n'
         '      <div class="member-sidebar__footer">\n'
