@@ -74,7 +74,7 @@
       var href = link.getAttribute("href") || "";
       var feature = {"/analyze":"bazi", "/choose-date":"date_selection", "/marriage-consulting":"marriage",
         "/childbirth-consulting":"childbirth", "/naming-consulting":"naming",
-        "/business-consulting":"business", "/tinh-van-han":"van_han", "/tinh-cac-nam-tot":"van_han"}[href];
+        "/business-consulting":"business", "/tinh-van-han":"van_han", "/tinh-cac-nam-tot":"good_years"}[href];
       link.hidden = (!user && !PUBLIC_PATHS[href]) ||
         !!(user && Array.isArray(user.member_features) && feature && !user.member_features.includes(feature));
     });

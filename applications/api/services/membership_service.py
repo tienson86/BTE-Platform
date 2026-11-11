@@ -146,6 +146,13 @@ class MembershipService:
         memo = None
         instructions_updated = False
         if membership:
+            plan = membership.get("plan") or {}
+            limits = plan.get("feature_limits")
+            enabled = plan.get("enabled_features")
+            if isinstance(limits, dict) and "van_han" in limits and "good_years" not in limits:
+                limits["good_years"] = limits["van_han"]
+                if isinstance(enabled, list) and "van_han" in enabled and "good_years" not in enabled:
+                    enabled.append("good_years")
             memo = membership.get("transfer_content") or transfer_content(user)
             legacy_memo = membership.get("legacy_transfer_content")
             if not membership.get("transfer_content"):

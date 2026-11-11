@@ -54,6 +54,10 @@ class UserRecord:
 
     def to_public_dict(self) -> dict[str, Any]:
         """JSON-safe public profile."""
+        plan = (self.membership or {}).get("plan") or {}
+        features = plan.get("enabled_features")
+        if isinstance(features, list) and "van_han" in features and "good_years" not in features and "good_years" not in (plan.get("feature_limits") or {}):
+            features = [*features, "good_years"]
         return {
             "user_id": self.user_id,
             "username": self.username,
@@ -66,7 +70,7 @@ class UserRecord:
             "analyses_used": self.analyses_used,
             "analyses_remaining": None if self.analysis_limit is None else max(0, self.analysis_limit - self.analyses_used),
             "member_access": self.has_member_access(),
-            "member_features": (self.membership or {}).get("plan", {}).get("enabled_features"),
+            "member_features": features,
             "membership_status": (self.membership or {}).get("status", "existing"),
             "membership_expires_at": (self.membership or {}).get("expires_at"),
             "member_tier": (self.membership or {}).get("tier"),

@@ -214,6 +214,10 @@ def create_app() -> FastAPI:
     def referral_share_page() -> HTMLResponse:
         return page("referral-share", "referral_share.html")
 
+    @app.get("/linh-thach", response_class=HTMLResponse)
+    def linh_thach_page() -> HTMLResponse:
+        return page("linh-thach", "linh_thach.html")
+
     @app.get("/membership", response_class=HTMLResponse)
     def membership_page() -> HTMLResponse:
         return page("membership", "membership.html")

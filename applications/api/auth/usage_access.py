@@ -7,7 +7,7 @@ from applications.api.services.activity_service import ActivityError, get_activi
 CHART_PATHS = {"/analysis"} | {"/api/v1/"+name for name in ("analyze","bazi","pattern","score","interpretation","report","narrative")}
 PATHS = {**{path:"bazi" for path in CHART_PATHS},
          "/api/v1/date-selection/search":"date_selection", "/api/v1/van-han/analyze":"van_han",
-         "/api/v1/van-han/good-years/analyze":"van_han"}
+         "/api/v1/van-han/good-years/analyze":"good_years"}
 
 def failed(error):
     return JSONResponse({"detail":str(error),"message":str(error),"code":error.code,

@@ -3,7 +3,7 @@ import re
 from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
-Feature = Literal["bazi", "date_selection", "marriage", "childbirth", "naming", "business", "van_han"]
+Feature = Literal["bazi", "date_selection", "marriage", "childbirth", "naming", "business", "van_han", "good_years"]
 
 def normalize_phone(value):
     value = re.sub(r"[\s().-]", "", value.strip())

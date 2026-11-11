@@ -71,7 +71,7 @@ def _customer_header_html(
         '      <div class="app-header-actions">\n'
         '        <a class="member-join" href="/membership" id="memberJoinLink">Đăng ký thành viên</a>\n'
         '        <button type="button" id="memberLogout" class="secondary" hidden>Đăng xuất</button>\n'
-        '        <a id="headerLinhThach" class="header-linh-thach" href="/membership#memberRewards"'
+        '        <a id="headerLinhThach" class="header-linh-thach" href="/linh-thach"'
         ' aria-label="Số dư Linh Thạch" title="Xem số dư và đổi Linh Thạch" hidden>\n'
         '          <img src="/static/images/membership/linh-thach.png" width="52" height="52" alt="" aria-hidden="true" />\n'
         '          <span class="header-linh-thach__text"><strong id="headerLinhThachBalance" aria-live="polite">—</strong>'
@@ -134,7 +134,7 @@ def render_page(template_name: str, *, active: str, locale: str = DEFAULT_LOCALE
             ),
             "SUBMIT": "Tính và lưu năm tốt" if good_years else "Tính và lưu vận hạn",
             "HISTORY": "Hồ sơ năm tốt đã lưu" if good_years else "Hồ sơ vận hạn đã lưu",
-            "USAGE": '<p class="muted">Tạo hồ sơ năm tốt dùng chung hạn mức với Tính vận hạn.</p>' if good_years else "",
+            "USAGE": '<p class="muted">Tạo hồ sơ năm tốt dùng hạn mức riêng theo cấp thành viên.</p>' if good_years else "",
         }
         for key, value in tokens.items():
             body = body.replace("{{PERIOD_" + key + "}}", value)

@@ -144,3 +144,30 @@ def test_zero_or_disabled_chart_allowance_can_be_approved_without_blocking_other
         activity.reserve(buyer, "bazi", "chart-blocked", {})
     assert error.value.status == (403 if disabled else 429)
     assert activity.reserve(buyer, "naming", "still-allowed", {})["replay"] is False
+
+
+def test_good_years_inherits_old_settings_then_uses_its_own_quota(system):
+    client, service, store, headers = system
+    open_plan(service)
+    data, revision = editable(client, headers)
+    for tier in data["tiers"]:
+        tier["feature_limits"].pop("good_years")
+        tier["enabled_features"].remove("good_years")
+    data["tiers"][0]["feature_limits"]["van_han"] = 3
+    assert save(client, headers, data, revision).status_code == 200
+    data, revision = editable(client, headers)
+    assert data["tiers"][0]["feature_limits"]["good_years"] == 3
+    data["tiers"][0]["feature_limits"]["good_years"] = 1
+    assert save(client, headers, data, revision).status_code == 200
+    order = register(client, tier=1).json()
+    assert approve(client, headers, order).status_code == 200
+    user = store.get_by_username("newmember")
+    activity = ActivityService(store)
+    ticket = activity.reserve(user, "good_years", "first-good-year", {})
+    activity.finish(user, ticket["ticket"], {"id": "GY-test"})
+    result = client.post("/api/v1/van-han/good-years/analyze", headers=headers("newmember"), json={})
+    assert result.status_code == 429
+    assert result.json()["code"] == "quota_exhausted"
+    summary = {item["feature"]: item["remaining"] for item in activity.summary(user)}
+    assert summary["good_years"] == 0
+    assert summary["van_han"] == 3

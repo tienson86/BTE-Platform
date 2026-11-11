@@ -81,5 +81,6 @@
     } catch (error) { host.textContent = error.message || "Chưa tải được thông tin Linh Thạch."; }
   }
   window.BteMemberRewards = {render};
+  if (document.getElementById("memberRewards") && BtePortal.getToken?.()) render("memberRewards");
   if (document.getElementById("referralRewards")) render("referralRewards");
 })();

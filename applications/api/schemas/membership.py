@@ -5,7 +5,7 @@ from pydantic import BaseModel, ConfigDict, Field, SecretStr, model_validator, f
 
 
 Quota = Annotated[int, Field(ge=0, le=1_000_000, strict=True)]
-ALL_FEATURES = ("bazi", "date_selection", "marriage", "childbirth", "naming", "business", "van_han")
+ALL_FEATURES = ("bazi", "date_selection", "marriage", "childbirth", "naming", "business", "van_han", "good_years")
 
 
 class MembershipTier(BaseModel):
@@ -20,10 +20,21 @@ class MembershipTier(BaseModel):
     referral_reward: int = Field(default=0, ge=0, le=1_000_000, strict=True)
     enabled: bool = True
 
+    @model_validator(mode="before")
+    @classmethod
+    def inherit_legacy_good_years(cls, data):
+        if not isinstance(data, dict):
+            return data
+        limits, enabled = data.get("feature_limits"), data.get("enabled_features")
+        if isinstance(limits, dict) and "van_han" in limits and "good_years" not in limits and isinstance(enabled, list):
+            return {**data, "feature_limits": {**limits, "good_years": limits["van_han"]},
+                    "enabled_features": enabled + (["good_years"] if "van_han" in enabled and "good_years" not in enabled else [])}
+        return data
+
     @model_validator(mode="after")
     def validate_features(self):
         if set(self.feature_limits) != set(ALL_FEATURES):
-            raise ValueError("Cần cấu hình đủ bảy chức năng cho mỗi cấp.")
+            raise ValueError("Cần cấu hình đủ tám chức năng cho mỗi cấp.")
         if len(self.enabled_features) != len(set(self.enabled_features)):
             raise ValueError("Chức năng bị lặp.")
         self.analysis_limit = self.feature_limits["bazi"] if "bazi" in self.enabled_features else 0

@@ -12,6 +12,8 @@ def feature_entitlement(user, feature):
     plan = (user.membership or {}).get("plan") or {}
     limits = plan.get("feature_limits")
     enabled = plan.get("enabled_features")
+    if feature == "good_years" and isinstance(limits, dict) and feature not in limits:
+        feature = "van_han"
     if isinstance(limits, dict) and feature in limits:
         return limits[feature], enabled is None or feature in enabled
     return user.analysis_limit, True

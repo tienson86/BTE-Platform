@@ -1,4 +1,8 @@
 (function () {
+  if (location.hash === "#memberRewards") {
+    location.replace("/linh-thach");
+    return;
+  }
   const form = document.getElementById("memberRegisterForm");
   if (!form) return;
   const fields = document.getElementById("memberRegisterFields");
@@ -95,7 +99,7 @@
       const labels = { pending: "Chờ xác nhận thanh toán", active: user.member_access ? "Thành viên đang hoạt động" : "Thành viên đã hết hạn", rejected: "Đăng ký chưa được chấp thuận", refunded: "Đã ghi nhận hoàn tiền" };
       card.append(node("p", labels[membership.status] || "Đang kiểm tra trạng thái", "membership-status"));
       card.append(row("Họ và Tên", user.display_name || user.username), row("Tên đăng nhập", user.username), row("Số điện thoại", user.phone || "Chưa bổ sung"));
-      if (membership.tier) card.append(row("Cấp thành viên", membership.tier));
+      if (membership.tier) card.append(row("Cấp thành viên", membership.plan?.title || "Cấp " + membership.tier));
       if (membership.source === "manual") card.append(node("p", "Quyền thành viên được Admin cấp thủ công. Đây không phải xác nhận đã thanh toán."));
       if (membership.discount_percent) card.append(
         row("Giá gốc", money(membership.original_amount_vnd)),
@@ -138,7 +142,11 @@
   async function loadAccount() {
     const data = await BtePortal.get("/api/v1/membership/me");
     BtePortal.setSession(BtePortal.getToken(), data.user); renderAccount(data);
-    if (window.BteMemberRewards) await window.BteMemberRewards.render("memberRewards");
+    if (data.user.member_access) {
+      document.getElementById("memberBenefitsPanel")?.setAttribute("hidden", "");
+      document.getElementById("memberSupport")?.setAttribute("hidden", "");
+      document.getElementById("memberFreeTools")?.setAttribute("hidden", "");
+    }
   }
   form.addEventListener("submit", async event => {
     event.preventDefault(); if (busy || !plan?.ready) return;

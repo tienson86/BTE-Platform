@@ -12,7 +12,7 @@ from threading import RLock
 from uuid import uuid4
 
 FEATURES = {"bazi":"Xem lá số", "date_selection":"Chọn ngày tốt", "marriage":"Tư vấn hôn nhân",
-            "childbirth":"Tư vấn sinh con", "naming":"Tư vấn đặt tên", "business":"Tư vấn hợp tác", "van_han":"Tính vận hạn"}
+            "childbirth":"Tư vấn sinh con", "naming":"Tư vấn đặt tên", "business":"Tư vấn hợp tác", "van_han":"Tính vận hạn", "good_years":"Tính các năm tốt"}
 ROOT = Path(__file__).resolve().parents[3]
 _SCHEMA_LOCK = RLock()
 
@@ -169,7 +169,7 @@ class ActivityService:
                 raise ActivityError("Chức năng này chưa được mở trong gói của bạn.", 403)
             limit = None if base_limit is None else base_limit + extra_credits(connection, user.user_id, feature)
             if limit is not None and used + pending >= limit:
-                raise ActivityError(f"Bạn đã hết lượt {FEATURES[feature].lower()}. Vui lòng liên hệ ADMIN để được cấp thêm hạn mức.",429,"quota_exhausted")
+                raise ActivityError(f"Bạn đã hết lượt {FEATURES[feature].lower()}. Hãy xem cấp thành viên cao hơn hoặc dùng Linh Thạch để đổi thêm lượt.",429,"quota_exhausted")
             ticket = previous["id"] if previous else uuid4().hex
             if previous:
                 connection.execute("UPDATE usage_tickets SET state='held',created_at=?,legacy=? WHERE id=?", (timestamp(),int(legacy),ticket))
