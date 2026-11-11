@@ -126,9 +126,8 @@ def render_page(template_name: str, *, active: str, locale: str = DEFAULT_LOCALE
             "TITLE": title,
             "TITLE_LOWER": title.lower(),
             "SCOPE": (
-                "Một năm hoặc tháng được chọn khi Can hoặc Chi của chính thời điểm đó gặp Dụng/Hỷ thần, "
-                "Cung Phi thuận, đồng thời qua đối chiếu Kỵ thần, lục xung và mốc đại vận. "
-                "Tháng được xét riêng trong từng năm âm lịch."
+                "Xem mức thuận riêng theo Cung Phi – Du Niên và theo Bát Tự. "
+                "Bát Tự đối chiếu Can Chi với Dụng/Hỷ/Kỵ thần, Nhật chủ và đại vận."
                 if good_years else
                 "Bản đầu tiên xét cung phi, Dụng–Hỷ–Kỵ thần và hợp/xung. "
                 "Các cơ chế hình, hại, phá và hợp hóa cần đọc thêm trong bản luận lá số đầy đủ."

@@ -77,21 +77,35 @@
   }
   function render(row){
     active=row;sourceDirty=false;void loadSources(row.result.source_analysis_id,row.result.source_owner).catch(e=>{byId('vhSourceChosen').textContent=e.message;});window.history.replaceState(null,'',pagePath+'?id='+encodeURIComponent(row.id));const result=row.result,p=result.profile,u=p.useful;
-    const summary=goodYears?'<p><strong>'+result.years.filter(y=>y.favorable).length+' năm thuận · '+result.years.reduce((total,y)=>total+y.months.length,0)+' tháng thuận</strong></p><p class="muted">PDF và DOCX bao gồm toàn bộ khoảng năm của hồ sơ.</p>':'';
-    const filter=goodYears?'':'<label><input id="vhOnly" type="checkbox"> Chỉ hiện năm/tháng có dấu hiệu cần lưu ý</label>';
+    const summary=goodYears?'<p><strong>Cung Phi</strong> · '+result.years.filter(y=>y.cung_phi.favorable).length+' năm thuận · '+result.years.reduce((total,y)=>total+y.months.filter(m=>m.cung_phi.favorable).length,0)+' tháng thuận</p><p><strong>Bát Tự</strong> · '+result.years.filter(y=>y.bazi_favorable).length+' năm thuận · '+result.years.reduce((total,y)=>total+y.months.filter(m=>m.bazi_favorable).length,0)+' tháng thuận (gồm thuận có lưu ý)</p><p class="muted">PDF và DOCX bao gồm toàn bộ năm và tháng của hồ sơ.</p>':'';
+    const filter=goodYears?'<label>Lọc thời điểm <select id="vhOnly"><option value="all">Tất cả</option><option value="favorable">Thuận theo ít nhất một cách</option><option value="palace">Thuận theo Cung Phi</option><option value="bazi">Thuận theo Bát Tự</option><option value="both">Thuận theo cả hai cách</option></select></label>':'<label><input id="vhOnly" type="checkbox"> Chỉ hiện năm/tháng có dấu hiệu cần lưu ý</label>';
     byId('vhResult').innerHTML='<h2>'+esc(result.name)+'</h2><p>Cung '+esc(result.years[0].cung_phi.personal)+' · '+esc(p.strength)+' · Dụng thần '+esc(u.element)+' '+esc(u.stem)+' · Hỷ thần '+esc(u.favorable.join(', '))+' · Kỵ thần '+esc(u.unfavorable.join(', '))+'</p><p>Hồ sơ '+esc(row.id)+' · Người tạo: '+esc(row.creator_display_name)+' · '+esc(row.creator_username)+'</p>'+summary+'<div class="toolbar"><label>Xem năm <select id="vhYear"><option value="all">Tất cả</option>'+result.years.map(y=>'<option>'+y.year+'</option>').join('')+'</select></label>'+filter+'<button data-export="pdf">Tải PDF</button><button data-export="docx">Tải DOCX</button></div><div id="vhPeriods"></div>';
-    byId('vhYear').onchange=periods;if(!goodYears)byId('vhOnly').onchange=periods;periods();updateExportAvailability();
+    byId('vhYear').onchange=periods;byId('vhOnly').onchange=periods;periods();updateExportAvailability();
     byId('vhResult').querySelectorAll('[data-export]').forEach(button=>button.onclick=()=>download(button));
   }
+  function evidence(period){
+    return '<details><summary>Luận và cơ sở</summary><ul>'+period.bazi.evidence.map(e=>'<li>'+esc(e.text)+'</li>').join('')+'</ul></details>';
+  }
+  function assessment(period){
+    return goodYears?'<p><strong>'+esc(period.bazi_assessment_label)+'</strong> · '+esc(period.assessment)+'</p>':'';
+  }
   function periods(){
-    const chosen=byId('vhYear').value,only=!goodYears&&byId('vhOnly').checked;
+    const chosen=byId('vhYear').value, control=byId('vhOnly');
+    const mode=goodYears?control.value:'all';
+    const matches=period=>{
+      if(!goodYears)return !control.checked||period.review_candidate;
+      if(mode==='palace')return period.cung_phi.favorable;
+      if(mode==='bazi')return period.bazi_favorable;
+      if(mode==='both')return period.cung_phi.favorable&&period.bazi_favorable;
+      return mode==='all'||period.favorable;
+    };
     const content=active.result.years.filter(y=>chosen==='all'||String(y.year)===chosen).map(y=>{
-      const months=y.months.filter(m=>!only||m.review_candidate);
-      if(only&&!y.review_candidate&&!months.length)return '';
-      const rows=months.map(m=>'<tr><td>'+m.month+(m.leap?' nhuận':'')+'</td><td>'+esc(m.start)+' – '+esc(m.end)+'</td><td>'+esc(m.ganzhi)+'</td><td>'+esc(m.cung_phi.period)+' · '+esc(m.cung_phi.relationship)+'</td><td>'+esc(m.bazi.verdict)+'</td><td><details><summary>Luận và cơ sở</summary><p>'+esc(m.narrative)+'</p><ul>'+m.bazi.evidence.map(e=>'<li>'+esc(e.text)+'</li>').join('')+'</ul></details></td></tr>').join('');
-      const yearStatus=goodYears?(y.favorable?' · Năm thuận':' · Năm chưa đạt tiêu chí thuận'):'';
+      const months=y.months.filter(matches);
+      if(!matches(y)&&!months.length)return '';
+      const rows=months.map(m=>'<tr><td>'+m.month+(m.leap?' nhuận':'')+'</td><td>'+esc(m.start)+' – '+esc(m.end)+'</td><td>'+esc(m.ganzhi)+'</td><td>'+esc(m.cung_phi.period)+' · '+esc(m.cung_phi.relationship)+(goodYears?'<br>'+esc(m.palace_assessment_label):'')+'</td><td>'+(goodYears?esc(m.bazi_assessment_label):esc(m.bazi.verdict))+'</td><td><details><summary>Luận và cơ sở</summary><p>'+esc(m.narrative)+'</p>'+assessment(m)+'<ul>'+m.bazi.evidence.map(e=>'<li>'+esc(e.text)+'</li>').join('')+'</ul></details></td></tr>').join('');
+      const yearStatus=goodYears?' · '+esc(y.assessment_label):'';
       const empty=goodYears&&!months.length?'<tr><td colspan="6">Không có tháng đạt tiêu chí thuận trong năm này.</td></tr>':'';
-      return '<section><h3>'+y.year+' · '+esc(y.ganzhi)+yearStatus+'</h3><p>Cung phi: '+esc(y.cung_phi.relationship)+' · Bát Tự: '+esc(y.bazi.verdict)+'</p><p>'+esc(y.narrative)+'</p><div class="history-table-wrap"><table class="history-table"><thead><tr><th>Tháng âm</th><th>Ngày dương lịch</th><th>Can Chi</th><th>Cung phi · Du Niên</th><th>Bát Tự</th><th>Chi tiết</th></tr></thead><tbody>'+(rows||empty)+'</tbody></table></div></section>';
+      return '<section><h3>'+y.year+' · '+esc(y.ganzhi)+yearStatus+'</h3><p>Cung phi: '+esc(y.cung_phi.relationship)+(goodYears?' · '+esc(y.palace_assessment_label):'')+' · Bát Tự: '+esc(goodYears?y.bazi_assessment_label:y.bazi.verdict)+'</p><p>'+esc(y.narrative)+'</p>'+(goodYears?assessment(y)+evidence(y):'')+'<div class="history-table-wrap"><table class="history-table"><thead><tr><th>Tháng âm</th><th>Ngày dương lịch</th><th>Can Chi</th><th>Cung phi · Du Niên</th><th>Bát Tự</th><th>Chi tiết</th></tr></thead><tbody>'+(rows||empty)+'</tbody></table></div></section>';
     }).join('');byId('vhPeriods').innerHTML=content||'<p>Không có thời điểm phù hợp bộ lọc.</p>';
   }
   async function download(button){

@@ -65,6 +65,9 @@ def period_routes(*, good_years=False):
     def owned(request,identifier):
         user=current_user(request);row=get_result('user:'+user.user_id,identifier,is_admin(user),good_years=good_years)
         if row is None:raise HTTPException(404,'Không tìm thấy hồ sơ trong quyền truy cập của bạn')
+        if good_years:
+            from applications.api.services.good_years import expand_legacy_row
+            return expand_legacy_row(row)
         return row
 
     @period_router.get('/{identifier}')
