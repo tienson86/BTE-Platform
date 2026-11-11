@@ -32,8 +32,21 @@ def ensure_course_schema(connection):
     for course in content():
         initial = {key: course[key] for key in ("title", "summary")}
         initial.update(price=0, access_days=None, status="draft")
+        initial.update(course.get("defaults", {}))
+        payload = json.dumps(initial, ensure_ascii=False)
         connection.execute("INSERT OR IGNORE INTO courses_settings VALUES(?,?,1)",
-                           (course["id"], json.dumps(initial, ensure_ascii=False)))
+                           (course["id"], payload))
+        if course["id"] == "kinh-dich-nhap-mon":
+            # Upgrade the original placeholder without overwriting admin changes.
+            placeholder = {
+                "title": "Kinh Dịch nhập môn",
+                "summary": "Nền tảng Dịch học, 64 quẻ và ý nghĩa hào. Nội dung đang biên soạn.",
+                "price": 0, "access_days": None, "status": "draft",
+            }
+            connection.execute(
+                "UPDATE courses_settings SET payload=?, revision=2 WHERE id=? AND revision=1 AND payload=?",
+                (payload, course["id"], json.dumps(placeholder, ensure_ascii=False)),
+            )
     connection.commit()  # Schema/seed run before ActivityService starts its write transaction.
 
 

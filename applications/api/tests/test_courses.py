@@ -33,7 +33,7 @@ def purchase(system,key='purchase_0001',revision=None):
 
 def test_defaults_are_closed_trial_is_readable_and_paid_content_is_hidden(system):
     data=system.call('GET','/courses',name='member').json()
-    assert len(data['courses'])==2 and all(c['status']=='draft' for c in data['courses'])
+    assert [(c['id'], c['status']) for c in data['courses']] == [(COURSE, 'draft'), ('kinh-dich-nhap-mon', 'published')]
     assert 'body' not in str(data)
     assert system.call('GET','/courses/'+COURSE+'/lessons/am-duong-bat-quai',name='member').status_code==200
     assert system.call('GET','/courses/'+COURSE+'/lessons/lap-que-hai-so',name='member').status_code==403
@@ -148,11 +148,51 @@ def test_video_is_authorized_and_accepts_range_requests(system):
     assert partial.status_code==206 and len(partial.content)==100
 
 
-def test_unfinished_kinh_dich_cannot_be_sold_and_invalid_values_are_rejected(system):
+def test_course_settings_and_redemption_reject_invalid_values(system):
     row=system.call('GET','/admin/courses').json()['courses'][1]
     body={k:row[k] for k in ('title','summary','price','access_days','status')}
     body.update(status='published',expected_revision=1)
-    assert system.call('PUT','/admin/courses/kinh-dich-nhap-mon',body).status_code==422
     for changes in [{'price':-1},{'price':True},{'access_days':0},{'access_days':True}]:
         with pytest.raises(ValidationError):CourseSettings(**{**body,**changes})
     assert system.call('POST','/courses/'+COURSE+'/redeem',{'operation_key':'test_12345','expected_revision':1,'price':0},'member').status_code==422
+
+
+@pytest.mark.parametrize("tier", [1, 2, 3])
+def test_kinh_dich_trial_and_redemption_for_each_member_tier(system, tier):
+    user = system.store.get_by_username("member")
+    user.membership["tier"] = tier
+    path = "/courses/kinh-dich-nhap-mon"
+    view = system.call("GET", path, name="member").json()
+    assert view["status"] == "published" and view["price"] == 5 and view["lesson_count"] == 7
+    assert system.call("GET", path + "/lessons/nhap-mon", name="member").status_code == 200
+    locked = path + "/lessons/thai-va-bi"
+    assert system.call("GET", locked, name="member").status_code == 403
+    request = {"operation_key": "kinh_dich_test_1", "expected_revision": view["revision"]}
+    assert system.call("POST", path + "/redeem", request, "member").status_code == 409
+    fund(system, 10)
+    for _ in range(2):
+        response = system.call("POST", path + "/redeem", request, "member")
+        assert response.status_code == 200 and response.json()["balance"] == 5
+    assert system.call("GET", locked, name="member").status_code == 200
+
+
+def test_kinh_dich_upgrades_original_placeholder_once(system):
+    import json
+
+    service = CourseService(system.store)
+    placeholder = {
+        "title": "Kinh Dịch nhập môn",
+        "summary": "Nền tảng Dịch học, 64 quẻ và ý nghĩa hào. Nội dung đang biên soạn.",
+        "price": 0, "access_days": None, "status": "draft",
+    }
+    with service.activity.connect() as connection:
+        connection.execute("UPDATE courses_settings SET payload=? WHERE id='kinh-dich-nhap-mon'",
+                           (json.dumps(placeholder, ensure_ascii=False),))
+    path = "/courses/kinh-dich-nhap-mon"
+    view = system.call("GET", path, name="member").json()
+    assert view["status"] == "published" and view["revision"] == 2
+    settings = {key: view[key] for key in ("title", "summary", "price", "access_days", "status")}
+    settings.update(price=8, status="paused", expected_revision=2)
+    assert system.call("PUT", "/admin" + path, settings).status_code == 200
+    view = system.call("GET", path, name="member").json()
+    assert (view["status"], view["price"], view["revision"]) == ("paused", 8, 3)
