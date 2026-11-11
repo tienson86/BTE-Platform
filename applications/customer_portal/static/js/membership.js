@@ -91,7 +91,19 @@
       document.getElementById("memberPrice").textContent = (membership.source === "manual" ? "Được Admin cấp thủ công" : money(membership.plan.amount_vnd)) + " / " + membership.plan.validity_days + " ngày";
       document.getElementById("memberAllowance").textContent = membership.plan.title + " — " + rightsText(membership.plan);
     }
-    const card = node("section", undefined, "panel");
+    const panel = node("section", undefined, "panel");
+    const card = node("div");
+    const tier = membership?.tier;
+    if (membership?.status === "active" && user.member_access && [1, 2, 3].includes(tier)) {
+      panel.classList.add("member-account-with-tier");
+      const image = node("img", undefined, "member-account-tier-image");
+      image.src = "/static/images/membership/tier-" + tier + ".png";
+      image.alt = "Thẻ thành viên BTE – Phong thủy sư cấp " + tier;
+      image.width = tier === 1 ? 1568 : 1586;
+      image.height = tier === 1 ? 1003 : 992;
+      panel.append(image);
+    }
+    panel.append(card);
     card.append(node("h2", "Tài khoản " + (user.display_name || user.username)));
     if (!membership) {
       card.append(node("p", "Tài khoản hiện tại giữ nguyên quyền sử dụng đã được cấp."), link("Mở xem lá số", "/analyze"), node("p"), link("Hồ sơ đã lưu và tải tài liệu", "/history"));
@@ -135,7 +147,7 @@
     }
     const refresh = node("button", "Kiểm tra lại trạng thái", "secondary"); refresh.type = "button";
     refresh.onclick = async () => { refresh.disabled = true; try { await loadAccount(); state.textContent = "Đã cập nhật trạng thái thành viên."; } catch (error) { state.textContent = error.message; refresh.disabled = false; } };
-    card.append(node("p"), refresh); account.append(card);
+    card.append(node("p"), refresh); account.append(panel);
     if (user.role === "ADMIN") account.append(link("Mở quản trị hệ thống", "/admin"));
   }
 

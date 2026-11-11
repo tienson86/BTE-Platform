@@ -148,3 +148,21 @@ it("sends the chosen tier and code while leaving final price determination to th
   }));
   window.history.replaceState({}, "", "/");
 });
+
+it.each([1, 2, 3])("shows only the card for active tier %i", async tier => {
+  const data = details("active", true);
+  mount("test-token", {...data, membership: {...data.membership, tier}});
+  await vi.waitFor(() => {
+    const images = document.querySelectorAll<HTMLImageElement>("#memberAccount img");
+    expect(images).toHaveLength(1);
+    expect(images[0].getAttribute("src")).toBe("/static/images/membership/tier-" + tier + ".png");
+    expect(images[0].alt).toContain("cấp " + tier);
+  });
+});
+
+it.each(["pending", "active"])("does not show a tier card for %s membership without access", async status => {
+  const data = details(status, false);
+  mount("test-token", {...data, membership: {...data.membership, tier: 2}});
+  await vi.waitFor(() => expect(document.getElementById("memberAccount")?.hidden).toBe(false));
+  expect(document.querySelector("#memberAccount img")).toBeNull();
+});
