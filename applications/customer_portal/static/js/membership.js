@@ -84,6 +84,45 @@
   function link(text, href) { const el = node("a", text); el.href = href; return el; }
   function row(label, value) { const el = node("p"); el.append(node("strong", label + ": "), document.createTextNode(String(value))); return el; }
 
+  function renderUpgrade(order) {
+    if (!order) return;
+    const panel = node("section", undefined, "panel");
+    const heading = node("h2", "Nâng cấp thành viên từ cấp " + order.from_tier + " lên cấp " + order.tier);
+    panel.append(heading);
+    if (order.status !== "pending") {
+      panel.append(node("p", order.status === "refunded" ? "Đã ghi nhận hoàn tiền nâng cấp." : "Yêu cầu nâng cấp chưa được chấp thuận."));
+      if (order.review_note) panel.append(row("Phản hồi của quản trị viên", order.review_note));
+      account.prepend(panel);
+      return;
+    }
+    const target = order.plan;
+    panel.append(node("p", order.payment_reported_at ? "Đã gửi xác nhận chuyển khoản. Đang chờ quản trị viên đối chiếu." : "Chuyển khoản theo thông tin dưới đây, rồi bấm xác nhận."),
+      row("Số tiền", money(target.amount_vnd)), row("Ngân hàng", target.bank_name),
+      row("Số tài khoản", target.bank_account), row("Chủ tài khoản", target.bank_holder),
+      row("Nội dung chuyển khoản", order.transfer_content), row("Thời hạn gói", target.validity_days + " ngày"),
+      node("p", "Quyền cấp hiện tại được giữ trong thời gian chờ duyệt."));
+    const payment = node("form");
+    const label = node("label", "Ghi chú giao dịch (nếu có)");
+    const note = node("textarea"); note.maxLength = 500; note.value = order.payment_note || "";
+    label.append(note);
+    const send = node("button", order.payment_reported_at ? "Cập nhật xác nhận chuyển khoản" : "Tôi đã chuyển khoản");
+    send.type = "submit";
+    const feedback = node("p"); feedback.setAttribute("role", "status");
+    payment.append(label, send, feedback);
+    payment.onsubmit = async event => {
+      event.preventDefault();
+      send.disabled = true;
+      try {
+        renderAccount(await BtePortal.post("/api/v1/membership/upgrade/payment-notice", {reference: order.reference, note: note.value}));
+      } catch (error) {
+        feedback.textContent = error.message;
+        send.disabled = false;
+      }
+    };
+    panel.append(payment);
+    account.prepend(panel);
+  }
+
   function renderAccount(data) {
     account.replaceChildren(); account.hidden = false; form.hidden = true;
     const user = data.user, membership = data.membership;
@@ -147,17 +186,25 @@
     }
     const refresh = node("button", "Kiểm tra lại trạng thái", "secondary"); refresh.type = "button";
     refresh.onclick = async () => { refresh.disabled = true; try { await loadAccount(); state.textContent = "Đã cập nhật trạng thái thành viên."; } catch (error) { state.textContent = error.message; refresh.disabled = false; } };
-    card.append(node("p"), refresh); account.append(panel);
+    card.append(node("p"), refresh); account.append(panel); renderUpgrade(data.upgrade);
     if (user.role === "ADMIN") account.append(link("Mở quản trị hệ thống", "/admin"));
   }
 
-  async function loadAccount() {
-    const data = await BtePortal.get("/api/v1/membership/me");
+  async function loadAccount(startUpgrade = false) {
+    let data = await BtePortal.get("/api/v1/membership/me");
     BtePortal.setSession(BtePortal.getToken(), data.user); renderAccount(data);
     if (data.user.member_access) {
       document.getElementById("memberBenefitsPanel")?.setAttribute("hidden", "");
       document.getElementById("memberSupport")?.setAttribute("hidden", "");
       document.getElementById("memberFreeTools")?.setAttribute("hidden", "");
+    }
+    const currentTier = data.membership?.tier;
+    const targetTier = Number(requestedTier);
+    if (startUpgrade && data.user.role === "CUSTOMER" && data.user.member_access &&
+        [1, 2].includes(currentTier) && [2, 3].includes(targetTier) && targetTier > currentTier) {
+      data = await BtePortal.post("/api/v1/membership/upgrade", {tier: targetTier});
+      renderAccount(data);
+      history.replaceState(history.state, "", "/membership");
     }
   }
   form.addEventListener("submit", async event => {
@@ -210,7 +257,7 @@
       populateTiers();
       updatePrice();
       if (!BtePortal.getToken() && form.elements.referral_code.value) await verifyReferral();
-      if (BtePortal.getToken()) await loadAccount();
+      if (BtePortal.getToken()) await loadAccount(true);
       else { form.hidden = false; fields.disabled = !plan.ready; if (!plan.ready) state.textContent = "Đăng ký trả phí sẽ mở sau khi biểu phí được cập nhật. Bạn vẫn dùng được các mục miễn phí."; }
     } catch (error) { state.textContent = error.message || "Chưa tải được thông tin thành viên. Vui lòng thử lại."; }
   })();

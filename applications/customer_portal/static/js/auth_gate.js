@@ -1,6 +1,11 @@
 (function () {
   var PUBLIC_PATHS = { "/gioi-thieu-bte": true, "/thanh-vien-bte": true, "/": true, "/good-date": true, "/login": true, "/name-analysis": true, "/number-energy": true, "/membership": true, "/contact":true };
 
+  function publicPath(path) {
+    return Object.prototype.hasOwnProperty.call(PUBLIC_PATHS, path) ||
+      path === "/knowledge" || path.startsWith("/knowledge/lesson/");
+  }
+
   function currentPath() {
     return window.location.pathname || "/";
   }
@@ -75,7 +80,7 @@
       var feature = {"/analyze":"bazi", "/choose-date":"date_selection", "/marriage-consulting":"marriage",
         "/childbirth-consulting":"childbirth", "/naming-consulting":"naming",
         "/business-consulting":"business", "/tinh-van-han":"van_han", "/tinh-cac-nam-tot":"good_years"}[href];
-      link.hidden = (!user && !PUBLIC_PATHS[href]) ||
+      link.hidden = (!user && !publicPath(href)) ||
         !!(user && Array.isArray(user.member_features) && feature && !user.member_features.includes(feature));
     });
     var profile = document.querySelector("a.app-user");
@@ -107,7 +112,7 @@
       }).catch(function () {});
     }
     if (!token) {
-      if (!PUBLIC_PATHS[path]) window.location.replace(loginUrl());
+      if (!publicPath(path)) window.location.replace(loginUrl());
       return;
     }
     try {
@@ -118,11 +123,11 @@
         document.querySelectorAll("[data-message-unread]").forEach(function(badge){var count=Number(summary.unread_messages)||0;badge.textContent=count>99?"99+":String(count);badge.hidden=count===0;badge.setAttribute("aria-label",count+" tin nhắn chưa đọc");});
       }).catch(function(){});
       if (path === "/admin-membership" && user.role !== "ADMIN") window.location.replace("/membership");
-      else if (user.member_access === false && !PUBLIC_PATHS[path] && path !== "/profile" && path !== "/messages") window.location.replace("/membership");
+      else if (user.member_access === false && !publicPath(path) && path !== "/profile" && path !== "/messages") window.location.replace("/membership");
     } catch (_) {
       BtePortal.clearSession();
       updateNavigation(null);
-      if (!PUBLIC_PATHS[path]) window.location.replace(loginUrl());
+      if (!publicPath(path)) window.location.replace(loginUrl());
     }
   }
 

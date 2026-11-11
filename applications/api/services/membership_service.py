@@ -143,9 +143,12 @@ class MembershipService:
 
     def details(self, user: UserRecord, *, internal=False):
         membership = deepcopy(user.membership)
+        upgrade = None
         memo = None
         instructions_updated = False
         if membership:
+            upgrade = membership.pop("upgrade_order", None)
+            membership.pop("previous_membership", None)
             plan = membership.get("plan") or {}
             limits = plan.get("feature_limits")
             enabled = plan.get("enabled_features")
@@ -165,7 +168,7 @@ class MembershipService:
                 membership.pop("reference", None)
                 membership.pop("legacy_transfer_content", None)
         return {"user": user.to_public_dict(), "membership": membership,
-                "transfer_content": memo, "transfer_instructions_updated": instructions_updated}
+                "transfer_content": memo, "transfer_instructions_updated": instructions_updated, "upgrade": upgrade}
 
     def _save(self, user, membership, analysis_limit):
         previous, previous_limit, revision = user.membership, user.analysis_limit, user.account_revision
@@ -177,6 +180,68 @@ class MembershipService:
             user.membership, user.analysis_limit = previous, previous_limit
             user.account_revision = revision
             raise
+
+    def request_upgrade(self, user, tier_number):
+        with self.store._lock:
+            current = deepcopy(user.membership) or {}
+            if (user.role != Role.CUSTOMER or not user.has_member_access()
+                    or current.get("tier") not in (1, 2) or tier_number <= current["tier"]):
+                fail("Chỉ thành viên cấp 1 hoặc cấp 2 còn hiệu lực được nâng lên cấp cao hơn.", 403)
+            pending = current.get("upgrade_order") or {}
+            if pending.get("status") == "pending":
+                if pending["tier"] == tier_number:
+                    return self.details(user)
+                fail("Bạn đã có một yêu cầu nâng cấp đang chờ xử lý.")
+            plan = self.plan()
+            if not plan.ready:
+                fail("Đang cập nhật biểu phí. Vui lòng quay lại sau.", 503)
+            tier = next(item for item in plan.configured_tiers() if item.tier == tier_number)
+            if not tier.enabled:
+                fail("Cấp này đang tạm ngừng đăng ký.")
+            selected = plan.model_dump(exclude={"tiers"})
+            selected.update(tier.model_dump(include={"title", "amount_vnd", "validity_days", "analysis_limit",
+                                                     "feature_limits", "enabled_features"}))
+            reference = "NC" + uuid4().hex[:12].upper()
+            current["upgrade_order"] = {
+                "reference": reference, "source": "upgrade", "status": "pending",
+                "tier": tier_number, "from_tier": current["tier"], "plan": selected,
+                "registered_at": now().isoformat(), "payment_reported_at": None, "payment_note": "",
+                "transfer_content": f"{transfer_content(user)} {reference}",
+            }
+            self._save(user, current, user.analysis_limit)
+            return self.details(user)
+
+    def report_upgrade_payment(self, user, reference, note):
+        with self.store._lock:
+            current = deepcopy(user.membership) or {}
+            order = current.get("upgrade_order") or {}
+            if order.get("status") != "pending" or order.get("reference") != reference:
+                fail("Yêu cầu nâng cấp này đã thay đổi hoặc đã được xử lý.")
+            order.update(payment_reported_at=now().isoformat(), payment_note=note)
+            self._save(user, current, user.analysis_limit)
+            return self.details(user)
+
+    def _review_upgrade(self, user, current, order, body, admin):
+        if order["status"] != "pending" or body.decision == "refund":
+            fail("Yêu cầu nâng cấp đã được xử lý hoặc không thể hoàn tiền ở trạng thái này.")
+        if body.decision == "approve" and not order.get("payment_reported_at"):
+            fail("Thành viên chưa gửi xác nhận chuyển khoản.")
+        if not user.is_active or user.deleted_at or current.get("tier") != order["from_tier"]:
+            fail("Tài khoản hoặc cấp hiện tại đã thay đổi. Kiểm tra lại trước khi duyệt.")
+        order.update(reviewed_by=admin.user_id, reviewed_at=now().isoformat(), review_note=body.note)
+        if body.decision == "reject":
+            order["status"] = "rejected"
+            self._save(user, current, user.analysis_limit)
+        else:
+            plan = MembershipOrderPlan.model_validate(order["plan"])
+            expires = now() + timedelta(days=plan.validity_days)
+            if current.get("expires_at"):
+                expires = max(expires, datetime.fromisoformat(current["expires_at"]))
+            current.pop("upgrade_order")
+            order.update(status="active", expires_at=expires.isoformat(), previous_membership=current,
+                         referral_events=current.get("referral_events", []))
+            self._save(user, order, plan.analysis_limit)
+        return self.details(user, internal=True)
 
     def report_payment(self, user: UserRecord, note: str):
         with self.store._lock:
@@ -197,6 +262,9 @@ class MembershipService:
             if not user or not user.membership:
                 fail("Không tìm thấy đăng ký thành viên.", 404)
             membership = deepcopy(user.membership)
+            upgrade = membership.get("upgrade_order") or {}
+            if upgrade.get("reference") == body.expected_reference:
+                return self._review_upgrade(user, membership, upgrade, body, admin)
             if user.deleted_at or membership.get("source") == "manual":
                 fail("Quyền cấp thủ công hoặc tài khoản đã xóa không phải đơn thanh toán để duyệt.")
             if membership.get("reference") != body.expected_reference:
@@ -204,6 +272,16 @@ class MembershipService:
             if body.decision == "refund":
                 if membership.get("status") != "active":
                     fail("Chỉ ghi nhận hoàn tiền cho đăng ký đã được kích hoạt.")
+                if upgrade.get("status") == "pending":
+                    fail("Xử lý yêu cầu nâng cấp đang chờ trước khi ghi nhận hoàn tiền.")
+                if membership.get("source") == "upgrade":
+                    previous = membership.pop("previous_membership")
+                    membership.update(status="refunded", reviewed_by=admin.user_id, review_note=body.note,
+                                      refunded_at=now().isoformat())
+                    previous["upgrade_order"] = membership
+                    previous_plan = MembershipOrderPlan.model_validate(previous["plan"])
+                    self._save(user, previous, previous_plan.analysis_limit)
+                    return self.details(user, internal=True)
                 membership.update(status="refunded", reviewed_by=admin.user_id,
                                   review_note=body.note, refunded_at=now().isoformat(), expires_at=now().isoformat())
                 self._referral_event(membership, refund=True)
@@ -241,5 +319,14 @@ class MembershipService:
 
     def applications(self):
         with self.store._lock:
-            return sorted([self.details(user, internal=True) for user in self.store.users_by_id.values() if user.membership and not user.deleted_at and user.membership.get("source") != "manual"],
-                          key=lambda item: item["membership"].get("registered_at", ""), reverse=True)
+            rows = []
+            for user in self.store.users_by_id.values():
+                if not user.membership or user.deleted_at:
+                    continue
+                item = self.details(user, internal=True)
+                if user.membership.get("source") != "manual":
+                    rows.append(item)
+                if item["upgrade"]:
+                    order = item["upgrade"]
+                    rows.append({**item, "membership": order, "transfer_content": order["transfer_content"]})
+            return sorted(rows, key=lambda item: item["membership"].get("registered_at", ""), reverse=True)

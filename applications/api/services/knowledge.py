@@ -1,7 +1,8 @@
-"""Ordered member library. Draft content is accessible only through Admin APIs."""
+"""Ordered public library. Draft content is accessible only through Admin APIs."""
 from contextlib import contextmanager
 from datetime import datetime, timezone
 import os
+import re
 from pathlib import Path
 import sqlite3
 from threading import RLock
@@ -34,13 +35,19 @@ def fold(text):
     return " ".join("".join(char for char in text if not unicodedata.combining(char)).split())
 
 
+def assign_slug(connection, identifier, title):
+    base = re.sub(r"[^a-z0-9]+", "-", fold(title)).strip("-")[:120].rstrip("-") or "bai-viet"
+    if re.fullmatch(r"[a-f0-9]{32}", base):
+        base = "bai-" + base
+    slug, suffix = base, 2
+    while connection.execute("SELECT 1 FROM library_articles WHERE slug=?", (slug,)).fetchone():
+        slug = f"{base}-{suffix}"
+        suffix += 1
+    connection.execute("UPDATE library_articles SET slug=? WHERE id=?", (slug, identifier))
+
+
 def fail(message="Không tìm thấy nội dung.", status=404, code="knowledge_error"):
     raise ActivityError(message, status, code)
-
-
-def require_member(user):
-    if not user.has_member_access():
-        fail("Kiến thức phong thủy dành cho thành viên còn quyền sử dụng.", 403, "membership_required")
 
 
 def require_admin(user):
@@ -104,6 +111,17 @@ class KnowledgeService:
                     elif existing["title"] != title or existing["position"] != index*10:
                         connection.execute("UPDATE library_categories SET title=?,position=?,revision=revision+1,updated_at=? WHERE id=?",(title,index*10,date,identifier))
                 connection.execute("INSERT INTO library_meta VALUES('categories_v2','1')")
+            if not connection.execute("SELECT 1 FROM library_meta WHERE key='article_slugs_v1'").fetchone():
+                if not any(row["name"] == "slug" for row in connection.execute("PRAGMA table_info(library_articles)")):
+                    connection.execute("ALTER TABLE library_articles ADD COLUMN slug TEXT")
+                connection.execute("CREATE UNIQUE INDEX IF NOT EXISTS library_articles_slug ON library_articles(slug)")
+                articles = connection.execute(
+                    "SELECT id,title FROM library_articles WHERE status='published' AND slug IS NULL "
+                    "ORDER BY published_at,created_at,id"
+                ).fetchall()
+                for article in articles:
+                    assign_slug(connection, article["id"], article["title"])
+                connection.execute("INSERT INTO library_meta VALUES('article_slugs_v1','1')")
             yield connection
             connection.commit()
         except Exception:
@@ -130,7 +148,7 @@ class KnowledgeService:
             JOIN library_categories c ON c.id=g.category_id"""
 
     def _article_view(self, row, detail=False, management=False):
-        keys = ["id","group_id","category_id","group_title","category_title","title","summary","position","updated_at","published_at","author_name"]
+        keys = ["id","slug","group_id","category_id","group_title","category_title","title","summary","position","updated_at","published_at","author_name"]
         if detail:
             keys.append("body")
         if management:
@@ -154,7 +172,8 @@ class KnowledgeService:
         return categories
 
     def catalog(self, user, management=False):
-        require_admin(user) if management else require_member(user)
+        if management:
+            require_admin(user)
         with self.connect() as connection:
             result = {"categories":self._catalog(connection,management)}
             if not management:
@@ -163,7 +182,6 @@ class KnowledgeService:
             return result
 
     def category(self, user, identifier):
-        require_member(user)
         with self.connect() as connection:
             category = next((row for row in self._catalog(connection) if row["id"]==identifier),None)
             if category is None:
@@ -174,21 +192,25 @@ class KnowledgeService:
             return {"category":category}
 
     def article(self, user, identifier, management=False):
-        require_admin(user) if management else require_member(user)
+        if management:
+            require_admin(user)
         with self.connect() as connection:
-            row = connection.execute(self._article_query()+" WHERE a.id=?"+("" if management else " AND a.status='published'"),(identifier,)).fetchone()
+            condition = "a.id=?" if management else "(a.id=? OR a.slug=?) AND a.status='published'"
+            args = (identifier,) if management else (identifier, identifier)
+            row = connection.execute(self._article_query()+" WHERE "+condition, args).fetchone()
             if row is None:
                 fail()
             result = {"article":self._article_view(row,True,management)}
             if not management:
                 ordered = connection.execute(self._article_query()+" WHERE g.category_id=? AND a.status='published' ORDER BY g.position,g.created_at,g.id,a.position,a.created_at,a.id",(row["category_id"],)).fetchall()
-                index = next(i for i,item in enumerate(ordered) if item["id"]==identifier)
+                index = next(i for i,item in enumerate(ordered) if item["id"]==row["id"])
                 result["previous"] = self._article_view(ordered[index-1]) if index else None
                 result["next"] = self._article_view(ordered[index+1]) if index+1<len(ordered) else None
             return result
 
     def search(self, user, query, page=1, limit=20, management=False, category_id=None, group_id=None, status=None):
-        require_admin(user) if management else require_member(user)
+        if management:
+            require_admin(user)
         conditions,args = [],[]
         if not management:
             conditions.append("a.status='published'")
@@ -257,6 +279,9 @@ class KnowledgeService:
                         created_at,updated_at,published_at,author_id,author_name,client_key) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
                         (identifier,body.group_id,body.title,body.summary,body.body,fold(body.title+" "+body.summary+" "+body.body),body.status,body.position,date,date,date if body.status=="published" else None,user.user_id,user.display_name or user.username,body.client_key))
             row = connection.execute(self._article_query()+" WHERE a.id=?",(identifier,)).fetchone()
+            if row["status"] == "published" and row["slug"] is None:
+                assign_slug(connection, identifier, row["title"])
+                row = connection.execute(self._article_query()+" WHERE a.id=?", (identifier,)).fetchone()
             return self._article_view(row,True,True)
 
 

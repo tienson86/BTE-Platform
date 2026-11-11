@@ -240,8 +240,14 @@ def create_app() -> FastAPI:
 
     @app.get("/knowledge", response_class=HTMLResponse)
     @app.get("/knowledge/lesson/{identifier}", response_class=HTMLResponse)
-    def knowledge_page() -> HTMLResponse:
-        return page("knowledge", "knowledge.html")
+    async def knowledge_page(request: Request, identifier: str | None = None) -> Response:
+        from applications.customer_portal.pages.knowledge import render_knowledge
+        page_data, status = await render_knowledge(request.query_params, identifier, settings.api_base_url)
+        if isinstance(page_data, str):
+            return RedirectResponse(page_data, status_code=status)
+        headers = {"X-Robots-Tag": "noindex"} if identifier is None and request.query_params.get("q", "").strip() else None
+        return HTMLResponse(render_page("knowledge.html", active="knowledge", page_data=page_data),
+                            status_code=status, headers=headers)
 
     @app.get("/admin-membership", include_in_schema=False)
     def admin_membership_page() -> RedirectResponse:

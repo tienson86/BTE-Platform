@@ -1,4 +1,4 @@
-"""Member reads and Admin-only content authoring for the ordered library."""
+"""Public reads and Admin-only content authoring for the ordered library."""
 from typing import Literal
 from fastapi import APIRouter,Query
 from applications.api.auth.dependencies import CurrentUser
@@ -8,20 +8,20 @@ from applications.api.services.knowledge import get_knowledge_service
 router=APIRouter(tags=["Knowledge library"])
 
 @router.get("/knowledge/catalog")
-def catalog(user:CurrentUser):
-    return get_knowledge_service().catalog(user)
+def catalog():
+    return get_knowledge_service().catalog(None)
 
 @router.get("/knowledge/categories/{identifier}")
-def category(identifier:str,user:CurrentUser):
-    return get_knowledge_service().category(user,identifier)
+def category(identifier:str):
+    return get_knowledge_service().category(None,identifier)
 
 @router.get("/knowledge/articles/{identifier}")
-def article(identifier:str,user:CurrentUser):
-    return get_knowledge_service().article(user,identifier)
+def article(identifier:str):
+    return get_knowledge_service().article(None,identifier)
 
 @router.get("/knowledge/search")
-def search(user:CurrentUser,q:str=Query(min_length=1,max_length=120),page:int=Query(1,ge=1),limit:int=Query(20,ge=1,le=50)):
-    return get_knowledge_service().search(user,q,page,limit)
+def search(q:str=Query(min_length=1,max_length=120),page:int=Query(1,ge=1),limit:int=Query(20,ge=1,le=50)):
+    return get_knowledge_service().search(None,q,page,limit)
 
 @router.get("/admin/knowledge/catalog")
 def admin_catalog(user:CurrentUser):

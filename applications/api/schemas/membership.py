@@ -117,6 +117,17 @@ class MemberRegistration(BaseModel):
         return normalize_phone(value)
 
 
+class MembershipUpgrade(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    tier: int = Field(ge=2, le=3, strict=True)
+
+
+class UpgradePaymentReport(BaseModel):
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+    reference: str = Field(min_length=8, max_length=64)
+    note: str = Field(default="", max_length=500)
+
+
 class PaymentReport(BaseModel):
     model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
     note: str = Field(default="", max_length=500)

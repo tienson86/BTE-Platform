@@ -7,7 +7,7 @@ from applications.api.auth.dependencies import CurrentUser, require_role
 from applications.api.auth.roles import Role
 from applications.api.auth.store import UserRecord
 from applications.api.dependencies import get_settings, get_user_store
-from applications.api.schemas.membership import MemberRegistration, MembershipPlan, MembershipReview, PaymentReport, LinhThachRedeem
+from applications.api.schemas.membership import MemberRegistration, MembershipPlan, MembershipReview, PaymentReport, LinhThachRedeem, MembershipUpgrade, UpgradePaymentReport
 from applications.api.services.membership_service import MembershipService
 
 router = APIRouter(prefix="/membership", tags=["Membership"])
@@ -31,6 +31,17 @@ def register(body: MemberRegistration, service: MembershipService = Depends(get_
 @router.get("/me")
 def me(user: CurrentUser, service: MembershipService = Depends(get_membership_service)):
     return service.details(user)
+
+
+@router.post("/upgrade")
+def upgrade(body: MembershipUpgrade, user: CurrentUser, service: MembershipService = Depends(get_membership_service)):
+    return service.request_upgrade(user, body.tier)
+
+
+@router.post("/upgrade/payment-notice")
+def upgrade_payment_notice(body: UpgradePaymentReport, user: CurrentUser,
+                           service: MembershipService = Depends(get_membership_service)):
+    return service.report_upgrade_payment(user, body.reference, body.note)
 
 
 @router.post("/payment-notice")

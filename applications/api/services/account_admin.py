@@ -48,6 +48,8 @@ class AccountAdminService:
             user = self._target(admin, username, body.expected_revision)
             if user.deleted_at:
                 fail("Khôi phục tài khoản trước khi cấp thành viên.")
+            if ((user.membership or {}).get("upgrade_order") or {}).get("status") == "pending":
+                fail("Xử lý yêu cầu nâng cấp đang chờ trước khi cấp thành viên thủ công.")
             plan = self.memberships.plan()
             tier = next(t for t in plan.configured_tiers() if t.tier == body.tier)
             selected = plan.model_dump(exclude={"tiers"})

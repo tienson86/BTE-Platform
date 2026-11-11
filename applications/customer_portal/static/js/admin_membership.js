@@ -83,7 +83,8 @@
         line("Thời hạn", plan.validity_days + " ngày"), line("Tài khoản nhận", plan.bank_name + " · " + plan.bank_account + " · " + plan.bank_holder),
         line("Thông báo từ khách", member.payment_reported_at ? "Khách đã báo chuyển khoản" : "Chưa báo chuyển khoản"),
         line("Ghi chú giao dịch", member.payment_note), line("Trạng thái", {pending:"Chờ xác nhận",active:"Đã kích hoạt",rejected:"Chưa chấp thuận",refunded:"Đã hoàn tiền"}[member.status] || member.status));
-      if (member.tier) card.append(line("Cấp thành viên", member.tier));
+      if (member.source === "upgrade") card.append(line("Loại yêu cầu", "Nâng cấp từ cấp " + member.from_tier + " lên cấp " + member.tier));
+      else if (member.tier) card.append(line("Cấp thành viên", member.tier));
       if (member.referrer_user_id) card.append(
         line("Mã giới thiệu", member.referral_code),
         line("Giá trước giảm", Number(member.original_amount_vnd).toLocaleString("vi-VN") + " đ"),
@@ -93,8 +94,10 @@
       if (member.status === "active") {
         const refund = node("button", "Ghi nhận đã hoàn tiền và thu hồi quyền / thưởng");
         refund.type = "button"; refund.className = "secondary";
+        if (member.source === "upgrade") refund.textContent = "Ghi nhận hoàn tiền và khôi phục gói trước";
         refund.onclick = async () => {
-          if (!window.confirm("Xác nhận bạn đã xử lý hoàn tiền giao dịch này? BTE sẽ thu hồi quyền thành viên và thưởng giới thiệu tương ứng.")) return;
+          const message = member.source === "upgrade" ? "Xác nhận đã hoàn tiền nâng cấp? BTE sẽ khôi phục gói trước." : "Xác nhận bạn đã xử lý hoàn tiền giao dịch này? BTE sẽ thu hồi quyền thành viên và thưởng giới thiệu tương ứng.";
+          if (!window.confirm(message)) return;
           refund.disabled = true;
           try {
             await api.post("/api/v1/membership/admin/applications/" + encodeURIComponent(user.user_id) + "/review",
@@ -111,7 +114,7 @@
         confirmLabel.append(confirmed, document.createTextNode(" Tôi đã đối chiếu số tiền và nội dung chuyển khoản: " + item.transfer_content + (member.legacy_transfer_content ? " (hoặc nội dung trước đây: " + member.legacy_transfer_content + ")" : "")));
         const noteLabel = node("label", "Ghi chú phản hồi cho khách");
         const note = node("textarea"); note.maxLength = 500; noteLabel.append(note);
-        const approve = node("button", "Xác nhận đã nhận tiền và mở quyền"); approve.type = "button";
+        const approve = node("button", member.source === "upgrade" ? "Xác nhận đã nhận tiền và nâng cấp" : "Xác nhận đã nhận tiền và mở quyền"); approve.type = "button";
         const reject = node("button", "Chưa chấp thuận"); reject.type = "button"; reject.className = "secondary";
         async function review(decision) {
           if (decision === "approve" && !confirmed.checked) { state.textContent = "Cần xác nhận đã đối chiếu khoản tiền trước khi mở quyền."; confirmed.focus(); return; }

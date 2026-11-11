@@ -3,7 +3,10 @@
   if (!host) return;
   const state = document.getElementById("memberPlansState");
   const money = value => Number(value).toLocaleString("vi-VN") + " VNĐ";
-  BtePortal.get("/api/v1/membership/plan").then(plan => {
+  const account = BtePortal.getToken?.() ? BtePortal.get("/api/v1/membership/me").catch(() => null) : null;
+  Promise.all([BtePortal.get("/api/v1/membership/plan"), account]).then(([plan, member]) => {
+    const currentTier = member?.user?.role === "CUSTOMER" && member.user.member_access ? member.membership?.tier : null;
+    const pendingTier = member?.upgrade?.status === "pending" ? member.upgrade.tier : null;
     plan.tiers.forEach(tier => {
       const card = host.querySelector('[data-tier="' + tier.tier + '"]');
       if (!card) return;
@@ -22,9 +25,17 @@
         rights.append(item);
       });
       const link = card.querySelector("[data-tier-register]");
-      if (!tier.enabled || !plan.ready) {
+      if (pendingTier === tier.tier) {
+        link.href = "/membership";
+        link.textContent = "Xem yêu cầu nâng cấp";
+      } else if (currentTier && tier.tier <= currentTier) {
+        link.removeAttribute("href"); link.setAttribute("aria-disabled", "true");
+        link.textContent = tier.tier === currentTier ? "Cấp hiện tại" : "Cấp thấp hơn";
+      } else if (!tier.enabled || !plan.ready) {
         link.removeAttribute("href"); link.setAttribute("aria-disabled", "true");
         link.textContent = "Tạm ngừng đăng ký";
+      } else if (currentTier) {
+        link.textContent = "Nâng cấp lên cấp " + tier.tier;
       }
     });
   }).catch(() => { state.textContent = "Chưa tải được biểu phí hiện tại. Vui lòng tải lại trang trước khi đăng ký."; });

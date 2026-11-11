@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Any
+from html import escape
 
 from applications.customer_portal.config import PORTAL_ROOT, settings
 from applications.customer_portal.i18n import DEFAULT_LOCALE, dump_catalog_json, load_catalog, t
@@ -52,10 +53,8 @@ def _customer_header_html(
     community_class = "member-sidebar__quick-link" + (" active" if active == "community" else "")
     messages_current = ' aria-current="page"' if active == "messages" else ""
     community_current = ' aria-current="page"' if active == "community" else ""
-    knowledge_class = "member-sidebar__quick-link" + (" active" if active == "knowledge" else "")
     courses_class = "member-sidebar__quick-link" + (" active" if active == "courses" else "")
     courses_current = ' aria-current="page"' if active == "courses" else ""
-    knowledge_current = ' aria-current="page"' if active == "knowledge" else ""
     return (
         f'<a class="skip-link" href="{skip_href}">Skip to content</a>\n'
         '  <header class="app-header" id="appHeader">\n'
@@ -87,7 +86,6 @@ def _customer_header_html(
         '      <nav class="member-sidebar__quick-links" aria-label="Tiện ích thành viên">\n'
         f'        <a class="{messages_class}"{messages_current} href="/messages">Tin nhắn với Admin <span data-message-unread hidden></span></a>\n'
         f'        <a class="{community_class}"{community_current} href="/community" data-forum-only hidden>Trao đổi kiến thức</a>\n'
-        f'        <a class="{knowledge_class}"{knowledge_current} href="/knowledge" data-forum-only hidden>Kiến thức phong thủy</a>\n'
         f'        <a class="{courses_class}"{courses_current} href="/khoa-hoc" data-forum-only hidden>Khóa học</a>\n'
         '      </nav>\n'
         f'      <nav class="member-nav" data-customer-nav="member" aria-label="Chức năng thành viên">{member_nav}</nav>\n'
@@ -113,7 +111,8 @@ def _apply_common_tokens(html: str, *, locale: str, catalog: dict[str, Any]) -> 
     return html
 
 
-def render_page(template_name: str, *, active: str, locale: str = DEFAULT_LOCALE) -> str:
+def render_page(template_name: str, *, active: str, locale: str = DEFAULT_LOCALE,
+                page_data: tuple[str, str, str] | None = None) -> str:
     """Compose layout + page body with navigation (labels from i18n catalog)."""
     catalog = load_catalog(locale)
     base = (TEMPLATES_DIR / "_layout.html").read_text(encoding="utf-8")
@@ -142,10 +141,18 @@ def render_page(template_name: str, *, active: str, locale: str = DEFAULT_LOCALE
         shared=(TEMPLATES_DIR / "community.html").read_text(encoding="utf-8")
         panel=shared.split("<!-- COMMUNITY_PANEL_START -->",1)[1].split("<!-- COMMUNITY_PANEL_END -->",1)[0]
         body=body.replace("{{CATEGORY_COMMUNITY}}",panel)
+    if page_data is not None:
+        base = base.replace("{{DOC_TITLE}}", "{{PAGE_TITLE}}")
     html = base.replace("{{HEADER}}", _customer_header_html(catalog, active))
     html = html.replace("{{CONTENT}}", body)
     html = html.replace("{{ACTIVE}}", active)
-    return _apply_common_tokens(html, locale=locale, catalog=catalog)
+    html = _apply_common_tokens(html, locale=locale, catalog=catalog)
+    if page_data is None:
+        return html
+    title, description, content = page_data
+    html = html.replace("{{PAGE_TITLE}}", escape(title), 1)
+    html = html.replace("</head>", f'<meta name="description" content="{escape(description)}" />\n</head>', 1)
+    return html.replace("{{KNOWLEDGE_CONTENT}}", content, 1)
 
 
 def render_desktop_page(
