@@ -19,7 +19,7 @@ from consulting.marriage.models.enums import CanonicalGender, FiveElement, Perso
 from consulting.marriage.models.snapshot import MarriageCanonicalSnapshot
 from consulting.marriage.runtime.canonical_labels import try_map_five_element
 from consulting.marriage.runtime.snapshot_builder import build_marriage_snapshot
-from consulting.naming.models import NamingRequest, normalize_name
+from consulting.naming.models import NamingBirthInput, NamingRequest, normalize_name
 
 MODULE_VERSION = "naming.consulting.v0.1"
 ELEMENT_LABELS = {
@@ -69,11 +69,23 @@ def analyze_naming(
     *,
     adapter: CanonicalOrchestratorAdapter | None = None,
 ) -> dict[str, Any]:
+    snapshot, cung_element = build_naming_birth_snapshot(
+        request, full_name=request.current_name, adapter=adapter,
+    )
+    return recommend_names(request, snapshot, cung_element=cung_element)
+
+
+def build_naming_birth_snapshot(
+    request: NamingBirthInput,
+    *,
+    full_name: str = "",
+    adapter: CanonicalOrchestratorAdapter | None = None,
+) -> tuple[MarriageCanonicalSnapshot, FiveElement | None]:
     person = MarriagePersonInput(
         gender=CanonicalGender(request.gender),
         birth_date=request.birth_date,
         birth_time=request.birth_time,
-        full_name=request.current_name or None,
+        full_name=full_name or None,
         birth_place=BirthPlaceInput(display_name=request.birth_place) if request.birth_place else None,
         timezone=request.timezone,
     )
@@ -85,16 +97,15 @@ def analyze_naming(
     cung_element = try_map_five_element(calendar.get("hanh_cung"))
     if cung_element is None and snapshot.feng_shui:
         cung_element = snapshot.feng_shui.element
-    return recommend_names(request, snapshot, cung_element=cung_element)
+    return snapshot, cung_element
 
 
-def recommend_names(
-    request: NamingRequest,
+def naming_birth_signals(
+    request: NamingBirthInput,
     snapshot: MarriageCanonicalSnapshot,
     *,
     cung_element: FiveElement | None = None,
-) -> dict[str, Any]:
-    catalog = load_catalog()
+) -> tuple[dict[str, Any], list[str]]:
     hour_known = request.birth_time is not None and snapshot.pillars.hour is not None
     useful = set(useful_elements(snapshot.useful_god)) if hour_known else set()
     favorable = set(favorable_elements(snapshot.useful_god)) if hour_known else set()
@@ -125,6 +136,34 @@ def recommend_names(
         cung_element = None
     if request.birth_place:
         warnings.append("Nơi sinh được ghi nhận; V0.1 tính theo múi giờ đã chọn, chưa hiệu chỉnh giờ Mặt Trời theo tọa độ.")
+    signals = {
+        "pillars": {
+            slot: getattr(snapshot.pillars, slot).can_chi
+            if getattr(snapshot.pillars, slot) and (slot != "hour" or hour_known) else None
+            for slot in ("year", "month", "day", "hour")
+        },
+        "useful_elements": _labels(useful), "favorable_elements": _labels(favorable),
+        "unfavorable_elements": _labels(unfavorable),
+        "nap_am": nap_am or None, "nap_am_element": ELEMENT_LABELS.get(nap_element),
+        "cung_phi": cung, "cung_phi_element": ELEMENT_LABELS.get(cung_element),
+    }
+    return signals, warnings
+
+
+def recommend_names(
+    request: NamingRequest,
+    snapshot: MarriageCanonicalSnapshot,
+    *,
+    cung_element: FiveElement | None = None,
+) -> dict[str, Any]:
+    catalog = load_catalog()
+    signals, warnings = naming_birth_signals(request, snapshot, cung_element=cung_element)
+    hour_known = signals["pillars"]["hour"] is not None
+    useful = signals["useful_elements"]
+    favorable = signals["favorable_elements"]
+    unfavorable = signals["unfavorable_elements"]
+    nap_element = try_map_five_element(signals["nap_am_element"])
+    cung_element = try_map_five_element(signals["cung_phi_element"])
     recommendations = []
     group_counts: Counter[str] = Counter()
     for entry in catalog["names"]:
@@ -136,14 +175,15 @@ def recommend_names(
         }:
             continue
         element = FiveElement(entry["element"].lower())
-        if element in unfavorable:
+        element_label = ELEMENT_LABELS[element]
+        if element_label in unfavorable:
             continue
 
-        if element in useful:
+        if element_label in useful:
             group, points = "useful", 60
             level = "Ưu tiên theo Dụng thần"
             reason = "Hành tên trùng hành Dụng thần do BTE công bố."
-        elif element in favorable:
+        elif element_label in favorable:
             group, points = "favorable", 30
             level = "Phù hợp theo Hỷ thần"
             reason = "Hành tên trùng hành Hỷ thần do BTE công bố."
@@ -187,17 +227,7 @@ def recommend_names(
         "mode": request.mode,
         "current_name": request.current_name if request.mode == "rename" else None,
         "quality": "preliminary" if not hour_known or not (useful or favorable) else "with_birth_time",
-        "signals": {
-            "pillars": {
-                slot: getattr(snapshot.pillars, slot).can_chi
-                if getattr(snapshot.pillars, slot) and (slot != "hour" or hour_known) else None
-                for slot in ("year", "month", "day", "hour")
-            },
-            "useful_elements": _labels(useful), "favorable_elements": _labels(favorable),
-            "unfavorable_elements": _labels(unfavorable),
-            "nap_am": nap_am or None, "nap_am_element": ELEMENT_LABELS.get(nap_element),
-            "cung_phi": cung, "cung_phi_element": ELEMENT_LABELS.get(cung_element),
-        },
+        "signals": signals,
         "recommendations": recommendations[:request.count],
         "eligible_counts": {group: group_counts[group] for group in priority_order},
         "warnings": warnings,

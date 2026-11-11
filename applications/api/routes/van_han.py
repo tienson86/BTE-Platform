@@ -38,41 +38,52 @@ def sources(request:Request,q:str=Query('',max_length=120),limit:int=Query(30,ge
                       'birth_date':row[4],'birth_time':row[5],'gender':row[6],'creator_username':users[row[0]]})
     return {'items':items,'total':total,'offset':offset,'limit':limit,'has_more':offset+len(items)<total}
 
-@router.post('/analyze')
-def analyze(request:Request,body:CalculateRequest):
-    user=current_user(request);owner='user:'+user.user_id
-    if body.source_owner and body.source_owner!=owner:
-        if not is_admin(user):raise HTTPException(403,'Bạn không được dùng hồ sơ của tài khoản khác')
-        owner=body.source_owner
-    row=get_snapshot(owner,body.analysis_id)
-    if row is None:raise HTTPException(404,'Không tìm thấy lá số trong quyền truy cập của bạn')
-    try:result=calculate(row,body.start_year,body.end_year)
-    except (ValueError,KeyError,TypeError) as error:raise HTTPException(422,str(error)) from error
-    result['source_owner']=owner
-    return {'row':save_result(user,result)}
+def period_routes(*, good_years=False):
+    period_router=APIRouter()
 
-@router.get('/history')
-def history(request:Request):
-    user=current_user(request)
-    return {'items':list_results('user:'+user.user_id,is_admin(user))}
+    @period_router.post('/analyze')
+    def analyze(request:Request,body:CalculateRequest):
+        user=current_user(request);owner='user:'+user.user_id
+        if body.source_owner and body.source_owner!=owner:
+            if not is_admin(user):raise HTTPException(403,'Bạn không được dùng hồ sơ của tài khoản khác')
+            owner=body.source_owner
+        row=get_snapshot(owner,body.analysis_id)
+        if row is None:raise HTTPException(404,'Không tìm thấy lá số trong quyền truy cập của bạn')
+        try:result=calculate(row,body.start_year,body.end_year)
+        except (ValueError,KeyError,TypeError) as error:raise HTTPException(422,str(error)) from error
+        if good_years:
+            from applications.api.services.good_years import select_good_periods
+            result=select_good_periods(result)
+        result['source_owner']=owner
+        return {'row':save_result(user,result,good_years=good_years)}
 
-def owned(request,identifier):
-    user=current_user(request);row=get_result('user:'+user.user_id,identifier,is_admin(user))
-    if row is None:raise HTTPException(404,'Không tìm thấy hồ sơ vận hạn trong quyền truy cập của bạn')
-    return row
+    @period_router.get('/history')
+    def history(request:Request):
+        user=current_user(request)
+        return {'items':list_results('user:'+user.user_id,is_admin(user),good_years=good_years)}
 
-@router.get('/{identifier}')
-def get_one(identifier:str,request:Request):return {'row':owned(request,identifier)}
+    def owned(request,identifier):
+        user=current_user(request);row=get_result('user:'+user.user_id,identifier,is_admin(user),good_years=good_years)
+        if row is None:raise HTTPException(404,'Không tìm thấy hồ sơ trong quyền truy cập của bạn')
+        return row
 
-@router.get('/{identifier}/export/{fmt}')
-def export(identifier:str,fmt:Literal['pdf','docx'],request:Request):
-    row=owned(request,identifier)
-    from applications.api.services.van_han_export import export_file
-    from consulting.marriage.report.export import cleanup_marriage_export
-    import logging
-    try:artifact=export_file(row,fmt)
-    except Exception:
-        logging.getLogger(__name__).exception('van_han_export_failed id=%s format=%s',identifier,fmt)
-        raise HTTPException(500,'Chưa tạo được '+fmt.upper()+'. Mã hồ sơ: '+identifier+'. Hãy gửi kết quả kiểm tra tải tài liệu để xác định lỗi.') from None
-    return FileResponse(str(artifact.path),media_type=artifact.media_type,filename=artifact.filename,
-                        background=BackgroundTask(cleanup_marriage_export,artifact.path))
+    @period_router.get('/{identifier}')
+    def get_one(identifier:str,request:Request):return {'row':owned(request,identifier)}
+
+    @period_router.get('/{identifier}/export/{fmt}')
+    def export(identifier:str,fmt:Literal['pdf','docx'],request:Request):
+        row=owned(request,identifier)
+        from applications.api.services.van_han_export import export_file
+        from consulting.marriage.report.export import cleanup_marriage_export
+        import logging
+        try:artifact=export_file(row,fmt)
+        except Exception:
+            logging.getLogger(__name__).exception('van_han_export_failed id=%s format=%s',identifier,fmt)
+            raise HTTPException(500,'Chưa tạo được '+fmt.upper()+'. Mã hồ sơ: '+identifier+'. Hãy gửi kết quả kiểm tra tải tài liệu để xác định lỗi.') from None
+        return FileResponse(str(artifact.path),media_type=artifact.media_type,filename=artifact.filename,
+                            background=BackgroundTask(cleanup_marriage_export,artifact.path))
+
+    return period_router
+
+router.include_router(period_routes(good_years=True),prefix='/good-years')
+router.include_router(period_routes())

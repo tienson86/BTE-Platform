@@ -143,6 +143,10 @@ def test_admin_approval_opens_access_once_and_survives_restart(system):
     ("/api/v1/export/pdf", "post"), ("/api/v1/export/docx", "post"),
     ("/api/v1/date-selection/report/pdf", "post"), ("/api/v1/van-han/history", "get"),
     ("/api/v1/analysis-archive", "get"),
+    ("/api/v1/van-han/good-years/history", "get"),
+    ("/api/v1/van-han/good-years/analyze", "post"),
+    ("/api/v1/van-han/good-years/NT-1/export/pdf", "get"),
+    ("/api/v1/van-han/good-years/NT-1/export/docx", "get"),
 ])
 def test_paid_views_and_downloads_are_blocked_before_processing(system, path, method):
     client, service, store, headers = system

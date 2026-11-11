@@ -156,6 +156,10 @@ def create_app() -> FastAPI:
         """UI-16 executive report HTML preview. Does not replace /reports PDF."""
         return HTMLResponse(render_desktop_page("result_desktop.html", active="result"))
 
+    @app.get("/tinh-cac-nam-tot", response_class=HTMLResponse)
+    def good_years_page() -> HTMLResponse:
+        return page("good-years", "van_han.html")
+
     @app.get("/tinh-van-han", response_class=HTMLResponse)
     def van_han_page() -> HTMLResponse:
         return page("van-han", "van_han.html")

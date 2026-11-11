@@ -1,4 +1,4 @@
-"""Stateless current-name reading from curated meanings and year-only references."""
+"""Read curated name meanings and compare the name with birth-chart signals."""
 
 from __future__ import annotations
 
@@ -10,9 +10,10 @@ from typing import Any
 
 from consulting.marriage.models.enums import FiveElement
 from consulting.marriage.runtime.canonical_labels import try_map_five_element
-from consulting.naming.models import CurrentNameRequest, normalize_name
+from consulting.naming.models import CurrentNameBirthRequest, CurrentNameRequest, NamingRequest, normalize_name
 from consulting.naming.service import (
-    CONTROLS, ELEMENT_LABELS, GENERATES, describe_element_relation, load_catalog,
+    CONTROLS, ELEMENT_LABELS, GENERATES, build_naming_birth_snapshot,
+    describe_element_relation, load_catalog, naming_birth_signals, recommend_names,
 )
 from engines.calendar_engine.cung_phi import (
     element_label_for_cung,
@@ -73,8 +74,8 @@ def load_han_viet() -> dict[str, Any]:
     return {"words": words, "phrases": phrases, "note": data["note"], "version": data["version"]}
 
 
-def analyze_current_name(request: CurrentNameRequest) -> dict[str, Any]:
-    words = request.full_name.split()
+def read_current_name(full_name: str) -> dict[str, Any]:
+    words = full_name.split()
     family_size = 0 if len(words) == 1 else 1
     if len(words) >= 3 and " ".join(words[:2]).casefold() in _COMPOUND_FAMILY_NAMES:
         family_size = 2
@@ -103,6 +104,28 @@ def analyze_current_name(request: CurrentNameRequest) -> dict[str, Any]:
     if combined.get("summary"):
         meaning = combined["summary"]
 
+    return {
+        "family_part": " ".join(words[:family_size]) or None,
+        "given_part": given_part,
+        "middle_part": " ".join(name_words[:-1]) or None,
+        "main_part": name_words[-1],
+        "meaning": meaning,
+        "parts": parts,
+        "family_reading": _family_reading(" ".join(words[:family_size])),
+        "rhythm": _name_rhythm(words),
+        "han_viet": {
+            "note": load_han_viet()["note"],
+            **combined,
+        },
+        "element": ELEMENT_LABELS.get(element),
+        "element_basis": basis,
+        "match_source": "catalog_name" if catalog_match else "main_word" if main_entry else "unresolved",
+    }
+
+
+def analyze_current_name(request: CurrentNameRequest) -> dict[str, Any]:
+    reading = read_current_name(request.full_name)
+    element = try_map_five_element(reading["element"])
     # The form supplies an already determined lunar year, never a Gregorian year.
     year = jiazi_row_for_year(request.lunar_birth_year)
     cung = personal_cung_phi_from_year_ganzhi(
@@ -113,7 +136,7 @@ def analyze_current_name(request: CurrentNameRequest) -> dict[str, Any]:
         raise ValueError("current_name_cung_phi_missing")
     nap_element = try_map_five_element(year.nap_am.rsplit(" ", 1)[-1])
     cung_element = try_map_five_element(element_label_for_cung(cung.cung_phi))
-    unknown = list(dict.fromkeys(part["word"] for part in parts if not part["known"]))
+    unknown = list(dict.fromkeys(part["word"] for part in reading["parts"] if not part["known"]))
     notes = [
         "Can Chi, Nạp Âm và Cung Phi được đối chiếu theo năm sinh âm lịch bạn đã nhập.",
         "Muốn xét Bát Tự và Dụng/Hỷ thần, cần ngày và giờ sinh đầy đủ.",
@@ -126,23 +149,7 @@ def analyze_current_name(request: CurrentNameRequest) -> dict[str, Any]:
         "full_name": request.full_name,
         "gender": request.gender,
         "lunar_birth_year": request.lunar_birth_year,
-        "name_reading": {
-            "family_part": " ".join(words[:family_size]) or None,
-            "given_part": given_part,
-            "middle_part": " ".join(name_words[:-1]) or None,
-            "main_part": name_words[-1],
-            "meaning": meaning,
-            "parts": parts,
-            "family_reading": _family_reading(" ".join(words[:family_size])),
-            "rhythm": _name_rhythm(words),
-            "han_viet": {
-                "note": load_han_viet()["note"],
-                **combined,
-            },
-            "element": ELEMENT_LABELS.get(element),
-            "element_basis": basis,
-            "match_source": "catalog_name" if catalog_match else "main_word" if main_entry else "unresolved",
-        },
+        "name_reading": reading,
         "year_reference": {
             "calendar": "vietnamese_lunar_year",
             "lunar_birth_year": request.lunar_birth_year,
@@ -160,6 +167,128 @@ def analyze_current_name(request: CurrentNameRequest) -> dict[str, Any]:
         ],
         "notes": notes,
         "notice": "Ý nghĩa và hành tên là cách diễn giải tham khảo, không quyết định tính cách, thành công hay danh tiếng của một người.",
+    }
+
+
+def analyze_current_name_birth(request: CurrentNameBirthRequest) -> dict[str, Any]:
+    reading = read_current_name(request.full_name)
+    snapshot, cung_element = build_naming_birth_snapshot(request, full_name=request.full_name)
+    signals, warnings = naming_birth_signals(request, snapshot, cung_element=cung_element)
+    element_label = reading["element"]
+    element = try_map_five_element(element_label)
+    useful = signals["useful_elements"]
+    favorable = signals["favorable_elements"]
+    unfavorable = signals["unfavorable_elements"]
+    middle = [part for part in reading["parts"][:-1] if part["element"]]
+    name_context = f'Tên chính “{reading["main_part"]}” được luận theo nghĩa và âm điệu.'
+    if middle:
+        middle_elements = ", ".join(f'“{part["word"]}” thuộc hành {part["element"]}' for part in middle)
+        name_context = f"Tên đệm {middle_elements}. " + name_context
+    name_context += " Xét riêng tên chính theo ngũ hành, tên ở mức trung tính."
+
+    factors = []
+    for label, elements, purpose in (
+        ("Dụng thần", useful, "ưu tiên khi chọn hành tên"),
+        ("Hỷ thần", favorable, "có thể bổ trợ cho lá số"),
+        ("Kỵ thần", unfavorable, "nên cân nhắc khi chọn hành tên"),
+    ):
+        if not elements:
+            continue
+        description = f'Hành {", ".join(elements)} {purpose}.'
+        if element_label in elements:
+            description += f" Tên đang mang hành {element_label} nên trùng với tiêu chí này."
+        elif element_label:
+            relations = [
+                _comparison(element, try_map_five_element(target), label)["title"].split(": ")[-1]
+                for target in elements
+            ]
+            description += f" Xét quan hệ với hành tên, {', '.join(relations)}."
+        factors.append({"label": label, "elements": elements, "explanation": description})
+
+    if not element:
+        level, title, reason = "neutral", "Tên chính trung tính về ngũ hành", name_context
+    elif element_label in unfavorable:
+        level, title, reason = (
+            "caution", "Cần cân nhắc theo Bát Tự",
+            f"Tên mang hành {element_label}, trùng hành Kỵ thần. Nếu muốn đổi hoặc dùng thêm tên gọi, "
+            "nên ưu tiên hành Dụng thần rồi đến Hỷ thần.",
+        )
+    elif element_label in useful:
+        level, title, reason = (
+            "aligned", "Phù hợp theo Dụng thần",
+            f"Tên mang hành {element_label}, đúng hành lá số ưu tiên. Có thể tiếp tục dùng tên hiện tại.",
+        )
+    elif element_label in favorable:
+        level, title, reason = (
+            "aligned", "Phù hợp theo Hỷ thần",
+            f"Tên mang hành {element_label}, thuộc nhóm hành bổ trợ của lá số. Có thể tiếp tục dùng tên hiện tại.",
+        )
+    elif useful or favorable:
+        level, title, reason = (
+            "neutral", "Tên ở mức trung tính theo Bát Tự",
+            f"Tên mang hành {element_label} và nằm ngoài các hành Dụng, Hỷ, Kỵ được nêu trong lá số.",
+        )
+
+    else:
+        level, title, reason = (
+            "neutral", f"Tên mang hành {element_label}",
+            "Có thể tham khảo ý nghĩa tên cùng quan hệ với Nạp Âm và Cung Phi của lá số.",
+        )
+
+    comparisons = [
+        _comparison(element, try_map_five_element(signals["nap_am_element"]), "Nạp Âm trụ năm"),
+        _comparison(element, try_map_five_element(signals["cung_phi_element"]), "Cung Phi"),
+    ]
+    if element and comparisons[1]["relation"] != "unresolved":
+        relation = comparisons[1]["title"].split(": ")[-1]
+        reason += f" Đối chiếu Cung Phi cho thấy {relation}."
+        if level == "aligned" and "controls" in comparisons[1]["relation"]:
+            reason += " Trong đánh giá tổng thể, Bát Tự vẫn được ưu tiên."
+    if not element:
+        comparisons = [
+            {**item, "label": f'{item["label"]} và tên đệm “{part["word"]}”'}
+            for part in middle
+            for item in (
+                _comparison(try_map_five_element(part["element"]), try_map_five_element(signals["nap_am_element"]), "Nạp Âm trụ năm"),
+                _comparison(try_map_five_element(part["element"]), try_map_five_element(signals["cung_phi_element"]), "Cung Phi"),
+            )
+        ]
+    suggestions = []
+    direction = ""
+    if level != "aligned" and (useful or favorable):
+        preferred = ", ".join(useful or favorable)
+        direction = f"Bạn có thể cân nhắc tên gọi phụ trong sinh hoạt hoặc công việc, ưu tiên hành {preferred}."
+        if reading["family_part"]:
+            naming_request = NamingRequest(
+                **request.model_dump(exclude={"full_name"}),
+                mode="rename", family_name=reading["family_part"], current_name=request.full_name,
+            )
+            ranked = recommend_names(naming_request, snapshot, cung_element=cung_element)["recommendations"]
+            suggestions = [
+                {
+                    **item,
+                    "cung_phi_relation": _comparison(
+                        try_map_five_element(item["element"]),
+                        try_map_five_element(signals["cung_phi_element"]),
+                        "Cung Phi",
+                    ),
+                }
+                for item in ranked if item["priority_group"] in {"useful", "favorable"}
+            ][:3]
+
+    return {
+        "module_version": "naming.current-name.v0.5",
+        "basis": "birth_chart",
+        "full_name": request.full_name,
+        "name_reading": reading,
+        "signals": signals,
+        "fit": {"level": level, "title": title, "reason": reason},
+        "factors": factors,
+        "direction": direction,
+        "suggestions": suggestions,
+        "comparisons": comparisons,
+        "notes": warnings,
+        "notice": "Đánh giá dựa trên hành tên theo danh mục BTE. Nạp Âm và Cung Phi bổ sung góc nhìn tham khảo.",
     }
 
 
@@ -182,6 +311,7 @@ def _word_reading(word: str, dictionary: dict[str, dict[str, Any]]) -> dict[str,
         "known": entry is not None,
         "meaning": entry["meaning"] if entry else "Tiếng tên này có thể gắn với một cách đặt riêng. Hãy đối chiếu chữ gốc hoặc ý nghĩa người đặt tên gửi gắm.",
         "element": ELEMENT_LABELS.get(element),
+        "element_basis": entry.get("basis") if element else None,
         "han_characters": han_viet.get("characters", []),
         "interpretation": han_viet.get("interpretation"),
     }

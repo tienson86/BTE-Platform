@@ -5,14 +5,10 @@
   const state = document.getElementById("na-state");
   const result = document.getElementById("na-result");
   const fullName = document.getElementById("na-full-name");
-  const birthYear = document.getElementById("na-lunar-birth-year");
-  const currentYear = Number(new Intl.DateTimeFormat("en", { year: "numeric", timeZone: "Asia/Ho_Chi_Minh" }).format(new Date()));
-  birthYear.max = String(currentYear);
   let busy = false;
 
   form.addEventListener("input", function () {
     fullName.setCustomValidity("");
-    birthYear.setCustomValidity("");
     state.textContent = "";
     result.replaceChildren();
     result.hidden = true;
@@ -21,26 +17,20 @@
   form.addEventListener("submit", async function (event) {
     event.preventDefault();
     if (busy) return;
-    const year = Number(birthYear.value);
     fullName.setCustomValidity(fullName.value.trim() ? "" : "Vui lòng nhập họ và tên hiện tại.");
-    birthYear.setCustomValidity(/^\d{4}$/.test(birthYear.value) && year >= 1900 && year <= currentYear
-      ? "" : "Vui lòng nhập năm sinh âm lịch hợp lệ từ 1900 đến " + currentYear + ".");
     if (!form.reportValidity()) return;
-    const payload = {
-      full_name: fullName.value.trim(),
-      gender: form.elements.gender.value,
-      lunar_birth_year: year,
-    };
+    const payload = Object.fromEntries(new FormData(form));
+    payload.full_name = fullName.value.trim();
     busy = true;
     fields.disabled = true;
     form.setAttribute("aria-busy", "true");
     result.hidden = true;
     result.replaceChildren();
-    state.textContent = "Đang luận nghĩa tên và đối chiếu năm sinh âm lịch…";
+    state.textContent = "Đang lập Bát Tự và đối chiếu hành tên…";
     try {
-      const response = await fetch("/backend/api/v1/public/naming/analyze-current", {
+      const response = await fetch("/backend/api/v1/public/naming/analyze-current-birth", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload), signal: AbortSignal.timeout(20000),
+        body: JSON.stringify(payload), signal: AbortSignal.timeout(120000),
       });
       const envelope = await response.json();
       if (!response.ok || envelope.status !== "SUCCESS" || !envelope.data) {
@@ -73,9 +63,26 @@
 
   function renderResult(data) {
     const reading = data.name_reading;
-    const reference = data.year_reference;
-    if (data.basis !== "lunar_birth_year_only" || !Number.isInteger(data.lunar_birth_year)) {
-      throw new Error("Dịch vụ chưa cập nhật năm âm lịch. Vui lòng tải lại trang sau ít phút.");
+    if (data.basis !== "birth_chart" || !data.signals || !data.fit) {
+      throw new Error("Dịch vụ chưa hỗ trợ phân tích theo ngày giờ sinh. Vui lòng cập nhật và khởi động lại BTE.");
+    }
+    const reference = data.signals;
+    const verdict = node("section", undefined, "panel na-verdict");
+    verdict.dataset.level = data.fit.level;
+    verdict.append(node("h2", "Mức độ phù hợp của tên"), node("strong", data.fit.title), node("p", data.fit.reason));
+    if (data.direction) verdict.append(node("p", data.direction));
+    if (data.suggestions?.length) {
+      const suggestions = node("ul");
+      data.suggestions.forEach(function (item) {
+        const line = node("li");
+        line.append(node("strong", item.full_name + " · " + item.element),
+          node("span", " — " + item.fit_level + ". " + item.meaning));
+        if (item.cung_phi_relation?.relation !== "unresolved" && item.cung_phi_relation?.explanation) {
+          line.append(node("p", item.cung_phi_relation.explanation, "muted"));
+        }
+        suggestions.append(line);
+      });
+      verdict.append(node("h3", "Tên gọi có thể cân nhắc"), suggestions);
     }
     const summary = node("section", undefined, "panel nc-name");
     summary.dataset.element = reading.element || "";
@@ -109,6 +116,7 @@
       }
       if (part.interpretation) card.append(node("p", part.interpretation, "na-prose"));
       if (part.element) card.append(node("p", "Hành tham khảo: " + part.element, "muted"));
+      if (part.element_basis) card.append(node("p", part.element_basis, "muted"));
       parts.append(card);
     });
     const hanViet = node("section", undefined, "panel na-han-viet");
@@ -136,10 +144,12 @@
       rhythm.append(tones);
     }
     const yearSection = node("section", undefined, "panel");
-    yearSection.append(node("h2", "Đối chiếu theo năm sinh âm lịch " + data.lunar_birth_year));
+    yearSection.append(node("h2", "Bát Tự và đối chiếu ngũ hành"));
     const yearGrid = node("div", undefined, "na-grid");
     [
-      ["Can Chi năm", reference.can_chi],
+      ...[["Trụ năm", "year"], ["Trụ tháng", "month"], ["Trụ ngày", "day"], ["Trụ giờ", "hour"]].map(function ([label, key]) {
+        return [label, reference.pillars[key]];
+      }),
       ["Nạp Âm", reference.nap_am],
       ["Cung Phi", [reference.cung_phi, reference.cung_phi_element].filter(Boolean).join(" · ")],
     ].forEach(function (item) {
@@ -149,6 +159,11 @@
     });
     yearSection.append(yearGrid);
     const comparisons = node("div", undefined, "na-comparisons");
+    data.factors.forEach(function (factor) {
+      const card = node("section", undefined, "panel");
+      card.append(node("h3", factor.label), node("strong", factor.elements.join(", ") || "Chưa xác định"), node("p", factor.explanation));
+      comparisons.append(card);
+    });
     const resolvedComparisons = data.comparisons.filter(function (comparison) { return comparison.relation !== "unresolved"; });
     resolvedComparisons.forEach(function (comparison) {
       const card = node("section", undefined, "panel");
@@ -156,21 +171,16 @@
       card.append(node("h3", comparison.label), node("strong", comparison.title), node("p", comparison.explanation));
       comparisons.append(card);
     });
-    if (!resolvedComparisons.length) yearSection.append(node("p", "Phần luận tên tập trung vào ý nghĩa và âm điệu. Quan hệ ngũ hành được đối chiếu khi có cách hiểu rõ ràng về hành của tên.", "muted"));
     const notes = node("aside", undefined, "na-note");
-    const notesList = node("ul");
-    const hasUnknownWords = reading.parts.some(function (part) { return !part.known; });
-    if (hasUnknownWords) data.notes.filter(function (text) { return text.startsWith("Chưa có diễn giải"); }).forEach(function (text) { notesList.append(node("li", text)); });
-    notes.append(notesList);
-    notes.hidden = !notesList.childElementCount;
-    result.append(
-      summary, hanViet,
-    );
+    if (data.notes.length) {
+      const notesList = node("ul");
+      data.notes.forEach(function (text) { notesList.append(node("li", text)); });
+      notes.append(notesList);
+    }
+    notes.hidden = !data.notes.length;
+    result.append(summary, verdict, yearSection, comparisons, hanViet);
     if (reading.rhythm) result.append(rhythm);
-    result.append(
-      yearSection, comparisons,
-      notes, node("p", data.notice, "muted"),
-    );
+    result.append(notes, node("p", data.notice, "muted"));
     result.hidden = false;
   }
 })();

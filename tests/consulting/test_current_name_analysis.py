@@ -214,3 +214,59 @@ def test_public_errors_do_not_expose_internal_diagnostics(monkeypatch, tmp_path)
     assert response.status_code == 503
     assert response.json()["status"] == "FAILED"
     assert "private-diagnostic-path" not in response.text
+
+
+@pytest.mark.parametrize(("name", "level"), [
+    ("Nguyễn Tiến Sơn", "caution"),
+    ("Nguyễn Ánh Dương", "aligned"),
+    ("Nguyễn Minh Xyza", "neutral"),
+])
+def test_public_birth_analysis_uses_full_chart_for_name_fit(name, level):
+    from consulting.marriage.api.http import create_marriage_api_app
+
+    client = TestClient(create_marriage_api_app())
+    response = client.post("/api/v1/public/naming/analyze-current-birth", json={
+        "full_name": name, "gender": "male",
+        "birth_date": "1987-01-21", "birth_time": "04:30",
+    })
+    assert response.status_code == 200, response.text
+    assert response.headers["cache-control"] == "private, no-store"
+    result = response.json()["data"]
+    assert result["fit"]["level"] == level
+    assert result["signals"]["pillars"] == {
+        "year": "Bính Dần", "month": "Tân Sửu", "day": "Canh Ngọ", "hour": "Mậu Dần",
+    }
+    assert result["signals"]["useful_elements"] == ["Hỏa"]
+    assert result["signals"]["favorable_elements"] == ["Mộc"]
+    assert result["signals"]["unfavorable_elements"]
+    assert result["signals"]["cung_phi"] == "Khôn"
+    if level == "caution":
+        assert result["comparisons"][1]["relation"] == "same"
+        assert result["suggestions"]
+    if level == "neutral":
+        assert "“Minh” thuộc hành Hỏa" in result["fit"]["reason"]
+        assert result["suggestions"]
+        assert all("tên đệm" in item["label"] for item in result["comparisons"])
+
+
+def test_birth_analysis_requires_a_real_birth_time():
+    from consulting.naming.models import CurrentNameBirthRequest
+
+    for value in (None, "", "24:00"):
+        with pytest.raises(ValidationError):
+            CurrentNameBirthRequest(full_name="Nguyễn Ánh Dương", gender="male",
+                                    birth_date="1987-01-21", birth_time=value)
+
+
+def test_tue_nhi_is_wood_and_useful_god_takes_priority_over_cung_phi():
+    from consulting.naming.current_name import analyze_current_name_birth
+    from consulting.naming.models import CurrentNameBirthRequest
+
+    result = analyze_current_name_birth(CurrentNameBirthRequest(
+        full_name="Nguyễn Tuệ Nhi", gender="female", birth_date="2019-08-07", birth_time="22:00",
+    ))
+    assert result["signals"]["pillars"]["hour"] == "Kỷ Hợi"
+    assert result["name_reading"]["element"] == "Mộc"
+    assert result["fit"]["level"] == "aligned"
+    assert "Kim khắc Mộc" in result["fit"]["reason"]
+    assert result["suggestions"] == []

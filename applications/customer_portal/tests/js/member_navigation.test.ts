@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 import { afterEach, expect, it, vi } from "vitest";
 const script = readFileSync(resolve(__dirname, "../../static/js/auth_gate.js"), "utf8");
 const publicPaths = ["/good-date", "/name-analysis", "/number-energy"];
-const memberPaths = ["/analyze", "/choose-date", "/marriage-consulting", "/childbirth-consulting", "/naming-consulting", "/business-consulting", "/tinh-van-han"];
+const memberPaths = ["/analyze", "/choose-date", "/marriage-consulting", "/childbirth-consulting", "/naming-consulting", "/business-consulting", "/tinh-van-han", "/tinh-cac-nam-tot"];
 function mount(token: string, user: any, verify?: Promise<any>) {
   history.replaceState(null, "", "/number-energy");
   document.body.innerHTML = '<header><button id="btnNavToggle" hidden></button><nav>' + publicPaths.map((path, i) => `<a data-nav-id="public-${i}" href="${path}">Free</a>`).join("") + '</nav></header><aside id="memberSidebar" hidden>' + memberPaths.map((path, i) => `<a data-nav-id="member-${i}" href="${path}">Member</a>`).join("") + '<a data-admin-only hidden>Admin</a></aside><p id="siteAnnouncement" hidden></p>';
@@ -22,11 +22,11 @@ it("shows all three free tools to guests without showing the member sidebar", as
   expect([...document.querySelectorAll('[data-nav-id^="public-"]')].every(el => !(el as HTMLElement).hidden)).toBe(true);
   expect([...document.querySelectorAll('[data-nav-id^="member-"]')].every(el => (el as HTMLElement).hidden)).toBe(true);
 });
-it.each(["CUSTOMER", "ADMIN"])("shows the seven member tools after verifying a %s account", async role => {
+it.each(["CUSTOMER", "ADMIN"])("shows the member tools after verifying a %s account", async role => {
   mount("test-token", {user_id: "member", role, member_access: true});
   await vi.waitFor(() => expect((document.getElementById("memberSidebar") as HTMLElement).hidden).toBe(false));
   expect(document.body.dataset.memberNav).toBe("true");
-  expect(document.querySelectorAll('[data-nav-id^="member-"]').length).toBe(7);
+  expect(document.querySelectorAll('[data-nav-id^="member-"]').length).toBe(memberPaths.length);
   expect((document.querySelector("[data-admin-only]") as HTMLElement).hidden).toBe(role !== "ADMIN");
 });
 it("does not reveal member navigation using only a cached profile", async () => {

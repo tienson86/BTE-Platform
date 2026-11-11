@@ -35,8 +35,8 @@ def profile_from_snapshot(snapshot):
         raise ValueError('Cung phi nguồn khác bảng tính hiện tại. Cần kiểm tra phiên bản trước khi tính vận hạn.')
     return profile
 
-def ensure_table(conn):
-    conn.execute('CREATE TABLE IF NOT EXISTS van_han_results (owner TEXT NOT NULL,id TEXT NOT NULL,saved_at TEXT NOT NULL,snapshot TEXT NOT NULL,PRIMARY KEY(owner,id))')
+def ensure_table(conn, table):
+    conn.execute(f'CREATE TABLE IF NOT EXISTS {table} (owner TEXT NOT NULL,id TEXT NOT NULL,saved_at TEXT NOT NULL,snapshot TEXT NOT NULL,PRIMARY KEY(owner,id))')
 
 def calculate(snapshot,start,end):
     profile=profile_from_snapshot(snapshot)
@@ -45,27 +45,33 @@ def calculate(snapshot,start,end):
                   status='INITIAL_RELEASE', scope_note='Đối chiếu cung phi, Can Chi và Dụng/Hỷ/Kỵ thần, lục hợp/lục xung. Các quan hệ hình/hại/phá và điều kiện hợp hóa chưa được dùng để kết luận trong bản này.')
     return result
 
-def save_result(user,result):
-    identifier='VH-'+uuid4().hex;now=datetime.now(timezone.utc).isoformat()
+def result_table(good_years):
+    return 'good_year_results' if good_years else 'van_han_results'
+
+def save_result(user,result,*,good_years=False):
+    table=result_table(good_years)
+    identifier=('NT-' if good_years else 'VH-')+uuid4().hex;now=datetime.now(timezone.utc).isoformat()
     row={'id':identifier,'created_at':now,'saved_at':now,'owner_user_id':user.user_id,
          'creator_username':user.username,'creator_display_name':user.display_name,
          'result':result}
     with _connect() as conn:
-        ensure_table(conn)
-        conn.execute('INSERT INTO van_han_results VALUES(?,?,?,?)',('user:'+user.user_id,identifier,now,json.dumps(row,ensure_ascii=False)))
+        ensure_table(conn, table)
+        conn.execute(f'INSERT INTO {table} VALUES(?,?,?,?)',('user:'+user.user_id,identifier,now,json.dumps(row,ensure_ascii=False)))
     return row
 
-def get_result(owner,identifier,admin=False):
+def get_result(owner,identifier,admin=False,*,good_years=False):
+    table=result_table(good_years)
     with _connect() as conn:
-        ensure_table(conn)
-        if admin:rows=conn.execute('SELECT snapshot FROM van_han_results WHERE id=?',(identifier,)).fetchall()
-        else:rows=conn.execute('SELECT snapshot FROM van_han_results WHERE owner=? AND id=?',(owner,identifier)).fetchall()
+        ensure_table(conn, table)
+        if admin:rows=conn.execute(f'SELECT snapshot FROM {table} WHERE id=?',(identifier,)).fetchall()
+        else:rows=conn.execute(f'SELECT snapshot FROM {table} WHERE owner=? AND id=?',(owner,identifier)).fetchall()
     if len(rows)!=1:return None
     return json.loads(rows[0][0])
 
-def list_results(owner,admin=False):
+def list_results(owner,admin=False,*,good_years=False):
+    table=result_table(good_years)
     with _connect() as conn:
-        ensure_table(conn)
-        query="SELECT id,saved_at,json_extract(snapshot,'$.result.name'),json_extract(snapshot,'$.creator_username'),json_extract(snapshot,'$.creator_display_name') FROM van_han_results"
+        ensure_table(conn, table)
+        query=f"SELECT id,saved_at,json_extract(snapshot,'$.result.name'),json_extract(snapshot,'$.creator_username'),json_extract(snapshot,'$.creator_display_name') FROM {table}"
         rows=conn.execute(query+('' if admin else ' WHERE owner=?')+' ORDER BY saved_at DESC',() if admin else (owner,)).fetchall()
     return [{'id':r[0],'created_at':r[1],'name':r[2],'creator_username':r[3],'creator_display_name':r[4]} for r in rows]

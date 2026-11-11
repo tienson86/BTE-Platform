@@ -4,7 +4,7 @@ from fastapi.testclient import TestClient
 from applications.customer_portal.app import create_app
 
 PUBLIC = ["/good-date", "/name-analysis", "/number-energy", "/gioi-thieu-bte", "/thanh-vien-bte"]
-MEMBER = ["/analyze", "/choose-date", "/marriage-consulting", "/childbirth-consulting", "/naming-consulting", "/business-consulting", "/tinh-van-han"]
+MEMBER = ["/analyze", "/choose-date", "/marriage-consulting", "/childbirth-consulting", "/naming-consulting", "/business-consulting", "/tinh-van-han", "/tinh-cac-nam-tot"]
 
 
 @pytest.mark.parametrize("path", ["/good-date", "/name-analysis", "/number-energy", "/membership", "/analyze", "/result", "/marriage-consulting"])

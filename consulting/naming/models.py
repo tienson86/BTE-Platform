@@ -26,23 +26,14 @@ def validate_name_text(value: str) -> str:
     return normalized
 
 
-class NamingRequest(BaseModel):
+class NamingBirthInput(BaseModel):
     model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
 
-    family_name: str = Field(min_length=1, max_length=80)
     gender: Literal["male", "female"]
-    mode: Literal["child", "rename"] = "child"
-    current_name: str = Field(default="", max_length=120)
     birth_date: str
     birth_time: str | None = None
     birth_place: str = Field(default="", max_length=160)
     timezone: str = Field(default="Asia/Ho_Chi_Minh", min_length=1, max_length=80)
-    count: int = Field(default=8, ge=5, le=10, strict=True)
-
-    @field_validator("family_name", "current_name")
-    @classmethod
-    def validate_name(cls, value: str) -> str:
-        return validate_name_text(value)
 
     @field_validator("birth_date")
     @classmethod
@@ -73,11 +64,47 @@ class NamingRequest(BaseModel):
         return value
 
     @model_validator(mode="after")
-    def validate_context(self) -> NamingRequest:
-        if self.mode == "rename" and not self.current_name:
-            raise ValueError("Vui lòng nhập tên hiện tại khi chọn đổi tên.")
+    def validate_context(self) -> NamingBirthInput:
         if date.fromisoformat(self.birth_date) > datetime.now(ZoneInfo(self.timezone)).date():
             raise ValueError("V0.1 tư vấn cho người đã sinh; ngày sinh không được ở tương lai.")
+        return self
+
+
+class NamingRequest(NamingBirthInput):
+    family_name: str = Field(min_length=1, max_length=80)
+    mode: Literal["child", "rename"] = "child"
+    current_name: str = Field(default="", max_length=120)
+    count: int = Field(default=8, ge=5, le=10, strict=True)
+
+    @field_validator("family_name", "current_name")
+    @classmethod
+    def validate_name(cls, value: str) -> str:
+        return validate_name_text(value)
+
+    @model_validator(mode="after")
+    def require_rename_name(self) -> NamingRequest:
+        if self.mode == "rename" and not self.current_name:
+            raise ValueError("Vui lòng nhập tên hiện tại khi chọn đổi tên.")
+        return self
+
+
+def validate_full_name(value: str) -> str:
+    normalized = validate_name_text(value)
+    if not any(character.isalpha() for character in normalized):
+        raise ValueError("Vui lòng nhập họ tên có chữ hợp lệ.")
+    return normalized
+
+
+class CurrentNameBirthRequest(NamingBirthInput):
+    full_name: str = Field(min_length=1, max_length=120)
+    birth_time: str
+
+    _validate_name = field_validator("full_name")(validate_full_name)
+
+    @model_validator(mode="after")
+    def require_birth_time(self) -> CurrentNameBirthRequest:
+        if not self.birth_time:
+            raise ValueError("Vui lòng nhập giờ sinh.")
         return self
 
 
@@ -95,13 +122,7 @@ class CurrentNameRequest(BaseModel):
             raise ValueError("Biểu mẫu đã đổi sang năm sinh âm lịch. Vui lòng tải lại trang và nhập năm âm lịch.")
         return value
 
-    @field_validator("full_name")
-    @classmethod
-    def validate_full_name(cls, value: str) -> str:
-        normalized = validate_name_text(value)
-        if not any(character.isalpha() for character in normalized):
-            raise ValueError("Vui lòng nhập họ tên có chữ hợp lệ.")
-        return normalized
+    _validate_name = field_validator("full_name")(validate_full_name)
 
     @field_validator("lunar_birth_year")
     @classmethod

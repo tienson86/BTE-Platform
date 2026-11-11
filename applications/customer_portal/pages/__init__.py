@@ -70,6 +70,7 @@ CUSTOMER_MEMBER_NAV_ITEMS: tuple[NavItem, ...] = (
     ),
     NavItem("business-consulting", "nav.business_consulting", "/business-consulting", "business_consulting.html"),
     NavItem("van-han", "nav.van_han", "/tinh-van-han", "van_han.html"),
+    NavItem("good-years", "nav.good_years", "/tinh-cac-nam-tot", "van_han.html"),
 )
 CUSTOMER_NAV_ITEMS = CUSTOMER_PUBLIC_NAV_ITEMS + CUSTOMER_MEMBER_NAV_ITEMS
 

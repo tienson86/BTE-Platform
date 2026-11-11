@@ -8,7 +8,7 @@ const authGate = readFileSync(resolve(__dirname, "../../static/js/auth_gate.js")
 
 function responseData() {
   return {
-    full_name: "Nguyễn Tiến Sơn", lunar_birth_year: 1986, basis: "lunar_birth_year_only",
+    full_name: "Nguyễn Tiến Sơn", basis: "birth_chart",
     name_reading: {
       given_part: "Tiến Sơn", meaning: "Tên gọi gợi sự vững chãi.", element: "Thổ",
       family_part: "Nguyễn", middle_part: "Tiến", main_part: "Sơn",
@@ -18,9 +18,11 @@ function responseData() {
       family_reading: {word: "Nguyễn", characters: "阮", paragraph: "Nguyễn là phần họ."},
       rhythm: {paragraph: "Tên gồm 3 tiếng.", tones: [{word: "Nguyễn", tone: "ngã", group: "Trắc"}, {word: "Tiến", tone: "sắc", group: "Trắc"}, {word: "Sơn", tone: "ngang", group: "Bằng"}]},
     },
-    year_reference: { can_chi: "Bính Dần", nap_am: "Lư Trung Hỏa", cung_phi: "Khôn", cung_phi_element: "Thổ" },
+    signals: { pillars: {year: "Bính Dần", month: "Tân Sửu", day: "Canh Ngọ", hour: "Mậu Dần"}, nap_am: "Lư Trung Hỏa", cung_phi: "Khôn", cung_phi_element: "Thổ" },
+    fit: { level: "caution", title: "Cần cân nhắc theo Bát Tự", reason: "Hành tên trùng Kỵ thần." },
+    factors: [{ label: "Kỵ thần", elements: ["Thổ", "Kim"], explanation: "Tên thuộc Thổ." }],
     comparisons: [{ label: "Nạp Âm", relation: "reference_generates_name", title: "Tương sinh", explanation: "Hỏa sinh Thổ." }],
-    notes: ["Cần ngày giờ sinh để xét Bát Tự."], notice: "Chỉ tham khảo.",
+    notes: [], notice: "Chỉ tham khảo.",
   };
 }
 
@@ -32,7 +34,8 @@ function mount() {
   const form = document.getElementById("name-analysis-form") as HTMLFormElement;
   (form.elements.namedItem("full_name") as HTMLInputElement).value = "Nguyễn Tiến Sơn";
   (form.elements.namedItem("gender") as HTMLSelectElement).value = "male";
-  (form.elements.namedItem("lunar_birth_year") as HTMLInputElement).value = "1986";
+  (form.elements.namedItem("birth_date") as HTMLInputElement).value = "1987-01-21";
+  (form.elements.namedItem("birth_time") as HTMLSelectElement).value = "04:00";
   return { form, fetcher };
 }
 
@@ -48,17 +51,17 @@ afterEach(() => {
 });
 
 describe("public current name analysis", () => {
-  it("submits only the three basic fields without credentials or an invented date", async () => {
+  it("submits birth date and time without requiring credentials", async () => {
     const { form, fetcher } = mount();
     const savedItems = sessionStorage.length;
     submit(form);
     await vi.waitFor(() => expect(document.getElementById("na-result")?.hidden).toBe(false));
     const [url, options] = fetcher.mock.calls[0];
-    expect(url).toBe("/backend/api/v1/public/naming/analyze-current");
-    expect(JSON.parse(options.body)).toEqual({ full_name: "Nguyễn Tiến Sơn", gender: "male", lunar_birth_year: 1986 });
+    expect(url).toBe("/backend/api/v1/public/naming/analyze-current-birth");
+    expect(JSON.parse(options.body)).toEqual({ full_name: "Nguyễn Tiến Sơn", gender: "male", birth_date: "1987-01-21", birth_time: "04:00", timezone: "Asia/Ho_Chi_Minh" });
     expect(options.headers).not.toHaveProperty("Authorization");
     expect(document.getElementById("na-result")?.textContent).toContain("Lư Trung Hỏa");
-    expect(document.getElementById("na-result")?.textContent).toContain("Đối chiếu theo năm sinh âm lịch 1986");
+    expect(document.getElementById("na-result")?.textContent).toContain("Cần cân nhắc theo Bát Tự");
     expect(sessionStorage.length).toBe(savedItems);
   });
 
@@ -80,30 +83,31 @@ describe("public current name analysis", () => {
     const { form, fetcher } = mount();
     const data = responseData();
     data.name_reading.element = "";
+    data.fit = {level: "undetermined", title: "Tên chính trung tính về ngũ hành", reason: "Chưa xác định hành tên."};
     data.comparisons = [{label: "Nạp Âm", relation: "unresolved", title: "Chưa đủ cơ sở đối chiếu", explanation: "Chưa xác định hành tên."}];
     fetcher.mockResolvedValueOnce({ok: true, json: async () => ({status: "SUCCESS", data})});
     submit(form);
     await vi.waitFor(() => expect(document.getElementById("na-result")?.hidden).toBe(false));
     expect(document.querySelector(".na-han-viet")?.textContent).toContain("tiến bộ bền bỉ");
-    expect(document.getElementById("na-result")?.textContent).not.toContain("Chưa đủ cơ sở đối chiếu");
+    expect(document.getElementById("na-result")?.textContent).toContain("Tên chính trung tính về ngũ hành");
     expect(document.getElementById("na-result")?.textContent).not.toContain("Chưa xác định hành của tên gọi.");
-    expect(document.querySelectorAll(".na-comparisons > section").length).toBe(0);
-    expect(document.getElementById("na-result")?.textContent).toContain("Can Chi năm");
+    expect(document.querySelectorAll(".na-comparisons > section").length).toBe(1);
+    expect(document.getElementById("na-result")?.textContent).toContain("Bính Dần");
   });
 
-  it("does not display a stale solar-year response as a lunar result", async () => {
+  it("does not display a year-only response as a birth chart result", async () => {
     const { form, fetcher } = mount();
     const data = { ...responseData(), basis: "birth_year_only", birth_year: 1986 };
     fetcher.mockResolvedValueOnce({ ok: true, json: async () => ({ status: "SUCCESS", data }) });
     submit(form);
-    await vi.waitFor(() => expect(document.getElementById("na-state")?.textContent).toContain("chưa cập nhật năm âm lịch"));
+    await vi.waitFor(() => expect(document.getElementById("na-state")?.textContent).toContain("chưa hỗ trợ phân tích theo ngày giờ sinh"));
     expect(document.getElementById("na-result")?.hidden).toBe(true);
     expect((document.getElementById("na-fields") as HTMLFieldSetElement).disabled).toBe(false);
   });
 
-  it.each([1899, 1986.5, 2101])("blocks invalid year %s before sending", (year) => {
+  it.each(["1899-01-01", "1987-02-30", "2101-01-01"])("blocks invalid date %s before sending", (date) => {
     const { form, fetcher } = mount();
-    (form.elements.namedItem("lunar_birth_year") as HTMLInputElement).value = String(year);
+    (form.elements.namedItem("birth_date") as HTMLInputElement).value = date;
     submit(form);
     expect(fetcher).not.toHaveBeenCalled();
   });

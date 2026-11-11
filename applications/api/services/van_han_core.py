@@ -88,7 +88,7 @@ def bazi_evidence(profile,ganzhi,year,year_ganzhi=None):
         if branch==natal:
             evidence.append({'type':'reference','text':f'Chi {branch} lặp lại chi trụ {PILLARS[key]}; đây là điểm cần đối chiếu thêm, chưa tự kết luận thành hạn.'})
         elif pair in XUNG:
-            evidence.append({'type':'interaction','text':f'{branch} xung {natal} ở trụ {PILLARS[key]}; cần xem sự thay đổi tác động vào đâu và có yếu tố trợ lực nào.'})
+            evidence.append({'type':'interaction','relation':'xung','text':f'{branch} xung {natal} ở trụ {PILLARS[key]}; cần xem sự thay đổi tác động vào đâu và có yếu tố trợ lực nào.'})
         elif pair in HOP:
             evidence.append({'type':'interaction','text':f'{branch} hợp {natal} ở trụ {PILLARS[key]}; ghi nhận quan hệ hợp, không mặc định đã hóa thành hành khác.'})
     cycles=cycles_for(profile,year)

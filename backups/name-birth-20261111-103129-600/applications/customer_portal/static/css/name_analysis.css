@@ -1,0 +1,132 @@
+.na-page {
+  max-width: 1000px;
+}
+
+.na-page .na-form {
+  border-top: 4px solid var(--five-green, #176b45);
+}
+
+.na-full {
+  grid-column: 1 / -1;
+}
+
+#na-result[hidden] {
+  display: none;
+}
+
+.na-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.na-parts,
+.na-comparisons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.na-grid > section {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--five-water-soft, #edf5fc);
+}
+
+.na-grid p:last-child,
+.na-parts p:last-child {
+  margin-bottom: 0;
+}
+
+.na-comparisons .panel {
+  border-top: 4px solid var(--five-blue, #12678d);
+}
+
+.na-comparisons [data-relation="same"] {
+  border-top-color: var(--five-green, #176b45);
+}
+
+.na-page .nc-name[data-element=""] {
+  --name-color: var(--muted);
+  --name-soft: var(--secondary-soft);
+}
+
+.na-note {
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--five-yellow, #8a5b08);
+  border-radius: var(--radius);
+  background: var(--five-earth-soft, #fff7dc);
+  margin-bottom: 1rem;
+}
+
+.na-note ul {
+  padding-left: 1.25rem;
+  margin: 0;
+}
+
+.na-han-viet {
+  border-top: 4px solid var(--five-green, #176b45);
+}
+
+.na-prose {
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.na-characters {
+  list-style: none;
+  padding: 0;
+}
+
+.na-characters li {
+  display: flex;
+  align-items: baseline;
+  gap: .75rem;
+  margin: .5rem 0;
+}
+
+.na-han-character {
+  color: var(--five-blue, #12678d);
+  font-family: "Noto Serif CJK TC", "Microsoft JhengHei", "SimSun", serif;
+  font-size: 1.65rem;
+  flex-shrink: 0;
+}
+
+.na-caption {
+  font-size: .9em;
+  color: var(--muted);
+  margin-bottom: .25rem;
+}
+
+.na-name-structure {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 .5rem;
+}
+
+.na-name-structure > div {
+  background: var(--five-water-soft, #edf5fc);
+  padding: .85rem 1rem;
+  border-radius: 12px;
+}
+
+.na-name-structure dt { color: var(--muted); font-size: .85em; }
+.na-name-structure dd { margin: .35rem 0 0; font-size: 1.15em; font-weight: 700; color: var(--five-blue, #12678d); }
+.na-family { border-top: 1px solid var(--line); padding-top: 1rem; margin-top: 1rem; }
+.na-family summary { cursor: pointer; color: var(--five-blue, #12678d); font-weight: 600; }
+.na-tones { display: flex; flex-wrap: wrap; gap: .75rem; }
+.na-tone { padding: .6rem .9rem; border-radius: 10px; background: var(--five-wood-soft, #edf7ee); color: var(--five-green, #176b45); }
+.na-tone[data-group="Trắc"] { background: var(--five-earth-soft, #fff7dc); color: var(--five-yellow, #8a5b08); }
+.na-page .na-rhythm { border-top: 4px solid var(--five-blue, #12678d); }
+.na-page .na-han-viet { border-top: 4px solid var(--five-green, #176b45); }
+#na-result [hidden] { display: none !important; }
+
+@media (max-width: 700px) {
+  .na-grid,
+  .na-parts,
+  .na-comparisons {
+    grid-template-columns: 1fr;
+  }
+}

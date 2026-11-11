@@ -118,6 +118,27 @@ def render_page(template_name: str, *, active: str, locale: str = DEFAULT_LOCALE
     catalog = load_catalog(locale)
     base = (TEMPLATES_DIR / "_layout.html").read_text(encoding="utf-8")
     body = (TEMPLATES_DIR / template_name).read_text(encoding="utf-8")
+    if template_name == "van_han.html":
+        good_years = active == "good-years"
+        title = "Tính các năm tốt" if good_years else "Tính vận hạn"
+        tokens = {
+            "GOOD_YEARS": "true" if good_years else "false",
+            "TITLE": title,
+            "TITLE_LOWER": title.lower(),
+            "SCOPE": (
+                "Một năm hoặc tháng được chọn khi Can hoặc Chi của chính thời điểm đó gặp Dụng/Hỷ thần, "
+                "Cung Phi thuận, đồng thời qua đối chiếu Kỵ thần, lục xung và mốc đại vận. "
+                "Tháng được xét riêng trong từng năm âm lịch."
+                if good_years else
+                "Bản đầu tiên xét cung phi, Dụng–Hỷ–Kỵ thần và hợp/xung. "
+                "Các cơ chế hình, hại, phá và hợp hóa cần đọc thêm trong bản luận lá số đầy đủ."
+            ),
+            "SUBMIT": "Tính và lưu năm tốt" if good_years else "Tính và lưu vận hạn",
+            "HISTORY": "Hồ sơ năm tốt đã lưu" if good_years else "Hồ sơ vận hạn đã lưu",
+            "USAGE": '<p class="muted">Tạo hồ sơ năm tốt dùng chung hạn mức với Tính vận hạn.</p>' if good_years else "",
+        }
+        for key, value in tokens.items():
+            body = body.replace("{{PERIOD_" + key + "}}", value)
     if "{{CATEGORY_COMMUNITY}}" in body:
         shared=(TEMPLATES_DIR / "community.html").read_text(encoding="utf-8")
         panel=shared.split("<!-- COMMUNITY_PANEL_START -->",1)[1].split("<!-- COMMUNITY_PANEL_END -->",1)[0]

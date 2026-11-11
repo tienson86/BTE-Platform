@@ -11,4 +11,4 @@ def test_header_wallet_replaces_theme_button_across_shared_pages():
         assert 'href="/membership#memberRewards"' in html
         assert 'title="Xem số dư và đổi Linh Thạch" hidden' in html
         assert '/static/images/membership/linh-thach.png' in html
-        assert 'auth_gate.js?v=wallet-header-01' in html
+        assert 'auth_gate.js?v=good-years-01' in html
