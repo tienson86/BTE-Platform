@@ -30,3 +30,32 @@
 .course-dialog::backdrop { background:#0008; }
 @media(max-width:900px) { .course-study { grid-template-columns:1fr; } .course-study aside { position:static; max-height:none; } }
 @media(max-width:650px) { .course-grid,.course-form { grid-template-columns:1fr; } .course-card { padding:19px; } .courses-page { padding:0 10px; } }
+
+.catalog-cover {
+  box-sizing: border-box;
+  width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+  background: #f4f0e6;
+  border: 1px solid #d1b26a;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px #34280420;
+  margin-bottom: 16px;
+}
+.catalog-cover-preview { width: min(100%, 400px); max-height: 220px; }
+.catalog-reward {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #fff1c9;
+  color: #543a09;
+  font-weight: 700;
+}
+.catalog-notice { margin-bottom: 20px; }
+.catalog-notice-with-cover { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 24px; align-items: start; }
+[data-menu-group] { min-width: 0; padding: 16px; border: 1px solid var(--border, #d5ded4); border-radius: 12px; }
+[data-menu-group] legend { font-weight: 700; }
+[data-menu-group] label { margin-block: 8px; }
+@media (max-width: 650px) {
+  .catalog-notice-with-cover { grid-template-columns: 1fr; }
+}

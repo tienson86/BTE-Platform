@@ -238,6 +238,18 @@ def create_app() -> FastAPI:
     def courses_page() -> HTMLResponse:
         return page("courses", "courses.html")
 
+    @app.get("/khoa-hoc-offline", response_class=HTMLResponse)
+    def offline_page() -> HTMLResponse:
+        return page("offline", "member_catalog.html")
+
+    @app.get("/shop-vat-pham", response_class=HTMLResponse)
+    def shop_page() -> HTMLResponse:
+        return page("shop", "member_catalog.html")
+
+    @app.get("/thong-bao-noi-bo", response_class=HTMLResponse)
+    def notices_page() -> HTMLResponse:
+        return page("notices", "member_catalog.html")
+
     @app.get("/knowledge", response_class=HTMLResponse)
     @app.get("/knowledge/lesson/{identifier}", response_class=HTMLResponse)
     async def knowledge_page(request: Request, identifier: str | None = None) -> Response:

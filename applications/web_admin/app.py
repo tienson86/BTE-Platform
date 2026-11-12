@@ -89,6 +89,18 @@ def create_app() -> FastAPI:
     def courses_page() -> HTMLResponse:
         return page("courses", "courses.html")
 
+    @app.get("/offline-courses", response_class=HTMLResponse)
+    def offline_courses_page() -> HTMLResponse:
+        return page("offline", "member_catalog.html")
+
+    @app.get("/member-shop", response_class=HTMLResponse)
+    def shop_page() -> HTMLResponse:
+        return page("shop", "member_catalog.html")
+
+    @app.get("/member-notices", response_class=HTMLResponse)
+    def notices_page() -> HTMLResponse:
+        return page("notices", "member_catalog.html")
+
     @app.get("/knowledge", response_class=HTMLResponse)
     def knowledge_page() -> HTMLResponse:
         return page("knowledge", "knowledge.html")
@@ -96,6 +108,10 @@ def create_app() -> FastAPI:
     @app.get("/website-settings", response_class=HTMLResponse)
     def website_settings_page() -> HTMLResponse:
         return page("website-settings", "membership.html")
+
+    @app.get("/menu-visibility", response_class=HTMLResponse)
+    def menu_visibility_page() -> HTMLResponse:
+        return page("menu-visibility", "menu_visibility.html")
 
     @app.get("/customers", response_class=HTMLResponse)
     def customers_page() -> HTMLResponse:

@@ -25,6 +25,11 @@ def ensure_course_schema(connection):
             price INTEGER NOT NULL,revision INTEGER NOT NULL,started_at TEXT NOT NULL,
             expires_at TEXT,operation_key TEXT NOT NULL,UNIQUE(owner,operation_key));
         CREATE INDEX IF NOT EXISTS courses_access_owner ON courses_access(owner,course,started_at);
+        CREATE TABLE IF NOT EXISTS courses_custom(
+            id TEXT PRIMARY KEY,subject TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS course_lessons(
+            course TEXT NOT NULL,id TEXT NOT NULL,payload TEXT NOT NULL,revision INTEGER NOT NULL,
+            PRIMARY KEY(course,id));
         CREATE TABLE IF NOT EXISTS courses_progress(
             owner TEXT NOT NULL,course TEXT NOT NULL,lesson TEXT NOT NULL,completed INTEGER NOT NULL,
             updated_at TEXT NOT NULL,PRIMARY KEY(owner,course,lesson));
@@ -67,14 +72,54 @@ class CourseService:
         if not user.is_active or user.role != Role.ADMIN:
             fail("Chỉ Admin được quản lý khóa học.", 403)
 
-    def _course(self, course_id):
-        row = next((c for c in content() if c["id"] == course_id), None)
-        if row is None:
-            fail("Không tìm thấy khóa học.", 404)
-        return row
+    def _course(self, connection, course_id, built_in=None):
+        base = built_in or next((c for c in content() if c["id"] == course_id), None)
+        if base is None:
+            row = connection.execute("SELECT * FROM courses_custom WHERE id=?", (course_id,)).fetchone()
+            if row is None:
+                fail("Không tìm thấy khóa học.", 404)
+            base = {**dict(row), "lessons": []}
+        lessons = {item["id"]: {**item, "revision": 0} for item in base["lessons"]}
+        for row in connection.execute(
+            "SELECT * FROM course_lessons WHERE course=? ORDER BY rowid", (course_id,)
+        ):
+            lessons[row["id"]] = {**json.loads(row["payload"]), "revision": row["revision"]}
+        return {**base, "lessons": list(lessons.values())}
+
+    def create(self, user, body):
+        self._admin(user)
+        course_id = uuid4().hex
+        settings = dict(title=body.title, summary="", price=0, access_days=None, status="draft")
+        with self.activity.connect() as c:
+            c.execute("INSERT INTO courses_custom VALUES(?,?)", (course_id, body.subject))
+            c.execute("INSERT INTO courses_settings VALUES(?,?,1)", (course_id, json.dumps(settings, ensure_ascii=False)))
+        return {"id": course_id}
+
+    def lesson_catalog(self, user, course_id):
+        self._admin(user)
+        with self.activity.connect() as c:
+            return self._course(c, course_id)["lessons"]
+
+    def save_lesson(self, user, course_id, body, lesson_id=None):
+        self._admin(user)
+        with self.activity.connect() as c:
+            course = self._course(c, course_id)
+            original = next((item for item in course["lessons"] if item["id"] == lesson_id), None)
+            if lesson_id is not None and original is None:
+                fail("Không tìm thấy bài học.", 404)
+            if body.expected_revision != (original["revision"] if original else 0):
+                fail("Bài học đã thay đổi. Vui lòng tải lại trước khi lưu.")
+            item = body.model_dump(exclude={"expected_revision"})
+            item.update(id=lesson_id or uuid4().hex, video=bool(original and original.get("video")))
+            revision = body.expected_revision + 1
+            c.execute(
+                "INSERT INTO course_lessons VALUES(?,?,?,?) ON CONFLICT(course,id) "
+                "DO UPDATE SET payload=excluded.payload,revision=excluded.revision",
+                (course_id, item["id"], json.dumps(item, ensure_ascii=False), revision),
+            )
+            return {**item, "revision": revision}
 
     def _settings(self, connection, course_id):
-        self._course(course_id)
         row = connection.execute("SELECT * FROM courses_settings WHERE id=?", (course_id,)).fetchone()
         return {**json.loads(row["payload"]), "revision": row["revision"]}
 
@@ -91,25 +136,29 @@ class CourseService:
         access = self._access(connection, user, course["id"])
         return {"id": course["id"], "subject": course["subject"], **settings,
                 "lesson_count": len(course["lessons"]), "ready": bool(course["lessons"]),
+                "has_trial": any(lesson.get("trial") for lesson in course["lessons"]),
                 "access": access, "admin_preview": user.role == Role.ADMIN}
 
     def catalog(self, user, management=False):
         self._admin(user) if management else self._member(user)
         sync_referrals(self.activity)
         with self.activity.connect() as c:
-            return {"courses": [self._view(c, user, course, management) for course in content()],
+            courses = [self._course(c, course["id"], course) for course in content()]
+            ids = c.execute("SELECT id FROM courses_custom ORDER BY rowid").fetchall()
+            courses.extend(self._course(c, row["id"]) for row in ids)
+            return {"courses": [self._view(c, user, course, management) for course in courses],
                     "balance": balance(c, user.user_id)}
 
     def configure(self, user, course_id, body):
         self._admin(user)
-        course = self._course(course_id)
         values = body.model_dump(exclude={"expected_revision"})
         values["title"] = values["title"].strip()
         if not values["title"]:
             fail("Vui lòng nhập tên khóa học.", 422)
-        if values["status"] == "published" and not course["lessons"]:
-            fail("Khóa học chưa có bài học để mở bán.", 422)
         with self.activity.connect() as c:
+            course = self._course(c, course_id)
+            if values["status"] == "published" and not course["lessons"]:
+                fail("Khóa học chưa có bài học để mở bán.", 422)
             old = self._settings(c, course_id)
             if old["revision"] != body.expected_revision:
                 fail("Cấu hình đã thay đổi. Vui lòng tải lại trước khi lưu.")
@@ -119,8 +168,8 @@ class CourseService:
 
     def detail(self, user, course_id):
         self._member(user)
-        course = self._course(course_id)
         with self.activity.connect() as c:
+            course = self._course(c, course_id)
             view = self._view(c, user, course)
             progress = {r["lesson"]: bool(r["completed"]) for r in c.execute(
                 "SELECT * FROM courses_progress WHERE owner=? AND course=?", (user.user_id, course_id))}
@@ -131,7 +180,7 @@ class CourseService:
             return view
 
     def _lesson(self, connection, user, course_id, lesson_id):
-        course = self._course(course_id)
+        course = self._course(connection, course_id)
         lesson = next((l for l in course["lessons"] if l["id"] == lesson_id), None)
         if lesson is None:
             fail("Không tìm thấy bài học.", 404)
@@ -156,9 +205,9 @@ class CourseService:
 
     def redeem(self, user, course_id, body):
         self._member(user)
-        course = self._course(course_id)
         sync_referrals(self.activity)
         with self.activity.connect() as c:
+            course = self._course(c, course_id)
             previous = c.execute("SELECT * FROM courses_access WHERE owner=? AND operation_key=?",
                                  (user.user_id, body.operation_key)).fetchone()
             if previous:

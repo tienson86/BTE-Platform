@@ -22,3 +22,21 @@ class CourseRedeem(BaseModel):
 class LessonProgress(BaseModel):
     model_config = ConfigDict(extra="forbid")
     completed: bool = True
+
+
+class CourseCreate(BaseModel):
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+    title: str = Field(min_length=1, max_length=160)
+    subject: str = Field(min_length=1, max_length=120)
+
+
+class LessonEdit(BaseModel):
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+    title: str = Field(min_length=1, max_length=200)
+    section: str = Field(min_length=1, max_length=120)
+    goal: str = Field(default="", max_length=1000)
+    body: str = Field(min_length=1, max_length=60000)
+    exercise: str = Field(default="", max_length=6000)
+    answer: str = Field(default="", max_length=6000)
+    trial: bool = False
+    expected_revision: int = Field(default=0, ge=0, strict=True)

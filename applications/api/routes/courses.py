@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends
 from fastapi.responses import FileResponse
 from applications.api.auth.dependencies import CurrentUser
 from applications.api.dependencies import get_auth_service
-from applications.api.schemas.courses import CourseSettings, CourseRedeem, LessonProgress
+from applications.api.schemas.courses import CourseSettings, CourseRedeem, LessonProgress, CourseCreate, LessonEdit
 from applications.api.services.courses import CourseService, MEDIA_PATH, fail
 
 router = APIRouter(tags=["Courses"])
@@ -21,6 +21,26 @@ def catalog(user: CurrentUser, svc=Depends(service)):
 @router.get("/admin/courses")
 def admin_catalog(user: CurrentUser, svc=Depends(service)):
     return svc.catalog(user, management=True)
+
+
+@router.post("/admin/courses", status_code=201)
+def create(body: CourseCreate, user: CurrentUser, svc=Depends(service)):
+    return svc.create(user, body)
+
+
+@router.get("/admin/courses/{course_id}/lessons")
+def admin_lessons(course_id: str, user: CurrentUser, svc=Depends(service)):
+    return svc.lesson_catalog(user, course_id)
+
+
+@router.post("/admin/courses/{course_id}/lessons", status_code=201)
+def add_lesson(course_id: str, body: LessonEdit, user: CurrentUser, svc=Depends(service)):
+    return svc.save_lesson(user, course_id, body)
+
+
+@router.put("/admin/courses/{course_id}/lessons/{lesson_id}")
+def edit_lesson(course_id: str, lesson_id: str, body: LessonEdit, user: CurrentUser, svc=Depends(service)):
+    return svc.save_lesson(user, course_id, body, lesson_id)
 
 
 @router.put("/admin/courses/{course_id}")
