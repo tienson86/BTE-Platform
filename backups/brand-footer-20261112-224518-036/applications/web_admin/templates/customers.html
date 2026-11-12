@@ -1,0 +1,92 @@
+<section class="panel" aria-labelledby="registeredTitle">
+  <h2 id="registeredTitle">Danh sách thành viên</h2>
+  <p class="muted">Quản lý cấp thành viên, trạng thái tài khoản và quyền được cấp thủ công. Tài khoản cũ chưa có cấp được ghi rõ Chưa phân cấp.</p>
+  <div class="toolbar"><input id="registeredQuery" type="search" placeholder="Tìm họ tên, tên đăng nhập, số điện thoại" aria-label="Tìm khách hàng đăng ký" /><button id="registeredSearch" type="button">Tìm / Tải lại</button><button id="registeredCreate" type="button">Tạo khách hàng</button></div>
+  <div class="toolbar" style="margin-top:12px"><label>Cấp thành viên <select id="registeredTier"><option value="">Tất cả cấp</option><option value="1">Cấp 1</option><option value="2">Cấp 2</option><option value="3">Cấp 3</option><option value="none">Chưa phân cấp</option></select></label><label>Danh sách <select id="registeredScope"><option value="current">Tài khoản hiện tại</option><option value="deleted">Tài khoản đã xóa</option></select></label></div>
+  <p id="registeredState" role="status"></p>
+  <div class="table-scroll"><table><thead><tr><th>Họ và Tên</th><th>Tên đăng nhập</th><th>Số điện thoại</th><th>Cấp thành viên</th><th>Trạng thái</th><th>Hết hạn</th><th>Hạn mức mỗi loại</th><th>Thao tác</th></tr></thead><tbody id="registeredRows"></tbody></table></div>
+</section>
+<dialog id="registeredDialog" class="customer-dialog">
+  <h2 id="registeredDialogTitle">Thông tin khách hàng</h2>
+  <form id="registeredCustomerForm">
+    <div class="form-grid">
+      <label>Họ và Tên<input name="display_name" maxlength="120" required /></label>
+      <label>Tên đăng nhập<input name="username" minlength="3" maxlength="64" pattern="[A-Za-z0-9_.-]+" required /></label>
+      <label>Số điện thoại<input name="phone" type="tel" maxlength="24" /></label>
+      <label>Hạn mức cho mỗi chức năng<input name="analysis_limit" type="number" min="0" max="1000000" /></label>
+      <label>Mật khẩu mới<input name="password" type="password" minlength="8" autocomplete="new-password" /></label>
+      <label><span><input name="is_active" type="checkbox" /> Tài khoản được phép đăng nhập</span></label>
+    </div>
+    <p class="muted">Cùng hạn mức cho mỗi loại, có bộ đếm riêng. Tăng hạn mức giữ nguyên các lượt đã dùng. Để trống là không giới hạn.</p>
+    <div id="registeredUsage" class="table-scroll"></div>
+    <p id="registeredDialogState" role="status"></p>
+    <div class="toolbar"><button type="submit">Lưu khách hàng</button><button id="registeredRelease" class="secondary" type="button">Giải phóng lượt chờ quá 30 phút</button><button id="registeredClose" class="secondary" type="button">Đóng</button></div>
+  </form>
+</dialog>
+<dialog id="memberGrantDialog" class="customer-dialog">
+  <h2>Cấp thành viên thủ công</h2>
+  <p id="memberGrantTarget"></p>
+  <p>Thay quyền hiện tại bằng cấu hình cấp được chọn. Giữ nguyên số lượt đã dùng, số dư Linh Thạch và quyền khóa học. Không ghi nhận thanh toán hoặc thưởng giới thiệu. Tài khoản đang khóa vẫn giữ trạng thái khóa.</p>
+  <form id="memberGrantForm">
+    <div class="form-grid"><label>Cấp thành viên<select name="tier" required><option value="1">Cấp 1</option><option value="2">Cấp 2</option><option value="3">Cấp 3</option></select></label><label>Thời hạn từ lúc cấp (ngày)<input name="validity_days" type="number" min="1" max="3650" required /></label><label class="full">Lý do cấp / điều chỉnh<textarea name="note" minlength="3" maxlength="600" required></textarea></label></div>
+    <p id="memberGrantBenefits" class="muted"></p><p id="memberGrantState" role="status"></p>
+    <div class="toolbar"><button type="submit">Xác nhận cấp thành viên</button><button type="button" id="memberGrantClose" class="secondary">Hủy</button></div>
+  </form>
+</dialog>
+<dialog id="memberActionDialog" class="customer-dialog">
+  <h2 id="memberActionTitle"></h2><p id="memberActionDescription"></p>
+  <form id="memberActionForm"><label>Lý do thao tác<textarea name="note" minlength="3" maxlength="600" required></textarea></label><label id="memberDeleteConfirmLabel" hidden>Nhập đúng tên đăng nhập để xác nhận xóa<input name="confirm_username" autocomplete="off" /></label><p id="memberActionState" role="status"></p><div class="toolbar"><button type="submit">Xác nhận</button><button type="button" id="memberActionClose" class="secondary">Hủy</button></div></form>
+</dialog>
+<details class="panel"><summary>Danh bạ khách hàng nhập tay trước đây</summary>
+<div class="panel">
+  <div class="toolbar">
+    <input id="qName" placeholder="Search name" />
+    <input id="qPhone" placeholder="Phone" />
+    <input id="qEmail" placeholder="Email" />
+    <input id="qTag" placeholder="Tag" />
+    <button type="button" id="btnSearch">Search</button>
+    <button type="button" class="secondary" id="btnReload">Reload</button>
+    <button type="button" id="btnCreate">Add customer</button>
+  </div>
+  <div style="overflow:auto">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th><th>Gender</th><th>Birth</th><th>Phone</th><th>Email</th><th>Tags</th><th></th>
+        </tr>
+      </thead>
+      <tbody id="customerRows"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="panel" id="historyPanel" style="display:none">
+  <h2>Analysis history — <span id="historyName"></span></h2>
+  <div id="historyBody" class="pre"></div>
+</div>
+
+<div class="modal-backdrop" id="customerModal">
+  <div class="modal">
+    <h2 id="modalTitle">Customer</h2>
+    <form id="customerForm" class="form-grid">
+      <input type="hidden" id="customerId" />
+      <label class="full">Full name<input id="full_name" required /></label>
+      <label>Gender<input id="gender" placeholder="male/female" /></label>
+      <label>Birth datetime<input id="birth_datetime" placeholder="1990-05-15T10:30:00" /></label>
+      <label>Phone<input id="phone" /></label>
+      <label>Email<input id="email" /></label>
+      <label>Timezone<input id="timezone" value="Asia/Ho_Chi_Minh" /></label>
+      <label>Language<input id="language" value="vi" /></label>
+      <label class="full">Tags (comma)<input id="tags" /></label>
+      <label class="full">Notes<textarea id="notes"></textarea></label>
+      <div class="full toolbar">
+        <button type="submit">Save</button>
+        <button type="button" class="secondary" id="modalClose">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+</details>
+<script src="/static/js/registered_customers.js?v=member-admin-01"></script>
+<script src="/static/js/customers.js"></script>
+<script>document.getElementById("pageTitle").textContent = "Danh sách thành viên";</script>

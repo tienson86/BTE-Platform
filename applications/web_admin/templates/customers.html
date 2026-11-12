@@ -3,9 +3,35 @@
   <p class="muted">Quản lý cấp thành viên, trạng thái tài khoản và quyền được cấp thủ công. Tài khoản cũ chưa có cấp được ghi rõ Chưa phân cấp.</p>
   <div class="toolbar"><input id="registeredQuery" type="search" placeholder="Tìm họ tên, tên đăng nhập, số điện thoại" aria-label="Tìm khách hàng đăng ký" /><button id="registeredSearch" type="button">Tìm / Tải lại</button><button id="registeredCreate" type="button">Tạo khách hàng</button></div>
   <div class="toolbar" style="margin-top:12px"><label>Cấp thành viên <select id="registeredTier"><option value="">Tất cả cấp</option><option value="1">Cấp 1</option><option value="2">Cấp 2</option><option value="3">Cấp 3</option><option value="none">Chưa phân cấp</option></select></label><label>Danh sách <select id="registeredScope"><option value="current">Tài khoản hiện tại</option><option value="deleted">Tài khoản đã xóa</option></select></label></div>
+  <div class="toolbar" style="margin-top:12px">
+    <label>Trạng thái <select id="registeredStatus"><option value="">Tất cả</option><option value="active">Còn hiệu lực</option><option value="expired">Đã hết hạn</option><option value="pending">Chờ xác nhận</option><option value="locked">Đã khóa</option><option value="existing">Đã cấp quyền trước đây</option><option value="rejected">Chưa chấp thuận</option><option value="refunded">Đã hoàn tiền</option></select></label>
+    <label><input id="registeredExpiring" type="checkbox" /> Sắp hết hạn trong 30 ngày</label>
+    <label><input id="registeredPending" type="checkbox" /> Có giao dịch chờ xử lý</label>
+  </div>
   <p id="registeredState" role="status"></p>
-  <div class="table-scroll"><table><thead><tr><th>Họ và Tên</th><th>Tên đăng nhập</th><th>Số điện thoại</th><th>Cấp thành viên</th><th>Trạng thái</th><th>Hết hạn</th><th>Hạn mức mỗi loại</th><th>Thao tác</th></tr></thead><tbody id="registeredRows"></tbody></table></div>
+  <div class="table-scroll"><table><thead><tr><th>Họ và Tên</th><th>Tên đăng nhập</th><th>Số điện thoại</th><th>Cấp thành viên</th><th>Trạng thái</th><th>Hết hạn</th><th>Hoạt động gần nhất</th><th>Thao tác</th></tr></thead><tbody id="registeredRows"></tbody></table></div>
+  <div class="toolbar" aria-label="Phân trang thành viên">
+    <button id="registeredPrevious" type="button" class="secondary" disabled>Trang trước</button>
+    <button id="registeredNext" type="button" class="secondary" disabled>Trang sau</button>
+  </div>
 </section>
+<dialog id="memberHistoryDialog" class="customer-dialog">
+  <h2 id="memberHistoryTitle">Hồ sơ thành viên</h2>
+  <label>Mục hồ sơ <select id="memberHistorySection">
+    <option value="membership">Gói &amp; thanh toán</option>
+    <option value="usage">Dịch vụ đã dùng</option>
+    <option value="orders">Đơn mua &amp; đăng ký</option>
+    <option value="learning">Học tập</option>
+    <option value="wallet">Linh Thạch</option>
+  </select></label>
+  <p id="memberHistoryState" role="status"></p>
+  <div id="memberHistoryRows" class="table-scroll"></div>
+  <div class="toolbar">
+    <button id="memberHistoryPrevious" type="button" class="secondary" disabled>Trang trước</button>
+    <button id="memberHistoryNext" type="button" class="secondary" disabled>Trang sau</button>
+    <button id="memberHistoryClose" type="button" class="secondary">Đóng</button>
+  </div>
+</dialog>
 <dialog id="registeredDialog" class="customer-dialog">
   <h2 id="registeredDialogTitle">Thông tin khách hàng</h2>
   <form id="registeredCustomerForm">
@@ -87,6 +113,6 @@
   </div>
 </div>
 </details>
-<script src="/static/js/registered_customers.js?v=member-admin-01"></script>
+<script src="/static/js/registered_customers.js?v=member-directory-01"></script>
 <script src="/static/js/customers.js"></script>
 <script>document.getElementById("pageTitle").textContent = "Danh sách thành viên";</script>

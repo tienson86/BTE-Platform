@@ -93,7 +93,9 @@
   }
   async function load() {
     const sequence=++requestSequence;
+    const owner = new URLSearchParams(location.search).get('owner');
     const params=new URLSearchParams({page:String(page),limit:'50',kind:document.getElementById('aaKind').value,username:document.getElementById('aaUser').value,q:document.getElementById('aaSearch').value});
+    if (owner) params.set('owner', owner);
     summary.textContent='Đang đọc kho hồ sơ trên máy chủ…';
     try {
       const response=await api.get('/api/v1/admin-archive?'+params);
@@ -124,6 +126,11 @@
     if(window.BteAdmin && !BteAdmin.portalSession)toolbar.querySelector('a')?.remove();
     ['aaKind','aaUser'].forEach(id=>document.getElementById(id).onchange=()=>{page=1;void load();});
     document.getElementById('aaSearch').onkeydown=event=>{if(event.key==='Enter'){page=1;void load();}};
+    const context = new URLSearchParams(location.search);
+    if (window.BteAdmin && context.has('owner')) {
+      document.getElementById('aaSearch').value = context.get('q') || '';
+      document.getElementById('aaKind').value = context.get('kind') || '';
+    }
     await load();return true;
   },refresh:load};
 })();

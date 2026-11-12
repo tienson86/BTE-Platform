@@ -68,7 +68,7 @@ def legacy_records():
     return records, warnings
 
 @router.get('')
-def list_all(request: Request, kind: str='', username: str='', q: str='',
+def list_all(request: Request, kind: str='', username: str='', q: str='', owner: str='',
              page: int=Query(1, ge=1), limit: int=Query(50, ge=1, le=200)):
     require_admin(request)
     with _connect() as conn:
@@ -96,6 +96,7 @@ def list_all(request: Request, kind: str='', username: str='', q: str='',
     users = sorted({r['creator_username'] for r in items})
     items = [r for r in items if (not kind or r['kind']==kind) and
              (not username or r['creator_username']==username) and
+             (not owner or r['owner']==owner) and
              (not q or q.casefold() in ' '.join(str(r.get(k) or '') for k in ('customer_name','id','creator_username','creator_display_name','phone')).casefold())]
     items.sort(key=lambda r:(r.get('created_at') or '',r['id'],r['owner']), reverse=True)
     total = len(items)
