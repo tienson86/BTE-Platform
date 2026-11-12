@@ -1,0 +1,191 @@
+"""HTML template renderer."""
+
+from __future__ import annotations
+
+from typing import Any
+from html import escape
+import re
+
+from applications.customer_portal.config import PORTAL_ROOT, settings
+from applications.customer_portal.i18n import DEFAULT_LOCALE, dump_catalog_json, load_catalog, t
+from applications.customer_portal.pages import CUSTOMER_PUBLIC_NAV_ITEMS, CUSTOMER_MEMBER_NAV_ITEMS
+
+TEMPLATES_DIR = PORTAL_ROOT / "templates"
+
+_ANALYZE_ACTIVE = frozenset({"analyze", "result", "interpretation"})
+_HOME_ACTIVE = frozenset({"home", "good-date", ""})
+
+
+def _is_customer_nav_active(item_key: str, active: str) -> bool:
+    """Return whether a customer primary-nav item matches the current page."""
+    if item_key == "home":
+        return active in _HOME_ACTIVE
+    if item_key == "choose-date":
+        return active == "choose-date"
+    if item_key == "analyze":
+        return active in _ANALYZE_ACTIVE
+    return item_key == active
+
+
+def _customer_nav_html(catalog: dict[str, Any], active: str, *, member: bool = False) -> str:
+    """Render the live customer primary product links."""
+    links: list[str] = []
+    for item in (CUSTOMER_MEMBER_NAV_ITEMS if member else CUSTOMER_PUBLIC_NAV_ITEMS):
+        is_active = _is_customer_nav_active(item.key, active)
+        cls = "nav-link active" if is_active else "nav-link"
+        current = ' aria-current="page"' if is_active else ""
+        links.append(
+            f'<a class="{cls}" href="{item.path}" data-nav-id="{item.key}"{current}>'
+            f"{t(catalog, item.label)}</a>"
+        )
+    return "\n".join(links)
+
+
+def _customer_header_html(
+    catalog: dict[str, Any],
+    active: str,
+    *,
+    skip_href: str = "#mainContent",
+) -> str:
+    """Render the single Customer Portal chrome used by HTML pages and /result."""
+    nav = _customer_nav_html(catalog, active)
+    member_nav = _customer_nav_html(catalog, active, member=True)
+    messages_class = "member-sidebar__quick-link" + (" active" if active == "messages" else "")
+    community_class = "member-sidebar__quick-link" + (" active" if active == "community" else "")
+    messages_current = ' aria-current="page"' if active == "messages" else ""
+    community_current = ' aria-current="page"' if active == "community" else ""
+    member_catalog_links = ""
+    for key, path, title in (
+        ("courses", "/khoa-hoc", "Khóa học Online"),
+        ("offline", "/khoa-hoc-offline", "Khóa học Offline"),
+        ("shop", "/shop-vat-pham", "Shop Vật phẩm"),
+        ("notices", "/thong-bao-noi-bo", "Thông báo Nội bộ"),
+    ):
+        current = ' aria-current="page"' if active == key else ""
+        css = "member-sidebar__quick-link" + (" active" if current else "")
+        member_catalog_links += (
+            f'        <a class="{css}"{current} href="{path}" data-forum-only hidden>{title}</a>\n'
+        )
+    return (
+        f'<a class="skip-link" href="{skip_href}">Skip to content</a>\n'
+        '  <header class="app-header" id="appHeader">\n'
+        '      <a class="app-brand" href="/good-date">BTE <span>Portal</span></a>\n'
+        '      <button type="button" class="app-nav-toggle" id="btnNavToggle"'
+        ' aria-label="Mở menu thành viên" aria-controls="memberSidebar" aria-expanded="false" hidden>\n'
+        '        <span class="app-nav-toggle__bar" aria-hidden="true"></span>\n'
+        '        <span class="app-nav-toggle__bar" aria-hidden="true"></span>\n'
+        '        <span class="app-nav-toggle__bar" aria-hidden="true"></span>\n'
+        "      </button>\n"
+        f'      <nav class="app-nav nav" id="appNav" data-customer-nav="primary"'
+        f' aria-label="Điều hướng chính">{nav}</nav>\n'
+        '      <div class="app-header-actions">\n'
+        '        <a class="member-join" href="/membership" id="memberJoinLink">Đăng ký thành viên</a>\n'
+        '        <button type="button" id="memberLogout" class="secondary" hidden>Đăng xuất</button>\n'
+        '        <a id="headerLinhThach" class="header-linh-thach" href="/linh-thach"'
+        ' aria-label="Số dư Linh Thạch" title="Xem số dư và đổi Linh Thạch" hidden>\n'
+        '          <img src="/static/images/membership/linh-thach.png" width="52" height="52" alt="" aria-hidden="true" />\n'
+        '          <span class="header-linh-thach__text"><strong id="headerLinhThachBalance" aria-live="polite">—</strong>'
+        '<span>Linh Thạch</span></span>\n'
+        '        </a>\n'
+        '        <a class="app-user" href="/profile" aria-label="Hồ sơ" title="Hồ sơ">\n'
+        '          <span class="app-user__avatar" aria-hidden="true">U</span>\n'
+        "        </a>\n"
+        "      </div>\n"
+        "    </header>\n"
+        '    <aside class="member-sidebar" id="memberSidebar" aria-label="Không gian thành viên" hidden>\n'
+        '      <p class="member-sidebar__title">Không gian thành viên</p>\n'
+        '      <nav class="member-sidebar__quick-links" aria-label="Tiện ích thành viên">\n'
+        f'        <a class="{messages_class}"{messages_current} href="/messages">Tin nhắn với Admin <span data-message-unread hidden></span></a>\n'
+        f'        <a class="{community_class}"{community_current} href="/community" data-forum-only hidden>Trao đổi kiến thức</a>\n'
+        f"{member_catalog_links}"
+        '      </nav>\n'
+        f'      <nav class="member-nav" data-customer-nav="member" aria-label="Chức năng thành viên">{member_nav}</nav>\n'
+        '      <div class="member-sidebar__footer">\n'
+        '        <a href="/history">Hồ sơ đã lưu và tải tài liệu</a>\n'
+        '        <a href="/membership">Trạng thái thành viên</a>\n'
+        '        <a href="/chia-se-gioi-thieu">Chia sẻ link giới thiệu</a>\n'
+        '        <a href="/admin" data-admin-only hidden>Quản trị hệ thống</a>\n'
+        '      </div>\n'
+        '    </aside>\n'
+        '    <p id="siteAnnouncement" class="site-announcement" role="status" hidden></p>'
+    )
+
+
+def _apply_common_tokens(html: str, *, locale: str, catalog: dict[str, Any]) -> str:
+    """Replace shared template tokens."""
+    html = html.replace("{{LANG}}", locale)
+    html = html.replace("{{I18N_JSON}}", dump_catalog_json(locale))
+    html = html.replace("{{I18N_LOCALE}}", locale)
+    if "{{FOOTER}}" in html:
+        footer = (TEMPLATES_DIR / "_footer.html").read_text(encoding="utf-8")
+        html = html.replace("{{FOOTER}}", footer)
+        html = html.replace("</head>", '  <link rel="stylesheet" href="/static/css/brand_footer.css?v=2" />\n</head>', 1)
+    html = html.replace("{{DOC_TITLE}}", t(catalog, "brand.title") or settings.title)
+    html = html.replace("{{NARRATIVE_PROVIDER}}", settings.narrative_provider)
+    html = html.replace("{{PACK05_LEGACY}}", "1" if settings.pack05_legacy else "0")
+    return html
+
+
+def render_page(template_name: str, *, active: str, locale: str = DEFAULT_LOCALE,
+                page_data: tuple[str, str, str] | None = None) -> str:
+    """Compose layout + page body with navigation (labels from i18n catalog)."""
+    catalog = load_catalog(locale)
+    base = (TEMPLATES_DIR / "_layout.html").read_text(encoding="utf-8")
+    body = (TEMPLATES_DIR / template_name).read_text(encoding="utf-8")
+    if template_name == "van_han.html":
+        good_years = active == "good-years"
+        title = "Tính các năm tốt" if good_years else "Tính vận hạn"
+        tokens = {
+            "GOOD_YEARS": "true" if good_years else "false",
+            "TITLE": title,
+            "TITLE_LOWER": title.lower(),
+            "SCOPE": (
+                "Xem mức thuận riêng theo Cung Phi – Du Niên và theo Bát Tự. "
+                "Bát Tự đối chiếu Can Chi với Dụng/Hỷ/Kỵ thần, Nhật chủ và đại vận."
+                if good_years else
+                "Bản đầu tiên xét cung phi, Dụng–Hỷ–Kỵ thần và hợp/xung. "
+                "Các cơ chế hình, hại, phá và hợp hóa cần đọc thêm trong bản luận lá số đầy đủ."
+            ),
+            "SUBMIT": "Tính và lưu năm tốt" if good_years else "Tính và lưu vận hạn",
+            "HISTORY": "Hồ sơ năm tốt đã lưu" if good_years else "Hồ sơ vận hạn đã lưu",
+            "USAGE": '<p class="muted">Tạo hồ sơ năm tốt dùng hạn mức riêng theo cấp thành viên.</p>' if good_years else "",
+        }
+        for key, value in tokens.items():
+            body = body.replace("{{PERIOD_" + key + "}}", value)
+    if "{{CATEGORY_COMMUNITY}}" in body:
+        shared=(TEMPLATES_DIR / "community.html").read_text(encoding="utf-8")
+        panel=shared.split("<!-- COMMUNITY_PANEL_START -->",1)[1].split("<!-- COMMUNITY_PANEL_END -->",1)[0]
+        body=body.replace("{{CATEGORY_COMMUNITY}}",panel)
+    if page_data is not None:
+        base = base.replace("{{DOC_TITLE}}", "{{PAGE_TITLE}}")
+    html = base.replace("{{HEADER}}", _customer_header_html(catalog, active))
+    if template_name == "name_analysis.html":
+        body = re.sub(r"""(/static/js/name_analysis\.js)(?:\?[^"']*)?(?=["'])""",
+                      r'\1?v=vn-birth-date-01', body)
+    html = html.replace("{{CONTENT}}", body)
+    html = html.replace("{{ACTIVE}}", active)
+    html = _apply_common_tokens(html, locale=locale, catalog=catalog)
+    if page_data is None:
+        return html
+    title, description, content = page_data
+    html = html.replace("{{PAGE_TITLE}}", escape(title), 1)
+    html = html.replace("</head>", f'<meta name="description" content="{escape(description)}" />\n</head>', 1)
+    return html.replace("{{KNOWLEDGE_CONTENT}}", content, 1)
+
+
+def render_desktop_page(
+    template_name: str = "result_desktop.html",
+    *,
+    locale: str = DEFAULT_LOCALE,
+    active: str = "analyze",
+    skip_href: str = "#rp-main",
+) -> str:
+    """Render Canonical Desktop V2 host with the shared Customer Portal chrome."""
+    catalog = load_catalog(locale)
+    html = (TEMPLATES_DIR / template_name).read_text(encoding="utf-8")
+    if "{{HEADER}}" in html:
+        html = html.replace(
+            "{{HEADER}}",
+            _customer_header_html(catalog, active, skip_href=skip_href),
+        )
+    return _apply_common_tokens(html, locale=locale, catalog=catalog)

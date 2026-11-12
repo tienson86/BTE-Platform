@@ -17,6 +17,8 @@ from engines.report_engine.rendering.html_report_v1 import HtmlReportV1Renderer
 
 logger = logging.getLogger(__name__)
 
+BTE_PLATFORM_SLOGAN = "BTE Platform - Khám Phá Bản Thân - Thấu Hiểu Thời Vận"
+
 PDF_SIGNATURE = b"%PDF"
 MIN_PDF_BYTES = 1024
 
@@ -52,7 +54,7 @@ class PlaywrightPdfBackend:
                         '<div style="font-size:9px;width:100%;padding:0 16mm;color:#555;'
                         "font-family:Arial,'Segoe UI',sans-serif;display:flex;"
                         'justify-content:space-between;">'
-                        "<span>BTE V1.0</span>"
+                        f"<span>{BTE_PLATFORM_SLOGAN}</span>"
                         '<span><span class="pageNumber"></span> / '
                         '<span class="totalPages"></span></span>'
                         "</div>"

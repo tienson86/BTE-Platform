@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="/static/css/naming_consulting.css?v=BTE-44d150c4a9608241" />
+<link rel="stylesheet" href="/static/css/name_analysis.css?v=BTE-9f463730f7072212" />
+<section class="nc-page na-page" data-testid="name-analysis-page" aria-labelledby="na-title">
+  <header>
+    <p class="muted">Xem tên của bạn · Không cần đăng nhập</p>
+    <h1 id="na-title">Phân tích tên hiện tại</h1>
+    <p>Đọc ý nghĩa, âm điệu và hành của tên đang dùng. Đối chiếu tên với Dụng thần, Hỷ thần, Kỵ thần, Nạp Âm và Cung Phi theo ngày giờ sinh.</p>
+  </header>
+
+  <form id="name-analysis-form" class="panel na-form" data-testid="name-analysis-form">
+    <fieldset id="na-fields">
+      <legend>Thông tin của bạn</legend>
+      <div class="nc-fields">
+        <label class="na-full">Họ và tên hiện tại
+          <input id="na-full-name" name="full_name" type="text" maxlength="120" autocomplete="name" placeholder="Ví dụ: Nguyễn Tiến Sơn" required />
+          <small class="muted">Nhập tiếng Việt có dấu để đối chiếu ý nghĩa rõ hơn.</small>
+        </label>
+        <label>Giới tính dùng để tính Cung Phi
+          <select name="gender" required>
+            <option value="">Chọn giới tính</option>
+            <option value="male">Nam</option>
+            <option value="female">Nữ</option>
+          </select>
+        </label>
+        <label>Ngày sinh dương lịch
+          <input id="na-birth-date" name="birth_date" type="date" min="1900-01-01" max="2100-12-31" required />
+        </label>
+        <label>Giờ sinh
+          <select name="birth_time" required aria-describedby="na-hour-note">
+            <option value="">Chọn khung giờ Can Chi</option>
+            <option value="00:00">Giờ Tý · 23h01 – 01h00</option>
+            <option value="02:00">Giờ Sửu · 01h01 – 03h00</option>
+            <option value="04:00">Giờ Dần · 03h01 – 05h00</option>
+            <option value="06:00">Giờ Mão · 05h01 – 07h00</option>
+            <option value="08:00">Giờ Thìn · 07h01 – 09h00</option>
+            <option value="10:00">Giờ Tỵ · 09h01 – 11h00</option>
+            <option value="12:00">Giờ Ngọ · 11h01 – 13h00</option>
+            <option value="14:00">Giờ Mùi · 13h01 – 15h00</option>
+            <option value="16:00">Giờ Thân · 15h01 – 17h00</option>
+            <option value="18:00">Giờ Dậu · 17h01 – 19h00</option>
+            <option value="20:00">Giờ Tuất · 19h01 – 21h00</option>
+            <option value="22:00">Giờ Hợi · 21h01 – 23h00</option>
+          </select>
+          <small class="muted" id="na-hour-note">Chọn theo giờ địa phương nơi sinh. BTE lấy giờ giữa khung trên ngày đã nhập để luận sơ bộ. Nếu sinh gần giao ngày hoặc giao tiết, hãy đối chiếu giờ phút chính xác ở mục Tư vấn đặt tên.</small>
+        </label>
+        <label>Múi giờ nơi sinh
+          <input name="timezone" value="Asia/Ho_Chi_Minh" maxlength="80" required />
+          <small class="muted">Giữ Asia/Ho_Chi_Minh nếu sinh tại Việt Nam.</small>
+        </label>
+      </div>
+      <button type="submit" data-testid="submit-name-analysis">Phân tích tên</button>
+    </fieldset>
+  </form>
+
+  <p id="na-state" role="status" aria-live="polite" tabindex="-1"></p>
+  <section id="na-result" data-testid="name-analysis-result" aria-label="Kết quả phân tích tên hiện tại" hidden></section>
+  <p><a href="/naming-consulting">Mở tư vấn đặt tên đầy đủ</a> nếu bạn cần gợi ý tên khác.</p>
+</section>
+<script src="/static/js/name_analysis.js?v=BTE-8fb5dc3d08b5ef78" defer></script>

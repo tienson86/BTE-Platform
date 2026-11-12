@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 from html import escape
+import re
 
 from applications.customer_portal.config import PORTAL_ROOT, settings
 from applications.customer_portal.i18n import DEFAULT_LOCALE, dump_catalog_json, load_catalog, t
@@ -115,6 +116,10 @@ def _apply_common_tokens(html: str, *, locale: str, catalog: dict[str, Any]) -> 
     html = html.replace("{{LANG}}", locale)
     html = html.replace("{{I18N_JSON}}", dump_catalog_json(locale))
     html = html.replace("{{I18N_LOCALE}}", locale)
+    if "{{FOOTER}}" in html:
+        footer = (TEMPLATES_DIR / "_footer.html").read_text(encoding="utf-8")
+        html = html.replace("{{FOOTER}}", footer)
+        html = html.replace("</head>", '  <link rel="stylesheet" href="/static/css/brand_footer.css?v=3" />\n</head>', 1)
     html = html.replace("{{DOC_TITLE}}", t(catalog, "brand.title") or settings.title)
     html = html.replace("{{NARRATIVE_PROVIDER}}", settings.narrative_provider)
     html = html.replace("{{PACK05_LEGACY}}", "1" if settings.pack05_legacy else "0")
@@ -154,6 +159,9 @@ def render_page(template_name: str, *, active: str, locale: str = DEFAULT_LOCALE
     if page_data is not None:
         base = base.replace("{{DOC_TITLE}}", "{{PAGE_TITLE}}")
     html = base.replace("{{HEADER}}", _customer_header_html(catalog, active))
+    if template_name == "name_analysis.html":
+        body = re.sub(r"""(/static/js/name_analysis\.js)(?:\?[^"']*)?(?=["'])""",
+                      r'\1?v=vn-birth-date-01', body)
     html = html.replace("{{CONTENT}}", body)
     html = html.replace("{{ACTIVE}}", active)
     html = _apply_common_tokens(html, locale=locale, catalog=catalog)

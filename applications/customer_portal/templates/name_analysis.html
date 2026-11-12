@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="/static/css/naming_consulting.css?v=BTE-44d150c4a9608241" />
-<link rel="stylesheet" href="/static/css/name_analysis.css?v=birth-chart-02" />
+<link rel="stylesheet" href="/static/css/name_analysis.css?v=BTE-9f463730f7072212" />
 <section class="nc-page na-page" data-testid="name-analysis-page" aria-labelledby="na-title">
   <header>
     <p class="muted">Xem tên của bạn · Không cần đăng nhập</p>
@@ -23,7 +23,8 @@
           </select>
         </label>
         <label>Ngày sinh dương lịch
-          <input id="na-birth-date" name="birth_date" type="date" min="1900-01-01" max="2100-12-31" required />
+          <input id="na-birth-date" name="birth_date" type="text" placeholder="DD/MM/YYYY" maxlength="10" autocomplete="bday" aria-describedby="na-date-note" required />
+          <small id="na-date-note">Nhập theo ngày/tháng/năm, ví dụ 21/01/1987.</small>
         </label>
         <label>Giờ sinh
           <select name="birth_time" required aria-describedby="na-hour-note">
@@ -56,4 +57,4 @@
   <section id="na-result" data-testid="name-analysis-result" aria-label="Kết quả phân tích tên hiện tại" hidden></section>
   <p><a href="/naming-consulting">Mở tư vấn đặt tên đầy đủ</a> nếu bạn cần gợi ý tên khác.</p>
 </section>
-<script src="/static/js/name_analysis.js?v=birth-chart-02" defer></script>
+<script src="/static/js/name_analysis.js?v=BTE-8fb5dc3d08b5ef78" defer></script>

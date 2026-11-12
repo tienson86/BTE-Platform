@@ -5,10 +5,12 @@
   const state = document.getElementById("na-state");
   const result = document.getElementById("na-result");
   const fullName = document.getElementById("na-full-name");
+  const birthDate = document.getElementById("na-birth-date");
   let busy = false;
 
   form.addEventListener("input", function () {
     fullName.setCustomValidity("");
+    birthDate.setCustomValidity("");
     state.textContent = "";
     result.replaceChildren();
     result.hidden = true;
@@ -18,9 +20,12 @@
     event.preventDefault();
     if (busy) return;
     fullName.setCustomValidity(fullName.value.trim() ? "" : "Vui lòng nhập họ và tên hiện tại.");
+    const isoBirthDate = parseBirthDate(birthDate.value.trim());
+    birthDate.setCustomValidity(isoBirthDate ? "" : "Vui lòng nhập ngày sinh hợp lệ theo DD/MM/YYYY, từ năm 1900 đến 2100.");
     if (!form.reportValidity()) return;
     const payload = Object.fromEntries(new FormData(form));
     payload.full_name = fullName.value.trim();
+    payload.birth_date = isoBirthDate;
     busy = true;
     fields.disabled = true;
     form.setAttribute("aria-busy", "true");
@@ -53,6 +58,19 @@
       form.removeAttribute("aria-busy");
     }
   });
+
+  function parseBirthDate(raw) {
+    const match = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(raw);
+    if (!match) return null;
+    const [, day, month, year] = match;
+    const numericYear = Number(year);
+    if (numericYear < 1900 || numericYear > 2100) return null;
+    const parsed = new Date(Date.UTC(numericYear, Number(month) - 1, Number(day)));
+    if (parsed.getUTCFullYear() !== numericYear ||
+        parsed.getUTCMonth() !== Number(month) - 1 ||
+        parsed.getUTCDate() !== Number(day)) return null;
+    return `${year}-${month}-${day}`;
+  }
 
   function node(tag, text, className) {
     const element = document.createElement(tag);

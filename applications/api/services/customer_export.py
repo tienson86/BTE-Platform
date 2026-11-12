@@ -399,18 +399,8 @@ def _append_pdf_search_marker(output_path: Path, value: str) -> None:
 
 def _render_modern_report_html(report_input: ReportInputV1) -> str:
     title = _modern_title(report_input)
-    subtitle = _modern_subtitle(report_input)
     chapters = _modern_chapters(report_input)
-    body: list[str] = [
-        '<main class="report">',
-        '<header class="hero">',
-        '<p class="eyebrow">Hồ sơ luận giải</p>',
-        f"<h1>{escape(title)}</h1>",
-        f'<p class="subtitle">{escape(subtitle)}</p>',
-        f'<p class="badge">{len(chapters)} chương luận giải</p>',
-        "</header>",
-        _opening_chart_html(report_input),
-    ]
+    body = ['<main class="report">', _opening_chart_html(report_input)]
     for chapter in chapters:
         body.append(_chapter_html(chapter, report_input))
     footer = " · ".join(
@@ -442,94 +432,107 @@ _BRANCH_ELEMENTS = {
 }
 
 
-def _opening_chart_html(report_input: ReportInputV1) -> str:
-    """Present the same Tứ Trụ and Bát Tự fields as the customer Result dashboard."""
+def _opening_sections(report_input: ReportInputV1) -> tuple[str, list[tuple[str, list[str], list[list[str]]]]]:
+    """One set of opening data for the printed PDF and editable Word tables."""
     opening = dict((report_input.modern_report or {}).get("opening") or {})
     published = dict(opening.get("pillars") or {})
     pillars = [dict(published.get(key) or {}) for key in ("year", "month", "day", "hour")]
-    names = ("Năm trụ", "Tháng trụ", "Ngày trụ", "Giờ trụ")
-    header = "".join(f"<th>{name}{'<small>NHẬT CHỦ</small>' if index == 2 else ''}</th>"
-                     for index, name in enumerate(names))
-
-    def row(label: str, values: list[str], *, prominent: bool = False) -> str:
-        cells = "".join(
-            f'<td class="{("day-column " if index == 2 else "") + ("prominent" if prominent else "")}">{value or "—"}</td>'
-            for index, value in enumerate(values)
-        )
-        return f"<tr><th scope='row'>{label}</th>{cells}</tr>"
-
-    def value(pillar: Mapping[str, Any], key: str) -> str:
-        return escape(str(pillar.get(key) or ""))
-
-    def detail_cell(primary: str, secondary: str) -> str:
-        return f"<b>{escape(primary)}</b><small>{escape(secondary)}</small>"
-
-    summary_rows = "".join(
-        '<tr>' + f'<th scope="row">{label}</th>' + ''.join(
-            f'<td>{value(pillar, field)}</td>' for field, pillar in (("can_chi", pillar),
-                                                                     ("nap_am_element", pillar),
-                                                                     ("cung_phi", pillar))
-        ) + '</tr>' for label, pillar in zip(("Năm", "Tháng", "Ngày", "Giờ"), pillars)
-    )
-    hidden = []
-    for pillar in pillars:
-        items = []
-        for item in pillar.get("hidden_stems") or []:
-            if not isinstance(item, Mapping):
-                continue
-            items.append(detail_cell(str(item.get("stem") or ""),
-                                     " · ".join(str(item.get(key) or "") for key in ("element", "ten_god") if item.get(key))))
-        hidden.append("<br>".join(items))
-    detail = "".join((
-        row("Thiên Can", [detail_cell(str(p.get("stem") or ""),
-             " · ".join(part for part in (_STEM_ELEMENTS.get(str(p.get("stem") or ""), ""),
-                                    "Dương" if str(p.get("stem") or "") in ("Giáp", "Bính", "Mậu", "Canh", "Nhâm") else "Âm") if part))
-             for p in pillars]),
-        row("Địa Chi", [detail_cell(str(p.get("branch") or ""),
-             " · ".join(part for part in (_BRANCH_ELEMENTS.get(str(p.get("branch") or ""), ""),
-                                    "Dương" if str(p.get("branch") or "") in ("Tý", "Dần", "Thìn", "Ngọ", "Thân", "Tuất") else "Âm") if part))
-             for p in pillars]),
-        row("Nạp Âm", [value(p, "nap_am") for p in pillars]),
-        row("Tàng Can", hidden),
-        row("Thập Thần", [value(p, "ten_god") for p in pillars]),
-        row("Trường Sinh", [value(p, "truong_sinh") for p in pillars]),
-        row("Tam Hợp", [value(p, "tam_hop") for p in pillars]),
-        row("Thần Sát", ["<br>".join(escape(str(star)) for star in p.get("shen_sha") or []) for p in pillars]),
-    ))
     person = dict(opening.get("person") or {})
-    identity = " · ".join(escape(str(person.get(key))) for key in
-                          ("full_name", "solar_birth", "lunar_birth", "birth_time", "birth_place") if person.get(key))
+    gender = str(person.get("gender") or report_input.profile.gender or "")
+    gender = {"male": "Nam", "female": "Nữ", "m": "Nam", "f": "Nữ"}.get(gender.casefold(), gender)
+    profile = report_input.profile
+    identity = " · ".join(str(part) for part in (
+        person.get("full_name") or profile.full_name,
+        gender,
+        person.get("solar_birth") or profile.birth_date,
+        f"Âm lịch {person['lunar_birth']}" if person.get("lunar_birth") else "",
+        person.get("birth_time") or profile.birth_time,
+        person.get("birth_place") or profile.birth_place,
+    ) if part)
+    def value(p, field):
+        return str(p.get(field) or "—")
+
+    def details(p, key, elements, yang):
+        name = str(p.get(key) or "")
+        element = elements.get(name)
+        return f"{name}\n{element} · {'Dương' if name in yang else 'Âm'}" if element else name or "—"
+
+    def hidden(p):
+        return "\n".join(" · ".join(str(item[key]) for key in ("stem", "element", "ten_god") if item.get(key))
+                          for item in p.get("hidden_stems") or [] if isinstance(item, Mapping)) or "—"
+
+    def stars(p):
+        names = [str(item) for item in p.get("shen_sha") or [] if item]
+        preview = names[:2]
+        if len(names) > 2:
+            preview.append(f"+{len(names)-2} · xem mục Thần sát")
+        return "\n".join(preview) or "—"
+
+    summary = [[label, *[value(p, field) for field in ("can_chi", "nap_am_element", "cung_phi")]]
+               for label, p in zip(("Năm", "Tháng", "Ngày", "Giờ"), pillars)]
+    detail = [
+        ["Thiên Can", *[details(p, "stem", _STEM_ELEMENTS, {"Giáp","Bính","Mậu","Canh","Nhâm"}) for p in pillars]],
+        ["Địa Chi", *[details(p, "branch", _BRANCH_ELEMENTS, {"Tý","Dần","Thìn","Ngọ","Thân","Tuất"}) for p in pillars]],
+        ["Nạp Âm", *[value(p, "nap_am") for p in pillars]],
+        ["Tàng Can", *[hidden(p) for p in pillars]],
+        ["Thập Thần", *[value(p, "ten_god") for p in pillars]],
+        ["Trường Sinh", *[value(p, "truong_sinh") for p in pillars]],
+        ["Tam Hợp", *[value(p, "tam_hop") for p in pillars]],
+        ["Thần Sát", *[stars(p) for p in pillars]],
+    ]
+    elements = {label: _format_number(number) for _, label, number in _five_element_values(report_input)}
+    element_labels = ["Mộc", "Hỏa", "Thổ", "Kim", "Thủy"]
     bone = dict(opening.get("bone_weight") or {})
+    weight = " · ".join(str(item) for item in (
+        bone.get("display_weight") or bone.get("weight"), bone.get("classification"), bone.get("summary")
+    ) if item)
     technical = dict(opening.get("technical") or {})
-    labels = (("Tam Nguyên", "tam_nguyen"), ("Cửu Vận", "cuu_van"),
-              ("Cung Phi", "cung_phi"), ("Mệnh Quái", "menh_quai"),
-              ("Hành Cung", "hanh_cung"), ("Nhóm Trạch", "nhom_trach"),
-              ("Tiết khí", "solar_term"))
-    tech_rows = "".join(f'<dt>{escape(label)}</dt><dd>{escape(str(technical[key]))}</dd>'
-                        for label, key in labels if technical.get(key))
-    chart = _five_elements_chart_html(report_input)
-    return (
-        '<section class="opening-page opening-first">'
-        f'<p class="opening-identity">{identity}</p>'
-        '<h2>Tứ Trụ</h2>'
-        '<table class="opening-table opening-summary-table"><thead><tr><th>Trụ</th><th>Can Chi</th>'
-        f'<th>Nạp âm</th><th>Cung Phi</th></tr></thead><tbody>{summary_rows}</tbody></table>'
-        '<div class="opening-facts">'
-        '<div><h3>Cân Xương đoán mệnh</h3>'
-        f'<strong>{escape(str(bone.get("display_weight") or bone.get("weight") or "—"))}</strong>'
-        f'<p>{escape(str(bone.get("classification") or ""))}</p>'
-        f'<p>{escape(str(bone.get("summary") or ""))}</p></div>'
-        f'<div><h3>Thông tin kỹ thuật</h3><dl class="opening-tech">{tech_rows}</dl></div>'
-        '</div>'
-        '</section>'
-        '<section class="opening-page opening-second">'
-        '<h2>Bát Tự</h2>'
-        f'<table class="opening-table opening-detail-table"><thead><tr><th scope="col">Thành phần</th>{header}</tr></thead><tbody>{detail}</tbody></table>'
-        '<h2>Phân bổ Ngũ hành</h2>'
-        f'{chart}'
-        '<p class="opening-note">Tính theo Thiên Can · bản hành Địa Chi · Tàng Can.</p>'
-        '</section>'
-    )
+    tech = [[label, value(technical, key)] for label, key in (
+        ("Tam Nguyên", "tam_nguyen"), ("Cửu Vận", "cuu_van"), ("Cung Phi", "cung_phi"),
+        ("Hành Cung", "hanh_cung"), ("Nhóm Trạch", "nhom_trach"), ("Tiết khí", "solar_term"),
+    )]
+    stem = report_input.strength.day_master or pillars[2].get("stem") or "—"
+    element = _STEM_ELEMENTS.get(stem)
+    useful = report_input.useful_god
+    final = [
+        [f"Nhật Chủ: {stem}" + (f" ({element})" if element else ""),
+         f"Mệnh cục: {report_input.pattern.primary_pattern or '—'}",
+         f"Thế Thân: {report_input.strength.level or '—'}"],
+        [f"Dụng thần: {useful.useful_display or useful.useful_god or '—'}",
+         f"Hỷ thần: {useful.favorable_display or '—'}",
+         f"Kỵ thần: {useful.unfavorable_display or '—'}"],
+    ]
+    return identity, [
+        ("Tứ Trụ", ["Trụ", "Can Chi", "Nạp âm", "Cung Phi"], summary),
+        ("Bát Tự", ["Thành phần", "Năm trụ", "Tháng trụ", "Ngày trụ · Nhật Chủ", "Giờ trụ"], detail),
+        ("Phân bổ Ngũ hành", element_labels, [[elements.get(k, "—") for k in element_labels]]),
+        ("Cân Xương đoán mệnh", [], [[weight or "—"]]),
+        ("Thông tin phong thủy thời vận", [], tech),
+        ("", [], final),
+    ]
+
+
+def _opening_chart_html(report_input: ReportInputV1) -> str:
+    identity, sections = _opening_sections(report_input)
+    out = ['<section class="chart-cover">', '<h1>Thông tin lá số Bát Tự</h1>',
+           f'<p class="cover-identity">{escape(identity)}</p>']
+    for i, (label, headings, rows) in enumerate(sections):
+        if label:
+            out.append(f"<h2>{escape(label)}</h2>")
+        if i == 3:
+            out.append(f'<p class="cover-bone">{escape(rows[0][0])}</p>')
+            continue
+        out.append(f'<table class="cover-grid cover-grid-{i}">')
+        if headings:
+            out.append("<thead><tr>" + "".join(f"<th>{escape(v)}</th>" for v in headings) + "</tr></thead>")
+        out.append("<tbody>")
+        for row in rows:
+            out.append("<tr>" + "".join(f'<td>{escape(v).replace(chr(10), "<br>")}</td>' for v in row) + "</tr>")
+        out.append("</tbody></table>")
+        if i == 2:
+            out.append('<p class="cover-note">Tính theo Thiên Can · bản hành Địa Chi · Tàng Can.</p>')
+    out.append("</section>")
+    return "".join(out)
 
 
 def _technical_snapshot_html(report_input: ReportInputV1) -> str:
@@ -706,9 +709,6 @@ def _render_modern_report_docx(report_input: ReportInputV1, output_path: Path) -
             if ppr is not None:
                 for border in ppr.findall(qn("w:pBdr")):
                     ppr.remove(border)
-    document.add_heading(_modern_title(report_input), level=0)
-    document.add_paragraph(_modern_subtitle(report_input))
-    document.add_paragraph(f"Mã phân tích: {report_input.metadata.case_id}")
     _docx_opening_chart(document, report_input)
     for chapter in _modern_chapters(report_input):
         chapter_id = str(chapter.get("id") or "")
@@ -743,85 +743,62 @@ def _docx_shade(cell: Any, fill: str) -> None:
     cell._tc.get_or_add_tcPr().append(shading)
 
 
-def _docx_opening_table(document: Document, headings: list[str], rows: list[tuple[str, list[str]]]) -> None:
-    table = document.add_table(rows=1, cols=len(headings))
-    table.style = "Table Grid"
-    table.autofit = False
-    for index, label in enumerate(headings):
-        cell = table.rows[0].cells[index]
-        cell.text = label
-        _docx_shade(cell, "FFF3CC")
-        for run in cell.paragraphs[0].runs:
-            run.bold = True
-            run.font.size = Pt(9)
-    for row_label, values in rows:
-        cells = table.add_row().cells
-        for index, value in enumerate([row_label, *values]):
-            cells[index].text = value or "—"
-            for paragraph in cells[index].paragraphs:
-                paragraph.paragraph_format.space_after = Pt(0)
-                for run in paragraph.runs:
-                    run.font.size = Pt(8.2)
-        _docx_shade(cells[0], "F5F6FA")
-        if len(cells) == 5:
-            _docx_shade(cells[3], "FFF7DE")
+def _docx_cover_paragraph(p, size, *, bold=False, before=0, after=0, align=None):
+    from docx.enum.text import WD_ALIGN_PARAGRAPH
+    fmt = p.paragraph_format
+    fmt.space_before = Pt(before)
+    fmt.space_after = Pt(after)
+    fmt.line_spacing = Pt(size + 2)
+    if align is not None:
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    for run in p.runs:
+        run.font.size = Pt(size)
+        run.bold = bold
 
 
 def _docx_opening_chart(document: Document, report_input: ReportInputV1) -> None:
-    """Editable Word equivalent of the PDF's two published opening pages."""
-    opening = dict((report_input.modern_report or {}).get("opening") or {})
-    published = dict(opening.get("pillars") or {})
-    if not published:
-        _docx_key_value_table(document, _technical_snapshot_rows(report_input))
-        return
-    pillars = [dict(published.get(key) or {}) for key in ("year", "month", "day", "hour")]
-    person = dict(opening.get("person") or {})
-    bone = dict(opening.get("bone_weight") or {})
-    technical = dict(opening.get("technical") or {})
-    identity = " · ".join(str(person.get(key)) for key in
-        ("full_name", "solar_birth", "lunar_birth", "birth_time", "birth_place") if person.get(key))
-    document.add_paragraph(identity)
-    document.add_heading("Tứ Trụ", level=1)
-    _docx_opening_table(document, ["Trụ", "Can Chi", "Nạp âm", "Cung Phi"], [
-        (label, [str(pillar.get(field) or "") for field in ("can_chi", "nap_am_element", "cung_phi")])
-        for label, pillar in zip(("Năm", "Tháng", "Ngày", "Giờ"), pillars)
-    ])
-    document.add_heading("Cân Xương đoán mệnh", level=2)
-    document.add_paragraph(" · ".join(str(bone.get(key)) for key in
-        ("display_weight", "classification", "summary") if bone.get(key)))
-    document.add_heading("Thông tin kỹ thuật", level=2)
-    _docx_key_value_table(document, [
-        (label, str(technical[key])) for label, key in (
-            ("Tam Nguyên", "tam_nguyen"), ("Cửu Vận", "cuu_van"),
-            ("Cung Phi", "cung_phi"), ("Mệnh Quái", "menh_quai"),
-            ("Hành Cung", "hanh_cung"), ("Nhóm Trạch", "nhom_trach"),
-            ("Tiết khí", "solar_term")) if technical.get(key)
-    ])
-    document.add_page_break()
-    document.add_heading("Bát Tự", level=1)
-    yang_stems = {"Giáp", "Bính", "Mậu", "Canh", "Nhâm"}
-    yang_branches = {"Tý", "Dần", "Thìn", "Ngọ", "Thân", "Tuất"}
-    def details(pillar: Mapping[str, Any], key: str, elements: Mapping[str, str], yang: set[str]) -> str:
-        name = str(pillar.get(key) or "")
-        return f"{name}\n{elements.get(name, '')} · {'Dương' if name in yang else 'Âm'}" if name else ""
-    def hidden(pillar: Mapping[str, Any]) -> str:
-        return "\n".join(" · ".join(str(item.get(key)) for key in ("stem", "element", "ten_god") if item.get(key))
-            for item in pillar.get("hidden_stems") or [] if isinstance(item, Mapping))
-    rows = [
-        ("Thiên Can", [details(p, "stem", _STEM_ELEMENTS, yang_stems) for p in pillars]),
-        ("Địa Chi", [details(p, "branch", _BRANCH_ELEMENTS, yang_branches) for p in pillars]),
-        ("Nạp Âm", [str(p.get("nap_am") or "") for p in pillars]),
-        ("Tàng Can", [hidden(p) for p in pillars]),
-        ("Thập Thần", [str(p.get("ten_god") or "") for p in pillars]),
-        ("Trường Sinh", [str(p.get("truong_sinh") or "") for p in pillars]),
-        ("Tam Hợp", [str(p.get("tam_hop") or "") for p in pillars]),
-        ("Thần Sát", ["\n".join(str(item) for item in p.get("shen_sha") or []) for p in pillars]),
-    ]
-    _docx_opening_table(document, ["Thành phần", "Năm trụ", "Tháng trụ", "Ngày trụ\nNHẬT CHỦ", "Giờ trụ"], rows)
-    document.add_heading("Phân bổ Ngũ hành", level=2)
-    _docx_five_elements_table(document, report_input)
-    document.add_paragraph("Tính theo Thiên Can · bản hành Địa Chi · Tàng Can.")
-    document.add_page_break()
+    identity, sections = _opening_sections(report_input)
+    _docx_cover_paragraph(document.add_paragraph("Thông tin lá số Bát Tự", style="Title"), 20, bold=True, after=6, align=True)
+    _docx_cover_paragraph(document.add_paragraph(identity), 10, after=5, align=True)
+    for i, (label, headings, rows) in enumerate(sections):
+        if label:
+            title = document.add_heading(label, level=2)
+            _docx_cover_paragraph(title, 10, bold=True, before=6, after=2)
+        if i == 3:
+            _docx_cover_paragraph(document.add_paragraph(rows[0][0]), 9, bold=True)
+            continue
+        if i == 5:
+            gap = document.add_paragraph()
+            _docx_cover_paragraph(gap, 3)
+        table = document.add_table(rows=0, cols=len(rows[0]))
+        table.style = "Table Grid"
+        table.autofit = False
+        margins = OxmlElement("w:tblCellMar")
+        for side, width in (("top", "24"), ("bottom", "24"), ("left", "50"), ("right", "50")):
+            node = OxmlElement(f"w:{side}")
+            node.set(qn("w:w"), width)
+            node.set(qn("w:type"), "dxa")
+            margins.append(node)
+        table._tbl.tblPr.append(margins)
+        content = ([headings] if headings else []) + rows
+        for n, row in enumerate(content):
+            tr = table.add_row()
+            tr._tr.get_or_add_trPr().append(OxmlElement("w:cantSplit"))
+            for j, (cell, value) in enumerate(zip(tr.cells, row)):
+                cell.text = value
+                header = bool(headings and n == 0)
+                _docx_cover_paragraph(cell.paragraphs[0], 8.3 if i in (1, 5) else 9,
+                                      bold=header or i == 5, align=True)
+                if header:
+                    _docx_shade(cell, "FFF3CC")
+                elif i == 1 and j == 3:
+                    _docx_shade(cell, "FFF7DE")
+                elif i == 5:
+                    _docx_shade(cell, "F5F6FA")
+        if i == 2:
+            _docx_cover_paragraph(document.add_paragraph("Tính theo Thiên Can · bản hành Địa Chi · Tàng Can."), 8, before=2)
+    if _modern_chapters(report_input):
+        document.add_page_break()
 
 
 def _docx_key_value_table(document: Document, rows: list[tuple[str, str]]) -> None:
@@ -994,41 +971,19 @@ body { margin: 0; background: #ffffff; color: #111827; font-family: Arial, "Sego
 h1 { font-size: 28px; margin: 0 0 8px; }
 .subtitle { color: #334155; margin: 0 0 8px; }
 .badge { display: inline-block; border: 1px solid #dfe3ea; border-radius: 999px; margin: 0; padding: 3px 10px; font-weight: 700; color: #334155; background: #f7fafc; }
-.opening-page { break-inside: avoid; }
-.opening-first { break-after: page; }
-.opening-second { break-after: page; }
-.opening-identity { color: #475569; margin-bottom: 14px; }
-.opening-table { width: 100%; border-collapse: collapse; table-layout: fixed; margin: 8px 0 22px; font-size: 12px; line-height: 1.4; }
-.opening-table th, .opening-table td { border: 1px solid #cbd5e1; padding: 10px 7px; text-align: center; vertical-align: middle; overflow-wrap: anywhere; }
-.opening-table thead th { background: #eff6f3; color: #123b35; }
-.opening-table thead th:first-child, .opening-table tbody th { width: 17%; }
-.opening-table tbody th { text-align: left; background: #f8fafc; }
-.opening-table .day-column { background: #e9f6f0; }
-.opening-table .prominent { font-weight: 800; font-size: 15px; }
-.opening-table small { display: block; font-size: 10px; color: #64748b; }
-.opening-summary-table th, .opening-summary-table td { padding: 8px; }
-.opening-summary-table tbody td:nth-child(2) { font-weight: 800; font-size: 14px; }
-.opening-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.opening-facts > div { border: 1px solid #dce7e4; border-radius: 8px; padding: 14px; }
-.opening-facts strong { display: block; font-size: 20px; }
-.opening-facts p { margin: 5px 0; }
-.opening-tech { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 8px; margin: 0; font-size: 11px; }
-.opening-tech dt { font-weight: 700; color: #475569; }
-.opening-tech dd { margin: 0; }
-.opening-detail-table { font-size: 10px; line-height: 1.3; margin-bottom: 10px; }
-.opening-detail-table th, .opening-detail-table td { padding: 5px 4px; }
-.opening-detail-table small { font-size: 9px; }
-.opening-second .visual { margin: 5px 0; padding: 9px; }
-.opening-second .element-chart { min-height: 105px; }
-.opening-second .element { min-height: 100px; }
-.opening-second .track { min-height: 65px; }
-.opening-second .track span { width: 30px; }
-.opening-second h2 { margin-bottom: 6px; }
-.opening-summary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-.opening-summary > div { border: 1px solid #dce7e4; border-radius: 8px; background: #f7fbf9; padding: 9px 11px; }
-.opening-summary span { display: block; color: #64748b; font-size: 11px; }
-.opening-summary strong { display: block; line-height: 1.4; }
-.opening-note { color: #475569; font-size: 11px; }
+ .chart-cover { break-after: page; font-size: 10.5px; line-height: 1.24; }
+.chart-cover h1 { text-align: center; font-size: 26px; margin: 0 0 7px; color: #18243a; }
+.chart-cover .cover-identity { text-align: center; margin: 0 0 12px; font-size: 12px; }
+.chart-cover h2 { font-size: 13px; margin: 8px 0 3px; color: #18243a; break-after: avoid; }
+.cover-grid { border-collapse: collapse; table-layout: fixed; width: 100%; text-align: center; }
+.cover-grid tr { break-inside: avoid; }
+.cover-grid th, .cover-grid td { border: 1px solid #bcc6d0; padding: 2px 4px; overflow-wrap: anywhere; }
+.cover-grid th { background: #fff3cc; }
+.cover-grid-1 td:nth-child(4) { background: #fff7de; }
+.cover-grid-4 td:first-child { text-align: left; }
+.cover-grid-5 { margin-top: 10px; font-weight: 700; background: #f5f6fa; }
+.chart-cover .cover-note { font-size: 9px; margin: 3px 0 0; }
+.chart-cover .cover-bone { font-weight: 700; margin: 0; }
 .snapshot, .chapter { break-inside: avoid; margin: 0 0 20px; }
 .chapter { border-top: 1px solid #dfe3ea; padding-top: 16px; }
 h2 { font-size: 19px; margin: 0 0 10px; color: #111827; }
