@@ -22,31 +22,37 @@ def _catalog() -> dict[str, Any]:
 
 
 def ten_gods_editorial_paragraphs(four_layer: Mapping[str, Any]) -> list[str]:
-    """Use a god once, preferring a visible stem over a hidden occurrence."""
-    layers = {str(item.get("pillar") or ""): item for item in four_layer.get("layers", [])
+    """Keep every published god/pillar occurrence without repeating a pillar's prose."""
+    raw_layers = four_layer.get("layers", [])
+    if not isinstance(raw_layers, list):
+        return []
+    layers = {str(item.get("pillar") or ""): item for item in raw_layers
               if isinstance(item, Mapping)}
-    choices: list[tuple[str, str, str]] = []
+    # Insertion order preserves visible-first ordering, while modes are merged per position.
+    choices: dict[tuple[str, str], set[str]] = {}
     for visibility in ("visible", "hidden"):
         for pillar in _PILLARS:
-            layer = layers.get(pillar, {})
-            occurrences = layer.get(visibility, [])
+            occurrences = layers.get(pillar, {}).get(visibility, [])
             for occurrence in occurrences if isinstance(occurrences, list) else []:
-                if isinstance(occurrence, Mapping):
-                    god = str(occurrence.get("ten_god") or "").strip()
-                    if god and god != "Nhật Chủ":
-                        choices.append((god, pillar, visibility))
+                if not isinstance(occurrence, Mapping):
+                    continue
+                god = str(occurrence.get("ten_god") or "").strip()
+                if god and god.lower() != "nhật chủ":
+                    choices.setdefault((god, pillar), set()).add(visibility)
 
     entries = _catalog()
     result: list[str] = []
-    seen: set[str] = set()
-    for god, pillar, visibility in choices:
-        if god in seen:
-            continue
+    # Group identical copy for the same god if a future catalog shares it between pillars.
+    grouped: dict[tuple[str, str], list[str]] = {}
+    for (god, pillar), modes in choices.items():
         prose = entries.get(god, {}).get("pillar_copy", {}).get(pillar, "")
         if not prose:
             continue
-        seen.add(god)
-        location = f"trụ {_PILLAR_LABELS[pillar]}"
-        mode = "lộ can" if visibility == "visible" else "tàng chi"
-        result.append(f"{god} tại {location} ({mode}): {prose}")
+        prose = prose.replace("Người này", "Bạn").replace("người này", "bạn")
+        mode = "lộ can và tàng chi" if modes == {"visible", "hidden"} else (
+            "lộ can" if "visible" in modes else "tàng chi")
+        location = f"trụ {_PILLAR_LABELS[pillar]} ({mode})"
+        grouped.setdefault((god, prose), []).append(location)
+    for (god, prose), locations in grouped.items():
+        result.append(f"{god} tại {'; '.join(locations)}: {prose}")
     return result

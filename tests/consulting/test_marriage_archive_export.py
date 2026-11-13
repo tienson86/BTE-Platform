@@ -14,7 +14,7 @@ from consulting.marriage.api.http import build_marriage_router
 from consulting.marriage.report.export import export_marriage_file
 from consulting.marriage.repository.json_file import JsonMarriageRepository
 from consulting.marriage.runtime.api_wiring import wire_marriage_api_runtime
-from tests.consulting.api_fixtures import valid_body
+from tests.consulting.api_fixtures import valid_body, install_test_identity
 from tests.consulting.runtime_fixtures import FakeCanonicalRunner
 
 
@@ -25,6 +25,7 @@ def _client(path: Path) -> tuple[TestClient, JsonMarriageRepository]:
         repository=repository,
     )
     app = FastAPI()
+    install_test_identity(app)
     app.include_router(build_marriage_router(container), prefix="/api/v1")
     return TestClient(app), repository
 
@@ -79,3 +80,22 @@ def test_pdf_export_uses_the_same_stored_report(tmp_path: Path) -> None:
     )
     assert artifact.path.read_bytes().startswith(b"%PDF")
     assert artifact.filename.endswith(".pdf")
+
+
+def test_print_export_does_not_repeat_ui_helper_blocks():
+    from consulting.marriage.models.report import ReportBlock, ReportSection
+    from consulting.marriage.report.export import _printable_sections
+    original = ReportSection(section_id="compatibility_hero", title="Summary", summary="Headline", blocks=[
+        ReportBlock(block_id="hero-state", kind="decision_state", title="Headline", body="Observation"),
+        ReportBlock(block_id="hero-headline", kind="headline", title="Headline"),
+        ReportBlock(block_id="hero-conclusion", kind="summary", body="Observation"),
+    ])
+    question = ReportSection(section_id="executive_summary", title="Assessment", summary="Answer", blocks=[
+        ReportBlock(block_id="q1-question", kind="question", title="Question?", body="Question?"),
+        ReportBlock(block_id="q1-answer", kind="answer", title="Question?", body="Answer"),
+    ])
+    printed = _printable_sections([original, question])
+    assert len(printed[0].blocks) == 1 and printed[0].summary is None
+    assert len(printed[1].blocks) == 1 and printed[1].summary is None
+    assert len(original.blocks) == 3 and original.summary == "Headline"
+    assert len(question.blocks) == 2

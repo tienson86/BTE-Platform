@@ -14,9 +14,13 @@
   void loadHistory();
   const archiveId = new URLSearchParams(location.search).get("archive_id");
   if (archiveId) {
-    request(apiBase + "/" + encodeURIComponent(archiveId)).then(renderResult).catch(error => {
+    setBusy(true);
+    request(apiBase + "/" + encodeURIComponent(archiveId)).then(data => {
+      restoreForm(data.input);
+      renderResult(data);
+    }).catch(error => {
       state.textContent = error.message || "Chưa mở được hồ sơ sinh con.";
-    });
+    }).finally(() => setBusy(false));
   }
 
   const currentYear = new Date().getFullYear();
@@ -56,6 +60,7 @@
       const data = await request(apiUrl, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
       state.textContent = "";
       renderResult(data);
+      await loadHistory();
     } catch (error) {
       state.innerHTML = `<p class="field-error">${escapeHtml(error.message || "Không thể hoàn tất tư vấn.")}</p>`;
     } finally {
@@ -124,7 +129,9 @@
     const response = await fetch(url, { ...options, signal: AbortSignal.timeout(120000) });
     const envelope = await response.json();
     if (!response.ok || envelope.status !== "SUCCESS" || !envelope.data) {
-      throw new Error(envelope.errors?.[0]?.message || "Không thể hoàn tất thao tác. Vui lòng thử lại.");
+      const detail = envelope.errors?.[0]?.detail;
+      const messages = {start_year_in_past: "Năm bắt đầu không được nằm trong quá khứ.", start_year_out_of_range: "Khoảng xét cần kết thúc không muộn hơn năm 2099.", years_ahead_out_of_range: "Số năm xét phải từ 1 đến 24.", integer_required: "Vui lòng nhập năm và số năm bằng số nguyên.", father_birth_date_out_of_range: "Ngày sinh của bố nằm ngoài khoảng hợp lệ. Hãy kiểm tra lại.", mother_birth_date_out_of_range: "Ngày sinh của mẹ nằm ngoài khoảng hợp lệ. Hãy kiểm tra lại."};
+      throw new Error(messages[detail] || envelope.errors?.[0]?.message || envelope.detail || "Không thể hoàn tất thao tác. Vui lòng thử lại.");
     }
     return envelope.data;
   }
@@ -190,6 +197,12 @@
     const fatherDate = birthDate("#cb-father-date");
     const motherDate = birthDate("#cb-mother-date");
     if (!fatherDate || !motherDate) return null;
+    const start = numberValue("#cb-start-year") ?? currentYear;
+    const count = numberValue("#cb-years-ahead") ?? 12;
+    if (!Number.isInteger(start) || start < currentYear || start > 2099 || !Number.isInteger(count) || count < 1 || count > 24 || start + count - 1 > 2099) {
+      state.textContent = "Nhập năm bắt đầu từ năm hiện tại, số năm từ 1 đến 24 và năm kết thúc không quá 2099.";
+      return null;
+    }
     return {
       father: {
         gender: "male",
@@ -208,8 +221,8 @@
         timezone: "Asia/Ho_Chi_Minh",
       },
       options: {
-        start_year: numberValue("#cb-start-year"),
-        years_ahead: numberValue("#cb-years-ahead") || 12,
+        start_year: start,
+        years_ahead: count,
       },
     };
 
@@ -263,6 +276,7 @@
         <div>
           <h2>${escapeHtml(data.summary?.headline || "Kết quả tư vấn sinh con")}</h2>
           ${data.summary?.note ? `<p class="muted">${escapeHtml(data.summary.note)}</p>` : ""}
+          <p class="cb-caution">${escapeHtml(data.notice || "Kết quả tham khảo theo Bát Tự và Cung Phi, không đánh giá khả năng sinh sản hoặc giới tính của trẻ. Hãy trao đổi với bác sĩ khi lập kế hoạch sinh con.")}</p>
           <p class="muted">${escapeHtml(data.eligibility?.rule || "")}</p>
         </div>
         <div>
@@ -294,6 +308,7 @@
     return `
       <article class="bte-card">
         <h2>${title}</h2>
+        ${parent.birth_time_known === false ? '<p class="cb-caution">Chưa biết giờ sinh: chưa sử dụng Mệnh cục, Dụng/Hỷ và Thập Thần để xếp hạng năm.</p>' : ""}
         <p><strong>Nhật chủ:</strong> ${escapeHtml(parent.day_master || "--")} (${escapeHtml(parent.day_master_element || "--")})</p>
         <p><strong>Mệnh cục:</strong> ${escapeHtml(parent.pattern || "--")}</p>
         <p><strong>Dụng/Hỷ:</strong> ${escapeHtml([...(parent.useful_elements || []), ...(parent.favorable_elements || [])].join(", ") || "--")}</p>
@@ -306,9 +321,9 @@
 
   function yearCard(item) {
     const genderLabel = {
-      boy: "Ưu tiên con trai",
-      girl: "Ưu tiên con gái",
-      either: "Trai/gái đều xét được",
+      boy: "Giả định bé trai: điểm Cung Phi cao hơn",
+      girl: "Giả định bé gái: điểm Cung Phi cao hơn",
+      either: "Hai giả định Cung Phi gần nhau",
     }[item.recommended_child_gender] || "Trai/gái đều xét được";
     return `
       <article class="bte-card cb-year">
@@ -320,7 +335,7 @@
             <span class="cb-pill">${escapeHtml(item.primary_element)} / ${escapeHtml(item.branch_element)}</span>
           </div>
         </div>
-        <p><strong>Điểm phù hợp:</strong> ${escapeHtml(String(item.score))}/100 · bố ${escapeHtml(String(item.father_age))} tuổi, mẹ ${escapeHtml(String(item.mother_age))} tuổi.</p>
+        <p><strong>Điểm đối chiếu truyền thống:</strong> ${escapeHtml(String(item.score))}/100 · bố ${escapeHtml(String(item.father_age))} tuổi, mẹ ${escapeHtml(String(item.mother_age))} tuổi.</p>
         <p><strong>Bé trai:</strong> ${escapeHtml(item.boy?.cung_phi || "--")} · ${escapeHtml(item.boy?.trach_group || "--")}</p>
         <p><strong>Bé gái:</strong> ${escapeHtml(item.girl?.cung_phi || "--")} · ${escapeHtml(item.girl?.trach_group || "--")}</p>
         <ul class="cb-list">${(item.reasons || []).map((text) => `<li>${escapeHtml(text)}</li>`).join("")}</ul>
@@ -330,6 +345,7 @@
   }
 
   function emptyState(data) {
+    if (data.analysis_status === "insufficient_data") return `<article class="bte-card"><h2>Chưa xếp hạng năm</h2><p>${escapeHtml(data.summary?.note || "Cần bổ sung giờ sinh của bố mẹ.")}</p></article>`;
     const items = data.eligibility?.ineligible_years || [];
     return `
       <article class="bte-card">
@@ -341,10 +357,10 @@
 
   function levelLabel(level) {
     return {
-      very_suitable: "Rất phù hợp",
-      suitable: "Phù hợp",
-      consider: "Có thể cân nhắc",
-      sensitive: "Cần thận trọng",
+      very_suitable: "Điểm đối chiếu cao",
+      suitable: "Có điểm hỗ trợ",
+      consider: "Thuận và nghịch đan xen",
+      sensitive: "Nhiều điểm cần đối chiếu",
     }[level] || "Có thể cân nhắc";
   }
 

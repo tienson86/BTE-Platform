@@ -117,6 +117,10 @@ def create_app() -> FastAPI:
         """Analyze page."""
         return page("analyze", "analyze.html")
 
+    @app.get("/can-xuong", response_class=HTMLResponse)
+    def bone_weight_page() -> HTMLResponse:
+        return page("can-xuong", "bone_weight.html")
+
     @app.get("/good-date", response_class=HTMLResponse)
     def good_date_page() -> HTMLResponse:
         """General auspicious-date calendar."""

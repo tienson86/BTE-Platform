@@ -16,13 +16,11 @@ entries:
     version: "1.0.0"
     status: approved
 
-    headline: "Hai người có khả năng bổ trợ cho nhau theo cả hai chiều."
+    headline: "Hai lá số có yếu tố bổ trợ theo cả hai chiều."
 
-    meaning: >
-      Đây là dạng quan hệ mà mỗi người đều mang đến những yếu tố có ích cho người kia.
-      Sự hỗ trợ không chỉ nghiêng về một phía, vì vậy khả năng cùng nhau phát triển
-      thường tốt hơn những mối quan hệ chỉ có một người liên tục nâng đỡ người còn lại.
 
+
+    meaning: "Mỗi lá số đều có những yếu tố phù hợp với nhu cầu cân bằng của lá số còn lại. Đây là cách diễn giải theo Bát Tự, không có nghĩa một người quyết định sự thành công hay hạnh phúc của người kia."
     plain_customer_text: >
       Cả hai đều có thể trở thành điểm tựa cho nhau theo những cách khác nhau.
       Một người có thể hỗ trợ về động lực, sự nghiệp hoặc khả năng phát triển,
@@ -55,7 +53,8 @@ entries:
 
       - id: mutual_role_support
         source_fact: mutual_role_support
-        template: "Cấu trúc vai trò cho thấy hai người có khả năng nâng đỡ nhau thay vì chỉ cạnh tranh hoặc gây áp lực."
+        template: "Cấu trúc vai trò cho thấy hai bạn có khả năng nâng đỡ nhau thay vì chỉ cạnh tranh hoặc gây áp lực."
+
         slots: []
         status: approved
 
@@ -68,7 +67,8 @@ entries:
 
       - id: different_support_domains
         source_fact: support_domains_differ
-        template: "Hai người có thể hỗ trợ nhau ở những phương diện khác nhau, vì vậy không nên chỉ nhìn một yếu tố để kết luận ai quan trọng hơn."
+        template: "Hai bạn có thể hỗ trợ nhau ở những phương diện khác nhau, vì vậy không nên chỉ nhìn một yếu tố để kết luận ai quan trọng hơn."
+
         slots: []
         status: approved
 
@@ -84,17 +84,14 @@ entries:
 
     variants:
       - id: v1
-        headline: "Hai người bổ trợ cho nhau khá rõ."
-        meaning: >
-          Sự hỗ trợ xuất hiện ở cả hai chiều,
-          cho thấy đây không phải mối quan hệ mà chỉ một người liên tục phải nâng đỡ người còn lại.
+        headline: "Hai lá số có yếu tố bổ trợ theo cả hai chiều."
 
+
+        meaning: "Mỗi lá số đều có những yếu tố phù hợp với nhu cầu cân bằng của lá số còn lại. Đây là cách diễn giải theo Bát Tự, không có nghĩa một người quyết định sự thành công hay hạnh phúc của người kia."
       - id: v2
-        headline: "Đây là mối quan hệ có tính hỗ trợ hai chiều."
-        meaning: >
-          Cả hai đều có những yếu tố giúp người kia cân bằng và phát huy tốt hơn thế mạnh của mình.
+        headline: "Hai lá số có yếu tố bổ trợ theo cả hai chiều."
 
-
+        meaning: "Mỗi lá số đều có những yếu tố phù hợp với nhu cầu cân bằng của lá số còn lại. Đây là cách diễn giải theo Bát Tự, không có nghĩa một người quyết định sự thành công hay hạnh phúc của người kia."
   marriage.q2.a_supports_b:
     semantic_state: a_supports_b
     tone: professional_warm
@@ -108,12 +105,7 @@ entries:
       Điều này thường cho thấy {person_a} có khả năng giúp {person_b} cân bằng tốt hơn,
       phát huy thuận lợi hơn hoặc giảm bớt một phần bất lợi trong cấu trúc lá số.
 
-    plain_customer_text: >
-      Trong mối quan hệ này, {person_a} có xu hướng là người nâng đỡ {person_b} nhiều hơn.
-      Sự hỗ trợ có thể thể hiện ở khả năng tạo động lực, ổn định cuộc sống,
-      hỗ trợ công việc hoặc giúp {person_b} phát triển đúng thế mạnh,
-      tùy vào Finding cụ thể mà hệ thống đã xác nhận.
-
+    plain_customer_text: "Trong mối quan hệ này, {person_a} có xu hướng là người nâng đỡ {person_b} nhiều hơn. Sự hỗ trợ có thể thể hiện ở khả năng tạo động lực, ổn định cuộc sống, hỗ trợ công việc hoặc giúp {person_b} phát triển đúng thế mạnh, tùy vào những điểm bổ trợ cụ thể được nêu trong bản luận."
     technical_explanation: >
       Chỉ sử dụng trạng thái này khi Decision ghi nhận số lượng hoặc chất lượng Finding hỗ trợ
       ở chiều A→B rõ hơn B→A, và sự khác biệt đó đủ để tạo kết luận bất đối xứng.
@@ -146,15 +138,12 @@ entries:
 
       - id: real_life_required
         source_fact: real_life_required
-        template: "Mức bổ trợ chỉ phát huy tốt khi hai người biết sử dụng đúng thế mạnh của nhau trong đời sống thực tế."
+        template: "Mức bổ trợ chỉ phát huy tốt khi hai bạn biết sử dụng đúng thế mạnh của nhau trong đời sống thực tế."
+
         slots: []
         status: approved
 
-    closing: >
-      Đây là mối quan hệ có chiều nâng đỡ khá rõ từ {person_a} sang {person_b}.
-      Nếu vai trò này được duy trì một cách cân bằng,
-      nó có thể trở thành lợi thế lớn cho sự phát triển lâu dài của hai người.
-
+    closing: "Đây là mối quan hệ có chiều nâng đỡ khá rõ từ {person_a} sang {person_b}. Nếu vai trò này được duy trì một cách cân bằng, nó có thể trở thành lợi thế lớn cho sự phát triển lâu dài của hai bạn."
     forbidden_terms:
       - "{person_b} phải dựa vào {person_a}"
       - "{person_a} nuôi vận {person_b}"
@@ -213,7 +202,8 @@ entries:
 
       - id: real_relationship_matters
         source_fact: real_relationship_matters
-        template: "Khả năng hỗ trợ chỉ trở thành lợi thế thực sự khi hai người biết phối hợp trong cuộc sống."
+        template: "Khả năng hỗ trợ chỉ trở thành lợi thế thực sự khi hai bạn biết phối hợp trong cuộc sống."
+
         slots: []
         status: approved
 
@@ -235,7 +225,8 @@ entries:
     version: "1.0.0"
     status: approved
 
-    headline: "Hai người có bổ trợ, nhưng mức hỗ trợ giữa hai chiều chưa cân bằng."
+    headline: "Hai bạn có bổ trợ, nhưng mức hỗ trợ giữa hai chiều chưa cân bằng."
+
 
     meaning: >
       Một người đang tạo tác động thuận lợi rõ hơn lên người còn lại.
@@ -307,11 +298,7 @@ entries:
       phù hợp với phần mà lá số người chồng đang cần.
       Sự hỗ trợ có thể tạo thuận lợi cho khả năng phát triển, ổn định hoặc khai mở cơ hội của người chồng.
 
-    plain_customer_text: >
-      Người vợ không “tạo ra thành công” thay cho người chồng,
-      nhưng sự hiện diện và cách hai người kết hợp có thể giúp người chồng phát huy tốt hơn năng lực,
-      giữ được sự ổn định và thuận lợi hơn trên con đường phát triển.
-
+    plain_customer_text: "Người vợ không “tạo ra thành công” thay cho người chồng, nhưng sự hiện diện và cách hai bạn kết hợp có thể giúp người chồng phát huy tốt hơn năng lực, giữ được sự ổn định và thuận lợi hơn trên con đường phát triển."
     technical_explanation: >
       Chỉ được sử dụng khi người hỗ trợ là nữ, người nhận hỗ trợ là nam,
       và Decision xác nhận ít nhất một Finding đủ mạnh về Dụng thần hoặc hỗ trợ thuận chiều
@@ -332,7 +319,8 @@ entries:
 
       - id: career_finance_support
         source_fact: husband_career_finance_support
-        template: "Sự bổ trợ có liên hệ đến phương diện phát triển, công việc hoặc tài vận khi Finding tương ứng được xác nhận."
+        template: "Sự bổ trợ có liên hệ đến phương diện phát triển, công việc hoặc tài vận theo những điểm bổ trợ cụ thể được nêu trong bản luận."
+
         slots: []
         status: approved
 
@@ -349,11 +337,7 @@ entries:
         slots: []
         status: approved
 
-    closing: >
-      Nếu hai người biết phối hợp đúng thế mạnh,
-      đây là dạng quan hệ trong đó người vợ có thể trở thành một nguồn hỗ trợ tích cực
-      cho quá trình phát triển của người chồng.
-
+    closing: "Nếu hai bạn biết phối hợp đúng thế mạnh, đây là dạng quan hệ trong đó người vợ có thể trở thành một nguồn hỗ trợ tích cực cho quá trình phát triển của người chồng."
     forbidden_terms:
       - "cưới vợ sẽ phát tài"
       - "vợ mang tiền về cho chồng"
@@ -406,7 +390,8 @@ entries:
 
       - id: stability_finance_support
         source_fact: wife_stability_finance_support
-        template: "Sự hỗ trợ có thể thể hiện ở tính ổn định, khả năng phối hợp tài chính hoặc phát triển khi Finding tương ứng được xác nhận."
+        template: "Sự hỗ trợ có thể thể hiện ở tính ổn định, khả năng phối hợp tài chính hoặc phát triển theo những điểm bổ trợ cụ thể được nêu trong bản luận."
+
         slots: []
         status: approved
 
@@ -423,11 +408,7 @@ entries:
         slots: []
         status: approved
 
-    closing: >
-      Nếu hai người phối hợp tốt,
-      người chồng có thể trở thành một điểm tựa thuận lợi
-      giúp người vợ ổn định và phát triển tốt hơn.
-
+    closing: "Nếu hai bạn phối hợp tốt, người chồng có thể trở thành một điểm tựa thuận lợi giúp người vợ ổn định và phát triển tốt hơn."
     forbidden_terms:
       - "lấy chồng đổi đời"
       - "chồng mang tài lộc cho vợ"
@@ -450,10 +431,7 @@ entries:
 
     headline: "Hiện chưa đủ căn cứ để xác định ai bổ trợ cho ai rõ hơn."
 
-    meaning: >
-      Dữ liệu hiện tại chưa đủ để kết luận chắc chắn về hướng hỗ trợ giữa hai người.
-      Đây là giới hạn của dữ liệu, không phải dấu hiệu cho thấy mối quan hệ thiếu sự bổ trợ.
-
+    meaning: "Dữ liệu hiện tại chưa đủ để kết luận chắc chắn về hướng hỗ trợ giữa hai bạn. Đây là giới hạn của dữ liệu, không phải dấu hiệu cho thấy mối quan hệ thiếu sự bổ trợ."
     plain_customer_text: >
       Hệ thống chưa có đủ bằng chứng để nói rằng người này nâng đỡ người kia nhiều hơn.
       Vì vậy kết quả ở mục này nên được xem là chưa xác định thay vì tốt hoặc xấu.
@@ -465,7 +443,8 @@ entries:
     supporting_fact_templates:
       - id: support_direction_unclear
         source_fact: support_direction_unclear
-        template: "Chiều hỗ trợ giữa hai người hiện chưa đủ rõ để tạo kết luận đáng tin cậy."
+        template: "Chiều hỗ trợ giữa hai bạn hiện chưa đủ rõ để tạo kết luận đáng tin cậy."
+
         slots: []
         status: approved
 
@@ -478,7 +457,8 @@ entries:
     limitation_templates:
       - id: insufficient_not_bad
         source_fact: insufficient_not_bad
-        template: "Chưa đủ dữ liệu không đồng nghĩa với việc hai người không hỗ trợ được nhau."
+        template: "Chưa đủ dữ liệu không đồng nghĩa với việc hai bạn không hỗ trợ được nhau."
+
         slots: []
         status: approved
 

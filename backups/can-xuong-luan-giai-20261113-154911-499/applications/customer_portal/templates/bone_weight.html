@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="/static/css/courses.css?v=catalog-cover-02" />
+<section class="courses-page">
+  <h1>Cân xương đoán mệnh</h1>
+  <p>Nhập ngày dương lịch dự kiến và chọn giờ Can Chi. Kết quả dùng lịch âm Việt Nam (UTC+7).</p>
+  <div class="course-card">
+    <form id="boneWeightForm" class="course-form">
+      <label>Họ và tên <input name="full_name" required minlength="2" maxlength="160" autocomplete="off" /></label>
+      <label>Giới tính
+        <select name="gender" required>
+          <option value="">Chọn giới tính</option><option value="male">Nam</option><option value="female">Nữ</option>
+        </select>
+      </label>
+      <label>Ngày sinh dương lịch <input name="birth_date" type="text" required maxlength="10" placeholder="DD/MM/YYYY" /></label>
+      <label>Giờ sinh
+        <select name="hour_branch" required aria-describedby="boneWeightHourNote">
+          <option value="">Chọn khung giờ Can Chi</option>
+          <option value="Tý">Giờ Tý · 23h01 – 01h00</option>
+          <option value="Sửu">Giờ Sửu · 01h01 – 03h00</option>
+          <option value="Dần">Giờ Dần · 03h01 – 05h00</option>
+          <option value="Mão">Giờ Mão · 05h01 – 07h00</option>
+          <option value="Thìn">Giờ Thìn · 07h01 – 09h00</option>
+          <option value="Tỵ">Giờ Tỵ · 09h01 – 11h00</option>
+          <option value="Ngọ">Giờ Ngọ · 11h01 – 13h00</option>
+          <option value="Mùi">Giờ Mùi · 13h01 – 15h00</option>
+          <option value="Thân">Giờ Thân · 15h01 – 17h00</option>
+          <option value="Dậu">Giờ Dậu · 17h01 – 19h00</option>
+          <option value="Tuất">Giờ Tuất · 19h01 – 21h00</option>
+          <option value="Hợi">Giờ Hợi · 21h01 – 23h00</option>
+        </select>
+        <small id="boneWeightHourNote">Với giờ Tý qua nửa đêm, chọn đúng ngày dương lịch của thời điểm cần xem.</small>
+      </label>
+      <div class="course-wide"><button class="course-action" type="submit">Tính cân xương</button></div>
+    </form>
+    <p id="boneWeightState" role="status"></p>
+  </div>
+  <article id="boneWeightResult" class="course-card" style="margin-top:24px" hidden></article>
+  <p class="course-meta">Cân Xương là cách luận dân gian để tham khảo. Thời điểm sinh nên theo tư vấn của bác sĩ sản khoa.</p>
+</section>
+<script src="/static/js/bone_weight.js?v=2" defer></script>

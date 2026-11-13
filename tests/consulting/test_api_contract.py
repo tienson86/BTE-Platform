@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import pytest
+
 import json
 
 from consulting.marriage.api.versions import API_VERSION
@@ -159,3 +161,14 @@ def test_no_api_side_decision_mutation() -> None:
         if block.block_id == "overall-headline"
     )
     assert got["headline"] == headline
+
+
+@pytest.fixture(autouse=True)
+def authenticated_test_owner():
+    """Direct service assertions use the same owner as the test HTTP fixture."""
+    from consulting.archive_access import identity
+    token = identity.set({"user_id": "test-marriage-owner", "role": "MEMBER"})
+    try:
+        yield
+    finally:
+        identity.reset(token)

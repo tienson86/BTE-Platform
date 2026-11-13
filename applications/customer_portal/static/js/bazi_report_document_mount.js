@@ -586,7 +586,7 @@
   function inferDomainTitle(paragraph, index) {
     const value = text(paragraph).toLocaleLowerCase("vi-VN");
     const matched = DOMAIN_TITLE_RULES.find((item) => item[0].test(value));
-    return matched ? matched[1] : `Góc nhìn ${index + 1}`;
+    return matched ? matched[1] : "Ứng dụng trong đời sống";
   }
 
   function inferDomainGroup(title, body) {
@@ -609,7 +609,7 @@
     const index = value.indexOf(":");
     const title = index <= 0 ? inferDomainTitle(value, paragraphIndex) : value.slice(0, index).trim();
     const rawBody = index <= 0 ? value : value.slice(index + 1).trim();
-    const compact = compactLegacyUsefulGod(title, rawBody);
+    const compact = compactLegacyUsefulGod(isPlaceholderTitle(title) ? inferDomainTitle(rawBody, paragraphIndex) : title, rawBody);
     const explicitGroup = index > 0 ? DOMAIN_GROUPS.find((group) => group.pattern.test(title)) : null;
     return { title: compact.title, body: compact.body, group: explicitGroup || activeGroup || inferDomainGroup(title, rawBody) };
   }
@@ -692,14 +692,14 @@
   ]);
 
   const STRUCTURED_CHAPTER_META = {
-    four_pillars: { kicker: "Khung tứ trụ", title: "Bốn trụ và vai trò từng cung", cardTitle: "Luận trụ" },
-    day_master: { kicker: "Nhật chủ", title: "Khí chất cốt lõi của mệnh", cardTitle: "Luận Nhật chủ" },
-    strength_structure_useful_god: { kicker: "Trục cân bằng", title: "Thân vượng/nhược, Mệnh cục và Dụng thần", cardTitle: "Luận trục" },
-    ten_gods: { kicker: "Thập thần", title: "Vai trò đời sống qua từng tín hiệu", cardTitle: "Luận Thập thần" },
-    shen_sha: { kicker: "Thần sát", title: "Tín hiệu bổ sung cần quan sát", cardTitle: "Luận Thần sát" },
-    bone_weight: { kicker: "Cân xương", title: "Nền lượng và nhịp tích lũy", cardTitle: "Luận Cân xương" },
-    palace_feng_shui: { kicker: "Cung Phi", title: "Nhóm trạch và phong thủy ứng dụng", cardTitle: "Luận Cung Phi" },
-    luck_cycles: { kicker: "Đại vận", title: "Nhịp từng chặng và cách ứng dụng", cardTitle: "Luận Đại vận" },
+    four_pillars: { kicker: "Khung tứ trụ", title: "Bốn trụ và vai trò từng cung", cardTitle: "Vai trò trong Tứ trụ" },
+    day_master: { kicker: "Nhật chủ", title: "Khí chất cốt lõi của mệnh", cardTitle: "Khí chất và cách ứng xử" },
+    strength_structure_useful_god: { kicker: "Trục cân bằng", title: "Thân vượng/nhược, Mệnh cục và Dụng thần", cardTitle: "Cân bằng toàn cục" },
+    ten_gods: { kicker: "Thập thần", title: "Vai trò đời sống qua từng tín hiệu", cardTitle: "Ý nghĩa và mối liên hệ" },
+    shen_sha: { kicker: "Thần sát", title: "Tín hiệu bổ sung cần quan sát", cardTitle: "Ý nghĩa bổ trợ" },
+    bone_weight: { kicker: "Cân xương", title: "Nền lượng và nhịp tích lũy", cardTitle: "Ý nghĩa cân lượng" },
+    palace_feng_shui: { kicker: "Cung Phi", title: "Nhóm trạch và phong thủy ứng dụng", cardTitle: "Ứng dụng phương vị" },
+    luck_cycles: { kicker: "Đại vận", title: "Nhịp từng chặng và cách ứng dụng", cardTitle: "Trọng tâm giai đoạn" },
     synthesis: { kicker: "Tổng hợp", title: "Điểm mạnh, rủi ro và trọng tâm hành động", cardTitle: "Kết luận" },
     recommendations: { kicker: "Khuyến nghị", title: "Việc nên ưu tiên sau khi đọc lá số", cardTitle: "Khuyến nghị" },
   };
@@ -730,11 +730,18 @@
     return Boolean(chapter && STRUCTURED_CHAPTER_IDS.has(chapter.id));
   }
 
+  function isPlaceholderTitle(title) {
+    return /^(?:Luận(?: giải)?(?: .+)?|Góc nhìn(?: bổ sung)?)(?: \d+)$/i.test(title.trim());
+  }
+
   function splitStructuredParagraph(chapterId, paragraph, paragraphIndex) {
     const value = text(paragraph);
     const meta = STRUCTURED_CHAPTER_META[chapterId] || { cardTitle: "Luận điểm" };
     const prefix = STRUCTURED_PREFIX_RULES.find((item) => item[0].test(value));
     const colonIndex = value.indexOf(":");
+    if (colonIndex > 0 && isPlaceholderTitle(value.slice(0, colonIndex))) {
+      return splitStructuredParagraph(chapterId, value.slice(colonIndex + 1).trim(), paragraphIndex);
+    }
     if (chapterId === "luck_cycles" && value.startsWith("Năm năm tới")) {
       return { title: "Lộ trình 5 năm", body: value };
     }
@@ -750,7 +757,7 @@
         body: value.slice(colonIndex + 1).trim(),
       };
     }
-    return { title: `${meta.cardTitle} ${paragraphIndex + 1}`, body: value };
+    return { title: meta.cardTitle, body: value };
   }
 
   function renderStructuredChapterVisual(chapter) {
@@ -852,11 +859,11 @@
       chapterNode.appendChild(chapterHead);
       const lead = chapter.paragraphs[0];
       const visualConsumesParagraphs = chapter.id === "life_domains" || usesStructuredVisual(chapter);
-      if (!visualConsumesParagraphs && lead) appendText(chapterNode, "p", "bte-report-doc__lead", lead);
+      if (!visualConsumesParagraphs && chapter.id !== "five_elements" && lead) appendText(chapterNode, "p", "bte-report-doc__lead", lead);
       const visual = renderChapterVisual(chapter, model);
       if (visual) chapterNode.appendChild(visual);
       if (!visualConsumesParagraphs) {
-        chapter.paragraphs.slice(1).forEach((paragraph) => {
+        chapter.paragraphs.slice(chapter.id === "five_elements" ? 0 : 1).forEach((paragraph) => {
           appendText(chapterNode, "p", "bte-report-doc__paragraph", paragraph);
         });
       }

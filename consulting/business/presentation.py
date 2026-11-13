@@ -11,12 +11,12 @@ from consulting.marriage.dto.history import MarriageStoredResult
 from consulting.marriage.models.matrix import MarriageMatrixRow
 from consulting.marriage.models.report import MarriageReportModel, ReportBlock, ReportSection
 
-BUSINESS_SCOPE = "Dẫn chứng hiện phản ánh tương tác giữa hai lá số. Mức phù hợp với ngành/nghề đã chọn cần được đánh giá thêm theo chuyên môn và điều kiện kinh doanh."
+BUSINESS_SCOPE = "Phần đối chiếu Bát Tự chỉ có giá trị tham khảo, không xác định năng lực, uy tín hay hiệu quả kinh doanh. Ngành/nghề đã chọn là bối cảnh tư vấn, chưa được dùng để tính điểm riêng; cần đánh giá thêm chuyên môn và điều kiện kinh doanh thực tế."
 GROUPS = (
-    ("useful_god", "Dụng thần và Ngũ Hành", "Xem người này có bổ sung đúng hành người kia cần, hay đồng thời kích hoạt hành bất lợi.", "Đối chiếu phần bổ trợ với năng lực thực tế để phân công công việc; nếu có áp lực hai chiều, thống nhất giới hạn trách nhiệm."),
+    ("useful_god", "Dụng thần và Ngũ Hành", "Xem sự tương tác Ngũ Hành giữa hai lá số để nhận diện điểm bổ trợ và những khác biệt cần dung hòa khi làm việc chung.", "Đối chiếu phần bổ trợ với năng lực thực tế để phân công công việc; nếu có áp lực hai chiều, thống nhất giới hạn trách nhiệm."),
     ("cung_phi", "Cung Phi", "Đối chiếu cung bản mệnh và cung từng trụ theo Du Niên; đây là chỉ báo phụ khi xem khả năng phối hợp.", "Đọc cùng Dụng thần và Can Chi khi cân nhắc cách phối hợp, không dùng riêng Cung Phi để quyết định góp vốn."),
     ("stem_branch", "Can Chi", "Các quan hệ hợp, xung, hình, hại và yếu tố cứu giải giúp lý giải phần đồng thuận hoặc ma sát giữa hai lá số.", "Thống nhất người quyết định cuối cùng, cách phản biện và quy trình giải quyết bất đồng trong công việc."),
-    ("pattern", "Mệnh Cục", "Mệnh Cục cung cấp bối cảnh của từng lá số; giống hoặc khác mệnh cục chưa đủ để kết luận hợp hay khắc.", "Dùng bối cảnh này để trao đổi về cách làm việc, rồi kiểm chứng bằng kinh nghiệm và hiệu quả công việc thực tế."),
+    ("pattern", "Mệnh Cục", "Mệnh Cục cung cấp bối cảnh của từng lá số; giống hoặc khác mệnh cục chưa đủ để kết luận hợp hay khắc.", "Trao đổi rõ về thói quen làm việc và kỳ vọng của mỗi người; kiểm chứng qua công việc thực tế thay vì suy đoán tính cách từ lá số."),
     ("day_master", "Nhật Chủ", "Quan hệ sinh–khắc và âm dương của Nhật Chủ được đọc cùng Dụng thần và các quan hệ Can Chi.", "Thỏa thuận mức tự chủ của mỗi người và cơ chế kiểm soát chéo khi ra quyết định chung."),
 )
 
@@ -67,7 +67,7 @@ def build_business_profile(stored: MarriageStoredResult) -> BusinessProfile:
         rows = rows_for(key)
         available = any(row.available and row.status != "unavailable" for row in rows)
         facts = [f"{row.label}: {name_a} - {row.value_a}; {name_b} - {row.value_b}. {row.relationship} Cơ sở: {row.basis}" for row in rows]
-        card = {"question_id": key, "question": title, "answer": _verdict(rows), "meaning": meaning, "supporting_facts": facts, "quick_guidance": guidance if available else "Bổ sung dữ liệu lá số trước khi luận phần này.", "confidence": "", "limitations": []}
+        card = {"question_id": key, "question": title, "answer": _verdict(rows), "meaning": meaning, "supporting_facts": facts, "quick_guidance": guidance if available else "Chưa đủ dữ liệu để nhận định phần này. Cần kiểm tra và bổ sung thông tin còn thiếu.", "confidence": "", "limitations": []}
         cards.append(card)
         assessment_blocks.extend([
             ReportBlock(block_id=f"{key}-answer", kind="answer", title=title, body=card["answer"]),
@@ -75,7 +75,7 @@ def build_business_profile(stored: MarriageStoredResult) -> BusinessProfile:
             ReportBlock(block_id=f"{key}-guidance", kind="paragraph", body=card["quick_guidance"]),
         ])
         if available and key != "cung_phi":
-            action_blocks.append(ReportBlock(block_id=key, kind="recommendation", title=f"Phối hợp theo {title}", body=f"Ưu tiên vừa. {guidance}"))
+            action_blocks.append(ReportBlock(block_id=key, kind="recommendation", title=f"Phối hợp theo {title}", body=card["quick_guidance"]))
 
     core_rows = [row for key in ("useful_god", "stem_branch", "day_master") for row in rows_for(key)]
     supportive = next((row for row in core_rows if row.available and row.status == "supportive"), None)
@@ -86,7 +86,7 @@ def build_business_profile(stored: MarriageStoredResult) -> BusinessProfile:
     conclusion = [
         ReportBlock(block_id="conclusion-opinion", kind="paragraph", title="Nhận định chung", body=overall),
         ReportBlock(block_id="conclusion-strength", kind="paragraph", title="Điểm bổ trợ nổi bật", body=f"{supportive.label}: {supportive.relationship}" if supportive else "Chưa có yếu tố hỗ trợ nổi trội đủ dữ liệu để kết luận."),
-        ReportBlock(block_id="conclusion-attention", kind="paragraph", title="Điều cần lưu ý", body=f"{pressured.label}: {pressured.relationship}" if pressured else "Cần đọc đầy đủ các hàng đối chiếu và phần thiếu dữ liệu trước khi quyết định hợp tác."),
+        ReportBlock(block_id="conclusion-attention", kind="paragraph", title="Điều cần lưu ý", body=f"{pressured.label}: {pressured.relationship}" if pressured else "Chưa thấy áp lực nổi bật trong các yếu tố đã đối chiếu; điều đó không có nghĩa là hợp tác sẽ không có bất đồng. Hai bên vẫn cần thống nhất trách nhiệm và cách giải quyết phát sinh."),
         ReportBlock(block_id="conclusion-recommendation", kind="paragraph", title="Khuyến nghị", body=f"Đối với lĩnh vực {context['occupation_label']}: {score.advice}"),
     ]
     score_blocks = [ReportBlock(block_id="business-score", kind="paragraph", title="Điểm hợp tác trên thang 100", body=overall), ReportBlock(block_id="business-score-coverage", kind="paragraph", body=f"Độ phủ dữ liệu: {score.coverage:g}%. Độ tin cậy dữ liệu: {score.confidence * 100:g}%.")]

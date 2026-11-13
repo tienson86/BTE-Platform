@@ -293,6 +293,7 @@ MENU_LINKS = {
         "/shop-vat-pham": "Shop Vật phẩm",
         "/thong-bao-noi-bo": "Thông báo Nội bộ",
         "/analyze": "Xem lá số",
+        "/can-xuong": "Cân xương đoán mệnh",
         "/choose-date": "Chọn ngày tốt",
         "/marriage-consulting": "Tư vấn hôn nhân",
         "/childbirth-consulting": "Tư vấn sinh con",

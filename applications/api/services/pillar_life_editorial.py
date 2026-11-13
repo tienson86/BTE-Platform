@@ -45,17 +45,17 @@ _SCENES = {
         "learning": "Điều còn theo bạn từ gia đình đôi khi là cách một người lớn kiên nhẫn chỉ cho bạn làm một việc. Nếu muốn hiểu vì sao bố mẹ hay nhắc một điều, thử hỏi họ đã học điều ấy trong hoàn cảnh nào.",
     },
     "siblings": {
-        "peer": "Bạn bè có thể giúp nhau rất nhanh, nhất là khi mỗi người đều muốn tự đứng trên phần việc của mình. Khi việc chung bắt đầu có tiền hoặc khách hàng, chốt trước ai quyết, ai giao việc và chia phần thế nào.",
+        "peer": "Trong quan hệ ngang vai, sự tự chủ và tinh thần cùng góp sức cần được giữ cân bằng. Bạn có thể nhận sự giúp đỡ mà vẫn giữ trách nhiệm với lựa chọn của mình. Khi cùng lo một việc, nói rõ mỗi người nhận phần nào sẽ tránh cảm giác một bên phải gánh thay bên kia.",
         "voice": "Trong nhóm, bạn có thể là người nói ra cách làm khác khi cả nhóm đang mắc kẹt. Hãy đưa một ví dụ nhỏ để mọi người cùng thử; người nghe sẽ dễ góp ý hơn khi biết ý tưởng đó giúp việc gì.",
-        "resources": "Một người giới thiệu cơ hội, người khác bỏ công theo đến cùng. Trước khi cùng nhận việc, hãy thống nhất phần đóng góp nào là giúp nhau và phần nào được tính vào quyền lợi.",
+        "resources": "Tài tinh ở trụ tháng đưa việc cho, nhận và phân chia nguồn lực vào quan hệ ngang vai. Bạn nên phân biệt một lần giúp đỡ tự nguyện với trách nhiệm lâu dài. Khi có việc chung liên quan tiền bạc hoặc tài sản, sự rõ ràng từ đầu giúp giữ tình cảm tốt hơn việc trông chờ người kia tự hiểu.",
         "duty": "Khi nhóm có việc gấp, bạn có thể đứng ra giữ tiến độ. Trước lúc nhận thêm việc thay người khác, hãy nói rõ ai làm phần còn lại và khi nào cả nhóm nhìn lại cách chia việc.",
-        "learning": "Bạn có thể quý người đồng nghiệp chịu chỉ cho mình một cách làm và giải thích vì sao nó hiệu quả. Khi trao lại kinh nghiệm, hãy dùng một ca cụ thể để cả hai thấy chỗ nào áp dụng được và chỗ nào cần đổi.",
+        "learning": "Ấn tinh ở trụ tháng gợi sự coi trọng những mối quan hệ giúp bạn học hỏi và mở rộng cách nhìn. Một người biết lắng nghe, giải thích và cùng tìm lời giải có thể đem lại sự hỗ trợ thiết thực. Điều cần giữ là trao đổi hai chiều, không để sự tin cậy biến thành phụ thuộc vào quyết định của người khác.",
     },
     "children": {
-        "peer": "Bạn có thể quý đứa trẻ biết tự chọn, nhưng vẫn sốt ruột khi nó chọn đường bạn thấy khó. Hãy cùng con chốt một giới hạn an toàn rồi để con thử và kể lại điều tự học được.",
-        "voice": "Một việc bạn thích có thể trở thành dịp gần con hơn nếu hai người được cùng làm. Hãy hỏi con muốn làm theo cách nào trước khi chỉ cách của mình; về sau, những lần cùng thử dễ thành kỷ niệm hơn những lời dặn dài.",
-        "resources": "Muốn truyền cách tự lo, bạn có thể cùng con chọn một khoản nhỏ hoặc một việc vừa sức để tự lên kế hoạch. Khi nhìn lại, hãy hỏi con đã cân nhắc thế nào để thấy cả cách nghĩ đằng sau kết quả.",
-        "duty": "Bạn có thể muốn con học cách giữ lời và chịu trách nhiệm. Hãy chọn một việc vừa sức, nói rõ khi nào cần hoàn thành và cùng con xem lại nếu chưa làm được; đó cũng là cách truyền nếp nhà về sau.",
+        "peer": "Bạn có thể quý đứa trẻ biết tự chọn, nhưng vẫn sốt ruột khi nó chọn đường bạn thấy khó. Nếu đang nuôi dạy con, bạn có thể cùng con thống nhất một giới hạn an toàn rồi để con thử và kể lại điều tự học được.",
+        "voice": "Nếu có con, một việc bạn thích có thể trở thành dịp gần con hơn khi hai người được cùng làm. Hãy hỏi con muốn làm theo cách nào trước khi chỉ cách của mình; về sau, những lần cùng thử dễ thành kỷ niệm hơn những lời dặn dài.",
+        "resources": "Nếu có con và muốn truyền cách tự lo, bạn có thể cùng con chọn một khoản nhỏ hoặc một việc vừa sức để tự lên kế hoạch. Khi nhìn lại, hãy hỏi con đã cân nhắc thế nào để thấy cả cách nghĩ đằng sau kết quả.",
+        "duty": "Nếu đang chăm sóc con, bạn có thể coi trọng việc giúp con học cách giữ lời và chịu trách nhiệm. Hãy chọn một việc vừa sức, nói rõ khi nào cần hoàn thành và cùng con xem lại nếu chưa làm được; đó cũng là cách truyền nếp nhà về sau.",
         "learning": "Về sau, điều đáng trao lại có thể là cách bạn đi tìm lời giải khi gặp một việc lạ. Kể cho con hoặc người đi sau một lần bạn từng đổi ý và vì sao; họ sẽ có thêm cách tự cân nhắc khi gặp chuyện tương tự.",
     },
 }
@@ -139,14 +139,30 @@ def pillar_domain(key, p):
         "children": ("Con cái và hậu vận", "Nếu muốn truyền kinh nghiệm cho con hoặc người đi sau, hãy cho họ thử một việc nhỏ rồi cùng nhìn lại kết quả. Về sau, giữ một việc mình còn muốn học hoặc chia sẻ cũng giúp đời sống có nhịp riêng."),
     }
     title, action = contexts[key]
+    position_label = {"year": "năm", "month": "tháng", "hour": "giờ"}[positions[key]]
+    can_chi = " ".join(str(a.get(part) or "") for part in ("stem", "branch")).strip()
+    if key == "ancestry":
+        # The year pillar is shared evidence, not a reason to repeat the parents paragraph.
+        return [
+            f"{title}: Trụ năm {can_chi} là điểm tham khảo về nền gia đình và môi trường ban đầu. "
+            "Điều đáng tiếp nối là những giá trị bạn đã thực sự nhận được: một nghề, cách giữ lời, "
+            "sự chăm chỉ hoặc cách người đi trước đối diện khó khăn. Đây không phải căn cứ để "
+            "kết luận tình trạng âm phần hay quy khó khăn hiện tại cho tổ tiên.",
+            "Bạn không cần giữ nguyên mọi nếp cũ để thể hiện lòng biết ơn. Hãy phân biệt điều còn "
+            "giúp gia đình gắn bó với điều cần thay đổi cho phù hợp cuộc sống hôm nay. Tiếp nối "
+            "một giá trị bằng việc làm cụ thể có ý nghĩa hơn lặp lại một khuôn mẫu chỉ vì đã quen.",
+        ]
     scene = _SCENES.get(key, {}).get(_FAMILY.get(god), action)
     evidence = []
     if role:
-        evidence.append(f"{god} ở trụ này gợi {role}.")
+        evidence.append(f"{god} tại trụ {position_label} {can_chi} gợi {role}.")
     if stage:
-        evidence.append(f"Khi đọc thêm {stage_name}, có thể lưu ý {stage}.")
-    if stage and key in _SCENES:
-        scene = f"{scene} {_STAGE_STEP[stage_name]}"
+        evidence.append(f"Trạng thái {stage_name} bổ sung nét {stage}.")
+    if key == "children":
+        evidence.append("Phần này nói về cách bạn dành tâm sức cho con hoặc người đi sau; không xác định số con, tính cách hay thành bại của họ.")
+    elif key == "parents":
+        evidence.append("Các dấu hiệu này không xác nhận những gì bố mẹ đã trải qua; ý nghĩa cần được đối chiếu với quan hệ gia đình thực tế của bạn.")
+    # Stage-specific action belongs in recommendations, not repeated in both sections.
     return [f"{title}: " + " ".join(evidence), scene]
 
 def pillar_synthesis(p):
@@ -159,7 +175,7 @@ def pillar_synthesis(p):
 
 def pillar_recommendations(p):
     a = _pillar(p, "day")
-    if _map(p.get("bazi")).get("day_master") != "Canh" or a.get("branch") != "Ngọ":
+    if not _sample(p):
         lines = []
         for position, title in (("month", "Trong công việc và quan hệ ngang vai"), ("hour", "Với con cái và người đi sau"), ("year", "Với gia đình")):
             pillar = _pillar(p, position)
@@ -172,11 +188,10 @@ def pillar_recommendations(p):
                 if position == "year" and role:
                     detail = "Chọn một việc có thể cùng người thân làm trong tháng này, rồi nói rõ mỗi người nhận phần nào."
                 if position == "hour" and role:
-                    detail = "Dành một buổi làm cùng con hoặc người đi sau, để họ tự thử một phần rồi cùng nhìn lại."
+                    detail = "Nếu có con hoặc đang hướng dẫn người đi sau, dành thời gian để họ tự thử một phần rồi cùng nhìn lại."
                 lines.append(f"{title}: " + " ".join(x for x in (detail, stage) if x))
         return lines
-    return []
     return [
         "Trong nghề, hãy giữ một hướng đủ lâu để người khác nhớ đến bạn vì việc bạn làm tốt nhất. Khi thấy chán, hãy xem thứ cần đổi là nghề, vai trò hay chỉ là cách làm. Đôi khi cái mới có ích nhất là tìm ra một cách tốt hơn để làm việc mình đã giỏi, rồi kiên trì đến lúc người khác nhìn thấy kết quả.",
-        "Trong tình cảm, sự thủy chung cần đi cùng sự minh bạch. Người bạn đời dễ yên lòng hơn khi những mối quan hệ bên ngoài có giới hạn rõ, và khi những chuyện vui buồn quan trọng vẫn được mang về kể cho nhau. Bạn vốn có thể lo được nhiều việc cho người mình thương. Điều đáng vun thêm là để họ cảm thấy, ngay cả khi bạn chưa lo xong mọi việc, hai người vẫn đang ở cùng một phía.",
+        "Trong tình cảm, sự thủy chung cần đi cùng sự minh bạch. Người bạn đời dễ yên lòng hơn khi những mối quan hệ bên ngoài có giới hạn rõ, và khi những chuyện vui buồn quan trọng vẫn được mang về kể cho nhau. Khi muốn chăm lo cho người mình thương, điều đáng vun thêm là để họ cảm thấy, ngay cả khi bạn chưa lo xong mọi việc, hai người vẫn đang ở cùng một phía.",
     ]

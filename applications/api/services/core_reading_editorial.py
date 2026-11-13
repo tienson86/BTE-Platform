@@ -75,7 +75,7 @@ def pattern_useful_paragraphs(payload: Mapping[str, Any]) -> list[str]:
         special = label.split(":", 1)[-1].strip()
         if "Giá Vượng" in special:
             meaning = (
-                "Giá Vượng là tên cấu trúc đặc biệt mà phần phân tích đang ghi nhận, "
+                "Lá số được xếp vào cấu trúc đặc biệt Giá Vượng, "
                 "cần phân biệt với một cách cục thông thường lấy tên Thập thần của nguyệt lệnh. "
                 "Điểm cần xem là khí nổi trội được nâng đỡ bởi những Can Chi nào, "
                 "có thành thế nhất quán hay còn lực khác làm thay đổi hướng vận hành. "
@@ -84,9 +84,11 @@ def pattern_useful_paragraphs(payload: Mapping[str, Any]) -> list[str]:
             )
         else:
             meaning = (
-                "Tên cấu trúc này mô tả cách các nguồn lực kết hợp trong toàn lá số. "
-                "Khi đọc cần đặt cạnh nguyệt lệnh, thế Thân và Dụng thần để hiểu "
-                "nguồn lực nào đang nâng đỡ bạn và phần nào cần điều tiết."
+                "Tên cấu trúc này mô tả cách các nguồn lực kết hợp trong lá số, "
+                "không ấn định sẵn một nghề hay một kết quả trong đời. Với bạn, "
+                "điều hữu ích là nhận ra hoàn cảnh nào giúp mình làm việc tốt và "
+                "phần trách nhiệm nào cần được chia sẻ. Ý nghĩa cụ thể còn phụ thuộc "
+                "vào nguyệt lệnh, thế Thân và Dụng thần đã nêu."
             )
         result.append(f"Mệnh cục {special}: {meaning}")
     if pattern_copy:
@@ -102,7 +104,7 @@ def pattern_useful_paragraphs(payload: Mapping[str, Any]) -> list[str]:
             else f"Lá số được xếp vào Mệnh cục {label} khi xét cấu trúc của toàn cục. "
         )
         meaning = (
-            "Ở đây, Chính Tài nói về cách quản lý nguồn lực, làm việc có đầu ra và "
+            "Ở đây, Chính Tài nói về cách quản lý nguồn lực, làm việc có kết quả và "
             "giữ chữ tín với phần mình nhận; nó không tự khẳng định bạn giàu có. "
             if label == "Chính Tài" else "Tên mệnh cục cho biết cách nguồn lực trong lá số thường vận hành. "
         )
@@ -129,31 +131,32 @@ def pattern_useful_paragraphs(payload: Mapping[str, Any]) -> list[str]:
             )
     if element not in _ELEMENTS or not display:
         return result
-    result.append(f"Dụng thần {display}. {_catalog()['useful'][element]}")
-    if (element == "Hỏa" and str(bazi.get("day_master_element") or "") == "Kim"
+    day_element = str(bazi.get("day_master_element") or "")
+    if not day_element:
+        day_element = _STEM_NATURE.get(str(bazi.get("day_master") or ""), ("", ""))[1]
+    generates = {"Mộc": "Hỏa", "Hỏa": "Thổ", "Thổ": "Kim", "Kim": "Thủy", "Thủy": "Mộc"}
+    controls = {"Mộc": "Thổ", "Thổ": "Thủy", "Thủy": "Hỏa", "Hỏa": "Kim", "Kim": "Mộc"}
+    relation = ""
+    if day_element in _ELEMENTS:
+        if generates[element] == day_element:
+            relation = f"{element} sinh {day_element}, tạo nguồn nâng đỡ cho Nhật Chủ. "
+        elif controls[element] == day_element:
+            relation = f"{element} khắc {day_element}, đặt Nhật Chủ trong quan hệ với sự ràng buộc và trách nhiệm. "
+        elif generates[day_element] == element:
+            relation = f"Nhật Chủ {day_element} sinh {element}; đây là chiều tiết khí, đưa năng lực ra ngoài qua sự biểu đạt và kết quả. "
+        elif controls[day_element] == element:
+            relation = f"Nhật Chủ {day_element} khắc {element}; hành này thuộc quan hệ Tài, gắn với việc sử dụng nguồn lực và tạo giá trị. "
+        else:
+            relation = f"{element} đồng hành với Nhật Chủ, bổ sung lực cùng loại. "
+    result.append(f"Dụng thần {display}. {relation}{_catalog()['useful'][element]}")
+    if (element == "Hỏa" and day_element == "Kim"
             and str(useful.get("reason_archetype") or "").upper() == "CHẾ"):
-        result.append(
-            "Hỏa chế Kim ở đây là cách lá số đặt một chuẩn sáng rõ cho nguồn lực Kim đang mạnh. "
-            "Đinh Hỏa nhấn vào kỷ luật nhất quán: xác định kết quả bạn hứa giao, cách kiểm tra "
-            "chất lượng và người chịu trách nhiệm khi kết quả cần sửa. Bính Hỏa là lực thử thách "
-            "khác; không thay tên Bính cho Đinh chỉ vì cả hai cùng thuộc Hỏa."
-        )
-        result.append(
-            "Trong nhịp sống, hãy tạo chỗ làm việc đủ sáng, ấm và dễ trao đổi; giữ thời gian "
-            "nghỉ để sự nhiệt tình không thành hao sức. Trong công việc, chọn một phần chuyên môn "
-            "để giảng giải, trình bày hoặc đóng thành quy trình người khác dùng được. Một lịch "
-            "công bố kết quả và một kênh nhận phản hồi giúp điều bạn biết bước ra ngoài, thay vì "
-            "chỉ được giữ trong đầu. Những vai trò cần giải thích, điều phối hoặc chịu trách nhiệm "
-            "về chất lượng có thể là môi trường rèn Hỏa khi phù hợp năng lực thật của bạn."
-        )
-        result.append(
-            "Nếu lịch trình bị lấp kín, lời hứa vượt quá khả năng giao hoặc bạn thúc người khác "
-            "liên tục, cách dùng Hỏa đang quá tay. Hãy giảm số cam kết, giữ lại chuẩn quan trọng "
-            "nhất và cho mình cùng người làm việc có thời gian phục hồi. Dụng thần là hướng "
-            "điều tiết, không phải mệnh lệnh phải luôn sống nhanh và nóng."
-        )
-    else:
-        result.append(_ACTIONS[element])
+        useful_stem = str(useful.get("useful_stem") or "")
+        lead = "Hỏa chế Kim giúp điều tiết phần Kim đang mạnh, thay vì tiếp tục tăng thêm lực cùng loại. "
+        if useful_stem == "Đinh" and str(bazi.get("day_master") or "") == "Canh":
+            lead += "Đinh Hỏa mang vai trò Chính Quan đối với Canh Kim, nhấn vào trách nhiệm, chuẩn mực và sự bền bỉ trong việc giữ lời. "
+        result.append(lead + "Khi ứng dụng vào đời sống, bạn có thể bắt đầu từ việc chọn một trách nhiệm vừa sức, làm đến nơi và để kết quả chứng minh năng lực. Sự nghiêm túc có ích khi giúp công việc rõ ràng hơn, không phải khi khiến bạn luôn căng thẳng hoặc khắt khe với mọi người.")
+    result.append("Về ứng dụng thực tế: " + _ACTIONS[element] + " Đây là gợi ý điều chỉnh thói quen, không phải bảo đảm rằng chọn một màu sắc, vật phẩm hay nghề cùng hành sẽ thay đổi vận mệnh.")
     hy = useful.get("favorable_roles")
     favorable = {str(item.get("element")) for item in hy if isinstance(item, Mapping)} if isinstance(hy, list) else set()
     if element in favorable and isinstance(hy, list):
@@ -161,15 +164,14 @@ def pattern_useful_paragraphs(payload: Mapping[str, Any]) -> list[str]:
                        and item.get("element") == element and item.get("stem") != useful.get("useful_stem")]
         if other_stems:
             result.append(
-                f"Trong phần Hỷ thần còn có {', '.join(other_stems)} {element}. Cùng là {element}, "
-                "vai trò hỗ trợ này không thay cho can Dụng thần đã chọn; hãy đọc theo việc "
-                "nó nâng đỡ trục chính, không gộp hai can thành một kết luận."
+                f"Hỷ thần còn có {', '.join(other_stems)} {element}, bổ trợ cho sự cân bằng của lá số. "
+                f"Dụng thần vẫn là {display}; hai vai trò cùng hành không đồng nghĩa với nhau."
             )
     for support in _ELEMENTS:
         if support in favorable and support != element:
             result.append(
-                f"Hỷ thần {support} là phần hỗ trợ cho trục Dụng thần trong lá số này. "
-                f"{_ACTIONS[support]} Hãy dùng nó vừa đủ để việc chính thông hơn."
+                f"Hỷ thần {support} bổ trợ cho Dụng thần và sự cân bằng chung. "
+                f"Bạn có thể tham khảo cách ứng dụng: {_ACTIONS[support]}"
             )
     ky = useful.get("unfavorable_roles")
     unfavorable = {str(item.get("element")) for item in ky if isinstance(item, Mapping)} if isinstance(ky, list) else set()
@@ -183,49 +185,37 @@ def pattern_useful_paragraphs(payload: Mapping[str, Any]) -> list[str]:
 
 
 def shen_sha_paragraphs(payload: Mapping[str, Any]) -> list[str]:
-    bazi = _map(payload.get("bazi"))
-    matches = bazi.get("shensha_matches")
+    matches = _map(payload.get("bazi")).get("shensha_matches")
     if not isinstance(matches, list):
         return []
     texts = _catalog()["shen_sha"]
-    result: list[str] = []
-    seen: set[str] = set()
-    de_pillars: set[str] = set()
+    labels = {"year": "năm", "month": "tháng", "day": "ngày", "hour": "giờ"}
+    grouped: dict[str, set[str]] = {}
     for match in matches:
         if not isinstance(match, Mapping):
             continue
-        name = str(match.get("canonical_name") or match.get("name") or "")
-        if name in seen or name not in texts:
+        name = str(match.get("canonical_name") or match.get("name") or "").strip()
+        position = str(match.get("pillar") or "")
+        if name and position in labels:
+            grouped.setdefault(name, set()).add(position)
+    result: list[str] = []
+    de_names = ("Thiên Đức Quý Nhân", "Nguyệt Đức Quý Nhân")
+    combine_de = all("day" in grouped.get(name, set()) for name in de_names)
+    for name, positions in grouped.items():
+        # Combine only the shared day occurrence, preserving every other position.
+        remaining = positions - {"day"} if combine_de and name in de_names else positions
+        if not remaining:
             continue
-        seen.add(name)
-        raw_pillar = str(match.get("pillar") or "")
-        if name in ("Thiên Đức Quý Nhân", "Nguyệt Đức Quý Nhân") and raw_pillar == "day":
-            de_pillars.add(name)
-            continue
-        pillar = {"year": "năm", "month": "tháng", "day": "ngày", "hour": "giờ"}.get(raw_pillar)
-        if pillar:
-            result.append(f"{name} tại trụ {pillar}: {texts[name]}")
-    if de_pillars == {"Thiên Đức Quý Nhân", "Nguyệt Đức Quý Nhân"}:
+        places = ", ".join(labels[position] for position in labels if position in remaining)
+        meaning = texts.get(name)
+        if meaning:
+            result.append(f"{name} tại trụ {places}: {meaning}")
+        else:
+            result.append(f"{name} tại trụ {places}: đây là dấu hiệu bổ sung trong cách luận truyền thống. Riêng dấu hiệu này chưa đủ để kết luận một sự kiện tốt hay xấu trong đời sống của bạn.")
+    if combine_de:
         result.append(
-            "Thiên Đức và Nguyệt Đức cùng hiện ở trụ ngày: trong chuyện gần gũi, hai dấu này "
-            "cùng nhắc đến một lợi thế của cách ứng xử: giữ lòng tốt mà vẫn giữ ranh giới. "
-            "Khi quan hệ gặp điều khó nói, bạn có thêm cơ hội chọn lời vừa thật vừa có đường "
-            "cho người kia bước tới. Đây là điểm sáng bổ trợ; độ bền của quan hệ vẫn cần đọc "
-            "từ toàn bộ trụ ngày và cuộc sống thực của hai người."
-        )
-    else:
-        for name in ("Thiên Đức Quý Nhân", "Nguyệt Đức Quý Nhân"):
-            if name in de_pillars:
-                result.append(f"{name} tại trụ ngày: {texts[name]}")
-    other_names = []
-    for match in matches:
-        if isinstance(match, Mapping):
-            name = str(match.get("canonical_name") or match.get("name") or "")
-            if name and name not in texts and name not in other_names:
-                other_names.append(name)
-    if result and other_names:
-        result.append(
-            "Lá số còn ghi nhận " + ", ".join(other_names) +
-            ". Những dấu này cần được đọc cùng vị trí trụ và toàn cục trước khi đưa ra lời luận riêng."
+            "Thiên Đức và Nguyệt Đức cùng hiện ở trụ ngày: hai dấu này bổ sung chủ đề hòa giải và cách ứng xử trong những quan hệ gần gũi. "
+            "Khi bất đồng, việc nói rõ điều mình cần mà vẫn tôn trọng người kia có thể giúp hai bên tìm được cách giải quyết. "
+            "Đây không phải bảo đảm mọi mâu thuẫn sẽ tự qua; sự tin cậy vẫn được tạo nên bằng cách hai người đối xử với nhau mỗi ngày."
         )
     return result

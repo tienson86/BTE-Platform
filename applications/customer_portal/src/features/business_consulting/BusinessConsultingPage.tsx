@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from "react";
 
 import { customerErrorMessage, envelopeErrors } from "../marriage_consulting/adapter";
 import { adaptBusinessView } from "./adapter";
@@ -52,6 +52,9 @@ export function BusinessConsultingPage(): ReactNode {
   const [exporting, setExporting] = useState<"pdf" | "docx" | null>(null);
   const [actionError, setActionError] = useState("");
   const [retryResultId, setRetryResultId] = useState<string | null>(null);
+  // Keep the same operation across transport retries, including resubmitting unchanged inputs.
+  const operation = useRef<{ body: string; key: string } | null>(null);
+  const submitting = useRef(false);
   const busy = status === "loading" || saving || Boolean(exporting);
 
   const layout = useMemo(() => "customer-dashboard", []);
@@ -111,7 +114,13 @@ export function BusinessConsultingPage(): ReactNode {
   }
 
   async function run(body = lastBody, selectedOccupation = lastOccupation): Promise<void> {
-    if (!body) return;
+    if (!body || submitting.current) return;
+    submitting.current = true;
+    const serialized = JSON.stringify(body);
+    if (!operation.current || operation.current.body !== serialized) {
+      const bytes = crypto.getRandomValues(new Uint8Array(16));
+      operation.current = { body: serialized, key: `business-${Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("")}` };
+    }
     setStatus("loading");
     setView(null);
     setSavedAt(null);
@@ -120,7 +129,7 @@ export function BusinessConsultingPage(): ReactNode {
     setErrorMessage("");
     setRetryable(false);
     try {
-      const created = await createBusinessConsultation(body);
+      const created = await createBusinessConsultation(body, operation.current.key);
       const createErrors = envelopeErrors(created);
       if (!created.data || created.status !== "SUCCESS") {
         const err = createErrors[0];
@@ -130,10 +139,13 @@ export function BusinessConsultingPage(): ReactNode {
         return;
       }
       await loadResult(created.data.consultation_id, selectedOccupation);
+      // Once the result id is known, subsequent retries only retrieve that result.
     } catch {
       setStatus("error");
       setErrorMessage(customerErrorMessage(undefined));
       setRetryable(true);
+    } finally {
+      submitting.current = false;
     }
   }
 
@@ -160,6 +172,7 @@ export function BusinessConsultingPage(): ReactNode {
   }
 
   function startNew(): void {
+    operation.current = null;
     setView(null);
     setPersonA(DEFAULT_PERSON_A);
     setPersonB(DEFAULT_PERSON_B);

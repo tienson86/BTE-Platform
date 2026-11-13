@@ -10,10 +10,10 @@ import type { BusinessConsultationDto } from "./api";
 import type { BusinessReportDto, BusinessViewModel } from "./types";
 
 const GROUPS = [
-  { key: "useful_god", title: "Dụng thần và Ngũ Hành", meaning: "Xem người này có bổ sung đúng hành người kia cần, hay đồng thời kích hoạt hành bất lợi.", guidance: "Đối chiếu phần bổ trợ với năng lực thực tế để phân công công việc; nếu có áp lực hai chiều, thống nhất giới hạn trách nhiệm." },
+  { key: "useful_god", title: "Dụng thần và Ngũ Hành", meaning: "Xem sự tương tác Ngũ Hành giữa hai lá số để nhận diện điểm bổ trợ và những khác biệt cần dung hòa khi làm việc chung.", guidance: "Đối chiếu phần bổ trợ với năng lực thực tế để phân công công việc; nếu có áp lực hai chiều, thống nhất giới hạn trách nhiệm." },
   { key: "cung_phi", title: "Cung Phi", meaning: "Đối chiếu cung bản mệnh và cung từng trụ theo Du Niên; đây là chỉ báo phụ khi xem khả năng phối hợp.", guidance: "Đọc cùng Dụng thần và Can Chi khi cân nhắc cách phối hợp, không dùng riêng Cung Phi để quyết định góp vốn." },
   { key: "stem_branch", title: "Can Chi", meaning: "Các quan hệ hợp, xung, hình, hại và yếu tố cứu giải giúp lý giải phần đồng thuận hoặc ma sát giữa hai lá số.", guidance: "Thống nhất người quyết định cuối cùng, cách phản biện và quy trình giải quyết bất đồng trong công việc." },
-  { key: "pattern", title: "Mệnh Cục", meaning: "Mệnh Cục cung cấp bối cảnh của từng lá số; giống hoặc khác mệnh cục chưa đủ để kết luận hợp hay khắc.", guidance: "Dùng bối cảnh này để trao đổi về cách làm việc, rồi kiểm chứng bằng kinh nghiệm và hiệu quả công việc thực tế." },
+  { key: "pattern", title: "Mệnh Cục", meaning: "Mệnh Cục cung cấp bối cảnh của từng lá số; giống hoặc khác mệnh cục chưa đủ để kết luận hợp hay khắc.", guidance: "Trao đổi rõ về thói quen làm việc và kỳ vọng của mỗi người; kiểm chứng qua công việc thực tế thay vì suy đoán tính cách từ lá số." },
   { key: "day_master", title: "Nhật Chủ", meaning: "Quan hệ sinh–khắc và âm dương của Nhật Chủ được đọc cùng Dụng thần và các quan hệ Can Chi.", guidance: "Thỏa thuận mức tự chủ của mỗi người và cơ chế kiểm soát chéo khi ra quyết định chung." },
 ] as const;
 
@@ -75,7 +75,7 @@ export function adaptBusinessView(
       answer: verdict(rows),
       meaning: group.meaning,
       supportingFacts: rows.map((row) => `${row.label}: ${personAName} — ${row.personA}; ${personBName} — ${row.personB}. ${row.relationship} Cơ sở: ${row.basis}`),
-      quickGuidance: rows.some((row) => row.available && row.status !== "unavailable") ? group.guidance : "Bổ sung dữ liệu lá số trước khi luận phần này.",
+      quickGuidance: rows.some((row) => row.available && row.status !== "unavailable") ? group.guidance : "Chưa đủ dữ liệu để nhận định phần này. Cần kiểm tra và bổ sung thông tin còn thiếu.",
       confidence: "",
       limitations: [],
       technicalExplanation: "",
@@ -93,7 +93,7 @@ export function adaptBusinessView(
     heroSummary: overall,
     executiveSummary: overall,
     assessmentCards: report.metadata?.consultation_kind === "business" ? source.assessmentCards : cards,
-    unavailableNote: "Dẫn chứng hiện phản ánh tương tác giữa hai lá số. Mức phù hợp với ngành/nghề đã chọn cần được đánh giá thêm theo chuyên môn và điều kiện kinh doanh.",
+    unavailableNote: "Phần đối chiếu Bát Tự chỉ có giá trị tham khảo, không xác định năng lực, uy tín hay hiệu quả kinh doanh. Ngành/nghề đã chọn là bối cảnh tư vấn, chưa được dùng để tính điểm riêng; cần đánh giá thêm chuyên môn và điều kiện kinh doanh thực tế.",
     timingSummary: null,
     actions: report.metadata?.consultation_kind === "business" ? source.actions : cards.filter((card) => rowsFor(card.questionId, view).some((row) => row.available && row.status !== "unavailable"))
       .filter((card) => card.questionId !== "cung_phi")
@@ -102,7 +102,7 @@ export function adaptBusinessView(
     finalOpinion: report.metadata?.consultation_kind === "business" ? source.finalOpinion : {
       overall,
       strongestStrength: supportive ? `${supportive.label}: ${supportive.relationship}` : "Chưa có yếu tố hỗ trợ nổi trội đủ dữ liệu để kết luận.",
-      mainAttention: pressured ? `${pressured.label}: ${pressured.relationship}` : "Cần đọc đầy đủ các hàng đối chiếu và phần thiếu dữ liệu trước khi quyết định hợp tác.",
+      mainAttention: pressured ? `${pressured.label}: ${pressured.relationship}` : "Chưa thấy áp lực nổi bật trong các yếu tố đã đối chiếu; điều đó không có nghĩa là hợp tác sẽ không có bất đồng. Hai bên vẫn cần thống nhất trách nhiệm và cách giải quyết phát sinh.",
       recommendation: `Trước khi hợp tác trong lĩnh vực ${occupation}, thống nhất vai trò, vốn góp, quyền quyết định, phân chia lợi ích và cách xử lý bất đồng; kiểm chứng bằng một giai đoạn làm việc thử.`,
     },
   };

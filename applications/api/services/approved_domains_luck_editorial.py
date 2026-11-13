@@ -12,6 +12,7 @@ from .pillar_life_editorial import pillar_domain, pillar_synthesis, pillar_recom
 
 from engines.ten_gods_engine.mapper import day_master_info, map_stem_to_ten_god
 from engines.ten_gods_engine.exceptions import TenGodsValidationError
+from .customer_voice_standard import ROLE_READINGS, age_application, cycle_branch_context, age_scoped_domain, current_age
 
 
 def _map(value: Any) -> Mapping[str, Any]:
@@ -227,72 +228,41 @@ _HEALTH_PAIR_NOTES = {
 
 
 def _health_prose(payload: Mapping[str, Any], day_master: str) -> list[str]:
+    """Explain traditional correspondences without deriving diagnoses from counts."""
     bazi, strength = _map(payload.get("bazi")), _map(payload.get("strength"))
     counts = _map(_map(payload.get("five_elements")).get("counts"))
     useful = _map(payload.get("useful_god"))
-    month = _pill(payload, "month")
-    season = _text(month.get("branch"))
+    season = _text(_pill(payload, "month").get("branch"))
     day_element = _HEALTH_ELEMENT_KEYS.get(_text(bazi.get("day_master_element")))
     present = {key: float(value) for key, value in counts.items()
-               if key in _HEALTH_ELEMENT_NOTES and isinstance(value, (int, float)) and value >= 0}
-    strong = _text(strength.get("strength_level")) in ("strong", "very_strong")
-    overview = (
-        f"Nhật Chủ {day_master} " + ("ở thế Thân vượng" if strong else "cần được đặt trong thế vượng nhược của toàn cục")
-        + (f", sinh vào tháng {season}" if season else "")
-        + ". Các hành cần được đọc cùng mùa sinh và vị trí Can Chi để thấy nhịp vận hành của toàn lá số."
-    )
-    paragraphs = ["Cách đọc sức khỏe: " + overview]
+               if key in _HEALTH_ELEMENT_NOTES and isinstance(value, (int, float)) and not isinstance(value, bool) and value >= 0}
+    label = {"strong": "Thân vượng", "very_strong": "Thân rất vượng", "weak": "Thân nhược", "very_weak": "Thân rất nhược", "balanced": "Thân trung hòa"}.get(_text(strength.get("strength_level")), "")
+    paragraphs = ["Ngũ hành và sức khỏe: " + f"Nhật Chủ {day_master}" + (f" ở thế {label}" if label else "")
+        + (f", sinh vào tháng {season}" if season else "") + ". Thế thân là tương quan ngũ hành của lá số, không phải đánh giá sức khỏe thể chất. Các liên hệ với cơ thể trong Bát Tự là cách diễn giải truyền thống, không cho phép xác định bệnh hoặc cơ quan đang bị tổn thương."]
     if present:
-        ranked = sorted(present, key=lambda key: (-present[key], key))
-        selected = [day_element] if day_element in present else []
-        selected.extend(key for key in ranked[:2] if key not in selected)
-        low = min(present, key=lambda key: (present[key], key))
-        if low not in selected:
-            selected.append(low)
-        for key in selected:
-            name, organs, signs = _HEALTH_ELEMENT_NOTES[key]
-            prominence = (
-                "xuất hiện ít nhất trong bảng đếm" if key == low and present[key] < max(present.values()) else
-                "nằm trong nhóm xuất hiện nhiều trong bảng đếm" if key in ranked[:2] else
-                "cần được đọc theo sức của Nhật Chủ, không chỉ theo số lần xuất hiện"
-            )
+        maximum, minimum = max(present.values()), min(present.values())
+        # Fixed traditional order, and every supplied element is shown. Alphabetical
+        # tie-breaking must never choose which organ the customer should worry about.
+        for key in ("wood", "fire", "earth", "metal", "water"):
+            if key not in present:
+                continue
+            name, organs, _ = _HEALTH_ELEMENT_NOTES[key]
+            prominence = "xuất hiện ít nhất" if minimum < maximum and present[key] == minimum else "có mặt"
             role = " của Nhật Chủ" if key == day_element else ""
-            paragraphs.append(
-                f"{name} và hướng theo dõi: {name}{role} {prominence} ({present[key]:g} vị trí). "
-                f"Trong cách nhìn của Đông y, {name} gắn với {organs}; bạn nên để ý {signs}."
-            )
+            paragraphs.append(f"{name} trong lá số: {name}{role} {prominence} với {present[key]:g} vị trí trong bảng đếm. "
+                + f"Trong hệ thống tương ứng truyền thống, {name} gắn với {organs}. "
+                + "Số lần xuất hiện không phản ánh sức khỏe của cơ quan và cũng chưa đủ xác định hành mạnh hay yếu.")
     else:
-        paragraphs.append("Dữ liệu ngũ hành: Chưa có bảng phân bố để chọn hành nổi bật; "
-                          "không suy tên bệnh hoặc mức vượng từ riêng Nhật Chủ.")
+        paragraphs.append("Dữ liệu ngũ hành: Chưa có bảng phân bố; không suy tình trạng sức khỏe từ riêng tên Nhật Chủ.")
     useful_key = _HEALTH_ELEMENT_KEYS.get(_text(useful.get("useful_element")))
-    pair = None
     if useful_key and day_element and _HEALTH_CONTROLS.get(useful_key) == day_element:
-        pair = useful_key, day_element
-    elif len(present) == 5:
-        candidates = [(a, b) for a, b in _HEALTH_CONTROLS.items()
-                      if present[a] == max(present.values()) and present[b] == min(present.values())]
-        pair = candidates[0] if candidates else None
-    if pair:
-        a, b = pair
-        a_name, b_name = _HEALTH_ELEMENT_NOTES[a][0], _HEALTH_ELEMENT_NOTES[b][0]
-        note = _HEALTH_PAIR_NOTES[pair]
-        if a == useful_key and b == day_element:
-            useful_stem = _text(useful.get("useful_stem"))
-            paragraphs.append(
-                f"Quan hệ {a_name} khắc {b_name}: {useful_stem or a_name} {a_name} là hướng Dụng thần "
-                f"đã chọn để điều tiết Nhật Chủ {b_name}. Trong nhịp sống, bạn có thể {note}."
-            )
-        else:
-            paragraphs.append(
-                f"Quan hệ {a_name} khắc {b_name}: Bảng đếm cho thấy {a_name} nhiều và {b_name} ít; "
-                "mối quan hệ này cần được đọc cùng mùa sinh và các Can Chi khác. "
-                f"Trong đời sống, bạn có thể {note}."
-            )
+        a_name, b_name = _HEALTH_ELEMENT_NOTES[useful_key][0], _HEALTH_ELEMENT_NOTES[day_element][0]
+        stem = _text(useful.get("useful_stem"))
+        paragraphs.append(f"Quan hệ {a_name} khắc {b_name}: {stem + ' ' if stem else ''}{a_name} là hướng Dụng thần để điều tiết Nhật Chủ {b_name}. "
+            + "Đây là quan hệ trong cách đọc ngũ hành, không phải bằng chứng một cơ quan khắc hoặc gây bệnh cho cơ quan khác.")
     paragraphs.extend([
-        "Chăm sóc hằng ngày: Giữ giờ ngủ và giờ làm tương đối đều, nghỉ giữa những việc đòi hỏi tập trung, "
-        "ăn uống và vận động phù hợp; quan sát khả năng hồi phục sau giai đoạn bận rộn.",
-        "Khi cần kiểm tra sức khỏe: Nếu một biểu hiện kéo dài hoặc nặng lên, hãy thăm khám để xác định nguyên nhân "
-        "và chọn cách chăm sóc phù hợp."
+        "Chăm sóc hằng ngày: Ưu tiên nhịp sinh hoạt phù hợp với sức của mình, có thời gian nghỉ và không bỏ qua những thay đổi thực tế của cơ thể. Không cần bổ sung một hành chỉ vì hành đó ít xuất hiện trong bảng đếm.",
+        "Khi cần kiểm tra sức khỏe: Nếu có biểu hiện kéo dài, nặng lên hoặc ảnh hưởng sinh hoạt, hãy được nhân viên y tế đánh giá. Lá số không thay thế thăm khám, chẩn đoán hoặc điều trị."
     ])
     return paragraphs
 
@@ -314,6 +284,9 @@ def life_domain_prose(key: str, payload: Mapping[str, Any]) -> list[str]:
     use = f"{useful_stem} {useful_element}".strip()
     pattern_name = _text(pattern.get("cach_cuc"))
 
+    age_copy = age_scoped_domain(key, payload)
+    if age_copy:
+        return age_copy
     revised = day_domain(key, payload)
     pillar_copy = pillar_domain(key, payload)
     if revised:
@@ -331,7 +304,7 @@ def life_domain_prose(key: str, payload: Mapping[str, Any]) -> list[str]:
         sát = _has(payload, "Thất Sát", position="year")
         quan = _has(payload, "Chính Quan")
         hour_resource = _text(hour.get("stem")) if _text(hour.get("ten_god")) == "Thiên Ấn" else ""
-        roles, industries = _CAREER_PATHS.get(pattern_name, ("người làm chuyên môn có đầu ra rõ và được kiểm tra", "lĩnh vực đã có kinh nghiệm, khách hàng và nhu cầu thực"))
+        roles, industries = _CAREER_PATHS.get(pattern_name, ("người làm chuyên môn có đầu ra rõ và được kiểm tra", "môi trường cho phép thử kỹ năng, nhận hướng dẫn và nhìn thấy kết quả công việc"))
         combination = (
             "Ấn tinh đi cùng Quan hoặc Sát: học sâu rồi dùng phương pháp để giữ chuẩn và xử lý việc khó. "
             "Bạn có thể bắt đầu ở vai trò chuyên gia, sau đó phụ trách đào tạo hoặc chất lượng khi đã có thành quả để dẫn chứng."
@@ -353,13 +326,13 @@ def life_domain_prose(key: str, payload: Mapping[str, Any]) -> list[str]:
             "Chuẩn và áp lực: " + (
                 f"Thất Sát ở trụ năm nhắc tới cách bạn đón việc khó; hướng Dụng thần {use}"
                 " đặt chuẩn chất lượng và trách nhiệm lên trước nhịp đối đầu. "
-                "Áp lực Thất Sát không được gọi thành Chính Quan chỉ vì cả hai liên quan Hỏa."
+                "Khi nhận việc khó, nên làm rõ phạm vi quyết định và phần hỗ trợ có thể nhận, để trách nhiệm không trở thành gánh nặng một mình."
                 if sát and quan and use else
                 f"Hướng Dụng thần {use} giúp bạn chọn cách tổ chức công việc có phương pháp. "
                 "Mỗi Thập thần có vai trò riêng; cần xem trụ và can cụ thể trước khi kết luận." if use else
                 "Khi gặp việc khó, hãy tách yêu cầu, nguồn lực và người chịu trách nhiệm trước khi nhận thêm."),
             "Việc có thể làm: Chọn một dạng công việc, viết câu hỏi đầu vào, mẫu bàn giao và cách kiểm tra kết quả. "
-            "Thử giải thích cho người chưa học chuyên môn; khi họ hiểu và dùng được kết quả, tri thức mới có đường thành dịch vụ bền.",
+            "Thử giải thích cho người chưa học chuyên môn; phản hồi của họ giúp bạn biết phần nào đã rõ và phần nào cần cải thiện.",
             f"Vị trí có thể phát huy: Với Mệnh cục {pattern_name or 'đã công bố'}, "
             f"bạn có thể cân nhắc vai trò {roles}. {combination}",
             f"Nhóm nghề nên khảo sát: {industries}. Đây là nhóm môi trường để thử năng lực, "
@@ -368,8 +341,8 @@ def life_domain_prose(key: str, payload: Mapping[str, Any]) -> list[str]:
             "Cách chọn và tiến nghề: " + (
                 f"Dụng thần {use} gợi cách làm việc: {_CAREER_USEFUL_STYLES[useful_element]}. "
                 if use and useful_element in _CAREER_USEFUL_STYLES else "Hãy đặt cách làm phù hợp vào công việc bạn đang có. "
-            ) + "Chọn hai vị trí gần chuyên môn sẵn có, thử bằng một dự án nhỏ trong vài tháng; "
-            "so sánh chất lượng đầu ra, nhu cầu khách hàng, chi phí học thêm và sức bền của bản thân trước khi chuyển nghề."
+            ) + "Chọn một hoặc hai hướng phù hợp năng lực và điều kiện hiện tại, thử ở phạm vi vừa sức; "
+            "so sánh kết quả, nhu cầu của nơi làm việc, thời gian học thêm và nhịp sống trước khi quyết định thay đổi."
         ]
 
     if key == "marriage":
@@ -378,7 +351,7 @@ def life_domain_prose(key: str, payload: Mapping[str, Any]) -> list[str]:
                                     if e.get("visibility") == "hidden" or e.get("hidden_stem")))
         return [
             "Ở gần nhau: " + (f"Trụ ngày {day_master} {branch} đặt Nhật Chủ cạnh cung quan hệ thân thiết. "
-                + (f"Trong chi ngày có {', '.join(hidden)}; đây là các lớp để hỏi về trách nhiệm và nhu cầu được nâng đỡ, " if hidden else "Cần đọc cả các trụ và đời sống thật, ")
+                + (f"Trong chi ngày có {', '.join(hidden)}; các vai trò này gợi cách bạn chia sẻ trách nhiệm và đón nhận sự hỗ trợ trong quan hệ gần gũi, nhưng " if hidden else "Cần đọc cả các trụ và đời sống thật, ")
                 + "không đủ để kết luận tính cách người phối ngẫu hoặc hôn nhân sẽ thuận hay khó."
                 if branch else "Thiếu chi ngày nên chưa thể luận riêng về cung quan hệ thân thiết."),
             "Cách chăm mối quan hệ: Khi bất đồng về tiền, thời gian hoặc gia đình hai bên, "
@@ -424,8 +397,8 @@ def life_domain_prose(key: str, payload: Mapping[str, Any]) -> list[str]:
                 if peer in ("Kiếp Tài", "Tỷ Kiên") else
                 "Anh em và người đồng hành phải được đọc cùng các dấu ở trụ tháng, "
                 "không gán sẵn người nào giúp hoặc cản bạn."),
-            "Khi làm chung: Thống nhất ai chịu trách nhiệm trước khách hàng, ai quyết định chi tiêu "
-            "và khi dừng việc chung sẽ bàn giao tài liệu, khách hàng, tiền ra sao. Viết được điều ấy ngắn gọn là cách giữ cả công việc lẫn tình thân.",
+            "Khi làm chung: Nếu cùng làm một công việc hoặc chia sẻ khoản chi, hãy thống nhất phần mỗi người nhận, cách quyết định "
+            "và cách xử lý khi có người muốn thay đổi thỏa thuận. Viết được điều ấy ngắn gọn là cách giữ cả công việc lẫn tình thân.",
             "Trong giao tiếp: Giữ chuẩn chất lượng, cho người khác quyền góp ý vào cách làm và hẹn thời điểm đánh giá lại. "
             "Ranh giới rõ không đồng nghĩa thiếu tin nhau."
         ]
@@ -492,78 +465,53 @@ _GOD_LONG_VIEW = {
 
 
 def luck_cycle_prose(payload: Mapping[str, Any], cycles: Mapping[str, Any]) -> list[str]:
-    """Describe every published cycle, separating stem role from branch climate."""
-    day_master = _text(_map(payload.get("bazi")).get("day_master"))
+    """Describe published cycles without borrowing a sample person's life."""
+    bazi = _map(payload.get("bazi"))
+    day_master = _text(bazi.get("day_master"))
     items = [item for item in cycles.get("cycles") or [] if isinstance(item, Mapping)]
     if not day_master or not items:
         return []
     useful = _map(payload.get("useful_god"))
-    use_stem = _text(useful.get("useful_stem"))
-    use_element = _text(useful.get("useful_element"))
-    favorable = {_text(item.get("element")) for item in useful.get("favorable_roles") or [] if isinstance(item, Mapping)}
-    unfavorable = {_text(item.get("element")) for item in useful.get("unfavorable_roles") or [] if isinstance(item, Mapping)}
+    use_stem, use_element = _text(useful.get("useful_stem")), _text(useful.get("useful_element"))
+    favorable = {_text(v.get("element")) for v in useful.get("favorable_roles") or [] if isinstance(v, Mapping)}
+    unfavorable = {_text(v.get("element")) for v in useful.get("unfavorable_roles") or [] if isinstance(v, Mapping)}
     current = _map(cycles.get("current_cycle"))
-    paragraphs = [
-        f"Cách đọc Đại vận: Đại vận khởi khoảng {cycles.get('start_age')} tuổi và đi {cycles.get('direction_label') or cycles.get('direction') or 'theo chiều đã tính'}. "
-        "Mỗi chặng cho biết môi trường tác động lên nền lá số. Khi đọc một vận, cần tách vai trò Thập thần của Thiên Can "
-        "và khí của Địa Chi, sau đó mới đặt chúng bên cạnh Dụng thần."
-    ]
+    start_age = cycles.get("start_age")
+    start_note = f"khởi khoảng {start_age} tuổi" if start_age is not None else "chưa có tuổi khởi vận xác định"
+    direction = _text(cycles.get("direction_label") or cycles.get("direction"))
+    paragraphs = [f"Các chặng Đại vận: Lá số {start_note}" + (f", đi {direction}. " if direction else ". ")
+        + "Mỗi chặng được đọc cùng nền Tứ trụ và hoàn cảnh sống. Các mốc tuổi rất cao là phần tiếp nối lý thuyết của bảng vận, không phải dự đoán tuổi thọ."]
     for item in items:
-        stem = _text(item.get("stem"))
-        branch = _text(item.get("branch"))
+        stem, branch = _text(item.get("stem")), _text(item.get("branch"))
         if not stem or not branch:
             continue
         try:
             god, _ = map_stem_to_ten_god(day_master, stem)
         except (ValueError, TenGodsValidationError):
             continue
-        theme, action = _GOD_THEMES.get(god, ("nhìn lại cách sử dụng nguồn lực", "đối chiếu công việc và hoàn cảnh thực tế"))
         label = _text(item.get("gan_zhi")) or f"{stem} {branch}"
-        start, end = item.get("year_start"), item.get("year_end")
-        age_start, age_end = item.get("age_start"), item.get("age_end")
-        context = f"{start}–{end}, khoảng {age_start}–{age_end} tuổi" if None not in (start, end, age_start, age_end) else "một chặng Đại vận"
+        start, end, age_start, age_end = (item.get(k) for k in ("year_start", "year_end", "age_start", "age_end"))
+        context = f"{start}–{end}, khoảng {age_start}–{age_end} tuổi" if None not in (start, end, age_start, age_end) else "chưa đủ mốc năm và tuổi"
+        theme, meaning = ROLE_READINGS.get(god, ("cách sử dụng nguồn lực", ""))
         element = _text(item.get("branch_element"))
-        climate = (
-            f"Chi {branch} thuộc {element}, chạm tới hướng ngũ hành cần bồi trong lá số. "
-            if element and element in favorable else
-            f"Chi {branch} thuộc {element}, cần xem liệu nó có làm phần khí vốn đã mạnh thêm quá mức. "
-            if element and element in unfavorable else
-            f"Chi {branch} thuộc {element}; riêng hành của chi chưa đủ để gọi cả vận là tốt hoặc xấu. "
-            if element else "Cần đặt địa chi cạnh toàn cục trước khi đánh giá vận. "
-        )
-        if stem == use_stem:
-            nuance = f"Can {stem} chính là can Dụng thần đã chọn; địa chi và lưu niên vẫn cần xét riêng. "
-        elif _text(item.get("stem_element")) == use_element and use_stem:
-            nuance = f"Can {stem} cùng hành {use_element} với Dụng thần {use_stem} nhưng mang vai trò {god} riêng; không đồng nhất hai can. "
+        if element and element in unfavorable and element in favorable:
+            climate = f"Chi {branch} thuộc {element}; hành này xuất hiện ở cả nhóm hỗ trợ và nhóm cần tiết chế, nên chưa thể kết luận chiều tác động chỉ từ tên hành. "
+        elif element and element in unfavorable:
+            climate = f"Chi {branch} thuộc {element}, là hành cần tiết chế trong lá số. Vì vậy, điều đáng lưu ý là giữ quy mô cam kết phù hợp với nguồn lực thay vì tăng thêm gánh nặng. "
+        elif element and (element in favorable or element == use_element):
+            climate = f"Chi {branch} thuộc {element}, nằm trong hướng hỗ trợ của lá số. Đây là yếu tố bổ trợ khi xét vận, không phải sự bảo đảm rằng mọi lựa chọn đều thuận lợi. "
         else:
-            nuance = ""
-        if god == "Chính Tài" and element in favorable and use_stem:
-            nuance += "Đây là dịp xem cách chuyển chuyên môn thành dòng thu có chuẩn, không phải lời hứa riêng cho từng năm trong vận. "
-        elif god == "Chính Quan" and element in unfavorable:
-            nuance += "Hành của chi cần được giữ vừa sức để chuẩn mực không biến thành thêm tầng nghĩa vụ. "
-        elif god == "Thiên Ấn" and branch == "Thân" and _text(_pill(payload, "year").get("branch")) == "Dần":
-            nuance += "Thân và Dần có quan hệ xung; chỉ luận thành sự kiện khi có thêm toàn cục và thời điểm kích hoạt. "
-        if god == "Chính Tài":
-            nuance += (
-                f"Can {stem} đặt trọng tâm vào việc tạo nguồn thu từ giá trị có người nhận: "
-                "cần làm rõ sản phẩm, giá bán, chi phí và phần tiền giữ lại. "
-                f"Khí {element or 'của chi'} ở chi {branch} chỉ là bối cảnh thúc đẩy hoặc thử thách "
-                "cách quản lý ấy, không biến Chính Tài thành Quan hay Sát. "
-            )
-        elif god == "Thất Sát":
-            nuance += (
-                f"Can {stem} đưa thử thách, áp lực cạnh tranh và trách nhiệm xử lý việc khó "
-                "ra phía trước; cần xác định quyền quyết định và sức của đội ngũ trước khi nhận việc. "
-                + (f"Dù cùng hành {use_element}, {stem} là Thất Sát, còn {use_stem} là can Dụng thần; "
-                   "không thể đọc hai can như cùng một vai trò. "
-                   if use_stem and _text(item.get('stem_element')) == use_element and stem != use_stem else "")
-            )
-        is_current = bool(current and item.get("index") == current.get("index"))
+            climate = f"Chi {branch} thuộc {element}. " if element else ""
+        nuance = ""
+        if stem == use_stem:
+            nuance = f"Can {stem} chính là can Dụng thần {use_stem} {use_element}, nên vai trò điều tiết của hành này đáng được chú ý khi xét toàn vận. "
+        elif _text(item.get("stem_element")) == use_element and use_stem:
+            nuance = f"Dù cùng hành {use_element}, {stem} mang vai trò {god}, còn {use_stem} là can Dụng thần. Ý nghĩa của vận vì thế cần được phân biệt với vai trò điều tiết của Dụng thần. "
+        is_current = bool(current and item.get("index") is not None and item.get("index") == current.get("index"))
         prefix = "Vận đang đi qua" if is_current else "Đại vận"
         paragraphs.append(f"{prefix} {label} ({context}): {stem} là {god} của Nhật Chủ {day_master}, gợi chủ đề {theme}. "
-                          f"{climate}{nuance}{_GOD_LONG_VIEW.get(god, '')} Bạn có thể {action}.")
-    paragraphs.append("Khi chọn thời điểm: Muốn biết năm nào nên mở rộng hoặc giảm tải, hãy đọc thêm lưu niên "
-                      "cùng sức khỏe, dòng tiền, gia đình và nguồn lực thực tế. Đại vận không tự ấn định chức vụ, tài sản, bệnh hay tuổi thọ.")
+            + meaning + " " + climate + nuance + cycle_branch_context(branch, bazi) + age_application(god, age_start))
+    paragraphs.append("Chọn thời điểm phù hợp: Đại vận chỉ là bối cảnh dài hạn. Khi đứng trước một quyết định quan trọng, cần xét thêm lưu niên, điều kiện thực tế và nguồn lực bạn đang có; không dùng một can hoặc chi để khẳng định thành bại.")
     return paragraphs
 
 
@@ -598,6 +546,18 @@ def synthesis_prose(payload: Mapping[str, Any]) -> list[str]:
         + ". Đây là ba dữ kiện cần đọc cùng nhau khi lựa chọn công việc và nhịp sống, "
         "không suy ra sẵn một nghề hay kết quả duy nhất."
     ]
+    age = current_age(payload)
+    if age is not None and (age < 18 or age >= 65):
+        # Life-stage applications must not inherit the working-adult sample synthesis.
+        paragraphs.extend(age_scoped_domain("career", payload))
+        paragraphs.extend(age_scoped_domain("wealth", payload))
+        if cycle.get("gan_zhi"):
+            try:
+                god = map_stem_to_ten_god(stem, _text(cycle.get("stem")))[0]
+            except (ValueError, TenGodsValidationError):
+                god = ""
+            paragraphs.append(f"Chặng hiện tại: Đại vận {cycle['gan_zhi']}. " + age_application(god, age))
+        return paragraphs
     tai = _has(payload, "Chính Tài", "Thiên Tài")
     peer = _text(month.get("ten_god"))
     if tai or peer:
@@ -620,7 +580,7 @@ def synthesis_prose(payload: Mapping[str, Any]) -> list[str]:
         window = f" ({start}–{end})" if start and end else ""
         paragraphs.append(f"Chặng hiện tại: Đại vận {current_name}{window} là bối cảnh để xem "
             "chuyên môn, trách nhiệm và dòng thu đang gặp thời như thế nào. "
-            + (f"{_text(cycle.get('stem'))} của vận không tự đồng nhất với Dụng thần {use_stem}; "
+            + (f"Can {_text(cycle.get('stem'))} của vận có vai trò riêng bên cạnh Dụng thần {use_stem}; "
                if _text(cycle.get("stem")) and use_stem and cycle.get("stem") != use_stem else "")
             + "khi chọn một năm hay quyết định lớn, hãy đặt thêm lưu niên và điều kiện thực tế cạnh Đại vận.")
     paragraphs.append("Điểm chốt: Lá số đưa ra một cách nhìn về nguồn lực và thời điểm. "
@@ -629,49 +589,29 @@ def synthesis_prose(payload: Mapping[str, Any]) -> list[str]:
     revised = pillar_synthesis(payload)
     if revised:
         # Keep current-cycle context when available.
-        return revised + [line for line in paragraphs if line.startswith("Chặng hiện tại:")]
+        return paragraphs[:1] + revised + [line for line in paragraphs if line.startswith("Chặng hiện tại:")]
     return paragraphs
 
 
 def recommendation_prose(payload: Mapping[str, Any]) -> list[str]:
-    """Actionable steps selected from the same published facts as the synthesis."""
-    bazi = _map(payload.get("bazi"))
-    if not _text(bazi.get("day_master")):
+    """A short priority list, not repeated chapter endings or business assumptions."""
+    if not _text(_map(payload.get("bazi")).get("day_master")):
         return []
-    useful = _map(payload.get("useful_god"))
     pattern = _text(_map(payload.get("pattern")).get("cach_cuc"))
     cycle = _map(_map(payload.get("luck")).get("current_cycle"))
-    use_stem, use_element = _text(useful.get("useful_stem")), _text(useful.get("useful_element"))
     current_name = _text(cycle.get("gan_zhi"))
-    peer = _text(_pill(payload, "month").get("ten_god")) in ("Kiếp Tài", "Tỷ Kiên")
-    palace = _text(_map(payload.get("calendar")).get("cung_phi"))
-    paragraphs = [
-        "Việc làm trong tháng tới: Chọn một công việc hoặc dịch vụ có thể bàn giao; "
-        "viết đầu vào cần có, kết quả sẽ giao, thời hạn và cách kiểm tra chất lượng. "
-        + (f"Mệnh cục {pattern} giúp bạn xây phương pháp, " if pattern == "Chính Ấn" else "Hãy dùng thế mạnh của bạn để làm ra đầu ra rõ, ")
-        + (f"còn Dụng thần {use_stem} {use_element} nhắc giữ trách nhiệm với lời đã hứa." if use_stem and use_element else
-           "và nói rõ ai chịu trách nhiệm khi kết quả cần sửa."),
-        "Tiền giữ được: Mỗi tháng tách số tiền thu về, chi phí để giao dịch vụ và phần còn lại. "
-        "Giữ quỹ sinh hoạt, dự phòng và khoản tái đầu tư thành các phần riêng. "
-        "Khi một ý tưởng cần thêm vốn, thử ở quy mô nhỏ và đặt trước mức chi có thể chịu được.",
-        "Giữ sức khi mở việc: Chọn giờ làm việc sâu, giờ trả lời khách và một giới hạn nhận việc mỗi tuần. "
-        "Nếu luôn phải làm thay người khác để kịp hạn, sửa khâu giao việc trước khi tiếp tục tăng số khách hoặc dự án.",
-    ]
-    if peer:
-        paragraphs.append("Hợp tác có ranh giới: Với người cùng góp sức, hãy ghi rõ ai giữ hồ sơ, "
-                          "ai chốt chi phí, ai chịu trách nhiệm trước khách và cách chia phần còn lại. "
-                          "Làm rõ từ đầu giúp giữ cả quan hệ lẫn chất lượng công việc.")
+    opening = "Việc nên ưu tiên: "
+    if pattern in ("Chính Ấn", "Thiên Ấn"):
+        opening += "Chọn một điều bạn đang hiểu rõ hoặc muốn học sâu, rồi biến nó thành một việc cụ thể có thể thực hiện. Kiểm tra điều đã học bằng trải nghiệm và trao đổi, thay vì chỉ tích lũy thêm thông tin."
+    elif pattern in ("Chính Tài", "Thiên Tài"):
+        opening += "Xem lại cách bạn phân bổ công sức và tiền bạc: điều gì thực sự cần, điều gì đang chiếm quá nhiều nguồn lực. Một lựa chọn có giá trị là lựa chọn bạn đủ sức duy trì, không chỉ hấp dẫn lúc bắt đầu."
+    elif pattern in ("Chính Quan", "Thất Sát"):
+        opening += "Làm rõ một trách nhiệm đang đặt lên vai mình: việc nào bạn cần tự quyết, việc nào có thể cùng người khác chia sẻ. Giữ lời cần đi cùng khả năng nói rõ giới hạn."
     else:
-        paragraphs.append("Quan hệ làm việc: Khi cần cộng sự, hãy thống nhất phạm vi, quyền quyết định "
-                          "và cách đánh giá kết quả trước khi giao một phần công việc quan trọng.")
-    if palace:
-        paragraphs.append(f"Không gian dễ sử dụng: Cung Phi {palace} là lớp để khảo sát hướng; "
-                          "hãy xem trước ánh sáng, độ thoáng, đường đi và chỗ trao đổi với khách. "
-                          "Chỉ luận sâu hướng nhà khi có hướng đo, mặt bằng và năm vào ở; "
-                          "không tăng một ngũ hành chỉ vì tên hành của Cung Phi.")
+        opening += "Chọn một mục tiêu vừa sức, làm đến nơi đến chốn và dành thời gian nhìn lại kết quả. Hướng phù hợp sẽ rõ hơn qua trải nghiệm thực tế."
+    paragraphs = [opening,
+        "Nguồn lực và quan hệ: Trước một cam kết mới, hãy cân nhắc thời gian, khoản chi và sự hỗ trợ thực sự có. Khi cùng người khác làm việc hoặc chăm lo gia đình, thống nhất phần mỗi người nhận để tránh kỳ vọng không được nói ra.",
+        "Giữ sức bền: Dành khoảng thời gian cho nghỉ ngơi và những quan hệ quan trọng. Khi lịch trình thay đổi, trao đổi sớm với người liên quan thay vì tự gánh rồi chờ đến lúc quá sức mới tháo gỡ."]
     if current_name:
-        paragraphs.append(f"Chọn nhịp trong vận {current_name}: Cuối mỗi quý, nhìn lại "
-                          "giá trị khách nhận được, phần tiền giữ lại, số giờ bản thân phải trực tiếp làm "
-                          "và mức hồi phục sau công việc. Nếu cả bốn cùng tốt lên, bạn mới có cơ sở mở rộng; "
-                          "quyết định năm cụ thể cần thêm lưu niên và hoàn cảnh thực tế.")
-    return pillar_recommendations(payload) + paragraphs
+        paragraphs.append(f"Chọn nhịp trong vận {current_name}: Cuối mỗi quý, nhìn lại điều đã làm được, phần nguồn lực còn lại và điều cần thay đổi. Đánh giá kế hoạch bằng kết quả thực tế, không chỉ vì tên vận được xem là thuận hay nghịch.")
+    return paragraphs

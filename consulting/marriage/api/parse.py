@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import json
+import math
+from dataclasses import asdict
 from typing import Any, Mapping
 
 from consulting.marriage.dto.request import (
@@ -41,13 +44,14 @@ def parse_consultation_request(
 
 def request_fingerprint(request: MarriageConsultationRequest) -> str:
     """Stable request identity for idempotency conflict checks. Not an idempotency key."""
-    return "|".join(
-        [
-            _person_fingerprint(request.person_a),
-            _person_fingerprint(request.person_b),
-            _options_fingerprint(request.options),
-        ]
-    )
+    payload = {
+        "person_a": asdict(request.person_a),
+        "person_b": asdict(request.person_b),
+        "options": asdict(request.options) if request.options else None,
+        # Business type and occupation are carried by client metadata.
+        "client": request.request_meta.client if request.request_meta else None,
+    }
+    return json.dumps(payload, sort_keys=True, ensure_ascii=False, separators=(",", ":"), allow_nan=False)
 
 
 def _parse_person(payload: Mapping[str, Any], label: str) -> MarriagePersonInput:
@@ -98,7 +102,7 @@ def _parse_options(payload: Mapping[str, Any] | None) -> MarriageConsultationOpt
         end = window_payload.get("end_year")
         if start is None or end is None:
             raise MarriageValidationError("luck_window_invalid")
-        window = MarriageLuckWindow(start_year=int(start), end_year=int(end))
+        window = MarriageLuckWindow(start_year=_year(start), end_year=_year(end))
     return MarriageConsultationOptions(
         include_luck=_optional_bool(payload.get("include_luck")),
         luck_window=window,
@@ -124,38 +128,6 @@ def _parse_meta(payload: Mapping[str, Any] | None, header_key: str | None) -> Re
     return RequestMeta(request_id=request_id, idempotency_key=key, client=client)
 
 
-def _person_fingerprint(person: MarriagePersonInput) -> str:
-    """Fingerprint person identity fields. Not used as the idempotency key."""
-    return ",".join(
-        [
-            person.gender.value,
-            person.birth_date,
-            person.birth_time or "",
-            person.full_name or "",
-            person.timezone or "",
-        ]
-    )
-
-
-def _options_fingerprint(options: MarriageConsultationOptions | None) -> str:
-    """Fingerprint approved options."""
-    if options is None:
-        return ""
-    window = ""
-    if options.luck_window is not None:
-        window = f"{options.luck_window.start_year}-{options.luck_window.end_year}"
-    return ",".join(
-        [
-            str(options.language or ""),
-            str(options.audience or ""),
-            str(options.reading_level or ""),
-            str(options.expert_mode),
-            str(options.include_score),
-            window,
-        ]
-    )
-
-
 def _optional_str(value: object | None) -> str | None:
     """Return a stripped string or None. Empty string becomes None."""
     if value is None:
@@ -177,4 +149,28 @@ def _optional_float(value: object | None) -> float | None:
     """Return a float when provided."""
     if value is None or value == "":
         return None
-    return float(str(value))
+    try:
+        if isinstance(value, bool):
+            raise ValueError("boolean coordinate")
+        number = float(str(value))
+    except (TypeError, ValueError, OverflowError) as exc:
+        raise MarriageValidationError("birth_place_coordinate_invalid") from exc
+    if not math.isfinite(number):
+        raise MarriageValidationError("birth_place_coordinate_invalid")
+    return number
+
+
+def _year(value: object) -> int:
+    """Accept whole calendar years, never silently truncate floats or booleans."""
+    try:
+        if isinstance(value, bool):
+            raise ValueError("boolean year")
+        raw = str(value).strip()
+        if not raw.isdecimal():
+            raise ValueError("non-integral year")
+        year = int(raw)
+        if not 1 <= year <= 9999:
+            raise ValueError("year outside calendar")
+        return year
+    except (TypeError, ValueError, OverflowError) as exc:
+        raise MarriageValidationError("luck_window_invalid") from exc

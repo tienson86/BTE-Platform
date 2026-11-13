@@ -34,6 +34,7 @@ from applications.api.auth.usage_access import register_usage_access
 from applications.api.routes.activity import router as activity_router, register_activity_errors
 from applications.api.routes.communications import router as communications_router
 from applications.api.routes.knowledge import router as knowledge_router
+from applications.api.routes.bone_weight import router as bone_weight_router
 from applications.api.routes.member_catalog import router as member_catalog_router
 from applications.api.routes.courses import router as courses_router
 from applications.api.routes import export as export_router
@@ -96,6 +97,7 @@ def create_app() -> FastAPI:
     app.include_router(communications_router, prefix=settings.api_prefix)
     app.include_router(knowledge_router, prefix=settings.api_prefix)
     app.include_router(courses_router, prefix=settings.api_prefix)
+    app.include_router(bone_weight_router, prefix=settings.api_prefix)
     app.include_router(member_catalog_router, prefix=settings.api_prefix)
     app.include_router(customers_router.router, prefix=settings.api_prefix)
     app.include_router(cases_router.router, prefix=settings.api_prefix)

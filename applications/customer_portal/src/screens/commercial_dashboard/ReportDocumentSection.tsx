@@ -84,10 +84,10 @@ type DomainItem = {
   readonly group: DomainGroup;
 };
 
-function inferDomainTitle(paragraph: string, index: number): string {
+function inferDomainTitle(paragraph: string, _index: number): string {
   const normalized = paragraph.toLocaleLowerCase("vi-VN");
   const matched = DOMAIN_TITLE_RULES.find(([pattern]) => pattern.test(normalized));
-  return matched ? matched[1] : `Góc nhìn ${index + 1}`;
+  return matched ? matched[1] : "Ứng dụng trong đời sống";
 }
 
 function inferDomainGroup(title: string, body: string): DomainGroup {
@@ -109,7 +109,7 @@ function splitDomainParagraph(paragraph: string, index: number, activeGroup?: Do
   const colonIndex = paragraph.indexOf(":");
   const title = colonIndex <= 0 ? inferDomainTitle(paragraph, index) : paragraph.slice(0, colonIndex).trim();
   const rawBody = colonIndex <= 0 ? paragraph : paragraph.slice(colonIndex + 1).trim();
-  const compact = compactLegacyUsefulGod(title, rawBody);
+  const compact = compactLegacyUsefulGod(isPlaceholderTitle(title) ? inferDomainTitle(rawBody, index) : title, rawBody);
   const explicitGroup = colonIndex > 0 ? DOMAIN_GROUPS.find((group) => group.pattern.test(title)) : undefined;
   return { title: compact.title, body: compact.body, group: explicitGroup ?? activeGroup ?? inferDomainGroup(title, rawBody) };
 }
@@ -197,14 +197,14 @@ const STRUCTURED_CHAPTER_IDS = new Set([
 ]);
 
 const STRUCTURED_CHAPTER_META: Record<string, { readonly kicker: string; readonly title: string; readonly cardTitle: string }> = {
-  four_pillars: { kicker: "Khung tứ trụ", title: "Bốn trụ và vai trò từng cung", cardTitle: "Luận trụ" },
-  day_master: { kicker: "Nhật chủ", title: "Khí chất cốt lõi của mệnh", cardTitle: "Luận Nhật chủ" },
-  strength_structure_useful_god: { kicker: "Trục cân bằng", title: "Thân vượng/nhược, Mệnh cục và Dụng thần", cardTitle: "Luận trục" },
-  ten_gods: { kicker: "Thập thần", title: "Vai trò đời sống qua từng tín hiệu", cardTitle: "Luận Thập thần" },
-  shen_sha: { kicker: "Thần sát", title: "Tín hiệu bổ sung cần quan sát", cardTitle: "Luận Thần sát" },
-  bone_weight: { kicker: "Cân xương", title: "Nền lượng và nhịp tích lũy", cardTitle: "Luận Cân xương" },
-  palace_feng_shui: { kicker: "Cung Phi", title: "Nhóm trạch và phong thủy ứng dụng", cardTitle: "Luận Cung Phi" },
-  luck_cycles: { kicker: "Đại vận", title: "Nhịp từng chặng và cách ứng dụng", cardTitle: "Luận Đại vận" },
+  four_pillars: { kicker: "Khung tứ trụ", title: "Bốn trụ và vai trò từng cung", cardTitle: "Vai trò trong Tứ trụ" },
+  day_master: { kicker: "Nhật chủ", title: "Khí chất cốt lõi của mệnh", cardTitle: "Khí chất và cách ứng xử" },
+  strength_structure_useful_god: { kicker: "Trục cân bằng", title: "Thân vượng/nhược, Mệnh cục và Dụng thần", cardTitle: "Cân bằng toàn cục" },
+  ten_gods: { kicker: "Thập thần", title: "Vai trò đời sống qua từng tín hiệu", cardTitle: "Ý nghĩa và mối liên hệ" },
+  shen_sha: { kicker: "Thần sát", title: "Tín hiệu bổ sung cần quan sát", cardTitle: "Ý nghĩa bổ trợ" },
+  bone_weight: { kicker: "Cân xương", title: "Nền lượng và nhịp tích lũy", cardTitle: "Ý nghĩa cân lượng" },
+  palace_feng_shui: { kicker: "Cung Phi", title: "Nhóm trạch và phong thủy ứng dụng", cardTitle: "Ứng dụng phương vị" },
+  luck_cycles: { kicker: "Đại vận", title: "Nhịp từng chặng và cách ứng dụng", cardTitle: "Trọng tâm giai đoạn" },
   synthesis: { kicker: "Tổng hợp", title: "Điểm mạnh, rủi ro và trọng tâm hành động", cardTitle: "Kết luận" },
   recommendations: { kicker: "Khuyến nghị", title: "Việc nên ưu tiên sau khi đọc lá số", cardTitle: "Khuyến nghị" },
 };
@@ -240,6 +240,10 @@ function shouldUseStructuredVisual(chapterId: string): boolean {
   return STRUCTURED_CHAPTER_IDS.has(chapterId);
 }
 
+function isPlaceholderTitle(title: string): boolean {
+  return /^(?:Luận(?: giải)?(?: .+)?|Góc nhìn(?: bổ sung)?)(?: \d+)$/i.test(title.trim());
+}
+
 function splitStructuredParagraph(chapterId: string, paragraph: string, index: number): StructuredItem {
   const value = paragraph.trim();
   const meta = STRUCTURED_CHAPTER_META[chapterId] ?? {
@@ -249,6 +253,9 @@ function splitStructuredParagraph(chapterId: string, paragraph: string, index: n
   };
   const prefix = STRUCTURED_PREFIX_RULES.find(([pattern]) => pattern.test(value));
   const colonIndex = value.indexOf(":");
+  if (colonIndex > 0 && isPlaceholderTitle(value.slice(0, colonIndex))) {
+    return splitStructuredParagraph(chapterId, value.slice(colonIndex + 1).trim(), index);
+  }
   if (chapterId === "luck_cycles" && value.startsWith("Năm năm tới")) {
     return { title: "Lộ trình 5 năm", body: value };
   }
@@ -263,7 +270,7 @@ function splitStructuredParagraph(chapterId: string, paragraph: string, index: n
     };
   }
   return {
-    title: `${meta.cardTitle} ${index + 1}`,
+    title: meta.cardTitle,
     body: value,
   };
 }
@@ -346,13 +353,13 @@ function ReportChapter({
         </span>
         <h3 className="bte-report-doc__chapter-title">{chapter.title}</h3>
       </header>
-      {!visualConsumesParagraphs && leadParagraph ? (
+      {!visualConsumesParagraphs && chapter.id !== "five_elements" && leadParagraph ? (
         <p className="bte-report-doc__lead">
           {leadParagraph}
         </p>
       ) : null}
       <ReportChapterVisual chapter={chapter} model={model} />
-      {!visualConsumesParagraphs && bodyParagraphs.map((paragraph, paragraphIndex) => (
+      {!visualConsumesParagraphs && (chapter.id === "five_elements" ? chapter.paragraphs : bodyParagraphs).map((paragraph, paragraphIndex) => (
         <p key={`${chapter.id}-p-${paragraphIndex + 1}`} className="bte-report-doc__paragraph">
           {paragraph}
         </p>

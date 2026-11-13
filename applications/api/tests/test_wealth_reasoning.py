@@ -67,7 +67,8 @@ def test_case_0001_money_source_is_evidence_based_not_job_based() -> None:
     assert "Điểm rò tiền" in customer_text
     assert "Khả năng giữ tiền" in customer_text
     assert "Con đường tích sản" in customer_text
-    assert "nghề hiện tại" in customer_text
+    assert "hợp logic" not in customer_text
+    assert "chưa phải xác nhận nguồn thu" in customer_text
     assert "Engine" not in customer_text
     assert "phát tài" not in customer_text
 

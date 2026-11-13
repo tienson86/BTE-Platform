@@ -56,8 +56,9 @@ export function businessApiBase(): string {
 
 export async function createBusinessConsultation(
   body: CreateBusinessConsultationBody,
+  idempotencyKey: string,
 ): Promise<MarriageEnvelope<MarriageConsultationDto>> {
-  return request("POST", businessApiBase(), body);
+  return request("POST", businessApiBase(), body, idempotencyKey);
 }
 
 export async function getBusinessConsultation(
@@ -132,8 +133,10 @@ async function request<T>(
   method: string,
   url: string,
   body?: unknown,
+  idempotencyKey?: string,
 ): Promise<MarriageEnvelope<T>> {
   const headers: Record<string, string> = { Accept: "application/json" };
+  if (idempotencyKey) headers["Idempotency-Key"] = idempotencyKey;
   if (body !== undefined) headers["Content-Type"] = "application/json";
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), BUSINESS_FETCH_TIMEOUT_MS);

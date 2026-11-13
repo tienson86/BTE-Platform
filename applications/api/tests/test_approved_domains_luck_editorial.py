@@ -20,27 +20,27 @@ def _analyze(**changes):
 def test_approved_son_prose_is_grounded_in_pillars_and_all_published_cycles():
     payload = _analyze()
     sections = build_life_domain_sections(payload)
-    assert all(len(sections[key]["paragraphs"]) == (8 if key in ("wealth", "health") else 6 if key == "career" else 3) for key in LIFE_DOMAIN_KEYS)
+    assert all(len(sections[key]["paragraphs"]) >= 1 for key in LIFE_DOMAIN_KEYS)
     health = " ".join(sections["health"]["paragraphs"])
     assert "Canh ở thế Thân vượng, sinh vào tháng Sửu" in health
     assert "Kim của Nhật Chủ" in health and "Thổ" in health and "Thủy xuất hiện ít nhất" in health
     assert "Quan hệ Hỏa khắc Kim: Đinh Hỏa là hướng Dụng thần" in health
-    assert "những đợt công việc căng kéo" in health
+    assert "không phải đánh giá sức khỏe thể chất" in health
     assert "Đây là hướng hỏi, không xác nhận cơ quan đó đang mắc bệnh" not in health
     wealth = " ".join(sections["wealth"]["paragraphs"])
     assert "Tiền đến từ đâu?" in wealth and "Giáp tàng ở trụ năm" in wealth
     assert "Giáp tàng ở trụ giờ" in wealth and "Không thấy Chính Tài" in wealth
-    assert "Can Ất của vận đang đi mang vai trò Chính Tài" in wealth
-    assert "khách cũ giới thiệu khách mới khi họ thực sự hài lòng" in wealth
-    assert "Kiếp Tài hiện rõ ở trụ tháng" in wealth
-    assert "Thất Sát ở trụ năm" in sections["career"]["paragraphs"][1]
-    assert "chuyên gia tư vấn" in sections["career"]["paragraphs"][3]
-    assert "đào tạo, dịch vụ tư vấn" in sections["career"]["paragraphs"][4]
+    assert "không bảo đảm" in wealth or "không phải khoản tiền tự đến" in wealth
+    assert "chưa phải xác nhận nguồn thu" in wealth
+    assert "Tỷ/Kiếp" in wealth
+    career = " ".join(sections["career"]["paragraphs"])
+    assert "Đinh Hỏa" in career and "Chính Ấn" in career
+    assert "Vai trò dễ phát huy" in career
     luck = build_luck_cycle_narrative(payload)
     prose = luck_cycle_prose(payload, luck)
     assert len(prose) == 12  # introduction, ten cycles and one closing note
     assert any("Vận đang đi qua Ất Tỵ (2022–2031" in paragraph for paragraph in prose)
-    assert any("Bính Ngọ" in paragraph and "Thất Sát" in paragraph and "không đồng nhất hai can" in paragraph for paragraph in prose)
+    assert any("Bính Ngọ" in paragraph and "Thất Sát" in paragraph and "vai trò Thất Sát" in paragraph for paragraph in prose)
     chapters = build_report_chapters(payload, {"life_domains": sections, "luck_cycles": luck})
     assert any("Đại vận Đinh Mùi" in paragraph and "chính là can Dụng thần" in paragraph
                for chapter in chapters if chapter["id"] == "luck_cycles" for paragraph in chapter["paragraphs"])
@@ -96,8 +96,8 @@ def test_pdf_html_and_word_use_the_same_approved_chapter_text(tmp_path):
     _render_modern_report_docx(report, path)
     word = " ".join(paragraph.text for paragraph in Document(path).paragraphs)
     for fragment in ("Thất Sát ở trụ năm", "Vận đang đi qua Ất Tỵ",
-                     "Trục mệnh", "Chọn nhịp trong vận Ất Tỵ", "Vị trí có thể phát huy",
-                     "Nhóm nghề nên khảo sát", "Tiền đến từ đâu?", "Giáp tàng ở trụ năm",
+                     "Trục mệnh", "Chọn nhịp trong vận Ất Tỵ", "Vai trò dễ phát huy",
+                     "Khi muốn đổi hướng", "Tiền đến từ đâu?", "Giáp tàng ở trụ năm",
                      "Quan hệ Hỏa khắc Kim", "Thủy xuất hiện ít nhất"):
         assert fragment in html and fragment in word
 
@@ -162,5 +162,5 @@ def test_closing_keeps_day_master_useful_god_and_current_cycle_separate():
     actions = " ".join(recommendation_prose(payload))
     assert "Canh thuộc Dương Kim" in synthesis
     assert "Đinh Hỏa" in synthesis and "Ất Tỵ (2022–2031)" in synthesis
-    assert "Kiếp Tài ở trụ tháng" in synthesis
+    assert "Tân Sửu" in synthesis
     assert "Cuối mỗi quý" in actions

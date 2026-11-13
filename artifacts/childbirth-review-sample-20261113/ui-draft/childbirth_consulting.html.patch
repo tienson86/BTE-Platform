@@ -1,0 +1,37 @@
+diff --git a/applications/customer_portal/templates/childbirth_consulting.html b/applications/customer_portal/templates/childbirth_consulting.html
+index 72789917..a2b440d1 100644
+--- a/applications/customer_portal/templates/childbirth_consulting.html
++++ b/applications/customer_portal/templates/childbirth_consulting.html
+@@ -7,7 +7,7 @@
+   <header class="mc-intro">
+     <p class="muted">Tư vấn → Tư vấn sinh con</p>
+     <h1>Tư vấn sinh con</h1>
+-    <p class="muted">Chọn các năm sinh con phù hợp cho vợ chồng mới kết hôn dựa trên lá số của bố và mẹ.</p>
++    <p class="muted">So sánh các năm theo Bát Tự và Cung Phi của bố mẹ để tham khảo. Kết quả không thay thế đánh giá sức khỏe sinh sản hoặc tư vấn y khoa.</p>
+   </header>
+ 
+   <form class="cb-form" data-testid="childbirth-form" novalidate>
+@@ -86,7 +86,7 @@
+     <section class="bte-card cb-options" aria-label="Khoảng năm cần xét">
+       <label>
+         <span>Năm bắt đầu xét</span>
+-        <input id="cb-start-year" name="start_year" type="number" min="2026" max="2100" />
++        <input id="cb-start-year" name="start_year" type="number" min="2026" max="2099" />
+       </label>
+       <label>
+         <span>Số năm tiếp theo</span>
+@@ -95,7 +95,7 @@
+     </section>
+ 
+     <div class="mc-cta">
+-      <button type="submit" data-testid="submit-childbirth">Xem năm sinh con phù hợp</button>
++      <button type="submit" data-testid="submit-childbirth">So sánh các năm sinh con</button>
+     </div>
+   </form>
+ 
+@@ -109,4 +109,4 @@
+     <div class="mc-history__list" data-testid="childbirth-history"></div>
+   </section>
+ </main>
+-<script src="/static/js/childbirth_consulting.js?v=BTE-d75d23fe86792a27" defer></script>
++<script src="/static/js/childbirth_consulting.js?v=childbirth-review-20261113" defer></script>

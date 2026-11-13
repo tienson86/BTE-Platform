@@ -33,17 +33,47 @@ def _quan_an(payload):
     return {("Đinh", "Chính Quan"), ("Kỷ", "Chính Ấn")} <= gods
 
 def day_personality(payload):
-    stem, _ = _day(payload)
-    if _canh_ngo(payload):
-        return [
-            "Canh thuộc Dương Kim, ví như sắt thép có độ cứng và đường nét rõ ràng. Canh gặp Ngọ Hỏa gợi hình ảnh kim qua lửa rèn: vẫn giữ được sự cứng cỏi bên trong, nhưng cách nói năng và cư xử bên ngoài có phần mềm mại hơn. Khi bất đồng, bạn có thể lựa lời để người đối diện không mất mặt. Nếu câu chuyện chạm đến uy tín, lời hứa hoặc điều bạn cho là đúng, bạn khó nhượng bộ chỉ để giữ hòa khí.",
-            "Nét Mộc Dục ở Canh Ngọ thể hiện qua sự chỉn chu và sức hút tự nhiên. Bạn có thể ăn mặc đơn giản mà vẫn tạo ấn tượng, vì biết chọn thứ hợp với mình và hợp hoàn cảnh. Cái duyên còn nằm ở cách nói chuyện: biết lúc nào nên nghiêm túc, lúc nào có thể đùa một câu để không khí nhẹ đi.",
-            "Cùng một lời góp ý, nếu được nói riêng và có lý lẽ, bạn có thể tiếp thu nhanh; nếu nói trước mặt người khác với giọng coi nhẹ, bạn dễ nhớ lâu. Bạn cũng tò mò, thích thử điều mới. Điểm dễ vướng là khi việc cũ bước vào giai đoạn chậm và lặp lại, còn hướng mới chỉ vừa xuất hiện và chưa bộc lộ khó khăn. Khi ấy, hãy thử đổi cách làm trước khi đổi cả mục tiêu.",
-        ]
-    if stem in _STEMS:
-        nature, prose = _STEMS[stem]
-        return [f"{stem} thuộc {nature}. {prose}"]
-    return []
+    stem, day = _day(payload)
+    if stem not in _STEMS:
+        return []
+    nature, prose = _STEMS[stem]
+    result = [f"{stem} thuộc {nature}, là Thiên Can của trụ ngày và được gọi là Nhật Chủ. Theo hình tượng truyền thống của {stem}, {prose[0].lower() + prose[1:]}"]
+    branch = str(day.get("branch") or "")
+    if not branch:
+        return result
+    rows = _map(payload.get("ten_gods")).get("hidden") or []
+    entries = []
+    roles = set()
+    for row in rows:
+        if not isinstance(row, Mapping) or row.get("pillar") != "day":
+            continue
+        if row.get("branch") and row.get("branch") != branch:
+            continue
+        hidden_stem = str(row.get("hidden_stem") or row.get("stem") or "")
+        role = str(row.get("ten_god") or "")
+        if hidden_stem and role:
+            fact = f"{hidden_stem} {role}"
+            if fact not in entries:
+                entries.append(fact)
+                roles.add(role)
+    if entries:
+        result.append(f"Ở trụ ngày {stem} {branch}, chi {branch} chứa {', '.join(entries)}. Những thành phần này làm rõ hơn cách bạn cân bằng nhu cầu riêng với các trách nhiệm và mối quan hệ gần gũi; chúng không thay thế toàn bộ hoàn cảnh sống thực tế.")
+        if {"Chính Quan", "Chính Ấn"} <= roles:
+            result.append("Chính Quan và Chính Ấn cùng hiện ở trụ ngày gợi sự kết hợp giữa trách nhiệm và nhu cầu có nền tảng vững. Bạn có thể coi trọng việc hiểu rõ trước khi nhận lời, đồng thời muốn người thân tin vào điều mình làm. Điểm cần giữ là sự rõ ràng đi cùng lắng nghe: một cách làm có lý vẫn cần được trao đổi để người cùng sống thấy mình được tôn trọng.")
+        elif roles & {"Thực Thần", "Thương Quan"} and roles & {"Tỷ Kiên", "Kiếp Tài"}:
+            result.append("Nét tự chủ của Tỷ Kiên hoặc Kiếp Tài đi cùng nhu cầu biểu đạt của Thực Thần hoặc Thương Quan tạo một chủ đề đáng chú ý: bạn cần được nói điều mình nghĩ, nhưng cũng cần để người thân có khoảng riêng. Khi bất đồng, nói rõ mong muốn từ sớm thường hữu ích hơn tự lo mọi việc rồi chỉ chia sẻ khi đã mệt.")
+        elif roles & {"Chính Quan", "Thất Sát"}:
+            result.append("Quan hoặc Sát ở trụ ngày làm nổi bật chủ đề trách nhiệm trong đời sống riêng. Điều đáng đối chiếu là bạn có đang nhận quá nhiều phần việc vì muốn mọi chuyện ổn thỏa hay không. Sự chu toàn bền hơn khi trách nhiệm được chia sẻ rõ ràng, thay vì một người phải đoán hoặc gánh thay cho người còn lại.")
+        elif roles & {"Chính Tài", "Thiên Tài"}:
+            result.append("Tài tinh ở trụ ngày gợi cách bạn chăm lo cho đời sống gần gũi bằng những việc cụ thể. Điều đáng đối chiếu là cách hai bên chia sẻ thời gian, công sức và nguồn lực. Sự chu đáo dễ được cảm nhận hơn khi bạn hỏi người kia cần gì, thay vì chỉ cố lo đủ theo suy nghĩ của mình.")
+        elif roles & {"Chính Ấn", "Thiên Ấn"}:
+            result.append("Ấn tinh ở trụ ngày làm nổi bật nhu cầu hiểu và được thấu hiểu trong đời sống riêng. Bạn có thể tìm sự yên tâm ở một cuộc trò chuyện đủ sâu hoặc ở người sẵn lòng cùng mình tìm lời giải. Hãy nói rõ lúc nào cần lời khuyên và lúc nào chỉ cần người kia lắng nghe, để sự quan tâm không trở thành quyết định thay nhau.")
+        elif roles & {"Thực Thần", "Thương Quan"}:
+            result.append("Thực Thần hoặc Thương Quan ở trụ ngày gợi nhu cầu biểu đạt và chia sẻ điều mình cảm nhận. Một việc cùng làm, một ý tưởng được lắng nghe hoặc một cuộc trò chuyện không vội có thể giúp quan hệ gần gũi hơn. Khi bất đồng, hãy nói mong muốn cụ thể và dành chỗ cho cách nhìn khác, thay vì cố tìm ngay ai đúng.")
+        elif roles & {"Tỷ Kiên", "Kiếp Tài"}:
+            result.append("Tỷ Kiên hoặc Kiếp Tài ở trụ ngày gợi chủ đề tự chủ trong những quan hệ gần. Bạn có thể coi trọng việc mỗi người có tiếng nói và giữ được lựa chọn riêng. Khi có việc chung, nói rõ phần mình nhận và phần cần bàn cùng nhau giúp sự độc lập đi cùng gắn bó, thay vì khiến hai người phải tự xoay xở riêng.")
+    return result
+
 
 def day_domain(key, payload):
     if not (_canh_ngo(payload) and _quan_an(payload)):

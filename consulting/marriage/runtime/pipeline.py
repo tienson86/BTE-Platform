@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from contextvars import ContextVar
 import time
 from datetime import datetime, timezone
 from typing import Callable
@@ -59,8 +60,32 @@ class MarriageRuntimeOrchestrator(MarriageOrchestrator):
     ) -> None:
         self._validation = validation
         self._canonical_adapter = canonical_adapter
-        self._session: MarriageRuntimeSession | None = None
-        self._pending_traces: list[StageTrace] = []
+        self._session_context: ContextVar[MarriageRuntimeSession | None] = ContextVar(
+            f"marriage_session_{id(self)}", default=None
+        )
+        self._traces_context: ContextVar[list[StageTrace] | None] = ContextVar(
+            f"marriage_traces_{id(self)}", default=None
+        )
+
+    @property
+    def _session(self) -> MarriageRuntimeSession | None:
+        return self._session_context.get()
+
+    @_session.setter
+    def _session(self, value: MarriageRuntimeSession | None) -> None:
+        self._session_context.set(value)
+
+    @property
+    def _pending_traces(self) -> list[StageTrace]:
+        traces = self._traces_context.get()
+        if traces is None:
+            traces = []
+            self._traces_context.set(traces)
+        return traces
+
+    @_pending_traces.setter
+    def _pending_traces(self, value: list[StageTrace]) -> None:
+        self._traces_context.set(value)
 
     @property
     def session(self) -> MarriageRuntimeSession | None:

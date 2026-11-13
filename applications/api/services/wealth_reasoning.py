@@ -77,7 +77,7 @@ def build_wealth_reasoning(payload: Mapping[str, Any]) -> dict[str, Any]:
     outcome = _wealth_outcome(occurrences, peer, storage, strength_gate, flow)
     timing = _timing(payload, wealth_stems, occurrences, pillars, wealth_element)
     findings = _findings(stars, peer, flow, storage, strength_gate, timing)
-    paragraphs = _customer_paragraphs(money_sources, outcome, peer, storage, timing)
+    paragraphs = _customer_paragraphs(money_sources, outcome, peer, storage, timing, stars)
 
     return {
         "status": "ready",
@@ -143,7 +143,10 @@ def analyze_wealth_modifier(
 def customer_wealth_paragraphs(payload: Mapping[str, Any]) -> list[str]:
     reasoning = build_wealth_reasoning(payload)
     customer = _mapping(reasoning.get("customer"))
-    return _text_list(customer.get("paragraphs"))
+    paragraphs = _text_list(customer.get("paragraphs"))
+    from .customer_voice_standard import age_scoped_domain
+    age_copy = age_scoped_domain("wealth", payload)
+    return paragraphs[:2] + age_copy if age_copy else paragraphs
 
 
 def _wealth_stems(day_element: str, day_polarity: str) -> dict[str, str]:
@@ -626,32 +629,57 @@ def _findings(
 
 
 def _customer_paragraphs(
-    sources: Sequence[Mapping[str, Any]],
-    outcome: Mapping[str, Any],
-    peer: Mapping[str, Any],
-    storage: Mapping[str, Any],
-    timing: Mapping[str, Any],
+    sources: Sequence[Mapping[str, Any]], outcome: Mapping[str, Any],
+    peer: Mapping[str, Any], storage: Mapping[str, Any], timing: Mapping[str, Any],
+    stars: Mapping[str, Any] | None = None,
 ) -> list[str]:
-    source_labels = [str(item.get("label")) for item in sources if item.get("label")]
-    paragraphs = [
-        "Tiền đến từ đâu?: " + (
-            "Cấu trúc lá số chỉ ra nguồn tiền hợp logic đến từ " + "; ".join(source_labels) + ". Đây là kết luận từ vị trí Tài tinh, trụ chứa Tài và đường Tài đi qua Quan/Sát - Ấn, không dựa vào nghề hiện tại."
-            if source_labels else "Chưa đủ bằng chứng Tài tinh rõ để chốt nguồn tiền riêng; cần đọc qua năng lực tạo giá trị và vận kích hoạt."
-        ),
-        "Kiếm tiền bằng cách nào?: Nền phù hợp là biến quan hệ thị trường thành niềm tin, rồi biến niềm tin thành dịch vụ, sản phẩm, chuyên môn hoặc dự án có đầu ra đo được. Tài xuất hiện chỉ mở chủ đề tiền bạc; có kiếm được hay không còn tùy cách tạo giá trị và kỷ luật thực thi.",
-        "Điểm rò tiền: " + (
-            "Kiếp Tài/Tỷ Kiên cho thấy cạnh tranh, cộng sự, chi phí vận hành, chia lợi ích hoặc tái đầu tư có thể làm dòng tiền bị mỏng đi. Vì vậy hợp tác, nhân sự và phần chia lợi nhuận cần ranh giới rõ."
-            if peer.get("state") == "wealth_contested_by_peer" else "Chưa thấy áp lực Tỷ/Kiếp nổi bật; vẫn cần kiểm soát chi phí và quyết định mở rộng."
-        ),
-        "Khả năng giữ tiền: " + (
-            "Khả năng tạo tiền có thể tốt hơn khả năng giữ tiền tự nhiên. Nên tách doanh thu, lợi nhuận, quỹ dự phòng và phần tái đầu tư; không lấy doanh thu lớn làm bằng chứng đã giữ được Tài."
-            if outcome.get("wealth_retention") == "challenged" else "Có thể giữ tiền tốt hơn khi duy trì kỷ luật dòng tiền và không để cơ hội ngắn hạn phá kế hoạch dài hạn."
-        ),
-        "Con đường tích sản: " + (
-            f"Tài thuộc {storage.get('wealth_element')} mộ tại {storage.get('wealth_storage_branch')}; nguyên cục không sẵn Tài khố này, nên tích sản thiên về quá trình chuyển cơ hội thành hệ thống, dự án dài hạn và tài sản hóa về sau. Khi vận có {storage.get('wealth_storage_branch')}, vẫn phải xét khố có Tài, Tài nhập khố và khố có được mở hay không; không dùng quy tắc thô 'có khố là giàu'."
-            if not storage.get("natal_storage_present") else "Nguyên cục có dấu hiệu Tài khố, nhưng vẫn cần xét khố có Tài, có nhập khố và có được mở hay không."
-        ),
-    ]
+    """Write only from the chart's wealth evidence, not the person's known job."""
+    paragraphs = []
+    for kind in ("indirect_wealth", "direct_wealth"):
+        star = _mapping((stars or {}).get(kind))
+        name = _text(star.get("ten_god"))
+        if not name:
+            continue
+        facts = []
+        for raw in _list(star.get("occurrences")):
+            hit = _mapping(raw)
+            place = PILLAR_LABELS.get(_text(hit.get("pillar")), "")
+            if place:
+                fact = f"{star.get('stem')} {'lộ' if hit.get('exposed') else 'tàng'} ở trụ {place.lower()}"
+                if fact not in facts:
+                    facts.append(fact)
+        if facts:
+            meaning = ("Thiên Tài gợi khả năng nhận ra nhu cầu, kết nối người và nguồn lực để tạo giá trị mới. "
+                       if kind == "indirect_wealth" else
+                       "Chính Tài gợi hướng tạo thu nhập từ công sức đều đặn, trách nhiệm rõ và chất lượng ổn định. ")
+            paragraphs.append(f"{name} trong lá số: " + "; ".join(facts) + ". " + meaning
+                + ("Vì Tài nằm trong tàng can, khả năng ấy cần được nuôi dưỡng và thể hiện bằng việc cụ thể, không phải khoản tiền tự đến."
+                   if not star.get("exposed") else "Tài lộ là dấu hiệu dễ nhận diện trong cấu trúc, không bảo đảm thu nhập hay mức giàu có."))
+        else:
+            paragraphs.append(f"{name} trong lá số: Không thấy {name} trong các can của nguyên cục. Điều đó không đồng nghĩa bạn không thể có nguồn thu tương ứng; vẫn cần xét khả năng thực tế và tác động của vận.")
+    source_ids = {_text(item.get("id")) for item in sources}
+    possible = []
+    if "market_network_clients" in source_ids:
+        possible.append("các mối liên hệ bên ngoài và nhu cầu bạn có thể đáp ứng")
+    if "expertise_reputation_trust" in source_ids:
+        possible.append("chuyên môn được người khác tin cậy khi có kết quả thực tế")
+    if "long_term_projects_assets" in source_ids:
+        possible.append("công việc hoặc dự án cần tích lũy lâu dài")
+    paragraphs.append("Tiền đến từ đâu?: " + ("Sự phối hợp giữa những dấu hiệu có trong lá số gợi các hướng có thể khảo sát: "
+        + "; ".join(possible) + ". Đây là cách diễn giải về khả năng tạo giá trị, chưa phải xác nhận nguồn thu bạn đang có."
+        if possible else "Chưa đủ căn cứ để chỉ một nguồn tiền riêng. Nên đối chiếu công việc bạn làm tốt, nhu cầu thực tế và phần thu nhập có thể giữ lại trước khi lựa chọn."))
+    paragraphs.append("Kiếm tiền bằng cách nào?: Hãy bắt đầu từ điều có người thực sự cần và phần việc bạn đủ năng lực đảm nhận. Khi nhận một công việc tạo thu nhập, cần thống nhất phạm vi, thời hạn và cách thanh toán. Sự chu đáo có giá trị khi đi cùng giới hạn rõ, để bạn không phải bỏ thêm công sức mà không biết phần nào được ghi nhận.")
+    paragraphs.append("Điểm rò tiền: " + ("Tỷ/Kiếp có mặt trong lá số, gợi chủ đề chia sẻ nguồn lực và lợi ích. Dấu này không tự xác nhận có Tài tinh hoặc có tiền để phân chia. Khi góp sức hay góp tiền, hãy thống nhất phần đóng góp, quyền quyết định và trách nhiệm; không suy từ dấu hiệu ấy rằng một người cụ thể sẽ gây thiệt hại."
+        if peer.get("state") == "wealth_contested_by_peer" else "Chưa có dấu hiệu Tỷ/Kiếp nổi bật để dẫn dắt phần luận này. Dù vậy, một kế hoạch vẫn cần tính đủ chi phí và khoản dự phòng trước khi thực hiện."))
+    paragraphs.append("Khả năng giữ tiền: " + ("Chủ đề chia sẻ nguồn lực khiến việc giữ thành quả cần được chú ý cùng việc tạo thu nhập. " if outcome.get("wealth_retention") == "challenged" else "Khả năng tích lũy vẫn cần được xây dựng bằng cách quản lý thực tế. ")
+        + "Nên phân biệt tiền thu về, chi phí và phần thực sự còn lại. Nếu có kế hoạch đầu tư hoặc mở rộng, không dùng một dấu Tài để thay cho việc đánh giá rủi ro.")
+    element, branch = _text(storage.get("wealth_element")), _text(storage.get("wealth_storage_branch"))
+    if element and branch:
+        present = "có" if storage.get("natal_storage_present") else "không có"
+        paragraphs.append(f"Con đường tích sản: Theo quy ước Tài khố đang dùng, Tài thuộc {element} mộ tại {branch}; nguyên cục {present} chi này. "
+            + "Tài khố không tự đồng nghĩa với tài sản hoặc giàu có. Điều có thể làm chủ là chuyển thu nhập thành khoản tích lũy phù hợp nhu cầu dài hạn, đồng thời giữ đủ nguồn lực cho đời sống hiện tại.")
+    else:
+        paragraphs.append("Con đường tích sản: Chưa đủ dữ kiện Tài khố để luận riêng. Việc tích lũy cần dựa vào thu chi thực tế và kế hoạch dài hạn.")
     return paragraphs
 
 

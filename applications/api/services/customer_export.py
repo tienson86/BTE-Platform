@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import re
 import tempfile
 import uuid
 from html import escape
@@ -257,14 +258,14 @@ _STRUCTURED_CHAPTER_IDS = {
 }
 
 _STRUCTURED_CHAPTER_META = {
-    "four_pillars": ("Khung tứ trụ", "Bốn trụ và vai trò từng cung", "Luận trụ"),
-    "day_master": ("Nhật chủ", "Khí chất cốt lõi của mệnh", "Luận Nhật chủ"),
-    "strength_structure_useful_god": ("Trục cân bằng", "Thân vượng/nhược, Mệnh cục và Dụng thần", "Luận trục"),
-    "ten_gods": ("Thập thần", "Vai trò đời sống qua từng tín hiệu", "Luận Thập thần"),
-    "shen_sha": ("Thần sát", "Tín hiệu bổ sung cần quan sát", "Luận Thần sát"),
-    "bone_weight": ("Cân xương", "Nền lượng và nhịp tích lũy", "Luận Cân xương"),
-    "palace_feng_shui": ("Cung Phi", "Nhóm trạch và phong thủy ứng dụng", "Luận Cung Phi"),
-    "luck_cycles": ("Đại vận", "Nhịp từng chặng và cách ứng dụng", "Luận Đại vận"),
+    "four_pillars": ("Khung tứ trụ", "Bốn trụ và vai trò từng cung", "Vai trò trong Tứ trụ"),
+    "day_master": ("Nhật chủ", "Khí chất cốt lõi của mệnh", "Khí chất và cách ứng xử"),
+    "strength_structure_useful_god": ("Trục cân bằng", "Thân vượng/nhược, Mệnh cục và Dụng thần", "Cân bằng toàn cục"),
+    "ten_gods": ("Thập thần", "Vai trò đời sống qua từng tín hiệu", "Ý nghĩa và mối liên hệ"),
+    "shen_sha": ("Thần sát", "Tín hiệu bổ sung cần quan sát", "Ý nghĩa bổ trợ"),
+    "bone_weight": ("Cân xương", "Nền lượng và nhịp tích lũy", "Ý nghĩa cân lượng"),
+    "palace_feng_shui": ("Cung Phi", "Nhóm trạch và phong thủy ứng dụng", "Ứng dụng phương vị"),
+    "luck_cycles": ("Đại vận", "Nhịp từng chặng và cách ứng dụng", "Trọng tâm giai đoạn"),
     "synthesis": ("Tổng hợp", "Điểm mạnh, rủi ro và trọng tâm hành động", "Kết luận"),
     "recommendations": ("Khuyến nghị", "Việc nên ưu tiên sau khi đọc lá số", "Khuyến nghị"),
 }
@@ -554,6 +555,7 @@ def _chapter_html(chapter: Mapping[str, Any], report_input: ReportInputV1) -> st
     content: list[str] = [f"<h2>{escape(title)}</h2>"]
     if chapter_id == "five_elements":
         content.append(_five_elements_chart_html(report_input))
+        content.extend(f"<p>{escape(paragraph)}</p>" for paragraph in paragraphs)
     elif chapter_id == "life_domains":
         content.append(_life_domains_html(paragraphs))
     elif _uses_structured_chapter(chapter_id):
@@ -612,11 +614,17 @@ def _uses_structured_chapter(chapter_id: str) -> bool:
     return chapter_id in _STRUCTURED_CHAPTER_IDS
 
 
+def _is_placeholder_title(title: str) -> bool:
+    return bool(re.fullmatch(r"(?:Luận(?: giải)?(?: .+)?|Góc nhìn(?: bổ sung)?)(?: \d+)", title.strip(), re.IGNORECASE))
+
+
 def _split_structured_paragraph(chapter_id: str, paragraph: str, index: int) -> tuple[str, str]:
     value = paragraph.strip()
     _kicker, _title, card_title = _STRUCTURED_CHAPTER_META.get(chapter_id, ("Luận giải", "Các ý chính cần đọc", "Luận điểm"))
     lowered = value.lower()
     colon = value.find(":")
+    if colon > 0 and _is_placeholder_title(value[:colon]):
+        return _split_structured_paragraph(chapter_id, value[colon + 1:].strip(), index)
     if chapter_id == "strength_structure_useful_god":
         for prefix, title in (
             ("Hỏa chế Kim", "Hỏa rèn Kim"),
@@ -644,7 +652,7 @@ def _split_structured_paragraph(chapter_id: str, paragraph: str, index: int) -> 
             return title, body
     if 0 < colon < 62:
         return value[:colon].strip(), value[colon + 1 :].strip()
-    return f"{card_title} {index + 1}", value
+    return card_title, value
 
 
 def _structured_chapter_html(chapter_id: str, paragraphs: list[str]) -> str:
@@ -716,6 +724,8 @@ def _render_modern_report_docx(report_input: ReportInputV1, output_path: Path) -
         paragraphs = [str(item).strip() for item in chapter.get("paragraphs", []) if str(item).strip()] if isinstance(chapter.get("paragraphs"), list) else []
         if chapter_id == "five_elements":
             _docx_five_elements_table(document, report_input)
+            for paragraph in paragraphs:
+                document.add_paragraph(paragraph)
         elif chapter_id == "life_domains":
             _docx_life_domains(document, paragraphs)
         elif _uses_structured_chapter(chapter_id):
@@ -871,7 +881,8 @@ def _split_domain_paragraph(paragraph: str, index: int) -> tuple[str, str]:
     value = paragraph.strip()
     colon = value.find(":")
     if colon > 0:
-        return value[:colon].strip(), value[colon + 1 :].strip()
+        title, body = value[:colon].strip(), value[colon + 1 :].strip()
+        return (_infer_domain_title(body, index) if _is_placeholder_title(title) else title), body
     return _infer_domain_title(value, index), value
 
 
@@ -939,7 +950,7 @@ def _infer_domain_title(paragraph: str, index: int) -> str:
     for keywords, title in _DOMAIN_TITLE_RULES:
         if any(keyword in lowered for keyword in keywords):
             return title
-    return f"Góc nhìn {index + 1}"
+    return "Ứng dụng trong đời sống"
 
 
 def _unique_domain_title(title: str, used: dict[str, int]) -> str:
@@ -1012,6 +1023,14 @@ p { margin: 0 0 10px; }
 .structured-card span { color: #0f9f75; font-weight: 800; }
 .structured-card h3 { margin: 2px 0 6px; font-size: 14px; }
 .structured-card p { margin: 0; }
+/* Long domain chapters must fragment by card, not move a whole grid to the next page. */
+@media print {
+  #life_domains { break-inside: auto; }
+  #life_domains > h2, #life_domains .domain-group > h3 { break-after: avoid; page-break-after: avoid; }
+  #life_domains .domains, #life_domains .domain-grid { display: block; }
+  #life_domains .domain-group { break-inside: auto; margin-bottom: 14px; }
+  #life_domains .domain-card { break-inside: avoid; margin-bottom: 10px; }
+}
 ul { margin: 0 0 10px; padding-left: 18px; }
 .footer { border-top: 1px solid #dfe3ea; color: #64748b; font-size: 11px; margin-top: 26px; padding-top: 10px; }
 """

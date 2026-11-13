@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import pytest
+
 from tests.consulting.api_fixtures import api_client, valid_body
 
 
@@ -83,3 +85,14 @@ def test_repository_not_found_stays_isolated() -> None:
     stored = container.api_contract.get_stored(created["consultation_id"])
     assert stored.history.consultation_id == created["consultation_id"]
     assert stored.result.overall.score is None
+
+
+@pytest.fixture(autouse=True)
+def authenticated_test_owner():
+    """Direct service assertions use the same owner as the test HTTP fixture."""
+    from consulting.archive_access import identity
+    token = identity.set({"user_id": "test-marriage-owner", "role": "MEMBER"})
+    try:
+        yield
+    finally:
+        identity.reset(token)

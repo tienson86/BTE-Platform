@@ -6,14 +6,15 @@ import re
 import unicodedata
 
 from consulting.childbirth.repository import ChildbirthProfile
+from consulting.childbirth.service import CHILDBIRTH_NOTICE
 from consulting.marriage.models.report import ReportBlock, ReportSection
 from consulting.marriage.report.export import (
     ConsultationExportDocument, MarriageExportArtifact, MarriageExportFormat,
     MarriagePdfBackend, export_consultation_file,
 )
 
-GENDER_LABELS = {"boy": "Ưu tiên con trai", "girl": "Ưu tiên con gái", "either": "Trai/gái đều xét được"}
-LEVEL_LABELS = {"very_suitable": "Rất phù hợp", "suitable": "Phù hợp", "consider": "Có thể cân nhắc", "sensitive": "Cần thận trọng"}
+GENDER_LABELS = {"boy": "Giả định bé trai: điểm Cung Phi cao hơn", "girl": "Giả định bé gái: điểm Cung Phi cao hơn", "either": "Hai giả định Cung Phi gần nhau"}
+LEVEL_LABELS = {"very_suitable": "Điểm đối chiếu cao", "suitable": "Có điểm hỗ trợ", "consider": "Thuận và nghịch đan xen", "sensitive": "Nhiều điểm cần đối chiếu"}
 HOUR_BRANCHES = ("Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi")
 
 
@@ -47,6 +48,7 @@ def build_childbirth_document(profile: ChildbirthProfile) -> ConsultationExportD
     for role, label in (("father", "Người bố"), ("mother", "Người mẹ")):
         parent = data["parents"][role]
         signals = [
+            ("Giờ sinh", "Chưa biết; chưa dùng các kết luận phụ thuộc giờ để xếp hạng năm" if parent.get("birth_time_known") is False else "Theo thông tin đã nhập"),
             ("Nhật chủ", f"{parent['day_master']} ({parent['day_master_element']})"),
             ("Mệnh cục", parent.get("pattern") or "Chưa rõ"),
             ("Dụng thần", ", ".join(parent.get("useful_elements", [])) or "Chưa rõ"),
@@ -84,7 +86,7 @@ def build_childbirth_document(profile: ChildbirthProfile) -> ConsultationExportD
         title=f"Tư vấn sinh con - {names}", heading="BẢN LUẬN GIẢI TƯ VẤN SINH CON", subtitle=names,
         filename_stem=f"BTE_TuVanSinhCon_{identity}_{profile.consultation_id[-8:]}",
         summary_rows=rows, sections=sections,
-        notice="Kết quả là luận giải theo Bát Tự và Cung Phi. Đánh giá bé trai/bé gái thể hiện tương hợp theo mô hình, không dự đoán giới tính thực tế.",
+        notice=data.get("notice") or CHILDBIRTH_NOTICE,
     )
 
 

@@ -39,7 +39,7 @@ def build_childbirth_router(repository: JsonChildbirthRepository | None = None) 
                 father=father,
                 mother=mother,
                 start_year=_optional_int(options.get("start_year")),
-                years_ahead=_optional_int(options.get("years_ahead")) or DEFAULT_YEARS_AHEAD,
+                years_ahead=DEFAULT_YEARS_AHEAD if options.get("years_ahead") in (None, "") else _optional_int(options.get("years_ahead")),
             )
             profile = archive.create(
                 jsonable_encoder({"father": asdict(father), "mother": asdict(mother),
@@ -156,7 +156,12 @@ def _birth_place(raw: Any) -> BirthPlaceInput | None:
 def _optional_int(value: Any) -> int | None:
     if value in (None, ""):
         return None
-    return int(value)
+    if isinstance(value, bool) or (isinstance(value, float) and not value.is_integer()):
+        raise ValueError("integer_required")
+    try:
+        return int(value)
+    except (TypeError, ValueError, OverflowError) as exc:
+        raise ValueError("integer_required") from exc
 
 
 def _optional_float(value: Any) -> float | None:

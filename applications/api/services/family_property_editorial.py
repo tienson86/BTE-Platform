@@ -111,7 +111,7 @@ def build_family_property_evidence(payload: Mapping[str, Any]) -> FamilyProperty
 def build_family_property_reasoning(evidence: FamilyPropertyEvidence) -> tuple[FamilyReasoning, ...]:
     steps: list[FamilyReasoning] = []
     if evidence.resource_gods or evidence.wealth_gods:
-        resource_state = "ẩn" if evidence.resource_gods and all(god in evidence.hidden_gods for god in evidence.resource_gods) else "hiện"
+        resource_state = "ẩn" if evidence.resource_gods and all(god in evidence.hidden_gods and god not in evidence.visible_gods for god in evidence.resource_gods) else "hiện"
         steps.append(FamilyReasoning(
             "parents",
             f"Ấn {resource_state}: {', '.join(evidence.resource_gods) or 'không rõ'}; Tài: {', '.join(evidence.wealth_gods) or 'không rõ'}",
@@ -146,53 +146,105 @@ def compose_family_property_narrative(evidence: FamilyPropertyEvidence, reasonin
     parents: list[str] = []
     children: list[str] = []
     property_lines: list[str] = []
-    resource_hidden = evidence.resource_gods and all(god in evidence.hidden_gods for god in evidence.resource_gods)
+    resource_hidden = bool(evidence.resource_gods) and all(
+        god in evidence.hidden_gods and god not in evidence.visible_gods
+        for god in evidence.resource_gods
+    )
 
     if evidence.resource_gods or evidence.wealth_gods:
+        facts = []
+        if evidence.resource_gods:
+            facts.append(f"Ấn tinh gồm {', '.join(evidence.resource_gods)}")
+        if evidence.wealth_gods:
+            facts.append(f"Tài tinh gồm {', '.join(evidence.wealth_gods)}")
         parents.append(
-            f"Phần cha mẹ được đọc đồng thời qua Ấn tinh ({', '.join(evidence.resource_gods) or 'chưa lộ rõ'}), Tài tinh ({', '.join(evidence.wealth_gods) or 'chưa lộ rõ'}) và cung phụ mẫu. "
-            "Tài nghiêng về cách gia đình lo việc thực tế, kinh tế và trách nhiệm; Ấn nghiêng về nuôi dưỡng, che chở và nền học hỏi. Hai nhóm này không được dùng máy móc để gán một sao cho một người rồi kết luận sự kiện cụ thể."
+            "; ".join(facts) + ". Trong cách luận truyền thống về gia đình, Ấn gắn với sự nuôi dưỡng "
+            "và học hỏi, còn Tài gợi phần chăm lo vật chất và trách nhiệm thực tế. Khi hai mặt ấy "
+            "được đặt cạnh nhau, điều cần quan tâm là cách bạn vừa đón nhận sự hỗ trợ, vừa hình "
+            "thành lựa chọn riêng. Những dấu hiệu này không xác nhận tính cách hay biến cố của cha mẹ."
         )
         if resource_hidden:
             parents.append(
-                "Ấn tinh có mặt nhưng nằm ở tầng tàng can. Cách diễn đạt phù hợp là sự chăm sóc và nâng đỡ vẫn có, song thường đi phía sau, thể hiện bằng lo toan hoặc hành động nhiều hơn lời nói. Khi Tài tinh đồng thời rõ, tình thương trong gia đình dễ đi kèm các tiêu chuẩn thực tế về nghề nghiệp, thu nhập, hôn nhân và chỗ ở."
+                "Ấn tinh nằm trong Tàng Can, không lộ trên Thiên Can. Theo hướng biểu tượng này, "
+                "sự nâng đỡ có thể kín đáo, được cảm nhận qua những việc nhỏ hơn là lời bày tỏ trực tiếp. "
+                "Bạn nên đối chiếu với điều gia đình thực sự đã làm cho mình, thay vì mặc định sự "
+                "im lặng đồng nghĩa với thiếu quan tâm hoặc chắc chắn có hy sinh phía sau."
             )
         parents.append(
-            f"Với {evidence.strength.lower() or 'thế Thân hiện tại'}, quan hệ với cha mẹ thường cân bằng hơn khi chủ mệnh có nghề nghiệp, tài chính và ranh giới riêng. Kết luận nên dùng là hiếu nhưng có ranh giới; lá số không đủ căn cứ để phán cha mẹ ly tán, mất sớm hay một biến cố gia đình cụ thể."
+            "Điều đáng vun đắp là hiếu nhưng có ranh giới: nói rõ khả năng và phần trách nhiệm bạn "
+            "có thể nhận, đồng thời lắng nghe điều bố mẹ thật sự cần. Nếu hoàn cảnh hoặc mong muốn "
+            "khác nhau, một thỏa thuận cụ thể thường giúp hai bên hiểu nhau hơn việc cố làm vừa lòng "
+            "tất cả rồi âm thầm mệt mỏi."
         )
 
     if evidence.output_gods:
         children.append(
-            f"Tử tinh được nhận diện qua {', '.join(evidence.output_gods)}. Khi nhóm Thực/Thương hiện rõ, duyên dành năng lượng cho con cái và thế hệ sau không phải chủ đề mờ; tuy nhiên điều này chỉ nói về cấu trúc quan hệ, không cho phép chốt chính xác có bao nhiêu con hoặc thay thế đánh giá y khoa về sinh sản."
+            f"Lá số có {', '.join(evidence.output_gods)}, nhóm thường được liên hệ với sự sinh xuất, "
+            "diễn đạt và truyền lại điều mình có. Khi bàn con cái, nét này gợi cách bạn dành tâm sức "
+            "để hướng dẫn, chăm sóc và đồng hành. Nó không cho phép chốt chính xác có bao nhiêu con "
+            "hoặc thay thế đánh giá y khoa về sinh sản."
         )
     if evidence.hour_branch and (evidence.output_gods or evidence.hour_hidden_gods):
-        detail = f", bên trong có {', '.join(evidence.hour_hidden_gods)}" if evidence.hour_hidden_gods else ""
+        detail = f", Tàng Can có {', '.join(evidence.hour_hidden_gods)}" if evidence.hour_hidden_gods else ""
         children.append(
-            f"Cung giờ đặt tại {evidence.hour_branch}{detail}. Đây là lớp dữ liệu để hiểu cách tương tác với con và hậu vận. Nếu Thương Quan hoặc Kiếp Tài nằm trong cung giờ, trẻ dễ có cá tính và nhu cầu tự chủ; cách nuôi phù hợp là nguyên tắc rõ nhưng vẫn cho quyền lựa chọn trong giới hạn, thay vì kiểm soát mọi chi tiết."
+            f"Trụ giờ mang chi {evidence.hour_branch}{detail}. Đây là phần được xem cùng Thực/Thương "
+            "khi bàn cách bạn trao kinh nghiệm và chăm lo cho thế hệ sau. Sự gắn bó không chỉ nằm "
+            "ở việc làm thay, mà còn ở khả năng để người khác tự thử và trưởng thành."
         )
+        if any(god in evidence.hour_hidden_gods for god in ("Thương Quan", "Kiếp Tài")):
+            children.append(
+                "Thương Quan hoặc Kiếp Tài trong trụ giờ làm nổi bật chủ đề tự chủ trong cách "
+                "diễn giải quan hệ này. Điều cần chú ý là mong muốn hướng dẫn của bạn có để lại "
+                "không gian lựa chọn cho người đi sau hay không. Nếu đang nuôi dạy con, có thể "
+                "thống nhất giới hạn an toàn rồi để con chọn cách thực hiện; không suy từ dấu này "
+                "rằng con nhất định có một tính cách cụ thể."
+            )
     if evidence.output_gods:
         children.append(
-            "Mặt cần giữ là xu hướng sinh xuất quá nhiều: thời gian, tiền bạc và sự quan tâm có thể dồn mạnh cho con. Bài toán không phải 'con khắc mẹ/cha', mà là người lớn cần giữ phần đời, sức khỏe và kế hoạch tài chính của mình để việc chăm con không trở thành kiệt sức kéo dài."
+            "Nếu bạn đang dành nhiều thời gian và công sức cho con, hãy giữ cả thời gian hồi phục "
+            "và những kế hoạch riêng. Sự chăm sóc bền vững cần người lớn còn đủ sức lắng nghe, "
+            "không phải hy sinh mọi nhu cầu rồi mong con bù đắp lại. Nếu chưa có con, phần ý nghĩa "
+            "về truyền đạt và dìu dắt vẫn có thể đối chiếu với người bạn đang hướng dẫn."
         )
 
-    property_lines.append(
-        f"Bát Tự không có một cung Điền Trạch cố định giống Tử Vi. Phần nhà đất phải tổng hợp Tài tinh, Thổ, Nhật chi và khả năng tụ tài theo vận. Trong dữ liệu hiện tại, Thổ có mức {evidence.earth_count} và Tài tinh gồm {', '.join(evidence.wealth_gods) or 'chưa lộ rõ'}; đây là tín hiệu để nghiên cứu khả năng chuyển thu nhập thành tài sản hữu hình, không phải lời bảo đảm rằng mua bất động sản lúc nào cũng có lợi."
-    )
+    facts = []
+    if evidence.wealth_gods:
+        facts.append(f"Tài tinh gồm {', '.join(evidence.wealth_gods)}")
+    if evidence.day_branch:
+        facts.append(f"Nhật chi là {evidence.day_branch}")
+    if facts:
+        property_lines.append(
+            "; ".join(facts) + ". Khi bàn điền trạch, cần nối khả năng tạo thu nhập với việc "
+            "tích lũy và nhu cầu về nơi ở. Số lần xuất hiện của Thổ trong bảng ngũ hành không "
+            "đồng nghĩa với số lượng nhà đất hay khả năng được thừa kế. Một nơi ở phù hợp trước "
+            "hết cần đáp ứng sinh hoạt và khả năng chi trả thực tế của bạn."
+        )
+    else:
+        property_lines.append(
+            "Chưa đủ dữ kiện riêng để luận xu hướng điền trạch. Không nên suy quyền sở hữu nhà đất "
+            "chỉ từ một hành nổi bật hoặc một tên sao. Khi lựa chọn nơi ở, hãy ưu tiên nhu cầu "
+            "sinh hoạt, khả năng chi trả và thông tin pháp lý đã được kiểm tra."
+        )
     if evidence.output_gods and evidence.wealth_gods:
         property_lines.append(
-            "Mạch Thực/Thương sinh Tài cho thấy kiểu tạo điền sản hợp lý hơn là dùng năng lực và nghề nghiệp tạo dòng tiền, rồi từng bước chuyển dòng tiền thành tài sản. Hỗ trợ gia đình có thể là bệ đỡ, nhưng hệ thống không được tự suy thành chắc chắn thừa kế nhà đất."
+            f"Sự hiện diện của {', '.join(evidence.output_gods)} cùng {', '.join(evidence.wealth_gods)} "
+            "gợi chủ đề dùng năng lực để tạo nguồn thu rồi tích lũy từng bước. Đây là mối liên hệ "
+            "cần đọc cùng sức mạnh của các hành và hoàn cảnh thực tế, không tự bảo đảm một khoản "
+            "thu sẽ chuyển thành tài sản. Khi có kế hoạch lớn, nên phân biệt phần tiền có sẵn "
+            "với phần chỉ đang kỳ vọng."
         )
     property_lines.append(
-        "Khi xét năm mua, bán hoặc chuyển nhà, Hợp chỉ cho biết có sự kết nối/kích hoạt và Xung chỉ cho biết có chuyển động; Hợp không luôn tốt, Xung không luôn xấu. Quyết định thực tế vẫn phải kiểm tra dòng tiền chịu được, mức vay, pháp lý, thanh khoản và mục tiêu nắm giữ."
+        "Hợp không luôn tốt, Xung không luôn xấu: một thay đổi về nhà ở có thể phù hợp hoặc "
+        "không tùy hoàn cảnh. Vì vậy, năm có tương tác Can Chi không tự trở thành thời điểm nên "
+        "mua bán. Quyết định thực tế cần cân nhắc nhu cầu, dòng tiền, khoản vay và pháp lý."
     )
-
     if any(step.id == "generation-chain" for step in reasoning):
-        bridge = (
-            "Ba phần nối thành một mạch: nguồn lực và kỳ vọng từ gia đình gốc đi qua năng lực tự lập của chủ mệnh; phần sinh xuất tiếp tục dành cho con cái; thành quả tài chính có xu hướng được chuyển thành nền tảng vật chất. Bài học chung là không để trách nhiệm với cha mẹ, con cái và nhà cửa cùng lúc tiêu hao hết sức lực và dòng tiền của bản thân."
+        # One synthesis only, instead of the same paragraph repeated in three chapters.
+        property_lines.append(
+            "Trong kế hoạch dài hạn, điều quan trọng là không để trách nhiệm với cha mẹ, con cái "
+            "và nhà cửa cùng lúc tiêu hao hết sức lực và nguồn dự phòng của bạn. Hãy phân biệt "
+            "việc cần lo ngay, việc có thể cùng người thân chia sẻ và việc nên chờ đến khi đủ điều kiện."
         )
-        parents.append(bridge)
-        children.append(bridge)
-        property_lines.append(bridge)
     return {"parents": parents, "children": children, "property": property_lines}
 
 

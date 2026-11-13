@@ -1,0 +1,606 @@
+# Q4 Marriage Stability — language skeleton only.
+# Non-fatalistic. No divorce prediction.
+
+schema_version: "1.0.0"
+catalog_version: "consulting.language.marriage@1.0.0"
+module_language_version: "marriage.language@1.0.0"
+module: marriage
+question_id: Q4
+audience: customer
+status: approved
+
+entries:
+  marriage.q4.stable:
+
+    semantic_state: stable
+
+    tone: professional_warm
+
+    version: "1.0.0"
+
+    status: approved
+
+    headline: "Hai lá số có những yếu tố bổ trợ cho việc giữ cân bằng trong quan hệ."
+    meaning: "Phần bổ trợ trong phép đối chiếu đang rõ hơn phần gây sức ép. Hai bạn có thể xem đây là điểm để tìm hiểu thêm; sự ổn định thực tế còn phụ thuộc vào cách ứng xử, chia sẻ trách nhiệm và hoàn cảnh sống."
+    plain_customer_text: "Hai bạn có thể dùng những điểm bổ trợ và khác biệt được nêu để bắt đầu một cuộc trao đổi cụ thể. Một nhận định từ lá số không thay thế việc quan sát cách cả hai đối xử với nhau trong đời sống."
+    technical_explanation: >
+      Trạng thái này chỉ xuất hiện khi Decision xác nhận phần hỗ trợ
+      chiếm ưu thế rõ hơn phần tạo áp lực,
+      đồng thời không xuất hiện các Finding xung đột có mức ảnh hưởng lớn.
+
+    supporting_fact_templates:
+
+      - id: mutual_support
+        source_fact: mutual_support
+        template: "Hai bạn có nhiều yếu tố hỗ trợ lẫn nhau trong cấu trúc lá số."
+        slots: []
+        status: approved
+
+      - id: balanced_roles
+        source_fact: balanced_roles
+        template: "Vai trò của hai bạn khá cân bằng nên dễ phối hợp trong cuộc sống."
+        slots: []
+        status: approved
+
+      - id: low_conflict
+        source_fact: low_conflict
+        template: >
+          Không thấy các điểm xung đủ mạnh để chi phối toàn bộ mối quan hệ.
+        slots: []
+        status: approved
+
+      - id: rescue_available
+        source_fact: rescue_available
+        template: >
+          Một số khác biệt nếu có đều được giảm nhờ các yếu tố hỗ trợ đi kèm.
+        slots: []
+        status: approved
+
+    main_risk_templates:
+
+      - id: communication
+        source_fact: communication_difference
+        template: >
+          Khác biệt nhỏ trong cách giao tiếp nếu để kéo dài có thể tạo khoảng cách.
+        status: approved
+
+      - id: finance
+        source_fact: finance_difference
+        template: >
+          Quan điểm tài chính cần được thống nhất từ sớm.
+        status: approved
+
+    main_rescue_templates:
+
+      - id: mutual_respect
+        source_fact: mutual_respect
+        template: "Hai bạn có khả năng lắng nghe và điều chỉnh khi cần."
+        status: approved
+
+      - id: support_two_way
+        source_fact: support_two_way
+        template: >
+          Sự bổ trợ hai chiều giúp giảm đáng kể tác động của các khác biệt.
+        status: approved
+
+    limitation_templates:
+
+      - id: no_perfect_marriage
+        source_fact: no_perfect_marriage
+        template: >
+          Không có cuộc hôn nhân nào hoàn toàn không có mâu thuẫn.
+        status: approved
+
+      - id: maintain_relationship
+        source_fact: maintain_relationship
+        template: "Sự ổn định lâu dài vẫn phụ thuộc vào cách hai bạn duy trì mối quan hệ trong thực tế."
+        status: approved
+
+    closing: "Sự ổn định cần được xây dựng trong đời sống thực tế, không thể xác định chỉ từ hai lá số."
+    forbidden_terms:
+
+      - "chắc chắn hạnh phúc"
+
+      - "không bao giờ cãi nhau"
+
+      - "hôn nhân hoàn hảo"
+
+    variants:
+
+      - id: v1
+
+        headline: "Hai lá số có những yếu tố bổ trợ cho việc giữ cân bằng trong quan hệ."
+        meaning: "Phần bổ trợ trong phép đối chiếu đang rõ hơn phần gây sức ép. Hai bạn có thể xem đây là điểm để tìm hiểu thêm; sự ổn định thực tế còn phụ thuộc vào cách ứng xử, chia sẻ trách nhiệm và hoàn cảnh sống."
+      - id: v2
+
+        headline: "Hai lá số có những yếu tố bổ trợ cho việc giữ cân bằng trong quan hệ."
+        meaning: "Phần bổ trợ trong phép đối chiếu đang rõ hơn phần gây sức ép. Hai bạn có thể xem đây là điểm để tìm hiểu thêm; sự ổn định thực tế còn phụ thuộc vào cách ứng xử, chia sẻ trách nhiệm và hoàn cảnh sống."
+  marriage.q4.stable_with_rescue:
+
+    semantic_state: stable_with_rescue
+
+    tone: professional_warm
+
+    version: "1.0.0"
+
+    status: approved
+
+    headline: "Các điểm xung trong hai lá số đi cùng những yếu tố bổ trợ."
+    meaning: "Phép đối chiếu ghi nhận cả điểm xung và yếu tố có thể làm nhẹ phần xung đó, thường gọi là cứu giải. Điều này không có nghĩa mâu thuẫn thực tế sẽ tự được hóa giải; hai bạn vẫn cần lắng nghe và cùng điều chỉnh."
+    plain_customer_text: "Hai bạn có thể dùng những điểm bổ trợ và khác biệt được nêu để bắt đầu một cuộc trao đổi cụ thể. Một nhận định từ lá số không thay thế việc quan sát cách cả hai đối xử với nhau trong đời sống."
+    technical_explanation: >
+      Chỉ sử dụng trạng thái này khi Decision xác nhận đồng thời có Finding xung
+      và Finding cứu giải hoặc bổ trợ đủ mạnh.
+      Các yếu tố cứu giải không xóa hoàn toàn xung,
+      nhưng làm giảm đáng kể mức ảnh hưởng của chúng.
+
+    supporting_fact_templates:
+
+      - id: rescue_exists
+        source_fact: rescue_exists
+        template: >
+          Các điểm xung hiện có đều đi kèm yếu tố hỗ trợ hoặc cứu giải.
+
+      - id: mutual_support
+        source_fact: mutual_support
+        template: "Hai bạn vẫn duy trì được nhiều điểm bổ trợ hai chiều."
+      - id: support_stronger
+        source_fact: support_stronger_than_conflict
+        template: >
+          Tổng thể các yếu tố thuận đang nhỉnh hơn phần tạo áp lực.
+
+      - id: role_balance
+        source_fact: balanced_roles
+        template: "Vai trò của hai bạn vẫn có khả năng giữ được sự cân bằng."
+    main_risk_templates:
+
+      - id: communication_difference
+        source_fact: communication_difference
+        template: >
+          Khác biệt trong cách giao tiếp là điểm dễ phát sinh mâu thuẫn nhất.
+
+      - id: finance_difference
+        source_fact: finance_difference
+        template: >
+          Quan điểm về tài chính nên được thống nhất ngay từ đầu.
+
+    main_rescue_templates:
+
+      - id: rescue_day_master
+        source_fact: rescue_day_master
+        template: >
+          Nhật Chủ có yếu tố bổ trợ giúp giảm bớt phần xung.
+
+      - id: rescue_useful_god
+        source_fact: rescue_useful_god
+        template: >
+          Dụng thần giữa hai lá số tạo thêm khả năng cân bằng.
+
+      - id: rescue_direction
+        source_fact: directional_support
+        template: >
+          Hai chiều hỗ trợ giúp hạn chế tác động của các điểm khác biệt.
+
+    limitation_templates:
+
+      - id: rescue_not_cancel
+        source_fact: rescue_not_cancel
+        template: >
+          Yếu tố cứu giải không làm mất hoàn toàn các điểm xung.
+
+      - id: relationship_effort
+        source_fact: relationship_effort
+        template: "Hai bạn vẫn cần chủ động xây dựng cách giao tiếp và chia sẻ trách nhiệm."
+    closing: "Sự ổn định cần được xây dựng trong đời sống thực tế, không thể xác định chỉ từ hai lá số."
+    forbidden_terms:
+
+      - "chắc chắn hạnh phúc"
+
+      - "không bao giờ cãi nhau"
+
+      - "không thể ly hôn"
+
+    variants:
+
+      - id: v1
+
+        headline: "Các điểm xung trong hai lá số đi cùng những yếu tố bổ trợ."
+        meaning: "Phép đối chiếu ghi nhận cả điểm xung và yếu tố có thể làm nhẹ phần xung đó, thường gọi là cứu giải. Điều này không có nghĩa mâu thuẫn thực tế sẽ tự được hóa giải; hai bạn vẫn cần lắng nghe và cùng điều chỉnh."
+      - id: v2
+
+        headline: "Các điểm xung trong hai lá số đi cùng những yếu tố bổ trợ."
+        meaning: "Phép đối chiếu ghi nhận cả điểm xung và yếu tố có thể làm nhẹ phần xung đó, thường gọi là cứu giải. Điều này không có nghĩa mâu thuẫn thực tế sẽ tự được hóa giải; hai bạn vẫn cần lắng nghe và cùng điều chỉnh."
+  marriage.q4.mixed_with_conflict:
+
+    semantic_state: mixed_with_conflict
+
+    tone: professional_warm
+
+    version: "1.0.0"
+
+    status: approved
+
+    headline: "Hai lá số có cả điểm bổ trợ lẫn điểm xung cần lưu ý."
+    meaning: "Các yếu tố hỗ trợ và gây sức ép cùng xuất hiện trong phép đối chiếu. Để hiểu ý nghĩa với quan hệ của mình, hai bạn nên xem những điểm nào đúng với trải nghiệm thực tế và cách cả hai đang giải quyết bất đồng."
+    plain_customer_text: "Hai bạn có thể dùng những điểm bổ trợ và khác biệt được nêu để bắt đầu một cuộc trao đổi cụ thể. Một nhận định từ lá số không thay thế việc quan sát cách cả hai đối xử với nhau trong đời sống."
+    technical_explanation: >
+      Trạng thái này được sử dụng khi Decision xác nhận
+      các Finding hỗ trợ và Finding tạo áp lực cùng tồn tại,
+      nhưng chưa có nhóm nào đủ mạnh để hoàn toàn chi phối kết luận.
+
+    supporting_fact_templates:
+
+      - id: support_exists
+        source_fact: support_exists
+        template: "Hai bạn vẫn có nhiều yếu tố thuận lợi để cùng đồng hành."
+      - id: conflict_exists
+        source_fact: conflict_exists
+        template: >
+          Đồng thời vẫn tồn tại những điểm khác biệt cần được lưu ý.
+
+      - id: rescue_partial
+        source_fact: rescue_partial
+        template: >
+          Một số điểm xung đã có yếu tố giúp giảm bớt tác động.
+
+      - id: long_term_possible
+        source_fact: long_term_possible
+        template: >
+          Nếu biết điều chỉnh,
+          mối quan hệ vẫn có khả năng phát triển ổn định.
+
+    main_risk_templates:
+
+      - id: communication
+        source_fact: communication_difference
+        template: >
+          Khác biệt trong cách giao tiếp là nguyên nhân dễ tạo khoảng cách nhất.
+
+      - id: finance
+        source_fact: finance_difference
+        template: >
+          Quan điểm tài chính nên được trao đổi rõ ngay từ đầu.
+
+      - id: responsibility
+        source_fact: responsibility_difference
+        template: >
+          Việc phân chia trách nhiệm cần được thống nhất sớm.
+
+    main_rescue_templates:
+
+      - id: support
+        source_fact: mutual_support
+        template: "Hai bạn vẫn có nhiều yếu tố bổ trợ hai chiều."
+      - id: useful_god
+        source_fact: useful_god_support
+        template: >
+          Dụng thần giữa hai lá số tạo thêm khả năng cân bằng.
+
+      - id: respect
+        source_fact: mutual_respect
+        template: >
+          Khả năng lắng nghe và điều chỉnh sẽ giúp giảm đáng kể các điểm xung.
+
+    limitation_templates:
+
+      - id: conflict_not_failure
+        source_fact: conflict_not_failure
+        template: >
+          Khác biệt không đồng nghĩa với việc cuộc hôn nhân sẽ thất bại.
+
+      - id: need_effort
+        source_fact: need_effort
+        template: >
+          Đây là kiểu quan hệ cần nhiều sự chủ động vun đắp hơn những cặp có độ bổ trợ rất cao.
+
+    closing: "Sự ổn định cần được xây dựng trong đời sống thực tế, không thể xác định chỉ từ hai lá số."
+    forbidden_terms:
+
+      - "dễ ly hôn"
+
+      - "không hợp"
+
+      - "không nên cưới"
+
+      - "khắc nhau"
+
+    variants:
+
+      - id: v1
+
+        headline: "Hai lá số có cả điểm bổ trợ lẫn điểm xung cần lưu ý."
+        meaning: "Các yếu tố hỗ trợ và gây sức ép cùng xuất hiện trong phép đối chiếu. Để hiểu ý nghĩa với quan hệ của mình, hai bạn nên xem những điểm nào đúng với trải nghiệm thực tế và cách cả hai đang giải quyết bất đồng."
+      - id: v2
+
+        headline: "Hai lá số có cả điểm bổ trợ lẫn điểm xung cần lưu ý."
+        meaning: "Các yếu tố hỗ trợ và gây sức ép cùng xuất hiện trong phép đối chiếu. Để hiểu ý nghĩa với quan hệ của mình, hai bạn nên xem những điểm nào đúng với trải nghiệm thực tế và cách cả hai đang giải quyết bất đồng."
+  marriage.q4.needs_management:
+
+    semantic_state: needs_management
+
+    tone: professional_warm
+
+    version: "1.0.0"
+
+    status: approved
+
+    headline: "Một số khác biệt trong hai lá số gợi ý cần chú ý cách phối hợp."
+    meaning: "Các điểm bổ trợ vẫn có, nhưng phần khác biệt cũng đáng được quan tâm. Nếu những khác biệt này xuất hiện trong đời sống chung, hai bạn nên trao đổi sớm về cách xử lý thay vì để kéo dài."
+    plain_customer_text: "Hai bạn có thể dùng những điểm bổ trợ và khác biệt được nêu để bắt đầu một cuộc trao đổi cụ thể. Một nhận định từ lá số không thay thế việc quan sát cách cả hai đối xử với nhau trong đời sống."
+    technical_explanation: >
+      Trạng thái này chỉ xuất hiện khi Decision xác nhận
+      có các Finding tạo áp lực ở mức trung bình,
+      nhưng vẫn tồn tại nền tảng hỗ trợ đủ để duy trì mối quan hệ.
+
+    supporting_fact_templates:
+
+      - id: support_remains
+        source_fact: support_remains
+        template: "Hai bạn vẫn còn nhiều điểm thuận để tiếp tục đồng hành."
+      - id: management_required
+        source_fact: management_required
+        template: >
+          Một số khác biệt cần được quản lý chủ động thay vì để tự phát triển.
+
+      - id: rescue_exists
+        source_fact: rescue_exists
+        template: >
+          Các yếu tố hỗ trợ vẫn hiện diện và có thể giúp giảm áp lực.
+
+    main_risk_templates:
+
+      - id: communication
+        source_fact: communication_difference
+        template: >
+          Khác biệt trong giao tiếp là điểm cần quan tâm đầu tiên.
+
+      - id: expectations
+        source_fact: expectation_difference
+        template: >
+          Kỳ vọng khác nhau về cuộc sống dễ tạo ra hiểu lầm.
+
+      - id: responsibility
+        source_fact: responsibility_difference
+        template: >
+          Việc phân chia trách nhiệm nên được thống nhất rõ.
+
+    main_rescue_templates:
+
+      - id: mutual_adjustment
+        source_fact: mutual_adjustment
+        template: "Hai bạn đều có khả năng điều chỉnh khi nhận ra vấn đề."
+      - id: support
+        source_fact: support_exists
+        template: >
+          Nền tảng hỗ trợ vẫn đủ để giúp mối quan hệ cân bằng trở lại.
+
+    limitation_templates:
+
+      - id: no_self_fix
+        source_fact: no_self_fix
+        template: "Những khác biệt này sẽ không tự biến mất nếu hai bạn không cùng giải quyết."
+      - id: effort
+        source_fact: effort
+        template: >
+          Mối quan hệ cần sự chủ động từ cả hai phía.
+
+    closing: "Sự ổn định cần được xây dựng trong đời sống thực tế, không thể xác định chỉ từ hai lá số."
+    forbidden_terms:
+      - "không hợp"
+      - "dễ ly hôn"
+
+    variants: []
+  marriage.q4.pressured:
+
+    semantic_state: pressured
+
+    tone: professional_warm
+
+    version: "1.0.0"
+
+    status: approved
+
+    headline: "Phép đối chiếu ghi nhận nhiều điểm gây sức ép hơn điểm bổ trợ."
+    meaning: "Đây là lời nhắc để hai bạn xem kỹ những chủ đề dễ bất đồng, không phải dự đoán hôn nhân sẽ thiếu ổn định. Cách lắng nghe và cùng giải quyết vấn đề trong thực tế vẫn quan trọng hơn một nhãn đánh giá."
+    plain_customer_text: "Hai bạn có thể dùng những điểm bổ trợ và khác biệt được nêu để bắt đầu một cuộc trao đổi cụ thể. Một nhận định từ lá số không thay thế việc quan sát cách cả hai đối xử với nhau trong đời sống."
+    technical_explanation: >
+      Decision ghi nhận các Finding gây áp lực
+      đang chiếm ưu thế so với phần hỗ trợ.
+
+    supporting_fact_templates:
+
+      - id: conflict_high
+        source_fact: conflict_high
+        template: >
+          Các điểm tạo áp lực xuất hiện ở nhiều nhóm phân tích.
+
+      - id: support_exists
+        source_fact: support_exists
+        template: >
+          Một số yếu tố hỗ trợ vẫn còn nhưng chưa đủ mạnh.
+
+    main_risk_templates:
+
+      - id: communication
+        source_fact: communication_difference
+        template: >
+          Khác biệt trong giao tiếp có thể lặp lại nhiều lần.
+
+      - id: finance
+        source_fact: finance_difference
+        template: >
+          Quan điểm tài chính cần được thống nhất ngay từ đầu.
+
+      - id: ego
+        source_fact: ego_difference
+        template: >
+          Cái tôi của mỗi người có thể làm mâu thuẫn kéo dài.
+
+    main_rescue_templates:
+
+      - id: respect
+        source_fact: respect
+        template: >
+          Nếu biết tôn trọng vai trò của nhau,
+          nhiều áp lực vẫn có thể giảm.
+
+    limitation_templates:
+
+      - id: not_prediction
+        source_fact: not_prediction
+        template: >
+          Đây không phải là dự đoán rằng cuộc hôn nhân sẽ thất bại.
+
+      - id: counseling
+        source_fact: counseling
+        template: >
+          Trường hợp này nên được xem xét sâu hơn trước khi đưa ra quyết định lâu dài.
+
+    closing: "Sự ổn định cần được xây dựng trong đời sống thực tế, không thể xác định chỉ từ hai lá số."
+    forbidden_terms:
+      - "chắc chắn ly hôn"
+      - "không nên cưới"
+
+    variants: []
+  marriage.q4.highly_pressured:
+
+    semantic_state: highly_pressured
+
+    tone: professional_warm
+
+    version: "1.0.0"
+
+    status: approved
+
+    headline: "Những điểm gây sức ép khá nổi bật khi đối chiếu hai lá số."
+    meaning: "Các khác biệt được ghi nhận cần được xem xét thận trọng. Lá số không xác định hai bạn có thể sống cùng nhau hay không; hãy đối chiếu với sự tôn trọng, an toàn và khả năng chia sẻ trách nhiệm trong quan hệ thực tế."
+    plain_customer_text: "Hai bạn có thể dùng những điểm bổ trợ và khác biệt được nêu để bắt đầu một cuộc trao đổi cụ thể. Một nhận định từ lá số không thay thế việc quan sát cách cả hai đối xử với nhau trong đời sống."
+    technical_explanation: >
+      Trạng thái này chỉ được sử dụng
+      khi Decision ghi nhận phần lớn Finding
+      đều nghiêng về nhóm tạo áp lực.
+
+    supporting_fact_templates:
+
+      - id: pressure
+        source_fact: pressure
+        template: >
+          Các yếu tố tạo áp lực đang chiếm ưu thế rõ.
+
+      - id: weak_support
+        source_fact: weak_support
+        template: >
+          Phần hỗ trợ hiện chưa đủ để cân bằng toàn bộ khác biệt.
+
+    main_risk_templates:
+
+      - id: lifestyle
+        source_fact: lifestyle_difference
+        template: >
+          Khác biệt về cách sống là điểm cần cân nhắc nhất.
+
+      - id: values
+        source_fact: value_difference
+        template: >
+          Quan điểm sống khác nhau có thể tạo khoảng cách lâu dài.
+
+      - id: communication
+        source_fact: communication_difference
+        template: >
+          Nếu thiếu trao đổi,
+          mâu thuẫn dễ tích tụ theo thời gian.
+
+    main_rescue_templates:
+
+      - id: willingness
+        source_fact: willingness
+        template: >
+          Nếu cả hai thực sự sẵn sàng điều chỉnh,
+          vẫn có khả năng cải thiện đáng kể.
+
+    limitation_templates:
+
+      - id: no_absolute
+        source_fact: no_absolute
+        template: >
+          Không nên xem đây là kết luận tuyệt đối về tương lai hôn nhân.
+
+      - id: deep_consulting
+        source_fact: deep_consulting
+        template: >
+          Đây là trường hợp rất nên được tư vấn chuyên sâu.
+
+    closing: "Sự ổn định cần được xây dựng trong đời sống thực tế, không thể xác định chỉ từ hai lá số."
+    forbidden_terms:
+      - "không thể cưới"
+      - "đại hung"
+      - "khắc chết"
+
+    variants: []
+  marriage.q4.insufficient:
+
+    semantic_state: insufficient
+
+    tone: professional_warm
+
+    version: "1.0.0"
+
+    status: approved
+
+    headline: "Chưa đủ căn cứ từ hai lá số để nhận định về yếu tố giữ ổn định."
+    meaning: "Một số thông tin hoặc căn cứ đối chiếu còn thiếu. Điều này không nói lên quan hệ của hai bạn tốt hay xấu, cũng không dự báo khả năng duy trì hôn nhân."
+    plain_customer_text: "Hai bạn có thể dùng những điểm bổ trợ và khác biệt được nêu để bắt đầu một cuộc trao đổi cụ thể. Một nhận định từ lá số không thay thế việc quan sát cách cả hai đối xử với nhau trong đời sống."
+    technical_explanation: >
+      Confidence chưa đạt ngưỡng cần thiết
+      hoặc một số Domain chưa đủ Finding.
+
+    supporting_fact_templates:
+
+      - id: insufficient_data
+        source_fact: insufficient_data
+        template: >
+          Dữ liệu hiện chưa đủ để tạo kết luận ổn định.
+
+    main_risk_templates: []
+
+    main_rescue_templates: []
+
+    limitation_templates:
+
+      - id: add_birth_time
+        source_fact: add_birth_time
+        template: >
+          Nếu có thể,
+          nên bổ sung giờ sinh để tăng độ tin cậy.
+
+      - id: insufficient_not_negative
+        source_fact: insufficient_not_negative
+        template: >
+          Thiếu dữ liệu không phải là dấu hiệu bất lợi về hôn nhân.
+
+    closing: "Sự ổn định cần được xây dựng trong đời sống thực tế, không thể xác định chỉ từ hai lá số."
+    forbidden_terms:
+      - "không hợp"
+      - "không nên cưới"
+
+    variants: []
+forbidden_terms:
+  - "chắc chắn"
+  - "bản chất"
+  - "không thể thay đổi"
+
+render_rules:
+  verdict_first: true
+  customer_first: true
+  explain_jargon: true
+  technical_explanation_collapsed_by_default: true
+
+  max_headline_sentences: 1
+  max_meaning_sentences: 3
+  max_supporting_facts: 4
+  max_limitations: 2
+
+review_status:
+  architecture: approved
+  customer_wording: approved
+  runtime_binding: not_started

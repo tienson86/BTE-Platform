@@ -62,7 +62,8 @@ def test_strength_chapter_always_leads_with_actual_body_strength() -> None:
 
     assert chapter["title"] == "Thân vượng/nhược, Mệnh cục và Dụng thần"
     assert chapter["paragraphs"][0].startswith("Thế thân được đánh giá là Thân nhược.")
-    assert "Tù khí theo tháng -10" in chapter["paragraphs"][0]
+    assert "mùa sinh không tạo ưu thế" in chapter["paragraphs"][0]
+    assert "-10" not in chapter["paragraphs"][0]
     assert any(item.startswith("Mệnh cục Chính Tài:") for item in chapter["paragraphs"])
     assert any(item.startswith("Dụng thần Mộc · Ất · Thiên Ấn.") for item in chapter["paragraphs"])
 
@@ -71,7 +72,7 @@ def test_strength_chapter_always_leads_with_actual_body_strength() -> None:
     )
     assert title == "Thế thân"
     assert body.startswith("Thế thân được đánh giá là Thân nhược.")
-    assert "Các dấu hiệu trực tiếp:" in body
+    assert "Những yếu tố đáng chú ý gồm:" in body
 
 
 def test_huynh_pattern_name_and_month_basis_survive_pdf_and_docx_cards() -> None:

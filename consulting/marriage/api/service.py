@@ -3,6 +3,9 @@
 from __future__ import annotations
 
 import logging
+from contextlib import nullcontext
+from contextvars import ContextVar
+from threading import RLock
 from consulting.archive_access import creator_fields, can_read, identity
 from dataclasses import replace
 
@@ -36,7 +39,17 @@ class MarriageConsultationApi(MarriageApiContract):
         self._orchestrator = orchestrator
         self._repository = repository
         self._validation = validation
-        self.last_create_was_replay = False
+        self._replay_context: ContextVar[bool] = ContextVar(f"marriage_replay_{id(self)}", default=False)
+        # Bounded lock stripes prevent duplicate creates for the same user/key.
+        self._idempotency_locks = tuple(RLock() for _ in range(64))
+
+    @property
+    def last_create_was_replay(self) -> bool:
+        return self._replay_context.get()
+
+    @last_create_was_replay.setter
+    def last_create_was_replay(self, value: bool) -> None:
+        self._replay_context.set(value)
 
     def create_consultation(
         self,
@@ -49,28 +62,30 @@ class MarriageConsultationApi(MarriageApiContract):
         user = identity.get()
         if not user: raise RuntimeError("Authenticated creator required")
         if key: key = "user:" + user["user_id"] + ":" + key
-        fingerprint = request_fingerprint(request)
-        if key:
-            existing = self._repository.get_by_idempotency_key(key)
-            if existing is not None:
-                if existing.request_fingerprint != fingerprint:
-                    raise MarriageConflictError("idempotency_conflict")
-                self.last_create_was_replay = True
-                return _runtime_from_stored(existing)
-        response = self._orchestrator.run(request)
-        if response.status is not MarriageRuntimeStatus.SUCCESS:
-            logger.info(
-                "marriage_api_create_failed",
-                extra={
-                    "consultation_id": response.consultation_id,
-                    "stage": response.error.stage if response.error else "runtime",
-                    "status": response.status.value,
-                },
-            )
+        guard = self._idempotency_locks[hash(key) % len(self._idempotency_locks)] if key else nullcontext()
+        with guard:
+            fingerprint = request_fingerprint(request)
+            if key:
+                existing = self._repository.get_by_idempotency_key(key)
+                if existing is not None:
+                    if request_fingerprint(existing.request) != fingerprint:
+                        raise MarriageConflictError("idempotency_conflict")
+                    self.last_create_was_replay = True
+                    return _runtime_from_stored(existing)
+            response = self._orchestrator.run(request)
+            if response.status is not MarriageRuntimeStatus.SUCCESS:
+                logger.info(
+                    "marriage_api_create_failed",
+                    extra={
+                        "consultation_id": response.consultation_id,
+                        "stage": response.error.stage if response.error else "runtime",
+                        "status": response.status.value,
+                    },
+                )
+                return response
+            stored = self._persist(request, response, key, fingerprint)
+            response.result = stored.result
             return response
-        stored = self._persist(request, response, key, fingerprint)
-        response.result = stored.result
-        return response
 
     def get_consultation(self, consultation_id: str) -> MarriageDecisionResult:
         """Return the stored Decision Result. HTTP layer serializes the public DTO."""
@@ -106,7 +121,11 @@ class MarriageConsultationApi(MarriageApiContract):
         size = limit if limit is not None else HISTORY_DEFAULT_LIMIT
         if size < 1 or size > HISTORY_MAX_LIMIT:
             raise MarriageValidationError("history_limit_invalid")
-        rows = list(reversed(self.list_history()))
+        from consulting.business.presentation import business_context
+
+        # Keep list_history() as the shared authorized source for business history.
+        rows = [row for row in reversed(self.list_history())
+                if business_context(self._require(row.consultation_id)) is None]
         if status: rows = [r for r in rows if r.status == status]
         if language: rows = [r for r in rows if r.language == language]
         if grade: rows = [r for r in rows if r.grade is not None and r.grade.value == grade]
@@ -165,6 +184,8 @@ class MarriageConsultationApi(MarriageApiContract):
         if session is None or session.context.decision_result is None:
             raise MarriageValidationError("consultation_result_missing")
         result = session.context.decision_result
+        if result.consultation_id != response.consultation_id:
+            raise MarriageValidationError("consultation_result_mismatch")
         label = _display_label(result.person_a.display_name, result.person_b.display_name)
         stored = MarriageStoredResult(
             **creator_fields(),

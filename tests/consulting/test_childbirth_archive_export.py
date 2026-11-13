@@ -1,6 +1,9 @@
 """Childbirth archives and exports retain the exact analyzed result."""
 
 import io
+from copy import deepcopy
+import pytest
+from consulting.archive_access import identity
 from pathlib import Path
 from unittest.mock import patch
 
@@ -14,6 +17,13 @@ from consulting.childbirth.repository import JsonChildbirthRepository
 from consulting.childbirth.service import analyze_childbirth_plan
 from consulting.marriage.adapters.canonical_runtime import CanonicalOrchestratorAdapter
 from tests.consulting.runtime_fixtures import FakeCanonicalRunner
+
+@pytest.fixture(autouse=True)
+def authenticated_test_identity():
+    token = identity.set({"user_id": "childbirth-test", "role": "ADMIN", "username": "test"})
+    yield
+    identity.reset(token)
+
 
 BASE = "/api/v1/consulting/childbirth"
 BODY = {
@@ -30,14 +40,14 @@ def _client(directory: Path):
     return TestClient(app), repository
 
 
-def _create(client):
+def _create(client, body=None):
     def analyze(**kwargs):
         return analyze_childbirth_plan(
             **kwargs, adapter=CanonicalOrchestratorAdapter(runner=FakeCanonicalRunner())
         )
 
     with patch("consulting.childbirth.api.analyze_childbirth_plan", side_effect=analyze):
-        response = client.post(f"{BASE}/analyze", json=BODY)
+        response = client.post(f"{BASE}/analyze", json=body or BODY)
     assert response.status_code == 200, response.text
     return response.json()["data"]
 
@@ -46,7 +56,7 @@ def test_save_is_idempotent_and_profiles_survive_restart(tmp_path):
     client, _ = _client(tmp_path)
     data = _create(client)
     id = data["consultation_id"]
-    assert client.get(f"{BASE}/history").json()["data"]["items"] == []
+    assert len(client.get(f"{BASE}/history").json()["data"]["items"]) == 1
     first = client.post(f"{BASE}/{id}/save").json()["data"]
     assert first["saved_at"]
     assert client.post(f"{BASE}/{id}/save").json()["data"] == first
@@ -63,9 +73,13 @@ def test_save_is_idempotent_and_profiles_survive_restart(tmp_path):
         assert history[0]["display_identity"] == "An / Bình"
 
 
-def test_docx_download_contains_inputs_and_the_analyzed_recommendations(tmp_path):
+@pytest.mark.parametrize("known_time", [False, True])
+def test_docx_download_contains_inputs_and_the_analyzed_recommendations(tmp_path, known_time):
     client, _ = _client(tmp_path)
-    data = _create(client)
+    body = deepcopy(BODY)
+    if known_time:
+        body["mother"]["birth_time"] = "04:00"
+    data = _create(client, body)
     id = data["consultation_id"]
     client.post(f"{BASE}/{id}/save")
     with patch("consulting.childbirth.api.analyze_childbirth_plan", side_effect=AssertionError("must not recalculate")):
@@ -79,7 +93,12 @@ def test_docx_download_contains_inputs_and_the_analyzed_recommendations(tmp_path
     )
     assert "TƯ VẤN SINH CON" in text and "TƯ VẤN HÔN NHÂN" not in text
     assert "02/01/1990" in text and "01/02/1992" in text
-    assert "Giờ Sửu" in text and "Không biết" in text and "Hà Nội" in text
+    assert "Giờ Sửu" in text and "Hà Nội" in text
+    assert ("Giờ Dần" if known_time else "Không biết") in text
+    if known_time:
+        assert data["recommendations"]
+    else:
+        assert not data["recommendations"] and "Chưa biết giờ sinh" in text
     assert data["summary"]["headline"] in text
     assert document.core_properties.identifier == id
     for item in data["recommendations"]:
@@ -130,10 +149,10 @@ def test_missing_profiles_and_failed_exports_return_errors(tmp_path):
     assert client.get(f"{BASE}/{data['consultation_id']}/export/zip").status_code == 422
 
 
-def test_failed_save_leaves_profile_unsaved(tmp_path):
+def test_autosaved_profile_save_does_not_write_again(tmp_path):
     client, repository = _client(tmp_path)
     data = _create(client)
     with patch.object(repository, "_write", side_effect=OSError("test write failed")):
-        assert client.post(f"{BASE}/{data['consultation_id']}/save").status_code == 500
-    assert repository.get(data["consultation_id"]).saved_at is None
-    assert repository.history() == []
+        assert client.post(f"{BASE}/{data['consultation_id']}/save").status_code == 200
+    assert repository.get(data["consultation_id"]).saved_at is not None
+    assert len(repository.history()) == 1

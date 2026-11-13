@@ -19,7 +19,7 @@ def compose_final_opinion(payload: NarrativeInput) -> dict[str, str]:
     return {
         "overall_opinion": _one_sentence((q6.headline if q6 else "") or _overall_fallback(payload)),
         "strongest_strength": _one_sentence(
-            (q2.headline if q2 else "") or _first_fact(q2) or "Điểm mạnh nhất là khả năng bổ trợ đang có giữa hai người."
+            (q2.headline if q2 else "") or _first_fact(q2) or "Chưa đủ căn cứ để chọn một điểm mạnh nổi bật nhất."
         ),
         "main_attention": _one_sentence(_attention(q4, q1)),
         "final_recommendation": _one_sentence(_recommendation(payload, q6)),
@@ -35,7 +35,7 @@ def _attention(q4: LanguageCardWording | None, q1: LanguageCardWording | None) -
             text = fact.replace("Rủi ro:", "").replace("Cứu giải:", "").strip()
             if text:
                 return f"Điều cần lưu ý nhất là {text[0].lower() + text[1:]}" if text[0].isupper() else f"Điều cần lưu ý nhất là {text}"
-    return "Điều cần lưu ý nhất là giữ quy ước rõ khi có khác biệt."
+    return "Chưa đủ căn cứ để xác định một điểm cần lưu ý nổi bật nhất."
 
 
 def _recommendation(payload: NarrativeInput, q6: LanguageCardWording | None) -> str:

@@ -166,6 +166,54 @@ function fillValidForm(): void {
 }
 
 describe("Business Consulting UI", () => {
+  it("reuses the operation key after a lost create response and changes it for a new consultation", async () => {
+    const keys: string[] = [];
+    vi.stubGlobal("fetch", vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
+      const url = String(input);
+      if (url.includes("/business/history")) return jsonResponse(envelope({ items: [], next_cursor: null }));
+      if (init?.method === "POST") {
+        keys.push(new Headers(init.headers).get("Idempotency-Key") || "");
+        if (keys.length === 1) throw new TypeError("Response lost after server committed");
+        return jsonResponse(envelope(consultation), 201);
+      }
+      if (url.includes("/report")) return jsonResponse(envelope(report));
+      return jsonResponse(envelope(consultation));
+    }));
+    render(<BusinessConsultingPage />); fillValidForm();
+    fireEvent.submit(screen.getByTestId("business-form"));
+    fireEvent.click(await screen.findByTestId("retry-analysis"));
+    await screen.findByTestId("business-result");
+    expect(keys[0]).toMatch(/^business-[0-9a-f]{32}$/);
+    expect(keys[1]).toBe(keys[0]);
+    fireEvent.click(screen.getByRole("button", { name: "Tư vấn hợp tác mới" }));
+    fillValidForm(); fireEvent.submit(screen.getByTestId("business-form"));
+    await screen.findByTestId("business-result");
+    expect(keys[2]).not.toBe(keys[0]);
+  });
+
+  it("reuses the operation key when unchanged form is submitted again after transport failure", async () => {
+    const keys: string[] = [];
+    vi.stubGlobal("fetch", vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
+      if (String(input).includes("/business/history")) return jsonResponse(envelope({ items: [], next_cursor: null }));
+      if (init?.method === "POST") {
+        keys.push(new Headers(init.headers).get("Idempotency-Key") || "");
+        throw new TypeError("Network unavailable");
+      }
+      return jsonResponse(envelope(consultation));
+    }));
+    render(<BusinessConsultingPage />); fillValidForm();
+    fireEvent.submit(screen.getByTestId("business-form"));
+    await screen.findByTestId("retry-analysis");
+    fireEvent.submit(screen.getByTestId("business-form"));
+    await screen.findByTestId("retry-analysis");
+    expect(keys).toHaveLength(2);
+    expect(keys[1]).toBe(keys[0]);
+    fireEvent.change(screen.getByTestId("occupation-select"), { target: { value: "retail" } });
+    fireEvent.submit(screen.getByTestId("business-form"));
+    await screen.findByTestId("retry-analysis");
+    expect(keys[2]).not.toBe(keys[0]);
+  });
+
   it("renders occupation and gender controls", () => {
     render(<BusinessConsultingPage />);
     expect(screen.getByTestId("business-title").textContent).toContain("Tư vấn hợp tác");

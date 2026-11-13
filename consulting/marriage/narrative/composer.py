@@ -83,7 +83,7 @@ def _identity_section(payload: NarrativeInput) -> MarriageNarrativeSection:
     gender_b = _GENDER_LABEL[payload.person_b_gender.value]
     text = (
         f"{payload.person_a_label} ({gender_a}) và {payload.person_b_label} ({gender_b}) "
-        "được đọc như một hồ sơ tư vấn hôn nhân, không như một bản tính điểm."
+        "được đối chiếu để tìm hiểu những điểm bổ trợ và khác biệt trong đời sống chung."
     )
     return MarriageNarrativeSection(
         section_id="identity",
@@ -341,7 +341,7 @@ def _action_section(
                 "action-none",
                 "action",
                 "marriage.action.none",
-                "Hồ sơ hiện không công bố hành động độc lập ngoài việc đọc nhận định đã có.",
+                "Chưa có đủ căn cứ để đưa ra gợi ý riêng ngoài những nội dung đã trình bày.",
             )
         )
     return MarriageNarrativeSection(
@@ -462,7 +462,7 @@ def _domain_blocks(
                 f"domain-{domain.domain.value}-actions",
                 "action_bridge",
                 f"marriage.domain.{domain.domain.value}.action_ref",
-                "Phần khuyến nghị tương ứng được nêu ở kế hoạch hành động, không lặp lại giải thích miền.",
+                "Hai bạn có thể xem các bước gợi ý cụ thể ở phần Kế hoạch hành động.",
                 domain=domain.domain,
                 source_recommendation_ids=rec_ids,
             )

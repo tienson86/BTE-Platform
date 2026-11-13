@@ -7,7 +7,7 @@ import re
 import shutil
 import tempfile
 import unicodedata
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Literal, Protocol
 
@@ -89,6 +89,7 @@ def export_consultation_file(
     pdf_backend: MarriagePdfBackend | None = None,
 ) -> MarriageExportArtifact:
     """Render the common consultation layout from an archived document."""
+    document = replace(document, sections=_printable_sections(document.sections))
     root = output_root or Path(tempfile.mkdtemp(prefix="bte-marriage-export-"))
     root.mkdir(parents=True, exist_ok=True)
     filename = f"{document.filename_stem}.{fmt}"
@@ -143,6 +144,29 @@ def _visible_sections(stored: MarriageStoredResult) -> list[ReportSection]:
     if model is None:
         return []
     return [item for item in customer_sections(model) if item.section_id != "appendix"]
+
+
+def _printable_sections(sections: list[ReportSection]) -> list[ReportSection]:
+    """Flatten UI helper blocks without printing the same headline twice.
+
+    Preserve the semantic model and all distinct body text. UI intentionally has
+    separate question/state/headline blocks; a linear document needs only one.
+    """
+    result: list[ReportSection] = []
+    for section in sections:
+        blocks = list(section.blocks)
+        answer_titles = {b.title for b in blocks if b.kind == "answer" and b.title}
+        state = next((b for b in blocks if b.block_id == "hero-state"), None)
+        blocks = [b for b in blocks if not (
+            (b.kind == "question" and b.body in answer_titles)
+            or (state and b.block_id == "hero-headline" and b.title == state.title)
+            or (state and b.block_id == "hero-conclusion" and b.body == state.body)
+        )]
+        summary = section.summary
+        if summary and any(summary in {b.body, b.title} for b in blocks):
+            summary = None
+        result.append(replace(section, blocks=blocks, summary=summary))
+    return result
 
 
 def _write_docx(spec: ConsultationExportDocument, consultation_id: str, path: Path) -> None:

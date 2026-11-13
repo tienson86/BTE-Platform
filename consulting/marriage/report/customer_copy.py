@@ -60,7 +60,7 @@ def customer_confidence(level: str) -> str:
 
 def customerize(text: str) -> str:
     """Soften internal phrasing without inventing a new conclusion."""
-    cleaned = text.replace("Cấu trúc hiện cho thấy", "Trong thực tế,")
+    cleaned = text.replace("Cấu trúc hiện cho thấy", "Đối chiếu hai lá số cho thấy")
     cleaned = cleaned.replace("Tầng cấu trúc đang", "Nền tảng đang")
     cleaned = cleaned.replace("tầng cấu trúc đang", "nền tảng đang")
     cleaned = cleaned.replace("tầng cấu trúc", "nền tảng")
@@ -68,7 +68,7 @@ def customerize(text: str) -> str:
     cleaned = cleaned.replace("Hệ thống hiện chưa", "Hiện chưa")
     cleaned = cleaned.replace("cơ sở cấu trúc", "cơ sở")
     cleaned = cleaned.replace("dữ liệu cấu trúc", "dữ liệu")
-    cleaned = cleaned.replace("kết luận cấu trúc", "kết luận đã chốt")
+    cleaned = cleaned.replace("kết luận cấu trúc", "nhận định từ hai lá số")
     cleaned = cleaned.replace(" về cấu trúc", "")
     cleaned = cleaned.replace("của hồ sơ ở mức cao trên dữ liệu hiện có", "cao trên dữ liệu hiện có")
     return " ".join(cleaned.split()).strip()

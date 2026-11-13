@@ -52,6 +52,7 @@ def api_client(
     adapter = None if live else CanonicalOrchestratorAdapter(runner=FakeCanonicalRunner())
     container = wire_marriage_api_runtime(canonical_adapter=adapter)
     app = FastAPI()
+    install_test_identity(app)
     app.include_router(build_marriage_router(container), prefix="/api/v1")
     return TestClient(app), container
 
@@ -61,3 +62,16 @@ def api_service(container: MarriageContainer) -> MarriageConsultationApi:
     api = container.api_contract
     assert isinstance(api, MarriageConsultationApi)
     return api
+
+
+def install_test_identity(app: FastAPI) -> None:
+    """Test-only identity for isolated router fixtures; not production auth."""
+    from consulting.archive_access import identity
+
+    @app.middleware("http")
+    async def test_identity(request, call_next):
+        token = identity.set({"user_id": "test-marriage-owner", "role": "MEMBER"})
+        try:
+            return await call_next(request)
+        finally:
+            identity.reset(token)

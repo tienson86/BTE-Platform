@@ -19,7 +19,10 @@ from consulting.marriage.models.enums import CanonicalGender, FiveElement, Perso
 from consulting.marriage.models.snapshot import MarriageCanonicalSnapshot
 from consulting.marriage.runtime.snapshot_builder import build_marriage_snapshot
 
-CHILDBIRTH_MODULE_VERSION = "childbirth.consulting.v1"
+CHILDBIRTH_MODULE_VERSION = "childbirth.consulting.v2"
+CHILDBIRTH_NOTICE = ("Đây là đối chiếu Bát Tự và Cung Phi theo quan niệm truyền thống, không đánh giá khả năng thụ thai, "
+    "sự an toàn của thai kỳ hoặc giới tính thực tế của trẻ. Việc sinh con cần dựa vào sức khỏe, hoàn cảnh gia đình "
+    "và tư vấn của bác sĩ; không trì hoãn chăm sóc y tế hay chọn giới tính theo điểm số này.")
 DEFAULT_YEARS_AHEAD = 12
 MAX_YEARS_AHEAD = 24
 
@@ -115,6 +118,7 @@ class ParentSignals:
     shen_sha: tuple[str, ...]
     cung_phi: str | None
     trach_group: str | None
+    birth_time_known: bool = True
 
 
 def analyze_childbirth_plan(
@@ -127,12 +131,13 @@ def analyze_childbirth_plan(
     today: date | None = None,
 ) -> dict[str, Any]:
     """Analyze future childbirth timing for a married couple."""
-    _validate_parent(father, CanonicalGender.MALE, "father")
-    _validate_parent(mother, CanonicalGender.FEMALE, "mother")
     current = today or date.today()
-    start = start_year or current.year
-    if years_ahead < 1 or years_ahead > MAX_YEARS_AHEAD:
-        raise ValueError("years_ahead_out_of_range")
+    _validate_parent(father, CanonicalGender.MALE, "father", current)
+    _validate_parent(mother, CanonicalGender.FEMALE, "mother", current)
+    start = current.year if start_year is None else start_year
+    _validate_range(start, years_ahead)
+    if start < current.year:
+        raise ValueError("start_year_in_past")
     runtime = adapter or CanonicalOrchestratorAdapter()
     father_snapshot = _snapshot_for(runtime, father, PersonSide.B, "CB-FATHER")
     mother_snapshot = _snapshot_for(runtime, mother, PersonSide.A, "CB-MOTHER")
@@ -156,12 +161,15 @@ def evaluate_childbirth_years(
     years_ahead: int,
 ) -> dict[str, Any]:
     """Evaluate years from snapshots. Public for deterministic tests."""
+    _validate_range(start_year, years_ahead)
     father = _signals(father_snapshot, father_birth_date)
     mother = _signals(mother_snapshot, mother_birth_date)
     father_birth = _parse_date(father_birth_date)
     mother_birth = _parse_date(mother_birth_date)
     results = []
     ineligible = []
+    missing_time = [label for label, parent in (("bố", father), ("mẹ", mother)) if not parent.birth_time_known]
+    limitations = (["Chưa biết giờ sinh của " + " và ".join(missing_time) + ". Chưa xếp hạng năm vì giờ sinh có thể thay đổi các yếu tố dùng để chấm điểm."] if missing_time else [])
     for year in range(start_year, start_year + years_ahead):
         father_age = _age_on(father_birth, date(year, 12, 31))
         mother_age = _age_on(mother_birth, date(year, 12, 31))
@@ -175,13 +183,17 @@ def evaluate_childbirth_years(
                 }
             )
             continue
-        results.append(_evaluate_year(year, father, mother, father_age, mother_age))
+        if not missing_time:
+            results.append(_evaluate_year(year, father, mother, father_age, mother_age))
     results.sort(key=lambda item: (-item["score"], item["year"]))
     top = results[:5]
     return {
         "module": "childbirth_consulting",
         "module_version": CHILDBIRTH_MODULE_VERSION,
         "status": "SUCCESS",
+        "analysis_status": "insufficient_data" if missing_time else "complete",
+        "limitations": limitations,
+        "notice": CHILDBIRTH_NOTICE,
         "start_year": start_year,
         "years_ahead": years_ahead,
         "eligibility": {
@@ -196,14 +208,28 @@ def evaluate_childbirth_years(
         },
         "recommendations": top,
         "all_years": results,
-        "summary": _summary(top, bool(ineligible)),
+        "summary": ({"headline": "Cần bổ sung giờ sinh trước khi so sánh các năm.", "recommended_years": [], "note": limitations[0]} if missing_time else _summary(top, bool(ineligible))),
     }
 
 
-def _validate_parent(person: MarriagePersonInput, expected: CanonicalGender, role: str) -> None:
+def _validate_range(start_year: int, years_ahead: int) -> None:
+    if isinstance(years_ahead, bool) or not isinstance(years_ahead, int) or not 1 <= years_ahead <= MAX_YEARS_AHEAD:
+        raise ValueError("years_ahead_out_of_range")
+    if isinstance(start_year, bool) or not isinstance(start_year, int) or not 1900 <= start_year <= 2099 or start_year + years_ahead - 1 > 2099:
+        raise ValueError("start_year_out_of_range")
+
+
+def _validate_parent(person: MarriagePersonInput, expected: CanonicalGender, role: str, current: date) -> None:
     if person.gender is not expected:
         raise ValueError(f"{role}_gender_mismatch")
-    _parse_date(person.birth_date)
+    birth = _parse_date(person.birth_date)
+    if birth > current or _age_on(birth, current) > 120:
+        raise ValueError(f"{role}_birth_date_out_of_range")
+    if person.birth_time is not None:
+        try:
+            datetime.strptime(person.birth_time, "%H:%M")
+        except ValueError as exc:
+            raise ValueError(f"{role}_birth_time_invalid") from exc
 
 
 def _snapshot_for(
@@ -244,6 +270,7 @@ def _signals(snapshot: MarriageCanonicalSnapshot, birth_date: str) -> ParentSign
         shen_sha=tuple(dict.fromkeys(shen_sha)),
         cung_phi=snapshot.feng_shui.cung_phi if snapshot.feng_shui else None,
         trach_group=snapshot.feng_shui.group if snapshot.feng_shui else None,
+        birth_time_known=snapshot.person.birth_data_quality.birth_time_known,
     )
 
 
@@ -265,11 +292,11 @@ def _evaluate_year(
     gender = _gender_options(year, father, mother)
     score += gender["score_adjustment"]
     if gender["recommended_child_gender"] == "boy":
-        reasons.append("Cung phi giả định của bé trai hài hòa với nhóm trạch của bố mẹ hơn.")
+        reasons.append("Nếu giả định là bé trai, Cung Phi có nhiều điểm cùng nhóm trạch với bố mẹ hơn; đây chỉ là phép so sánh, không phải lời khuyên chọn giới tính.")
     elif gender["recommended_child_gender"] == "girl":
-        reasons.append("Cung phi giả định của bé gái hài hòa với nhóm trạch của bố mẹ hơn.")
+        reasons.append("Nếu giả định là bé gái, Cung Phi có nhiều điểm cùng nhóm trạch với bố mẹ hơn; đây chỉ là phép so sánh, không phải lời khuyên chọn giới tính.")
     else:
-        reasons.append("Chênh lệch cung phi giữa bé trai và bé gái không lớn, có thể ưu tiên năm hơn giới tính.")
+        reasons.append("Hai giả định trai và gái có mức tương hợp Cung Phi gần nhau; kết quả không dự đoán giới tính của trẻ.")
     clipped = max(0, min(100, score))
     return {
         "year": year,
@@ -285,8 +312,8 @@ def _evaluate_year(
         "recommended_child_gender": gender["recommended_child_gender"],
         "boy": gender["boy"],
         "girl": gender["girl"],
-        "reasons": list(dict.fromkeys(reasons))[:6],
-        "cautions": list(dict.fromkeys(cautions))[:4],
+        "reasons": list(dict.fromkeys(reasons)),
+        "cautions": list(dict.fromkeys(cautions)),
     }
 
 
@@ -303,29 +330,29 @@ def _parent_score(
     score = 0
     if year_element in parent.useful_elements or stem in parent.useful_stems:
         score += 10
-        reasons.append(f"Năm {stem} {branch} chạm đúng Dụng thần/yếu tố cần của {label}.")
+        reasons.append(f"Thiên can của năm {stem} {branch} thuộc nhóm Dụng thần trong lá số {label}, nên được cộng điểm khi đối chiếu.")
     if year_element in parent.favorable_elements or branch_element in parent.favorable_elements:
         score += 6
-        reasons.append(f"Ngũ hành năm có phần thuộc Hỷ thần của {label}.")
+        reasons.append(f"Ngũ hành của năm có yếu tố thuộc Hỷ thần của {label}, bổ sung một điểm thuận trong phép so sánh.")
     if year_element in parent.unfavorable_elements:
         score -= 8
-        cautions.append(f"Thiên can năm kích hoạt nhóm Kỵ thần của {label}, cần chọn tháng/ngày kỹ hơn.")
+        cautions.append(f"Thiên can của năm thuộc nhóm Kỵ thần của {label}. Đây là điểm giảm trong mô hình, không có nghĩa việc mang thai hoặc sinh con sẽ gặp vấn đề.")
     output = _GENERATES[parent.day_master_element]
     if year_element is output or branch_element is output:
         score += 7
-        reasons.append(f"Năm mở kênh biểu đạt/con cái cho Nhật chủ {parent.day_master} của {label}.")
+        reasons.append(f"Ngũ hành của năm thuộc nhóm Thực Thương đối với Nhật Chủ {parent.day_master} của {label}. Trong cách luận truyền thống, nhóm này gắn với sự biểu đạt và chăm lo thế hệ sau, không xác nhận khả năng sinh sản.")
     if _GENERATES[year_element] is parent.day_master_element:
         score += 4
         reasons.append(f"Ngũ hành năm sinh trợ cho Nhật chủ của {label}.")
     if _CONTROLS[year_element] is parent.day_master_element:
         score -= 5
-        cautions.append(f"Ngũ hành năm tạo áp lực lên Nhật chủ của {label}.")
+        cautions.append(f"Ngũ hành của năm khắc hành Nhật Chủ của {label}; mô hình ghi nhận đây là điểm cần cân nhắc cùng các yếu tố khác.")
     if frozenset((branch, parent.day_branch)) in _CLASHES:
         score -= 7
-        cautions.append(f"Địa chi năm xung với chi ngày của {label}; nên thận trọng tháng sinh.")
+        cautions.append(f"Địa chi của năm xung với chi ngày của {label}. Quan hệ này không đủ để dự báo bất hòa gia đình hay vấn đề của thai kỳ.")
     if branch == parent.day_branch:
         score += 3
-        reasons.append(f"Địa chi năm đồng khí với cung ngày của {label}.")
+        reasons.append(f"Địa chi của năm trùng chi ngày của {label}, tạo điểm tương đồng trong phép đối chiếu.")
     score += _strength_adjustment(label, parent, year_element, reasons, cautions)
     score += _ten_god_adjustment(label, parent, reasons)
     score += _shen_sha_adjustment(label, parent, reasons, cautions)
@@ -342,14 +369,14 @@ def _strength_adjustment(
     strength = parent.strength.lower()
     if "vượng" in strength or "strong" in strength:
         if year_element is _GENERATES[parent.day_master_element]:
-            reasons.append(f"{label.capitalize()} có thân vượng, năm có kênh tiết xuất giúp cân bằng hơn.")
+            reasons.append(f"Lá số {label} được đánh giá thân vượng; hành của năm có quan hệ tiết xuất với Nhật Chủ nên được xem là yếu tố cân bằng trong mô hình.")
             return 4
         if year_element is parent.day_master_element:
             cautions.append(f"{label.capitalize()} đã thiên vượng, năm cùng hành có thể làm lực quá đầy.")
             return -2
     if "nhược" in strength or "weak" in strength or "yếu" in strength:
         if _GENERATES[year_element] is parent.day_master_element:
-            reasons.append(f"{label.capitalize()} có thân nhược, năm sinh trợ giúp nền ổn hơn.")
+            reasons.append(f"Lá số {label} được đánh giá thân nhược; hành của năm sinh trợ Nhật Chủ nên được cộng điểm hỗ trợ.")
             return 4
         if _CONTROLS[year_element] is parent.day_master_element:
             return -3
@@ -361,10 +388,10 @@ def _ten_god_adjustment(label: str, parent: ParentSignals, reasons: list[str]) -
     score = 0
     if {"Thực Thần", "Thương Quan"} & names:
         score += 3
-        reasons.append(f"Thập thần của {label} có kênh con cái/biểu đạt để tham chiếu.")
+        reasons.append(f"Lá số {label} có Thực Thần hoặc Thương Quan, là dấu hiệu tham khảo về sự biểu đạt và chăm sóc thế hệ sau trong Bát Tự.")
     if {"Chính Quan", "Thất Sát"} & names:
         score += 2
-        reasons.append(f"Thập thần của {label} có trục trách nhiệm/gia đạo rõ để nâng quyết định sinh con.")
+        reasons.append(f"Lá số {label} có Quan hoặc Sát, được mô hình dùng làm yếu tố tham khảo về trách nhiệm; không phải bằng chứng đã sẵn sàng làm cha mẹ.")
     return score
 
 
@@ -378,10 +405,10 @@ def _shen_sha_adjustment(
     text = " ".join(parent.shen_sha)
     if any(name in text for name in _POSITIVE_SHEN_SHA):
         score += 2
-        reasons.append(f"Thần sát của {label} có tín hiệu trợ lực/quý nhân.")
+        reasons.append(f"Lá số {label} ghi nhận dấu hiệu Quý Nhân hoặc phúc đức; đây là lớp tham khảo bổ sung, không bảo đảm mọi việc thuận lợi.")
     if any(name in text for name in _CAUTION_SHEN_SHA):
         score -= 2
-        cautions.append(f"Thần sát của {label} có tín hiệu cần giữ nhịp gia đạo ổn định.")
+        cautions.append(f"Một số Thần sát trong lá số {label} được mô hình xếp vào nhóm cần lưu ý; không dùng riêng những dấu này để kết luận về gia đình hoặc sức khỏe.")
     return score
 
 
@@ -468,7 +495,14 @@ def _level(score: int) -> str:
 
 
 def _public_parent(parent: ParentSignals) -> dict[str, Any]:
+    if not parent.birth_time_known:
+        return {"display_name": parent.name, "gender": parent.gender, "birth_date": parent.birth_date,
+                "day_master": parent.day_master, "day_master_element": _ELEMENT_LABELS[parent.day_master_element],
+                "birth_time_known": False, "strength": None, "pattern": None, "useful_elements": [],
+                "favorable_elements": [], "unfavorable_elements": [], "ten_gods": [], "shen_sha": [],
+                "cung_phi": parent.cung_phi, "trach_group": parent.trach_group}
     return {
+        "birth_time_known": True,
         "display_name": parent.name,
         "gender": parent.gender,
         "birth_date": parent.birth_date,
@@ -496,8 +530,12 @@ def _summary(top: list[dict[str, Any]], has_ineligible: bool) -> dict[str, Any]:
     years = [str(item["year"]) for item in top[:3]]
     best = top[0]
     note = "Một số năm đầu đã bị loại vì chưa đạt điều kiện tuổi tối thiểu." if has_ineligible else None
+    if best["score"] < 55:
+        headline = "Chưa có năm nổi bật trong khoảng đang xét; các năm dưới đây chỉ được xếp từ điểm cao xuống thấp."
+    else:
+        headline = f"Các năm {', '.join(years)} có điểm đối chiếu cao hơn trong khoảng xét; {best['year']} ({best['can_chi']}) đứng đầu. Đây không phải khuyến nghị thời điểm mang thai."
     return {
-        "headline": f"Nên ưu tiên {', '.join(years)}; năm nổi bật nhất là {best['year']} ({best['can_chi']}).",
+        "headline": headline,
         "recommended_years": [item["year"] for item in top],
         "best_year": best["year"],
         "best_child_gender": best["recommended_child_gender"],
