@@ -36,18 +36,25 @@ def _sum_named(timings: list, names: tuple[str, ...]) -> float:
     return round(sum(item.duration_ms for item in timings if item.stage in wanted), 3)
 
 
-def test_record_performance_baseline() -> None:
+def test_record_performance_baseline(monkeypatch) -> None:
     """Record representative live stage durations for later comparison."""
     client, container = api_client(live=True)
     api = api_service(container)
     assert isinstance(api, MarriageConsultationApi)
+    # Request-local timings must be captured inside the HTTP worker context.
+    captured_timings = []
+    original_persist = api._persist
+    def capture_persist(*args, **kwargs):
+        session = api._orchestrator._session
+        captured_timings.extend(session.context.timings)
+        return original_persist(*args, **kwargs)
+    monkeypatch.setattr(api, "_persist", capture_persist)
     started = time.perf_counter()
     created = client.post("/api/v1/consulting/marriage", json=valid_body())
     api_ms = (time.perf_counter() - started) * 1000.0
     assert created.status_code == 201
     stored = api.get_stored(created.json()["data"]["consultation_id"])
-    session = getattr(api._orchestrator, "_session", None)
-    timings = list(session.context.timings) if session is not None else []
+    timings = captured_timings
     baseline = {
         "case": "LIVE 1987-01-21 / 1990-05-15",
         "units": "milliseconds",
